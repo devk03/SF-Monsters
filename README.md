@@ -25,8 +25,8 @@ Sourced character candidates and fictional roles are in [cast research](docs/cas
 
 ## First playable milestone
 
-Build Outer Sunset and Inner Sunset with three starter choices, approximately
-12 mini monsters, one gym, one complete quest, encounters, recruitment,
+Build Outer Sunset and SoMa with three starter choices, approximately
+12 mini monsters, one Cognition gym, one complete courier quest, encounters, recruitment,
 turn-based battles, and persistent saving.
 
 Scope, acceptance criteria, and current progress are maintained in

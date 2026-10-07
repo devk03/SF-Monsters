@@ -83,3 +83,19 @@ Sources:
 
 Game maps compress blocks and distances while preserving ocean/bay orientation,
 relative districts, and explicit transit for Peninsula travel.
+
+## All-SF correction
+
+The latest user instruction prohibits every outside-SF game location.
+Remove Replit/Foster City from the gym slate. The first MVP gym is Cognition in
+SoMa, with Scott Wu as the proposed leader. Outer Sunset connects to SoMa via Muni.
+Replace the eighth startup slot with Notion, whose company page establishes a
+downtown SF presence; verify its exact occupied office before map implementation.
+
+- [Notion about](https://www.notion.com/about)
+- [Ivan Zhao founder profile](https://www.firstround.com/companies/notion)
+
+The eight candidate identities are Cognition, Midjourney, Cursor, Perplexity,
+Mercor, Anthropic, OpenAI, and Notion. Previous assignment tables are historical
+research proposals superseded by the geographic corrections in this document.
+Championship and side-antagonist content belong on Treasure Island within SF.

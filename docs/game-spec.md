@@ -13,7 +13,7 @@ The world, creatures, art, music, dialogue, presentation, and implementation are
 Required release scope:
 
 - 16 accessible neighborhood hubs, each with a mini-adventure.
-- Eight famous-startup gyms placed in verified office districts or connected Bay Area excursions.
+- Eight famous-startup gyms placed in verified San Francisco office districts.
   Each has a real-person leader, a product-inspired puzzle, and a distinct battle strategy.
 - 150 collectible mini-monster catalog entries, including evolution stages.
 - Three starter choices, a recurring rival, and real-person antagonist roles.
@@ -97,21 +97,21 @@ Campaign order is not a claim of literal neighborhood adjacency.
 | Order | Hub | Mini-adventure | Gym leader and concept |
 | --- | --- | --- | --- |
 | 1 | Outer Sunset | Select a starter and rescue a surf courier lost in an Ocean Beach fog bank | — |
-| 2 | Inner Sunset | Restore a greenhouse and investigate Golden Gate Park machinery | 1: Replit, Amjad Masad — Build Lab |
+| 2 | Inner Sunset | Restore a greenhouse and investigate Golden Gate Park machinery | — |
 | 3 | Haight-Ashbury | Follow conflicting concert flyers to a secret performance | — |
-| 4 | Castro | Restore the lights for a neighborhood celebration | 2: Midjourney, David Holz — Dream Studio |
+| 4 | Castro | Restore the lights for a neighborhood celebration | — |
 | 5 | Mission | Recover mural pigments and follow a painted monster's clues | — |
-| 6 | Dogpatch | Restore an industrial workshop with inventive monsters | 3: Cognition, Scott Wu — Agent Workshop |
-| 7 | SoMa | Investigate an escaped startup demo and the antagonist's first installation | — |
-| 8 | Tenderloin | Find a missing musician, with an optional surreal high-state route | 4: Cursor, Michael Truell — Debug Dungeon |
+| 6 | Dogpatch | Restore an industrial workshop with inventive monsters | — |
+| 7 | SoMa | Investigate an escaped startup demo and the antagonist's first installation | Cognition (MVP); other SoMa gyms subject to sourced layout |
+| 8 | Tenderloin | Find a missing musician, with an optional surreal high-state route | — |
 | 9 | Fillmore | Recover a jazz ensemble's instruments before its show | — |
-| 10 | Japantown | Recover festival supplies through lantern and gallery puzzles | 5: Perplexity, Aravind Srinivas — Search Archive |
+| 10 | Japantown | Recover festival supplies through lantern and gallery puzzles | — |
 | 11 | Richmond District | Follow archival clues through Lands End to Sutro Baths | — |
-| 12 | Presidio | Trace signals through woodland and Fort Point | 6: Mercor, Brendan Foody — Expert Trials |
+| 12 | Presidio | Trace signals through woodland and Fort Point | — |
 | 13 | Marina | Solve The Case of the Missing Quarter-Zip across Chestnut Street bars | — |
-| 14 | Russian Hill | Restore cable-car machinery and navigate foggy stairways | 7: Anthropic, Daniela Amodei — Alignment Lab |
+| 14 | Russian Hill | Restore cable-car machinery and navigate foggy stairways | — |
 | 15 | North Beach | Decode a poet's notebook while following an unhelpful parrot | — |
-| 16 | Chinatown | Restore a community festival and expose the final antagonist relay | 8: OpenAI, Tibo Sottiaux — Compute Tower |
+| 16 | Chinatown | Restore a community festival and expose the final antagonist relay | — |
 
 Gym identity is the startup; the leader is a real person associated with it.
 The previous evenly spaced assignments in the table are milestone proposals,
@@ -122,10 +122,11 @@ then verify each current office district independently before implementing it.
 Do not confuse mailing/registered addresses, historical offices, or planned leases
 with occupied current offices. Record evidence and uncertainty in [startup gyms](startup-gyms.md).
 
-For the MVP, Outer Sunset and Inner Sunset remain the two SF hubs, with a
-Peninsula shuttle excursion to the Replit gym in Foster City. It is not an
-Inner Sunset office. Additional office districts can be transit-connected
-submaps rather than artificially relocating companies into the original hubs.
+For the MVP, Outer Sunset and SoMa are the two playable neighborhoods,
+connected by an explicit Muni transit interaction. The first gym is Cognition
+in the SoMa/South Park area. Remove the Foster City excursion and Replit gym.
+Replit can appear as an online reference, but not as a falsely located SF office.
+Replace its gym slot with an SF company such as Notion, subject to location verification.
 
 Each gym has original pixel-art interiors, employee trainers, a product-inspired
 puzzle, a leader battle, and a company-themed badge. Karpathy, Dylan Field,
@@ -146,18 +147,30 @@ Provide accessible healing and storage services throughout the campaign.
 
 ## 5. Story
 
-The player is an adult local courier who discovers unstable monster evolutions
-and damaged habitats while working across the city.
+The player is an adult local courier. Roon has dropped a damaged prototype
+near Ocean Beach. Karpathy supplies a companion mini monster so the player can
+recover it safely. Bringing it back reveals that it belongs to a citywide
+monster-habitat system; delivery to Scott Wu's Cognition lab in SoMa provides
+the next concrete destination.
 
-Proposed fictional antagonist faction: the Overclock Collective.
-Beff Jezos wants to accelerate every monster's evolution simultaneously.
-Marc Andreessen's fictional funding machine supplies installations that demand
-endless neighborhood growth. Their scheme destabilizes microclimates and awakens Bayveil.
-Balaji Srinivasan supplies a separate island/network-state side-antagonist arc.
+MVP sequence: meet Karpathy, choose a starter, recover the prototype, return to
+Roon, take Muni to SoMa, deliver it to Scott, repair the lab's safety relays,
+and pass his gym challenge. Scott identifies evidence of an external overclock
+signal. The first badge and a clear investigation lead conclude the MVP.
+Optional exploration, capture, healing, and roster management fit around this route.
 
-Roon is the recurring rival and unreliable online oracle. He competes with the
-player, posts cryptic clues, and has an independent goal that can conflict with
-both the player and the antagonists. His choices produce a late-game resolution.
+In the full campaign, the fictional Overclock Collective has repurposed the
+habitat system to accelerate every monster's evolution simultaneously. Beff
+leads its experimental faction; Marc's fictional funding apparatus supplies
+its infrastructure. The system damages SF microclimates and awakens Bayveil.
+Each neighborhood adventure exposes or repairs a different part of this system.
+Gym leaders test the player's readiness and help recover access to its relays.
+
+Roon is a recurring rival with his own investigation. His cryptic posts first
+confuse the player, then reveal that he has pieces of the same mystery. Balaji's
+fictional Treasure Island district is a side arc connected to competing ideas
+about who should control the habitat network. Sam is the championship opponent,
+not the same character as the central story villain.
 
 Acts:
 
@@ -172,7 +185,7 @@ Real names/public personas inspire the cast; dialogue and fantastical actions ar
 
 ## 6. Championship and postgame
 
-Eight badges unlock a ferry to a fictional offshore championship sanctuary.
+Eight badges unlock a ferry to a championship venue on Treasure Island within San Francisco.
 Fight four consecutive specialists, with a defined recovery/item policy, then a champion.
 
 | Opponent | Proposed battle identity |
@@ -185,7 +198,7 @@ Fight four consecutive specialists, with a defined recovery/item policy, then a 
 
 Unique boss mechanics must remain readable and beatable with ordinary obtainable teams.
 Postgame includes Bayveil's quest, rematches, outstanding dates/side quests,
-rare monster collection, hidden jokes, and the network-state island challenge.
+rare monster collection, hidden jokes, and the Treasure Island network-state district challenge.
 
 ## 7. Marina, intoxication, and dates
 
@@ -311,6 +324,9 @@ Unsupported/newer save versions must produce a clear error instead of corrupting
 Browser saves persist locally and support explicit backup/export/import.
 Keep manual saving available; browser storage is not treated as a permanent backup.
 
+All playable locations must be inside San Francisco city limits, including championship
+and side-antagonist zones. No Peninsula, Foster City, Oakland, or other-city excursions.
+
 No backend or database is required for v1. No cloud account is required to play.
 
 ## 12. Open source and distribution
@@ -333,7 +349,7 @@ Publish versioned downloadable ROMs and matching browser builds.
 
 1. Design baseline: finalize core battle rules/type chart, map links, cast roles,
    monster roster structure, content formats, and the first quest scripts.
-2. Platform slice: Outer/Inner Sunset, three starter choices, about 12 monsters,
+2. Platform slice: Outer Sunset/SoMa, three starter choices, about 12 monsters,
    one gym, exploration, capture, battles, healing/storage, and saves.
 3. Comedy slice: one playable Marina drunk sequence, one Tenderloin high sequence,
    one weird date, and conditional dialogue/Easter eggs.
@@ -375,9 +391,11 @@ Do not mark a milestone complete until its acceptance criteria have been verifie
 ### Objective
 
 Deliver a publicly accessible, testable MVP with two neighborhoods, 12 original
-collectible mini monsters, one Replit startup gym reached through a Foster City shuttle excursion, exploration and dialogue,
+collectible mini monsters, one Cognition startup gym in SoMa, exploration and dialogue,
 turn-based battles, capture, team/storage management, and persistent saving.
-Build an actual GBA ROM and run the same ROM on the website through WebAssembly.
+Build an actual GBA ROM with the feel of a classic ROM-hack adventure and run
+the same ROM on the website through WebAssembly. Original-ROM implementation is
+the default while the user clarifies whether a specific existing base ROM is intended.
 Verify the ROM in a standard GBA emulator, using mGBA as the reference target.
 The website supports real sign-in and device-local saves with backup/import.
 Commit coherent checkpoints around 500–700 changed lines when it makes sense.
@@ -388,7 +406,7 @@ The full 150-entry game and later 50-person cast expansion remain subsequent sco
 - [ ] Two neighborhoods and a complete courier quest are playable.
 - [ ] Three starter choices and 12 obtainable mini monsters work.
 - [ ] Capture, battles, healing, team switching, and storage work.
-- [ ] The Replit gym can be challenged and defeated.
+- [ ] The Cognition gym can be challenged and defeated.
 - [ ] Saving and loading preserve progress; backup/import round trips work.
 - [ ] The actual GBA ROM boots and plays in mGBA.
 - [ ] The browser plays the same ROM through WebAssembly.
@@ -412,8 +430,9 @@ In progress:
 - GBA game implementation and browser emulator integration.
 - Browser emulator runtime artifacts verified in installed packages; integrating
   a single-threaded mGBA WebAssembly core that avoids cross-origin isolation requirements.
-- Realistic startup geography supersedes the arbitrary gym placements. Replit
-  is a Foster City excursion; other startup locations are recorded with evidence.
+- All-SF geography supersedes the Foster City excursion. The first gym is
+  Cognition in SoMa; Outer Sunset connects to it through Muni.
+- The courier/prototype quest now provides a coherent MVP story and completion point.
 
 Next checkpoint:
 
