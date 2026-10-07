@@ -21,3 +21,14 @@ cells, character approximately 52x52 pixels; integer nearest-neighbor enlargemen
 outlines, two or three shade values per material and upper-left light. No copied
 Pokémon species, logo, text, borders, background, gradients, anti-aliasing, blur
 or painted texture. Maintain native handheld creature-RPG craft and proportions.
+
+`native-v1/` contains the first technical conversion: 64x64 front/back, 64x128
+entrance frames, 32x64 party-icon frames and 16-entry normal/shiny palettes.
+All PNGs share the same palette and transparent index zero. These remain
+unreviewed candidates; this conversion does not perform deliberate pixel cleanup.
+Reproduce with Pillow 12.3.0 and:
+
+```
+python scripts/romhack/monster_art.py assets/monsters/cindercoy/source-v1.png assets/monsters/cindercoy/native-v1 --crop 88 64 668 644
+python tests/monster_art_test.py
+```

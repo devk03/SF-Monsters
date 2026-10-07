@@ -823,6 +823,12 @@ First-slice checkpoint — native save compatibility:
   assets/monsters/cindercoy/source-v1.png with its prompt and remaining cleanup
   requirements. It is not integrated or quality-approved; finished-monster and
   domain approval counts do not increase.
+- CinderCoy now has reproducible native-format candidates: 64x64 front/back,
+  two entrance frames, two icon frames and shared RGB555-compatible palettes.
+  The independent asset contract check passes dimensions, transparent index
+  zero, the 15-color opaque budget and cross-view palette identity. This is
+  technical conversion, not deliberate pixel cleanup or art approval. Next:
+  integrate the original species data/art into actual battles and menus.
 
 Approved architecture change — Emerald ROM hack:
 

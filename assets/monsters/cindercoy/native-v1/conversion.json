@@ -1,0 +1,21 @@
+{
+  "source_size": [
+    2172,
+    724
+  ],
+  "cell_crop": [
+    88,
+    64,
+    668,
+    644
+  ],
+  "alpha_threshold": 128,
+  "native_cell": [
+    64,
+    64
+  ],
+  "opaque_palette_budget": 15,
+  "method": "nearest-neighbor and shared RGB555 median-cut palette",
+  "pixel_cleanup": "pending",
+  "quality_approval": "pending"
+}
