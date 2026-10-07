@@ -753,13 +753,14 @@ progress toward final parity. Do not lower a target to fit the existing code.
   tooling and the experimental hardware foundation have started.
 - Approved Emerald-parity domains: 0/11. This is an approval count, not a claim
   that the prototype has no working functionality.
-- Prototype content: 2 simple neighborhood maps, 1 gym, 12 monsters, basic turn
-  resolution, static sprites, limited tones and a short courier quest.
+- Main build: actual Emerald engine, authored Outer Sunset opening and native
+  quest/battle/save behavior. Original SF creatures, cast art and music remain
+  required. The earlier two-map/one-gym/12-monster prototype is archived.
 - Quality-complete hubs/gyms/monsters: unreviewed. Earlier technical checks do
   not certify final content or visual/audio quality.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
-- Next checkpoint: A, reference capture and foundation comparison. No production
-  game change is included in this goal-definition checkpoint.
+- Next checkpoint: South Park/Cognition and the polished first slice, while
+  completing the reference measurements and comparison suite.
 - Reviewer: the user, through approval of matched comparison clips.
 - Scope preference: Emerald-tier quality within existing SF scope; do not add
   breeding, contests or a full Battle Frontier clone as hidden requirements.
@@ -906,6 +907,27 @@ First authored SF opening — local Sunset preview:
 - All eleven approved scores remain unchanged at 0/11. Next: finish the opening
   save/browser checks, publish this preview, then build South Park/Cognition,
   original Mini Monsters, SF art/music and the comparison suite.
+
+Sunset player release checkpoint:
+
+- Version 0.0.4-sunset-preview ships a 494,189-byte verified BPS patch. Target
+  SHA-256: 2bf3ce822a56ff0c95dc3a9d271a3587a8ba469033179c4ce5a3b8c44602adf1.
+- Native Save after delivery produces a valid SF schema 1 Flash backup at counter
+  2. Cold native/browser resume matches final RGB and exported battery bytes after
+  the same 2464-frame route. A raw emulator snapshot resumes with its paired Flash
+  contents; snapshots alone do not embed battery data.
+- Local browser QA imports that actual completed-quest save, continues at the
+  saved beach location and prepares a valid backup. An unmarked Emerald-format
+  backup is rejected while the current game remains playable. Browser slots use
+  emerald:v2; prototype and earlier preview namespaces remain separate.
+- Core/prototype regressions, BPS integrity, Flash format/SF schema, native map
+  boundaries and TypeScript pass. The pushed Site production build passes.
+- Public Site version 5 deployed successfully at the Play URL on October 7, 2026.
+  Site source: 59f0536cebb1386d39f5e5a2ffea51c248015168. Archive inspection confirms
+  no full inherited cartridge; the earlier original prototype remains /prototype.
+- Production sign-in, Mac GUI/Safari/physical-phone performance, campaign checks
+  and the complete comparison suite remain pending. This is an opening preview,
+  not the completed MVP slice or full campaign; approved domains remain 0/11.
 
 Reference sources for benchmark construction:
 

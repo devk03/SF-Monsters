@@ -10,5 +10,8 @@ clang -std=c11 -Wall -Wextra -Werror game/core.c game/content.c tests/save_fixtu
 build/save-fixture build/save-fixture.sav
 node --experimental-strip-types tests/save-format.test.mjs build/save-fixture.sav
 node tests/emulator.test.cjs
+node --experimental-strip-types tests/bps.test.mjs
+node --experimental-strip-types tests/flash-save.test.mjs
+python3 tests/romhack_maps_test.py
 cd web
 npx tsc --noEmit

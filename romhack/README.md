@@ -73,5 +73,7 @@ species and music are placeholders; the full first chapter is unfinished.
 Native captures now export `.sav` battery files beside their `.state` snapshots.
 `capture_core.py --battery PATH` tests a cold battery-save boot; `--state PATH`
 resumes an emulator snapshot instead. They are mutually exclusive.
+Raw snapshots do not contain Flash bytes; the harness restores a matching `.sav`
+companion automatically when continuing a recorded snapshot.
 `tests/foundation_runtime.cjs ROM INPUT NATIVE_DIRECTORY BATTERY` verifies actual
 WebAssembly restore/export and native frame/save equality for a recorded route.

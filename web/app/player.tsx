@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { countCaught, decodeSave, encodeSave, nextQuest, readProgress, validateSave, type Progress } from './save-format';
-import {flashCounter, validateFlashSave} from './flash-save';
+import {flashCounter, validateSfFlashSave} from './flash-save';
 import {patchLocalRom} from './rom-loader';
 
 type Engine = {
@@ -54,12 +54,13 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
   const [backupUrl, setBackupUrl] = useState<string | null>(null);
   useEffect(() => () => { if (backupUrl) URL.revokeObjectURL(backupUrl); }, [backupUrl]);
   const [retry, setRetry] = useState(0);
-  const storageKey = `sf-mini-monsters:${legacy ? 'v1' : 'emerald:v1'}:${account?.id ?? 'guest'}`;
+  const storageKey = `sf-mini-monsters:${legacy ? 'v1' : 'emerald:v2'}:${account?.id ?? 'guest'}`;
   const validateBattery = useCallback((bytes: Uint8Array) => {
-    if (legacy) validateSave(bytes); else validateFlashSave(bytes);
+    if (legacy) validateSave(bytes); else validateSfFlashSave(bytes);
   }, [legacy]);
   const batteryProgress = useCallback((bytes: Uint8Array): Progress | null => {
     if (legacy) return readProgress(bytes);
+    try { validateSfFlashSave(bytes); } catch { return null; }
     const sequence = flashCounter(bytes);
     return sequence === null ? null : {sequence, flags: 0, caught: 0, coins: 0, map: 0, party: 0};
   }, [legacy]);
@@ -207,7 +208,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
     </header>
     <div className="workbench">
       <section className="play-surface" aria-label="SF Mini Monsters game">
-        <div className="screen-label"><span>THE FOG SIGNAL</span><span>{legacy ? progress ? MAPS[progress.map] : 'OUTER SUNSET' : 'EMERALD ENGINE PREVIEW'}</span></div>
+        <div className="screen-label"><span>THE FOG SIGNAL</span><span>{legacy ? progress ? MAPS[progress.map] : 'OUTER SUNSET' : 'SUNSET PREVIEW'}</span></div>
         <div className="game-screen">
           <canvas ref={canvas} width={240} height={160} tabIndex={0} aria-label="GBA game screen. Arrow keys move, X confirms, Z goes back, Enter opens the menu." />
           {phase === 'waiting' && <div className="screen-overlay"><p>Bring your Emerald ROM.</p><button onClick={() => romInput.current?.click()}>Load .gba or ZIP</button><p>Patched here, on your device.</p></div>}
@@ -256,7 +257,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
         {!legacy && <a className="rom-link" href="/patch/sf-mini-monsters.bps" download>Download SF patch</a>}
         <a className="source-link" href="https://github.com/devk03/SF-Monsters" target="_blank" rel="noreferrer">Fork the game on GitHub</a>
         <p className="account-note">{account ? `Signed in as ${account.name}.` : 'Guest play is available. Sign in for a separate local save slot.'}</p>
-        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Early engine proof: SF opening text and hometown label. Stock maps, sprites and creatures remain placeholders. The 16-neighborhood, 8-gym, 150-monster campaign is unfinished.'}</p>
+        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Early Sunset preview: choose a companion, recover Roon’s sensor and investigate the fog signal. Cast sprites, creatures and music are placeholders. The Cognition chapter and full 16-neighborhood campaign are unfinished.'}</p>
         {!legacy && <a className="source-link" href="/prototype">Play the earlier courier prototype</a>}
       </aside>
     </div>

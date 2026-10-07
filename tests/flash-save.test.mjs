@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {FLASH_SIZE, flashCounter, validateFlashSave} from '../web/app/flash-save.ts';
+import {FLASH_SIZE, flashCounter, validateFlashSave, validateSfFlashSave} from '../web/app/flash-save.ts';
 
 // Independently specified sector layout from the pinned Emerald save format.
 const lengths = [0xf2c, 0xf80, 0xf80, 0xf80, 0xf08,
@@ -37,3 +37,21 @@ assert.equal(flashCounter(save), 0, 'Save counter wraparound preserves newest-sl
 const wrapped = new Uint8Array(FLASH_SIZE + 7); wrapped.set(save, 7);
 assert.equal(flashCounter(wrapped.subarray(7)), 0, 'Typed-array offsets are respected');
 console.log('Flash slot checksums, rotation, recovery, wraparound and invalid-save rejection passed.');
+assert.throws(() => validateSfFlashSave(save), /not a supported SF/);
+function stampIdentity(slot, schema) {
+  for (let index = 0; index < 14; index++) {
+    const view = new DataView(save.buffer, (slot * 14 + index) * 4096, 4096);
+    if (view.getUint16(4084, true) !== 2) continue;
+    view.setUint16(0x60c, 0x5346, true); view.setUint16(0x60e, schema, true);
+    let checksum = 0;
+    for (let offset = 0; offset < 0xf80; offset += 4)
+      checksum = (checksum + view.getUint32(offset, true)) >>> 0;
+    view.setUint16(4086, ((checksum >>> 16) + checksum) & 65535, true);
+  }
+}
+stampIdentity(1, 1); validateSfFlashSave(save);
+stampIdentity(1, 2); assert.throws(() => validateSfFlashSave(save), /not a supported SF/);
+stampIdentity(0, 1); assert.throws(() => validateSfFlashSave(save), /not a supported SF/,
+  'An older compatible slot must not hide a newer unsupported schema');
+save[14 * 4096] ^= 1; validateSfFlashSave(save);
+console.log('SF identity, unsupported schema and intact-slot recovery passed.');

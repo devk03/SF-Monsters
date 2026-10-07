@@ -66,6 +66,11 @@ def main():
             parser.error('State must have its original capture metadata beside it.')
         if json.loads(state_metadata.read_text()).get('rom_sha256') != digest:
             parser.error('State belongs to a different cartridge build.')
+    # Raw mGBA snapshots omit Flash contents; restore the same capture's battery.
+    companion_battery = args.state.with_suffix('.sav') if args.state else None
+    battery = args.battery or (companion_battery if companion_battery and companion_battery.is_file() else None)
+    if battery and battery.stat().st_size != (131072 if code == b'BPEE' else 32768):
+        parser.error('Capture battery size does not match the cartridge family.')
     output = ROOT / '.tools/benchmarks' / args.name
     if output.exists():
         parser.error('Choose a new name; existing benchmark evidence is preserved.')
@@ -93,7 +98,7 @@ def main():
     prefix = output / 'capture'
     docker(executable, mounted(args.rom), mounted(prefix), mounted(args.input),
         mounted(args.state) if args.state else '-', args.telemetry,
-        'trace' if args.trace_only else 'video', mounted(args.battery) if args.battery else '-')
+        'trace' if args.trace_only else 'video', mounted(battery) if battery else '-')
     metadata = json.loads(prefix.with_suffix('.json').read_text())
     metadata.update({
         'rom_sha256': digest, 'game_code': code.decode(),
@@ -101,7 +106,7 @@ def main():
         'runtime': 'native mGBA 0.10.5 core, Linux ARM64 official devkitARM container',
         'mgba_revision': REVISION, 'input_sha256': hashlib.sha256(args.input.read_bytes()).hexdigest(),
         'controller_only': True, 'trace_only': args.trace_only,
-        'battery_input_sha256': hashlib.sha256(args.battery.read_bytes()).hexdigest() if args.battery else None,
+        'battery_input_sha256': hashlib.sha256(battery.read_bytes()).hexdigest() if battery else None,
         'user_quality_approval': 'pending', 'host_browser_performance_proven': False
     })
     metadata['source_worktree_dirty'] = bool(subprocess.check_output(
