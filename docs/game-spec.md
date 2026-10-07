@@ -812,6 +812,17 @@ First-slice checkpoint — native save compatibility:
 - New guarded target SHA-256:
   6698a2df771b0a8a6115e4e12018b4749b451d9bff7503fc67ac39624c4cbca2.
   Original art/audio and the clip reviews still block first-slice acceptance.
+- Clinic follow-up: native controller play registers the SoMa respawn warp,
+  restores the starter to 19/19 HP, purchases one ball (five to six; 200 coins
+  deducted), and opens the actual Move Monsters box interface. Evidence:
+  .tools/benchmarks/cognition-clinic-{heal,buy,box}. Full storage transfer and
+  clinic blackout/re-entry checks remain outstanding.
+- Restoring the pinned baseline after the native guard still reproduces exact
+  Emerald; reapplying the overlay reproduces guarded target 6698a2df...cbca2.
+- Original CinderCoy front/entrance/back source candidate is stored at
+  assets/monsters/cindercoy/source-v1.png with its prompt and remaining cleanup
+  requirements. It is not integrated or quality-approved; finished-monster and
+  domain approval counts do not increase.
 
 Approved architecture change — Emerald ROM hack:
 
