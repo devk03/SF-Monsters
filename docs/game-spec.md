@@ -409,7 +409,10 @@ The full 150-entry game and later 50-person cast expansion remain subsequent sco
 - [x] Capture, battles, healing, team switching, storage, and defeat recovery pass core checks.
 - [x] The Cognition gym can be challenged and defeated (core checks and browser battle through the Build Badge).
 - [x] Native/browser format and actual WebAssembly SRAM restore/resume/export pass automated checks.
-- [ ] Manual cross-emulator backup/import round trip is verified.
+- [x] A completed native mGBA battery save imports into browser play, preserving
+  the Build Badge and level-8 Brinepup.
+- [ ] Downloaded browser backup is tested in a regular external browser (in-app
+  download event automation times out).
 - [x] The actual GBA ROM boots and accepts input in native mGBA.
 - [x] The browser boots the same ROM through WebAssembly; starter selection and keyboard input verified.
 - [x] Desktop keyboard and on-screen controls, small-screen layout, and browser gym completion are verified.
@@ -424,22 +427,22 @@ Completed preparation:
 - Public GitHub repository and consolidated specification committed.
 - Startup gym identities and real-person casting research recorded.
 - Public website deployed: https://sf-mini-monsters.devkunjadia03.chatgpt.site
-  (Sites version 1, deployment succeeded 2026-10-07).
+  (Sites version 2, deployment succeeded 2026-10-07).
 - Web framework starter and dependencies installed locally.
 - GBA compiler installed locally.
 - Two original raster sprite atlases integrated; palette and sprite conversion is reproducible.
 
-In progress:
+Implemented and verified:
 
-- Browser interface and emulator execution verification.
+- Browser interface, emulator execution, controls, and native cartridge behavior.
 - Original GBA ROM built successfully (67,820 bytes), with indexed pixel art,
   scrolling maps, menus, battles, and dual-bank cartridge saves.
 - Browser battery saves validate native records, wait for actual SRAM allocation,
   verify imported bytes, and support local persistence and portable export.
 - Core logic implemented: starter choice, encounters, capture, team/storage,
   courier quest, relay gates, and the three-monster Cognition gym battle.
-- Browser emulator runtime artifacts verified in installed packages; integrating
-  a single-threaded mGBA WebAssembly core that avoids cross-origin isolation requirements.
+- Browser player uses a single-threaded mGBA WebAssembly core with same-origin
+  assets and no cross-origin isolation requirement.
 - All-SF geography supersedes the Foster City excursion. The first gym is
   Cognition in SoMa; Outer Sunset connects to it through Muni.
 - The courier/prototype quest now provides a coherent MVP story and completion point.
@@ -494,6 +497,33 @@ Latest verification checkpoint (2026-10-07):
 - Native mGBA loads a portable 32 KiB fixture and displays Continue Delivery.
 - Download event capture times out in the in-app test browser. A persistent
   Download save link is provided; byte-level WebAssembly export/import passes.
-- Still awaiting hands-on verification: a full native-emulator playthrough,
-  native-to-browser downloaded-file transfer, and a production account sign-in.
-  These are stated QA limits, not claimed as verified.
+- Native controller-script playthrough and native-to-browser save transfer now
+  pass (see final acceptance below). Production account sign-in and external
+  browser download behavior remain hands-on QA items.
+
+Release checkpoint:
+
+- Public Site version 2 is deployed with the final save-download fallback and
+  battle-command selection fix.
+- Clean Ubuntu build and all checks pass in GitHub Actions:
+  https://github.com/devk03/SF-Monsters/actions/runs/37596174090
+- GCC versions produce different ROM sizes (macOS GCC 16: 67,820 bytes;
+  Ubuntu toolchain: 67,372 bytes). Both execute the cartridge checks successfully.
+- The earlier clean-checkout failure was fixed by tracking required web/build
+  helpers while ignoring only the root cartridge build output.
+
+Final native acceptance (2026-10-07):
+
+- A fresh cartridge completes starter selection, parcel recovery, Roon's delivery
+  instructions, Muni, both neighborhoods, Scott's diagnosis, both safety relays,
+  healing/resupply, and the gym through native mGBA controller scripting.
+- The test writes controller keys only. It reads state for navigation and never
+  writes stats, levels, quest flags, or other game memory. It exercises recovery,
+  ordinary training battles, the free clinic, and the capsule/potion shop.
+- Native result: flags 127, 460 coins, level-8 Brinepup, Build Badge earned.
+- Importing that actual 32 KiB native save into the browser succeeds. The browser
+  Team/Storage screen displays Brinepup level 8 with 52 HP, preserving the badge.
+- `make native-qa` prepares isolated ROM/script files for repeatable acceptance.
+- MVP implementation is delivered for user testing. Full campaign milestones in
+  section 13 remain future work; production account login and normal-browser
+  backup download should be included in the user's first testing pass.

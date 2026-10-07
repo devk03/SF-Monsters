@@ -6,6 +6,9 @@ Status: playable MVP. Explore Outer Sunset and SoMa, recruit 12 original monster
 and complete the courier quest and Cognition gym on the same GBA cartridge.
 All playable locations are inside San Francisco.
 
+[Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
+[Download the GBA ROM](https://sf-mini-monsters.devkunjadia03.chatgpt.site/game/sf-mini-monsters.gba)
+
 ## Game scope
 
 - 16 accessible neighborhood hubs, each with a mini-adventure.

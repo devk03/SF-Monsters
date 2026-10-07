@@ -24,7 +24,9 @@ differ (mGBA defaults: X = A, Z = B).
 4. Walk southeast to the Muni stop at (18,13); interact to travel to SoMa.
 5. Enter the Cognition door around (14,6). Speak to Scott Wu near (11,2).
 6. Repair relay A at (5,6), then relay B at (17,10). Return to Scott.
-7. Defeat his three-monster team to earn the Build Badge and finish this chapter.
+7. Train your lead to about level 8, or build a balanced party. Heal at the clinic
+   and restock potions at Jonathan's shop.
+8. Defeat his three-monster team to earn the Build Badge and finish this chapter.
 
 Explore grass and sand for wild encounters. Weaken a monster, select Capsule,
 then press A to recruit it. Six companions fit in the active party; additional
@@ -65,6 +67,13 @@ layout, quest gates, 12-entry recruitment, team/storage, gym completion, defeat
 recovery, and reachability of required map locations. It also executes the actual
 WebAssembly cartridge to verify boot, controller input, SRAM restore, resume, and
 export. CI rebuilds the cartridge and website and uploads the GBA artifact.
+
+For native emulator acceptance, run `make native-qa`. It prepares a fresh ROM
+basename and Lua script under `build/native-qa`. Open that ROM in mGBA, then use
+Tools → Scripting → File → Load script to load the matching Lua file. The script
+plays through the quest with controller inputs and reports the gym result in the
+console. It reads game state for navigation; it never writes stats or progress.
+Each run uses a new basename so existing player saves are preserved.
 
 For manual QA, finish the route, recruit a wild monster, switch the lead, heal,
 save/reopen, and export/import on both targets. Test the site at 320, 375, 414,

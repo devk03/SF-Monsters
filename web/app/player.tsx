@@ -128,6 +128,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
       const previous = persist();
       if (previous) localStorage.setItem(`${storageKey}:previous`, encodeSave(previous));
       engine.current.importBattery(bytes);
+      setBackupUrl(null);
       localStorage.setItem(storageKey, encodeSave(bytes));
       lastSequence.current = -1; setProgress(readProgress(bytes));
       setNotice('Backup restored. Press A to continue your delivery.');

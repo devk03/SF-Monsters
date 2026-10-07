@@ -1,5 +1,5 @@
 PYTHON ?= .tools/venv/bin/python
-.PHONY: setup rom web check
+.PHONY: setup rom web check native-qa
 setup:
 	python3 -m venv .tools/venv
 	$(PYTHON) -m pip install -r requirements-build.txt
@@ -11,3 +11,6 @@ web: rom
 	cd web && npm run build
 check:
 	bash scripts/check.sh
+
+native-qa: rom
+	$(PYTHON) scripts/native_check.py
