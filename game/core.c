@@ -5,7 +5,9 @@ void text_append(char *out, const char *in) { while(*out) out++; text_copy(out,i
 void text_number(char *out, int value) {
     char buf[12]; int n=0; if(value<0) value=0;
     do { buf[n++]=(char)('0'+value%10); value/=10; } while(value);
-    while(*out) out++; while(n) *out++=buf[--n]; *out=0;
+    while(*out) out++;
+    while(n) *out++=buf[--n];
+    *out=0;
 }
 static u32 random_next(Game *g) {
     g->save.rng=g->save.rng*1664525u+1013904223u; return g->save.rng;
@@ -294,7 +296,8 @@ void game_input(Game *g,u16 keys) {
     if(g->scene==DEX) {
         if(keys&(KEY_RIGHT|KEY_DOWN))g->cursor=(g->cursor+1)%SPECIES_COUNT;
         if(keys&(KEY_LEFT|KEY_UP))g->cursor=(g->cursor+SPECIES_COUNT-1)%SPECIES_COUNT;
-        if(keys&KEY_B)g->scene=MENU; return;
+        if(keys&KEY_B)g->scene=MENU;
+        return;
     }
     if(g->scene==PARTY) {
         if(keys&KEY_DOWN)g->cursor=(g->cursor+1)%g->save.roster_count;
@@ -321,7 +324,8 @@ void game_input(Game *g,u16 keys) {
         if(keys&KEY_DOWN)g->cursor=(g->cursor+1)%4;
         if(keys&KEY_UP)g->cursor=(g->cursor+3)%4;
         if(keys&KEY_B) { g->scene=BATTLE;g->cursor=0; }
-        if(keys&KEY_A)game_choose_move(g,g->cursor);return;
+        if(keys&KEY_A)game_choose_move(g,g->cursor);
+        return;
     }
     if(g->scene==BATTLE) {
         if(g->message_open) {

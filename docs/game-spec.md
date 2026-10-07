@@ -427,7 +427,10 @@ Completed preparation:
 
 In progress:
 
-- GBA renderer/build and browser emulator integration.
+- Browser interface and emulator execution verification.
+- Original GBA ROM built successfully (61,892 bytes), with indexed pixel art,
+  scrolling maps, menus, battles, and dual-bank cartridge saves.
+- Browser battery-save validation/export/import implementation started.
 - Core logic implemented: starter choice, encounters, capture, team/storage,
   courier quest, relay gates, and the three-monster Cognition gym battle.
 - Browser emulator runtime artifacts verified in installed packages; integrating
