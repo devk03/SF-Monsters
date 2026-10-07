@@ -1,4 +1,7 @@
-# Experimental native foundation
+# Archived standalone foundation
+
+The user approved switching the main build to an Emerald ROM hack on October 7,
+2026. This renderer is retained as an experiment; it is no longer the main game.
 
 This is checkpoint A's hardware-renderer candidate. It is unreviewed, does not
 replace the public prototype, and does not certify Emerald quality. The first
@@ -30,3 +33,8 @@ cleanup. Font glyphs use the existing public-domain font with its notice intact.
 `foundation_telemetry` records real game updates, missed frames, peak CPU budget,
 controller state, position and completed steps. Inspect it through emulator reads;
 an emulator FPS counter alone cannot demonstrate that gameplay meets its deadline.
+
+The native/WASM test in `tests/foundation_runtime.cjs` compares a complete
+controller route against the same native-captured cartridge, including final RGB
+pixels. `scripts/quality/preview_foundation.py` serves an isolated local review
+page. These checks describe the archived experiment, not the new hack's release.

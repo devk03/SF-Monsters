@@ -12,6 +12,8 @@ Commit frequently.
 
 Always read `docs/game-spec.md` as the source of truth for scope and acceptance.
 Use section 15 as the active Emerald parity goal; section 14 records the earlier technical prototype.
+The main path is now an Emerald ROM hack with player-supplied local ROM upload.
+Publish SF contributions and patches; keep full Emerald-derived ROMs private.
 Update acceptance evidence and progress in the specification at meaningful checkpoints.
 Validate both the website and a standard GBA emulator; mGBA is the reference target.
 Commit coherent changes every 200–300 handwritten code lines when practical.

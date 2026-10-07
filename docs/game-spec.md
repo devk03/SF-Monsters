@@ -555,10 +555,29 @@ the coherent checkpoint they substantiate.
 
 ### 15.1 Objective and completion rule
 
-Deliver the complete original SF Mini Monsters campaign on one GBA ROM and the
-public WebAssembly website, with Emerald-tier audio, sprites, movement, maps,
+Architecture revision approved by the user on October 7, 2026: use an Emerald
+ROM hack. The user explicitly accepts a public website that asks players to load
+their own Emerald ROM and applies the SF patch locally. This supersedes the
+standalone-homebrew/instant-play distribution approach for the main build.
+
+Deliver the complete SF Mini Monsters campaign on an Emerald-based GBA ROM and
+the public WebAssembly website, with Emerald-tier audio, sprites, movement, maps,
 battles, monster depth, NPC events, interface, story, and balance. Every playable
 location remains inside San Francisco city limits. Keep source publicly forkable.
+
+Preserve Emerald's actual movement, camera, sprites/animation infrastructure,
+menus, battle engine, scripting and sound engine as the baseline. On opening the
+game, the player should immediately recognize the Gen III creature-RPG format.
+New SF art must match its native pixel scale, palette discipline, perspective,
+proportions and animation conventions. The former standalone renderer is an
+archived experiment, not the main path to parity.
+
+Publish our SF changes, asset sources, build tools and a versioned patch. Keep
+commercial ROMs and reconstructed full Emerald-derived ROMs out of Git and
+public hosting. The browser validates and patches the player's local base ROM
+without uploading it; players may download their resulting cartridge for mGBA.
+The project's open-source license covers our original contributions, not the
+inherited commercial engine/assets. Patch distribution does not relicense them.
 
 Completion requires ALL of these, independently:
 
@@ -572,8 +591,10 @@ substitute for those conditions. Partial slice approval never means the full
 campaign or all 150 monsters have achieved parity.
 
 Parity means equivalent craft, responsiveness, depth, and polish for the agreed
-SF experience. It does not require copying Hoenn, its creatures, its soundtrack,
-or its branding. The user chose quality within the existing SF scope: breeding,
+SF experience, now built on Emerald's engine. Hoenn locations and the stock
+campaign are development scaffolding and must be replaced before SF content is
+counted complete. Our 150 Mini Monsters, SF cast, neighborhood story and distinct
+branding remain required. The user chose quality within the existing SF scope: breeding,
 contests, link trading, multiplayer, and a copy of every Battle Frontier facility
 are not added to this goal. The later approximately 50-person cast expansion
 remains subsequent scope. The existing legendary/rematch/side-quest postgame stays.
@@ -588,7 +609,8 @@ The archive/header/hash have been inspected; benchmark clips have not been colle
 Use this ROM locally as the reference, with mGBA 0.10.5 at normal emulation speed.
 Keep commercial ROM data and reference assets out of the repository and deployment.
 Ship original assets and code or dependencies with appropriate redistribution rights.
-The supplied reference ROM is not a build prerequisite for the released SF game.
+The approved reference ROM is now also the validated patch input. Contributors
+and players supply it locally; public builds/releases contain our patch and tools.
 
 Compare matching situations, not identical geographic layouts: town walking,
 route exploration, interior entry, dialogue, wild battle, trainer/gym battle,
@@ -685,16 +707,19 @@ Saves, progression, and release:
 - Both the same ROM in native mGBA and the web player complete the campaign.
   Public guest play, real sign-in, independent local save slots and actual
   downloadable/importable backups pass hands-on release checks.
-- Clean GitHub builds pass; versioned ROM, website, editable assets and contributor
-  instructions reproduce from a clean checkout. A sample additional cast member
+- Clean GitHub builds pass; versioned patch, website, editable SF assets and
+  contributor instructions reproduce from a clean checkout plus the documented
+  local base-ROM requirement. The patched cartridge runs identically in native
+  mGBA and the browser. A sample additional cast member
   can be added through data without engine changes, preserving an older save.
 
 ### 15.5 Hill-climbing checkpoints
 
-A. Reference and foundation: collect the paired benchmark set, record timing and
-   audio baselines, finalize the art/audio direction, battle-rule coverage and
-   type chart. Demonstrate a foundation that can meet the gates on GBA and web.
-   Do not preserve the current homebrew architecture merely because it exists.
+A. Reference and Emerald foundation: verify a pinned Emerald build against the
+   supplied ROM, collect the benchmark set and preserve inherited engine behavior.
+   Produce a small SF content patch, verify exact patch application locally, and
+   run the same patched cartridge in mGBA and the browser. Establish the native
+   art/audio conventions, battle coverage and SF type mapping before expansion.
 
 B. First polished slice: Outer Sunset/Ocean Beach, the Muni connection, a detailed
    South Park block, and Cognition's gym. Include 12 fully presented monsters,
@@ -741,6 +766,21 @@ progress toward final parity. Do not lower a target to fit the existing code.
   at the stated gates. Resolve changes to scope/platform/originality with the user;
   ordinary engine and implementation choices remain autonomous.
 - Never mark the goal complete while any required gate or review is outstanding.
+
+Approved architecture change — Emerald ROM hack:
+
+- User direction: the result should immediately look and feel like Pokémon's
+  Gen III game, including sprite presentation. The user approved Emerald hacking
+  and local-ROM upload on the public website.
+- Main path: pinned pret/pokeemerald build, SF source/data changes, local ROM
+  reconstruction, patch release, and client-side validation/patching/play.
+- The standalone Butano candidate is archived. Its native/WASM controller route
+  matched final RGB pixels across 2280 frames; this remains experimental evidence
+  and earns no quality approval for the new main path.
+- All eleven domain approvals and the complete SF content/performance/save gates
+  remain outstanding. Inheriting the engine does not complete SF maps or story.
+- Next checkpoint: reproduce Emerald, then demonstrate an actual SF content
+  change inside that engine. Do not publicly host the supplied or rebuilt ROM.
 
 Reference sources for benchmark construction:
 

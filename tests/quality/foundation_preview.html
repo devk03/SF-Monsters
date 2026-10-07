@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SF native foundation review</title>
+<style>
+body{margin:0;background:#102333;color:#eff6f2;font:16px system-ui;padding:24px}
+main{max-width:720px;margin:auto}canvas{display:block;width:100%;image-rendering:pixelated;background:#000}
+button{font:inherit;padding:12px 20px;margin:12px 0}p{line-height:1.5}
+</style>
+<main>
+<h1>SF foundation · unreviewed</h1>
+<p>Hardware renderer candidate. Maps and music are provisional. This is a development review.</p>
+<canvas width="240" height="160" aria-label="SF Mini Monsters GBA display"></canvas>
+<button id="play">Play candidate</button>
+<p id="status" role="status">Ready. Arrow keys walk, Z runs, right Shift changes maps.</p>
+<p>Public campaign and Emerald quality approval remain separate gates.</p>
+</main>
+<script type="module">
+import {load} from './emulator/mgba.sdk.js';
+const button=document.querySelector('#play');
+const status=document.querySelector('#status');
+button.addEventListener('click',async()=>{
+  button.disabled=true;
+  try{
+    const response=await fetch('./sf-foundation.gba');
+    if(!response.ok)throw new Error('Candidate cartridge unavailable');
+    const player=await load({canvasEl:document.querySelector('canvas'),
+      assets:{rom:new Uint8Array(await response.arrayBuffer())},
+      storageNamespace:'sf-foundation-review',persist:null,
+      options:{volume:1,renderFilter:'pixelated',interframeBlending:false},
+      onEvent:event=>{if(event.type==='error')status.textContent=String(event.message)}});
+    player.start();
+    status.textContent='Running the same GBA cartridge. Arrow keys walk; Z runs; right Shift changes maps.';
+    button.hidden=true;
+  }catch(error){status.textContent=error.message;button.disabled=false;}
+});
+</script>
+</html>
