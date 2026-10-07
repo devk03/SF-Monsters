@@ -19,21 +19,14 @@ Be very concise.
 For complex tasks where independent parallel work materially improves speed
 or quality, keep the desktop task as coordinator and use subagent orchestration.
 
-- Use native Codex subagents for ordinary parallel lanes and the installed
-  `delegate-secondary-codex` skill for at least one suitable independent lane
-  on the separately authenticated account.
+- Use native Codex subagents for suitable independent parallel lanes.
+- Do not use the secondary Codex account or its delegation skill.
 - Prefer bounded read-heavy exploration, review, triage, research, and test analysis.
 - Do not delegate trivial work or create redundant work to consume usage.
-- Default the secondary account to read-only.
 - Pass compact task briefs; workers inspect the repository and applicable instructions.
 - Never let agents edit the same checkout concurrently. Parallel write lanes
   require separate Git worktrees and non-overlapping ownership.
 - Wait for requested workers, verify important findings, and return one
   consolidated result rather than raw intermediate output.
-- For recurring secondary-account work, use a stable persistent thread keyed
-  by repository, branch, and worker role. Keep one-shot work ephemeral and
-  start fresh when the objective or role changes materially.
-- If the secondary account is unavailable, report it clearly. Do not silently
-  replace its lane with additional primary-account workers.
 - Delegation does not expand authorization for migrations, destructive actions,
   commits, publication, pull requests, or other external changes.
