@@ -28,6 +28,7 @@ elif not verified_core(out,out/'core-build.json'):
     if not verified_core(cache,cache/'build.json'):raise ValueError('Pinned browser core verification failed.')
     for name in ['mgba.js','mgba.wasm']:shutil.copy2(cache/name,out/name)
     shutil.copy2(cache/'build.json',out/'core-build.json')
+for name in ['mgba.js','mgba.wasm']:(out/name).chmod(0o644)
 # Small MPL-covered extension exposes battery saves, not proprietary savestates.
 p=out/'mgba.sdk.js';s=p.read_text()
 needle='        async saveState() {'

@@ -761,7 +761,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.5 includes three original starter candidates,
+- Public preview: version 0.0.6 includes three original starter/call candidates,
   Sunset/Muni/South Park, the clinic and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
@@ -944,6 +944,31 @@ First-slice checkpoint — original starter calls:
   Public patch remains 0.0.5. Original neighborhood/battle music, remaining
   creature cries, evolution art, nine slice creatures and clip reviews remain
   required. This is three call candidates, not a completed soundtrack.
+- Follow-up: CinderCoy and SproutSlug native audition routes are also recorded.
+  Their 6,952/7,076 frames match every final RGB pixel and every raw stereo
+  sample pair (7,628,080/7,764,140 respectively) in the pinned browser core.
+  Evidence: cindercoy-original-cry-preview and sproutslug-original-cry-preview
+  under .tools/benchmarks. This completes three functional call auditions,
+  while composition, character and mix approval remain unreviewed.
+
+First-slice checkpoint — public original-call preview:
+
+- Public Site version 7 deployed successfully with 0.0.6-starter-audio-preview
+  and the pinned mGBA 0.10.5 browser core. Site source commit:
+  5228a3d789e2e71cccd486900c9426eae2d73be9. URL remains
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+- Archive validation confirms the 595,880-byte patch, the pinned-core fingerprint
+  and no hosted full Emerald-derived cartridge. Browser BPS decoding reproduces
+  the compiled target exactly; website build and the regression suite pass.
+- The observed fresh-game HP discrepancy is resolved in the checked replay,
+  with original failure evidence retained. Three native call-preview routes
+  and an actual older-SF-battery restore match final pixels and every raw audio
+  sample under the same core revision. These are bounded checks, not all release
+  performance traces, campaign save transfers or user quality approval.
+- Next weakest content area: original neighborhood/battle soundtrack, followed
+  by remaining slice monsters/evolution art and map/cast polish. Real browser
+  AudioWorklet/Safari/mobile checks, comparison clips, gym victory/balance,
+  full 16-hub/eight-gym/150-entry campaign and all 11 approvals remain open.
 
 Approved architecture change — Emerald ROM hack:
 
