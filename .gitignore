@@ -10,4 +10,9 @@ dist/
 *.srm
 
 .tools/
+/engine/build/
+/engine/*.elf
+/engine/*.map
+/engine/graphics/
+__pycache__/
 !web/public/game/sf-mini-monsters.gba

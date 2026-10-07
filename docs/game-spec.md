@@ -723,8 +723,8 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-- Goal definition and reviewer preference are established; implementation has not
-  started under this acceptance bar.
+- Goal definition and reviewer preference are established. Reference capture
+  tooling and the experimental hardware foundation have started.
 - Approved Emerald-parity domains: 0/11. This is an approval count, not a claim
   that the prototype has no working functionality.
 - Prototype content: 2 simple neighborhood maps, 1 gym, 12 monsters, basic turn
@@ -762,3 +762,18 @@ Foundation checkpoint A — reference tooling:
   Docker image sha256:116afba8df8453961de2936ffab20dd441edf4d682856c1ec8b0e53d7ed0bbf5
   are being evaluated for hardware backgrounds/sprites and streaming music.
 - The current production prototype remains at 0/11 approved quality domains.
+
+Foundation checkpoint A — native graphics candidate:
+
+- The pinned Butano/devkitARM build produces a genuine GBA SFMM cartridge.
+  The initial build has four-direction interpolated walk/run, alternating
+  footstep poses, and a twelve-frame 16x32 original courier sheet.
+- Build and indexed-asset dimensions/palette checks pass. Walking/running use
+  provisional 16/8-frame tile durations; these are not yet certified timings.
+- Reproducible entry point: make foundation, after the documented pinned setup.
+  This isolated candidate does not replace the public game or its saves.
+- Native GUI checks are pending after emulator window automation became
+  unavailable. The first reference recording was rejected: 1080x720 output
+  despite native-resolution presets being shown. It is diagnostic only.
+- No quality-domain score or approval changed. Map composition, music, core
+  integration, measured walking baseline, and valid comparison clips remain next.

@@ -1,5 +1,5 @@
 PYTHON ?= .tools/venv/bin/python
-.PHONY: setup rom web check native-qa
+.PHONY: setup rom web check native-qa foundation
 setup:
 	python3 -m venv .tools/venv
 	$(PYTHON) -m pip install -r requirements-build.txt
@@ -14,3 +14,6 @@ check:
 
 native-qa: rom
 	$(PYTHON) scripts/native_check.py
+
+foundation:
+	python3 scripts/foundation/build.py
