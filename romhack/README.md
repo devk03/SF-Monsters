@@ -6,7 +6,7 @@ The complete SF scope and quality gates remain in `docs/game-spec.md` section 15
 
 Our public repository contains original SF contributions and build/patch tools.
 Full commercial and reconstructed cartridges stay under ignored `.tools`.
-The release website will distribute the patch and emulator; a player's base ROM
+The release website distributes the patch and emulator; a player's base ROM
 is validated and patched locally, without uploading it to a server.
 
 Pinned sources:
@@ -22,14 +22,19 @@ Prerequisites: Docker, Git and Python 3. Run
 The result must match SHA-1 `f3ae088181bf583e55daf962a92bb46f4f1d07b7` and the
 user-approved SHA-256 in the spec. Build evidence goes to
 `.tools/romhack-baseline/build.json`; the local ROM stays beside it.
+If an SF overlay was previously built, bootstrap preserves its modified inputs
+in ignored storage before restoring the pinned base inputs. Run `make hack`
+afterward to rebuild the SF overlay. No source or intermediate files are deleted.
 
 Compiler variants build in separate work directories. Upstream cleanup actions
 move temporary files into ignored preservation storage, respecting the project's
 no-deletion instruction. Game/compiler C and assembly are not changed for this
 adaptation. Failed stages and their logs remain available for inspection.
 
-The exact baseline reproduction passes. SF content patching, browser ROM upload,
-Flash save compatibility, native/web play and the campaign are subsequent gates.
+Exact baseline reproduction, SF patch application and local browser ROM upload
+pass. The same cartridge reaches identical native-core/WebAssembly frame output.
+Flash slot validation passes; actual campaign-save transfers and the SF campaign
+remain outstanding gates.
 Renaming stock maps alone does not complete an SF neighborhood adventure.
 
 `make hack` builds the small `engine-probe.json` overlay, creates a BPS delta

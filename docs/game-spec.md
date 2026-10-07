@@ -8,9 +8,9 @@ Repository: https://github.com/devk03/SF-Monsters
 
 ## 1. Product
 
-An original, open-source, adult comedy creature RPG set in a compressed San
-Francisco. The single-player mechanics should feel familiar to a Pokemon player.
-The world, creatures, art, music, dialogue, presentation, and implementation are original.
+An adult comedy creature RPG set in a compressed San Francisco, built as an
+Emerald ROM hack. Our SF content and tools are open source; inherited commercial
+engine/assets retain their rights. Section 15 defines the approved architecture.
 
 Required release scope:
 
@@ -25,7 +25,7 @@ Required release scope:
 - An optional Tenderloin adventure with a playable high state for the protagonist.
 - Optional weird dates, recurring jokes, historical lore, and hidden Easter eggs.
 - Real public tech figures and online personalities as the preferred named NPC cast.
-- One original GBA ROM, playable in standard GBA emulators and a web player.
+- One locally patched GBA ROM, playable in standard GBA emulators and a web player.
 - Public source, editable content, documented builds, and open licensing.
 - Support for adding approximately 50 researched Twitter personalities after
   the main game is complete, without redesigning the engine or campaign.
@@ -58,7 +58,7 @@ Frost, Echo, Mind, and Shade. Finalize the chart before implementing battle cont
 Gym concepts and elemental specialties are separate design decisions.
 
 The battle system is deterministic for a fixed state and random seed.
-Balance formulas live in a separate tuning specification and are implemented originally.
+Emerald's Gen III rules are the engine baseline; SF tuning lives in editable data.
 Gym teams progress in difficulty and demonstrate distinct strategies.
 Ordinary encounters provide enough experience to progress without mandatory grinding.
 
@@ -304,9 +304,10 @@ An original city map and simple quest journal help players track return visits.
 
 ## 11. Technical architecture and saves
 
-Implemented MVP architecture: freestanding C compiled with GCC for ARM into one
-original GBA ROM. The website runs the same cartridge using mGBA WebAssembly.
-Native mGBA boot and WebAssembly execution have been demonstrated.
+Main architecture: pinned pret/pokeemerald plus our editable SF overlay, compiled
+locally and released as a BPS patch. The website patches a player-supplied ROM
+locally and runs that cartridge using mGBA WebAssembly. The earlier freestanding
+C implementation is archived at `/prototype`.
 
 Keep maps, dialogue, quests, monsters, encounters, moves, and teams in editable
 source data compiled into ROM assets/tables. Validate IDs, references, resource
@@ -340,13 +341,13 @@ record source and licensing.
 Dependencies and separately licensed material keep their own notices/licenses.
 
 Include editable source assets, content formats, contributor guide, and build instructions.
-Builds must not require commercial ROMs, copied proprietary assets, or proprietary BIOS files.
-Keep branding and presentation original and review the release identity.
+Players supply the validated base ROM locally. Full commercial and reconstructed
+cartridges stay out of Git and public hosting. Publish our original changes and
+patches; keep SF branding distinct and record inherited material separately.
 
-Website requirements: Play, Download GBA, Fork source, controls, save backup/import,
-release version, and credits. Serve the ROM and WebAssembly player as static assets.
-Choose the hosting provider during release preparation; verify its emulator requirements.
-Publish versioned downloadable ROMs and matching browser builds.
+Website requirements: local ROM upload/patch/play, local patched-GBA download,
+Fork source, controls, save backup/import, release version, and credits.
+Serve versioned patches and the WebAssembly player through Sites hosting.
 
 ## 13. Delivery and acceptance
 
@@ -837,7 +838,24 @@ Emerald foundation checkpoint — local ROM player:
   its local save namespace remain available through /prototype.
 - The full SF campaign, actual campaign-save round trips/resume checkpoints,
   Mac GUI/Safari/physical mobile checks, sign-in QA and all eleven user approvals
-  remain outstanding. No domain approval changed. Publishing this player is next.
+  remain outstanding. No domain approval changed.
+
+Emerald foundation checkpoint — public player deployment:
+
+- Public Site version 4 deployed successfully on October 7, 2026 at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+  Pushed Site source: 585833d9eefbcb6440c3069fd35f16cca5e29360.
+- Deployment archive inspection confirmed that the main build contains the
+  226,353-byte patch, with no full Emerald-derived cartridge. The only hosted
+  `.gba` is the earlier 67,820-byte original prototype at `/prototype`.
+- Repeating baseline bootstrap after applying the SF overlay preserves modified
+  inputs, restores the pinned base and reproduces the exact original ROM again.
+  Reapplying the overlay reproduces the immutable 0.0.3 patch; its browser-decoded
+  output again matches the compiled target byte-for-byte.
+- Public sign-in hands-on QA remains pending. This is a deployed engine preview,
+  not a completed SF campaign. All eleven domain approvals remain outstanding.
+- Next weakest domain: actual SF world/story content. Replace the stock opening
+  with the Outer Sunset/Ocean Beach adventure before expanding neighborhoods.
 
 Reference sources for benchmark construction:
 

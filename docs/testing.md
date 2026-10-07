@@ -1,6 +1,42 @@
-# Testing the MVP
+# Testing SF Mini Monsters
 
-## Play
+## Main Emerald engine preview
+
+Open https://sf-mini-monsters.devkunjadia03.chatgpt.site and choose **Load .gba or ZIP**.
+Supply your local English Emerald ROM matching SHA-256
+`a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af`.
+Validation, extraction and SF patching happen on your device. No ROM is uploaded.
+The current 0.0.3 engine preview changes opening dialogue and the hometown label;
+stock maps, creatures, art and campaign are still scaffolding.
+
+Guest play works without an account. Optional ChatGPT sign-in has a separate
+device-local save slot. Complete **Save** inside the game before using **Save
+backup**. Emerald backups are 128 KiB Flash battery saves, distinct from the
+earlier prototype's 32 KiB SRAM saves. Import rejects incompatible backups.
+Actual campaign save-transfer acceptance is still pending.
+
+After loading the ROM, use **Download patched GBA** for native mGBA. Keep its
+`.sav` beside the cartridge with the same basename and close the emulator before
+replacing a battery-save file. Emulator savestates are not portable battery saves.
+
+Build the matching baseline with `python3 scripts/romhack/bootstrap.py`, then
+run `make hack`. See [the pinned build workflow](../romhack/README.md).
+Check patch integrity and Flash-slot validation with:
+
+```sh
+node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.3-engine-probe/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
+node --experimental-strip-types tests/flash-save.test.mjs
+```
+
+Baseline bootstrap and subsequent SF rebuilding have reproduced the same ROM
+and immutable patch. These checks do not establish SF content or quality parity.
+
+## Archived standalone prototype
+
+The following walkthrough/checks apply only to `/prototype`, the original
+freestanding cartridge. Its saves and mechanics are separate from the main hack.
+
+### Play
 
 The MVP uses one original cartridge on both platforms. All playable areas are
 inside San Francisco: Outer Sunset, SoMa/South Park, and the Cognition Lab interior.

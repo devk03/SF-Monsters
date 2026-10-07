@@ -2,18 +2,21 @@
 
 A San Francisco creature RPG with public SF content and development tools.
 
-The main build is now an Emerald ROM hack. Players will supply their own base
+The main build is now an Emerald ROM hack. Players supply their own base
 ROM to the website for local patching. The pinned engine baseline reproduces
 Emerald exactly; the first SF content overlay is an unreviewed engine proof.
 See [the hack workflow](romhack/README.md) and the active spec in section 15.
 
-Status: playable technical prototype; Emerald quality parity has not been achieved.
-Explore Outer Sunset and SoMa, recruit 12 original monsters,
-and complete the courier quest and Cognition gym on the same GBA cartridge.
-All playable locations are inside San Francisco.
+Status: the public Emerald player is an engine preview with SF opening dialogue.
+Stock maps, creatures, art and campaign remain development scaffolding.
+The complete SF campaign and Emerald quality approval are still outstanding.
 
 [Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
-[Download the GBA ROM](https://sf-mini-monsters.devkunjadia03.chatgpt.site/game/sf-mini-monsters.gba)
+[Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps) ·
+[Earlier standalone prototype](https://sf-mini-monsters.devkunjadia03.chatgpt.site/prototype)
+
+Load the supported Emerald `.gba` or ZIP to play. ROM bytes stay on your device.
+The player can download the patched cartridge for a standard GBA emulator.
 
 ## Game scope
 
@@ -56,7 +59,7 @@ Acceptance criteria:
 The main build overlays SF content on a pinned Emerald decompilation and releases
 a BPS patch. A player's local base ROM becomes the same patched cartridge used
 in native mGBA and the WebAssembly player. Full inherited cartridges stay private.
-The earlier freestanding C prototype remains archived and playable at the links above.
+The earlier freestanding C prototype remains archived and playable at `/prototype`.
 The website uses React/Vinext and Sites hosting with optional ChatGPT sign-in.
 
 Maps, encounters, monsters, and dialogue should have editable source data
@@ -85,9 +88,9 @@ licensable; see [asset credits](assets/README.md).
 Dependencies and separately licensed assets retain their own licenses.
 Track the author, source, and license of contributed assets.
 
-Use original implementation and creative expression. Do not include commercial
-game ROMs, copied sprites, music, scripts, logos, or proprietary BIOS files.
-Review the name, branding, and distinctive mechanics before public release.
+Publish original SF contributions and patches, never full commercial or
+reconstructed cartridges. Our license does not relicense Emerald's inherited
+engine or assets. Keep full ROMs in ignored local storage.
 
 ## Platform references
 

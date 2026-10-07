@@ -116,6 +116,17 @@ def build_compilers():
 def inside():
     os.environ['PATH'] = '/opt/devkitpro/devkitARM/bin:' + os.environ['PATH']
     build_compilers()
+    # Our content overlay uses these files. Preserve it before reproducing base.
+    preserved = TOOLS / ('preserved-overlay-' + uuid.uuid4().hex[:10])
+    for name in ['data/text/birch_speech.inc', 'src/data/region_map/region_map_sections.json']:
+        source = EMERALD / name
+        original = subprocess.check_output(['git', 'show', f'{EMERALD_REVISION}:{name}'],
+                                           cwd=EMERALD)
+        if source.read_bytes() != original:
+            backup = preserved / name
+            backup.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, backup)
+            source.write_bytes(original)
     # No clean targets: failed/intermediate builds remain inspectable.
     run('make', '-j8', f'RM={PRESERVE}', cwd=EMERALD)
     cartridge = EMERALD / 'pokeemerald.gba'
