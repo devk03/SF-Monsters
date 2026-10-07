@@ -1034,6 +1034,21 @@ First-slice checkpoint — original native Sunset score candidate:
   remaining slice monsters/evolution art and map/cast polish, while the theme
   direction review is pending.
 
+First-slice checkpoint — original wild-battle score candidate:
+
+- Fogbank Frenzy adds an original twenty-four-bar wild-battle cue at nominal
+  132 BPM, with six related phrases, contrasting rhythmic sections, answering
+  pluck, syncopated bass, chord pads and developed percussion. Seven native
+  tracks use eight original synthesized samples. Editable notes and recipes
+  live in assets/audio/fogbank-frenzy.json and scripts/romhack/battle_music.py.
+- The importer now supports explicit, unique field/wild song bindings and
+  keeps each instrument bank separate. Every generated Ocean Commute MIDI,
+  sample and voice source remains byte-identical to the preceding checkpoint.
+  Independent MIDI checks pass for both loop lengths, monophonic tracks,
+  closed notes and program/header bounds; the native draft compiles and its
+  patch reapplies byte-for-byte. Native listening/transition/browser evidence
+  and user review are still pending at this checkpoint. No quality score changes.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

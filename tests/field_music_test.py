@@ -28,8 +28,12 @@ def midi_events(data):
 
 
 class NativeScore(unittest.TestCase):
-    def test_seven_mono_tracks_share_a_sixteen_bar_loop(self):
-        data = (ROOT / 'assets/audio/ocean-commute-native-v1/ocean_commute.mid').read_bytes()
+    def test_seven_mono_tracks_share_each_declared_loop(self):
+        for stem, loop in [('ocean-commute', 1536), ('fogbank-frenzy', 2304)]:
+            with self.subTest(score=stem): self.check_score(stem, loop)
+
+    def check_score(self, stem, loop):
+        data = (ROOT / f'assets/audio/{stem}-native-v1/{stem.replace("-", "_")}.mid').read_bytes()
         self.assertEqual(data[:4], b'MThd')
         self.assertEqual(struct.unpack_from('>IHHH', data, 4), (6, 1, 7, 24))
         cursor = 14
@@ -46,13 +50,17 @@ class NativeScore(unittest.TestCase):
                     self.assertIn(payload[0], active); active.remove(payload[0])
                 elif status & 240 == 192: self.assertLess(payload[0], 8)
             self.assertFalse(active)
-            self.assertEqual(markers, [(0, b'['), (1536, b']')])
+            self.assertEqual(markers, [(0, b'['), (loop, b']')])
             self.assertGreater(count, 0)
             cursor += length
         self.assertEqual(cursor, len(data))
 
     def test_original_instrument_wave_headers(self):
-        files = list((ROOT / 'assets/audio/ocean-commute-native-v1').glob('*.bin'))
+        for stem in ['ocean-commute', 'fogbank-frenzy']:
+            with self.subTest(score=stem): self.check_samples(stem)
+
+    def check_samples(self, stem):
+        files = list((ROOT / f'assets/audio/{stem}-native-v1').glob('*.bin'))
         self.assertEqual(len(files), 8)
         for path in files:
             data = path.read_bytes(); kind, status, frequency, loop, size = struct.unpack_from('<HHIII', data)

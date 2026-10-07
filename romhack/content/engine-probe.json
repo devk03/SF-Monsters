@@ -1,8 +1,8 @@
 {
-  "version": "0.0.7-sunset-score-preview",
+  "version": "0.0.8-battle-score-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with Cognition, three original starter/call candidates and an original Sunset theme; wild creatures, evolution art, portraits and other music remain placeholders.",
+  "status": "Unreviewed SF chapter with Cognition, three original starter/call candidates and original Sunset/wild-battle themes; wild creatures, evolution art, portraits and other music remain placeholders.",
   "maps": [
     "sunset.json",
     "south-park.json",
@@ -30,5 +30,5 @@
   "battle_content": "first-chapter-battles.json",
   "monster_content": "monsters.json",
   "creature_audio": "assets/audio/creature-cries.json",
-  "field_music": "assets/audio/ocean-commute.json"
+  "music_scores": ["assets/audio/ocean-commute.json", "assets/audio/fogbank-frenzy.json"]
 }

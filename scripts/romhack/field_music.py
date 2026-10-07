@@ -6,8 +6,13 @@ import random
 import re
 import shutil
 import struct
+from battle_music import battle_tracks, battle_samples
 
 ROOT = Path(__file__).resolve().parents[2]
+BINDINGS = {
+    'mus_littleroot': ('littleroot', 'sf_ocean', 'ocean_commute', 'SF_Ocean'),
+    'mus_vs_wild': ('vs_wild', 'sf_wild', 'fogbank_frenzy', 'SF_Wild'),
+}
 
 
 def variable_length(value):
@@ -91,16 +96,20 @@ def instrument_samples():
 
 
 def write_song(score, output):
-    tracks, end = score_tracks(score)
+    group, directory, stem, prefix = BINDINGS[score['native_song']]
+    if score['native_voicegroup'] != group:
+        raise ValueError('Native song and voicegroup binding disagree.')
+    battle = score.get('arrangement') == 'wild_battle'
+    tracks, end = battle_tracks(score) if battle else score_tracks(score)
     output.mkdir(parents=True, exist_ok=True)
     midi = b'MThd' + struct.pack('>IHHH', 6, 1, len(tracks), 24)
     midi += b''.join(midi_track(track, end) for track in tracks)
-    (output / 'ocean_commute.mid').write_bytes(midi)
-    waves, voices = [], ['voice_group littleroot']
-    for name, data, loop, rate in instrument_samples():
-        symbol = 'SF_Ocean_' + name
+    (output / (stem + '.mid')).write_bytes(midi)
+    waves, voices = [], ['voice_group ' + group]
+    for name, data, loop, rate in (battle_samples() if battle else instrument_samples()):
+        symbol = prefix + '_' + name
         (output / (name + '.bin')).write_bytes(struct.pack('<HHIII', 0, 0x4000 if loop else 0, rate * 1024, 0, len(data)) + data)
-        waves.extend(['\t.align 2', symbol + '::', f'\t.incbin "sound/sf_ocean/{name}.bin"'])
+        waves.extend(['\t.align 2', symbol + '::', f'\t.incbin "sound/{directory}/{name}.bin"'])
         voices.append(f'\tvoice_directsound 60, 0, {symbol}, 255, 0, 230, {90 if loop else 40}')
     (output / 'waves.inc').write_text('\n'.join(waves) + '\n')
     (output / 'voices.inc').write_text('\n'.join(voices) + '\n')
@@ -110,24 +119,36 @@ def write_song(score, output):
 
 
 def apply_field_music(content, root, engine, original):
-    if 'field_music' not in content: return []
-    plan = (root / content['field_music']).resolve(); plan.relative_to(root / 'assets/audio')
-    score = json.loads(plan.read_text())
-    if score['native_song'] != 'mus_littleroot' or score['native_voicegroup'] != 'littleroot':
-        raise ValueError('Review additional native song bindings before using them.')
-    source = root / 'assets/audio/ocean-commute-native-v1'
-    write_song(score, source)
-    destination = engine / 'sound/sf_ocean'; destination.mkdir(exist_ok=True)
-    for file in source.iterdir():
-        if file.suffix == '.bin': shutil.copy2(file, destination / file.name)
-    midi_path, voice_path, data_path = 'sound/songs/midi/mus_littleroot.mid', 'sound/voicegroups/littleroot.inc', 'sound/direct_sound_data.inc'
-    shutil.copy2(source / 'ocean_commute.mid', engine / midi_path)
-    (engine / voice_path).write_text((source / 'voices.inc').read_text())
-    (engine / 'sound/sf_ocean/waves.inc').write_text((source / 'waves.inc').read_text())
-    (engine / data_path).write_text(original(data_path) + '\n.include "sound/sf_ocean/waves.inc"\n')
-    return [midi_path, voice_path, data_path]
+    plans = content.get('music_scores', [content['field_music']] if 'field_music' in content else [])
+    restored, includes, used = [], [], set()
+    for name in plans:
+        plan = (root / name).resolve(); plan.relative_to(root / 'assets/audio')
+        score = json.loads(plan.read_text()); song = score['native_song']
+        if song not in BINDINGS or song in used:
+            raise ValueError('Native song bindings must be reviewed and unique.')
+        used.add(song)
+        group, directory, stem, _ = BINDINGS[song]
+        source = root / 'assets/audio' / (plan.stem + '-native-v1')
+        write_song(score, source)
+        destination = engine / 'sound' / directory; destination.mkdir(exist_ok=True)
+        for file in source.iterdir():
+            if file.suffix == '.bin': shutil.copy2(file, destination / file.name)
+        midi_path = f'sound/songs/midi/{song}.mid'
+        voice_path = f'sound/voicegroups/{group}.inc'
+        shutil.copy2(source / (stem + '.mid'), engine / midi_path)
+        (engine / voice_path).write_text((source / 'voices.inc').read_text())
+        (destination / 'waves.inc').write_text((source / 'waves.inc').read_text())
+        includes.append(f'\n.include "sound/{directory}/waves.inc"\n')
+        restored.extend([midi_path, voice_path])
+    if includes:
+        data_path = 'sound/direct_sound_data.inc'
+        (engine / data_path).write_text(original(data_path) + ''.join(includes))
+        restored.append(data_path)
+    return restored
 
 
 if __name__ == '__main__':
-    write_song(json.loads((ROOT / 'assets/audio/ocean-commute.json').read_text()), ROOT / 'assets/audio/ocean-commute-native-v1')
-    print('Wrote original native Ocean Commute score and eight synthesized instruments.')
+    for name in ['ocean-commute', 'fogbank-frenzy']:
+        write_song(json.loads((ROOT / f'assets/audio/{name}.json').read_text()),
+                   ROOT / f'assets/audio/{name}-native-v1')
+    print('Wrote original field/battle scores and synthesized instruments.')
