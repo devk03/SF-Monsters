@@ -6,13 +6,17 @@ Open https://sf-mini-monsters.devkunjadia03.chatgpt.site and choose **Load .gba 
 Supply your local English Emerald ROM matching SHA-256
 `a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af`.
 Validation, extraction and SF patching happen on your device. No ROM is uploaded.
-The current 0.0.4 Sunset preview has an original hometown layout and opening
-quest. Cast sprites, creatures and music remain scaffolding; the full campaign
-is unfinished.
+Version 0.0.5 adds South Park and three original starter candidates. Wild
+creatures, cast art, music and evolution art still use scaffolding; the full
+campaign and all quality approvals remain unfinished.
 
 Choose a companion from the three capsules near Karpathy, recover the sensor
 north along Ocean Beach, then return it to Roon. Karpathy heals the team for free.
-The next Cognition chapter and building interiors are still being built.
+After returning the sensor, talk to Jonathan at Judah to ride Muni. In SoMa,
+Cognition is near Third Street, northwest of the park. The clinic to its east
+offers healing, supplies and storage. Deliver the sensor to Scott, stabilize
+blue INPUT before green OUTPUT, then cross the gate for his gym battle.
+Gym victory/rewards and three-starter balance still need release play checks.
 
 Guest play works without an account. Optional ChatGPT sign-in has a separate
 device-local save slot. Complete **Save** inside the game before using **Save
@@ -31,7 +35,7 @@ run `make hack`. See [the pinned build workflow](../romhack/README.md).
 Check patch integrity and Flash-slot validation with:
 
 ```sh
-node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.4-sunset-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
+node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.5-cognition-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
 node --experimental-strip-types tests/flash-save.test.mjs
 ```
 

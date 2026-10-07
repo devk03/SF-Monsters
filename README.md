@@ -7,10 +7,11 @@ ROM to the website for local patching. The pinned engine baseline reproduces
 Emerald exactly; the first SF content overlay is an unreviewed engine proof.
 See [the hack workflow](romhack/README.md) and the active spec in section 15.
 
-Status: the public Emerald player has an authored Outer Sunset opening: choose
-a companion, recover Roon's sensor through a native battle, and return it.
-Cast sprites, creatures and music are placeholders. South Park/Cognition, the
-complete SF campaign and Emerald quality approval are still outstanding.
+Status: the current preview includes the Outer Sunset opening, Muni travel,
+South Park clinic and Cognition's first gym draft. BrinePup, SproutSlug and
+CinderCoy are original starter candidates. Wild creatures, cast art, music and
+evolution art still use placeholders. The full SF campaign and Emerald quality
+approval remain outstanding.
 
 [Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
 [Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps) ·

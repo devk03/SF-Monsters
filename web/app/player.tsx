@@ -244,20 +244,20 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
         </div>}
       </section>
       <aside className="quest-sidebar">
-        <div className="chapter-label">{legacy ? 'CHAPTER 01' : 'ENGINE PREVIEW'}</div>
+        <div className="chapter-label">{legacy ? 'CHAPTER 01' : 'CHAPTER 01 PREVIEW'}</div>
         <h1>A courier.<br />A missing parcel.<br />Very normal fog.</h1>
-        <p className="next-quest">{legacy ? progress ? nextQuest(progress.flags) : 'Choose your companion, then find Roon’s prototype on Ocean Beach.' : 'The SF opening now runs inside Emerald’s actual engine. The full city adventure is being built.'}</p>
+        <p className="next-quest">{legacy ? progress ? nextQuest(progress.flags) : 'Choose your companion, then find Roon’s prototype on Ocean Beach.' : 'Meet Karpathy by Judah, recover Roon’s sensor at Ocean Beach, then ride Muni to Cognition’s Build Challenge.'}</p>
         {legacy && <ol className="quest-list">{ROUTE.map(step => <li key={step.flag} className={progress && progress.flags & step.flag ? 'done' : ''}>
           <span aria-hidden="true">{progress && progress.flags & step.flag ? '✓' : '·'}</span>{step.label}
         </li>)}</ol>}
         {legacy && <div className="field-stats"><div><strong>{progress ? countCaught(progress.caught) : 0}<small>/12</small></strong><span>mini monsters</span></div>
           <div><strong>{progress?.flags && progress.flags & 64 ? '01' : '00'}</strong><span>gym badges</span></div></div>}
-        <div className="delivery-note"><p>{legacy ? 'Outer Sunset → Muni → SoMa' : 'Planned first chapter: Sunset → South Park'}</p><p>{legacy ? 'Every stop is in San Francisco.' : 'SF map replacement is in progress.'}</p></div>
+        <div className="delivery-note"><p>Outer Sunset → Muni → South Park</p><p>Every stop is in San Francisco.</p></div>
         {(legacy || romUrl) && <a className="rom-link" href={legacy ? '/game/sf-mini-monsters.gba' : romUrl!} download="sf-mini-monsters.gba">Download GBA ROM</a>}
         {!legacy && <a className="rom-link" href="/patch/sf-mini-monsters.bps" download>Download SF patch</a>}
         <a className="source-link" href="https://github.com/devk03/SF-Monsters" target="_blank" rel="noreferrer">Fork the game on GitHub</a>
         <p className="account-note">{account ? `Signed in as ${account.name}.` : 'Guest play is available. Sign in for a separate local save slot.'}</p>
-        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Early Sunset preview: choose a companion, recover Roon’s sensor and investigate the fog signal. Cast sprites, creatures and music are placeholders. The Cognition chapter and full 16-neighborhood campaign are unfinished.'}</p>
+        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Preview: BrinePup, SproutSlug and CinderCoy join the Sunset adventure and Cognition’s first gym. Wild creatures, cast art and music still use placeholders. The full 16-neighborhood campaign is unfinished.'}</p>
         {!legacy && <a className="source-link" href="/prototype">Play the earlier courier prototype</a>}
       </aside>
     </div>

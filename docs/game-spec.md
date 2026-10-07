@@ -761,6 +761,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
+- Public preview: version 0.0.5 includes three original starter candidates,
+  Sunset/Muni/South Park, the clinic and Cognition's gym draft. This is not the
+  accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
 - Scope preference: Emerald-tier quality within existing SF scope; do not add
   breeding, contests or a full Battle Frontier clone as hidden requirements.
@@ -877,6 +880,25 @@ First-slice checkpoint — all three original starter candidates:
   evolution lines or approved monsters. Cries, evolution art, deliberate pixel
   cleanup, nine remaining slice creatures and matched clip approval are pending.
   Approved parity domains remain 0/11; the public Site still serves 0.0.4.
+
+First-slice checkpoint — updated public preview:
+
+- Site version 6 deployed successfully on October 7, 2026 at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site with patch version
+  0.0.5-cognition-preview. Site source commit:
+  cc0f3da70bde2d3c9cf3d648c7dce018ac3276f4.
+- The 586,024-byte BPS patch and integrity manifest are public. Archive inspection
+  confirms no full Emerald-derived cartridge is hosted; the 67,820-byte original
+  homebrew prototype remains separately available. The browser decoder matches
+  native patch application byte-for-byte. Website type checking/build and the
+  existing regression suite pass. The player describes the actual current route
+  and explicitly labels the unfinished campaign and placeholder assets.
+- Both current native and browser save guards preserve schema-1 compatibility;
+  original species content upgrades preserve stable IDs and earned progress.
+  Full campaign transfers, gym victory/rewards/balance, hands-on production
+  sign-in, Safari/physical-mobile performance, original audio/evolutions and
+  matched comparison approval remain outstanding. All 11 domains remain
+  unapproved; publication is preview availability, not goal completion.
 
 Approved architecture change — Emerald ROM hack:
 
