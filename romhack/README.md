@@ -43,8 +43,10 @@ Repeated builds must reproduce the same patch; changing a published version's
 bytes requires a version bump. The public `romhack/releases` folder contains
 patches and integrity manifests, never full ROMs.
 
-The engine probe changes the opening dialogue and hometown label. Stock art,
-creatures, maps and campaign remain scaffolding; it is not the SF campaign MVP.
+The overlay includes original Sunset/South Park layouts, the courier quest,
+clinic and Cognition gym draft, three starter/call candidates and a Sunset
+theme candidate. Other creatures, cast art, tiles and music remain scaffolding;
+this is not the accepted polished slice or complete SF campaign.
 Floating IPS is Alcaro's GPL-3.0 tool, pinned at
 `ff216a75df0987047a67d7923567dc4482ce07ac`; its source/license stay in the local
 checkout. Our browser decoder follows byuu's public-domain BPS format rather
@@ -67,8 +69,8 @@ Inherited tiles are local development scaffolding, not publicly copied assets.
 
 `build_probe.py --draft` keeps immutable iteration patches in ignored storage,
 keyed by target hash. Publish with `make hack` after the relevant native checks.
-The Sunset plan is the first original layout/event draft. Its inherited art,
-species and music are placeholders; the full first chapter is unfinished.
+The Sunset plan is the first original layout/event draft. Inherited tiles and
+wild species remain placeholders; the full first chapter is unfinished.
 
 Native captures now export `.sav` battery files beside their `.state` snapshots.
 `capture_core.py --battery PATH` tests a cold battery-save boot; `--state PATH`
@@ -92,5 +94,19 @@ Only an exact former default nickname changes; custom names remain. Earned
 early moves fill empty slots without removing existing moves. Party stats are
 recalculated from unchanged experience, nature, IVs and EVs. Schema/quest/badge
 identity stays intact; Flash changes only when the player saves normally.
-The current CinderCoy candidate still needs pixel cleanup, original cry and
-complete evolution-line art. It is not a finished or approved catalog entry.
+The three starters have original front/back art, entrance frames, icons and
+cry candidates. Pixel cleanup, complete evolution-line art and user approval
+remain required; these are not finished or approved catalog entries.
+
+## Original native audio
+
+`assets/audio/creature-cries.json` declares synthesized starter calls;
+`scripts/romhack/creature_audio.py` generates their PCM and native table overlay.
+`assets/audio/ocean-commute.json` declares Sunset's sixteen-bar, seven-track
+theme. `scripts/romhack/field_music.py` generates its looped MIDI, eight original
+instrument samples and native voicegroup. Generated sources remain public and
+editable; `make hack` compiles them with Emerald's MPlay sequencer.
+These candidates replace only their declared contexts. Other music and cries
+remain scaffolding, and all composition/presentation approvals remain pending.
+Run `python3 tests/creature_audio_test.py` and `python3 tests/field_music_test.py`
+to check signal/header limits, MIDI loop alignment and voice bounds.

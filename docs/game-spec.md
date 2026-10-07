@@ -1014,6 +1014,25 @@ First-slice checkpoint — original native Sunset score candidate:
   the patch and the earlier original homebrew cartridge, with no inherited
   full ROM. Public access is preserved. Hands-on browser playback, Safari/mobile
   performance and actual sign-in/backup checks remain pending.
+- Controller-only native play enters a random Sunset grass encounter, sends
+  CinderCoy, escapes through RUN and returns to the field. Read-only MPlay
+  inspection confirms the original field cue, native wild-battle cue and
+  original field cue again; the battle outcome is RAN. No stats, flags or
+  random values are written by the harness.
+- The full cold-battery route repeats that sequence under native mGBA 0.10.5
+  and the matching WebAssembly core: 27,142 frames, identical final RGB,
+  all 29,781,556 raw stereo pairs and exported Flash bytes. Evidence:
+  .tools/benchmarks/ocean-commute-field-battle-roundtrip; source 94de2cc,
+  target 8914865e5b0ef3335790ccc26533d1ec9f3f43761404b2bcca30e65e46c3240c.
+  This checks one music transition and battery route, not ten cross-platform
+  campaign round trips, real browser AudioWorklet behavior or performance gates.
+- Existing clean GitHub checks pass for 94de2cc:
+  https://github.com/devk03/SF-Monsters/actions/runs/37704305361.
+  That workflow builds the archived homebrew plus current host/content/web
+  checks; it does not certify a clean Emerald hack rebuild or the SF campaign.
+  Approved parity remains 0/11. Next: original encounter/neighborhood music,
+  remaining slice monsters/evolution art and map/cast polish, while the theme
+  direction review is pending.
 
 Approved architecture change — Emerald ROM hack:
 
