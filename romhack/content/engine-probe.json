@@ -1,8 +1,10 @@
 {
-  "version": "0.0.3-engine-probe",
+  "version": "0.0.4-sunset-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed engine proof; stock maps, cast sprites and creatures remain scaffolding.",
+  "status": "Unreviewed Outer Sunset opening; stock cast sprites, creatures and music remain scaffolding. Full campaign unfinished.",
+  "maps": ["sunset.json"],
+  "spawn": {"map": "LittlerootTown", "id": "LITTLEROOT_TOWN", "x": 23, "y": 22},
   "region_names": { "MAPSEC_LITTLEROOT_TOWN": "OUTER SUNSET" },
   "intro": {
     "gText_Birch_Welcome": "Welcome to SAN FRANCISCO!\\pI'm NAVAL. The fog got here\\nbefore either of us.\\pAround here, even tiny monsters\\nhave a personal brand.\\p$",

@@ -65,6 +65,11 @@ ignored storage so baseline bootstrap can preserve and restore them later.
 Run `python3 tests/romhack_maps_test.py` for format and event-boundary checks.
 Inherited tiles are local development scaffolding, not publicly copied assets.
 
+`build_probe.py --draft` keeps immutable iteration patches in ignored storage,
+keyed by target hash. Publish with `make hack` after the relevant native checks.
+The Sunset plan is the first original layout/event draft. Its inherited art,
+species and music are placeholders; the full first chapter is unfinished.
+
 Native captures now export `.sav` battery files beside their `.state` snapshots.
 `capture_core.py --battery PATH` tests a cold battery-save boot; `--state PATH`
 resumes an emulator snapshot instead. They are mutually exclusive.

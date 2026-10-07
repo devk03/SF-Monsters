@@ -12,6 +12,8 @@ def encode_layout(plan):
     width = len(rows[0])
     if not 1 <= width <= 128 or any(len(row) != width for row in rows):
         raise ValueError('Map rows must have one consistent width of 1–128 tiles.')
+    if (width + 15) * (len(rows) + 14) > 0x2800:
+        raise ValueError('Map and native connection margins exceed the virtual-map buffer.')
     blocks = []
     for row in rows:
         for token in row:
@@ -32,7 +34,7 @@ def check_position(plan, x, y, *, walkable=True):
 
 def event_objects(plan):
     events, positions, identifiers = [], set(), set()
-    for npc in plan.get('npcs', []):
+    for index, npc in enumerate(plan.get('npcs', []), 1):
         x, y = npc['x'], npc['y']
         check_position(plan, x, y)
         if (x, y) in positions or npc['id'] in identifiers:
@@ -41,8 +43,11 @@ def event_objects(plan):
         identifiers.add(npc['id'])
         if not 1 <= npc['id'] <= 255:
             raise ValueError('NPC local ID must fit the native object format.')
+        if npc['id'] != index:
+            raise ValueError('Append NPC IDs in native event order, starting at one.')
         events.append({
-            'local_id': str(npc['id']), 'graphics_id': npc['graphics'], 'x': x, 'y': y,
+            'local_id': f'LOCALID_SF_{plan.get("engine_map", "TEST").upper()}_{npc["id"]}',
+            'graphics_id': npc['graphics'], 'x': x, 'y': y,
             'elevation': plan['legend'][plan['rows'][y][x]][2],
             'movement_type': npc.get('movement', 'MOVEMENT_TYPE_FACE_DOWN'),
             'movement_range_x': npc.get('range_x', 0),
@@ -51,8 +56,8 @@ def event_objects(plan):
             'trainer_sight_or_berry_tree_id': str(npc.get('sight', 0)),
             'script': npc['script'], 'flag': npc.get('flag', '0')
         })
-    if len(events) > 16:
-        raise ValueError('A map exceeds Emerald\'s sixteen active-object budget.')
+    if len(events) > 15:
+        raise ValueError('A map must reserve one of sixteen active-object slots for the player.')
     return events
 
 
@@ -63,7 +68,7 @@ def apply_maps(content, root, engine, original):
     layouts_path = 'data/layouts/layouts.json'
     layouts = json.loads(original(layouts_path))
     restored = [layouts_path]
-    ids = set()
+    ids, aliases = set(), {}
     for reference in plans:
         source = (root / 'romhack/content' / reference).resolve()
         source.relative_to((root / 'romhack/content').resolve())
@@ -75,6 +80,9 @@ def apply_maps(content, root, engine, original):
         ids.add(name)
         map_path = f'data/maps/{name}/map.json'
         metadata = json.loads(original(map_path))
+        for index, event in enumerate(metadata['object_events'], 1):
+            if 'local_id' in event:
+                aliases[event['local_id']] = index
         layout = next(item for item in layouts['layouts'] if item['id'] == metadata['layout'])
         layout.update(width=width, height=height)
         blocks_path = layout['blockdata_filepath']
@@ -92,6 +100,9 @@ def apply_maps(content, root, engine, original):
         script_source = (source.parent / plan['script']).resolve()
         script_source.relative_to((root / 'romhack/content').resolve())
         script = script_source.read_text()
+        for text in re.findall(r'\.string "(.*?)"', script):
+            if not text.endswith('$') or '$' in text[:-1]:
+                raise ValueError('SF text must have one final $ terminator; spell out currency.')
         symbol = name + '_MapScripts::'
         if script.count(symbol) != 1:
             raise ValueError('SF script must define exactly one native map-script header.')
@@ -100,6 +111,12 @@ def apply_maps(content, root, engine, original):
         (engine / script_path).write_text(inherited + '\n' + script)
         restored.append(script_path)
     (engine / layouts_path).write_text(json.dumps(layouts, indent=2) + '\n')
+    # Inherited scripts/C still reference old local IDs even when unreachable.
+    path = 'include/constants/event_objects.h'
+    compatibility = '\n'.join(f'#ifndef {name}\n#define {name} {value}\n#endif'
+                              for name, value in sorted(aliases.items()))
+    (engine / path).write_text(original(path) + '\n' + compatibility + '\n')
+    restored.append(path)
     if 'spawn' in content:
         spawn = content['spawn']
         plan = next(json.loads((root / 'romhack/content' / p).read_text())
@@ -113,5 +130,19 @@ def apply_maps(content, root, engine, original):
         if source.count(before) != 1:
             raise ValueError('Pinned new-game spawn anchor changed.')
         (engine / path).write_text(source.replace(before, after))
+        restored.append(path)
+        path = 'src/overworld.c'
+        source = original(path)
+        before = 'gFieldCallback = ExecuteTruckSequence;'
+        if source.count(before) != 1:
+            raise ValueError('Pinned new-game field callback changed.')
+        (engine / path).write_text(source.replace(before, 'gFieldCallback = NULL;'))
+        restored.append(path)
+        # Defeat recovery must return to the same SF hub, never a stock house.
+        path = 'src/data/heal_locations.json'
+        healing = json.loads(original(path))
+        for location in healing['heal_locations'][:2]:
+            location.update(map='MAP_' + spawn['id'], x=spawn['x'], y=spawn['y'])
+        (engine / path).write_text(json.dumps(healing, indent=2) + '\n')
         restored.append(path)
     return restored

@@ -19,7 +19,7 @@ class MapEncoding(unittest.TestCase):
         self.assertEqual(data, bytes.fromhex('01 30 ff ff 70 1d 01 30'))
 
     def test_layout_boundaries(self):
-        for rows in [[], [''], ['.', '..'], ['.' * 129], ['.'] * 129]:
+        for rows in [[], [''], ['.', '..'], ['.' * 129], ['.'] * 129, ['.' * 128] * 128]:
             with self.subTest(rows=rows), self.assertRaises(ValueError):
                 encode_layout({**self.plan, 'rows': rows})
         for tile in [[1024, False, 3], [1, 1, 3], [1, False, 16]]:
@@ -37,8 +37,8 @@ class MapEncoding(unittest.TestCase):
         npc = {'id': 1, 'x': 0, 'y': 0, 'graphics': 'GFX', 'script': 'HELLO'}
         events = event_objects({**self.plan, 'npcs': [npc]})
         self.assertEqual(events[0]['elevation'], 3)
-        self.assertEqual(events[0]['local_id'], '1')
-        for npcs in [[npc, npc], [{**npc, 'x': 1}], [{**npc, 'id': 0}]]:
+        self.assertEqual(events[0]['local_id'], 'LOCALID_SF_TEST_1')
+        for npcs in [[npc, npc], [{**npc, 'x': 1}], [{**npc, 'id': 0}], [{**npc, 'id': 2}]]:
             with self.subTest(npcs=npcs), self.assertRaises(ValueError):
                 event_objects({**self.plan, 'npcs': npcs})
 

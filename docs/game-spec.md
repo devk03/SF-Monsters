@@ -881,6 +881,32 @@ Native battery-save tooling checkpoint:
 - This is one foundation pilot, not the ten full-campaign round trips or fifty
   checkpoint acceptance gate. Full campaign, device matrix and reviews remain.
 
+First authored SF opening — local Sunset preview:
+
+- A 32x32 Outer Sunset block replaces the stock hometown, with a western ocean,
+  beach, street grid, house blocks and Judah/Great Highway sign. Fresh games start
+  here directly; the stock truck/clock opening is bypassed.
+- Karpathy offers three native starter choices and supplies, and heals the team.
+  Roon's sensor is guarded by a native wild battle. Winning or capturing permits
+  recovery; returning it grants 500 coins and directions toward Cognition.
+  Naval/Jonathan have original ambient dialogue. Art, species and music are stock
+  placeholders; this is not a quality-complete hub or the 20–30-minute slice.
+- Controller-only native play verifies selection, inventory, battle, sensor
+  recovery and delivery (quest stage 4, 3500 coins). It caught and fixed a
+  redundant post-battle wait before any publication. The final fresh-town
+  controller route matches native/WebAssembly RGB across 5972 frames.
+- Map validation now covers the native connection-buffer limit, fifteen NPC
+  slots plus the player, event placement and native local-ID/header linkage.
+  Text validation rejects premature string terminators.
+- Iteration patches stay in ignored draft storage until release. Bootstrap can
+  restore all overlay inputs. No inherited full ROM is published.
+- Native save schema uses reserved vars F8/F9; the browser rejects ordinary
+  Emerald/unsupported SF saves and keeps earlier namespaces separate. Native
+  refusal of unsupported schemas remains a release gate to implement.
+- All eleven approved scores remain unchanged at 0/11. Next: finish the opening
+  save/browser checks, publish this preview, then build South Park/Cognition,
+  original Mini Monsters, SF art/music and the comparison suite.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)

@@ -1,5 +1,6 @@
 """Build an SF content overlay and publish a BPS patch, never the inherited ROM."""
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import re
@@ -27,6 +28,9 @@ def original(path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--draft', action='store_true', help='Keep iteration artifacts in ignored local storage.')
+    args = parser.parse_args()
     if not BASE.exists() or hashlib.sha256(BASE.read_bytes()).hexdigest() != BASE_HASH:
         raise ValueError('Run bootstrap.py and verify the matching baseline first.')
     content = json.loads((ROOT / 'romhack/content/engine-probe.json').read_text())
@@ -58,7 +62,9 @@ def main():
     target = EMERALD / 'sf-engine-probe.gba'
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     docker('make', 'TARGET=cli', 'CFLAGS=-O2', directory='/workspace/.tools/flips')
-    output = ROOT / 'romhack/releases' / content['version']
+    target_hash = hashlib.sha256(target.read_bytes()).hexdigest()
+    output = ((ROOT / '.tools/romhack-drafts' / content['version'] / target_hash)
+              if args.draft else ROOT / 'romhack/releases' / content['version'])
     candidate = ROOT / '.tools' / ('candidate-' + uuid.uuid4().hex[:10] + '.bps')
     mounted = lambda path: '/workspace/' + str(path.relative_to(ROOT))
     docker('.tools/flips/flips', '--create', '--bps', '--exact',
@@ -76,7 +82,7 @@ def main():
     manifest = {
         'version': content['version'], 'status': content['status'], 'game_code': content['game_code'],
         'base_sha256': BASE_HASH, 'base_bytes': BASE.stat().st_size,
-        'target_sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
+        'target_sha256': target_hash,
         'target_bytes': target.stat().st_size,
         'patch_sha256': hashlib.sha256(patch.read_bytes()).hexdigest(),
         'patch_bytes': patch.stat().st_size,
