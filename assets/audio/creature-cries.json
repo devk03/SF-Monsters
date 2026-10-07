@@ -1,0 +1,14 @@
+{
+  "sample_rate": 10512,
+  "cries": [
+    {"name": "cindercoy", "engine_symbol": "Torchic", "engine_file": "torchic",
+     "duration": 0.46, "formants": [740, 1800, 2400], "noise": 0.08,
+     "pulses": [[0.02, 0.17, 410, 220], [0.23, 0.20, 330, 180]]},
+    {"name": "brinepup", "engine_symbol": "Mudkip", "engine_file": "mudkip",
+     "duration": 0.56, "formants": [500, 1050, 1500], "noise": 0.04,
+     "pulses": [[0.02, 0.22, 225, 140], [0.29, 0.23, 285, 175]]},
+    {"name": "sproutslug", "engine_symbol": "Treecko", "engine_file": "treecko",
+     "duration": 0.52, "formants": [1200, 2200, 2900], "noise": 0.03,
+     "pulses": [[0.01, 0.12, 650, 440], [0.18, 0.12, 760, 520], [0.35, 0.14, 900, 650]]}
+  ]
+}

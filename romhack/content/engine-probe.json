@@ -1,5 +1,5 @@
 {
-  "version": "0.0.5-cognition-preview",
+  "version": "0.0.6-starter-audio-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
   "status": "Unreviewed SF chapter with Cognition and three original starter candidates; wild creatures, evolution art, portraits and music remain placeholders.",
@@ -28,5 +28,6 @@
     "gText_Birch_AreYouReady": "Ready for your SF adventure?\\pFind a companion. Explore.\\nRead the signs. Talk to people.\\pSome of them may be normal.\\pWatch for the fog signal.\\nIt is not a product launch.\\p$"
   },
   "battle_content": "first-chapter-battles.json",
-  "monster_content": "monsters.json"
+  "monster_content": "monsters.json",
+  "creature_audio": "assets/audio/creature-cries.json"
 }

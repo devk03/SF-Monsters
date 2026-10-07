@@ -50,6 +50,7 @@ SF_Starter_Bloom::
 	lock
 	goto_if_set FLAG_SYS_POKEMON_GET, SF_Starter_Done
 	showmonpic SPECIES_TREECKO, 10, 3
+	playmoncry SPECIES_TREECKO, 0
 	msgbox SF_Text_Bloom, MSGBOX_YESNO
 	hidemonpic
 	goto_if_eq VAR_RESULT, NO, SF_Starter_Done
@@ -61,6 +62,7 @@ SF_Starter_Ember::
 	lock
 	goto_if_set FLAG_SYS_POKEMON_GET, SF_Starter_Done
 	showmonpic SPECIES_TORCHIC, 10, 3
+	playmoncry SPECIES_TORCHIC, 0
 	msgbox SF_Text_Ember, MSGBOX_YESNO
 	hidemonpic
 	goto_if_eq VAR_RESULT, NO, SF_Starter_Done
@@ -72,6 +74,7 @@ SF_Starter_Tide::
 	lock
 	goto_if_set FLAG_SYS_POKEMON_GET, SF_Starter_Done
 	showmonpic SPECIES_MUDKIP, 10, 3
+	playmoncry SPECIES_MUDKIP, 0
 	msgbox SF_Text_Tide, MSGBOX_YESNO
 	hidemonpic
 	goto_if_eq VAR_RESULT, NO, SF_Starter_Done

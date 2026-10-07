@@ -928,6 +928,23 @@ First-slice checkpoint — pinned browser core and audio equivalence:
   the pinned core. The public Site runtime update remains to be deployed.
   All eleven quality approvals and the full campaign gates remain outstanding.
 
+First-slice checkpoint — original starter calls:
+
+- Added editable harmonic/formant synthesis recipes for CinderCoy's falling
+  barks, BrinePup's lower honks and SproutSlug's three wet trills. Source WAVs
+  and native signed PCM are original, with no commercial recordings/samples.
+  Normal/reverse cry entries use these sources; starter preview also plays them.
+- WaveData header/payload bounds, deterministic generation, silent endpoints,
+  amplitude limits and audible energy checks pass. The actual BrinePup native
+  preview executes with the same graphics/audio stream in WebAssembly as noted
+  above. Listening quality and the other two native audition recordings remain
+  to be reviewed. A passing sample hash does not earn audio parity approval.
+- Private draft 0.0.6-starter-audio-preview target:
+  d1b7a24a04ae4a046fbafb231a115e4ade0343daea92aca51c32901e18f1bd18.
+  Public patch remains 0.0.5. Original neighborhood/battle music, remaining
+  creature cries, evolution art, nine slice creatures and clip reviews remain
+  required. This is three call candidates, not a completed soundtrack.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's
