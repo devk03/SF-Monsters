@@ -605,7 +605,8 @@ remains subsequent scope. The existing legendary/rematch/side-quest postgame sta
 Reference supplied by the user: Pokemon - Emerald Version (USA, Europe).gba.
 ROM header: POKEMON EMER; game code BPEE; size 16,777,216 bytes.
 SHA-256: a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af.
-The archive/header/hash have been inspected; benchmark clips have not been collected.
+The archive/header/hash have been inspected. Native benchmark captures and paired
+clips are recorded below; the complete comparison suite remains unfinished.
 
 Use this ROM locally as the reference, with mGBA 0.10.5 at normal emulation speed.
 Keep commercial ROM data and reference assets out of the repository and deployment.
@@ -761,8 +762,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.6 includes three original starter/call candidates,
-  Sunset/Muni/South Park, the clinic and Cognition's gym draft. This is not the
+- Public preview: version 0.0.7 includes three original starter/call candidates,
+  the original Sunset theme Ocean Commute, Sunset/Muni/South Park, the clinic
+  and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
 - Scope preference: Emerald-tier quality within existing SF scope; do not add
@@ -1003,6 +1005,15 @@ First-slice checkpoint — original native Sunset score candidate:
   ocean-commute-native-three-loops.wav and emerald-town-native-three-loops.wav.
   The user has been asked for one-theme direction feedback. No final audio
   score or first-slice approval is inferred from the pending response.
+- Public Site version 8 deployed successfully with 0.0.7-sunset-score-preview
+  at https://sf-mini-monsters.devkunjadia03.chatgpt.site. Its 607,553-byte BPS
+  patch validates against the approved base and reconstructs the verified
+  target byte-for-byte. Site source e503469376523d5eec18bb841e511d65318d8a7b;
+  deployment appgdep_6ac6d9c643488191b6124a6e19a7f964.
+  TypeScript and the packaged production build pass. Archive inspection finds
+  the patch and the earlier original homebrew cartridge, with no inherited
+  full ROM. Public access is preserved. Hands-on browser playback, Safari/mobile
+  performance and actual sign-in/backup checks remain pending.
 
 Approved architecture change — Emerald ROM hack:
 
