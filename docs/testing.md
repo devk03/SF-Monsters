@@ -10,11 +10,11 @@ save slot. Account saves remain on this browser/device; there is no cloud sync.
 Use **Save backup** before changing devices or clearing browser storage.
 
 Download `sf-mini-monsters.gba` and open it in a standard GBA emulator. mGBA is
-our reference. No commercial base ROM or external BIOS is required.
+our reference ([default controls](https://github.com/mgba-emu/mgba#controls)). No commercial base ROM or external BIOS is required.
 
 Keyboard in the browser: arrows move, X/A confirms, Z/B cancels, Enter opens the
 menu. The on-screen controls work with touch. Native emulator key bindings may
-differ (mGBA defaults: Z = A, X = B).
+differ (mGBA defaults: X = A, Z = B).
 
 ## Walkthrough
 

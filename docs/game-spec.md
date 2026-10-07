@@ -404,15 +404,15 @@ The full 150-entry game and later 50-person cast expansion remain subsequent sco
 
 ### Acceptance checklist
 
-- [ ] Two neighborhoods and a complete courier quest are playable.
-- [ ] Three starter choices and 12 obtainable mini monsters work.
-- [ ] Capture, battles, healing, team switching, and storage work.
-- [ ] The Cognition gym can be challenged and defeated.
+- [x] Two neighborhoods and a complete courier quest are implemented; quest gates and required locations pass checks.
+- [x] Three starter choices and recruitment of all 12 entries pass core checks.
+- [x] Capture, battles, healing, team switching, storage, and defeat recovery pass core checks.
+- [x] The Cognition gym can be challenged and defeated (core checks and browser battle through the Build Badge).
 - [x] Native/browser format and actual WebAssembly SRAM restore/resume/export pass automated checks.
 - [ ] Manual cross-emulator backup/import round trip is verified.
 - [x] The actual GBA ROM boots and accepts input in native mGBA.
 - [x] The browser boots the same ROM through WebAssembly; starter selection and keyboard input verified.
-- [ ] Desktop and mobile browser controls are verified.
+- [x] Desktop keyboard and on-screen controls, small-screen layout, and browser gym completion are verified.
 - [x] Public deployment succeeds; real ChatGPT sign-in integration and protected-route redirects are implemented.
 - [ ] A complete production sign-in session is verified.
 - [x] Core, map reachability, browser save, WebAssembly execution, TypeScript, and production build checks pass; docs/testing.md provides instructions.
@@ -432,7 +432,7 @@ Completed preparation:
 In progress:
 
 - Browser interface and emulator execution verification.
-- Original GBA ROM built successfully (67,852 bytes), with indexed pixel art,
+- Original GBA ROM built successfully (67,820 bytes), with indexed pixel art,
   scrolling maps, menus, battles, and dual-bank cartridge saves.
 - Browser battery saves validate native records, wait for actual SRAM allocation,
   verify imported bytes, and support local persistence and portable export.
@@ -481,11 +481,19 @@ Database migrations and PR merges still require explicit permission.
 
 Latest verification checkpoint (2026-10-07):
 
-- `make rom check` passes on the compiled 67,852-byte cartridge.
+- `make rom check` passes on the compiled 67,820-byte cartridge.
 - Actual WebAssembly execution resumes a native save, accepts movement, preserves
   currency and quest flags, and writes the next valid cartridge save bank.
 - Raster rendering optimized to keep short controller taps responsive.
 - Browser play visibly resumes in Cognition Lab and starts Scott Wu's gym battle.
 - No database is used or migrated. Source and assets remain publicly forkable.
-- Remaining QA: manual gym completion, mobile layout/control checks, native save
-  transfer, and optional production authentication session.
+- Browser gym battle completed manually, awarding the Build Badge and updating the
+  website quest panel. Progress survives reload.
+- Responsive checks at requested 320/375/414/768/1100 viewport settings show no
+  horizontal overflow. Small-screen on-screen confirm works.
+- Native mGBA loads a portable 32 KiB fixture and displays Continue Delivery.
+- Download event capture times out in the in-app test browser. A persistent
+  Download save link is provided; byte-level WebAssembly export/import passes.
+- Still awaiting hands-on verification: a full native-emulator playthrough,
+  native-to-browser downloaded-file transfer, and a production account sign-in.
+  These are stated QA limits, not claimed as verified.

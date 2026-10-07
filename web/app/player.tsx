@@ -41,6 +41,8 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(false);
   const [help, setHelp] = useState(false);
+  const [backupUrl, setBackupUrl] = useState<string | null>(null);
+  useEffect(() => () => { if (backupUrl) URL.revokeObjectURL(backupUrl); }, [backupUrl]);
   const [retry, setRetry] = useState(0);
   const storageKey = `sf-mini-monsters:v1:${account?.id ?? 'guest'}`;
   const lastSequence = useRef(-1);
@@ -115,8 +117,8 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
       const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }));
       const link = document.createElement('a'); link.href = url; link.download = 'sf-mini-monsters.sav';
       link.hidden = true; document.body.appendChild(link); link.click(); link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 10000);
-      persist(); setNotice('Backup prepared. Save the .sav beside your ROM in a GBA emulator.');
+      setBackupUrl(url);
+      persist(); setNotice('Backup prepared. Use Download save if your browser did not start the download.');
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Choose a starter before saving.'); }
   };
   const importSave = async (file?: File) => {
@@ -179,7 +181,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
           <button onClick={() => setHelp(!help)} aria-expanded={help}>Controls</button>
           <input ref={importInput} type="file" accept=".sav" hidden onChange={event => void importSave(event.target.files?.[0])} />
         </div>
-        <p className="save-notice" role="status">{notice}</p>
+        <p className="save-notice" role="status">{notice}{backupUrl && <> <a href={backupUrl} download="sf-mini-monsters.sav">Download save</a></>}</p>
         {help && <div className="help-panel">
           <p><strong>Move:</strong> arrow keys or D-pad. <strong>Confirm / talk:</strong> X or A.</p>
           <p><strong>Back:</strong> Z or B. <strong>Menu:</strong> Enter or Start.</p>

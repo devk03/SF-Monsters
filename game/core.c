@@ -141,7 +141,7 @@ void game_choose_move(Game *g,u8 move) {
         text_number(g->text,damage); text_append(g->text,"!");
         if(move==1 && random_next(g)%5==0) { g->enemy.status=1; text_append(g->text," Enemy dazed."); }
     }
-    g->scene=BATTLE;
+    g->scene=BATTLE;g->cursor=0;
     if(!g->enemy.hp) {
         text_append(g->text," Won!"); award_xp(g); g->save.coins+=20;
         g->pending=1;
