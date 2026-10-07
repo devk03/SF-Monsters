@@ -1,0 +1,29 @@
+name: Build and verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install GBA and host compilers
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends gcc-arm-none-eabi binutils-arm-none-eabi clang
+      - name: Install dependencies
+        run: make setup
+      - name: Verify core and cartridge save compatibility
+        run: make rom check
+      - name: Build GBA ROM and website
+        run: make web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sf-mini-monsters-gba
+          path: build/sf-mini-monsters.gba

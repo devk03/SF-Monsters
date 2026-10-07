@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { readProgress, validateSave, nextQuest, countCaught, encodeSave, decodeSave } from '../web/app/save-format.ts';
-const bytes = new Uint8Array(readFileSync('/tmp/sf-mini-monsters-fixture.sav'));
+const bytes = new Uint8Array(readFileSync(process.argv[2] ?? 'build/save-fixture.sav'));
 const progress = readProgress(bytes);
 assert.equal(progress.coins, 222);
 assert.equal(progress.flags & 2, 2);

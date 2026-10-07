@@ -2,10 +2,16 @@
 #include <stdio.h>
 #include "../game/game.h"
 int main(int argc,char **argv) {
-    if(argc!=2)return 1;
+    if(argc<2)return 1;
     Game g;game_init(&g,0);
     game_input(&g,KEY_A);game_input(&g,KEY_A);game_input(&g,KEY_A);game_input(&g,KEY_A);
-    g.save.coins=222;g.save.flags|=PROTOTYPE;save_prepare(&g.save);
+    g.save.coins=222;g.save.flags|=PROTOTYPE;
+    if(argc>2) {
+        g.save.flags|=COURIER_FOUND|DELIVERED|RELAY_A|RELAY_B;
+        g.save.map=2;g.save.x=11;g.save.y=2;
+        g.save.roster[0].level=20;game_heal(&g);
+    }
+    save_prepare(&g.save);
     unsigned char ram[32768]={0};
     const unsigned char *src=(const unsigned char*)&g.save;
     for(unsigned i=0;i<sizeof(Save);i++)ram[2048+i]=src[i];

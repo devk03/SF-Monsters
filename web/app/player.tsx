@@ -113,9 +113,10 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
     try {
       const bytes = engine.current!.exportBattery(); validateSave(bytes);
       const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }));
-      const link = document.createElement('a'); link.href = url; link.download = 'sf-mini-monsters.sav'; link.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      persist(); setNotice('Backup downloaded. Keep the .sav beside your ROM in a GBA emulator.');
+      const link = document.createElement('a'); link.href = url; link.download = 'sf-mini-monsters.sav';
+      link.hidden = true; document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      persist(); setNotice('Backup prepared. Save the .sav beside your ROM in a GBA emulator.');
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Choose a starter before saving.'); }
   };
   const importSave = async (file?: File) => {
@@ -139,7 +140,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
   };
   const control = (label: string, code: string, className = '') => <button type="button" className={`game-key ${className}`}
     disabled={phase !== 'ready' || paused} aria-label={label} key={code}
-    onClick={event => { if (event.detail === 0) { sendKey(code, true); setTimeout(() => sendKey(code, false), 90); } }}
+    onClick={() => { sendKey(code, true); setTimeout(() => sendKey(code, false), 90); }}
     onPointerDown={event => { event.preventDefault(); event.currentTarget.setPointerCapture(event.pointerId); sendKey(code, true); }}
     onPointerUp={() => sendKey(code, false)} onPointerCancel={() => sendKey(code, false)}
     onLostPointerCapture={() => sendKey(code, false)}

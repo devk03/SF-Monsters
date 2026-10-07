@@ -2,8 +2,9 @@
 
 An original, open-source creature RPG set in a compressed San Francisco.
 
-Status: concept and planning. No playable ROM or browser build exists yet.
-The project name is provisional and has not been cleared for release.
+Status: playable MVP. Explore Outer Sunset and SoMa, recruit 12 original monsters,
+and complete the courier quest and Cognition gym on the same GBA cartridge.
+All playable locations are inside San Francisco.
 
 ## Game scope
 
@@ -39,17 +40,20 @@ Acceptance criteria:
 - Verify manual save export/import between the supported players.
 - Build from documented prerequisites without proprietary game assets.
 
-## Proposed architecture
+## Architecture
 
-Original content and C++ game code compile into a GBA ROM using Butano.
-The browser player runs that ROM in a WebAssembly GBA emulator.
-The emulator choice remains subject to compatibility and licensing checks.
+Freestanding C and original assets compile into a GBA ROM using GCC for ARM.
+The browser runs that ROM in mGBA through WebAssembly.
+The website uses React/Vinext and Sites hosting with optional ChatGPT sign-in.
 
 Maps, encounters, monsters, and dialogue should have editable source data
 compiled into the ROM. The browser wrapper supplies touch controls, keyboard
 and gamepad input, local persistence, and save import/export.
 
-No account system or backend is required for the first release.
+Guest play is available. Signed-in players get a separate device-local save slot.
+There is no database or cloud-save service.
+
+See [build, controls, save transfer, and QA instructions](docs/testing.md).
 
 ## Development workflow
 
@@ -62,7 +66,8 @@ Commits are authorized; remote publication and PR merges require their own scope
 ## Licensing and originality
 
 Original code and documentation are available under the [MIT license](LICENSE).
-CC BY 4.0 is proposed for future original art and music; no game assets exist yet.
+Original generated sprite atlases are offered under CC BY 4.0 to the extent
+licensable; see [asset credits](assets/README.md).
 Dependencies and separately licensed assets retain their own licenses.
 Track the author, source, and license of contributed assets.
 
@@ -72,7 +77,5 @@ Review the name, branding, and distinctive mechanics before public release.
 
 ## Platform references
 
-- [Butano](https://github.com/GValiente/butano)
-- [Delta ROM importing](https://faq.deltaemulator.com/getting-started/importing-games)
 - [mGBA](https://github.com/mgba-emu/mgba)
 - [Candidate WebAssembly wrapper](https://github.com/wasm-gaming/mGBA-wasm)

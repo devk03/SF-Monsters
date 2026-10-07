@@ -1,4 +1,4 @@
-/* Modified for SF Mini Monsters: battery saves and frame-safe input. MPL-2.0. */
+/* Modified for SF Mini Monsters: battery saves, frame-safe input, video pacing. MPL-2.0. */
 import { manifest } from './mgba.manifest.js';
 import { bindConfig, createSettingsStore, } from './mgba.config.js';
 import { coerceOptionValue, DEFAULT_MGBA_OPTIONS, MGBA_ENGINE_OPTIONS, MGBA_GB_MODEL_VALUES, MGBA_LOG_LEVEL_IDS, MGBA_PLATFORM_IDS, toEscMenuGroups, } from './mgba.options.js';
@@ -438,6 +438,8 @@ export async function load(config) {
     };
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
+    const releaseAllKeys = () => { for (const timer of releaseTimers.values()) clearTimeout(timer); keyMask = 0; padMask = 0; pushInput(); };
+    window.addEventListener('blur', releaseAllKeys);
     /** Gamepad polling (standard mapping). */
     const pollGamepads = () => {
         if (!opts.gamepads || !navigator.getGamepads)
@@ -615,25 +617,14 @@ export async function load(config) {
         pollGamepads();
         const rate = syncCoreRate();
         let frames = 0;
-        if (audioCtx.state === 'running' && audioClockAdvancing(now)) {
-            const buffered = enqueuedFrames - consumedFrames;
-            const deficit = Math.round(rate * TARGET_SECONDS) - buffered;
-            const perEmulatedFrame = rate / framerate;
-            if (deficit > 0)
-                frames = Math.ceil(deficit / perEmulatedFrame);
-            wallClockStart = 0;
+        // Wall-clock video pacing keeps silent ROMs and restored saves playable.
+        if (!wallClockStart) {
+            wallClockStart = now;
+            wallClockFrames = 0;
         }
-        else {
-            // Wall-clock fallback (audio blocked or stalled): accumulate at the core
-            // framerate.
-            if (!wallClockStart) {
-                wallClockStart = now;
-                wallClockFrames = 0;
-            }
-            const due = Math.floor(((now - wallClockStart) / 1000) * framerate);
-            frames = due - wallClockFrames;
-            wallClockFrames = due;
-        }
+        const due = Math.floor(((now - wallClockStart) / 1000) * framerate);
+        frames = due - wallClockFrames;
+        wallClockFrames = due;
         frames = Math.max(0, Math.min(MAX_FRAMES_PER_TICK, frames));
         if (frames > 0) {
             runFrames(frames);
@@ -783,13 +774,29 @@ export async function load(config) {
             return bytes;
         },
         importBattery(bytes) {
+            releaseAllKeys();
             if (!(bytes instanceof Uint8Array) || bytes.length !== 32768)
                 throw new Error('Expected a 32 KiB GBA SRAM save.');
+            rebootCore();
+            // Run startup so the ROM initializes SRAM before restoring it.
+            let ready = false;
+            for (let frame = 0; frame < 120; frame++) {
+                mod._mgbawasm_run_frame();
+                if (mod._mgbawasm_sram_save() === 32768) { ready = true; break; }
+            }
+            if (!ready) throw new Error('The cartridge save memory did not initialize.');
             const ptr = heapAlloc(mod, bytes);
             const ok = mod._mgbawasm_sram_load(ptr, bytes.length);
             mod._free(ptr);
             if (!ok) throw new Error('The emulator could not restore this save.');
+            const restored = cloneSram();
+            if (!restored || restored.length !== bytes.length ||
+                restored.some((value, index) => value !== bytes[index]))
+                throw new Error('The cartridge save could not be verified.');
             mod._mgbawasm_reset();
+            applyLiveSettings();
+            mod._mgbawasm_set_keys(0);
+            sentMask = -1;
         },
         async saveState() {
             const size = mod._mgbawasm_state_size();
@@ -852,6 +859,7 @@ export async function load(config) {
             void persistSram();
             window.removeEventListener('keydown', onKeyDown);
             window.removeEventListener('keyup', onKeyUp);
+            window.removeEventListener('blur', releaseAllKeys);
             window.removeEventListener('pointerdown', resumeAudio);
             window.removeEventListener('keydown', resumeAudio);
             sink.disconnect();

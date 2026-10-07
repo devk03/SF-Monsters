@@ -302,9 +302,9 @@ An original city map and simple quest journal help players track return visits.
 
 ## 11. Technical architecture and saves
 
-Recommended starting architecture: C++ game code using Butano, compiled into
-one original GBA ROM. Evaluate an mGBA-based WebAssembly player in the initial slice.
-This is a proposed stack; performance and compatibility are not yet demonstrated.
+Implemented MVP architecture: freestanding C compiled with GCC for ARM into one
+original GBA ROM. The website runs the same cartridge using mGBA WebAssembly.
+Native mGBA boot and WebAssembly execution have been demonstrated.
 
 Keep maps, dialogue, quests, monsters, encounters, moves, and teams in editable
 source data compiled into ROM assets/tables. Validate IDs, references, resource
@@ -333,7 +333,8 @@ No backend or database is required for v1. No cloud account is required to play.
 
 Public repository: https://github.com/devk03/SF-Monsters
 Original code/documentation: MIT, as adopted in the repository.
-Proposed original art/music license: CC BY 4.0, to be finalized before assets ship.
+Original generated raster art: CC BY 4.0 to the extent licensable; asset notices
+record source and licensing.
 Dependencies and separately licensed material keep their own notices/licenses.
 
 Include editable source assets, content formats, contributor guide, and build instructions.
@@ -407,12 +408,14 @@ The full 150-entry game and later 50-person cast expansion remain subsequent sco
 - [ ] Three starter choices and 12 obtainable mini monsters work.
 - [ ] Capture, battles, healing, team switching, and storage work.
 - [ ] The Cognition gym can be challenged and defeated.
-- [ ] Saving and loading preserve progress; backup/import round trips work.
+- [x] Native/browser format and actual WebAssembly SRAM restore/resume/export pass automated checks.
+- [ ] Manual cross-emulator backup/import round trip is verified.
 - [x] The actual GBA ROM boots and accepts input in native mGBA.
 - [x] The browser boots the same ROM through WebAssembly; starter selection and keyboard input verified.
 - [ ] Desktop and mobile browser controls are verified.
-- [ ] Public deployment succeeds and real website sign-in is available.
-- [ ] Core behavior checks and clean builds pass; test instructions are provided.
+- [x] Public deployment succeeds; real ChatGPT sign-in integration and protected-route redirects are implemented.
+- [ ] A complete production sign-in session is verified.
+- [x] Core, map reachability, browser save, WebAssembly execution, TypeScript, and production build checks pass; docs/testing.md provides instructions.
 
 ### Current progress
 
@@ -420,17 +423,19 @@ Completed preparation:
 
 - Public GitHub repository and consolidated specification committed.
 - Startup gym identities and real-person casting research recorded.
-- Public Sites project registered; no deployment exists yet.
+- Public website deployed: https://sf-mini-monsters.devkunjadia03.chatgpt.site
+  (Sites version 1, deployment succeeded 2026-10-07).
 - Web framework starter and dependencies installed locally.
 - GBA compiler installed locally.
-- Two original raster sprite atlases generated and inspected; not yet integrated.
+- Two original raster sprite atlases integrated; palette and sprite conversion is reproducible.
 
 In progress:
 
 - Browser interface and emulator execution verification.
-- Original GBA ROM built successfully (61,892 bytes), with indexed pixel art,
+- Original GBA ROM built successfully (67,852 bytes), with indexed pixel art,
   scrolling maps, menus, battles, and dual-bank cartridge saves.
-- Browser battery-save validation/export/import implementation started.
+- Browser battery saves validate native records, wait for actual SRAM allocation,
+  verify imported bytes, and support local persistence and portable export.
 - Core logic implemented: starter choice, encounters, capture, team/storage,
   courier quest, relay gates, and the three-monster Cognition gym battle.
 - Browser emulator runtime artifacts verified in installed packages; integrating
@@ -473,3 +478,14 @@ Database migrations and PR merges still require explicit permission.
 - [Delta ROM importing](https://faq.deltaemulator.com/getting-started/importing-games)
 - [mGBA](https://github.com/mgba-emu/mgba)
 - [Candidate WebAssembly wrapper](https://github.com/wasm-gaming/mGBA-wasm)
+
+Latest verification checkpoint (2026-10-07):
+
+- `make rom check` passes on the compiled 67,852-byte cartridge.
+- Actual WebAssembly execution resumes a native save, accepts movement, preserves
+  currency and quest flags, and writes the next valid cartridge save bank.
+- Raster rendering optimized to keep short controller taps responsive.
+- Browser play visibly resumes in Cognition Lab and starts Scott Wu's gym battle.
+- No database is used or migrated. Source and assets remain publicly forkable.
+- Remaining QA: manual gym completion, mobile layout/control checks, native save
+  transfer, and optional production authentication session.

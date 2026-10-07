@@ -8,7 +8,13 @@ static void pixel(int x,int y,u8 color) {
     if(x>=0&&x<240&&y>=0&&y<160)framebuffer[y*240+x]=color;
 }
 static void rect(int x,int y,int w,int h,u8 color) {
-    for(int yy=y;yy<y+h;yy++)for(int xx=x;xx<x+w;xx++)pixel(xx,yy,color);
+    int left=x<0?0:x,top=y<0?0:y;
+    int right=x+w>240?240:x+w,bottom=y+h>160?160:y+h;
+    if(left>=right||top>=bottom)return;
+    for(int yy=top;yy<bottom;yy++) {
+        u8 *row=framebuffer+yy*240;
+        for(int xx=left;xx<right;xx++)row[xx]=color;
+    }
 }
 static void line(int x,int y,int w,u8 color) { rect(x,y,w,1,color); }
 static void text(int x,int y,const char *s,u8 color) {
@@ -41,8 +47,20 @@ static void wrapped(int x,int y,const char *s,int columns,int rows,u8 color) {
 static void sprite(int id,int x,int y,int scale) {
     if(id<0||id>=28)return;
     const u8 *data=art_pixels+art_offsets[id];
-    for(int yy=0;yy<art_heights[id];yy++)for(int xx=0;xx<art_widths[id];xx++) {
-        u8 color=data[yy*art_widths[id]+xx];
+    int width=art_widths[id],height=art_heights[id];
+    if(x>=240||y>=160||x+width*scale<=0||y+height*scale<=0)return;
+    if(scale==1) {
+        int left=x<0?-x:0,top=y<0?-y:0;
+        int right=x+width>240?240-x:width,bottom=y+height>160?160-y:height;
+        for(int yy=top;yy<bottom;yy++) {
+            const u8 *source=data+yy*width;
+            u8 *target=framebuffer+(y+yy)*240+x+left;
+            for(int xx=left;xx<right;xx++)if(source[xx])target[xx-left]=source[xx];
+        }
+        return;
+    }
+    for(int yy=0;yy<height;yy++)for(int xx=0;xx<width;xx++) {
+        u8 color=data[yy*width+xx];
         if(color)rect(x+xx*scale,y+yy*scale,scale,scale,color);
     }
 }

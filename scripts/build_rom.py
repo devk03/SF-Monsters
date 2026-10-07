@@ -4,7 +4,7 @@ import subprocess, sys, shutil
 ROOT=Path(__file__).resolve().parents[1]
 BUILD=ROOT/'build';BUILD.mkdir(exist_ok=True)
 subprocess.run([sys.executable,str(ROOT/'scripts/compile_assets.py')],check=True)
-flags=['-mcpu=arm7tdmi','-mthumb','-mthumb-interwork','-Os','-ffreestanding','-fno-builtin',
+flags=['-mcpu=arm7tdmi','-mthumb','-mthumb-interwork','-O2','-ffreestanding','-fno-builtin',
        '-fno-strict-aliasing','-Wall','-Wextra','-Werror','-I'+str(ROOT/'game'),'-I'+str(BUILD)]
 objects=[]
 for source in [ROOT/'game'/name for name in ['core.c','content.c','render.c','main.c','runtime.c']]+[BUILD/'assets.c']:

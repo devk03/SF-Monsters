@@ -24,6 +24,11 @@ static void write_save(void) {
     for(unsigned i=4;i<sizeof(Save);i++)ram[i]=in[i];
     for(int i=0;i<4;i++)ram[i]=in[i];
 }
+static void tone(int frequency) {
+    REG16(0x04000060)=0;
+    REG16(0x04000062)=0x70b0;
+    REG16(0x04000064)=(u16)(0xc000|frequency);
+}
 static void present(void) {
     volatile u16 *vram=(volatile u16*)0x06000000;
     const u16 *frame=(const u16*)framebuffer;
@@ -32,10 +37,16 @@ static void present(void) {
 int main(void) {
     (void)save_type;
     REG16(0x04000000)=0x0404;
+    REG16(0x04000084)=0x0080;
+    REG16(0x04000080)=0x1177;
+    REG16(0x04000082)=0x0002;
     REG16(0x04000020)=256; REG16(0x04000022)=0;
     REG16(0x04000024)=0; REG16(0x04000026)=256;
     volatile u16 *palette=(volatile u16*)0x05000000;
     for(int i=0;i<256;i++)palette[i]=art_palette[i];
+    /* A preserving write initializes SRAM auto-detection in GBA emulators. */
+    volatile u8 *sram=(volatile u8*)0x0e000000;
+    u8 tail=sram[32767];sram[32767]=tail;
     read_save();game_init(&game,&disk);game_render(&game);present();
     u16 previous=0;int repeat=0;
     for(;;) {
@@ -47,7 +58,10 @@ int main(void) {
         else repeat=0;
         previous=held;
         if(pressed) {
+            u16 old_flags=game.save.flags;
             game_input(&game,pressed);
+            if((game.save.flags&BADGE)&&!(old_flags&BADGE))tone(1900);
+            else if(pressed&(KEY_A|KEY_START))tone(1750);
             if(game.scene==WORLD||game.scene==TALK||game.scene==MENU)write_save();
             game_render(&game);present();
         }
