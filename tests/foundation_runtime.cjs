@@ -54,6 +54,12 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
     if (actual[n] !== expected[n] || actual[n + 1] !== expected[n + 1] ||
         actual[n + 2] !== expected[n + 2]) differingPixels++;
   }
+  if (differingPixels) {
+    // Preserve the actual rendering for diagnosis; never mask a failed comparison.
+    const diagnostic = path.join(nativeDirectory, `wasm-mismatch-${Date.now()}.rgba`);
+    fs.writeFileSync(diagnostic, actual, {flag: 'wx'});
+    console.error(`WASM diagnostic: ${diagnostic}`);
+  }
   // Alpha is a frontend presentation convention; compare actual RGB game pixels.
   assert.equal(differingPixels, 0, 'Native and WASM final field state/rendering must match');
   if (batteryPath) {

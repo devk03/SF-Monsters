@@ -899,6 +899,14 @@ First-slice checkpoint — updated public preview:
   sign-in, Safari/physical-mobile performance, original audio/evolutions and
   matched comparison approval remain outstanding. All 11 domains remain
   unapproved; publication is preview availability, not goal completion.
+- Follow-up fresh-game replay check does not pass: the BrinePup party screen
+  differs by 56 RGB pixels, entirely within the HP digits (native 21/21,
+  WebAssembly 20/20). The frames, creature art, name and interface otherwise
+  agree. Preserve this failed evidence; do not mask the digits or infer a pass.
+  Evidence: .tools/benchmarks/brinepup-fresh-native-web, with separate timestamped
+  WASM diagnostic frames. Native Emerald seeds new-game randomness from timer 1;
+  startup timer/RNG alignment is the next investigation. The earlier
+  battery-seeded 17,527-frame comparison remains a separate passing check.
 
 Approved architecture change — Emerald ROM hack:
 
