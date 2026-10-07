@@ -8,6 +8,9 @@ The project name is provisional and has not been cleared for release.
 ## Game scope
 
 - 16 accessible neighborhood hubs, each with a mini-adventure.
+- 150 collectible mini-monster entries, including evolution stages.
+- Real tech people and recognizable online personalities as the proposed cast.
+- Adult SF comedy, playable drunk/high character states, and optional weird dates.
 - Eight gyms, one at every second stop in the proposed campaign.
 - A four-member Bay Council championship and a final rival battle.
 - A recurring antagonist, a villain organization, and one legendary mini monster.
@@ -16,6 +19,7 @@ The project name is provisional and has not been cleared for release.
 - Public source, editable content, and documented builds for contributors.
 
 The design is a proposal, not a final specification. See [the game plan](docs/game-plan.md).
+Sourced character candidates and fictional roles are in [cast research](docs/cast-research.md).
 
 ## First playable milestone
 

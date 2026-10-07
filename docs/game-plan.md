@@ -3,13 +3,15 @@
 ## Identity and gameplay
 
 Working title: SF Mini Monsters.
-Default proposed tone: an adult protagonist and affectionate SF satire.
-Tone is still open to the user's direction.
+Tone: an adult protagonist, SF satire, optional drunk/high character states,
+weird dates, and extensive jokes and Easter eggs.
 
 Explore, encounter mini monsters, recruit them, build a team, win turn-based
 battles, and unlock neighborhoods. Familiar genre systems include levels,
 transformations, elemental matchups, status effects, and championship progression.
-Exact team size, move limits, recruitment rules, and battle formulas remain open.
+Use a six-monster team and four equipped moves, with capture, levels,
+evolution, abilities, held items, healing, and storage. Exact formulas remain open.
+The catalog target is 150 collectible entries; evolution stages count separately.
 
 All names and fictional concepts below are provisional.
 
@@ -33,9 +35,9 @@ not imply literal adjacency.
 | 3 | Haight-Ashbury | Follow contradictory concert flyers to a secret show. | — |
 | 4 | Castro | Rescue a neighborhood celebration after its lighting system fails. | 2: Echo, performance stage |
 | 5 | Mission | Recover mural pigments and follow a painted monster's clues. | — |
-| 6 | Bernal Heights | Repair the hilltop lookout amid wind and territorial creatures. | 3: Stone, summit challenge |
-| 7 | Dogpatch | Restore an abandoned workshop with inventive mini monsters. | — |
-| 8 | SoMa | Stop an escaped startup demo from disrupting habitats. | 4: Spark, malfunctioning demo floor |
+| 6 | Dogpatch | Restore an abandoned workshop with inventive mini monsters. | 3: Energy Workshop |
+| 7 | SoMa | Stop an escaped startup demo from disrupting habitats. | — |
+| 8 | Tenderloin | Follow a missing musician through an optional surreal nighttime adventure. | 4: Debug Dungeon |
 | 9 | Fillmore | Reunite a jazz ensemble's missing instruments. | — |
 | 10 | Japantown | Recover festival supplies through lantern and paper-folding puzzles. | 5: Alloy, kinetic sculpture workshop |
 | 11 | Richmond District | Follow archival clues to a tide puzzle at Sutro Baths. | — |
@@ -47,6 +49,8 @@ not imply literal adjacency.
 
 Each hub needs a main quest, optional secret, distinctive encounters, and a
 reason to revisit. This is the proposed complete neighborhood list for launch.
+Tenderloin replaces Bernal Heights as a hub; Bernal remains expansion scope.
+Gym casting and final themes are proposed in [cast research](cast-research.md).
 
 ## Marina nightlife
 
@@ -54,6 +58,10 @@ Fictional bars: The Quarter Zip, Liquidity Lounge, and The Last Round.
 The mystery features identical vest owners, a bouncer demanding proof of
 product-market fit, competitive trivia, and a creature in a karaoke speaker.
 The reward connects the Palace of Fine Arts to the main story.
+The player can order drinks and continue playing while the character is drunk.
+Tenderloin has an optional high-character sequence. Both states change dialogue
+and perception while keeping controls, menus, saving, and progression usable.
+Optional weird dates provide branching conversations, rewards, and callbacks.
 
 ## Main story and antagonist
 
@@ -89,18 +97,15 @@ The Bay Council supplies the four-member championship:
 
 The rival is the final championship opponent.
 
-## Recurring internet characters
+## Real-person casting
 
-Use fictional handles, original portraits, and original dialogue:
-
-- @StealthFounder launches a different pre-revenue company each encounter.
-- @PermitPal writes forty-post threads about installing one bench.
-- @TransitOracle explains the perfect connection while missing it.
-- @MicroclimateGuy corrects weather descriptions during battles.
-- @BagelDueDiligence ranks breakfast with an incomprehensible spreadsheet.
-
-Posts appear on an offline in-game bulletin board. These characters also
-give quests and develop beyond their initial jokes.
+The user wants real SF tech people and recognizable public online characters
+for gyms, villains, rivals, and ideally every interactable human NPC.
+See [cast research](cast-research.md) for sourced public themes and proposed roles.
+This supersedes the fictional-handle NPC direction. The earlier ClearSky/Arden/
+Patch plot above is a legacy pitch pending replacement by the real-person cast.
+Write original dialogue; game roles and neighborhood placements are fictional.
+Posts appear on an offline in-game bulletin board with quest-dependent callbacks.
 
 ## Historical foundations
 
@@ -120,6 +125,6 @@ displacement, civil-rights history, and community struggles with care.
 2. Expand to 16 hubs, eight gyms, the Bay Council, villain arc, and Bayveil.
 3. Balance and verify builds, document contributions, and prepare publication.
 
-Initial full-campaign targets: approximately 60 monster forms and 8–12 hours.
+Initial full-campaign targets: 150 collectible monster entries and 8–12 hours.
 These are planning targets that must be reassessed after the playable slice.
 Multiplayer, live social feeds, and cloud accounts are outside the initial scope.
