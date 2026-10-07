@@ -990,6 +990,19 @@ First-slice checkpoint — original native Sunset score candidate:
 - One neighborhood theme candidate is not soundtrack completion. Remaining
   fifteen hub identities, encounter/fanfare/title/credits contexts, original
   monster/evolution/cast/map work and all release/approval gates remain required.
+- The 9,964-frame loop capture matches final RGB, all 10,932,996 raw stereo
+  pairs and exported Flash in WebAssembly. Matched 40.18-second native A/V
+  listening clips are prepared for Ocean Commute and Emerald's calm town cue.
+  They use the same native size/speed, with the reference attenuated 4.06 dB
+  to match the candidate's measured -25.31 LUFS. Only constant gain is applied;
+  dynamics are not compressed to hide mix differences. Reference scene is the
+  house using the same Littleroot cue, so this comparison judges music direction
+  rather than outdoor map art. The reference's nominal loop is 53.33 seconds;
+  both longer listening artifacts cover three consecutive loop periods.
+- Local review files: .tools/audio-review/{sunset,emerald}-level-matched.mp4,
+  ocean-commute-native-three-loops.wav and emerald-town-native-three-loops.wav.
+  The user has been asked for one-theme direction feedback. No final audio
+  score or first-slice approval is inferred from the pending response.
 
 Approved architecture change — Emerald ROM hack:
 
