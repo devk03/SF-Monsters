@@ -427,7 +427,7 @@ Completed preparation:
 - Public GitHub repository and consolidated specification committed.
 - Startup gym identities and real-person casting research recorded.
 - Public website deployed: https://sf-mini-monsters.devkunjadia03.chatgpt.site
-  (Sites version 2, deployment succeeded 2026-10-07).
+  (Sites version 3, deployment succeeded 2026-10-07).
 - Web framework starter and dependencies installed locally.
 - GBA compiler installed locally.
 - Two original raster sprite atlases integrated; palette and sprite conversion is reproducible.
@@ -527,3 +527,12 @@ Final native acceptance (2026-10-07):
 - MVP implementation is delivered for user testing. Full campaign milestones in
   section 13 remain future work; production account login and normal-browser
   backup download should be included in the user's first testing pass.
+
+Final handoff:
+
+- Public Site version 3 deployed successfully at the same Play URL.
+- Final code checkpoint: 8d8c171. Its clean build/check workflow passes:
+  https://github.com/devk03/SF-Monsters/actions/runs/37598110919
+- Native and browser screenshots are saved locally under .tools/qa for review.
+- All playable game maps and future story destinations stay inside SF city limits.
+- MVP delivery is complete; user acceptance testing can now begin.
