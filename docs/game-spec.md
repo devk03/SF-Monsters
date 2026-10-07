@@ -427,7 +427,9 @@ Completed preparation:
 
 In progress:
 
-- GBA game implementation and browser emulator integration.
+- GBA renderer/build and browser emulator integration.
+- Core logic implemented: starter choice, encounters, capture, team/storage,
+  courier quest, relay gates, and the three-monster Cognition gym battle.
 - Browser emulator runtime artifacts verified in installed packages; integrating
   a single-threaded mGBA WebAssembly core that avoids cross-origin isolation requirements.
 - All-SF geography supersedes the Foster City excursion. The first gym is
@@ -436,12 +438,15 @@ In progress:
 
 Next checkpoint:
 
-- Commit the build scaffold and implement the first playable GBA scene.
+- Compile and boot the ROM, then integrate the same ROM into the web player.
 
 Verification evidence:
 
 - Specification checked for exactly 16 hubs and eight alternating gym stops.
-- No gameplay, emulator, sign-in, or deployment completion is claimed yet.
+- Native C checks pass with AddressSanitizer and UndefinedBehaviorSanitizer:
+  all three starters, save round trip/corruption rejection, quest order, all 12
+  catalog entries, storage swaps, gym completion, and recovery after defeat.
+- Emulator execution, browser interaction, sign-in, and deployment are not yet verified.
 
 Blockers requiring user input: none currently.
 Database migrations and PR merges still require explicit permission.
