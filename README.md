@@ -1,0 +1,70 @@
+# SF Mini Monsters
+
+An original, open-source creature RPG set in a compressed San Francisco.
+
+Status: concept and planning. No playable ROM or browser build exists yet.
+The project name is provisional and has not been cleared for release.
+
+## Game scope
+
+- 16 accessible neighborhood hubs, each with a mini-adventure.
+- Eight gyms, one at every second stop in the proposed campaign.
+- A four-member Bay Council championship and a final rival battle.
+- A recurring antagonist, a villain organization, and one legendary mini monster.
+- Original creatures, artwork, music, dialogue, interface, and game code.
+- A GBA ROM playable in iOS emulators and a browser through WebAssembly.
+- Public source, editable content, and documented builds for contributors.
+
+The design is a proposal, not a final specification. See [the game plan](docs/game-plan.md).
+
+## First playable milestone
+
+Build Outer Sunset and Inner Sunset with three starter choices, approximately
+12 mini monsters, one gym, one complete quest, encounters, recruitment,
+turn-based battles, and persistent saving.
+
+Acceptance criteria:
+
+- Finish the quest and gym on the same ROM in Delta and mobile Safari.
+- Save, close the player, reopen it, and resume progress on both platforms.
+- Verify manual save export/import between the supported players.
+- Build from documented prerequisites without proprietary game assets.
+
+## Proposed architecture
+
+Original content and C++ game code compile into a GBA ROM using Butano.
+The browser player runs that ROM in a WebAssembly GBA emulator.
+The emulator choice remains subject to compatibility and licensing checks.
+
+Maps, encounters, monsters, and dialogue should have editable source data
+compiled into the ROM. The browser wrapper supplies touch controls, keyboard
+and gamepad input, local persistence, and save import/export.
+
+No account system or backend is required for the first release.
+
+## Development workflow
+
+Commit after approximately 300–500 changed lines, keeping each commit coherent.
+Smaller commits are appropriate for initial setup, completed small changes,
+or a natural checkpoint. Do not pad changes to meet a line count.
+
+Verify the diff and run checks relevant to the change before committing.
+Stage explicit project files. Do not include credentials or unrelated changes.
+Commits are authorized; remote publication and PR merges require their own scope.
+
+## Licensing and originality
+
+Proposed licensing is MIT for original code and CC BY 4.0 for original assets.
+Licenses have not yet been adopted. Dependencies retain their own licenses.
+Track the author, source, and license of contributed assets.
+
+Use original implementation and creative expression. Do not include commercial
+game ROMs, copied sprites, music, scripts, logos, or proprietary BIOS files.
+Review the name, branding, and distinctive mechanics before public release.
+
+## Platform references
+
+- [Butano](https://github.com/GValiente/butano)
+- [Delta ROM importing](https://faq.deltaemulator.com/getting-started/importing-games)
+- [mGBA](https://github.com/mgba-emu/mgba)
+- [Candidate WebAssembly wrapper](https://github.com/wasm-gaming/mGBA-wasm)
