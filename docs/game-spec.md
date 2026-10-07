@@ -782,6 +782,20 @@ Approved architecture change — Emerald ROM hack:
 - Next checkpoint: reproduce Emerald, then demonstrate an actual SF content
   change inside that engine. Do not publicly host the supplied or rebuilt ROM.
 
+Emerald foundation checkpoint — matching reproduction:
+
+- Pinned pret/pokeemerald 731ad5bfd6e6f265508d0efcca0ba42f9dcf5881 and
+  pret/agbcc da598c1d918402c42c0c0d7128ba14567f3175e9 build a byte-identical
+  16,777,216-byte Emerald cartridge. SHA-1 matches f3ae088181bf583e55daf962a92bb46f4f1d07b7;
+  SHA-256 matches the approved user-supplied ROM. Local evidence:
+  .tools/romhack-baseline/build.json. The ROM is ignored and unpublished.
+- Build/compiler cleanup actions preserve temporary files under ignored storage.
+  No cleanup deletion command is executed. The game/compiler C and assembly
+  remain unchanged for baseline reproduction.
+- This proves the engine foundation can exactly preserve the reference.
+  It does not grant any SF content or final quality approvals. Next: original
+  SF source/data overlay, verified patch application, then local browser playback.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)
