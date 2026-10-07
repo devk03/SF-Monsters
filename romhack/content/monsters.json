@@ -1,6 +1,10 @@
 {
-  "content_revision": 1,
-  "icon_palettes": {"3": "assets/monsters/cindercoy/native-v1/normal.pal"},
+  "content_revision": 2,
+  "icon_palettes": {
+    "3": "assets/monsters/cindercoy/native-v1/normal.pal",
+    "4": "assets/monsters/brinepup/native-v1/normal.pal",
+    "5": "assets/monsters/sproutslug/native-v1/normal.pal"
+  },
   "monsters": [{
     "species": "SPECIES_TORCHIC",
     "symbol": "Torchic",
@@ -12,11 +16,48 @@
     "art": "assets/monsters/cindercoy/native-v1",
     "engine_asset_dir": "torchic",
     "icon_palette": 3,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
     "stats": {"baseHP": 48, "baseAttack": 55, "baseDefense": 42, "baseSpeed": 64, "baseSpAttack": 61, "baseSpDefense": 45},
     "types": ["TYPE_FIRE", "TYPE_FIRE"],
     "abilities": ["ABILITY_BLAZE", "ABILITY_FLASH_FIRE"],
     "learnset": [[1, "MOVE_SCRATCH"], [1, "MOVE_GROWL"], [5, "MOVE_EMBER"], [8, "MOVE_QUICK_ATTACK"], [11, "MOVE_LEER"], [14, "MOVE_BITE"], [18, "MOVE_FLAME_WHEEL"], [23, "MOVE_ROAR"], [28, "MOVE_FLAMETHROWER"], [34, "MOVE_AGILITY"], [39, "MOVE_CRUNCH"], [45, "MOVE_FIRE_BLAST"]],
     "migration_move": [5, "MOVE_EMBER"],
     "description": ["It warms its paws on the last patch", "of SUNSET sunlight. Its ember-speckled", "tail glows when it finds a new friend."]
+  }, {
+    "species": "SPECIES_MUDKIP",
+    "symbol": "Mudkip",
+    "old_name": "MUDKIP",
+    "name": "BRINEPUP",
+    "category": "SEA LION",
+    "height": 5,
+    "weight": 68,
+    "art": "assets/monsters/brinepup/native-v1",
+    "engine_asset_dir": "mudkip",
+    "icon_palette": 4,
+    "coordinates": {"front": [56, 48, 8], "back": [56, 48, 6]},
+    "stats": {"baseHP": 55, "baseAttack": 48, "baseDefense": 58, "baseSpeed": 41, "baseSpAttack": 56, "baseSpDefense": 57},
+    "types": ["TYPE_WATER", "TYPE_WATER"],
+    "abilities": ["ABILITY_TORRENT", "ABILITY_THICK_FAT"],
+    "learnset": [[1, "MOVE_TACKLE"], [1, "MOVE_GROWL"], [5, "MOVE_WATER_GUN"], [8, "MOVE_MUD_SLAP"], [11, "MOVE_DEFENSE_CURL"], [14, "MOVE_BITE"], [18, "MOVE_BUBBLE_BEAM"], [23, "MOVE_PROTECT"], [28, "MOVE_AURORA_BEAM"], [34, "MOVE_REST"], [39, "MOVE_SURF"], [45, "MOVE_HYDRO_PUMP"]],
+    "migration_move": [5, "MOVE_WATER_GUN"],
+    "description": ["A playful beach companion. It naps", "where the fog meets the warm sand.", "One splash means it wants to play."]
+  }, {
+    "species": "SPECIES_TREECKO",
+    "symbol": "Treecko",
+    "old_name": "TREECKO",
+    "name": "SPROUTSLUG",
+    "category": "GARDEN SLUG",
+    "height": 4,
+    "weight": 45,
+    "art": "assets/monsters/sproutslug/native-v1",
+    "engine_asset_dir": "treecko",
+    "icon_palette": 5,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 53, "baseAttack": 43, "baseDefense": 57, "baseSpeed": 43, "baseSpAttack": 56, "baseSpDefense": 63},
+    "types": ["TYPE_GRASS", "TYPE_GRASS"],
+    "abilities": ["ABILITY_OVERGROW", "ABILITY_SHIELD_DUST"],
+    "learnset": [[1, "MOVE_POUND"], [1, "MOVE_LEER"], [5, "MOVE_ABSORB"], [8, "MOVE_STUN_SPORE"], [11, "MOVE_LEECH_SEED"], [14, "MOVE_MEGA_DRAIN"], [18, "MOVE_POISON_POWDER"], [23, "MOVE_SILVER_WIND"], [28, "MOVE_SYNTHESIS"], [34, "MOVE_GIGA_DRAIN"], [39, "MOVE_SLEEP_POWDER"], [45, "MOVE_SOLAR_BEAM"]],
+    "migration_move": [5, "MOVE_ABSORB"],
+    "description": ["It tends little flowers while", "dreaming of wings. Even a tiny garden", "can be the start of a great journey."]
   }]
 }

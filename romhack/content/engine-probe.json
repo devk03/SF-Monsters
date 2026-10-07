@@ -2,7 +2,7 @@
   "version": "0.0.5-cognition-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with Cognition and an original CinderCoy starter candidate; other stock creatures, portraits and music remain placeholders.",
+  "status": "Unreviewed SF chapter with Cognition and three original starter candidates; wild creatures, evolution art, portraits and music remain placeholders.",
   "maps": [
     "sunset.json",
     "south-park.json",

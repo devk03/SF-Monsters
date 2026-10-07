@@ -855,6 +855,29 @@ First-slice checkpoint — original CinderCoy in the native engine:
   SF type labels/chart, remaining eleven slice creatures and user clip review
   remain outstanding. No finished-monster or parity approval count increases.
 
+First-slice checkpoint — all three original starter candidates:
+
+- BrinePup and SproutSlug join CinderCoy with original source sheets, separate
+  native front/back art, entrance poses, party icons, six-stat records, abilities,
+  species-specific learnsets and guide descriptions. Palette groups 3–5 now
+  contain the three original icon palettes. Source prompts and reproducible
+  conversions are stored with each creature under assets/monsters.
+- Starter interaction previews the actual front sprite and uses the original
+  creature name. Controller-only fresh games select each starter at level 5,
+  reach quest stage 2, receive exactly one party member and resume movement.
+  Their initial moves are respectively Tackle/Growl/Water Gun,
+  Pound/Leer/Absorb, and Scratch/Growl/Ember. Each party icon renders in its
+  intended palette. Declining CinderCoy leaves no party member, preserves quest
+  stage 1 and all three choices, closes the preview and releases movement.
+- Evidence: .tools/benchmarks/{brinepup,sproutslug,cindercoy}-{preview-aligned,
+  starter-accepted,party-icon} and cindercoy-starter-declined. Latest private
+  draft target: 04ecdf09659cf6c0b42de858b14b9aba59c7774ff3fc2e34e0e129fbb62f0b07.
+- Content revision 2 extends the existing upgrade table without reordering
+  native species IDs. These three integrated candidates are not three finished
+  evolution lines or approved monsters. Cries, evolution art, deliberate pixel
+  cleanup, nine remaining slice creatures and matched clip approval are pending.
+  Approved parity domains remain 0/11; the public Site still serves 0.0.4.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

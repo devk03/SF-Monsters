@@ -35,6 +35,10 @@ def check_monster(mon):
     if [level, move] not in mon['learnset']: raise ValueError('Migration move must be earned in the learnset.')
     if any(type(mon[key]) is not int or not 1 <= mon[key] <= 65535 for key in ['height', 'weight']): raise ValueError('Invalid field-guide size.')
     if not 3 <= mon['icon_palette'] <= 5: raise ValueError('Original icons use reserved palette groups 3–5.')
+    for side in ['front', 'back']:
+        width, height, offset = mon['coordinates'][side]
+        if any(type(value) is not int for value in [width, height, offset]) or width not in range(8, 65, 8) or height not in range(8, 65, 8) or not 0 <= offset <= 32:
+            raise ValueError('Sprite bounds must fit native coordinate packing and ground alignment.')
     if len(mon['description']) != 3 or any(not re.fullmatch(r"[A-Za-z0-9 ,.!'-]{1,38}", line) for line in mon['description']):
         raise ValueError('Field-guide description needs three safe short lines.')
 
@@ -105,8 +109,9 @@ def apply_monsters(content, root, engine, original):
         edit('src/data/pokemon/level_up_learnsets.h', rf'static const u16 s{symbol}LevelUpLearnset\[\] = \{{.*?\n\}};',
              f'static const u16 s{symbol}LevelUpLearnset[] = {{\n{moves},\n    LEVEL_UP_END\n}};')
         for side in ['front', 'back']:
+            width, height, offset = mon['coordinates'][side]
             edit(f'src/data/pokemon_graphics/{side}_pic_coordinates.h', rf'\[{species}\]\s*=\s*\{{[^}}]*\}}',
-                 f'[{species}] = {{ .size = MON_COORDS_SIZE(56, 56), .y_offset = 4 }}')
+                 f'[{species}] = {{ .size = MON_COORDS_SIZE({width}, {height}), .y_offset = {offset} }}')
         edit('src/data/pokemon_graphics/front_pic_anims.h', rf'static const union AnimCmd sAnim_{symbol}_1\[\] =\n\{{.*?\n\}};',
              f'static const union AnimCmd sAnim_{symbol}_1[] = {{\n    ANIMCMD_FRAME(0, 12),\n    ANIMCMD_FRAME(1, 6),\n    ANIMCMD_FRAME(0, 10),\n    ANIMCMD_END,\n}};')
         edit('src/pokemon_icon.c', rf'\[{species}\] = \d+,', f'[{species}] = {mon["icon_palette"]},')

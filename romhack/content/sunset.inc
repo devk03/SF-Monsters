@@ -49,7 +49,9 @@ SF_Karpathy_Heal::
 SF_Starter_Bloom::
 	lock
 	goto_if_set FLAG_SYS_POKEMON_GET, SF_Starter_Done
+	showmonpic SPECIES_TREECKO, 10, 3
 	msgbox SF_Text_Bloom, MSGBOX_YESNO
+	hidemonpic
 	goto_if_eq VAR_RESULT, NO, SF_Starter_Done
 	givemon SPECIES_TREECKO, 5
 	setvar VAR_STARTER_MON, 0
@@ -58,7 +60,9 @@ SF_Starter_Bloom::
 SF_Starter_Ember::
 	lock
 	goto_if_set FLAG_SYS_POKEMON_GET, SF_Starter_Done
+	showmonpic SPECIES_TORCHIC, 10, 3
 	msgbox SF_Text_Ember, MSGBOX_YESNO
+	hidemonpic
 	goto_if_eq VAR_RESULT, NO, SF_Starter_Done
 	givemon SPECIES_TORCHIC, 5
 	setvar VAR_STARTER_MON, 1
@@ -67,7 +71,9 @@ SF_Starter_Ember::
 SF_Starter_Tide::
 	lock
 	goto_if_set FLAG_SYS_POKEMON_GET, SF_Starter_Done
+	showmonpic SPECIES_MUDKIP, 10, 3
 	msgbox SF_Text_Tide, MSGBOX_YESNO
+	hidemonpic
 	goto_if_eq VAR_RESULT, NO, SF_Starter_Done
 	givemon SPECIES_MUDKIP, 5
 	setvar VAR_STARTER_MON, 2
@@ -166,11 +172,11 @@ SF_Text_Choose::
 SF_Text_Heal::
 	.string "KARPATHY: Your team is refreshed.\pThe prototype washed up on the beach,\nnorth of ROON. Watch the shore grass.$"
 SF_Text_Bloom::
-	.string "The grass companion watches the fog\nwith intense professional interest.\pChoose TREECKO?$"
+	.string "SPROUTSLUG dreams of growing wings.\nFor now, its garden comes along.\pChoose SPROUTSLUG?$"
 SF_Text_Ember::
-	.string "The fire companion is warm enough\nto make the Sunset feel optimistic.\pChoose TORCHIC?$"
+	.string "CINDERCOY warms the Sunset with\na little fire and too much confidence.\pChoose CINDERCOY?$"
 SF_Text_Tide::
-	.string "The water companion is ready for\ncold waves and questionable plans.\pChoose MUDKIP?$"
+	.string "BRINEPUP loves the cold waves.\nIt thinks every courier is a playmate.\pChoose BRINEPUP?$"
 SF_Text_Ready::
 	.string "KARPATHY: Take supplies for the beach.\nWeaken a wild monster to recruit it.\pROON is west of GREAT HIGHWAY.\nHis prototype is farther north.\pYour BAG, team and SAVE are available\nfrom the START menu.$"
 SF_Text_Prototype::
