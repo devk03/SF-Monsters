@@ -13,7 +13,7 @@ The world, creatures, art, music, dialogue, presentation, and implementation are
 Required release scope:
 
 - 16 accessible neighborhood hubs, each with a mini-adventure.
-- Eight famous-startup gyms, one in every second hub in the campaign order.
+- Eight famous-startup gyms placed in verified office districts or connected Bay Area excursions.
   Each has a real-person leader, a product-inspired puzzle, and a distinct battle strategy.
 - 150 collectible mini-monster catalog entries, including evolution stages.
 - Three starter choices, a recurring rival, and real-person antagonist roles.
@@ -114,20 +114,24 @@ Campaign order is not a claim of literal neighborhood adjacency.
 | 16 | Chinatown | Restore a community festival and expose the final antagonist relay | 8: OpenAI, Tibo Sottiaux — Compute Tower |
 
 Gym identity is the startup; the leader is a real person associated with it.
-The eight-company slate is proposed and can be revised before implementation.
-Their neighborhood placements and game interiors are fictional, not actual office addresses.
-The slate emphasizes recognizable AI companies; it is not a ranked funding list.
-See [startup gym research](startup-gyms.md) for sources and proposed mechanics.
+The previous evenly spaced assignments in the table are milestone proposals,
+not final geography. The latest instruction requires realistic startup locations,
+so the every-other-neighborhood rule is superseded. Eight gyms may cluster.
+Use [Silicon Valley Map](https://www.siliconvalleymap.org/) as a spatial reference,
+then verify each current office district independently before implementing it.
+Do not confuse mailing/registered addresses, historical offices, or planned leases
+with occupied current offices. Record evidence and uncertainty in [startup gyms](startup-gyms.md).
 
-Each gym has an original pixel-art startup office/lab, employee trainers, a
-product-inspired puzzle, a leader battle, and a company-themed badge.
-Optional interactions parody onboarding, demos, subscriptions, credits, and launch culture.
-Use original game visuals; real names do not imply company endorsement.
+For the MVP, Outer Sunset and Inner Sunset remain the two SF hubs, with a
+Peninsula shuttle excursion to the Replit gym in Foster City. It is not an
+Inner Sunset office. Additional office districts can be transit-connected
+submaps rather than artificially relocating companies into the original hubs.
 
-Karpathy, Dylan Field, Danielle Fong, Justine Moore, Naval, Garry Tan, and
-Jonathan Liu move into mentor, quest-giver, investor, commentator, and optional
-boss roles. Jonathan retains the date-assistance quest. Sam remains the champion;
-Dario remains a championship opponent, distinct from Daniela's gym role.
+Each gym has original pixel-art interiors, employee trainers, a product-inspired
+puzzle, a leader battle, and a company-themed badge. Karpathy, Dylan Field,
+Danielle Fong, Justine Moore, Naval, Garry Tan, and Jonathan Liu serve other
+substantive cast roles. Sam is champion; Dario is an elite opponent.
+
 Tenderloin replaces Bernal Heights in the earlier hub list; Bernal is expansion scope.
 
 Golden Gate Park links Sunset, Haight, and Richmond. Presidio links Richmond
@@ -371,7 +375,7 @@ Do not mark a milestone complete until its acceptance criteria have been verifie
 ### Objective
 
 Deliver a publicly accessible, testable MVP with two neighborhoods, 12 original
-collectible mini monsters, one Replit startup gym, exploration and dialogue,
+collectible mini monsters, one Replit startup gym reached through a Foster City shuttle excursion, exploration and dialogue,
 turn-based battles, capture, team/storage management, and persistent saving.
 Build an actual GBA ROM and run the same ROM on the website through WebAssembly.
 Verify the ROM in a standard GBA emulator, using mGBA as the reference target.
@@ -406,8 +410,10 @@ Completed preparation:
 In progress:
 
 - GBA game implementation and browser emulator integration.
-- Evaluating browser emulator packages; two candidates published without the
-  expected runtime artifacts, so a usable distribution still needs verification.
+- Browser emulator runtime artifacts verified in installed packages; integrating
+  a single-threaded mGBA WebAssembly core that avoids cross-origin isolation requirements.
+- Realistic startup geography supersedes the arbitrary gym placements. Replit
+  is a Foster City excursion; other startup locations are recorded with evidence.
 
 Next checkpoint:
 

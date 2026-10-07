@@ -51,3 +51,35 @@ These establish company products and public associations, not invented game role
 - [OpenAI / Tibo Sottiaux](https://www.wired.com/story/model-behavior-interview-with-openai-codex-lead-tibo-sottiaux/): Engineering/product association; Tibo is not described as a founder.
 
 Research additional posts and personality hooks before writing final scripts.
+
+## Realistic geography requirement
+
+The user's Silicon Valley Map reference supersedes the arbitrary neighborhood
+assignments above. Keep the product/battle concepts, but verify office districts.
+The reference map is manually maintained and is not proof of current occupancy.
+Use it for spatial context; do not redistribute its company dataset.
+
+| Startup | Geographic evidence | Implementation decision |
+| --- | --- | --- |
+| Replit | Foster City; 1001 E Hillsdale Blvd listed in a city-published property report and company profile | MVP Peninsula shuttle excursion; not Inner Sunset |
+| Cognition | Current South Park/SoMa office at 550 Third Street reported by local coverage; expansion reported separately | SoMa gym; verify occupancy timing before final art |
+| Mercor | 181 Fremont Street in SEC filing | Downtown/Transbay SoMa placement, pending office corroboration beyond filing |
+| Anthropic | 300 Howard Street lease reported in SoMa | SoMa candidate; distinguish lease from occupied office |
+| Perplexity | Company profile lists 115 Sansome Street | Financial District candidate |
+| OpenAI | Company document lists 1455 Third Street | Mission Bay gym |
+| Cursor | SF association confirmed; public mailing address is not evidence of occupied office | Exact district pending verification |
+| Midjourney | SF association and a reported future Union Square spa site | Exact gym office pending verification; do not use an unopened spa as current HQ |
+
+Sources:
+
+- [Map reference](https://www.siliconvalleymap.org/)
+- [Replit company profile](https://www.linkedin.com/company/repl-it/)
+- [City-published property report](https://www.ssfca.gov/files/assets/public/v/1/economic-amp-community-development/documents/2024-q1-peninsula-reports.pdf)
+- [Cognition local office reporting](https://www.sfchronicle.com/realestate/article/new-sf-ai-startup-cognition-takes-cruise-s-office-22406725.php/)
+- [Mercor SEC filing](https://www.sec.gov/Archives/edgar/data/2103986/000210398626000005/0002103986-26-000005-index.htm)
+- [Anthropic office lease reporting](https://www.sfgate.com/tech/article/anthropic-office-expansion-sf-21325161.php)
+- [Perplexity company profile](https://ai.linkedin.com/company/perplexity-ai)
+- [OpenAI company document](https://cdn.openai.com/pdf/21b88bb5-10a3-4566-919d-f9a6b9c3e632/openai-ostp-rfi-oct-27-2025.pdf)
+
+Game maps compress blocks and distances while preserving ocean/bay orientation,
+relative districts, and explicit transit for Peninsula travel.
