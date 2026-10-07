@@ -3,7 +3,7 @@
 .env.*
 !.env.example
 node_modules/
-build/
+/build/
 dist/
 *.gba
 *.sav
