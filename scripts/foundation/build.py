@@ -2,6 +2,7 @@
 from pathlib import Path
 import argparse
 import subprocess
+import shutil
 import uuid
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +34,11 @@ def main():
         parser.error(f'Butano revision mismatch: expected {REVISION}, got {revision}')
     run(str(ROOT / '.tools/venv/bin/python'),
         str(ROOT / 'scripts/foundation/pack_graphics.py'))
+    run(str(ROOT / '.tools/venv/bin/python'),
+        str(ROOT / 'scripts/foundation/pack_maps.py'))
+    generated = ROOT / 'engine/generated'
+    generated.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / 'game/content.c', generated / 'content.c')
     # Keep the container and its logs. No deletion or clean targets are invoked.
     name = 'sf-foundation-' + uuid.uuid4().hex[:10]
     run('docker', 'run', '--name', name, '--mount',

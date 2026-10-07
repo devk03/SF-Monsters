@@ -8,6 +8,9 @@ running on actual GBA hardware graphics. Timing is provisional until measured.
 Build prerequisites: Docker, Git, Python 3, and the root `make setup` environment.
 Run `python3 scripts/foundation/build.py --setup` once, then `make foundation`.
 Open `engine/sf-foundation.gba` with native mGBA 0.10.5. PAD walks; hold B to run.
+SELECT cycles through the three provisional prototype maps. This shortcut is
+only a renderer exercise; story progression and map quality are not approved.
+The camera follows interpolated movement and clamps at the collision-map edges.
 The build retains containers and intermediate files for inspection.
 
 Pinned dependencies: Butano 21.9.0, commit
@@ -20,3 +23,7 @@ Original courier source: `assets/characters/courier-walk-candidate.png`.
 The pipeline reserves transparent palette index zero, packs twelve 16x32 frames,
 and records source hash/crop metadata. This conversion is not pixel-level art
 cleanup. Font glyphs use the existing public-domain font with its notice intact.
+
+`foundation_telemetry` records real game updates, missed frames, peak CPU budget,
+controller state, position and completed steps. Inspect it through emulator reads;
+an emulator FPS counter alone cannot demonstrate that gameplay meets its deadline.

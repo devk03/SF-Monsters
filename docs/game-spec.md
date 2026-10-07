@@ -777,3 +777,14 @@ Foundation checkpoint A — native graphics candidate:
   despite native-resolution presets being shown. It is diagnostic only.
 - No quality-domain score or approval changed. Map composition, music, core
   integration, measured walking baseline, and valid comparison clips remain next.
+
+- The hardware candidate now scrolls the three provisional maps with camera
+  clamping and collision data shared with game/content.c. SELECT map cycling is
+  a foundation debug shortcut, not a campaign transition or new finished hub.
+- A 760-frame controller route through native mGBA 0.10.5's Linux ARM64 core
+  completed 28 tile steps and both map changes with zero missed game updates.
+  Peak recorded game CPU budget was 1552/4096 (37.9%). This short foundation
+  trace does not pass the three ten-minute release traces or Mac/web device gates.
+- Capture instrumentation found that ordinary bus reads of write-only GBA
+  background scroll registers returned open-bus data. The harness now uses the
+  emulator's raw memory view; earlier scroll-register traces are invalid.
