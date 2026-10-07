@@ -49,3 +49,18 @@ Floating IPS is Alcaro's GPL-3.0 tool, pinned at
 `ff216a75df0987047a67d7923567dc4482ce07ac`; its source/license stay in the local
 checkout. Our browser decoder follows byuu's public-domain BPS format rather
 than embedding Floating IPS code.
+
+## Editable SF maps
+
+`scripts/romhack/maps.py` compiles original ASCII layouts into Emerald's native
+16-bit map blocks. A map plan specifies rows, a token legend containing metatile
+ID/collision/elevation, positioned NPCs, native warp/trigger/sign events, and an
+original script file. The build rejects uneven rows, invalid tile packing,
+blocked/out-of-bounds event positions, duplicate NPC IDs/positions and object
+budget overflow. New-game spawn must be a walkable authored tile.
+
+Stock script symbols remain available for engine linkage; their map-entry
+header is replaced by the SF script. Modified engine inputs are recorded under
+ignored storage so baseline bootstrap can preserve and restore them later.
+Run `python3 tests/romhack_maps_test.py` for format and event-boundary checks.
+Inherited tiles are local development scaffolding, not publicly copied assets.

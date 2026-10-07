@@ -857,6 +857,18 @@ Emerald foundation checkpoint — public player deployment:
 - Next weakest domain: actual SF world/story content. Replace the stock opening
   with the Outer Sunset/Ocean Beach adventure before expanding neighborhoods.
 
+Emerald foundation checkpoint — editable native maps:
+
+- The source overlay can now compile authored ASCII layouts and native NPC,
+  warp, coordinate-trigger and sign events. It validates format boundaries,
+  event placement, object identity/budget and a walkable new-game spawn.
+- Native bit-packing and invalid event/layout fixtures pass. The existing
+  engine-preview cartridge and patch remain identical with this tooling added.
+- Stock script linkage is retained while new map-entry scripts replace the
+  corresponding inherited entry points. Bootstrap records/restores all modified
+  inputs. No new neighborhood is counted complete from tools alone.
+- Next: authored Outer Sunset block and its first in-engine quest events.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)

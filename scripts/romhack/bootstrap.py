@@ -118,7 +118,13 @@ def inside():
     build_compilers()
     # Our content overlay uses these files. Preserve it before reproducing base.
     preserved = TOOLS / ('preserved-overlay-' + uuid.uuid4().hex[:10])
-    for name in ['data/text/birch_speech.inc', 'src/data/region_map/region_map_sections.json']:
+    names = ['data/text/birch_speech.inc', 'src/data/region_map/region_map_sections.json']
+    overlay_manifest = TOOLS / 'romhack-overlay-files.json'
+    if overlay_manifest.exists():
+        names.extend(json.loads(overlay_manifest.read_text()))
+    for name in dict.fromkeys(names):
+        # Only restore tracked files inside the pinned source checkout.
+        (EMERALD / name).resolve().relative_to(EMERALD.resolve())
         source = EMERALD / name
         original = subprocess.check_output(['git', 'show', f'{EMERALD_REVISION}:{name}'],
                                            cwd=EMERALD)
