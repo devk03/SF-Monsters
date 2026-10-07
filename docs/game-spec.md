@@ -13,7 +13,8 @@ The world, creatures, art, music, dialogue, presentation, and implementation are
 Required release scope:
 
 - 16 accessible neighborhood hubs, each with a mini-adventure.
-- Eight gyms, one in every second hub in the campaign order.
+- Eight famous-startup gyms, one in every second hub in the campaign order.
+  Each has a real-person leader, a product-inspired puzzle, and a distinct battle strategy.
 - 150 collectible mini-monster catalog entries, including evolution stages.
 - Three starter choices, a recurring rival, and real-person antagonist roles.
 - Four championship opponents followed by a champion.
@@ -96,23 +97,37 @@ Campaign order is not a claim of literal neighborhood adjacency.
 | Order | Hub | Mini-adventure | Gym leader and concept |
 | --- | --- | --- | --- |
 | 1 | Outer Sunset | Select a starter and rescue a surf courier lost in an Ocean Beach fog bank | — |
-| 2 | Inner Sunset | Restore a greenhouse and investigate Golden Gate Park machinery | 1: Andrej Karpathy, Training Lab |
+| 2 | Inner Sunset | Restore a greenhouse and investigate Golden Gate Park machinery | 1: Replit, Amjad Masad — Build Lab |
 | 3 | Haight-Ashbury | Follow conflicting concert flyers to a secret performance | — |
-| 4 | Castro | Restore the lights for a neighborhood celebration | 2: Dylan Field, Design Studio |
+| 4 | Castro | Restore the lights for a neighborhood celebration | 2: Midjourney, David Holz — Dream Studio |
 | 5 | Mission | Recover mural pigments and follow a painted monster's clues | — |
-| 6 | Dogpatch | Restore an industrial workshop with inventive monsters | 3: Danielle Fong, Energy Workshop |
+| 6 | Dogpatch | Restore an industrial workshop with inventive monsters | 3: Cognition, Scott Wu — Agent Workshop |
 | 7 | SoMa | Investigate an escaped startup demo and the antagonist's first installation | — |
-| 8 | Tenderloin | Find a missing musician, with an optional surreal high-state route | 4: Tibo Sottiaux, Debug Dungeon |
+| 8 | Tenderloin | Find a missing musician, with an optional surreal high-state route | 4: Cursor, Michael Truell — Debug Dungeon |
 | 9 | Fillmore | Recover a jazz ensemble's instruments before its show | — |
-| 10 | Japantown | Recover festival supplies through lantern and gallery puzzles | 5: Justine Moore, Generative Gallery |
+| 10 | Japantown | Recover festival supplies through lantern and gallery puzzles | 5: Perplexity, Aravind Srinivas — Search Archive |
 | 11 | Richmond District | Follow archival clues through Lands End to Sutro Baths | — |
-| 12 | Presidio | Trace signals through woodland and Fort Point | 6: Naval Ravikant, Leverage Garden |
+| 12 | Presidio | Trace signals through woodland and Fort Point | 6: Mercor, Brendan Foody — Expert Trials |
 | 13 | Marina | Solve The Case of the Missing Quarter-Zip across Chestnut Street bars | — |
-| 14 | Russian Hill | Restore cable-car machinery and navigate foggy stairways | 7: Garry Tan, Demo Day |
+| 14 | Russian Hill | Restore cable-car machinery and navigate foggy stairways | 7: Anthropic, Daniela Amodei — Alignment Lab |
 | 15 | North Beach | Decode a poet's notebook while following an unhelpful parrot | — |
-| 16 | Chinatown | Restore a community festival and expose the final antagonist relay | 8: Jonathan Liu, Bootstrap Arcade |
+| 16 | Chinatown | Restore a community festival and expose the final antagonist relay | 8: OpenAI, Tibo Sottiaux — Compute Tower |
 
-These leader assignments are proposals. Their neighborhood placements are fictional.
+Gym identity is the startup; the leader is a real person associated with it.
+The eight-company slate is proposed and can be revised before implementation.
+Their neighborhood placements and game interiors are fictional, not actual office addresses.
+The slate emphasizes recognizable AI companies; it is not a ranked funding list.
+See [startup gym research](startup-gyms.md) for sources and proposed mechanics.
+
+Each gym has an original pixel-art startup office/lab, employee trainers, a
+product-inspired puzzle, a leader battle, and a company-themed badge.
+Optional interactions parody onboarding, demos, subscriptions, credits, and launch culture.
+Use original game visuals; real names do not imply company endorsement.
+
+Karpathy, Dylan Field, Danielle Fong, Justine Moore, Naval, Garry Tan, and
+Jonathan Liu move into mentor, quest-giver, investor, commentator, and optional
+boss roles. Jonathan retains the date-assistance quest. Sam remains the champion;
+Dario remains a championship opponent, distinct from Daniela's gym role.
 Tenderloin replaces Bernal Heights in the earlier hub list; Bernal is expansion scope.
 
 Golden Gate Park links Sunset, Haight, and Richmond. Presidio links Richmond
@@ -202,7 +217,7 @@ No date outcome blocks gym progression or obtaining the full monster catalog.
 Aim for real public SF/Bay tech figures and recognizable online personalities
 for every named interactable human NPC. Use recurring characters across hubs
 rather than inventing filler identities to reach a quota.
-Build the main game using the core cast; the current 23-person shortlist is in
+Build the main game using the core cast; the initial cast shortlist and startup-leader additions are in
 [cast research](cast-research.md). Specific role assignments remain proposed.
 
 Recurring candidates include Aella, Nikita Bier, Mike Solana, Dwarkesh Patel,

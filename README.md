@@ -11,7 +11,7 @@ The project name is provisional and has not been cleared for release.
 - 150 collectible mini-monster entries, including evolution stages.
 - Real tech people and recognizable online personalities as the proposed cast.
 - Adult SF comedy, playable drunk/high character states, and optional weird dates.
-- Eight gyms, one at every second stop in the proposed campaign.
+- Eight famous-startup gyms with real-person leaders, one at every second campaign stop.
 - A four-member championship followed by a champion battle.
 - A recurring antagonist, a villain organization, and one legendary mini monster.
 - Original creatures, artwork, music, dialogue, interface, and game code.

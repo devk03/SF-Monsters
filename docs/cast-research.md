@@ -18,21 +18,25 @@ dialogue, factions, and fantastical schemes below are fictional proposals.
 Do not present invented actions or private-life details as biographical facts.
 The player's drunk/high states do not imply substance use by the cast.
 
-## Proposed eight gyms
+## Proposed eight startup gyms
 
-| Gym | Game neighborhood | Person | Public basis | Fictional gym concept |
+The latest requirement makes famous startups the gym identities.
+
+| Gym | Game neighborhood | Startup | Leader | Fictional concept |
 | --- | --- | --- | --- | --- |
-| 1 | Inner Sunset | Andrej Karpathy | AI education and building neural networks | Training Lab: teaches battle fundamentals, then tests whether the player overfits to one strategy |
-| 2 | Castro | Dylan Field | Figma and collaborative design | Design Studio: reorganize a visual maze; win through coordinated combinations |
-| 3 | Dogpatch | Danielle Fong | Energy storage and physics writing | Energy Workshop: manage charged machinery and stored-energy attacks |
-| 4 | Tenderloin | Thibault "Tibo" Sottiaux | Codex and AI coding tools | Debug Dungeon: resolve broken doors and recover exhausted move resources |
-| 5 | Japantown | Justine Moore | AI applications and creative tools | Generative Gallery: distinguish decoys and adapt to changing appearances |
-| 6 | Presidio | Naval Ravikant | Wealth, happiness, and practical philosophy | Leverage Garden: a small team gets disproportionate value from passive effects |
-| 7 | Russian Hill | Garry Tan | YC, founder building, and public SF connection | Demo Day: pitch a team, then prove it works in battle |
-| 8 | Chinatown | Jonathan Liu | Bootstrapped projects, scheduling, and dating-app tools | Bootstrap Arcade: win with a limited item budget and timing combinations |
+| 1 | Inner Sunset | Replit | Amjad Masad | Build Lab |
+| 2 | Castro | Midjourney | David Holz | Dream Studio |
+| 3 | Dogpatch | Cognition | Scott Wu | Agent Workshop |
+| 4 | Tenderloin | Cursor | Michael Truell | Debug Dungeon |
+| 5 | Japantown | Perplexity | Aravind Srinivas | Search Archive |
+| 6 | Presidio | Mercor | Brendan Foody | Expert Trials |
+| 7 | Russian Hill | Anthropic | Daniela Amodei | Alignment Lab |
+| 8 | Chinatown | OpenAI | Tibo Sottiaux | Compute Tower |
 
-Neighborhood assignment is deliberately flexible. Character themes and
-elemental specialties are separate; the final type chart is still open.
+Company/leader sources and mechanics are in [startup gym research](startup-gyms.md).
+Neighborhood placements are fictional. Elemental specialties remain open.
+The previous gym candidates become mentors, quest givers, investors, commentators,
+and optional bosses rather than being discarded from the cast.
 
 ## Rival, championship, and villain proposals
 
