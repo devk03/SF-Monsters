@@ -71,7 +71,7 @@ def main():
     if not patch.exists():
         shutil.copy2(candidate, patch)
     manifest = {
-        'version': content['version'], 'status': content['status'],
+        'version': content['version'], 'status': content['status'], 'game_code': content['game_code'],
         'base_sha256': BASE_HASH, 'base_bytes': BASE.stat().st_size,
         'target_sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
         'target_bytes': target.stat().st_size,

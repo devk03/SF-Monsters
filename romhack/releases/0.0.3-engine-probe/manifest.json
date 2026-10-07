@@ -1,0 +1,17 @@
+{
+  "version": "0.0.3-engine-probe",
+  "status": "Unreviewed engine proof; stock maps, cast sprites and creatures remain scaffolding.",
+  "game_code": "BPEE",
+  "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
+  "base_bytes": 16777216,
+  "target_sha256": "32e256b0371bc00004fba7c58a7ea775bcce3356fcb985dfbe7a71ba3c267f87",
+  "target_bytes": 16777216,
+  "patch_sha256": "fe1b8ea20a25f6599201aca03303678a163a7a6f974ca85d2581894e00af9aac",
+  "patch_bytes": 226353,
+  "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
+  "source_commit": "053cab3819a9566ee69b2943885ea649f9f45e62",
+  "source_worktree_dirty": true,
+  "patch_roundtrip": "byte-identical",
+  "quality_approval": "pending"
+}

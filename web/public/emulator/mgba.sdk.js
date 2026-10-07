@@ -775,14 +775,17 @@ export async function load(config) {
         },
         importBattery(bytes) {
             releaseAllKeys();
-            if (!(bytes instanceof Uint8Array) || bytes.length !== 32768)
-                throw new Error('Expected a 32 KiB GBA SRAM save.');
+            if (!(bytes instanceof Uint8Array) || ![32768, 131072].includes(bytes.length))
+                throw new Error('Expected a supported GBA battery save.');
+            const current = cloneSram();
+            if (current && current.length !== bytes.length)
+                throw new Error('This save uses a different cartridge format.');
             rebootCore();
             // Run startup so the ROM initializes SRAM before restoring it.
             let ready = false;
             for (let frame = 0; frame < 120; frame++) {
                 mod._mgbawasm_run_frame();
-                if (mod._mgbawasm_sram_save() === 32768) { ready = true; break; }
+                if (mod._mgbawasm_sram_save() === bytes.length) { ready = true; break; }
             }
             if (!ready) throw new Error('The cartridge save memory did not initialize.');
             const ptr = heapAlloc(mod, bytes);

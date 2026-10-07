@@ -49,7 +49,9 @@ def main():
     digest = hashlib.sha256(rom).hexdigest()
     code = rom[0xac:0xb0]
     if code == b'BPEE' and digest != REFERENCE_HASH:
-        parser.error('Reference hash does not match the approved Emerald ROM.')
+        manifests = (ROOT / 'romhack/releases').glob('*/manifest.json')
+        if not any(json.loads(path.read_text()).get('target_sha256') == digest for path in manifests):
+            parser.error('ROM matches neither the approved reference nor a verified SF patch target.')
     if code not in [b'BPEE', b'SFMM']:
         parser.error('Only the approved reference or an SF cartridge is supported.')
     if args.state:

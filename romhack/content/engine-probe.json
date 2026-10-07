@@ -1,7 +1,7 @@
 {
-  "version": "0.0.2-engine-probe",
+  "version": "0.0.3-engine-probe",
   "title": "SF MONSTERS",
-  "game_code": "SFMM",
+  "game_code": "BPEE",
   "status": "Unreviewed engine proof; stock maps, cast sprites and creatures remain scaffolding.",
   "region_names": { "MAPSEC_LITTLEROOT_TOWN": "OUTER SUNSET" },
   "intro": {

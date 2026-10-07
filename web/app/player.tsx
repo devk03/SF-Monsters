@@ -1,6 +1,8 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { countCaught, decodeSave, encodeSave, nextQuest, readProgress, validateSave, type Progress } from './save-format';
+import {flashCounter, validateFlashSave} from './flash-save';
+import {patchLocalRom} from './rom-loader';
 
 type Engine = {
   start(): void; pause(): void; resume(): void; destroy(): void;
@@ -8,7 +10,10 @@ type Engine = {
   config: { write(key: string, value: number | boolean): boolean };
 };
 type Account = { id: string; name: string } | null;
-declare global { interface Window { sfMiniMonstersLoad?: (config: unknown) => Promise<Engine> } }
+declare global { interface Window {
+  sfMiniMonstersLoad?: (config: unknown) => Promise<Engine>;
+  sfMiniMonstersExtract?: (bytes: Uint8Array) => Promise<{bytes: Uint8Array}>;
+} }
 let runtimeLoader: Promise<void> | null = null;
 function loadRuntime(): Promise<void> {
   if (runtimeLoader) return runtimeLoader;
@@ -29,22 +34,41 @@ const ROUTE = [
   { flag: 32, label: 'Repair the safety relays' },
   { flag: 64, label: 'Earn the Build Badge' },
 ];
-export default function GamePlayer({ account, signInUrl, signOutUrl }: {
-  account: Account; signInUrl: string; signOutUrl: string;
+export default function GamePlayer({ account, signInUrl, signOutUrl, variant = 'emerald' }: {
+  account: Account; signInUrl: string; signOutUrl: string; variant?: 'emerald' | 'prototype';
 }) {
+  const legacy = variant === 'prototype';
   const canvas = useRef<HTMLCanvasElement>(null);
   const engine = useRef<Engine | null>(null);
   const importInput = useRef<HTMLInputElement>(null);
-  const [phase, setPhase] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [notice, setNotice] = useState('Loading your cartridge…');
+  const romInput = useRef<HTMLInputElement>(null);
+  const [romBytes, setRomBytes] = useState<Uint8Array | null>(null);
+  const [romUrl, setRomUrl] = useState<string | null>(null);
+  const [phase, setPhase] = useState<'waiting' | 'verifying' | 'loading' | 'ready' | 'error'>(legacy ? 'loading' : 'waiting');
+  const [notice, setNotice] = useState(legacy ? 'Loading your cartridge…' : 'Load your Emerald ROM. It stays on your device.');
   const [progress, setProgress] = useState<Progress | null>(null);
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(false);
+  const mutedRef = useRef(false);
   const [help, setHelp] = useState(false);
   const [backupUrl, setBackupUrl] = useState<string | null>(null);
   useEffect(() => () => { if (backupUrl) URL.revokeObjectURL(backupUrl); }, [backupUrl]);
   const [retry, setRetry] = useState(0);
-  const storageKey = `sf-mini-monsters:v1:${account?.id ?? 'guest'}`;
+  const storageKey = `sf-mini-monsters:${legacy ? 'v1' : 'emerald:v1'}:${account?.id ?? 'guest'}`;
+  const validateBattery = useCallback((bytes: Uint8Array) => {
+    if (legacy) validateSave(bytes); else validateFlashSave(bytes);
+  }, [legacy]);
+  const batteryProgress = useCallback((bytes: Uint8Array): Progress | null => {
+    if (legacy) return readProgress(bytes);
+    const sequence = flashCounter(bytes);
+    return sequence === null ? null : {sequence, flags: 0, caught: 0, coins: 0, map: 0, party: 0};
+  }, [legacy]);
+  useEffect(() => {
+    if (!romBytes) return;
+    const url = URL.createObjectURL(new Blob([new Uint8Array(romBytes)]));
+    setRomUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [romBytes]);
   const lastSequence = useRef(-1);
   const heldKeys = useRef(new Set<string>());
   const sendKey = useCallback((code: string, down: boolean) => {
@@ -59,7 +83,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
     if (!current) return;
     try {
       const bytes = current.exportBattery();
-      const state = readProgress(bytes);
+      const state = batteryProgress(bytes);
       if (!state) return;
       setProgress(state);
       if (state.sequence !== lastSequence.current) {
@@ -71,29 +95,34 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
     } catch {
       if (report) setNotice('Device storage is unavailable. Use Save backup to keep your progress.');
     }
-  }, [storageKey]);
+  }, [storageKey, batteryProgress]);
   useEffect(() => {
+    if (!legacy && !romBytes) return;
     let disposed = false;
     let instance: Engine | null = null;
     const initialize = async () => {
       setPhase('loading');
       try {
         await loadRuntime();
-        const response = await fetch('/game/sf-mini-monsters.gba');
-        if (!response.ok) throw new Error('The cartridge could not be loaded.');
-        const rom = new Uint8Array(await response.arrayBuffer());
+        let rom = romBytes;
+        if (legacy) {
+          const response = await fetch('/game/sf-mini-monsters.gba');
+          if (!response.ok) throw new Error('The cartridge could not be loaded.');
+          rom = new Uint8Array(await response.arrayBuffer());
+        }
+        lastSequence.current = -1;
         instance = await window.sfMiniMonstersLoad!({ canvasEl: canvas.current, assets: { rom },
           jsUrl: '/emulator/mgba.js', wasmUrl: '/emulator/mgba.wasm', persist: null,
-          storageNamespace: storageKey, options: { system: 'gba', idleOptimization: 'ignore', volume: 0.35, logLevel: 'error' } });
+          storageNamespace: storageKey, options: { system: 'gba', idleOptimization: 'ignore', volume: mutedRef.current ? 0 : 0.35, logLevel: 'error' } });
         if (disposed) { instance?.destroy(); return; }
         engine.current = instance;
         try {
           const saved = localStorage.getItem(storageKey);
           if (saved) {
-            const bytes = decodeSave(saved); validateSave(bytes);
-            instance!.importBattery(bytes); setProgress(readProgress(bytes));
-            setNotice('Your delivery is ready to continue. Press A.');
-          } else setNotice('Press A to begin. Saves stay on this device.');
+            const bytes = decodeSave(saved); validateBattery(bytes);
+            instance!.importBattery(bytes); setProgress(batteryProgress(bytes));
+            setNotice('Your game is ready to continue. Press A.');
+          } else setNotice(legacy ? 'Press A to begin. Saves stay on this device.' : 'Press Start, then choose New Game. Save from the in-game menu before downloading a backup.');
         } catch { setNotice('The device save could not be restored. Import a valid backup or start a new delivery.'); }
         instance!.start(); setPhase('ready');
       } catch (error) {
@@ -110,27 +139,46 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
       instance?.destroy(); engine.current = null;
       window.removeEventListener('pagehide', onHide); window.removeEventListener('blur', releaseKeys);
     };
-  }, [storageKey, retry, persist, releaseKeys]);
+  }, [storageKey, retry, persist, releaseKeys, legacy, romBytes, validateBattery, batteryProgress]);
+  const loadRom = async (file?: File) => {
+    if (!file) return;
+    const wasRunning = !!engine.current;
+    releaseKeys(); engine.current?.pause(); setPhase('verifying');
+    try {
+      if (file.size > 24 * 1024 * 1024) throw new Error('Select an Emerald .gba ROM or its ZIP archive.');
+      await loadRuntime();
+      const selected = new Uint8Array(await file.arrayBuffer());
+      const {bytes} = await window.sfMiniMonstersExtract!(selected);
+      const result = await patchLocalRom(bytes);
+      persist(); setRomBytes(result.rom); setNotice('Emerald verified and SF patch applied locally.');
+      setPaused(false);
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : 'The selected ROM could not be opened.');
+      setPhase(wasRunning ? 'ready' : 'waiting');
+      if (wasRunning && !paused) engine.current?.resume();
+    }
+    if (romInput.current) romInput.current.value = '';
+  };
   const backup = () => {
     try {
-      const bytes = engine.current!.exportBattery(); validateSave(bytes);
+      const bytes = engine.current!.exportBattery(); validateBattery(bytes);
       const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }));
       const link = document.createElement('a'); link.href = url; link.download = 'sf-mini-monsters.sav';
       link.hidden = true; document.body.appendChild(link); link.click(); link.remove();
       setBackupUrl(url);
       persist(); setNotice('Backup prepared. Use Download save if your browser did not start the download.');
-    } catch (error) { setNotice(error instanceof Error ? error.message : 'Choose a starter before saving.'); }
+    } catch (error) { setNotice(legacy && error instanceof Error ? error.message : 'Save from the in-game menu first, then download a backup.'); }
   };
   const importSave = async (file?: File) => {
     if (!file || !engine.current) return;
     try {
-      const bytes = new Uint8Array(await file.arrayBuffer()); validateSave(bytes);
+      const bytes = new Uint8Array(await file.arrayBuffer()); validateBattery(bytes);
       const previous = persist();
       if (previous) localStorage.setItem(`${storageKey}:previous`, encodeSave(previous));
       engine.current.importBattery(bytes);
       setBackupUrl(null);
       localStorage.setItem(storageKey, encodeSave(bytes));
-      lastSequence.current = -1; setProgress(readProgress(bytes));
+      lastSequence.current = -1; setProgress(batteryProgress(bytes));
       setNotice('Backup restored. Press A to continue your delivery.');
       if (paused) { engine.current.resume(); setPaused(false); }
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Could not import the save. Your progress was kept.'); }
@@ -159,10 +207,11 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
     </header>
     <div className="workbench">
       <section className="play-surface" aria-label="SF Mini Monsters game">
-        <div className="screen-label"><span>THE FOG SIGNAL</span><span>{progress ? MAPS[progress.map] : 'OUTER SUNSET'}</span></div>
+        <div className="screen-label"><span>THE FOG SIGNAL</span><span>{legacy ? progress ? MAPS[progress.map] : 'OUTER SUNSET' : 'EMERALD ENGINE PREVIEW'}</span></div>
         <div className="game-screen">
           <canvas ref={canvas} width={240} height={160} tabIndex={0} aria-label="GBA game screen. Arrow keys move, X confirms, Z goes back, Enter opens the menu." />
-          {phase === 'loading' && <div className="screen-overlay"><p>Loading cartridge…</p></div>}
+          {phase === 'waiting' && <div className="screen-overlay"><p>Bring your Emerald ROM.</p><button onClick={() => romInput.current?.click()}>Load .gba or ZIP</button><p>Patched here, on your device.</p></div>}
+          {(phase === 'loading' || phase === 'verifying') && <div className="screen-overlay"><p>{phase === 'verifying' ? 'Checking and patching locally…' : 'Loading cartridge…'}</p></div>}
           {phase === 'error' && <div className="screen-overlay"><p>{notice}</p><button onClick={() => setRetry(retry + 1)}>Try again</button></div>}
           {paused && <div className="screen-overlay"><p>Paused</p><button onClick={togglePause}>Resume</button></div>}
         </div>
@@ -176,37 +225,41 @@ export default function GamePlayer({ account, signInUrl, signOutUrl }: {
         </div>
         <div className="player-actions">
           <button onClick={togglePause} disabled={phase !== 'ready'}>{paused ? 'Resume' : 'Pause'}</button>
-          <button onClick={() => { const value = !muted; setMuted(value); engine.current?.config.write('volume', value ? 0 : 0.35); }} disabled={phase !== 'ready'}>{muted ? 'Sound on' : 'Mute'}</button>
+          <button onClick={() => { const value = !muted; setMuted(value); mutedRef.current = value; engine.current?.config.write('volume', value ? 0 : 0.35); }} disabled={phase !== 'ready'}>{muted ? 'Sound on' : 'Mute'}</button>
           <button onClick={backup} disabled={phase !== 'ready'}>Save backup</button>
           <button onClick={() => importInput.current?.click()} disabled={phase !== 'ready'}>Import save</button>
           <button onClick={() => setHelp(!help)} aria-expanded={help}>Controls</button>
+          {!legacy && <button onClick={() => romInput.current?.click()} disabled={phase === 'verifying' || phase === 'loading'}>Load ROM</button>}
           <input ref={importInput} type="file" accept=".sav" hidden onChange={event => void importSave(event.target.files?.[0])} />
+          <input ref={romInput} type="file" accept=".gba,.zip" hidden onChange={event => void loadRom(event.target.files?.[0])} />
         </div>
         <p className="save-notice" role="status">{notice}{backupUrl && <> <a href={backupUrl} download="sf-mini-monsters.sav">Download save</a></>}</p>
         {help && <div className="help-panel">
           <p><strong>Move:</strong> arrow keys or D-pad. <strong>Confirm / talk:</strong> X or A.</p>
           <p><strong>Back:</strong> Z or B. <strong>Menu:</strong> Enter or Start.</p>
-          <p>In battle, use Up/Down to choose an action. Weaken wild monsters, then select Capture.</p>
-          <p>Team/Storage: A puts a monster in the lead slot. Select releases a stored duplicate. Clinics heal for free.</p>
+          <p>{legacy ? 'In battle, use Up/Down to choose an action. Weaken wild monsters, then select Capture.' : 'Hold B to run when running is available. Save through Start → Save; then use Save backup.'}</p>
+          {legacy && <p>Team/Storage: A puts a monster in the lead slot. Select releases a stored duplicate. Clinics heal for free.</p>}
           <p>The game saves progress on this device. Download a .sav backup before switching devices or clearing browser storage.</p>
         </div>}
       </section>
       <aside className="quest-sidebar">
-        <div className="chapter-label">CHAPTER 01</div>
+        <div className="chapter-label">{legacy ? 'CHAPTER 01' : 'ENGINE PREVIEW'}</div>
         <h1>A courier.<br />A missing parcel.<br />Very normal fog.</h1>
-        <p className="next-quest">{progress ? nextQuest(progress.flags) : 'Choose your companion, then find Roon’s prototype on Ocean Beach.'}</p>
-        <ol className="quest-list">{ROUTE.map(step => <li key={step.flag} className={progress && progress.flags & step.flag ? 'done' : ''}>
+        <p className="next-quest">{legacy ? progress ? nextQuest(progress.flags) : 'Choose your companion, then find Roon’s prototype on Ocean Beach.' : 'The SF opening now runs inside Emerald’s actual engine. The full city adventure is being built.'}</p>
+        {legacy && <ol className="quest-list">{ROUTE.map(step => <li key={step.flag} className={progress && progress.flags & step.flag ? 'done' : ''}>
           <span aria-hidden="true">{progress && progress.flags & step.flag ? '✓' : '·'}</span>{step.label}
-        </li>)}</ol>
-        <div className="field-stats"><div><strong>{progress ? countCaught(progress.caught) : 0}<small>/12</small></strong><span>mini monsters</span></div>
-          <div><strong>{progress?.flags && progress.flags & 64 ? '01' : '00'}</strong><span>gym badges</span></div></div>
-        <div className="delivery-note"><p>Outer Sunset → Muni → SoMa</p><p>Every stop is in San Francisco.</p></div>
-        <a className="rom-link" href="/game/sf-mini-monsters.gba" download>Download GBA ROM</a>
+        </li>)}</ol>}
+        {legacy && <div className="field-stats"><div><strong>{progress ? countCaught(progress.caught) : 0}<small>/12</small></strong><span>mini monsters</span></div>
+          <div><strong>{progress?.flags && progress.flags & 64 ? '01' : '00'}</strong><span>gym badges</span></div></div>}
+        <div className="delivery-note"><p>{legacy ? 'Outer Sunset → Muni → SoMa' : 'Planned first chapter: Sunset → South Park'}</p><p>{legacy ? 'Every stop is in San Francisco.' : 'SF map replacement is in progress.'}</p></div>
+        {(legacy || romUrl) && <a className="rom-link" href={legacy ? '/game/sf-mini-monsters.gba' : romUrl!} download="sf-mini-monsters.gba">Download GBA ROM</a>}
+        {!legacy && <a className="rom-link" href="/patch/sf-mini-monsters.bps" download>Download SF patch</a>}
         <a className="source-link" href="https://github.com/devk03/SF-Monsters" target="_blank" rel="noreferrer">Fork the game on GitHub</a>
         <p className="account-note">{account ? `Signed in as ${account.name}.` : 'Guest play is available. Sign in for a separate local save slot.'}</p>
-        <p className="edition-note">MVP: two neighborhoods, one startup gym, twelve collectible monsters. The full city is still being built.</p>
+        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Early engine proof: SF opening text and hometown label. Stock maps, sprites and creatures remain placeholders. The 16-neighborhood, 8-gym, 150-monster campaign is unfinished.'}</p>
+        {!legacy && <a className="source-link" href="/prototype">Play the earlier courier prototype</a>}
       </aside>
     </div>
-    <footer className="foot-line"><span>Original game · real public personas · fictional adventure</span><a href="/emulator/NOTICE.txt">Emulator credits</a></footer>
+    <footer className="foot-line"><span>SF fan project · real public personas · fictional adventure</span><a href="/emulator/NOTICE.txt">Emulator credits</a></footer>
   </main>;
 }

@@ -816,6 +816,29 @@ Emerald foundation checkpoint — SF source overlay:
   supplied ROM bytes remain unchanged. These are patch-format checks, not battle
   cases or presentation approvals. Website upload/play integration is next.
 
+Emerald foundation checkpoint — local ROM player:
+
+- Version 0.0.3-engine-probe preserves cartridge code BPEE for standard mGBA
+  RTC, Flash and idle-loop compatibility while retaining the SF display title.
+  The verified target hash is 32e256b0371bc00004fba7c58a7ea775bcce3356fcb985dfbe7a71ba3c267f87.
+- The same patched cartridge produces identical final RGB pixels after a
+  1096-frame native-core/WebAssembly controller route.
+- Local browser QA loads the user-supplied ZIP, validates/extracts it, patches it
+  without sending ROM bytes to the server, and displays Welcome to SAN FRANCISCO.
+  Wrong-ROM rejection preserves the running cartridge. Chromium downloads the
+  actual 16 MiB result with the exact verified target hash. Automated download
+  event monitoring timed out, but the resulting file was verified on disk.
+- Measured CSS widths 320/375/414/768/1440 have no horizontal overflow in the
+  checked player. Desktop/mobile screenshots are in ignored .tools/qa.
+  These are simulated viewports; physical-phone performance is still pending.
+- Emerald Flash support validates complete rotating slots and checksums, chooses
+  the latest intact counter (including wraparound), and rejects invalid backups.
+  Existing prototype SRAM behavior still passes its tests; the earlier game and
+  its local save namespace remain available through /prototype.
+- The full SF campaign, actual campaign-save round trips/resume checkpoints,
+  Mac GUI/Safari/physical mobile checks, sign-in QA and all eleven user approvals
+  remain outstanding. No domain approval changed. Publishing this player is next.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)

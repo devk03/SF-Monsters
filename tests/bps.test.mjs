@@ -46,6 +46,5 @@ if (basePath || patchPath || targetPath) {
   const patch = new Uint8Array(fs.readFileSync(patchPath));
   const result = applyBps(base, patch);
   assert.deepEqual(Buffer.from(result), fs.readFileSync(targetPath), 'Browser decoder must match native Flips output');
-  assert.equal(new TextDecoder().decode(result.subarray(0xac, 0xb0)), 'SFMM');
 }
 console.log('BPS commands, overlapping/backward copies, integrity, bounds and input preservation passed.');

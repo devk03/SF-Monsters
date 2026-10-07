@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SF Mini Monsters — The Fog Signal",
-  description: "Play an original San Francisco mini-monster adventure in your browser, or download the GBA ROM.",
+  description: "Load your Emerald ROM and apply the SF Mini Monsters patch locally. Play in the browser or download your patched GBA cartridge.",
   other: {
     "codex-preview": "development",
   },
