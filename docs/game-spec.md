@@ -747,3 +747,18 @@ Reference sources for benchmark construction:
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)
 - [mGBA scripting API](https://mgba.io/docs/scripting.html)
 - [Gen III battle calculation reference](https://github.com/pret/pokeemerald/blob/master/src/pokemon.c)
+
+Foundation checkpoint A — reference tooling:
+
+- Native capture preparation now verifies the approved BPEE SHA-256 and isolates
+  ROMs, saves, clips, and frame traces under ignored .tools/benchmarks.
+- Native mGBA controller harness records frame numbers, controller state, and
+  background scroll registers; all gameplay writes are controller input only.
+- Frame-only encodes are explicitly diagnostics. Scored excerpts must come from
+  synchronized native 240x160 audio/video and last 30–60 seconds.
+- A new courier walking-sheet candidate was generated for asset-pipeline testing;
+  it is unreviewed and does not establish pixel-art parity.
+- Butano 21.9.0 (a9426cf21b8b6372e4f43678464345a1bf4594de) and pinned devkitARM
+  Docker image sha256:116afba8df8453961de2936ffab20dd441edf4d682856c1ec8b0e53d7ed0bbf5
+  are being evaluated for hardware backgrounds/sprites and streaming music.
+- The current production prototype remains at 0/11 approved quality domains.
