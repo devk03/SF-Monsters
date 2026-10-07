@@ -49,9 +49,9 @@ callback = callbacks:add('frame',function()
     if Bench.remaining > 0 then Bench.remaining = Bench.remaining - 1 end
     trace:write(string.format('%d,%d,%d,%d,%d,%d,%d,%d,%d\n',
         emu:currentFrame(),emu:getKeys(),emu:read16(0x04000000),
-        emu:read16(0x04000010),emu:read16(0x04000012),
-        emu:read16(0x04000014),emu:read16(0x04000016),
-        emu:read16(0x04000018),emu:read16(0x0400001a)))
+        emu.memory.io:read16(0x10),emu.memory.io:read16(0x12),
+        emu.memory.io:read16(0x14),emu.memory.io:read16(0x16),
+        emu.memory.io:read16(0x18),emu.memory.io:read16(0x1a)))
     if Bench.capture then
         local capture = Bench.capture
         emu:screenshot(string.format('%s/%s/%06d.png',BENCH_OUTPUT,capture.name,capture.count))
