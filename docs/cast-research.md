@@ -119,7 +119,9 @@ For each character selected for implementation, collect:
 5. Recurring appearances, callbacks, and story flags.
 6. Portrait/asset provenance and release review status.
 
-Expand toward roughly 60–80 real-person NPC identities only as neighborhood
-scripts require them. Recurring characters can fill several locations.
+Use the core shortlist for the main game. After completion, expect approximately
+50 additional user-selected Twitter personalities, each researched separately.
+Recurring characters can fill several locations. See [the full spec](game-spec.md)
+for stable IDs, content expansion, and save compatibility requirements.
 Avoid filling the city with identical founder jokes: make each interaction
 reveal a person, deliver a clue, change a quest, or provide a useful service.

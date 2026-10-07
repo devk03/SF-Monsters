@@ -12,13 +12,15 @@ The project name is provisional and has not been cleared for release.
 - Real tech people and recognizable online personalities as the proposed cast.
 - Adult SF comedy, playable drunk/high character states, and optional weird dates.
 - Eight gyms, one at every second stop in the proposed campaign.
-- A four-member Bay Council championship and a final rival battle.
+- A four-member championship followed by a champion battle.
 - A recurring antagonist, a villain organization, and one legendary mini monster.
 - Original creatures, artwork, music, dialogue, interface, and game code.
 - A GBA ROM playable in iOS emulators and a browser through WebAssembly.
 - Public source, editable content, and documented builds for contributors.
 
-The design is a proposal, not a final specification. See [the game plan](docs/game-plan.md).
+The [v1 specification](docs/game-spec.md) defines the full proposed game.
+It includes support for approximately 50 additional researched Twitter personalities
+after the main game is complete.
 Sourced character candidates and fictional roles are in [cast research](docs/cast-research.md).
 
 ## First playable milestone
