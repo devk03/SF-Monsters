@@ -809,6 +809,13 @@ Emerald foundation checkpoint — SF source overlay:
   Full cartridges remain local/ignored. Actual first-slice maps, original cast
   art, Mini Monster replacements, SF events and browser upload remain required.
 
+- The browser BPS decoder reproduces the real compiled SF probe byte-for-byte,
+  matching native Floating IPS. Independent ASCII fixtures exercise all four
+  patch commands, backward offsets and overlapping target copies. Corrupt patches,
+  wrong input, invalid bounds and output checksum mismatches are rejected; the
+  supplied ROM bytes remain unchanged. These are patch-format checks, not battle
+  cases or presentation approvals. Website upload/play integration is next.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)
