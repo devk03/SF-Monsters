@@ -44,9 +44,7 @@ No account system or backend is required for the first release.
 
 ## Development workflow
 
-Commit after approximately 300–500 changed lines, keeping each commit coherent.
-Smaller commits are appropriate for initial setup, completed small changes,
-or a natural checkpoint. Do not pad changes to meet a line count.
+Commit frequently, keeping each commit coherent and reviewable.
 
 Verify the diff and run checks relevant to the change before committing.
 Stage explicit project files. Do not include credentials or unrelated changes.
@@ -54,8 +52,9 @@ Commits are authorized; remote publication and PR merges require their own scope
 
 ## Licensing and originality
 
-Proposed licensing is MIT for original code and CC BY 4.0 for original assets.
-Licenses have not yet been adopted. Dependencies retain their own licenses.
+Original code and documentation are available under the [MIT license](LICENSE).
+CC BY 4.0 is proposed for future original art and music; no game assets exist yet.
+Dependencies and separately licensed assets retain their own licenses.
 Track the author, source, and license of contributed assets.
 
 Use original implementation and creative expression. Do not include commercial
