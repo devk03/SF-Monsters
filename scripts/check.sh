@@ -16,5 +16,6 @@ python3 tests/romhack_maps_test.py
 python3 tests/romhack_battles_test.py
 python3 tests/romhack_monsters_test.py
 python3 tests/creature_audio_test.py
+python3 tests/field_music_test.py
 cd web
 npx tsc --noEmit

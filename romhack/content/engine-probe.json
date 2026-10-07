@@ -1,5 +1,5 @@
 {
-  "version": "0.0.6-starter-audio-preview",
+  "version": "0.0.7-sunset-score-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
   "status": "Unreviewed SF chapter with Cognition and three original starter candidates; wild creatures, evolution art, portraits and music remain placeholders.",
@@ -29,5 +29,6 @@
   },
   "battle_content": "first-chapter-battles.json",
   "monster_content": "monsters.json",
-  "creature_audio": "assets/audio/creature-cries.json"
+  "creature_audio": "assets/audio/creature-cries.json",
+  "field_music": "assets/audio/ocean-commute.json"
 }

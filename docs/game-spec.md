@@ -970,6 +970,27 @@ First-slice checkpoint — public original-call preview:
   AudioWorklet/Safari/mobile checks, comparison clips, gym victory/balance,
   full 16-hub/eight-gym/150-entry campaign and all 11 approvals remain open.
 
+First-slice checkpoint — original native Sunset score candidate:
+
+- Ocean Commute now uses native MPlay sequencing: sixteen bars at nominal
+  108 BPM, A/A2/B/A3 melodic development, answering pluck, root/fifth bass,
+  major/minor chord pads and kick/brush/hat rhythm. Seven tracks use eight
+  originally synthesized instrument samples. Score, mix, MIDI and wave sources
+  are editable under assets/audio; no commercial melody/sample is copied.
+- Native MIDI conversion compiles synchronized loop jumps for all seven tracks.
+  Independent MIDI checks confirm monophonic tracks, program bounds, closed
+  notes and a shared 1,536-tick loop. Instrument headers and payload bounds pass.
+  The draft patch reapplies byte-for-byte at target
+  8914865e5b0ef3335790ccc26533d1ec9f3f43761404b2bcca30e65e46c3240c.
+- Actual native capture resumes an older Sunset battery and records more than
+  three consecutive field loops. Local listening artifact:
+  .tools/audio-review/ocean-commute-native-three-loops.wav. Evidence:
+  .tools/benchmarks/ocean-commute-native-three-loops. Composition, instrument
+  character, mix and loop/transition listening review remain unapproved.
+- One neighborhood theme candidate is not soundtrack completion. Remaining
+  fifteen hub identities, encounter/fanfare/title/credits contexts, original
+  monster/evolution/cast/map work and all release/approval gates remain required.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

@@ -1,0 +1,25 @@
+{
+  "title": "Ocean Commute",
+  "tempo": 108,
+  "ticks_per_quarter": 24,
+  "sections": ["A", "A2", "B", "A3"],
+  "melodies": {
+    "A": [62,66,69,66,64,66,71,69,67,71,74,71,69,73,76,73],
+    "A2": [62,69,66,69,64,71,66,69,67,74,71,74,69,76,73,71],
+    "B": [74,73,71,69,66,69,71,66,67,66,64,62,64,68,71,73],
+    "A3": [62,66,69,66,64,66,71,69,67,71,74,71,69,66,64,62]
+  },
+  "harmony": [[50,62,"major"],[47,59,"minor"],[43,55,"major"],[45,57,"major"]],
+  "counterline": [57,62,54,59,50,55,52,57],
+  "channels": {
+    "bell": {"volume": 78, "pan": 48},
+    "counter": {"volume": 54, "pan": 82},
+    "bass": {"volume": 74, "pan": 64},
+    "pad": {"volume": 43, "pan": 64},
+    "kick": {"volume": 72, "pan": 64},
+    "snare": {"volume": 48, "pan": 72},
+    "hat": {"volume": 32, "pan": 44}
+  },
+  "native_song": "mus_littleroot",
+  "native_voicegroup": "littleroot"
+}
