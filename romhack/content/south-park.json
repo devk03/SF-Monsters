@@ -1,0 +1,217 @@
+{
+  "engine_map": "OldaleTown",
+  "script": "south-park.inc",
+  "tilesets": {
+    "secondary": "gTileset_Rustboro"
+  },
+  "legend": {
+    ".": [
+      1,
+      false,
+      3
+    ],
+    "R": [
+      699,
+      false,
+      3
+    ],
+    "P": [
+      699,
+      false,
+      3
+    ],
+    "F": [
+      11,
+      true,
+      3
+    ],
+    "G": [
+      13,
+      false,
+      3
+    ],
+    "B": [
+      19,
+      true,
+      3
+    ],
+    "#": [
+      5,
+      true,
+      3
+    ],
+    "D": [
+      461,
+      false,
+      0
+    ],
+    "H": [
+      33,
+      false,
+      0
+    ],
+    "a": [
+      540,
+      true,
+      0
+    ],
+    "b": [
+      541,
+      true,
+      0
+    ],
+    "c": [
+      543,
+      true,
+      0
+    ],
+    "d": [
+      548,
+      true,
+      0
+    ],
+    "e": [
+      549,
+      true,
+      0
+    ],
+    "f": [
+      551,
+      true,
+      0
+    ],
+    "g": [
+      556,
+      true,
+      0
+    ],
+    "h": [
+      557,
+      true,
+      0
+    ],
+    "i": [
+      564,
+      true,
+      0
+    ],
+    "j": [
+      565,
+      true,
+      0
+    ]
+  },
+  "rows": [
+    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+    "FPPPPPRRRPabbbbbcPPPPPPPPPPPPabbbbbcPPPF",
+    "FPPPPPRRRPdeeeeefPPPPPPPPPPPPdeeeeefPPPF",
+    "FPPPPPRRRPghhhhhfPPPPPPPPPPPPghhhhhfPPPF",
+    "FPPPPPRRRPijjjjjfPPPPPPPPPPPPijjjjjfPPPF",
+    "FPPPPPRRRPPPPDPPPPPPPPPPPPPPPPPPHPPPPPPF",
+    "FPPPPPRRRP#PPPPPPPPPPPPPPPPPP#PPPPPPPPPF",
+    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
+    "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
+    "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
+    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRPPabcPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRPPdefPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRPPghfPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRPPijfPPPPP..............PPPPPPF",
+    "FPPPPPRRRPPPPPPPP..................PPPPF",
+    "FPPPPPRRRPPPPPPP.............B......PPPF",
+    "FPPPPPRRRPPPPPP..GG..................PPF",
+    "FPPPPPRRRPPPPPP......................PPF",
+    "FPPPPPRRRPPabcP.........B........#...PPF",
+    "FPPPPPRRRPPdefP...B............GG....PPF",
+    "FPPPPPRRRPPghfPP....................PPPF",
+    "FPPPPPRRRPPijfPPP....GG............PPPPF",
+    "FPPPPPRRRPPPPPPPPPP..............PPPPPPF",
+    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
+    "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
+    "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
+    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_RUSTBORO_CITY_GYM",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 32,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+      "dest_warp_id": "0"
+    }
+  ],
+  "npcs": [
+    {
+      "id": 1,
+      "x": 7,
+      "y": 25,
+      "graphics": "OBJ_EVENT_GFX_MAN_5",
+      "script": "SF_Muni_Return"
+    },
+    {
+      "id": 2,
+      "x": 26,
+      "y": 18,
+      "graphics": "OBJ_EVENT_GFX_MAN_3",
+      "script": "SF_DylanField",
+      "movement": "MOVEMENT_TYPE_WANDER_AROUND",
+      "range_x": 1,
+      "range_y": 1
+    },
+    {
+      "id": 3,
+      "x": 34,
+      "y": 23,
+      "graphics": "OBJ_EVENT_GFX_GENTLEMAN",
+      "script": "SF_GarryTan"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SF_CognitionSign"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SF_ServiceSign"
+    },
+    {
+      "type": "sign",
+      "x": 33,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SF_ParkHistory"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SF_ParkDiscovery"
+    }
+  ],
+  "metadata": {
+    "weather": "WEATHER_SUNNY"
+  }
+}

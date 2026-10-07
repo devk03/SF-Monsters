@@ -753,8 +753,8 @@ progress toward final parity. Do not lower a target to fit the existing code.
   tooling and the experimental hardware foundation have started.
 - Approved Emerald-parity domains: 0/11. This is an approval count, not a claim
   that the prototype has no working functionality.
-- Main build: actual Emerald engine, authored Outer Sunset opening and native
-  quest/battle/save behavior. Original SF creatures, cast art and music remain
+- Main build: actual Emerald engine, authored Outer Sunset opening, South Park
+  travel, clinic and Cognition gym draft. Original SF creatures, cast art and music remain
   required. The earlier two-map/one-gym/12-monster prototype is archived.
 - Quality-complete hubs/gyms/monsters: unreviewed. Earlier technical checks do
   not certify final content or visual/audio quality.
@@ -768,6 +768,29 @@ progress toward final parity. Do not lower a target to fit the existing code.
   at the stated gates. Resolve changes to scope/platform/originality with the user;
   ordinary engine and implementation choices remain autonomous.
 - Never mark the goal complete while any required gate or review is outstanding.
+
+First-slice checkpoint — South Park and Cognition draft:
+
+- Authored a two-way Muni connection from the completed Sunset quest to the
+  South Park block, a clinic with healing/shop/storage, park lore/discovery,
+  and Cognition's sensor delivery, ordered relay puzzle and first gym roster.
+  All authored map warps/connections stay within the SF map set.
+- Native mGBA controller-only evidence under .tools/benchmarks/cognition-*:
+  an existing schema-1 Sunset battery resumes, rides Muni, enters the gym,
+  delivers the sensor (stage 1), rejects green-first (still stage 1), activates
+  blue (stage 2), activates green (stage 3), crosses the opened gate and enters
+  the actual SCOTT WU trainer battle. No gameplay RAM writes are used.
+- Native compilation and exact BPS reapplication pass. The latest draft target
+  is 088b5793cb077084b2c9fe0711f8007cb0adece248d2334f06ba72d0a3d3d3ab.
+  Full cartridges remain ignored/private. Format, save, patch, archived-engine
+  and TypeScript checks pass. Cross-runtime checks for this draft remain next.
+- Nine wild stock species plus three stock starters exercise native habitats
+  and team mechanics; they do not count as finished original Mini Monsters.
+  Stock portraits, tiles and soundtrack are unreviewed scaffolding. The large
+  interiors need furniture, composition, readable relays and SF art direction.
+- Gym victory/reward/re-entry, clinic workflows, return travel, encounters and
+  three-starter balance still need native play checks. This draft is not yet
+  the public website release and earns no domain approval (still 0/11).
 
 Approved architecture change — Emerald ROM hack:
 

@@ -140,6 +140,18 @@ SF_Naval::
 	end
 
 SF_Jonathan::
+	lock
+	faceplayer
+	goto_if_lt VAR_UNUSED_0x40F7, 4, SF_Jonathan_BeforeTransit
+	msgbox SF_Text_MuniOutbound, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SF_Jonathan_Done
+	closemessage
+	warp MAP_OLDALE_TOWN, 7, 26
+	waitstate
+SF_Jonathan_Done::
+	release
+	end
+SF_Jonathan_BeforeTransit::
 	msgbox SF_Text_Jonathan, MSGBOX_NPC
 	end
 
@@ -181,3 +193,6 @@ SF_Text_Jonathan::
 	.string "JONATHAN: I made a scheduling tool\nfor spontaneous plans.\pIt found us a twelve-minute window\nfor spontaneity next Thursday.$"
 SF_Text_Sign::
 	.string "JUDAH / GREAT HIGHWAY\nOCEAN BEACH: WEST\pMUNI: EAST\nPlease give the fog right of way.$"
+
+SF_Text_MuniOutbound::
+	.string "JONATHAN: COGNITION? Take MUNI\nfrom JUDAH, then walk to SOUTH PARK.\pThe sensor is not paying a second fare.\pRide to SoMa?$"

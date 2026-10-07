@@ -11,7 +11,7 @@ from battle_content import trainer_record
 class TrainerLimits(unittest.TestCase):
     def setUp(self):
         self.team = {'id': 'TRAINER_ROXANNE_1', 'name': 'SCOTT WU',
-                     'class': 'TRAINER_CLASS_LEADER', 'portrait': 'TRAINER_PIC_SCIENTIST',
+                     'class': 'TRAINER_CLASS_LEADER', 'portrait': 'TRAINER_PIC_LEADER_BRAWLY',
                      'party': [{'species': 'SPECIES_RALTS', 'level': 8, 'moves': ['MOVE_CONFUSION']}]}
 
     def test_valid_native_team(self):

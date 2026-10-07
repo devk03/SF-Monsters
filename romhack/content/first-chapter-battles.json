@@ -1,0 +1,237 @@
+{
+  "trainers": [
+    {
+      "id": "TRAINER_ROXANNE_1",
+      "name": "SCOTT WU",
+      "class": "TRAINER_CLASS_LEADER",
+      "portrait": "TRAINER_PIC_LEADER_BRAWLY",
+      "items": [
+        "ITEM_POTION"
+      ],
+      "party": [
+        {
+          "species": "SPECIES_MAGNEMITE",
+          "level": 6,
+          "moves": [
+            "MOVE_THUNDER_SHOCK",
+            "MOVE_TACKLE",
+            "MOVE_REFLECT"
+          ],
+          "item": "ITEM_NONE"
+        },
+        {
+          "species": "SPECIES_LOTAD",
+          "level": 7,
+          "moves": [
+            "MOVE_WATER_GUN",
+            "MOVE_ABSORB",
+            "MOVE_GROWL"
+          ],
+          "item": "ITEM_NONE"
+        },
+        {
+          "species": "SPECIES_RALTS",
+          "level": 8,
+          "moves": [
+            "MOVE_CONFUSION",
+            "MOVE_GROWL",
+            "MOVE_DOUBLE_TEAM"
+          ],
+          "item": "ITEM_ORAN_BERRY"
+        }
+      ]
+    },
+    {
+      "id": "TRAINER_JOSH",
+      "name": "WALDEN YAN",
+      "class": "TRAINER_CLASS_POKEMANIAC",
+      "portrait": "TRAINER_PIC_POKEMANIAC",
+      "party": [
+        {
+          "species": "SPECIES_ZIGZAGOON",
+          "level": 5,
+          "moves": [
+            "MOVE_TACKLE",
+            "MOVE_GROWL"
+          ],
+          "item": "ITEM_NONE"
+        },
+        {
+          "species": "SPECIES_SEEDOT",
+          "level": 5,
+          "moves": [
+            "MOVE_BIDE",
+            "MOVE_HARDEN"
+          ],
+          "item": "ITEM_NONE"
+        }
+      ]
+    },
+    {
+      "id": "TRAINER_TOMMY",
+      "name": "STEVEN HAO",
+      "class": "TRAINER_CLASS_POKEMANIAC",
+      "portrait": "TRAINER_PIC_POKEMANIAC",
+      "party": [
+        {
+          "species": "SPECIES_WINGULL",
+          "level": 5,
+          "moves": [
+            "MOVE_WATER_GUN",
+            "MOVE_GROWL"
+          ],
+          "item": "ITEM_NONE"
+        },
+        {
+          "species": "SPECIES_SHROOMISH",
+          "level": 5,
+          "moves": [
+            "MOVE_ABSORB",
+            "MOVE_TACKLE"
+          ],
+          "item": "ITEM_NONE"
+        }
+      ]
+    }
+  ],
+  "encounters": [
+    {
+      "map": "MAP_LITTLEROOT_TOWN",
+      "base_label": "gSFLITTLEROOT_TOWN",
+      "land_mons": {
+        "encounter_rate": 15,
+        "mons": [
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_ZIGZAGOON"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_ZIGZAGOON"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_POOCHYENA"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_POOCHYENA"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_WINGULL"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_WINGULL"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_LOTAD"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_LOTAD"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_TAILLOW"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_TAILLOW"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_SEEDOT"
+          },
+          {
+            "min_level": 2,
+            "max_level": 4,
+            "species": "SPECIES_SEEDOT"
+          }
+        ]
+      }
+    },
+    {
+      "map": "MAP_OLDALE_TOWN",
+      "base_label": "gSFOLDALE_TOWN",
+      "land_mons": {
+        "encounter_rate": 15,
+        "mons": [
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_RALTS"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_RALTS"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_MAGNEMITE"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_MAGNEMITE"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_SHROOMISH"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_SHROOMISH"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_TAILLOW"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_TAILLOW"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_ZIGZAGOON"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_ZIGZAGOON"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_LOTAD"
+          },
+          {
+            "min_level": 3,
+            "max_level": 5,
+            "species": "SPECIES_LOTAD"
+          }
+        ]
+      }
+    }
+  ]
+}
