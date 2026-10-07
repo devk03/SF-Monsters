@@ -792,6 +792,27 @@ First-slice checkpoint — South Park and Cognition draft:
   three-starter balance still need native play checks. This draft is not yet
   the public website release and earns no domain approval (still 0/11).
 
+First-slice checkpoint — native save compatibility:
+
+- Added a native main-menu guard using the same SF identity/schema as the web
+  importer. Unsupported saves show an explanation and omit Continue. Their
+  Flash contents are not erased, rewritten or silently converted.
+- Real schema-1 Sunset battery: a 16,551-frame route through Muni, delivery,
+  both relays, the opened gate and Scott's battle produces identical final RGB
+  and Flash bytes in native mGBA and WebAssembly. Evidence:
+  .tools/benchmarks/cognition-supported-save-guard.
+- Independently modified, checksum-valid schema-2 and unmarked battery copies
+  are rejected by the native menu with byte-identical exported backups. The
+  schema-2 refusal also matches WebAssembly after 2,456 frames. Evidence:
+  .tools/benchmarks/sf-native-*-guard-menu and sf-native-guard-no-continue.
+- A controller-only gym loss returns to the registered Sunset healing location
+  without granting a badge; relay stage 3 survives. Actual victory, clinic
+  respawn registration and first-chapter balance remain unvalidated. These are
+  compatibility checks, not the required ten complete-campaign round trips.
+- New guarded target SHA-256:
+  6698a2df771b0a8a6115e4e12018b4749b451d9bff7503fc67ac39624c4cbca2.
+  Original art/audio and the clip reviews still block first-slice acceptance.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's
