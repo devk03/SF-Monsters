@@ -9,8 +9,9 @@ See [the hack workflow](romhack/README.md) and the active spec in section 15.
 
 Status: the current preview includes the Outer Sunset opening, Muni travel,
 South Park clinic and Cognition's first gym draft. BrinePup, SproutSlug and
-CinderCoy are original starter/call candidates. Ocean Commute is the original
-Sunset theme candidate. Wild creatures, cast art, other music and evolution art
+CinderCoy are original starter/call candidates. Ocean Commute and Fogbank Frenzy
+are the original Sunset and wild-battle theme candidates. Wild creatures,
+cast art, other music and evolution art
 still use placeholders. The full SF campaign and Emerald quality
 approval remain outstanding.
 

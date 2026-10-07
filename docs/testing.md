@@ -6,9 +6,10 @@ Open https://sf-mini-monsters.devkunjadia03.chatgpt.site and choose **Load .gba 
 Supply your local English Emerald ROM matching SHA-256
 `a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af`.
 Validation, extraction and SF patching happen on your device. No ROM is uploaded.
-Version 0.0.7 includes South Park, three original starter candidates and their
-original cry candidates, plus the original Sunset theme Ocean Commute.
-Preview a starter to hear its call; explore Sunset to hear the theme. Wild
+Version 0.0.8 includes South Park, three original starter candidates and their
+original cry candidates, plus Ocean Commute (Sunset) and Fogbank Frenzy (wild battles).
+Preview a starter to hear its call; explore Sunset and its encounter grass to
+hear the new themes. Wild
 creatures, cast art, other music and evolution art still use scaffolding; the full
 campaign and all quality approvals remain unfinished.
 
@@ -37,7 +38,7 @@ run `make hack`. See [the pinned build workflow](../romhack/README.md).
 Check patch integrity and Flash-slot validation with:
 
 ```sh
-node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.7-sunset-score-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
+node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.8-battle-score-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
 node --experimental-strip-types tests/flash-save.test.mjs
 ```
 

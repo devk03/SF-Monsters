@@ -44,8 +44,8 @@ bytes requires a version bump. The public `romhack/releases` folder contains
 patches and integrity manifests, never full ROMs.
 
 The overlay includes original Sunset/South Park layouts, the courier quest,
-clinic and Cognition gym draft, three starter/call candidates and a Sunset
-theme candidate. Other creatures, cast art, tiles and music remain scaffolding;
+clinic and Cognition gym draft, three starter/call candidates and Sunset/wild-battle
+theme candidates. Other creatures, cast art, tiles and music remain scaffolding;
 this is not the accepted polished slice or complete SF campaign.
 Floating IPS is Alcaro's GPL-3.0 tool, pinned at
 `ff216a75df0987047a67d7923567dc4482ce07ac`; its source/license stay in the local
@@ -103,8 +103,11 @@ remain required; these are not finished or approved catalog entries.
 `assets/audio/creature-cries.json` declares synthesized starter calls;
 `scripts/romhack/creature_audio.py` generates their PCM and native table overlay.
 `assets/audio/ocean-commute.json` declares Sunset's sixteen-bar, seven-track
-theme. `scripts/romhack/field_music.py` generates its looped MIDI, eight original
-instrument samples and native voicegroup. Generated sources remain public and
+theme. `assets/audio/fogbank-frenzy.json` declares the twenty-four-bar wild-battle
+score, with its arrangement/recipes in `scripts/romhack/battle_music.py`.
+`scripts/romhack/field_music.py` generates their looped MIDI, eight original
+instrument samples per theme and native voicegroups. Explicit `music_scores`
+bindings select each context. Generated sources remain public and
 editable; `make hack` compiles them with Emerald's MPlay sequencer.
 These candidates replace only their declared contexts. Other music and cries
 remain scaffolding, and all composition/presentation approvals remain pending.

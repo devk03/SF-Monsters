@@ -762,8 +762,8 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.7 includes three original starter/call candidates,
-  the original Sunset theme Ocean Commute, Sunset/Muni/South Park, the clinic
+- Public preview: version 0.0.8 includes three original starter/call candidates,
+  original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic
   and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
@@ -1048,6 +1048,26 @@ First-slice checkpoint — original wild-battle score candidate:
   closed notes and program/header bounds; the native draft compiles and its
   patch reapplies byte-for-byte. Native listening/transition/browser evidence
   and user review are still pending at this checkpoint. No quality score changes.
+- Native play on target d685ef1cde893130fe17180bd9a7e120702231924f8a483328c436721c003119
+  reaches a random wild encounter with CinderCoy, remains in the battle menu
+  for over three loop periods, then escapes and resumes Ocean Commute. Read-only
+  MPlay/song-header inspection confirms the intended cue at each boundary.
+  Listening source: .tools/audio-review/fogbank-frenzy-native-three-loops.wav;
+  native 40.18-second A/V clip: .tools/benchmarks/fogbank-frenzy-review-40s/review.mp4.
+- The cold-battery field/battle/loop route matches native and WebAssembly final
+  RGB, exported Flash and all 37,528,144 raw stereo pairs across 34,202 frames.
+  Evidence: .tools/benchmarks/fogbank-frenzy-battle-loop, source f13d9db.
+  This is a bounded core/audio check; real browser performance/AudioWorklet,
+  campaign save-transfer gates and user musical/presentation judgment remain open.
+- Public Site version 9 deployed successfully with 0.0.8-battle-score-preview
+  at https://sf-mini-monsters.devkunjadia03.chatgpt.site. The 617,864-byte patch
+  reapplies exactly to the approved base. Site source
+  edad77b7c06558aacce63df8df05c7b4abeb708c; deployment
+  appgdep_6ac6dcc22af481919bedfb448d92f707. TypeScript, production packaging and
+  the current host/content checks pass. Archive inspection excludes inherited
+  full ROMs. The fixed Emerald battle reference and matched-volume review remain
+  in preparation. Two music candidates do not complete the soundtrack; 0/11
+  approved parity domains and all remaining SF scope/gates are unchanged.
 
 Approved architecture change — Emerald ROM hack:
 
