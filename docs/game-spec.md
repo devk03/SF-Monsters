@@ -1,6 +1,8 @@
 # SF Mini Monsters — v1 specification
 
-Status: implementation in progress; this file is the source of truth for scope and progress.
+Status: technical prototype shipped; Emerald quality parity is NOT achieved.
+Section 15 is the active goal and overrides the earlier prototype completion criteria.
+This file is the source of truth for scope, acceptance, and progress.
 Updated: October 7, 2026.
 Repository: https://github.com/devk03/SF-Monsters
 
@@ -382,7 +384,7 @@ The release is complete when the full campaign and catalog are playable on both
 targets, optional comedy systems work, and a contributor can fork and build it.
 The extra 50-person expansion is a subsequent milestone, not a release blocker.
 
-## 14. Active MVP objective and progress
+## 14. Previous technical prototype and progress (superseded)
 
 Always read this specification before planning or implementing the next task.
 Resolve scope conflicts in favor of the latest user instruction and update this file.
@@ -399,7 +401,7 @@ the same ROM on the website through WebAssembly. Original-ROM implementation is
 the default while the user clarifies whether a specific existing base ROM is intended.
 Verify the ROM in a standard GBA emulator, using mGBA as the reference target.
 The website supports real sign-in and device-local saves with backup/import.
-Commit coherent checkpoints around 500–700 changed lines when it makes sense.
+Current workflow: commit coherent changes every 200–300 handwritten code lines.
 The full 150-entry game and later 50-person cast expansion remain subsequent scope.
 
 ### Acceptance checklist
@@ -449,11 +451,13 @@ Implemented and verified:
 
 Next checkpoint:
 
-- Compile and boot the ROM, then integrate the same ROM into the web player.
+- See section 15. The earlier compile/boot/deploy checkpoint is complete, but
+  it did not establish Emerald quality parity.
 
 Verification evidence:
 
-- Specification checked for exactly 16 hubs and eight alternating gym stops.
+- Specification defines 16 hubs and eight startup gyms. Real office geography
+  supersedes alternating gym placement.
 - Native C checks pass with AddressSanitizer and UndefinedBehaviorSanitizer:
   all three starters, save round trip/corruption rejection, quest order, all 12
   catalog entries, storage swaps, gym completion, and recovery after defeat.
@@ -462,7 +466,8 @@ Verification evidence:
   selection, and the website reports the first caught entry.
 - Native-generated .sav fixture passes browser decoding, checksum rejection,
   dual-bank ordering, and backup encoding tests.
-- Full browser quest, responsive controls, sign-in, and deployment remain to verify.
+- Later checkpoints below record browser, native, and deployment verification.
+  Production account sign-in and normal-browser downloads remain manual QA items.
 
 Blockers requiring user input: none currently.
 Database migrations and PR merges still require explicit permission.
@@ -536,3 +541,209 @@ Final handoff:
 - Native and browser screenshots are saved locally under .tools/qa for review.
 - All playable game maps and future story destinations stay inside SF city limits.
 - MVP delivery is complete; user acceptance testing can now begin.
+
+## 15. Active Emerald parity goal
+
+This section supersedes the technical-prototype acceptance bar in section 14.
+The user requires Emerald-tier quality in every audited area, within the existing
+SF game scope. The user approves matched comparison clips at each review gate.
+Commit coherent changes every 200–300 handwritten code lines when practical;
+smaller completed fixes are valid checkpoints. Generated output is counted separately.
+Do not pad code, churn formatting, or leave a broken intermediate build to meet
+the line quota. Scope, tests, screenshots/clips and progress updates travel with
+the coherent checkpoint they substantiate.
+
+### 15.1 Objective and completion rule
+
+Deliver the complete original SF Mini Monsters campaign on one GBA ROM and the
+public WebAssembly website, with Emerald-tier audio, sprites, movement, maps,
+battles, monster depth, NPC events, interface, story, and balance. Every playable
+location remains inside San Francisco city limits. Keep source publicly forkable.
+
+Completion requires ALL of these, independently:
+
+1. All 11 quality domains below receive a user-approved final score of 4/4.
+2. The entire existing SF release scope is implemented and validated.
+3. All mechanics, performance, save, campaign, and release gates pass.
+4. The user approves the final comparison-clip suite and complete playable build.
+
+A passing build, an attractive title screen, or a polished first gym cannot
+substitute for those conditions. Partial slice approval never means the full
+campaign or all 150 monsters have achieved parity.
+
+Parity means equivalent craft, responsiveness, depth, and polish for the agreed
+SF experience. It does not require copying Hoenn, its creatures, its soundtrack,
+or its branding. The user chose quality within the existing SF scope: breeding,
+contests, link trading, multiplayer, and a copy of every Battle Frontier facility
+are not added to this goal. The later approximately 50-person cast expansion
+remains subsequent scope. The existing legendary/rematch/side-quest postgame stays.
+
+### 15.2 Fixed reference and comparison method
+
+Reference supplied by the user: Pokemon - Emerald Version (USA, Europe).gba.
+ROM header: POKEMON EMER; game code BPEE; size 16,777,216 bytes.
+SHA-256: a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af.
+The archive/header/hash have been inspected; benchmark clips have not been collected.
+
+Use this ROM locally as the reference, with mGBA 0.10.5 at normal emulation speed.
+Keep commercial ROM data and reference assets out of the repository and deployment.
+Ship original assets and code or dependencies with appropriate redistribution rights.
+The supplied reference ROM is not a build prerequisite for the released SF game.
+
+Compare matching situations, not identical geographic layouts: town walking,
+route exploration, interior entry, dialogue, wild battle, trainer/gym battle,
+attack/status feedback, capture, evolution, party/storage, and story events.
+Use 30–60-second paired clips at 240x160 with equal nearest-neighbor display scale,
+normal gameplay speed, and sound. Also inspect still sprites at native pixel size.
+Audio comparisons use matched listening levels and at least three consecutive loops.
+Label each clip with build commit, reference identity, emulator/runtime, and scenario.
+
+Each review records the user's score, specific remaining gaps, and clip evidence
+in this specification. Unreviewed work is marked unreviewed, never inferred as 4/4.
+Frame measurements and functional checks support the review; they do not replace
+human judgment of melody, pixel art, animation, map composition, or writing.
+
+### 15.3 Quality scale and scorecard
+
+Score each domain against the matched Emerald reference:
+
+- 0: absent, or the required experience cannot be exercised.
+- 1: prototype; major visual, audio, interaction, or mechanical gaps.
+- 2: functional and recognizable, with obvious deficiencies against the reference.
+- 3: polished, but specific reference-level gaps still remain.
+- 4: user approves Emerald-tier quality in the agreed scope; all domain gates pass.
+
+An average is not an acceptance criterion. A 4 in art cannot compensate for a 1
+in audio. Report the 11 scores individually and the number at approved parity.
+Within a checkpoint, improve the lowest-scoring domain first; then resolve its
+remaining failed checks. Keep previously approved checks passing. Record regressions.
+
+| Domain | Mandatory evidence for final 4/4 |
+| --- | --- |
+| World design | All 16 hubs have a distinctive landmark, main adventure, optional discovery, enterable spaces, and return interaction. Routes/shortcuts form the approved SF map. User approves traversal and exploration clips from all 16 hubs; larger empty maps do not count as progress. |
+| Movement/camera | Four-direction idle/walk/run animation with alternating footsteps; continuous tile interpolation and camera scrolling; coherent collisions, turns, doors, running and planned traversal modes. Movement timing matches the selected Emerald reference mode within one emulated frame. No snapping between tiles during ordinary movement. |
+| Pixel art | All 150 monsters have separately authored readable front/back sprites, party icons, and entrance animation. All shipped tilesets, named cast sprites, leader portraits, and UI share an approved pixel-art direction. Each human locomotion set includes all four directions and stepping frames. Native-size and in-game reviews pass; resized generated art alone is insufficient. |
+| Battle presentation | Wild/trainer/gym/double battles include transitions, deployment, animated HP/experience, move effects, status feedback, capture throw/shakes/outcomes, fainting, switching, victory, evolution and move-learning sequences. Every shipped move has appropriate animated feedback and sound; static text-only attacks fail. |
+| Battle mechanics | Complete six-stat calculation, speed/priority order, accuracy/evasion, criticals, STAB, dual types, physical/special rules, stat stages, statuses, abilities, held items, weather, switching, items, capture, and doubles. All reference fixtures and approved SF chart tests pass; trainer decisions demonstrate their advertised strategies. |
+| Monster depth | 150 obtainable entries, three complete starter evolution lines, species-specific learnsets, move learning/relearning, growth curves, individual stat variation, abilities, habitats and evolution rules. Every final form has an identifiable battle role and multiple viable move choices; one global four-move set fails. |
+| NPCs/events | Interaction respects position and facing; roaming NPCs, trainer sight lines, scripted movement, story triggers, and state-dependent dialogue work. Each hub contains both ambient activity and consequential events. No invisible large-region interaction substitutes for approaching a person/object. |
+| Interface | Party/summary/moves, organized storage, inventory/held items, field guide, city map, journal, save and settings are complete. Adjustable text pacing, cursor navigation, help, confirmations and battle messages are readable and consistent on GBA and web. All core menu workflows pass without clipping or ambiguous input. |
+| Audio | Every declared music context has an original developed looping composition/arrangement: all 16 hub identities, wild/trainer/gym/rival/villain/championship/legendary encounters, evolution, victory, title and credits. All 150 creatures have identifiable cries; UI, moves and field interactions have appropriate effects. User approves composition/arrangement, instrumentation, mix and transitions. Beeps or track count alone do not establish parity. |
+| Story/SF identity | Sixteen coherent neighborhood adventures, recurring rival and villains, eight credible startup gyms, championship and legendary arcs, researched lore, Marina bars/drunk play, Tenderloin high-state play, dates and discoverable jokes. User approves scene pacing, cast writing and SF recognizability; labels on generic maps fail. |
+| Campaign/balance | All eight gyms, Elite Four, champion, legendary and scoped postgame are playable. Three fresh runs with different starters complete without cheats or progression softlocks. Each gym has at least three obtainable team/strategy solutions that do not require repetitive mandatory grinding. User approves progression and encounter pacing. |
+
+### 15.4 Functional and measurable gates
+
+Mechanics:
+
+- Establish Gen III battle behavior as the baseline, including its type-based
+  physical/special distinction. Finalize the original SF type chart and mapping.
+- Include nature/IV/EV-style stat variation with explicit rules and growth data.
+- At least 300 independently derived reference cases pass 100%, including at
+  least 50 doubles cases. Every required mechanic has basic, boundary, and
+  interaction cases; repeating a simple attack hundreds of times does not qualify.
+- Where state, mapped rules and random draws are equivalent, turn order, damage,
+  accuracy, statuses, resource consumption and resulting state match the reference.
+  Document intentional content differences before evaluating them.
+- Validate every ordered pair in the approved type chart, every evolution rule,
+  every move/ability/item reference, and all 150 encounter/acquisition paths.
+- The initial four universal moves are replaced with species-specific progression
+  and a move catalog covering damage, status, recovery, control, weather and
+  multi-target strategies. Final catalog approval requires breadth and usefulness,
+  not a minimum number of renamed duplicates.
+
+Performance and input:
+
+- Run at the GBA's native emulation speed. Baseline measurements are collected
+  before choosing a renderer, animation scheduler or sound architecture.
+- At least 99% of required game update/render deadlines are met in each of three
+  10-minute traces: field traversal, mixed battles, and menus/story events.
+  Count game updates, not merely an emulator's displayed frame-rate counter.
+- Unblocked controller input is consumed within two game frames. Walking/running
+  tile duration differs from the matched reference by no more than one frame.
+- Web input-to-visible-response p95 is at most 100 ms on the declared devices.
+- Record OS, browser, device, emulator/core version and test route before measuring.
+  Reference matrix: native mGBA on the development Mac; web Chromium and Safari
+  on that Mac; one physical mobile browser/device selected for the release.
+- No audio-buffer underruns or unintended loop/transition clicks in those traces.
+- Test 320/375/414/768/1440 CSS widths and both phone orientations with no horizontal
+  overflow or blocked controls. Viewport simulation does not prove phone performance.
+
+Saves, progression, and release:
+
+- Ten consecutive native-to-web-to-native battery-save round trips preserve all
+  monsters, moves, items, money, badges, quest flags, locations and settings.
+- Resume from at least 50 distinct campaign save checkpoints, including before
+  and after gyms, branching comedy events, legendary encounters and championship.
+- Corrupt/truncated/unsupported saves are rejected safely. A documented upgrade
+  path preserves supported older SF saves; migration evidence is required.
+- Zero unresolved crashes, data-loss bugs, progression softlocks, or broken
+  required content references. The entire 150-entry catalog is obtainable in
+  one release without trading, restarting or event-only downloads.
+- Main-story target stays 8–12 hours for a first-time player. Validate pacing
+  through normal play, not emulator turbo or artificial travel/dialogue padding.
+- Both the same ROM in native mGBA and the web player complete the campaign.
+  Public guest play, real sign-in, independent local save slots and actual
+  downloadable/importable backups pass hands-on release checks.
+- Clean GitHub builds pass; versioned ROM, website, editable assets and contributor
+  instructions reproduce from a clean checkout. A sample additional cast member
+  can be added through data without engine changes, preserving an older save.
+
+### 15.5 Hill-climbing checkpoints
+
+A. Reference and foundation: collect the paired benchmark set, record timing and
+   audio baselines, finalize the art/audio direction, battle-rule coverage and
+   type chart. Demonstrate a foundation that can meet the gates on GBA and web.
+   Do not preserve the current homebrew architecture merely because it exists.
+
+B. First polished slice: Outer Sunset/Ocean Beach, the Muni connection, a detailed
+   South Park block, and Cognition's gym. Include 12 fully presented monsters,
+   three starters, species-specific moves, NPC events, interiors, music, battle
+   effects, complete menus and save transfer. Target a meaningful 20–30-minute
+   first-play experience. The user approves matched clips for each applicable
+   domain before campaign expansion; this is a slice gate, not project completion.
+
+C. Complete systems: remaining battle interactions/doubles, growth/evolution,
+   full content tools, storage, traversal, events, audio coverage and interfaces.
+   Mechanics/performance/save gates pass without presentation regressions.
+
+D. Campaign expansion: implement the 16 hubs, eight gyms, 150 entries and story
+   in small batches. Each new hub satisfies its map/event/quest/asset/music gates
+   before it is counted complete. Repeat the approved comparison protocol.
+
+E. Final acceptance: full normal-speed playthroughs, collection validation,
+   three-starter balance checks, native/web save and deployment checks, and
+   user approval of the final 11-domain comparison suite.
+
+Each implementation checkpoint records in this file: build commit, affected
+criteria, prior/current approved scores, functional checks passed/required,
+clip/evidence references, regressions, and the next weakest domain. Repeatedly
+improving an easy high-scoring domain while leaving a weak one untouched is not
+progress toward final parity. Do not lower a target to fit the existing code.
+
+### 15.6 Baseline and current state
+
+- Goal definition and reviewer preference are established; implementation has not
+  started under this acceptance bar.
+- Approved Emerald-parity domains: 0/11. This is an approval count, not a claim
+  that the prototype has no working functionality.
+- Prototype content: 2 simple neighborhood maps, 1 gym, 12 monsters, basic turn
+  resolution, static sprites, limited tones and a short courier quest.
+- Quality-complete hubs/gyms/monsters: unreviewed. Earlier technical checks do
+  not certify final content or visual/audio quality.
+- Reference clip suite, measured timings and 300-case mechanics suite: pending.
+- Next checkpoint: A, reference capture and foundation comparison. No production
+  game change is included in this goal-definition checkpoint.
+- Reviewer: the user, through approval of matched comparison clips.
+- Scope preference: Emerald-tier quality within existing SF scope; do not add
+  breeding, contests or a full Battle Frontier clone as hidden requirements.
+- Ask before database migrations and PR merges. Request concrete clip reviews
+  at the stated gates. Resolve changes to scope/platform/originality with the user;
+  ordinary engine and implementation choices remain autonomous.
+- Never mark the goal complete while any required gate or review is outstanding.
+
+Reference sources for benchmark construction:
+
+- [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)
+- [mGBA scripting API](https://mgba.io/docs/scripting.html)
+- [Gen III battle calculation reference](https://github.com/pret/pokeemerald/blob/master/src/pokemon.c)

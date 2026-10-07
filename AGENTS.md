@@ -11,6 +11,10 @@ Commit frequently.
 ## Active implementation workflow
 
 Always read `docs/game-spec.md` as the source of truth for scope and acceptance.
-Update its active MVP progress section at meaningful implementation checkpoints.
+Use section 15 as the active Emerald parity goal; section 14 records the earlier technical prototype.
+Update acceptance evidence and progress in the specification at meaningful checkpoints.
 Validate both the website and a standard GBA emulator; mGBA is the reference target.
-Commit coherent changes around 500–700 changed lines when it makes sense.
+Commit coherent changes every 200–300 handwritten code lines when practical.
+Commit smaller completed fixes or reviews at logical boundaries; count generated assets separately.
+Do not pad code or reformat unrelated files to reach a commit-size quota.
+Emerald parity requires user approval of comparison clips, not just passing build tests.

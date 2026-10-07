@@ -2,7 +2,8 @@
 
 An original, open-source creature RPG set in a compressed San Francisco.
 
-Status: playable MVP. Explore Outer Sunset and SoMa, recruit 12 original monsters,
+Status: playable technical prototype; Emerald quality parity has not been achieved.
+Explore Outer Sunset and SoMa, recruit 12 original monsters,
 and complete the courier quest and Cognition gym on the same GBA cartridge.
 All playable locations are inside San Francisco.
 
@@ -27,14 +28,16 @@ It includes support for approximately 50 additional researched Twitter personali
 after the main game is complete.
 Sourced character candidates and fictional roles are in [cast research](docs/cast-research.md).
 
-## First playable milestone
+## Previous technical milestone
 
 Build Outer Sunset and SoMa with three starter choices, approximately
 12 mini monsters, one Cognition gym, one complete courier quest, encounters, recruitment,
 turn-based battles, and persistent saving.
 
 Scope, acceptance criteria, and current progress are maintained in
-[the canonical specification](docs/game-spec.md#14-active-mvp-objective-and-progress).
+[the canonical specification](docs/game-spec.md#15-active-emerald-parity-goal).
+The active goal requires Emerald-tier quality across all eleven audited domains,
+with user-approved comparison clips and the complete SF campaign.
 
 Acceptance criteria:
 
@@ -60,7 +63,8 @@ See [build, controls, save transfer, and QA instructions](docs/testing.md).
 
 ## Development workflow
 
-Commit frequently, keeping each commit coherent and reviewable.
+Commit coherent changes every 200–300 handwritten code lines when practical,
+with smaller completed fixes committed at logical boundaries.
 
 Verify the diff and run checks relevant to the change before committing.
 Stage explicit project files. Do not include credentials or unrelated changes.
