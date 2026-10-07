@@ -1,0 +1,22 @@
+{
+  "content_revision": 1,
+  "icon_palettes": {"3": "assets/monsters/cindercoy/native-v1/normal.pal"},
+  "monsters": [{
+    "species": "SPECIES_TORCHIC",
+    "symbol": "Torchic",
+    "old_name": "TORCHIC",
+    "name": "CINDERCOY",
+    "category": "CITY COYOTE",
+    "height": 5,
+    "weight": 62,
+    "art": "assets/monsters/cindercoy/native-v1",
+    "engine_asset_dir": "torchic",
+    "icon_palette": 3,
+    "stats": {"baseHP": 48, "baseAttack": 55, "baseDefense": 42, "baseSpeed": 64, "baseSpAttack": 61, "baseSpDefense": 45},
+    "types": ["TYPE_FIRE", "TYPE_FIRE"],
+    "abilities": ["ABILITY_BLAZE", "ABILITY_FLASH_FIRE"],
+    "learnset": [[1, "MOVE_SCRATCH"], [1, "MOVE_GROWL"], [5, "MOVE_EMBER"], [8, "MOVE_QUICK_ATTACK"], [11, "MOVE_LEER"], [14, "MOVE_BITE"], [18, "MOVE_FLAME_WHEEL"], [23, "MOVE_ROAR"], [28, "MOVE_FLAMETHROWER"], [34, "MOVE_AGILITY"], [39, "MOVE_CRUNCH"], [45, "MOVE_FIRE_BLAST"]],
+    "migration_move": [5, "MOVE_EMBER"],
+    "description": ["It warms its paws on the last patch", "of SUNSET sunlight. Its ember-speckled", "tail glows when it finds a new friend."]
+  }]
+}

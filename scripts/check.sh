@@ -14,5 +14,6 @@ node --experimental-strip-types tests/bps.test.mjs
 node --experimental-strip-types tests/flash-save.test.mjs
 python3 tests/romhack_maps_test.py
 python3 tests/romhack_battles_test.py
+python3 tests/romhack_monsters_test.py
 cd web
 npx tsc --noEmit

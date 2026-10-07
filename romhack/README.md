@@ -77,3 +77,20 @@ Raw snapshots do not contain Flash bytes; the harness restores a matching `.sav`
 companion automatically when continuing a recorded snapshot.
 `tests/foundation_runtime.cjs ROM INPUT NATIVE_DIRECTORY BATTERY` verifies actual
 WebAssembly restore/export and native frame/save equality for a recorded route.
+
+## Original species overlay
+
+`romhack/content/monsters.json` binds original creatures to stable native species
+IDs. The importer supplies names, six stats, types, abilities, learnsets, guide
+text, front/back coordinates, entrance frames and party-icon palette groups.
+Native PNGs must satisfy the dimensions and indexed-color contracts; source art
+and conversion notes stay editable under `assets/monsters`. Palette groups 3–5
+are shared by original party icons; icons in a group must use that group's colors.
+
+Content revision upgrades run once on Continue and cover party and storage.
+Only an exact former default nickname changes; custom names remain. Earned
+early moves fill empty slots without removing existing moves. Party stats are
+recalculated from unchanged experience, nature, IVs and EVs. Schema/quest/badge
+identity stays intact; Flash changes only when the player saves normally.
+The current CinderCoy candidate still needs pixel cleanup, original cry and
+complete evolution-line art. It is not a finished or approved catalog entry.

@@ -830,6 +830,31 @@ First-slice checkpoint — native save compatibility:
   technical conversion, not deliberate pixel cleanup or art approval. Next:
   integrate the original species data/art into actual battles and menus.
 
+First-slice checkpoint — original CinderCoy in the native engine:
+
+- A data-driven species importer now supplies original names, six base stats,
+  abilities, learnsets, field-guide text, front/back art, entrance frames and
+  shared party-icon palettes. Native species IDs remain stable across saves.
+- CinderCoy replaces the Torchic development slot with original coyote art and
+  data. New starters learn Ember at level 5; older SF starters can gain it in an
+  empty slot. Native controller play displays its back sprite in Scott's battle,
+  executes a super-effective Ember, and displays the separately drawn front
+  sprite in the summary interface. These are unreviewed presentation candidates.
+- The one-time content upgrade covers party/storage, renames exact stock default
+  names and preserves custom names. A checksum-valid SPICY nickname fixture
+  remains SPICY. Read-only comparisons of the actual decoded party preserve
+  personality/OT, experience, held items, EVs, IVs, origin and ability selection.
+  Scratch/Growl and their PP stay unchanged; Ember fills the third slot at 25 PP.
+- A 17,527-frame route from the actual earlier Sunset save produces identical
+  final RGB/Flash in native mGBA and WebAssembly. The compiled patch reapplies
+  byte-for-byte and repeats at target SHA-256
+  20fe36c2e9af7b5b62bd093696536394339acaf1b4482b419276175b7f472f9a.
+  Evidence: .tools/benchmarks/cindercoy-{first-battle,ember,custom-summary}.
+- Creature-record bounds and native art contracts pass, along with the existing
+  regression checks. Pixel cleanup, a distinct original cry, evolution-line art,
+  SF type labels/chart, remaining eleven slice creatures and user clip review
+  remain outstanding. No finished-monster or parity approval count increases.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's
