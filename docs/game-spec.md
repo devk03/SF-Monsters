@@ -869,6 +869,18 @@ Emerald foundation checkpoint — editable native maps:
   inputs. No new neighborhood is counted complete from tools alone.
 - Next: authored Outer Sunset block and its first in-engine quest events.
 
+Native battery-save tooling checkpoint:
+
+- The capture harness exports actual emulator battery saves and can cold-boot
+  from them. It keeps emulator savestates and portable battery saves distinct.
+- In the local Sunset draft, in-game Save produces a valid 128 KiB Flash file
+  at counter 1. Cold boot resumes its acquired starter and inventory.
+- Native → WebAssembly → native retains byte-identical battery data and matches
+  the resumed final RGB after the same 2464-frame controller route. Evidence:
+  .tools/benchmarks/sunset-real-battery-comparison and sunset-native-returned-from-wasm.
+- This is one foundation pilot, not the ten full-campaign round trips or fifty
+  checkpoint acceptance gate. Full campaign, device matrix and reviews remain.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)

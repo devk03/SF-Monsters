@@ -64,3 +64,9 @@ header is replaced by the SF script. Modified engine inputs are recorded under
 ignored storage so baseline bootstrap can preserve and restore them later.
 Run `python3 tests/romhack_maps_test.py` for format and event-boundary checks.
 Inherited tiles are local development scaffolding, not publicly copied assets.
+
+Native captures now export `.sav` battery files beside their `.state` snapshots.
+`capture_core.py --battery PATH` tests a cold battery-save boot; `--state PATH`
+resumes an emulator snapshot instead. They are mutually exclusive.
+`tests/foundation_runtime.cjs ROM INPUT NATIVE_DIRECTORY BATTERY` verifies actual
+WebAssembly restore/export and native frame/save equality for a recorded route.

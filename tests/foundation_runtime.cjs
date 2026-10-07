@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const crypto = require('node:crypto');
 const path = require('node:path');
-const [romPath, inputPath, nativeDirectory] = process.argv.slice(2);
+const [romPath, inputPath, nativeDirectory, batteryPath] = process.argv.slice(2);
 assert.ok(romPath && inputPath && nativeDirectory, 'Pass ROM, controller CSV and native capture directory');
 const base = path.resolve('web/public/emulator') + '/';
 const sandbox = {require, process, console, __dirname: base, __filename: base + 'mgba.js',
@@ -25,6 +25,17 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
   assert.equal(core._mgbawasm_load(pointer, rom.length, 0, 0, 0, 0, 1), 1);
   core._free(pointer);
   core._mgbawasm_run_frame(); // Same initial frame alignment as native capture.
+  if (batteryPath) {
+    const battery = fs.readFileSync(batteryPath);
+    const pointer = core._malloc(battery.length);
+    core.HEAPU8.set(battery, pointer);
+    assert.equal(core._mgbawasm_sram_load(pointer, battery.length), 1);
+    core._free(pointer);
+    assert.equal(core._mgbawasm_sram_save(), battery.length);
+    const address = core._mgbawasm_sram_ptr();
+    assert.ok(Buffer.from(core.HEAPU8.subarray(address, address + battery.length)).equals(battery));
+    core._mgbawasm_reset(); core._mgbawasm_run_frame();
+  }
   let frames = 0;
   for (const row of fs.readFileSync(inputPath, 'utf8').trim().split('\n')) {
     const [keys, duration] = row.split(',').map(Number);
@@ -45,5 +56,11 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
   }
   // Alpha is a frontend presentation convention; compare actual RGB game pixels.
   assert.equal(differingPixels, 0, 'Native and WASM final field state/rendering must match');
+  if (batteryPath) {
+    const length = core._mgbawasm_sram_save(), address = core._mgbawasm_sram_ptr();
+    const exported = Buffer.from(core.HEAPU8.subarray(address, address + length));
+    assert.ok(exported.equals(fs.readFileSync(path.join(nativeDirectory, 'capture.sav'))), 'Battery bytes must match native execution');
+    fs.writeFileSync(path.join(nativeDirectory, 'wasm-export.sav'), exported);
+  }
   console.log(`Foundation native/WASM route: ${frames} frames, identical final RGB pixels.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

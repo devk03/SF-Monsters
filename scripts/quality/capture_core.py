@@ -33,6 +33,7 @@ def main():
     parser.add_argument('--input', type=Path, required=True)
     parser.add_argument('--name', required=True)
     parser.add_argument('--state', type=Path)
+    parser.add_argument('--battery', type=Path, help='Resume an actual emulator battery save.')
     parser.add_argument('--telemetry', default='0')
     parser.add_argument('--trace-only', action='store_true')
     args = parser.parse_args()
@@ -41,15 +42,20 @@ def main():
     if not re.fullmatch(r'[0-9a-fA-F]{1,8}', args.telemetry):
         parser.error('Telemetry must be a hexadecimal address, or zero.')
     # All container-visible inputs and all outputs remain inside this checkout.
-    for path in [args.rom, args.input] + ([args.state] if args.state else []):
+    if args.state and args.battery:
+        parser.error('Choose a savestate or battery save, never both.')
+    for path in [args.rom, args.input] + ([args.state] if args.state else []) + ([args.battery] if args.battery else []):
         if not path.is_file():
             parser.error(f'Missing input: {path}')
         mounted(path)
     rom = args.rom.read_bytes()
     digest = hashlib.sha256(rom).hexdigest()
     code = rom[0xac:0xb0]
+    if args.battery and args.battery.stat().st_size != (131072 if code == b'BPEE' else 32768):
+        parser.error('Battery-save size does not match the cartridge family.')
     if code == b'BPEE' and digest != REFERENCE_HASH:
-        manifests = (ROOT / 'romhack/releases').glob('*/manifest.json')
+        manifests = list((ROOT / 'romhack/releases').glob('*/manifest.json'))
+        manifests += list((ROOT / '.tools/romhack-drafts').glob('*/*/manifest.json'))
         if not any(json.loads(path.read_text()).get('target_sha256') == digest for path in manifests):
             parser.error('ROM matches neither the approved reference nor a verified SF patch target.')
     if code not in [b'BPEE', b'SFMM']:
@@ -87,7 +93,7 @@ def main():
     prefix = output / 'capture'
     docker(executable, mounted(args.rom), mounted(prefix), mounted(args.input),
         mounted(args.state) if args.state else '-', args.telemetry,
-        'trace' if args.trace_only else 'video')
+        'trace' if args.trace_only else 'video', mounted(args.battery) if args.battery else '-')
     metadata = json.loads(prefix.with_suffix('.json').read_text())
     metadata.update({
         'rom_sha256': digest, 'game_code': code.decode(),
@@ -95,6 +101,7 @@ def main():
         'runtime': 'native mGBA 0.10.5 core, Linux ARM64 official devkitARM container',
         'mgba_revision': REVISION, 'input_sha256': hashlib.sha256(args.input.read_bytes()).hexdigest(),
         'controller_only': True, 'trace_only': args.trace_only,
+        'battery_input_sha256': hashlib.sha256(args.battery.read_bytes()).hexdigest() if args.battery else None,
         'user_quality_approval': 'pending', 'host_browser_performance_proven': False
     })
     metadata['source_worktree_dirty'] = bool(subprocess.check_output(

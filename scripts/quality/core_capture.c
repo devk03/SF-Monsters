@@ -53,9 +53,9 @@ static FILE* output(const char* prefix, const char* extension)
 
 int main(int argc, char** argv)
 {
-    if(argc < 4 || argc > 7)
+    if(argc < 4 || argc > 8)
     {
-        fprintf(stderr, "Usage: core_capture ROM PREFIX INPUT_CSV [STATE|-] [TELEMETRY_HEX] [trace]\n");
+        fprintf(stderr, "Usage: core_capture ROM PREFIX INPUT_CSV [STATE|-] [TELEMETRY_HEX] [trace] [BATTERY|-]\n");
         return 2;
     }
     struct mLogger logger = {.log = log_errors};
@@ -75,6 +75,21 @@ int main(int argc, char** argv)
     if(! mCoreLoadFile(core, argv[1])) return 2;
     core->reset(core);
     core->runFrame(core); /* Align to a complete video frame before recording. */
+    if(argc > 7 && strcmp(argv[7], "-"))
+    {
+        FILE* battery = fopen(argv[7], "rb");
+        if(! battery || fseek(battery, 0, SEEK_END)) return 2;
+        long length = ftell(battery);
+        if(length != 32768 && length != 131072) return 2;
+        rewind(battery);
+        void* bytes = malloc(length);
+        if(! bytes || fread(bytes, length, 1, battery) != 1 ||
+           ! core->savedataRestore(core, bytes, length, false)) return 2;
+        free(bytes);
+        fclose(battery);
+        core->reset(core);
+        core->runFrame(core);
+    }
     if(argc > 4 && strcmp(argv[4], "-"))
     {
         FILE* state_file = fopen(argv[4], "rb");
@@ -137,6 +152,15 @@ int main(int argc, char** argv)
        fwrite(state, core->stateSize(core), 1, state_file) != 1) return 2;
     free(state);
     fclose(state_file);
+    void* save_bytes = NULL;
+    size_t save_length = core->savedataClone(core, &save_bytes);
+    if(save_length)
+    {
+        FILE* battery = output(argv[2], "sav");
+        if(! save_bytes || fwrite(save_bytes, save_length, 1, battery) != 1) return 2;
+        fclose(battery);
+    }
+    free(save_bytes);
     fclose(metadata);
     if(video) fclose(video);
     FILE* still = output(argv[2], "final.rgba");
