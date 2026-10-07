@@ -36,6 +36,7 @@ def main():
         str(ROOT / 'scripts/foundation/pack_graphics.py'))
     run(str(ROOT / '.tools/venv/bin/python'),
         str(ROOT / 'scripts/foundation/pack_maps.py'))
+    run('python3', str(ROOT / 'scripts/foundation/compose_music.py'))
     generated = ROOT / 'engine/generated'
     generated.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / 'game/content.c', generated / 'content.c')

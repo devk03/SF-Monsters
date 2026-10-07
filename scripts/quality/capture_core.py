@@ -76,13 +76,14 @@ def main():
         ['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip()
     if revision != REVISION:
         parser.error('Native mGBA source revision mismatch.')
+    executable = '.tools/core_capture_' + uuid.uuid4().hex[:10]
     docker('cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-D_GNU_SOURCE',
         '-DBUILD_STATIC', '-I.tools/mgba-native/include', '-I.tools/mgba-build/include',
         'scripts/quality/core_capture.c', '.tools/mgba-build/libmgba.a',
-        '-lm', '-lpthread', '-o', '.tools/core_capture')
+        '-lm', '-lpthread', '-o', executable)
     output.mkdir(parents=True)
     prefix = output / 'capture'
-    docker('.tools/core_capture', mounted(args.rom), mounted(prefix), mounted(args.input),
+    docker(executable, mounted(args.rom), mounted(prefix), mounted(args.input),
         mounted(args.state) if args.state else '-', args.telemetry,
         'trace' if args.trace_only else 'video')
     metadata = json.loads(prefix.with_suffix('.json').read_text())
@@ -94,6 +95,8 @@ def main():
         'controller_only': True, 'trace_only': args.trace_only,
         'user_quality_approval': 'pending', 'host_browser_performance_proven': False
     })
+    metadata['source_worktree_dirty'] = bool(subprocess.check_output(
+        ['git', 'status', '--porcelain'], text=True).strip())
     prefix.with_suffix('.json').write_text(json.dumps(metadata, indent=2) + '\n')
     print(f'Native capture saved: {output}')
 

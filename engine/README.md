@@ -4,6 +4,9 @@ This is checkpoint A's hardware-renderer candidate. It is unreviewed, does not
 replace the public prototype, and does not certify Emerald quality. The first
 scene proves four-direction interpolated walking, alternating footsteps and
 running on actual GBA hardware graphics. Timing is provisional until measured.
+It now streams the original Ocean Commute tracker draft while walking; its
+composition and mix remain unreviewed. Editable source is documented in
+`assets/music/README.md`.
 
 Build prerequisites: Docker, Git, Python 3, and the root `make setup` environment.
 Run `python3 scripts/foundation/build.py --setup` once, then `make foundation`.

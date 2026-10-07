@@ -2,6 +2,7 @@
 #include "bn_color.h"
 #include "bn_bg_palettes.h"
 #include "bn_keypad.h"
+#include "bn_music_items.h"
 #include "bn_camera_ptr.h"
 #include "bn_regular_bg_ptr.h"
 #include "bn_sprite_ptr.h"
@@ -108,6 +109,7 @@ namespace
 int main()
 {
     bn::core::init();
+    bn::music_items::ocean_commute.play(bn::fixed(0.65));
     bn::bg_palettes::set_transparent_color(bn::color(9, 17, 22));
     auto camera = bn::camera_ptr::create(168, 200);
     auto background = bn::regular_bg_items::sunset.create_bg(256, 256);

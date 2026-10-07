@@ -26,3 +26,10 @@ Normal-speed encoded playback can support presentation comparisons. It does
 not prove interactive Mac GUI behavior, browser latency, or physical-phone
 performance. Those checks remain separate release gates. Unreviewed clips and
 generated assets never acquire an automatic parity score.
+
+`encode_core_capture.py DIRECTORY` checks native frame/audio byte counts and
+clock agreement before encoding at the cartridge's native frame rate. It marks
+clips outside 30–60 seconds as diagnostics and reports whether the signal is
+audible. Capture initializes mixer volume explicitly; earlier silent captures
+are invalid for soundtrack comparison. A clip still needs scenario matching,
+equal listening levels and user approval before it contributes to parity.

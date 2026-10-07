@@ -788,3 +788,20 @@ Foundation checkpoint A — native graphics candidate:
 - Capture instrumentation found that ordinary bus reads of write-only GBA
   background scroll registers returned open-bus data. The harness now uses the
   emulator's raw memory view; earlier scroll-register traces are invalid.
+
+Foundation checkpoint A — audio and synchronized capture:
+
+- Ocean Commute is an original four-voice AABA tracker candidate at 108 BPM,
+  using synthesized instruments and percussion. It streams during traversal.
+  Its source, notes and instrument recipes are editable and publicly included.
+  It is one unreviewed draft, not soundtrack parity or sixteen completed themes.
+- A capture-volume initialization bug was found through zero-amplitude checks
+  and corrected. Re-recorded SF/reference signals peak at 9408/10848 respectively
+  in signed 16-bit PCM. Earlier silent captures are invalid for audio review.
+- Native-core video and audio clocks agree within 0.031 ms in the checked route.
+  Encodes retain the GBA's native frame rate and 240x160 dimensions; duration,
+  byte counts, audible signal and dirty-source metadata are recorded explicitly.
+- The reference opening has reached the player's house through controller-only
+  input. The walking baseline and matched reference/SF clip review are pending.
+- Approved quality domains remain 0/11. Next: measured walking reference,
+  browser foundation checks, and full first-slice integration/design work.

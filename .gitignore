@@ -15,5 +15,6 @@ dist/
 /engine/*.map
 /engine/graphics/
 /engine/generated/
+/engine/audio/
 __pycache__/
 !web/public/game/sf-mini-monsters.gba

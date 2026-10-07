@@ -24,6 +24,7 @@ struct Capture
     FILE* audio;
     unsigned rate;
     unsigned long samples;
+    unsigned peak;
 };
 
 static void audio_rate(struct mAVStream* stream, unsigned rate)
@@ -35,6 +36,8 @@ static void audio_frame(struct mAVStream* stream, int16_t left, int16_t right)
 {
     struct Capture* capture = (struct Capture*) stream;
     int16_t sample[] = {left, right};
+    unsigned peak = abs(left) > abs(right) ? abs(left) : abs(right);
+    if(peak > capture->peak) capture->peak = peak;
     if(fwrite(sample, sizeof(sample), 1, capture->audio) != 1) exit(2);
     ++capture->samples;
 }
@@ -62,6 +65,7 @@ int main(int argc, char** argv)
     mCoreConfigInit(&core->config, NULL);
     mCoreConfigSetDefaultIntValue(&core->config, "logLevel", 0);
     mCoreConfigSetDefaultIntValue(&core->config, "skipBios", 1);
+    mCoreConfigSetDefaultIntValue(&core->config, "volume", 256);
     mCoreLoadConfig(core);
     color_t pixels[240 * 160];
     unsigned width, height;
@@ -125,8 +129,8 @@ int main(int argc, char** argv)
     }
     FILE* metadata = output(argv[2], "json");
     fprintf(metadata, "{\"frames\":%lu,\"frequency\":%d,\"frame_cycles\":%d,"
-        "\"sample_rate\":%u,\"audio_samples\":%lu,\"width\":240,\"height\":160}\n",
-        total, core->frequency(core), core->frameCycles(core), capture.rate, capture.samples);
+        "\"sample_rate\":%u,\"audio_samples\":%lu,\"audio_peak\":%u,\"width\":240,\"height\":160}\n",
+        total, core->frequency(core), core->frameCycles(core), capture.rate, capture.samples, capture.peak);
     FILE* state_file = output(argv[2], "state");
     void* state = malloc(core->stateSize(core));
     if(! state || ! core->saveState(core, state) ||
