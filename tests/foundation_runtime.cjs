@@ -4,9 +4,9 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const crypto = require('node:crypto');
 const path = require('node:path');
-const [romPath, inputPath, nativeDirectory, batteryPath] = process.argv.slice(2);
+const [romPath, inputPath, nativeDirectory, batteryPath, runtimeDirectory, audioMode] = process.argv.slice(2);
 assert.ok(romPath && inputPath && nativeDirectory, 'Pass ROM, controller CSV and native capture directory');
-const base = path.resolve('web/public/emulator') + '/';
+const base = path.resolve(runtimeDirectory || 'web/public/emulator') + '/';
 const sandbox = {require, process, console, __dirname: base, __filename: base + 'mgba.js',
   exports: {}, module: {exports: {}}, TextDecoder, TextEncoder, WebAssembly,
   Uint8Array, Int8Array, Uint16Array, Int16Array, Uint32Array, Int32Array,
@@ -25,7 +25,7 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
   assert.equal(core._mgbawasm_load(pointer, rom.length, 0, 0, 0, 0, 1), 1);
   core._free(pointer);
   core._mgbawasm_run_frame(); // Same initial frame alignment as native capture.
-  if (batteryPath) {
+  if (batteryPath && batteryPath !== '-') {
     const battery = fs.readFileSync(batteryPath);
     const pointer = core._malloc(battery.length);
     core.HEAPU8.set(battery, pointer);
@@ -37,10 +37,30 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
     core._mgbawasm_reset(); core._mgbawasm_run_frame();
   }
   let frames = 0;
+  const compareAudio = audioMode === 'audio';
+  const audioHash = compareAudio ? crypto.createHash('sha256') : null;
+  const audioPointer = compareAudio ? core._malloc(8192 * 4) : 0;
+  let audioPairs = 0;
+  const drainAudio = record => {
+    let available = core._mgbawasm_audio_available();
+    while (available > 0) {
+      const count = core._mgbawasm_read_audio(audioPointer, Math.min(available, 8192));
+      assert.ok(count > 0, 'Available audio must be drainable');
+      if (record) {
+        audioHash.update(Buffer.from(core.HEAPU8.subarray(audioPointer, audioPointer + count * 4)));
+        audioPairs += count;
+      }
+      available = core._mgbawasm_audio_available();
+    }
+  };
+  if (compareAudio) drainAudio(false); // Match native capture's post-startup boundary.
   for (const row of fs.readFileSync(inputPath, 'utf8').trim().split('\n')) {
     const [keys, duration] = row.split(',').map(Number);
     core._mgbawasm_set_keys(keys);
-    for (let n = 0; n < duration; n++) core._mgbawasm_run_frame();
+    for (let n = 0; n < duration; n++) {
+      core._mgbawasm_run_frame();
+      if (compareAudio) drainAudio(true);
+    }
     frames += duration;
   }
   assert.equal(frames, native.frames, 'Entire controller route must execute');
@@ -62,7 +82,14 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
   }
   // Alpha is a frontend presentation convention; compare actual RGB game pixels.
   assert.equal(differingPixels, 0, 'Native and WASM final field state/rendering must match');
-  if (batteryPath) {
+  if (compareAudio) {
+    core._free(audioPointer);
+    assert.equal(audioPairs, native.audio_samples, 'Raw stereo sample count must match');
+    const expectedAudio = crypto.createHash('sha256').update(fs.readFileSync(path.join(nativeDirectory, 'capture.pcm'))).digest('hex');
+    assert.equal(audioHash.digest('hex'), expectedAudio, 'Every raw audio sample must match native output');
+    console.log(`Native/WASM raw audio: ${audioPairs} identical stereo sample pairs.`);
+  }
+  if (batteryPath && batteryPath !== '-') {
     const length = core._mgbawasm_sram_save(), address = core._mgbawasm_sram_ptr();
     const exported = Buffer.from(core.HEAPU8.subarray(address, address + length));
     assert.ok(exported.equals(fs.readFileSync(path.join(nativeDirectory, 'capture.sav'))), 'Battery bytes must match native execution');

@@ -908,6 +908,26 @@ First-slice checkpoint — updated public preview:
   startup timer/RNG alignment is the next investigation. The earlier
   battery-seeded 17,527-frame comparison remains a separate passing check.
 
+First-slice checkpoint — pinned browser core and audio equivalence:
+
+- The browser core now builds mGBA 0.10.5 at the same revision as the native
+  reference harness. The previous packaged core used a newer upstream revision.
+  A public shim adaptation preserves the SDK interface and drains raw hardware
+  audio through a bounded queue. Source, immutable compiler image and artifact
+  hashes are recorded; clean preparation never substitutes the newer core.
+- The previously failing 10,842-frame fresh BrinePup route now matches every
+  final RGB pixel, including HP digits, without masking or forcing random draws.
+  Original failure frames remain preserved as evidence.
+- The new 7,076-frame starter-cry route matches final RGB and all 7,764,140 raw
+  stereo sample pairs. A 3,494-frame cold restore from the actual older Sunset
+  battery likewise matches RGB, all 3,833,788 stereo pairs and exported Flash.
+  Evidence: brinepup-original-cry-preview and pinned-core-battery-summary under
+  .tools/benchmarks. These sample hashes verify emulated output, not browser
+  AudioWorklet playback, underruns, physical-device latency or listening quality.
+- Existing save/patch/asset/cartridge and TypeScript regression checks pass with
+  the pinned core. The public Site runtime update remains to be deployed.
+  All eleven quality approvals and the full campaign gates remain outstanding.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

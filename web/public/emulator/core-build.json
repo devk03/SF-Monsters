@@ -1,0 +1,10 @@
+{
+  "mgba_version": "0.10.5",
+  "mgba_revision": "26b7884bc25a5933960f3cdcd98bac1ae14d42e2",
+  "emsdk_image": "emscripten/emsdk@sha256:92c97951b9a6835cb5da9592e9d95226f67e09ecd01a541d817a5b4801f235a4",
+  "shim_sha256": "b5e1abc7121e49d949245040303613c4d50632a89b68b9f4d6c09518c6aae6dc",
+  "artifacts": {
+    "mgba.js": "4a19067b25b423d9b37ab41b8623e01a59c172dc856e6c03d827807df7b9ebe4",
+    "mgba.wasm": "8554455ae6d70ae639e98c589fbf1340901a8c16b0303539366ff2575493f00c"
+  }
+}

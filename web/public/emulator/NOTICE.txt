@@ -2,13 +2,21 @@ mGBA WebAssembly runtime
 
 Upstream: https://github.com/mgba-emu/mgba
 Wrapper: https://github.com/wasm-gaming/mGBA-wasm
-Pinned package: @wasm-gaming/mgba-wasm 0.1.1
+Pinned JavaScript SDK: @wasm-gaming/mgba-wasm 0.1.1
+Browser/native core: mGBA 0.10.5, revision 26b7884bc25a5933960f3cdcd98bac1ae14d42e2
 License: Mozilla Public License 2.0
 License text: https://www.mozilla.org/en-US/MPL/2.0/
 
 mgba.sdk.js is modified to expose battery-save export/import. The modification
 and reproducible patch are in scripts/prepare_web.py in the public repository:
 https://github.com/devk03/SF-Monsters
+
+The 0.10.5-compatible shim is in emulator/mgba_0105_shim.c. Its upstream
+source is wasm-gaming/mGBA-wasm revision 6b19a50a1aa45055970b46999d5cde2451f1f5d0.
+SF adaptations provide the older core API and a bounded raw-audio queue.
+Rebuild with scripts/build_web_core.py; core-build.json records the source,
+immutable Emscripten image and artifact hashes. This avoids substituting the
+SDK package's different emulator revision during a clean website build.
 
 The emulator and covered modifications retain MPL-2.0. Original game source
 and website source are MIT; this notice does not relicense emulator code.
