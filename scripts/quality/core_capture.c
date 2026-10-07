@@ -90,7 +90,7 @@ int main(int argc, char** argv)
     capture.stream.postAudioFrame = audio_frame;
     core->setAVStream(core, &capture.stream);
     uint32_t telemetry = argc > 5 ? strtoul(argv[5], NULL, 16) : 0;
-    fprintf(trace, "frame,keys,bg0_x,bg0_y,bg1_x,bg1_y,updates,missed,cpu_q12,x,y,steps,map\n");
+    fprintf(trace, "frame,keys,bg0_x,bg0_y,bg1_x,bg1_y,bg2_x,bg2_y,bg3_x,bg3_y,updates,missed,cpu_q12,x,y,steps,map\n");
     unsigned mask, frames;
     unsigned long total = 0;
     while(fscanf(sequence, "%u,%u", &mask, &frames) == 2)
@@ -101,10 +101,12 @@ int main(int argc, char** argv)
         {
             core->runFrame(core);
             if(video && fwrite(pixels, sizeof(pixels), 1, video) != 1) return 2;
-            fprintf(trace, "%u,%u,%u,%u,%u,%u,%u,%u,%u,%d,%d,%u,%u\n",
+            fprintf(trace, "%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%d,%d,%u,%u\n",
                 core->frameCounter(core), mask,
                 core->rawRead16(core, 0x04000010, -1), core->rawRead16(core, 0x04000012, -1),
                 core->rawRead16(core, 0x04000014, -1), core->rawRead16(core, 0x04000016, -1),
+                core->rawRead16(core, 0x04000018, -1), core->rawRead16(core, 0x0400001a, -1),
+                core->rawRead16(core, 0x0400001c, -1), core->rawRead16(core, 0x0400001e, -1),
                 telemetry ? core->busRead32(core, telemetry + 4) : 0,
                 telemetry ? core->busRead32(core, telemetry + 8) : 0,
                 telemetry ? core->busRead32(core, telemetry + 12) : 0,

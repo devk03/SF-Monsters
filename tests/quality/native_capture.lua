@@ -4,7 +4,7 @@ local code = emu:getGameCode()
 assert(code == BENCH_GAME_CODE or code == 'AGB-' .. BENCH_GAME_CODE, 'Wrong cartridge for this benchmark')
 Bench = {queue={}, tick=0, index=1, remaining=0, capture=nil}
 local trace = assert(io.open(BENCH_OUTPUT .. '/trace.csv', 'w'))
-trace:write('frame,keys,display_control,bg0_x,bg0_y,bg1_x,bg1_y,bg2_x,bg2_y\n')
+trace:write('frame,keys,display_control,bg0_x,bg0_y,bg1_x,bg1_y,bg2_x,bg2_y,bg3_x,bg3_y\n')
 function Bench.play(sequence)
     assert(not Bench.capture, 'Finish capture before replacing the controller sequence')
     Bench.queue, Bench.index, Bench.remaining = sequence, 1, 0
@@ -47,11 +47,12 @@ callback = callbacks:add('frame',function()
         else emu:setKeys(0) end
     end
     if Bench.remaining > 0 then Bench.remaining = Bench.remaining - 1 end
-    trace:write(string.format('%d,%d,%d,%d,%d,%d,%d,%d,%d\n',
+    trace:write(string.format('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n',
         emu:currentFrame(),emu:getKeys(),emu:read16(0x04000000),
         emu.memory.io:read16(0x10),emu.memory.io:read16(0x12),
         emu.memory.io:read16(0x14),emu.memory.io:read16(0x16),
-        emu.memory.io:read16(0x18),emu.memory.io:read16(0x1a)))
+        emu.memory.io:read16(0x18),emu.memory.io:read16(0x1a),
+        emu.memory.io:read16(0x1c),emu.memory.io:read16(0x1e)))
     if Bench.capture then
         local capture = Bench.capture
         emu:screenshot(string.format('%s/%s/%06d.png',BENCH_OUTPUT,capture.name,capture.count))
