@@ -31,3 +31,16 @@ adaptation. Failed stages and their logs remain available for inspection.
 The exact baseline reproduction passes. SF content patching, browser ROM upload,
 Flash save compatibility, native/web play and the campaign are subsequent gates.
 Renaming stock maps alone does not complete an SF neighborhood adventure.
+
+`make hack` builds the small `engine-probe.json` overlay, creates a BPS delta
+with pinned Floating IPS, and independently reapplies it to the validated base.
+Repeated builds must reproduce the same patch; changing a published version's
+bytes requires a version bump. The public `romhack/releases` folder contains
+patches and integrity manifests, never full ROMs.
+
+The engine probe changes the opening dialogue and hometown label. Stock art,
+creatures, maps and campaign remain scaffolding; it is not the SF campaign MVP.
+Floating IPS is Alcaro's GPL-3.0 tool, pinned at
+`ff216a75df0987047a67d7923567dc4482ce07ac`; its source/license stay in the local
+checkout. Our browser decoder follows byuu's public-domain BPS format rather
+than embedding Floating IPS code.

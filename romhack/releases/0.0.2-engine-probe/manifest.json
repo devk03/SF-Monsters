@@ -1,0 +1,16 @@
+{
+  "version": "0.0.2-engine-probe",
+  "status": "Unreviewed engine proof; stock maps, cast sprites and creatures remain scaffolding.",
+  "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
+  "base_bytes": 16777216,
+  "target_sha256": "4121e399fdbebe109a508cc28c1d696ea101418193504f1a55e9d0300d0ed052",
+  "target_bytes": 16777216,
+  "patch_sha256": "444aeb64b5cf5f94d2c45a1373b261d6f3639ad161928a5cedaf0e7fbfd021cb",
+  "patch_bytes": 226361,
+  "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
+  "source_commit": "7b53dd5736d8d5ad0c23f65b179a1ec5b5b8425d",
+  "source_worktree_dirty": true,
+  "patch_roundtrip": "byte-identical",
+  "quality_approval": "pending"
+}

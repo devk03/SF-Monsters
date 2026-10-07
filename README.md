@@ -1,6 +1,11 @@
 # SF Mini Monsters
 
-An original, open-source creature RPG set in a compressed San Francisco.
+A San Francisco creature RPG with public SF content and development tools.
+
+The main build is now an Emerald ROM hack. Players will supply their own base
+ROM to the website for local patching. The pinned engine baseline reproduces
+Emerald exactly; the first SF content overlay is an unreviewed engine proof.
+See [the hack workflow](romhack/README.md) and the active spec in section 15.
 
 Status: playable technical prototype; Emerald quality parity has not been achieved.
 Explore Outer Sunset and SoMa, recruit 12 original monsters,
@@ -19,7 +24,7 @@ All playable locations are inside San Francisco.
 - Eight famous-startup gyms with real-person leaders and sourced geographic placements.
 - A four-member championship followed by a champion battle.
 - A recurring antagonist, a villain organization, and one legendary mini monster.
-- Original creatures, artwork, music, dialogue, interface, and game code.
+- Original SF creatures, artwork, music, dialogue and campaign on Emerald's engine.
 - A GBA ROM playable in standard GBA emulators and a browser through WebAssembly.
 - Public source, editable content, and documented builds for contributors.
 
@@ -48,8 +53,10 @@ Acceptance criteria:
 
 ## Architecture
 
-Freestanding C and original assets compile into a GBA ROM using GCC for ARM.
-The browser runs that ROM in mGBA through WebAssembly.
+The main build overlays SF content on a pinned Emerald decompilation and releases
+a BPS patch. A player's local base ROM becomes the same patched cartridge used
+in native mGBA and the WebAssembly player. Full inherited cartridges stay private.
+The earlier freestanding C prototype remains archived and playable at the links above.
 The website uses React/Vinext and Sites hosting with optional ChatGPT sign-in.
 
 Maps, encounters, monsters, and dialogue should have editable source data

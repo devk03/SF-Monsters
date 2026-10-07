@@ -796,6 +796,19 @@ Emerald foundation checkpoint — matching reproduction:
   It does not grant any SF content or final quality approvals. Next: original
   SF source/data overlay, verified patch application, then local browser playback.
 
+Emerald foundation checkpoint — SF source overlay:
+
+- Version 0.0.2-engine-probe introduces original SF opening dialogue and the
+  Outer Sunset hometown label inside the actual Emerald engine. It remains an
+  unreviewed engine proof with stock visuals, creatures, maps and story scaffolding.
+  Finished SF hubs/gyms/monsters do not increase from these substitutions.
+- The public artifact is a 226,361-byte BPS patch plus its integrity manifest.
+  Applying it to the approved base reproduces the compiled 16 MiB cartridge
+  byte-for-byte. Repeating the build reproduces the identical patch.
+- Target SHA-256: 4121e399fdbebe109a508cc28c1d696ea101418193504f1a55e9d0300d0ed052.
+  Full cartridges remain local/ignored. Actual first-slice maps, original cast
+  art, Mini Monster replacements, SF events and browser upload remain required.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)
