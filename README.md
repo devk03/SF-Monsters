@@ -15,7 +15,7 @@ The project name is provisional and has not been cleared for release.
 - A four-member championship followed by a champion battle.
 - A recurring antagonist, a villain organization, and one legendary mini monster.
 - Original creatures, artwork, music, dialogue, interface, and game code.
-- A GBA ROM playable in iOS emulators and a browser through WebAssembly.
+- A GBA ROM playable in standard GBA emulators and a browser through WebAssembly.
 - Public source, editable content, and documented builds for contributors.
 
 The [v1 specification](docs/game-spec.md) defines the full proposed game.
@@ -29,9 +29,12 @@ Build Outer Sunset and Inner Sunset with three starter choices, approximately
 12 mini monsters, one gym, one complete quest, encounters, recruitment,
 turn-based battles, and persistent saving.
 
+Scope, acceptance criteria, and current progress are maintained in
+[the canonical specification](docs/game-spec.md#14-active-mvp-objective-and-progress).
+
 Acceptance criteria:
 
-- Finish the quest and gym on the same ROM in Delta and mobile Safari.
+- Finish the quest and gym on the same ROM in mGBA and the browser player.
 - Save, close the player, reopen it, and resume progress on both platforms.
 - Verify manual save export/import between the supported players.
 - Build from documented prerequisites without proprietary game assets.

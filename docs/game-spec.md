@@ -1,6 +1,6 @@
 # SF Mini Monsters — v1 specification
 
-Status: consolidated product specification; implementation has not started.
+Status: implementation in progress; this file is the source of truth for scope and progress.
 Updated: October 7, 2026.
 Repository: https://github.com/devk03/SF-Monsters
 
@@ -23,7 +23,7 @@ Required release scope:
 - An optional Tenderloin adventure with a playable high state for the protagonist.
 - Optional weird dates, recurring jokes, historical lore, and hidden Easter eggs.
 - Real public tech figures and online personalities as the preferred named NPC cast.
-- One original GBA ROM, playable through iOS GBA emulators and a web player.
+- One original GBA ROM, playable in standard GBA emulators and a web player.
 - Public source, editable content, documented builds, and open licensing.
 - Support for adding approximately 50 researched Twitter personalities after
   the main game is complete, without redesigning the engine or campaign.
@@ -341,7 +341,7 @@ Publish versioned downloadable ROMs and matching browser builds.
 
 Required verification:
 
-- Finish the platform slice on the same ROM in Delta and mobile Safari.
+- Finish the platform slice on the same ROM in mGBA and the browser WebAssembly player.
 - Complete the campaign and all eight gyms without a progression softlock.
 - Verify all 150 catalog entries are obtainable in one playthrough/release.
 - Validate battle resolution, capture, evolution, and important quest branches.
@@ -355,11 +355,71 @@ Commit frequently at coherent checkpoints and verify relevant changes.
 Database migrations and PR merges require the user's permission.
 
 Outside v1: online multiplayer, trading, breeding, cloud accounts, live social
-feeds, a standalone native iOS app, and neighborhoods beyond the 16 listed hubs.
+feeds, native platform-specific apps, and neighborhoods beyond the 16 listed hubs.
 
 The release is complete when the full campaign and catalog are playable on both
 targets, optional comedy systems work, and a contributor can fork and build it.
 The extra 50-person expansion is a subsequent milestone, not a release blocker.
+
+## 14. Active MVP objective and progress
+
+Always read this specification before planning or implementing the next task.
+Resolve scope conflicts in favor of the latest user instruction and update this file.
+Record completed work, verification evidence, blockers, and the next checkpoint here.
+Do not mark a milestone complete until its acceptance criteria have been verified.
+
+### Objective
+
+Deliver a publicly accessible, testable MVP with two neighborhoods, 12 original
+collectible mini monsters, one Replit startup gym, exploration and dialogue,
+turn-based battles, capture, team/storage management, and persistent saving.
+Build an actual GBA ROM and run the same ROM on the website through WebAssembly.
+Verify the ROM in a standard GBA emulator, using mGBA as the reference target.
+The website supports real sign-in and device-local saves with backup/import.
+Commit coherent checkpoints around 500–700 changed lines when it makes sense.
+The full 150-entry game and later 50-person cast expansion remain subsequent scope.
+
+### Acceptance checklist
+
+- [ ] Two neighborhoods and a complete courier quest are playable.
+- [ ] Three starter choices and 12 obtainable mini monsters work.
+- [ ] Capture, battles, healing, team switching, and storage work.
+- [ ] The Replit gym can be challenged and defeated.
+- [ ] Saving and loading preserve progress; backup/import round trips work.
+- [ ] The actual GBA ROM boots and plays in mGBA.
+- [ ] The browser plays the same ROM through WebAssembly.
+- [ ] Desktop and mobile browser controls are verified.
+- [ ] Public deployment succeeds and real website sign-in is available.
+- [ ] Core behavior checks and clean builds pass; test instructions are provided.
+
+### Current progress
+
+Completed preparation:
+
+- Public GitHub repository and consolidated specification committed.
+- Startup gym identities and real-person casting research recorded.
+- Public Sites project registered; no deployment exists yet.
+- Web framework starter and dependencies installed locally.
+- GBA compiler installed locally.
+- Two original raster sprite atlases generated and inspected; not yet integrated.
+
+In progress:
+
+- GBA game implementation and browser emulator integration.
+- Evaluating browser emulator packages; two candidates published without the
+  expected runtime artifacts, so a usable distribution still needs verification.
+
+Next checkpoint:
+
+- Commit the build scaffold and implement the first playable GBA scene.
+
+Verification evidence:
+
+- Specification checked for exactly 16 hubs and eight alternating gym stops.
+- No gameplay, emulator, sign-in, or deployment completion is claimed yet.
+
+Blockers requiring user input: none currently.
+Database migrations and PR merges still require explicit permission.
 
 ## References
 
