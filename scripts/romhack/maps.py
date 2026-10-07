@@ -61,12 +61,34 @@ def event_objects(plan):
     return events
 
 
+def validate_links(plans):
+    """Map warps/connections may only reach other authored SF locations."""
+    by_id = {plan['native_id']: plan for plan in plans}
+    for plan in plans:
+        for warp in plan.get('warp_events', []):
+            target = by_id.get(warp['dest_map'])
+            if target is None:
+                raise ValueError('A warp leaves the authored SF map graph.')
+            index = int(warp['dest_warp_id'])
+            if not 0 <= index < len(target.get('warp_events', [])):
+                raise ValueError('A warp targets an absent native arrival slot.')
+        for connection in plan.get('connections') or []:
+            if connection['map'] not in by_id:
+                raise ValueError('A connection leaves the authored SF map graph.')
+
+
 def apply_maps(content, root, engine, original):
     plans = content.get('maps', [])
     if not plans:
         return []
     layouts_path = 'data/layouts/layouts.json'
     layouts = json.loads(original(layouts_path))
+    linked = []
+    for reference in plans:
+        plan = json.loads((root / 'romhack/content' / reference).read_text())
+        plan['native_id'] = json.loads(original(f'data/maps/{plan["engine_map"]}/map.json'))['id']
+        linked.append(plan)
+    validate_links(linked)
     restored = [layouts_path]
     ids, aliases = set(), {}
     for reference in plans:
@@ -85,6 +107,10 @@ def apply_maps(content, root, engine, original):
                 aliases[event['local_id']] = index
         layout = next(item for item in layouts['layouts'] if item['id'] == metadata['layout'])
         layout.update(width=width, height=height)
+        for role, tileset in plan.get('tilesets', {}).items():
+            if role not in ['primary', 'secondary'] or not re.fullmatch(r'gTileset_[A-Za-z0-9]+', tileset):
+                raise ValueError('Tileset role/name is invalid.')
+            layout[role + '_tileset'] = tileset
         blocks_path = layout['blockdata_filepath']
         (engine / blocks_path).write_bytes(blocks)
         restored.extend([map_path, blocks_path])

@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts/romhack'))
-from maps import encode_layout, check_position, event_objects
+from maps import encode_layout, check_position, event_objects, validate_links
 
 
 class MapEncoding(unittest.TestCase):
@@ -41,6 +41,18 @@ class MapEncoding(unittest.TestCase):
         for npcs in [[npc, npc], [{**npc, 'x': 1}], [{**npc, 'id': 0}], [{**npc, 'id': 2}]]:
             with self.subTest(npcs=npcs), self.assertRaises(ValueError):
                 event_objects({**self.plan, 'npcs': npcs})
+
+    def test_graph_keeps_travel_in_authored_sf_maps(self):
+        town = {'native_id': 'MAP_SF_TOWN', 'warp_events': [
+            {'dest_map': 'MAP_SF_ROOM', 'dest_warp_id': '0'}]}
+        room = {'native_id': 'MAP_SF_ROOM', 'warp_events': [
+            {'dest_map': 'MAP_SF_TOWN', 'dest_warp_id': '0'}]}
+        validate_links([town, room])
+        for destination, index in [('MAP_HOENN', '0'), ('MAP_SF_ROOM', '1')]:
+            bad = {**town, 'warp_events': [{'dest_map': destination, 'dest_warp_id': index}]}
+            with self.assertRaises(ValueError): validate_links([bad, room])
+        with self.assertRaises(ValueError):
+            validate_links([{**town, 'connections': [{'map': 'MAP_HOENN'}]}, room])
 
 
 if __name__ == '__main__':

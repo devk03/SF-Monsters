@@ -929,6 +929,20 @@ Sunset player release checkpoint:
   and the complete comparison suite remain pending. This is an opening preview,
   not the completed MVP slice or full campaign; approved domains remain 0/11.
 
+Native first-gym content tools checkpoint:
+
+- Authored trainer teams can now replace pinned trainer slots, including native
+  portraits/classes, individual moves, held items and battle items. Editable land
+  encounter tables use the engine's twelve probability slots. They remain native
+  battle data, rather than a replacement simplified combat system.
+- Content limits and native identifier/name constraints pass checks. Map travel
+  validation rejects foreign map destinations and absent arrival slots; themes
+  can select native tilesets without changing the renderer.
+- Cognition's occupied South Park office and separate expansion lease have been
+  rechecked. South Park's oval form is sourced in startup-gyms.md.
+- These are tools/research, not a completed gym or quality approval. Scores remain
+  0/11; next is actual Muni/South Park and the Cognition challenge.
+
 Reference sources for benchmark construction:
 
 - [Emerald battle presentation and doubles](https://www.pokemon.co.jp/game/gba/emerald/battle.html)

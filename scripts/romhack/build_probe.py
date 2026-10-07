@@ -9,6 +9,7 @@ import subprocess
 import uuid
 from bootstrap import ROOT, EMERALD, EMERALD_REVISION, SDK, checkout
 from maps import apply_maps
+from battle_content import apply_battles
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -56,6 +57,7 @@ def main():
             raise ValueError(f'Expected one intro symbol: {symbol}')
     (EMERALD / speech_path).write_text(speech)
     restored = [sections_path, speech_path] + apply_maps(content, ROOT, EMERALD, original)
+    restored += apply_battles(content, ROOT, EMERALD, original)
     (ROOT / '.tools/romhack-overlay-files.json').write_text(json.dumps(restored) + '\n')
     docker('make', '-j8', 'FILE_NAME=sf-engine-probe', f'TITLE={content["title"]}',
            f'GAME_CODE={content["game_code"]}', directory='/workspace/.tools/pokeemerald')

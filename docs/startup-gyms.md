@@ -99,3 +99,17 @@ The eight candidate identities are Cognition, Midjourney, Cursor, Perplexity,
 Mercor, Anthropic, OpenAI, and Notion. Previous assignment tables are historical
 research proposals superseded by the geographic corrections in this document.
 Championship and side-antagonist content belong on Treasure Island within SF.
+
+## First-slice verification, October 7, 2026
+
+Cognition's company page confirms SF headquarters. The March 24, 2026 office
+report describes its occupied South Park headquarters; the August 28 Chronicle
+report identifies the current 550 Third Street space separately from its new
+333 Brannan Street lease. The first gym uses a compressed Third Street/South Park
+block; it does not claim that the later expansion is already occupied or copy
+an actual interior floor plan.
+
+- [Company headquarters/team](https://cognition.com/about)
+- [Occupied South Park office reporting](https://sfstandard.com/2026/03/24/grind-sf-startup-racing-build-ai-software-engineer/)
+- [Current office versus expansion lease](https://www.sfchronicle.com/realestate/article/new-sf-ai-startup-cognition-takes-cruise-s-office-22406725.php)
+- [South Park form and history](https://www.sfrecpark.org/576/South-Park)
