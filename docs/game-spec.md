@@ -408,8 +408,8 @@ The full 150-entry game and later 50-person cast expansion remain subsequent sco
 - [ ] Capture, battles, healing, team switching, and storage work.
 - [ ] The Cognition gym can be challenged and defeated.
 - [ ] Saving and loading preserve progress; backup/import round trips work.
-- [ ] The actual GBA ROM boots and plays in mGBA.
-- [ ] The browser plays the same ROM through WebAssembly.
+- [x] The actual GBA ROM boots and accepts input in native mGBA.
+- [x] The browser boots the same ROM through WebAssembly; starter selection and keyboard input verified.
 - [ ] Desktop and mobile browser controls are verified.
 - [ ] Public deployment succeeds and real website sign-in is available.
 - [ ] Core behavior checks and clean builds pass; test instructions are provided.
@@ -449,7 +449,12 @@ Verification evidence:
 - Native C checks pass with AddressSanitizer and UndefinedBehaviorSanitizer:
   all three starters, save round trip/corruption rejection, quest order, all 12
   catalog entries, storage swaps, gym completion, and recovery after defeat.
-- Emulator execution, browser interaction, sign-in, and deployment are not yet verified.
+- Native mGBA 0.10.5 boots the cartridge and advances the opening dialogue.
+- Browser mGBA boots the same ROM; keyboard advances the opening and starter
+  selection, and the website reports the first caught entry.
+- Native-generated .sav fixture passes browser decoding, checksum rejection,
+  dual-bank ordering, and backup encoding tests.
+- Full browser quest, responsive controls, sign-in, and deployment remain to verify.
 
 Blockers requiring user input: none currently.
 Database migrations and PR merges still require explicit permission.

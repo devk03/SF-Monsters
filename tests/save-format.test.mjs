@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { readProgress, validateSave, nextQuest, countCaught, encodeSave, decodeSave } from '../web/app/save-format.ts';
+const bytes = new Uint8Array(readFileSync('/tmp/sf-mini-monsters-fixture.sav'));
+const progress = readProgress(bytes);
+assert.equal(progress.coins, 222);
+assert.equal(progress.flags & 2, 2);
+assert.equal(progress.party, 1);
+assert.equal(countCaught(progress.caught), 1);
+assert.match(nextQuest(progress.flags), /Roon/);
+assert.deepEqual(decodeSave(encodeSave(bytes)), bytes);
+const corrupt = bytes.slice(); corrupt[2048 + 100] ^= 1;
+assert.equal(readProgress(corrupt), null);
+assert.throws(() => validateSave(corrupt));
+assert.throws(() => validateSave(new Uint8Array(4096)));
+// Both valid banks: the older backup must not supersede the newer record.
+const dual = bytes.slice(); dual.set(bytes.subarray(2048, 2408), 0);
+const view = new DataView(dual.buffer); view.setUint32(12, 0, true);
+let hash = 2166136261;
+for (let i = 0; i < 360; i++) if (i < 8 || i >= 12) hash = Math.imul(hash ^ dual[i], 16777619) >>> 0;
+view.setUint32(8, hash, true);
+assert.equal(readProgress(dual).sequence, 1);
+console.log('PASS: native/browser save compatibility, corruption rejection, backup ordering, portable encoding');

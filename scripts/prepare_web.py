@@ -25,6 +25,11 @@ s=s.replace(needle,'''        exportBattery() {
             mod._mgbawasm_reset();
         },
 '''+needle)
-s='/* Modified for SF Mini Monsters: battery-save export/import. MPL-2.0. */\n'+s
+# Ensure a quick keyboard tap is visible to a frame-based handheld input loop.
+s=s.replace("    const onKeyDown = (e) => {", "    const keyTimes = new Map();\n    const releaseTimers = new Map();\n    const onKeyDown = (e) => {\n        clearTimeout(releaseTimers.get(e.code));\n        keyTimes.set(e.code, performance.now());")
+s=s.replace("    const onKeyUp = (e) => {\n        if (applyKey(e.code, false))\n            e.preventDefault();\n    };", "    const onKeyUp = (e) => {\n        if (!codeToBit.has(e.code)) return;\n        e.preventDefault();\n        const delay = Math.max(0, 70 - (performance.now() - (keyTimes.get(e.code) || 0)));\n        releaseTimers.set(e.code, setTimeout(() => applyKey(e.code, false), delay));\n    };")
+s=s.replace("            running = false;", "            for (const timer of releaseTimers.values()) clearTimeout(timer);\n            running = false;")
+s='/* Modified for SF Mini Monsters: battery saves and frame-safe input. MPL-2.0. */\n'+s
 p.write_text(s)
+(out/'entry.js').write_text("import { load } from './mgba.sdk.js';\nwindow.sfMiniMonstersLoad = load;\n")
 print('Prepared same-origin mGBA runtime and battery-save extension.')

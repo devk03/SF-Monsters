@@ -1,0 +1,14 @@
+mGBA WebAssembly runtime
+
+Upstream: https://github.com/mgba-emu/mgba
+Wrapper: https://github.com/wasm-gaming/mGBA-wasm
+Pinned package: @wasm-gaming/mgba-wasm 0.1.1
+License: Mozilla Public License 2.0
+License text: https://www.mozilla.org/en-US/MPL/2.0/
+
+mgba.sdk.js is modified to expose battery-save export/import. The modification
+and reproducible patch are in scripts/prepare_web.py in the public repository:
+https://github.com/devk03/SF-Monsters
+
+The emulator and covered modifications retain MPL-2.0. Original game source
+and website source are MIT; this notice does not relicense emulator code.
