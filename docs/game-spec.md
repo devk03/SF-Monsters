@@ -1802,3 +1802,26 @@ Interior release and interaction validation checkpoint:
   cleanup, comparison reviews and other starter/team strategies remain. The full
   16-hub/eight-gym/150-entry game, all system/performance/save/campaign gates
   and 11 final user quality approvals remain required. Approved parity stays 0/11.
+
+Original gym-creature integration checkpoint:
+
+- TrolleyKit (Electric/Steel cable stoat), PuddlePrig (Water/Grass reed frog) and
+  HushMoth (Psychic blanket-wing moth) replace the first gym's three stock species.
+  Each has original source art/prompt, separate native front/back/entrance art,
+  two icon poses, an original synthesized call, six stats, abilities, a distinct
+  learnset and guide text. Twelve original creature candidates are now integrated;
+  six other slice species still use inherited creature presentation.
+- Content revision 6 retains stable species IDs and existing save schema. These
+  three species have no evolution until original targets are authored. Stock gym
+  moves/items are preserved; new base stats and abilities are intentional content
+  differences, so the earlier gym replay is not assumed to remain balanced.
+- Source/content/audio checks and native draft compilation/BPS reapplication pass.
+  Private 0.0.15-wild-preview target:
+  9c681bba8f241abe6e2e6aacae3b82cd1205633b8ecd093f39439e1c83670f82.
+  Native glyph/palette/battle checks, earned-route balance and native/WebAssembly
+  evidence are next. The public release remains 0.0.14 pending those checks.
+- Art was generated with built-in imagegen and encoded to native formats; deliberate
+  pixel cleanup and art/audio approval remain pending. Reused icon palettes can
+  simplify intended colors. This does not increase finished-monster counts or any
+  of the 11 quality approvals. Full campaign, remaining systems and review gates
+  remain required by section 15.1.

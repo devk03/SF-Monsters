@@ -27,6 +27,15 @@
      "pulses": [[0.02, 0.15, 560, 380], [0.23, 0.15, 670, 440], [0.42, 0.16, 780, 560]]},
     {"name": "canoptera", "engine_symbol": "Sceptile", "engine_file": "sceptile",
      "duration": 0.74, "formants": [1100, 2100, 2850], "noise": 0.04,
-     "pulses": [[0.02, 0.17, 720, 500], [0.26, 0.17, 850, 590], [0.50, 0.20, 1020, 760]]}
+     "pulses": [[0.02, 0.17, 720, 500], [0.26, 0.17, 850, 590], [0.50, 0.20, 1020, 760]]},
+    {"name": "trolleykit", "engine_symbol": "Magnemite", "engine_file": "magnemite",
+     "duration": 0.45, "formants": [1400, 2350, 3200], "noise": 0.11,
+     "pulses": [[0.01, 0.10, 820, 550], [0.15, 0.11, 980, 650], [0.30, 0.12, 1100, 780]]},
+    {"name": "puddleprig", "engine_symbol": "Lotad", "engine_file": "lotad",
+     "duration": 0.52, "formants": [420, 1250, 1950], "noise": 0.07,
+     "pulses": [[0.01, 0.16, 210, 125], [0.21, 0.12, 280, 160], [0.37, 0.12, 245, 140]]},
+    {"name": "hushmoth", "engine_symbol": "Ralts", "engine_file": "ralts",
+     "duration": 0.58, "formants": [1700, 2500, 3300], "noise": 0.01,
+     "pulses": [[0.02, 0.23, 1040, 850], [0.31, 0.23, 890, 660]]}
   ]
 }
