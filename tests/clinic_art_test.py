@@ -8,7 +8,7 @@ import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/romhack'))
-from clinic_art import apply_clinic, clinic_resources, clinic_tile
+from clinic_art import apply_clinic, clinic_resources, clinic_tile, paving, align_ground, joined_wall
 from maps import encode_layout
 
 
@@ -16,9 +16,9 @@ class ClinicArt(unittest.TestCase):
     def test_native_exit_layers_and_capacity_keep_actors_and_warp_visible(self):
         graphics,records,attributes,palettes=clinic_resources(ROOT)
         self.assertLessEqual(len(graphics)//32,504)
-        self.assertEqual(len(records),81*16)
+        self.assertEqual(len(records),92*16)
         self.assertEqual(len(palettes),512)
-        flags=struct.unpack('<81H',attributes)
+        flags=struct.unpack('<92H',attributes)
         self.assertEqual(flags[1],0x1065)
         self.assertTrue(all(flag>>12==1 for flag in flags))
         for index in range(1,5):
@@ -46,7 +46,7 @@ class ClinicArt(unittest.TestCase):
                 before=struct.unpack_from('<H',original,offset)[0]
                 after=struct.unpack_from('<H',output,offset)[0]
                 self.assertEqual(before&0xfc00,after&0xfc00)
-                self.assertTrue(512<=after&0x3ff<593)
+                self.assertTrue(512<=after&0x3ff<604)
             self.assertEqual(clinic_tile(plan,6,12),513)
             self.assertEqual(clinic_tile(plan,2,3),518) # storage terminal
             self.assertEqual(clinic_tile(plan,10,2),519) # team notes
@@ -56,6 +56,30 @@ class ClinicArt(unittest.TestCase):
             self.assertIn('gTilesetTiles_SFSouthParkClinic',graphics)
             self.assertIn('secondary/sf_south_park_clinic/tiles.png',graphics)
             self.assertTrue(all((engine/file).exists() for file in changed))
+
+    def test_small_ground_repeat_and_connected_corners_do_not_stamp_card_frames(self):
+        palette=clinic_resources(ROOT)[3][192:224]
+        floor=paving(palette)
+        self.assertEqual(floor[:8],floor[8:16])
+        self.assertEqual(floor[:128],floor[128:])
+        self.assertNotIn(4,floor) # shared dark prop outline is never floor grout
+        band=bytes(5+y for y in range(8) for x in range(16))
+        north=joined_wall(floor,band,'N');west=joined_wall(floor,band,'W')
+        corner=joined_wall(floor,band,'NW')
+        self.assertEqual(corner[:16],north[:16])
+        self.assertEqual(corner[0::16],west[0::16])
+        self.assertEqual(corner[8*16+8:8*16+16],floor[8*16+8:8*16+16])
+        # Repeating material phase continues beneath floor-colored prop surrounds;
+        # an outlined white prop interior is preserved rather than retiled.
+        pixels=bytearray([1]*256)
+        for y in range(4,12):
+            for x in range(4,12):pixels[y*16+x]=4 if x in (4,11) or y in (4,11) else 1
+        result=align_ground(pixels,16,16,floor)
+        self.assertEqual(result[:16],floor[:16])
+        self.assertEqual(result[5*16+5:5*16+11],bytes([1]*6))
+        plan=json.loads((ROOT/'romhack/content/services.json').read_text())
+        self.assertEqual({clinic_tile(plan,x,y) for x,y in ((0,1),(12,1),(0,12),(12,12))},
+                         {597,598,599,600})
 
 
 if __name__=='__main__':unittest.main()

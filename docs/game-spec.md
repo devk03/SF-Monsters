@@ -3305,10 +3305,38 @@ Clinic cast resume compatibility correction:
   inspected, and badge/stage 4, money, items, level/moves/PP/HP retained. Native
   and WASM cold-resume final RGB, 16,467,520 PCM bytes and Flash match. Those
   trace-only captures do not establish equality for every video frame.
-- Full native/WASM healing route: 336 identical RGB frames, 1,474,700 PCM bytes
+- Full native/WASM healing route: 336 identical RGB frames, 1,474,704 PCM bytes
   and identical Flash. Exit/re-entry: 576 identical RGB frames, 2,528,064 PCM
   bytes and identical Flash, ending (6,12) with original clinic NPCs. HP/PP
   refresh and all earned progression fields remain correct. Comparison receipts
   accompany .tools/benchmarks/clinic-cast-v36-* captures.
 - Updated paired walking review and public publication follow. Public remains
   v35/Site 29 and approval remains 0/11; no CI workflow or DB operation ran.
+
+
+User-directed clinic tiling correction:
+
+- User reviewed the v36 paired still and objected to the chopped, oversized
+  floor grid and disconnected wall joins compared with Emerald. This is
+  negative art feedback, not a numeric score or full-domain approval. The
+  prepared v36 Site archive/source are preserved and are not deployed.
+- Added source-seamless-v2.png and exact built-in edit prompt. Current v2
+  native materials use a low-contrast eight-pixel paving repeat, a flat teal
+  carpet and edge-connected ground alignment around enclosed props. A source
+  card's decorative border is no longer stamped across walkable floor.
+- Authored wall strips now form straight runs and mitered NW/NE/SW/SE joins;
+  windows share the wall-band alignment. Outside the cutaway room is quiet
+  dark backdrop. A connected two-cell welcome mat replaces the arrow picture;
+  native exit behavior stays 0x65 at the same (6,12) warp. Movement/collision
+  remain the existing native grid; texture density is independent of it.
+- Native tests verify the eight-pixel repeat, absence of dark prop outline on
+  floor, corner endpoints, protected outlined white-prop interiors and all
+  collision/elevation/event/warp contracts. Three clinic tests and full local
+  checks pass. Initial v37 draft target
+  aeea0b31083be08bc4f3fc8f6b2601bb48bac346b707650d8f3c542536114d1f
+  compiles normally; 785,858-byte BPS applies exactly. Old v35 clinic battery
+  resumes (6,8), both original NPCs visible, with earned party/items/money/
+  badge/stage preserved. Native preview inspected for reduced grid contrast
+  and continuous wall/carpet joins. Native/WASM routes and publication follow.
+- Public remains v35/Site 29. All section 15 gates and unapproved first-slice
+  domains remain required; no GitHub workflow or DB operation ran.
