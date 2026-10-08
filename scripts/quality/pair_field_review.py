@@ -37,7 +37,11 @@ def main():
     parser.add_argument('--left',type=Path,required=True)
     parser.add_argument('--right',type=Path,required=True)
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--candidate-label',default='SF OFFICE',
+                        help='Visible candidate scene name in uppercase letters and spaces.')
     args=parser.parse_args()
+    if not re.fullmatch(r'[A-Z][A-Z ]{1,39}',args.candidate_label):
+        parser.error('Candidate label must use 2–40 uppercase letters/spaces.')
     directories=[p.resolve() for p in (args.left,args.right,args.output)]
     for path in directories:path.relative_to(ROOT/'.tools/benchmarks')
     left,right,output=directories
@@ -58,7 +62,7 @@ def main():
             parser.error('Encoded review does not match its native capture.')
     output.mkdir()
     labels=['EMERALD LAB  '+metadata[0]['rom_sha256'][:8],
-            'SF OFFICE  '+metadata[1]['rom_sha256'][:8]]
+            args.candidate_label+'  '+metadata[1]['rom_sha256'][:8]]
     filters=[]
     for i,label in enumerate(labels):
         filters.append(f'[{i}:v]scale=720:480:flags=neighbor,pad=720:524:0:32:color=0x102333,'+

@@ -757,7 +757,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.34-brighter-office-preview; target 3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad; Site version 28. Brighter office and varied props address the user's prior gloom/repetition feedback. Updated art remains unreviewed; walking is preserved. |
-| Latest local source build | 0.0.34-brighter-office-preview; same target. Normal source compilation/BPS application pass; old native save, walking loop and native/WASM exit-return pass. The revised 34.29-second paired clip is ready; public download/import/resume/export QA passes. |
+| Latest local source build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302. Normal compilation/BPS and older-save entry pass; native/WASM entry, healing and exit-return match. Matched clinic art clip is ready; service/save/public checks follow. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -3187,3 +3187,28 @@ Original South Park clinic interior implementation:
 - No quality score is inferred from generation, native conversion or tests.
   Public release stays v34/Site 28; all full section 15 gates remain required.
   No GitHub Actions, DB operation or delegated agent ran.
+
+
+Clinic native verification and matched review checkpoint:
+
+- Corrected v35 target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302
+  compiles normally; 783,070-byte BPS applies exactly. Entering from the older
+  earned campaign battery retains badge/stage 4, 4,000 money, three Potions,
+  level 11 CinderCoy HP 4/31 and its four moves/PP. Entry reaches (6,12).
+- Clinic native/WASM entry: 704 identical RGB frames, 3,089,856 identical PCM
+  bytes and identical Flash. Healing: 400 identical RGB frames, 1,755,600 PCM
+  bytes and identical Flash; HP becomes 31/31 and Ember PP returns to 25.
+  Exit/re-entry: 576 identical RGB frames, 2,528,064 PCM bytes and identical
+  Flash, ending (6,12). Receipts accompany the native captures under .tools/
+  benchmarks/clinic-v35-*. These core comparisons do not prove browser timing.
+- Generated a fresh 2,048-frame 34.29-second clinic walk from (6,8), returning
+  there. Same original Emerald lab reference, exact controller sequence, GBA
+  clock, nearest 3x scaling and two labelled audio tracks; private package
+  .tools/benchmarks/clinic-v35-paired-interior-review/comparison.{mp4,png,json}.
+  Candidate label is now configurable so the tool labels this scene SF CLINIC.
+  No numeric score/full approval is inferred. Reference footage stays private.
+- Complete entry and healing recordings and the complete walking retry are
+  losslessly compressed. A first walk recording failed on full local storage;
+  its partial output is preserved and excluded from review. One build log was
+  also preserved as gzip. Native dialogue/PC/shop and a new saved clinic
+  checkpoint are being exercised; public remains v34 until publication succeeds.
