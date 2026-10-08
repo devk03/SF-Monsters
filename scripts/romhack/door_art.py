@@ -92,15 +92,22 @@ static const u8 sSFDoorPalettes[] = {10, 10, 10, 10, 10, 10, 10, 10};
                             '#include "text.h"\n#include "constants/maps.h"')
     camera = camera.replace(draw_anchor, '''        // The SF facade occupies the top background, above the native fog.
         // Put its animated replacement on that same layer, without changing timing.
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN)
-         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN)
-         && (MapGridGetMetatileIdAt(x, y) == 630 || MapGridGetMetatileIdAt(x, y) == 635))
+        if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN)
+          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN)
+          && (MapGridGetMetatileIdAt(x, y) == 630 || MapGridGetMetatileIdAt(x, y) == 635))
+         || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_OLDALE_TOWN)
+          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_OLDALE_TOWN)
+          && (MapGridGetMetatileIdAt(x, y) == 576 || MapGridGetMetatileIdAt(x, y) == 583
+           || MapGridGetMetatileIdAt(x, y) == 611 || MapGridGetMetatileIdAt(x, y) == 618)))
         {
             u16 sfTiles[8];
+            const u16 *sfGround = gMapHeader.mapLayout->secondaryTileset->metatiles
+                + (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_OLDALE_TOWN) ? 19 : 60)
+                * NUM_TILES_PER_METATILE;
             int i;
             for (i = 0; i < 4; i++)
             {
-                sfTiles[i] = tiles[i + 4];
+                sfTiles[i] = sfGround[i + 4];
                 sfTiles[i + 4] = tiles[i];
             }
             DrawMetatile(METATILE_LAYER_TYPE_NORMAL, sfTiles, offset);

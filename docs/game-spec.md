@@ -2785,3 +2785,38 @@ South Park standalone world integration (private candidate):
   original opening frames are being integrated before publication.
 - This remains first-slice polish. Public build is 0.0.30 and full domains stay
   0/11 approved. No CI workflow, database change or delegated agent was used.
+
+
+South Park native doors and older-save recovery checkpoint:
+
+- Added original three-stage warehouse/clinic door frames in
+  assets/tiles/south-park-doors with their exact built-in imagegen prompt.
+  Six 16x32 frames use the existing facade palettes. Each door compiles to
+  exactly 768 original bytes; compiled ELF/cartridge allocations match those
+  bytes. Native opening/closing timings and warp logic remain unchanged.
+- Registered metatiles 583/618 and matching upper cells in the foreground door
+  drawing hook. Transparent animated margins reveal our own sidewalk; Sunset
+  doors reveal original lawn. Other map door drawing retains its native path.
+- Actual 0.0.30 in-game SAVE at South Park (11,5), newly occupied by a
+  foundation, cold-resumes on 0.0.31 at adjacent sidewalk (11,6). Build Badge,
+  gym stage 4, 4,000 money, three Potions and CinderCoy level 11, HP 4/31,
+  moves/PP survive. Evidence: park-old-foundation-saved and
+  park-new-foundation-resume. No RAM/flag edits or DB migration were used.
+- Gym entry/exit: park-{native,wasm}-gym-door-roundtrip, 616 RGB frames,
+  2,703,632 PCM bytes and Flash identical; returns to (13,6). Clinic entry/exit:
+  park-{native,wasm}-clinic-door-retry, 980 RGB frames, 4,301,216 PCM bytes and
+  Flash identical; returns to (32,6). Source city/door images were inspected,
+  with the courier visible outside and native interiors reached normally.
+  Each native capture has comparison.json and a synchronized review.mp4.
+- The first clinic recording failed when local storage filled; its partial
+  files are retained and excluded from evidence. Verified lossless compression
+  of completed captures freed 2,148.5 MiB, preserving every original frame.
+  The successful retry has a distinct name. No user files were removed.
+- New meadow/bench are reachable and the native Oran Berry reward executes
+  (park-native-bench-discovery/final.png). Full local checks pass after the
+  art tests use the project's Pillow-enabled Python environment. These routes
+  do not prove physical-browser performance or human Emerald-tier approval.
+- Final candidate target e1b4c66fd4eb1c5aa1731fdc18c7985e199791d3480ad90106d25bdbcc7574a4;
+  source compilation/BPS round trip pass. Public build remains 0.0.30 until
+  this candidate is published. Full quality approvals remain 0/11. First-slice
+  cast/interior/battle art and the complete campaign remain required; no CI ran.

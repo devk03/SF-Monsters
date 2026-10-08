@@ -30,7 +30,7 @@ def park_resources(root):
     cells.append((furniture[:256], 7)); flags.append(0x1000)
     for frame, bank in zip(frames, (8, 9)):
         cells += facade_cells(frame, 112, 80, bank); flags += [0] * 35
-    flags[71] = flags[106] = 0x60  # Upgrade to animated doors after their art integration.
+    flags[71] = flags[106] = 0x69  # Original frames use native animated door behavior.
     annex = Image.open(root / 'assets/tiles/sunset-rowhouse/native-preview.png').resize(
         (48, 64), Image.Resampling.NEAREST).tobytes()
     cells += facade_cells(annex, 48, 64, 10); flags += [0] * 12

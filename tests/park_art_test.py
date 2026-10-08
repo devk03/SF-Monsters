@@ -74,6 +74,7 @@ class ParkResources(unittest.TestCase):
                 self.assertIn(tile, range(122))
                 if token in 'RP.FGB#T':
                     self.assertEqual(flags[tile] >> 12, 1)
+        self.assertEqual((flags[71], flags[106]), (0x69, 0x69))
         for door, expected in (((13,5),583),((32,5),618)):
             self.assertEqual(park_tile(plan,*door), expected)
         self.assertTrue(plan['legend'][plan['rows'][5][11]][1])

@@ -25,7 +25,8 @@ from courier_art import apply_courier
 from apartment_art import apply_apartment_art
 from door_art import apply_door_art
 from terrain_art import apply_coastal_animation
-from park_map import apply_park_map
+from park_map import apply_park_map, park_resources
+from park_doors import apply_park_doors
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -93,6 +94,7 @@ def main():
     restored += apply_door_art(ROOT, EMERALD, original)
     restored += apply_coastal_animation(ROOT, EMERALD, original)
     restored += apply_park_map(ROOT, EMERALD)
+    restored += apply_park_doors(ROOT, EMERALD)
     if args.fixture:
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture
@@ -172,6 +174,14 @@ def main():
         'assets/tiles/sunset-door/conversion.json').read_text())
     manifest['coastal_terrain'] = json.loads((ROOT /
         'assets/tiles/sunset-terrain/conversion.json').read_text())
+    park_raw, park_records, park_attributes, park_palettes = park_resources(ROOT)
+    manifest['south_park'] = {'native_tiles': len(park_raw) // 32,
+        'metatiles': len(park_records) // 16, 'quality_approval': 'pending',
+        'resource_sha256': {name: hashlib.sha256(data).hexdigest() for name, data in
+            zip(('tiles', 'metatiles', 'attributes', 'palettes'),
+                (park_raw, park_records, park_attributes, park_palettes))}}
+    manifest['south_park_doors'] = json.loads((ROOT /
+        'assets/tiles/south-park-doors/conversion.json').read_text())
     if args.fixture:
         manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
                                'campaign_progress_evidence': False}
