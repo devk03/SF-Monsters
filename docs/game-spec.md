@@ -757,11 +757,11 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505; Site version 23. Replaces the rejected 0.0.29 ground layering. |
-| Latest local source build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505. Fixes concealed courier on ground; 768 visible walking frames verified; published. Public visibility check pending. |
+| Latest local source build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505. Fixes concealed courier on ground; 768 visible walking frames verified; published. Courier visibility and save resume verified on the public website. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Local ROM load and downloaded 0.0.28 cartridge verified; existing guest save resumes into the original apartment. Earned post-gym beacon branch is verified locally. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Public QA | Local ROM load and downloaded 0.0.30 cartridge verified; beach save resumes with a visible courier. Public export is byte-identical to the native save and cold-resumes natively. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
 | Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
 
@@ -2721,3 +2721,24 @@ Ground-layer fix publication checkpoint:
   Hands-on public standing/visibility/download checks follow. Human approvals,
   account sign-in, physical performance and full campaign gates remain open.
   No GitHub workflow or database operation was used.
+
+
+Fixed coastal public visibility and battery-transfer check:
+
+- Hands-on public loading produced Downloads/sf-mini-monsters (7).gba, 16 MiB,
+  SHA-256 e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505.
+  Continue resumes the existing coast save with the courier visibly standing
+  on the sand. Screenshot .tools/browser-review/public-v30-coast.png includes
+  the public game/page context; public-v30.json records the exact download.
+- Public Save backup produced Downloads/sf-mini-monsters.sav, 128 KiB,
+  byte-identical to terrain-coast-saved/capture.sav (SHA-256
+  0d755458f2c2fd1fed247aab5f11e123e86fcf6269aac050311732c6e0a42db9).
+  Copied that actual download into local evidence and cold-booted it natively:
+  terrain-public-export-native-resume returns to (4,8), same two-monster party,
+  HP/moves/PP, 3,500 money and three Potions. The visible-courier check passes.
+  Receipt public-v30-save.json documents the exported-file identity.
+- This verifies one guest checkpoint transfer, not ten consecutive final-release
+  round trips, all campaign checkpoints or signed-in play. Source/runtime art
+  reviews and the full campaign/performance/acceptance gates remain required.
+- No new, queued or running GitHub Actions jobs appeared after pushing source;
+  tests, compilation, captures and site packaging ran locally.
