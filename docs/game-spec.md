@@ -760,8 +760,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Quality-complete hubs/gyms/monsters: unreviewed. Earlier technical checks do
   not certify final content or visual/audio quality.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
-- Next checkpoint: South Park/Cognition and the polished first slice, while
-  completing the reference measurements and comparison suite.
+- Next checkpoint: additional starter/team strategies, original wild creatures,
+  map/cast/audio/interface polish and first-slice comparison reviews. The earned
+  Fire route now verifies the first gym victory, reward, re-entry and save.
 - Public preview: version 0.0.13 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
@@ -1672,3 +1673,52 @@ First-gym preparation checkpoint — earned practice victory:
   do not pass ten complete-scope save round trips, fifty campaign checkpoints,
   full campaign runs or any quality-domain approval. Art/map/audio/story polish,
   the complete SF scope and all final gates remain required. Parity stays 0/11.
+
+First-gym validation checkpoint — earned Fire route:
+
+- The normal 0.0.13 ROM completes Steven's practice battle from the earned
+  level-7 Walden checkpoint, using Scratch against Wingull and Ember against
+  Shroomish, with two Potions. CinderCoy earns level 9; Quick Attack fills its
+  fourth slot through normal level-8 learning. Clinic healing restores HP/PP.
+  The first solo attempt without recovery loses and is retained as a negative
+  diagnostic, not a victory or balanced-route claim.
+- A cold 33,744-frame replay of the successful route, starting from the actual
+  earned battery without intermediate savestates, matches final RGB, exported
+  Flash and all 37,025,604 raw stereo pairs between native mGBA and WebAssembly.
+  Evidence: .tools/benchmarks/cognition-steven-earned-full.
+- Supplies are bought through the native shop: three Potions cost 900 coins,
+  taking money from 4,100 to 3,200 and the Potion count from one to four. Both
+  relays are restored in order before entering Scott's actual leader battle.
+- The level-9 CinderCoy defeats Scott's Magnemite/Lotad/Ralts using Ember and
+  two Potions, earns level 11, and replaces Scratch with Leer through the actual
+  move-forgetting UI. Final moves are Leer/Growl/Ember/Quick Attack with PP
+  30/40/17/30; party checksum, HP 21/31 and move IDs 43/45/52/98 are verified.
+  Some exploratory filenames say bite; the authored level-11 move and actual
+  UI/data are Leer. Bite is authored at level 14. No Bite learning is claimed.
+- Native victory awards 800 coins, the Build Badge and one Reflect disk (TM33,
+  item 321). Gym stage becomes 4; badge, defeated-gym and reward flags are set.
+  Money ends at 4,000 with two Potions remaining. Exit/re-entry restores the
+  open gate and Scott's station. Talking again starts no rematch and leaves
+  money, party, progress and the single Reflect disk unchanged.
+- A complete cold replay from the earned Walden battery reaches the same badge
+  and reward without intermediate savestates or scripted level/item gifts.
+  Its 77,908 frames match native/WebAssembly final RGB, exported Flash and all
+  85,484,552 raw stereo pairs. Evidence:
+  .tools/benchmarks/{cognition-earned-first-badge-full,cognition-earned-scott-reentry}.
+  The automated route includes deliberate waiting/dialogue inputs; its duration
+  does not pass the normal-player pacing, input-latency or deadline gates.
+- Native Save records the post-badge state at save counter 4. The battery passes
+  the web SF validator and cold Continue resumes Cognition 8,4 with level 11,
+  21/31 HP, all moves/PP, money/items, badge and gym/reward flags preserved.
+  Evidence: .tools/benchmarks/cognition-earned-first-badge-{saved,resume}.
+  Its 2,464-frame cold resume also matches native/WebAssembly final RGB,
+  exported Flash and all 2,703,624 raw stereo pairs. Reflect remains quantity
+  one and its reward flag remains set. This is an early campaign checkpoint,
+  not the required ten complete-scope round trips or fifty campaign resumes.
+- This proves one Fire-starter route from an existing earned Sunset/practice
+  checkpoint, not three fresh full-campaign runs, all seeds or the required
+  three team/strategy solutions per gym. Native Mac GUI/Safari/mobile, all 300
+  mechanics cases, complete-scope saves, original slice art/audio/story/interface
+  polish and the full 16-hub/eight-gym/150-entry campaign remain required.
+  Approved quality domains stay 0/11. Latest existing release checks pass:
+  https://github.com/devk03/SF-Monsters/actions/runs/37717333483 (bc008be).

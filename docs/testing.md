@@ -151,3 +151,14 @@ This chapter has two neighborhoods, one gym, and 12 monsters. The complete
 16-hub city, eight gyms, 150 monsters, Elite Four, legendary quest, Marina bars,
 Tenderloin character effects, dates, and expanded Twitter cast remain in the
 canonical specification. Current characters have fictional dialogue and roles.
+
+The first gym's earned Fire route is now functionally verified. Practice with
+Walden and Steven, rest at the clinic between battles, buy supplies, stabilize
+blue INPUT before green OUTPUT, and challenge Scott. The tested route used
+physical attacks against Steven's Wingull, Fire attacks against Grass opponents,
+and healing before low HP became fatal. It earned level 11 and learned Leer.
+After victory, confirm one Build Badge and one Reflect disk, then leave/re-enter
+and talk to Scott: the reward must not duplicate and the battle must not restart.
+Save and Continue to check that the badge, party, items and gym progress survive.
+This is one verified route; other starter/team strategies and normal-player
+pacing still need testing, and this does not certify the finished SF campaign.
