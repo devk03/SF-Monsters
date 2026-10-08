@@ -762,7 +762,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.8 includes three original starter/call candidates,
+- Public preview: version 0.0.9 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic
   and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
@@ -1092,6 +1092,32 @@ First-slice audio comparison — measured battle-mix revision:
   periods. The full fixed-reference clip suite and all domain approvals remain
   unfinished. Browser/core comparison, public 0.0.9 deployment and matched-level
   user direction review are the next checks for this revision.
+- Matching WebAssembly execution now passes for all 34,202 frames, final RGB,
+  exported Flash and all 37,528,144 raw stereo pairs. Native RUN returns to
+  the original Sunset cue with outcome RAN. No saturated samples occur in
+  this route; this does not certify every sound-effect combination or device.
+- Matched-level review files are .tools/audio-review/fogbank-mix-level-matched.mp4
+  and emerald-wild-mix-reference.mp4. Both retain native timing and dynamics;
+  only a constant 0.93 dB attenuation is applied to the SF clip. Longer files
+  fogbank-mix-three-loops.wav and emerald-wild-native-three-loops.wav cover at
+  least three consecutive loop periods. Earlier quieter captures are preserved
+  separately. Reference identity remains the supplied a9dec84d…85af ROM.
+- The user has been asked for the battle cue's direction. No response, score,
+  final soundtrack approval or first-slice acceptance is inferred while pending.
+  Code/mix checkpoint 56af8c3. After this audio check, remaining slice monsters,
+  evolution art, map/cast polish and gym victory/balance are the next content
+  priorities; browser performance, full reference fixtures, saves and all release
+  gates remain required before acceptance or campaign expansion.
+- Public Site version 10 deployed successfully with 0.0.9-battle-mix-preview
+  at https://sf-mini-monsters.devkunjadia03.chatgpt.site. Site source
+  77b169e116dcd78a2f93068fed9a79f58e108771; deployment
+  appgdep_6ac6e2799bdc8191b92d74de22d62e3e. The 615,007-byte immutable patch
+  reapplies byte-for-byte to the approved base. Source opening, TypeScript,
+  production packaging and archive inspection pass; no inherited full ROM is
+  included, and public access is preserved. Existing GitHub checks pass for
+  56af8c3: https://github.com/devk03/SF-Monsters/actions/runs/37707174159.
+  These checks do not replace clean Emerald rebuild, hands-on sign-in/backup,
+  actual browser/device performance or user approval. Approved parity is 0/11.
 
 Approved architecture change — Emerald ROM hack:
 
