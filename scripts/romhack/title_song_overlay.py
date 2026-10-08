@@ -1,28 +1,13 @@
 """Link original title music into its existing native song allocation."""
 import hashlib
 import json
-import re
 import struct
 import subprocess
 import uuid
-from native_resources import replace_resource
+from native_resources import replace_resource, named_addresses
 from title_music import write_title_score
 
 WAVES = ('lead', 'bass', 'major', 'minor', 'answer', 'kick', 'snare', 'hat')
-
-
-def named_addresses(elf, wanted):
-    output = subprocess.check_output(['arm-none-eabi-nm', '--defined-only', str(elf)], text=True)
-    symbols = {}
-    for line in output.splitlines():
-        match = re.fullmatch(r'([0-9a-f]+) [RrAa] ([A-Za-z0-9_]+)', line)
-        if match and match[2] in wanted:
-            if match[2] in symbols:
-                raise ValueError('Ambiguous native music symbol: ' + match[2])
-            symbols[match[2]] = int(match[1], 16)
-    if set(symbols) != wanted:
-        raise ValueError('Missing declared native music symbols.')
-    return symbols
 
 
 def song_region(blob, own_header, header_offset, old_header_size, base, group):

@@ -20,6 +20,7 @@ from interface_graphics import apply_interface_graphics
 from title_art import apply_title_art
 from title_creature import apply_title_creature
 from title_song_overlay import apply_title_song
+from house_art import apply_house_art
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -87,6 +88,7 @@ def main():
     title_receipt = apply_title_art(ROOT, EMERALD, target)
     creature_receipt = apply_title_creature(ROOT, EMERALD, target)
     song_receipt = apply_title_song(ROOT, EMERALD, target)
+    house_receipt = apply_house_art(ROOT, EMERALD, target)
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     docker('make', 'TARGET=cli', 'CFLAGS=-O2', directory='/workspace/.tools/flips')
     target_hash = hashlib.sha256(target.read_bytes()).hexdigest()
@@ -123,6 +125,7 @@ def main():
     manifest['title_art'] = title_receipt
     manifest['title_creature'] = creature_receipt
     manifest['title_song'] = song_receipt
+    manifest['sunset_house'] = house_receipt
     if args.fixture:
         manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
                                'campaign_progress_evidence': False}

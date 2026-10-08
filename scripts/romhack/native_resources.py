@@ -1,8 +1,30 @@
 """Guarded post-link replacement of declared read-only native resources."""
 import hashlib
+import re
 import subprocess
 import uuid
 from interface_text import symbols_from_nm
+
+
+def named_addresses(elf, wanted):
+    output = subprocess.check_output(['arm-none-eabi-nm', '--defined-only', str(elf)], text=True)
+    symbols = {}
+    for line in output.splitlines():
+        match = re.fullmatch(r'([0-9a-f]+) [RrAa] ([A-Za-z0-9_]+)', line)
+        if match and match[2] in wanted:
+            if match[2] in symbols:
+                raise ValueError('Ambiguous native resource symbol: ' + match[2])
+            symbols[match[2]] = int(match[1], 16)
+    if set(symbols) != wanted:
+        raise ValueError('Missing declared native resource symbols.')
+    return symbols
+
+
+def bounded_span(addresses, start, end):
+    offset, capacity = addresses[start] - 0x08000000, addresses[end] - addresses[start]
+    if offset < 0 or capacity < 1:
+        raise ValueError('Native end symbol must follow its resource in cartridge space.')
+    return offset, capacity
 
 
 def replace_resource(rom, linked, offset, capacity, data, preserve_tail=False):
@@ -23,6 +45,15 @@ def apply_resources(root, emerald, target, resources):
         raise ValueError('Declare each native resource only once.')
     symbols = symbols_from_nm(subprocess.check_output(['arm-none-eabi-nm', '-S',
         '--defined-only', str(emerald / 'sf-engine-probe.elf')], text=True), set(names))
+    bounded = [resource for resource in resources if resource.get('end_symbol')]
+    if bounded:
+        addresses = named_addresses(emerald / 'sf-engine-probe.elf',
+            {name for resource in bounded for name in (resource['symbol'], resource['end_symbol'])})
+        for resource in bounded:
+            span = bounded_span(addresses, resource['symbol'], resource['end_symbol'])
+            if resource['symbol'] in symbols and symbols[resource['symbol']] != span:
+                raise ValueError('End symbol disagrees with the declared native resource size.')
+            symbols[resource['symbol']] = span
     work = root / '.tools' / ('native-resources-' + uuid.uuid4().hex)
     work.mkdir()
     linked_path, codec = work / 'linked.bin', work / 'native-lz'

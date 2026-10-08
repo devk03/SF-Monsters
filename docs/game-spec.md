@@ -2205,3 +2205,42 @@ Foglight Overture — original native title-music checkpoint:
   Comparing the prior art candidate to this cartridge confirms every byte outside
   the declared title-song allocation is unchanged. Real browser playback and
   human soundtrack approval remain unproven.
+
+Sunset rowhouse — original native world-art checkpoint:
+
+- Added an original peach-stucco residential facade with projecting bay windows,
+  a garage, teal trim and separate entry steps. Source/prompt and native 80x80
+  conversion are under assets/tiles/sunset-rowhouse. The visible art uses fifteen
+  opaque RGB555 colors plus transparency. Six existing five-by-five footprints
+  receive the facade; these are decorative houses, not completed interiors.
+- The first encoded sheet exceeded its original allocation and was rejected.
+  The corrected private sheet removes unused tiles, retains the actual four road
+  quadrants, and deduplicates ninety-one original facade tiles. It compresses to
+  2,060 of 2,300 bytes. Mixed inherited tile/palette tables remain private.
+  Only palette bank ten, twenty-five metatile records/attributes and the six
+  facade block regions change. Collision/elevation bits, roads, events and save
+  coordinates remain intact. Guards reject a second active SF map sharing the
+  same secondary tileset without reviewing its references.
+- Added explicit end-symbol bounds for the native block array, which has no ELF
+  size field. Resource overflow/overlap, unrelated prior edits and map mismatch
+  fail before writing. Reapplication is byte-identical; comparison against the
+  preceding title/music candidate finds zero changed bytes outside the five
+  declared house-resource allocations. Meaningful layout, road preservation and
+  native quadrant-order tests pass, as does scripts/check.sh locally.
+- Private 0.0.23 target SHA-256:
+  43b3107493aa0e44b454047c61375730d35eac4fe18950cfb0d10affe74f2428.
+  Native Flips and the browser BPS decoder reproduce exactly that cartridge.
+  A 3,968-frame cold battery route reaches Sunset and stops at the house wall
+  at (12,11), preserving the actual caught CinderCoy/BinPossum party and Flash.
+  Native/WASM final RGB and all 4,353,888 stereo pairs match. Their raw frame
+  alpha padding differs (native zero, WASM 255); RGB is checked independently.
+- A subsequent controller-only 576-frame walk shows wall collision, walking and
+  camera scrolling to the second facade at (22,15). Every RGB frame, Flash and
+  all 632,016 stereo pairs match native/WASM. Evidence is in
+  .tools/benchmarks/sunset-rowhouse-{native,wasm}-{cold-east,walk}; the native walk
+  has a 9.64-second review.mp4. This is an implementation clip, not a matched
+  Emerald comparison, performance gate or human art approval.
+- Public 0.0.17 remains unchanged pending a verified normal rebuild. Distinct
+  facade variants, original streets/terrain, detailed interiors and complete
+  neighborhood map design remain unfinished. All eleven full domain approvals
+  stay pending. No GitHub Actions workflow was dispatched.

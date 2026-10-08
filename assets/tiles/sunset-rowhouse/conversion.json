@@ -1,0 +1,27 @@
+{
+  "source_size": [
+    1254,
+    1254
+  ],
+  "alpha_bounds": [
+    180,
+    148,
+    1074,
+    1118
+  ],
+  "native_size": [
+    80,
+    80
+  ],
+  "visible_size": [
+    72,
+    78
+  ],
+  "palette_bank": 10,
+  "quality_approval": "pending",
+  "source_sha256": "4cb38b16213c3b07fd952c6b177489a231be618447f68141dd5d30428bff7bc6",
+  "files": {
+    "house.4bpp": "2006f9d57f9a2a2e5e612574c8d76aa2752691698318de58b88a82ae6088672a",
+    "house.gbapal": "c9f4d87bd13b83f3b7d24d92b640c0a7dfc0e6d023bea09e10dfc5f11606139e"
+  }
+}
