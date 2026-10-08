@@ -98,10 +98,13 @@ The three starters have original front/back art, entrance frames, icons and
 cry candidates. CinderCoy's authored line evolves into Ashrunner at 16 and
 Solhowl at 36, with new art/cry/move candidates. Explicit evolution targets
 also bind BrinePup → Brinebull at 16 → Water/Ice Tideroar at 36, with their own
-views, icon poses, cries and Bubble Beam/Ice Beam learning. Evolution targets
+views, icon poses, cries and Bubble Beam/Ice Beam learning.
+SproutSlug → FernSlug at 16 → Grass/Bug Canoptera at 36 includes Poison
+Powder/Signal Beam learning. All three lines remain unapproved candidates.
+Evolution targets
 must be authored, acyclic and have increasing level thresholds. Other native
 evolution methods remain available in the engine; their original content
-authoring rules are unfinished. Pixel cleanup, other evolution-line art and user approval
+authoring rules are unfinished. Pixel cleanup, remaining creature art and user approval
 remain required; these are not finished or approved catalog entries.
 
 `scripts/romhack/monster_atlas.py` encodes distinct battle and authored icon
@@ -112,7 +115,9 @@ imagegen prompts stay beside each source image under `assets/monsters`.
 For isolated evolution UI checks, use `build_probe.py --draft --fixture cinder-15`
 or `ashrunner-35`. These private cartridges script a starting level and Rare Candy.
 `brinepup-15` and `brinebull-35` prepare the corresponding Water-line cases.
-they never count as earned campaign progression. Fixture publishing is rejected.
+`sproutslug-15` and `fernslug-35` prepare the Grass-line cases; reference fixtures
+use the matching `reference-sprout-15`/`reference-sprout-35` names.
+They never count as earned campaign progression. Fixture publishing is rejected.
 `reference-15`/`reference-35` prepare battery inputs for the actual fixed reference
 ROM with original names/stats/learnsets and compatible coordinates. Their saved
 map view can carry SF tiles, so use them for evolution/menu comparisons only,

@@ -762,9 +762,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.11 includes three original starter/call candidates,
+- Public preview: version 0.0.12 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic
-  CinderCoy/BrinePup evolution candidates and Cognition's gym draft. This is not the
+  all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
 - Scope preference: Emerald-tier quality within existing SF scope; do not add
@@ -1536,3 +1536,45 @@ Foundation checkpoint A — audio and synchronized capture:
   input. The walking baseline and matched reference/SF clip review are pending.
 - Approved quality domains remain 0/11. Next: measured walking reference,
   browser foundation checks, and full first-slice integration/design work.
+
+SproutSlug line validation and public release checkpoint:
+
+- The normal main ROM evolves prepared specimens into level-16 FernSlug at
+  47/47 HP and level-36 Canoptera at 108/108 HP. Default names update and native
+  stats recalculate. The actual move-forgetting UI replaces Absorb with Poison
+  Powder, yielding Poison Powder/Stun Spore/Leech Seed/Mega Drain and PP
+  35/30/10/10. Signal Beam replaces Silver Wind, yielding Poison Powder/Signal
+  Beam/Synthesis/Giga Drain and PP 35/15/5/5. Checksummed party decoding confirms
+  stable species 278/279. These are evolution fixtures, not earned-level runs.
+- Both 6,714-frame cold-battery routes match final RGB, exported Flash and all
+  7,366,936 raw stereo pairs between native mGBA and WebAssembly. The actual
+  older Sunset save resumes at unchanged level 5, 13/19 HP and quest 4, advances
+  content revision to 5, and matches RGB/Flash/all 10,932,996 raw stereo pairs
+  over 9,964 frames. Evidence: .tools/benchmarks/{sprout-evolution15-main-full,
+  sprout-evolution35-main-full,sprout-line-older-save-resume}.
+- Four matched 40.18-second clips capture both SF evolution stages and their
+  actual Emerald counterparts at native 240x160, normal speed and zero measured
+  A/V skew. Reference captures use the supplied a9dec84d…85af ROM and prepared
+  original-name/stat/learnset batteries; final frames show Grovyle/Sceptile.
+  The level-16 Pursuit prompt is declined before alignment. The earlier capture
+  stopped at learning and is excluded. Saved-map-view carryover restricts these
+  reference fixtures to evolution/menu evidence, not original-world comparisons.
+  Clips: .tools/benchmarks/{sprout-evolution15-animation-40s,
+  sprout-evolution35-animation-40s,emerald-sprout15-aligned-40s,
+  emerald-sprout35-aligned-40s}/review.mp4. The user has been asked for direction;
+  no pending response counts as approval.
+- Public Site version 13 deployed successfully with the normal
+  0.0.12-starter-lines-preview at https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+  Site source 5edd7477f7b55bb69fee9ac8a3a33d5395324ddf; deployment
+  appgdep_6ac6f5afee6081919b9a9da0621326c8. Its 665,289-byte BPS reconstructs
+  target eadd7196b8b7d2006d424e78ab55924cc6fb02cb91bf2e64421922ca04de495a.
+  TypeScript/build, native content checks, BPS round-trip and archive inspection
+  pass. The native host package contains 84 files; no full inherited ROM or
+  private fixture patch is included. Public access remains unchanged.
+  GitHub checks pass for 70a952b:
+  https://github.com/devk03/SF-Monsters/actions/runs/37713787191.
+- Three integrated lines and nine original candidates remain unapproved art.
+  Pixel/back-view cleanup, remaining first-slice wild creatures, map/cast polish
+  and actual first-gym victory/three-starter balance are next. Complete campaign,
+  300 mechanics cases, device/audio/input gates, save/campaign runs and all 11
+  final quality approvals remain required. Approved parity stays 0/11.

@@ -8,8 +8,10 @@ The source and technical conversions use the license/attribution in
 `native-v1/` contains separate 64x64 front/back views, two front entrance frames,
 two 32x32 party-icon frames, and 16-entry normal/shiny palettes. The shared crop
 preserves proportions and relative poses. Native palette/dimension checks are
-format evidence, not pixel cleanup or user approval. Original cries and all
-evolution stages remain required.
+format evidence, not pixel cleanup or user approval.
+The original cry, FernSlug (level 16) and Canoptera (36) candidates are
+now integrated, with new views, authored icon poses and move progression.
+Native-size cleanup and user art/animation approval remain pending.
 
 Reproduce with Pillow 12.3.0:
 
