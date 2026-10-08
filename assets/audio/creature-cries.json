@@ -42,6 +42,18 @@
      "pulses": [[0.01, 0.11, 590, 340], [0.17, 0.13, 690, 420], [0.35, 0.11, 530, 310]]},
     {"name": "pinepip", "engine_symbol": "Seedot", "engine_file": "seedot",
      "duration": 0.57, "formants": [620, 1450, 2300], "noise": 0.04,
-     "pulses": [[0.02, 0.15, 340, 220], [0.22, 0.13, 440, 280], [0.40, 0.14, 370, 240]]}
+     "pulses": [[0.02, 0.15, 340, 220], [0.22, 0.13, 440, 280], [0.40, 0.14, 370, 240]]},
+    {"name": "nightskunk", "engine_symbol": "Poochyena", "engine_file": "poochyena",
+     "duration": 0.6, "formants": [500, 1350, 2150], "noise": 0.14,
+     "pulses": [[0.02, 0.22, 280, 150], [0.32, 0.24, 340, 190]]},
+    {"name": "pierpeep", "engine_symbol": "Wingull", "engine_file": "wingull",
+     "duration": 0.66, "formants": [700, 1600, 2600], "noise": 0.1,
+     "pulses": [[0.02, 0.19, 480, 260], [0.27, 0.16, 570, 330], [0.47, 0.16, 450, 250]]},
+    {"name": "hillchirp", "engine_symbol": "Taillow", "engine_file": "taillow",
+     "duration": 0.54, "formants": [1850, 2750, 3600], "noise": 0.03,
+     "pulses": [[0.01, 0.09, 1300, 970], [0.14, 0.12, 1500, 1100], [0.31, 0.09, 1150, 800], [0.44, 0.08, 1420, 1050]]},
+    {"name": "mycelimp", "engine_symbol": "Shroomish", "engine_file": "shroomish",
+     "duration": 0.64, "formants": [650, 1600, 2450], "noise": 0.06,
+     "pulses": [[0.02, 0.19, 370, 200], [0.28, 0.12, 550, 310], [0.46, 0.15, 430, 240]]}
   ]
 }

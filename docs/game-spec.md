@@ -1882,3 +1882,28 @@ Early-route original creature/progression authoring checkpoint:
 - Native battle/balance and older-save evidence are next. Both art candidates
   still need pixel/outline cleanup and user art/audio review. Public 0.0.15 is
   unchanged at this checkpoint; all 11 final quality approvals remain pending.
+
+Complete first-slice creature-presentation candidates:
+
+- NightSkunk, PierPeep, HillChirp and Mycelimp replace the remaining four stock
+  encounter species, including Steven's trainer roster. Every first-slice
+  species now has an original name, separately authored front/back/entrance views,
+  two party-icon poses, an original cry, stats, abilities, progression data,
+  learnset and guide description. Eighteen original entries comprise twelve
+  base/slice species and six starter evolution stages. This is not 150 entries
+  or eighteen approved/finished monsters; pixel and palette cleanup remains.
+- Revision 8 keeps the existing IDs/schema and supported-save growth curves.
+  Stock wild evolution targets remain disabled until original targets exist.
+  All original art sources/prompts and native encodings are public contributions.
+  Native draft compilation/BPS reapplication and required source checks pass.
+  Draft target: 11f315ea2f5c3191d067360e58465d4b2db96ff719fd0d3e5fe0d5726806e176.
+- The preceding two-creature draft verifies the earned level-5 Fire route through
+  Walden with no Potions, ending level 7, 13/23 HP and Ember PP 21. Its 35,285-frame
+  cold replay matches RGB/Flash/all 38,716,464 stereo pairs in native/WebAssembly.
+  Native frames show BinPossum/PinePip fronts and names. Older badge save resume
+  also preserves its earned state and matches all 2,703,624 stereo pairs.
+  Evidence: scouts-{earned-walden-route,old-save-resume,binpossum-presentation,
+  pinepip-presentation}. These checks do not certify balance of the new final roster.
+- Next: final-roster earned trainer/gym replay, actual capture/party presentation,
+  broader art/audio/interface/cast polish and matched comparison clips. Public
+  0.0.15 remains current until validation; all 11 final approvals remain pending.
