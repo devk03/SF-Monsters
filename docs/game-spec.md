@@ -1578,3 +1578,25 @@ SproutSlug line validation and public release checkpoint:
   and actual first-gym victory/three-starter balance are next. Complete campaign,
   300 mechanics cases, device/audio/input gates, save/campaign runs and all 11
   final quality approvals remain required. Approved parity stays 0/11.
+
+First-gym earned-route probe on the published starter-line ROM:
+
+- The older, actually earned Sunset battery enters Scott's battle through Muni,
+  delivery and ordered relays on the current eadd7196…495a target. Its single
+  CinderCoy begins at level 5 and 13/19 HP, with three Potions, and skips both
+  practice trainers, the clinic and recruitment. No prepared levels or RAM
+  writes are used. Evidence: .tools/benchmarks/starter-lines-cognition-*.
+- Ember defeats the opening level-6 Magnemite and CinderCoy earns level 7.
+  Potion use restores HP through the native party interface. This minimal route
+  then loses to level-7 Lotad after two Potions and a switch to Scratch; it does
+  not reach Ralts or grant a badge. Move PP/HP are checked from party data.
+- Controller-only blackout returns to the registered Sunset healing location.
+  Gym relay stage remains 3; badge and defeated-gym flags remain false. Earned
+  level 7 persists and HP is restored. The final capture is
+  .tools/benchmarks/starter-lines-cognition-earned-route-loss. This is a single
+  underprepared route, not evidence that all strategies fail or that the gym is
+  balanced. No difficulty changes are inferred from this one result.
+- Next: test the clinic, both optional practice trainers and recruited team
+  routes with each starter, then actual victory/reward/re-entry and save resume.
+  The release commit 594d630 also passes GitHub checks:
+  https://github.com/devk03/SF-Monsters/actions/runs/37714577998.
