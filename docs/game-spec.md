@@ -756,12 +756,12 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
-| Public build | 0.0.24-native-host-slice-preview; target fe17001af73fd6f6cb989323e418bc3880ee15fbd3bf0bdd75211f451a5f9de6; Site version 18. |
-| Latest local source build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9. Original courier and road tiles are local candidates. |
+| Public build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9; Site version 19. |
+| Latest local source build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9. Courier and road tiles are published candidates; human art review remains pending. |
 | Content implemented so far | Sunset opening, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Local ROM load and downloaded 0.0.24 cartridge verified. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Public QA | Local ROM load and downloaded 0.0.26 cartridge verified; old caught-party backup accepted and resumed into Sunset. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
 | Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
 
@@ -778,8 +778,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 - Next checkpoint: additional starter/team strategies, original wild creatures,
   map/cast/audio/interface polish and first-slice comparison reviews. The earned
   Fire route now verifies the first gym victory, reward, re-entry and save.
-- Public preview: version 0.0.24 includes eighteen original creature/call candidates,
-  original Sunset/wild/title themes, title/guide art, Sunset rowhouses,
+- Public preview: version 0.0.26 includes eighteen original creature/call candidates,
+  original Sunset/wild/title themes, title/guide art, Sunset rowhouses/streets and courier locomotion,
   Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
@@ -2406,3 +2406,19 @@ Sunset streets — original compiled terrain checkpoint:
   beach/fence/sign details, distinct facade variants, named cast and interiors
   still require work. The first-slice and all eleven full quality approvals
   remain pending. Public 0.0.24 is unchanged at this checkpoint.
+
+- Published courier/street source build 0.0.26 through Sites. Site version 19;
+  source 1debecb50e3e5b2a94853c77de97491ea1c82ab1;
+  saved version appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_e28eda0e73d48191833498c2f8016787;
+  deployment appgdep_6ac77a3d99d881919451e287f6bc95bc reports succeeded at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site. The deployment archive
+  verifies the patch hash and contains no inherited full cartridge.
+- Fresh in-app browser loads the local base and downloads a 16 MiB cartridge
+  matching the source-built target. Evidence: .tools/browser-review/public-v26.json;
+  actual download /Users/devkunjadia/Downloads/sf-mini-monsters (3).gba.
+  The old caught-party backup is accepted and reaches the Continue menu with
+  two catalog entries/zero badges. Browser field resume is visually confirmed with the new courier and roads;
+  the party view shows CinderCoy level five HP 13/19 and BinPossum level three
+  HP 15/15, matching the imported backup. Screenshots: public-v26-{resume,party}.png
+  under .tools/browser-review. Native/WASM recorded routes are verified separately.
+  No human art score, signed-in completion or performance pass is inferred.
