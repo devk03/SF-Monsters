@@ -1,0 +1,60 @@
+{
+  "source_size": [
+    1536,
+    1024
+  ],
+  "authored_rectangles": {
+    "battle": [
+      [
+        0,
+        0,
+        560,
+        700
+      ],
+      [
+        560,
+        0,
+        1024,
+        700
+      ],
+      [
+        1024,
+        0,
+        1536,
+        700
+      ]
+    ],
+    "icons": [
+      [
+        0,
+        700,
+        560,
+        1024
+      ],
+      [
+        560,
+        700,
+        1120,
+        1024
+      ]
+    ],
+    "pad_frames": true
+  },
+  "battle_crop": [
+    51,
+    179,
+    538,
+    625
+  ],
+  "icon_crop": [
+    109,
+    73,
+    516,
+    262
+  ],
+  "icon_palette": "assets/monsters/cindercoy/native-v1/normal.pal",
+  "opaque_palette_budget": 15,
+  "method": "aspect-preserving nearest-neighbor, shared RGB555 battle palette, authored icon frames",
+  "pixel_cleanup": "pending",
+  "quality_approval": "pending"
+}
