@@ -25,6 +25,7 @@ from courier_art import apply_courier
 from apartment_art import apply_apartment_art
 from door_art import apply_door_art
 from terrain_art import apply_coastal_animation
+from park_map import apply_park_map
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -91,6 +92,7 @@ def main():
     restored += apply_apartment_art(ROOT, EMERALD, original)
     restored += apply_door_art(ROOT, EMERALD, original)
     restored += apply_coastal_animation(ROOT, EMERALD, original)
+    restored += apply_park_map(ROOT, EMERALD)
     if args.fixture:
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture

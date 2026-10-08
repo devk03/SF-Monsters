@@ -2,7 +2,7 @@
   "engine_map": "OldaleTown",
   "script": "south-park.inc",
   "tilesets": {
-    "secondary": "gTileset_Rustboro"
+    "secondary": "gTileset_SFSouthPark"
   },
   "legend": {
     ".": [
@@ -99,6 +99,16 @@
       565,
       true,
       0
+    ],
+    "K": [
+      512,
+      true,
+      0
+    ],
+    "T": [
+      541,
+      true,
+      3
     ]
   },
   "rows": [
@@ -107,7 +117,7 @@
     "FPPPPPRRRPdeeeeefPPPPPPPPPPPPdeeeeefPPPF",
     "FPPPPPRRRPghhhhhfPPPPPPPPPPPPghhhhhfPPPF",
     "FPPPPPRRRPijjjjjfPPPPPPPPPPPPijjjjjfPPPF",
-    "FPPPPPRRRPPPPDPPPPPPPPPPPPPPPPPPHPPPPPPF",
+    "FPPPPPRRRPKKKDKKKPPPPPPPPPPPPKKKHKKKPPPF",
     "FPPPPPRRRP#PPPPPPPPPPPPPPPPPP#PPPPPPPPPF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
@@ -118,11 +128,11 @@
     "FPPPPPRRRPPdefPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPghfPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPijfPPPPP..............PPPPPPF",
-    "FPPPPPRRRPPPPPPPP..................PPPPF",
+    "FPPPPPRRRPPPPPPPP...T..........T...PPPPF",
     "FPPPPPRRRPPPPPPP.............B......PPPF",
     "FPPPPPRRRPPPPPP..GG..................PPF",
     "FPPPPPRRRPPPPPP......................PPF",
-    "FPPPPPRRRPPabcP.........B........#...PPF",
+    "FPPPPPRRRPPabcP.T.......B........#T..PPF",
     "FPPPPPRRRPPdefP...B............GG....PPF",
     "FPPPPPRRRPPghfPP....................PPPF",
     "FPPPPPRRRPPijfPPP....GG............PPPPF",
@@ -213,5 +223,6 @@
   ],
   "metadata": {
     "weather": "WEATHER_SUNNY"
-  }
+  },
+  "border_tile": 532
 }

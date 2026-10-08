@@ -2760,3 +2760,28 @@ South Park original asset checkpoint:
   now supports authored road tokens; existing Sunset street tests still pass.
 - Integration follows. Public 0.0.30 and all approval counts stay unchanged.
   No GitHub workflow, DB change or delegated agent was used.
+
+
+South Park standalone world integration (private candidate):
+
+- Source follows bf89077. Added gTileset_SFSouthPark, built entirely from original
+  roads, lawn, railings, furnishings and SF facades. 469 native secondary tiles,
+  122 metatiles and five separate palette banks fit below the eight slots reserved
+  for native door animation. Ground uses covered layers below field sprites;
+  vertical facades use foreground layers. Margins reveal original sidewalk.
+- Replaced indoor-floor street graphics with asphalt/curbs/center markings and
+  distinct sidewalk. Original meadow, benches, planters and boards define the
+  park. Annexes reuse a technically resized original SF rowhouse candidate;
+  pixel cleanup and all art approval remain pending.
+- New facade lower walls close twelve former sidewalk cells; center entrance
+  coordinates (13,5)/(32,5), all NPCs, transport, history and discovery locations
+  stay connected. Four native/resource tests pass, including complete map
+  allocation, sprite layers and path reachability. Existing saved coordinates
+  blocked by new foundations must use the established same-map recovery guard;
+  actual older-save verification follows. Save schemas are unchanged.
+- First source build 0.0.31-south-park-preview, target
+  e63e59539fca4af983c1d80a7ba4830a0a737457741ec9b25001270fb5c92209,
+  compiles normally with exact BPS round trip. Doors are initially native fades;
+  original opening frames are being integrated before publication.
+- This remains first-slice polish. Public build is 0.0.30 and full domains stay
+  0/11 approved. No CI workflow, database change or delegated agent was used.
