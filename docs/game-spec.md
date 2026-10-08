@@ -761,9 +761,9 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Downloaded 0.0.31 cartridge matches the verified target. Earned South Park bench save imports/resumes with a visible courier; public export is byte-identical to its native battery, which cold-resumes with the reward/team/badge intact. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Public QA | Downloaded 0.0.32 cartridge matches the verified target. Native gym save imports/resumes showing all three original cast sprites; public export equals the native battery. A transient white boot display recovered after Pause/Resume; cause/pacing remains unverified. Signed-in player awaits the user's login. Physical-device/performance checks remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
+| Next work | Investigate public import/boot pacing, then original gym/clinic interiors, remaining cast/battle portraits and first-slice matched reviews. Routine checks stay local; GitHub Actions stays manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -2949,3 +2949,28 @@ Cognition cast public publication checkpoint (October 8, 2026):
   matched reviews remain outstanding. This does not complete the NPC/pixel-art
   domains or the first-slice acceptance gate. No CI workflow, DB migration or
   delegated agent was used. Full section 15 campaign/system scope stays active.
+
+
+Cognition cast public hands-on verification:
+
+- Actual public cartridge download `sf-mini-monsters (9).gba` matches target
+  311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780.
+  Native gym battery cast-room-saved imports and resumes at (8,7), showing
+  Scott, Walden and Steven's original sprites together. Public screenshot:
+  .tools/browser-review/public-v32-cognition-cast.png; structured evidence
+  public-v32-cognition-cast.json in the same directory.
+- Actual Save backup is 131,072 bytes identical to the imported native battery,
+  SHA256 0d815344d5da4c9166efcb589955ee954c51fec041b0fb6a0e53cedf7fa67494.
+  That battery independently cold-resumes natively with the preserved earned
+  team/badge state. This is one guest checkpoint, not ten final round trips.
+- Browser import initially showed white without console errors. Pause/Resume
+  reached the native Continue screen and resumed the correct room normally.
+  Cause and browser boot/frame pacing remain unverified; investigate before
+  final release acceptance. Do not infer performance/input gates from this QA.
+- First GitHub push terminated with HTTP 408; remote API confirmed old HEAD.
+  HTTP/1.1 retry succeeded, and remote API confirms source 218beb3. No workflow
+  was triggered: the latest Actions run remains 37731870689 from 05:20:22Z.
+  Source/art/rebuild/publication are committed in d39da11, d754113 and 218beb3.
+- Signed-in QA and existing user comparison reviews remain pending. All 11 full
+  domain approvals remain outstanding. Next work follows the current table;
+  the complete SF campaign and every section 15 gate stay required.
