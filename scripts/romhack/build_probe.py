@@ -15,6 +15,7 @@ from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
 from evolution_fixture import FIXTURES, apply_evolution_fixture
+from interface_text import apply_interface_text
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -77,6 +78,7 @@ def main():
     docker('make', '-j8', 'FILE_NAME=sf-engine-probe', f'TITLE={content["title"]}',
            f'GAME_CODE={content["game_code"]}', directory='/workspace/.tools/pokeemerald')
     target = EMERALD / 'sf-engine-probe.gba'
+    text_receipt = apply_interface_text(ROOT, EMERALD, target)
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     docker('make', 'TARGET=cli', 'CFLAGS=-O2', directory='/workspace/.tools/flips')
     target_hash = hashlib.sha256(target.read_bytes()).hexdigest()
@@ -108,6 +110,7 @@ def main():
         'source_worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip()),
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending'
     }
+    manifest['interface_text'] = text_receipt
     if args.fixture:
         manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
                                'campaign_progress_evidence': False}

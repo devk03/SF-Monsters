@@ -2020,8 +2020,10 @@ Native Mac capture and caught-party save checkpoint:
   to the separately played WASM save, SHA-256
   ca1024db3fcdbddac57620444f133e1c53c56aafb14dc5d8dcb358cf03e3770e.
   No creature, experience, inventory or quest-state RAM is forced.
-- A 1,336-frame cold native resume of that battery matches WASM final RGB/Flash
-  and all 1,465,924 stereo pairs. CinderCoy remains level 5, 13/19 HP with
+- A 1,336-frame cold native boot of that battery matches WASM final RGB/Flash
+  and all 1,465,924 stereo pairs. Later rendered inspection found that this short
+  input stops at the title screen: decoded save data is preserved, but playable
+  continuation is not proven by this recording. CinderCoy remains level 5, 13/19 HP with
   Scratch/Growl/Ember at 32/40/25 PP; BinPossum remains level 3, 15/15 HP with
   Tackle/Tail Whip/Sand Attack at 35/30/15 PP. Sunset position 7,11, money 3,500,
   three Potions and pre-gym flags remain. Evidence: slice-roster-macos-caught-
@@ -2032,3 +2034,31 @@ Native Mac capture and caught-party save checkpoint:
   cast/tiles/music, pixel cleanup, wider balance and real browser performance
   remain open. Public 0.0.17 is unchanged; all 11 approvals and the complete
   section 15.1 campaign/system gates remain required.
+
+Original native interface labels — private preview checkpoint:
+
+- Authored 41 compact labels for team selection, summary, guide searches,
+  capture messages and save information. The Start menu uses TEAM and GUIDE;
+  party selection says "Choose a monster" and summary uses MONSTER INFO/SKILLS.
+  A guarded post-link text overlay keeps the engine's allocated addresses and
+  cartridge size unchanged. It verifies each allocation against the linked ELF,
+  rejects missing/ambiguous/overlapping/stale/overflowing slots and preserves
+  unrelated bytes. Reapplication is idempotent. Boundary/correspondence checks pass.
+- The normal build now applies this overlay. Docker compilation is still stalled,
+  so a separately labeled private text-only preview starts from verified 0.0.17.
+  It does not claim a new full rebuild. Private target SHA-256:
+  36156ec34d7e05614f33e9d8a9b01a034446f0fcb01500fecd03898f2f34e1f8.
+  Native Flips and the browser BPS decoder reproduce that target exactly.
+  The public website remains 0.0.17 until normal compilation is verified.
+- Rendered QA exposed an earlier evidence error: the short 1,336-frame battery
+  input loaded party data but remained at the title. That recording is retained
+  as boot/decoded-save evidence and is not counted as playable continuation.
+  The corrected 3,752-frame cold sequence visibly reaches Sunset. In native Mac
+  mGBA and WASM it matches final RGB/Flash/all 4,116,880 stereo pairs, preserving
+  both caught-party members, moves/PP, money/items and location. Evidence:
+  interface-final-native-field. Actual menu captures show readable TEAM/GUIDE,
+  party and summary labels; this is not real browser latency or full UI approval.
+- Guide-list header art still displays inherited branding, as does the title.
+  Those graphics, other labels/assets, native pixel cleanup, cast/tiles/music,
+  wider balance and all complete-campaign gates remain unfinished. All 11 user
+  quality approvals remain pending. No GitHub workflow was dispatched.

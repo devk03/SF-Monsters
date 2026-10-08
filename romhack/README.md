@@ -44,13 +44,31 @@ bytes requires a version bump. The public `romhack/releases` folder contains
 patches and integrity manifests, never full ROMs.
 
 The overlay includes original Sunset/South Park layouts, the courier quest,
-clinic and Cognition gym draft, three starter/call candidates and Sunset/wild-battle
-theme candidates. Other creatures, cast art, tiles and music remain scaffolding;
+clinic and Cognition gym draft, eighteen creature/call candidates and Sunset/wild-battle
+theme candidates. Cast art, tiles and most music remain scaffolding;
 this is not the accepted polished slice or complete SF campaign.
 Floating IPS is Alcaro's GPL-3.0 tool, pinned at
 `ff216a75df0987047a67d7923567dc4482ce07ac`; its source/license stay in the local
 checkout. Our browser decoder follows byuu's public-domain BPS format rather
 than embedding Floating IPS code.
+
+## Native interface text
+
+`romhack/content/interface-text.json` declares our compact team, summary, guide
+and capture labels. After compilation, `interface_text.py` resolves read-only
+symbols in the linked ELF and verifies their bytes against the cartridge before
+replacing them. Labels must fit their original allocations, including the native
+terminator. Addresses, surrounding data and save layouts stay unchanged. Shorter
+labels are terminated and padded; repeat application produces identical bytes.
+Controls use the pinned engine's character map. Check actual rendered widths too:
+allocation safety does not prove that a phrase fits its screen window.
+
+When compilation is unavailable, `python3 scripts/romhack/preview_interface.py
+--rom PATH` can make a private text-only draft from the explicitly pinned prior
+cartridge. It uses the pinned native Flips encoder and verifies reapplication.
+Its manifest explicitly leaves full recompilation unverified; do not publish it
+as a normal release. Both the inherited title and guide-header graphics still
+need original replacements; changing text labels does not finish branding.
 
 ## Editable SF maps
 

@@ -72,12 +72,14 @@ the current Mac evidence). Keep full cartridges, inputs and recordings in `.tool
 ```sh
 python3 scripts/quality/capture_core.py --backend host --setup \
   --rom .tools/browser-review/production-downloaded-v17.gba \
-  --input .tools/benchmarks/sunset-battery-continue.csv \
+  --input .tools/benchmarks/interface-cold-field-full.csv \
   --battery .tools/benchmarks/slice-roster-wasm-caught-saved/capture.sav \
   --name my-native-resume --trace-only
 ```
 
 Omit `--setup` after the host core is built. Omit `--trace-only` to record video;
+the example uses an existing private controller recording, not a shipped fixture.
+Inspect the final screen: loaded party RAM at the title is not a resumed field.
 raw video needs about 9 MiB per game second. Losslessly compress a completed
 recording with `python3 scripts/quality/frame_storage.py .tools/benchmarks/NAME`,
 then encode it with `python3 scripts/quality/encode_core_capture.py` and that path.

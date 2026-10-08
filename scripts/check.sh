@@ -21,6 +21,7 @@ python3 tests/evolution_fixture_test.py
 python3 tests/creature_audio_test.py
 python3 tests/field_music_test.py
 python3 tests/frame_storage_test.py
+python3 tests/interface_text_test.py
 node tests/web_capture_test.cjs
 cd web
 npx tsc --noEmit
