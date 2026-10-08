@@ -761,14 +761,14 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.38-neutral-clinic-preview; target a93d6c0a9f9e1a8e551d74c96d00996813b22665ee9776a4ce0af2891bc18f82; Site version 31. Teal carpet/trim removed; neutral stone/plaster/wood, larger furniture and connected walls. Art remains unapproved. |
-| Latest local source build | v39 storage-label draft 00c55c0d1ad410e96cb52656c73b7efec240d17103721b224f0e5fcea7a4d735. Continue/PC storage labels use Guide/monster terms. Normal compilation/BPS/full local checks pass; old v35 battery resumes, and 1,116 native/WASM service frames match RGB/PCM/Flash. Public remains v38. |
+| Public build | 0.0.40-clinic-music-preview; target fcdb5aeb7266af8af0938d52bfd13c00fc9a1db9ba111abac2a2667aff8e3b94; Site version 32. Neutral clinic art and original Continue/storage labels preserved; original clinic music added. Clinic music subset rated 2/4 by user; full Audio remains incomplete. |
+| Latest local source build | Same v40 target, source 0898f08. Normal compilation/BPS and full local checks pass. Old v35 battery resumes; 2,048 walking and 336 healing native/WASM RGB/PCM/Flash frames match. Two actual music loops captured. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 31 guest clinic resume verified in IAB. Actual Chrome signed-in session shows account identity, accepts v35 battery, resumes clinic and downloads exact v38 cartridge and byte-identical backup; that downloaded pair cold-resumes in native mGBA. Fresh auth flow, same-browser account/guest isolation, Safari/mobile and full save gates remain open. IAB blob downloads remain unverified. |
+| Public QA | Site 32 Chrome account session restores old local save, displays GUIDE at Continue and resumes clinic. Actual ROM download matches v40; battery export remains byte-identical to v35 import. Sampled core counter 60.0 fps. Fresh auth, controlled account/guest isolation, Safari/mobile and full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Clinic subset comparison awaits requested user score. Finish storage text/boxes, then original first-slice interior/battle music and remaining cast/portraits. Other interiors still need coherent material/connection rules. Preserve positively reviewed walking; checks stay local and GitHub Actions manual-only. |
+| Next work | Clinic music is explicitly 2/4; improve its weakest audible aspect after requested gap feedback. Clinic art subset score also pending. Other first-slice music, cast/portraits and interior material rules remain required. Preserve walking. Checks stay local; Actions manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3554,3 +3554,44 @@ Clinic initial native mix audition evidence:
 - Initial 2048 native/WASM walking RGB frames, 8,988,672 PCM bytes and Flash are
   identical; end state remains (6,8) with party/badge/stage/items/money retained.
   These are runtime equivalence checks, not browser deadline/underrun evidence.
+
+
+Clinic v40 revised music release and user review:
+
+- Source 0898f0838e34b715e4ec0ff374de9f67c851a9c2 builds final target
+  fcdb5aeb7266af8af0938d52bfd13c00fc9a1db9ba111abac2a2667aff8e3b94.
+  BPS 813,704 bytes, SHA256
+  c87d61428615461184b1d92188731151c708f6a89f0cf14b2c3d04597171b8a2;
+  normal compilation and byte-identical patch round trip pass.
+- Revised native/WASM walking: 2048 RGB frames, 8,988,672 PCM bytes and Flash
+  identical. Healing: 336 RGB frames, 1,474,704 PCM bytes and Flash identical;
+  level-11 starter HP restores 4/31 -> 31/31 and Ember PP 16 -> 25 while
+  money/items/badge/stage persist. Inherited healing fanfare is still pending.
+- Revised 167.43-second native clinic recording: peak 6528, RMS 1741.73.
+  Matched segment RMS 1728.19 (~2.9 dB below reference lab 2416.32). The native
+  tempo produces an approximately 74.175-second repeat (25 ms energy-envelope
+  correlation 0.969; second repeat 148.375 seconds, correlation 0.962). This
+  supports two actual loops in the capture, not a browser underrun/click verdict.
+- Candidate listening file:
+  .tools/benchmarks/clinic-music-v40-revised-native-two-loop/park-bench-break-native.mp3.
+  Private matched comparison:
+  .tools/benchmarks/clinic-music-v40-revised-paired-review/comparison.mp4.
+  Reference remains private. Candidate composition and instruments are original.
+- User rated this clinic music subset 2/4 on October 8, 2026. This is an explicit
+  below-target result, not approval. Full Audio and all 11 full domains remain
+  incomplete. Asked which gap dominates: instrument sounds, melody/arrangement
+  or mix/energy. Awaiting that optional feedback; no specific criticism inferred.
+- Site source 24ddc372ab9f3248724e6ee82ba2b230f562f26e; saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_32acc9db20948191b93ed7bcc4be64f1.
+  Deployment appgdep_6ac7ec3a07108191ae2de2d7499955a0 succeeded
+  2026-10-08T19:17:22Z at the existing public URL. Archive patch/manifest match
+  release exactly; no full BPEE ROM is hosted. Current audience stays public.
+- Actual Chrome signed-in public player downloads sf-mini-monsters (15).gba
+  matching final target, restores prior local battery, displays GUIDE at
+  Continue and enters neutral clinic. Backup sf-mini-monsters (7).sav matches
+  imported v35 battery byte-for-byte (131072 bytes, SHA256
+  01536628638451d12541c2cdfe37972cc069bd94fbe9b6a5525b4716ee37dedc).
+  Screenshots: .tools/browser-review/public-v40-guide-continue.png and
+  public-v40-clinic-music.png. Sampled core counter 60.0 fps is not a deadline gate.
+- No workflow, DB mutation, PR merge or delegation ran. Goal stays active with
+  the original full scope and the recorded 6 PM local stop condition.
