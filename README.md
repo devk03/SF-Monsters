@@ -20,6 +20,8 @@ BrinePup now has Brinebull (level 16) and Water/Ice Tideroar (level 36)
 candidates with their own art, cries and defensive move progression.
 SproutSlug now has FernSlug (16) and Grass/Bug Canoptera (36) candidates.
 All three authored lines still need pixel cleanup and user quality approval.
+The gym/clinic now have furnished interiors, an incident log, a planning board
+and a one-time emergency Potion. Older saves reload updated rooms safely.
 
 [Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
 [Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps) ·

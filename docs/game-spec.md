@@ -763,7 +763,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Next checkpoint: additional starter/team strategies, original wild creatures,
   map/cast/audio/interface polish and first-slice comparison reviews. The earned
   Fire route now verifies the first gym victory, reward, re-entry and save.
-- Public preview: version 0.0.13 includes three original starter/call candidates,
+- Public preview: version 0.0.14 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
@@ -1774,3 +1774,31 @@ First-slice interior composition checkpoint:
   Clinic workflows, final normal-patch publication and review clips remain next.
   Public 0.0.13 is still current at this source checkpoint. All 11 final quality
   approvals, original wild creatures, broader systems and full campaign remain.
+
+Interior release and interaction validation checkpoint:
+
+- Native interaction reads the post-badge incident log, collects one emergency
+  Potion (two to three; flag 0x043 set), then confirms repeated interaction
+  grants no additional item. Evidence: .tools/benchmarks/interiors-{incident-log-after,
+  coffee-first,coffee-collected,coffee-repeat}. The office planning/return content
+  remains inside the existing first slice, not a new completed neighborhood.
+- Updated-clinic controller play heals the earned level-11 party from 21/31 to
+  31/31 HP and restores PP, opens Patrick's actual purchase list/prices, and
+  reaches the native PC menu. Evidence: .tools/benchmarks/interiors-clinic-
+  {healed,shop,storage}. Opening these menus proves access; complete storage
+  transfer, every inventory workflow and the final interface gate remain open.
+- Public Site version 15 deployed successfully with the normal
+  0.0.14-interiors-preview patch at https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+  Site source 74e600c55eed00dbb7cbab1e10eb075c50be7014; deployment
+  appgdep_6ac71acb8e948191a49d4de987624622. The 676,294-byte patch reconstructs
+  target 234969b126fabde5068cd010d9f6eab91b0b9d8f94b21ff47994857bd34a1de7.
+  Native rebuild/BPS checks, TypeScript, production packaging and archive
+  inspection pass. The native package has 84 files; full inherited cartridges
+  and private setup fixtures remain excluded. Public access is unchanged.
+  Source checks pass for 2710910:
+  https://github.com/devk03/SF-Monsters/actions/runs/37727021369.
+- Composition and compatibility have improved, but inherited tile/cast art,
+  original wild creatures, original indoor/trainer/gym music, native-size art
+  cleanup, comparison reviews and other starter/team strategies remain. The full
+  16-hub/eight-gym/150-entry game, all system/performance/save/campaign gates
+  and 11 final user quality approvals remain required. Approved parity stays 0/11.

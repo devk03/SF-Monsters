@@ -6,7 +6,7 @@ Open https://sf-mini-monsters.devkunjadia03.chatgpt.site and choose **Load .gba 
 Supply your local English Emerald ROM matching SHA-256
 `a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af`.
 Validation, extraction and SF patching happen on your device. No ROM is uploaded.
-Version 0.0.13 includes South Park, three original starter candidates and their
+Version 0.0.14 includes South Park, three original starter candidates and their
 original cry candidates, plus Ocean Commute (Sunset) and Fogbank Frenzy (wild battles).
 Preview a starter to hear its call; explore Sunset and its encounter grass to
 hear the new themes. The wild-battle mix has been raised to within 1 dB of the
@@ -50,7 +50,7 @@ run `make hack`. See [the pinned build workflow](../romhack/README.md).
 Check patch integrity and Flash-slot validation with:
 
 ```sh
-node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.13-clinic-recovery-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
+node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.14-interiors-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
 node --experimental-strip-types tests/flash-save.test.mjs
 ```
 
@@ -162,3 +162,10 @@ and talk to Scott: the reward must not duplicate and the battle must not restart
 Save and Continue to check that the badge, party, items and gym progress survive.
 This is one verified route; other starter/team strategies and normal-player
 pacing still need testing, and this does not certify the finished SF campaign.
+
+The office and clinic now have furnished work/waiting/service areas. Read the
+team board near the office entrance and the incident log upstairs; the log changes
+after the badge. The coffee shelf offers one emergency Potion. Repeated visits
+must not grant another. Older saves reload the new layouts; a valid position stays
+unchanged, while a position covered by new furniture moves to nearby safe floor.
+These layouts still use inherited tile and cast art, with quality review pending.
