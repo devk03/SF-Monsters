@@ -1,16 +1,16 @@
 {
-  "version": "0.0.40-clinic-music-preview",
+  "version": "0.0.41-clinic-voice-preview",
   "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Five named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "fcdb5aeb7266af8af0938d52bfd13c00fc9a1db9ba111abac2a2667aff8e3b94",
+  "target_sha256": "9cf14795ee4fc41cd772abd2a2f61572003659995aeb4cf970744202de1cd5bc",
   "target_bytes": 16777216,
-  "patch_sha256": "c87d61428615461184b1d92188731151c708f6a89f0cf14b2c3d04597171b8a2",
-  "patch_bytes": 813704,
+  "patch_sha256": "8645c3c95a13f9ef653e657bcc8190cb26732209f3889670c652cacf744ed15b",
+  "patch_bytes": 841806,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "0898f0838e34b715e4ec0ff374de9f67c851a9c2",
+  "source_commit": "59371e302ee97e2f10fa30d8d4d18d752dd0bca7",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
@@ -41,8 +41,8 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "7b124df53189ed6a5711a89f89c3b3f58b3f106302acad909661263b93d10e80",
-    "target_sha256": "22b0aca23ae61a37b024b9311e9b2fd2d2e686f8512366b62db9d4d49cac5b5d",
+    "input_sha256": "bfd4d38ab0a6f61dff62c646f8fa0241d8a2c7b526d11976418f8589643e3c10",
+    "target_sha256": "dfe838d4661be2ac274211327ff12cfd1750d5cf744032d61d59600fe6c5f7b7",
     "labels": [
       {
         "symbol": "gText_Pokemon",
@@ -459,15 +459,15 @@
   ],
   "title_song": {
     "title": "Foglight Overture",
-    "region_address": 144011176,
-    "header_address": 144022912,
+    "region_address": 144048808,
+    "header_address": 144060544,
     "allocated_bytes": 11784,
     "score_bytes": 1988,
     "tracks": 8,
     "voicegroup_address": 141207372,
     "native_volume": 90,
     "midi_sha256": "a5fa33ca074408a6958d785d882f172468225b28461856419b9d86fbcdb58a16",
-    "score_sha256": "588c91418fc098d65558e3719415436a43eba424e8b680c3f37a1ac34ecf274b",
+    "score_sha256": "09d99bbc5fdb869f5c67431677a7b4f315a4836c784e350b36331418e02c02b0",
     "waveform_sources_verified": true,
     "quality_approval": "pending"
   },

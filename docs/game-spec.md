@@ -761,14 +761,14 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.40-clinic-music-preview; target fcdb5aeb7266af8af0938d52bfd13c00fc9a1db9ba111abac2a2667aff8e3b94; Site version 32. Neutral clinic art and original Continue/storage labels preserved; original clinic music added. Clinic music subset rated 2/4 by user; full Audio remains incomplete. |
-| Latest local source build | Same v40 target, source 0898f08. Normal compilation/BPS and full local checks pass. Old v35 battery resumes; 2,048 walking and 336 healing native/WASM RGB/PCM/Flash frames match. Two actual music loops captured. |
+| Public build | 0.0.41-clinic-voice-preview; target 9cf14795ee4fc41cd772abd2a2f61572003659995aeb4cf970744202de1cd5bc; Site version 33. Expressive original clinic instrument revision preserves v40 tune/mix and walking frames. v41 is unreviewed; latest explicit clinic music score is v40 at 2/4. Full Audio remains incomplete. |
+| Latest local source build | Same v41 target, source 59371e3. Normal compilation/BPS and all local checks pass. Native/WASM 2,048 walking and 336 healing frames match RGB/PCM/Flash; v40/v41 walking RGB also identical. Old battery resumes; controlled audio A/B ready. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 32 Chrome account session restores old local save, displays GUIDE at Continue and resumes clinic. Actual ROM download matches v40; battery export remains byte-identical to v35 import. Sampled core counter 60.0 fps. Fresh auth, controlled account/guest isolation, Safari/mobile and full save/performance gates remain open. |
+| Public QA | Site 33 existing Chrome account restores old local save through GUIDE/Continue into clinic. Actual ROM download matches v41; battery export is byte-identical to v35 import. Test player muted/paused to avoid overlapping review audio. Fresh auth, controlled account/guest isolation, Safari/mobile and full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Clinic music is explicitly 2/4; improve its weakest audible aspect after requested gap feedback. Clinic art subset score also pending. Other first-slice music, cast/portraits and interior material rules remain required. Preserve walking. Checks stay local; Actions manual-only. |
+| Next work | Await v41 instrument score while progressing other required first-slice audio contexts. Healing uses inherited MUS_HEAL with 160-frame fanfare gate and shared fanfare voicegroup; its original replacement needs a separate voicegroup and one-shot timing. Clinic art/cast/interior/story/system gates remain open. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3645,3 +3645,31 @@ Clinic voice v41 native A/B verification:
 - v40 remains the last explicit clinic music score, 2/4. v41 is unreviewed.
   These format/capture/level checks do not establish acoustic realism, musical
   taste, transition cleanliness, browser underrun safety or full Audio parity.
+
+
+Clinic voice v41 publication checkpoint:
+
+- Site source 47ceac6a503fbb62aa986acdf4f42eb7a55ba7ed, saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_5ab34aa831a48191b0d4810e2d8ed148.
+  Deployment appgdep_6ac7f1bb34788191877cfa7bc5d2270f succeeded
+  2026-10-08T19:40:51Z, publishing Site 33 at the existing public URL.
+  Archive patch/manifest match release and contain no full Emerald ROM.
+- Native/WASM healing verifies all 336 RGB frames, 1,474,704 PCM bytes and
+  Flash identical with the revised sustain voices. Ends at (6,5), HP31/31 and
+  Ember PP25; party/items/money/earned badge/stage retained. This does not
+  approve the inherited fanfare or certify every audio transition.
+- Actual public Chrome account session downloads sf-mini-monsters (16).gba
+  matching v41 target, restores prior local battery through GUIDE/Continue
+  into neutral clinic, and exports sf-mini-monsters (8).sav byte-identically
+  to the v35 import: 131072 bytes, SHA256
+  01536628638451d12541c2cdfe37972cc069bd94fbe9b6a5525b4716ee37dedc.
+  Screenshot: .tools/browser-review/public-v41-clinic-voices.png. Player is
+  muted and paused after QA so review audio can play alone. Goal stays active.
+- Latest human result remains clinic v40 music 2/4; v41 instrument review and
+  exact gap feedback are pending. No full-domain approval is inferred.
+- Inspected next audio context: native FANFARE_HEAL waits 160 frames and
+  MUS_HEAL uses MUSIC_PLAYER_SE2 with the shared fanfare voicegroup. An original
+  replacement must preserve that event timing and avoid changing other
+  fanfares' instrument mappings; implement an independent one-shot voicegroup.
+- No workflow, DB mutation, PR merge, delegation or recurring monitor ran.
+  Original full scope and recorded 6 PM local cutoff remain in force.
