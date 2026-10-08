@@ -3,6 +3,7 @@ import json
 import re
 import struct
 from copy import deepcopy
+import shutil
 from pathlib import Path
 
 
@@ -122,6 +123,15 @@ def apply_maps(content, root, engine, original):
         plan['native_id'] = json.loads(original(f'data/maps/{plan["engine_map"]}/map.json'))['id']
         linked.append(plan)
     validate_links(linked)
+    authored = '\n        || '.join(
+        '(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(%s)\n'
+        '         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(%s))'
+        % (plan['native_id'], plan['native_id']) for plan in linked)
+    (engine / 'src/sf_authored_maps.h').write_text(
+        '#ifndef SF_AUTHORED_MAPS_H\n#define SF_AUTHORED_MAPS_H\n'
+        '#include "constants/maps.h"\n'
+        'static inline bool8 SFMapUsesAuthoredLayout(void)\n{\n'
+        '    return ' + authored + ';\n}\n#endif\n')
     points = content.get('recovery_points', [])
     healing_path = 'src/data/heal_locations.json'
     healing = json.loads(original(healing_path))
@@ -207,5 +217,31 @@ def apply_maps(content, root, engine, original):
         if source.count(before) != 1:
             raise ValueError('Pinned new-game field callback changed.')
         (engine / path).write_text(source.replace(before, 'gFieldCallback = NULL;'))
+        restored.append(path)
+    # SF map state is rebuilt by its on-load scripts, including the gym gate.
+    # A cached view from an older patch must not paint over a new layout.
+    path = 'src/fieldmap.c'
+    source = original(path)
+    source = source.replace('#include "fieldmap.h"',
+                            '#include "fieldmap.h"\n#include "sf_authored_maps.h"', 1)
+    if source.count('    LoadSavedMapView();') != 1:
+        raise ValueError('Pinned saved-map-view hook changed.')
+    (engine / path).write_text(source.replace('    LoadSavedMapView();',
+        '    if (!SFMapUsesAuthoredLayout())\n        LoadSavedMapView();', 1))
+    restored.append(path)
+    shutil.copy2(root / 'romhack/engine/map_resume.h', engine / 'src/sf_map_resume.h')
+    path = 'src/overworld.c'
+    source = (engine / path).read_text()
+    anchor = 'void CB2_ContinueSavedGame(void)'
+    if source.count(anchor) != 1 or source.count('    if (UseContinueGameWarp() == TRUE)') != 1:
+        raise ValueError('Pinned saved-position hook changed.')
+    source = source.replace(anchor, '#include "sf_map_resume.h"\n\n' + anchor, 1)
+    source = source.replace('    if (UseContinueGameWarp() == TRUE)',
+        '    if (SFMapResumeWarpIfNeeded())\n'
+        '    {\n        WarpIntoMap();\n        TryPutTodaysRivalTrainerOnAir();\n'
+        '        SetMainCallback2(CB2_LoadMap);\n    }\n'
+        '    else if (UseContinueGameWarp() == TRUE)', 1)
+    (engine / path).write_text(source)
+    if path not in restored:
         restored.append(path)
     return restored

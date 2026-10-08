@@ -1722,3 +1722,24 @@ First-gym validation checkpoint — earned Fire route:
   polish and the full 16-hub/eight-gym/150-entry campaign remain required.
   Approved quality domains stay 0/11. Latest existing release checks pass:
   https://github.com/devk03/SF-Monsters/actions/runs/37717333483 (bc008be).
+
+First-slice interior upgrade foundation:
+
+- The empty gym/clinic layouts are being composed into work, waiting and service
+  areas while retaining their dimensions, main corridors and event identities.
+  Native saved views would otherwise paint older cached tiles over updated rooms.
+- The authored-map compiler now generates a native SF-map predicate. Continue
+  reloads these layouts from content and reconstructs persistent terrain through
+  on-load scripts, including Cognition's already-earned open gate. Unauthored
+  maps retain the engine's ordinary cached-view behavior.
+- A native position resolver keeps valid saved positions unchanged. If revised
+  terrain blocks an older position, it selects a nearby walkable tile, avoids
+  NPC/door anchors and uses the native same-map warp. It does not rewrite party,
+  inventory, money or quest state. Coordinates outside a smaller map are clamped
+  before bounded searching. This adds no save-schema or database change.
+- Host C tests exercise the production resolver with sanitizers: valid positions,
+  moved-NPC anchors, new collision, equally near NPC/warp exclusions, map bounds,
+  foreign maps, no safe tile and unrelated state preservation. Native compilation
+  and exact draft BPS round-trip pass. New room composition, actual older-save
+  resume/rendering and cross-runtime verification remain next; public 0.0.13 is
+  unchanged. This does not approve map art or any quality domain (still 0/11).

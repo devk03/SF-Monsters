@@ -146,3 +146,9 @@ are rejected. Both new-game recovery slots must be declared, and every authored
 `setrespawn` script must register a declared slot. The South Park clinic uses
 32,6, immediately outside its entrance; the two initial slots use Sunset 23,22.
 These change recovery data, without converting or deleting existing saves.
+
+Authored SF maps reload their current layouts on Continue rather than overlaying
+an older saved view. Reconstruct lasting metatile changes in the map's on-load
+script from persistent flags/variables. The gym gate already follows this rule.
+Valid saved coordinates are retained; newly blocked positions use the native
+same-map warp to a nearby walkable tile, avoiding doors and NPC anchors.
