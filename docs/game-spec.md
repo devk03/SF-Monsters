@@ -761,14 +761,14 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.41-clinic-voice-preview; target 9cf14795ee4fc41cd772abd2a2f61572003659995aeb4cf970744202de1cd5bc; Site version 33. Expressive original clinic instrument revision preserves v40 tune/mix and walking frames. v41 is unreviewed; latest explicit clinic music score is v40 at 2/4. Full Audio remains incomplete. |
-| Latest local source build | Same v41 target, source 59371e3. Normal compilation/BPS and all local checks pass. Native/WASM 2,048 walking and 336 healing frames match RGB/PCM/Flash; v40/v41 walking RGB also identical. Old battery resumes; controlled audio A/B ready. |
+| Public build | 0.0.42-recovery-cue-preview; target 5542a01edefcd14a12b4e0669ffe63f95fef025d30fd0b244085c3e24bd90632; Site version 34. Original one-shot recovery cue uses a separate bank and preserves native service timing. v41 voices/v42 cue remain unreviewed; latest explicit clinic music score is v40 at 2/4. |
+| Latest local source build | Same v42 target, source 101ca9d. Normal compilation/BPS/all local checks pass. Native/WASM 336 healing frames match RGB/PCM/Flash; v41/v42 service RGB identical. Compiled three-track cue finishes and seven-track BGM resumes; shared fanfare bank unchanged. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 33 existing Chrome account restores old local save through GUIDE/Continue into clinic. Actual ROM download matches v41; battery export is byte-identical to v35 import. Test player muted/paused to avoid overlapping review audio. Fresh auth, controlled account/guest isolation, Safari/mobile and full save/performance gates remain open. |
+| Public QA | Site 34 Chrome account restores prior local save through GUIDE/Continue into clinic. Actual ROM download matches v42; backup export matches v35 import byte-for-byte. Initial chooser wait timed out; alternate visible Load ROM succeeded without console errors. Test player muted/paused. Fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Await v41 instrument score while progressing other required first-slice audio contexts. Healing uses inherited MUS_HEAL with 160-frame fanfare gate and shared fanfare voicegroup; its original replacement needs a separate voicegroup and one-shot timing. Clinic art/cast/interior/story/system gates remain open. Actions stay manual-only. |
+| Next work | Capture genuine reference-ROM healing in Oldale centre using existing controller-only Emerald lineage, then compare audio/service presentation. v41 instrument review remains pending. Other first-slice audio/cast/art/story/system gates remain required; no campaign expansion before slice approval. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3728,3 +3728,33 @@ Recovery cue v42 playback verification:
   to an authentic reference-ROM comparison.
 - Shared fanfare bank remains byte-unchanged. Public v42 release follows;
   the original full Audio/domain/campaign/system gates remain open.
+
+
+Recovery cue v42 public release checkpoint:
+
+- Site source c8fc44c5e08a1d5230be320f3c75837148228297, saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_f73ab5684a9481918e19ad9585f1594d.
+  Deployment appgdep_6ac7f8add9908191b58557f83baa7e12 succeeded
+  2026-10-08T20:10:31Z, publishing Site 34 at the existing public URL.
+  Archive patch/manifest match release exactly and contain no full Emerald ROM.
+- Actual public Chrome account downloads sf-mini-monsters (17).gba matching
+  v42 target, restores old local save through GUIDE/Continue into neutral
+  clinic, then exports sf-mini-monsters (9).sav matching the v35 import:
+  131072 bytes, SHA256
+  01536628638451d12541c2cdfe37972cc069bd94fbe9b6a5525b4716ee37dedc.
+  Screenshot: .tools/browser-review/public-v42-recovery-cue.png. The first
+  chooser wait timed out after reload; fresh state showed no console errors,
+  and alternate Load ROM control worked. No persistent product bug is inferred
+  from one transient observation; early-load behavior remains worth checking.
+- Recovery service is proven in native/WASM captures and the exact public ROM
+  is verified; actual browser healing interaction/audio deadline checks are
+  still pending, not substituted by cartridge identity alone.
+- Inspecting the pinned original maps establishes a genuine reference route:
+  original lab exits (6/7,12) -> Littleroot (7,16), then Route101 -> Oldale.
+  Oldale centre door is (6,5); nurse is (7,2), approached at (7,3). Existing
+  office-emerald-paired-interior snapshot has the exact baseline hash and
+  pinned controller-only lineage; extend it through normal gameplay.
+- Latest explicit user music score remains 2/4 for v40. No score/approval is
+  inferred for v41 voices or v42 cue. Full Audio and all full-domain, campaign
+  and system requirements remain unfinished. No CI, DB mutation, PR merge or
+  delegated work ran. Goal remains active with the same 6 PM local cutoff.
