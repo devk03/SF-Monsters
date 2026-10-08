@@ -3543,3 +3543,14 @@ Original clinic music composition checkpoint:
   compiles and round-trip applies (813,705-byte BPS). Actual native/WASM playback,
   two-loop capture, transitions and old-save verification follow. Public remains
   v38/Site 31; there is no audio approval or full-domain completion.
+
+
+Clinic initial native mix audition evidence:
+
+- Initial two-loop capture is 167.43 seconds, peak 4320, RMS 1135.93. The matched
+  34.29-second segment has RMS 1122.74 versus reference lab RMS 2416.32 (~6.7 dB
+  quieter). Raised score channel/native levels before publication. Initial
+  patch/captures are preserved, not deployed; revised mix is still unreviewed.
+- Initial 2048 native/WASM walking RGB frames, 8,988,672 PCM bytes and Flash are
+  identical; end state remains (6,8) with party/badge/stage/items/money retained.
+  These are runtime equivalence checks, not browser deadline/underrun evidence.

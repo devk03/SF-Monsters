@@ -53,15 +53,15 @@
     "A3": [[48,60,"major7"],[45,57,"minor7"],[41,53,"major7"],[43,55,"major7"],[48,60,"major7"],[45,57,"minor7"],[38,50,"minor7"],[48,60,"major7"]]
   },
   "channels": {
-    "flute": {"volume": 76, "pan": 58},
-    "guitar": {"volume": 58, "pan": 84},
-    "bass": {"volume": 70, "pan": 64},
-    "piano": {"volume": 58, "pan": 42},
-    "kick": {"volume": 48, "pan": 64},
-    "brush": {"volume": 40, "pan": 74},
-    "shaker": {"volume": 30, "pan": 52}
+    "flute": {"volume": 102, "pan": 58},
+    "guitar": {"volume": 84, "pan": 84},
+    "bass": {"volume": 88, "pan": 64},
+    "piano": {"volume": 82, "pan": 42},
+    "kick": {"volume": 60, "pan": 64},
+    "brush": {"volume": 55, "pan": 74},
+    "shaker": {"volume": 42, "pan": 52}
   },
   "native_song": "mus_birch_lab",
   "native_voicegroup": "birch_lab",
-  "native_volume": 80
+  "native_volume": 96
 }
