@@ -1940,3 +1940,26 @@ Final opening-roster gameplay/release checkpoint:
   Native pixel cleanup, actual capture/party review, cast/tiles/music/interfaces,
   additional starter strategies and user comparison reviews remain open. All
   11 final approvals and the full 16-hub/eight-gym/150-entry campaign remain required.
+
+Capture-storage recovery checkpoint:
+
+- The host ran out of disk space while recording the actual wild BinPossum
+  capture attempt. Failed partial evidence is retained, not counted as a pass.
+  The first two bag-navigation checkpoints are intact; the subsequent ball-pocket
+  recording did not finish. A trace-only retry is still waiting on its live
+  Docker compilation process (sf-capture-0fb9f08e83), not assumed completed.
+- Added lossless gzip storage for raw native frames and streaming support in the
+  clip encoder. Compression verifies the entire decoded byte count/SHA before
+  replacing a raw file and retains a recovery receipt. Frame-count, hash and
+  corruption tests pass. Final pixels, PCM, save/state and controller evidence
+  remain unchanged. This changes evidence storage, not game art or emulation.
+- Actual 403,660,800-byte Mycelimp battle frames decode to the original SHA-256
+  8b762cce63f6252c97282f1392e31cb2859affc052c92e2731611741adf75818,
+  using 10,789,465 compressed bytes. The updated encoder successfully produces
+  a 44.00-second native A/V clip after an initial disk-full encoding failure:
+  .tools/benchmarks/slice-roster-steven-ember/review-729fbb15fc.mp4.
+  This is a functional clip, not a matched comparison or human quality approval.
+- Existing completed captures are being losslessly compressed to recover space;
+  unrelated user files remain untouched. Required source checks including the
+  new storage contracts pass. Public 0.0.17 remains current; capture/party review,
+  paired art/audio clips, cast/tiles/music and all full-campaign gates remain open.
