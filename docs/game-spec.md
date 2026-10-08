@@ -1207,6 +1207,29 @@ First-slice creature checkpoint — authored CinderCoy evolution candidates:
   creatures, map/cast polish and native gym victory/balance. All 16 hubs/eight
   gyms/150 entries, systems/performance/save gates and 11 final approvals remain.
 
+First-slice creature checkpoint — BrinePup evolution candidates:
+
+- BrinePup → Brinebull at level 16 → Tideroar at level 36 is authored on the
+  stable Mudkip/Marshtomp/Swampert native IDs. Brinebull stays Water and learns
+  Bubble Beam at evolution; Tideroar becomes Water/Ice and learns Ice Beam.
+  High HP/defenses, special attacks and Protect/Rest give this line a distinct
+  defensive role from the faster CinderCoy line. Stats, learnsets, guide text,
+  original honk/roar recipes and explicit evolution rules are authored in data.
+- Source atlases, separate back views, entrance poses and authored icon poses
+  are saved under assets/monsters/{brinebull,tideroar}, with exact built-in
+  imagegen prompts and panel layouts. Icons share BrinePup's reserved group 4.
+  Unequal atlas panels can be padded transparently without stretching or cutting
+  a wide flipper; an independent output test protects the outer tip and ground
+  alignment. Native-size cleanup and art approval remain pending.
+- Content revision 4 preserves stable save identities. Native draft compilation,
+  BPS round-trip and content/atlas/cry checks pass. Private prepared-level and
+  original-reference battery fixtures are added with the same publication guard;
+  they do not count as campaign progress. Native evolution/move learning,
+  older-save/browser evidence, matched clips and public deployment remain next.
+  Seven original creature candidates are not seven quality-complete monsters;
+  the SproutSlug line, slice wild creatures and full scope remain outstanding.
+  Approved parity stays 0/11.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

@@ -12,6 +12,27 @@ from monsters import png_palette
 
 
 class AuthoredAtlas(unittest.TestCase):
+    def test_unequal_panels_keep_the_outer_flipper_and_ground_line(self):
+        scratch = ROOT / '.tools' / ('atlas-test-' + uuid.uuid4().hex)
+        scratch.mkdir(parents=True)
+        image = Image.new('RGBA', (30, 16)); draw = ImageDraw.Draw(image)
+        for left, right in [(0, 12), (12, 22), (22, 30)]:
+            draw.rectangle((left + 2, 1, right - 2, 6), fill=(255, 0, 0, 255))
+        draw.point((11, 6), fill=(0, 255, 0, 255))
+        draw.rectangle((2, 10, 5, 13), fill=(0, 0, 255, 255))
+        draw.rectangle((12, 10, 15, 13), fill=(0, 0, 255, 255))
+        image.save(scratch / 'source.png')
+        path = scratch / 'icons.pal'
+        colors = [(0, 0, 0), (0, 0, 255)] + [(255, 0, 0)] * 14
+        path.write_text('JASC-PAL\n0100\n16\n' + '\n'.join('%d %d %d' % c for c in colors) + '\n')
+        layout = {'battle': [[0, 0, 12, 8], [12, 0, 22, 8], [22, 0, 30, 8]],
+                  'icons': [[0, 8, 10, 16], [10, 8, 20, 16]], 'pad_frames': True}
+        atlas_assets(scratch / 'source.png', scratch / 'native', layout, path)
+        front = Image.open(scratch / 'native/front.png').convert('RGBA')
+        back = Image.open(scratch / 'native/back.png').convert('RGBA')
+        self.assertTrue(any(p[:3] == (0, 255, 0) and p[3] for p in front.get_flattened_data()))
+        self.assertEqual(front.getchannel('A').getbbox()[3], back.getchannel('A').getbbox()[3])
+
     def test_authored_icons_keep_the_shared_palette_and_alternate_frame(self):
         scratch = ROOT / '.tools' / ('atlas-test-' + uuid.uuid4().hex)
         scratch.mkdir(parents=True)

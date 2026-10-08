@@ -15,6 +15,12 @@
      "pulses": [[0.02, 0.21, 310, 160], [0.30, 0.23, 250, 135]]},
     {"name": "solhowl", "engine_symbol": "Blaziken", "engine_file": "blaziken",
      "duration": 0.80, "formants": [480, 1050, 1700], "noise": 0.08,
-     "pulses": [[0.02, 0.19, 260, 130], [0.25, 0.48, 220, 105]]}
+     "pulses": [[0.02, 0.19, 260, 130], [0.25, 0.48, 220, 105]]},
+    {"name": "brinebull", "engine_symbol": "Marshtomp", "engine_file": "marshtomp",
+     "duration": 0.67, "formants": [460, 950, 1450], "noise": 0.05,
+     "pulses": [[0.02, 0.25, 205, 125], [0.34, 0.27, 245, 150]]},
+    {"name": "tideroar", "engine_symbol": "Swampert", "engine_file": "swampert",
+     "duration": 0.84, "formants": [360, 820, 1250], "noise": 0.06,
+     "pulses": [[0.02, 0.28, 165, 90], [0.37, 0.40, 205, 110]]}
   ]
 }

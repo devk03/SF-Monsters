@@ -1,5 +1,5 @@
 {
-  "content_revision": 3,
+  "content_revision": 4,
   "icon_palettes": {
     "3": "assets/monsters/cindercoy/native-v1/normal.pal",
     "4": "assets/monsters/brinepup/native-v1/normal.pal",
@@ -41,6 +41,7 @@
     "abilities": ["ABILITY_TORRENT", "ABILITY_THICK_FAT"],
     "learnset": [[1, "MOVE_TACKLE"], [1, "MOVE_GROWL"], [5, "MOVE_WATER_GUN"], [8, "MOVE_MUD_SLAP"], [11, "MOVE_DEFENSE_CURL"], [14, "MOVE_BITE"], [18, "MOVE_BUBBLE_BEAM"], [23, "MOVE_PROTECT"], [28, "MOVE_AURORA_BEAM"], [34, "MOVE_REST"], [39, "MOVE_SURF"], [45, "MOVE_HYDRO_PUMP"]],
     "migration_move": [5, "MOVE_WATER_GUN"],
+    "evolutions": [{"level": 16, "species": "SPECIES_MARSHTOMP"}],
     "description": ["A playful beach companion. It naps", "where the fog meets the warm sand.", "One splash means it wants to play."]
   }, {
     "species": "SPECIES_TREECKO",
@@ -98,5 +99,43 @@
     "migration_move": [5, "MOVE_EMBER"],
     "evolutions": [],
     "description": ["Its howl carries over OCEAN BEACH.", "The warm glow of its tail shelters", "smaller monsters on cold foggy nights."]
+  }, {
+    "species": "SPECIES_MARSHTOMP",
+    "symbol": "Marshtomp",
+    "old_name": "MARSHTOMP",
+    "name": "BRINEBULL",
+    "category": "WAVE LION",
+    "height": 10,
+    "weight": 240,
+    "art": "assets/monsters/brinebull/native-v1",
+    "engine_asset_dir": "marshtomp",
+    "icon_palette": 4,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 64, "baseAttack": 62, "baseDefense": 76, "baseSpeed": 50, "baseSpAttack": 73, "baseSpDefense": 80},
+    "types": ["TYPE_WATER", "TYPE_WATER"],
+    "abilities": ["ABILITY_TORRENT", "ABILITY_THICK_FAT"],
+    "learnset": [[1, "MOVE_TACKLE"], [1, "MOVE_GROWL"], [5, "MOVE_WATER_GUN"], [8, "MOVE_MUD_SLAP"], [11, "MOVE_DEFENSE_CURL"], [14, "MOVE_BITE"], [16, "MOVE_BUBBLE_BEAM"], [23, "MOVE_PROTECT"], [28, "MOVE_AURORA_BEAM"], [34, "MOVE_REST"], [39, "MOVE_SURF"], [45, "MOVE_HYDRO_PUMP"]],
+    "migration_move": [5, "MOVE_WATER_GUN"],
+    "evolutions": [{"level": 36, "species": "SPECIES_SWAMPERT"}],
+    "description": ["It guides beach pups through surf.", "Its crest curls like the waves at", "OCEAN BEACH, even on still mornings."]
+  }, {
+    "species": "SPECIES_SWAMPERT",
+    "symbol": "Swampert",
+    "old_name": "SWAMPERT",
+    "name": "TIDEROAR",
+    "category": "TIDE GUARD",
+    "height": 17,
+    "weight": 820,
+    "art": "assets/monsters/tideroar/native-v1",
+    "engine_asset_dir": "swampert",
+    "icon_palette": 4,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 99, "baseAttack": 83, "baseDefense": 86, "baseSpeed": 60, "baseSpAttack": 104, "baseSpDefense": 98},
+    "types": ["TYPE_WATER", "TYPE_ICE"],
+    "abilities": ["ABILITY_TORRENT", "ABILITY_THICK_FAT"],
+    "learnset": [[1, "MOVE_TACKLE"], [1, "MOVE_GROWL"], [5, "MOVE_WATER_GUN"], [8, "MOVE_MUD_SLAP"], [11, "MOVE_DEFENSE_CURL"], [14, "MOVE_BITE"], [16, "MOVE_BUBBLE_BEAM"], [23, "MOVE_PROTECT"], [28, "MOVE_AURORA_BEAM"], [34, "MOVE_REST"], [36, "MOVE_ICE_BEAM"], [42, "MOVE_SURF"], [49, "MOVE_HYDRO_PUMP"], [56, "MOVE_HAIL"]],
+    "migration_move": [5, "MOVE_WATER_GUN"],
+    "evolutions": [],
+    "description": ["Its call rolls over the gray ocean.", "Tiny crystals on its crest shelter", "tired companions from the cold wind."]
   }]
 }

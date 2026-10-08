@@ -21,7 +21,16 @@ def atlas_assets(source, output, layout, icon_palette):
 
     def fitted(group, limit):
         if len({cell.size for cell, _ in group}) != 1:
-            raise ValueError('Corresponding atlas frames need equal source canvases.')
+            if not layout.get('pad_frames'):
+                raise ValueError('Corresponding atlas frames need equal source canvases.')
+            size = (max(cell.width for cell, _ in group), max(cell.height for cell, _ in group))
+            padded = []
+            for cell, mask in group:
+                position = ((size[0] - cell.width) // 2, size[1] - cell.height)
+                canvas = Image.new('RGBA', size); canvas.paste(cell, position)
+                alpha = Image.new('L', size); alpha.paste(mask, position)
+                padded.append((canvas, alpha))
+            group = padded
         bounds = [mask.getbbox() for _, mask in group]
         crop = (min(b[0] for b in bounds), min(b[1] for b in bounds),
                 max(b[2] for b in bounds), max(b[3] for b in bounds))
