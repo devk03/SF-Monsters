@@ -13,7 +13,7 @@ CinderCoy are original starter/call candidates. Ocean Commute and Fogbank Frenzy
 are the original Sunset and wild-battle theme candidates. The preview now has
 eighteen original creature candidates, original title art/music and six Sunset
 rowhouse facades and street textures. The first house now has an original
-enterable courier studio: a fog-beacon puzzle, one-time capsule reward, team
+enterable courier studio with an animated doorway: a fog-beacon puzzle, one-time capsule reward, team
 rest and an N-Judah history postcard. Cast art, remaining world tiles and other music still use
 placeholders. The full SF campaign and Emerald quality
 approval remain outstanding.

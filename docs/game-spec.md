@@ -756,8 +756,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
-| Public build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186; Site version 20. |
-| Latest local source build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe. Original opening/closing door frames verified locally; doorway subset review pending. Public preview remains 0.0.27. |
+| Public build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe; Site version 21. |
+| Latest local source build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe. Original opening/closing door frames verified locally and published; doorway subset review pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2547,3 +2547,33 @@ Earned post-gym apartment branch checkpoint:
 - Doorway subset review remains pending. Full-bag deferred reward runtime
   verification and original terrain/cast work remain next. Full section 15
   approvals and campaign gates stay open; no GitHub workflow was dispatched.
+
+
+Doorway preview publication checkpoint:
+
+- Normally compiled release source 73ec36a, version 0.0.28-rowhouse-door-preview.
+  Patch 703,552 bytes, SHA-256 aacfd85e2a42fe545e5884471c2ddd9e17855e7f09b5f95de2a79bc161b0c7f0;
+  target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe.
+  The BPS round trip reproduces the tested cartridge exactly.
+- Site source 713afcc658e43acb558af9976d75eaaa5fa6e46b; saved version 21,
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_87546bdaf0008191a34d13e6dd6b6d18.
+  Deployment appgdep_6ac78f48bf2c8191b8ee7ad420fa642d succeeded at
+  2026-10-08T12:40:48Z; public URL unchanged. Archive audit confirms patch
+  identity and excludes full inherited cartridges; Sites accepted 84 files.
+- The prior public apartment battery save cold-resumes on 0.0.28 at (7,4)
+  with beacon state 3, the healed two-monster party, 3,500 money and three
+  Potions. Evidence: door-v27-apartment-battery-resume. The earned 0.0.24
+  gym upgrade and post-badge revisit are recorded separately above.
+- No database migration, audience change, recurring monitor or GitHub Actions
+  dispatch was used. Doorway review and every unapproved full quality/campaign
+  gate remain open. Public download check follows; sign-in awaits user login.
+
+
+Public 0.0.28 cartridge check:
+
+- Hands-on local-ROM load completed on the published player. Actual Download
+  GBA ROM produced Downloads/sf-mini-monsters (5).gba, 16 MiB, SHA-256
+  aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe.
+  Receipt: .tools/browser-review/public-v28.json. This is the same normally
+  compiled cartridge used for native/WASM animation checks, not a browser-only
+  adaptation. Real sign-in and full physical-device/performance gates stay open.
