@@ -1,8 +1,8 @@
 {
-  "version": "0.0.11-brine-evolution-preview",
+  "version": "0.0.12-starter-lines-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with Cognition, three original starters, CinderCoy/BrinePup evolution candidates and original Sunset/wild-battle themes; SproutSlug evolutions, wild creatures, portraits and other music remain placeholders.",
+  "status": "Unreviewed SF chapter with Cognition, three authored starter-line candidates and original Sunset/wild-battle themes; wild creatures, portraits and other music remain placeholders.",
   "maps": [
     "sunset.json",
     "south-park.json",

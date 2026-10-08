@@ -1,0 +1,60 @@
+{
+  "source_size": [
+    1536,
+    1024
+  ],
+  "authored_rectangles": {
+    "battle": [
+      [
+        0,
+        0,
+        544,
+        700
+      ],
+      [
+        544,
+        0,
+        1056,
+        700
+      ],
+      [
+        1056,
+        0,
+        1536,
+        700
+      ]
+    ],
+    "icons": [
+      [
+        0,
+        700,
+        512,
+        1024
+      ],
+      [
+        512,
+        700,
+        1024,
+        1024
+      ]
+    ],
+    "pad_frames": true
+  },
+  "battle_crop": [
+    24,
+    56,
+    526,
+    655
+  ],
+  "icon_crop": [
+    151,
+    62,
+    371,
+    288
+  ],
+  "icon_palette": "assets/monsters/sproutslug/native-v1/normal.pal",
+  "opaque_palette_budget": 15,
+  "method": "aspect-preserving nearest-neighbor, shared RGB555 battle palette, authored icon frames",
+  "pixel_cleanup": "pending",
+  "quality_approval": "pending"
+}

@@ -21,6 +21,12 @@
      "pulses": [[0.02, 0.25, 205, 125], [0.34, 0.27, 245, 150]]},
     {"name": "tideroar", "engine_symbol": "Swampert", "engine_file": "swampert",
      "duration": 0.84, "formants": [360, 820, 1250], "noise": 0.06,
-     "pulses": [[0.02, 0.28, 165, 90], [0.37, 0.40, 205, 110]]}
+     "pulses": [[0.02, 0.28, 165, 90], [0.37, 0.40, 205, 110]]},
+    {"name": "fernslug", "engine_symbol": "Grovyle", "engine_file": "grovyle",
+     "duration": 0.62, "formants": [950, 1850, 2550], "noise": 0.03,
+     "pulses": [[0.02, 0.15, 560, 380], [0.23, 0.15, 670, 440], [0.42, 0.16, 780, 560]]},
+    {"name": "canoptera", "engine_symbol": "Sceptile", "engine_file": "sceptile",
+     "duration": 0.74, "formants": [1100, 2100, 2850], "noise": 0.04,
+     "pulses": [[0.02, 0.17, 720, 500], [0.26, 0.17, 850, 590], [0.50, 0.20, 1020, 760]]}
   ]
 }

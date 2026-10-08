@@ -1275,6 +1275,30 @@ BrinePup line validation checkpoint:
   the complete 16-hub/eight-gym/150-entry scope and 11 final approvals remain
   required. Seven candidates and two integrated lines do not satisfy those gates.
 
+First-slice creature checkpoint — SproutSlug evolution candidates:
+
+- SproutSlug → FernSlug at level 16 → Canoptera at 36 is explicitly authored
+  on stable Treecko/Grovyle/Sceptile IDs. FernSlug stays Grass and learns Poison
+  Powder at evolution; Canoptera becomes Grass/Bug and learns Signal Beam.
+  Native Gen III special Grass damage, physical Bug coverage and Leech Seed,
+  status, recovery and screens provide a support role distinct from the other
+  starter lines. Six-stat data, learnsets, guide text and original trill recipes
+  are authored in editable files.
+- Original front/entrance/back candidates and separately designed icon poses
+  are saved under assets/monsters/{fernslug,canoptera}, with exact built-in
+  imagegen prompts and encoding layouts. The existing atlas encoder preserves
+  wing tips/proportions and maps icons into SproutSlug's reserved group 5.
+  Native dimensions, shared palettes, evolution graph and cry bounds pass;
+  the draft compiles and its BPS patch reapplies exactly.
+- Content revision 5 preserves stable IDs. Private level-15/35 and original
+  reference battery fixtures are covered by the existing publication guard;
+  they are not campaign-progress evidence. Actual native evolutions, move
+  learning, older-save/browser checks, comparison clips and deployment remain
+  the next checks for this candidate. All three authored lines are not three
+  approved lines, and nine candidates are not nine quality-complete monsters.
+  Native-size cleanup, slice wild creatures, gym balance and the full scope
+  remain required. Approved parity stays 0/11.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

@@ -1,5 +1,5 @@
 {
-  "content_revision": 4,
+  "content_revision": 5,
   "icon_palettes": {
     "3": "assets/monsters/cindercoy/native-v1/normal.pal",
     "4": "assets/monsters/brinepup/native-v1/normal.pal",
@@ -60,6 +60,7 @@
     "abilities": ["ABILITY_OVERGROW", "ABILITY_SHIELD_DUST"],
     "learnset": [[1, "MOVE_POUND"], [1, "MOVE_LEER"], [5, "MOVE_ABSORB"], [8, "MOVE_STUN_SPORE"], [11, "MOVE_LEECH_SEED"], [14, "MOVE_MEGA_DRAIN"], [18, "MOVE_POISON_POWDER"], [23, "MOVE_SILVER_WIND"], [28, "MOVE_SYNTHESIS"], [34, "MOVE_GIGA_DRAIN"], [39, "MOVE_SLEEP_POWDER"], [45, "MOVE_SOLAR_BEAM"]],
     "migration_move": [5, "MOVE_ABSORB"],
+    "evolutions": [{"level": 16, "species": "SPECIES_GROVYLE"}],
     "description": ["It tends little flowers while", "dreaming of wings. Even a tiny garden", "can be the start of a great journey."]
   }, {
     "species": "SPECIES_COMBUSKEN",
@@ -137,5 +138,43 @@
     "migration_move": [5, "MOVE_WATER_GUN"],
     "evolutions": [],
     "description": ["Its call rolls over the gray ocean.", "Tiny crystals on its crest shelter", "tired companions from the cold wind."]
+  }, {
+    "species": "SPECIES_GROVYLE",
+    "symbol": "Grovyle",
+    "old_name": "GROVYLE",
+    "name": "FERNSLUG",
+    "category": "FERN SLUG",
+    "height": 8,
+    "weight": 110,
+    "art": "assets/monsters/fernslug/native-v1",
+    "engine_asset_dir": "grovyle",
+    "icon_palette": 5,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 65, "baseAttack": 53, "baseDefense": 76, "baseSpeed": 51, "baseSpAttack": 70, "baseSpDefense": 90},
+    "types": ["TYPE_GRASS", "TYPE_GRASS"],
+    "abilities": ["ABILITY_OVERGROW", "ABILITY_SHIELD_DUST"],
+    "learnset": [[1, "MOVE_POUND"], [1, "MOVE_LEER"], [5, "MOVE_ABSORB"], [8, "MOVE_STUN_SPORE"], [11, "MOVE_LEECH_SEED"], [14, "MOVE_MEGA_DRAIN"], [16, "MOVE_POISON_POWDER"], [23, "MOVE_SILVER_WIND"], [28, "MOVE_SYNTHESIS"], [34, "MOVE_GIGA_DRAIN"], [39, "MOVE_SLEEP_POWDER"], [45, "MOVE_SOLAR_BEAM"]],
+    "migration_move": [5, "MOVE_ABSORB"],
+    "evolutions": [{"level": 36, "species": "SPECIES_SCEPTILE"}],
+    "description": ["It carries a tiny garden on its back.", "New leaves unfurl when the fog lifts.", "Its dreams of flight are growing too."]
+  }, {
+    "species": "SPECIES_SCEPTILE",
+    "symbol": "Sceptile",
+    "old_name": "SCEPTILE",
+    "name": "CANOPTERA",
+    "category": "LEAF MOTH",
+    "height": 11,
+    "weight": 105,
+    "art": "assets/monsters/canoptera/native-v1",
+    "engine_asset_dir": "sceptile",
+    "icon_palette": 5,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 85, "baseAttack": 75, "baseDefense": 82, "baseSpeed": 75, "baseSpAttack": 105, "baseSpDefense": 108},
+    "types": ["TYPE_GRASS", "TYPE_BUG"],
+    "abilities": ["ABILITY_OVERGROW", "ABILITY_SHIELD_DUST"],
+    "learnset": [[1, "MOVE_POUND"], [1, "MOVE_LEER"], [5, "MOVE_ABSORB"], [8, "MOVE_STUN_SPORE"], [11, "MOVE_LEECH_SEED"], [14, "MOVE_MEGA_DRAIN"], [16, "MOVE_POISON_POWDER"], [23, "MOVE_SILVER_WIND"], [28, "MOVE_SYNTHESIS"], [34, "MOVE_GIGA_DRAIN"], [36, "MOVE_SIGNAL_BEAM"], [42, "MOVE_SLEEP_POWDER"], [49, "MOVE_SOLAR_BEAM"], [56, "MOVE_LIGHT_SCREEN"]],
+    "migration_move": [5, "MOVE_ABSORB"],
+    "evolutions": [],
+    "description": ["The little garden finally takes wing.", "It drifts over GOLDEN GATE PARK and", "leaves fresh blossoms in its wake."]
   }]
 }

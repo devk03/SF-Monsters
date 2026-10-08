@@ -8,7 +8,11 @@ FIXTURES = {'cinder-15': ('SPECIES_TORCHIC', 15),
             'brinepup-15': ('SPECIES_MUDKIP', 15),
             'brinebull-35': ('SPECIES_MARSHTOMP', 35),
             'reference-brine-15': ('SPECIES_MUDKIP', 15),
-            'reference-brine-35': ('SPECIES_MARSHTOMP', 35)}
+            'reference-brine-35': ('SPECIES_MARSHTOMP', 35),
+            'sproutslug-15': ('SPECIES_TREECKO', 15),
+            'fernslug-35': ('SPECIES_GROVYLE', 35),
+            'reference-sprout-15': ('SPECIES_TREECKO', 15),
+            'reference-sprout-35': ('SPECIES_GROVYLE', 35)}
 
 
 def apply_evolution_fixture(engine, name, original):
