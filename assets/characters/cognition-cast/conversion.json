@@ -1,0 +1,254 @@
+{
+  "characters": [
+    {
+      "slug": "scott-wu",
+      "name": "Scott Wu",
+      "symbol": "SFScottWu",
+      "graphics": "OBJ_EVENT_GFX_SF_SCOTT_WU",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_NATU_DOLL",
+      "script": "SF_Scott",
+      "map": "cognition.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          69,
+          67,
+          264,
+          440
+        ],
+        [
+          411,
+          67,
+          606,
+          440
+        ],
+        [
+          756,
+          67,
+          950,
+          440
+        ],
+        [
+          77,
+          565,
+          273,
+          938
+        ],
+        [
+          418,
+          565,
+          614,
+          938
+        ],
+        [
+          759,
+          565,
+          956,
+          938
+        ],
+        [
+          63,
+          1057,
+          276,
+          1446
+        ],
+        [
+          402,
+          1057,
+          616,
+          1446
+        ],
+        [
+          751,
+          1057,
+          965,
+          1446
+        ]
+      ],
+      "common_scale": 0.061696658097686374,
+      "files": {
+        "source.png": "7d235fc50da273558b2d30ca6f0a78d1937ecfd59d8c1fe445890656e4b55c88",
+        "walk.png": "82629e6e066384eb07e90393406161db518b774a4b8a9f23266da73fdbdfbcd7",
+        "walk.4bpp": "e9d296cbfe0e4b1b26746ecdad98b146ceb47edcd1cc66093ec9289e90dadb69",
+        "native-gallery.png": "58172dd2dd79d53be5457a4adcd5c619bb430914b457ced8e68e5debe1d85f02"
+      }
+    },
+    {
+      "slug": "walden-yan",
+      "name": "Walden Yan",
+      "symbol": "SFWaldenYan",
+      "graphics": "OBJ_EVENT_GFX_SF_WALDEN_YAN",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_MAGNEMITE_DOLL",
+      "script": "SF_WaldenYan",
+      "map": "cognition.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          75,
+          106,
+          271,
+          455
+        ],
+        [
+          417,
+          106,
+          615,
+          455
+        ],
+        [
+          761,
+          106,
+          958,
+          455
+        ],
+        [
+          75,
+          599,
+          267,
+          953
+        ],
+        [
+          419,
+          599,
+          611,
+          953
+        ],
+        [
+          761,
+          599,
+          952,
+          953
+        ],
+        [
+          65,
+          1087,
+          261,
+          1431
+        ],
+        [
+          410,
+          1087,
+          606,
+          1431
+        ],
+        [
+          755,
+          1087,
+          950,
+          1431
+        ]
+      ],
+      "common_scale": 0.06779661016949153,
+      "files": {
+        "source.png": "fcce142af89360479ce874f3b09f7da26037c096509efd1ba494ec24516518c8",
+        "walk.png": "55e6bb4f482087f4f4ea8a1cd6b0c1053b97ded43c80825917857a686ebbcd44",
+        "walk.4bpp": "dfc9234244d78c4210750fcd3101dcb3c1177a9f67c9e2d2a4e7c5b624cbc27b",
+        "native-gallery.png": "9488bb733cdc48afbd18c6b12e58ef8d136934990b39a018542f7dba1c7dda35"
+      }
+    },
+    {
+      "slug": "steven-hao",
+      "name": "Steven Hao",
+      "symbol": "SFStevenHao",
+      "graphics": "OBJ_EVENT_GFX_SF_STEVEN_HAO",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_SQUIRTLE_DOLL",
+      "script": "SF_StevenHao",
+      "map": "cognition.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          73,
+          75,
+          290,
+          473
+        ],
+        [
+          402,
+          75,
+          616,
+          473
+        ],
+        [
+          735,
+          75,
+          949,
+          473
+        ],
+        [
+          72,
+          574,
+          294,
+          978
+        ],
+        [
+          403,
+          574,
+          627,
+          978
+        ],
+        [
+          734,
+          574,
+          956,
+          978
+        ],
+        [
+          72,
+          1069,
+          294,
+          1460
+        ],
+        [
+          402,
+          1069,
+          623,
+          1460
+        ],
+        [
+          735,
+          1069,
+          955,
+          1460
+        ]
+      ],
+      "common_scale": 0.0594059405940594,
+      "files": {
+        "source.png": "0c84186f14dfad1f10785730d0a03c52c8e925094997bf422a654f1df07aa224",
+        "walk.png": "4b75118ce0520880c2d018162562c71d28403378ca9d4207a63dc017cd3601ec",
+        "walk.4bpp": "053038ed9c924e532558d4daf225ba3cc5230436043985e32d2f87c9bce364ee",
+        "native-gallery.png": "a90070a9c7debe5a6657fdaa6945f2608fba67dc7ea2630385ebd7fe3065c980"
+      }
+    }
+  ],
+  "frames_per_character": 9,
+  "native_order": [
+    0,
+    3,
+    6,
+    1,
+    2,
+    4,
+    5,
+    7,
+    8
+  ],
+  "native_frame_size": [
+    16,
+    32
+  ],
+  "feet_baseline": 30,
+  "east_view": "native horizontal flip of original west frames",
+  "palette_tag": "0x1125",
+  "palette_slot": "PALSLOT_NPC_SPECIAL",
+  "palette_sha256": "92d9ed7574b9c9449a1912c0add41e4831e3cbf1a5d863c34f66e77cafb30da0",
+  "quality_approval": "pending"
+}

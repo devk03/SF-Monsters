@@ -22,6 +22,7 @@ from title_creature import apply_title_creature
 from title_song_overlay import apply_title_song
 from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
+from cast_art import apply_cast
 from apartment_art import apply_apartment_art
 from door_art import apply_door_art
 from terrain_art import apply_coastal_animation
@@ -89,6 +90,7 @@ def main():
     restored += apply_creature_audio(content, ROOT, EMERALD, original)
     restored += apply_field_music(content, ROOT, EMERALD, original)
     restored += apply_courier(ROOT, EMERALD, original)
+    restored += apply_cast(ROOT, EMERALD)
     restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     restored += apply_apartment_art(ROOT, EMERALD, original)
     restored += apply_door_art(ROOT, EMERALD, original)
@@ -170,6 +172,8 @@ def main():
     manifest['sunset_house'] = house_receipt
     manifest['courier_apartment'] = json.loads((ROOT /
         'assets/tiles/courier-apartment/conversion.json').read_text())
+    manifest['cognition_cast'] = json.loads((ROOT /
+        'assets/characters/cognition-cast/conversion.json').read_text())
     manifest['rowhouse_door'] = json.loads((ROOT /
         'assets/tiles/sunset-door/conversion.json').read_text())
     manifest['coastal_terrain'] = json.loads((ROOT /

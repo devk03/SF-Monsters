@@ -1,9 +1,9 @@
 {
-  "version": "0.0.31-south-park-preview",
+  "version": "0.0.32-cognition-cast-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with eighteen original creature/call candidates, starter lines, title art/music, courier locomotion, Sunset rowhouses/streets/coastal terrain and apartment adventure. Remaining borders, field effects, pixel cleanup, cast portraits, other maps/music and the full campaign are unfinished.",
+  "status": "Unreviewed SF chapter with original creature/title/courier candidates, Sunset terrain/apartment and South Park outdoor art. Cognition now has three original named field-sprite candidates. Native pixel cleanup, remaining cast/battle portraits, interiors/music and the full campaign remain unfinished.",
   "maps": [
     "sunset.json",
     "apartment.json",

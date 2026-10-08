@@ -757,7 +757,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.31-south-park-preview; target e1b4c66fd4eb1c5aa1731fdc18c7985e199791d3480ad90106d25bdbcc7574a4; Site version 24. Original South Park street/garden/facade candidate; unreviewed. |
-| Latest local source build | 0.0.31-south-park-preview; same target. Source 18b68f9, normal host compilation and exact BPS application pass. Native/WASM gym and clinic door routes match; original outdoor assets remain unapproved. |
+| Latest local source build | 0.0.32-cognition-cast-preview; target 311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780. Normal host compilation and exact BPS application pass. Three original Cognition field-sprite candidates; controller verification follows. Public release stays 0.0.31. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2873,3 +2873,29 @@ South Park public hands-on verification:
   new workflow caused by publication or pushed commits. All checks ran locally.
   Sign-in QA remains pending the user's existing login handoff. Full section 15
   scope and all remaining campaign, mechanics and performance gates stay active.
+
+
+Cognition original field cast candidate checkpoint:
+
+- Added original field-sprite sheets for Scott Wu, Walden Yan and Steven Hao,
+  generated with built-in imagegen. Each source and exact prompt is saved under
+  assets/characters/cognition-cast/{character}. Fictional costumes distinguish
+  navy jacket, green jacket and gray top/glasses. Likeness and art are unreviewed.
+- Native conversion preserves nine 16x32 frames per character, consistent feet
+  baseline, idle/two footsteps for south/north/west and mirrored east. One
+  shared 16-color palette avoids competing colors in the three-person gym.
+  Registered tag 0x1125, native special NPC slot and reflection pairing; unused
+  native graphic slots 76–78 are reserved. Save format and dynamic IDs stay fixed.
+- cast.json assigns data-driven graphics aliases to the existing three NPCs.
+  Their locations, dialogue, trainer sight, battles and progression stay intact.
+  Trainer battle portraits and other named cast still use placeholders.
+- Three native tests pass: independent cartridge nibble/tile decoding, shared
+  palette and distinct pose cycles; malformed atlas rejection; stale palette
+  rejection before engine writes. Full local checks pass. Source build target
+  311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780 compiles
+  normally and the 764,680-byte BPS applies byte-identically. Actual controller
+  routes, rendered native sprites and cross-runtime confirmation follow.
+- This is first-slice pixel-art/NPC progress. All full domains stay 0/11 approved.
+  Source images resized into native candidates still need pixel cleanup and
+  matched user review. Public build remains 0.0.31 until publication verifies
+  the new candidate. No CI workflow, DB operation or delegated agent was used.

@@ -1,0 +1,33 @@
+{
+  "characters": [
+    {
+      "slug": "scott-wu",
+      "name": "Scott Wu",
+      "symbol": "SFScottWu",
+      "graphics": "OBJ_EVENT_GFX_SF_SCOTT_WU",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_NATU_DOLL",
+      "script": "SF_Scott",
+      "map": "cognition.json"
+    },
+    {
+      "slug": "walden-yan",
+      "name": "Walden Yan",
+      "symbol": "SFWaldenYan",
+      "graphics": "OBJ_EVENT_GFX_SF_WALDEN_YAN",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_MAGNEMITE_DOLL",
+      "script": "SF_WaldenYan",
+      "map": "cognition.json"
+    },
+    {
+      "slug": "steven-hao",
+      "name": "Steven Hao",
+      "symbol": "SFStevenHao",
+      "graphics": "OBJ_EVENT_GFX_SF_STEVEN_HAO",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_SQUIRTLE_DOLL",
+      "script": "SF_StevenHao",
+      "map": "cognition.json"
+    }
+  ],
+  "outfits": "Fictional in-game costumes, not biographical claims.",
+  "source_basis": "https://cognition.com/about"
+}
