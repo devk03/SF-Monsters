@@ -2062,3 +2062,9 @@ Original native interface labels — private preview checkpoint:
   Those graphics, other labels/assets, native pixel cleanup, cast/tiles/music,
   wider balance and all complete-campaign gates remain unfinished. All 11 user
   quality approvals remain pending. No GitHub workflow was dispatched.
+
+- Native UI review clip: interface-final-native-review/review.mp4, 40.25 seconds,
+  2,404 controller frames and 2,637,788 stereo pairs, source commit 0a5c888.
+  It shows the Start menu, caught-party selection, summary, stats and moves.
+  This private text preview remains unreviewed; it is not an Emerald comparison
+  suite or a replacement for the pending normal rebuild.
