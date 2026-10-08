@@ -1,0 +1,8 @@
+# Original Sunset doorway animation
+
+Built-in imagegen; precise-object-edit of an original SF rowhouse crop.
+Reference: assets/tiles/sunset-rowhouse/native-preview.png, pixels (48,48)-(64,80), nearest enlarged for the edit input. No Emerald artwork was used as input.
+
+Edit target: the attached original SF rowhouse door tile crop, a 16x32-pixel scene shown at 16x nearest scale. Produce an ORIGINAL pixel-art door animation spritesheet with exactly THREE equal-width columns, each the identical 16x32 scene shown at a large integer pixel scale. No margins, gutters, labels or text. Sheet aspect ratio 3:2, each column aspect 1:2. Preserve the cream door surround, coral wall, navy/teal trim, pavement, step, lighting and precise alignment of this reference. Keep all architecture outside the moving teal door identical. Column 1: door has opened inward slightly, narrow dark interior visible. Column 2: door swings halfway inward with larger dark opening. Column 3: fully open doorway, dark navy interior, narrow teal door edge at the right. The fixed door casing and threshold never move. Use the same very limited coral/cream/teal/navy pixel palette and chunky one-pixel native detailing. Each source pixel must be an aligned solid rectangular block on the 16x32 grid; no antialiasing, gradients, new furniture, people, logos, invented decorations, perspective changes or shading outside the door. Preserve any existing transparent pixels at the lower outside edge; otherwise opaque scene. This is for native GBA 4bpp tiles, not concept art.
+
+Conversion: three equal source columns, nearest 16x32 resampling, existing house RGB555 palette, native eight-tile groups. Art quality remains pending human review.

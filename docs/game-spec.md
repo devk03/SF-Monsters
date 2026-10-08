@@ -757,7 +757,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
 | Public build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186; Site version 20. |
-| Latest local source build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186. Original enterable Sunset studio and persistent fog-beacon adventure verified locally and published; human art review pending. |
+| Latest local source build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe. Original opening/closing door frames verified locally; doorway subset review pending. Public preview remains 0.0.27. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2490,3 +2490,38 @@ Public apartment hands-on check:
 - User login, matched review, door animation, bag-full and earned post-gym
   branch checks remain required. Full campaign/quality/performance/save gates
   stay open. Routine validation stayed local; no Actions run was dispatched.
+
+
+Original rowhouse doorway checkpoint:
+
+- Added three original 16x32 door-opening stages using the built-in imagegen
+  tool and our own rowhouse crop. Source and exact prompt are in
+  assets/tiles/sunset-door. Technical conversion preserves aligned columns
+  and uses the existing 16-color house palette; source-quality review is pending.
+- Source compilation registers a 768-byte native animation and palette bank 10
+  for Sunset door metatile 635. The engine's opening/closing frame tables,
+  sound, warp control and task timing stay intact. A narrow Sunset-only camera
+  drawing hook puts the two animated cells on the same layer as the facade.
+  Other native door drawing keeps its original path. The first capture exposed
+  inconsistent fog lighting; a whole-facade fog experiment washed out the art
+  and was rejected. The final candidate preserves the facade's existing colors.
+- Actual open/enter/exit route ends outside at Sunset (16,9); matched reference
+  route ends outside Littleroot (5,9). Both start outside facing west and use
+  door-open-exit.csv. First 70 frames' normalized camera Y deltas match exactly.
+  Captures from the earlier incorrect indoor start and fog experiment are
+  diagnostic only; they are excluded from the review and acceptance evidence.
+- Native/WASM door-layer-{native,wasm}-open-exit captures: all 464 RGB frames,
+  2,036,496 PCM bytes and Flash match. This proves the recorded native/core
+  route; it does not prove real-browser latency or the full performance gate.
+  Compiled asset bytes match the original eight-tile-per-stage payload.
+- 7.77-second matched clip: .tools/benchmarks/door-paired-review/comparison.mp4;
+  equal nearest 3x scale, Emerald left / SF candidate right, SF audio. Receipt
+  comparison.json records both inputs, targets and scope. A user review request
+  is pending for doorway art/traversal only. Full domains remain 0/11 approved.
+- Native-format tests reject malformed, overflowing or identical stages and
+  independently check each 256-byte tile allocation. Full local checks pass.
+  Latest target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe;
+  BPS round trip is byte-identical. Public version remains the apartment preview.
+- Next: earned post-gym beacon return, full-bag runtime branch, original ground
+  tiles and named cast art. The entire section 15 campaign and acceptance gates
+  remain required. No GitHub workflow or recurring monitor was started.

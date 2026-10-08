@@ -263,3 +263,17 @@ The build compiles a separate secondary tileset. `tile_grid_base` assigns each
 cell its scene record while retaining map collision/elevation. Native asset
 tests protect the layer, capacity and exit. The initial exterior door uses a
 native fade; authored door opening frames and human art approval remain pending.
+
+
+## Rowhouse doorway animation
+
+`assets/tiles/sunset-door` contains the original three-stage sheet and its prompt.
+`door_art.py` uses the existing house palette, keeps frame columns aligned and
+serializes three groups of eight tiles at offsets 0/256/512. It registers the
+768-byte payload in the native door table for metatile 635. The two animated
+facade cells use the same top-background layer as their closed artwork, keeping
+fog lighting consistent. The drawing hook is limited to Sunset and these
+cells; other doors and native opening/closing timing retain their behavior.
+
+Run `python3 tests/door_art_test.py` for native allocation checks. Source art,
+matched comparison evidence and human approvals are recorded in spec section 15.

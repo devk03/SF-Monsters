@@ -193,7 +193,7 @@ def apply_house_art(root, emerald, target):
     palette[320:352] = files['house.gbapal']
     palette[352:384] = street_palette
     attributes[FIRST_METATILE * 2:(FIRST_METATILE + 25) * 2] = bytes(50)
-    attributes[123 * 2:124 * 2] = struct.pack('<H', 0x60)  # Native non-animated exterior door.
+    attributes[123 * 2:124 * 2] = struct.pack('<H', 0x69)  # Native animated door; original SF frames.
     for index in range(FIRST_ROAD, FIRST_ROAD + len(streets)):
         attributes[index * 2:index * 2 + 2] = attributes[2:4]
     offset, capacity = bounded_span(addresses, 'LittlerootTown_Layout_Blockdata', 'LittlerootTown_Layout')
@@ -218,7 +218,7 @@ def apply_house_art(root, emerald, target):
             'unique_tiles': unique, 'native_size': [80, 80], 'collision_elevation_preserved': True,
             'street_variants': road_counts, 'secondary_tiles': 192,
             'enterable_apartment': True, 'decorative_houses': 5,
-            'door_animation': 'native fade; authored opening frames pending', 'quality_approval': 'pending'}
+            'door_animation': 'three original stages; native opening/closing timing', 'quality_approval': 'pending'}
 
 
 if __name__ == '__main__':

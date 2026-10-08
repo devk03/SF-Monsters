@@ -1,0 +1,22 @@
+{
+  "native_frame_size": [
+    16,
+    32
+  ],
+  "frames": 3,
+  "metatile": 635,
+  "palette_bank": 10,
+  "source_sha256": "920833794528b2962fa5058956ab0097a07cbe538176e994baf484f2cd7a5cbe",
+  "palette_sha256": "c9f4d87bd13b83f3b7d24d92b640c0a7dfc0e6d023bea09e10dfc5f11606139e",
+  "frame_offsets": [
+    0,
+    256,
+    512
+  ],
+  "animation_timing": "inherited native table",
+  "quality_approval": "pending",
+  "files": {
+    "frames.png": "6c794899dedb0b8b3d1787a667abdd3e874e335c0905bbb1bd83e8ecd51c4cd4",
+    "frames.4bpp": "a3767e2ace6ae9f85f47e56103a04522855b842b33d0b71f7382d5b81d77c680"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "version": "0.0.27-courier-apartment-preview",
+  "version": "0.0.28-rowhouse-door-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
@@ -52,5 +52,8 @@
   "battle_content": "first-chapter-battles.json",
   "monster_content": "monsters.json",
   "creature_audio": "assets/audio/creature-cries.json",
-  "music_scores": ["assets/audio/ocean-commute.json", "assets/audio/fogbank-frenzy.json"]
+  "music_scores": [
+    "assets/audio/ocean-commute.json",
+    "assets/audio/fogbank-frenzy.json"
+  ]
 }
