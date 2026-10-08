@@ -12,7 +12,7 @@ South Park clinic and Cognition's first gym draft. BrinePup, SproutSlug and
 CinderCoy are original starter/call candidates. Ocean Commute and Fogbank Frenzy
 are the original Sunset and wild-battle theme candidates. The preview now has
 eighteen original creature candidates, original title art/music and six Sunset
-rowhouse facades and street textures. The first house now has an original
+rowhouse facades, street textures and coastal ground/wave animation. The first house now has an original
 enterable courier studio with an animated doorway: a fog-beacon puzzle, one-time capsule reward, team
 rest and an N-Judah history postcard. Cast art, remaining world tiles and other music still use
 placeholders. The full SF campaign and Emerald quality

@@ -756,8 +756,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe; Site version 21. |
-| Latest local source build | 0.0.29-coastal-terrain-preview; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8. Original ground/shore/wave tiles and camera margin verified locally; public build remains 0.0.28, human review pending. |
+| Public build | 0.0.29-coastal-terrain-preview; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8; Site version 22. |
+| Latest local source build | 0.0.29-coastal-terrain-preview; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8. Original ground/shore/wave tiles and camera margin verified locally and published; human review pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2643,3 +2643,22 @@ Coastal terrain native integration checkpoint:
 - Remaining first-slice art includes field effects/footprints, battle player back
   poses, cast, the other maps and pixel cleanup. Full campaign remains required.
   No GitHub workflow or recurring monitor was started.
+
+
+Coastal terrain publication checkpoint:
+
+- Normally compiled release source a1e9b57, 0.0.29-coastal-terrain-preview.
+  Target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8;
+  patch 718,122 bytes, SHA-256 b6de7cc182bb5b04e826f4165e11fec47a7ee8994ef93f2909dd88412d0a5f63.
+- Site source d6a433052072b2608e7b08bcaca5734db8538fad; saved version 22,
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_5daa91dc89ec81919c0a9886a61e8d92.
+  Deployment appgdep_6ac79774fcb0819191ef47de2565eb81 succeeded at
+  2026-10-08T13:15:42Z; public URL unchanged. Archive audit checks exact
+  patch/target identity and excludes full inherited cartridges; 84 files accepted.
+- A staging copy initially used the Site directory instead of the game repo;
+  its path was corrected before building and the archive's 0.0.29 target was
+  independently verified. Public load/download/beach-save checks follow.
+- In-game SAVE at the new coast produced terrain-coast-saved/capture.sav at
+  (4,8), with the two-monster party, 3,500 money and three Potions preserved.
+  Human art/performance and the full campaign gates stay open; no DB migration,
+  audience change, recurring monitor or GitHub workflow was used.
