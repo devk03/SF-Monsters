@@ -26,6 +26,9 @@ SproutSlug now has FernSlug (16) and Grass/Bug Canoptera (36) candidates.
 All three authored lines still need pixel cleanup and user quality approval.
 The gym/clinic now have furnished interiors, an incident log, a planning board
 and a one-time emergency Potion. Older saves reload updated rooms safely.
+Cognition now has distinct original field-sprite candidates for Scott Wu,
+Walden Yan and Steven Hao, each with native walking poses. Trainer battle
+portraits and the other named cast remain unfinished.
 
 [Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
 [Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps) ·

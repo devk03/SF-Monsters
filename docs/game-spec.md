@@ -756,8 +756,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.31-south-park-preview; target e1b4c66fd4eb1c5aa1731fdc18c7985e199791d3480ad90106d25bdbcc7574a4; Site version 24. Original South Park street/garden/facade candidate; unreviewed. |
-| Latest local source build | 0.0.32-cognition-cast-preview; target 311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780. Normal host compilation and exact BPS application pass. Three original Cognition field-sprite candidates; controller verification follows. Public release stays 0.0.31. |
+| Public build | 0.0.32-cognition-cast-preview; target 311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780; Site version 25. Three original Cognition field-sprite candidates; unreviewed. |
+| Latest local source build | 0.0.32-cognition-cast-preview; same target. Two corrected consecutive normal builds match; full local checks pass. Actual older-save entry, Scott return dialogue and room cold-resume pass. Native/WASM recorded RGB/audio/Flash match. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2924,3 +2924,28 @@ Cognition cast rebuild and native rendering verification:
   follow. Native rendering/rebuild evidence does not replace matched Emerald
   approval, physical-browser performance or complete campaign gates.
   Human approvals remain 0/11; no GitHub workflow or DB operation was used.
+
+
+Cognition cast public publication checkpoint (October 8, 2026):
+
+- Corrected consecutive source builds reproduce target
+  311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780.
+  Published BPS is 764,680 bytes, SHA256
+  45d5bc8f6f449fa35d50d342469030507f3eb54a79c4f439582d240a704102da.
+  Immutable manifest retains its first successful candidate source receipt
+  d39da11 with dirty marker; repeat-build fix d754113 produces identical bytes.
+  The source registry/frame tests and full local checks pass after the fix.
+- Actual native SAVE at gym (8,7), cast-room-saved, cold-resumes at (8,7)
+  in cast-room-cold-resume with all three new sprites and earned badge, stage,
+  party, moves/PP, money and Potions intact. Public browser verification follows.
+- Site source efa06a7f9049637a12fd563907f64c28923486f5 passes TypeScript and
+  production build; its archive contains the exact patch/manifest and no
+  inherited cartridge. Public Site version 25:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_74620fdeb9f881918abb0571c60b50b5.
+  Deployment appgdep_6ac7b3bef1208191870777e942de79d1 succeeded
+  at 2026-10-08T15:16:23Z, retaining the public audience/local ROM patching.
+- Full quality approvals stay 0/11. Field sprites remain likeness/art candidates;
+  battle portraits, other named cast, original gym/clinic interiors and their
+  matched reviews remain outstanding. This does not complete the NPC/pixel-art
+  domains or the first-slice acceptance gate. No CI workflow, DB migration or
+  delegated agent was used. Full section 15 campaign/system scope stays active.
