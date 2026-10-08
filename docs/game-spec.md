@@ -2525,3 +2525,25 @@ Original rowhouse doorway checkpoint:
 - Next: earned post-gym beacon return, full-bag runtime branch, original ground
   tiles and named cast art. The entire section 15 campaign and acceptance gates
   remain required. No GitHub workflow or recurring monitor was started.
+
+
+Earned post-gym apartment branch checkpoint:
+
+- Continued the existing 71,038-frame controller-only gym-victory capture on
+  its original 0.0.24 target. Finished badge/TM dialogue and used in-game SAVE;
+  apartment-earned-gym-saved/capture.sav is its actual Flash output.
+- Cold resumed that file on the normally compiled 0.0.28 candidate. Build Badge,
+  gym stage 4, 4,000 money, three Potions and CinderCoy level 11 with 4/31 HP,
+  Leer/Growl/Ember/Quick Attack and their PP survive the upgrade. Returned
+  through South Park and Muni to Sunset (28,22), then walked to the studio.
+  The initial combined travel route hit a building; later controller segments
+  corrected the route normally. No RAM/flag edits or scripted fixture was used.
+- Observed fog, calibrated the beacon and claimed exactly one Great Ball.
+  Re-interaction displays the earned post-badge text: someone is waking
+  habitats / bigger than a lost parcel. State remains 3, badge and original
+  party/money remain intact. Evidence: apartment-earned-after-badge/final.png
+  and controller/state/Flash receipts under .tools/benchmarks. This verifies
+  the branch and a clue, not completion of the antagonist or legendary arc.
+- Doorway subset review remains pending. Full-bag deferred reward runtime
+  verification and original terrain/cast work remain next. Full section 15
+  approvals and campaign gates stay open; no GitHub workflow was dispatched.
