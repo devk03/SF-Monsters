@@ -757,13 +757,13 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.34-brighter-office-preview; target 3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad; Site version 28. Brighter office and varied props address the user's prior gloom/repetition feedback. Updated art remains unreviewed; walking is preserved. |
-| Latest local source build | 0.0.34-brighter-office-preview; same target. Normal source compilation/BPS application pass; old native save, walking loop and native/WASM exit-return pass. The revised 34.29-second paired clip is ready; public hands-on QA follows. |
+| Latest local source build | 0.0.34-brighter-office-preview; same target. Normal source compilation/BPS application pass; old native save, walking loop and native/WASM exit-return pass. The revised 34.29-second paired clip is ready; public download/import/resume/export QA passes. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 26 fresh-load/import reaches title/Continue/gym normally without Pause/Resume; sampled core throughput 59.0–60.6 fps. Prior white display did not reproduce; cause remains unconfirmed. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
+| Public QA | Site 28 cartridge download matches v34 target; older native save imports and resumes through title/Continue into the brighter office, then exports byte-identically. Sampled core throughput 60.0–60.5 fps. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Publish/verify the brighter, less repetitive office and review its revised matched clip, then original clinic, remaining cast/portraits/music and first-slice reviews. Preserve positively reviewed animation. Checks stay local; GitHub Actions stays manual-only. |
+| Next work | Review the revised brighter office matched clip; continue original clinic, remaining cast/portraits/music and first-slice reviews. Preserve positively reviewed animation. Checks stay local; GitHub Actions stays manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3136,3 +3136,27 @@ Brighter office public publication:
   numerical/full-domain approval remains pending. Old-save public QA follows;
   original clinic/cast portraits/music, all 16 hubs/eight gyms/150 creatures and
   every system gate remain required. No GitHub workflow or DB operation ran.
+
+
+Brighter office public hands-on verification:
+
+- Site 28 actual cartridge download sf-mini-monsters (11).gba is 16,777,216
+  bytes and matches v34 target SHA256
+  3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad.
+- Explicitly imported the older cast-room-saved battery; normal native intro,
+  title and Continue resume visibly into the brighter office. Courier and
+  three cast characters remain visible; ivory ground, blue aisle, plants and
+  varied storage/desk/chairs/whiteboard/server arrangements are inspected.
+- Actual public Save backup downloads sf-mini-monsters (4).sav and exactly
+  preserves the 131,072-byte imported battery, SHA256
+  0d815344d5da4c9166efcb589955ee954c51fec041b0fb6a0e53cedf7fa67494.
+  Screenshot and structured receipt: .tools/browser-review/
+  public-v34-brighter-office.{png,json}. This is one checkpoint verification,
+  not completion of ten final campaign round trips. Sampled 60.0–60.5 core
+  fps is not the deadline/input/audio performance gate.
+- Requested a 0–4 art/readability score and remaining gap for the revised
+  34.29-second office comparison. The prior positive animation feedback stays
+  qualitative; no full quality-domain approval or numeric score is inferred.
+- Release and source commits pushed successfully. Actions inventory still
+  ends at completed run 37731870689 (2026-10-08T05:20:22Z); these pushes and
+  Sites publication triggered zero new Actions jobs. No DB operation ran.
