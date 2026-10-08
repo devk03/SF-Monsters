@@ -1,5 +1,5 @@
 {
-  "version": "0.0.12-starter-lines-preview",
+  "version": "0.0.13-clinic-recovery-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
   "status": "Unreviewed SF chapter with Cognition, three authored starter-line candidates and original Sunset/wild-battle themes; wild creatures, portraits and other music remain placeholders.",
@@ -15,6 +15,26 @@
     "x": 23,
     "y": 22
   },
+  "recovery_points": [
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+      "map": "MAP_LITTLEROOT_TOWN",
+      "x": 23,
+      "y": 22
+    },
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+      "map": "MAP_LITTLEROOT_TOWN",
+      "x": 23,
+      "y": 22
+    },
+    {
+      "id": "HEAL_LOCATION_OLDALE_TOWN",
+      "map": "MAP_OLDALE_TOWN",
+      "x": 32,
+      "y": 6
+    }
+  ],
   "region_names": {
     "MAPSEC_LITTLEROOT_TOWN": "OUTER SUNSET",
     "MAPSEC_OLDALE_TOWN": "SOMA / SOUTH PARK",

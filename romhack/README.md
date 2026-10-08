@@ -138,3 +138,11 @@ These candidates replace only their declared contexts. Other music and cries
 remain scaffolding, and all composition/presentation approvals remain pending.
 Run `python3 tests/creature_audio_test.py` and `python3 tests/field_music_test.py`
 to check signal/header limits, MIDI loop alignment and voice bounds.
+
+Recovery destinations are authored in `engine-probe.json` under `recovery_points`.
+Each record names an existing native healing-slot ID, an authored SF map ID and
+walkable integer coordinates. NPC/warp tiles, foreign maps and duplicate slots
+are rejected. Both new-game recovery slots must be declared, and every authored
+`setrespawn` script must register a declared slot. The South Park clinic uses
+32,6, immediately outside its entrance; the two initial slots use Sunset 23,22.
+These change recovery data, without converting or deleting existing saves.

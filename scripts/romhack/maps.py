@@ -2,6 +2,7 @@
 import json
 import re
 import struct
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -77,6 +78,38 @@ def validate_links(plans):
                 raise ValueError('A connection leaves the authored SF map graph.')
 
 
+def recovery_locations(points, plans, native):
+    """Replace declared native recovery slots with safe authored SF positions."""
+    result = deepcopy(native)
+    slots = {location['id']: location for location in result['heal_locations']}
+    maps = {plan['native_id']: plan for plan in plans}
+    declared = set()
+    for point in points:
+        identifier = point.get('id')
+        if identifier not in slots or identifier in declared:
+            raise ValueError('Recovery IDs must name unique existing native slots.')
+        plan = maps.get(point.get('map'))
+        if plan is None:
+            raise ValueError('Recovery must stay inside the authored SF map graph.')
+        x, y = point.get('x'), point.get('y')
+        if type(x) is not int or type(y) is not int:
+            raise ValueError('Recovery coordinates must be integer tiles.')
+        check_position(plan, x, y)
+        occupied = plan.get('npcs', []) + plan.get('warp_events', [])
+        if any((event['x'], event['y']) == (x, y) for event in occupied):
+            raise ValueError('Recovery cannot occupy an NPC or warp tile.')
+        slots[identifier].update(map=point['map'], x=x, y=y)
+        declared.add(identifier)
+    return result
+
+
+def validate_recovery_scripts(script, points):
+    declared = {point['id'] for point in points}
+    for identifier in re.findall(r'^\s*setrespawn\s+(\w+)\s*$', script, re.MULTILINE):
+        if identifier not in declared:
+            raise ValueError('An SF script registers an unauthored recovery slot.')
+
+
 def apply_maps(content, root, engine, original):
     plans = content.get('maps', [])
     if not plans:
@@ -89,6 +122,14 @@ def apply_maps(content, root, engine, original):
         plan['native_id'] = json.loads(original(f'data/maps/{plan["engine_map"]}/map.json'))['id']
         linked.append(plan)
     validate_links(linked)
+    points = content.get('recovery_points', [])
+    healing_path = 'src/data/heal_locations.json'
+    healing = json.loads(original(healing_path))
+    if 'spawn' in content:
+        defaults = {location['id'] for location in healing['heal_locations'][:2]}
+        if not defaults <= {point['id'] for point in points}:
+            raise ValueError('Declare both native new-game recovery slots in SF content.')
+    healing = recovery_locations(points, linked, healing)
     restored = [layouts_path]
     ids, aliases = set(), {}
     for reference in plans:
@@ -126,6 +167,7 @@ def apply_maps(content, root, engine, original):
         script_source = (source.parent / plan['script']).resolve()
         script_source.relative_to((root / 'romhack/content').resolve())
         script = script_source.read_text()
+        validate_recovery_scripts(script, points)
         for text in re.findall(r'\.string "(.*?)"', script):
             if not text.endswith('$') or '$' in text[:-1]:
                 raise ValueError('SF text must have one final $ terminator; spell out currency.')
@@ -143,6 +185,8 @@ def apply_maps(content, root, engine, original):
                               for name, value in sorted(aliases.items()))
     (engine / path).write_text(original(path) + '\n' + compatibility + '\n')
     restored.append(path)
+    (engine / healing_path).write_text(json.dumps(healing, indent=2) + '\n')
+    restored.append(healing_path)
     if 'spawn' in content:
         spawn = content['spawn']
         plan = next(json.loads((root / 'romhack/content' / p).read_text())
@@ -163,12 +207,5 @@ def apply_maps(content, root, engine, original):
         if source.count(before) != 1:
             raise ValueError('Pinned new-game field callback changed.')
         (engine / path).write_text(source.replace(before, 'gFieldCallback = NULL;'))
-        restored.append(path)
-        # Defeat recovery must return to the same SF hub, never a stock house.
-        path = 'src/data/heal_locations.json'
-        healing = json.loads(original(path))
-        for location in healing['heal_locations'][:2]:
-            location.update(map='MAP_' + spawn['id'], x=spawn['x'], y=spawn['y'])
-        (engine / path).write_text(json.dumps(healing, indent=2) + '\n')
         restored.append(path)
     return restored

@@ -763,7 +763,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
 - Public preview: version 0.0.12 includes three original starter/call candidates,
-  original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic
+  original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
@@ -1600,3 +1600,27 @@ First-gym earned-route probe on the published starter-line ROM:
   routes with each starter, then actual victory/reward/re-entry and save resume.
   The release commit 594d630 also passes GitHub checks:
   https://github.com/devk03/SF-Monsters/actions/runs/37714577998.
+
+First-gym preparation and clinic recovery regression:
+
+- Controller-only play on the published eadd7196…495a ROM visits the South Park
+  clinic, restores CinderCoy from 13/19 to 19/19 HP and all move PP, delivers the
+  sensor and starts Walden's practice battle. An initial navigation capture
+  instead entered wild grass and is excluded from healing evidence; subsequent
+  corrected captures explicitly verify position, party checksum, HP and PP.
+  Evidence: .tools/benchmarks/cognition-prepared-route-*.
+- A separate intentional non-offensive battle probe reproduces a clinic
+  blackout at South Park 6,17, far from its entrance at 32,5. It restores HP/PP,
+  retains relay stage 1 and grants neither a badge nor gym victory. Evidence:
+  .tools/benchmarks/cognition-clinic-blackout-before. This negative recovery test
+  does not count as a normal balance attempt or campaign run.
+- Recovery destinations are now explicitly authored in content: Sunset's two
+  default native slots stay at 23,22; the registered clinic slot moves to 32,6,
+  outside its entrance. The native map compiler rejects non-SF maps, unknown or
+  duplicate slots, invalid/blocked/NPC/warp coordinates and script registrations
+  without an authored recovery slot. Focused map/recovery tests pass, including
+  the actual clinic destination and preservation of unrelated pinned data.
+- Native rebuild, after-fix blackout/save checks, WebAssembly equivalence and
+  publication remain pending for this source checkpoint. The public website
+  still serves 0.0.12. Gym victory, practice/team balance, art cleanup and every
+  final parity gate remain outstanding; approved quality domains stay 0/11.
