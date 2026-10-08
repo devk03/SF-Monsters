@@ -1,0 +1,60 @@
+{
+  "source_size": [
+    1536,
+    1024
+  ],
+  "authored_rectangles": {
+    "battle": [
+      [
+        0,
+        0,
+        512,
+        700
+      ],
+      [
+        512,
+        0,
+        1056,
+        700
+      ],
+      [
+        1056,
+        0,
+        1536,
+        700
+      ]
+    ],
+    "icons": [
+      [
+        256,
+        700,
+        768,
+        1024
+      ],
+      [
+        768,
+        700,
+        1280,
+        1024
+      ]
+    ],
+    "pad_frames": true
+  },
+  "battle_crop": [
+    17,
+    186,
+    513,
+    594
+  ],
+  "icon_crop": [
+    47,
+    27,
+    403,
+    241
+  ],
+  "icon_palette": "assets/monsters/brinepup/native-v1/normal.pal",
+  "opaque_palette_budget": 15,
+  "method": "aspect-preserving nearest-neighbor, shared RGB555 battle palette, authored icon frames",
+  "pixel_cleanup": "pending",
+  "quality_approval": "pending"
+}
