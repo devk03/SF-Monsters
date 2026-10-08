@@ -762,7 +762,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.12 includes three original starter/call candidates,
+- Public preview: version 0.0.13 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
@@ -1624,3 +1624,51 @@ First-gym preparation and clinic recovery regression:
   publication remain pending for this source checkpoint. The public website
   still serves 0.0.12. Gym victory, practice/team balance, art cleanup and every
   final parity gate remain outstanding; approved quality domains stay 0/11.
+
+Clinic recovery validation and public release checkpoint:
+
+- Rebuilt the normal 0.0.13 cartridge and verified exact BPS reapplication.
+  Native controller-only play now recovers at South Park 32,6, directly outside
+  the clinic, instead of the reproduced old 6,17. Level 5, 19/19 HP, restored
+  move PP and relay stage 1 are checked; badge/gym-victory flags stay false.
+- The full 59,999-frame clinic/delivery/intentional-blackout route matches final
+  RGB, exported Flash and all 65,833,900 raw stereo pairs in native mGBA and
+  WebAssembly. Evidence: .tools/benchmarks/cognition-clinic-blackout-after-full.
+  Its duration and intentional idle/test inputs do not certify story pacing,
+  game-update deadlines, browser input latency or AudioWorklet/device performance.
+- The recovered checkpoint is saved through the actual native menu. Its 128 KiB
+  battery passes the website's SF validator at save counter 3. Cold Continue
+  resumes the field at 32,6 with unchanged party and relay progress. That
+  2,464-frame route matches RGB/Flash/all 2,703,624 stereo pairs in WebAssembly.
+  Evidence: .tools/benchmarks/cognition-clinic-recovery-{saved,cold-resume}.
+  The earlier shortened Continue attempt stayed at the title screen and is
+  excluded; loaded RAM alone was insufficient evidence of gameplay resume.
+- Public Site version 14 deployed successfully with normal
+  0.0.13-clinic-recovery-preview at https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+  Site source 7f8a7e5ff1c419f66c2a08e7e6e380e83bcf6ee8; deployment
+  appgdep_6ac6fca79db88191bec90f09ff7b8908. Its 665,298-byte patch reconstructs
+  target c264be15b5ecc3279f447e4ecd0b9bba085017eea3b4b4f09893732407221b4b.
+  TypeScript, production build, archive inspection and the source checks pass.
+  The native package contains 84 files, with no full inherited ROM or private
+  fixture patch. Public access remains unchanged. GitHub source checks:
+  https://github.com/devk03/SF-Monsters/actions/runs/37715984319 (dff49e5).
+
+First-gym preparation checkpoint — earned practice victory:
+
+- On the earlier 0.0.12 main ROM, the healed level-5 CinderCoy defeats Walden's
+  Zigzagoon/Seedot through actual native battles, using Ember and no Potions.
+  It earns level 7 and finishes at 13/23 HP with move PP 35/40/21. This is normal
+  earned progress from the older Sunset battery, not scripted levels or RAM
+  edits. Evidence: .tools/benchmarks/cognition-prepared-route-walden-*.
+- Native Save creates a portable earned checkpoint at Cognition 4,13, relay
+  stage 1, with Walden's trainer-defeat flag set and no gym badge. The new
+  0.0.13 cartridge resumes that older battery with the same level, HP, moves,
+  PP, location and flags. Its cold route also matches native/WebAssembly final
+  RGB, exported Flash and all 2,703,624 stereo pairs across 2,464 frames.
+  Evidence: .tools/benchmarks/{cognition-earned-walden-saved,
+  cognition-earned-walden-new-version-resume}. Both batteries pass SF validation.
+- Next: heal/build the team, Steven's practice battle, Scott's actual victory,
+  rewards/re-entry and three-starter strategy checks. These early checkpoints
+  do not pass ten complete-scope save round trips, fifty campaign checkpoints,
+  full campaign runs or any quality-domain approval. Art/map/audio/story polish,
+  the complete SF scope and all final gates remain required. Parity stays 0/11.
