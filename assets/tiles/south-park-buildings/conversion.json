@@ -1,0 +1,17 @@
+{
+  "source_sha256": "369188e0a9c4f5d26c56298a0c4b7e9372747be9dcbb3f6d7857a718b3a22448",
+  "native_frame_size": [
+    112,
+    80
+  ],
+  "frames": 2,
+  "palette_banks": [
+    8,
+    9
+  ],
+  "quality_approval": "pending",
+  "files": {
+    "buildings.indices": "3e8fe424343b09a72e17da2e7ae8c26419378e27309904a9d5b1b83e244734c2",
+    "building-palettes.gbapal": "e932cbba8d8b6123619af28e6beccdd778dec2eaeaf59cdf2d5c9d76d09ee88c"
+  }
+}

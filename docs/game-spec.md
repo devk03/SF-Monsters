@@ -2742,3 +2742,21 @@ Fixed coastal public visibility and battery-transfer check:
   reviews and the full campaign/performance/acceptance gates remain required.
 - No new, queued or running GitHub Actions jobs appeared after pushing source;
   tests, compilation, captures and site packaging ran locally.
+
+
+South Park original asset checkpoint:
+
+- Replaced the planned institutional facades with original warehouse/clinic
+  art, saved under assets/tiles/south-park-buildings with the exact built-in
+  imagegen prompt. Native size is 112x80 per facade; separate palette banks
+  preserve brick/stone colors. These are fictional SF venues, not exact offices.
+- Original bench, planter and information board are in
+  assets/tiles/south-park-furniture. Native 16x16 conversion shares the existing
+  original lawn palette. All images remain unapproved art candidates.
+- park_art.py converts/validates these resources and packs four-bit metatiles
+  into at most 512 secondary VRAM tiles. Three native-format tests pass:
+  aligned facade/door cells, independent palette/layer flags on deduplicated
+  graphics, and allocation overflow rejection. Generic street edge selection
+  now supports authored road tokens; existing Sunset street tests still pass.
+- Integration follows. Public 0.0.30 and all approval counts stay unchanged.
+  No GitHub workflow, DB change or delegated agent was used.

@@ -1,0 +1,12 @@
+{
+  "source_sha256": "e49e89fc9f7d53b54e8ac8146e245bd9bf5db5cd04ca5cdc67499e6bc5b4125a",
+  "palette_sha256": "ef4b0babd1c4f03a1a39db7a446d8be6783e5e6250b94d5f7b03d18c05d80757",
+  "native_cells": [
+    "bench",
+    "planter",
+    "information board"
+  ],
+  "palette_bank": 7,
+  "indices_sha256": "71df233978ec0a1148056f2216e5f595e41aa1b0dfe7be67c489bd24fba69e72",
+  "quality_approval": "pending"
+}

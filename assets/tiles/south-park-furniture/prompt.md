@@ -1,0 +1,7 @@
+# Original SF park furnishings
+
+Built-in imagegen; supporting input is the original coastal terrain atlas in this repository. No commercial-game artwork used as an input.
+
+Create an original GBA-style pixel-art park-furniture tilesheet for a San Francisco creature RPG. Exactly THREE equal square columns in one row, each design represents 16x16 native pixel blocks, no padding, gaps, captions or labels. Crisp solid enlarged pixel blocks, no antialiasing, gradients or background noise. Limited muted sage/cream/charcoal/warm wood palette that matches the supporting original coastal-ground atlas. All cells have an opaque sage short-lawn background, matching that atlas's lawn tone and sparse short blades. Cell 1: a compact wooden park bench facing the viewer, honey-brown slatted back and seat, charcoal metal supports, fits within 16x16 and is recognizable at native size. Cell 2: low clipped round ornamental park shrub in a charcoal square planter, two green tones and a dark base, fits16x16. Cell 3: small upright neighborhood information board, cream rectangular blank panel in a charcoal frame on two posts, no text, same native scale. No people, Pokemon logos, real company logos or red cross. Production bitmap tiles, not concept art; keep each object readable, consistent and properly aligned on the 16x16 grid.
+
+Converted to three native 16x16 cells using the existing lawn palette. Human art review remains pending.

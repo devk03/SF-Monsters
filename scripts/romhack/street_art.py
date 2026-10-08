@@ -71,9 +71,9 @@ def load_streets(root):
             for index, turns in VARIANTS], files['street.gbapal']
 
 
-def road_variant(plan, x, y):
+def road_edge_variant(plan, x, y, tokens='P#'):
     rows = plan['rows']
-    is_road = lambda nx, ny: 0 <= ny < len(rows) and 0 <= nx < len(rows[0]) and rows[ny][nx] in 'P#'
+    is_road = lambda nx, ny: 0 <= ny < len(rows) and 0 <= nx < len(rows[0]) and rows[ny][nx] in tokens
     mask = sum(bit for dx, dy, bit in ((0, -1, 1), (1, 0, 2), (0, 1, 4), (-1, 0, 8))
                if not is_road(x + dx, y + dy))
     if mask not in EDGE_VARIANTS:
@@ -86,6 +86,13 @@ def road_variant(plan, x, y):
         raise ValueError(f'Review a multi-corner street junction at {x},{y}.')
     if corners:
         return corners[0]
+    return 0
+
+
+def road_variant(plan, x, y):
+    edge = road_edge_variant(plan, x, y)
+    if edge:
+        return edge
     if (x, y) in ((10, 8), (10, 24)):
         return 17
     if x in (17, 27) and y in (17, 22):
