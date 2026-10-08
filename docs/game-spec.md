@@ -3751,10 +3751,54 @@ Recovery cue v42 public release checkpoint:
   still pending, not substituted by cartridge identity alone.
 - Inspecting the pinned original maps establishes a genuine reference route:
   original lab exits (6/7,12) -> Littleroot (7,16), then Route101 -> Oldale.
-  Oldale centre door is (6,5); nurse is (7,2), approached at (7,3). Existing
+  Oldale centre door is (6,16); nurse is (7,2), approached at (7,4). Existing
   office-emerald-paired-interior snapshot has the exact baseline hash and
   pinned controller-only lineage; extend it through normal gameplay.
 - Latest explicit user music score remains 2/4 for v40. No score/approval is
   inferred for v41 voices or v42 cue. Full Audio and all full-domain, campaign
   and system requirements remain unfinished. No CI, DB mutation, PR merge or
   delegated work ran. Goal remains active with the same 6 PM local cutoff.
+
+
+Genuine Emerald recovery comparison checkpoint:
+
+- Previous goal turn classified as progress: original recovery cue v42 was
+  published with verified timing/state restoration and public download/resume.
+- Extended the genuine controller-only reference lineage from the original lab:
+  obtained Torchic through Birch rescue, completed normal dialogue, crossed
+  Route101, took a Tackle after Growl, fled, and reached Oldale centre. Exact
+  reference ROM/core hashes retained; no SF state or RAM writes are used.
+- Corrected setup assumptions using pinned map/variable evidence: rival intro
+  was already complete; the first exit lane was blocked by an NPC and then a
+  tree. Centre door is (6,16), not the previously mistyped (6,5); nurse is
+  approached from (7,4) across the counter. Unused detours remain preserved
+  diagnostics and do not replace the actual parent lineage.
+- Added a read-only static-map controller planner that favors avoiding grass
+  and conservatively avoids authored NPCs. It labels outputs planned-only;
+  encounters, directional terrain and live events require actual replay.
+  No benchmark input is overwritten by the planner.
+- The first paired service input selected NO in the reference Yes/No prompt:
+  reference HP/PP stayed 17/19 and 39/40. Preserved that failed diagnostic.
+  Corrected input (four A taps, four B taps) produces one completed healing
+  event in both games at identical 2048-frame/34.289-second controller input.
+- Genuine reference restores level-5 Torchic HP17/19 -> 19/19 and Growl PP39 ->
+  40; money3000/moves/other PP retained. SF v42 restores level-11 CinderCoy
+  HP4/31 -> 31/31 and Ember PP16 -> 25, retaining three Potions/money4000/
+  earned badge/stage. Both close dialogue; an additional Down controller replay
+  verifies unblocked movement afterward. Content/stat/layout/confirmation
+  differences are recorded; this is not an identical-state damage case.
+- Recipe/input: docs/quality/recovery-service-review.md and
+  data/quality/recovery-service-review.csv. Packager now labels the actual
+  reference scene EMERALD CENTRE and declares healing-event/audio-only scope,
+  retaining genuine-ROM/core/input/length/frame provenance guards. Existing
+  paired-review tests pass; game source/build is unchanged for this checkpoint.
+- Private 34.29-second comparison:
+  .tools/benchmarks/recovery-service-v42-genuine-review/comparison.mp4.
+  Separate listening files are in recovery-service-emerald-confirmed/listen.mp3
+  and recovery-service-v42-confirmed/listen.mp3. Commercial reference remains
+  private. Asked for separate 0-4 healing cue and visual-sequence scores; pending.
+- Visible next gap: reference nurse/equipment has recovery movement/effects,
+  while SF equipment remains static. Improve that scene, preserve its verified
+  service behavior, and gather a new same-protocol comparison. Full domain
+  approvals remain 0/11; latest clinic soundtrack rating is v40 at 2/4.
+  Public stays v42/Site34. No workflow, DB mutation, PR merge or delegation ran.

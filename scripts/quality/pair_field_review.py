@@ -39,9 +39,14 @@ def main():
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--candidate-label',default='SF OFFICE',
                         help='Visible candidate scene name in uppercase letters and spaces.')
+    parser.add_argument('--reference-label',default='EMERALD LAB',
+                        help='Visible genuine reference scene name in uppercase letters and spaces.')
+    parser.add_argument('--review-scope',choices=['interior','healing'],default='interior')
     args=parser.parse_args()
     if not re.fullmatch(r'[A-Z][A-Z ]{1,39}',args.candidate_label):
         parser.error('Candidate label must use 2–40 uppercase letters/spaces.')
+    if not re.fullmatch(r'[A-Z][A-Z ]{1,39}',args.reference_label):
+        parser.error('Reference label must use 2–40 uppercase letters/spaces.')
     directories=[p.resolve() for p in (args.left,args.right,args.output)]
     for path in directories:path.relative_to(ROOT/'.tools/benchmarks')
     left,right,output=directories
@@ -61,7 +66,7 @@ def main():
         if (probe['width'],probe['height'],int(probe['nb_frames']))!=(240,160,data['frames']):
             parser.error('Encoded review does not match its native capture.')
     output.mkdir()
-    labels=['EMERALD LAB  '+metadata[0]['rom_sha256'][:8],
+    labels=[args.reference_label+'  '+metadata[0]['rom_sha256'][:8],
             args.candidate_label+'  '+metadata[1]['rom_sha256'][:8]]
     filters=[]
     for i,label in enumerate(labels):
@@ -77,10 +82,14 @@ def main():
                     '-c:a','copy','-movflags','+faststart',str(video)],check=True)
     subprocess.run(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-n','-ss','4',
                     '-i',str(video),'-frames:v','1',str(output/'comparison.png')],check=True)
-    receipt={'scope':'Interior art/readability and walking presentation only; full domains incomplete',
+    scope = ('Recovery event presentation and audio cue only; full domains incomplete'
+             if args.review_scope == 'healing' else
+             'Interior art/readability and walking presentation only; full domains incomplete')
+    receipt={'scope':scope,
              'seconds':seconds,'frames_per_side':metadata[0]['frames'],'scale':'equal nearest 3x',
              'same_controller_input':True,'audio_tracks':['Emerald reference','SF candidate'],
-             'audio_quality_approval_requested':False,'left':metadata[0],'right':metadata[1],
+             'audio_quality_approval_requested':args.review_scope == 'healing',
+             'left':metadata[0],'right':metadata[1],
              'human_approval':'pending','commercial_reference_stays_private':True}
     (output/'comparison.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(f'Private matched field review: {video} ({seconds:.2f}s)')
