@@ -756,8 +756,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.33-cognition-office-preview; target 0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f; Site version 27. Original office and cast candidates; user requests a brighter look and less repetition, with positive animation feedback. Full quality approvals remain open. |
-| Latest local source build | 0.0.34-brighter-office-preview; target 3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad. Warm ivory source, quieter blue aisle, four palette banks and varied workstation arrangements. Old-save resume and local checks pass; native/WASM exit-return matches. Public stays 0.0.33 until this revision is published. |
+| Public build | 0.0.34-brighter-office-preview; target 3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad; Site version 28. Brighter office and varied props address the user's prior gloom/repetition feedback. Updated art remains unreviewed; walking is preserved. |
+| Latest local source build | 0.0.34-brighter-office-preview; same target. Normal source compilation/BPS application pass; old native save, walking loop and native/WASM exit-return pass. The revised 34.29-second paired clip is ready; public hands-on QA follows. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -3109,3 +3109,30 @@ Brighter office revision following direct user feedback:
   the positively reviewed walking animation. Numerical scores and full-domain
   approval stay unassigned; all 11 full approvals and the complete campaign/
   systems remain required. No CI workflow, DB operation or delegated agent ran.
+
+
+Brighter office public publication:
+
+- Normal release compilation from c9b19c4 reproduces target
+  3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad.
+  BPS is 773,937 bytes, SHA256
+  0c1b20a942daabb8db13fe300ef3be93c0875dbafaeedef88e4a41064b3fefb3.
+- Site source 36b2afbeab02799f480892b2ad29729fc7c0a33f passes TypeScript
+  and production build. Archive has the exact patch/manifest, no inherited
+  cartridge. Saved Site version 28:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_bf490b03ef4081919017577597f2d23b.
+  Deployment appgdep_6ac7c985701881919069bbbaecba0877 succeeded at
+  2026-10-08T16:49:18Z. Public audience and on-device patching are preserved.
+- New paired evidence: .tools/benchmarks/brighter-office-interior-paired-review/
+  comparison.{mp4,png,json}. Same Emerald lab capture, identical 2,048-frame
+  controller sequence, 34.29 seconds and equal nearest 3x scale. SF walk returns
+  to (8,7); updated still inspected for brighter ground, plant/furniture color
+  and distinct corner arrangements. No courier/NPC animation asset or timing
+  changed. This remains an office subset, not a full quality-domain approval.
+- New native captures were losslessly compressed, preserving every frame and
+  freeing 153,227,014 and 300,884,406 bytes. Native/WASM exit-return also verifies
+  1,024 identical RGB frames, 4,494,336 PCM bytes and identical Flash.
+- Direct user feedback and the positive animation note stay recorded. New
+  numerical/full-domain approval remains pending. Old-save public QA follows;
+  original clinic/cast portraits/music, all 16 hubs/eight gyms/150 creatures and
+  every system gate remain required. No GitHub workflow or DB operation ran.
