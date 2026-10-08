@@ -763,7 +763,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Next checkpoint: additional starter/team strategies, original wild creatures,
   map/cast/audio/interface polish and first-slice comparison reviews. The earned
   Fire route now verifies the first gym victory, reward, re-entry and save.
-- Public preview: version 0.0.15 includes twelve original creature/call candidates,
+- Public preview: version 0.0.17 includes eighteen original creature/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
@@ -1907,3 +1907,36 @@ Complete first-slice creature-presentation candidates:
 - Next: final-roster earned trainer/gym replay, actual capture/party presentation,
   broader art/audio/interface/cast polish and matched comparison clips. Public
   0.0.15 remains current until validation; all 11 final approvals remain pending.
+
+Final opening-roster gameplay/release checkpoint:
+
+- Native final-roster play again defeats Walden from the actual level-5 Sunset
+  battery without Potions, ending level 7 and 13/23 HP. Its 35,285-frame cold
+  route matches RGB/Flash/all 38,716,464 stereo sample pairs in WebAssembly.
+- The earlier fixed Steven/gym input replay fails and remains preserved under
+  slice-roster-earned-gym. PierPeep faints after three Scratch attacks, moving
+  the old Potion input into the level-up UI; Mycelimp then defeats the unhealed
+  party. This is not masked or counted as a pass. Reading the actual command
+  menu, using one Potion against Mycelimp and two Embers earns Steven's victory
+  and level 9. No game stats, flags, experience or random draws are forced.
+- The corrected continuous cold route heals/restocks normally, defeats Scott,
+  earns the badge/rewards and returns to Cognition 8,4. It ends level 11, 4/31 HP,
+  Leer/Growl/Ember/Quick Attack, three Potions and 4,000 money. All 71,038 frames
+  execute in native/WebAssembly with identical final RGB/Flash and all 77,946,444
+  stereo pairs. Evidence: slice-roster-earned-gym-cold and the preserved
+  slice-roster-steven-* steps. This remains one earned Fire strategy, not the
+  required three fresh campaigns or all starter/team/seed balance solutions.
+- Source checks pass for 08a69bc:
+  https://github.com/devk03/SF-Monsters/actions/runs/37730067469. Native compilation,
+  Flips/browser BPS round-trip, Site typecheck/build and archive inspection pass.
+  Normal 0.0.17 BPS: 740,811 bytes; SHA-256
+  13c3339184c911bd03e4c228c94c3c03421ec0bb240cf2f91257a67c5ebed64b.
+- Public Site version 17 deployed successfully at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site. Site source
+  03c48fecd77e13888d63fdd76f5ba669375bd40f; deployment
+  appgdep_6ac7252533f08191b52ab4293fbca7d3. Its 84-file native package excludes
+  inherited full ROMs and fixtures; raw non-AppleDouble inspection counts 85.
+- Original front/back/entrance/icon/cry candidates now cover the opening roster.
+  Native pixel cleanup, actual capture/party review, cast/tiles/music/interfaces,
+  additional starter strategies and user comparison reviews remain open. All
+  11 final approvals and the full 16-hub/eight-gym/150-entry campaign remain required.
