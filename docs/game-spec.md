@@ -761,8 +761,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.42-recovery-cue-preview; target 5542a01edefcd14a12b4e0669ffe63f95fef025d30fd0b244085c3e24bd90632; Site version 34. Original one-shot recovery cue uses a separate bank and preserves native service timing. v41 voices/v42 cue remain unreviewed; latest explicit clinic music score is v40 at 2/4. |
-| Latest local source build | Same v42 target, source 101ca9d. Normal compilation/BPS/all local checks pass. Native/WASM 336 healing frames match RGB/PCM/Flash; v41/v42 service RGB identical. Compiled three-track cue finishes and seven-track BGM resumes; shared fanfare bank unchanged. |
+| Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
+| Latest local source build | v43 target, source25603f2. Normal compilation/BPS/all local checks pass. Native/WASM2048 healing frames match RGB/PCM/Flash; HP4/31 becomes31/31, EmberPP16 becomes25, money/items/badge/stage retained. Native Down replay verifies return control. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -3821,3 +3821,30 @@ Recovery animation source checkpoint (v43, not yet released):
   native/WASM replay, public release and human visual/audio review are pending.
 - Public remains v42/Site34 until validated v43 is published. No Actions run,
   DB mutation, PR merge or delegation. Goal remains active until 6 PM SF local.
+
+Recovery animation verified and published checkpoint:
+
+- v43 source25603f2 compiled normally; BPS866334 bytes, SHA256
+  4cbb4c0b5add19e3011b1ee607d0f8a0027520bbb43990ee195f14506a382995.
+  Target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6.
+  Build reports dirty worktree because unrelated user PDF is untracked; it is
+  excluded from source/assets/release and remains untouched.
+- Native and WASM run2048 same-protocol frames from a cold imported v35 battery,
+  with byte-identical RGB,8988672 PCM bytes and Flash. Both restore HP4/31 to
+  31/31 and EmberPP16 to25; moves/level/items/money4000/badge/stage4 retained.
+  Additional native Down moves6,5 to6,6 after dialogue: control is released.
+- Captured snapshots confirm warm/bright/peak/idle equipment phases and healer
+  facing change. No geometry added:328 native tiles/106 metatiles. Local checks
+  pass. Scene is still sparse; this does not establish Emerald-quality parity.
+- New genuine34.29second comparison:
+  .tools/benchmarks/recovery-service-v43-genuine-review/comparison.mp4.
+  Shared controller protocol and original reference provenance unchanged.
+- Site source919cec27e674fced3219c3176e43befbb22d70fa; archive
+  .tools/site-v43-recovery-animation.tar.gz verifies one v43 patch/manifest and
+  no commercial BPEE cartridge. Site35 saved id:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_b45a6a9f732c8191b47c107f4571c940.
+  Deployment appgdep_6ac8079f096c8191bb7b8fa67e8660da succeeded
+  2026-10-08T21:14:15Z, preserving public audience and existing auth.
+- Actual browser healing/download verification is underway. Latest clinic music
+  rating remains2/4; full-domain approvals0/11. No GitHub workflow, DB mutation,
+  PR merge or delegation ran. Goal remains active with6PM local stop.

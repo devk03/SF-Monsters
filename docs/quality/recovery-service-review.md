@@ -2,7 +2,7 @@
 
 This reviews healing presentation and its audio cue, not complete Audio,
 NPC/event or Interface domains. The left capture is the genuine pinned Emerald
-ROM; the right is SF v42. Both use native mGBA 0.10.5 on the development Mac,
+ROM; the right is SF v43. Both use native mGBA 0.10.5 on the development Mac,
 240x160 pixels, the same 2048-frame input and native GBA clock (34.289 seconds).
 Commercial reference footage, ROMs and saves stay in ignored private storage.
 
@@ -27,7 +27,7 @@ service actor. Species/content/room layouts and confirmation dialogue differ;
 this is a comparable free-healing workflow, not an identical-state damage case.
 
 Private captures: `recovery-service-emerald-confirmed` and
-`recovery-service-v42-confirmed` under `.tools/benchmarks`. Encode each with
+`recovery-service-v43-confirmed` under `.tools/benchmarks`. Encode each with
 `scripts/quality/encode_core_capture.py`, then package using
 `scripts/quality/pair_field_review.py --reference-label 'EMERALD CENTRE'
 --candidate-label 'SF CLINIC' --review-scope healing` and the two directories.
@@ -35,7 +35,8 @@ The packager retains ROM/core/input/length/native-frame provenance checks.
 The video has separate reference and candidate audio tracks. Separate listening
 files are provided when the viewer cannot select audio tracks.
 
-Visible remaining gap: the reference equipment/nurse sequence has movement
-and effects; SF v42 plays its original cue beside static recovery equipment.
-The next revision should improve that scene without losing the service's
-verified state restoration. Human cue/event scores remain pending.
+v43 adds five 24-frame amber light phases and a healer turn toward the
+equipment; its original cue, native fanfare completion and return control are
+preserved. Native/WASM replay matches RGB, PCM and Flash across all 2048
+frames. The reference still has richer service choreography and presentation.
+Human cue/event scores remain pending; this is a limited scene improvement.
