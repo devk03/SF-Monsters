@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import struct
+import shutil
 from street_art import rotate_pixels
 from title_art import tiles8
 from title_creature import pack4
@@ -105,6 +106,64 @@ def remap_terrain(plan, blocks):
             struct.pack_into('<H', output, offset, (word & 0xfc00) | (512 + FIRST_METATILE + variant))
             counts[variant] = counts.get(variant, 0) + 1
     return bytes(output), counts
+
+
+def apply_coastal_animation(root, engine, original):
+    # Eight reserved secondary tiles are isolated from static-art deduplication.
+    _, _, waves = load_terrain(root)
+    destination = engine / 'data/tilesets/secondary/petalburg/sf_coast_waves.4bpp'
+    destination.write_bytes(waves)
+    path = 'src/tileset_anims.c'
+    source = original(path)
+    anchor = '''void InitTilesetAnim_Petalburg(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = sPrimaryTilesetAnimCounterMax;
+    sSecondaryTilesetAnimCallback = NULL;
+}'''
+    if source.count(anchor) != 1:
+        raise ValueError('Pinned secondary animation initializer changed; inspect before integrating.')
+    replacement = '''static const u16 sSFCoastalWaves[] = INCBIN_U16("data/tilesets/secondary/petalburg/sf_coast_waves.4bpp");
+
+static void TilesetAnim_SFCoast(u16 timer)
+{
+    if (timer % 16 == 0)
+        AppendTilesetAnimToBuffer(sSFCoastalWaves + (timer / 16) * 128,
+            (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 240)), 8 * TILE_SIZE_4BPP);
+}
+
+void InitTilesetAnim_Petalburg(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = 48;
+    sSecondaryTilesetAnimCallback = TilesetAnim_SFCoast;
+}'''
+    (engine / path).write_text(source.replace(anchor, replacement))
+    # Extend only the displayed camera margin, preserving physical map borders.
+    camera_path = 'src/field_camera.c'
+    camera = (engine / camera_path).read_text()  # Keep the earlier doorway hook.
+    marker = '    u16 metatileId = MapGridGetMetatileIdAt(x, y);\n    const u16 *metatiles;'
+    draw = 'DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * NUM_TILES_PER_METATILE, offset);'
+    if camera.count(marker) != 1 or camera.count(draw) != 1:
+        raise ValueError('Pinned camera margin hook changed; inspect before integrating.')
+    camera = camera.replace('#include "constants/maps.h"',
+                            '#include "constants/maps.h"\n#include "sf_coastal_border.h"')
+    camera = camera.replace(marker, marker + '''
+    u8 layerType = MapGridGetMetatileLayerTypeAt(x, y);
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN))
+    {
+        int sfBorder = SFCoastalBorderGraphic(x, y, mapLayout->width, mapLayout->height);
+        if (sfBorder >= 0)
+        {
+            metatileId = sfBorder;
+            layerType = METATILE_LAYER_TYPE_NORMAL;
+        }
+    }''')
+    camera = camera.replace(draw, 'DrawMetatile(layerType, metatiles + metatileId * NUM_TILES_PER_METATILE, offset);')
+    (engine / camera_path).write_text(camera)
+    shutil.copy2(root / 'romhack/engine/coastal_border.h', engine / 'src/sf_coastal_border.h')
+    return [path, camera_path]
 
 
 if __name__ == '__main__':

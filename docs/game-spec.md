@@ -757,7 +757,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe; Site version 21. |
-| Latest local source build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe. Original opening/closing door frames verified locally and published; doorway subset review pending. |
+| Latest local source build | 0.0.29-coastal-terrain-preview; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8. Original ground/shore/wave tiles and camera margin verified locally; public build remains 0.0.28, human review pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2606,3 +2606,40 @@ Coastal terrain asset checkpoint (original source; not yet a playable release):
 - This is first-slice polish, not another completed neighborhood. Borders,
   field-effect sprites, named cast and other first-slice art remain outstanding;
   public build stays 0.0.28. No approval score or acceptance count changed.
+
+
+Coastal terrain native integration checkpoint:
+
+- Source follows asset commit 3f44da2. The compiled secondary sheet grows from
+  192 to 256 tiles, with palette bank 12 for coastal terrain. Ocean and shoreline
+  reserve eight private VRAM slots (752–759), independent of static-art dedup.
+  Three 256-byte stages advance every 16 frames through the native tileset DMA
+  queue. House margins now use original SF lawn instead of inherited grass.
+- Remapped 7 ground tokens into nineteen possible orientations while preserving
+  collision/elevation and all event/save positions. Tall grass retains native
+  encounter behavior. Sand now uses MB_SAND instead of the prior arbitrary
+  southeast-blocking behavior; water uses MB_OCEAN_WATER. These are authored
+  terrain corrections, not a claim that all movement behavior stayed unchanged.
+- In-game coastline inspection exposed the old forest in camera padding west of
+  the map. A Sunset-only visual selector continues ocean/surf/dune/lawn strips
+  outside the rendered map. Field collision, connections and physical map data
+  are unchanged by this selector. Independent C tests cover interior cells,
+  both outside corners, strip edges and differently sized map bounds.
+- Controller evidence: terrain-border-native-coast-ready and
+  terrain-{native,wasm}-coast-waves. All 720 RGB frames, 3,160,080 PCM bytes and
+  Flash match. Visible water has exactly three phases at a sixteen-frame cadence;
+  static sand stays constant. Reserved VRAM matches an authored wave stage.
+  Holding west stops at (4,8), preserving the blocked shoreline. Receipt:
+  native capture's comparison.json; 12.05-second review.mp4 preserves native A/V.
+- Walking the new dune grass produces a native wild BinPossum encounter
+  (terrain-native-encounter/final.png). Old 0.0.27 apartment Flash cold-resumes at
+  (7,4), beacon state 3, with the healed party, 3,500 money and three Potions
+  (terrain-v27-apartment-resume). The doorway/apartment art remains intact.
+- Full scripts/check.sh passes locally; native allocation tests protect mutable
+  slots from aliasing even identical static pixels. Normal cartridge compilation
+  and BPS round trip pass; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8.
+  Source-only checks and recorded core routes do not prove physical-browser
+  performance or Emerald-tier art approval. Full domains remain 0/11 approved.
+- Remaining first-slice art includes field effects/footprints, battle player back
+  poses, cast, the other maps and pixel cleanup. Full campaign remains required.
+  No GitHub workflow or recurring monitor was started.

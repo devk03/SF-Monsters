@@ -5,6 +5,8 @@ mkdir -p build
 clang -std=c11 -Wall -Wextra -Werror -fsanitize=address,undefined -g game/core.c game/content.c tests/core_test.c -o build/core-test
 build/core-test
 clang -std=c11 -Wall -Wextra -Werror game/content.c tests/map_test.c -o build/map-test
+clang -std=c11 -Wall -Wextra -Werror tests/coastal_border_test.c -o build/coastal-border-test
+build/coastal-border-test
 build/map-test
 clang -std=c11 -Wall -Wextra -Werror game/core.c game/content.c tests/save_fixture.c -o build/save-fixture
 build/save-fixture build/save-fixture.sav

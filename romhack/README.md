@@ -233,11 +233,12 @@ directional variants, then selects road records from map adjacency. It preserves
 the upper collision/elevation bits and existing event coordinates.
 
 The complete house/street sheet is compiled from original indexed art with
-192 secondary tiles; its compressed allocation comes from the actual source
+256 secondary tiles, including coastal terrain; its compressed allocation comes from the actual source
 build. Metatile records use separate house/street palette banks. Normal native
 resource guards still verify lossless encoding, ELF correspondence and bounds.
 The older road ID aliases the new asphalt for legacy map-view buffers, while
-authored SF layouts reload on Continue. Generic ground/beach art remains pending.
+authored SF layouts reload on Continue. Coastal ground/water now use original
+art; field-effect sprites and human pixel-art approval remain pending.
 
 This sheet requires normal source compilation. The old pinned-cartridge
 `preview_interface.py` path rejects the current world revision; use
@@ -277,3 +278,20 @@ cells; other doors and native opening/closing timing retain their behavior.
 
 Run `python3 tests/door_art_test.py` for native allocation checks. Source art,
 matched comparison evidence and human approvals are recorded in spec section 15.
+
+
+## Coastal terrain
+
+`assets/tiles/sunset-terrain` contains the original 4x4 atlas, prompt, native
+cells, palette and three ocean/surf stages. `terrain_art.py` remaps ground
+records while retaining collision/elevation and event positions. The shared
+secondary sheet reserves slots 240–247 for animated tiles, so even identical
+static pixels cannot alias mutable water graphics. Palette bank 12 is separate
+from streets (11) and houses (10). Native DMA updates eight tiles each sixteen
+frames; the loop is 48 frames.
+
+The camera's Sunset-only padding selector continues the coast west of the map;
+it changes displayed graphics, not physical boundaries or map connections.
+`coastal_border_test.c` and native gameplay evidence cover its edges. Sand uses
+the native sand behavior, water uses ocean behavior, and encounter grass keeps
+the native tall-grass behavior. Field-effect art and human approval remain open.

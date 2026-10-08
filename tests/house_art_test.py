@@ -11,6 +11,7 @@ from house_art import compose_tiles, remap_houses
 from maps import encode_layout
 from native_resources import bounded_span
 from street_art import load_streets
+from terrain_art import load_terrain
 
 
 class HouseArt(unittest.TestCase):
@@ -78,6 +79,31 @@ class HouseArt(unittest.TestCase):
         for slot in range(100, 125):
             for word in struct.unpack_from('<8H', changed, slot * 16)[4:]:
                 self.assertEqual(word >> 12, 10)
+
+
+    def test_coastal_animation_tiles_never_alias_static_art_or_facade_underlays(self):
+        records = bytearray(2304)
+        struct.pack_into('<8H', records, 16, 0x2002, 0x2003, 0x2003, 0x2002,
+                         0x5250, 0x5251, 0x5260, 0x5261)
+        owned = (ROOT / 'assets/tiles/sunset-rowhouse/house.4bpp').read_bytes()
+        streets, _ = load_streets(ROOT)
+        terrain, _, waves = load_terrain(ROOT)
+        # Even identical ocean/static pixels must not share mutable VRAM slots.
+        terrain[0] = terrain[2]
+        graphics, changed, count = compose_tiles(bytes(256 * 32), owned, bytes(records), streets, terrain)
+        self.assertEqual(len(graphics), 8192)
+        self.assertLessEqual(count, 256)
+        self.assertEqual(graphics[240 * 32:248 * 32], waves[:256])
+        for slot in list(range(40, 58)) + [60, 61, 64, 65, 66, 67, 68, 69, 72, 73, 76, 77, 78] + list(range(100, 125)):
+            entries = struct.unpack_from('<8H', changed, slot * 16)
+            for word in entries[4:]:
+                self.assertNotIn((word & 0x3ff) - 512, range(240, 248))
+        for slot in range(100, 125):
+            self.assertTrue(all(word >> 12 == 12
+                                for word in struct.unpack_from('<4H', changed, slot * 16)))
+        for slot, start in ((62, 752), (63, 756)):
+            self.assertEqual(tuple(word & 0x3ff for word in struct.unpack_from('<4H', changed, slot * 16 + 8)),
+                             tuple(range(start, start + 4)))
 
 
 if __name__ == '__main__':

@@ -24,6 +24,7 @@ from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from apartment_art import apply_apartment_art
 from door_art import apply_door_art
+from terrain_art import apply_coastal_animation
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -89,6 +90,7 @@ def main():
     restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     restored += apply_apartment_art(ROOT, EMERALD, original)
     restored += apply_door_art(ROOT, EMERALD, original)
+    restored += apply_coastal_animation(ROOT, EMERALD, original)
     if args.fixture:
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture
@@ -166,6 +168,8 @@ def main():
         'assets/tiles/courier-apartment/conversion.json').read_text())
     manifest['rowhouse_door'] = json.loads((ROOT /
         'assets/tiles/sunset-door/conversion.json').read_text())
+    manifest['coastal_terrain'] = json.loads((ROOT /
+        'assets/tiles/sunset-terrain/conversion.json').read_text())
     if args.fixture:
         manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
                                'campaign_progress_evidence': False}

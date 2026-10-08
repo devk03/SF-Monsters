@@ -1,9 +1,9 @@
 {
-  "version": "0.0.28-rowhouse-door-preview",
+  "version": "0.0.29-coastal-terrain-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with eighteen original creature/call candidates, team/guide labels, guide header, title lettering/Bayveil silhouette, title theme, courier walking/running and Sunset rowhouse/street candidates; remaining title elements, pixel cleanup, portraits, ground/interior tiles and other music remain unfinished.",
+  "status": "Unreviewed SF chapter with eighteen original creature/call candidates, starter lines, title art/music, courier locomotion, Sunset rowhouses/streets/coastal terrain and apartment adventure. Remaining borders, field effects, pixel cleanup, cast portraits, other maps/music and the full campaign are unfinished.",
   "maps": [
     "sunset.json",
     "apartment.json",
