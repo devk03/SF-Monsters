@@ -29,6 +29,7 @@ python3 tests/title_song_overlay_test.py
 python3 tests/house_art_test.py
 .tools/venv/bin/python tests/courier_art_test.py
 python3 tests/street_art_test.py
+python3 tests/apartment_art_test.py
 node tests/web_capture_test.cjs
 cd web
 npx tsc --noEmit

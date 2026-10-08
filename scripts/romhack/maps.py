@@ -17,12 +17,16 @@ def encode_layout(plan):
     if (width + 15) * (len(rows) + 14) > 0x2800:
         raise ValueError('Map and native connection margins exceed the virtual-map buffer.')
     blocks = []
-    for row in rows:
-        for token in row:
+    base = plan.get('tile_grid_base')
+    if base is not None and (type(base) is not int or base < 512 or base + width * len(rows) > 1024):
+        raise ValueError('Backdrop tiles must fit the native secondary metatile range.')
+    for y, row in enumerate(rows):
+        for x, token in enumerate(row):
             tile, blocked, elevation = legend[token]
             if not (0 <= tile < 1024 and type(blocked) is bool and 0 <= elevation < 16):
                 raise ValueError('Invalid native metatile, collision or elevation.')
-            blocks.append(tile | (0xC00 if blocked else 0) | elevation << 12)
+            blocks.append((base + y * width + x if base is not None else tile) |
+                          (0xC00 if blocked else 0) | elevation << 12)
     return width, len(rows), struct.pack('<' + 'H' * len(blocks), *blocks)
 
 
@@ -165,6 +169,13 @@ def apply_maps(content, root, engine, original):
         blocks_path = layout['blockdata_filepath']
         (engine / blocks_path).write_bytes(blocks)
         restored.extend([map_path, blocks_path])
+        if 'border_tile' in plan:
+            tile = plan['border_tile']
+            if type(tile) is not int or not 0 <= tile < 1024:
+                raise ValueError('Border metatile must fit the native map word.')
+            border_path = layout['border_filepath']
+            (engine / border_path).write_bytes(struct.pack('<4H', *([tile | 0x3c00] * 4)))
+            restored.append(border_path)
         for field in ['warp_events', 'coord_events', 'bg_events']:
             metadata[field] = plan.get(field, [])
             for event in metadata[field]:

@@ -22,6 +22,13 @@ class MapEncoding(unittest.TestCase):
         self.assertEqual((width, height), (2, 2))
         self.assertEqual(data, bytes.fromhex('01 30 ff ff 70 1d 01 30'))
 
+    def test_backdrop_grid_preserves_collision_and_elevation_with_unique_native_tiles(self):
+        plan = {**self.plan, 'tile_grid_base': 512}
+        self.assertEqual(encode_layout(plan)[2], bytes.fromhex('00 32 01 fe 02 1e 03 32'))
+        for base in (511, 1021, True, '512'):
+            with self.subTest(base=base), self.assertRaises(ValueError):
+                encode_layout({**self.plan, 'tile_grid_base': base})
+
     def test_layout_boundaries(self):
         for rows in [[], [''], ['.', '..'], ['.' * 129], ['.'] * 129, ['.' * 128] * 128]:
             with self.subTest(rows=rows), self.assertRaises(ValueError):
