@@ -1,6 +1,6 @@
 {
-  "revision": 3,
-  "description": "Compact original names for native team, summary, guide and capture screens. Title art and other inherited labels remain pending.",
+  "revision": 4,
+  "description": "Compact original names for native team, summary, guide, capture, Continue and storage screens. Other inherited labels and item branding remain pending.",
   "preview_input_sha256": "11f315ea2f5c3191d067360e58465d4b2db96ff719fd0d3e5fe0d5726806e176",
   "labels": [
     {"symbol": "gText_Pokemon", "text": "MONSTER"},
@@ -40,6 +40,14 @@
     {"symbol": "gText_MenuPokedex", "text": "GUIDE"},
     {"symbol": "gText_MenuPokemon", "text": "TEAM"},
     {"symbol": "gText_SavingPokedex", "text": "GUIDE"},
+    {"symbol": "gText_ContinueMenuPokedex", "text": "GUIDE"},
+    {"symbol": "gText_WithdrawPokemon", "text": "WITHDRAW MONSTER"},
+    {"symbol": "gText_DepositPokemon", "text": "DEPOSIT MONSTER"},
+    {"symbol": "gText_MovePokemon", "text": "MOVE MONSTER"},
+    {"symbol": "gText_WithdrawMonDescription", "text": "Move monsters from BOXES to\nyour party."},
+    {"symbol": "gText_DepositMonDescription", "text": "Store party monsters in BOXES."},
+    {"symbol": "gText_MoveMonDescription", "text": "Organize monsters in BOXES and\nin your party."},
+    {"symbol": "gText_MoveItemsDescription", "text": "Move items held by monsters\nin BOXES or your party."},
     {"symbol": "gText_BattleMenu", "text": "FIGHT{CLEAR_TO 56}BAG\nTEAM{CLEAR_TO 56}RUN"},
     {"symbol": "sText_PkmnBrokeFree", "text": "Oh, no!\nThe monster broke free!"},
     {"symbol": "sText_PkmnDataAddedToDex", "text": "{B_OPPONENT_MON1_NAME}'s data was\nadded to the Guide.\\p"},

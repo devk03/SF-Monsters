@@ -762,13 +762,13 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.38-neutral-clinic-preview; target a93d6c0a9f9e1a8e551d74c96d00996813b22665ee9776a4ce0af2891bc18f82; Site version 31. Teal carpet/trim removed; neutral stone/plaster/wood, larger furniture and connected walls. Art remains unapproved. |
-| Latest local source build | Same v38 target, source 12be738. Normal compilation/BPS and full local checks pass; old-save resume and native/WASM healing (336 frames) and exit-return (576 frames) match RGB/PCM/Flash. New 34.29-second comparison is ready. |
+| Latest local source build | v39 storage-label draft 00c55c0d1ad410e96cb52656c73b7efec240d17103721b224f0e5fcea7a4d735. Continue/PC storage labels use Guide/monster terms. Normal compilation/BPS/full local checks pass; old v35 battery resumes, and 1,116 native/WASM service frames match RGB/PCM/Flash. Public remains v38. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 31 local ROM patch and explicit v35 battery import reach title/Continue and the neutral clinic. Actual website screenshot inspected; sampled core throughput 60.0 fps. The public GBA download click produced no download event/file in this session; v38 download/export and signed-in player verification remain open. |
+| Public QA | Site 31 guest clinic resume verified in IAB. Actual Chrome signed-in session shows account identity, accepts v35 battery, resumes clinic and downloads exact v38 cartridge and byte-identical backup; that downloaded pair cold-resumes in native mGBA. Fresh auth flow, same-browser account/guest isolation, Safari/mobile and full save gates remain open. IAB blob downloads remain unverified. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Review corrected clinic floor/wall clip; apply coherent material/connection rules to other first-slice interiors, then remaining cast/portraits/music and first-slice gates. Preserve positively reviewed walking. Checks stay local; GitHub Actions stays manual-only. |
+| Next work | Clinic subset comparison awaits requested user score. Finish storage text/boxes, then original first-slice interior/battle music and remaining cast/portraits. Other interiors still need coherent material/connection rules. Preserve positively reviewed walking; checks stay local and GitHub Actions manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3461,3 +3461,45 @@ Neutral clinic v38 publication and verification:
   requires user approval; all full-domain and campaign/system gates stay open.
 - One-time 6 PM local work-stop reminder recorded above. No workflow, DB change,
   PR merge or delegated agent ran for this checkpoint.
+
+
+Release checks and storage terminology checkpoint:
+
+- Previous goal turn classified as progress: neutral clinic v38 was deployed,
+  committed and visually resumed on the actual public website.
+- Chrome public session was already signed in and visibly identifies the account.
+  No credential entry or new authentication grant occurred. Before import it
+  had no supported saved game; explicit v35 battery import reaches the clinic.
+  Actual downloaded cartridge sf-mini-monsters (14).gba is the exact v38 target.
+  Export sf-mini-monsters (6).sav is 131,072 bytes, byte-identical to the imported
+  v35 battery (SHA256 01536628638451d12541c2cdfe37972cc069bd94fbe9b6a5525b4716ee37dedc).
+  Those actual downloaded files, copied into ignored private benchmark storage,
+  cold-resume in native mGBA at (6,8), preserving level-11 CinderCoy, HP 4/31,
+  all four moves/PP, three Potions, 4000 money and earned badge/gym stage 4.
+  This is a supported older-save transfer, not ten full same-release round trips.
+- Signed-in screenshot: .tools/browser-review/public-v38-signed-in-chrome.png.
+  Existing authenticated play/download/export works; the entire fresh sign-in
+  flow and controlled same-browser guest/account isolation remain unproven.
+  IAB downloadMedia also timed out on the blob link; Chrome succeeds with the
+  same release. No product download regression is concluded from IAB alone.
+- Native controller checks reach storage action menus and the front-counter
+  purchase flow. Diagnostic named potion-purchase actually bought 20 basic
+  capture items at 200 each: capture pocket 5 -> 25, money 4000 -> 0, Potions
+  stay 3. Preserve this diagnostic and its accurate result; it is not a Potion
+  purchase test. The counter behaves normally; storage box editing is pending.
+- Continue and eight storage labels exposed inherited branding in these checks.
+  Added original Guide/monster terminology through the existing allocation-safe
+  text overlay, preserving save layout, menu actions and native timing. Other
+  inherited item/text/art references remain pending; this is not an originality
+  or complete interface approval.
+- v39 draft 00c55c0d1ad410e96cb52656c73b7efec240d17103721b224f0e5fcea7a4d735
+  compiles normally and applies exactly (787,791-byte BPS). All local checks pass.
+  Old battery resumes at (6,8); storage menu screenshot confirms new labels and
+  descriptive text without clipping. Native/WASM menu route matches all 1,116
+  RGB frames, 4,898,128 PCM bytes and Flash, ending at (2,4) with state preserved.
+- Requested the user's 0-4 clinic art/readability score and biggest gap using
+  .tools/benchmarks/neutral-clinic-v38-paired-review/comparison.mp4. No answer
+  or numeric approval yet; 0/11 full domain approvals remains unchanged.
+- Public stays v38/Site 31 while v39 and further first-slice work are prepared.
+  No workflow, DB mutation, PR merge or delegation ran. The goal remains active
+  until the user-requested cutoff or a genuine completion audit.
