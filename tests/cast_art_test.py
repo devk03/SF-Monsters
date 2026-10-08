@@ -66,7 +66,7 @@ class NativeCast(unittest.TestCase):
             shutil.copytree(ROOT/'assets/characters/cognition-cast',root/'assets/characters/cognition-cast')
             (root/'assets/characters/cognition-cast/cast.gbapal').write_bytes(bytes(32))
             with self.assertRaisesRegex(ValueError, 'palette differs'):
-                apply_cast(root, root/'engine-does-not-exist')
+                apply_cast(root, root/'engine-does-not-exist', lambda path: '')
 
 
 if __name__ == '__main__':

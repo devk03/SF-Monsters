@@ -90,7 +90,7 @@ def main():
     restored += apply_creature_audio(content, ROOT, EMERALD, original)
     restored += apply_field_music(content, ROOT, EMERALD, original)
     restored += apply_courier(ROOT, EMERALD, original)
-    restored += apply_cast(ROOT, EMERALD)
+    restored += apply_cast(ROOT, EMERALD, original)
     restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     restored += apply_apartment_art(ROOT, EMERALD, original)
     restored += apply_door_art(ROOT, EMERALD, original)

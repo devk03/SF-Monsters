@@ -2899,3 +2899,28 @@ Cognition original field cast candidate checkpoint:
   Source images resized into native candidates still need pixel cleanup and
   matched user review. Public build remains 0.0.31 until publication verifies
   the new candidate. No CI workflow, DB operation or delegated agent was used.
+
+
+Cognition cast rebuild and native rendering verification:
+
+- A second source compilation exposed duplicate cast frame declarations.
+  The cast overlay now restores its own pointer/frame headers from the pinned
+  engine before appending records, while preserving courier/map-owned headers.
+  Corrected normal build succeeds and reproduces target
+  311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780.
+  No broken candidate was published. Further consecutive-build check follows.
+- Controller-only older-save entry reaches the gym with earned badge/stage 4,
+  CinderCoy level 11 HP 4/31, four moves/PP, 4,000 money and three Potions intact.
+  Existing scripts station Scott at (8,3) after delivery; this behavior is retained.
+  cast-native-room-view shows all three new sprites with the courier at (8,7).
+- cast-{native,wasm}-gym-dialogue-review has 2,932 identical RGB frames,
+  12,868,544 identical PCM bytes and identical Flash. Its 49.09-second native
+  A/V clip and route-contact.png were inspected. It exercises Scott's return
+  dialogue but movement during text pacing misses later intended approaches;
+  it is explicitly not evidence of completed three-person dialogue coverage.
+  Corrected close/dialogue route reaches the room overview normally.
+- Native capture compression preserves every original frame and frees
+  441,738,648 bytes. Actual browser, newer in-game save and publication checks
+  follow. Native rendering/rebuild evidence does not replace matched Emerald
+  approval, physical-browser performance or complete campaign gates.
+  Human approvals remain 0/11; no GitHub workflow or DB operation was used.

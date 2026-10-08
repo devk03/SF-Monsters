@@ -114,7 +114,7 @@ def encode_cast(root):
     return metadata
 
 
-def apply_cast(root, emerald):
+def apply_cast(root, emerald, original):
     directory = root / ASSET
     entries = catalog(root)
     metadata = json.loads((directory / 'conversion.json').read_text())
@@ -135,6 +135,9 @@ def apply_cast(root, emerald):
              'src/data/object_events/object_event_graphics_info_pointers.h',
              'src/event_object_movement.c']
     constants, header, graphics, pictures, info, pointers, movement = ((emerald/p).read_text() for p in paths)
+    # These two headers have no earlier overlay owner. Rebuild them from the
+    # pinned source; other headers must retain the courier/map additions.
+    pictures, pointers = original(paths[3]), original(paths[5])
     if TAG in movement or '0x1125' in movement:
         raise ValueError('Dedicated SF cast palette tag is already occupied.')
     palette_dest = 'graphics/object_events/palettes/sf_cognition_cast.gbapal'
