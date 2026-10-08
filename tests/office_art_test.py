@@ -40,6 +40,7 @@ class OfficeArt(unittest.TestCase):
         self.assertEqual(office_tile(plan,1,6),540) # incident terminal lower-left
         self.assertEqual(office_tile(plan,5,19),591) # team whiteboard
         self.assertEqual(office_tile(plan,1,15),582) # coffee counter
+        self.assertEqual(len({office_tile(plan,x,y) for x,y in ((1,3),(13,3),(1,9),(14,9))}),4)
         for x,y in ((8,3),(8,7),(8,16),(4,10),(12,10)):
             self.assertEqual(office_tile(plan,x,y),515 if plan['rows'][y][x]=='r' else 514)
 

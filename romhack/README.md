@@ -321,7 +321,7 @@ status are documented in spec section 15; passing checks is not art approval.
 
 `office_art.py` compiles the original sixteen-card atlas in
 `assets/tiles/cognition-office` into a standalone secondary tileset. The native
-source has 319 tiles, 81 metatiles and palette bank 6. Its floor stays beneath
+source has 319 tiles, 81 metatiles and palette banks 6–9. Its floor stays beneath
 actors. Record 2 preserves the scripted gate-open floor (0x202); record 1
 retains the south-arrow exit behavior. The existing room collision/elevation
 bits, NPCs, warps and event coordinates are preserved.
@@ -331,3 +331,13 @@ whiteboard, and the coffee reward on its counter. The source, prompt, native
 atlas, indexed cards and palette are editable; resized candidates still need
 pixel cleanup and user review. Native old-save resume and exit/return evidence
 are in spec section 15. Public release preparation remains separate.
+
+
+The current bright candidate uses source-bright-v2.png and v3 native derivatives.
+The original source and one-bank/v2 derivatives remain preserved. Four banks
+separate floors/walls, furniture, vegetation and relay/whiteboard colors while
+sharing ground/outline colors. The four workstation corners now use different
+arrangements: storage, desk, whiteboard and server equipment. Walking assets,
+animation timing, room collision/elevation and event coordinates are unchanged.
+The user's earlier review requested brighter art and less repetition and gave
+positive animation feedback; no 4/4 approval was inferred.

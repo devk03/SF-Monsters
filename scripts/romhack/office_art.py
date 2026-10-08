@@ -7,7 +7,8 @@ from park_art import pack_park_cells
 from street_art import rotate_pixels
 
 ASSET = 'assets/tiles/cognition-office'
-REVISION = 'v2'
+REVISION = 'v3'
+SOURCE_FILE = 'source-bright-v2.png'
 CARD_BANKS = (6,6,6,6,7,7,8,7,9,7,7,9,9,9,6,7)
 
 
@@ -16,7 +17,7 @@ def strong_bands(mask, axis):
     for index in range(mask.size[axis]):
         box = (index,0,index+1,mask.height) if axis == 0 else (0,index,mask.width,index+1)
         count = sum(bool(a) for a in mask.crop(box).get_flattened_data())
-        if count >= mask.size[1-axis] // 10:
+        if count >= mask.size[1-axis] // 2:
             if not bands or index > bands[-1][1]:
                 bands.append([index,index+1])
             else:
@@ -27,7 +28,7 @@ def strong_bands(mask, axis):
 def encode_office(root):
     from PIL import Image
     path = root / ASSET
-    source = Image.open(path/'source.png').convert('RGBA')
+    source = Image.open(path/SOURCE_FILE).convert('RGBA')
     mask = source.getchannel('A').point(lambda a:255 if a >= 128 else 0)
     rows = strong_bands(mask,1)
     if len(rows) != 4:
@@ -70,7 +71,7 @@ def encode_office(root):
     palette = b''.join(struct.pack('<H',sum(round(rgb[c]*31/255) << (5*c) for c in range(3)))
                        for bank in range(6,10) for rgb in palettes[bank])
     (path/names[2]).write_bytes(palette)
-    metadata = {'source_sha256':hashlib.sha256((path/'source.png').read_bytes()).hexdigest(),
+    metadata = {'source_file':SOURCE_FILE,'source_sha256':hashlib.sha256((path/SOURCE_FILE).read_bytes()).hexdigest(),
                 'source_size':list(source.size),'source_cells':boxes,'native_card_size':[32,32],
                 'cards':16,'card_banks':CARD_BANKS,'palette_banks':[6,7,8,9],'quality_approval':'pending',
                 'files':{name:hashlib.sha256((path/name).read_bytes()).hexdigest() for name in names}}
@@ -83,7 +84,7 @@ def office_resources(root):
     metadata = json.loads((path/f'conversion-{REVISION}.json').read_text())
     if tuple(metadata['card_banks']) != CARD_BANKS:
         raise ValueError('Office palette assignment changed after conversion.')
-    for name,digest in dict(metadata['files'],**{'source.png':metadata['source_sha256']}).items():
+    for name,digest in dict(metadata['files'],**{metadata['source_file']:metadata['source_sha256']}).items():
         if hashlib.sha256((path/name).read_bytes()).hexdigest() != digest:
             raise ValueError('Regenerate office atlas after changing '+name)
     raw = (path/f'cards-{REVISION}.indices').read_bytes()
@@ -124,7 +125,13 @@ def office_tile(plan,x,y):
     if token == '#':return 512+({0:74,len(plan['rows'][y])-1:72}.get(x,73 if y==len(plan['rows'])-1 else 5))
     for letters,card in (('abcd',4),('klmn',6),('ijst',9)):
         if token in letters:
+            if letters=='abcd':
+                if x<3:card=15 if y<5 else 8
+                elif y>8:card=5
             if letters=='klmn' and x<3:card=5
+            if letters=='ijst':
+                if y<6 and x<6:card=7
+                elif y>=18 and x>=13:card=15
             return 512+6+card*4+letters.index(token)
     if token in 'uv':return 512+(79 if y==19 else 70)+'uv'.index(token)
     if token == 'B':return 512+75

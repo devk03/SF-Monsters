@@ -757,13 +757,13 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.33-cognition-office-preview; target 0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f; Site version 27. Original office and cast candidates; user requests a brighter look and less repetition, with positive animation feedback. Full quality approvals remain open. |
-| Latest local source build | 0.0.33-cognition-office-preview; target 0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f. Original office candidate compiles and old gym save cold-resumes; exit/re-entry RGB/audio/Flash match natively and in WASM. Public ROM stays 0.0.32 pending normal release/public QA. |
+| Latest local source build | 0.0.34-brighter-office-preview; target 3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad. Warm ivory source, quieter blue aisle, four palette banks and varied workstation arrangements. Old-save resume and local checks pass; native/WASM exit-return matches. Public stays 0.0.33 until this revision is published. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site 26 fresh-load/import reaches title/Continue/gym normally without Pause/Resume; sampled core throughput 59.0–60.6 fps. Prior white display did not reproduce; cause remains unconfirmed. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Publish and verify the original Cognition office candidate, then original clinic, remaining cast/battle portraits and first-slice matched reviews. Retain import diagnostics for the earlier unconfirmed observation. Checks stay local; GitHub Actions stays manual-only. |
+| Next work | Publish/verify the brighter, less repetitive office and review its revised matched clip, then original clinic, remaining cast/portraits/music and first-slice reviews. Preserve positively reviewed animation. Checks stay local; GitHub Actions stays manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3081,3 +3081,31 @@ Office publication, matched review and user feedback:
   without losing frames. Both new complete comparison captures are also
   losslessly compressed. No files were removed, no DB operation or workflow
   was run, and all full-domain/campaign/system gates remain required.
+
+
+Brighter office revision following direct user feedback:
+
+- Built-in imagegen edited our own atlas into source-bright-v2.png. Exact edit
+  prompt is saved in bright-prompt.md. Warm ivory floors/honey wood, clean blue
+  carpet, vivid green plants and clearer relay details replace the gloomy cast.
+  Original source and prior derivatives remain preserved. Strong alpha-band
+  extraction ignores sparse gutter artifacts before native conversion.
+- Current v3 conversion uses banks 6–9 with shared ground/outline colors. Four
+  formerly identical workstation corners now use storage, desk, whiteboard and
+  server equipment; secondary furniture arrangements also vary. Existing
+  collision/elevation, NPC/event coordinates, exit/gate behavior and every
+  courier/character animation resource remain unchanged.
+- Draft 0.0.34-brighter-office-preview target
+  3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad compiles
+  normally; 773,937-byte BPS applies exactly. Native old gym save resumes at
+  (8,7) with visible courier, earned badge/stage 4, 4,000 money, three Potions
+  and CinderCoy level 11 HP 4/31, four moves/PP preserved.
+- brighter-office-{native,wasm}-exit-return: 1,024 identical RGB frames,
+  4,494,336 identical PCM bytes and identical Flash. Returns to gym (8,6).
+  Full local checks pass, including native palette/shared-ground/room/event
+  coverage and guarded paired-review tests. A new same-input 2,048-frame
+  interior clip returns to (8,7); paired review packaging/publication follows.
+- This addresses the user's stated gloom/repetition gaps while preserving
+  the positively reviewed walking animation. Numerical scores and full-domain
+  approval stay unassigned; all 11 full approvals and the complete campaign/
+  systems remain required. No CI workflow, DB operation or delegated agent ran.
