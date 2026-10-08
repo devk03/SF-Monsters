@@ -3503,3 +3503,19 @@ Release checks and storage terminology checkpoint:
 - Public stays v38/Site 31 while v39 and further first-slice work are prepared.
   No workflow, DB mutation, PR merge or delegation ran. The goal remains active
   until the user-requested cutoff or a genuine completion audit.
+
+
+Storage-label source/release checkpoint:
+
+- Source commit 8d700e75921069ab90dd10c63b822a988195c7b8 is pushed.
+  Normal release v39 reproduces the reviewed draft target exactly; BPS SHA256
+  636b8b9f16eebda072c38515d33f61c5acbedbc242314a9c550884dffd83bd69,
+  787,791 bytes. Versioned original patch/manifest are checked in; no full ROM.
+- This small completed label correction is a coherent commit exception to the
+  200-300 handwritten-line cadence. No padding or unrelated edits are added.
+- Next weakest work: first-slice music identity/arrangement. Current original
+  bindings cover field/title/wild contexts; separate interior/gym/trainer music
+  remains unfinished. Inspect actual native map song wiring before adding the
+  clinic/office compositions, then audition in the real engine and compare mix/
+  transition evidence. The full Audio domain and other acceptance gates stay open.
+- Public remains v38/Site 31; v39 will be bundled into the next first-slice release.
