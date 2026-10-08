@@ -556,6 +556,11 @@ the coherent checkpoint they substantiate.
 
 ### 15.1 Objective and completion rule
 
+User-requested work cutoff: October 8, 2026, 6 PM San Francisco local time
+(October 9, 01:00 UTC). Stop new work at the cutoff, record remaining gates,
+make the final coherent commit, and pause the goal. A one-time thread reminder
+is scheduled; no recurring monitor or GitHub workflow is authorized by this.
+
 Architecture revision approved by the user on October 7, 2026: use an Emerald
 ROM hack. The user explicitly accepts a public website that asks players to load
 their own Emerald ROM and applies the SF patch locally. This supersedes the
@@ -756,12 +761,12 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.37-seamless-clinic-preview; target aeea0b31083be08bc4f3fc8f6b2601bb48bac346b707650d8f3c542536114d1f; Site version 30. Finer low-contrast floor, continuous carpet, connected walls and original clinic cast address direct feedback. Art remains unapproved; walking is preserved. |
-| Latest local source build | Same v37 target. Normal compilation/BPS, old-save resume and full local checks pass; native/WASM healing and exit-return match RGB/PCM/Flash. New 34.29-second comparison is ready. Public hands-on QA follows. |
+| Public build | 0.0.38-neutral-clinic-preview; target a93d6c0a9f9e1a8e551d74c96d00996813b22665ee9776a4ce0af2891bc18f82; Site version 31. Teal carpet/trim removed; neutral stone/plaster/wood, larger furniture and connected walls. Art remains unapproved. |
+| Latest local source build | Same v38 target, source 12be738. Normal compilation/BPS and full local checks pass; old-save resume and native/WASM healing (336 frames) and exit-return (576 frames) match RGB/PCM/Flash. New 34.29-second comparison is ready. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 29 cartridge download matches v35 target; native clinic save imports and resumes through title/Continue into the new clinic, then exports byte-identically. Sampled core throughput 60.0–60.6 fps. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
+| Public QA | Site 31 local ROM patch and explicit v35 battery import reach title/Continue and the neutral clinic. Actual website screenshot inspected; sampled core throughput 60.0 fps. The public GBA download click produced no download event/file in this session; v38 download/export and signed-in player verification remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
 | Next work | Review corrected clinic floor/wall clip; apply coherent material/connection rules to other first-slice interiors, then remaining cast/portraits/music and first-slice gates. Preserve positively reviewed walking. Checks stay local; GitHub Actions stays manual-only. |
 
@@ -3424,3 +3429,35 @@ Neutral clinic reading-corner and native preview checkpoint:
 - Final native/WASM service and exit routes, matched comparison and public
   release follow. Public remains v37/Site 30; this is first-slice art and
   layout work, not a complete quality domain or campaign. No CI or DB ran.
+
+
+Neutral clinic v38 publication and verification:
+
+- Normal build source 12be73894159c56d3dae99b038856f9e0ab6a3f7; target
+  a93d6c0a9f9e1a8e551d74c96d00996813b22665ee9776a4ce0af2891bc18f82.
+  BPS is 787,700 bytes, SHA256
+  342330559c1c8426a1afce90826a8b5c0e02aa2c11a4bfb65e9c1a156a88d040.
+- Native/WASM healing: 336 RGB frames, 1,474,704 PCM bytes and Flash identical.
+  Native/WASM exit-return: 576 RGB frames, 2,528,064 PCM bytes and Flash identical;
+  ends at clinic (6,12), preserving party/items/money/earned badge/stage.
+  PC boot, front-counter dialogue and reading shelf are reached through controls;
+  front-counter purchase menu and this revision's PC boxes are not yet verified.
+- Private 34.29-second matched comparison is in
+  .tools/benchmarks/neutral-clinic-v38-paired-review/comparison.mp4.
+  Original reference stays private; no human score is inferred.
+- Site source 10dfde4873bc483581dde7724f77b1dda6d93215, saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_35b016f90f288191b4c222055bb0033b.
+  Deployment appgdep_6ac7e6875570819189d85f4479e3f1ff succeeded
+  2026-10-08T18:53:03Z at the existing public URL. Archive patch/manifest
+  match the release exactly and contain no BPEE ROM; Apple metadata forks
+  are distinguished from playable files during the audit.
+- Actual public old-battery import, title/Continue and neutral room inspected.
+  Screenshot: .tools/browser-review/public-v38-neutral-clinic.png; sampled
+  core throughput 60.0 fps is not a complete performance gate. Public download
+  link clicks produced no new file or download event; download/export and
+  sign-in checks remain open, not assumed successful.
+- Original teal carpet and wall trim are removed. NPC shirt colors are separate
+  from the rejected environmental material treatment. Full art quality still
+  requires user approval; all full-domain and campaign/system gates stay open.
+- One-time 6 PM local work-stop reminder recorded above. No workflow, DB change,
+  PR merge or delegated agent ran for this checkpoint.
