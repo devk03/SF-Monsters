@@ -2387,7 +2387,7 @@ Sunset streets — original compiled terrain checkpoint:
   matching its newly compiled allocation. Lossless codec/ELF/bounds checks pass.
   No inherited tile pixels are included in this secondary sheet; original
   primary ground/beach/fence art and the rest of the map library remain pending.
-- All 434 road blocks select native curb/lane variants while retaining collision
+- All 329 road blocks select native curb/lane variants while retaining collision
   and elevation bits. House footprints, sign, NPC/warp coordinates and routes
   remain intact. The older road ID aliases our asphalt, and the existing authored
   map-resume guard refreshes old saved views. Unit checks cover orientation,
