@@ -1069,6 +1069,30 @@ First-slice checkpoint — original wild-battle score candidate:
   in preparation. Two music candidates do not complete the soundtrack; 0/11
   approved parity domains and all remaining SF scope/gates are unchanged.
 
+First-slice audio comparison — measured battle-mix revision:
+
+- The supplied reference cartridge now reaches its original rescue battle
+  through controller-only clock, household, rival and route play. Native Torchic
+  versus Zigzagoon provides the fixed-reference wild-battle cue and menu scenario.
+  No reference game memory is changed, and reference ROM/audio/art stays private.
+- Both native A/V clips run 40.18 seconds at 240x160 and normal speed. Initial
+  Fogbank Frenzy measures -27.85 LUFS against the reference's -17.80 LUFS:
+  a 10.05 dB level gap, recorded before further mix work. The 0.0.9 candidate
+  uses a sustained original harmonic lead, stronger individual track mix and
+  explicit native converter volume. It measures -16.87 LUFS, a 0.93 dB gap,
+  with -8.05 dBTP and 1.60 LU loudness range in the compared battle-menu clip.
+- Native capture on target
+  0d3669cc8eee271876e25f76b5e9f2daff31c7599d9570d7781fc1fb4da3c2d6
+  records 34,202 frames and 37,528,144 stereo pairs, peak 19,392, with zero
+  saturated signed-16-bit samples. This is signal evidence, not composition
+  approval or proof of every sound-effect combination/device. Loop/header checks,
+  current regression checks and unchanged Sunset source fingerprints pass.
+- Original wild-cue MIDI has a nominal 39.18-second loop after its introduction.
+  The reference and SF longer listening files each cover at least three loop
+  periods. The full fixed-reference clip suite and all domain approvals remain
+  unfinished. Browser/core comparison, public 0.0.9 deployment and matched-level
+  user direction review are the next checks for this revision.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's

@@ -44,14 +44,15 @@
   },
   "harmony": [[43,55,"minor"],[41,53,"major"],[39,51,"major"],[38,50,"major"]],
   "channels": {
-    "lead": {"volume": 98, "pan": 56},
-    "answer": {"volume": 52, "pan": 88},
-    "bass": {"volume": 90, "pan": 64},
-    "pad": {"volume": 42, "pan": 40},
-    "kick": {"volume": 92, "pan": 64},
-    "snare": {"volume": 66, "pan": 70},
-    "hat": {"volume": 40, "pan": 46}
+    "lead": {"volume": 127, "pan": 56},
+    "answer": {"volume": 58, "pan": 88},
+    "bass": {"volume": 110, "pan": 64},
+    "pad": {"volume": 52, "pan": 40},
+    "kick": {"volume": 100, "pan": 64},
+    "snare": {"volume": 76, "pan": 70},
+    "hat": {"volume": 46, "pan": 46}
   },
   "native_song": "mus_vs_wild",
-  "native_voicegroup": "vs_wild"
+  "native_voicegroup": "vs_wild",
+  "native_volume": 100
 }

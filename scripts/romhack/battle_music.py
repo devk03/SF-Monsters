@@ -70,8 +70,10 @@ def battle_samples():
 
     def saw(n): return 2 * (n % 64) / 64 - 1
 
-    lead = pcm(4096, lambda n: (math.sin(math.tau * n / 64) + .32 * saw(n)
-        + .16 * math.sin(math.tau * n / 32)) * 78 * math.exp(-n / 2600))
+    lead = pcm(256, lambda n: 112 * math.sin(math.tau * n / 64)
+        + 30 * math.sin(math.tau * n * 3 / 64)
+        + 18 * math.sin(math.tau * n * 5 / 64)
+        + 10 * math.sin(math.tau * n * 7 / 64))
     answer = pcm(2048, lambda n: (math.sin(math.tau * n / 64)
         + .24 * math.sin(math.tau * n / 16)) * 80 * math.exp(-n / 650))
     bass = pcm(256, lambda n: (math.sin(math.tau * n / 64) + .28 * saw(n)) * 88)
@@ -85,6 +87,6 @@ def battle_samples():
         + 24 * math.sin(.075 * n)) * math.exp(-n / 450))
     hat = pcm(960, lambda n: (noise.random() * 2 - 1) * 68 * math.exp(-n / 160))
     return [(name, data, loop, rate) for name, data, loop in
-        [('lead', lead, False), ('bass', bass, True), ('major', major, True),
+        [('lead', lead, True), ('bass', bass, True), ('major', major, True),
          ('minor', minor, True), ('answer', answer, False), ('kick', kick, False),
          ('snare', snare, False), ('hat', hat, False)]]

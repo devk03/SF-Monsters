@@ -121,6 +121,9 @@ def write_song(score, output):
 def apply_field_music(content, root, engine, original):
     plans = content.get('music_scores', [content['field_music']] if 'field_music' in content else [])
     restored, includes, used = [], [], set()
+    configuration_path = 'sound/songs/midi/midi.cfg'
+    configuration = original(configuration_path)
+    configured = False
     for name in plans:
         plan = (root / name).resolve(); plan.relative_to(root / 'assets/audio')
         score = json.loads(plan.read_text()); song = score['native_song']
@@ -130,6 +133,14 @@ def apply_field_music(content, root, engine, original):
         group, directory, stem, _ = BINDINGS[song]
         source = root / 'assets/audio' / (plan.stem + '-native-v1')
         write_song(score, source)
+        if 'native_volume' in score:
+            volume = score['native_volume']
+            if not isinstance(volume, int) or not 1 <= volume <= 100:
+                raise ValueError('Native song volume must be 1–100 percent.')
+            configuration, count = re.subn(rf'(?m)^({re.escape(song)}\.mid:.*?-V)\d+',
+                lambda match: match[1] + f'{volume:03}', configuration)
+            if count != 1: raise ValueError('Native MIDI volume binding was not found.')
+            configured = True
         destination = engine / 'sound' / directory; destination.mkdir(exist_ok=True)
         for file in source.iterdir():
             if file.suffix == '.bin': shutil.copy2(file, destination / file.name)
@@ -144,6 +155,9 @@ def apply_field_music(content, root, engine, original):
         data_path = 'sound/direct_sound_data.inc'
         (engine / data_path).write_text(original(data_path) + ''.join(includes))
         restored.append(data_path)
+    if configured:
+        (engine / configuration_path).write_text(configuration)
+        restored.append(configuration_path)
     return restored
 
 
