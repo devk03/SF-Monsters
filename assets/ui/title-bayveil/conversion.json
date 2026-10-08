@@ -1,0 +1,60 @@
+{
+  "source_size": [
+    1415,
+    1111
+  ],
+  "alpha_bounds": [
+    83,
+    277,
+    1332,
+    954
+  ],
+  "native_size": [
+    128,
+    128
+  ],
+  "silhouette_size": [
+    116,
+    63
+  ],
+  "placement": [
+    6,
+    32
+  ],
+  "tilemap_origin": [
+    7,
+    5
+  ],
+  "palette_bank": 14,
+  "background": "authored blue/teal row gradient in reserved first 32 tiles",
+  "body_palette_index": 11,
+  "eye_palette_index": 15,
+  "eye_pixels": 38,
+  "eye_clusters": [
+    {
+      "pixels": 19,
+      "bounds": [
+        51,
+        51,
+        58,
+        58
+      ]
+    },
+    {
+      "pixels": 19,
+      "bounds": [
+        70,
+        51,
+        77,
+        58
+      ]
+    }
+  ],
+  "preview_eye_color": "maximum glow; actual title uses its existing animated color",
+  "campaign_acquisition_implemented": false,
+  "quality_approval": "pending",
+  "files": {
+    "bayveil.4bpp": "aa942ed6f9b4e6882d351d36f0482dd6732efd03e44b5ccd0a03357c6d7bb414",
+    "bayveil.tilemap": "c8d8fce97f2539b6389e2219c0ec47e698d649aa772f5b52c781e15694cd4e62"
+  }
+}
