@@ -106,20 +106,70 @@
       519,
       false,
       3
+    ],
+    "a": [
+      514,
+      true,
+      3
+    ],
+    "b": [
+      514,
+      true,
+      3
+    ],
+    "c": [
+      514,
+      true,
+      3
+    ],
+    "U": [
+      514,
+      true,
+      3
+    ],
+    "H": [
+      514,
+      true,
+      3
+    ],
+    "K": [
+      514,
+      false,
+      3
+    ],
+    "e": [
+      514,
+      true,
+      3
+    ],
+    "f": [
+      514,
+      true,
+      3
+    ],
+    "g": [
+      514,
+      true,
+      3
+    ],
+    "h": [
+      514,
+      true,
+      3
     ]
   },
   "rows": [
     "#############",
     "WWWWWWWWWWWWW",
-    "#.......klT.#",
-    "#.C.ij..mn..#",
+    "#ab......UT.#",
+    "#cC.ij......#",
     "#...st......#",
-    "#...rrrr....#",
-    "#...rrrr....#",
-    "#...rrrr..p.#",
-    "#ij.rrrr....#",
-    "#st.rrrr....#",
-    "#...rrrruv..#",
+    "#kl.......ef#",
+    "#mn.......gh#",
+    "#.........p.#",
+    "#ij.........#",
+    "#st.....HK..#",
+    "#.......uv..#",
     "#....=>.....#",
     "######E######"
   ],
@@ -164,6 +214,22 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SF_ClinicNotes"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SF_ClinicCounterShop"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SF_ClinicHistoryShelf"
     }
   ],
   "metadata": {

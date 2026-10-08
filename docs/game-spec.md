@@ -3362,3 +3362,65 @@ Seamless clinic runtime and public packaging:
   Public audience/local patching remain unchanged. Actual public older-save
   download/import/resume/export checks follow. All full gates remain required;
   no workflow, DB migration or delegated agent ran.
+
+
+Seamless clinic successful deployment:
+
+- Deployment appgdep_6ac7db0484148191a96270d4eb75e693 succeeded at
+  2026-10-08T18:03:57Z, publishing Site 30 at the existing public URL.
+  The earlier cast-only prepared source/archive was not deployed.
+- Actual public cartridge download sf-mini-monsters (13).gba matches the
+  v37 target exactly. Older clinic battery import is accepted and public
+  native title/Continue/resumed-room/export verification is in progress.
+- Prior game/sign-in browser handles are no longer in this session's live
+  inventory. Guest play is being retested in the current public tab; real
+  signed-in player verification remains open, not an inferred successful login.
+
+
+Further direct user art feedback and clinic recomposition:
+
+- User rejected the v37 still as below Emerald quality and explicitly asked
+  to stop using the chopped teal color. This remains negative qualitative
+  feedback; no numeric approval or parity is inferred. The seam correction
+  alone did not solve flat walls, tiny props or sparse room composition.
+- Added source-neutral-v3.png and exact built-in edit prompt: neutral stone,
+  plaster, brown wood, charcoal and navy replace the teal environment. Removed
+  the large carpet from the map entirely. Full north wall/window art and deeper
+  cutaway wall materials replace the thin outline treatment.
+- Terminal now uses its full 32x32 footprint; recovery equipment is relocated
+  into the visible left-side care area. Reception supplies counter uses all
+  four native quadrants, including a transparent prop foreground with its own
+  floor behind actors. This gives the desk physical volume without hiding
+  players under opaque floor. Notes use a full two-cell board.
+- NPC IDs/positions and original direct service scripts stay stable. Added
+  a native facing-sensitive front-counter interaction for Patrick, selecting
+  the actual local NPC before his existing shop script. PC access takes the
+  authored path around the larger recovery equipment.
+- Four clinic tests cover independent drawing/ground layering, full native
+  capacity, corner joins, collision/elevation contracts and reachability of
+  healer, PC, direct/front shop and notes interactions. All local checks pass.
+  Initial v38 draft 02205f55d9099bd82dc4325deadc869f316635156918cdd10d740608ec0d2a18
+  compiles normally; 786,936-byte BPS applies exactly. Cold resume, service
+  routes, matched review and public release verification follow.
+- Public remains v37/Site 30 until the neutral revision verifies. Original
+  first-slice art, music, all full domains and campaign/system gates remain
+  required. No GitHub workflow, DB operation or delegated agent ran.
+
+
+Neutral clinic reading-corner and native preview checkpoint:
+
+- Source-neutral-v4 replaces one unused corner card with a wood bookcase. The
+  right-side reading corner balances the left care/storage area; source and
+  exact built-in prompt are preserved alongside the prior neutral candidate.
+  A native-facing shelf sign contains paraphrased South Park garden history
+  from SF Recreation and Parks plus an original group-chat joke. Attribution
+  and scope are recorded in the asset folder's history-source.md.
+- Final draft a93d6c0a9f9e1a8e551d74c96d00996813b22665ee9776a4ce0af2891bc18f82
+  compiles normally; 787,700-byte BPS applies exactly. Full local checks pass.
+  The old v35 clinic battery cold-resumes at (6,8), with both named NPCs
+  visible, reception counter depth inspected and earned badge/stage/party/
+  moves/PP/items/money retained. Room screenshot contains no teal carpet or
+  trim treatment. No visual-parity score is inferred from this preview.
+- Final native/WASM service and exit routes, matched comparison and public
+  release follow. Public remains v37/Site 30; this is first-slice art and
+  layout work, not a complete quality domain or campaign. No CI or DB ran.

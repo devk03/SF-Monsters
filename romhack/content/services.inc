@@ -13,6 +13,9 @@ SF_JustineClinic::
 	msgbox SF_Text_Clinic, MSGBOX_DEFAULT
 	release
 	end
+SF_ClinicCounterShop::
+	setvar VAR_LAST_TALKED, 2
+	goto SF_PatrickShop
 SF_PatrickShop::
 	lock
 	faceplayer
@@ -40,3 +43,9 @@ SF_Text_Shop::
 	.string "PATRICK MCKENZIE: Supplies have clear\nprices. Revolutionary, I know.\pA stronger team beats buying\nforty potions for the same problem.$"
 SF_Text_ClinicNotes::
 	.string "TEAM NOTES\pSix companions travel with you.\nThe terminal stores the others.\pRead move types and effects.\nA balanced roster gives you options.$"
+
+SF_ClinicHistoryShelf::
+	msgbox SF_Text_ClinicHistoryShelf, MSGBOX_SIGN
+	end
+SF_Text_ClinicHistoryShelf::
+	.string "HISTORY SHELF\pSOUTH PARK began as a garden\nmodeled on London's city squares.\pUpscale homes surrounded it.\nSF had exclusive communities\lbefore invite-only group chats.$"

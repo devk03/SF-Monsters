@@ -16,11 +16,14 @@ class ClinicArt(unittest.TestCase):
     def test_native_exit_layers_and_capacity_keep_actors_and_warp_visible(self):
         graphics,records,attributes,palettes=clinic_resources(ROOT)
         self.assertLessEqual(len(graphics)//32,504)
-        self.assertEqual(len(records),92*16)
+        self.assertEqual(len(records),94*16)
         self.assertEqual(len(palettes),512)
-        flags=struct.unpack('<92H',attributes)
+        flags=struct.unpack('<94H',attributes)
         self.assertEqual(flags[1],0x1065)
-        self.assertTrue(all(flag>>12==1 for flag in flags))
+        self.assertEqual({i for i,flag in enumerate(flags) if flag>>12!=1},{52,53})
+        self.assertEqual(flags[52:54],(0,0))
+        self.assertEqual(records[52*16:52*16+8],records[2*16+8:3*16])
+        self.assertEqual(records[53*16:53*16+8],records[2*16+8:3*16])
         for index in range(1,5):
             self.assertEqual(len({palettes[bank*32+index*2:bank*32+index*2+2]
                                   for bank in range(6,10)}),1)
@@ -46,12 +49,13 @@ class ClinicArt(unittest.TestCase):
                 before=struct.unpack_from('<H',original,offset)[0]
                 after=struct.unpack_from('<H',output,offset)[0]
                 self.assertEqual(before&0xfc00,after&0xfc00)
-                self.assertTrue(512<=after&0x3ff<604)
+                self.assertTrue(512<=after&0x3ff<606)
             self.assertEqual(clinic_tile(plan,6,12),513)
-            self.assertEqual(clinic_tile(plan,2,3),518) # storage terminal
-            self.assertEqual(clinic_tile(plan,10,2),519) # team notes
+            self.assertEqual(clinic_tile(plan,2,3),547) # full-size storage terminal
+            self.assertEqual(clinic_tile(plan,10,2),605) # full-width team notes
             for npc in plan['npcs']:
-                self.assertEqual(clinic_tile(plan,npc['x'],npc['y']),514)
+                self.assertEqual(clinic_tile(plan,npc['x'],npc['y']),
+                                 565 if npc['script']=='SF_PatrickShop' else 514)
             graphics=(engine/'src/data/tilesets/graphics.h').read_text()
             self.assertIn('gTilesetTiles_SFSouthParkClinic',graphics)
             self.assertIn('secondary/sf_south_park_clinic/tiles.png',graphics)
@@ -80,6 +84,27 @@ class ClinicArt(unittest.TestCase):
         plan=json.loads((ROOT/'romhack/content/services.json').read_text())
         self.assertEqual({clinic_tile(plan,x,y) for x,y in ((0,1),(12,1),(0,12),(12,12))},
                          {597,598,599,600})
+
+    def test_full_size_furniture_keeps_services_and_counter_approachable(self):
+        from collections import deque
+        plan=json.loads((ROOT/'romhack/content/services.json').read_text())
+        self.assertFalse(any('r' in row for row in plan['rows']))
+        occupied={(npc['x'],npc['y']) for npc in plan['npcs']}
+        pending=deque([(6,11)]);reachable=set()
+        while pending:
+            x,y=pending.popleft()
+            if (x,y) in reachable:continue
+            reachable.add((x,y))
+            for xx,yy in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                if 0<=yy<len(plan['rows']) and 0<=xx<len(plan['rows'][yy]):
+                    token=plan['rows'][yy][xx]
+                    if not plan['legend'][token][1] and (xx,yy) not in occupied:
+                        pending.append((xx,yy))
+        for point in ((6,5),(2,4),(9,8),(9,11),(10,3),(11,7)):
+            self.assertIn(point,reachable)
+        front=next(event for event in plan['bg_events'] if event['script']=='SF_ClinicCounterShop')
+        self.assertEqual((front['x'],front['y']),(9,10))
+        self.assertEqual(front['player_facing_dir'],'BG_EVENT_PLAYER_FACING_NORTH')
 
 
 if __name__=='__main__':unittest.main()

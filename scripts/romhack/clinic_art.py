@@ -9,9 +9,9 @@ from park_art import pack_park_cells
 from street_art import rotate_pixels
 
 ASSET = 'assets/tiles/south-park-clinic'
-REVISION = 'v2'
-SOURCE_FILE = 'source-seamless-v2.png'
-CARD_BANKS = (6,6,6,6,7,7,8,7,6,9,7,6,9,6,6,6)
+REVISION = 'v4'
+SOURCE_FILE = 'source-neutral-v4.png'
+CARD_BANKS = (6,6,6,6,7,7,8,7,6,9,7,6,9,9,6,6)
 
 
 def encode_clinic(root):
@@ -43,7 +43,7 @@ def align_ground(pixels,width,height,floor):
     return bytes(output)
 
 
-def joined_wall(floor,band,edges):
+def joined_wall(floor,band,edges,north=None):
     """Join authored half-cell wall strips with a continuous miter at corners."""
     output=bytearray(floor)
     for y in range(16):
@@ -51,9 +51,11 @@ def joined_wall(floor,band,edges):
             choices=[]
             for edge in edges:
                 depth={'N':y,'S':15-y,'W':x,'E':15-x}[edge]
-                if depth<8:
+                limit=16 if edge=='N' and north is not None else 8
+                if depth<limit:
                     along=x if edge in 'NS' else y
-                    choices.append((depth,band[depth*16+along]))
+                    material=north if limit==16 else band
+                    choices.append((depth*(16//limit),material[depth*16+along]))
             if choices:output[y*16+x]=min(choices,key=lambda v:v[0])[1]
     return bytes(output)
 
@@ -73,7 +75,7 @@ def clinic_resources(root):
     palette=(path/f'clinic-{REVISION}.gbapal').read_bytes()
     floor=paving(palette)
     cards = [align_ground(raw[i*1024:(i+1)*1024],32,32,floor)
-             if i in (4,5,6,7,9,10,12,14) else raw[i*1024:(i+1)*1024] for i in range(16)]
+             if i in (4,5,6,7,9,10,12,13,14) else raw[i*1024:(i+1)*1024] for i in range(16)]
     def small(index):
         return bytes(cards[index][y*64+x*2] for y in range(16) for x in range(16))
     # Preserve old record indices/exit behavior while removing framed floor art.
@@ -85,9 +87,10 @@ def clinic_resources(root):
     flags[1] = 0x1065 # south-arrow exit warp at the existing (6,12)
     for card,bank in zip(cards,CARD_BANKS):
         for yy,xx in ((0,0),(0,16),(16,0),(16,16)):
-            cells.append((bytes(pixel for y in range(yy,yy+16)
-                          for pixel in card[y*32+xx:y*32+xx+16]),bank))
-            flags.append(0x1000)
+            pixels=bytes(pixel for y in range(yy,yy+16) for pixel in card[y*32+xx:y*32+xx+16])
+            foreground = card==cards[10] and yy==0
+            if foreground:pixels=bytes(0 if pixel in (1,2,3) else pixel for pixel in pixels)
+            cells.append((pixels,bank));flags.append(0 if foreground else 0x1000)
     # Keep the two-cell supplies counter within its existing collision footprint.
     counter = Image.frombytes('L',(32,32),cards[10]).resize((32,16),Image.Resampling.NEAREST).tobytes()
     counter=align_ground(counter,32,16,floor)
@@ -97,18 +100,27 @@ def clinic_resources(root):
     for turns in (1,2,3):
         cells.append((rotate_pixels(small(2),turns),6)); flags.append(0x1000)
     # Strip height is independent of the 16-pixel movement/collision grid.
-    band=Image.frombytes('L',(32,32),cards[2]).crop((0,0,32,27)).resize((16,8),Image.Resampling.NEAREST).tobytes()
-    window=Image.frombytes('L',(32,32),cards[3]).crop((0,0,32,27)).resize((16,8),Image.Resampling.NEAREST).tobytes()
+    band=Image.frombytes('L',(32,32),cards[2]).crop((2,0,30,32)).resize((16,8),Image.Resampling.NEAREST).tobytes()
+    north=small(2);window=small(3)
     for edges in ('N','S','W','E','NW','NE','SW','SE'):
-        cells.append((joined_wall(floor,band,edges),6));flags.append(0x1000)
-    cells.append((window+floor[128:],6));flags.append(0x1000)
+        cells.append((joined_wall(floor,band,edges,north),6));flags.append(0x1000)
+    cells.append((window,6));flags.append(0x1000)
     mat=Image.frombytes('L',(32,32),cards[14]).resize((32,16),Image.Resampling.NEAREST).tobytes()
     mat=align_ground(mat,32,16,floor)
     for xx in (0,16):
         cells.append((bytes(pixel for y in range(16) for pixel in mat[y*32+xx:y*32+xx+16]),6))
         flags.append(0x1000)
+    notes=Image.frombytes('L',(32,32),cards[12]).resize((32,16),Image.Resampling.NEAREST).tobytes()
+    for xx in (0,16):
+        cells.append((align_ground(bytes(pixel for y in range(16) for pixel in notes[y*32+xx:y*32+xx+16]),16,16,floor),9))
+        flags.append(0x1000)
     graphics,records,attributes = pack_park_cells(cells,flags)
-    return graphics,records,attributes,bytes(192)+palette+bytes(192)
+    # A proper front layer hides only the counter's opaque prop pixels;
+    # ground stays behind actors, avoiding the former all-floor occlusion bug.
+    records=bytearray(records)
+    ground=records[2*16+8:3*16]
+    for index in (52,53):records[index*16:index*16+8]=ground
+    return graphics,bytes(records),attributes,bytes(192)+palette+bytes(192)
 
 
 def clinic_tile(plan,x,y):
@@ -119,14 +131,16 @@ def clinic_tile(plan,x,y):
         return 512+{(0,1):85,(last_x,1):86,(0,last_y):87,(last_x,last_y):88}[(x,y)]
     if token == '#':return 512+(83 if x==0 else 84 if x==last_x else 82)
     if token == 'W':return 512+(89 if x in (3,7,10) else 81)
-    single = {'.':514,'r':515,'E':513,'C':518,'T':519,'p':520,'=':602,'>':603}
+    single = {'.':514,'r':514,'E':513,'p':520,'=':602,'>':603,'U':604,'T':605}
     if token in single:return single[token]
+    if token in 'abcC':return 512+12+5*4+'abcC'.index(token)
+    if token in 'efgh':return 512+12+13*4+'efgh'.index(token)
+    if token in 'HKuv':return 512+12+10*4+'HKuv'.index(token)
     for letters,card in (('klmn',4),('ijst',7)):
         if token in letters:
             # Upper waiting area has chairs; lower area offers supplies storage.
             if letters=='ijst' and y>=8:card=9
             return 512+12+card*4+letters.index(token)
-    if token in 'uv':return 588+'uv'.index(token)
     raise ValueError('Clinic token has no original art: '+token)
 
 
