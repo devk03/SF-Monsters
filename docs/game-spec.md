@@ -2164,3 +2164,44 @@ Bayveil title silhouette — private original-art checkpoint:
 - Public 0.0.17 remains unchanged while normal compilation/recovery is pending.
   Title clouds/footer/music, complete slice polish and every full-game gate remain
   open. Approved full domains stay 0/11. No GitHub workflow was dispatched.
+
+Foglight Overture — original native title-music checkpoint:
+
+- Authored an original thirty-two-bar, eight-track title theme: melodic lead,
+  answering/plucked lines, arpeggio, bass, triad pad and three percussion parts.
+  The form varies its main motif, lifts in register, rests the answering line
+  in an eight-bar bridge and returns with a pickup into the loop. Editable score,
+  generated MIDI and metadata are under assets/audio/foglight-overture*.
+  Native monophonic-note, release and shared-loop marker checks pass.
+- The native overlay uses the pinned MIDI converter/ARM data linker, retains the
+  existing song-table/header address and fits the 1,988-byte sequence in its
+  11,784-byte region. Header/track bounds and fixed-address tests pass. Every
+  sample pointer and byte is verified against our original SF battle-bank PCM;
+  the commercial title melody/instrument samples are not used by this theme.
+- Private target SHA-256:
+  9a68c513a8ebdad994a56ce9178166815a2fe7c38f74f72eda68827987168810.
+  A 4,608-frame cold route reaches Sunset and the guide, preserves the caught
+  party/save and matches native/WASM RGB/Flash/all 5,056,128 stereo pairs.
+  Native/browser BPS reapplication and required source checks pass. This changes
+  the title song only; approved/pending title artwork is preserved.
+- An actual 18,000-frame native title capture advances the driver clock from
+  561 to 14,481 with all eight score tracks active. Its 3,072-tick loop takes
+  66.509 seconds on the GBA clock. The 53.5–255.5-second listening window contains
+  three complete consecutive cycles; .tools/benchmarks/foglight-native-listening/
+  {capture.pcm,three-loops.mp3,listening.json} retains clocks and provenance.
+  Native PCM peak is 9,984, with zero clipped samples; RMS is -20.90 dBFS versus
+  -20.54 dBFS in the forty-second Emerald title excerpt. No gain trick is applied.
+- The reference title is a finite sequenced arrangement rather than this new
+  loop. Complete reference-playthrough listening, human composition/mix review
+  and real browser playback remain pending; loop/RMS checks do not establish
+  Emerald-tier audio. Intro/other context music and the full sixteen-hub soundtrack
+  remain required. Public 0.0.17 is unchanged while normal compilation/recovery
+  is pending. All eleven full approvals stay pending; no CI run was dispatched.
+
+- Extended the title-loop comparison through the full 18,000-frame listening
+  capture: native/WASM final RGB, Flash and every one of 19,750,500 stereo pairs
+  match, including repeated loop boundaries. Evidence: foglight-wasm-listening.
+  PCM SHA-256: 86feb02da81eb08b9da8afd980b64b82426f80d843e10166ddafa00dda520370.
+  Comparing the prior art candidate to this cartridge confirms every byte outside
+  the declared title-song allocation is unchanged. Real browser playback and
+  human soundtrack approval remain unproven.

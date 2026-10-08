@@ -10,6 +10,7 @@ from interface_text import apply_interface_text
 from interface_graphics import apply_interface_graphics
 from title_art import apply_title_art
 from title_creature import apply_title_creature
+from title_song_overlay import apply_title_song
 
 
 def main():
@@ -37,6 +38,7 @@ def main():
     graphics_receipt = apply_interface_graphics(ROOT, EMERALD, target)
     title_receipt = apply_title_art(ROOT, EMERALD, target)
     creature_receipt = apply_title_creature(ROOT, EMERALD, target)
+    song_receipt = apply_title_song(ROOT, EMERALD, target)
     target_hash = hashlib.sha256(target.read_bytes()).hexdigest()
     output = ROOT / '.tools/romhack-drafts' / content['version'] / target_hash
     if output.exists():
@@ -57,6 +59,7 @@ def main():
         'interface_graphics': graphics_receipt,
         'title_art': title_receipt,
         'title_creature': creature_receipt,
+        'title_song': song_receipt,
         'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         'source_worktree_dirty': True, 'full_rebuild_verified': False}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')

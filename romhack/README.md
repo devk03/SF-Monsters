@@ -93,6 +93,13 @@ blue/teal backing tiles for cloud blending. Its graphics/map must fit the
 original allocations and decode losslessly. This title hint does not implement
 Bayveil's battle art, catalog entry, stats or acquisition quest.
 
+The original title score is `assets/audio/foglight-overture.json`. Rebuild its
+eight-track MIDI with `python3 scripts/romhack/title_music.py`. The title music
+overlay verifies our existing waveform bank, links native sequence data and
+keeps the song-table/header address stable inside the old title allocation.
+Its score/loop and mix checks support a listening review; they do not establish
+soundtrack parity or complete the remaining neighborhood/encounter themes.
+
 ## Editable SF maps
 
 `scripts/romhack/maps.py` compiles original ASCII layouts into Emerald's native

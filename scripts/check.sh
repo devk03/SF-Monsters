@@ -25,6 +25,7 @@ python3 tests/interface_text_test.py
 python3 tests/interface_graphics_test.py
 python3 tests/native_resources_test.py
 python3 tests/title_creature_test.py
+python3 tests/title_song_overlay_test.py
 node tests/web_capture_test.cjs
 cd web
 npx tsc --noEmit
