@@ -6,13 +6,14 @@ Open https://sf-mini-monsters.devkunjadia03.chatgpt.site and choose **Load .gba 
 Supply your local English Emerald ROM matching SHA-256
 `a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af`.
 Validation, extraction and SF patching happen on your device. No ROM is uploaded.
-Version 0.0.14 includes South Park, three original starter candidates and their
-original cry candidates, plus Ocean Commute (Sunset) and Fogbank Frenzy (wild battles).
+Version 0.0.17 includes South Park, eighteen original creature-presentation
+candidates, plus Ocean Commute (Sunset) and Fogbank Frenzy (wild battles).
 Preview a starter to hear its call; explore Sunset and its encounter grass to
 hear the new themes. The wild-battle mix has been raised to within 1 dB of the
 measured Emerald reference. This is a mix check, not soundtrack approval. Wild
-creatures, cast art and other music still use
-scaffolding. CinderCoy evolves into Ashrunner at level 16, then Solhowl at 36.
+cast art, tiles and other music still use scaffolding. The opening encounter and
+gym roster has original art and cry candidates, still awaiting pixel cleanup and
+user review. CinderCoy evolves into Ashrunner at level 16, then Solhowl at 36.
 The new forms include original art, icon poses, cries and species-specific moves.
 BrinePup also evolves into Brinebull at 16 and Water/Ice Tideroar at 36,
 learning Bubble Beam and Ice Beam at those thresholds.
@@ -50,7 +51,7 @@ run `make hack`. See [the pinned build workflow](../romhack/README.md).
 Check patch integrity and Flash-slot validation with:
 
 ```sh
-node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.14-interiors-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
+node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.17-slice-roster-preview/sf-mini-monsters.bps .tools/browser-review/production-downloaded-v17.gba
 node --experimental-strip-types tests/flash-save.test.mjs
 ```
 
@@ -59,6 +60,37 @@ and immutable patch. These checks do not establish SF content or quality parity.
 The browser and native acceptance harness use the same pinned mGBA 0.10.5.
 `python3 scripts/build_web_core.py` rebuilds the browser artifacts; source and
 artifact fingerprints are in `web/public/emulator/core-build.json`.
+
+### Controller captures without Docker
+
+Use the pinned native mGBA core directly on the development Mac when Docker is
+unavailable. This creates a separate host library, records its fingerprint and
+preserves generated cleanup targets. It does not replace or restart Docker jobs.
+Install CMake in the project venv if it is absent (`cmake==3.31.10` was used for
+the current Mac evidence). Keep full cartridges, inputs and recordings in `.tools`.
+
+```sh
+python3 scripts/quality/capture_core.py --backend host --setup \
+  --rom .tools/browser-review/production-downloaded-v17.gba \
+  --input .tools/benchmarks/sunset-battery-continue.csv \
+  --battery .tools/benchmarks/slice-roster-wasm-caught-saved/capture.sav \
+  --name my-native-resume --trace-only
+```
+
+Omit `--setup` after the host core is built. Omit `--trace-only` to record video;
+raw video needs about 9 MiB per game second. Losslessly compress a completed
+recording with `python3 scripts/quality/frame_storage.py .tools/benchmarks/NAME`,
+then encode it with `python3 scripts/quality/encode_core_capture.py` and that path.
+Always choose a new name; existing evidence is preserved. `--state` requires its
+original controller-only metadata and restores the companion battery before the
+snapshot. A different cartridge/core revision is rejected.
+
+The Docker-independent browser-core harness is
+`node scripts/quality/capture_web_core.cjs`, with the same ROM/input/name and
+state-or-battery arguments. Its optional `--video` writes compressed frames.
+That Node harness proves cartridge behavior, not real browser input latency,
+playback quality or sign-in. Native and WASM recordings remain separately labeled.
+Routine verification runs locally; GitHub Actions is manual-only.
 
 ## Archived standalone prototype
 

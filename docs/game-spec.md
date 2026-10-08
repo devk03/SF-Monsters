@@ -1998,3 +1998,37 @@ Browser/capture progress and CI budget checkpoint:
   cast/tiles/music/pixel cleanup remain unfinished. These are explicit remaining
   originality/presentation gaps. First-slice and full-campaign quality approval
   remain 0/11; section 15.1 stays the complete objective.
+
+Native Mac capture and caught-party save checkpoint:
+
+- Added an explicit host backend to the existing controller capture tool. It
+  builds the same pinned mGBA 0.10.5 revision with Apple Clang, records the static
+  library/platform fingerprint, preserves generated cleanup targets and rejects
+  snapshots without matching cartridge/core/controller provenance. Docker jobs
+  and their incomplete evidence remain intact. The previously stalled retry is
+  not counted as finished; this is a separate completed native Mac recording.
+- Native Mac capture of the real BinPossum ball throw matches the existing
+  WebAssembly recording: 2,184 controller frames, all 38,400 final RGB pixels,
+  exported Flash and all 2,396,392 stereo sample pairs. Evidence:
+  slice-roster-macos-catch. A separate native video records the same sequence,
+  is losslessly compressed and encodes to a 36.57-second A/V clip at
+  slice-roster-macos-catch-video/review.mp4. This is not yet a matched Emerald
+  capture comparison or a user quality approval.
+- Controller play inspects the caught creature in the party and summary menus,
+  then saves through the actual in-game prompts. The continuous native sequence
+  is 8,330 frames (slice-roster-macos-catch-party-saved). Its battery is identical
+  to the separately played WASM save, SHA-256
+  ca1024db3fcdbddac57620444f133e1c53c56aafb14dc5d8dcb358cf03e3770e.
+  No creature, experience, inventory or quest-state RAM is forced.
+- A 1,336-frame cold native resume of that battery matches WASM final RGB/Flash
+  and all 1,465,924 stereo pairs. CinderCoy remains level 5, 13/19 HP with
+  Scratch/Growl/Ember at 32/40/25 PP; BinPossum remains level 3, 15/15 HP with
+  Tackle/Tail Whip/Sand Attack at 35/30/15 PP. Sunset position 7,11, money 3,500,
+  three Potions and pre-gym flags remain. Evidence: slice-roster-macos-caught-
+  cold-resume and slice-roster-wasm-native-party-cold-resume. This checkpoint
+  does not establish ten consecutive transfers or fifty campaign checkpoints.
+- Required source checks pass locally; no GitHub workflow was dispatched.
+  Party/summary still display inherited franchise labels. Native title, original
+  cast/tiles/music, pixel cleanup, wider balance and real browser performance
+  remain open. Public 0.0.17 is unchanged; all 11 approvals and the complete
+  section 15.1 campaign/system gates remain required.
