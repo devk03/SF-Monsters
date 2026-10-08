@@ -3701,3 +3701,30 @@ Original recovery cue implementation checkpoint:
 - Native/WASM healing, old-save resume, jingle lifetime and public QA follow.
   Public remains v41/Site 33. Full Audio and all final acceptance gates remain
   open; no CI, DB mutation, PR merge or delegation ran.
+
+
+Recovery cue v42 playback verification:
+
+- Normal build source 101ca9d0d9505d033da0def8aa7bd82a9c85c8e2 matches draft
+  5542a01edefcd14a12b4e0669ffe63f95fef025d30fd0b244085c3e24bd90632.
+  BPS 866,594 bytes, SHA256
+  86f3f0478bb0a3d5d277424c8419a02e370bca908e41eb61f6f68505726471f8.
+- Controller-only old-save resume preserves position (6,8), party/HP/moves/PP,
+  items/money/badge/stage. Native/WASM healing matches all 336 RGB frames,
+  1,474,704 PCM bytes and Flash. v41/v42 RGB is also identical across the
+  complete service route, preserving dialogue/game timing. Ends (6,5), HP31/31
+  and Ember PP25 with other earned state retained.
+- Compiled music-state inspection shows the cue's dedicated bank and three
+  active song tracks while BGM is paused, with 122 fanfare frames remaining
+  at the intermediate controller snapshot. At completion the cue has zero
+  active tracks, clock 194, counter zero, and all seven BGM tracks resumed.
+  Inspector labels now distinguish the active bitmask/count, player capacity
+  and actual song-header track count to avoid confusing capacity with voices.
+- Actual cue/service clip:
+  .tools/benchmarks/recovery-cue-v42-native-heal/review.mp4 (5.63 seconds).
+  Listening file: same folder/team-refresh-native.mp3. These demonstrate the
+  candidate in-game; a genuine Emerald-centre comparison and human score are
+  still required. An older SF clip containing inherited music is not promoted
+  to an authentic reference-ROM comparison.
+- Shared fanfare bank remains byte-unchanged. Public v42 release follows;
+  the original full Audio/domain/campaign/system gates remain open.

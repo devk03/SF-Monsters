@@ -13,7 +13,8 @@ def inspect(directory, elf):
     metadata = json.loads((directory / 'capture.json').read_text())
     manifest = json.loads((elf.parent / 'manifest.json').read_text())
     cartridge = elf.parent / 'target.gba'
-    digest = hashlib.sha256(cartridge.read_bytes()).hexdigest()
+    rom = cartridge.read_bytes()
+    digest = hashlib.sha256(rom).hexdigest()
     if digest != metadata['rom_sha256'] or digest != manifest['target_sha256']:
         raise ValueError('Snapshot and ELF companion cartridge identities differ.')
     if metadata['mgba_revision'] != REVISION or metadata.get('controller_only') is not True:
@@ -45,8 +46,12 @@ def inspect(directory, elf):
     def player(name):
         start = offset(symbols[name], 64)
         status = struct.unpack_from('<I', state, start + 4)[0]
-        return {'status': hex(status), 'active_tracks': status & 0xffff,
-                'paused': bool(status & 0x80000000), 'track_count': state[start + 8],
+        header = struct.unpack_from('<I', state, start)[0] - 0x08000000
+        mask = status & 0xffff
+        return {'status': hex(status), 'active_track_mask': hex(mask),
+                'active_track_count': mask.bit_count(),
+                'paused': bool(status & 0x80000000), 'track_capacity': state[start + 8],
+                'song_track_count': rom[header] if 0 <= header < len(rom) else None,
                 'clock_ticks': struct.unpack_from('<I', state, start + 12)[0],
                 'voicegroup': hex(struct.unpack_from('<I', state, start + 48)[0])}
 
