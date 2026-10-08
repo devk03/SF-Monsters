@@ -7,7 +7,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
-from monsters import check_monster, check_catalog, png_palette
+from monsters import check_monster, check_catalog, png_palette, check_progression, apply_progression
 
 
 class MonsterContracts(unittest.TestCase):
@@ -57,6 +57,32 @@ class MonsterContracts(unittest.TestCase):
         with self.assertRaises(ValueError): check_catalog(cycle)
         repeated = deepcopy(line); repeated[1]['engine_asset_dir'] = line[0]['engine_asset_dir']
         with self.assertRaises(ValueError): check_catalog(repeated)
+
+    def test_native_progression_keeps_saved_experience_curve(self):
+        record = '''    [SPECIES_TORCHIC] = {
+            .baseHP = 48, .catchRate = 45, .expYield = 65,
+            .evYield_HP = 0, .evYield_Attack = 0, .evYield_Defense = 0,
+            .evYield_Speed = 0, .evYield_SpAttack = 1, .evYield_SpDefense = 0,
+            .growthRate = GROWTH_MEDIUM_SLOW, .friendship = STANDARD_FRIENDSHIP,
+        },'''
+        progression = {'growth_rate': 'GROWTH_MEDIUM_SLOW', 'catch_rate': 100,
+                       'exp_yield': 55, 'ev_yield': [1, 0, 0, 0, 1, 0]}
+        output = apply_progression(record, progression)
+        for fragment in ['.catchRate = 100', '.expYield = 55', '.evYield_HP = 1',
+                         '.growthRate = GROWTH_MEDIUM_SLOW', '.baseHP = 48',
+                         '.friendship = STANDARD_FRIENDSHIP']:
+            self.assertIn(fragment, output)
+        with self.assertRaises(ValueError):
+            apply_progression(record, {**progression, 'growth_rate': 'GROWTH_FAST'})
+
+    def test_progression_rejects_truncation_and_excess_effort_rewards(self):
+        progression = self.mon['progression']
+        for fields in [{'catch_rate': 0}, {'catch_rate': 256}, {'exp_yield': True},
+                       {'exp_yield': 256}, {'growth_rate': 'GROWTH_UNKNOWN'},
+                       {'ev_yield': [0] * 5}, {'ev_yield': [4, 0, 0, 0, 0, 0]},
+                       {'ev_yield': [1] * 6}, {'ev_yield': [True, 0, 0, 0, 0, 0]}]:
+            with self.subTest(fields=fields), self.assertRaises(ValueError):
+                check_progression({**deepcopy(progression), **fields})
 
 
 if __name__ == '__main__': unittest.main()

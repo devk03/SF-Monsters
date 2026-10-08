@@ -1,8 +1,8 @@
 {
-  "version": "0.0.15-wild-preview",
+  "version": "0.0.16-scouts-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with Cognition, twelve original creature/call candidates and Sunset/wild-battle themes; six other slice creatures, portraits, tiles and other music remain placeholders.",
+  "status": "Unreviewed SF chapter with Cognition, fourteen original creature/call candidates and Sunset/wild-battle themes; four other slice creatures, portraits, tiles and other music remain placeholders.",
   "maps": [
     "sunset.json",
     "south-park.json",

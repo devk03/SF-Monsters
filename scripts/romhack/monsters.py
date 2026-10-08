@@ -6,6 +6,40 @@ import shutil
 import struct
 from battle_content import constant
 
+GROWTH_RATES = {'GROWTH_MEDIUM_FAST', 'GROWTH_ERRATIC', 'GROWTH_FLUCTUATING',
+                'GROWTH_MEDIUM_SLOW', 'GROWTH_FAST', 'GROWTH_SLOW'}
+EV_FIELDS = ('HP', 'Attack', 'Defense', 'Speed', 'SpAttack', 'SpDefense')
+
+
+def check_progression(progression):
+    if set(progression) != {'growth_rate', 'catch_rate', 'exp_yield', 'ev_yield'}:
+        raise ValueError('Declare growth, capture rate, experience and all EV yields.')
+    if progression['growth_rate'] not in GROWTH_RATES:
+        raise ValueError('Unknown native experience curve.')
+    for key in ['catch_rate', 'exp_yield']:
+        if type(progression[key]) is not int or not 1 <= progression[key] <= 255:
+            raise ValueError('Capture and experience yields must fit native byte fields.')
+    yields = progression['ev_yield']
+    if not isinstance(yields, list) or len(yields) != 6:
+        raise ValueError('Declare six EV yields in HP/Attack/Defense/Speed/SpAttack/SpDefense order.')
+    if any(type(value) is not int or not 0 <= value <= 3 for value in yields) or sum(yields) > 3:
+        raise ValueError('Each defeat may award at most three EVs across six stats.')
+
+
+def apply_progression(record, progression):
+    check_progression(progression)
+    inherited = re.search(r'\.growthRate\s*=\s*(GROWTH_[A-Z_]+)', record)
+    if not inherited or inherited.group(1) != progression['growth_rate']:
+        # Existing saves store experience, not a separate persistent level.
+        # Changing its curve would silently change levels on resume/withdrawal.
+        raise ValueError('Stable species slots must retain their experience curve for save compatibility.')
+    for field, value in [('catchRate', progression['catch_rate']),
+                         ('expYield', progression['exp_yield'])]:
+        record = replace_one(record, rf'\.{field}\s*=\s*\d+', f'.{field} = {value}')
+    for field, value in zip(EV_FIELDS, progression['ev_yield']):
+        record = replace_one(record, rf'\.evYield_{field}\s*=\s*\d+', f'.evYield_{field} = {value}')
+    return record
+
 
 def replace_one(source, pattern, value):
     source, count = re.subn(pattern, lambda match: value, source, flags=re.M | re.S)
@@ -24,6 +58,7 @@ def check_monster(mon):
     required = {'baseHP', 'baseAttack', 'baseDefense', 'baseSpeed', 'baseSpAttack', 'baseSpDefense'}
     if set(mon['stats']) != required or any(type(value) is not int or not 1 <= value <= 255 for value in mon['stats'].values()):
         raise ValueError('Creature needs all six valid base stats.')
+    check_progression(mon['progression'])
     for key, prefix in [('types', 'TYPE_'), ('abilities', 'ABILITY_')]:
         if len(mon[key]) != 2: raise ValueError('Native type/ability tables need two entries.')
         for value in mon[key]: constant(value, prefix)
@@ -141,6 +176,7 @@ def apply_monsters(content, root, engine, original):
         record = match.group()
         for field, value in mon['stats'].items(): record = replace_one(record, rf'\.{field}\s*=\s*\d+', f'.{field} = {value}')
         for field in ['types', 'abilities']: record = replace_one(record, rf'\.{field}\s*=\s*\{{[^}}]*\}}', '.%s = {%s}' % (field, ', '.join(mon[field])))
+        record = apply_progression(record, mon['progression'])
         edit(path, pattern, record)
         if 'evolutions' in mon:
             path = 'src/data/pokemon/evolution.h'

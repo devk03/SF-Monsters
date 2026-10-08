@@ -1861,3 +1861,24 @@ Original gym roster — gameplay and compatibility evidence:
   creature presentations, original cast/tiles/indoor and trainer music, alternate
   starter/team strategies and matched user comparison clips. The full section
   15 objective stays active; publishing this preview is not completion.
+
+Early-route original creature/progression authoring checkpoint:
+
+- BinPossum (Normal urban opossum) and PinePip (Grass pinecone hedgehog) replace
+  Walden's stock team and their existing Sunset/South Park encounters. Both have
+  original source sheets/prompts, separate front/back/entrance views, two icons,
+  synthesized cries, stats, abilities, learnsets and guide text. Fourteen original
+  candidates are integrated; four other slice species still need original art.
+- Every authored creature now explicitly declares its catch rate, experience
+  reward, six EV yields and growth curve. Existing values are retained for the
+  prior twelve entries. Authoring rejects overflowing native fields, malformed
+  effort rewards and changes to a stable slot's experience curve; this prevents
+  saved EXP from silently turning into a different level. These contracts do
+  not establish 300 independent battle-mechanics cases or complete growth QA.
+- Revision 7 preserves stable IDs/schema, default-name upgrades and earned move
+  insertion. BinPossum/PinePip do not evolve until original targets are authored.
+  Native draft compilation/BPS round-trip and required source checks pass.
+  Draft target: 57b04945a9e6d79ad910c8defe4ab55a1f5ac181b4284a3f55f45c7fe94c2793.
+- Native battle/balance and older-save evidence are next. Both art candidates
+  still need pixel/outline cleanup and user art/audio review. Public 0.0.15 is
+  unchanged at this checkpoint; all 11 final quality approvals remain pending.

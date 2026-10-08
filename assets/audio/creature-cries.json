@@ -36,6 +36,12 @@
      "pulses": [[0.01, 0.16, 210, 125], [0.21, 0.12, 280, 160], [0.37, 0.12, 245, 140]]},
     {"name": "hushmoth", "engine_symbol": "Ralts", "engine_file": "ralts",
      "duration": 0.58, "formants": [1700, 2500, 3300], "noise": 0.01,
-     "pulses": [[0.02, 0.23, 1040, 850], [0.31, 0.23, 890, 660]]}
+     "pulses": [[0.02, 0.23, 1040, 850], [0.31, 0.23, 890, 660]]},
+    {"name": "binpossum", "engine_symbol": "Zigzagoon", "engine_file": "zigzagoon",
+     "duration": 0.49, "formants": [950, 1900, 2850], "noise": 0.12,
+     "pulses": [[0.01, 0.11, 590, 340], [0.17, 0.13, 690, 420], [0.35, 0.11, 530, 310]]},
+    {"name": "pinepip", "engine_symbol": "Seedot", "engine_file": "seedot",
+     "duration": 0.57, "formants": [620, 1450, 2300], "noise": 0.04,
+     "pulses": [[0.02, 0.15, 340, 220], [0.22, 0.13, 440, 280], [0.40, 0.14, 370, 240]]}
   ]
 }
