@@ -756,14 +756,14 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.32-cognition-cast-preview; target 311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780; Site version 25. Three original Cognition field-sprite candidates; unreviewed. |
-| Latest local source build | 0.0.32-cognition-cast-preview; same target. Two corrected consecutive normal builds match; full local checks pass. Actual older-save entry, Scott return dialogue and room cold-resume pass. Native/WASM recorded RGB/audio/Flash match. |
+| Public build | 0.0.32-cognition-cast-preview; target 311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780; Site version 26. Three original Cognition field-sprite candidates, corrected save-boot prompts and frame diagnostics; unreviewed. |
+| Latest local source build | 0.0.33-cognition-office-preview; target 0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f. Original office candidate compiles and old gym save cold-resumes; exit/re-entry RGB/audio/Flash match natively and in WASM. Public ROM stays 0.0.32 pending normal release/public QA. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Downloaded 0.0.32 cartridge matches the verified target. Native gym save imports/resumes showing all three original cast sprites; public export equals the native battery. A transient white boot display recovered after Pause/Resume; cause/pacing remains unverified. Signed-in player awaits the user's login. Physical-device/performance checks remain open. |
+| Public QA | Site 26 fresh-load/import reaches title/Continue/gym normally without Pause/Resume; sampled core throughput 59.0–60.6 fps. Prior white display did not reproduce; cause remains unconfirmed. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Investigate public import/boot pacing, then original gym/clinic interiors, remaining cast/battle portraits and first-slice matched reviews. Routine checks stay local; GitHub Actions stays manual-only. |
+| Next work | Publish and verify the original Cognition office candidate, then original clinic, remaining cast/battle portraits and first-slice matched reviews. Retain import diagnostics for the earlier unconfirmed observation. Checks stay local; GitHub Actions stays manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -2993,3 +2993,46 @@ Browser import investigation, first checkpoint:
   is being prepared so fresh-load/import frame pacing can be measured through
   the real browser, rather than inferred from a still screenshot. No ROM bytes,
   save format, DB state or quality approval changed. No GitHub workflow ran.
+
+
+Public import diagnostics and original office checkpoint:
+
+- Site source a29cf98c08ea8e5631cf66a41fdd4a100cb12ab0 passes TypeScript and
+  production build. Saved Site version 26:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_4d7a0421fbc88191838847e28f7c5878.
+  Deployment appgdep_6ac7b7b242f481919547ed43fd25e569 succeeded at
+  2026-10-08T15:33:14Z. ROM patch/target are unchanged and archive has no
+  inherited cartridge. Source prompt/diagnostic change is committed in 66e327b.
+- Fresh local ROM load restores the existing save, then a second import during
+  initial boot reaches title, Continue and the gym without Pause/Resume.
+  SDK executed-core-frame samples are 59.0, 59.9, 59.6, 60.6 and 59.6 fps.
+  Screenshot: .tools/browser-review/public-v32-fresh-import-diagnostics.png.
+  These samples are not the 99% game deadline, input p95 or audio trace gates.
+  Earlier white display remains an unconfirmed one-time observation; no general
+  stall is proven in this fresh/warm retry, and no scheduler fix is claimed.
+- Added original modular office source/prompt and native derivatives under
+  assets/tiles/cognition-office, generated with built-in imagegen. Sixteen cards
+  provide floor/aisle/walls/windows, workstations, servers, plants, chairs,
+  whiteboard, books, coffee, relay consoles, barrier, exit and storage.
+  Native tileset has 319 tiles, 81 metatiles and one palette bank, below VRAM
+  capacity. No inherited office pixels remain in this room candidate.
+- Map adapter preserves collision/elevation and all existing story/NPC/event
+  coordinates. Scripted open gate keeps floor record 0x202; south exit keeps
+  MB_SOUTH_ARROW_WARP. Server terminal/whiteboard/coffee art aligns with the
+  corresponding text interactions. Two native office tests and full checks pass.
+- Initial candidate bfbae84d2f736c0a9fe2c38c52008c739834de5bb53003d292eb3e942a6acfec
+  was inspected locally; aligned final target is
+  0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f, with
+  772,747-byte BPS byte-exact application. office-aligned-old-save-resume
+  cold-loads the actual older gym battery at (8,7), preserving earned badge,
+  stage 4, CinderCoy level 11 HP 4/31, moves/PP, 4,000 money and three Potions.
+- office-{native,wasm}-exit-return: 1,024 identical RGB frames, 4,494,336
+  identical PCM bytes and identical Flash; exits to South Park and returns to
+  gym (8,6) with visible courier and preserved earned state. Native directory
+  contains comparison.json, final.png and synchronized review.mp4. Verified
+  lossless frame compression preserves every pixel and frees 153,998,111 bytes.
+- Office art remains an unreviewed native candidate. This 17-second functional
+  route is not a matched 30–60-second Emerald quality approval. Public office
+  release/QA, pixel cleanup, clinic art, other cast/portraits/music and full
+  section 15 scope remain required. Full approved domains stay 0/11. No DB
+  operation, delegated agent, recurring monitor or GitHub workflow was used.

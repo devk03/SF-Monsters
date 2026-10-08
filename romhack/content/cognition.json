@@ -2,7 +2,7 @@
   "engine_map": "RustboroCity_Gym",
   "script": "cognition.inc",
   "tilesets": {
-    "secondary": "gTileset_Lab"
+    "secondary": "gTileset_SFCognitionOffice"
   },
   "legend": {
     ".": [

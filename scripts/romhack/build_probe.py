@@ -23,6 +23,7 @@ from title_song_overlay import apply_title_song
 from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from cast_art import apply_cast
+from office_art import apply_office, office_resources
 from apartment_art import apply_apartment_art
 from door_art import apply_door_art
 from terrain_art import apply_coastal_animation
@@ -97,6 +98,7 @@ def main():
     restored += apply_coastal_animation(ROOT, EMERALD, original)
     restored += apply_park_map(ROOT, EMERALD)
     restored += apply_park_doors(ROOT, EMERALD)
+    restored += apply_office(ROOT, EMERALD)
     if args.fixture:
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture
@@ -174,6 +176,11 @@ def main():
         'assets/tiles/courier-apartment/conversion.json').read_text())
     manifest['cognition_cast'] = json.loads((ROOT /
         'assets/characters/cognition-cast/conversion.json').read_text())
+    office_data = office_resources(ROOT)
+    manifest['cognition_office'] = {'native_tiles':len(office_data[0])//32,
+        'metatiles':len(office_data[1])//16, 'quality_approval':'pending',
+        'resource_sha256':{name:hashlib.sha256(data).hexdigest() for name,data in
+            zip(('tiles','metatiles','attributes','palettes'),office_data)}}
     manifest['rowhouse_door'] = json.loads((ROOT /
         'assets/tiles/sunset-door/conversion.json').read_text())
     manifest['coastal_terrain'] = json.loads((ROOT /

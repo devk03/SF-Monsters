@@ -315,3 +315,19 @@ sidewalk. Gym/clinic interiors still need original art and user review.
 Run `.tools/venv/bin/python tests/park_art_test.py` for native resource, layer,
 door and gameplay reachability checks. Controller recordings and approval
 status are documented in spec section 15; passing checks is not art approval.
+
+
+## Cognition office candidate
+
+`office_art.py` compiles the original sixteen-card atlas in
+`assets/tiles/cognition-office` into a standalone secondary tileset. The native
+source has 319 tiles, 81 metatiles and palette bank 6. Its floor stays beneath
+actors. Record 2 preserves the scripted gate-open floor (0x202); record 1
+retains the south-arrow exit behavior. The existing room collision/elevation
+bits, NPCs, warps and event coordinates are preserved.
+
+The incident log now appears on a server terminal, the team plan on a
+whiteboard, and the coffee reward on its counter. The source, prompt, native
+atlas, indexed cards and palette are editable; resized candidates still need
+pixel cleanup and user review. Native old-save resume and exit/return evidence
+are in spec section 15. Public release preparation remains separate.
