@@ -768,7 +768,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site 34 Chrome account restores prior local save through GUIDE/Continue into clinic. Actual ROM download matches v42; backup export matches v35 import byte-for-byte. Initial chooser wait timed out; alternate visible Load ROM succeeded without console errors. Test player muted/paused. Fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Capture genuine reference-ROM healing in Oldale centre using existing controller-only Emerald lineage, then compare audio/service presentation. v41 instrument review remains pending. Other first-slice audio/cast/art/story/system gates remain required; no campaign expansion before slice approval. Actions stay manual-only. |
+| Next work | Genuine 34.29-second Emerald/SF healing comparison is ready; cue and visual-sequence subset scores requested. Next improve static SF recovery equipment/NPC choreography while preserving HP/PP and return-control behavior. v41 instrument review and all other first-slice gates remain open. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
