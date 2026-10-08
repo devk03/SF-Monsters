@@ -2589,3 +2589,20 @@ Public 0.0.28 resume follow-up:
 - Doorway review remains pending, all full quality approvals remain 0/11,
   and the full campaign/acceptance objective remains active. Pushed commits
   were checked: GitHub still shows no new, queued or running Actions jobs.
+
+
+Coastal terrain asset checkpoint (original source; not yet a playable release):
+
+- Original 4x4 atlas authored with built-in imagegen using only our own SF
+  house/street style inputs. Saved source, exact prompt, native atlas, RGB555
+  palette and three wave stages in assets/tiles/sunset-terrain. No commercial
+  game artwork was used as an input. Native cells remain candidates pending
+  in-game and human pixel-art review; resized generated art is not approval.
+- terrain_art.py converts aligned 16x16 cells, validates resource fingerprints,
+  builds 256-byte ocean/shore stages and chooses railing/grass orientations.
+  The remapper changes only low metatile IDs, preserving collision/elevation
+  and event/save coordinates. Three targeted tests pass, including encounter
+  patch and transit-sign positions. Native integration follows this checkpoint.
+- This is first-slice polish, not another completed neighborhood. Borders,
+  field-effect sprites, named cast and other first-slice art remain outstanding;
+  public build stays 0.0.28. No approval score or acceptance count changed.

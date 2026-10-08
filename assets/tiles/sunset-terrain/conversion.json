@@ -1,0 +1,23 @@
+{
+  "source_sha256": "a27a3f2d27f038f36768211ad72c9ae2c66d6b07bb6858bc27f3ddce3ff44818",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "native_size": [
+    64,
+    64
+  ],
+  "palette_bank": 12,
+  "wave_tile_start": 240,
+  "wave_tiles": 8,
+  "wave_frames": 3,
+  "wave_frame_bytes": 256,
+  "wave_cadence_frames": 16,
+  "quality_approval": "pending",
+  "files": {
+    "tiles.indices": "a905cc41244d7abe00ab13b71c4e2b8db0edf48d0251a7b18729e3dbec16e962",
+    "terrain.gbapal": "ef4b0babd1c4f03a1a39db7a446d8be6783e5e6250b94d5f7b03d18c05d80757",
+    "waves.4bpp": "c3f8350cb8074a8706f08c358da6974808ad1cf1fad6cd3e0c9d498b637dbaac"
+  }
+}
