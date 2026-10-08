@@ -1,5 +1,9 @@
 name: Build and verify
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+concurrency:
+  group: sf-monsters-validation-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

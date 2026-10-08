@@ -8,6 +8,12 @@ No merging prs without asking me.
 
 Commit frequently.
 
+## CI budget
+
+GitHub Actions runs only through manual dispatch. Use local checks for routine
+commits. Dispatch CI only for a meaningful release or validation checkpoint;
+do not trigger it for each incremental code, asset, or documentation commit.
+
 ## Active implementation workflow
 
 Always read `docs/game-spec.md` as the source of truth for scope and acceptance.
