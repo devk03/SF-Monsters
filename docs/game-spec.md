@@ -756,7 +756,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.34-brighter-office-preview; target 3d03b45d6c9edef949ca7b7c3b4933f124cf5d5149d2f105922d442840d2acad; Site version 28. Brighter office and varied props address the user's prior gloom/repetition feedback. Updated art remains unreviewed; walking is preserved. |
+| Public build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302; Site version 29. Original bright clinic joins the brighter office. Both art subsets remain unreviewed; walking is preserved. |
 | Latest local source build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302. Normal compilation/BPS and older-save entry pass; native/WASM entry, healing and exit-return match. Matched clinic art clip is ready; service/save/public checks follow. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
@@ -3212,3 +3212,26 @@ Clinic native verification and matched review checkpoint:
   its partial output is preserved and excluded from review. One build log was
   also preserved as gzip. Native dialogue/PC/shop and a new saved clinic
   checkpoint are being exercised; public remains v34 until publication succeeds.
+
+
+Clinic services and public release:
+
+- Native controller checks reach storage boxes from the terminal at (2,3),
+  the four-item priced supply list from Patrick, and the native Save prompt.
+  No money/inventory changes occurred while browsing. A native SAVE at clinic
+  (6,8), then cold resume, retains earned badge/stage 4, 4,000 money, three
+  Potions and the wounded CinderCoy's level/moves/PP/HP. See clinic-v35-
+  {terminal-menu,storage-boxes,shop-supplies,saved,native-saved-cold}.
+- Normal release from c6098e7 reproduces the corrected draft target exactly.
+  Public BPS SHA256 8d11323bf325d5ea7dc97a088922549eb07d30d43de1ae2e3694d752a67a4662,
+  783,070 bytes. Website mirrors contain that exact release.
+- Site source bfb7dd3a15688fb5afb5efcd4ee9e7e314e8fbca passes TypeScript and
+  production build. Archive verifies exact patch/manifest and no inherited
+  cartridge. Saved Site version 29:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_b737da42a4a08191b583da696a5285c2.
+  Deployment appgdep_6ac7d0789884819193e15676701e9459 succeeded at
+  2026-10-08T17:18:58Z. Public audience and on-device patching are preserved.
+- Public cartridge download and explicit clinic save import/export checks
+  follow. Sign-in still awaits the user's login. Full-domain approvals stay
+  0/11; existing office review remains pending. No CI workflow or DB operation
+  ran; latest Actions inventory remains run 37731870689 from 05:20:22Z.
