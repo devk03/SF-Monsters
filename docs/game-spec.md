@@ -761,7 +761,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Local ROM load and downloaded 0.0.30 cartridge verified; beach save resumes with a visible courier. Public export is byte-identical to the native save and cold-resumes natively. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Public QA | Downloaded 0.0.31 cartridge matches the verified target. Earned South Park bench save imports/resumes with a visible courier; public export is byte-identical to its native battery, which cold-resumes with the reward/team/badge intact. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
 | Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
 
@@ -2846,3 +2846,30 @@ South Park public release checkpoint (October 8, 2026):
   remain required. No database migration, recurring job or GitHub Actions run
   was used. Last turn verified remote manual-only triggers and no active/queued
   jobs; this turn publishes the already locally verified candidate.
+
+
+South Park public hands-on verification:
+
+- Public Site version 24 loads/patches the local base ROM normally. Actual browser
+  cartridge download `sf-mini-monsters (8).gba` has exact target SHA256
+  e1b4c66fd4eb1c5aa1731fdc18c7985e199791d3480ad90106d25bdbcc7574a4.
+  Imported park-discovery-saved battery resumes at (18,20), with the courier
+  visible beside the original park bench, meadow, planters and annex facades.
+  Screenshot: .tools/browser-review/public-v31-south-park.png; structured
+  release evidence: public-v31-south-park.json in the same directory.
+- Actual public Save backup produces 131,072 bytes identical to the native
+  imported battery: SHA256
+  50d85a8b78a22a9e05a535a38de8d3be0a66bfa48128194b550dd8687717b2f7.
+  Controller-only native cold resume (park-bench-cold-resume) verifies (18,20),
+  discovery flag 0x41, three Oran Berries, three Potions, 4,000 money, earned
+  Build Badge/stage 4 and level-11 CinderCoy HP 4/31 with its four moves/PP.
+  This validates one guest checkpoint, not the final ten-round-trip gate.
+- Original outdoor art now replaces the borrowed South Park terrain/facades.
+  Sparse composition, resized-pixel cleanup, remaining inherited field effects,
+  named cast sprites and interior art still need improvement and matched user
+  review. Approval stays unreviewed, with 0/11 full domains accepted.
+- Source/art/release commits bf89077, 21cca90, 18b68f9 and 784c19f are pushed.
+  The latest GitHub Actions run remains 37731870689 from 05:20:22Z, with no
+  new workflow caused by publication or pushed commits. All checks ran locally.
+  Sign-in QA remains pending the user's existing login handoff. Full section 15
+  scope and all remaining campaign, mechanics and performance gates stay active.
