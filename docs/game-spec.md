@@ -3619,3 +3619,29 @@ Clinic instrument revision 2 checkpoint:
   compiles normally and round-trip applies (841,806-byte BPS). Native/WASM
   playback, old-save resume and controlled audio comparison follow. Public
   remains v40/Site 32; revised music is unreviewed and full Audio is incomplete.
+
+
+Clinic voice v41 native A/B verification:
+
+- Normal source build 59371e302ee97e2f10fa30d8d4d18d752dd0bca7 reproduces draft
+  target 9cf14795ee4fc41cd772abd2a2f61572003659995aeb4cf970744202de1cd5bc.
+  BPS 841,806 bytes, SHA256
+  8645c3c95a13f9ef653e657bcc8190cb26732209f3889670c652cacf744ed15b.
+  All local checks pass; a trailing blank-line warning is corrected separately
+  without changing runtime output.
+- Old v35 battery cold-resumes at (6,8), preserving starter/HP/moves/PP/items/
+  money/badge/stage. Native/WASM walking matches 2048 RGB frames, 8,988,672 PCM
+  bytes and Flash. v40/v41 walking RGB is also identical across all 2048 frames;
+  MIDI bytes are identical, isolating this change to instruments/native sustain.
+- A 167.43-second native capture reaches two loops without capture failure or
+  digital clipping: peak 5952, RMS 1562.80. Matched 34.29-second v41 segment RMS
+  1552.94, versus v40 1728.19; level-matched A/B scales only the review copy
+  (gain 1.11285), never in-game audio. Native output remains separately available.
+- A/B first plays user-rated v40, pauses half a second, then plays v41. Evidence:
+  .tools/benchmarks/clinic-voice-v41-audio-review/v40-then-v41-rms-matched.mp3.
+  Native candidate: .tools/benchmarks/clinic-voice-v41-native-two-loop/park-bench-break-native.mp3.
+  Emerald matched comparison: .tools/benchmarks/clinic-voice-v41-paired-review/comparison.mp4.
+  Asked for a new 0-4 instrument score and remaining gap; no answer yet.
+- v40 remains the last explicit clinic music score, 2/4. v41 is unreviewed.
+  These format/capture/level checks do not establish acoustic realism, musical
+  taste, transition cleanliness, browser underrun safety or full Audio parity.

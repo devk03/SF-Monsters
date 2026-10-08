@@ -60,4 +60,3 @@ def clinic_tracks(score):
                 for eighth in range(8):
                     note(6, start + eighth * 12, 5, 60, 42 if eighth % 2 else 30)
     return tracks, 32 * 96
-
