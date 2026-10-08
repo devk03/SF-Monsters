@@ -21,7 +21,7 @@ PRESERVE = f'python3 {ROOT / "scripts/romhack/preserve_files.py"}'
 
 
 def run(*command, cwd=None):
-    subprocess.run(command, cwd=cwd or ROOT, check=True)
+    subprocess.run(command, cwd=cwd or ROOT, check=True, timeout=5400)
 
 
 def checkout(path, remote, revision):
@@ -52,7 +52,7 @@ def make(directory, *targets):
     run('make', '-j1', f'RM={PRESERVE}', *targets, cwd=directory)
 
 
-def build_compilers():
+def build_compilers(work_tag=''):
     installed = EMERALD / 'tools/agbcc'
     marker = installed / 'sf-toolchain.json'
     if marker.exists():
@@ -60,7 +60,7 @@ def build_compilers():
         if data['agbcc_revision'] != AGBCC_REVISION:
             raise ValueError('Installed compiler revision mismatch.')
         return
-    progress = TOOLS / 'agbcc-build-state.json'
+    progress = TOOLS / ('agbcc-build-state' + work_tag + '.json')
     if progress.exists():
         data = json.loads(progress.read_text())
         if data['revision'] != AGBCC_REVISION:

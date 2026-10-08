@@ -2244,3 +2244,39 @@ Sunset rowhouse — original native world-art checkpoint:
   facade variants, original streets/terrain, detailed interiors and complete
   neighborhood map design remain unfinished. All eleven full domain approvals
   stay pending. No GitHub Actions workflow was dispatched.
+
+Native Mac compilation — complete source-build checkpoint:
+
+- Built the pinned old/normal/ARM compiler variants as native Mac executables
+  in separate work directories and a fresh .tools/pokeemerald-host checkout.
+  No commercial/compiler C or assembly was changed. Cleanup actions preserve
+  intermediates; make commands have ninety-minute deadlines. The Docker checkout
+  and prior verified cartridges remain intact. Our obsolete stalled capture CLI
+  processes were stopped; Docker Desktop/storage was not force-quit or reset.
+- The fresh host baseline reproduces the pinned reference exactly: SHA-1
+  f3ae088181bf583e55daf962a92bb46f4f1d07b7; SHA-256
+  a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af.
+  Compiler/library hashes, tool versions and actual baseline bytes are checked
+  before reuse. Proof is in .tools/pokeemerald-host/sf-host-build.json and
+  .tools/romhack-baseline/build-host.json. This verifies a fresh base build, not
+  all complete-game clean-build/quality gates.
+- build_probe.py --backend host compiles the entire SF source overlay and applies
+  the original text, guide/title art, title music and house-resource stages.
+  Drafts retain immutable private cartridge/ELF pairs. Public release output
+  contains only the patch and integrity manifest. A second source build produces
+  the same target fingerprint. The prior private preview no longer substitutes
+  for normal compilation; this new target comes from the normal source pipeline.
+- Compiled 0.0.24 target SHA-256:
+  fe17001af73fd6f6cb989323e418bc3880ee15fbd3bf0bdd75211f451a5f9de6.
+  Patch: 673,686 bytes, SHA-256
+  9a936ec4a4c2b0fbe652e13a985886712f7a5828085b80c5119b76e3e40f7567.
+  Native Flips reapplication is byte-identical; required local source checks pass.
+- A 4,608-frame cold caught-party route reaches the guide and preserves both
+  monsters/save. Native/WASM final RGB, Flash and all 5,056,128 stereo pairs match.
+  The established 71,038-frame first-gym route earns the badge with CinderCoy
+  level eleven, HP 4/31, money 4,000 and three Potions. Final RGB, Flash and all
+  77,946,444 stereo pairs match native/WASM. Evidence uses host-slice-* benchmark
+  directories. This is one Fire-starter strategy, not three fresh campaigns.
+- Public deployment of this normally compiled preview is being prepared.
+  All eleven full approvals and the remaining full SF campaign gates remain
+  open. No GitHub workflow was dispatched.

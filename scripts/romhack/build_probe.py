@@ -40,12 +40,18 @@ def original(path):
 
 
 def main():
+    global EMERALD
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--backend', choices=['docker', 'host'], default='docker',
+                        help='Use the independently verified native host checkout.')
     parser.add_argument('--draft', action='store_true', help='Keep iteration artifacts in ignored local storage.')
     parser.add_argument('--fixture', choices=FIXTURES, help='Private level/evolution setup, never campaign evidence.')
     args = parser.parse_args()
     if args.fixture and not args.draft:
         parser.error('Fixture cartridges must remain private --draft builds.')
+    if args.backend == 'host':
+        from host_toolchain import prepare_host, host_make
+        EMERALD = prepare_host()
     if not BASE.exists() or hashlib.sha256(BASE.read_bytes()).hexdigest() != BASE_HASH:
         raise ValueError('Run bootstrap.py and verify the matching baseline first.')
     content = json.loads((ROOT / 'romhack/content/engine-probe.json').read_text())
@@ -80,8 +86,11 @@ def main():
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture
     (ROOT / '.tools/romhack-overlay-files.json').write_text(json.dumps(restored) + '\n')
-    docker('make', '-j8', 'FILE_NAME=sf-engine-probe', f'TITLE={content["title"]}',
-           f'GAME_CODE={content["game_code"]}', directory='/workspace/.tools/pokeemerald')
+    build_args = ('FILE_NAME=sf-engine-probe', f'TITLE={content["title"]}', f'GAME_CODE={content["game_code"]}')
+    if args.backend == 'host':
+        host_make(EMERALD, *build_args)
+    else:
+        docker('make', '-j8', *build_args, directory='/workspace/.tools/pokeemerald')
     target = EMERALD / 'sf-engine-probe.gba'
     text_receipt = apply_interface_text(ROOT, EMERALD, target)
     graphics_receipt = apply_interface_graphics(ROOT, EMERALD, target)
@@ -90,19 +99,35 @@ def main():
     song_receipt = apply_title_song(ROOT, EMERALD, target)
     house_receipt = apply_house_art(ROOT, EMERALD, target)
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
-    docker('make', 'TARGET=cli', 'CFLAGS=-O2', directory='/workspace/.tools/flips')
+    if args.backend == 'host':
+        encoder = ROOT / '.tools/flips-macos'
+        host_make(FLIPS, 'TARGET=cli', 'CFLAGS=-O2', 'FNAME_cli=' + str(encoder))
+    else:
+        docker('make', 'TARGET=cli', 'CFLAGS=-O2', directory='/workspace/.tools/flips')
     target_hash = hashlib.sha256(target.read_bytes()).hexdigest()
     output = ((ROOT / '.tools/romhack-drafts' / content['version'] / target_hash)
               if args.draft else ROOT / 'romhack/releases' / content['version'])
     candidate = ROOT / '.tools' / ('candidate-' + uuid.uuid4().hex[:10] + '.bps')
-    mounted = lambda path: '/workspace/' + str(path.relative_to(ROOT))
-    docker('.tools/flips/flips', '--create', '--bps', '--exact',
-           mounted(BASE), mounted(target), mounted(candidate))
+    def patch(*arguments):
+        if args.backend == 'host':
+            subprocess.run([str(encoder), *[str(value) for value in arguments]], check=True, timeout=300)
+        else:
+            docker('.tools/flips/flips', *['/workspace/' + str(value.relative_to(ROOT))
+                   if isinstance(value, Path) else value for value in arguments])
+    patch('--create', '--bps', '--exact', BASE, target, candidate)
     verification = ROOT / '.tools' / ('patch-roundtrip-' + uuid.uuid4().hex[:10] + '.gba')
-    docker('.tools/flips/flips', '--apply', '--exact', mounted(candidate), mounted(BASE), mounted(verification))
+    patch('--apply', '--exact', candidate, BASE, verification)
     if verification.read_bytes() != target.read_bytes():
         raise ValueError('BPS application did not reproduce the compiled cartridge.')
     output.mkdir(parents=True, exist_ok=True)
+    if args.draft:
+        # Captures use an immutable cartridge/ELF pair; neither is published.
+        for source, name in ((target, 'target.gba'), (EMERALD / 'sf-engine-probe.elf', 'target.elf')):
+            destination = output / name
+            if destination.exists() and destination.read_bytes() != source.read_bytes():
+                raise ValueError('Existing private build evidence changed; preserve and inspect it.')
+            if not destination.exists():
+                shutil.copy2(source, destination)
     patch = output / 'sf-mini-monsters.bps'
     if patch.exists() and patch.read_bytes() != candidate.read_bytes():
         raise ValueError('Bump the content version instead of replacing a released patch.')
@@ -120,6 +145,10 @@ def main():
         'source_worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip()),
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending'
     }
+    manifest['build_backend'] = args.backend
+    manifest['normal_compilation_verified'] = True
+    if args.backend == 'host':
+        manifest['host_toolchain'] = json.loads((EMERALD / 'sf-host-build.json').read_text())
     manifest['interface_text'] = text_receipt
     manifest['interface_graphics'] = graphics_receipt
     manifest['title_art'] = title_receipt

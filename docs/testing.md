@@ -63,6 +63,13 @@ artifact fingerprints are in `web/public/emulator/core-build.json`.
 
 ### Controller captures without Docker
 
+The cartridge itself can also build natively on Mac:
+`python3 scripts/romhack/build_probe.py --backend host --draft`.
+This uses the separately verified matching host toolchain described in
+[the build workflow](../romhack/README.md#native-mac-build); it preserves the
+Docker checkout and writes immutable private capture inputs. Routine verification
+runs locally. GitHub Actions is manual-only and does not run on each push.
+
 Use the pinned native mGBA core directly on the development Mac when Docker is
 unavailable. This creates a separate host library, records its fingerprint and
 preserves generated cleanup targets. It does not replace or restart Docker jobs.

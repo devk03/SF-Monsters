@@ -31,6 +31,27 @@ move temporary files into ignored preservation storage, respecting the project's
 no-deletion instruction. Game/compiler C and assembly are not changed for this
 adaptation. Failed stages and their logs remain available for inspection.
 
+### Native Mac build
+
+Docker is optional on the verified native Mac path. Install Git, Python 3,
+a C/C++ compiler, ARM GNU binutils/preprocessor, libpng and pkg-config, then run:
+
+```sh
+python3 scripts/romhack/host_toolchain.py
+python3 scripts/romhack/build_probe.py --backend host --draft
+```
+
+The host uses separate `.tools/pokeemerald-host` and compiler work directories.
+Its fresh baseline must reproduce the pinned reference exactly before SF content
+is applied. Compiler/library hashes, tool versions and the baseline fingerprint
+are recorded and rechecked; changing that identity requires inspecting its proof.
+Build commands have a ninety-minute limit. The existing Docker checkout, verified
+cartridges and failed intermediates are preserved.
+
+A draft keeps its immutable cartridge/ELF, patch and manifest under ignored
+`.tools/romhack-drafts`. Omit `--draft` only for a validated versioned release;
+the public release folder receives the patch/manifest alone.
+
 Exact baseline reproduction, SF patch application and local browser ROM upload
 pass. The same cartridge reaches identical native-core/WebAssembly frame output.
 Flash slot validation passes; actual campaign-save transfers and the SF campaign
