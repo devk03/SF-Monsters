@@ -3,7 +3,7 @@
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with eighteen original creature/call candidates, original team/guide labels, guide header, title lettering/Bayveil silhouette, title theme and Sunset rowhouse facade candidates; remaining title elements, pixel cleanup, portraits, world tiles and other music remain unfinished.",
+  "status": "Unreviewed SF chapter with eighteen original creature/call candidates, team/guide labels, guide header, title lettering/Bayveil silhouette, title theme, courier walking/running and Sunset rowhouse/street candidates; remaining title elements, pixel cleanup, portraits, ground/interior tiles and other music remain unfinished.",
   "maps": [
     "sunset.json",
     "south-park.json",

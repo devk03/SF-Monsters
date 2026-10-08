@@ -1,4 +1,5 @@
 PYTHON ?= .tools/venv/bin/python
+HACK_BACKEND ?= docker
 .PHONY: setup rom web check native-qa foundation hack
 setup:
 	python3 -m venv .tools/venv
@@ -19,4 +20,4 @@ foundation:
 	python3 scripts/foundation/build.py
 
 hack:
-	python3 scripts/romhack/build_probe.py
+	$(PYTHON) scripts/romhack/build_probe.py --backend $(HACK_BACKEND)

@@ -34,11 +34,12 @@ adaptation. Failed stages and their logs remain available for inspection.
 ### Native Mac build
 
 Docker is optional on the verified native Mac path. Install Git, Python 3,
-a C/C++ compiler, ARM GNU binutils/preprocessor, libpng and pkg-config, then run:
+a C/C++ compiler, ARM GNU binutils/preprocessor, libpng and pkg-config. Run
+`make setup` to install the project Python/Node dependencies, then:
 
 ```sh
-python3 scripts/romhack/host_toolchain.py
-python3 scripts/romhack/build_probe.py --backend host --draft
+.tools/venv/bin/python scripts/romhack/host_toolchain.py
+.tools/venv/bin/python scripts/romhack/build_probe.py --backend host --draft
 ```
 
 The host uses separate `.tools/pokeemerald-host` and compiler work directories.
@@ -51,6 +52,8 @@ cartridges and failed intermediates are preserved.
 A draft keeps its immutable cartridge/ELF, patch and manifest under ignored
 `.tools/romhack-drafts`. Omit `--draft` only for a validated versioned release;
 the public release folder receives the patch/manifest alone.
+`make hack HACK_BACKEND=host` uses the same project Python environment for a
+versioned native source build. The default `make hack` backend remains Docker.
 
 Exact baseline reproduction, SF patch application and local browser ROM upload
 pass. The same cartridge reaches identical native-core/WebAssembly frame output.
