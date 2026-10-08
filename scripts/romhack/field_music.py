@@ -8,13 +8,16 @@ import shutil
 import struct
 from battle_music import battle_tracks, battle_samples
 from clinic_music import clinic_tracks, clinic_samples
+from healing_music import healing_tracks, healing_samples
 
 ROOT = Path(__file__).resolve().parents[2]
 BINDINGS = {
     'mus_littleroot': ('littleroot', 'sf_ocean', 'ocean_commute', 'SF_Ocean'),
     'mus_vs_wild': ('vs_wild', 'sf_wild', 'fogbank_frenzy', 'SF_Wild'),
     'mus_birch_lab': ('birch_lab', 'sf_clinic', 'park_bench_break', 'SF_Clinic'),
+    'mus_heal': ('sf_heal', 'sf_heal', 'team_refresh', 'SF_Heal'),
 }
+CUSTOM_GROUPS = {'sf_heal'}
 
 
 def variable_length(value):
@@ -25,8 +28,9 @@ def variable_length(value):
     return bytes(result)
 
 
-def midi_track(events, end):
-    ordered = [(0, -2, b'\xff\x06\x01[')] + events + [(end, 3, b'\xff\x06\x01]'), (end, 4, b'\xff\x2f\x00')]
+def midi_track(events, end, loop=True):
+    markers = [(0, -2, b'\xff\x06\x01['), (end, 3, b'\xff\x06\x01]')] if loop else []
+    ordered = markers + events + [(end, 4, b'\xff\x2f\x00')]
     output, previous = bytearray(), 0
     for tick, priority, data in sorted(ordered, key=lambda row: (row[0], row[1])):
         if not 0 <= tick <= end: raise ValueError('A note leaves the song loop.')
@@ -111,16 +115,20 @@ def write_song(score, output):
     arrangement = score.get('arrangement', 'field')
     arrangers = {'field': (score_tracks, instrument_samples),
                  'wild_battle': (battle_tracks, battle_samples),
-                 'clinic': (clinic_tracks, clinic_samples)}
+                 'clinic': (clinic_tracks, clinic_samples),
+                 'healing': (healing_tracks, healing_samples)}
     if arrangement not in arrangers:
         raise ValueError('Unreviewed native music arrangement.')
     if arrangement == 'clinic' and instrument_revision(score) != 2:
         raise ValueError('Current clinic voices need revision 2; preserve revision 1 assets.')
     compose, samples = arrangers[arrangement]
     tracks, end = compose(score)
+    playback = score.get('playback', 'loop')
+    if playback not in ['loop', 'one-shot']:
+        raise ValueError('Unsupported native music playback mode.')
     output.mkdir(parents=True, exist_ok=True)
     midi = b'MThd' + struct.pack('>IHHH', 6, 1, len(tracks), 24)
-    midi += b''.join(midi_track(track, end) for track in tracks)
+    midi += b''.join(midi_track(track, end, playback == 'loop') for track in tracks)
     (output / (stem + '.mid')).write_bytes(midi)
     waves, voices = [], ['voice_group ' + group]
     for name, data, loop, rate, *starts in samples():
@@ -139,14 +147,19 @@ def write_song(score, output):
             voices.append(f'\tvoice_directsound 60, 0, {symbol}, 255, 0, 230, {90 if loop else 40}')
     (output / 'waves.inc').write_text('\n'.join(waves) + '\n')
     (output / 'voices.inc').write_text('\n'.join(voices) + '\n')
-    (output / 'score-info.json').write_text(json.dumps({'title': score['title'], 'tempo': score['tempo'],
+    info = {'title': score['title'], 'tempo': score['tempo'],
         'bars': end // 96, 'tracks': len(tracks), 'loop_ticks': end,
-        'nominal_loop_seconds': end / 24 * 60 / score['tempo'], 'quality_approval': 'pending'}, indent=2) + '\n')
+        'nominal_loop_seconds': end / 24 * 60 / score['tempo'], 'quality_approval': 'pending'}
+    if playback == 'one-shot':
+        info['duration_ticks'] = info.pop('loop_ticks')
+        info['nominal_duration_seconds'] = info.pop('nominal_loop_seconds')
+        info.update(playback=playback, native_wait_frames=score['native_wait_frames'])
+    (output / 'score-info.json').write_text(json.dumps(info, indent=2) + '\n')
 
 
 def apply_field_music(content, root, engine, original):
     plans = content.get('music_scores', [content['field_music']] if 'field_music' in content else [])
-    restored, includes, used = [], [], set()
+    restored, includes, used, custom_includes = [], [], set(), []
     configuration_path = 'sound/songs/midi/midi.cfg'
     configuration = original(configuration_path)
     configured = False
@@ -159,6 +172,12 @@ def apply_field_music(content, root, engine, original):
         group, directory, stem, _ = BINDINGS[song]
         source = root / 'assets/audio' / (plan.stem + '-native-v' + str(instrument_revision(score)))
         write_song(score, source)
+        if group in CUSTOM_GROUPS:
+            configuration, count = re.subn(rf'(?m)^({re.escape(song)}\.mid:.*?-G_)\w+',
+                lambda match: match[1] + group, configuration)
+            if count != 1: raise ValueError('Custom MIDI voicegroup binding was not found.')
+            configured = True
+            custom_includes.append(f'\n.include "sound/voicegroups/{group}.inc"\n')
         if 'native_volume' in score:
             volume = score['native_volume']
             if not isinstance(volume, int) or not 1 <= volume <= 100:
@@ -176,7 +195,12 @@ def apply_field_music(content, root, engine, original):
         (engine / voice_path).write_text((source / 'voices.inc').read_text())
         (destination / 'waves.inc').write_text((source / 'waves.inc').read_text())
         includes.append(f'\n.include "sound/{directory}/waves.inc"\n')
-        restored.extend([midi_path, voice_path])
+        restored.append(midi_path)
+        if group not in CUSTOM_GROUPS: restored.append(voice_path)
+    if custom_includes:
+        groups_path = 'sound/voice_groups.inc'
+        (engine / groups_path).write_text(original(groups_path) + ''.join(custom_includes))
+        restored.append(groups_path)
     if includes:
         data_path = 'sound/direct_sound_data.inc'
         (engine / data_path).write_text(original(data_path) + ''.join(includes))
@@ -188,7 +212,7 @@ def apply_field_music(content, root, engine, original):
 
 
 if __name__ == '__main__':
-    for name in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break']:
+    for name in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break', 'team-refresh']:
         score = json.loads((ROOT / f'assets/audio/{name}.json').read_text())
         write_song(score, ROOT / f'assets/audio/{name}-native-v{instrument_revision(score)}')
     print('Wrote original field/battle scores and synthesized instruments.')

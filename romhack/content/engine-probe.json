@@ -1,5 +1,5 @@
 {
-  "version": "0.0.41-clinic-voice-preview",
+  "version": "0.0.42-recovery-cue-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
@@ -55,6 +55,7 @@
   "music_scores": [
     "assets/audio/ocean-commute.json",
     "assets/audio/fogbank-frenzy.json",
-    "assets/audio/park-bench-break.json"
+    "assets/audio/park-bench-break.json",
+    "assets/audio/team-refresh.json"
   ]
 }

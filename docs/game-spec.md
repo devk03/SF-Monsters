@@ -3673,3 +3673,31 @@ Clinic voice v41 publication checkpoint:
   fanfares' instrument mappings; implement an independent one-shot voicegroup.
 - No workflow, DB mutation, PR merge, delegation or recurring monitor ran.
   Original full scope and recorded 6 PM local cutoff remain in force.
+
+
+Original recovery cue implementation checkpoint:
+
+- Previous goal turn classified as progress: clinic instrument revision 2 was
+  published with byte-identical walking/MIDI and controlled A/B evidence.
+  v41 review is pending; the last explicit clinic score remains v40 music 2/4.
+- Composed Team Refresh, an original two-bar, 192 BPM one-shot with bell/bass/
+  keys and a four-chord cadence. MIDI end is tick 192 (nominal 2.5 seconds),
+  last notes end at tick 180. No loop markers or hanging notes. Four synthesized
+  original waves and a separate sf_heal voicegroup replace only MUS_HEAL.
+- Importer appends the custom bank and redirects only this song's configuration;
+  existing shared fanfare.inc is byte-identical to pinned source (SHA256
+  d3e1c7539e87fbbf94a8b5ec5ab76e983a989f85f2392f0b8111162eca2ce728).
+  New untracked engine include stays inert when tracked include/config files
+  are restored; it is not listed as a nonexistent upstream restoration path.
+- Existing MIDI/wave tests cover the new one-shot, note lifetimes and silent
+  endpoints. All local checks and normal draft compilation/BPS round trip pass.
+  Draft target 5542a01edefcd14a12b4e0669ffe63f95fef025d30fd0b244085c3e24bd90632,
+  BPS 866,594 bytes. Playback quality remains unreviewed.
+- Added a read-only music-state inspector for pinned controller snapshots,
+  validating the ELF companion cartridge identity before reading native player
+  status, clock, voicegroup and remaining fanfare frames. Use it to verify the
+  one-shot actually ends and BGM resumes through the existing 160-frame service
+  gate; no game-state writes or production hooks are added.
+- Native/WASM healing, old-save resume, jingle lifetime and public QA follow.
+  Public remains v41/Site 33. Full Audio and all final acceptance gates remain
+  open; no CI, DB mutation, PR merge or delegation ran.

@@ -1,0 +1,18 @@
+{
+  "title": "Team Refresh",
+  "arrangement": "healing",
+  "playback": "one-shot",
+  "tempo": 192,
+  "ticks_per_quarter": 24,
+  "melody": [[0,9,74],[12,9,77],[24,21,81],[48,9,79],[60,9,76],[72,21,84],[96,9,83],[108,9,79],[120,9,76],[132,9,74],[144,36,72]],
+  "cadence": [[0,38,50,"minor7"],[48,41,53,"major7"],[96,43,55,"major7"],[144,48,60,"major7"]],
+  "channels": {
+    "bell": {"volume": 102, "pan": 64},
+    "bass": {"volume": 84, "pan": 64},
+    "keys": {"volume": 86, "pan": 56}
+  },
+  "native_song": "mus_heal",
+  "native_voicegroup": "sf_heal",
+  "native_volume": 96,
+  "native_wait_frames": 160
+}

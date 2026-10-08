@@ -1,0 +1,11 @@
+{
+  "title": "Team Refresh",
+  "tempo": 192,
+  "bars": 2,
+  "tracks": 3,
+  "quality_approval": "pending",
+  "duration_ticks": 192,
+  "nominal_duration_seconds": 2.5,
+  "playback": "one-shot",
+  "native_wait_frames": 160
+}

@@ -34,8 +34,9 @@ class NativeScore(unittest.TestCase):
         self.check_score('foglight-overture', 3072, 8)
         self.check_score('park-bench-break', 3072)
         self.check_score('park-bench-break', 3072, revision=2)
+        self.check_score('team-refresh', 192, 3, looped=False)
 
-    def check_score(self, stem, loop, track_count=7, revision=1):
+    def check_score(self, stem, loop, track_count=7, revision=1, looped=True):
         data = (ROOT / f'assets/audio/{stem}-native-v{revision}/{stem.replace("-", "_")}.mid').read_bytes()
         self.assertEqual(data[:4], b'MThd')
         self.assertEqual(struct.unpack_from('>IHHH', data, 4), (6, 1, track_count, 24))
@@ -53,7 +54,7 @@ class NativeScore(unittest.TestCase):
                     self.assertIn(payload[0], active); active.remove(payload[0])
                 elif status & 240 == 192: self.assertLess(payload[0], 8)
             self.assertFalse(active)
-            self.assertEqual(markers, [(0, b'['), (loop, b']')])
+            self.assertEqual(markers, [(0, b'['), (loop, b']')] if looped else [])
             self.assertGreater(count, 0)
             cursor += length
         self.assertEqual(cursor, len(data))
@@ -62,10 +63,11 @@ class NativeScore(unittest.TestCase):
         for stem in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break']:
             with self.subTest(score=stem): self.check_samples(stem)
         self.check_samples('park-bench-break', revision=2)
+        self.check_samples('team-refresh', count=4)
 
-    def check_samples(self, stem, revision=1):
+    def check_samples(self, stem, revision=1, count=8):
         files = list((ROOT / f'assets/audio/{stem}-native-v{revision}').glob('*.bin'))
-        self.assertEqual(len(files), 8)
+        self.assertEqual(len(files), count)
         for path in files:
             data = path.read_bytes(); kind, status, frequency, loop, size = struct.unpack_from('<HHIII', data)
             self.assertEqual((kind, frequency), (0, 16744 * 1024))
@@ -79,7 +81,7 @@ class NativeScore(unittest.TestCase):
                 self.assertLessEqual(abs(pcm[-1] - pcm[loop]), largest_step + 2)
             else:
                 self.assertEqual(loop, 0)
-            if stem == 'park-bench-break' and status == 0:
+            if stem in ['park-bench-break', 'team-refresh'] and status == 0:
                 self.assertEqual((data[16], data[-1]), (0, 0),
                                  'Transient voices must begin/end at silence')
 
