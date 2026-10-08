@@ -1963,3 +1963,38 @@ Capture-storage recovery checkpoint:
   unrelated user files remain untouched. Required source checks including the
   new storage contracts pass. Public 0.0.17 remains current; capture/party review,
   paired art/audio clips, cast/tiles/music and all full-campaign gates remain open.
+
+Browser/capture progress and CI budget checkpoint:
+
+- The user requested fewer GitHub workflow runs. Validation now uses manual
+  workflow_dispatch only, with concurrency cancellation for superseded deliberate
+  runs. Routine pushes/PRs do not launch it; local checks remain the default.
+  AGENTS.md records the rule. No active/queued runs existed when checked.
+- A real Chrome 154.0.8037.98 guest window on macOS 26.6.2 loads the public home
+  page anonymously, selects the verified local Emerald file and boots the player.
+  The downloaded 16,777,216-byte cartridge matches target SHA-256
+  11f315ea2f5c3191d067360e58465d4b2db96ff719fd0d3e5fe0d5726806e176.
+  Private copy: .tools/browser-review/production-downloaded-v17.gba. The page
+  accepts the actual earned post-badge native battery. Field continuation,
+  exported-save equality, real sign-in and device performance remain unproven.
+- Added a Docker-independent controller capture harness for the pinned WebAssembly
+  core. It verifies core/cartridge fingerprints, exact state provenance and input
+  bounds, restores companion Flash, and writes actual state/Flash/audio/final
+  pixels plus optionally losslessly compressed video. It never changes game RAM
+  directly. Metadata labels this runtime separately; the existing comparison
+  harness now rejects a WASM capture as its purported independent native reference.
+- Actual gameplay from the intact native wild/bag checkpoint throws one ball,
+  captures level-3 BinPossum, displays its authored guide text, declines a nickname
+  and returns to Sunset with a second party member. BinPossum has 15/15 HP and
+  Tackle/Tail Whip/Sand Attack at 35/30/15 PP. No scripted gift or prepared levels
+  substitute for capture. Evidence: slice-roster-wasm-{catch,caught-guide,caught-party}.
+  The 2,184-frame capture sequence records 2,396,392 stereo pairs and a 36.57-second
+  clip at slice-roster-wasm-catch/review.mp4. This is WASM gameplay evidence;
+  the stalled native retry has not yet supplied the corresponding comparison.
+- Source checks and capture-provenance tests pass. The prior clean CI failure was
+  a missing benchmark directory in the new frame-storage test; its setup now
+  creates that directory and the focused checks pass locally without a new CI run.
+- Native title/guide wording still contains inherited franchise branding, and
+  cast/tiles/music/pixel cleanup remain unfinished. These are explicit remaining
+  originality/presentation gaps. First-slice and full-campaign quality approval
+  remain 0/11; section 15.1 stays the complete objective.

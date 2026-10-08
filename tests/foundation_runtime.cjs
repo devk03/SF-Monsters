@@ -15,6 +15,7 @@ vm.runInNewContext(fs.readFileSync(base + 'mgba.js', 'utf8'), sandbox);
 
 (async () => {
   const native = JSON.parse(fs.readFileSync(path.join(nativeDirectory, 'capture.json'), 'utf8'));
+  assert.ok(native.runtime?.startsWith('native mGBA'), 'Reference must be an independent native capture');
   const rom = fs.readFileSync(romPath);
   const hash = crypto.createHash('sha256').update(rom).digest('hex');
   assert.equal(hash, native.rom_sha256, 'Comparison must use the identical cartridge');

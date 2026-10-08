@@ -1,4 +1,4 @@
-"""Encode raw native-core A/V at the original GBA rate, preserving synchronization."""
+"""Encode captured core A/V at the original GBA rate, preserving synchronization."""
 from pathlib import Path
 import argparse
 import json
@@ -57,4 +57,5 @@ metadata.update({
     'user_quality_approval': 'pending'
 })
 (directory / 'review.json').write_text(json.dumps(metadata, indent=2) + '\n')
-print(f'Encoded {duration:.2f}s native 240x160 A/V: {output}')
+kind = 'WebAssembly' if metadata['runtime'].startswith('WebAssembly') else 'native'
+print(f'Encoded {duration:.2f}s {kind} 240x160 A/V: {output}')
