@@ -1,0 +1,24 @@
+{
+  "source_size": [
+    1983,
+    793
+  ],
+  "alpha_bounds": [
+    312,
+    309,
+    1672,
+    482
+  ],
+  "native_size": [
+    80,
+    8
+  ],
+  "alpha_threshold": 128,
+  "resize": "nearest-neighbor",
+  "placement": "one empty row above and below six glyph rows",
+  "ink": "black",
+  "pixel_cleanup": "unreviewed native lettering candidate",
+  "quality_approval": "pending",
+  "native_png_sha256": "f7535e5778103f0bbb7e72d57fa23854e97a48e9a6f917fd67931c0947c2f30d",
+  "native_mask_sha256": "0c0b4b73536a989e587aac9541cb1c7ac4f46877408ae94fd208579030e5c3f6"
+}
