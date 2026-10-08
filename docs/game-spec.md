@@ -766,9 +766,9 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 34 Chrome account restores prior local save through GUIDE/Continue into clinic. Actual ROM download matches v42; backup export matches v35 import byte-for-byte. Initial chooser wait timed out; alternate visible Load ROM succeeded without console errors. Test player muted/paused. Fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
+| Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Verify v43 recovery lights/healer gesture in native and WASM, preserving HP/PP, collision and return control; then publish a matched healing comparison. Latest explicit clinic music score remains 2/4. v41 instrument review and all other first-slice gates remain open. Actions stay manual-only. |
+| Next work | v43 healing visual subset review requested; latest explicit clinic music score remains2/4. Next improve the clinic soundtrack's composition/instruments/mix against a matched listening baseline, while preserving mechanics and tracking other first-slice art/interface gaps. v41 instrument A/B remains unreviewed. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3848,3 +3848,26 @@ Recovery animation verified and published checkpoint:
 - Actual browser healing/download verification is underway. Latest clinic music
   rating remains2/4; full-domain approvals0/11. No GitHub workflow, DB mutation,
   PR merge or delegation ran. Goal remains active with6PM local stop.
+
+Public v43 healing interaction checkpoint:
+
+- Actual Chrome account reloads Site35, uses visible Load ROM with local baseline,
+  downloads /Users/devkunjadia/Downloads/sf-mini-monsters (18).gba matching the
+  verified v43 target, and resumes the prior save through title/Continue.
+- Three Up taps approach Justine; A produces her left-facing gesture and visible
+  amber equipment phase, then idle equipment returns and healing dialogue opens.
+  Three B taps close the pages; Down first changes facing and the next tap walks
+  away. Screenshot confirms separation from healer and normal field activity.
+  Test player is muted and paused afterward; no browser audio deadline claim.
+- Private public screenshots: .tools/browser-review/public-v43-recovery-playing.png
+  and public-v43-recovery-walk-away.png. Paused overlay hides the scene, so an
+  intermediate paused screenshot alone is not counted as movement evidence.
+- Native final music inspection finds fanfare counter0 and seven BGM tracks active
+  and unpaused. SE2 has since been reused by text effects; its final bank does
+  not represent the earlier healing cue and is not misreported as cue evidence.
+- Asked for updated0-4 healing visual subset review against genuine Emerald;
+  pending. Latest explicit clinic music score2/4 is retained. Next weakest
+  measured area is clinic soundtrack; no full-domain approval inferred0/11.
+- Source/release/progress commits25603f2 and5668521 pushed. No workflow, DB change,
+  PR merge or delegation. Complete SF campaign and required system/quality gates
+  remain unfinished; goal stays active with final stop/commit at6PM SF local.
