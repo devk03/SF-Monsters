@@ -1743,3 +1743,34 @@ First-slice interior upgrade foundation:
   and exact draft BPS round-trip pass. New room composition, actual older-save
   resume/rendering and cross-runtime verification remain next; public 0.0.13 is
   unchanged. This does not approve map art or any quality domain (still 0/11).
+
+First-slice interior composition checkpoint:
+
+- Cognition now has workstations, bookshelves, seating, a planning board and a
+  coffee/supply nook around its preserved relay, trainer and leader routes.
+  The clinic gains waiting seats, books/supplies, floor accents and a counter,
+  retaining healing, shop, storage, notes and exit access. Dimensions and stable
+  event identities are unchanged. These use inherited lab tiles as composition
+  scaffolding; original tile/cast art and user map approval remain outstanding.
+- Optional office objects add a team-planning hint, a flag-dependent incident log
+  and one emergency Potion at the coffee shelf. The log changes from the unknown
+  Sunset pulse to the Mission/Overclock lead after the badge. Native interaction
+  gives exactly one Potion, sets its persistent flag and does not repeat the
+  gift. This adds exploration/return interaction within the existing first slice.
+- Route checks cover all required clinic interactions, trainer/relay approaches,
+  the closed gate's barrier and access to the leader/log after opening. Focused
+  and full source checks, native compilation and draft BPS round-trip pass.
+- Native old-save tests preserve the earned post-badge position 8,4 and all party,
+  moves/PP, money/items and flags, while showing the new layout immediately.
+  An authentic 0.0.13 save made at the future bookshelf's tile 1,5 relocates to
+  safe floor 3,5, with the same progress/resources. Both 2,464-frame routes match
+  native/WebAssembly RGB/Flash/all 2,703,624 stereo pairs. The full 77,908-frame
+  earned Fire route also retains its victory/reward and matches RGB/Flash/all
+  85,484,552 stereo pairs on the new layout.
+  Evidence: .tools/benchmarks/interiors-final-{valid-resume,blocked-resume,earned-gym}.
+- An early draft used a bench-edge tile as floor; native visual inspection caught
+  the repeating object detail and it was replaced before release. Final draft
+  target: 234969b126fabde5068cd010d9f6eab91b0b9d8f94b21ff47994857bd34a1de7.
+  Clinic workflows, final normal-patch publication and review clips remain next.
+  Public 0.0.13 is still current at this source checkpoint. All 11 final quality
+  approvals, original wild creatures, broader systems and full campaign remain.

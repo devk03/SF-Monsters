@@ -154,3 +154,44 @@ SF_Text_StevenDefeat::
 	.string "STEVEN: That approach works.$"
 SF_Text_StevenAfter::
 	.string "STEVEN: The green relay is beside me.\nStatus moves can create an opening.$"
+
+SF_OfficeCoffee::
+	lockall
+	goto_if_set FLAG_UNUSED_0x043, SF_OfficeCoffee_Empty
+	msgbox SF_Text_Coffee, MSGBOX_DEFAULT
+	giveitem ITEM_POTION, 1
+	goto_if_eq VAR_RESULT, FALSE, SF_OfficeCoffee_Full
+	setflag FLAG_UNUSED_0x043
+SF_OfficeCoffee_Empty::
+	msgbox SF_Text_CoffeeEmpty, MSGBOX_DEFAULT
+	releaseall
+	end
+SF_OfficeCoffee_Full::
+	msgbox SF_Text_CoffeeFull, MSGBOX_DEFAULT
+	releaseall
+	end
+SF_IncidentLog::
+	lockall
+	goto_if_ge VAR_UNUSED_0x40DB, 4, SF_IncidentLog_After
+	msgbox SF_Text_IncidentBefore, MSGBOX_DEFAULT
+	releaseall
+	end
+SF_IncidentLog_After::
+	msgbox SF_Text_IncidentAfter, MSGBOX_DEFAULT
+	releaseall
+	end
+SF_TeamWhiteboard::
+	msgbox SF_Text_TeamWhiteboard, MSGBOX_SIGN
+	end
+SF_Text_Coffee::
+	.string "This mug says 'founder mode'.\pNobody has documented what it does.\nThere is a Potion beside it.$"
+SF_Text_CoffeeEmpty::
+	.string "The emergency shelf is empty.\pThe coffee is still here.\nIt has acquired a personal brand.$"
+SF_Text_CoffeeFull::
+	.string "Your BAG has no room for the Potion.\nThe emergency shelf can wait.$"
+SF_Text_IncidentBefore::
+	.string "FIELD LOG 17\nThe Sunset sensor caught a pulse.\pIt repeats like a transit loop.\nBlue INPUT keeps the test contained.\pThe sender is still unknown.$"
+SF_Text_IncidentAfter::
+	.string "FIELD LOG 18\nThe relays are stable again.\pROON traced the pulse to the MISSION.\nOVERCLOCK signs each transmission.\pSomeone put 'ship it' on the report.\nSomeone else crossed it out.$"
+SF_Text_TeamWhiteboard::
+	.string "TEAM PLAN\nBlue INPUT before green OUTPUT.\pTry the practice battles. Rest at\nthe clinic before the leader.\pUse more than one type of companion.\nEven your deck needs a second slide.$"

@@ -2,6 +2,7 @@
 import sys
 import json
 from copy import deepcopy
+from collections import deque
 import unittest
 from pathlib import Path
 
@@ -126,6 +127,42 @@ class RecoverySafety(unittest.TestCase):
                              ('MAP_LITTLEROOT_TOWN', 23, 22))
         validate_recovery_scripts((root / 'services.inc').read_text(),
                                   content['recovery_points'])
+
+
+class InteriorRoutes(unittest.TestCase):
+    def reachable(self, plan, start, gate_open=False):
+        occupied = {(n['x'], n['y']) for n in plan['npcs']}
+        queue, visited = deque([start]), {start}
+        while queue:
+            x, y = queue.popleft()
+            for xx, yy in [(x-1,y),(x+1,y),(x,y-1),(x,y+1)]:
+                if not (0 <= yy < len(plan['rows']) and 0 <= xx < len(plan['rows'][0])):
+                    continue
+                token = plan['rows'][yy][xx]
+                blocked = plan['legend'][token][1] and not (gate_open and token == 'Q')
+                if blocked or (xx,yy) in occupied or (xx,yy) in visited:
+                    continue
+                visited.add((xx,yy)); queue.append((xx,yy))
+        return visited
+
+    def test_gym_keeps_relay_practice_and_earned_gate_routes(self):
+        root = Path(__file__).resolve().parents[1] / 'romhack/content'
+        plan = json.loads((root / 'cognition.json').read_text())
+        encode_layout(plan); event_objects(plan)
+        closed = self.reachable(plan, (8,21))
+        for target in [(8,17),(4,13),(12,13),(3,13),(13,13),(1,16),(5,20)]:
+            self.assertIn(target, closed)
+        self.assertNotIn((8,4), closed)
+        opened = self.reachable(plan, (8,21), gate_open=True)
+        for target in [(8,4),(1,7)]: self.assertIn(target, opened)
+
+    def test_clinic_keeps_healing_shop_storage_notes_and_exit_accessible(self):
+        root = Path(__file__).resolve().parents[1] / 'romhack/content'
+        plan = json.loads((root / 'services.json').read_text())
+        encode_layout(plan); event_objects(plan)
+        reachable = self.reachable(plan, (6,12))
+        for target in [(6,5),(9,8),(2,4),(10,3)]:
+            self.assertIn(target, reachable)
 
 
 if __name__ == '__main__':
