@@ -14,7 +14,8 @@ are the original Sunset and wild-battle theme candidates. The preview now has
 eighteen original creature candidates, original title art/music and six Sunset
 rowhouse facades, street textures and coastal ground/wave animation. The first house now has an original
 enterable courier studio with an animated doorway: a fog-beacon puzzle, one-time capsule reward, team
-rest and an N-Judah history postcard. Cast art, remaining world tiles and other music still use
+rest and an N-Judah history postcard. South Park now has original brick/clinic facades, street paving, park furniture
+and animated entrances. Cast art, other interiors and other music still use
 placeholders. The full SF campaign and Emerald quality
 approval remain outstanding.
 CinderCoy now has authored Ashrunner (level 16) and Solhowl (level 36)

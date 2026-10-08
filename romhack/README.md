@@ -295,3 +295,23 @@ it changes displayed graphics, not physical boundaries or map connections.
 `coastal_border_test.c` and native gameplay evidence cover its edges. Sand uses
 the native sand behavior, water uses ocean behavior, and encounter grass keeps
 the native tall-grass behavior. Field-effect art and human approval remain open.
+
+
+## South Park streets and entrances
+
+`park_map.py` compiles a standalone `gTileset_SFSouthPark` secondary tileset
+from original streets, terrain, facades and park furniture. Its 469 tiles,
+122 metatiles and five palette banks leave native door animation slots free.
+Ground uses the covered layer below actors; warehouse/clinic foundations block
+walking except at reciprocal native door warps. Older saves on newly blocked
+foundations relocate through the same-map recovery guard.
+
+Editable source images, native derivatives and exact generation prompts are in
+`assets/tiles/south-park-buildings`, `south-park-furniture` and `south-park-doors`.
+`park_doors.py` packs six original 16x32 frames and registers metatiles 583/618
+with the existing native animation timing. Transparent margins reveal our
+sidewalk. Gym/clinic interiors still need original art and user review.
+
+Run `.tools/venv/bin/python tests/park_art_test.py` for native resource, layer,
+door and gameplay reachability checks. Controller recordings and approval
+status are documented in spec section 15; passing checks is not art approval.

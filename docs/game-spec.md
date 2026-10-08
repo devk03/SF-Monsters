@@ -756,8 +756,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505; Site version 23. Replaces the rejected 0.0.29 ground layering. |
-| Latest local source build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505. Fixes concealed courier on ground; 768 visible walking frames verified; published. Courier visibility and save resume verified on the public website. |
+| Public build | 0.0.31-south-park-preview; target e1b4c66fd4eb1c5aa1731fdc18c7985e199791d3480ad90106d25bdbcc7574a4; Site version 24. Original South Park street/garden/facade candidate; unreviewed. |
+| Latest local source build | 0.0.31-south-park-preview; same target. Source 18b68f9, normal host compilation and exact BPS application pass. Native/WASM gym and clinic door routes match; original outdoor assets remain unapproved. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2820,3 +2820,29 @@ South Park native doors and older-save recovery checkpoint:
   source compilation/BPS round trip pass. Public build remains 0.0.30 until
   this candidate is published. Full quality approvals remain 0/11. First-slice
   cast/interior/battle art and the complete campaign remain required; no CI ran.
+
+
+South Park public release checkpoint (October 8, 2026):
+
+- Normal build 0.0.31-south-park-preview, source 18b68f9, verifies byte-exact
+  target e1b4c66fd4eb1c5aa1731fdc18c7985e199791d3480ad90106d25bdbcc7574a4.
+  BPS patch is 759,406 bytes, SHA256
+  51ce40ffc5fec101dabdb35395e8537c1870c5d866c5f91e2cc787eb1492ee5c.
+  Source dirty marker reflects retained unrelated/untracked local files.
+- Native bench discovery save at (18,20) records reserved flag 0x41 set and
+  three Oran Berries (item 139). Earned badge, gym stage 4, 4,000 money, three
+  Potions and level-11 CinderCoy HP 4/31 survive the actual in-game SAVE.
+  Evidence: park-discovery-saved; read-only encrypted-party/inventory decode.
+  Public import/cold resume verification follows; this is not a full campaign
+  checkpoint or proof of ten cross-platform round trips.
+- Site source a9280a3aca53d62972b8ad0627c564476932a25a passes TypeScript and
+  production build. Archive verified against exact patch/target manifest,
+  with no inherited BPEE cartridge. Saved Site version 24:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_ef72738c7ae48191be72c40c69f22297.
+  Deployment appgdep_6ac7ae2a2798819181a01e709a8a1c3c succeeded at
+  2026-10-08T14:52:36Z, retaining public audience and local-only ROM patching.
+- All full quality approvals remain 0/11. Pending comparison reviews, signed-in
+  QA, first-slice original cast/interior/battle art and the complete campaign
+  remain required. No database migration, recurring job or GitHub Actions run
+  was used. Last turn verified remote manual-only triggers and no active/queued
+  jobs; this turn publishes the already locally verified candidate.
