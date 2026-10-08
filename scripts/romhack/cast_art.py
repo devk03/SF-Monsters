@@ -205,6 +205,22 @@ def apply_cast(root, emerald, original):
         generated += [palette_dest]+['graphics/object_events/pics/people/sf_'+e['slug'].replace('-', '_')+'.4bpp' for e in entries]
     for path, source in zip(paths, (constants, header, graphics, pictures, info, pointers, movement)):
         (emerald/path).write_text(source)
+    aliases = [entry['graphics'] for *_, entries, metadata in groups for entry in entries]
+    predicate = '#include "constants/event_objects.h"\n\n'
+    predicate += 'static bool8 SFIsNamedCastGraphics(u8 id)\n{\n    switch (id)\n    {\n'
+    predicate += ''.join('    case '+alias+':\n' for alias in aliases)
+    predicate += '        return TRUE;\n    default:\n        return FALSE;\n    }\n}\n\n'
+    (emerald/'src/sf_cast_resume.h').write_text(predicate+(root/'romhack/engine/cast_resume.h').read_text())
+    path = 'src/overworld.c'
+    source = (emerald/path).read_text()
+    source = insert_once(source,'void CB2_ContinueSavedGame(void)', '#include "sf_cast_resume.h"\n\n')
+    anchor = '        LoadSaveblockObjEventScripts();\n\n    UnfreezeObjectEvents();'
+    if source.count(anchor)!=1:
+        raise ValueError('Pinned named-cast resume hook changed.')
+    source = source.replace(anchor,'        LoadSaveblockObjEventScripts();\n\n'
+                            '    SFResumeNamedCastGraphics();\n    UnfreezeObjectEvents();',1)
+    (emerald/path).write_text(source)
+    paths.append(path)
     return paths+generated
 
 

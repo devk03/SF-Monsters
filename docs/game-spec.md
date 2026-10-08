@@ -3278,8 +3278,37 @@ Original clinic cast implementation checkpoint:
   and actual service-event wiring. v36 draft target
   d3e28f36df0db5b3f03ffd16da45a33d02e785a0e2848afc4a22f84dede40c75
   compiles normally; 786,365-byte BPS applies exactly. Old v35 clinic battery
-  cold-resumes at (6,8), with both new clinic sprites visible, badge/stage 4,
-  4,000 money, three Potions and wounded level-11 party moves/PP preserved.
+  cold-resumes at (6,8), with badge/stage 4, 4,000 money, three Potions
+  and wounded level-11 party moves/PP preserved. Inspection shows the older
+  save retains generic cached NPC graphics; a named-cast cache refresh is
+  required before this is a successful visual migration.
 - Public stays v35/Site 29 until cast runtime checks and publication succeed.
   No approval score is inferred; all first-slice/full gates remain required.
   No Actions workflow, DB operation or delegated agent ran.
+
+
+Clinic cast resume compatibility correction:
+
+- Initial v36 cold resume exposed native saved object/template graphics caches:
+  map definitions alone did not replace the old woman/gentleman sprites. That
+  diagnostic capture is retained and is not successful visual-migration evidence.
+- Added a data-derived named-cast predicate and bounded pre-sprite resume hook.
+  It refreshes only registered cast graphics in authored SF maps, preserving
+  saved locations, facing, movement state, script/quest/gameplay fields and
+  unrelated, inactive, other-map and player objects. Native sanitizer tests
+  cover selective refresh, idempotence and complete unrelated-state preservation.
+- Corrected draft ece0d2ea4a381395df7a440eb76531f7a7c111764cd2c4cdf06f30e61d9f9c6b
+  compiles normally; 788,390-byte BPS applies exactly. The initial build lacked
+  the native graphics-constant include; the corrected source now includes it.
+  Full local checks pass with the new native resolver test.
+- Actual old v35 clinic battery resumes at (6,8) with both new sprites visibly
+  inspected, and badge/stage 4, money, items, level/moves/PP/HP retained. Native
+  and WASM cold-resume final RGB, 16,467,520 PCM bytes and Flash match. Those
+  trace-only captures do not establish equality for every video frame.
+- Full native/WASM healing route: 336 identical RGB frames, 1,474,700 PCM bytes
+  and identical Flash. Exit/re-entry: 576 identical RGB frames, 2,528,064 PCM
+  bytes and identical Flash, ending (6,12) with original clinic NPCs. HP/PP
+  refresh and all earned progression fields remain correct. Comparison receipts
+  accompany .tools/benchmarks/clinic-cast-v36-* captures.
+- Updated paired walking review and public publication follow. Public remains
+  v35/Site 29 and approval remains 0/11; no CI workflow or DB operation ran.
