@@ -757,13 +757,13 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302; Site version 29. Original bright clinic joins the brighter office. Both art subsets remain unreviewed; walking is preserved. |
-| Latest local source build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302. Normal compilation/BPS and older-save entry pass; native/WASM entry, healing and exit-return match. Matched clinic art clip is ready; service/save/public checks follow. |
+| Latest local source build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302. Normal compilation/BPS and older-save entry pass; native/WASM entry, healing and exit-return match. Matched clinic art clip is ready; native storage, priced shop and clinic save/cold-resume pass. Release is published; public download/import/resume/export verification passes. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site 28 cartridge download matches v34 target; older native save imports and resumes through title/Continue into the brighter office, then exports byte-identically. Sampled core throughput 60.0–60.5 fps. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
+| Public QA | Site 29 cartridge download matches v35 target; native clinic save imports and resumes through title/Continue into the new clinic, then exports byte-identically. Sampled core throughput 60.0–60.6 fps. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Review the revised brighter office matched clip; continue original clinic, remaining cast/portraits/music and first-slice reviews. Preserve positively reviewed animation. Checks stay local; GitHub Actions stays manual-only. |
+| Next work | Review brighter office and original clinic matched clips; continue remaining named cast/portraits, original music and first-slice reviews. Preserve positively reviewed animation. Checks stay local; GitHub Actions stays manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3235,3 +3235,23 @@ Clinic services and public release:
   follow. Sign-in still awaits the user's login. Full-domain approvals stay
   0/11; existing office review remains pending. No CI workflow or DB operation
   ran; latest Actions inventory remains run 37731870689 from 05:20:22Z.
+
+
+Clinic public hands-on verification:
+
+- Site 29 actual cartridge download sf-mini-monsters (12).gba is 16,777,216
+  bytes and matches v35 target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302.
+- Explicit native clinic battery import reaches title/Continue and visibly
+  resumes the original clinic at (6,8). Public screenshot and structured receipt:
+  .tools/browser-review/public-v35-clinic.{png,json}.
+- Public Save backup sf-mini-monsters (5).sav preserves the imported native
+  battery byte-for-byte: 131,072 bytes, SHA256
+  01536628638451d12541c2cdfe37972cc069bd94fbe9b6a5525b4716ee37dedc.
+  The same battery already passed native cold resume. This checkpoint is not
+  completion of the ten final consecutive campaign round trips.
+- Sampled web core throughput 60.0–60.6 fps is not the deadline/input/audio
+  gate. The clinic art/readability 0–4 subset review is requested and pending.
+  Existing office review and all full-domain/system/campaign gates stay open.
+- Original clinic source and exact built-in prompt are checked in. Source/
+  release commits are pushed; no new Actions runs or DB operations occurred.
+  Next weakest first-slice work is remaining named cast/portraits and music.
