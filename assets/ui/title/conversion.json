@@ -1,0 +1,81 @@
+{
+  "source_size": [
+    1774,
+    887
+  ],
+  "quality_approval": "pending",
+  "assets": [
+    {
+      "name": "logo",
+      "panel": [
+        0,
+        0,
+        1018,
+        887
+      ],
+      "alpha_bounds": [
+        61,
+        314,
+        975,
+        556
+      ],
+      "native_size": [
+        256,
+        64
+      ],
+      "lettering_size": [
+        180,
+        48
+      ],
+      "palette_entries": 16,
+      "macro_tiles": [
+        32,
+        8
+      ],
+      "placement": [
+        1,
+        8
+      ],
+      "files": {
+        "logo.8bpp": "b25689942c6b1a98b99ad8135728cc660b39cc29af6d5812462ea25547aceb17",
+        "logo.gbapal": "9459d334bf1901d78e886f679bedc7a3d2aee86871beb6d94215d7ee0bc3cd18"
+      }
+    },
+    {
+      "name": "subtitle",
+      "panel": [
+        1018,
+        0,
+        1774,
+        887
+      ],
+      "alpha_bounds": [
+        43,
+        445,
+        695,
+        520
+      ],
+      "native_size": [
+        128,
+        32
+      ],
+      "lettering_size": [
+        120,
+        14
+      ],
+      "palette_entries": 16,
+      "macro_tiles": [
+        8,
+        4
+      ],
+      "placement": [
+        4,
+        9
+      ],
+      "files": {
+        "subtitle.8bpp": "4b3f11a96131354831fbed0741f439151673faf9e69dcbfabccf6d9f3647e46e",
+        "subtitle.gbapal": "99ac196789eba5ca0b98104dda5161cae2c885968dff899ffa8ee66b2812761f"
+      }
+    }
+  ]
+}
