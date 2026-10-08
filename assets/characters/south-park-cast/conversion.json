@@ -1,0 +1,178 @@
+{
+  "characters": [
+    {
+      "slug": "justine-moore",
+      "name": "Justine Moore",
+      "symbol": "SFJustineMoore",
+      "graphics": "OBJ_EVENT_GFX_SF_JUSTINE_MOORE",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_WOOPER_DOLL",
+      "script": "SF_JustineClinic",
+      "map": "services.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          54,
+          77,
+          283,
+          448
+        ],
+        [
+          394,
+          77,
+          624,
+          448
+        ],
+        [
+          743,
+          77,
+          972,
+          448
+        ],
+        [
+          54,
+          575,
+          284,
+          954
+        ],
+        [
+          393,
+          575,
+          623,
+          954
+        ],
+        [
+          738,
+          575,
+          967,
+          954
+        ],
+        [
+          71,
+          1060,
+          289,
+          1444
+        ],
+        [
+          409,
+          1060,
+          625,
+          1444
+        ],
+        [
+          758,
+          1060,
+          973,
+          1444
+        ]
+      ],
+      "common_scale": 0.0625,
+      "files": {
+        "source.png": "311d3b737354763e18c4fa5662edf8cbbca8c39764e74837f53627f32ce627cd",
+        "walk.png": "d1540b90a3f65f9dee54620dd05d7960f5fd50a215a7564a8204d3f4d01ca218",
+        "walk.4bpp": "0d11fb8eb828dc81b4c90ab9be5e0725f2734ecbc3b79c61ee2999c74abc3363",
+        "native-gallery.png": "c667f7dd89126e43d56532a42f9d984112fdd93fe29a4736a32e6d4d901f0492"
+      }
+    },
+    {
+      "slug": "patrick-mckenzie",
+      "name": "Patrick McKenzie",
+      "symbol": "SFPatrickMcKenzie",
+      "graphics": "OBJ_EVENT_GFX_SF_PATRICK_MCKENZIE",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PIKACHU_DOLL",
+      "script": "SF_PatrickShop",
+      "map": "services.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          67,
+          66,
+          269,
+          442
+        ],
+        [
+          406,
+          66,
+          609,
+          442
+        ],
+        [
+          748,
+          66,
+          954,
+          442
+        ],
+        [
+          76,
+          565,
+          276,
+          940
+        ],
+        [
+          416,
+          565,
+          617,
+          940
+        ],
+        [
+          758,
+          565,
+          958,
+          940
+        ],
+        [
+          61,
+          1056,
+          276,
+          1447
+        ],
+        [
+          401,
+          1056,
+          618,
+          1447
+        ],
+        [
+          750,
+          1056,
+          965,
+          1447
+        ]
+      ],
+      "common_scale": 0.061381074168797956,
+      "files": {
+        "source.png": "78029e441459002473b2f643ac9628d3108087ea50642d467c88675424d20050",
+        "walk.png": "bbf94b318d14c0315f671d26f02c6d044c500af0e1c79755e6be2e3f15f21752",
+        "walk.4bpp": "c29a2ff5f349b0fb5f8c14e79e891221b18da4bba67b19f450ebe924c5dc8bb6",
+        "native-gallery.png": "30c7b4ccb7d3d42c85aab3675de8f0913c7f2cc210bcfd667e996938e2bb08ff"
+      }
+    }
+  ],
+  "frames_per_character": 9,
+  "native_order": [
+    0,
+    3,
+    6,
+    1,
+    2,
+    4,
+    5,
+    7,
+    8
+  ],
+  "native_frame_size": [
+    16,
+    32
+  ],
+  "feet_baseline": 30,
+  "east_view": "native horizontal flip of original west frames",
+  "palette_tag": "0x1126",
+  "palette_slot": "PALSLOT_NPC_SPECIAL",
+  "palette_sha256": "2ebd0b851507a271fb7841b4c78cd0292e158d10f15ac5f334177a1f8be03558",
+  "quality_approval": "pending"
+}

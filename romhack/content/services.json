@@ -137,14 +137,14 @@
       "id": 1,
       "x": 6,
       "y": 4,
-      "graphics": "OBJ_EVENT_GFX_WOMAN_1",
+      "graphics": "OBJ_EVENT_GFX_SF_JUSTINE_MOORE",
       "script": "SF_JustineClinic"
     },
     {
       "id": 2,
       "x": 9,
       "y": 9,
-      "graphics": "OBJ_EVENT_GFX_GENTLEMAN",
+      "graphics": "OBJ_EVENT_GFX_SF_PATRICK_MCKENZIE",
       "script": "SF_PatrickShop"
     }
   ],

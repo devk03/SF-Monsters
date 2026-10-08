@@ -1,0 +1,28 @@
+{
+  "characters": [
+    {
+      "slug": "justine-moore",
+      "name": "Justine Moore",
+      "symbol": "SFJustineMoore",
+      "graphics": "OBJ_EVENT_GFX_SF_JUSTINE_MOORE",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_WOOPER_DOLL",
+      "script": "SF_JustineClinic",
+      "map": "services.json"
+    },
+    {
+      "slug": "patrick-mckenzie",
+      "name": "Patrick McKenzie",
+      "symbol": "SFPatrickMcKenzie",
+      "graphics": "OBJ_EVENT_GFX_SF_PATRICK_MCKENZIE",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PIKACHU_DOLL",
+      "script": "SF_PatrickShop",
+      "map": "services.json"
+    }
+  ],
+  "outfits": "Fictional game costumes; clinic roles and dialogue are invented.",
+  "source_basis": [
+    "https://a16z.com/author/justine-moore/",
+    "https://www.kalzumeus.com/about/",
+    "https://businessofsoftware.org/talks/speakers/patrick-mckenzie/"
+  ]
+}

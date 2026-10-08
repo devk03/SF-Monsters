@@ -1,6 +1,7 @@
 # Real-person cast research
 
 Research date: October 7, 2026.
+Clinic sprite reference refresh: October 8, 2026.
 Status: first-pass public-persona research and proposed fictional casting.
 
 ## Direction
@@ -104,6 +105,33 @@ Sources establish the public basis, not the invented game role.
 - Patrick McKenzie: https://www.kalzumeus.com/about/
 
 ## Research limitations and next pass
+
+### Implemented clinic sprite candidates
+
+Justine Moore's identity and public AI/creative-tool themes are established by
+her [a16z profile](https://a16z.com/author/justine-moore/). Three public work samples:
+[AI avatars](https://a16z.com/ai-avatars/),
+[Export Your Brain](https://a16z.com/export-your-brain-with-ai/), and
+[AI companions](https://a16z.com/its-not-a-computer-its-a-companion/).
+Her official portrait was inspected as a visual reference; it is not copied
+into game assets. The aqua outfit and clinic volunteer role are invented.
+
+Patrick McKenzie identifies himself as patio11 on his
+[own about page](https://www.kalzumeus.com/about/). Public work samples:
+[his career account](https://www.kalzumeus.com/start-here-if-youre-new/),
+[his talk on engineering and sales](https://businessofsoftware.org/talks/building-things-to-help-you-sell-the-things-you-build-patrick-mckenzie/), and
+[his payments-infrastructure essay](https://www.bitsaboutmoney.com/archive/regulation-e/).
+His [conference portrait](https://businessofsoftware.org/talks/speakers/patrick-mckenzie/)
+was inspected for hair/glasses reference. The red outfit, shop placement,
+dialogue and game actions are fictional. That older speaker biography is used
+for the portrait, not as evidence of his current role or SF residence.
+
+Original nine-frame field atlases and exact built-in imagegen prompts live in
+assets/characters/south-park-cast. Native size is 16x32; east mirrors west.
+Likeness, pixel cleanup and matched in-game approval remain pending. These
+sources support public identity/themes; a complete meme chronology is not claimed.
+
+### Remaining cast research
 
 Direct X profile fetches for the user-specified accounts failed. Jonathan's
 own site confirms the requested handle. Independent coverage identifies

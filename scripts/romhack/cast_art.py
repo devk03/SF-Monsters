@@ -12,10 +12,13 @@ from title_creature import pack4
 ASSET = 'assets/characters/cognition-cast'
 ORDER = (0, 3, 6, 1, 2, 4, 5, 7, 8)
 TAG = 'OBJ_EVENT_PAL_TAG_SF_COGNITION_CAST'
+GROUPS = ((ASSET, 'SFCognitionCast', TAG, '0x1125'),
+          ('assets/characters/south-park-cast', 'SFSouthParkCast',
+           'OBJ_EVENT_PAL_TAG_SF_SOUTH_PARK_CAST', '0x1126'))
 
 
-def catalog(root):
-    entries = json.loads((root / ASSET / 'cast.json').read_text())['characters']
+def catalog(root, asset=ASSET):
+    entries = json.loads((root / asset / 'cast.json').read_text())['characters']
     for field in ('slug', 'symbol', 'graphics', 'reserved_slot', 'script'):
         values = [entry[field] for entry in entries]
         if len(values) != len(set(values)):
@@ -67,11 +70,11 @@ def native_frames(image, mask, boxes, colors):
     return frames, scale
 
 
-def encode_cast(root):
+def encode_cast(root, asset=ASSET, palette_tag='0x1125'):
     from PIL import Image
-    directory = root / ASSET
+    directory = root / asset
     prepared, pixels = [], []
-    for entry in catalog(root):
+    for entry in catalog(root, asset):
         image = Image.open(directory / entry['slug'] / 'source.png').convert('RGBA')
         mask, boxes = source_cells(image)
         for box in boxes:
@@ -108,15 +111,15 @@ def encode_cast(root):
     metadata = {'characters': receipts, 'frames_per_character': 9, 'native_order': ORDER,
                 'native_frame_size': [16, 32], 'feet_baseline': 30,
                 'east_view': 'native horizontal flip of original west frames',
-                'palette_tag': '0x1125', 'palette_slot': 'PALSLOT_NPC_SPECIAL',
+                'palette_tag': palette_tag, 'palette_slot': 'PALSLOT_NPC_SPECIAL',
                 'palette_sha256': hashlib.sha256(raw_palette).hexdigest(), 'quality_approval': 'pending'}
     (directory / 'conversion.json').write_text(json.dumps(metadata, indent=2)+'\n')
     return metadata
 
 
-def apply_cast(root, emerald, original):
-    directory = root / ASSET
-    entries = catalog(root)
+def verified_cast(root, asset):
+    directory = root / asset
+    entries = catalog(root, asset)
     metadata = json.loads((directory / 'conversion.json').read_text())
     if [dict((key, e[key]) for key in entries[0]) for e in metadata['characters']] != entries:
         raise ValueError('Cast registry changed after native conversion.')
@@ -128,6 +131,29 @@ def apply_cast(root, emerald, original):
                 raise ValueError('Regenerate native cast after changing asset: '+entry['slug'])
         if len((directory/entry['slug']/'walk.4bpp').read_bytes()) != 9*256:
             raise ValueError('Cast graphics allocation must be nine native frames.')
+    return entries, metadata
+
+
+def registered_groups(root):
+    groups = [(asset, symbol, tag, value, *verified_cast(root, asset))
+              for asset, symbol, tag, value in GROUPS]
+    for field in ('slug', 'symbol', 'graphics', 'reserved_slot', 'script'):
+        values = [entry[field] for *_, entries, metadata in groups for entry in entries]
+        if len(values) != len(set(values)):
+            raise ValueError('Cast groups collide on '+field)
+    for asset, symbol, tag, value, entries, metadata in groups:
+        if metadata['palette_tag'] != value:
+            raise ValueError('Cast group palette tag differs from its receipt.')
+        for entry in entries:
+            plan = json.loads((root/'romhack/content'/entry['map']).read_text())
+            owners = [npc for npc in plan['npcs'] if npc['script']==entry['script']]
+            if len(owners)!=1 or owners[0]['graphics']!=entry['graphics']:
+                raise ValueError('Cast event must use its registered graphics: '+entry['slug'])
+    return groups
+
+
+def apply_cast(root, emerald, original):
+    groups = registered_groups(root)
     paths = ['include/constants/event_objects.h', 'include/graphics.h',
              'src/data/object_events/object_event_graphics.h',
              'src/data/object_events/object_event_pic_tables.h',
@@ -138,45 +164,50 @@ def apply_cast(root, emerald, original):
     # These two headers have no earlier overlay owner. Rebuild them from the
     # pinned source; other headers must retain the courier/map additions.
     pictures, pointers = original(paths[3]), original(paths[5])
-    if TAG in movement or '0x1125' in movement:
-        raise ValueError('Dedicated SF cast palette tag is already occupied.')
-    palette_dest = 'graphics/object_events/palettes/sf_cognition_cast.gbapal'
-    shutil.copy2(directory/'cast.gbapal', emerald/palette_dest)
-    graphics += '\nconst u16 gObjectEventPal_SFCognitionCast[] = INCBIN_U16("'+palette_dest+'");\n'
-    header += '\nextern const u16 gObjectEventPal_SFCognitionCast[];\n'
-    for entry in entries:
-        symbol, alias, slot = entry['symbol'], entry['graphics'], entry['reserved_slot']
-        constants += '\n#define '+alias+' '+slot+'\n'
-        target = 'graphics/object_events/pics/people/sf_'+entry['slug'].replace('-', '_')+'.4bpp'
-        shutil.copy2(directory/entry['slug']/'walk.4bpp', emerald/target)
-        graphics += 'const u32 gObjectEventPic_'+symbol+'[] = INCBIN_U32("'+target+'");\n'
-        pictures += '\nstatic const struct SpriteFrameImage sPicTable_'+symbol+'[] = {\n'
-        pictures += ''.join('    overworld_frame(gObjectEventPic_'+symbol+', 2, 4, '+str(i)+'),\n' for i in range(9))+'};\n'
-        info += '\nconst struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_'+symbol+' = {\n'
-        fields = {'tileTag':'TAG_NONE', 'paletteTag':TAG, 'reflectionPaletteTag':'OBJ_EVENT_PAL_TAG_NONE',
-                  'size':'256', 'width':'16', 'height':'32', 'paletteSlot':'PALSLOT_NPC_SPECIAL',
-                  'shadowSize':'SHADOW_SIZE_M', 'inanimate':'FALSE', 'disableReflectionPaletteLoad':'FALSE',
-                  'tracks':'TRACKS_FOOT', 'oam':'&gObjectEventBaseOam_16x32',
-                  'subspriteTables':'sOamTables_16x32', 'anims':'sAnimTable_Standard',
-                  'images':'sPicTable_'+symbol, 'affineAnims':'gDummySpriteAffineAnimTable'}
-        info += ''.join('    .'+k+' = '+v+',\n' for k,v in fields.items())+'};\n'
-        pointers = 'extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_'+symbol+';\n'+pointers
-        pointers, count = re.subn(r'(\['+slot+r'\]\s*=\s*)&\w+,',
-                                 r'\1&gObjectEventGraphicsInfo_'+symbol+',', pointers)
-        if count != 1:
-            raise ValueError('Reserved cast slot must exist exactly once.')
-    movement = insert_once(movement, '#define OBJ_EVENT_PAL_TAG_NONE', '#define '+TAG+' 0x1125\n')
-    anchor = 'static const struct SpritePalette sObjectEventSpritePalettes[] = {\n'
-    movement = insert_once(movement, anchor, '').replace(anchor, anchor+
-                '    {gObjectEventPal_SFCognitionCast, '+TAG+'},\n', 1)
-    anchor = 'static const struct PairedPalettes sSpecialObjectReflectionPaletteSets[] = {\n'
-    reflection = 'static const u16 sReflectionPaletteTags_SFCognitionCast[] = {\n    '+', '.join([TAG]*4)+',\n};\n\n'
-    movement = insert_once(movement, anchor, reflection).replace(anchor, anchor+
-                '    {'+TAG+', sReflectionPaletteTags_SFCognitionCast},\n', 1)
+    generated = []
+    for asset, palette_symbol, tag, tag_value, entries, metadata in groups:
+        directory = root / asset
+        if tag in movement or tag_value in movement:
+            raise ValueError('Dedicated SF cast palette tag is already occupied.')
+        palette_dest = 'graphics/object_events/palettes/sf_'+Path(asset).name.replace('-', '_')+'.gbapal'
+        shutil.copy2(directory/'cast.gbapal', emerald/palette_dest)
+        graphics += '\nconst u16 gObjectEventPal_'+palette_symbol+'[] = INCBIN_U16("'+palette_dest+'");\n'
+        header += '\nextern const u16 gObjectEventPal_'+palette_symbol+'[];\n'
+        for entry in entries:
+            symbol, alias, slot = entry['symbol'], entry['graphics'], entry['reserved_slot']
+            constants += '\n#define '+alias+' '+slot+'\n'
+            target = 'graphics/object_events/pics/people/sf_'+entry['slug'].replace('-', '_')+'.4bpp'
+            shutil.copy2(directory/entry['slug']/'walk.4bpp', emerald/target)
+            graphics += 'const u32 gObjectEventPic_'+symbol+'[] = INCBIN_U32("'+target+'");\n'
+            pictures += '\nstatic const struct SpriteFrameImage sPicTable_'+symbol+'[] = {\n'
+            pictures += ''.join('    overworld_frame(gObjectEventPic_'+symbol+', 2, 4, '+str(i)+'),\n' for i in range(9))+'};\n'
+            info += '\nconst struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_'+symbol+' = {\n'
+            fields = {'tileTag':'TAG_NONE', 'paletteTag':tag, 'reflectionPaletteTag':'OBJ_EVENT_PAL_TAG_NONE',
+                      'size':'256', 'width':'16', 'height':'32', 'paletteSlot':'PALSLOT_NPC_SPECIAL',
+                      'shadowSize':'SHADOW_SIZE_M', 'inanimate':'FALSE', 'disableReflectionPaletteLoad':'FALSE',
+                      'tracks':'TRACKS_FOOT', 'oam':'&gObjectEventBaseOam_16x32',
+                      'subspriteTables':'sOamTables_16x32', 'anims':'sAnimTable_Standard',
+                      'images':'sPicTable_'+symbol, 'affineAnims':'gDummySpriteAffineAnimTable'}
+            info += ''.join('    .'+k+' = '+v+',\n' for k,v in fields.items())+'};\n'
+            pointers = 'extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_'+symbol+';\n'+pointers
+            pointers, count = re.subn(r'(\['+slot+r'\]\s*=\s*)&\w+,',
+                                     r'\1&gObjectEventGraphicsInfo_'+symbol+',', pointers)
+            if count != 1:
+                raise ValueError('Reserved cast slot must exist exactly once.')
+        movement = insert_once(movement, '#define OBJ_EVENT_PAL_TAG_NONE', '#define '+tag+' '+tag_value+'\n')
+        anchor = 'static const struct SpritePalette sObjectEventSpritePalettes[] = {\n'
+        movement = insert_once(movement, anchor, '').replace(anchor, anchor+
+                    '    {gObjectEventPal_'+palette_symbol+', '+tag+'},\n', 1)
+        anchor = 'static const struct PairedPalettes sSpecialObjectReflectionPaletteSets[] = {\n'
+        reflection = 'static const u16 sReflectionPaletteTags_'+palette_symbol+'[] = {\n    '+', '.join([tag]*4)+',\n};\n\n'
+        movement = insert_once(movement, anchor, reflection).replace(anchor, anchor+
+                    '    {'+tag+', sReflectionPaletteTags_'+palette_symbol+'},\n', 1)
+        generated += [palette_dest]+['graphics/object_events/pics/people/sf_'+e['slug'].replace('-', '_')+'.4bpp' for e in entries]
     for path, source in zip(paths, (constants, header, graphics, pictures, info, pointers, movement)):
         (emerald/path).write_text(source)
-    return paths+[palette_dest]+['graphics/object_events/pics/people/sf_'+e['slug'].replace('-', '_')+'.4bpp' for e in entries]
+    return paths+generated
 
 
 if __name__ == '__main__':
-    encode_cast(Path(__file__).resolve().parents[2])
+    for asset, symbol, tag, value in GROUPS:
+        encode_cast(Path(__file__).resolve().parents[2], asset, value)

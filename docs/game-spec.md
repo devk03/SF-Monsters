@@ -3255,3 +3255,31 @@ Clinic public hands-on verification:
 - Original clinic source and exact built-in prompt are checked in. Source/
   release commits are pushed; no new Actions runs or DB operations occurred.
   Next weakest first-slice work is remaining named cast/portraits and music.
+
+
+Original clinic cast implementation checkpoint:
+
+- Added original Justine Moore and Patrick McKenzie nine-frame field atlases
+  in assets/characters/south-park-cast, with exact built-in prompts and inspected
+  public portrait references. Costumes/clinic roles remain fictional; refreshed
+  primary identity/work sources are in cast-research.md. Likeness and native
+  pixel-art approval are pending. East mirrors authored west frames.
+- Generalized the existing converter to independent cast groups. The clinic
+  pair share palette tag 0x1126; Cognition retains 0x1125 and all existing atlas/
+  palette/conversion files byte-unchanged. Five native characters retain their
+  16x32, nine-frame, 30-pixel feet-baseline and four-bit allocation contracts.
+- The native installer resets shared tables only once, then preserves both
+  groups. It rejects cross-group ID/slot collisions, stale palette/asset
+  receipts and a registered character left on generic map graphics. Services
+  now use the two new graphics IDs; scripts, locations, collisions, saves and
+  courier walking resources are unchanged.
+- All local checks pass; cast suite now covers all five independent pose
+  cycles, independent nibble/tile decoding, cross-group native-slot collisions
+  and actual service-event wiring. v36 draft target
+  d3e28f36df0db5b3f03ffd16da45a33d02e785a0e2848afc4a22f84dede40c75
+  compiles normally; 786,365-byte BPS applies exactly. Old v35 clinic battery
+  cold-resumes at (6,8), with both new clinic sprites visible, badge/stage 4,
+  4,000 money, three Potions and wounded level-11 party moves/PP preserved.
+- Public stays v35/Site 29 until cast runtime checks and publication succeed.
+  No approval score is inferred; all first-slice/full gates remain required.
+  No Actions workflow, DB operation or delegated agent ran.

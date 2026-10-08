@@ -178,6 +178,8 @@ def main():
         'assets/tiles/courier-apartment/conversion.json').read_text())
     manifest['cognition_cast'] = json.loads((ROOT /
         'assets/characters/cognition-cast/conversion.json').read_text())
+    manifest['south_park_cast'] = json.loads((ROOT /
+        'assets/characters/south-park-cast/conversion.json').read_text())
     office_data = office_resources(ROOT)
     manifest['cognition_office'] = {'native_tiles':len(office_data[0])//32,
         'metatiles':len(office_data[1])//16, 'quality_approval':'pending',

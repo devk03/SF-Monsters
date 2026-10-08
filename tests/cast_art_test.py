@@ -9,16 +9,19 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
-from cast_art import apply_cast, source_cells
+from cast_art import apply_cast, source_cells, GROUPS, registered_groups, verified_cast
 
 
 class NativeCast(unittest.TestCase):
-    def test_all_three_people_have_distinct_native_pose_cycles_and_one_palette(self):
-        directory = ROOT / 'assets/characters/cognition-cast'
-        metadata = json.loads((directory/'conversion.json').read_text())
-        native_colors = struct.unpack('<16H', (directory/'cast.gbapal').read_bytes())
+    def test_all_five_people_have_distinct_native_pose_cycles_and_group_palettes(self):
+        records = []
+        for asset, symbol, tag, value in GROUPS:
+            directory = ROOT / asset
+            metadata = json.loads((directory/'conversion.json').read_text())
+            records.extend((directory,entry) for entry in metadata['characters'])
         identities = []
-        for entry in metadata['characters']:
+        for directory,entry in records:
+            native_colors = struct.unpack('<16H', (directory/'cast.gbapal').read_bytes())
             path = directory/entry['slug']
             image = Image.open(path/'walk.png')
             self.assertEqual(image.size, (144, 32))
@@ -48,7 +51,32 @@ class NativeCast(unittest.TestCase):
                 unpacked.append(bytes(decoded))
             self.assertEqual(unpacked, frames)
             identities.append(frames[0])
-        self.assertEqual(len(set(identities)), 3)
+        self.assertEqual(len(set(identities)), 5)
+
+    def test_a_new_cast_group_cannot_replace_an_existing_native_graphics_slot(self):
+        from copy import deepcopy
+        from unittest.mock import patch
+        prepared = {asset:deepcopy(verified_cast(ROOT,asset)) for asset,*_ in GROUPS}
+        existing = prepared[GROUPS[0][0]][0][0]
+        additional = prepared[GROUPS[1][0]][0][0]
+        additional['reserved_slot'] = existing['reserved_slot']
+        with patch('cast_art.verified_cast',side_effect=lambda root,asset:prepared[asset]):
+            with self.assertRaisesRegex(ValueError,'collide on reserved_slot'):
+                registered_groups(ROOT)
+
+    def test_registered_character_must_be_used_by_its_actual_service_event(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            (root/'assets').symlink_to(ROOT/'assets',target_is_directory=True)
+            content=root/'romhack/content';content.mkdir(parents=True)
+            for name in ('cognition.json','services.json'):
+                shutil.copy2(ROOT/'romhack/content'/name,content/name)
+            plan=json.loads((content/'services.json').read_text())
+            plan['npcs'][0]['graphics']='OBJ_EVENT_GFX_WOMAN_1'
+            (content/'services.json').write_text(json.dumps(plan))
+            with self.assertRaisesRegex(ValueError,'registered graphics: justine-moore'):
+                registered_groups(root)
 
     def test_missing_or_collapsed_pose_rows_are_rejected_before_compilation(self):
         for rows, columns in ((2,3),(3,2),(3,4)):
