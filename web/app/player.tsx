@@ -257,7 +257,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
         {!legacy && <a className="rom-link" href="/patch/sf-mini-monsters.bps" download>Download SF patch</a>}
         <a className="source-link" href="https://github.com/devk03/SF-Monsters" target="_blank" rel="noreferrer">Fork the game on GitHub</a>
         <p className="account-note">{account ? `Signed in as ${account.name}.` : 'Guest play is available. Sign in for a separate local save slot.'}</p>
-        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Preview: BrinePup, SproutSlug and CinderCoy join the Sunset adventure and Cognition’s first gym. Wild creatures, cast art and music still use placeholders. The full 16-neighborhood campaign is unfinished.'}</p>
+        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Preview: three original starter lines and TrolleyKit, PuddlePrig and HushMoth join Sunset and Cognition’s first gym. Art and audio await review; other creatures, cast, tiles and music remain unfinished. The full 16-neighborhood campaign is unfinished.'}</p>
         {!legacy && <a className="source-link" href="/prototype">Play the earlier courier prototype</a>}
       </aside>
     </div>

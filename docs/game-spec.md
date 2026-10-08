@@ -763,7 +763,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Next checkpoint: additional starter/team strategies, original wild creatures,
   map/cast/audio/interface polish and first-slice comparison reviews. The earned
   Fire route now verifies the first gym victory, reward, re-entry and save.
-- Public preview: version 0.0.14 includes three original starter/call candidates,
+- Public preview: version 0.0.15 includes twelve original creature/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
@@ -1825,3 +1825,27 @@ Original gym-creature integration checkpoint:
   simplify intended colors. This does not increase finished-monster counts or any
   of the 11 quality approvals. Full campaign, remaining systems and review gates
   remain required by section 15.1.
+
+Original gym roster — gameplay and compatibility evidence:
+
+- Controller-only native play from the real earned Walden checkpoint completes
+  Steven, buys supplies and defeats Scott's TrolleyKit/PuddlePrig/HushMoth roster.
+  CinderCoy finishes at level 11, 23/31 HP, with Leer/Growl/Ember/Quick Attack;
+  two Potions and 4,000 money remain. Build Badge, gym victory/stage 4 and reward
+  flags are earned through battle. This is one Fire strategy from an earned save,
+  not three fresh campaigns or all starter/team balance solutions.
+- The full 77,908-frame route matches final RGB, exported Flash and all 85,484,552
+  raw stereo sample pairs in native mGBA 0.10.5 and pinned WebAssembly. A separate
+  2,464-frame cold resume of the actual older post-badge battery preserves its
+  position 8,4, 21/31 HP, moves/PP, items, money and flags; it matches RGB/Flash
+  and all 2,703,624 stereo pairs. Evidence: .tools/benchmarks/original-gym-
+  {earned-route,old-save-resume}. Real browser latency/playback remains unproven.
+- Native battle captures show all three original fronts, names and calls through
+  the actual gym encounter. Separate back/icon files satisfy encoding contracts;
+  captured originals still need outline/pixel cleanup and icon-palette review.
+  Evidence: original-gym-{trolleykit-settled,puddleprig-presentation,hushmoth-revealed}.
+- Normal 0.0.15-wild-preview BPS is 703,494 bytes, SHA-256
+  3694981fc659417334795e7e4cfb4c69d39bc49d2432cafe4335afd197d1892e.
+  Native Flips and the browser decoder reproduce the compiled target exactly.
+  Source/content/audio checks and Site typecheck/production build pass.
+  Deployment is in progress; all 11 quality approvals remain pending.
