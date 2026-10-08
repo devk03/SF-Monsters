@@ -6,7 +6,7 @@ Its stable native slot is `LOTAD` so supported older saves retain their species
 identity. Content revision 6 replaces the default stock name, stats and presentation;
 custom nicknames, experience, held items and existing moves/PP remain intact.
 No evolution is enabled until an original target and its acquisition rules are authored.
-Gen III mechanics remain in force; Sturdy protects against OHKO moves in this engine.
+Gen III mechanics remain in force, including the type-based physical/special split.
 
 `source-v1.png` is the built-in imagegen source sheet. `prompt.txt` preserves the
 exact generation prompt; `atlas-layout.json` records the actual panels. Distinct

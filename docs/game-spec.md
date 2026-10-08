@@ -1848,4 +1848,16 @@ Original gym roster — gameplay and compatibility evidence:
   3694981fc659417334795e7e4cfb4c69d39bc49d2432cafe4335afd197d1892e.
   Native Flips and the browser decoder reproduce the compiled target exactly.
   Source/content/audio checks and Site typecheck/production build pass.
-  Deployment is in progress; all 11 quality approvals remain pending.
+  All 11 quality approvals remain pending.
+
+- Public Site version 16 deployed successfully with 0.0.15-wild-preview at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site. Site source commit
+  1d28c4b03e9f6e23b7372e671f1ad01f1c17c261; deployment
+  appgdep_6ac7200d40288191800967c357d4fd5b. Archive inspection verifies the
+  current normal patch and excludes inherited full ROMs and private fixtures.
+  The hosting service reports 84 packaged files; raw inspection counts 85
+  non-AppleDouble entries. No final parity or full-campaign approval is implied.
+- Next weakest areas: deliberate native pixel cleanup, six remaining slice
+  creature presentations, original cast/tiles/indoor and trainer music, alternate
+  starter/team strategies and matched user comparison clips. The full section
+  15 objective stays active; publishing this preview is not completion.
