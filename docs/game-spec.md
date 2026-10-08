@@ -2974,3 +2974,22 @@ Cognition cast public hands-on verification:
 - Signed-in QA and existing user comparison reviews remain pending. All 11 full
   domain approvals remain outstanding. Next work follows the current table;
   the complete SF campaign and every section 15 gate stay required.
+
+
+Browser import investigation, first checkpoint:
+
+- Previous goal turn made source/art/publication progress (d4d61e6 and prior
+  cast commits), with actual downloaded-ROM and native/public save evidence.
+- Reimporting cast-room-saved into the running public Site 25 advances through
+  the native copyright/intro normally without Pause/Resume. The document reports
+  visible; no repeat white-screen stall is proven in this warm session. The
+  earlier first-load observation remains unresolved, not silently cleared.
+- Corrected Emerald save-restoration prompts: press Start at the title screen,
+  then choose Continue. The prototype's existing A prompt stays intact.
+  Added a DOM-only diagnostic data-emulator-fps on the canvas from the SDK's
+  existing frame event. It reports executed core frames/second; it does not
+  expose a new player-facing panel or establish the game deadline/input gates.
+- TypeScript validation passes. A public build with the diagnostic/prompt change
+  is being prepared so fresh-load/import frame pacing can be measured through
+  the real browser, rather than inferred from a still screenshot. No ROM bytes,
+  save format, DB state or quality approval changed. No GitHub workflow ran.

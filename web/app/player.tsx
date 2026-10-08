@@ -114,6 +114,11 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
         lastSequence.current = -1;
         instance = await window.sfMiniMonstersLoad!({ canvasEl: canvas.current, assets: { rom },
           jsUrl: '/emulator/mgba.js', wasmUrl: '/emulator/mgba.wasm', persist: null,
+          onEvent: (event: {type: string; fps?: number}) => {
+            if (event.type === 'frame' && Number.isFinite(event.fps) && canvas.current) {
+              canvas.current.dataset.emulatorFps = event.fps!.toFixed(1);
+            }
+          },
           storageNamespace: storageKey, options: { system: 'gba', idleOptimization: 'ignore', volume: mutedRef.current ? 0 : 0.35, logLevel: 'error' } });
         if (disposed) { instance?.destroy(); return; }
         engine.current = instance;
@@ -122,7 +127,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
           if (saved) {
             const bytes = decodeSave(saved); validateBattery(bytes);
             instance!.importBattery(bytes); setProgress(batteryProgress(bytes));
-            setNotice('Your game is ready to continue. Press A.');
+            setNotice(legacy ? 'Your game is ready to continue. Press A.' : 'Save restored. Press Start at the title screen, then choose Continue.');
           } else setNotice(legacy ? 'Press A to begin. Saves stay on this device.' : 'Press Start, then choose New Game. Save from the in-game menu before downloading a backup.');
         } catch { setNotice('The device save could not be restored. Import a valid backup or start a new delivery.'); }
         instance!.start(); setPhase('ready');
@@ -180,7 +185,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
       setBackupUrl(null);
       localStorage.setItem(storageKey, encodeSave(bytes));
       lastSequence.current = -1; setProgress(batteryProgress(bytes));
-      setNotice('Backup restored. Press A to continue your delivery.');
+      setNotice(legacy ? 'Backup restored. Press A to continue your delivery.' : 'Backup restored. Press Start at the title screen, then choose Continue.');
       if (paused) { engine.current.resume(); setPaused(false); }
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Could not import the save. Your progress was kept.'); }
     if (importInput.current) importInput.current.value = '';
