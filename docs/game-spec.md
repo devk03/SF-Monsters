@@ -2662,3 +2662,31 @@ Coastal terrain publication checkpoint:
   (4,8), with the two-monster party, 3,500 money and three Potions preserved.
   Human art/performance and the full campaign gates stay open; no DB migration,
   audience change, recurring monitor or GitHub workflow was used.
+
+
+Coastal foreground regression and correction:
+
+- The public 0.0.29 screenshot exposed a presentation bug missed in the earlier
+  native image review: opaque coastal ground on BG1 concealed the courier on
+  sand. Equal native/WASM frames and valid saved positions did not prove a
+  visible player. The 0.0.29 candidate is rejected for presentation; its earlier
+  art/core checks do not establish approval. Saved data remains supported.
+- Corrected roads/coastal ground to the native covered layer below field sprites;
+  facades and doors retain their foreground layer. Sunset-only horizontal fog
+  now uses a lighter 3/14 blend so ground artwork remains readable. Fog on other
+  maps retains its original blend. Field collision, encounter behaviors and
+  sprite priority rules are not changed by this rendering correction.
+- New source-format test independently checks ground layers, sand/ocean/grass
+  behaviors and foreground door flags. coastal_scene_check.py validates the
+  documented standing-at-(4,8) beach capture: warm sand plus a visible courier
+  silhouette. It rejects the actual 0.0.29 capture and passes the fixed capture
+  with 132 dark sprite pixels across 23 rows. This detects the known regression;
+  it does not grade art or generalize to arbitrary scenes.
+- Fixed target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505,
+  version 0.0.30-ground-layer-fix-preview, builds normally with exact BPS round
+  trip. terrain-fixed-{native,wasm}-waves match all 720 RGB frames, 3,160,080
+  PCM bytes and Flash; the final visible-courier check passes. Full local checks
+  pass. Walking visibility and replacement public publication follow.
+- No approval was carried forward from the faulty ground rendering. All full
+  quality scores stay unapproved; the full section 15 objective stays active.
+  No GitHub workflow was dispatched.

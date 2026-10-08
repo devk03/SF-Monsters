@@ -157,13 +157,27 @@ void InitTilesetAnim_Petalburg(void)
         if (sfBorder >= 0)
         {
             metatileId = sfBorder;
-            layerType = METATILE_LAYER_TYPE_NORMAL;
+            layerType = METATILE_LAYER_TYPE_COVERED;
         }
     }''')
     camera = camera.replace(draw, 'DrawMetatile(layerType, metatiles + metatileId * NUM_TILES_PER_METATILE, offset);')
     (engine / camera_path).write_text(camera)
     shutil.copy2(root / 'romhack/engine/coastal_border.h', engine / 'src/sf_coastal_border.h')
-    return [path, camera_path]
+    weather_path = 'src/field_weather_effect.c'
+    weather = original(weather_path)
+    weather = weather.replace('#include "global.h"', '#include "global.h"\n#include "constants/maps.h"')
+    blend = '            Weather_SetTargetBlendCoeffs(12, 8, 3);'
+    if weather.count(blend) != 1:
+        raise ValueError('Pinned horizontal fog blend changed; inspect before integrating.')
+    weather = weather.replace(blend, '''        {
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN)
+             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN))
+                Weather_SetTargetBlendCoeffs(3, 14, 3);
+            else
+                Weather_SetTargetBlendCoeffs(12, 8, 3);
+        }''')
+    (engine / weather_path).write_text(weather)
+    return [path, camera_path, weather_path]
 
 
 if __name__ == '__main__':

@@ -176,6 +176,23 @@ def prepare_sunset_tiles(root, emerald, original):
     return [path, header]
 
 
+def owned_field_attributes(original):
+    if len(original) != 288:
+        raise ValueError('Native secondary attributes need 144 sixteen-bit records.')
+    attributes = bytearray(original)
+    # Walkable ground belongs below elevation-three field sprites, on BG2.
+    for index in range(FIRST_ROAD, FIRST_ROAD + 18):
+        struct.pack_into('<H', attributes, index * 2, 0x1000)
+    for index in range(FIRST_TERRAIN, FIRST_TERRAIN + 19):
+        struct.pack_into('<H', attributes, index * 2, 0x1000)
+    for index, behavior in ((1, 0x21), (2, 0x15), (4, 0x02)):
+        struct.pack_into('<H', attributes, (FIRST_TERRAIN + index) * 2, 0x1000 | behavior)
+    # Vertical facades and their animated doors keep the foreground layer.
+    attributes[FIRST_METATILE * 2:(FIRST_METATILE + 25) * 2] = bytes(50)
+    struct.pack_into('<H', attributes, 123 * 2, 0x69)
+    return bytes(attributes)
+
+
 def apply_house_art(root, emerald, target):
     directory = root / ASSET
     metadata = json.loads((directory / 'conversion.json').read_text())
@@ -218,14 +235,7 @@ def apply_house_art(root, emerald, target):
     palette[320:352] = files['house.gbapal']
     palette[352:384] = street_palette
     palette[384:416] = terrain_palette
-    attributes[FIRST_METATILE * 2:(FIRST_METATILE + 25) * 2] = bytes(50)
-    attributes[123 * 2:124 * 2] = struct.pack('<H', 0x69)  # Native animated door; original SF frames.
-    for index in range(FIRST_ROAD, FIRST_ROAD + len(streets)):
-        attributes[index * 2:index * 2 + 2] = attributes[2:4]
-    # Normal ground/rail/sign cells; sand footprints, ocean and encounters stay native.
-    attributes[FIRST_TERRAIN * 2:(FIRST_TERRAIN + 19) * 2] = bytes(38)
-    for index, behavior in ((1, 0x21), (2, 0x15), (4, 0x02)):
-        struct.pack_into('<H', attributes, (FIRST_TERRAIN + index) * 2, behavior)
+    attributes = owned_field_attributes(attributes)
     offset, capacity = bounded_span(addresses, 'LittlerootTown_Layout_Blockdata', 'LittlerootTown_Layout')
     plan = json.loads((root / 'romhack/content/sunset.json').read_text())
     house_tokens = set(''.join(HOUSE_ROWS)) | {'D'}

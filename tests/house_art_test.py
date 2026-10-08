@@ -7,7 +7,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
-from house_art import compose_tiles, remap_houses
+from house_art import compose_tiles, remap_houses, owned_field_attributes
 from maps import encode_layout
 from native_resources import bounded_span
 from street_art import load_streets
@@ -104,6 +104,21 @@ class HouseArt(unittest.TestCase):
         for slot, start in ((62, 752), (63, 756)):
             self.assertEqual(tuple(word & 0x3ff for word in struct.unpack_from('<4H', changed, slot * 16 + 8)),
                              tuple(range(start, start + 4)))
+
+
+    def test_walkable_ground_is_below_player_sprites_without_changing_field_behaviors(self):
+        before = struct.pack('<144H', *([0x2040] * 144))
+        result = struct.unpack('<144H', owned_field_attributes(before))
+        for index in list(range(40, 58)) + list(range(60, 79)):
+            self.assertEqual(result[index] >> 12, 1)
+        self.assertEqual((result[61] & 255, result[62] & 255, result[64] & 255),
+                         (0x21, 0x15, 0x02))
+        self.assertEqual(result[123], 0x69)
+        for index in range(100, 125):
+            self.assertEqual(result[index] >> 12, 0)
+        self.assertEqual(result[80:100], (0x2040,) * 20)
+        with self.assertRaises(ValueError):
+            owned_field_attributes(bytes(286))
 
 
 if __name__ == '__main__':
