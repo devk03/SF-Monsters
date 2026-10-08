@@ -64,11 +64,18 @@ Controls use the pinned engine's character map. Check actual rendered widths too
 allocation safety does not prove that a phrase fits its screen window.
 
 When compilation is unavailable, `python3 scripts/romhack/preview_interface.py
---rom PATH` can make a private text-only draft from the explicitly pinned prior
+--rom PATH` can make a private interface draft from the explicitly pinned prior
 cartridge. It uses the pinned native Flips encoder and verifies reapplication.
 Its manifest explicitly leaves full recompilation unverified; do not publish it
-as a normal release. Both the inherited title and guide-header graphics still
-need original replacements; changing text labels does not finish branding.
+as a normal release. The inherited title and other guide graphics still need
+original replacements; changing individual labels or the header does not finish branding.
+
+The guide-header wordmark source/native conversion is in `assets/ui/field-guide`.
+`interface_graphics.py` maps its ink mask into thirteen central header tiles and
+preserves both outer caps and all unrelated raw tiles. A small host adapter uses
+the pinned engine tool's LZ77 codec. It verifies lossless decoding and refuses a
+compressed replacement larger than its original ELF allocation. Full inherited
+sheets and reconstructed cartridges remain in ignored private storage.
 
 ## Editable SF maps
 

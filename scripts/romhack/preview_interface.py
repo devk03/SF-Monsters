@@ -1,4 +1,4 @@
-"""Private text-only preview; normal release still requires the compiled build."""
+"""Private interface preview; normal release still requires the compiled build."""
 import argparse
 import hashlib
 import json
@@ -7,6 +7,7 @@ import subprocess
 import uuid
 from build_probe import ROOT, EMERALD, BASE, BASE_HASH, FLIPS, FLIPS_REVISION
 from interface_text import apply_interface_text
+from interface_graphics import apply_interface_graphics
 
 
 def main():
@@ -31,7 +32,9 @@ def main():
     target = candidate / 'target.gba'
     shutil.copy2(source, target)
     receipt = apply_interface_text(ROOT, EMERALD, target)
-    output = ROOT / '.tools/romhack-drafts' / content['version'] / receipt['target_sha256']
+    graphics_receipt = apply_interface_graphics(ROOT, EMERALD, target)
+    target_hash = hashlib.sha256(target.read_bytes()).hexdigest()
+    output = ROOT / '.tools/romhack-drafts' / content['version'] / target_hash
     if output.exists():
         parser.error('Existing evidence is preserved; choose a new content revision.')
     output.mkdir(parents=True)
@@ -43,10 +46,11 @@ def main():
     if verification.read_bytes() != target.read_bytes():
         raise ValueError('Text preview patch failed byte-identical reapplication.')
     manifest = {'version': content['version'], 'base_sha256': BASE_HASH,
-        'target_sha256': receipt['target_sha256'], 'target_bytes': target.stat().st_size,
+        'target_sha256': target_hash, 'target_bytes': target.stat().st_size,
         'patch_sha256': hashlib.sha256(patch.read_bytes()).hexdigest(), 'patch_bytes': patch.stat().st_size,
-        'game_code': 'BPEE', 'status': 'Private text-only preview; full compilation remains pending.',
+        'game_code': 'BPEE', 'status': 'Private interface preview; full compilation remains pending.',
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending', 'interface_text': receipt,
+        'interface_graphics': graphics_receipt,
         'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         'source_worktree_dirty': True, 'full_rebuild_verified': False}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')

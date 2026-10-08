@@ -2068,3 +2068,30 @@ Original native interface labels — private preview checkpoint:
   It shows the Start menu, caught-party selection, summary, stats and moves.
   This private text preview remains unreviewed; it is not an Emerald comparison
   suite or a replacement for the pending normal rebuild.
+
+Original Field Guide header — private native-art checkpoint:
+
+- Generated an original transparent FIELD GUIDE wordmark with the built-in
+  image tool. Its exact prompt, source, two-color native conversion and binary
+  ink mask are under assets/ui/field-guide. No inherited menu sheet is published.
+  Native rendering is readable at 240x160; typography approval remains pending.
+- The graphics overlay clears thirteen center header tiles, places the 80x8
+  wordmark at the pill's center, and preserves both caps and every unrelated raw
+  tile. The first preview retained a column of the old final letter; rendered
+  inspection exposed it and the corrected range removes that residue.
+- The pinned native LZ77 codec reencodes the complete 8,192-byte resource to
+  2,564 bytes inside its existing 2,584-byte allocation. Lossless decoding and
+  allocation/neighbor/nibble checks pass. Normal builds apply text then graphics;
+  private previews are still explicitly marked as not fully recompiled.
+- Corrected private target SHA-256:
+  96e663547a2beb28287c1613b04f9a7ab3f6bbad81c067191bf8a26adead20d9.
+  A 4,608-frame cold run reaches Sunset, opens the guide and matches native Mac
+  mGBA/WASM final RGB/Flash/all 5,056,128 stereo pairs. The actual caught party,
+  moves/PP, items/money and location survive. Evidence: guide-header-final-native-open.
+  Native Flips/browser BPS reapplication and required local source checks pass.
+- Private review clip: guide-header-final-native-review/review.mp4, 39.85 seconds,
+  2,380 controller frames and 2,611,452 stereo pairs. It shows guide navigation,
+  an original creature entry and return to the list. This is not a paired Emerald
+  comparison or a user approval. Public 0.0.17 remains unchanged; normal compilation,
+  original title/other graphics, full slice polish and every section 15.1 gate
+  remain required. Approved quality remains 0/11. No GitHub workflow was dispatched.
