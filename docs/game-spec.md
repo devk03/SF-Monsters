@@ -2095,6 +2095,29 @@ Original courier locomotion — native player-art checkpoint:
 - Public 0.0.24 is unchanged while the courier comparison is prepared. Full
   quality approvals remain 0/11. No GitHub workflow was dispatched.
 
+- Courier review evidence: courier-paired-walking-review/comparison.mp4, 32.15s,
+  1,920 frames per side, equal nearest-neighbor 3x scale. Left is the supplied
+  reference cartridge in its original Littleroot courtyard; right is the newly
+  compiled courier in Sunset. Both run native mGBA 0.10.5 on the development Mac
+  with identical direction/duration rows. Both return to their starting tiles.
+  The first unblocked 480-frame rectangle has identical normalized BG1 camera
+  movement in all four directions: one pixel/frame, sixteen frames/tile, zero
+  measured frame difference. Later reference laps meet roaming NPCs, so the
+  whole clip is not treated as uniform timing evidence. Running reference timing,
+  input-consumption latency and real-time performance still need their gates.
+- A prior reference evolution snapshot displays cached SF map/weather. It is
+  excluded from this authentic-town walking comparison. This new reference
+  lineage resumes emerald-route101-right-lane, closes the original NPC dialogue
+  with controller inputs and walks to the original courtyard. Its reference
+  ROM fingerprint and visible scene are verified. Prepared evolution/save
+  fixtures must not substitute for pristine field/reference-world evidence.
+- User feedback is requested for courier silhouette/palette/readability and
+  four-direction walking art only. Audio uses the SF capture, and the separate
+  34.82s SF clip shows running. No full movement, pixel-art, world or audio domain
+  is approved by these measurements; all eleven full approvals remain pending.
+  Source/asset checkpoint c3634a5 is pushed. Public 0.0.24 is unchanged while
+  this courier checkpoint is reviewed. No GitHub workflow was dispatched.
+
 - Native UI review clip: interface-final-native-review/review.mp4, 40.25 seconds,
   2,404 controller frames and 2,637,788 stereo pairs, source commit 0a5c888.
   It shows the Start menu, caught-party selection, summary, stats and moves.
