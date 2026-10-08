@@ -41,6 +41,41 @@ def check_monster(mon):
             raise ValueError('Sprite bounds must fit native coordinate packing and ground alignment.')
     if len(mon['description']) != 3 or any(not re.fullmatch(r"[A-Za-z0-9 ,.!'-]{1,38}", line) for line in mon['description']):
         raise ValueError('Field-guide description needs three safe short lines.')
+    evolutions = mon.get('evolutions', [])
+    if len(evolutions) > 1:
+        raise ValueError('Declare one unconditional level evolution per creature.')
+    for evolution in evolutions:
+        if set(evolution) != {'level', 'species'} or type(evolution['level']) is not int or not 2 <= evolution['level'] <= 100:
+            raise ValueError('Level evolution needs a target and a threshold from 2–100.')
+        constant(evolution['species'], 'SPECIES_')
+        if evolution['species'] == mon['species']:
+            raise ValueError('A creature cannot evolve into itself.')
+
+
+def check_catalog(monsters):
+    records = {}
+    names, symbols, paths = set(), set(), set()
+    for mon in monsters:
+        check_monster(mon)
+        if mon['species'] in records: raise ValueError('Species IDs must be unique.')
+        if mon['name'] in names or mon['symbol'] in symbols or mon['engine_asset_dir'] in paths:
+            raise ValueError('Creature names, engine symbols and asset destinations must be unique.')
+        names.add(mon['name']); symbols.add(mon['symbol']); paths.add(mon['engine_asset_dir'])
+        records[mon['species']] = mon
+    for mon in monsters:
+        visited, current = set(), mon
+        previous_level = 0
+        while current.get('evolutions'):
+            species = current['species']
+            if species in visited: raise ValueError('Evolution lines cannot contain cycles.')
+            visited.add(species)
+            rule = current['evolutions'][0]
+            if rule['species'] not in records:
+                raise ValueError('An original evolution must target an authored creature.')
+            if rule['level'] <= previous_level:
+                raise ValueError('Later evolution thresholds must increase.')
+            previous_level = rule['level']
+            current = records[rule['species']]
 
 
 def png_palette(path, expected_size):
@@ -66,6 +101,7 @@ def apply_monsters(content, root, engine, original):
     data = json.loads(reference.read_text()); changed, source, records, identifiers = [], {}, [], set()
     if not data['monsters'] or type(data['content_revision']) is not int or not 1 <= data['content_revision'] <= 65535:
         raise ValueError('Species content needs entries and a valid persistent revision.')
+    check_catalog(data['monsters'])
     icon_palettes, icon_paths = {}, {}
     for group, reference in data['icon_palettes'].items():
         if group not in ['3', '4', '5']: raise ValueError('Original icon palette group is not reserved.')
@@ -105,6 +141,17 @@ def apply_monsters(content, root, engine, original):
         for field, value in mon['stats'].items(): record = replace_one(record, rf'\.{field}\s*=\s*\d+', f'.{field} = {value}')
         for field in ['types', 'abilities']: record = replace_one(record, rf'\.{field}\s*=\s*\{{[^}}]*\}}', '.%s = {%s}' % (field, ', '.join(mon[field])))
         edit(path, pattern, record)
+        if 'evolutions' in mon:
+            path = 'src/data/pokemon/evolution.h'
+            value = source.get(path, original(path))
+            rules = ', '.join('{EVO_LEVEL, %d, %s}' % (rule['level'], rule['species'])
+                              for rule in mon['evolutions']) or '{0}'
+            record = f'    [{species}] = {{{rules}}},'
+            pattern = rf'^    \[{species}\]\s*=\s*\{{\{{.*?\}}\}},'
+            if re.search(pattern, value, re.M | re.S):
+                source[path] = replace_one(value, pattern, record)
+            else:
+                source[path] = replace_one(value, r'\n\};\s*\Z', '\n' + record + '\n};\n')
         moves = ',\n'.join(f'    LEVEL_UP_MOVE({level}, {move})' for level, move in mon['learnset'])
         edit('src/data/pokemon/level_up_learnsets.h', rf'static const u16 s{symbol}LevelUpLearnset\[\] = \{{.*?\n\}};',
              f'static const u16 s{symbol}LevelUpLearnset[] = {{\n{moves},\n    LEVEL_UP_END\n}};')

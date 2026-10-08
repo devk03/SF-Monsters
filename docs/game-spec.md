@@ -1119,6 +1119,23 @@ First-slice audio comparison — measured battle-mix revision:
   These checks do not replace clean Emerald rebuild, hands-on sign-in/backup,
   actual browser/device performance or user approval. Approved parity is 0/11.
 
+First-slice creature authoring checkpoint — evolution and icon contracts:
+
+- Original level-evolution declarations now validate authored targets, unique
+  native identities/assets, increasing thresholds and cycle-free lines. They
+  compile into the existing native evolution table without changing species IDs.
+  Other native evolution methods remain engine features; the original authoring
+  schema currently covers unconditional level rules only.
+- A native atlas encoder accepts separate battle views and separately authored
+  icon frames, preserves aspect/ground alignment, and maps icons into their
+  family's shared palette. The legacy three-view encoder remains unchanged.
+  Independent output checks distinguish blue authored icons from red battle
+  views and verify alternate frames, native PNG bounds and palette identity.
+- CinderCoy's evolved art is in preparation. This infrastructure checkpoint
+  does not count evolved creatures, prove an in-game evolution, or approve art.
+  Starter-line data, original evolved cries, native/browser evidence and user
+  review remain required. Approved parity stays 0/11.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's
