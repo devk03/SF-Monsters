@@ -20,7 +20,7 @@ from interface_graphics import apply_interface_graphics
 from title_art import apply_title_art
 from title_creature import apply_title_creature
 from title_song_overlay import apply_title_song
-from house_art import apply_house_art
+from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 
 FLIPS = ROOT / '.tools/flips'
@@ -84,6 +84,7 @@ def main():
     restored += apply_creature_audio(content, ROOT, EMERALD, original)
     restored += apply_field_music(content, ROOT, EMERALD, original)
     restored += apply_courier(ROOT, EMERALD, original)
+    restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     if args.fixture:
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture

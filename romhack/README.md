@@ -221,3 +221,21 @@ an older saved view. Reconstruct lasting metatile changes in the map's on-load
 script from persistent flags/variables. The gym gate already follows this rule.
 Valid saved coordinates are retained; newly blocked positions use the native
 same-map warp to a nearby walkable tile, avoiding doors and NPC anchors.
+
+## Original Sunset streets
+
+`assets/tiles/sunset-streets` contains original asphalt, sidewalk, curb/corner,
+lane, crossing and drain textures. `street_art.py` builds the native palette and
+directional variants, then selects road records from map adjacency. It preserves
+the upper collision/elevation bits and existing event coordinates.
+
+The complete house/street sheet is compiled from original indexed art with
+192 secondary tiles; its compressed allocation comes from the actual source
+build. Metatile records use separate house/street palette banks. Normal native
+resource guards still verify lossless encoding, ELF correspondence and bounds.
+The older road ID aliases the new asphalt for legacy map-view buffers, while
+authored SF layouts reload on Continue. Generic ground/beach art remains pending.
+
+This sheet requires normal source compilation. The old pinned-cartridge
+`preview_interface.py` path rejects the current world revision; use
+`build_probe.py --backend host --draft` for an immutable local candidate.

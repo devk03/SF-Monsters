@@ -750,6 +750,21 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
+Current snapshot (October 8, 2026; historical checkpoint details follow):
+
+| Item | Authoritative current status |
+| --- | --- |
+| Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
+| Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
+| Public build | 0.0.24-native-host-slice-preview; target fe17001af73fd6f6cb989323e418bc3880ee15fbd3bf0bdd75211f451a5f9de6; Site version 18. |
+| Latest local source build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9. Original courier and road tiles are local candidates. |
+| Content implemented so far | Sunset opening, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
+| Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
+| Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
+| Public QA | Local ROM load and downloaded 0.0.24 cartridge verified. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
+| Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
+
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
 - Approved Emerald-parity domains: 0/11. This is an approval count, not a claim
@@ -763,8 +778,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Next checkpoint: additional starter/team strategies, original wild creatures,
   map/cast/audio/interface polish and first-slice comparison reviews. The earned
   Fire route now verifies the first gym victory, reward, re-entry and save.
-- Public preview: version 0.0.17 includes eighteen original creature/call candidates,
-  original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic,
+- Public preview: version 0.0.24 includes eighteen original creature/call candidates,
+  original Sunset/wild/title themes, title/guide art, Sunset rowhouses,
+  Sunset/Muni/South Park, the clinic,
   all three authored evolution lines and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
@@ -2357,3 +2373,36 @@ Native Mac compilation — complete source-build checkpoint:
   session; the user is asked to complete login before /play can be verified.
   No credentials are requested in chat and no auth bypass is used. All full
   quality approvals remain pending. No GitHub workflow was dispatched.
+
+Sunset streets — original compiled terrain checkpoint:
+
+- Added eight original asphalt/sidewalk/curb/corner/lane/crossing/drain source
+  tiles under assets/tiles/sunset-streets. Native conversion uses one RGB555
+  palette and derives eighteen orientation variants. Adjacency selects outer
+  and concave junction corners; lane/crossing/drain details use the existing
+  street grid. This improves the map art, not the count of finished adventures.
+- The complete owned house/street sheet uses 161 unique tiles. Normal source
+  compilation declares 192 secondary tiles (6,144 raw bytes), rather than forcing
+  new art into the old 159-tile allocation. Native compression is 2,896 bytes,
+  matching its newly compiled allocation. Lossless codec/ELF/bounds checks pass.
+  No inherited tile pixels are included in this secondary sheet; original
+  primary ground/beach/fence art and the rest of the map library remain pending.
+- All 434 road blocks select native curb/lane variants while retaining collision
+  and elevation bits. House footprints, sign, NPC/warp coordinates and routes
+  remain intact. The older road ID aliases our asphalt, and the existing authored
+  map-resume guard refreshes old saved views. Unit checks cover orientation,
+  road-only differences, junctions, capacity/palette separation and the alias.
+  scripts/check.sh passes locally. No database change or GitHub CI run is used.
+- Normally compiled private 0.0.26 target SHA-256:
+  67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9.
+  Old caught-party battery reaches (18,22); native/WASM final RGB, Flash and all
+  4,586,504 stereo pairs match across 4,180 frames. Subsequent four-direction
+  walk/run footage matches every RGB frame, Flash and all 2,282,280 stereo pairs
+  across 2,080 frames. Its camera/controller trace is unchanged from the courier
+  candidate, and it returns to (18,22) with the same party/items/money/flags.
+  Evidence: streets-{native,wasm}-{cold-to-road,four-direction-motion}.
+- Native review.mp4 is 34.82 seconds. It is an implementation clip, not a matched
+  full world-design approval or real-time performance result. Original grass,
+  beach/fence/sign details, distinct facade variants, named cast and interiors
+  still require work. The first-slice and all eleven full quality approvals
+  remain pending. Public 0.0.24 is unchanged at this checkpoint.

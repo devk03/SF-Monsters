@@ -19,6 +19,8 @@ def main():
     parser.add_argument('--rom', required=True)
     args = parser.parse_args()
     content = json.loads((ROOT / 'romhack/content/engine-probe.json').read_text())
+    if content.get('requires_compiled_world_tiles'):
+        parser.error('Current world art requires source compilation. Use build_probe.py --backend host --draft.')
     labels = json.loads((ROOT / 'romhack/content/interface-text.json').read_text())
     source = ROOT / args.rom
     if hashlib.sha256(source.read_bytes()).hexdigest() != labels['preview_input_sha256']:

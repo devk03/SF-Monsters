@@ -1,5 +1,6 @@
 {
-  "version": "0.0.25-courier-motion-preview",
+  "version": "0.0.26-sunset-streets-preview",
+  "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
   "status": "Unreviewed SF chapter with eighteen original creature/call candidates, original team/guide labels, guide header, title lettering/Bayveil silhouette, title theme and Sunset rowhouse facade candidates; remaining title elements, pixel cleanup, portraits, world tiles and other music remain unfinished.",

@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from house_art import compose_tiles, remap_houses
 from maps import encode_layout
 from native_resources import bounded_span
+from street_art import load_streets
 
 
 class HouseArt(unittest.TestCase):
@@ -58,6 +59,25 @@ class HouseArt(unittest.TestCase):
         for addresses in ({'a': 0x03000000, 'b': 0x03000800}, {'a': 0x08001000, 'b': 0x08001000}):
             with self.assertRaises(ValueError):
                 bounded_span(addresses, 'a', 'b')
+
+    def test_combined_owned_sheet_uses_compiled_capacity_and_preserves_legacy_road_alias(self):
+        records = bytearray(2304)
+        struct.pack_into('<8H', records, 16, 0x2002, 0x2003, 0x2003, 0x2002,
+                         0x5250, 0x5251, 0x5260, 0x5261)
+        owned = (ROOT / 'assets/tiles/sunset-rowhouse/house.4bpp').read_bytes()
+        streets, _ = load_streets(ROOT)
+        graphics, changed, count = compose_tiles(bytes(192 * 32), owned, bytes(records), streets)
+        self.assertEqual(len(graphics), 6144)
+        self.assertLessEqual(count, 192)
+        self.assertEqual(changed[16:32], changed[640:656])
+        for slot in range(40, 58):
+            entries = struct.unpack_from('<8H', changed, slot * 16)
+            for word in entries[4:]:
+                self.assertEqual(word >> 12, 11)
+                self.assertLess((word & 0x3ff) - 512, count)
+        for slot in range(100, 125):
+            for word in struct.unpack_from('<8H', changed, slot * 16)[4:]:
+                self.assertEqual(word >> 12, 10)
 
 
 if __name__ == '__main__':
