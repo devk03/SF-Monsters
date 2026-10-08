@@ -1,0 +1,45 @@
+{
+  "engine_map": "LittlerootTown_BrendansHouse_1F",
+  "script": "apartment.inc",
+  "tile_grid_base": 512,
+  "border_tile": 622,
+  "tilesets": {"secondary": "gTileset_CourierHome"},
+  "legend": {
+    ".": [512, false, 3],
+    "H": [512, true, 3],
+    "W": [512, true, 3],
+    "B": [512, true, 3],
+    "#": [512, true, 3],
+    "T": [512, true, 3],
+    "R": [512, true, 3],
+    "D": [512, false, 3]
+  },
+  "rows": [
+    "HHHHHHHHHHH",
+    "HHHHHWHHHHH",
+    "H.........H",
+    "H.BBB.....H",
+    "H.BBB...TTH",
+    "H.##......H",
+    "H.##....R.H",
+    "H.......R.H",
+    "H.........H",
+    "HHHHHDHHHHH"
+  ],
+  "npcs": [],
+  "warp_events": [
+    {"x": 5, "y": 9, "elevation": 0, "dest_map": "MAP_LITTLEROOT_TOWN", "dest_warp_id": "0"}
+  ],
+  "bg_events": [
+    {"type": "sign", "x": 5, "y": 1, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH", "script": "SF_AptWindow"},
+    {"type": "sign", "x": 8, "y": 4, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "SF_AptBeacon"},
+    {"type": "sign", "x": 4, "y": 4, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "SF_AptBed"},
+    {"type": "sign", "x": 3, "y": 6, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "SF_AptPostcard"}
+  ],
+  "metadata": {
+    "weather": "WEATHER_NONE",
+    "allow_running": false,
+    "allow_cycling": false,
+    "region_map_section": "MAPSEC_LITTLEROOT_TOWN"
+  }
+}

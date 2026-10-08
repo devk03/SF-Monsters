@@ -152,6 +152,29 @@ class InteriorRoutes(unittest.TestCase):
                 visited.add((xx,yy)); queue.append((xx,yy))
         return visited
 
+    def test_apartment_has_a_return_warp_and_reachable_story_interactions(self):
+        root = Path(__file__).resolve().parents[1] / 'romhack/content'
+        home = json.loads((root / 'apartment.json').read_text())
+        street = json.loads((root / 'sunset.json').read_text())
+        plans = [{**home, 'native_id': 'MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F'},
+                 {**street, 'native_id': 'MAP_LITTLEROOT_TOWN'}]
+        validate_links(plans)
+        encode_layout(home); event_objects(home)
+        entry = home['warp_events'][0]
+        accessible = self.reachable(home, (entry['x'], entry['y']))
+        for event in home['bg_events']:
+            x, y = event['x'], event['y']
+            positions = ({(x, y + 1)} if event['player_facing_dir'].endswith('NORTH')
+                         else {(x-1,y), (x+1,y), (x,y-1), (x,y+1)})
+            self.assertTrue(positions & accessible, event['script'])
+        self.assertEqual(len(street['warp_events']), 1)
+        exterior = street['warp_events'][0]
+        check_position(street, exterior['x'], exterior['y'])
+        self.assertIn((exterior['x'], exterior['y'] + 1),
+                      self.reachable(street, (18, 22)))
+        self.assertEqual(exterior['dest_map'], plans[0]['native_id'])
+        self.assertEqual(entry['dest_map'], plans[1]['native_id'])
+
     def test_gym_keeps_relay_practice_and_earned_gate_routes(self):
         root = Path(__file__).resolve().parents[1] / 'romhack/content'
         plan = json.loads((root / 'cognition.json').read_text())

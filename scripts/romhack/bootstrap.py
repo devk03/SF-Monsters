@@ -44,6 +44,8 @@ def preserve_cleanup(directory):
             adapted = re.sub(r'(?<![\w/.$-])(?:rm|rmdir)(?=\s)', PRESERVE, original)
             if path.name.startswith('Makefile') and '.SECONDARY:' not in adapted:
                 adapted += '\n.SECONDARY:\n'
+            if path.name.startswith('Makefile') and '.PRECIOUS:' not in adapted:
+                adapted += '\n.PRECIOUS: %.o %.elf %.gba\n'
             if adapted != original:
                 path.write_text(adapted)
 

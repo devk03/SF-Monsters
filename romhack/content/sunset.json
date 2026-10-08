@@ -7,6 +7,7 @@
     "E": [379, true, 1],
     "S": [287, false, 3],
     "P": [513, false, 3],
+    "D": [584, false, 3],
     "F": [11, true, 3],
     "G": [13, false, 3],
     "#": [5, true, 3],
@@ -39,7 +40,7 @@
     "WWWESSSSSPPP.fggghPP..fgggh.PP.F",
     "WWWESSSSSPPP.ijjjkPP..ijjjk.PP.F",
     "WWWESSSSSPPP.lmnorPP..lmnor.PP.F",
-    "WWWESSSSSPPP.stuvwPP..stuvw.PP.F",
+    "WWWESSSSSPPP.stuDwPP..stuvw.PP.F",
     "WWWESSSSSPPP......PP........PP.F",
     "WWWESSGGSPPP.abbbePP..abbbe.PP.F",
     "WWWESSGGSPPP.fggghPP..fgggh.PP.F",
@@ -64,6 +65,7 @@
     "WWWESSSSSPPP......PP........PP.F",
     "WWWEFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
   ],
+  "warp_events": [{"x": 16, "y": 8, "elevation": 0, "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F", "dest_warp_id": "0"}],
   "npcs": [
     {"id": 1, "x": 23, "y": 18, "graphics": "OBJ_EVENT_GFX_SCIENTIST_1", "script": "SF_Karpathy"},
     {"id": 2, "x": 21, "y": 20, "graphics": "OBJ_EVENT_GFX_ITEM_BALL", "script": "SF_Starter_Bloom", "flag": "FLAG_SYS_POKEMON_GET"},

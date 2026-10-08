@@ -17,8 +17,9 @@ class ApartmentArt(unittest.TestCase):
         self.assertEqual((directory / 'tiles.4bpp').stat().st_size, 444 * 32)
         records = (directory / 'metatiles.bin').read_bytes()
         attributes = struct.unpack('<111H', (directory / 'attributes.bin').read_bytes())
-        self.assertEqual([i for i, value in enumerate(attributes) if value], [104])
-        self.assertEqual(attributes[104], 0x65)
+        self.assertTrue(all(value >> 12 == 1 for value in attributes))
+        self.assertEqual([i for i, value in enumerate(attributes) if value & 255], [104])
+        self.assertEqual(attributes[104], 0x1065)
         self.assertEqual(len(records), 111 * 16)
         for cell in range(110):
             entries = struct.unpack_from('<8H', records, cell * 16)

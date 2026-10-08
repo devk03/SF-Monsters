@@ -68,7 +68,7 @@ def remap_houses(plan, original):
     output, origins = bytearray(original), []
     for y in range(height - 4):
         for x in range(width - 4):
-            if all(plan['rows'][y + dy][x:x + 5] == row for dy, row in enumerate(HOUSE_ROWS)):
+            if all(plan['rows'][y + dy][x:x + 5].replace('D', 'v') == row for dy, row in enumerate(HOUSE_ROWS)):
                 origins.append([x, y])
                 for dy in range(5):
                     for dx in range(5):
@@ -193,11 +193,12 @@ def apply_house_art(root, emerald, target):
     palette[320:352] = files['house.gbapal']
     palette[352:384] = street_palette
     attributes[FIRST_METATILE * 2:(FIRST_METATILE + 25) * 2] = bytes(50)
+    attributes[123 * 2:124 * 2] = struct.pack('<H', 0x60)  # Native non-animated exterior door.
     for index in range(FIRST_ROAD, FIRST_ROAD + len(streets)):
         attributes[index * 2:index * 2 + 2] = attributes[2:4]
     offset, capacity = bounded_span(addresses, 'LittlerootTown_Layout_Blockdata', 'LittlerootTown_Layout')
     plan = json.loads((root / 'romhack/content/sunset.json').read_text())
-    house_tokens = set(''.join(HOUSE_ROWS))
+    house_tokens = set(''.join(HOUSE_ROWS)) | {'D'}
     if any(tile >= 512 and token not in house_tokens | {'P'}
            for token, (tile, _, _) in plan['legend'].items()):
         raise ValueError('Review all Sunset secondary references before replacing unused tiles.')
@@ -216,7 +217,8 @@ def apply_house_art(root, emerald, target):
     return {'resources': apply_resources(root, emerald, target, resources), 'origins': origins,
             'unique_tiles': unique, 'native_size': [80, 80], 'collision_elevation_preserved': True,
             'street_variants': road_counts, 'secondary_tiles': 192,
-            'interiors_implemented': False, 'quality_approval': 'pending'}
+            'enterable_apartment': True, 'decorative_houses': 5,
+            'door_animation': 'native fade; authored opening frames pending', 'quality_approval': 'pending'}
 
 
 if __name__ == '__main__':

@@ -32,9 +32,10 @@ def encode_apartment(root):
             raw.extend(pack4(tiles8(cell, 16, 16, 2, 2)))
             upper = [0x6200 | ((y * 11 + x) * 4 + tile) for tile in range(4)]
             records.extend(struct.pack('<8H', *border_tiles, *upper))
-            attributes.extend(struct.pack('<H', 0x65 if (x, y) == (5, 9) else 0))
+            # Covered metatiles put the opaque room below the player sprite.
+            attributes.extend(struct.pack('<H', 0x1000 | (0x65 if (x, y) == (5, 9) else 0)))
     raw.extend(bytes([border_color | border_color << 4]) * 128)
-    records.extend(struct.pack('<8H', *border_tiles, *border_tiles)); attributes.extend(bytes(2))
+    records.extend(struct.pack('<8H', *border_tiles, *border_tiles)); attributes.extend(struct.pack('<H', 0x1000))
     sheet = Image.new('P', (128, 224), 0); sheet.putpalette(palette)
     for tile in range(444):
         for y in range(8):
@@ -89,7 +90,7 @@ const struct Tileset gTileset_CourierHome = {
     .isCompressed = TRUE,
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_SFCourierHome,
-    .palettes = gTilesetPalettes_SFCourierHome,
+    .palettes = (const u16 (*)[16])gTilesetPalettes_SFCourierHome,
     .metatiles = gMetatiles_SFCourierHome,
     .metatileAttributes = gMetatileAttributes_SFCourierHome,
     .callback = NULL,

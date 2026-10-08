@@ -757,8 +757,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
 | Public build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9; Site version 19. |
-| Latest local source build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9. Courier and road tiles are published candidates; human art review remains pending. |
-| Content implemented so far | Sunset opening, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
+| Latest local source build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186. Original enterable Sunset studio and persistent fog-beacon adventure verified locally; publication and human art review pending. |
+| Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Local ROM load and downloaded 0.0.26 cartridge verified; old caught-party backup accepted and resumed into Sunset. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
@@ -2422,3 +2422,40 @@ Sunset streets — original compiled terrain checkpoint:
   HP 15/15, matching the imported backup. Screenshots: public-v26-{resume,party}.png
   under .tools/browser-review. Native/WASM recorded routes are verified separately.
   No human art score, signed-in completion or performance pass is inferred.
+
+
+Courier apartment / Sunset mini-adventure checkpoint (October 8, 2026):
+
+- Source follows art checkpoint 0ac1c33. Added one enterable studio to the
+  Sunset rowhouses, authored collision and reciprocal door/exit warps; five
+  other houses remain decorative. New art uses its own native secondary
+  tileset and palette. Initial gameplay exposed an opaque foreground layer
+  hiding the courier; corrected all room cells to the native covered layer.
+- Optional adventure: observe fog, reject or correct a cached indoor forecast,
+  receive one capsule, rest the party, read an N-Judah postcard and revisit the
+  beacon. Reserved VAR_GIFT_UNUSED_3 (0x40E0) stores states 0–3. Reward is
+  deferred when the bag is full. After the Build Badge, dialogue foreshadows the
+  habitat signal; this is a clue, not a completed villain/legendary arc.
+- Native controller evidence: apartment-native-window, -refused, -rest,
+  -postcard, -exit, -return and -battery-resume under .tools/benchmarks.
+  Refusal preserves state 1; completion/re-entry/resume preserve state 3 and
+  exactly one Great Ball. Rest heals CinderCoy from 13/19 to 19/19 HP and
+  Scratch from 32 to 35 PP. Exit returns to Sunset (16,9); re-entry succeeds.
+  In-game SAVE, then cold boot from its actual Flash file, resumes inside the
+  apartment (7,4) with the healed two-monster party and earned reward.
+- Full route: 18,236 controller frames in apartment-full-route.csv. Native
+  apartment-native-full-route and WASM apartment-wasm-full-route yield
+  identical final RGB, 20,009,448 stereo sample pairs (80,037,792 PCM bytes)
+  and 128 KiB Flash. Receipt: native capture's comparison.json. This trace
+  does not verify every rendered frame or real-browser deadline/input/audio
+  performance. Native-to-WASM cold battery resume also matches PCM/Flash and
+  preserves the quest; it does not count as ten release round trips.
+- Full scripts/check.sh passed locally; 14 map tests include path reachability
+  for every apartment interaction and both door endpoints. Native art checks
+  protect the sprite layer and exit behavior. The source cartridge compiles
+  normally and its BPS round trip is byte-identical; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186.
+- Still required: authored door opening animation, matched human room/quest
+  review, full-bag runtime branch, earned post-gym revisit, public publication
+  and hands-on web checks. This adds detail to the first slice; no additional
+  hub or full quality domain is approved. All 11 full approvals stay pending.
+  GitHub Actions was not dispatched; normal checks and captures ran locally.
