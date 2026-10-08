@@ -32,6 +32,7 @@ class NativeScore(unittest.TestCase):
         for stem, loop in [('ocean-commute', 1536), ('fogbank-frenzy', 2304)]:
             with self.subTest(score=stem): self.check_score(stem, loop)
         self.check_score('foglight-overture', 3072, 8)
+        self.check_score('park-bench-break', 3072)
 
     def check_score(self, stem, loop, track_count=7):
         data = (ROOT / f'assets/audio/{stem}-native-v1/{stem.replace("-", "_")}.mid').read_bytes()
@@ -57,7 +58,7 @@ class NativeScore(unittest.TestCase):
         self.assertEqual(cursor, len(data))
 
     def test_original_instrument_wave_headers(self):
-        for stem in ['ocean-commute', 'fogbank-frenzy']:
+        for stem in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break']:
             with self.subTest(score=stem): self.check_samples(stem)
 
     def check_samples(self, stem):
@@ -68,6 +69,9 @@ class NativeScore(unittest.TestCase):
             self.assertEqual((kind, frequency, loop), (0, 16744 * 1024, 0))
             self.assertIn(status, [0, 0x4000])
             self.assertEqual(size, len(data) - 16)
+            if stem == 'park-bench-break' and status == 0:
+                self.assertEqual((data[16], data[-1]), (0, 0),
+                                 'Transient voices must begin/end at silence')
 
 
 if __name__ == '__main__': unittest.main()

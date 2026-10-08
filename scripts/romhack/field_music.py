@@ -7,11 +7,13 @@ import re
 import shutil
 import struct
 from battle_music import battle_tracks, battle_samples
+from clinic_music import clinic_tracks, clinic_samples
 
 ROOT = Path(__file__).resolve().parents[2]
 BINDINGS = {
     'mus_littleroot': ('littleroot', 'sf_ocean', 'ocean_commute', 'SF_Ocean'),
     'mus_vs_wild': ('vs_wild', 'sf_wild', 'fogbank_frenzy', 'SF_Wild'),
+    'mus_birch_lab': ('birch_lab', 'sf_clinic', 'park_bench_break', 'SF_Clinic'),
 }
 
 
@@ -99,18 +101,27 @@ def write_song(score, output):
     group, directory, stem, prefix = BINDINGS[score['native_song']]
     if score['native_voicegroup'] != group:
         raise ValueError('Native song and voicegroup binding disagree.')
-    battle = score.get('arrangement') == 'wild_battle'
-    tracks, end = battle_tracks(score) if battle else score_tracks(score)
+    arrangement = score.get('arrangement', 'field')
+    arrangers = {'field': (score_tracks, instrument_samples),
+                 'wild_battle': (battle_tracks, battle_samples),
+                 'clinic': (clinic_tracks, clinic_samples)}
+    if arrangement not in arrangers:
+        raise ValueError('Unreviewed native music arrangement.')
+    compose, samples = arrangers[arrangement]
+    tracks, end = compose(score)
     output.mkdir(parents=True, exist_ok=True)
     midi = b'MThd' + struct.pack('>IHHH', 6, 1, len(tracks), 24)
     midi += b''.join(midi_track(track, end) for track in tracks)
     (output / (stem + '.mid')).write_bytes(midi)
     waves, voices = [], ['voice_group ' + group]
-    for name, data, loop, rate in (battle_samples() if battle else instrument_samples()):
+    for name, data, loop, rate in samples():
         symbol = prefix + '_' + name
         (output / (name + '.bin')).write_bytes(struct.pack('<HHIII', 0, 0x4000 if loop else 0, rate * 1024, 0, len(data)) + data)
         waves.extend(['\t.align 2', symbol + '::', f'\t.incbin "sound/{directory}/{name}.bin"'])
-        voices.append(f'\tvoice_directsound 60, 0, {symbol}, 255, 0, 230, {90 if loop else 40}')
+        if arrangement == 'clinic' and name == 'flute':
+            voices.append(f'\tvoice_directsound 60, 0, {symbol}, 96, 220, 180, 100')
+        else:
+            voices.append(f'\tvoice_directsound 60, 0, {symbol}, 255, 0, 230, {90 if loop else 40}')
     (output / 'waves.inc').write_text('\n'.join(waves) + '\n')
     (output / 'voices.inc').write_text('\n'.join(voices) + '\n')
     (output / 'score-info.json').write_text(json.dumps({'title': score['title'], 'tempo': score['tempo'],
@@ -162,7 +173,7 @@ def apply_field_music(content, root, engine, original):
 
 
 if __name__ == '__main__':
-    for name in ['ocean-commute', 'fogbank-frenzy']:
+    for name in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break']:
         write_song(json.loads((ROOT / f'assets/audio/{name}.json').read_text()),
                    ROOT / f'assets/audio/{name}-native-v1')
     print('Wrote original field/battle scores and synthesized instruments.')

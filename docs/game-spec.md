@@ -3519,3 +3519,27 @@ Storage-label source/release checkpoint:
   clinic/office compositions, then audition in the real engine and compare mix/
   transition evidence. The full Audio domain and other acceptance gates stay open.
 - Public remains v38/Site 31; v39 will be bundled into the next first-slice release.
+
+
+Original clinic music composition checkpoint:
+
+- Previous goal turn classified as progress: actual signed-in Chrome ROM/save
+  transfer was verified and original Continue/storage labels were committed.
+- Inspected native map song wiring: SF clinic's inherited lab map uses
+  MUS_BIRCH_LAB, distinct from the field and gym bindings. Added the original
+  Park Bench Break score only to that song/voicegroup binding. Healing still
+  uses an inherited fanfare; gym/trainer/interior contexts remain unfinished.
+- Editable 32-bar, 104 BPM score: first theme, varied second statement, harmonic
+  bridge with percussion rest/re-entry, and a returning cadence. Seven mono
+  tracks use original additive flute/bass, voiced seventh-chord piano, a damped
+  plucked string and synthesized soft percussion; no imported samples/melodies.
+  Native loop is 3072 ticks (~73.85 seconds). Score/artifact licensing documented
+  in assets/audio/park-bench-break.md. This remains a musical candidate.
+- Existing owning MIDI/voice tests now cover its note lifetimes, program bounds,
+  exact per-track loop markers, sample headers and silent transient endpoints.
+  These protect native note/loop safety, not composition/mix parity. All local
+  checks pass; prior field/wild assets remain byte-unchanged in Git.
+- Normal draft target 5d9e8a8a1ee68d5ebb666d18b2616124f73c7413a1d1ba00a307ca47df4f0538
+  compiles and round-trip applies (813,705-byte BPS). Actual native/WASM playback,
+  two-loop capture, transitions and old-save verification follow. Public remains
+  v38/Site 31; there is no audio approval or full-domain completion.
