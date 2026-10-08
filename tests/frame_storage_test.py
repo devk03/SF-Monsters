@@ -15,6 +15,7 @@ from frame_storage import compress_capture, verify_frames
 class FrameStorage(unittest.TestCase):
     def setUp(self):
         # Keep fixtures for inspection; do not remove evidence on test completion.
+        (ROOT / '.tools/benchmarks').mkdir(parents=True, exist_ok=True)
         self.directory = Path(tempfile.mkdtemp(prefix='frame-storage-', dir=ROOT / '.tools/benchmarks'))
         self.prefix = self.directory / 'capture'
         self.raw = bytes(range(256)) * 1200
