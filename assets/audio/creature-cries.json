@@ -9,6 +9,12 @@
      "pulses": [[0.02, 0.22, 225, 140], [0.29, 0.23, 285, 175]]},
     {"name": "sproutslug", "engine_symbol": "Treecko", "engine_file": "treecko",
      "duration": 0.52, "formants": [1200, 2200, 2900], "noise": 0.03,
-     "pulses": [[0.01, 0.12, 650, 440], [0.18, 0.12, 760, 520], [0.35, 0.14, 900, 650]]}
+     "pulses": [[0.01, 0.12, 650, 440], [0.18, 0.12, 760, 520], [0.35, 0.14, 900, 650]]},
+    {"name": "ashrunner", "engine_symbol": "Combusken", "engine_file": "combusken",
+     "duration": 0.58, "formants": [640, 1450, 2100], "noise": 0.10,
+     "pulses": [[0.02, 0.21, 310, 160], [0.30, 0.23, 250, 135]]},
+    {"name": "solhowl", "engine_symbol": "Blaziken", "engine_file": "blaziken",
+     "duration": 0.80, "formants": [480, 1050, 1700], "noise": 0.08,
+     "pulses": [[0.02, 0.19, 260, 130], [0.25, 0.48, 220, 105]]}
   ]
 }

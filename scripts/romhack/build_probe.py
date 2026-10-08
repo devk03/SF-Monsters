@@ -14,6 +14,7 @@ from engine_guards import apply_engine_guards
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
+from evolution_fixture import FIXTURES, apply_evolution_fixture
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -35,7 +36,10 @@ def original(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--draft', action='store_true', help='Keep iteration artifacts in ignored local storage.')
+    parser.add_argument('--fixture', choices=FIXTURES, help='Private level/evolution setup, never campaign evidence.')
     args = parser.parse_args()
+    if args.fixture and not args.draft:
+        parser.error('Fixture cartridges must remain private --draft builds.')
     if not BASE.exists() or hashlib.sha256(BASE.read_bytes()).hexdigest() != BASE_HASH:
         raise ValueError('Run bootstrap.py and verify the matching baseline first.')
     content = json.loads((ROOT / 'romhack/content/engine-probe.json').read_text())
@@ -66,6 +70,9 @@ def main():
     restored += apply_monsters(content, ROOT, EMERALD, original)
     restored += apply_creature_audio(content, ROOT, EMERALD, original)
     restored += apply_field_music(content, ROOT, EMERALD, original)
+    if args.fixture:
+        apply_evolution_fixture(EMERALD, args.fixture, original)
+        content['version'] += '-fixture-' + args.fixture
     (ROOT / '.tools/romhack-overlay-files.json').write_text(json.dumps(restored) + '\n')
     docker('make', '-j8', 'FILE_NAME=sf-engine-probe', f'TITLE={content["title"]}',
            f'GAME_CODE={content["game_code"]}', directory='/workspace/.tools/pokeemerald')
@@ -101,6 +108,9 @@ def main():
         'source_worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip()),
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending'
     }
+    if args.fixture:
+        manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
+                               'campaign_progress_evidence': False}
     manifest_path = output / 'manifest.json'
     if not manifest_path.exists():
         manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')

@@ -27,7 +27,7 @@ class MonsterContracts(unittest.TestCase):
         with self.assertRaises(ValueError): png_palette(art / 'front.png', (32, 32))
 
     def test_name_stats_and_learnset_bounds(self):
-        changes = [{'name': 'X' * 11}, {'stats': {'baseHP': 50}},
+        changes = [{'name': 'X' * 11}, {'category': 'X' * 12}, {'stats': {'baseHP': 50}},
                    {'learnset': [[6, 'MOVE_EMBER'], [5, 'MOVE_SCRATCH']]},
                    {'learnset': [[101, 'MOVE_EMBER']]}, {'species': 'unsafe slot'},
                    {'icon_palette': 6}, {'migration_move': [1, 'MOVE_SURF']}]

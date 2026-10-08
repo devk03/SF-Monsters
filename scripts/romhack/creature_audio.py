@@ -83,4 +83,4 @@ if __name__ == '__main__':
     recipe = json.loads((ROOT / 'assets/audio/creature-cries.json').read_text())
     for cry in recipe['cries']:
         write_assets(cry, recipe['sample_rate'], ROOT / 'assets/audio/cries-v1')
-    print('Wrote three original creature-call candidates.')
+    print(f'Wrote {len(recipe["cries"])} original creature-call candidates.')

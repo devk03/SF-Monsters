@@ -1,5 +1,5 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "icon_palettes": {
     "3": "assets/monsters/cindercoy/native-v1/normal.pal",
     "4": "assets/monsters/brinepup/native-v1/normal.pal",
@@ -22,6 +22,7 @@
     "abilities": ["ABILITY_BLAZE", "ABILITY_FLASH_FIRE"],
     "learnset": [[1, "MOVE_SCRATCH"], [1, "MOVE_GROWL"], [5, "MOVE_EMBER"], [8, "MOVE_QUICK_ATTACK"], [11, "MOVE_LEER"], [14, "MOVE_BITE"], [18, "MOVE_FLAME_WHEEL"], [23, "MOVE_ROAR"], [28, "MOVE_FLAMETHROWER"], [34, "MOVE_AGILITY"], [39, "MOVE_CRUNCH"], [45, "MOVE_FIRE_BLAST"]],
     "migration_move": [5, "MOVE_EMBER"],
+    "evolutions": [{"level": 16, "species": "SPECIES_COMBUSKEN"}],
     "description": ["It warms its paws on the last patch", "of SUNSET sunlight. Its ember-speckled", "tail glows when it finds a new friend."]
   }, {
     "species": "SPECIES_MUDKIP",
@@ -59,5 +60,43 @@
     "learnset": [[1, "MOVE_POUND"], [1, "MOVE_LEER"], [5, "MOVE_ABSORB"], [8, "MOVE_STUN_SPORE"], [11, "MOVE_LEECH_SEED"], [14, "MOVE_MEGA_DRAIN"], [18, "MOVE_POISON_POWDER"], [23, "MOVE_SILVER_WIND"], [28, "MOVE_SYNTHESIS"], [34, "MOVE_GIGA_DRAIN"], [39, "MOVE_SLEEP_POWDER"], [45, "MOVE_SOLAR_BEAM"]],
     "migration_move": [5, "MOVE_ABSORB"],
     "description": ["It tends little flowers while", "dreaming of wings. Even a tiny garden", "can be the start of a great journey."]
+  }, {
+    "species": "SPECIES_COMBUSKEN",
+    "symbol": "Combusken",
+    "old_name": "COMBUSKEN",
+    "name": "ASHRUNNER",
+    "category": "ASH COYOTE",
+    "height": 9,
+    "weight": 180,
+    "art": "assets/monsters/ashrunner/native-v1",
+    "engine_asset_dir": "combusken",
+    "icon_palette": 3,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 64, "baseAttack": 72, "baseDefense": 55, "baseSpeed": 82, "baseSpAttack": 84, "baseSpDefense": 63},
+    "types": ["TYPE_FIRE", "TYPE_FIRE"],
+    "abilities": ["ABILITY_BLAZE", "ABILITY_FLASH_FIRE"],
+    "learnset": [[1, "MOVE_SCRATCH"], [1, "MOVE_GROWL"], [5, "MOVE_EMBER"], [8, "MOVE_QUICK_ATTACK"], [11, "MOVE_LEER"], [14, "MOVE_BITE"], [16, "MOVE_FLAME_WHEEL"], [23, "MOVE_ROAR"], [27, "MOVE_SLASH"], [31, "MOVE_FLAMETHROWER"], [34, "MOVE_AGILITY"], [42, "MOVE_CRUNCH"], [49, "MOVE_FIRE_BLAST"]],
+    "migration_move": [5, "MOVE_EMBER"],
+    "evolutions": [{"level": 36, "species": "SPECIES_BLAZIKEN"}],
+    "description": ["It races the last light along", "GREAT HIGHWAY. Sparks in its mane", "guide lost companions through the fog."]
+  }, {
+    "species": "SPECIES_BLAZIKEN",
+    "symbol": "Blaziken",
+    "old_name": "BLAZIKEN",
+    "name": "SOLHOWL",
+    "category": "FOG GUARD",
+    "height": 14,
+    "weight": 350,
+    "art": "assets/monsters/solhowl/native-v1",
+    "engine_asset_dir": "blaziken",
+    "icon_palette": 3,
+    "coordinates": {"front": [56, 56, 4], "back": [56, 56, 4]},
+    "stats": {"baseHP": 78, "baseAttack": 94, "baseDefense": 69, "baseSpeed": 104, "baseSpAttack": 111, "baseSpDefense": 74},
+    "types": ["TYPE_FIRE", "TYPE_DARK"],
+    "abilities": ["ABILITY_BLAZE", "ABILITY_FLASH_FIRE"],
+    "learnset": [[1, "MOVE_SCRATCH"], [1, "MOVE_GROWL"], [5, "MOVE_EMBER"], [8, "MOVE_QUICK_ATTACK"], [11, "MOVE_LEER"], [14, "MOVE_BITE"], [16, "MOVE_FLAME_WHEEL"], [23, "MOVE_ROAR"], [27, "MOVE_SLASH"], [31, "MOVE_FLAMETHROWER"], [36, "MOVE_CRUNCH"], [42, "MOVE_AGILITY"], [49, "MOVE_FIRE_BLAST"], [56, "MOVE_SUNNY_DAY"]],
+    "migration_move": [5, "MOVE_EMBER"],
+    "evolutions": [],
+    "description": ["Its howl carries over OCEAN BEACH.", "The warm glow of its tail shelters", "smaller monsters on cold foggy nights."]
   }]
 }

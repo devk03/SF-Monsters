@@ -16,7 +16,8 @@ def replace_one(source, pattern, value):
 def check_monster(mon):
     constant(mon['species'], 'SPECIES_')
     for field in ['old_name', 'name', 'category']:
-        if not re.fullmatch(r'[A-Z0-9 ]{1,%d}' % (12 if field == 'category' else 10), mon[field]):
+        # categoryName[12] also stores the native text terminator.
+        if not re.fullmatch(r'[A-Z0-9 ]{1,%d}' % (11 if field == 'category' else 10), mon[field]):
             raise ValueError('Creature names must fit the native text fields.')
     if not re.fullmatch(r'[A-Z][A-Za-z]+', mon['symbol']) or not re.fullmatch(r'[a-z_]+', mon['engine_asset_dir']):
         raise ValueError('Unsafe native species symbol or asset path.')

@@ -1136,6 +1136,33 @@ First-slice creature authoring checkpoint — evolution and icon contracts:
   Starter-line data, original evolved cries, native/browser evidence and user
   review remain required. Approved parity stays 0/11.
 
+First-slice creature checkpoint — authored CinderCoy evolution candidates:
+
+- CinderCoy → Ashrunner at level 16 → Solhowl at level 36 is explicitly authored
+  on stable native Torchic/Combusken/Blaziken IDs. Ashrunner is a faster Fire
+  coyote with Flame Wheel at evolution; Solhowl becomes Fire/Dark with strong
+  special attack/speed, Crunch at evolution and physical/support options.
+  Species-specific learnsets, six-stat data, guide descriptions and distinct
+  original bark/howl recipes are compiled through the native engine.
+- Two new source atlases, back views, entrance poses and separately authored
+  icon poses are saved under assets/monsters/{ashrunner,solhowl}, including the
+  exact built-in imagegen prompts and encoding layouts. Native assets use
+  fifteen opaque RGB555 colors; icons share CinderCoy's reserved palette group.
+  Native-size cleanup and user art approval remain pending. This adds candidates,
+  not two quality-complete monsters or three approved starter lines.
+- Content revision 3 retains species IDs and the existing earned-progress upgrade
+  behavior. A native compiler warning exposed twelve-character category labels
+  overflowing their terminator space; the authoring limit is corrected to eleven
+  and the boundary is covered. Native draft compilation and BPS round-trip pass.
+- Private native-script fixtures prepare level-15/35 creatures and Rare Candy
+  for evolution UI tests. Their build command requires --draft and manifests
+  explicitly exclude campaign-progress evidence. Reference-compatible fixtures
+  restore original name/stat/learnset data and a safe shared map position for
+  battery setup; subsequent reference captures must use the actual a9dec84d…85af
+  cartridge. These setups never count as earned campaign levels or balance runs.
+  Native evolutions, move-learning, older-save/browser evidence, deployment and
+  matched reference clips remain next. Approved parity stays 0/11.
+
 Approved architecture change — Emerald ROM hack:
 
 - User direction: the result should immediately look and feel like Pokémon's
