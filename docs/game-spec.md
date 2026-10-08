@@ -2132,3 +2132,35 @@ Original title lettering and compiler diagnosis — private checkpoint:
   40.18 seconds at the original GBA rate, 2,400 controller frames. The main logo
   and subtitle are readable throughout the inherited title animation. This is
   a private candidate clip, not a paired Emerald suite or user quality approval.
+
+Bayveil title silhouette — private original-art checkpoint:
+
+- Generated original fog-manta silhouette art from the existing Bayveil design:
+  broad curled wings, kelp-like whiskers, fog-ribbon tail and two lighthouse eyes.
+  Source/prompt, native preview, scene tile payloads and conversion fingerprints
+  are under assets/ui/title-bayveil. Its visible footprint is 116x63; two separate
+  19-pixel eye regions use the existing pulsing color slot. This is title art,
+  not a new obtainable species or an implemented legendary quest. The eighteen
+  roster candidates and finished-monster counts are unchanged.
+- Replaced the stock title creature's graphics and map within their original
+  allocations. The first map removed the backing color used by the cloud blend,
+  producing a black background; that failed preview is retained. Corrected code
+  reserves thirty-two background tiles for an authored blue/teal row gradient,
+  and maps only occupied silhouette tiles. Native eye-component, nibble-order,
+  gradient/placement and resource-boundary checks pass. No palette changes or
+  game-state forcing are needed; cloud animation and existing input remain intact.
+- Corrected private target SHA-256:
+  c4ff84b3e6859654cbed323ac83e6a7a784e7c36c3e31c867389cddfc1fee950.
+  Graphics use 1,276 of 2,020 bytes; the map uses 460 of 768 bytes. Native/browser
+  BPS reapplication and required source checks pass. A 4,608-frame cold route to
+  Sunset/guide preserves both caught monsters and save data, matching native/WASM
+  RGB/Flash/all 5,056,128 stereo pairs. Evidence: bayveil-final-native-cold-guide.
+- Matched private review: bayveil-paired-title-review/comparison.mp4, 40.18 seconds,
+  2,400 frames per side, native mGBA 0.10.5, equal nearest-neighbor 3x scale.
+  Left is the supplied Emerald reference; right is the corrected SF preview.
+  Metadata includes both ROM/core identities and hashes. Audio uses the SF clip's
+  currently inherited title track. User feedback is requested for logo/silhouette/
+  layout art only; it does not approve the soundtrack or a full quality domain.
+- Public 0.0.17 remains unchanged while normal compilation/recovery is pending.
+  Title clouds/footer/music, complete slice polish and every full-game gate remain
+  open. Approved full domains stay 0/11. No GitHub workflow was dispatched.

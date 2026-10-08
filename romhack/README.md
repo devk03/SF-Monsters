@@ -86,6 +86,13 @@ resource batch together. The title palette update preserves the final sixteen
 creature/cloud colors. The inherited background creature/footer and title music
 still need their scoped replacements and review.
 
+Bayveil's title silhouette is under `assets/ui/title-bayveil`; encode it with
+`.tools/venv/bin/python scripts/romhack/title_creature.py`. The scene keeps two
+independent eye regions in the animated palette slot and supplies its own
+blue/teal backing tiles for cloud blending. Its graphics/map must fit the
+original allocations and decode losslessly. This title hint does not implement
+Bayveil's battle art, catalog entry, stats or acquisition quest.
+
 ## Editable SF maps
 
 `scripts/romhack/maps.py` compiles original ASCII layouts into Emerald's native
