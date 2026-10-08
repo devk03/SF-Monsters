@@ -2280,3 +2280,25 @@ Native Mac compilation — complete source-build checkpoint:
 - Public deployment of this normally compiled preview is being prepared.
   All eleven full approvals and the remaining full SF campaign gates remain
   open. No GitHub workflow was dispatched.
+
+- Published the normally compiled 0.0.24 preview through Sites, preserving public
+  access. Site version 18; source 3407da2ffd289b60a1d30112bbafb6e3f4c46656;
+  saved version appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_f783e2d8a9948191a2e9ac87cbc7da6e;
+  deployment appgdep_6ac763d5aa548191b845061849342671 reports succeeded at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site. The archive contains our
+  patch/manifest, emulator, site output and earlier standalone homebrew cartridge;
+  no inherited full cartridge is packaged. Native save/deploy identifies eighty-
+  four deployment files. Build output from the previous Site is preserved.
+- Hands-on fresh in-app browser verification loads the local base, renders the
+  SF title and downloads a 16 MiB cartridge matching the compiled target SHA-256.
+  Evidence: .tools/browser-review/public-v24{.json,-title.png}; downloaded file
+  is /Users/devkunjadia/Downloads/sf-mini-monsters (2).gba. The browser download
+  event API times out, but the completed file's timestamp/size/hash verify the
+  actual UI download. The initial Chrome Guest reload produces an empty view;
+  a fresh in-app browser loads and patches successfully. This is not a measured
+  performance result or proof of the complete campaign.
+- The public sign-in link reaches the expected OpenAI account login after
+  automatic security verification. The browser has no authenticated account
+  session; the user is asked to complete login before /play can be verified.
+  No credentials are requested in chat and no auth bypass is used. All full
+  quality approvals remain pending. No GitHub workflow was dispatched.
