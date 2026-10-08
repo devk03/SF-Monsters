@@ -25,19 +25,19 @@ def strong_bands(mask, axis):
     return bands
 
 
-def encode_office(root):
+def encode_card_atlas(root, asset, source_file, revision, card_banks, stem):
     from PIL import Image
-    path = root / ASSET
-    source = Image.open(path/SOURCE_FILE).convert('RGBA')
+    path = root / asset
+    source = Image.open(path/source_file).convert('RGBA')
     mask = source.getchannel('A').point(lambda a:255 if a >= 128 else 0)
     rows = strong_bands(mask,1)
     if len(rows) != 4:
-        raise ValueError('Office atlas needs four isolated card rows.')
+        raise ValueError('Interior atlas needs four isolated card rows.')
     boxes = []
     for top,bottom in rows:
         columns = strong_bands(mask.crop((0,top,mask.width,bottom)),0)
         if len(columns) != 4:
-            raise ValueError('Every office atlas row needs four cards.')
+            raise ValueError('Every interior atlas row needs four cards.')
         boxes.extend((left,top,right,bottom) for left,right in columns)
     cards = [source.crop(box).resize((32,32),Image.Resampling.NEAREST) for box in boxes]
     def colors_for(pixels,count):
@@ -47,7 +47,7 @@ def encode_office(root):
     floor = colors_for([rgb[:3] for rgb in cards[0].get_flattened_data() if rgb[3]>=128],3)
     palettes = {}
     for bank in range(6,10):
-        pixels = [rgb[:3] for card,owner in zip(cards,CARD_BANKS) if owner==bank
+        pixels = [rgb[:3] for card,owner in zip(cards,card_banks) if owner==bank
                   for rgb in card.get_flattened_data() if rgb[3]>=128]
         # Common ground colors keep the floor coherent beneath furniture;
         # eleven remaining colors preserve that group's material/detail range.
@@ -58,24 +58,28 @@ def encode_office(root):
     native.putpalette(flat+[0]*(768-len(flat)))
     indices = []
     for i,card in enumerate(cards):
-        colors = palettes[CARD_BANKS[i]]
+        colors = palettes[card_banks[i]]
         raw = bytes(min(range(1,16),key=lambda n:sum((rgb[c]-colors[n][c])**2 for c in range(3)))
                     for rgb in card.get_flattened_data())
         indices.append(raw)
         tile = Image.new('P',(32,32));tile.putpalette(native.getpalette())
-        tile.putdata(bytes((CARD_BANKS[i]-6)*16+p for p in raw))
+        tile.putdata(bytes((card_banks[i]-6)*16+p for p in raw))
         native.paste(tile,(i%4*32,i//4*32))
-    names = (f'native-atlas-{REVISION}.png',f'cards-{REVISION}.indices',f'office-{REVISION}.gbapal')
+    names = (f'native-atlas-{revision}.png',f'cards-{revision}.indices',f'{stem}-{revision}.gbapal')
     native.save(path/names[0],bits=8)
     (path/names[1]).write_bytes(b''.join(indices))
     palette = b''.join(struct.pack('<H',sum(round(rgb[c]*31/255) << (5*c) for c in range(3)))
                        for bank in range(6,10) for rgb in palettes[bank])
     (path/names[2]).write_bytes(palette)
-    metadata = {'source_file':SOURCE_FILE,'source_sha256':hashlib.sha256((path/SOURCE_FILE).read_bytes()).hexdigest(),
+    metadata = {'source_file':source_file,'source_sha256':hashlib.sha256((path/source_file).read_bytes()).hexdigest(),
                 'source_size':list(source.size),'source_cells':boxes,'native_card_size':[32,32],
-                'cards':16,'card_banks':CARD_BANKS,'palette_banks':[6,7,8,9],'quality_approval':'pending',
+                'cards':16,'card_banks':card_banks,'palette_banks':[6,7,8,9],'quality_approval':'pending',
                 'files':{name:hashlib.sha256((path/name).read_bytes()).hexdigest() for name in names}}
-    (path/f'conversion-{REVISION}.json').write_text(json.dumps(metadata,indent=2)+'\n')
+    (path/f'conversion-{revision}.json').write_text(json.dumps(metadata,indent=2)+'\n')
+
+
+def encode_office(root):
+    encode_card_atlas(root, ASSET, SOURCE_FILE, REVISION, CARD_BANKS, 'office')
 
 
 def office_resources(root):
@@ -141,10 +145,10 @@ def office_tile(plan,x,y):
     raise ValueError('Office token has no original art: '+token)
 
 
-def apply_office(root,engine):
+def install_interior_tileset(engine, name, symbol, resources):
     from PIL import Image
-    graphics,records,attributes,palettes = office_resources(root)
-    directory = engine/'data/tilesets/secondary/sf_cognition_office';directory.mkdir(parents=True,exist_ok=True)
+    graphics,records,attributes,palettes = resources
+    directory = engine/('data/tilesets/secondary/'+name);directory.mkdir(parents=True,exist_ok=True)
     count = len(graphics)//32
     image = Image.new('P',(128,((count+15)//16)*8),0)
     palette = []
@@ -155,18 +159,23 @@ def apply_office(root,engine):
         tile = graphics[i*32:(i+1)*32];pixels = bytes(p for v in tile for p in (v&15,v>>4))
         cell = Image.new('P',(8,8));cell.putdata(pixels);image.paste(cell,(i%16*8,i//16*8))
     image.save(directory/'tiles.png',bits=4)
-    for name,data in (('metatiles.bin',records),('attributes.bin',attributes),('palettes.gbapal',palettes)):
-        (directory/name).write_bytes(data)
-    prefix = 'data/tilesets/secondary/sf_cognition_office/'
+    for file_name,data in (('metatiles.bin',records),('attributes.bin',attributes),('palettes.gbapal',palettes)):
+        (directory/file_name).write_bytes(data)
+    prefix = 'data/tilesets/secondary/'+name+'/'
     paths = ['src/data/tilesets/graphics.h','src/data/tilesets/metatiles.h','src/data/tilesets/headers.h']
-    additions = ['\nconst u16 gTilesetPalettes_SFCognitionOffice[][16] = INCBIN_U16("'+prefix+'palettes.gbapal");\n'+
-                 'const u32 gTilesetTiles_SFCognitionOffice[] = INCGFX_U32("'+prefix+'tiles.png", ".4bpp.lz");\n',
-                 '\nconst u16 gMetatiles_SFCognitionOffice[] = INCBIN_U16("'+prefix+'metatiles.bin");\n'+
-                 'const u16 gMetatileAttributes_SFCognitionOffice[] = INCBIN_U16("'+prefix+'attributes.bin");\n',
-                 '\nconst struct Tileset gTileset_SFCognitionOffice = {.isCompressed=TRUE, .isSecondary=TRUE,\n'+
-                 ' .tiles=gTilesetTiles_SFCognitionOffice, .palettes=gTilesetPalettes_SFCognitionOffice,\n'+
-                 ' .metatiles=gMetatiles_SFCognitionOffice, .metatileAttributes=gMetatileAttributes_SFCognitionOffice, .callback=NULL};\n']
+    additions = [f'\nconst u16 gTilesetPalettes_{symbol}[][16] = INCBIN_U16("'+prefix+'palettes.gbapal");\n'+
+                 f'const u32 gTilesetTiles_{symbol}[] = INCGFX_U32("'+prefix+'tiles.png", ".4bpp.lz");\n',
+                 f'\nconst u16 gMetatiles_{symbol}[] = INCBIN_U16("'+prefix+'metatiles.bin");\n'+
+                 f'const u16 gMetatileAttributes_{symbol}[] = INCBIN_U16("'+prefix+'attributes.bin");\n',
+                 f'\nconst struct Tileset gTileset_{symbol} = {{.isCompressed=TRUE, .isSecondary=TRUE,\n'+
+                 f' .tiles=gTilesetTiles_{symbol}, .palettes=gTilesetPalettes_{symbol},\n'+
+                 f' .metatiles=gMetatiles_{symbol}, .metatileAttributes=gMetatileAttributes_{symbol}, .callback=NULL}};\n']
     for name,extra in zip(paths,additions):(engine/name).write_text((engine/name).read_text()+extra)
+    return paths+[prefix+file for file in ('tiles.png','metatiles.bin','attributes.bin','palettes.gbapal')]
+
+
+def apply_office(root,engine):
+    paths = install_interior_tileset(engine, 'sf_cognition_office', 'SFCognitionOffice', office_resources(root))
     plan = json.loads((root/'romhack/content/cognition.json').read_text())
     map_path = 'data/layouts/RustboroCity_Gym/map.bin'
     current = bytearray((engine/map_path).read_bytes())
@@ -176,7 +185,7 @@ def apply_office(root,engine):
             value = struct.unpack_from('<H',current,offset)[0]
             struct.pack_into('<H',current,offset,(value&0xfc00)|office_tile(plan,x,y))
     (engine/map_path).write_bytes(current)
-    return paths+[map_path]+[prefix+name for name in ('tiles.png','metatiles.bin','attributes.bin','palettes.gbapal')]
+    return paths+[map_path]
 
 
 if __name__ == '__main__':

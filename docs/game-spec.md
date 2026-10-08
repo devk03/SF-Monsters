@@ -3160,3 +3160,30 @@ Brighter office public hands-on verification:
 - Release and source commits pushed successfully. Actions inventory still
   ends at completed run 37731870689 (2026-10-08T05:20:22Z); these pushes and
   Sites publication triggered zero new Actions jobs. No DB operation ran.
+
+
+Original South Park clinic interior implementation:
+
+- Added an original sixteen-card clinic source atlas and exact built-in imagegen
+  prompt in assets/tiles/south-park-clinic. Bright ivory/teal recovery equipment,
+  terminal, waiting chairs, manuals, supply cabinet, counter, plant and notes
+  replace inherited lab furniture. This is first-slice art; approval is pending.
+- Shared the deterministic interior conversion/installation helpers with the
+  office; existing office derivatives are byte-unchanged. Clinic allocates
+  320 native tiles, 81 metatiles and four secondary palette banks. Every cell
+  uses the actor-visible floor layer. Original service scripts and animations
+  are unchanged; collision/elevation bits and all event/warp coordinates remain
+  intact. The terminal, notes and shop retain their authored interaction sites.
+- All local checks pass; two focused native tests verify capacity, draw/warp
+  behaviors, shared ground colors, installation paths and complete collision/
+  elevation preservation. Initial v35 draft compiles normally and BPS applies
+  exactly. An older earned save resumes with badge, stage 4, money, inventory
+  and wounded party preserved, then reaches the new clinic at (6,12).
+- Initial entry inspection exposed the old border record now pointing at the
+  exit arrow. Explicit border_tile 512 replaces that repeated arrow outside
+  the room; corrected draft compilation and healing/terminal/shop/exit/native-
+  WASM checks follow. The two earlier street approaches stopped outside and
+  are retained as diagnostic evidence, never counted as successful entry.
+- No quality score is inferred from generation, native conversion or tests.
+  Public release stays v34/Site 28; all full section 15 gates remain required.
+  No GitHub Actions, DB operation or delegated agent ran.

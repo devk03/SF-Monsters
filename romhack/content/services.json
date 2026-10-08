@@ -1,6 +1,11 @@
 {
   "engine_map": "LittlerootTown_ProfessorBirchsLab",
   "script": "services.inc",
+  "border_tile": 512,
+  "tilesets": {
+    "primary": "gTileset_General",
+    "secondary": "gTileset_SFSouthParkClinic"
+  },
   "legend": {
     ".": [
       514,
