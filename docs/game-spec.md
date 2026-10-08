@@ -756,14 +756,14 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302; Site version 29. Original bright clinic joins the brighter office. Both art subsets remain unreviewed; walking is preserved. |
-| Latest local source build | 0.0.35-clinic-interior-preview; target 0007ea7b1e2680de707e4bc300465f5ade39081c3154b583f0edb695ff046302. Normal compilation/BPS and older-save entry pass; native/WASM entry, healing and exit-return match. Matched clinic art clip is ready; native storage, priced shop and clinic save/cold-resume pass. Release is published; public download/import/resume/export verification passes. |
+| Public build | 0.0.37-seamless-clinic-preview; target aeea0b31083be08bc4f3fc8f6b2601bb48bac346b707650d8f3c542536114d1f; Site version 30. Finer low-contrast floor, continuous carpet, connected walls and original clinic cast address direct feedback. Art remains unapproved; walking is preserved. |
+| Latest local source build | Same v37 target. Normal compilation/BPS, old-save resume and full local checks pass; native/WASM healing and exit-return match RGB/PCM/Flash. New 34.29-second comparison is ready. Public hands-on QA follows. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site 29 cartridge download matches v35 target; native clinic save imports and resumes through title/Continue into the new clinic, then exports byte-identically. Sampled core throughput 60.0–60.6 fps. Signed-in player awaits the user's login. Physical-device/deadline/input/audio gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Review brighter office and original clinic matched clips; continue remaining named cast/portraits, original music and first-slice reviews. Preserve positively reviewed animation. Checks stay local; GitHub Actions stays manual-only. |
+| Next work | Review corrected clinic floor/wall clip; apply coherent material/connection rules to other first-slice interiors, then remaining cast/portraits/music and first-slice gates. Preserve positively reviewed walking. Checks stay local; GitHub Actions stays manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3340,3 +3340,25 @@ User-directed clinic tiling correction:
   and continuous wall/carpet joins. Native/WASM routes and publication follow.
 - Public remains v35/Site 29. All section 15 gates and unapproved first-slice
   domains remain required; no GitHub workflow or DB operation ran.
+
+
+Seamless clinic runtime and public packaging:
+
+- Normal release from 31745eb reproduces v37 target exactly. BPS is 785,858
+  bytes, SHA256 36f98c46e82fb173660e5720029361166b8db789cfae5c9024545b179d9c5cd5.
+  Native/WASM healing: 336 identical RGB frames, 1,474,704 PCM bytes and
+  identical Flash. Exit/re-entry: 576 identical RGB frames, 2,528,064 PCM
+  bytes and identical Flash. Both original clinic sprites remain visible.
+- Revised same-input 2,048-frame, 34.29-second private comparison:
+  .tools/benchmarks/seamless-clinic-v37-paired-review/comparison.{mp4,png,json}.
+  Equal nearest 3x display, native clock and original Emerald lab reference.
+  SF walk returns (6,8); new still inspected for subtle smaller floor texture,
+  uninterrupted carpet and joined cutaway walls. Complete recordings are
+  compressed losslessly; no review or full-domain score is inferred.
+- Site source d0953b2b751991f02ff83b20b58042e5d3d1f9db passes TypeScript and
+  production build. Archive verifies exact patch/manifest and no inherited
+  cartridge. Saved Site version 30:
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_99f14be67190819180b9fe66ab89e7b4.
+  Public audience/local patching remain unchanged. Actual public older-save
+  download/import/resume/export checks follow. All full gates remain required;
+  no workflow, DB migration or delegated agent ran.
