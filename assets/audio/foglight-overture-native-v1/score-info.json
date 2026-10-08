@@ -1,0 +1,11 @@
+{
+  "title": "Foglight Overture",
+  "tracks": 8,
+  "bars": 32,
+  "loop_ticks": 3072,
+  "tempo": 116,
+  "nominal_loop_seconds": 66.20689655172414,
+  "instruments": "Original SF battle-bank PCM; no inherited title instrument samples.",
+  "midi_sha256": "a5fa33ca074408a6958d785d882f172468225b28461856419b9d86fbcdb58a16",
+  "quality_approval": "pending"
+}

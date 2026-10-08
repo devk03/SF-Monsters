@@ -31,13 +31,14 @@ class NativeScore(unittest.TestCase):
     def test_seven_mono_tracks_share_each_declared_loop(self):
         for stem, loop in [('ocean-commute', 1536), ('fogbank-frenzy', 2304)]:
             with self.subTest(score=stem): self.check_score(stem, loop)
+        self.check_score('foglight-overture', 3072, 8)
 
-    def check_score(self, stem, loop):
+    def check_score(self, stem, loop, track_count=7):
         data = (ROOT / f'assets/audio/{stem}-native-v1/{stem.replace("-", "_")}.mid').read_bytes()
         self.assertEqual(data[:4], b'MThd')
-        self.assertEqual(struct.unpack_from('>IHHH', data, 4), (6, 1, 7, 24))
+        self.assertEqual(struct.unpack_from('>IHHH', data, 4), (6, 1, track_count, 24))
         cursor = 14
-        for track in range(7):
+        for track in range(track_count):
             self.assertEqual(data[cursor:cursor + 4], b'MTrk')
             length = struct.unpack_from('>I', data, cursor + 4)[0]; cursor += 8
             active, markers, count = set(), [], 0
