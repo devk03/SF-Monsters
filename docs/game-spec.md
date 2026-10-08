@@ -768,7 +768,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site 34 Chrome account restores prior local save through GUIDE/Continue into clinic. Actual ROM download matches v42; backup export matches v35 import byte-for-byte. Initial chooser wait timed out; alternate visible Load ROM succeeded without console errors. Test player muted/paused. Fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Genuine 34.29-second Emerald/SF healing comparison is ready; cue and visual-sequence subset scores requested. Next improve static SF recovery equipment/NPC choreography while preserving HP/PP and return-control behavior. v41 instrument review and all other first-slice gates remain open. Actions stay manual-only. |
+| Next work | Verify v43 recovery lights/healer gesture in native and WASM, preserving HP/PP, collision and return control; then publish a matched healing comparison. Latest explicit clinic music score remains 2/4. v41 instrument review and all other first-slice gates remain open. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3802,3 +3802,22 @@ Genuine Emerald recovery comparison checkpoint:
   service behavior, and gather a new same-protocol comparison. Full domain
   approvals remain 0/11; latest clinic soundtrack rating is v40 at 2/4.
   Public stays v42/Site34. No workflow, DB mutation, PR merge or delegation ran.
+
+Recovery animation source checkpoint (v43, not yet released):
+
+- Previous turn produced progress: genuine controller-only Emerald healing
+  reference and a same-input comparison now exist. No quality approval inferred.
+- User reiterated clinic music 2/4. This remains the recorded score; full Audio
+  and all eleven full-domain approvals remain open. Teal flooring stays removed.
+- Added native amber equipment palette phases that reuse the exact four pod
+  metatile geometries. Only equipment color indices 10/12/13 change, isolated
+  in banks10/11/12; neutral floor/outline/other furniture colors stay unchanged.
+- Healer faces equipment, plays the existing original recovery cue with five
+  24-frame light holds, restores idle equipment and waits for the original
+  fanfare gate before facing the player and releasing control after dialogue.
+  No actor coordinates, inventory, save format or recovery mechanics change.
+- Tileset uses106 metatiles/328 native tiles, within capacity. Five local clinic
+  tests pass, including phase geometry/layer/material invariants. Build,
+  native/WASM replay, public release and human visual/audio review are pending.
+- Public remains v42/Site34 until validated v43 is published. No Actions run,
+  DB mutation, PR merge or delegation. Goal remains active until 6 PM SF local.

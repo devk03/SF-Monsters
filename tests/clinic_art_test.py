@@ -16,9 +16,9 @@ class ClinicArt(unittest.TestCase):
     def test_native_exit_layers_and_capacity_keep_actors_and_warp_visible(self):
         graphics,records,attributes,palettes=clinic_resources(ROOT)
         self.assertLessEqual(len(graphics)//32,504)
-        self.assertEqual(len(records),94*16)
+        self.assertEqual(len(records),106*16)
         self.assertEqual(len(palettes),512)
-        flags=struct.unpack('<94H',attributes)
+        flags=struct.unpack('<106H',attributes)
         self.assertEqual(flags[1],0x1065)
         self.assertEqual({i for i,flag in enumerate(flags) if flag>>12!=1},{52,53})
         self.assertEqual(flags[52:54],(0,0))
@@ -30,6 +30,21 @@ class ClinicArt(unittest.TestCase):
         for record,bank in ((2,6),(6,7),(8,8),(7,9)):
             foreground=struct.unpack_from('<8H',records,record*16)[4:]
             self.assertEqual({value>>12 for value in foreground},{bank})
+
+    def test_recovery_palette_phases_preserve_geometry_and_ground(self):
+        graphics,records,attributes,palettes=clinic_resources(ROOT)
+        for phase,bank in enumerate((10,11,12)):
+            for corner,base in enumerate((28,29,30,31)):
+                original=struct.unpack_from('<8H',records,base*16)
+                animated=struct.unpack_from('<8H',records,(94+phase*4+corner)*16)
+                self.assertEqual([v&0xfff for v in original],[v&0xfff for v in animated])
+                self.assertEqual({v>>12 for v in animated[4:]},{bank})
+                self.assertEqual(attributes[base*2:base*2+2],
+                                 attributes[(94+phase*4+corner)*2:(95+phase*4+corner)*2])
+            base=struct.unpack_from('<16H',palettes,7*32)
+            current=struct.unpack_from('<16H',palettes,bank*32)
+            self.assertEqual({i for i in range(16) if base[i]!=current[i]},{10,12,13})
+        self.assertEqual(len(graphics)//32,328) # no duplicated pixel geometry
 
     def test_overlay_keeps_collision_elevation_and_existing_service_locations(self):
         plan=json.loads((ROOT/'romhack/content/services.json').read_text())

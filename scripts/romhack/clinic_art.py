@@ -12,6 +12,22 @@ ASSET = 'assets/tiles/south-park-clinic'
 REVISION = 'v4'
 SOURCE_FILE = 'source-neutral-v4.png'
 CARD_BANKS = (6,6,6,6,7,7,8,7,6,9,7,6,9,9,6,6)
+RECOVERY_FIRST = 606
+RECOVERY_BASE_RECORDS = (28,29,30,31)
+
+
+def recovery_palettes(palette):
+    """Native amber indicator phases; preserve furniture, floor and outlines."""
+    base=list(struct.unpack('<16H',palette[32:64])) # bank 7: equipment
+    phases=[]
+    for shades in (((17,10,3),(12,7,2),(9,5,1)),
+                   ((27,19,6),(22,14,4),(17,10,2)),
+                   ((31,28,18),(29,23,10),(26,18,5))):
+        colors=base.copy()
+        for index,rgb in zip((10,12,13),shades):
+            colors[index]=sum(component<<(5*c) for c,component in enumerate(rgb))
+        phases.append(struct.pack('<16H',*colors))
+    return b''.join(phases)
 
 
 def encode_clinic(root):
@@ -114,13 +130,20 @@ def clinic_resources(root):
     for xx in (0,16):
         cells.append((align_ground(bytes(pixel for y in range(16) for pixel in notes[y*32+xx:y*32+xx+16]),16,16,floor),9))
         flags.append(0x1000)
+    if len(cells)!=RECOVERY_FIRST-512:
+        raise ValueError('Recovery script metatile allocation needs review.')
+    # Reuse the exact equipment pixels with isolated native palette banks.
+    # Other blue furniture and every floor pixel keep their original color.
+    for bank in (10,11,12):
+        for record in RECOVERY_BASE_RECORDS:
+            cells.append((cells[record][0],bank));flags.append(flags[record])
     graphics,records,attributes = pack_park_cells(cells,flags)
     # A proper front layer hides only the counter's opaque prop pixels;
     # ground stays behind actors, avoiding the former all-floor occlusion bug.
     records=bytearray(records)
     ground=records[2*16+8:3*16]
     for index in (52,53):records[index*16:index*16+8]=ground
-    return graphics,bytes(records),attributes,bytes(192)+palette+bytes(192)
+    return graphics,bytes(records),attributes,bytes(192)+palette+recovery_palettes(palette)+bytes(96)
 
 
 def clinic_tile(plan,x,y):

@@ -7,12 +7,57 @@ SF_Clinic_Enter::
 SF_JustineClinic::
 	lock
 	faceplayer
+	applymovement 1, SF_Clinic_TurnToEquipment
+	waitmovement 0
 	special HealPlayerParty
 	playfanfare MUS_HEAL
+	call SF_Clinic_LightsWarm
+	delay 24
+	call SF_Clinic_LightsBright
+	delay 24
+	call SF_Clinic_LightsPeak
+	delay 24
+	call SF_Clinic_LightsBright
+	delay 24
+	call SF_Clinic_LightsWarm
+	delay 24
+	call SF_Clinic_LightsOff
 	waitfanfare
+	faceplayer
 	msgbox SF_Text_Clinic, MSGBOX_DEFAULT
 	release
 	end
+SF_Clinic_TurnToEquipment::
+	face_left
+	step_end
+SF_Clinic_LightsWarm::
+	setmetatile 1, 5, 606, TRUE
+	setmetatile 2, 5, 607, TRUE
+	setmetatile 1, 6, 608, TRUE
+	setmetatile 2, 6, 609, TRUE
+	special DrawWholeMapView
+	return
+SF_Clinic_LightsBright::
+	setmetatile 1, 5, 610, TRUE
+	setmetatile 2, 5, 611, TRUE
+	setmetatile 1, 6, 612, TRUE
+	setmetatile 2, 6, 613, TRUE
+	special DrawWholeMapView
+	return
+SF_Clinic_LightsPeak::
+	setmetatile 1, 5, 614, TRUE
+	setmetatile 2, 5, 615, TRUE
+	setmetatile 1, 6, 616, TRUE
+	setmetatile 2, 6, 617, TRUE
+	special DrawWholeMapView
+	return
+SF_Clinic_LightsOff::
+	setmetatile 1, 5, 540, TRUE
+	setmetatile 2, 5, 541, TRUE
+	setmetatile 1, 6, 542, TRUE
+	setmetatile 2, 6, 543, TRUE
+	special DrawWholeMapView
+	return
 SF_ClinicCounterShop::
 	setvar VAR_LAST_TALKED, 2
 	goto SF_PatrickShop
