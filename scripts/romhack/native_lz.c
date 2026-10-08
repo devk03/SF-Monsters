@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     {
         if (length < 4 || bytes[0] != 0x10) return 2;
         unsigned declared = bytes[1] | bytes[2] << 8 | bytes[3] << 16;
-        if (!declared || declared > 8192) return 2;
+        if (!declared || declared > 16384) return 2;
         result = LZDecompress(bytes, length, &size);
         if (size != (int) declared) return 2;
     }

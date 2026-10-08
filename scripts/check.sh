@@ -23,6 +23,7 @@ python3 tests/field_music_test.py
 python3 tests/frame_storage_test.py
 python3 tests/interface_text_test.py
 python3 tests/interface_graphics_test.py
+python3 tests/native_resources_test.py
 node tests/web_capture_test.cjs
 cd web
 npx tsc --noEmit

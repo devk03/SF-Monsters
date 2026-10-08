@@ -1,8 +1,8 @@
 {
-  "version": "0.0.19-guide-header-preview",
+  "version": "0.0.20-title-lettering-preview",
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with eighteen original creature/call candidates and original team/guide labels and guide-header candidate; native title, pixel cleanup, portraits, tiles and other music remain unfinished.",
+  "status": "Unreviewed SF chapter with eighteen original creature/call candidates and original team/guide labels and guide-header and title-lettering candidates; native title, pixel cleanup, portraits, tiles and other music remain unfinished.",
   "maps": [
     "sunset.json",
     "south-park.json",

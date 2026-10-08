@@ -2095,3 +2095,40 @@ Original Field Guide header — private native-art checkpoint:
   comparison or a user approval. Public 0.0.17 remains unchanged; normal compilation,
   original title/other graphics, full slice polish and every section 15.1 gate
   remain required. Approved quality remains 0/11. No GitHub workflow was dispatched.
+
+Original title lettering and compiler diagnosis — private checkpoint:
+
+- Generated original SF MINI MONSTERS and SAN FRANCISCO wordmarks. Editable
+  source/prompt, indexed native conversions, palettes and tile payloads are under
+  assets/ui/title. The main logo uses sixteen RGB555 colors in an eight-bit tile
+  sheet; the subtitle uses contiguous left/right 64x32 sprite blocks. Pixel/art
+  approval remains pending; the background creature/footer and title music remain
+  inherited. This replaces two branding elements, not the whole title experience.
+- Rendered inspection caught clipping from the engine's 29-pixel horizontal
+  affine offset. The corrected visible logo is 180 pixels wide and centered at
+  source x=91; all letters now fit on the 240x160 screen. Existing title animation
+  code, input, sprite positions and the creature/cloud palette tail are preserved.
+- A reusable native-resource writer validates ELF correspondence, allocation
+  bounds, overlap, exact reapplication and lossless compression before writing
+  the cartridge. Logo compression uses 3,668 of 5,892 bytes; the subtitle uses
+  its full 1,588-byte allocation. Neighbor/palette-tail and actual split-sprite
+  ordering tests pass. The native codec now accepts the required 16 KiB logo.
+- Private target SHA-256:
+  5ac09182ec46d89484b7aa717f8b22fd58c9b51a576d85c8a7780a5571926ad8.
+  A 4,608-frame cold route reaches Sunset and the guide, preserving the caught
+  party/save state and matching native/WASM RGB/Flash/all 5,056,128 stereo pairs.
+  Native Flips/browser BPS reapplication and required local source checks pass.
+- Docker host logs report disk-full writes and missing-image-blob I/O failures;
+  the VM console records an aborted ext4 journal. The supported start command
+  reports the app already running. One supported restart, bounded to 45 seconds,
+  fails because desktop/backend processes will not exit. No storage is removed
+  or reset. Force-quit/recovery approval is requested because Docker may serve
+  other work; no dependent recovery action proceeds without the response.
+- Public 0.0.17 is unchanged. Normal compilation, the original title scene/music,
+  full slice polish and every full-game gate remain required. All eleven quality
+  approvals remain pending. No GitHub workflow was dispatched.
+
+- Native title-lettering review: title-lettering-final-native-review/review.mp4,
+  40.18 seconds at the original GBA rate, 2,400 controller frames. The main logo
+  and subtitle are readable throughout the inherited title animation. This is
+  a private candidate clip, not a paired Emerald suite or user quality approval.

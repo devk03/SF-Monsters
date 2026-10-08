@@ -77,6 +77,15 @@ the pinned engine tool's LZ77 codec. It verifies lossless decoding and refuses a
 compressed replacement larger than its original ELF allocation. Full inherited
 sheets and reconstructed cartridges remain in ignored private storage.
 
+Original title lettering is under `assets/ui/title`; run
+`.tools/venv/bin/python scripts/romhack/title_art.py` to encode the source atlas.
+Its logo sheet uses the native affine layer's 29-pixel horizontal offset; the
+subtitle consists of two contiguous 64x32 sprite blocks. `native_resources.py`
+checks ELF correspondence and compression/allocation budgets, then writes the
+resource batch together. The title palette update preserves the final sixteen
+creature/cloud colors. The inherited background creature/footer and title music
+still need their scoped replacements and review.
+
 ## Editable SF maps
 
 `scripts/romhack/maps.py` compiles original ASCII layouts into Emerald's native
