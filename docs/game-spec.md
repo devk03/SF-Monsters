@@ -756,7 +756,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.32-cognition-cast-preview; target 311642145d16a51a0eff63cdb13b0799771f8d48f29c79ad73fc045bda45f780; Site version 26. Three original Cognition field-sprite candidates, corrected save-boot prompts and frame diagnostics; unreviewed. |
+| Public build | 0.0.33-cognition-office-preview; target 0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f; Site version 27. Original office and cast candidates; user requests a brighter look and less repetition, with positive animation feedback. Full quality approvals remain open. |
 | Latest local source build | 0.0.33-cognition-office-preview; target 0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f. Original office candidate compiles and old gym save cold-resumes; exit/re-entry RGB/audio/Flash match natively and in WASM. Public ROM stays 0.0.32 pending normal release/public QA. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
@@ -3036,3 +3036,48 @@ Public import diagnostics and original office checkpoint:
   release/QA, pixel cleanup, clinic art, other cast/portraits/music and full
   section 15 scope remain required. Full approved domains stay 0/11. No DB
   operation, delegated agent, recurring monitor or GitHub workflow was used.
+
+
+Office publication, matched review and user feedback:
+
+- Normal release build reproduces office target
+  0dfc69dc6b7473bd0dec180fec9f9603645693dfec41ffcc039e9ac0e5f0660f.
+  BPS SHA256 55ca8fa888af23927fd541b14de8eb785fbe44a16f6100b0d73363cfd40b6468,
+  772,747 bytes. Site source 9adae707b890ae8ffef7fc6742823f1e27670f06 passes
+  TypeScript/build; exact archive contains no inherited cartridge. Version 27
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_1c745d412fac819199b2d526ffc280a5,
+  deployment appgdep_6ac7bf1d1ae881918a97c707a827f37e succeeded at
+  2026-10-08T16:04:54Z. Public audience and local ROM patching are preserved.
+- Actual public cartridge download (10).gba matches the target; older native
+  cast-room-saved battery resumes visibly in the new room. Public Save backup
+  is byte-identical (131,072 bytes, SHA256
+  0d815344d5da4c9166efcb589955ee954c51fec041b0fb6a0e53cedf7fa67494).
+  Screenshot/receipt: .tools/browser-review/public-v33-cognition-office.{png,json}.
+  Sampled core throughput 60.0 fps is not a complete performance gate.
+- Produced 2,048-frame, 34.29-second paired interior walking clips with identical
+  controller rows, native GBA timing and equal nearest 3x display. Emerald lab
+  reference enters from the verified original-town doorway lineage; stock
+  scene/ROM identity and empty starting party are inspected. It does not use
+  a prepared evolution snapshot with cached SF map/weather. Both interior
+  walks return to their starting positions. Scope is upper-office scene art
+  and walking readability, not a full world/pixel-art/movement/audio domain.
+- Corrected review: .tools/benchmarks/office-interior-paired-review-tracks/
+  comparison.{mp4,png,json}. Its two audio tracks are labelled Emerald reference
+  and SF candidate; the earlier package lacked MP4 track labels and is retained.
+  Reference footage stays private. Added a guarded reusable private packager;
+  three tests reject wrong reference/core, controller provenance, mismatched
+  timing/input/resolution and too-short clips. Full local checks pass.
+- User feedback on that exact clip: "the biggest gap is that sf maybe looks too
+  gloomy and reuses the same sprites too much, the quality of the animation is
+  good". No numerical score or 4/4 approval is inferred. Preserve the positively
+  reviewed walking animation; brighten the room and diversify repeated props.
+- First corrective native conversion splits floor/walls, furniture, plants and
+  relays/boards across banks 6–9, with shared ground/outline colors. Versioned
+  v2 derivatives preserve the old one-bank assets. Tests verify palette records
+  and shared colors, with exit/gate/layer behavior unchanged. Draft target
+  6216be102b6d52db9a7c11b872a0a69824907ccf8bc2da917fdaecc84d2ababd compiles
+  normally and BPS applies exactly; brighter source/prop variation follows.
+- Verified compression of three older completed recordings freed 1,036.2 MiB
+  without losing frames. Both new complete comparison captures are also
+  losslessly compressed. No files were removed, no DB operation or workflow
+  was run, and all full-domain/campaign/system gates remain required.

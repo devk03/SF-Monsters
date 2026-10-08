@@ -7,6 +7,8 @@ from park_art import pack_park_cells
 from street_art import rotate_pixels
 
 ASSET = 'assets/tiles/cognition-office'
+REVISION = 'v2'
+CARD_BANKS = (6,6,6,6,7,7,8,7,9,7,7,9,9,9,6,7)
 
 
 def strong_bands(mask, axis):
@@ -37,64 +39,79 @@ def encode_office(root):
             raise ValueError('Every office atlas row needs four cards.')
         boxes.extend((left,top,right,bottom) for left,right in columns)
     cards = [source.crop(box).resize((32,32),Image.Resampling.NEAREST) for box in boxes]
-    pixels = [rgba[:3] for card in cards for rgba in card.get_flattened_data() if rgba[3] >= 128]
-    sample = Image.new('RGB',(len(pixels),1));sample.putdata(pixels)
-    values = sample.quantize(colors=15,method=Image.Quantize.MEDIANCUT).getpalette()[:45]
-    colors = [(0,0,0)]+[tuple(round(c*31/255)*255//31 for c in values[i:i+3]) for i in range(0,45,3)]
+    def colors_for(pixels,count):
+        sample = Image.new('RGB',(len(pixels),1));sample.putdata(pixels)
+        values = sample.quantize(colors=count,method=Image.Quantize.MEDIANCUT).getpalette()[:count*3]
+        return [tuple(round(c*31/255)*255//31 for c in values[i:i+3]) for i in range(0,len(values),3)]
+    floor = colors_for([rgb[:3] for rgb in cards[0].get_flattened_data() if rgb[3]>=128],3)
+    palettes = {}
+    for bank in range(6,10):
+        pixels = [rgb[:3] for card,owner in zip(cards,CARD_BANKS) if owner==bank
+                  for rgb in card.get_flattened_data() if rgb[3]>=128]
+        # Common ground colors keep the floor coherent beneath furniture;
+        # eleven remaining colors preserve that group's material/detail range.
+        detail = [rgb for rgb in pixels if min(sum((rgb[c]-f[c])**2 for c in range(3)) for f in floor)>432]
+        palettes[bank] = [(0,0,0)]+floor+[(24,24,24)]+colors_for(detail or pixels,11)
     native = Image.new('P',(128,128),0)
-    native.putpalette([c for color in colors for c in color]+[0]*720)
+    flat = [c for bank in range(6,10) for color in palettes[bank] for c in color]
+    native.putpalette(flat+[0]*(768-len(flat)))
     indices = []
     for i,card in enumerate(cards):
+        colors = palettes[CARD_BANKS[i]]
         raw = bytes(min(range(1,16),key=lambda n:sum((rgb[c]-colors[n][c])**2 for c in range(3)))
                     for rgb in card.get_flattened_data())
         indices.append(raw)
-        tile = Image.new('P',(32,32));tile.putpalette(native.getpalette());tile.putdata(raw)
+        tile = Image.new('P',(32,32));tile.putpalette(native.getpalette())
+        tile.putdata(bytes((CARD_BANKS[i]-6)*16+p for p in raw))
         native.paste(tile,(i%4*32,i//4*32))
-    native.save(path/'native-atlas.png',bits=4)
-    (path/'cards.indices').write_bytes(b''.join(indices))
-    palette = b''.join(struct.pack('<H',sum(round(rgb[c]*31/255) << (5*c) for c in range(3))) for rgb in colors)
-    (path/'office.gbapal').write_bytes(palette)
+    names = (f'native-atlas-{REVISION}.png',f'cards-{REVISION}.indices',f'office-{REVISION}.gbapal')
+    native.save(path/names[0],bits=8)
+    (path/names[1]).write_bytes(b''.join(indices))
+    palette = b''.join(struct.pack('<H',sum(round(rgb[c]*31/255) << (5*c) for c in range(3)))
+                       for bank in range(6,10) for rgb in palettes[bank])
+    (path/names[2]).write_bytes(palette)
     metadata = {'source_sha256':hashlib.sha256((path/'source.png').read_bytes()).hexdigest(),
                 'source_size':list(source.size),'source_cells':boxes,'native_card_size':[32,32],
-                'cards':16,'palette_bank':6,'quality_approval':'pending',
-                'files':{name:hashlib.sha256((path/name).read_bytes()).hexdigest()
-                         for name in ('native-atlas.png','cards.indices','office.gbapal')}}
-    (path/'conversion.json').write_text(json.dumps(metadata,indent=2)+'\n')
+                'cards':16,'card_banks':CARD_BANKS,'palette_banks':[6,7,8,9],'quality_approval':'pending',
+                'files':{name:hashlib.sha256((path/name).read_bytes()).hexdigest() for name in names}}
+    (path/f'conversion-{REVISION}.json').write_text(json.dumps(metadata,indent=2)+'\n')
 
 
 def office_resources(root):
     from PIL import Image
     path = root / ASSET
-    metadata = json.loads((path/'conversion.json').read_text())
+    metadata = json.loads((path/f'conversion-{REVISION}.json').read_text())
+    if tuple(metadata['card_banks']) != CARD_BANKS:
+        raise ValueError('Office palette assignment changed after conversion.')
     for name,digest in dict(metadata['files'],**{'source.png':metadata['source_sha256']}).items():
         if hashlib.sha256((path/name).read_bytes()).hexdigest() != digest:
             raise ValueError('Regenerate office atlas after changing '+name)
-    raw = (path/'cards.indices').read_bytes()
+    raw = (path/f'cards-{REVISION}.indices').read_bytes()
     if len(raw) != 16*1024 or not all(0 < p < 16 for p in raw):
         raise ValueError('Office cards need sixteen opaque four-bit 32x32 records.')
     cards = [raw[i*1024:(i+1)*1024] for i in range(16)]
     def small(index):
         return bytes(cards[index][y*2*32+x*2] for y in range(16) for x in range(16))
     # Records 1/2 preserve native exit and scripted gate-open semantics.
-    cells = [(small(i),6) for i in (0,14,0,1,13,2)]
+    cells = [(small(i),CARD_BANKS[i]) for i in (0,14,0,1,13,2)]
     flags = [0x1000,0x1065,0x1000,0x1000,0x1000,0x1000]
-    for card in cards:
+    for card,bank in zip(cards,CARD_BANKS):
         for yy,xx in ((0,0),(0,16),(16,0),(16,16)):
-            cells.append((bytes(p for y in range(yy,yy+16) for p in card[y*32+xx:y*32+xx+16]),6))
+            cells.append((bytes(p for y in range(yy,yy+16) for p in card[y*32+xx:y*32+xx+16]),bank))
             flags.append(0x1000)
     # Two-cell coffee counter keeps the existing one-row collision footprint.
     coffee = Image.frombytes('L',(32,32),cards[10]).resize((32,16),Image.Resampling.NEAREST).tobytes()
     for xx in (0,16):
-        cells.append((bytes(p for y in range(16) for p in coffee[y*32+xx:y*32+xx+16]),6));flags.append(0x1000)
+        cells.append((bytes(p for y in range(16) for p in coffee[y*32+xx:y*32+xx+16]),7));flags.append(0x1000)
     for turns in (1,2,3):
         cells.append((rotate_pixels(small(2),turns),6));flags.append(0x1000)
     for card in (11,12,15,3):
-        cells.append((small(card),6));flags.append(0x1000)
+        cells.append((small(card),CARD_BANKS[card]));flags.append(0x1000)
     board = Image.frombytes('L',(32,32),cards[8]).resize((32,16),Image.Resampling.NEAREST).tobytes()
     for xx in (0,16):
-        cells.append((bytes(p for y in range(16) for p in board[y*32+xx:y*32+xx+16]),6));flags.append(0x1000)
+        cells.append((bytes(p for y in range(16) for p in board[y*32+xx:y*32+xx+16]),9));flags.append(0x1000)
     graphics,records,attributes = pack_park_cells(cells,flags)
-    return graphics,records,attributes,bytes(192)+(path/'office.gbapal').read_bytes()+bytes(288)
+    return graphics,records,attributes,bytes(192)+(path/f'office-{REVISION}.gbapal').read_bytes()+bytes(192)
 
 
 def office_tile(plan,x,y):

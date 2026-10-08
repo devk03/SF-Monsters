@@ -38,5 +38,6 @@ python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_art_test.py
 .tools/venv/bin/python tests/office_art_test.py
 node tests/web_capture_test.cjs
+python3 tests/paired_review_test.py
 cd web
 npx tsc --noEmit

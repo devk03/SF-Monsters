@@ -20,6 +20,14 @@ class OfficeArt(unittest.TestCase):
         self.assertLessEqual(len(graphics)//32,504)
         self.assertEqual(len(records),81*16)
         self.assertEqual(len(palettes),512)
+        bank=lambda record:{value>>12 for value in struct.unpack_from('<8H',records,record*16)[4:]}
+        self.assertEqual(bank(2),{6})
+        self.assertEqual(bank(22),{7}) # workstation
+        self.assertEqual(bank(30),{8}) # vegetation
+        self.assertEqual(bank(75),{9}) # relay
+        for index in range(1,5):
+            colors=[palettes[bank*32+index*2:bank*32+index*2+2] for bank in range(6,10)]
+            self.assertEqual(len(set(colors)),1)
 
     def test_every_current_cell_has_original_art_without_losing_events_or_warps(self):
         plan=json.loads((ROOT/'romhack/content/cognition.json').read_text())
