@@ -755,13 +755,13 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Item | Authoritative current status |
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
-| Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
+| Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe; Site version 21. |
 | Latest local source build | 0.0.28-rowhouse-door-preview; target aac9091c9bc1a35a668829b0238d4d1edda98e1bd3449bca220985eac58a4afe. Original opening/closing door frames verified locally and published; doorway subset review pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Local ROM load and downloaded 0.0.27 cartridge verified; earned apartment save accepted and resumed into the original studio with completed-beacon dialogue. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Public QA | Local ROM load and downloaded 0.0.28 cartridge verified; existing guest save resumes into the original apartment. Earned post-gym beacon branch is verified locally. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
 | Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
 
@@ -2577,3 +2577,15 @@ Public 0.0.28 cartridge check:
   Receipt: .tools/browser-review/public-v28.json. This is the same normally
   compiled cartridge used for native/WASM animation checks, not a browser-only
   adaptation. Real sign-in and full physical-device/performance gates stay open.
+
+
+Public 0.0.28 resume follow-up:
+
+- Continue on the actual published player resumes the existing guest save in
+  the courier apartment. Screenshot .tools/browser-review/public-v28-resume.png
+  includes the live game and public page context; public-v28.json records this
+  alongside the exact downloaded cartridge hash. This proves the tested guest
+  resume only, not signed-in play or the ten full release round trips.
+- Doorway review remains pending, all full quality approvals remain 0/11,
+  and the full campaign/acceptance objective remains active. Pushed commits
+  were checked: GitHub still shows no new, queued or running Actions jobs.
