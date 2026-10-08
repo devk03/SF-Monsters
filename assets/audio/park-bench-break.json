@@ -1,6 +1,7 @@
 {
   "title": "Park Bench Break",
   "arrangement": "clinic",
+  "instrument_revision": 2,
   "tempo": 104,
   "ticks_per_quarter": 24,
   "sections": ["A", "A2", "B", "A3"],

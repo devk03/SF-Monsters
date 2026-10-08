@@ -3595,3 +3595,27 @@ Clinic v40 revised music release and user review:
   public-v40-clinic-music.png. Sampled core counter 60.0 fps is not a deadline gate.
 - No workflow, DB mutation, PR merge or delegation ran. Goal stays active with
   the original full scope and the recorded 6 PM local stop condition.
+
+
+Clinic instrument revision 2 checkpoint:
+
+- Previous goal turn classified as progress: original clinic soundtrack v40
+  was deployed and its below-target human score (2/4) recorded.
+- Specific gap feedback is still pending. Instrument tone is the working
+  hypothesis, not a criticism attributed to the user. Keep v40 as the scored
+  baseline and compare a single controlled revision rather than changing tune
+  and instruments together.
+- Revision 2 MIDI is byte-identical to v40: same melody, form, timing and mix.
+  New original voices add flute breath/long moving sustain, bass pluck/sustain,
+  piano tine strike and pitched damped guitar partials. All are synthesized
+  locally, with no copied/commercial instrument samples. Revision 1 remains
+  preserved under native-v1 and reproducible from its pinned commit.
+- Added validated native sustain offsets matching the pinned WaveData struct.
+  Existing owning MIDI/sample tests cover both generations and loop join
+  continuity, range and silent transient endpoints. This tests format/safety,
+  not instrument realism or musical quality. All local checks pass; previous
+  field/wild native assets remain byte-unchanged.
+- Draft target 9cf14795ee4fc41cd772abd2a2f61572003659995aeb4cf970744202de1cd5bc
+  compiles normally and round-trip applies (841,806-byte BPS). Native/WASM
+  playback, old-save resume and controlled audio comparison follow. Public
+  remains v40/Site 32; revised music is unreviewed and full Audio is incomplete.

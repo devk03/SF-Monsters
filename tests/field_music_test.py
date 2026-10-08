@@ -33,9 +33,10 @@ class NativeScore(unittest.TestCase):
             with self.subTest(score=stem): self.check_score(stem, loop)
         self.check_score('foglight-overture', 3072, 8)
         self.check_score('park-bench-break', 3072)
+        self.check_score('park-bench-break', 3072, revision=2)
 
-    def check_score(self, stem, loop, track_count=7):
-        data = (ROOT / f'assets/audio/{stem}-native-v1/{stem.replace("-", "_")}.mid').read_bytes()
+    def check_score(self, stem, loop, track_count=7, revision=1):
+        data = (ROOT / f'assets/audio/{stem}-native-v{revision}/{stem.replace("-", "_")}.mid').read_bytes()
         self.assertEqual(data[:4], b'MThd')
         self.assertEqual(struct.unpack_from('>IHHH', data, 4), (6, 1, track_count, 24))
         cursor = 14
@@ -60,15 +61,24 @@ class NativeScore(unittest.TestCase):
     def test_original_instrument_wave_headers(self):
         for stem in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break']:
             with self.subTest(score=stem): self.check_samples(stem)
+        self.check_samples('park-bench-break', revision=2)
 
-    def check_samples(self, stem):
-        files = list((ROOT / f'assets/audio/{stem}-native-v1').glob('*.bin'))
+    def check_samples(self, stem, revision=1):
+        files = list((ROOT / f'assets/audio/{stem}-native-v{revision}').glob('*.bin'))
         self.assertEqual(len(files), 8)
         for path in files:
             data = path.read_bytes(); kind, status, frequency, loop, size = struct.unpack_from('<HHIII', data)
-            self.assertEqual((kind, frequency, loop), (0, 16744 * 1024, 0))
+            self.assertEqual((kind, frequency), (0, 16744 * 1024))
             self.assertIn(status, [0, 0x4000])
             self.assertEqual(size, len(data) - 16)
+            if status:
+                self.assertLess(loop, size)
+                # Loop joins should have no isolated jump beyond the waveform slope.
+                pcm = [v if v < 128 else v - 256 for v in data[16:]]
+                largest_step = max(abs(a - b) for a, b in zip(pcm, pcm[1:]))
+                self.assertLessEqual(abs(pcm[-1] - pcm[loop]), largest_step + 2)
+            else:
+                self.assertEqual(loop, 0)
             if stem == 'park-bench-break' and status == 0:
                 self.assertEqual((data[16], data[-1]), (0, 0),
                                  'Transient voices must begin/end at silence')

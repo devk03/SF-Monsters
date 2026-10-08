@@ -1,6 +1,5 @@
 """Original clinic jazz arrangement and synthesized native MPlay voices."""
-import math
-import random
+from clinic_instruments import clinic_samples
 
 
 def clinic_tracks(score):
@@ -62,48 +61,3 @@ def clinic_tracks(score):
                     note(6, start + eighth * 12, 5, 60, 42 if eighth % 2 else 30)
     return tracks, 32 * 96
 
-
-def clinic_samples():
-    """No recordings: additive flute/piano/bass, plucked string and soft noise."""
-    rate, rng = 16744, random.Random(0x5041524b42454e43)
-
-    def pcm(length, function, transient=False):
-        values = []
-        for n in range(length):
-            value = function(n)
-            if transient:
-                value *= min(1, n / 24, (length - 1 - n) / 192)
-            values.append(max(-120, min(120, round(value))) & 255)
-        return bytes(values)
-
-    flute = pcm(256, lambda n: 88 * math.sin(math.tau * n / 64)
-        + 14 * math.sin(math.tau * n * 2 / 64) + 6 * math.sin(math.tau * n * 3 / 64))
-    bass = pcm(256, lambda n: 82 * math.sin(math.tau * n / 64)
-        + 22 * math.sin(math.tau * n * 2 / 64))
-
-    def piano(intervals):
-        def sample(n):
-            attack = min(1, n / 18)
-            return sum((math.sin(math.tau * n * 2 ** (i / 12) / 64)
-                + .18 * math.sin(math.tau * n * 2 ** (i / 12) / 32))
-                * math.exp(-n / 4200) for i in intervals) * 25 * attack
-        return pcm(16384, sample, True)
-
-    # A damped string recurrence gives a softer timbre than a repeating sine.
-    string = [rng.uniform(-1, 1) for _ in range(64)]
-    pluck = []
-    for n in range(12288):
-        index = n % 64
-        string[index] = .498 * (string[index] + string[(index + 1) % 64])
-        fade = min(1, n / 12, (12287 - n) / 192)
-        pluck.append(max(-120, min(120, round(string[index] * 100 * fade))) & 255)
-    kick = pcm(2400, lambda n: math.sin(.024 * n + 4 * (1 - math.exp(-n / 250)))
-        * 76 * math.exp(-n / 450), True)
-    brush = pcm(3072, lambda n: (rng.random() * 2 - 1) * 52 * math.exp(-n / 850), True)
-    shaker = pcm(960, lambda n: (rng.random() * 2 - 1) * 48 * math.exp(-n / 190), True)
-    return [(name, data, loop, rate) for name, data, loop in [
-        ('flute', flute, True), ('bass', bass, True),
-        ('major7', piano([0, 4, 7, 11]), False),
-        ('minor7', piano([0, 3, 7, 10]), False),
-        ('guitar', bytes(pluck), False), ('kick', kick, False),
-        ('brush', brush, False), ('shaker', shaker, False)]]

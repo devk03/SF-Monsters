@@ -97,6 +97,13 @@ def instrument_samples():
              ('snare', snare, False), ('hat', hat, False)]]
 
 
+def instrument_revision(score):
+    revision = score.get('instrument_revision', 1)
+    if type(revision) is not int or not 1 <= revision <= 99:
+        raise ValueError('Instrument revision must be a supported positive integer.')
+    return revision
+
+
 def write_song(score, output):
     group, directory, stem, prefix = BINDINGS[score['native_song']]
     if score['native_voicegroup'] != group:
@@ -107,6 +114,8 @@ def write_song(score, output):
                  'clinic': (clinic_tracks, clinic_samples)}
     if arrangement not in arrangers:
         raise ValueError('Unreviewed native music arrangement.')
+    if arrangement == 'clinic' and instrument_revision(score) != 2:
+        raise ValueError('Current clinic voices need revision 2; preserve revision 1 assets.')
     compose, samples = arrangers[arrangement]
     tracks, end = compose(score)
     output.mkdir(parents=True, exist_ok=True)
@@ -114,9 +123,15 @@ def write_song(score, output):
     midi += b''.join(midi_track(track, end) for track in tracks)
     (output / (stem + '.mid')).write_bytes(midi)
     waves, voices = [], ['voice_group ' + group]
-    for name, data, loop, rate in samples():
+    for name, data, loop, rate, *starts in samples():
+        loop_start = starts[0] if starts else 0
+        if len(starts) > 1 or type(loop_start) is not int or not 0 <= loop_start < len(data):
+            raise ValueError('Native sample sustain loop starts outside its PCM.')
+        if not loop and loop_start:
+            raise ValueError('A one-shot sample cannot declare a sustain loop.')
         symbol = prefix + '_' + name
-        (output / (name + '.bin')).write_bytes(struct.pack('<HHIII', 0, 0x4000 if loop else 0, rate * 1024, 0, len(data)) + data)
+        (output / (name + '.bin')).write_bytes(struct.pack('<HHIII', 0,
+            0x4000 if loop else 0, rate * 1024, loop_start, len(data)) + data)
         waves.extend(['\t.align 2', symbol + '::', f'\t.incbin "sound/{directory}/{name}.bin"'])
         if arrangement == 'clinic' and name == 'flute':
             voices.append(f'\tvoice_directsound 60, 0, {symbol}, 96, 220, 180, 100')
@@ -142,7 +157,7 @@ def apply_field_music(content, root, engine, original):
             raise ValueError('Native song bindings must be reviewed and unique.')
         used.add(song)
         group, directory, stem, _ = BINDINGS[song]
-        source = root / 'assets/audio' / (plan.stem + '-native-v1')
+        source = root / 'assets/audio' / (plan.stem + '-native-v' + str(instrument_revision(score)))
         write_song(score, source)
         if 'native_volume' in score:
             volume = score['native_volume']
@@ -174,6 +189,6 @@ def apply_field_music(content, root, engine, original):
 
 if __name__ == '__main__':
     for name in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break']:
-        write_song(json.loads((ROOT / f'assets/audio/{name}.json').read_text()),
-                   ROOT / f'assets/audio/{name}-native-v1')
+        score = json.loads((ROOT / f'assets/audio/{name}.json').read_text())
+        write_song(score, ROOT / f'assets/audio/{name}-native-v{instrument_revision(score)}')
     print('Wrote original field/battle scores and synthesized instruments.')
