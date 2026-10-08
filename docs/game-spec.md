@@ -762,9 +762,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.10 includes three original starter/call candidates,
+- Public preview: version 0.0.11 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic
-  CinderCoy's authored evolution candidates and Cognition's gym draft. This is not the
+  CinderCoy/BrinePup evolution candidates and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
 - Scope preference: Emerald-tier quality within existing SF scope; do not add
@@ -1229,6 +1229,51 @@ First-slice creature checkpoint — BrinePup evolution candidates:
   Seven original creature candidates are not seven quality-complete monsters;
   the SproutSlug line, slice wild creatures and full scope remain outstanding.
   Approved parity stays 0/11.
+
+BrinePup line validation checkpoint:
+
+- Main-ROM prepared fixtures complete both evolutions with normal native UI:
+  level-16 Brinebull at 47/47 HP and level-36 Tideroar at 118/118 HP in the
+  recorded specimens, with default-name updates and stat recalculation.
+  Bubble Beam replaces Defense Curl, yielding Water Gun/Mud-Slap/Bubble Beam/
+  Bite with PP 25/10/20/25. Ice Beam replaces Aurora Beam, yielding Bubble Beam/
+  Protect/Ice Beam/Rest with PP 20/10/10/10. Decoded party checksums and stable
+  species 284/285 confirm the actual changes; these are not earned-level runs.
+- Both cold-battery routes match final RGB, exported Flash and all 7,366,936
+  raw stereo pairs across 6,714 native/WebAssembly frames. The actual older
+  Sunset save also resumes at unchanged level 5, 13/19 HP and quest 4, upgrades
+  content revision to 4 and matches RGB/Flash/all 10,932,996 stereo pairs over
+  9,964 frames. Evidence lives under .tools/benchmarks/{brine-evolution15-main-full,
+  brine-evolution35-main-full,brine-line-older-save-resume}.
+- Native 40.18-second SF clips are captured at 240x160 and normal speed under
+  .tools/benchmarks/{brine-evolution15-animation-40s,brine-evolution35-animation-40s}.
+  Matching fixed-reference Mudkip/Marshtomp evolution captures use prepared
+  original-stat/name/learnset batteries and the actual a9dec84d…85af cartridge;
+  saved-map-view carryover excludes these fixtures from original-world evidence.
+  Clip encoding, reference inspection, user review and public 0.0.11 deployment
+  are the remaining handoff steps. No quality-domain approval is inferred.
+- Four paired clips now encode both BrinePup evolution stages and their actual
+  Emerald counterparts at 40.18 seconds, native 240x160, normal speed and zero
+  measured A/V skew. Final reference frames show Marshtomp/Swampert with their
+  original names, confirming evolution rather than a stopped move prompt.
+  Paths: .tools/benchmarks/{brine-evolution15-animation-40s,
+  brine-evolution35-animation-40s,emerald-brine15-animation-40s,
+  emerald-brine35-animation-40s}/review.mp4. The user has been asked for this
+  line's direction; no answer or quality approval is inferred while pending.
+- Public Site version 12 deployed successfully with normal
+  0.0.11-brine-evolution-preview at https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+  Site source 02b62faeadae7d3486e448c7006eea6ed98b65e8; deployment
+  appgdep_6ac6f22a447c81918c6ebe36cd273c64. The 646,141-byte patch reconstructs
+  target 1a1a758ed3c6a633ef04c1b2d7fec4f0eee8ae6598fd65c4a37542cb7d301184.
+  TypeScript, production packaging, host/content checks and archive inspection
+  pass. Neither inherited full ROMs nor private fixture patches are included;
+  public access is preserved. Existing GitHub checks pass for 5a98d04:
+  https://github.com/devk03/SF-Monsters/actions/runs/37712708545.
+- Art cleanup/back-view review, all three original starter lines, remaining
+  slice creatures, map/cast polish and native gym victory/balance remain open.
+  Browser/device performance, all reference mechanics cases, campaign saves,
+  the complete 16-hub/eight-gym/150-entry scope and 11 final approvals remain
+  required. Seven candidates and two integrated lines do not satisfy those gates.
 
 Approved architecture change — Emerald ROM hack:
 

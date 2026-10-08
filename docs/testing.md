@@ -6,14 +6,16 @@ Open https://sf-mini-monsters.devkunjadia03.chatgpt.site and choose **Load .gba 
 Supply your local English Emerald ROM matching SHA-256
 `a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af`.
 Validation, extraction and SF patching happen on your device. No ROM is uploaded.
-Version 0.0.10 includes South Park, three original starter candidates and their
+Version 0.0.11 includes South Park, three original starter candidates and their
 original cry candidates, plus Ocean Commute (Sunset) and Fogbank Frenzy (wild battles).
 Preview a starter to hear its call; explore Sunset and its encounter grass to
 hear the new themes. The wild-battle mix has been raised to within 1 dB of the
 measured Emerald reference. This is a mix check, not soundtrack approval. Wild
-creatures, cast art, other music and the other two evolution lines still use
+creatures, cast art, other music and the SproutSlug evolution line still use
 scaffolding. CinderCoy evolves into Ashrunner at level 16, then Solhowl at 36.
 The new forms include original art, icon poses, cries and species-specific moves.
+BrinePup also evolves into Brinebull at 16 and Water/Ice Tideroar at 36,
+learning Bubble Beam and Ice Beam at those thresholds.
 Private level/Rare Candy fixtures validate the evolution UI; they do not prove
 earned campaign progression or balance. The full
 campaign and all quality approvals remain unfinished.
@@ -43,7 +45,7 @@ run `make hack`. See [the pinned build workflow](../romhack/README.md).
 Check patch integrity and Flash-slot validation with:
 
 ```sh
-node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.10-cinder-evolution-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
+node --experimental-strip-types tests/bps.test.mjs .tools/romhack-baseline/emerald-matching.gba romhack/releases/0.0.11-brine-evolution-preview/sf-mini-monsters.bps .tools/pokeemerald/sf-engine-probe.gba
 node --experimental-strip-types tests/flash-save.test.mjs
 ```
 

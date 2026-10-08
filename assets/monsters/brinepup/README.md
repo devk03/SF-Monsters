@@ -8,8 +8,9 @@ The source and technical conversions use the license/attribution in
 `native-v1/` contains separate 64x64 front/back views, two front entrance frames,
 two 32x32 party-icon frames, and 16-entry normal/shiny palettes. The shared crop
 preserves proportions and relative poses. Native palette/dimension checks are
-format evidence, not pixel cleanup or user approval. Original cries and all
-evolution stages remain required.
+format evidence, not pixel cleanup or user approval. The original cry and
+Brinebull/Tideroar evolution candidates are now integrated. Native-size cleanup,
+art approval and normal campaign balance remain required.
 
 Reproduce with Pillow 12.3.0:
 
