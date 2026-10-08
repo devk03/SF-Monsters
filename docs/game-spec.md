@@ -762,9 +762,9 @@ progress toward final parity. Do not lower a target to fit the existing code.
 - Reference clip suite, measured timings and 300-case mechanics suite: pending.
 - Next checkpoint: South Park/Cognition and the polished first slice, while
   completing the reference measurements and comparison suite.
-- Public preview: version 0.0.9 includes three original starter/call candidates,
+- Public preview: version 0.0.10 includes three original starter/call candidates,
   original Sunset/wild-battle themes, Sunset/Muni/South Park, the clinic
-  and Cognition's gym draft. This is not the
+  CinderCoy's authored evolution candidates and Cognition's gym draft. This is not the
   accepted polished slice or complete campaign.
 - Reviewer: the user, through approval of matched comparison clips.
 - Scope preference: Emerald-tier quality within existing SF scope; do not add
@@ -1162,6 +1162,50 @@ First-slice creature checkpoint — authored CinderCoy evolution candidates:
   cartridge. These setups never count as earned campaign levels or balance runs.
   Native evolutions, move-learning, older-save/browser evidence, deployment and
   matched reference clips remain next. Approved parity stays 0/11.
+- Native main-ROM fixtures now complete both evolutions, default-name updates
+  and stat recalculation: level-16 Ashrunner at 47/47 HP and level-36 Solhowl
+  at 103/103 HP in the recorded specimens. Flame Wheel replaces Leer through
+  the actual move-forgetting UI; decoded/checksummed party data confirms
+  Ember/Quick Attack/Flame Wheel/Bite with PP 25/30/25/25. These results test
+  authored content on prepared levels, not normal campaign pacing.
+- Each cold-battery evolution route matches final RGB, exported Flash and all
+  7,366,936 raw stereo pairs across 6,714 native/WebAssembly frames. The actual
+  older level-5 Sunset save resumes at unchanged level 5, 13/19 HP and quest 4;
+  content revision advances to 3. Its 9,964-frame route also matches final RGB,
+  Flash and all 10,932,996 raw stereo pairs. Captures live under .tools/benchmarks/
+  {cinder-evolution15-main-full,ashrunner-evolution35-main-full,cinder-line-older-save-resume}.
+- Public Site version 11 deployed successfully with the normal
+  0.0.10-cinder-evolution-preview patch at
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site. Source
+  811ef2a6ed152487c3331a3d08506e9723f7efe9; deployment
+  appgdep_6ac6eeb833c48191adebc2a076a6336c. Its 632,272-byte patch reapplies
+  exactly to target 5b54d6d8143319624b948a523a91b40a792997fbe33ea7a7357ac684629b5f5b.
+  TypeScript/build/packaging pass. Archive inspection excludes full inherited
+  ROMs and fixture patches; public access stays unchanged. GitHub checks pass
+  for f19bebe: https://github.com/devk03/SF-Monsters/actions/runs/37710128830.
+- Reference evolution captures use the actual a9dec84d…85af cartridge with
+  prepared original-stat/name/learnset battery fixtures. Saved map views can
+  carry SF tiles, so these fixtures are restricted to evolution/menu comparisons,
+  not original-world or campaign evidence. The original Torchic's level-16 Peck
+  prompt is declined before aligning the evolution scene; that learnset
+  difference does not count as an animation-timing regression. Matched clips,
+  native pixel review and user approval remain pending; parity stays 0/11.
+- Solhowl's actual move-forgetting UI replaces Roar with Crunch. Decoded and
+  checksummed party data confirms level 36, species 282 and
+  Crunch/Slash/Flamethrower/Agility with PP 15/20/15/30. The first evolution
+  similarly confirms species 281 and its authored Flame Wheel progression.
+- Four 40.18-second native clips now pair both SF evolution stages with the
+  supplied Emerald cartridge, all at 240x160, normal speed and zero measured
+  A/V skew. Paths: .tools/benchmarks/{cinder-evolution15-animation-40s,
+  ashrunner-evolution35-animation-40s,emerald-evolution15-aligned-40s,
+  emerald-evolution35-aligned-40s}/review.mp4. The earlier reference capture
+  stopped at Peck learning and is not used as an evolution comparison.
+- The user has been asked for this line's art direction, with the prepared-level
+  limitation explicit. Pending feedback does not approve pixel cleanup, back
+  sprites, all 150 monsters, campaign balance or a whole quality domain.
+  Next content priorities are the other starter lines, remaining first-slice
+  creatures, map/cast polish and native gym victory/balance. All 16 hubs/eight
+  gyms/150 entries, systems/performance/save gates and 11 final approvals remain.
 
 Approved architecture change — Emerald ROM hack:
 

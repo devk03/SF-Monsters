@@ -95,8 +95,25 @@ early moves fill empty slots without removing existing moves. Party stats are
 recalculated from unchanged experience, nature, IVs and EVs. Schema/quest/badge
 identity stays intact; Flash changes only when the player saves normally.
 The three starters have original front/back art, entrance frames, icons and
-cry candidates. Pixel cleanup, complete evolution-line art and user approval
+cry candidates. CinderCoy's authored line evolves into Ashrunner at 16 and
+Solhowl at 36, with new art/cry/move candidates. Explicit evolution targets
+must be authored, acyclic and have increasing level thresholds. Other native
+evolution methods remain available in the engine; their original content
+authoring rules are unfinished. Pixel cleanup, other evolution-line art and user approval
 remain required; these are not finished or approved catalog entries.
+
+`scripts/romhack/monster_atlas.py` encodes distinct battle and authored icon
+frames into shared native palettes without changing the legacy encoder.
+The evolved icons share CinderCoy's reserved group 3. Layouts and exact built-in
+imagegen prompts stay beside each source image under `assets/monsters`.
+
+For isolated evolution UI checks, use `build_probe.py --draft --fixture cinder-15`
+or `ashrunner-35`. These private cartridges script a starting level and Rare Candy;
+they never count as earned campaign progression. Fixture publishing is rejected.
+`reference-15`/`reference-35` prepare battery inputs for the actual fixed reference
+ROM with original names/stats/learnsets and compatible coordinates. Their saved
+map view can carry SF tiles, so use them for evolution/menu comparisons only,
+not original-world exploration evidence. Capture the reference using a9dec84d…85af.
 
 ## Original native audio
 

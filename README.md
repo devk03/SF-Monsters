@@ -11,9 +11,11 @@ Status: the current preview includes the Outer Sunset opening, Muni travel,
 South Park clinic and Cognition's first gym draft. BrinePup, SproutSlug and
 CinderCoy are original starter/call candidates. Ocean Commute and Fogbank Frenzy
 are the original Sunset and wild-battle theme candidates. Wild creatures,
-cast art, other music and evolution art
+cast art, other music and the other two evolution lines
 still use placeholders. The full SF campaign and Emerald quality
 approval remain outstanding.
+CinderCoy now has authored Ashrunner (level 16) and Solhowl (level 36)
+evolution candidates, with new views, icon poses, cries and move progression.
 
 [Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
 [Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps) ·
