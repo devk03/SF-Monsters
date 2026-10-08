@@ -21,6 +21,7 @@ from title_art import apply_title_art
 from title_creature import apply_title_creature
 from title_song_overlay import apply_title_song
 from house_art import apply_house_art
+from courier_art import apply_courier
 
 FLIPS = ROOT / '.tools/flips'
 FLIPS_REVISION = 'ff216a75df0987047a67d7923567dc4482ce07ac'
@@ -82,6 +83,7 @@ def main():
     restored += apply_monsters(content, ROOT, EMERALD, original)
     restored += apply_creature_audio(content, ROOT, EMERALD, original)
     restored += apply_field_music(content, ROOT, EMERALD, original)
+    restored += apply_courier(ROOT, EMERALD, original)
     if args.fixture:
         apply_evolution_fixture(EMERALD, args.fixture, original)
         content['version'] += '-fixture-' + args.fixture

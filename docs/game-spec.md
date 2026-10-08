@@ -2063,6 +2063,38 @@ Original native interface labels — private preview checkpoint:
   wider balance and all complete-campaign gates remain unfinished. All 11 user
   quality approvals remain pending. No GitHub workflow was dispatched.
 
+Original courier locomotion — native player-art checkpoint:
+
+- Added an original eighteen-pose courier atlas: gray beanie, navy jacket,
+  orange messenger strap/bag and olive trousers. Three authored views each have
+  idle, two walk steps, run passing pose and two run steps. Native east-facing
+  animation mirrors the west frames. Both player selections share this neutral
+  courier design. Sources, prompt, native strips and conversion fingerprints are
+  under assets/characters/courier-native. Pixel cleanup/human approval are pending.
+- Conversion isolates transparent source bands rather than assuming an equal
+  grid, uses one scale and per-row baseline, and encodes sixteen-color 16x32
+  native frames. The walking/running strips each have nine distinct stepping
+  frames and exactly 2,304 bytes in the engine's macro-tile order. Independent
+  tile-order/pose-order, missing/blank/index-overflow and duplicate-step checks
+  pass; both strips use the same native palette. Required local checks pass.
+- A dedicated palette tag (0x1124) is registered for normal movement and its
+  reflection pairing. Compiled records for both selections/shared normal-view
+  aliases use it; existing cycling palettes remain unchanged. No animation
+  commands, movement/camera code, collision geometry or save layouts change.
+  Trainer/back portraits, cycling/surf/field-move poses, named NPC art and the
+  complete human art library remain unfinished. These are not counted complete.
+- Normally compiled private 0.0.25 target SHA-256:
+  26faaec3a354db9e16dd70f2721af448a67d9f68e2196fdd103fc9e1958021aa.
+  A cold battery route reaches the road at (18,22) with the caught party, money,
+  items and flags intact. A 2,080-frame controller-only route walks/runs in all
+  four directions, shows alternating poses/camera scrolling and returns there.
+  Every RGB frame, Flash and all 2,282,280 stereo pairs match native/WASM.
+  Native footage is courier-native-four-direction-motion/review.mp4, 34.82s;
+  palette and comparison evidence lives beside it. Reference timing and a
+  matched human review remain required; this clip alone does not establish them.
+- Public 0.0.24 is unchanged while the courier comparison is prepared. Full
+  quality approvals remain 0/11. No GitHub workflow was dispatched.
+
 - Native UI review clip: interface-final-native-review/review.mp4, 40.25 seconds,
   2,404 controller frames and 2,637,788 stereo pairs, source commit 0a5c888.
   It shows the Start menu, caught-party selection, summary, stats and moves.
