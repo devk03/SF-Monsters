@@ -756,12 +756,12 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art and courier-walking subset reviews are pending. |
-| Public build | 0.0.26-sunset-streets-preview; target 67e1ff17e5ce53083b2db72914735c97267a70982b05b3671438043dbe92eab9; Site version 19. |
-| Latest local source build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186. Original enterable Sunset studio and persistent fog-beacon adventure verified locally; publication and human art review pending. |
+| Public build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186; Site version 20. |
+| Latest local source build | 0.0.27-courier-apartment-preview; target 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186. Original enterable Sunset studio and persistent fog-beacon adventure verified locally and published; human art review pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Local ROM load and downloaded 0.0.26 cartridge verified; old caught-party backup accepted and resumed into Sunset. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
+| Public QA | Local ROM load and downloaded 0.0.27 cartridge verified; earned apartment save accepted and resumed into the original studio with completed-beacon dialogue. Signed-in player awaits the user's account login. Physical-device/performance checks remain unverified. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
 | Next work | Original terrain/cast/interior art and story/map polish for the first slice, then its matched user reviews. Routine checks stay local; GitHub Actions stays manual-only. |
 
@@ -2459,3 +2459,34 @@ Courier apartment / Sunset mini-adventure checkpoint (October 8, 2026):
   and hands-on web checks. This adds detail to the first slice; no additional
   hub or full quality domain is approved. All 11 full approvals stay pending.
   GitHub Actions was not dispatched; normal checks and captures ran locally.
+
+
+Courier apartment publication checkpoint:
+
+- Release source 9afdaa9; public version 0.0.27-courier-apartment-preview.
+  Patch 696,691 bytes; SHA-256 e5bebe18dbe6aff169463af4b9363a5b58efe7091d8bc0eb0aca7eb00ca73482.
+  Target remains the locally tested 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186.
+- Site source 541f6fc1f57341a5cdd291031e2a22f84648fb7d, saved version 20
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_5176fbea04788191910549c908528648.
+  Deployment appgdep_6ac788f052c0819190cfc68dc3c4586e succeeded at
+  2026-10-08T12:13:44Z. Public URL remains
+  https://sf-mini-monsters.devkunjadia03.chatgpt.site.
+- Local archive audited for target/patch hashes and exclusion of full inherited
+  cartridges; Sites accepted 84 deployment files. No DB migration, audience
+  change, recurring monitor or GitHub workflow was used. Public hands-on
+  load/download/apartment-save checks follow; sign-in still awaits user login.
+
+
+Public apartment hands-on check:
+
+- Existing public IAB tab reloaded; the supported base ROM patched locally.
+  Actual Download GBA ROM produced Downloads/sf-mini-monsters (4).gba, 16 MiB,
+  SHA-256 5e05f1bdb9b2b635c31672f3497870fb1ac993053a2d16d3318201b507965186.
+- Imported apartment-native-saved/capture.sav through Import save. Continue
+  entered the original room at the beacon and displayed completed-quest
+  dialogue. Screenshot .tools/browser-review/public-v27-apartment.png shows
+  the live game with public page context; receipt public-v27.json records the
+  download and import checks. This is hands-on guest play, not signed-in QA.
+- User login, matched review, door animation, bag-full and earned post-gym
+  branch checks remain required. Full campaign/quality/performance/save gates
+  stay open. Routine validation stayed local; no Actions run was dispatched.

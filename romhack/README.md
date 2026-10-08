@@ -242,3 +242,24 @@ authored SF layouts reload on Continue. Generic ground/beach art remains pending
 This sheet requires normal source compilation. The old pinned-cartridge
 `preview_interface.py` path rejects the current world revision; use
 `build_probe.py --backend host --draft` for an immutable local candidate.
+
+
+## Courier apartment
+
+The first Sunset rowhouse opens into the courier's studio. `apartment.json`
+provides native collision and reciprocal warps; `apartment.inc` stores the
+optional beacon puzzle in reserved `VAR_GIFT_UNUSED_3` (`0x40E0`). States 0/1/2/3
+mean unread observation / observed fog / reward pending / reward claimed.
+Do not reuse this variable for other gifts. A full capsule pocket preserves
+state 2; collecting the reward sets 3. Rest heals the party without changing
+the declared recovery destination. Badge-dependent return dialogue changes
+only after the first gym is won.
+
+`assets/tiles/courier-apartment/source.png` and its prompt document the original
+room artwork. `apartment_art.py` converts it to an eleven-column native scene,
+444 tiles, 111 metatiles and palette bank 6. Covered-layer attributes keep the
+opaque backdrop below the player; metatile 616 is the south-arrow exit.
+The build compiles a separate secondary tileset. `tile_grid_base` assigns each
+cell its scene record while retaining map collision/elevation. Native asset
+tests protect the layer, capacity and exit. The initial exterior door uses a
+native fade; authored door opening frames and human art approval remain pending.
