@@ -756,8 +756,8 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | --- | --- |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.29-coastal-terrain-preview; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8; Site version 22. |
-| Latest local source build | 0.0.29-coastal-terrain-preview; target 3e1cff65075ce0e029c395998f73e61ab7f07bf0e2952229b684bb34605939c8. Original ground/shore/wave tiles and camera margin verified locally and published; human review pending. |
+| Public build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505; Site version 23. Replaces the rejected 0.0.29 ground layering. |
+| Latest local source build | 0.0.30-ground-layer-fix-preview; target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505. Fixes concealed courier on ground; 768 visible walking frames verified; published. Public visibility check pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -2690,3 +2690,34 @@ Coastal foreground regression and correction:
 - No approval was carried forward from the faulty ground rendering. All full
   quality scores stay unapproved; the full section 15 objective stays active.
   No GitHub workflow was dispatched.
+
+
+Walking visibility regression verification:
+
+- terrain-fixed-native-walking records three controller-driven 2x1 beach
+  rectangles and returns to (4,8). The scene check passes all 768 frames with
+  at least 115 dark sprite pixels across at least 21 rows. Actual images show
+  the complete courier during standing and walking. Visibility is now checked
+  explicitly in addition to native/WASM agreement and saved coordinates.
+- 12.86-second fixed walking clip: .tools/benchmarks/terrain-fixed-native-walking/review.mp4.
+  Its visibility.json records per-route minima. This is a regression check,
+  not a user art approval or the complete reference/performance gate.
+- Source f136bed; replacement public version 0.0.30 uses the already tested
+  e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505 target.
+  Full section 15 scope remains unchanged; no Actions workflow was dispatched.
+
+
+Ground-layer fix publication checkpoint:
+
+- Release source f136bed, version 0.0.30-ground-layer-fix-preview.
+  Target e071e78c2ca5938a577eb7f65132c9ac7b482914d4bd7c321d77275bc0bb1505;
+  patch 745,165 bytes, SHA-256 61997aa35e928c599edff8128e31bf4d3793d5ab00cc7aa6244687a9542a2a47.
+- Site source 10c15c95664b6027f392f547cecf7ae68d09613d; saved version 23,
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_d7e4dc5c403c8191938e333ea2e4c43a.
+  Deployment appgdep_6ac79dd18734819197e0be83c66d0422 succeeded at
+  2026-10-08T13:42:50Z. Archive target/patch hashes independently checked;
+  no full inherited cartridges included, 84 files accepted. Public URL unchanged.
+- Replaces the faulty 0.0.29 presentation while preserving its valid save data.
+  Hands-on public standing/visibility/download checks follow. Human approvals,
+  account sign-in, physical performance and full campaign gates remain open.
+  No GitHub workflow or database operation was used.
