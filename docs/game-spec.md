@@ -759,6 +759,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
+| Deadline stop | Work stopped at the requested 6 PM San Francisco local cutoff on October 8, 2026 (2026-10-09T01:00Z). Goal pause requested; unfinished acceptance gates remain required. No further implementation, builds or deployments started. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
@@ -768,7 +769,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | v43 healing visual subset review requested; latest explicit clinic music score remains2/4. Next improve the clinic soundtrack's composition/instruments/mix against a matched listening baseline, while preserving mechanics and tracking other first-slice art/interface gaps. v41 instrument A/B remains unreviewed. Actions stay manual-only. |
+| Next work after explicit resume | v43 healing visual subset review requested; latest explicit clinic music score remains2/4. Improve the clinic soundtrack's composition/instruments/mix against a matched listening baseline, while preserving mechanics and tracking other first-slice art/interface gaps. v41 instrument A/B remains unreviewed. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3871,3 +3872,34 @@ Public v43 healing interaction checkpoint:
 - Source/release/progress commits25603f2 and5668521 pushed. No workflow, DB change,
   PR merge or delegation. Complete SF campaign and required system/quality gates
   remain unfinished; goal stays active with final stop/commit at6PM SF local.
+
+### 15.7 Requested deadline stop — October 8, 2026
+
+Work stopped at 6 PM San Francisco local time (October 9, 01:00 UTC).
+The one-time deadline fired at 01:00:05Z. No new implementation, build,
+deployment, monitor or GitHub workflow was started after the cutoff.
+Process inspection found no active project build/capture/publishing operation.
+Only this final progress record, commit/push and requested goal pause remain.
+
+Latest delivered release remains v43 / Site35, from source25603f2, with
+native/WASM healing replay and actual public download/resume/interaction checks
+recorded above. Last pre-cutoff repository commit was fd32bb0. The unrelated
+untracked data-center-three-hour-learning-guide.pdf remains untouched.
+
+The goal is not complete. Required outstanding work includes:
+
+- Complete sixteen SF neighborhood adventures, eight startup gyms, all150
+  obtainable monsters, championship, rival/villain/legendary arcs, Marina bars,
+  Tenderloin altered-state scenes, dates, lore and scoped postgame.
+- User-approved4/4 comparisons in all eleven quality domains: currently0/11.
+  Latest explicit clinic soundtrack score is2/4; later instrument/healing
+  comparisons remain unapproved. Passing runtime checks does not imply parity.
+- All300 independent reference mechanics cases, including50 doubles; full
+  performance/input/audio gates and three ten-minute deadline/audio traces.
+- Ten full cross-platform save round trips, fifty resume checkpoints, three
+  complete starter campaign runs, and remaining public authentication/account
+  isolation, Safari/mobile and browser audio checks.
+
+The complete section15 objective is preserved. Pause at the user's request;
+resume work only after the user resumes the goal. Final commit contains this
+honest deadline snapshot only; no database change or PR merge is involved.
