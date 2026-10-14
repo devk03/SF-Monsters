@@ -46,10 +46,10 @@ class NativeTileFlips(unittest.TestCase):
                 self.assertEqual(park_tile(plan, x, y), 648+(y-2)*3+x-26)
             row = restored['rows'][y]
             restored['rows'][y] = row[:26]+'PPP'+row[29:]
-        # Entire prior map, events, NPCs, collision and elevations outside gap.
+        # Entire map outside the frontage gap, including the v60 bench landing.
         self.assertEqual(hashlib.sha256(json.dumps(restored, sort_keys=True,
                          separators=(',', ':')).encode()).hexdigest(),
-                         '40fdb3fdc1de3a37035325c452b06ebe73aeef8af4e403cd96522fa3f16deb79')
+                         'b4027f918bc51e157320d4299be56160ad3467d76e01195960df793aceee5b3d')
         self.assertNotEqual(plan['rows'][5][25], 'P')  # Abuts butter facade.
         self.assertNotEqual(plan['rows'][5][29], 'P')  # Abuts clinic facade.
         for x in range(26, 29):

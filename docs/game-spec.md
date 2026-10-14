@@ -6005,3 +6005,27 @@ v59 / Site 50 publication — October 14, 20:32 UTC:
   closed and IAB visibility restored. GitHub Actions not run. Human scores still
   pending, goal active, stop deadline unchanged. Next: actual Safari120s smoke
   while alignment reviews the next concrete first-slice world-art improvement.
+
+
+Safari attempt / v60 park approach — October 14, 20:35 UTC:
+
+- Actual native Safari loaded and verified the local v59 cartridge/checkpoint,
+  but its page remained hidden and its canvas black. Diagnostic start rejected
+  with "Keep the diagnostic tab visible." Raising the window and normal Window
+  menu controls did not produce an eligible foreground observation. No timing
+  report was created; no compatibility pass or engine/rendering defect inferred.
+  Test instance/audio stopped, own tab closed, finite server terminated. Safari
+  remains an open acceptance gate. Public progress/settings untouched.
+- Alignment composition review proposes a continuous 3x2 landing at x15–17,
+  y21–22 beside South Park's discovery bench. Five existing ordinary lawn cells
+  become existing neutral pavement; the sixth is already paved. No new palette,
+  metatile, prop, blocker or map expansion. Bench/script/NPCs/warps unchanged.
+- v60 acceptance pending: exactly five of 1280 compiled words change tile ID;
+  collision/elevation/other words/resources/events remain equal. Actual cold
+  Continue approach and interaction must show the joined landing in native and
+  browser play; human art approval remains pending. No new tests for the small
+  reversible map edit; existing checks and compiled/native evidence will verify it.
+
+- Existing frontage whole-map snapshot correctly detected the five planned lawn
+  changes. Its expected baseline now includes only that reviewed landing; the
+  frontage assertions and all other map/event/collision protection are retained.
