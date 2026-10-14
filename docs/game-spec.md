@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 20:43 UTC:
+Current checkpoint — October 14, 2026, 21:06 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v60 / Site 51 is live.
-  Native release source aa512a3; website source 5db0a91d. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v61 / Site 52 is live.
+  Native release source 6bde309; website source 0185c853. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -579,8 +579,11 @@ Current checkpoint — October 14, 2026, 20:43 UTC:
 - South Park discovery bench has a continuous sidewalk landing; five tile IDs
   change, with every other ROM byte unchanged. Actual native/browser interaction
   passes; human art review remains pending. Safari smoke was rejected as hidden.
-- Alignment exchange 20:40–20:41 UTC identified the stock Birch intro figure
-  under NAVAL dialogue as the next cast replacement. Next check by 21:10 UTC.
+- Original Naval intro figure is integrated and visible in native/browser play.
+  Matched new-game/name flow and existing-save Continue preserve full save blocks.
+  Only796 bytes inside the intro graphics/palette allocations change from v60.
+- Alignment exchange 21:03–21:05 UTC identified a safe original Naval field-sprite
+  slot/palette/cache plan. Next check by 21:30 UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -802,8 +805,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.60-park-bench-approach-preview; target3ae1f9d52904d4e1efe3d04785f905b6a92f1c67d8c9bb49a104c2262b1deff6; Site51. Native/browser discovery bench has a joined paved approach. Human approvals remain0/11. |
-| Latest local source build | v60 normal sourceaa512a3 reproduces tested target3ae1f9d5. Whole-ROM diff from v59 changes only five intended map bytes. Existing creature resource gate passes; matched native interaction/save blocks remain identical. |
+| Public build | 0.0.61-naval-intro-preview; target238d7bed7afa88c3db9204d8c921b8de83cabb31af4cb1637e709dfd03c31c96; Site52. Original Naval welcome figure, joined bench approach and integrated creature art. Human approvals remain0/11. |
+| Latest local source build | v61 normal source6bde309 reproduces tested target238d7bed. Two intro resources/three bindings and existing creature controls pass; all ROM bytes outside the two raw intro allocations stay exact. Native new-game/old-save blocks match v60. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -6091,3 +6094,40 @@ v61 original Naval intro figure — October 14, 20:54 UTC:
 - Naval's separate field placeholder and inherited gender-selection portraits
   remain separate future work. No new NPCs, stats, save schema or content revision.
   Public staysv60/Site51 while this candidate is verified. Full human approvals0/11.
+
+
+v61 / Site 52 verified and published — October 14, 21:06 UTC:
+
+- Draft/normal target238d7bed7afa88c3db9204d8c921b8de83cabb31af4cb1637e709dfd03c31c96;
+  BPS958943bytes SHAaeaf969c38ad87adc6454184d07e1b2955f6401421bd867cbd67931a40ef6bb2.
+  Compiled intro5/5 and all255 existing creature/elevation/resource controls pass.
+  Exactly796 ROM bytes change, all inside the2048-byte intro figure and32-byte
+  palette. All other ROM bytes and audited symbol addresses remain identical.
+- Actual controller-only native NewGame reaches authored Sunset23,22 through
+  existing intro/monster/gender/name flow. Full15752-byte SaveBlock1 and3884-byte
+  SaveBlock2 are identical to v60 on the same controller route (one default look).
+  Existing ordinaryC4 Flash coldContinue to SouthPark13,6 also matches both full
+  blocks exactly. These are scoped compatibility checks, not new save round trips.
+- Actual Chrome welcome and controller A show the original figure beside
+  "I'm NAVAL...". No render crop/palette conflict observed. Owned QA emulator,
+  audio, tab and finite server stopped; public player progress untouched.
+  Screenshotnaval-v61-browser-named-welcome.png.
+- Matched40.182s SF before/after intro clip (not vanilla Emerald reference):
+  naval-intro-v61-before-after/comparison.mp4 SHA
+  bf6b863768743195772f1e75cdd28006cf0e720136891ba52c41f0505fcbc6a9.
+  Equal controller input and byte-identical native PCM; audio unchanged/unscored.
+  Likeness/art remains pending human review; full quality approvals0/11.
+- Website source0185c8531bd33eb79f208049ceab919652e3dbd0; saved Site52 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_1b6bbba3ed108191b102ea349834e67a;
+  deploymentappgdep_6acfee27d3fc8191beedb5899f1c0d58 succeeded21:03:45UTC.
+  Clean88-file archive SHAd85da6737fc5ce62467bb92cc3416bde1609b308951f6411da8123b305bca94d;
+  no commercial cartridge/private saves/AppleDouble. Actual browser BPS decoder
+  matches target. Both changed live resources match local bytes; unchanged
+ 15-file runtime matches archive. Live loader screenshotpublic-v61-loader-visible.png.
+- Public audience/auth/storage unchanged; no redundant user-folder download or
+  GitHub Actions. Goal remains active through October15,18:00 Pacific. Full campaign,
+  native/browser/device/performance/listening/50checkpoint and human gates stay open.
+- Next field-art task: original Naval9pose sprite in existing authored-SF-unused
+  ProfBirch64 slot, Sunset localId7 only, shared existing Sunset palette unchanged.
+  Existing named-cast Continue repair can refresh cached48→64 without resetting
+  position/movement. Garry keepsGentleman48. No new NPC/dialogue/schema/revision.

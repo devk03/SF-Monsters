@@ -1,20 +1,31 @@
 {
-  "version": "0.0.60-park-bench-approach-preview",
+  "version": "0.0.61-naval-intro-preview",
   "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Seven named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "3ae1f9d52904d4e1efe3d04785f905b6a92f1c67d8c9bb49a104c2262b1deff6",
+  "target_sha256": "238d7bed7afa88c3db9204d8c921b8de83cabb31af4cb1637e709dfd03c31c96",
   "target_bytes": 16777216,
-  "patch_sha256": "4d8f97ddb8ea223ffc610871241e9f5eebf5c729cf88541582ffa2fdc9daaced",
-  "patch_bytes": 958259,
+  "patch_sha256": "aeaf969c38ad87adc6454184d07e1b2955f6401421bd867cbd67931a40ef6bb2",
+  "patch_bytes": 958943,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "aa512a314fed062d29ab7a19c8b22fd52fcdfe58",
+  "source_commit": "6bde3095fe950aaa7c8c32ac190b4c3116a92a87",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
   "build_backend": "host",
+  "compiled_intro": {
+    "passed": true,
+    "counts": {
+      "total": 5,
+      "matched": 5
+    },
+    "receipt_sha256": "507a2884abd3381f117be79a35bc50c169515a8ed168857588c394255f4aec5b",
+    "validator_sha256": "708041c98d73809efa6bdb1d3838b4cdfe050d8dab2944827ea74a98442560b6",
+    "quality_approval": "pending",
+    "scope": "Intro figure integration only; human likeness/art/flow approval pending"
+  },
   "normal_compilation_verified": true,
   "compiled_creatures": {
     "passed": true,
@@ -44,8 +55,8 @@
         "matched": 18
       }
     },
-    "receipt_sha256": "ae122a5a821c78027db0e7f62e003bb306c4ce77b6daf083918909b656f516a6",
-    "validator_sha256": "8c6ce93c027270b60ab92812151acbc5885d3c9809f1077ddde586d777ddb8f2",
+    "receipt_sha256": "51c9dc6416f0db5cc6dffc0df41a48ebd4aa9dab2f4dc913efd016cd8287a957",
+    "validator_sha256": "24385344d4a436568db63a89c25ca6fe1626504f7a43a3b1ea0b75435b21d2e5",
     "quality_approval": "pending",
     "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
   },
@@ -74,8 +85,8 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "3422f77db6bfd07a14141bea7379111d5b4064c46e17a31612bb8a82bf171ba4",
-    "target_sha256": "cf1157f6472eda5d92befe10c16f026b543589dd3cba948209b5534db9fbb4ea",
+    "input_sha256": "68ae0ab2aab58f5db97453a5b1fe19c4d54a3b85047916de80da105476a71b06",
+    "target_sha256": "bf8a0b05ceb07b1c129d0a8ea7c046e30103768cd26f7f66319c9ff61f5df380",
     "labels": [
       {
         "symbol": "gText_Pokemon",
