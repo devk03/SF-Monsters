@@ -5473,3 +5473,17 @@ Bounded native input pilot, 2026-10-14:
   Next: commit reusable calibration/provenance wrapper and failure guards, then
   separately validate instruction-level callback observation against stock core.
   Next alignment check by17:45UTC; full human domains0/11; goal active.
+
+Reusable input calibration command verified:
+
+- profile_native_input.py pins ROM/ELF/state/Flash/controller provenance, library
+  and generated flags, verifies actual ReadKeys ROM/ELF bytes and compiles Main
+  offsets with pinned agbcc. Each process has an outer60second timeout. Existing
+  output names are refused; all inputs and frozen helpers must remain unchanged.
+- Final wrapper receipt input-v56-calibrated-pilot-v3/receipt.json
+  SHA36ac9d28c52be84052cc26121c98a8681d6ccf9e8b6bd6ce6f6c3b325c1af89e
+  repeats exact three-way calibration and eight input observations. Five failure
+  guards reject stale matches, missing events, impossible chronology and corruption
+  in any output. A real truncated CSV fails native execution with exit2; partial
+  artifacts retained and never accepted. Full local scripts/check.sh passes.
+  No new game ROM, deployment or workflow run needed for this tooling change.
