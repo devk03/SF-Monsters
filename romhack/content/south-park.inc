@@ -58,7 +58,7 @@ SF_Text_ParkHistory::
 SF_Text_CognitionSign::
 	.string "COGNITION\nSCOTT WU'S BUILD CHALLENGE\pDeliveries, team practice and\nhabitat safety relays.$"
 SF_Text_ServiceSign::
-	.string "SOUTH PARK FIELD CLINIC\nHealing, supplies and team storage.$"
+	.string "SOUTH PARK FIELD CLINIC\nHealing, supplies and team storage.\pFree team healing with JUSTINE.\nFainted teammates recover too.$"
 SF_Text_Discovery::
 	.string "Someone left berries beside a\nnotebook full of startup names.\pNone of the names have vowels.$"
 SF_Text_EmptyBench::

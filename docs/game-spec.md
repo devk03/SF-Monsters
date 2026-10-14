@@ -781,7 +781,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
 | Remaining system gates | 336 independent native scenarios pass across damage, stats, type, order, accuracy, critical, PP, HP and status commands;57 meaningful doubles. Numerical minimums are met; capture, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
-| Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is testing a fresh Water-starter route onv48. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
+| Next work | Close remaining capture/type-matrix/integrated-move coverage, improve first-play preparation and review urban density. Alignment chat is testing a fresh Grass-starter route onv49. Courier/facade changes are deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4606,3 +4606,32 @@ Native status-application checkpoint:
   scenarios /57 doubles meet numerical minimums, but the mechanics gate remains
   open for capture, full type matrix, integrated move resolution and coverage
   review. Human quality approvals remain0/11. Public game stays v49.
+
+
+Preparation guidance checkpoint (private v50):
+
+- Applied the alignment audit through four existing dialogue labels: first Scott
+  delivery/reminder, TEAM PLAN and clinic sign. Players are warned that optional
+  practice triggers on sight, can read both level5 rosters/types, learn Bide and
+  the Grass matchup, and find free healing/revival east at Justine's clinic.
+  Native compiled trainer team/move/item bytes and scalar AI/reward fields match
+  v49 exactly; sightlines, map positions and progression logic are unchanged.
+- Private target edcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78,
+  patch882803 bytes. Native source lines measure at most202px; actual seven-page
+  TEAM PLAN capture shows complete text fitting at native size.3416 RGB frames,
+  complete PCM and Flash match WASM. A first shorter capture did not give every
+  page enough printing time; preserved and reran with complete page waits.
+- Fresh Grass route supplied a normal pre-Scott v49 battery (Sprout5/BinPossum3,
+  money3500,3 Potions,4 capture items, stage0/no trainer flags). Onv50 it cold-loads
+  correctly and reaches first delivery before sightlines. All2928 delivery frames
+  and976 clinic-sign frames match RGB/PCM/Flash across cores. All pages fit,
+  delivery advances stage0 to1 and keeps team/resources intact.
+- Evidence: preparation-v50-complete-pages-{native,wasm}, first-delivery-pages
+  and clinic-sign-pages siblings, dialogue-parity.json, trainer-preservation.json.
+  Full local check.sh passes. All336 mechanics scenarios pass against
+  the new immutable target (mechanics-v50-*-guarded). Public remains v49 pending normal packaging/deployment.
+- 09:52 UTC alignment exchange: preparation audit completed and received. A new
+  bounded90-minute fresh Grass v49 first-badge route is active, ending by11:22 UTC;
+  supplied pre-Scott save22 without rollback and continues sequentially. Reviewer
+  writes private route evidence only; main owns source/builds. Next check by10:21 UTC.
+  Capture harness remains frozen; no quality approval inferred.

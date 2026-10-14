@@ -117,9 +117,9 @@ SF_StevenHao::
 	end
 
 SF_Text_Delivery::
-	.string "SCOTT WU: That's ROON'S sensor.\pThis signal is forcing habitats\nto accelerate evolution.\pOur safety relays caught the spike.\nHelp restore them before we test it.\pBlue INPUT first, green OUTPUT second.\nThe field clinic can refresh your team.$"
+	.string "SCOTT WU: That's ROON'S sensor.\pThis signal is forcing habitats\nto accelerate evolution.\pOur safety relays caught the spike.\nHelp restore them before we test it.\pBlue INPUT first, green OUTPUT second.\pPractice battles are optional.\nTrainers battle when they see you.\pRead TEAM PLAN by the entrance.\nThe clinic is east of COGNITION.$"
 SF_Text_Relays::
-	.string "SCOTT: Blue INPUT, then green OUTPUT.\nThe gate opens when both are stable.\pWALDEN and STEVEN offer team practice.\nRead their move effects.$"
+	.string "SCOTT: Blue INPUT, then green OUTPUT.\nThe gate opens when both are stable.\pPractice battles are optional.\nTrainers battle when they see you.\pRead TEAM PLAN by the entrance.\nThe clinic is east of COGNITION.$"
 SF_Text_ScottBattle::
 	.string "SCOTT WU: The relays are stable.\pA good plan leaves room to adapt.\nShow me how your team does it!$"
 SF_Text_ScottDefeat::
@@ -194,4 +194,4 @@ SF_Text_IncidentBefore::
 SF_Text_IncidentAfter::
 	.string "FIELD LOG 18\nThe relays are stable again.\pROON traced the pulse to the MISSION.\nOVERCLOCK signs each transmission.\pSomeone put 'ship it' on the report.\nSomeone else crossed it out.$"
 SF_Text_TeamWhiteboard::
-	.string "TEAM PLAN\nBlue INPUT before green OUTPUT.\pTry the practice battles. Rest at\nthe clinic before the leader.\pUse more than one type of companion.\nEven your deck needs a second slide.$"
+	.string "TEAM PLAN\nBlue INPUT before green OUTPUT.\pPractice battles are optional.\nTrainers battle when they see you.\pWALDEN: both level 5.\nBINPOSSUM: NORMAL. PINEPIP: GRASS.\pSTEVEN: both level 5.\nPIERPEEP: WATER/FLYING.\pMYCELIMP: GRASS.\nABSORB is strong against BRINEPUP.\pBIDE stores damage, then strikes.\nTry status moves while it charges.\pExit and walk east to the clinic.\nJUSTINE heals fainted teammates free.$"
