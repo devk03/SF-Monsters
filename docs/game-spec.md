@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 22:25 UTC:
+Current checkpoint — October 14, 2026, 22:49 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v64 / Site 55 is live.
-  Native release source 709e295; website source 56f1cb6f. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v65 / Site 56 is live.
+  Native release source 8bff425; website source aa5a3d14. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -591,8 +591,12 @@ Current checkpoint — October 14, 2026, 22:25 UTC:
 - Guide AREA now uses a geographic SF map and original courier marker. Actual
   two/one/no-wild-habitat scenarios and five player-parent contexts pass native
   checks; Chrome displays it and returns to the Guide. Art approval remains open.
-- Alignment map audit completed; new original-Garry slot/palette safety review
-  requested22:24UTC. Next alignment check by22:54UTC.
+- JOURNAL SELECT now opens SF MAP before starter/Guide unlock; A/B returns to
+  the native menu. Browser controls and no-starter native access are verified.
+- Original Garry field art survives old-save Continue, native Save and cold reload.
+  Prior eight custom cast sprites remain byte-exact; human art approval pending.
+- Alignment independently reviews exact map-return save encryption/volatile state
+  after the22:46UTC exchange. Next alignment check by23:16UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -814,7 +818,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.64-sf-habitat-map-preview; target32b575128a803e44d4f1d2c81a94294496b2d365be215fc190a14fd324ea5686; Site55. Geographic SF habitat map/player marker, portable journal, original Naval and creature art. Human approvals remain0/11. |
+| Public build | 0.0.65-city-map-and-garry-preview; target0b5d830eed40015d3f782f6bfa420732cd110013b210754a4d5f10ce7c986fff; Site56. JOURNAL SELECT opens SF MAP before starter unlock; original Garry field art. Human approvals remain0/11. |
 | Latest local source build | v64 normal source709e295 reproduces tested target32b57512. Map17/17, cast36/36, intro5/5 and creature255 controls pass. Scoped native habitats/five player parents/C8 travel-save-reload and actual Chrome map/return checks pass; full performance/art gates remain open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
@@ -6505,3 +6509,61 @@ v65 journal map handoff and first native checks — October14,22:40UTC:
   final release acceptance remain pending. Public staysv64/Site55; human0/11.
   Latest alignment handoff acknowledged22:36UTC; next check by23:05UTC. Root owns
   all further edits/builds/publication; peer task stopped. No GitHub Actions.
+
+
+v65 public city-map access and original Garry — October14,22:49UTC:
+
+- Native source8bff425 and normal release reproduce draft target
+  0b5d830eed40015d3f782f6bfa420732cd110013b210754a4d5f10ce7c986fff.
+  BPS1024149bytes SHA333aa289bfaff81ad13f50e485d5f00dc50786339a651ac0fa05e83cd431b688.
+  Full local checks pass; compiled cast40/40, SFmap17/17, intro5/5 and
+  creature255 controls match. Production web BPS decoder reproduces exact target.
+- Before-starter native map capture has party0, starter flag0x860 false and
+  Guide flag0x861 false. No debug unlock, new item or progression flag is used.
+  Park/Outer Sunset captions, native close/return and walking pass. Complete
+  sixteen-hub geographic/campaign map and human interface approval stay open.
+- Existing Garry uses numeric48 throughout; no cached-ID migration is needed.
+  Independent compiled239-entry pointer-table comparison changes ONLY slot48,
+  Gentleman→SFGarryTan. All previous eight original2304-byte sprite resources
+  remain byte-exact. South Park palette first28 bytes and other two cast palettes
+  remain exact; only previously unused14/15 receive new cream/gray colors.
+  Proofgarry-field-v65-plan/compiled-isolation-proof.json.
+- Genuine olderC5 native Continue displays Garry without leaving the map.
+  Ordinary Save createsC6 SHA78d6fe1996c1d896e465b3e16b75b844e4061f1a536a86cc5723788aa61115b3;
+  read-only Flash auditor passes all declared domains/counter/stat checks.
+  ColdC6 reload preserves ALL15752 SaveBlock1 bytes, all3884 SaveBlock2 bytes
+  except actual clock seconds/VBlanks0x11/0x12, and the exact Flash battery.
+  save-proof.json preserves this limited claim; this adds no cross-platform
+  round trip or distinct campaign checkpoint to the fifty-checkpoint gate.
+- Actual native dialogue turns Garry west; Chromium normal X interaction shows
+  the same original sprite/dialogue. Existing script content is unchanged.
+  Genuine older clinic save cold-resumes with Justine/Patrick visible using
+  the revised shared palette; their packed resources/visible colors stay exact.
+  Garry likeness, nine-pose art and movement quality remain human-unreviewed.
+- Chromium JOURNAL ShiftRight opens native SF MAP, B returns eight-row menu
+  with JOURNAL selected/SAVE row4, B returns field and X talks to Garry.
+  Ten-second map smoke reports597 executed/video frames,1200 visible ticks,
+  zero frame debt/mismatch, zero audio underruns/dropped source frames and
+  final audio acknowledgment. Report29b03e7924af4a9ca8f2c35c5ee3842e;
+  this does not pass guest-update, physical-input, full-duration or device gates.
+  Owned QA tab/emulator/audio/server18789 were stopped after capture.
+- Opening/closing native map changes encryption keys as the inherited engine
+  relocates save blocks. Initial raw comparison (382 SaveBlock1/seven SaveBlock2
+  byte differences) is retained, not called byte-exact. Alignment independently
+  reviews exact field decryption and active-object differences; final classified
+  proof remains pending. Flash itself and party remain exact.
+- Sites56 sourceaa5a3d1429b70591aed2198fd0b4593259d4206c; saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_2ea24b021660819198a0d21354e8702d.
+  Deploymentappgdep_6ad006b76fd481918ed0a277a6a373f5 succeeded22:48:31UTC.
+  Archive229df1db6a67152d525be02f0ad4bbfacb6523c5a920b400bf2c57bc763db021
+  passes88-file audit with no commercial cartridge, private save, fixture, ELF,
+  movie, ZIP or AppleDouble. Only approved original SFMM homebrew is included.
+- Both canonical anonymous live resources match local bytes; receiptSHA
+  01bc017705c6a120fec5e0bb6d11abb669119eda147f5611c7b6a17e6c1c0182.
+  Public loader screenshotpublic-v65-loader-visible.png; no public ROM/save
+  import/account changes. Hosting and15 runtime files unchanged, audience public.
+- Goal active through October15,18:00 Pacific. Human approvals0/11, music2/4
+  last ratedv40; revisedv44 pending. Full campaign/performance/mechanics/save
+  gates remain open. No GitHub Actions, DB migration, PR merge or new monitor.
+  Alignment's finite read-only acceptance task assigned22:46UTC (30minute limit);
+  next exchange by23:16UTC. Root owns all implementation/build/publication.
