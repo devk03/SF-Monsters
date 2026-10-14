@@ -5384,3 +5384,39 @@ Contextual story hints, v56 source checkpoint:
   checks; no synthetic campaign state or byte-edited battery will count.
   Public staysv55/Site46 until verification. Next alignment check by16:45UTC;
   prep hardstop17:00UTC. Full human domains0/11; full goal remains active.
+
+v56 story execution and compatibility verified:
+
+- Six genuine v49 ordinary checkpoints cover parcel2/3/4 and relay0/1/2/3;
+  original RAM phases were inspected before saving rather than trusting stale
+  companion Flash. An existing earned v51 badge checkpoint adds phase4/4.
+  Seven actual v56 coldContinues preserve phases/maps/positions and input Flash.
+  Provenance receipt story-hints-legacy-checkpoints/receipt.json
+  SHAb06b3043ff6dc78e2444f4205069bef6a696a3ae4d5db651781a15a609412683.
+- Normal travel reaches Karpathy from all seven checkpoints. Actual expanded
+  message bytes equal the correct immutable-ROM hint symbol in each phase.
+  All796 RGBframes/PCM per conversation match native/NodeWASM; phases stay
+  unchanged. Mentor receipt SHAe3b08c519df37674793d3e0f38cb6a1af402c4842ab33753253d3578d23b7cb8.
+- Independent normal Roon conversations verify all seven branches. Sensor
+  return changes quest3→4 and money3000→3500; repeats pay zero. Other branches
+  preserve actual phases/money. Receipt story-roon-v56-audit/receipt.json
+  SHA2c947254f040ac54e93217340f314d9b80fdce9a64ec6707634f8c8373cb6d49.
+  Subsequent ordinary Save1→2/coldContinue/repeat retains3500 and4/0, with no
+  extra reward; matched native/WASM Save Flash/finalRGB/PCM agree. Evidence
+  story-hints-v56-roon-reward-save-reload.json. This is checkpoint proof only.
+- A genuine before-starter source finishes its normal opening, then saves
+  quest1/relay0/party0 using actual menu Save index2. Valid CRC/SF marker and
+  real browser TypeScript validator accept it. v56 coldContinue and normal
+  mentor conversation select Choose; all600 party bytes, flags/vars/phase/money
+  remain unchanged. No function-call trace collected, so no claim of tracing
+  absence of healing. Receipt story-hints-prestarter-v56/receipt.json
+  SHA7af72c7e347cde8f6af6e2d7b2a2ac3b72bc657435a10c67778fc594465aa177.
+- Controlled native GetStringWidth fixtures measure33 actual encoded lines at
+  at most200px. They intentionally use scratch RAM/CPU registers and never
+  export campaign saves; separate from normal controller evidence. Font receipt
+  SHAab706dbf03831c7f14ba5857add48cfd235f6411337b2c41624a55cff86221e8.
+- Five source checks/fullcheck.sh and all711 mechanics/57 doubles pass. Normal
+  release/publication pending. No human/performance/full-story approval inferred.
+  Next: separate read-only guest-loop/input profiler pilot, with exact PC/cycle
+  semantics independently reviewed; frozen capture helpers remain unchanged.
+  Alignment audit hardstop17:35UTC, next check by17:15UTC. Publicv55/Site46.
