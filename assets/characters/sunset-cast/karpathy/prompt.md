@@ -44,3 +44,7 @@ First attempt preserved at ignored .tools/karpathy-atlas-generation/attempt-01.p
 The shared native palette adds a single light RGB5(31,27,23) face/sneaker color at previously unused index15. Roon keeps its original quantization palette, recipe, indexed frames and visible colors; his packed4bpp remains e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc. Karpathy uses nine16x32 native poses and native east mirroring; fine pose/palette/runtime review remains pending.
 
 Public persona reference checked2026-10-14: https://karpathy.ai/ describes Andrej Karpathy as an AI researcher and educator. The game mentor role, navy outfit and plot are fiction; source photography and site images were not copied.
+
+## Reviewed native cleanup candidate
+
+A pinned recipe now lightens231 orange skin/hand/sneaker accents, raises the trailing right shoe of west stride1 within x8..11/y27..29, and reflects north stride2 outer arm strips x2..4 and11..13/y20..24. There are252 net indexed pixel changes from the original quantization. Source PNG stays unchanged. West baseline contacts alternate left x4/5 then right x8..11; north arm phases now alternate. Recipe SHA256 5c2cf30cf91f46bc51f9df1155894ba3eada4aaf344a1c25992d09004cf5e643. Each source/palette and all nine before/after frame hashes are pinned. Earlier skin-only and west-plus-skin recipes remain in ignored local evidence. No human approval inferred.

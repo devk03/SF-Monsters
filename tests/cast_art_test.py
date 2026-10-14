@@ -1,5 +1,6 @@
 """Protect frame encoding and coherent palette use for the shipped SF cast."""
 from pathlib import Path
+import hashlib
 import json
 import struct
 import sys
@@ -26,7 +27,20 @@ class NativeCast(unittest.TestCase):
                          'e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc')
         karpathy = Image.open(directory/'karpathy/walk.png')
         self.assertIn(15, karpathy.tobytes())
+        self.assertNotIn(1, karpathy.tobytes())  # Removed orange skin accents.
         self.assertNotEqual(karpathy.tobytes(), roon.tobytes())
+
+    def test_karpathy_opposite_foot_contacts_and_north_arm_phases(self):
+        image = Image.open(ROOT/'assets/characters/sunset-cast/karpathy/walk.png')
+        frames = [image.crop((i*16,0,i*16+16,32)).tobytes() for i in range(9)]
+        contacts = [[x for x in range(16) if frames[i][29*16+x]] for i in (7,8)]
+        self.assertEqual(contacts, [[4,5], [8,9,10,11]])
+        hands = [{(x,y) for y in range(20,25) for x in (*range(2,5),*range(11,14))
+                  if frames[i][y*16+x]==15} for i in (5,6)]
+        self.assertNotEqual(hands[0], hands[1])
+        self.assertEqual(hands[0], {(15-x,y) for x,y in hands[1]})
+        self.assertEqual(hashlib.sha256(frames[6]).hexdigest(),
+                         '9240829f7d13c76cb68dc322f3768afabdfff5c0b61b8cb439adea0d951fab04')
 
     def test_stock_slot_replacement_cannot_claim_another_map_or_script(self):
         parent = ROOT/'.tools/cast-ownership-tests'; parent.mkdir(exist_ok=True)

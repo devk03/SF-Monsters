@@ -5266,3 +5266,23 @@ Karpathy native-art source integration:
   Karpathy as an AI researcher and educator. Game outfit/mentor role are fiction;
   source photos/site images were not copied. Atlas source/prompts remain original.
   Goal active; next alignment check no later14:30UTC.
+
+Karpathy native-pixel refinement before release:
+
+- Initial privatev55 target99b3367c...17c54da exposed orange skin highlights and
+  repeated north-arm/west-foot phases. That draft is preserved and unpublished.
+- Original source PNG staysa60e087...f97d940. Reviewed recipe lightens231 skin,
+  hand and sneaker accents, lifts the west first-stride trailing shoe one row
+  inside x8..11/y27..29, and reflects north second-stride outer arm strips only
+  inside x2..4/11..13,y20..24.252 net changes bind all nine input/output poses;
+  recipeSHA5c2cf30cf91f46bc51f9df1155894ba3eada4aaf344a1c25992d09004cf5e643.
+- Independent source/pixel audit verifies exactly those three operations, zero
+  other differences. North second-stride SHA9240829f...51fab04 agrees with the
+  independent proposal. West baseline contacts alternate left4/5 versus right
+  8..11; north hand phases alternate. Packed art02f0c4b074da27d427fd1e5b43e0769ddc95409ac94983b1997b309ef4006065
+  decodes exactly to all nine PNG poses; no opaque pixels below baseline30.
+  Roon remains exact4bppe5dc407...2d91fc and identical visibleRGBA, source/recipe
+  and all used palette colors. Shared palette remainsf4fc7a76...b4c0aad5.
+- Eleven cast, four palette and five cleanup checks pass; revised fullcheck.sh
+  passes. Normal build/runtime/older-save/mentor interaction checks still needed.
+  Full human domains0/11; public staysv54/Site45. No quality approval inferred.

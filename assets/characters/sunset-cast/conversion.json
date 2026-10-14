@@ -149,9 +149,10 @@
       "common_scale": 0.059850374064837904,
       "files": {
         "source.png": "a60e087653530020fd75052419432d805497d92bac2f9be9b3e8df176f97d940",
-        "walk.png": "a6bb7f963df0d744f5190136344dda6c5cb6f6bc6c3b4fda0edd55a2235a9f95",
-        "walk.4bpp": "1404f71b8b5aaad97a4327d010b34ce5ad854798caac92bc632365d26c8997ba",
-        "native-gallery.png": "8a53cb133f293a1c4626d57934d8020560232b3e90ce2a35cbd2e31e42f66a8b"
+        "walk.png": "6de806110fae7c855d09652a8eb04e41d292bb44b758c28e7855a4a6d1cbd554",
+        "walk.4bpp": "02f0c4b074da27d427fd1e5b43e0769ddc95409ac94983b1997b309ef4006065",
+        "native-gallery.png": "4b56e5669f5774b660e3b8b6982c7469824acf1c5831ea35515454d34bb900d6",
+        "native-cleanup.json": "5c2cf30cf91f46bc51f9df1155894ba3eada4aaf344a1c25992d09004cf5e643"
       }
     }
   ],
