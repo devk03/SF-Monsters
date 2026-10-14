@@ -5446,3 +5446,30 @@ Site47 v56 publication verified, 2026-10-14:
   equivalence first. These cannot establish callback completions, render deadlines,
   browser/mobile performance or input-to-photon. Frozen capture helpers unchanged.
   Next alignment check by17:40UTC. Full human domains0/11; full goal active.
+
+Bounded native input pilot, 2026-10-14:
+
+- New separate native_input_profile.c uses stock runFrame plus the existing
+  keysRead callback, filtered to actual ReadKeys LDRH. No guest RAM/register
+  writes or reads of the KEYINPUT device by the observer. Unsigned clock-wrap,
+  signed-boundary and discontinuity checks pass; reset/load precedes its epoch.
+  Validated pinned agbcc offsets are4/28/2a/2c/2e hex for pointer size/key fields.
+- Calibration input-v56-calibrated-pilot-v2/receipt.json
+  SHA f2a4333cbfd642509d49660a256928c399a18651af78254165a8f26dfd5cde81:
+  all120 actual video frames,131668 stereo PCM samples, final397312-byte state
+  and131072-byte Flash are exact across control, observer and unchanged frozen
+  capture harness. All120 stock calls advance exactly one video frame.
+  Eight distinct stable press/release masks get real hook entries and changed
+  heldRaw acknowledgements at the first frame-end sample. Hook-entry latency
+  22151–53415 guest cycles; acknowledgement upper bounds280887–280899 cycles.
+- Scope is one120-frame field route, input submitted at stock frame boundaries.
+  Hook entry precedes final instruction cost; frame-end acknowledgement is only
+  an upper bound. No callback/render deadline, browser/mobile/input-to-photon,
+  ten-minute run or robust overhead claim. Single-pair wall timings are noisy
+  and include audio callback writes. Full performance gate remains open.
+- Alignment independently rehashed all four exact outputs and reviewed observer
+  effects. Hardened truncated CSV rejection and actual frame increment checks;
+  outer wrapper timeout bounds bootstrap/IO too. Frozen capture helpers unchanged.
+  Next: commit reusable calibration/provenance wrapper and failure guards, then
+  separately validate instruction-level callback observation against stock core.
+  Next alignment check by17:45UTC; full human domains0/11; goal active.
