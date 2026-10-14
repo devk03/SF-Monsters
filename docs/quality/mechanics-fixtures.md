@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **656 independently specified scenarios**, including
-**57 double-battle interactions**. All656 pass on the approved Emerald reference
+The catalogs contain **677 independently specified scenarios**, including
+**57 double-battle interactions**. All677 pass on the approved Emerald reference
 and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases, plus10 move-script scenarios. This is partial evidence.
+action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases, plus10 move-script and21 residual-phase scenarios. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -387,3 +387,24 @@ main review and extraction of the bounded transport into its own module. Stop is
 BEFORE move-end: residuals, fainting, party synchronization, obedience, next action,
 full turns and all presentation/performance/save behavior remain outside this
 profile. It does not close the full mechanics gate. Total656/57 doubles.
+
+
+## Native residual phases
+
+`residual.json` has21 independently specified field/battler end-turn-phase cases.
+Actual DoFieldEndTurnEffects and DoBattlerEndTurnEffects select native scripts;
+the native callback wrapper executes each through end2 and restores the callback.
+Both phases complete with empty stacks, expected trackers/order and no outcome.
+
+Cases cover poison/burn/minimum damage, escalating/capped toxic counters,
+Leftovers/Ingrain healing/clamping/no-op, LeechSeed/LiquidOoze, damaging and
+immune/expired sandstorm, rain/sun duration, Reflect duration and the interaction
+of Leftovers before poison. Exact final HP/status/status3/weather/timers/sides/RNG,
+selected scripts/signed damage and intermediate HP packets are explicit oracles.
+
+The pinned agbcc proves native callback/stack/resource layouts. Strict transport,
+controller packet, duplicate-state, return/outcome/order and canary guards pass.
+Eight focused units and main native rerun `mechanics-v51-residual-main-review`
+pass21/21 both ROMs. Native living party objects prevent unrelated team-loss
+decisions; ACKs do not synchronize party HP. No move actions, move-end dispatch,
+fainting, full turn, presentation or durable-save proof is claimed. Total677/57.

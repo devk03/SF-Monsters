@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
-| Remaining system gates | 656 independent native scenarios pass,57 doubles: includes all289 native ordered type pairs,55 capture outcomes,8 delivery chains and10 native move-effect-script scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/residual/full-turn resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 677 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts and21 residual-phase scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4837,3 +4837,39 @@ Native move-script integration checkpoint:
 - Continue native move-end/residual verification with the alignment chat and
   hands-on desktop browser save roundtrips, keeping existing public guest saves
   isolated from QA. Public patch remainsv51/Site41; tooling needs no redeploy.
+
+
+Save-roundtrip QA preparation:
+
+- A finite localhost production-worker session serves exact Site41 source/client/
+  WASM/patch from http://127.0.0.1:18765, with6000-second hardstop. Its guest
+  origin is isolated from the public guest save. No DB/binding/access changes.
+- Normal-controller Grass-earned save continuation deposits BinPossum in Box1;
+  Sprout remains paralyzed and Hushmoth remains fainted in the party. Complete
+  native PC exit/ordinary save baseline is in progress; zero new roundtrips
+  counted yet. Localbrowser paused/muted until that baseline is ready.
+- Alignment audits normalization: actual old save already has clock flag0,
+  Safari0, species revision8 and consistent Dex mirrors. Must prove those on
+  post-deposit baseline. Encryption normalization includes all64 stats, five
+  bag quantity pockets, money/coins and BerryPowder; party/PC bytes remain raw.
+- Temporary human notification restriction: no WHOOP/Dhoop/vibration/ready buzzes
+  through2026-10-14T21:26:57Z; do not queue or replay suppressed alerts. Ordinary
+  updates/work continue. Alignment chat has the restriction too.
+
+
+Native residual-phase checkpoint:
+
+- Main reviewed/reran21 native field/battler end-turn-phase scenarios. Native
+  selectors and callback-wrapper scripts execute through end2; both phases
+  restore callbacks with empty stacks, expected trackers/order and no outcome.
+  Exact HP/status/status3/weather/duration/screens/RNG, selected effect/damage
+  and intermediate HP controller payloads match independent oracles.
+- Poison/burn/toxic, Leftovers/Ingrain, LeechSeed/LiquidOoze, sandstorm/rain/sun,
+  Reflect and healing-before-poison interactions covered. Main receipt
+  mechanics-v51-residual-main-review:21/21 both ROMs; interpreter-call totals
+  are in individual receipts; no extra scenario count per opcode/checked field.
+- Eight strict schema/phase/callback/controller/canary/deduplication guard units
+  and full localcheck.sh pass. Total677/57 doubles. Move actions, move-end,
+  fainting, party synchronization, full turn, presentation and saves still open.
+- Next alignment task is read-only save-normalization audit, ending11:45UTC.
+  No ROM build, workflow, deployment or recurring monitor for these tool changes.
