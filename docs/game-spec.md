@@ -554,28 +554,28 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October14,2026,19:45UTC:
+Current checkpoint — October 14, 2026, 20:25 UTC:
 
-- Goal active; deadline remains October15,18:00 Pacific. Publicv57/Site48, native
-  release source7cffa0b, website sourcea0ca6c9. The native lawn/audio preview is live.
-- Human final approvals0/11. Full16hub/8gym/150monster campaign and final
-  acceptance remain unfinished; first-slice approval is still required.
-- Criticalv57finding: all108creature visual/palette blobs remain stock despite
-  authored source art; original cries do match18/18. v58build integration fix is
-  in progress. Existing creature-art integration claims are superseded by this audit.
--711 independently specified mechanics cases/57doubles pass; full-turn/type/catalog
-  gates remain open. Ten save round trips are sealed at one first-badge checkpoint,
-  not50 distinct campaign checkpoints or full device/auth coverage.
-- New40ms-cushion actual Chrome600s field check:0drops/underruns/warmup/debt/video
-  mismatch,35836video frames/71999visible ticks,8DOM inputs maxsubmit16.4ms.
-  This passes this field-only observation. Earlier IAB clock failure remains open;
-  mixed gameplay, native deadlines, physical response, Safari/phone and listening
-  acceptance are separate required gates. No full performance acceptance claim.
-- v57ordinaryFlash coldContinue/Save2→3/coldreload preserves audited game domains.
-  Independent compiled audit confirms only intended lawn/house-underlay pixels
-  change; maps/collision/events/palettes/attributes remain exact. Human art pending.
-- Last alignment exchange19:41UTC; finite read-only replay audit finished and both
-  identified gaps were fixed/tested. Next check by20:00UTC. Detailed receipts and remaining gates append below.
+- Goal active; stop October 15 at 18:00 Pacific. Public v58 / Site 49 is live.
+  Native release source 0d7c006; website source 96f1f701. Human approvals 0/11.
+- Fixed stale Make caches that had retained inherited creature graphics. Final
+  ROM independently matches all 108 authored visual/palette resources, 90 table
+  bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
+  The compiled checker now blocks BPS creation on a mismatch. Pixel quality and
+  animation acceptance remain pending; integration alone does not satisfy parity.
+- Actual native cold Continue, party icons and gym battle, plus Chrome battle /
+  party controls, show the authored assets. Matched v57/v58 native controller
+  routes produce byte-identical ordinary Flash saves at counter 4.
+- 711 independently specified mechanics cases / 57 doubles pass at the v56
+  baseline; full-turn/type/catalog gates remain open. Ten save round trips cover
+  one first-badge checkpoint, not 50 distinct campaign checkpoints.
+- Chrome 600-second field observation and shorter mixed/browser smokes pass
+  their scoped audio/video checks. Earlier IAB long-clock failure, physical
+  response, native deadlines, Safari/phone and listening acceptance remain open.
+- Full 16-neighborhood / eight-gym / 150-monster campaign remains unfinished.
+  First-slice approval is required before campaign expansion.
+- Alignment exchange 20:23 UTC; peer is auditing inherited creature placement
+  metadata read-only, with a finite 20-minute task. Next exchange by 20:52 UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -5913,3 +5913,29 @@ Critical creature-asset integration audit and fix:
   source in BOTHv57/v58, includingScottWu/courierportrait+field, doors/apartment/title;
  4/4trainer pointerbindings pass. No additional visible stale-art defect identified,
   so v58 staysfocused on creatures ratherthan producer-policy churn.
+
+
+v58 / Site 49 publication — October 14, 20:25 UTC:
+
+- Normal release target 63b10d0425af8a73bbae969dcbb9e75b6eae4777cfd31b44dde6da7f6f77a297;
+  BPS 958249 bytes, SHA 1c42d19f4ddd10723f0ca79c216c9334900749d7ea5b8d82b04298aad20e3e1a.
+  Final compiled-resource receipt SHA 96290808edec225b473a6c98a9d23c664f915532df259710790d2c03013a6be5.
+- Actual Chrome battle/party navigation verified authored creature sprites/icons.
+  Ten-second battle smoke: 597 video frames / 1199 visible ticks, zero dropped
+  frames, debt, mismatch, underruns or warmup gaps. This is a short smoke only.
+- Website source 96f1f70137b496b5f270511365e34fe6feaa21fa; saved Site 49 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_f5c83947c1b88191b270a12f71f92ca6;
+  deployment appgdep_6acfe49940b481919fe27d6d83223d48 succeeded at 20:22:58 UTC.
+- Clean archive SHA ce5761354655e786c844b9535b8c4fe318264f9d1fd5a58e96522c57a3da5497:
+  88 files, exact runtime/patch, no commercial cartridge, private saves or AppleDouble.
+  Production browser BPS decoder reproduces the exact native target from private
+  base input. All 18 anonymous public resources match local bytes; HTTP receipt
+  SHA 9270c4f967f7a53c36225a6b98f92c02b38e2a1ef4cd7eecfee86ce7c1b2a3ba.
+- Live loader and actual Download SF patch checked. Download SHA matches release;
+  user cartridge/save/progress untouched. Screenshot public-v58-loader-visible.png.
+  Public audience and auth/storage unchanged. No GitHub workflow runs.
+- Alignment identified likely inherited enemy elevation causing TrolleyKit to
+  float above its ground shadow; compiled metadata audit pending. Next visible
+  task is correct authored creature placement and a matched review clip.
+- Full campaign, 11 human domains and outstanding performance/save gates remain
+  open. Goal stays active; no completion claim.

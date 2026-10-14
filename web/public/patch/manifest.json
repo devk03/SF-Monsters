@@ -1,21 +1,50 @@
 {
-  "version": "0.0.57-native-lawn-preview",
+  "version": "0.0.58-creature-assets-preview",
   "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Seven named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "22beceecbe5d5edf607a3411fa19af4585a51e92a7ddd1cf1c6bbb1b54df1afd",
+  "target_sha256": "63b10d0425af8a73bbae969dcbb9e75b6eae4777cfd31b44dde6da7f6f77a297",
   "target_bytes": 16777216,
-  "patch_sha256": "82880edae3130610686c9dd41d6817c38ce811034dbb33d9ce8f28cd19e34c68",
-  "patch_bytes": 888452,
+  "patch_sha256": "1c42d19f4ddd10723f0ca79c216c9334900749d7ea5b8d82b04298aad20e3e1a",
+  "patch_bytes": 958249,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "7cffa0b469fc2693e177b1167212dbd3431ab87b",
+  "source_commit": "0d7c006370719324ec12a2e9dfebe064dfc82b79",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
   "build_backend": "host",
   "normal_compilation_verified": true,
+  "compiled_creatures": {
+    "passed": true,
+    "counts": {
+      "visual": {
+        "total": 108,
+        "matched": 108
+      },
+      "binding": {
+        "total": 90,
+        "matched": 90
+      },
+      "icon_selector": {
+        "total": 18,
+        "matched": 18
+      },
+      "shared_palette": {
+        "total": 3,
+        "matched": 3
+      },
+      "cry": {
+        "total": 18,
+        "matched": 18
+      }
+    },
+    "receipt_sha256": "cd4d8b99971778452660df046a14f37fa6053e1c0252a1f814202afc674ae5c2",
+    "validator_sha256": "16c23dba41491eaa993fb928028c129a29d4db6b69055f153ed439b514e5e1b9",
+    "quality_approval": "pending",
+    "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
+  },
   "host_toolchain": {
     "system": "Darwin",
     "machine": "arm64",
@@ -41,8 +70,8 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "2ce08b194edd69d073813236d6af1c9d6618239e13223a3820ed69088a17d572",
-    "target_sha256": "db2340f27a12f36b78b783cd974a465ef1681a47b27178679e09a8a95cf376fe",
+    "input_sha256": "1b97202b880b58903a96cb3ea95d33a34b5e508311e7a4523bd6c1ab36533712",
+    "target_sha256": "6ab1ff545fc840488666cae104d214fd6c1521fd4f8569ab8c6404dcf789032b",
     "labels": [
       {
         "symbol": "gText_Pokemon",
@@ -391,7 +420,7 @@
   },
   "interface_graphics": {
     "symbol": "gPokedexMenu_Gfx",
-    "offset": 14425240,
+    "offset": 14429676,
     "capacity": 2584,
     "compressed_bytes": 2564,
     "raw_bytes": 8192,
@@ -402,7 +431,7 @@
   "title_art": [
     {
       "symbol": "gTitleScreenPokemonLogoGfx",
-      "offset": 14543444,
+      "offset": 14547880,
       "capacity": 5892,
       "encoded_bytes": 3668,
       "raw_bytes": 16384,
@@ -411,7 +440,7 @@
     },
     {
       "symbol": "gTitleScreenBgPalettes",
-      "offset": 14542364,
+      "offset": 14546800,
       "capacity": 480,
       "encoded_bytes": 448,
       "raw_bytes": 448,
@@ -420,7 +449,7 @@
     },
     {
       "symbol": "gTitleScreenEmeraldVersionGfx",
-      "offset": 14549336,
+      "offset": 14553772,
       "capacity": 1588,
       "encoded_bytes": 1588,
       "raw_bytes": 4096,
@@ -429,7 +458,7 @@
     },
     {
       "symbol": "gTitleScreenEmeraldVersionPal",
-      "offset": 14542844,
+      "offset": 14547280,
       "capacity": 32,
       "encoded_bytes": 32,
       "raw_bytes": 32,
