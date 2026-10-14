@@ -141,7 +141,12 @@ def serve(args, output, identity, routes):
                 pass
 
         def do_GET(self):
-            if self.headers.get('Host') != authority or self.path not in routes:
+            if self.headers.get('Host') != authority:
+                return self.respond(404)
+            if self.path == '/session.json':
+                return self.respond(200, json_bytes({
+                    'remaining_ms': max(0, (deadline - time.monotonic()) * 1000)}))
+            if self.path not in routes:
                 return self.respond(404)
             content_type = 'text/html; charset=utf-8' if self.path == '/' else (
                 'application/javascript' if self.path.endswith('.js') else

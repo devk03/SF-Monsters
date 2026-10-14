@@ -79,12 +79,15 @@ def controller_observation(report, identity, directory):
         actual = number(dispatch['actualMs'])
         if not start <= actual <= number(replay['endedAtMs']):
             raise ValueError('Replay dispatch falls outside its observation interval')
+        if actual < due - 2 or actual > due + 50:
+            raise ValueError('Replay dispatch timing exceeds its explicit timer tolerance')
         if actual - due > number(replay['maxLatenessMs']) + 1e-6:
             raise ValueError('Replay hides observed timer lateness')
         due += frames * (1000 * 280896 / 16777216)
     lateness = number(replay['maxLatenessMs'])
     if number(replay['endedAtMs']) > report['endedAtMs'] or (
-            replay['reason'] == 'complete' and (count != len(rows) or lateness > 50)):
+            replay['reason'] == 'complete' and (count != len(rows) or lateness > 50 or
+            not start + duration - 2 <= replay['endedAtMs'] <= start + duration + 50)):
         raise ValueError('Replay completion scope is inconsistent')
     return {'status': replay['reason'], 'applied_rows': count, 'declared_rows': len(rows),
         'max_lateness_ms': lateness,

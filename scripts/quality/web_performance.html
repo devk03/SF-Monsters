@@ -20,7 +20,7 @@ Diagnostics measure emulation, canvas submission and audio buffering. They do no
 <pre id="report">No diagnostic report yet.</pre>
 <script type="module">
 let game, identity, timers=[], sessionTimer, measuring=false, finished=false, checking=false;
-let replayModule, routeText, replay, replayResult=null, heldMask=0;
+let replayModule, routeText, replay, replayResult=null, heldMask=0, sessionDeadline=0;
 const status=document.querySelector('#status'), report=document.querySelector('#report');
 const button=id=>document.querySelector('#'+id);
 function controls(){
@@ -39,6 +39,21 @@ async function verified(url,expected){
   return new Uint8Array(bytes);
 }
 const showError=error=>{status.textContent='Test failed: '+error.message;};
+async function refreshSessionDeadline(){
+  const before=performance.now();
+  const response=await fetch('/session.json',{cache:'no-store',signal:AbortSignal.timeout(1500)});
+  if(!response.ok)throw Error('Local session deadline unavailable');
+  const {remaining_ms:remaining}=await response.json();
+  if(typeof remaining!=='number'||!Number.isFinite(remaining)||remaining<=0||remaining>identity.server_limit_seconds*1000)
+    throw Error('Local session expired or returned an invalid deadline');
+  if(finished)return 0;
+  // Use the request's earlier timestamp: network delay cannot extend the lease.
+  const deadline=before+remaining;
+  sessionDeadline=sessionDeadline?Math.min(sessionDeadline,deadline):deadline;
+  clearTimeout(sessionTimer);
+  sessionTimer=setTimeout(()=>void finishLocalQa(),Math.max(0,sessionDeadline-performance.now()-1500));
+  return Math.max(0,sessionDeadline-performance.now());
+}
 button('load').onclick=async()=>{try{
   button('load').disabled=true;status.textContent='Verifying local cartridge, checkpoint and browser runtime…';
   const response=await fetch('/identity.json',{cache:'no-store'});
@@ -54,23 +69,27 @@ button('load').onclick=async()=>{try{
   const {load}=await import('/emulator/mgba.sdk.js');
   game=await load({canvasEl:document.querySelector('canvas'),assets:{rom},persist:null,
     storageNamespace:'sf-performance-isolated-v1',options:{gamepads:false,interframeBlending:false,volume:.15}});
-  game.importBattery(battery);await game.loadState(state);game.start();
-  sessionTimer=setTimeout(()=>void finishLocalQa(),identity.server_limit_seconds*1000);
+  game.importBattery(battery);await game.loadState(state);
+  await refreshSessionDeadline();if(finished)return;game.start();
   status.textContent='Verified SF checkpoint playing. Arrow keys move; X/Z are A/B. Let audio settle before measuring.';
 }catch(error){if(game){game.destroy();game=null;}showError(error);}finally{controls();}};
-async function measure(durationMs){try{
+async function measure(durationMs,onStarted){try{
   if(measuring||finished||!game)return;measuring=true;controls();
+  const remaining=await refreshSessionDeadline();if(finished)return;
+  if(remaining<durationMs+2500)throw Error('Not enough local session time for this measurement and report upload. Start a fresh session.');
   status.textContent='Measuring '+durationMs/1000+' seconds; visibility='+document.visibilityState+'.';
-  const measured=await game.startDiagnostics({durationMs,context:{identity,scenario:'Verified SF checkpoint; manual or explicitly scripted DOM keyboard actions'}});
+  const pending=game.startDiagnostics({durationMs,context:{identity,scenario:'Verified SF checkpoint; manual or explicitly scripted DOM keyboard actions'}});
+  onStarted?.();
+  const measured=await pending;
   const completedReplay=replayResult&&replayResult.startedAtMs>=measured.startedAtMs&&replayResult.startedAtMs<=measured.endedAtMs?replayResult:null;
   const activeReplay=replay?.active&&replay.startedAtMs>=measured.startedAtMs?{reason:'in-progress',startedAtMs:replay.startedAtMs}:null;
   const result={...measured,controllerReplay:completedReplay??activeReplay};
   report.textContent=JSON.stringify(result,null,2);
-  const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)});
+  const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(1500)});
   if(!saved.ok)throw Error('Could not preserve local report');
   const receipt=await saved.json();
   status.textContent='Saved '+receipt.name+'; data valid='+result.valid+'; foreground='+result.scope.foregroundOnly+'; final audio ACK='+result.audioFinalAcknowledged+'; audio drops='+(result.audioFinalSnapshot?.droppedSourceFrames??'unknown')+'; underruns='+(result.audioFinalSnapshot?.underrunOutputFrames??'unknown')+'.';
-}catch(error){showError(error);}finally{measuring=false;controls();}}
+}catch(error){game?.stopDiagnostics('harness-error');showError(error);}finally{measuring=false;controls();}}
 button('short').onclick=()=>measure(10000);button('medium').onclick=()=>measure(120000);button('long').onclick=()=>measure(600000);
 button('snapshot').onclick=async()=>{
   if(!game||finished||measuring||checking)return;
@@ -99,12 +118,12 @@ button('route').onclick=()=>{
   if(!routeText||replay?.active||measuring||finished||checking||timers.length)return;
   const route=replayModule.parseControllerRoute(routeText);
   if(route.durationMs>180000){status.textContent='Supplied route exceeds the three-minute measurement; use a shorter route.';return;}
-  replayResult=null;void measure(180000);
-  if(!measuring)return;
-  replay=replayModule.startControllerReplay(routeText,applyMask,result=>{
-    replayResult=result;status.textContent='Controller replay '+result.reason+'; rows '+result.appliedRows+'/'+result.totalRows+'. Scene coverage requires actual observation.';controls();
+  replayResult=null;void measure(180000,()=>{
+    replay=replayModule.startControllerReplay(routeText,applyMask,result=>{
+      replayResult=result;status.textContent='Controller replay '+result.reason+'; rows '+result.appliedRows+'/'+result.totalRows+'. Scene coverage requires actual observation.';controls();
+    });
+    controls();
   });
-  controls();
 };
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible')replay?.stop('hidden');});
 button('move').onclick=()=>{

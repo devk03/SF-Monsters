@@ -135,10 +135,15 @@ class WebPerformanceAuditTest(unittest.TestCase):
                 'dispatches': [{'row': 0, 'mask': 8, 'dueMs': 1100, 'actualMs': 1100},
                     {'row': 1, 'mask': 0, 'dueMs': 1100+duration/2, 'actualMs': 1100+duration/2}]}})
         self.assertEqual(audit(report, identity, runtime)['controller_replay']['status'], 'complete')
-        for changes in ({'startedAtMs': 999}, {'appliedRows': 1}, {'maxLatenessMs': 51}):
+        for changes in ({'startedAtMs': 999}, {'appliedRows': 1}, {'maxLatenessMs': 51},
+                        {'endedAtMs': 1101}):
             invalid = copy.deepcopy(report); invalid['controllerReplay'].update(changes)
             with self.subTest(changes=changes), self.assertRaises(ValueError):
                 audit(invalid, identity, runtime)
+        compressed = copy.deepcopy(report)
+        compressed['controllerReplay']['dispatches'][1]['actualMs'] = 1100
+        with self.assertRaisesRegex(ValueError, 'timer tolerance'):
+            audit(compressed, identity, runtime)
         (directory/'route.csv').write_bytes(b'1,16\n')
         with self.assertRaisesRegex(ValueError, 'input/helper changed'):
             audit(report, identity, runtime)

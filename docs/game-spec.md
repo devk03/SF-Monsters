@@ -554,23 +554,25 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October14,2026,18:55UTC:
+Current checkpoint — October14,2026,19:26UTC:
 
 - Goal active; deadline remains October15,18:00 Pacific. Publicv56/Site47, native
-  story source7e6ce94. New browser audio/reset/diagnostic changes are local/repo only.
+  story source7e6ce94. v57native-lawn draft is verified locally, not public yet.
 - Human final approvals0/11. Full16hub/8gym/150monster campaign and final
   acceptance remain unfinished; first-slice approval is still required.
 -711 independently specified mechanics cases/57doubles pass; full-turn/type/catalog
   gates remain open. Ten save round trips are sealed at one first-badge checkpoint,
   not50 distinct campaign checkpoints or full device/auth coverage.
-- Both earlier600second field runs FAIL strict audio continuity: IAB drops469829
-  sourceframes; regular Chrome starves873outputframes. Cause remains open.
-  New stale-PCM reset and canonical snapshot export preserve all serialized state
-  and Flash in the actual WASM proof. Short actual Chrome check passes; fresh
-  ten-minute candidate started~18:53UTC. No full performance acceptance claim.
-- Last alignment exchange18:54UTC; bounded mixed-scene route planning ends19:40UTC.
-  Static preparation only until the field trace finishes; next check by19:15UTC.
-  Detailed receipts, limits and remaining gates append below.
+- New40ms-cushion actual Chrome600s field check:0drops/underruns/warmup/debt/video
+  mismatch,35836video frames/71999visible ticks,8DOM inputs maxsubmit16.4ms.
+  This passes this field-only observation. Earlier IAB clock failure remains open;
+  mixed gameplay, native deadlines, physical response, Safari/phone and listening
+  acceptance are separate required gates. No full performance acceptance claim.
+- v57ordinaryFlash coldContinue/Save2→3/coldreload preserves audited game domains.
+  Independent compiled audit confirms only intended lawn/house-underlay pixels
+  change; maps/collision/events/palettes/attributes remain exact. Human art pending.
+- Last alignment exchange19:25UTC; finite read-only replay audit ends19:45UTC.
+  Next check by19:45UTC. Detailed receipts and remaining gates append below.
 
 ### 15.1 Objective and completion rule
 
@@ -5767,3 +5769,56 @@ One-time playback cushion candidate:
   altered input, hidden lateness or partial completion cannot claim complete input
   coverage. Eight audit tests pass. Stop measurement now also releases replay keys.
   This remains dispatch evidence, not guest key/scene or physical presentation proof.
+
+
+Actual40ms-cushion field result:
+
+- Report audio-prefill-chrome-600-v1/report-c9b36783a93743ceb6b31a7fd6dc1580.json
+  SHAadb241c2e690d5d373bf8f30085c35a1e68adcd7aa13ab57addb3e7101c94695.
+ 600.0013s wall-read interval,600.003628context/output seconds at44100Hz,
+ 26460160rendered outputframes,0warmup/starvation/drop; playbackStartedtrue,
+  prefilltarget2622sourceframes. Queue observations1609.36..3487.74sourceframes;
+  final2227.10. Report preparation1.2ms. No physical speaker-timing claim.
+- Actual35836video frames/71999visible rAF ticks,0debt/mismatch,8scripted input
+  changes maxsubmit16.4ms. This is a passing field-only sink/pipeline observation,
+  not a causal proof against earlier different runs or full quality acceptance.
+  Exact runtime/identity/auditor preserved; emulator/tab/server stopped.
+- Independent compiledv57audit receipt8c4a7150d8fb9d5b7af3003651ea9bad156bed96cd5e94131c03dc1335845d73:
+  Sunset194records/512tiles: only3lawn+75facade underlays change; opaqueforegounds
+  andother116records exact. Park148records: only3lawn change,502→497packedtiles.
+  Palettes/attributes, layouts/borders/collision/events/bindings and wave240..247
+  exact; reserved door1016..1023 untouched. Clinic/office resources exact.
+- Broad script-data raw comparison fails4009bytes; retained as failed. Every
+  changed byte is accounted by2233actual named-pointer operands with the same
+  bindings and−184address shift. This is explicit symbolic-relocation accounting,
+  not whole-section byte identity or an address mask. No unexplained difference.
+
+
+Actual mixed-browser and finite-lease checks:
+
+- Nativev57replays the8888frame route from an ordinaryFlash coldContinue seed:
+  gym13,13/party3 → Savecounter4 → activebattle, starter24/26HP, AbsorbPP19.
+  Browser180s actual replay62/62rows reaches the same visible battle HP. SavingUI
+  and exteriortransition also observed. Party GUI/SAVEDsuccessmessage were not
+  captured at their short intervals; no browserFlash-counter or full-scene claim.
+- Browser report0e9c4023b42d4384bf51e2249e5da649 SHA
+  5c173a29f1a5601e02f65f7d33c17569013d833d5a5ebe7798d4e7da6dc9548c:
+  10751video/21600visible ticks,0debt/mismatch/drop/underrun/warmup,62DOM inputs,
+  maxsubmit20.2ms,180.001088audio seconds/44100Hz. Replay maxlateness5.143ms;
+  dispatch evidence validated against preserved input and current measurement.
+  This is a three-minute mixed smoke, not the required ten-minute scene regimes.
+- Alignment caught an auditor hole accepting a complete267.883ms route compressed
+  into1ms. Now dispatches must stay within2ms early/50ms late of nominal timing;
+  complete duration has those explicit bounds too. The collapsed-time negative
+  case fails; the actual browser replay passes. DOM keyup dispatch is not immediate
+  guest-register release: SDK retains its existing≤70ms minimum-hold policy.
+- Server exposes monotonic remainingtime; page uses a conservative earlier request
+  anchor and never extends its existing deadline. Every measurement reserves its
+  duration+2500ms for preparation/upload; replay starts only after asynchronous
+  budget validation and diagnostic start. Upload and lease fetches are bounded.
+- Actual50s-session late-load UI rejects the three-minute route without inputs,
+  permits a10s report (597video/1200ticks,0audio failures/input events, replaynot-run),
+  then autonomous emulator teardown is observed; server exits0. Exact relative
+  client/server teardown timestamp was not independently recorded. Report SHA
+  e0ff1f0521099c7c56251b64684b1eb2625709610e44950731b74c0aa8694f1f.
+  Full local checks pass; all private sessions/tabs stopped. Public unchanged.
