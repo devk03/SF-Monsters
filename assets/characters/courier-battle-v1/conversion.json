@@ -1,0 +1,78 @@
+{
+  "source_sha256": "100a93a328c73c328440225ca430ce066473f9bbed62ec03980a0210ca6eeb47",
+  "source_size": [
+    2172,
+    724
+  ],
+  "source_layout": "four separated horizontal figures, left to right",
+  "source_cells": [
+    [
+      79,
+      141,
+      439,
+      624
+    ],
+    [
+      575,
+      136,
+      1031,
+      624
+    ],
+    [
+      1141,
+      129,
+      1563,
+      624
+    ],
+    [
+      1623,
+      173,
+      2157,
+      624
+    ]
+  ],
+  "waist_anchors": [
+    [
+      207.0,
+      483
+    ],
+    [
+      187.5,
+      488
+    ],
+    [
+      208.0,
+      495
+    ],
+    [
+      209.5,
+      451
+    ]
+  ],
+  "shared_canvas": [
+    534,
+    495
+  ],
+  "common_scale": 0.11235955056179775,
+  "native_frame_size": [
+    64,
+    64
+  ],
+  "frames": 4,
+  "native_frame_order": [
+    1,
+    2,
+    3,
+    0
+  ],
+  "idle_native_frame": 3,
+  "native_layout": "four vertical frames",
+  "waist_baseline": 64,
+  "shared_gender_design": true,
+  "quality_approval": "pending",
+  "files": {
+    "back.png": "03d596000871803c301906bac9956dfbd1eee6908a8727c2eaedec592108c2a5",
+    "back.4bpp": "766552cfcb5b85d5c3d626799b2dae702f9b8437bbfc06d48bc024d4182ee775",
+    "back.gbapal": "509d8bafc6360ef38a68253eef23e4afc64ad817fcac3263de8fa6cdef48e518"
+  }
+}

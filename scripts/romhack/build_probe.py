@@ -24,6 +24,7 @@ from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from cast_art import apply_cast
 from trainer_portraits import apply_portrait
+from courier_battle_art import apply_courier_battle
 from office_art import apply_office, office_resources
 from clinic_art import apply_clinic, clinic_resources
 from apartment_art import apply_apartment_art
@@ -95,6 +96,7 @@ def main():
     restored += apply_courier(ROOT, EMERALD, original)
     restored += apply_cast(ROOT, EMERALD, original)
     restored += apply_portrait(ROOT, EMERALD, original)
+    restored += apply_courier_battle(ROOT, EMERALD, original)
     restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     restored += apply_apartment_art(ROOT, EMERALD, original)
     restored += apply_door_art(ROOT, EMERALD, original)
@@ -178,6 +180,8 @@ def main():
     manifest['sunset_house'] = house_receipt
     manifest['courier_apartment'] = json.loads((ROOT /
         'assets/tiles/courier-apartment/conversion.json').read_text())
+    manifest['courier_battle'] = json.loads((ROOT /
+        'assets/characters/courier-battle-v1/conversion.json').read_text())
     manifest['cognition_cast'] = json.loads((ROOT /
         'assets/characters/cognition-cast/conversion.json').read_text())
     manifest['south_park_cast'] = json.loads((ROOT /

@@ -3,7 +3,7 @@
 Status: technical prototype shipped; Emerald quality parity is NOT achieved.
 Section 15 is the active goal and overrides the earlier prototype completion criteria.
 This file is the source of truth for scope, acceptance, and progress.
-Updated: October 7, 2026.
+Updated: October 14, 2026.
 Repository: https://github.com/devk03/SF-Monsters
 
 ## 1. Product
@@ -4470,3 +4470,31 @@ Native critical/resource checkpoint and 09:08 UTC alignment:
   results, and requested exact checkpoint artifacts plus first-play clarity gap.
   Existing finite task ends by 10:13 UTC. Next alignment check by 09:38 UTC.
   Public remains v48; human approvals remain 0/11.
+
+
+Original courier battle-back checkpoint (private v49):
+
+- Built-in image generation produced four original throw poses matching the
+  existing courier beanie/navy jacket/orange messenger bag. Source and exact
+  prompt are saved in assets/characters/courier-battle-v1. Native conversion
+  aligns waist anchors with a common scale, 64x64 frames and 15 opaque RGB555
+  colors. It does not copy commercial trainer artwork. Human approval pending.
+- First private draft exposed a native frame-order mismatch: the engine waits
+  on frame3, so the authored follow-through incorrectly appeared while waiting.
+  Preserved that draft/capture and remapped source poses to native order1,2,3,0.
+  Corrected capture visibly waits neutrally, then winds up/throws. Native timing,
+  movement, four-frame ABI and battle rules are unchanged. Regression covers
+  idle-frame mapping, native tile decoding, geometry and palette/hash identity.
+- Corrected private target45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8
+  aea5c6d80d7a052; patch881879 bytes. Both player selections use the original
+  courier back art with a dedicated palette. Native audit proves six other back
+  graphics, original player front palettes and Scott portrait/palette unchanged.
+- Actual earned recovery battery cold-loads with level10 CinderCoy29/29HP,
+  money1100, Potions2 and stage3 preserved; controller-only approach reaches
+  Scott. Cold1712 and approach2232 frames match final RGB/PCM/Flash across cores.
+  Every RGB frame of the2452-frame intro, complete PCM and Flash match. Private
+  evidence: courier-v49-mapped-{cold,approach,intro}-{native,wasm}, parity.json
+  and native-resource-audit.json under benchmarks. Full local check.sh passes.
+- Public stays v48 until normal release packaging/deployment. All298 mechanics
+  cases also pass on this corrected immutable target in mechanics-v49-*-mapped. No quality domain is
+  approved by these implementation checks; the complete campaign remains open.
