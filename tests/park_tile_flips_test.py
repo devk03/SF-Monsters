@@ -39,6 +39,9 @@ class NativeTileFlips(unittest.TestCase):
     def test_lavender_frontage_fills_only_twelve_gap_cells(self):
         plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
         restored = json.loads(json.dumps(plan))
+        for y in range(13, 17):
+            row = restored['rows'][y]
+            restored['rows'][y] = row[:11] + 'P'*6 + row[17:]
         for y in range(2, 6):
             for x in range(26, 29):
                 token = plan['rows'][y][x]
@@ -46,7 +49,7 @@ class NativeTileFlips(unittest.TestCase):
                 self.assertEqual(park_tile(plan, x, y), 648+(y-2)*3+x-26)
             row = restored['rows'][y]
             restored['rows'][y] = row[:26]+'PPP'+row[29:]
-        # Entire map outside the frontage gap, including the v60 bench landing.
+        # Entire map outside reviewed frontage additions, including v60 bench landing.
         self.assertEqual(hashlib.sha256(json.dumps(restored, sort_keys=True,
                          separators=(',', ':')).encode()).hexdigest(),
                          '89f6d3d31744419676f6bd2126b3d10290fb5ac2926c14a1fc54bb38295e00f1')

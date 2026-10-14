@@ -161,6 +161,26 @@ class ParkResources(unittest.TestCase):
             self.assertEqual(bytes(pixels), b''.join(
                 expected[y * 48 + left:y * 48 + left + 16] for y in range(top, top + 16)))
 
+    def test_western_houses_block_all_footprints_and_keep_both_public_approaches(self):
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        # The previous empty plaza is now one compact street wall, never a path.
+        for y in range(13, 17):
+            for x in range(11, 17):
+                self.assertTrue(plan['legend'][plan['rows'][y][x]][1], (x, y))
+        for left, first in ((11, 622), (14, 634)):
+            for dy in range(4):
+                for dx in range(3):
+                    self.assertEqual(park_tile(plan, left+dx, 13+dy), first+dy*3+dx)
+        # Two unobstructed sidewalk rows face the cross street; the garden and
+        # road sides both reconnect below the houses. No fake walk-through door.
+        approaches = ([(x, y) for y in (11, 12, 17) for x in range(10, 18)]
+                      + [(x, y) for x in (10, 17) for y in range(13, 17)])
+        for x, y in approaches:
+            self.assertFalse(plan['legend'][plan['rows'][y][x]][1], (x, y))
+        self.assertFalse(any(11 <= event['x'] < 17 and 13 <= event['y'] < 17
+                             for key in ('npcs', 'warp_events', 'bg_events')
+                             for event in plan[key]))
+
     def test_compact_frontage_keeps_two_clear_sidewalk_rows_and_service_anchors(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         gap = maximum = 0
@@ -176,7 +196,7 @@ class ParkResources(unittest.TestCase):
         self.assertEqual([(w['x'], w['y']) for w in plan['warp_events']], [(13, 5), (32, 5)])
         for x, y in ((19, 4), (24, 4)):
             self.assertTrue(plan['legend'][plan['rows'][y][x]][1])
-        self.assertEqual([f[:2] for f in FACADES if f[4] == 110], [(18, 2), (11, 20)])
+        self.assertEqual([f[:2] for f in FACADES if f[4] == 110], [(18, 2), (11, 20), (11, 13)])
 
 
 if __name__ == '__main__':

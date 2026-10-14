@@ -6586,3 +6586,56 @@ v65 public city-map access and original Garry — October14,22:49UTC:
   Alignment's finite read-only acceptance task finished22:50UTC; followup
   twenty-minute first-slice priority review requested. Next exchange by23:20UTC.
   Root owns all implementation/build/publication.
+
+
+v66 first-slice density work started — October14,22:55UTC:
+
+- Public remainsv65/Site56. Source-only whole-map preview shows an empty paved
+  western stretch between the main street and oval garden. Root plans two
+  attached3×4 coral/butter frontages at11,13 and14,13, using existing original
+  tiles/palettes. Exactly24 previously paved cells change; no new graphics or
+  VRAM use. Two clear sidewalk rows above and one below remain, with both side
+  routes connected. All service/Muni/discovery/NPC/grass anchors remain fixed.
+- Acceptance: all existing destination approaches remain reachable, all24
+  building cells block walking and match visual depth, prior map bytes outside
+  the24 cells stay exact, secondary graphics/palettes/attributes/door reservations
+  stay exact, native/browser traversal is observed and an ordinary v65 save on
+  a newly occupied tile resumes safely without lost progress. This is first-slice
+  density work, not new campaign content, a usable interior, or art approval.
+- Private plan/current/candidate preview in park-density-v66-plan. Alignment
+  is reviewing this first-slice priority independently, with a finite20minute
+  task ending by23:10UTC. Source edits/build/recovery checks remain pending.
+
+
+v66 native density candidate acceptance — October14,23:00UTC:
+
+- Draft targetb2b5e135f52c711d626640a9ab54cd127f98b3d05e42f35ff1de29d578230bda
+  changes EXACTLY48bytes fromv65, the24 reviewed layout words. Every other ROM
+  byte stays exact: graphics, palettes, attributes, engine, NPC/event tables,
+  scripts, encounters and door VRAM. Existing497/504 unique8px tiles unchanged.
+- Original two-house street wall occupies11..16,y13..16. Both side approaches
+  and two upper sidewalk rows remain clear; native traversal goes round the east
+  side to16,17, and an Up attempt stays blocked in front of the butter house.
+  Rooftop Down attempt is blocked too. All existing service/discovery approaches
+  pass reachability; full local checks pass. Two focused behavior checks retain
+  blocked footprints, clear approaches, native bindings and no anchor overlap.
+- Native ordinaryv65 C6 Save genuinely walked to13,14 on the old open pavement.
+  v66 coldContinue relocates it to nearest safe sidewalk13,12 via existing resolver.
+  Plaintext proof verifies every saved byte except EXACT warp coordinates and
+  native template reconstruction:1536-byte array equals the three current ROM
+  records followed by61zero records, matching LoadObjEventTemplatesFromHeader.
+  Keys/clock separately classified. Party, storage, flags, vars, items, money and
+  non-save stats remain exact; active NPC trajectories/RNG are not called exact.
+- Ordinary Save after recovery createsC7 SHA
+  aab84ae8fcdbc31d27b77739f1e0ea11050094daed52eeb41cd7b859eabd3664.
+  Declared gameplay-domain audit changes ONLY location/warps; counter/saveStat
+  each6→7. ColdC7 Continue keeps exact Flash and visibly resumes safe sidewalk.
+  Proofs underpark-frontage-v66-occupied-cold/recovered-save/recovered-reload.
+  Native save recovery is not a new cross-platform or full campaign checkpoint.
+- Browser route/normal release/publication pending; public remainsv65/Site56.
+  Alignment accepted the empty western frontage gap and recommends one purposeful
+  usable room after the density checkpoint. Assigned finite60minute implementation
+  owns ONLY new seed-room source/art-helper/tests; root owns existing Park sources,
+  door/warp integration, builds, commits and publication. Planned butter entrance
+  is RIGHTMOST16,16 with apron16,17; no third building or Park raster allocation.
+  First-slice scope remains locked; no claim of map-art/user parity approval.

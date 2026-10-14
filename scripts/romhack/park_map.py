@@ -14,7 +14,8 @@ from park_signs import sign_cells
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
            (18, 2, 3, 4, 110), (11, 20, 3, 4, 110), (23, 2, 3, 4, 122),
-           (26, 2, 3, 4, 136))
+           (26, 2, 3, 4, 136),
+           (11, 13, 3, 4, 110), (14, 13, 3, 4, 122))
 
 
 def prune_unused_terrain(cells, plan):
