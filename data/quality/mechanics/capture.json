@@ -1,0 +1,513 @@
+{
+  "scope": "Isolated Cmd_handleballthrow only; no inventory decrement, acquisition/storage or campaign proof. Master case is explicitly tied to the pinned linked table and division-by-zero behavior.",
+  "reference_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "cases": [
+    {
+      "id": "basic-poke",
+      "ball": "ITEM_POKE_BALL",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "basic-great",
+      "ball": "ITEM_GREAT_BALL",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3012529599,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 15, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
+    },
+    {
+      "id": "basic-ultra",
+      "ball": "ITEM_ULTRA_BALL",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 2,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 20, \"odds_a\": 70, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 47661}"
+    },
+    {
+      "id": "poke-shake-0",
+      "rng_seed": 3,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 3310570426,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 3, \"rng_draws\": [50515], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "poke-shake-1",
+      "rng_seed": 0,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3917380458,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 0, \"rng_draws\": [0, 59774], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "poke-shake-2",
+      "rng_seed": 33,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 2,
+        "controller": 1,
+        "rng": 3802565610,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 2,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 33, \"rng_draws\": [31376, 116, 58022], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "poke-shake-3",
+      "rng_seed": 6,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 3,
+        "controller": 1,
+        "rng": 3319257162,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 3,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 6, \"rng_draws\": [35494, 31054, 21859, 50647], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "poke-shake-4",
+      "rng_seed": 2,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 230546438,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 2, \"rng_draws\": [33676, 28355, 21356, 3517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "poke-threshold-below",
+      "rng_seed": 148726177,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 2476292245,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 148726177, \"rng_draws\": [40328, 33512, 22086, 37785], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "poke-threshold-equal",
+      "rng_seed": 4097991073,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2643001344,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 4097991073, \"rng_draws\": [40329], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "status-sleep",
+      "status": 1,
+      "rng_seed": 781,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 70, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 47661}"
+    },
+    {
+      "id": "status-freeze",
+      "status": 32,
+      "rng_seed": 781,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 70, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 47661}"
+    },
+    {
+      "id": "status-poison",
+      "status": 8,
+      "rng_seed": 781,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3012529599,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
+    },
+    {
+      "id": "status-burn",
+      "status": 16,
+      "rng_seed": 781,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3012529599,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
+    },
+    {
+      "id": "status-paralysis",
+      "status": 64,
+      "rng_seed": 781,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3012529599,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
+    },
+    {
+      "id": "status-toxic",
+      "status": 128,
+      "rng_seed": 781,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3012529599,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
+    },
+    {
+      "id": "a254-four-check-path",
+      "species": "SPECIES_RATTATA",
+      "hp": 1,
+      "max_hp": 255,
+      "rng_seed": 0,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 833674724,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 254, \"rng_before\": 0, \"rng_draws\": [0, 59774, 21105, 12720], \"shake_threshold\": 65535}"
+    },
+    {
+      "id": "a254-threshold-equality-fails",
+      "species": "SPECIES_RATTATA",
+      "hp": 1,
+      "max_hp": 255,
+      "rng_seed": 516972961,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 4294901760,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 254, \"rng_before\": 516972961, \"rng_draws\": [65535], \"shake_threshold\": 65535}"
+    },
+    {
+      "id": "a255-auto-party-space",
+      "species": "SPECIES_RATTATA",
+      "hp": 45,
+      "max_hp": 90,
+      "status": 64,
+      "rng_seed": 123,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 123,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 255, \"rng_before\": 123, \"rng_draws\": [], \"shake_threshold\": null}"
+    },
+    {
+      "id": "a255-auto-party-full",
+      "species": "SPECIES_RATTATA",
+      "hp": 45,
+      "max_hp": 90,
+      "status": 64,
+      "rng_seed": 123,
+      "full_party": true,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 123,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 6
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 255, \"rng_before\": 123, \"rng_draws\": [], \"shake_threshold\": null}"
+    },
+    {
+      "id": "busy-noop",
+      "rng_seed": 123,
+      "controller_busy": true,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": 33814016,
+        "animation": 165,
+        "controller": 1,
+        "rng": 123,
+        "attempts": 0,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 170,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
+    },
+    {
+      "id": "trainer-block",
+      "rng_seed": 123,
+      "trainer": true,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_TrainerBallBlock",
+        "animation": 5,
+        "controller": 1,
+        "rng": 123,
+        "attempts": 0,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 170,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
+    },
+    {
+      "id": "tutorial-auto-success",
+      "rng_seed": 123,
+      "tutorial": true,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_WallyBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 123,
+        "attempts": 0,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 170,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
+    },
+    {
+      "id": "trainer-precedes-tutorial",
+      "rng_seed": 123,
+      "trainer": true,
+      "tutorial": true,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_TrainerBallBlock",
+        "animation": 5,
+        "controller": 1,
+        "rng": 123,
+        "attempts": 0,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 170,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
+    },
+    {
+      "id": "attempt-254-increments",
+      "rng_seed": 781,
+      "attempt_count": 254,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 255,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "attempt-255-saturates",
+      "rng_seed": 781,
+      "attempt_count": 255,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 255,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "master-pinned-one-draw",
+      "ball": "ITEM_MASTER_BALL",
+      "rng_seed": 0,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 24691,
+        "attempts": 0,
+        "master": 1,
+        "caught_ball": 1,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 0, \"odds_a\": 0, \"rng_before\": 0, \"rng_draws\": [0], \"shake_threshold\": 0}"
+    },
+    {
+      "id": "weak-beldum-full-hp",
+      "species": "SPECIES_BELDUM",
+      "hp": 90,
+      "max_hp": 90,
+      "rng_seed": 0,
+      "ball": "ITEM_POKE_BALL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3917380458,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1
+      },
+      "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 10, \"odds_a\": 1, \"rng_before\": 0, \"rng_draws\": [0, 59774], \"shake_threshold\": 16643}"
+    }
+  ]
+}

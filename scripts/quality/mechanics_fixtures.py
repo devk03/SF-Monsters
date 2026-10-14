@@ -71,16 +71,22 @@ def constants(engine):
     return resolve
 
 
-def symbols(elf, function=FUNCTION):
+def symbols(elf, function=FUNCTION, extra_globals=None):
     functions = {function} if isinstance(function, str) else set(function)
-    wanted, result = set(GLOBALS) | functions, {}
+    allocations = dict(GLOBALS)
+    for name, size in (extra_globals or {}).items():
+        if not re.fullmatch(r'g\w+', name) or type(size) is not int or size < 1 or (
+                name in allocations and allocations[name] != size):
+            raise ValueError('Additional native allocations need unambiguous positive sizes.')
+        allocations[name] = size
+    wanted, result = set(allocations) | functions, {}
     for line in subprocess.check_output(['arm-none-eabi-nm', '-S', '--defined-only', str(elf)], text=True).splitlines():
         match = re.fullmatch(r'([0-9a-f]+) ([0-9a-f]+) [A-Za-z] (\w+)', line)
         if match and match[3] in wanted:
             if match[3] in result:
                 raise ValueError('Ambiguous fixture symbol: ' + match[3])
             result[match[3]] = (int(match[1], 16), int(match[2], 16))
-    if set(result) != wanted or any(result[name][1] != size for name, size in GLOBALS.items()):
+    if set(result) != wanted or any(result[name][1] != size for name, size in allocations.items()):
         raise ValueError('Pinned native fixture symbols/layout changed.')
     return result
 
@@ -221,7 +227,7 @@ def validate_cases(document):
     return cases
 
 
-def verify_bundle(label, rom, elf, state, output, functions):
+def verify_bundle(label, rom, elf, state, output, functions, extra_globals=None):
     identity = digest(rom)
     cartridge = rom.read_bytes()
     if len(cartridge) != 16777216 or cartridge[0xac:0xb0] != b'BPEE':
@@ -234,7 +240,7 @@ def verify_bundle(label, rom, elf, state, output, functions):
         raise ValueError('Fixture state belongs to another ROM or core revision.')
     if label == 'reference' and identity != REFERENCE_HASH:
         raise ValueError('Use the fixed approved Emerald reference.')
-    syms = symbols(elf, functions)
+    syms = symbols(elf, functions, extra_globals)
     linked = output / (label + '-linked.bin')
     subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', str(elf), str(linked)], check=True)
     hashes = {}

@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **336 independently specified scenarios**, including
-**57 double-battle interactions**. All336 pass on the approved Emerald reference
-and SFv48:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,72 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases. This is partial evidence.
+The catalogs contain **364 independently specified scenarios**, including
+**57 double-battle interactions**. All364 pass on the approved Emerald reference
+and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
+action-order cases,72 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus28 capture-command cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -253,3 +253,33 @@ All earlier298 scenarios pass again. Final results are in
 `mechanics-v49-*-after-status`; total336 scenarios /57 doubles. Numerical
 minimums are met. Capture, the complete ordered type matrix, integrated attack
 resolution and the coverage review still prevent mechanics-gate completion.
+
+
+## Capture command catalog
+
+`capture.json` contains28 independently specified `Cmd_handleballthrow` outcomes.
+The runner creates valid fixed-personality enemy/player Pokemon in scratch RAM,
+sets the enemy's initial ball explicitly, seeds command RNG and observes animation,
+script branch, exact RNG, attempt counter, Master flag, stored ball, message chooser
+and party count. Wild flags are0; trainer/tutorial flags are explicit. No link-rule
+controller protocol is inherited from the generic battle setup.
+
+Coverage includes all five shake outcomes, strict threshold-below/equal cases,
+Poké/Great/Ultra differences with the same seed, all six major status bonuses,
+odds254 versus255, party-space/full messaging, busy deferral, trainer rejection,
+tutorial precedence, attempt saturation and a low-rate Beldum. The pinned Master
+case preserves the reference's one RNG draw before forced success: its linked
+bonus-table predecessor is0 and its unsigned division-by-zero path returns0.
+This is a pinned-engine observation, not a portable capture formula assumption.
+
+Use `capture_fixtures.py` with the same six ROM/ELF/state arguments above,
+`--cases data/quality/mechanics/capture.json` and a fresh evidence name. Evidence:
+`mechanics-v51-capture-guarded`; all28 pass both cartridges. An initial attempt
+exceeded the guarded helper's hex-write parser limit; preserved it and split
+controller-buffer initialization into1024-byte writes. Expected outcomes were
+specified before execution and were not changed to fit observed output.
+
+This command does not consume a bag item, animate the queued scene, register a
+new catalog entry, add the monster to a party or transfer it to storage. Those
+integrations and the remaining ball types remain required. Total364/57 does
+not close the full mechanics gate. No fixture produces a durable campaign save.

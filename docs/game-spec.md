@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
-| Remaining system gates | 336 independent native scenarios pass across damage, stats, type, order, accuracy, critical, PP, HP and status commands;57 meaningful doubles. Numerical minimums are met; capture, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 364 independent native scenarios pass,57 doubles, including28 capture-command outcomes. Numerical minimums are met; capture inventory/storage integration, remaining balls, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4742,3 +4742,24 @@ v51 public deployment:
   Evidence density-v51-public-archive-audit.json; actual-browser v51 QA pending.
 - Alignment pruning audit complete with no unsafe active references. Next finite
   mechanics coverage audit active until11:02UTC; continue implementation meanwhile.
+
+
+v51 actual-browser and capture-command checkpoint:
+
+- Public IAB applies the approved local base and exports GBA SHA256
+  ba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe, exactly
+  the native target. Existing guest Continue resumes one badge in the clinic,
+  exits normally into South Park and shows the new butter frontage. Screenshot
+  .tools/browser-review/public-v51-frontage.png; ROM receipt
+  density-v51-public-rom-download.json. No test-save import or in-game save;
+  temporary QA tab muted/paused/closed. Not a full save roundtrip/performance test.
+-28 capture-command scenarios pass reference/v51, bringing total364/57 doubles.
+  Observe five shake outcomes, RNG thresholds, basic ball differences, statuses,
+  odds254/255, party-full message, busy/trainer/tutorial paths, attempt saturation
+  and the pinned Master RNG edge. Actual fixed Pokemon objects and command calls,
+  controlled RAM/register setup; no campaign or inventory/storage proof.
+- Initial controller-buffer write exceeded the fixture parser bound; failed
+  evidence retained and runner writes split into1024-byte chunks. No oracle
+  changed after execution. Capture driver/core/harness unchanged. New strict
+  allocation, vector and write-bound guards/local check.sh pass. Final evidence
+  mechanics-v51-capture-guarded. All full-domain approvals remain0/11.
