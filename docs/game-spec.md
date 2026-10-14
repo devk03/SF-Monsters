@@ -5696,3 +5696,21 @@ Next native visual candidate — quieter Sunset lawn:
   nonfinite/reversed/partial anchors and a synthetic clock-deficit diagnostic.
   The ongoing Chrome600s run retains its earlier frozen SDK without these anchors;
   new source applies only to future sessions. No new performance gate is passed.
+
+
+- Completed candidate Chrome600s field run:35836video frames/72001visible ticks,
+  0discarded debt/mismatch/drop,8DOM input changes maxdispatch→submit16ms,
+  report preparation0.9ms. Audio stillFAILs zero-underrun criterion:73starved
+  outputframes at44100Hz (~1.655ms), with599.997823audio seconds. Receipt SHA
+  f6843351c9f95785dd97f075fb08481bcc1c7aed68ca68bb7427fb30560b1bcd.
+  Exact runtime/identity/auditor preserved. Do not infer causation or approval
+  from a smaller failure count than the earlier run. Test emulator/server stopped.
+- Alignment released to bounded mixed-route native capture at19:03UTC, using
+  immutablev56/pinned prebuilt capture binary. Root owns v57 build. No wall-time
+  performance claims from native captures overlapping local builds. Next check19:25UTC.
+- Full source checks exposed shared lawn use in South Park: decoded grass cells
+  20/32/33 intentionally change too; unique packed tiles502→497. All other prior
+  136-cell pixels retain their pinned historical hash after substituting only
+  these three independently checked authored cells with preserved original-art
+  fixtures. Palettes/attributes and reserved-door capacity checks remain strict.
+  The original failed check log is retained; revised six pack/decode tests pass.

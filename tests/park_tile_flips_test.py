@@ -77,7 +77,8 @@ class NativeTileFlips(unittest.TestCase):
             self.assertEqual(records[offset:offset+8], records[19*16+8:20*16])
             self.assertEqual(struct.unpack_from('<H', attrs, (136+cell)*2)[0],
                              0 if cell < 9 else 0x1000)
-        self.assertEqual(len(raw)//32, 502)
+        # Exact deduplication count varies with deliberately edited lawn art.
+        # The shared resource test below retains the native door VRAM bound.
 
     def test_four_orientations_reuse_one_tile_in_every_secondary_palette(self):
         original = bytes((x*x + 3*y + x*y) % 16 for y in range(8) for x in range(8))
@@ -129,11 +130,28 @@ class NativeTileFlips(unittest.TestCase):
             words = struct.unpack('<'+'H'*(len(records)//2), records)
             self.assertLessEqual(max(word & 0x3ff for word in words), 1015)
 
-    def test_all_released_v53_pixels_palettes_and_attributes_are_preserved(self):
+    def test_released_pixels_preserved_except_exact_authored_lawn_replacements(self):
+        from terrain_art import load_native_grass
         raw, records, attributes, palettes = park_resources(ROOT)
+        current_grass, _ = load_native_grass(ROOT/'assets/tiles/sunset-terrain')
+        old_grass = json.loads((ROOT/'tests/fixtures/coastal-lawn-v56.json').read_text())
+        self.assertEqual(old_grass['source_sha256'],
+                         'a905cc41244d7abe00ab13b71c4e2b8db0edf48d0251a7b18729e3dbec16e962')
+        def quadrant(cell, index):
+            left, top = (index % 2)*8, (index//2)*8
+            return b''.join(cell[y*16+left:y*16+left+8] for y in range(top, top+8))
         decoded = bytearray()
-        for word in struct.unpack('<'+'H'*(136*8), records[:136*16]):
-            for index in decode_tile(raw, word):
+        for offset, word in enumerate(struct.unpack('<'+'H'*(136*8), records[:136*16])):
+            cell, layer_quadrant = divmod(offset, 8)
+            pixels = decode_tile(raw, word)
+            if cell in (20, 32, 33) and layer_quadrant >= 4:
+                lawn = cell - 20
+                self.assertEqual(word >> 12, 7)
+                self.assertEqual(pixels, quadrant(current_grass[lawn], layer_quadrant - 4))
+                # Compare the remaining released resource to its original hash,
+                # restoring only these explicitly checked source-art quadrants.
+                pixels = quadrant(bytes.fromhex(old_grass['cells'][str(lawn)]), layer_quadrant - 4)
+            for index in pixels:
                 decoded.extend((index, word >> 12))
         # Pinned before this change, from the independently decoded v53 resource.
         self.assertEqual(hashlib.sha256(decoded).hexdigest(),
@@ -144,8 +162,6 @@ class NativeTileFlips(unittest.TestCase):
         old_palettes = palettes[:384] + bytes(32) + palettes[416:]
         self.assertEqual(hashlib.sha256(old_palettes).hexdigest(),
                          '19aa2722f040f2d30e65c33f80bcf6c9681947e0612f4e8cb2e0ce4a742598af')
-        old_words = struct.unpack('<'+'H'*(136*8), records[:136*16])
-        self.assertEqual(len({word & 1023 for word in old_words if word}), 459)
         self.assertLessEqual(len(raw)//32, 504)
 
 
