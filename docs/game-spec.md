@@ -5286,3 +5286,55 @@ Karpathy native-pixel refinement before release:
 - Eleven cast, four palette and five cleanup checks pass; revised fullcheck.sh
   passes. Normal build/runtime/older-save/mentor interaction checks still needed.
   Full human domains0/11; public staysv54/Site45. No quality approval inferred.
+
+October14 continuation and v55 runtime verification:
+
+- Both chats were interrupted around14:21UTC; resumed16:09UTC from authoritative
+  clean source state d337496. No continuous work/check-ins are claimed during
+  that interruption. Alignment restarted a finite read-only audit ending16:45UTC;
+  next check no later16:35UTC. Deadline remains October15 18:00 Pacific.
+- Revised private/normal v55 target
+  446434d6fb8f957e1b34279f3268a1bc16203e51626e3a500dfc55b5fcdf9818
+  reproduces exactly from source d337496.886933-byte patch SHA256
+  54a2384bae75fe95d00e07051d05805dfec983276787bb3a2937723ad0838c75;
+  exact BPS roundtrip passes. Earlier99b336...draft stays private and excluded.
+- Actual supported v53 Sunset Save4 coldContinue succeeds native/NodeWASM.
+  Normal28-tile walk reaches mentor23,18 from player7,11 to23,19. New original
+  sprite appears through existing slot46; mentor's standard dialogue/fanfare
+  restores CindercoyHP13→19 and ScratchPP32→35. Second party member stays exact;
+  identities/moves/levels/held items remain intact. Actual576 approach frames
+  and428 talk frames have identical full RGB/PCM in both runtimes.
+- Ordinary Save4→5 after closing dialogue persists the healed party and23,19.
+  Subsequent native coldContinue preserves location/party/Flash. Matched1260-frame
+  native/WASM Save legs produce identical full Flash/finalRGB/PCM. Expected
+  gameplay changes are explicit: position bytes0/2, HP/PP healing, steps91→119
+  and friendship-step variable0x402A91→119. All other declared domains preserve
+  expected semantics. This is one actual checkpoint, not full save acceptance.
+  Evidence karpathy-v55-mentor-{healing,save-reload}.json.
+- All711 reference scenarios/57 doubles rerun on revised v55 and pass. Existing
+  cast/palette/cleanup/full checks pass. Independent compiled/cache/palette audit
+  underway; public remainsv54/Site45 until audited publication succeeds.
+- Runtime exposed a separate story defect: mentor always repeats the beach
+  recovery hint after the sensor has already been returned. Next bounded story
+  change will follow actual parcel/relay/badge state and preserve rewards/healing.
+  Full human domains0/11 and full campaign/performance/auth gates remain open.
+
+Independent v55 compiled/cache review before publication:
+
+- Actual final-ROM/ELF comparison changes only pointer slot46 among239; dynamic
+  graphics base240 stays fixed. Karpathy's nine packed frames,16x32 info,
+  standard animations/shared tag1127/slot10/reflection match original assets.
+  Sixteen prior cast/courier resources and eight normalized prior graphics infos
+  remain unchanged. Roon's packed frames and used palette entries0..14 are exact;
+  shared palette changes only unused index15. Actual Sunset final-ROM map/events/
+  scripts/warps remain unchanged after relocation. Post-link map overlay is
+  accounted for, rather than treating the unpatched ELF map as final scenery.
+- Receipt karpathy-v55-compiled-cache-audit/compiled.json
+  SHA625c96118e2df374f5340f209e8ef3c356a64116d9a68b5bb958d945d23e2d3a.
+  All64 older saved templates preserve non-script fields; mentor ID46 already
+  matches the new binding. Actual shared palette buffers/PRAM are correct.
+- Independent cold native/WASM RAM comparison differs at two RTC-minute bytes
+  (sRtc/gLocalTime) across a host minute boundary; no complete cold RAM equality
+  is claimed. FinalRGB/PCM agree. Approach/talk seeded from the same native
+  parent state match all RAM as well as full RGB/PCM. No human, performance or
+  full release approval inferred. Public publication pending; full goal active.
