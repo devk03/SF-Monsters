@@ -6813,3 +6813,40 @@ v67 public seed-room release — October14,23:29UTC:
   save gates remain open (0/11 approved; last clinicmusic2/4 atv40).
   Goal remains active until October15,18:00 Pacific. Next alignment exchange
   by23:40UTC; no new monitor, GitHub workflow, DB migration or PR merge.
+
+
+v68 centered animated door plan — October14,23:32UTC:
+
+- Publicv67/Site58 remains live. A read-only native geometry review identifies
+  the existing tiny inset panel at cardx0..4, left of the player's tile center.
+  Root is preparing original centered closed/half/open door frames for ONLY
+  the seed-room entry, with top8 native window rows fixed. Portal centerx8
+  matches the approach tile, improving the doorway affordance and transition.
+- Use native size1 16×32 animation/unchanged timing/palette11. Newupper661 and
+  existinglower660 get the newclosedcard; upper staysblocked, lower changes
+  from0x60 toanimated0x69 withsamewarp16,16. Original other facade IDs stay fixed.
+  Preservingtop8rows bounds newgraphics to≤6tiles,497+6≤503 within504; validate
+  actual dedupcount beforebuild. Camera layerexception mustinclude661/660.
+- Native size2 was audited and rejected: residenttile1008 is occupied, while
+  size2overwrites1008..1023 and needs different anchor/close/static-open fixes.
+  No broader door-engine/VRAM change is planned. Generation/conversion/native
+  entry/exit/collision/cache/Save/browser checks remain pending. Root ownsart and
+  implementation; alignment's finite25minute read-only geometry audit is active
+  and ends by23:55UTC. Next exchange by00:00UTC. No score/complete claim.
+
+
+v68 original door-art checkpoint — October14,23:45UTC:
+
+- Built-in imagegen produced original closed/half/open source; selected source
+  is saved atassets/tiles/seed-room-door/source-v1.png with exactprompt.md.
+  Native serializer uses existing palette11, pins original top8window rows,
+  and holds all newclosed-card pixels outside aperturex4..11/y12..25 fixed.
+  Opaque portal stages progressively darken; no transparent opening exposes
+  background ground. Three256-byte stages serialize exactly to768bytes.
+- Six focused checks independently decode native4bpp tile order and reject
+  moved window, jamb jitter, alpha holes or identical stages. Native candidate
+  and whole-house source visualization inspected; no runtime/art approval claim.
+  Newcenter matches nativeavatar8 withinhalfapixel; boundedproof≤6newtiles holds.
+  Root ownsworld/animation/camera integration next. Alignment owns a separate
+  bounded35minute compiled-audit helper/test/explicitELFallowlist task, with
+  no builds/captures/commits. Next exchange by00:15UTC; public remainsv67/Site58.

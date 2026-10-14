@@ -1,0 +1,47 @@
+{
+  "source": "source-v1.png",
+  "source_sha256": "b70c92f29cfe9933282f1cf2e96d35915db52ddb4b597a8d3314546f6818a371",
+  "prompt_sha256": "6d74834d7259211047d47c78eaef7bb421589d0ce1b24be9ea3db8251f0225ff",
+  "boxes": [
+    [
+      75,
+      79,
+      431,
+      910
+    ],
+    [
+      587,
+      79,
+      942,
+      910
+    ],
+    [
+      1107,
+      79,
+      1463,
+      910
+    ]
+  ],
+  "size": [
+    16,
+    32
+  ],
+  "frames": 3,
+  "palette_bank": 11,
+  "palette_sha256": "78aa84fd92c3feda80d4fb979c051f4febc99a85ebe82885239ebf86ae9b0679",
+  "reference_sha256": "83cdd48e6af310d96b1be7e862eb0aa8db5f627d74b6ecbcff111a833bfce027",
+  "moving_rectangle": [
+    4,
+    12,
+    12,
+    26
+  ],
+  "fixed_top_rows": 8,
+  "files": {
+    "frames.png": "1edcd24ebba011a8d43136b47dcf7fb967088a11be40e2ba8966969175d2b407",
+    "frames.indices": "bc417bc605d2ad9be0e92d2194c9879d1243330ab98bb020a80752422a3bf669",
+    "frames.4bpp": "fb8e74c58d5e473c9c4b2491eaa6e0674e64f546190435235da3fd40e34970a5"
+  },
+  "quality_approval": "pending",
+  "generator": "Built-in imagegen; original project artwork only"
+}
