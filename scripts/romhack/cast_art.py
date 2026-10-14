@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 import shutil
 import struct
+import sys
 from courier_art import opaque_bands, insert_once
 from title_art import tiles8
 from title_creature import pack4
@@ -19,9 +20,11 @@ GROUPS = ((ASSET, 'SFCognitionCast', TAG, '0x1125'),
            'OBJ_EVENT_PAL_TAG_SF_SOUTH_PARK_CAST', '0x1126'),
           ('assets/characters/sunset-cast', 'SFSunsetCast',
            'OBJ_EVENT_PAL_TAG_SF_SUNSET_CAST', '0x1127'))
-# The six explicitly unused doll slots are occupied. Replace this one stock
-# appearance only for its existing authored SF owner; keep native dynamic IDs.
-AUTHORED_REPLACEMENTS = {'OBJ_EVENT_GFX_SCIENTIST_1': ('sunset.json', 'SF_Karpathy')}
+# The six unused doll slots are occupied. Reuse reviewed stock appearances for
+# their explicit SF owners; keep the static table and native dynamic IDs stable.
+# PROF_BIRCH has no authored SF owner; GENTLEMAN remains available to Garry.
+AUTHORED_REPLACEMENTS = {'OBJ_EVENT_GFX_SCIENTIST_1': ('sunset.json', 'SF_Karpathy'),
+                         'OBJ_EVENT_GFX_PROF_BIRCH': ('sunset.json', 'SF_Naval')}
 
 
 def catalog(root, asset=ASSET):
@@ -183,6 +186,56 @@ def registered_groups(root):
                         if npc.get('graphics') == entry['reserved_slot']:
                             raise ValueError('Stock cast appearance still has another authored owner.')
     return groups
+
+
+def audit_compiled_cast(rom, elf, root, graphics_header):
+    """Verify original cast pixels and actual native slot/frame/palette bindings."""
+    sys.path.insert(0, str(root/'scripts/quality'))
+    from check_creature_resources import Cartridge
+    receipt = {'passed': False, 'checks': [], 'errors': [],
+               'scope': 'Compiled field cast integration; no likeness/animation/save approval'}
+    try:
+        cart = Cartridge(rom, elf)
+        constants = {name:int(value) for name,value in re.findall(
+            r'^#define (OBJ_EVENT_GFX_\w+)\s+(\d+)\s*$', graphics_header.read_text(), re.M)}
+        table = cart.data('gObjectEventGraphicsInfoPointers')
+
+        def check(label, expected, actual):
+            receipt['checks'].append({'label':label, 'matches':expected == actual,
+                'expected_sha256':hashlib.sha256(expected).hexdigest(),
+                'actual_sha256':hashlib.sha256(actual).hexdigest()})
+
+        check('static_table_bytes', struct.pack('<I', 239*4), struct.pack('<I', len(table)))
+        for asset, palette_symbol, tag, tag_value, entries, metadata in registered_groups(root):
+            directory = root/asset
+            check(palette_symbol+':palette', (directory/'cast.gbapal').read_bytes(),
+                  cart.data('gObjectEventPal_'+palette_symbol))
+            for entry in entries:
+                symbol = entry['symbol']; picture = 'gObjectEventPic_'+symbol
+                frame_table = 'sPicTable_'+symbol; info_name = 'gObjectEventGraphicsInfo_'+symbol
+                check(symbol+':graphics', (directory/entry['slug']/'walk.4bpp').read_bytes(),
+                      cart.data(picture))
+                expected = b''.join(struct.pack('<IHH', cart.symbols[picture][0]+i*256, 256, 0)
+                                    for i in range(9))
+                check(symbol+':nine_frames', expected, cart.data(frame_table))
+                slot = constants[entry['reserved_slot']]
+                check(symbol+':slot', struct.pack('<I', cart.symbols[info_name][0]),
+                      table[slot*4:slot*4+4])
+                info = cart.data(info_name)
+                if len(info) != 36:
+                    raise ValueError('Field graphics info must retain its native 36-byte ABI.')
+                expected = struct.pack('<HHhhBI', int(tag_value,16), 256, 16, 32, 10,
+                                       cart.symbols[frame_table][0])
+                check(symbol+':display', expected,
+                      info[2:4]+info[6:12]+bytes([info[12]&15])+info[28:32])
+        receipt['inputs'] = {str(path.resolve()):hashlib.sha256(path.read_bytes()).hexdigest()
+                             for path in (rom, elf, graphics_header, Path(__file__))}
+        receipt['passed'] = bool(receipt['checks']) and all(row['matches'] for row in receipt['checks'])
+    except (OSError, ValueError, KeyError, TypeError, struct.error) as error:
+        receipt['errors'].append(str(error))
+    receipt['counts'] = {'total':len(receipt['checks']),
+                         'matched':sum(row['matches'] for row in receipt['checks'])}
+    return receipt
 
 
 def apply_cast(root, emerald, original):

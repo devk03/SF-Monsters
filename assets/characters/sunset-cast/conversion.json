@@ -154,6 +154,83 @@
         "native-gallery.png": "4b56e5669f5774b660e3b8b6982c7469824acf1c5831ea35515454d34bb900d6",
         "native-cleanup.json": "5c2cf30cf91f46bc51f9df1155894ba3eada4aaf344a1c25992d09004cf5e643"
       }
+    },
+    {
+      "slug": "naval",
+      "name": "Naval",
+      "symbol": "SFNaval",
+      "graphics": "OBJ_EVENT_GFX_SF_NAVAL",
+      "reserved_slot": "OBJ_EVENT_GFX_PROF_BIRCH",
+      "script": "SF_Naval",
+      "map": "sunset.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          119,
+          105,
+          287,
+          488
+        ],
+        [
+          427,
+          105,
+          595,
+          488
+        ],
+        [
+          736,
+          105,
+          902,
+          488
+        ],
+        [
+          118,
+          583,
+          285,
+          967
+        ],
+        [
+          426,
+          583,
+          595,
+          967
+        ],
+        [
+          737,
+          583,
+          901,
+          967
+        ],
+        [
+          130,
+          1060,
+          282,
+          1446
+        ],
+        [
+          431,
+          1060,
+          595,
+          1446
+        ],
+        [
+          739,
+          1060,
+          898,
+          1446
+        ]
+      ],
+      "common_scale": 0.06217616580310881,
+      "files": {
+        "source.png": "9ac6af209d4caf3d670c14c0181c745d0ee84fabd12a0a782080a0b32fa04808",
+        "walk.png": "025c69d3890bd8557c3e24adcee2b9bea69010d29713872a3c7389ed6e7c07bb",
+        "walk.4bpp": "60b16eed79bfb2c9f0f0bb50bb522af8f9ee39f2997ab76e0441e8fd1cb94ac1",
+        "native-gallery.png": "513bd4e23195e54356a89ea44a4550010e8498cf72eb8edf05c5df389873cb1b",
+        "native-cleanup.json": "05b6a061df59bc365d9425da7db587a091b05055a5d0a32e55f050bc019e005c"
+      }
     }
   ],
   "frames_per_character": 9,

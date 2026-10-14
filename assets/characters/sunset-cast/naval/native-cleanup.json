@@ -1,0 +1,325 @@
+{
+  "format": 1,
+  "intent": "Unapproved native facial drawing pass: separate two south-facing eye dots, simplify beard/chin clusters and mark a small pale temple. Preserve every body/footstep/north pixel and the existing shared palette; human likeness/art review pending.",
+  "source_sha256": "9ac6af209d4caf3d670c14c0181c745d0ee84fabd12a0a782080a0b32fa04808",
+  "palette_sha256": "f4fc7a765270447d16a2b604e00296d749b7e35aad7d408add2ba586b4c0aad5",
+  "before_frame_sha256": {
+    "0": "011315b03e737675c976d0c04a72047953b11a490033302271a4b01d079c3f6f",
+    "1": "c800165597f75cce74c8feda32c673bb541b70abc227c3fdc20deb79dcea2fef",
+    "2": "12c1e94e0506378fab661c32caf56c13fa7d66134e028cf4fff3e7f91009450f",
+    "6": "1f01b34a6ad57adefdbeadb5b128ca53cf545d7e4c3466b18fc31c7ebe511070",
+    "7": "5daeb68c0c21d9cb704a1c7ea919841eea123e4d08fce949ec15e0714a241763",
+    "8": "53ba62a1dc79041b48086685b45f0c7f9e133f5b6dd72e96794d247c3b84de01"
+  },
+  "after_frame_sha256": {
+    "0": "5a57374742cb6dff896764f136f05b257e7b3f27410d1e4537e51976a76f4e3f",
+    "1": "41ee196a0097c1f75d819563bdca3e17cffae10b6676e0482c6a389f9ee43717",
+    "2": "eecbe0d6163dc9092dbbcbb7dba7439cb09de81cfda2845e7a6fc826e4295987",
+    "6": "ebaff53fe381c1f8ab02a6716dbaa4e31aef45ef0e8ac7b25c4987e998228a59",
+    "7": "2634362baf8c4d5ba43d48f507ab537fe627a3e1cbfbe0706a47db265a25ff07",
+    "8": "ebe54b2a78a9c4655cfdc55d481f062c7fbbe049cb9bad94d5b98553a6cff1dc"
+  },
+  "changes": [
+    {
+      "frame": 0,
+      "x": 6,
+      "y": 11,
+      "old": 8,
+      "new": 12
+    },
+    {
+      "frame": 0,
+      "x": 9,
+      "y": 11,
+      "old": 8,
+      "new": 12
+    },
+    {
+      "frame": 0,
+      "x": 8,
+      "y": 11,
+      "old": 11,
+      "new": 4
+    },
+    {
+      "frame": 0,
+      "x": 6,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 0,
+      "x": 7,
+      "y": 13,
+      "old": 8,
+      "new": 9
+    },
+    {
+      "frame": 0,
+      "x": 8,
+      "y": 13,
+      "old": 4,
+      "new": 9
+    },
+    {
+      "frame": 0,
+      "x": 9,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 0,
+      "x": 7,
+      "y": 14,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 0,
+      "x": 8,
+      "y": 14,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 0,
+      "x": 10,
+      "y": 9,
+      "old": 11,
+      "new": 15
+    },
+    {
+      "frame": 1,
+      "x": 6,
+      "y": 11,
+      "old": 9,
+      "new": 12
+    },
+    {
+      "frame": 1,
+      "x": 9,
+      "y": 11,
+      "old": 4,
+      "new": 12
+    },
+    {
+      "frame": 1,
+      "x": 8,
+      "y": 11,
+      "old": 11,
+      "new": 4
+    },
+    {
+      "frame": 1,
+      "x": 6,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 1,
+      "x": 8,
+      "y": 13,
+      "old": 4,
+      "new": 9
+    },
+    {
+      "frame": 1,
+      "x": 9,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 1,
+      "x": 7,
+      "y": 14,
+      "old": 8,
+      "new": 10
+    },
+    {
+      "frame": 1,
+      "x": 8,
+      "y": 14,
+      "old": 8,
+      "new": 10
+    },
+    {
+      "frame": 1,
+      "x": 10,
+      "y": 9,
+      "old": 10,
+      "new": 15
+    },
+    {
+      "frame": 2,
+      "x": 6,
+      "y": 11,
+      "old": 8,
+      "new": 12
+    },
+    {
+      "frame": 2,
+      "x": 9,
+      "y": 11,
+      "old": 8,
+      "new": 12
+    },
+    {
+      "frame": 2,
+      "x": 8,
+      "y": 11,
+      "old": 11,
+      "new": 4
+    },
+    {
+      "frame": 2,
+      "x": 6,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 2,
+      "x": 8,
+      "y": 13,
+      "old": 4,
+      "new": 9
+    },
+    {
+      "frame": 2,
+      "x": 9,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 2,
+      "x": 7,
+      "y": 14,
+      "old": 8,
+      "new": 10
+    },
+    {
+      "frame": 2,
+      "x": 8,
+      "y": 14,
+      "old": 8,
+      "new": 10
+    },
+    {
+      "frame": 2,
+      "x": 10,
+      "y": 9,
+      "old": 10,
+      "new": 15
+    },
+    {
+      "frame": 6,
+      "x": 5,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 6,
+      "x": 6,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 6,
+      "x": 8,
+      "y": 14,
+      "old": 9,
+      "new": 10
+    },
+    {
+      "frame": 6,
+      "x": 9,
+      "y": 9,
+      "old": 11,
+      "new": 15
+    },
+    {
+      "frame": 7,
+      "x": 5,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 7,
+      "x": 6,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 7,
+      "x": 7,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 7,
+      "x": 8,
+      "y": 14,
+      "old": 12,
+      "new": 10
+    },
+    {
+      "frame": 7,
+      "x": 9,
+      "y": 9,
+      "old": 10,
+      "new": 15
+    },
+    {
+      "frame": 8,
+      "x": 6,
+      "y": 11,
+      "old": 14,
+      "new": 12
+    },
+    {
+      "frame": 8,
+      "x": 5,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 6,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 7,
+      "y": 13,
+      "old": 4,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 8,
+      "y": 14,
+      "old": 13,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 9,
+      "y": 9,
+      "old": 11,
+      "new": 15
+    }
+  ]
+}

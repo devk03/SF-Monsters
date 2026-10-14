@@ -75,10 +75,11 @@ class Cartridge:
                 if name_index >= len(names) or end < 0:
                     raise ValueError('Invalid ELF symbol name')
                 name = names[name_index:end].decode('ascii')
-                if not name.startswith(('gMon', 'Cry_')) and name not in (
+                if not name.startswith(('gMon', 'Cry_', 'gObjectEventPic_',
+                        'gObjectEventPal_', 'gObjectEventGraphicsInfo_', 'sPicTable_SF')) and name not in (
                         'gEnemyMonElevation', 'sNewGameBirch_Gfx', 'sNewGameBirch_Pal',
                         'sPicTable_NewGameBirch', 'sSpritePalette_NewGameBirch',
-                        'sSpriteTemplate_NewGameBirch'):
+                        'sSpriteTemplate_NewGameBirch', 'gObjectEventGraphicsInfoPointers'):
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')

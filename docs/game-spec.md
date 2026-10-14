@@ -6131,3 +6131,28 @@ v61 / Site 52 verified and published — October 14, 21:06 UTC:
   ProfBirch64 slot, Sunset localId7 only, shared existing Sunset palette unchanged.
   Existing named-cast Continue repair can refresh cached48→64 without resetting
   position/movement. Garry keepsGentleman48. No new NPC/dialogue/schema/revision.
+
+
+v62 original Naval field sprite — October14,21:21UTC:
+
+- Original9pose Naval joins the existing Sunset group. The native palette and
+  Roon/Karpathy packed sprites remain exact; all32 palette bytes and every used
+  color are retained.43 pinned face pixels improve tiny eye/beard separation,
+  preserving all north/body/footstep pixels. Likeness/art/animation approval pending.
+- Sunset localId7 changes only graphics alias to SF_NAVAL→ProfBirch64. Garry keeps
+  Gentleman48. The native239-entry pointer table/dynamicbase240 remain unchanged.
+  Slot64 has no other authored SF owner; unreachable Hoenn scaffolding references
+  would inherit the look. No NPC/dialogue/quest/reward/schema/revision expansion.
+- Existing named-cast cache helper is byte-identical; its generated predicate will
+  include64. It can refresh cached templates and current-map active appearance
+  without resetting positions/facing/movement. Actual old-save acceptance pending.
+- Genuine v61 ordinarySavecounter5 prepared at Sunset18,18 by returning via Muni
+  and using the native Save menu. Its cached Naval template is Gentleman48 at14,17.
+  This is the battery used for matched coldContinue tests, not an injected fixture.
+- New pre-BPS field-cast gate reads actual linked sprite bytes, all nine frame
+  pointers, reserved-slot binding, palette/dimensions/frame binding and all shared
+  palettes. Negative v61 control matches32 prior checks then fails missingSFNaval.
+  Earlier creature/intro guards stay required. No generic test harness added.
+- Existing cast authoring/resume tests pass. Full checks after the final compiled
+  guard, v62 native build, compiled pointer normalization and actual native/browser
+  old-cache/save/reload checks remain pending. Public staysv61/Site52; goal active.

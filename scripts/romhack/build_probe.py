@@ -23,7 +23,7 @@ from title_creature import apply_title_creature
 from title_song_overlay import apply_title_song
 from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
-from cast_art import apply_cast, GROUPS
+from cast_art import apply_cast, audit_compiled_cast, GROUPS
 from trainer_portraits import apply_portrait
 from intro_art import apply_intro, audit_intro
 from courier_battle_art import apply_courier_battle
@@ -147,6 +147,15 @@ def main():
     if compiled_intro.get('passed') is not True:
         raise ValueError('Compiled intro figure failed; preserved receipt: ' + str(intro_path))
     print('Compiled original intro verified: ' + json.dumps(compiled_intro['counts']))
+    compiled_cast = audit_compiled_cast(target, EMERALD / 'sf-engine-probe.elf', ROOT,
+                                       EMERALD / 'include/constants/event_objects.h')
+    cast_bytes = (json.dumps(compiled_cast, indent=2) + '\n').encode()
+    cast_path = validation_directory / ('field-cast-' + uuid.uuid4().hex + '.json')
+    with cast_path.open('xb') as stream:
+        stream.write(cast_bytes)
+    if compiled_cast.get('passed') is not True:
+        raise ValueError('Compiled original field cast failed; preserved receipt: ' + str(cast_path))
+    print('Compiled original field cast verified: ' + json.dumps(compiled_cast['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -195,6 +204,12 @@ def main():
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending'
     }
     manifest['build_backend'] = args.backend
+    manifest['compiled_field_cast'] = {
+        'passed': True, 'counts': compiled_cast['counts'],
+        'receipt_sha256': hashlib.sha256(cast_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/cast_art.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_cast['scope']
+    }
     manifest['compiled_intro'] = {
         'passed': True, 'counts': compiled_intro['counts'],
         'receipt_sha256': hashlib.sha256(intro_bytes).hexdigest(),
