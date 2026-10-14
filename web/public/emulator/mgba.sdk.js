@@ -172,11 +172,13 @@ export async function load(config) {
     let playbackEpoch = 0, pendingPlaybackEpoch = 0, playbackAckTimer = null;
     let lastPlaybackReset = null;
     let performanceProbe = null, diagnosticEpoch = 0, diagnosticResult = null;
+    let diagnosticClosing = false;
     let diagnosticFinish = null, pendingInput = null, lastDiagnosticTick = null;
     const finishDiagnostics = (audioFinalSnapshot, error = null) => {
         if (!diagnosticFinish) return;
         const pending = diagnosticFinish;
         diagnosticFinish = null;
+        diagnosticClosing = false;
         clearTimeout(pending.timer);
         const report = { ...pending.report, audioFinalSnapshot,
             audioFinalAcknowledged: audioFinalSnapshot !== null,
@@ -745,12 +747,13 @@ export async function load(config) {
                 throw new TypeError('Diagnostics options require optional callback functions.');
             if (!running || paused) throw new Error('Start foreground playback before diagnostics.');
             if (document.visibilityState !== 'visible') throw new Error('Keep the diagnostic tab visible.');
-            if (performanceProbe?.active || diagnosticFinish)
+            if (performanceProbe?.active || diagnosticClosing || diagnosticFinish)
                 throw new Error('Finish the existing diagnostic window first.');
             let resolve;
             let closeAnchor = null;
             const result = new Promise((complete) => { resolve = complete; });
             const probe = createPerformanceProbe({ ...options, onClose(close) {
+                diagnosticClosing = true;
                 closeAnchor = { endedAtMs: close.endedAtMs, audioTime: audioCtx.currentTime,
                     audioState: audioCtx.state };
                 // Stop audio observations before preparing aggregate distributions.

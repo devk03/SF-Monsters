@@ -554,22 +554,23 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October14,2026,18:10UTC:
+Current checkpoint — October14,2026,18:55UTC:
 
 - Goal active; deadline remains October15,18:00 Pacific. Publicv56/Site47, native
-  story source7e6ce94. Browser diagnostics sourcee82b67e is local/repository only.
+  story source7e6ce94. New browser audio/reset/diagnostic changes are local/repo only.
 - Human final approvals0/11. Full16hub/8gym/150monster campaign and final
   acceptance remain unfinished; first-slice approval is still required.
 -711 independently specified mechanics cases/57doubles pass; full-turn/type/catalog
   gates remain open. Ten save round trips are sealed at one first-badge checkpoint,
   not50 distinct campaign checkpoints or full device/auth coverage.
-- A600second visible desktop field trace records35837video frames/0discarded debt,
-  but FAILS audio continuity:469829dropped sourceframes and592.864audio-clock seconds.
-  Pipeline timing is not guest-input/physical-paint proof. Mixed traces, phone,
-  Safari and disabled/enabled overhead remain open. Next priority: diagnose this
-  clock/queue failure and compare actual Chrome before changing audio architecture.
-- Last alignment exchange18:11UTC; bounded reset-test work ends18:40UTC.
-  Next check-in no later18:25UTC. Details/evidence append below.
+- Both earlier600second field runs FAIL strict audio continuity: IAB drops469829
+  sourceframes; regular Chrome starves873outputframes. Cause remains open.
+  New stale-PCM reset and canonical snapshot export preserve all serialized state
+  and Flash in the actual WASM proof. Short actual Chrome check passes; fresh
+  ten-minute candidate started~18:53UTC. No full performance acceptance claim.
+- Last alignment exchange18:54UTC; bounded mixed-scene route planning ends19:40UTC.
+  Static preparation only until the field trace finishes; next check by19:15UTC.
+  Detailed receipts, limits and remaining gates append below.
 
 ### 15.1 Objective and completion rule
 
@@ -5659,3 +5660,16 @@ Playback reset and measurement-boundary fixes:
   0c2251d75357682f1b20a1b1983f0a5f6085f7f9497e4e6862ebc30b2bc09363.
   Full local checks pass. This proves local reset/export behavior, not a new Save
   checkpoint or full audio gate. Public staysSite47; longer/mixed traces remain open.
+
+- Independent source review found synchronous custom onClose callback reentry could
+  start another SDK diagnostic before the final-ACK wait was installed. A closing
+  lock now covers that interval and clears before user onReport delivery. SDK syntax
+  and19 probe guards pass; these guards do not execute every SDK asynchronous edge.
+- Actual production canonical-state helper proof retains all397312state bytes and
+  131072Flash bytes unchanged while discarding5620stale shim audioframes. Receipt
+  audio-reset-v56-canonical-helper-proof/receipt.json
+  SHA d49aa3adaf52f753f34b93dd5d2063f296b7287a5eb23ba4fd66bb1a6419283c.
+- New private QA pages also destroy the emulator at their declared session limit;
+  no recurring monitor starts. Unused duplicate local server stopped explicitly.
+  New ten-minute candidate uses frozen runtime and the genuine mentor-approach
+  checkpoint; results pending. Full objective, approvals and public version unchanged.
