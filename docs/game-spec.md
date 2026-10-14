@@ -5225,3 +5225,23 @@ Site45 v54 published; independent recovery audit sealed:
 - Original Roon/NPC comparison remains pending user rating. Full human domains
   stay0/11; first-slice polish, real-browser/device performance and full campaign
   remain unfinished. Goal active; next alignment check no later14:20UTC.
+
+Next Stage B cast improvement, Karpathy source candidate:
+
+- Alignment generated original fictional navy-crewneck/short-dark-hair field
+  atlas a60e087653530020fd75052419432d805497d92bac2f9be9b3e8df176f97d940,
+  with recorded prompts/limitations. Exactly nine S/N/W poses; two generation
+  attempts, rejected first preserved. Source is unapproved and not integrated.
+- Added optional explicitly authored16-color RGB5 palette policy and per-person
+  pinned quantization palette support. Existing cleanup still validates against
+  its exact source palette; every used native index must retain the same final
+  color. An occupied index recolor fails rather than silently changing old art.
+  Policy and quantization-palette presence/content are bound to conversion hashes.
+- All existing six cast assets/conversion receipts regenerate byte-identically
+  through this optional pipeline. Four palette tests, seven cast tests and five
+  cleanup checks pass. Current Roon uses indices0..14 only; unused duplicate
+  opaque slot15 can supply a light skin/sneaker color without changing Roon.
+- Main owns palette/registry/native conversion; alignment source-only work is
+  complete. Karpathy still stock scientist in publicv54/Site45. Next checks are
+  native pose readability, reserved-slot ownership, palette preservation, normal
+  interaction and older-save refresh. No new approval inferred; full goal active.

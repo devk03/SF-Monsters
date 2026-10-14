@@ -9,6 +9,7 @@ from courier_art import opaque_bands, insert_once
 from title_art import tiles8
 from title_creature import pack4
 from cast_cleanup import apply_cleanup
+from cast_palette import cast_palette, quantization_palette, preserve_used_colors
 
 ASSET = 'assets/characters/cognition-cast'
 ORDER = (0, 3, 6, 1, 2, 4, 5, 7, 8)
@@ -85,22 +86,19 @@ def encode_cast(root, asset=ASSET, palette_tag='0x1125'):
             pixels.extend(rgb[:3] for rgb, a in
                           zip(cell.get_flattened_data(), alpha.get_flattened_data()) if a)
         prepared.append((entry, image, mask, boxes))
-    samples = Image.new('RGB', (len(pixels), 1)); samples.putdata(pixels)
-    palette = samples.quantize(colors=15, method=Image.Quantize.MEDIANCUT).getpalette()[:45]
-    colors = [(0, 0, 0)] + [tuple(round(c*31/255)*255//31 for c in palette[i:i+3])
-                            for i in range(0, 45, 3)]
+    colors, raw_palette, policy_hash = cast_palette(directory, pixels)
     flat = [c for color in colors for c in color] + [0]*720
-    raw_palette = b''.join(struct.pack('<H', sum(round(rgb[c]*31/255) << (5*c)
-                                                for c in range(3))) for rgb in colors)
     (directory / 'cast.gbapal').write_bytes(raw_palette)
     receipts = []
     for entry, image, mask, boxes in prepared:
-        frames, scale = native_frames(image, mask, boxes, colors)
         path = directory / entry['slug']
+        source_colors, source_palette = quantization_palette(path, raw_palette)
+        frames, scale = native_frames(image, mask, boxes, source_colors)
         cleanup = path / 'native-cleanup.json'
         if cleanup.exists():
             frames = apply_cleanup(frames, json.loads(cleanup.read_text()),
-                                   (path/'source.png').read_bytes(), raw_palette)
+                                   (path/'source.png').read_bytes(), source_palette)
+        preserve_used_colors(frames, source_palette, raw_palette)
         selected = [frames[index] for index in ORDER]
         strip = bytes(p for y in range(32) for frame in selected for p in frame[y*16:(y+1)*16])
         raw = pack4(tiles8(strip, 144, 32, 2, 4))
@@ -115,12 +113,16 @@ def encode_cast(root, asset=ASSET, palette_tag='0x1125'):
         receipts.append(dict(entry, source_size=list(image.size), source_cells=boxes,
                              common_scale=scale, files={name: hashlib.sha256((path/name).read_bytes()).hexdigest()
                              for name in ('source.png', 'walk.png', 'walk.4bpp', 'native-gallery.png')
-                             + (('native-cleanup.json',) if cleanup.exists() else ())}))
+                             + (('native-cleanup.json',) if cleanup.exists() else ())
+                             + (('quantization-palette.gbapal',) if
+                                (path/'quantization-palette.gbapal').exists() else ())}))
     metadata = {'characters': receipts, 'frames_per_character': 9, 'native_order': ORDER,
                 'native_frame_size': [16, 32], 'feet_baseline': 30,
                 'east_view': 'native horizontal flip of original west frames',
                 'palette_tag': palette_tag, 'palette_slot': 'PALSLOT_NPC_SPECIAL',
                 'palette_sha256': hashlib.sha256(raw_palette).hexdigest(), 'quality_approval': 'pending'}
+    if policy_hash:
+        metadata['palette_policy_sha256'] = policy_hash
     (directory / 'conversion.json').write_text(json.dumps(metadata, indent=2)+'\n')
     return metadata
 
@@ -133,9 +135,14 @@ def verified_cast(root, asset):
         raise ValueError('Cast registry changed after native conversion.')
     if hashlib.sha256((directory/'cast.gbapal').read_bytes()).hexdigest() != metadata['palette_sha256']:
         raise ValueError('Cast palette differs from its receipt.')
+    policy = directory/'palette-policy.json'
+    if policy.exists() != ('palette_policy_sha256' in metadata) or (policy.exists() and
+       hashlib.sha256(policy.read_bytes()).hexdigest() != metadata['palette_policy_sha256']):
+        raise ValueError('Regenerate cast after changing its shared palette policy.')
     for entry in metadata['characters']:
-        if (directory/entry['slug']/'native-cleanup.json').exists() != ('native-cleanup.json' in entry['files']):
-            raise ValueError('Regenerate cast after adding/removing native cleanup: '+entry['slug'])
+        for name in ('native-cleanup.json', 'quantization-palette.gbapal'):
+            if (directory/entry['slug']/name).exists() != (name in entry['files']):
+                raise ValueError('Regenerate cast after adding/removing '+name+': '+entry['slug'])
         for name, digest in entry['files'].items():
             if hashlib.sha256((directory/entry['slug']/name).read_bytes()).hexdigest() != digest:
                 raise ValueError('Regenerate native cast after changing asset: '+entry['slug'])
