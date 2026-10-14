@@ -32,7 +32,12 @@ assert.equal(flashCounter(save), 42, 'A damaged newer slot falls back to the int
 save[0] ^= 1;
 assert.throws(() => validateFlashSave(save), /not a valid/);
 assert.throws(() => validateFlashSave(new Uint8Array(32768)), /128 KiB/);
-fillSlot(0, 0xffffffff, 3); fillSlot(1, 0, 12);
+fillSlot(0, 2, 0); fillSlot(1, 0x80000001, 1);
+assert.equal(flashCounter(save), 0x80000001, 'Native uses unsigned max outside the exact wrap pair');
+fillSlot(0, 44, 0); fillSlot(1, 46, 1);
+assert.equal(flashCounter(save), null, 'A newest counter in the wrong physical slot is unsafe to import');
+assert.throws(() => validateFlashSave(save), /not a valid/);
+fillSlot(1, 0xffffffff, 3); fillSlot(0, 0, 12);
 assert.equal(flashCounter(save), 0, 'Save counter wraparound preserves newest-slot order');
 const wrapped = new Uint8Array(FLASH_SIZE + 7); wrapped.set(save, 7);
 assert.equal(flashCounter(wrapped.subarray(7)), 0, 'Typed-array offsets are respected');
@@ -49,9 +54,15 @@ function stampIdentity(slot, schema) {
     view.setUint16(4086, ((checksum >>> 16) + checksum) & 65535, true);
   }
 }
-stampIdentity(1, 1); validateSfFlashSave(save);
-stampIdentity(1, 2); assert.throws(() => validateSfFlashSave(save), /not a supported SF/);
-stampIdentity(0, 1); assert.throws(() => validateSfFlashSave(save), /not a supported SF/,
+stampIdentity(0, 1); validateSfFlashSave(save);
+stampIdentity(0, 2); assert.throws(() => validateSfFlashSave(save), /not a supported SF/);
+stampIdentity(1, 1); assert.throws(() => validateSfFlashSave(save), /not a supported SF/,
   'An older compatible slot must not hide a newer unsupported schema');
-save[14 * 4096] ^= 1; validateSfFlashSave(save);
+save[0] ^= 1; validateSfFlashSave(save);
+fillSlot(0, 1, 2); fillSlot(1, 1, 7);
+stampIdentity(0, 2); stampIdentity(1, 1); validateSfFlashSave(save);
+assert.equal(flashCounter(save), 1, 'Equal counters select the physical slot native counter%2 loads');
+stampIdentity(0, 1); stampIdentity(1, 2);
+assert.throws(() => validateSfFlashSave(save), /not a supported SF/,
+  'An equal counter in another slot must not hide the schema native will load');
 console.log('SF identity, unsupported schema and intact-slot recovery passed.');

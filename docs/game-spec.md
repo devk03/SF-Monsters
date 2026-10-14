@@ -4873,3 +4873,16 @@ Native residual-phase checkpoint:
   fainting, party synchronization, full turn, presentation and saves still open.
 - Next alignment task is read-only save-normalization audit, ending11:45UTC.
   No ROM build, workflow, deployment or recurring monitor for these tool changes.
+
+
+Flash import safety correction (publication pending):
+
+- Alignment found the earlier synthetic wrap fixture used reversed physical
+  slots. Native SaveValidStatus chooses unsigned maximum except exactFFFFFFFF/0,
+  then CopySaveSlotData loads counter%2. Web validator now uses that same choice
+  and requires a complete matching physical slot. Equal counters select the
+  parity slot's actual schema; another slot cannot hide unsupported data.
+- Corrected synthetic wrap positions, added far-apart unsigned counters, unsafe
+  parity rejection and equal-counter/schema checks. Valid earned populated
+  counter5 save remains accepted. No save bytes rewritten or import attempted
+  before validation. New code is under local checks, public remainsSite41.

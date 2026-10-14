@@ -28,9 +28,18 @@ function slotCounter(bytes: Uint8Array, slot: number): number | null {
 function latestSlot(bytes: Uint8Array): {slot: number; counter: number} | null {
   if (bytes.length !== FLASH_SIZE) return null;
   const first = slotCounter(bytes, 0), second = slotCounter(bytes, 1);
-  if (first === null) return second === null ? null : {slot: 1, counter: second};
-  if (second === null) return {slot: 0, counter: first};
-  return ((second - first) | 0) > 0 ? {slot: 1, counter: second} : {slot: 0, counter: first};
+  let selected: {slot: number; counter: number} | null;
+  if (first === null) selected = second === null ? null : {slot: 1, counter: second};
+  else if (second === null) selected = {slot: 0, counter: first};
+  // Match native GetSaveValidStatus: unsigned max, with the exact max/zero wrap exception.
+  else if (first === 0xffffffff && second === 0) selected = {slot: 1, counter: second};
+  else if (first === 0 && second === 0xffffffff) selected = {slot: 0, counter: first};
+  else selected = second > first ? {slot: 1, counter: second} : {slot: 0, counter: first};
+  // CopySaveSlotData loads counter%2. Never import a slot the cartridge would skip.
+  if (!selected) return null;
+  const nativeSlot = selected.counter % 2;
+  return (nativeSlot === 0 ? first : second) === selected.counter
+    ? {slot: nativeSlot, counter: selected.counter} : null;
 }
 
 export function flashCounter(bytes: Uint8Array): number | null {
