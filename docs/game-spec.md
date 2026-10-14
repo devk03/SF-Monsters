@@ -4549,3 +4549,37 @@ v49 public export/resume verification completed:
   browser-to-native save compatibility. It is not one of the ten completed
   browser/native/browser save roundtrips. Authentication isolation, Safari/mobile,
   sustained browser performance/audio and human quality gates remain open.
+
+
+Alignment check October14,02:37 Pacific /09:37 UTC:
+
+- Reviewer completed a fresh Water-starter v48 route from no battery/state through
+  the first badge. All110 controller captures have verified parent/input hashes.
+  Both wild encounters became recruits; no repeated wild XP farming. Steven
+  caused one teammate faint, restored at the clinic; Scott won on first attempt
+  without blackout/rollback. Native route evidence does not establish pacing.
+- Earned battery e79664352a1c4108814a28527b4b8a8d98e98db5f6c3398afaebfac063cfcbad
+  is brine-route-alignment-109-earned-badge-saved/capture.sav. Full receipt:
+  brine-route-alignment-110-earned-badge-cold/fresh-water-route-result.json.
+  Stage4, all three trainer flags, one Reflect TM, money3000, one Potion/five
+  capture items; BrinePup10(27/33HP), BinPossum4(17/17), Hushmoth5(13/19).
+- Main bridges that earned battery onto v49 native/WASM: final RGB, complete PCM
+  and Flash match, with team/resources/badge preserved. Evidence:
+  brine-earned-v49-cold-{native,wasm}. This is compatibility, not a fresh v49 run.
+- The reviewer identified surprise sight-triggered practice encounters and vague
+  preparation advice. New read-only20-minute task ends09:57 UTC: locate precise
+  pre-sightline script hooks and propose roster/type/free-clinic guidance, keeping
+  native sight behavior and balance. No new route or source changes delegated.
+  Next routine alignment check by10:07 UTC; collect a completed report earlier.
+
+Matched courier/trainer subset review:
+
+- Added trainer scope to the existing private comparison packager. New34.289s
+  packet uses genuine Emerald Calvin and current v49 Scott/courier, each2048
+  native frames with the same controller sequence,3x nearest scaling, no retiming
+  and two selectable original audio streams. Full encode/identity guards pass.
+- Private video courier-v49-paired-intro-review/comparison.mp4, SHA256
+  076ca5c24f4ad2d03b5cc2b565eca513ccf2b6d6e5bc8883bcdd458976058d81.
+  Receipt records different trainer classes/teams/dialogue/scene timing and the
+  earned candidate/reference lineage. Requested user0–4 courier art/throw subset
+  review; no response or full-domain approval inferred.

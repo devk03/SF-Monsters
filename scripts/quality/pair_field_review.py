@@ -1,4 +1,4 @@
-"""Package a private, provenance-labelled native field-art comparison."""
+"""Package a private, provenance-labelled native gameplay comparison."""
 import argparse
 import json
 from pathlib import Path
@@ -28,7 +28,7 @@ def validate_pair(left,right):
             raise ValueError('Both sides must use equal frame counts and the same controller sequence.')
     seconds=left['frames']*280896/16777216
     if not 30<=seconds<=60:
-        raise ValueError('Field review needs 30–60 seconds of normal gameplay.')
+        raise ValueError('Matched review needs 30–60 seconds of normal gameplay.')
     return seconds
 
 
@@ -41,7 +41,7 @@ def main():
                         help='Visible candidate scene name in uppercase letters and spaces.')
     parser.add_argument('--reference-label',default='EMERALD LAB',
                         help='Visible genuine reference scene name in uppercase letters and spaces.')
-    parser.add_argument('--review-scope',choices=['interior','healing'],default='interior')
+    parser.add_argument('--review-scope',choices=['interior','healing','trainer'],default='interior')
     args=parser.parse_args()
     if not re.fullmatch(r'[A-Z][A-Z ]{1,39}',args.candidate_label):
         parser.error('Candidate label must use 2–40 uppercase letters/spaces.')
@@ -82,9 +82,9 @@ def main():
                     '-c:a','copy','-movflags','+faststart',str(video)],check=True)
     subprocess.run(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-n','-ss','4',
                     '-i',str(video),'-frames:v','1',str(output/'comparison.png')],check=True)
-    scope = ('Recovery event presentation and audio cue only; full domains incomplete'
-             if args.review_scope == 'healing' else
-             'Interior art/readability and walking presentation only; full domains incomplete')
+    scope = {'healing':'Recovery event presentation and audio cue only; full domains incomplete',
+             'interior':'Interior art/readability and walking presentation only; full domains incomplete',
+             'trainer':'Trainer introduction/deployment and courier throw only; full domains incomplete'}[args.review_scope]
     receipt={'scope':scope,
              'seconds':seconds,'frames_per_side':metadata[0]['frames'],'scale':'equal nearest 3x',
              'same_controller_input':True,'audio_tracks':['Emerald reference','SF candidate'],
@@ -92,7 +92,7 @@ def main():
              'left':metadata[0],'right':metadata[1],
              'human_approval':'pending','commercial_reference_stays_private':True}
     (output/'comparison.json').write_text(json.dumps(receipt,indent=2)+'\n')
-    print(f'Private matched field review: {video} ({seconds:.2f}s)')
+    print(f'Private matched gameplay review: {video} ({seconds:.2f}s)')
 
 
 if __name__=='__main__':main()
