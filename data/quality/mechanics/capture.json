@@ -15,7 +15,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
     },
@@ -32,7 +33,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 15, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
     },
@@ -49,7 +51,8 @@
         "master": 0,
         "caught_ball": 2,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 20, \"odds_a\": 70, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 47661}"
     },
@@ -66,7 +69,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 3, \"rng_draws\": [50515], \"shake_threshold\": 40329}"
     },
@@ -83,7 +87,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 0, \"rng_draws\": [0, 59774], \"shake_threshold\": 40329}"
     },
@@ -100,7 +105,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 2,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 33, \"rng_draws\": [31376, 116, 58022], \"shake_threshold\": 40329}"
     },
@@ -117,7 +123,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 3,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 6, \"rng_draws\": [35494, 31054, 21859, 50647], \"shake_threshold\": 40329}"
     },
@@ -134,7 +141,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 2, \"rng_draws\": [33676, 28355, 21356, 3517], \"shake_threshold\": 40329}"
     },
@@ -151,7 +159,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 148726177, \"rng_draws\": [40328, 33512, 22086, 37785], \"shake_threshold\": 40329}"
     },
@@ -168,7 +177,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 4097991073, \"rng_draws\": [40329], \"shake_threshold\": 40329}"
     },
@@ -186,7 +196,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 70, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 47661}"
     },
@@ -204,7 +215,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 70, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 47661}"
     },
@@ -222,7 +234,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
     },
@@ -240,7 +253,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
     },
@@ -258,7 +272,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
     },
@@ -276,7 +291,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 52, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 45589}"
     },
@@ -296,7 +312,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 254, \"rng_before\": 0, \"rng_draws\": [0, 59774, 21105, 12720], \"shake_threshold\": 65535}"
     },
@@ -316,7 +333,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 254, \"rng_before\": 516972961, \"rng_draws\": [65535], \"shake_threshold\": 65535}"
     },
@@ -337,7 +355,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 255, \"rng_before\": 123, \"rng_draws\": [], \"shake_threshold\": null}"
     },
@@ -359,7 +378,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 6
+        "party_count": 6,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 255, \"multiplier_tenths\": 10, \"odds_a\": 255, \"rng_before\": 123, \"rng_draws\": [], \"shake_threshold\": null}"
     },
@@ -377,7 +397,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 170,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
     },
@@ -395,7 +416,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 170,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
     },
@@ -413,7 +435,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 170,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
     },
@@ -432,7 +455,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 170,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"rng_before\": 123, \"rng_draws\": []}"
     },
@@ -450,7 +474,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
     },
@@ -468,7 +493,8 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 0,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
     },
@@ -485,7 +511,8 @@
         "master": 1,
         "caught_ball": 1,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 0, \"odds_a\": 0, \"rng_before\": 0, \"rng_draws\": [0], \"shake_threshold\": 0}"
     },
@@ -505,9 +532,599 @@
         "master": 0,
         "caught_ball": 4,
         "chooser": 1,
-        "party_count": 1
+        "party_count": 1,
+        "map_type": 1
       },
       "derivation": "Independently specified from pinned GenIII capture arithmetic and exact LCG draws before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 10, \"odds_a\": 1, \"rng_before\": 0, \"rng_draws\": [0, 59774], \"shake_threshold\": 16643}"
+    },
+    {
+      "id": "net-water",
+      "ball": "ITEM_NET_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 781,
+      "type1": "TYPE_WATER",
+      "type2": "TYPE_NORMAL",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 6,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 30, \"odds_a\": 105, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 55187}"
+    },
+    {
+      "id": "net-bug",
+      "ball": "ITEM_NET_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 781,
+      "type1": "TYPE_NORMAL",
+      "type2": "TYPE_BUG",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 6,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 30, \"odds_a\": 105, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 55187}"
+    },
+    {
+      "id": "net-dual-water-bug",
+      "ball": "ITEM_NET_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 781,
+      "type1": "TYPE_WATER",
+      "type2": "TYPE_BUG",
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 6,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 30, \"odds_a\": 105, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 55187}"
+    },
+    {
+      "id": "net-neutral",
+      "ball": "ITEM_NET_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 781,
+      "type1": "TYPE_NORMAL",
+      "type2": "TYPE_NORMAL",
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "dive-underwater",
+      "ball": "ITEM_DIVE_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 781,
+      "underwater": true,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 7,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 5
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 35, \"odds_a\": 122, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 55187}"
+    },
+    {
+      "id": "dive-on-surface",
+      "ball": "ITEM_DIVE_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 781,
+      "underwater": false,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "nest-level-1",
+      "ball": "ITEM_NEST_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 4059914657,
+      "level": 1,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 3,
+        "controller": 1,
+        "rng": 4005116053,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 3,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 39, \"odds_a\": 136, \"rng_before\": 4059914657, \"rng_draws\": [41000, 24840, 43494, 61113], \"shake_threshold\": 58253}"
+    },
+    {
+      "id": "nest-level-29",
+      "ball": "ITEM_NEST_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 4059914657,
+      "level": 29,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 2,
+        "controller": 1,
+        "rng": 2850454378,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 2,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 11, \"odds_a\": 38, \"rng_before\": 4059914657, \"rng_draws\": [41000, 24840, 43494], \"shake_threshold\": 41942}"
+    },
+    {
+      "id": "nest-level-30",
+      "ball": "ITEM_NEST_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 4059914657,
+      "level": 30,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2686976000,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 4059914657, \"rng_draws\": [41000], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "nest-level-31",
+      "ball": "ITEM_NEST_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 4059914657,
+      "level": 31,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2686976000,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 4059914657, \"rng_draws\": [41000], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "nest-level-40",
+      "ball": "ITEM_NEST_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 4059914657,
+      "level": 40,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2686976000,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 4059914657, \"rng_draws\": [41000], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "timer-turn-0",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 1807245729,
+      "turn": 0,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 1858535424,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 10, \"odds_a\": 2, \"rng_before\": 1807245729, \"rng_draws\": [28359], \"shake_threshold\": 19784}"
+    },
+    {
+      "id": "timer-turn-29",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 1807245729,
+      "turn": 29,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 1858535424,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 39, \"odds_a\": 8, \"rng_before\": 1807245729, \"rng_draws\": [28359], \"shake_threshold\": 27593}"
+    },
+    {
+      "id": "timer-turn-30",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 1807245729,
+      "turn": 30,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3434831987,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 40, \"odds_a\": 9, \"rng_before\": 1807245729, \"rng_draws\": [28359, 52411], \"shake_threshold\": 29126}"
+    },
+    {
+      "id": "timer-turn-31",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 1807245729,
+      "turn": 31,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3434831987,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 40, \"odds_a\": 9, \"rng_before\": 1807245729, \"rng_draws\": [28359, 52411], \"shake_threshold\": 29126}"
+    },
+    {
+      "id": "timer-turn-245",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 1807245729,
+      "turn": 245,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3434831987,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 3, \"multiplier_tenths\": 40, \"odds_a\": 9, \"rng_before\": 1807245729, \"rng_draws\": [28359, 52411], \"shake_threshold\": 29126}"
+    },
+    {
+      "id": "luxury-ball-ordinary-chance",
+      "ball": "ITEM_LUXURY_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 2,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 230546438,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 11,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 2, \"rng_draws\": [33676, 28355, 21356, 3517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "premier-ball-ordinary-chance",
+      "ball": "ITEM_PREMIER_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 30,
+      "max_hp": 90,
+      "rng_seed": 2,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 230546438,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 12,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native ball-branch arithmetic, before execution: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 2, \"rng_draws\": [33676, 28355, 21356, 3517], \"shake_threshold\": 40329}"
+    },
+    {
+      "id": "great-integer-rounding-order",
+      "ball": "ITEM_GREAT_BALL",
+      "species": "SPECIES_BULBASAUR",
+      "hp": 4,
+      "max_hp": 11,
+      "rng_seed": 987324833,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2916352000,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "floor(45*15/10)=67;floor(67*(33-8)/33)=50;doubleintegerSqrt producesb43690. A float/combined product givesa51,b45589;firstdraw44500 would incorrectly pass, while native mustfail0. ControlledbattleMonboundary, not a claim that level50Bulbasaur normally hasmaxHP11."
+    },
+    {
+      "id": "repeat-unseen",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1,
+        "dex_owned": 0,
+        "dex_seen": 0,
+        "dex_seen1": 0,
+        "dex_seen2": 0
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}",
+      "ball": "ITEM_REPEAT_BALL",
+      "dex_state": "none"
+    },
+    {
+      "id": "repeat-seen-only",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1,
+        "dex_owned": 0,
+        "dex_seen": 1,
+        "dex_seen1": 1,
+        "dex_seen2": 1
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 45, \"multiplier_tenths\": 10, \"odds_a\": 35, \"rng_before\": 781, \"rng_draws\": [43517], \"shake_threshold\": 40329}",
+      "ball": "ITEM_REPEAT_BALL",
+      "dex_state": "seen"
+    },
+    {
+      "id": "repeat-owned-consistent",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 1535280321,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 9,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1,
+        "dex_owned": 1,
+        "dex_seen": 1,
+        "dex_seen1": 1,
+        "dex_seen2": 1
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 45, \"multiplier_tenths\": 30, \"odds_a\": 105, \"rng_before\": 781, \"rng_draws\": [43517, 45967, 21001, 23426], \"shake_threshold\": 55187}",
+      "ball": "ITEM_REPEAT_BALL",
+      "dex_state": "caught"
+    },
+    {
+      "id": "safari-factor-3",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3012529599,
+        "attempts": 0,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 38, \"multiplier_tenths\": 15, \"odds_a\": 44, \"rng_before\": 781, \"rng_draws\": [43517, 45967], \"shake_threshold\": 43690}",
+      "ball": "ITEM_SAFARI_BALL",
+      "safari_factor": 3
+    },
+    {
+      "id": "safari-factor-20",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_SuccessBallThrow",
+        "animation": 4,
+        "controller": 1,
+        "rng": 781,
+        "attempts": 0,
+        "master": 0,
+        "caught_ball": 5,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 255, \"multiplier_tenths\": 15, \"odds_a\": 297, \"rng_before\": 781, \"rng_draws\": [], \"shake_threshold\": null}",
+      "ball": "ITEM_SAFARI_BALL",
+      "safari_factor": 20
+    },
+    {
+      "id": "timer-u8-wrap-246",
+      "rng_seed": 0,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 24691,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 3, \"multiplier_tenths\": 0, \"odds_a\": 0, \"rng_before\": 0, \"rng_draws\": [0], \"shake_threshold\": 0}",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "turn": 246
+    },
+    {
+      "id": "timer-u8-wrap-255",
+      "rng_seed": 0,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 1,
+        "controller": 1,
+        "rng": 3917380458,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 1,
+        "party_count": 1,
+        "map_type": 1
+      },
+      "derivation": "Independent pinned native arithmetic, ABI now audited with cartridge compiler: {\"base_catch_rate\": 3, \"multiplier_tenths\": 9, \"odds_a\": 1, \"rng_before\": 0, \"rng_draws\": [0, 59774], \"shake_threshold\": 16643}",
+      "ball": "ITEM_TIMER_BALL",
+      "species": "SPECIES_BELDUM",
+      "turn": 255
+    },
+    {
+      "id": "repeat-owned-without-seen-clears-corruption",
+      "ball": "ITEM_REPEAT_BALL",
+      "dex_state": "owned-only",
+      "rng_seed": 781,
+      "expected": {
+        "pointer": "BattleScript_ShakeBallThrow",
+        "animation": 0,
+        "controller": 1,
+        "rng": 2851971836,
+        "attempts": 1,
+        "master": 0,
+        "caught_ball": 4,
+        "chooser": 0,
+        "party_count": 1,
+        "map_type": 1,
+        "dex_owned": 0,
+        "dex_seen": 0,
+        "dex_seen1": 0,
+        "dex_seen2": 0
+      },
+      "derivation": "Owned bit alone fails native three-seen-mirror consistency check. Getter clears owned and all seen mirrors, falls back to1x catch odds35; firstdraw43517>=40329 yields0shakes. No fixture output used as oracle."
     }
   ]
 }

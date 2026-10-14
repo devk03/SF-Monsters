@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **611 independently specified scenarios**, including
-**57 double-battle interactions**. All611 pass on the approved Emerald reference
+The catalogs contain **638 independently specified scenarios**, including
+**57 double-battle interactions**. All638 pass on the approved Emerald reference
 and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus28 capture-command cases. This is partial evidence.
+action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -306,3 +306,32 @@ data/quality/mechanics/type-matrix.json`. Evidence:
 TypeCalc's flags and intermediate damage; they do not establish final randomized
 attack resolution, all SF species mappings or human approval of an SF type chart.
 The full mechanics gate remains open despite the611/57 numerical totals.
+
+
+### All native ball-command branches
+
+The capture catalog now has55 scenarios and all12 ball types. Added Net type
+branches, Dive map context, Nest level boundaries, Timer cap/wrap behavior,
+Luxury/Premier stored ball, Great integer rounding order, Repeat seen/caught
+consistency and Safari catch factors. The suite now totals638/57 doubles.
+Evidence: `mechanics-v51-capture-all-balls-initial`,55/55 both cartridges.
+
+An intermediate47-case run passed46: the Dive fixture initialized cached
+`gMapHeader`, but native `GetCurrentMapType` reads saved location through the ROM
+map table. Preserve that failed run. Fixed audited scratch save blocks and observe
+GetCurrentMapType itself before each command; all47 then passed with unchanged
+capture expectations. The underwater fixture is reference-engine setup, not a
+new non-SF game location or an obtainable Safari facility.
+
+`capture_layout.c` compiles sizeof/offsetof with the actual pinned agbcc frontend
+before execution. Modern ARM GCC produced incompatible nested save layouts and
+was rejected as an ABI source. Native save sizes are0x3d88/0xf2c, Safari factor
+offset0x7c; native seen/owned offsets are checked and compiler/source hashes saved.
+Repeat uses audited national entry1 and native SET_SEEN/SET_CAUGHT calls. An
+owned-only corruption case checks clearing all inconsistent mirrors. This does
+not establish all SF species-to-catalog mappings.
+
+Timer246/255 cases explicitly preserve pinned8-bit multiplier wrap and subsequent
+integer-division behavior. No later-generation or floating-point formula is used.
+Bag/Safari-ball consumption, actual acquisition/storage, Dex registration and
+complete presentation/save paths remain separate required integrations.

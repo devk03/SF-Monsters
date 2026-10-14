@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
-| Remaining system gates | 611 independent native scenarios pass,57 doubles, including all289 native ordered type pairs and28 capture-command outcomes. Capture inventory/storage integration, remaining balls, SF species mappings, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 638 independent native scenarios pass,57 doubles, including all289 native ordered type pairs and55 capture-command outcomes covering12 balls. Capture inventory/storage integration, SF species mappings, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4777,3 +4777,25 @@ Complete native type-chart checkpoint:
   Evidence mechanics-v51-type-matrix-initial. Total611/57 doubles; integrated
   move resolution, capture integration, SF species mappings and full gate remain
   open. No public patch change is needed for these verification tools/vectors.
+
+
+All native ball-command branches and alignment checkpoint:
+
+- Capture55/55 reference/v51: all12 balls, Net type conditions, Dive map context,
+  Nest levels, Timer cap/wrap, stored Luxury/Premier, integer-rounding order,
+  Repeat seen/caught mirrors and Safari factors. Total638/57 doubles.
+- Intermediate47-case run passed46 because fixture wrote cached mapheader rather
+  than saved location. Fixed scratch setup and added native map-type observation;
+  original capture outcomes unchanged.47/47 then55/55 pass. Failed run preserved.
+- Compile capture_layout.c with actual pinned agbcc before native execution.
+  Modern ARM GCC nested save layout differed and was rejected; native save sizes
+  0x3d88/0xf2c and relevant offsets are verified. Native Repeat setters populate
+  mirrors; owned-only invalid data is cleared as expected. Controller harness and
+  fixture driver unchanged; full local check.sh passes.
+- Evidence mechanics-v51-capture-native-map-context and
+  mechanics-v51-capture-all-balls-initial. Isolated command proof only; inventory
+  consumption, actual delivery/storage, Dex registration and campaign saves open.
+- Alignment read-only mechanics audit completed early. New bounded implementation
+  task owns only new move_pipeline_fixtures.py/test/catalog paths; main owns
+  capture/shared tools/spec/builds. Task ends11:50UTC; next check by11:18UTC.
+  It must distinguish script resolution from controller presentation/full turns.
