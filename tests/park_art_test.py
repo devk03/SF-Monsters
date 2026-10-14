@@ -10,9 +10,36 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from park_art import load_buildings, pack_park_cells, facade_cells
 from park_map import park_resources, park_tile, prune_unused_terrain, FACADES
+from park_signs import sign_cells
 
 
 class ParkResources(unittest.TestCase):
+    def test_service_signs_are_distinct_without_moving_history_or_service_doors(self):
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        raw, records, attributes, palettes = park_resources(ROOT)
+        self.assertEqual([park_tile(plan, *point) for point in ((10,6),(29,6),(33,20))],
+                         [646,647,540])
+        self.assertEqual([park_tile(plan, *point) for point in ((13,5),(32,5))], [583,618])
+        self.assertNotEqual(sign_cells()[0][0], sign_cells()[1][0])
+        self.assertEqual(palettes[7*32:8*32],
+                         (ROOT / 'assets/tiles/sunset-terrain/terrain.gbapal').read_bytes())
+        for index, (pixels, bank) in enumerate(sign_cells(), 134):
+            self.assertEqual(struct.unpack_from('<H', attributes, index*2)[0], 0x1000)
+            self.assertEqual(records[index*16:index*16+8], records[19*16+8:20*16])
+            decoded = bytearray(256)
+            for quadrant, word in enumerate(struct.unpack_from('<4H', records, index*16+8)):
+                self.assertEqual(word >> 12, bank)
+                offset = ((word & 1023)-512)*32
+                self.assertLess(offset+31, 504*32)  # Door animation owns the last eight tiles.
+                for y in range(8):
+                    for x in range(8):
+                        decoded[(quadrant//2*8+y)*16+quadrant%2*8+x] = (
+                            raw[offset+y*4+x//2] >> (x%2*4)) & 15
+            self.assertEqual(bytes(decoded), pixels)
+            self.assertEqual({pixels[i] for i in (0,15,240,255)}, {0})
+        for x, y in ((10,7),(29,7)):
+            self.assertFalse(plan['legend'][plan['rows'][y][x]][1])
+
     def test_facade_cells_keep_bottom_door_at_the_center_of_each_native_footprint(self):
         frames, palettes = load_buildings(ROOT)
         self.assertEqual([len(frame) for frame in frames], [8960, 8960])
@@ -55,8 +82,8 @@ class ParkResources(unittest.TestCase):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         raw, records, attributes, palettes = park_resources(ROOT)
         self.assertLessEqual(len(raw) // 32, 504)
-        self.assertEqual((len(records), len(attributes), len(palettes)), (134 * 16, 268, 512))
-        flags = struct.unpack('<134H', attributes)
+        self.assertEqual((len(records), len(attributes), len(palettes)), (136 * 16, 272, 512))
+        flags = struct.unpack('<136H', attributes)
         occupied = {(n['x'], n['y']) for n in plan['npcs']}
         start = (13, 6); visited = {start}; queue = deque([start])
         while queue:
@@ -71,7 +98,7 @@ class ParkResources(unittest.TestCase):
         for y, row in enumerate(plan['rows']):
             for x, token in enumerate(row):
                 tile = park_tile(plan, x, y) - 512
-                self.assertIn(tile, range(134))
+                self.assertIn(tile, range(136))
                 if token in 'RP.FGB#T':
                     self.assertEqual(flags[tile] >> 12, 1)
         self.assertEqual((flags[71], flags[106]), (0x1069, 0x1069))
@@ -86,7 +113,7 @@ class ParkResources(unittest.TestCase):
 
     def test_pruning_cannot_change_any_referenced_cell_or_facade_animation(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
-        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(134)]
+        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(136)]
         result = prune_unused_terrain(cells, plan)
         changed = {i for i, pair in enumerate(zip(cells, result)) if pair[0] != pair[1]}
         self.assertEqual(changed, {21, 22, 23, 30, 31, 34, 35})
@@ -94,7 +121,7 @@ class ParkResources(unittest.TestCase):
                       for y, row in enumerate(plan['rows']) for x in range(len(row))}
         referenced.add(plan['border_tile'] - 512)
         self.assertFalse(changed & referenced)
-        for i in referenced | set(range(40, 134)) | set(range(20)):
+        for i in referenced | set(range(40, 136)) | set(range(20)):
             self.assertEqual(result[i], cells[i])
         self.assertEqual(cells[21][0], bytes([7]) * 256)  # Input stays intact.
         for index in changed:

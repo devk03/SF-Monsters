@@ -4940,3 +4940,19 @@ Native item-effect checkpoint:
   Isolated Site42 localhost guest only; public auth/device/full save gates open.
 - Alignment now reviews the smallest Stage B visual improvement read-only,
   reporting by12:25UTC with a12:35UTC hardstop; no monitor/build/deploy.
+
+
+Service-sign differentiation in progress:
+
+- Alignment read-only art review identified gym/clinic/history signs all using
+  generic metatile540. Added two original native16x16 cream/navy emblems: code
+  chevrons for Cognition and a heart for clinic care. No new palette/footprint.
+  Existing sign scripts/positions and actual service doors583/618 stay intact.
+- Resource audit preserves every old graphics/record/attribute byte and all
+  palettes, appending two metatiles:498/504 tiles,136metatiles. Eight focused
+  park tests pass, including safe door VRAM, transparency/underlay, native
+  decode, separate history sign and reachable interaction positions.
+- v52 source awaits native build/actual dialog-door/controller and WASM checks;
+  public remainsv51/Site42. No human visual approval inferred from this change.
+- Actual desktop save cycles1–4 complete consecutively (native counter13);
+  cycle5 in browser now. Full save/auth/device/campaign gates remain open.

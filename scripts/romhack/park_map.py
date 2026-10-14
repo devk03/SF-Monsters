@@ -9,6 +9,7 @@ from street_art import load_streets, rotate_pixels, road_edge_variant
 from terrain_art import load_terrain
 from maps import encode_layout
 from house_variants import load_variants
+from park_signs import sign_cells
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -66,6 +67,7 @@ def park_resources(root):
     flags[131:134] = [0x1000] * 3
     plan = json.loads((root / 'romhack/content/south-park.json').read_text())
     cells = prune_unused_terrain(cells, plan)
+    cells += sign_cells(); flags += [0x1000, 0x1000]
     raw, records, attributes = pack_park_cells(cells, flags)
     if len(raw) // 32 > 504:
         raise ValueError('Park art must reserve the last eight secondary tiles for native doors.')
@@ -99,6 +101,8 @@ def park_tile(plan, x, y):
     if token == '.':
         return 532 + (0, 12, 13)[(x * 17 + y * 11) % 3]
     if token in 'GB#T':
+        if token == '#' and (x, y) in ((10, 6), (29, 6)):
+            return 646 if x == 10 else 647
         return {'G': 536, 'B': 551, '#': 540, 'T': 541}[token]
     if token == 'F':
         last_x, last_y = len(plan['rows'][0]) - 1, len(plan['rows']) - 1
