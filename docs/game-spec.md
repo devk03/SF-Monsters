@@ -5420,3 +5420,29 @@ v56 story execution and compatibility verified:
   Next: separate read-only guest-loop/input profiler pilot, with exact PC/cycle
   semantics independently reviewed; frozen capture helpers remain unchanged.
   Alignment audit hardstop17:35UTC, next check by17:15UTC. Publicv55/Site46.
+
+Site47 v56 publication verified, 2026-10-14:
+
+- Public now serves0.0.56-story-hints-preview, target91a1349d1e3069d243cfea7bc30f18f2bf7943d26ed3460c95ae099b00ae70da.
+  Exact885983-byte BPS SHA1ddd994b8b777583c718442e1912cb1282744c710422d51f9e88c1962f2a63b4;
+  normal release roundtrip and all711 mechanics/57 doubles pass.
+- Site source75eb546e73d2278646d9299703ab741fbd549842 passes TypeScript/build;
+  archive0312c96eea352bb93fadcb4b257e715dbd132f7f79e07549414c3710d49f2bf5
+  audits84files: exact patch/manifest, original SFMM prototype, no commercial
+  full ROM/private saves/AppleDouble. Prior dist preserved without deletion.
+- Saved versionappgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_94905632ab6c819188dc789c15994ec3;
+  deploymentappgdep_6acfb44631d48191a8b43db6d2395237 succeeded
+  2026-10-14T16:56:47.533410Z. Anonymous no-cookie HTTP200 manifest/patch and
+  actual IAB download match exact released bytes. Public loader paint verified
+  with browser visible; earlier background-compositor blank screenshots retained
+  as failed paint observations. Valid image: public-v56-loader-visible.png.
+  Temporary QA tab closed and previous browser visibility restored. No public
+  ROM import/Continue, guest progress, audience/auth/DB changes or workflow run.
+- Alignment independently validated native ReadKeys/dispatch/wait sites, ARM
+  Main key offsets and pinned clock behavior. Stock library disables debug global
+  cycle accumulation: use explicitly unwrapped mTimingCurrentTime, never infer
+  whole-run time from mTimingGlobalTime. Next separate pilot measures actual
+  KEYINPUT hook entry and frame-end held-key acknowledgement, with stock-control
+  equivalence first. These cannot establish callback completions, render deadlines,
+  browser/mobile performance or input-to-photon. Frozen capture helpers unchanged.
+  Next alignment check by17:40UTC. Full human domains0/11; full goal active.
