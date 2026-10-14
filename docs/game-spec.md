@@ -774,12 +774,12 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.51-park-frontage-preview; targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe; Site42. Tighter South Park frontage plus native-compatible safe Flash import validation. Human approvals remain0/11. |
-| Latest local source build | v52normal sourcea81ac69 reproduces targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0. Native/WASM signs/dialog/doors pass;498tiles/136metatiles. All711 mechanics scenarios and local checks pass. Public deployment remainsSite42/v51 until noted below. |
+| Public build | 0.0.52-service-signs-preview; targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0; Site43. Distinct code/heart service signs, preserved tighter frontage and native-compatible Flash validation. Human approvals remain0/11. |
+| Latest local source build | v52normal sourcea81ac69 reproduces targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0. Native/WASM signs/dialog/doors pass;498tiles/136metatiles. All711 mechanics scenarios and local checks pass. Public deployment isSite43/v52. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
+| Public QA | Site41 public IAB patches/exports exact v51. Site42 source/core in isolated localhost IAB completed ten consecutive desktop native→browser→native save cycles, independently sealed; populated party/storage/resources preserved. Fresh public auth/isolation, Safari/mobile, browser performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Finish ten actual desktop save cycles and their independent evidence seal; publish verified v52 service signs, then continue Stage B art/audio and integrated mechanics. All three starters have first-badge evidence; full campaigns, clip reviews and slice acceptance remain pending. |
 
@@ -4979,3 +4979,69 @@ Verified v52 service-sign release (public deployment pending):
   in progress. CUA import/download provenance is retrospectively indexed from
   actual tool events, explicitly not independently cryptographically attested.
   Alignment audits final sealing; localhost Site42 assets remain frozen.
+
+
+Ten-cycle desktop save-direction subtest sealed:
+
+- Ten consecutive actual IAB imports/Continue/ordinary Save/backup exports, each
+  followed by native coldContinue/ordinary Save, pass. Twenty ordinary saves
+  advance native counter5→25; final browser24. Raw party600/PC33744bytes, full
+  declared settings/locations/Dex/flags/vars/inventory/money/resource domains
+  preserve expected semantics through native encryption-key changes. Both Flash
+  slots valid, previous active slot and special sectors unchanged on each leg.
+- Independent final audit rehashes all ten chronological rows, capture metadata,
+  parent battery/state and controller CSV identities, frozen harness/core/client,
+  actual raw UI downloads and final downloaded v51 ROM. Final actual file
+  sf-mini-monsters(21).gba matches targetba3d954...314abe. UI observations are
+  retrospectively indexed from CUA tool events, not cryptographic UI attestation.
+- Seal roundtrip-v51-final-seal/final-seal.json SHA256
+  f909e2bfef80f6c3152a482f4354bef63d2b79f3170e257fca7db6c3574f4682.
+  Private final audit helper7602beca...61cb6 explicitly keeps full release false.
+  First Continue legitimately refreshes cached mapView, unused template script
+  pointers and Rival TV layout outside declared domains; whole opaque save-block
+  byte invariance is not claimed. Native playtime bounds and source pins pass.
+- Scope: one earned first-badge checkpoint, one isolated desktop IAB guest
+  session with exact Site42 assets, pinned native mGBA. This does not complete
+  public sign-in/isolation, Safari/physical mobile, fresh-session persistence,
+  fifty distinct campaign resumes, full campaigns or the whole release gate.
+- Temporary QA tab closed and only its finite worker process group stopped
+  before Site source changes. Existing public guest origin remains untouched.
+- v52 publication preparation preserves the complete prior dist directory. A
+  private copy of the Sites1.0.1 helper retains staging output instead of its
+  deletion cleanup; installed plugin/source/publication semantics unchanged.
+  Site43 typecheck/build/archive preparation underway; public stillSite42/v51.
+
+Next visual work: original fictional Roon amber-hood field atlas drafted with
+imagegen, source360a740...9cf5. Native review isolates18 proposed west-stride
+pixel changes; source/likeness/animation approval remains pending. No registry
+integration or new game build claimed for this draft. All full human domains0/11.
+
+
+Site43 v52 deployment and independent final review:
+
+- Site source071a6c7f5fa42a9ff0ba6d562f00976b0e3c029d typecheck/build passed.
+  Audited84-file archive SHA18ddb95ecc93638f8c40e55647b40ee51dac0b14b397d52366aa9bb579361dc4
+  contains exact v52 patch/manifest, original SFMM prototype, zero commercial
+  full cartridges/private saves/AppleDouble. Installed helper stayed unchanged.
+- Saved Site43 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_eeb71c2cc30881918c8ecd1b952298f6;
+  deployment appgdep_6acf79b994ac8191b0c7b450b958b169 succeeded
+  2026-10-14T12:46:56.778748Z. Public audience/auth/DBbindings unchanged.
+  No GitHub workflow runs, DB migrations or access changes.
+- Actual public IAB loader and Download SF patch event pass; downloaded882173
+  bytes match SHA44579e29...f40f9. Public guest ROM/Continue were not touched;
+  temporary tab closed. Browser-user-agent HTTP requests without auth/cookies
+  also retrieve exact public manifest/patch200; default Python-agent probe403
+  was not counted as a successful anonymous-client check.
+- Separate v51-final-save25→v52 ordinary coldContinue/Save26 passes all declared
+  persistent domains in both native and NodeWASM. Final RGB, PCM and full Flash
+  are byte-identical across cores. Party PAR Sprout/fainted Hush and Box1 Bin
+  retained. Evidence service-signs-v52-earned-save-upgrade.json. This supports
+  this version transition; ten-cycle seal remains correctly scoped to v51.
+- Alignment independently rebuilt final seal in memory: all106 evidence files
+  and every scope field agree apart from fresh timestamp. Rechecked pending
+  Site source/archive/helper adaptations; differences were patch/manifest only.
+  No broader human quality, sign-in/device, fresh-session or campaign approval.
+- Next: original Roon native-pixel cleanup/registry/old-save appearance refresh,
+  more Stage B visual variety and credible update/input/audio instrumentation.
+  Full scope/deadline unchanged; next alignment check no later12:55UTC.

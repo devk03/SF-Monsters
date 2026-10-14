@@ -2,7 +2,7 @@
 
 The catalogs contain **711 independently specified scenarios**, including
 **57 double-battle interactions**. All711 pass on the approved Emerald reference
-and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
+and current SFv52:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
 action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases, plus10 move-script,21 residual-phase and34 item-effect scenarios. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
@@ -434,3 +434,8 @@ Main independently reran both immutable reference and public v51 cartridges:
 controlled-object checks. Actual bag-use actions, consumption, controller UI,
 battle Revive dispatch, complete turns and durable saving remain unproved.
 The complete mechanics gate remains open; total711 scenarios/57 doubles.
+
+
+All16 catalogs reran unchanged on the normal v52 service-signs cartridge:
+`mechanics-v52-summary.json`,711/711. This verifies the same controlled coverage
+after the graphics change; it adds no scenarios or broader mechanics approval.
