@@ -104,12 +104,17 @@ class ParkResources(unittest.TestCase):
 
     def test_new_facade_keeps_its_native_pixels_palette_and_sidewalk_underlay(self):
         from PIL import Image
-        raw, records, _, palettes = park_resources(ROOT)
+        raw, records, attributes, palettes = park_resources(ROOT)
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         expected = Image.open(ROOT / 'assets/tiles/sunset-rowhouse-butter/native-preview.png').resize(
             (48, 64), Image.Resampling.NEAREST).tobytes()
         self.assertEqual(palettes[11 * 32:12 * 32],
                          (ROOT / 'assets/tiles/sunset-rowhouse-butter/house.gbapal').read_bytes())
         for cell in range(12):
+            # Global ID635 also occurs in the shared Sunset door table. Native
+            # behavior must keep this decorative facade out of door animation.
+            self.assertEqual(struct.unpack_from('<H', attributes, (122 + cell) * 2)[0] & 255, 0)
+            self.assertTrue(plan['legend'][plan['rows'][2 + cell // 3][23 + cell % 3]][1])
             words = struct.unpack_from('<8H', records, (122 + cell) * 16)
             self.assertEqual(records[(122 + cell) * 16:(122 + cell) * 16 + 8],
                              records[19 * 16 + 8:20 * 16])

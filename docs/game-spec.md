@@ -4713,3 +4713,18 @@ Private v51 South Park frontage:
   nonpruned prior metatiles render identically, all122 prior attributes and
   registered door bytes match, and South Park has zero retired-ID references.
   Evidence density-alignment-20261014/pruning-review/compiled-v50-v51-proof.json.
+
+
+v51 normal-release packaging:
+
+- Source3aa702f1b7b215fd984a17b0e4fe4ccfb0bce139 reproduces immutable target
+  ba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe.
+  BPS883582 bytes, SHA256
+  bc002513051832df649135e8fafa57a3b0b2411a1d4032161f95a632252fbea9.
+  Web patch/manifest updated; Sites packaging/publication pending. Public stays
+  Site40/v50 until deployment succeeds. No DB changes or GitHub Actions.
+- Alignment external-reference audit found no unsafe active reference. Clinic
+  writes542/543 belong to its own tileset; South Park callback isNULL. Added
+  explicit checks that every new decorative butter cell has no door behavior
+  and remains blocked, including global635 shared with a Sunset door-table row.
+  Border retention, seven park resource tests and two door tests pass.
