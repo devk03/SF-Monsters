@@ -18,6 +18,30 @@ def number(value, integer=False):
     return value
 
 
+def audio_clock_observation(report):
+    """Compare two bracketed context-clock reads; never infer speaker timing."""
+    start = report['context'].get('audioClockAtStart')
+    if start is None:
+        return None  # Earlier preserved runtimes did not collect start anchors.
+    end = report.get('audioClockAtClose')
+    if not isinstance(start, dict) or not isinstance(end, dict):
+        raise ValueError('Audio clock anchors must be paired')
+    for anchor in (start, end):
+        for key in ('beforeMs', 'afterMs', 'audioTime'):
+            number(anchor[key])
+        if anchor['beforeMs'] > anchor['afterMs'] or not isinstance(
+                anchor.get('audioState'), str) or not anchor['audioState']:
+            raise ValueError('Invalid audio clock read bracket')
+    if start['afterMs'] > end['beforeMs'] or start['audioTime'] > end['audioTime']:
+        raise ValueError('Audio clock anchor order regressed')
+    lower = (end['beforeMs'] - start['afterMs']) / 1000
+    upper = (end['afterMs'] - start['beforeMs']) / 1000
+    return {'context_audio_seconds': end['audioTime'] - start['audioTime'],
+        'wall_read_interval_seconds': [lower, upper],
+        'start_state': start['audioState'], 'end_state': end['audioState'],
+        'scope': 'Main-thread AudioContext clock reads; quantized context time, not hardware output or physical speaker timing'}
+
+
 def audit(report, identity, runtime):
     if report.get('schema') != 1 or report.get('valid') is not True or (
             report.get('context', {}).get('identity') != identity):
@@ -84,6 +108,7 @@ def audit(report, identity, runtime):
         'underrun_output_frames': final['underrunOutputFrames'],
         'dropped_source_frames': final['droppedSourceFrames'],
         'foreground_only': report['scope']['foregroundOnly'],
+        'audio_clock_observation': audio_clock_observation(report),
         'scope': 'Browser pipeline/audio observations; no guest consumption, physical paint or full gate acceptance'}
 
 

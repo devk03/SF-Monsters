@@ -156,6 +156,11 @@ export async function load(config) {
         throw new Error('mgba: could not acquire a 2d canvas context');
     // ---------------------------------------------------------------- audio
     const audioCtx = new AudioContext();
+    const sampleAudioClock = () => {
+        const beforeMs = performance.now();
+        const audioTime = audioCtx.currentTime, audioState = audioCtx.state;
+        return { beforeMs, afterMs: performance.now(), audioTime, audioState };
+    };
     const workletUrl = URL.createObjectURL(new Blob([WORKLET_SOURCE], { type: 'application/javascript' }));
     await audioCtx.audioWorklet.addModule(workletUrl);
     URL.revokeObjectURL(workletUrl);
@@ -754,8 +759,7 @@ export async function load(config) {
             const result = new Promise((complete) => { resolve = complete; });
             const probe = createPerformanceProbe({ ...options, onClose(close) {
                 diagnosticClosing = true;
-                closeAnchor = { endedAtMs: close.endedAtMs, audioTime: audioCtx.currentTime,
-                    audioState: audioCtx.state };
+                closeAnchor = { endedAtMs: close.endedAtMs, ...sampleAudioClock() };
                 // Stop audio observations before preparing aggregate distributions.
                 sink.port.postMessage({ type: 'diagnostics', enabled: false, epoch: diagnosticEpoch });
                 options.onClose?.(close);
@@ -771,7 +775,9 @@ export async function load(config) {
             performanceProbe = probe;
             diagnosticResult = result;
             ++diagnosticEpoch;
+            const audioClockAtStart = sampleAudioClock();
             probe.start({ ...options.context, framerate, diagnosticEpoch, visibility: document.visibilityState,
+                audioClockAtStart, audioContextSampleRate: audioCtx.sampleRate,
                 playbackReset: lastPlaybackReset ? { ...lastPlaybackReset } : null,
                 userAgent: navigator.userAgent, audioState: audioCtx.state,
                 inputScope: 'DOM handler time, changed masks including releases; completed frame-batch upper bound and canvas submission, not KEYINPUT acknowledgement or physical paint' });

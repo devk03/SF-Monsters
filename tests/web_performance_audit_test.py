@@ -70,6 +70,36 @@ class WebPerformanceAuditTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'percentiles'):
             audit(report, self.identity, self.runtime)
 
+    def test_context_clock_deficit_is_reported_separately_from_sink_frames(self):
+        report = copy.deepcopy(self.report)
+        report['context']['audioClockAtStart'] = {'beforeMs': 1000, 'afterMs': 1000.5,
+            'audioTime': 3, 'audioState': 'running'}
+        report['audioClockAtClose'] = {'beforeMs': 601000, 'afterMs': 601000.25,
+            'audioTime': 595.864, 'audioState': 'running'}
+        result = audit(report, self.identity, self.runtime)
+        clock = result['audio_clock_observation']
+        self.assertAlmostEqual(clock['context_audio_seconds'], 592.864)
+        self.assertEqual(clock['wall_read_interval_seconds'], [599.9995, 600.00025])
+        self.assertEqual(result['audio_observed_seconds'], 10)  # Independent sink interval.
+        self.assertIn('not hardware', clock['scope'])
+        self.assertIsNone(audit(self.report, self.identity, self.runtime)['audio_clock_observation'])
+
+    def test_partial_reversed_and_nonfinite_clock_anchors_are_rejected(self):
+        for start, end in [
+            ({'beforeMs': 1, 'afterMs': 2, 'audioTime': 0, 'audioState': 'running'}, None),
+            ({'beforeMs': 2, 'afterMs': 1, 'audioTime': 0, 'audioState': 'running'},
+             {'beforeMs': 3, 'afterMs': 4, 'audioTime': 1, 'audioState': 'running'}),
+            ({'beforeMs': 1, 'afterMs': 2, 'audioTime': 3, 'audioState': 'running'},
+             {'beforeMs': 3, 'afterMs': 4, 'audioTime': 2, 'audioState': 'running'}),
+            ({'beforeMs': 1, 'afterMs': 2, 'audioTime': 0, 'audioState': 'running'},
+             {'beforeMs': 3, 'afterMs': float('nan'), 'audioTime': 1, 'audioState': 'running'}),
+        ]:
+            report = copy.deepcopy(self.report)
+            report['context']['audioClockAtStart'] = start
+            report['audioClockAtClose'] = end
+            with self.subTest(start=start, end=end), self.assertRaises(ValueError):
+                audit(report, self.identity, self.runtime)
+
 
 if __name__ == '__main__':
     unittest.main()

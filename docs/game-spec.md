@@ -5687,3 +5687,12 @@ Next native visual candidate — quieter Sunset lawn:
 - Five terrain tests pass, including source→native fidelity and rejection of
   unrelated cell ownership, ocean-color indices and edge seams. Native ROM build,
   actual field comparison and user quality approval are pending. Public staysv56.
+
+
+- Added opt-in start/close AudioContext clock anchors, bracketed by main-thread
+  monotonic reads. Offline audit keeps their interval separate from sink-frame
+  observations; clock deficits are reported without choosing a cause or changing
+  playback speed/pitch. Six audit tests pass, including legacy missing anchors,
+  nonfinite/reversed/partial anchors and a synthetic clock-deficit diagnostic.
+  The ongoing Chrome600s run retains its earlier frozen SDK without these anchors;
+  new source applies only to future sessions. No new performance gate is passed.

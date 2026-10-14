@@ -52,3 +52,12 @@ Three10-minute scene regimes, native/Chromium/Safari/physical-phone coverage,
 matched diagnostics-off/on overhead, guest-update/render deadlines, actual
 input-to-visible response and listening for transition/loop clicks remain separate
 acceptance work. Do not promote a short field observation into those gates.
+
+
+New diagnostic windows also bracket AudioContext.currentTime reads with two
+performance.now readings at start and close. The auditor reports the context-time
+change and the wall-clock read interval separately from worklet output frames.
+These are quantized context-clock observations, not hardware/speaker timestamps.
+A discrepancy is retained as evidence; it does not select a cause or adjust pitch
+or pacing. Historical receipts without start anchors remain explicitly unavailable
+for this comparison. The anchor calls run only when diagnostics start/close.
