@@ -21,6 +21,7 @@ python3 tests/prepare_web_test.py
 node --experimental-strip-types tests/bps.test.mjs
 node --experimental-strip-types tests/flash-save.test.mjs
 python3 tests/romhack_maps_test.py
+python3 tests/seed_room_test.py
 python3 tests/story_hints_test.py
 python3 tests/field_journal_test.py
 .tools/venv/bin/python tests/city_map_test.py

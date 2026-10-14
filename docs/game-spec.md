@@ -6736,3 +6736,36 @@ v67 source/native first-entry checkpoint — October14,23:17UTC:
   only newattribute0x1060. Unique8px graphic count497 remains unchanged.
   Native room visual uses coherent original wood/walls/furniture; human review
   remains pending. Source checkpoint does not claim parity or final acceptance.
+
+
+v67 native room acceptance and source checks — October14,23:23UTC:
+
+- Source5088a04 is pushed. New202-line focused suite checks connected floor/one
+  exit, full original furniture cells with matching collision, reciprocal warp,
+  original music/parent, all existing-state text branches and finite pages with
+  zero state-writing commands. Wired into the existing manual local check script.
+  Complete local suite passes; no GitHub Actions requested.
+- Native entry from genuine olderC7 at16,17 reaches3,7 facing north; one inward
+  step reaches3,6. Correct held-Down exit returns via exterior door to16,17.
+  First16-frame exit attempt only stepped onto south-arrow3,7; trace retained,
+  not called a return. Holding Down40frames completes the normal native exit.
+- C7→roomSaveC8 SHA98efab1570a2c32a5e13cc097af86594ee1f6e4e7804ab4c3f74c12dfec8a30c
+  changes only audited location/warps, native VAR402A1→2/VAR402B3→0 and step
+  stat385→387; Save counter/stat7→8. Remaining declared gameplay domains exact.
+  ColdC8 resumes3,6 with exact Flash. Actual coldContinue→SaveC9 SHA
+  d5e6160758d470334fdb4104c118cf8bd66dddc0a2283d177e5bcb324481bd61
+  passes stationary semantic audit with counter/stat8→9 and no domain changes.
+- Full recovered-prototype field-note open/three-page/close cycle compared with
+  equal1240-frame idle from the same checkpoint preserves ALL15752 SaveBlock1,
+  ALL3884 SaveBlock2, global600-byte party,33744-byte storage and128KiB Flash
+  EXACTLY. No normalization/excluded bytes. state-proof.json retains scopedclaim.
+  This is one actual runtime branch; seven source tests cover remaining branches.
+- Native Journal names SEED ROOM / SOUTH PARK and keeps the existing chapter
+  objective; SELECT SF MAP shows South Park player marker/caption. Roomcompiled
+ 128layout bytes and8×8header/originalHome tileset binding/records/attributes/
+  palettes and native Ocean Commute songID independently match expected sources.
+  Private compiled-room-proof.json records checks; runtime art approval pending.
+- Private39.982second native visit-and-return clip is captured/encoded; original
+  gameplay/audio, one SF track only, not a matched Emerald reference or approval.
+  Browser route/smoke/publication acceptance is being finalized. Publicv66/Site57
+  stays live; no new fullcampaign/crossplatform/device/performance credits.
