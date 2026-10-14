@@ -5888,3 +5888,15 @@ Critical creature-asset integration audit and fix:
   wall120.0006s. Report SHA57952ac274a51f5c41027237df903822ff79def15ce6f53f544436c29b037207.
   This short run does not close the older600s IAB discrepancy or fullaudio gate.
   Owned test tab/server stopped; browser visibility restored.
+
+
+- v58firstdrafttarget63b10d0425af8a73bbae969dcbb9e75b6eae4777cfd31b44dde6da7f6f77a297
+  nowpasses independent portableELF/ROM validation:108/108authoredvisual resources,
+ 90/90bindings,18/18iconselectors,3/3sharedpalettes and18/18originalcrycontrols.
+  Twelve independent public format/bounds/ROM-ELFassociation tests pass. The
+  negativev57audit stillfails0/108visual matches. No externalbinutils dependency.
+- Actualnativev58coldContinue→partymenu→ordinarySave→gymbattle shows authored
+  SproutSlugback/TrolleyKitfront andcustomthree-partyicons. Starterends24/26HP,
+  AbsorbPP19, sameasv57route. Thisfixesintegration, not pixelcleanup/humanapproval.
+  Productionchecker is beingadded beforeanyBPScreation; privatefullreceipt and
+  public count/hashsummary willretainprovenance withoutpublishingbaseassets.
