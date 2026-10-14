@@ -5900,3 +5900,16 @@ Critical creature-asset integration audit and fix:
   AbsorbPP19, sameasv57route. Thisfixesintegration, not pixelcleanup/humanapproval.
   Productionchecker is beingadded beforeanyBPScreation; privatefullreceipt and
   public count/hashsummary willretainprovenance withoutpublishingbaseassets.
+
+
+- Portablecompiled checker is now a mandatorypost-overlay/pre-BPS buildgate.
+  A mismatch preserves an exclusive private fullreceipt and stops patchcreation;
+  public manifests include only counts/checkerhash/receipthash andpendingapproval.
+  Twelve format/association tests joinroutine localchecks; fullchecks pass.
+- Same8888frame nativecontroller route onv57/v58 produces byte-identical131072Flash
+  afterSavecounter4, with zerochanged declared domains. This is same-route evidence,
+  not another fullcross-platform roundtrip or50distinctcheckpoint acceptance.
+- Alignment other-art audit finds23/23checked non-creature resources exacttoauthored
+  source in BOTHv57/v58, includingScottWu/courierportrait+field, doors/apartment/title;
+ 4/4trainer pointerbindings pass. No additional visible stale-art defect identified,
+  so v58 staysfocused on creatures ratherthan producer-policy churn.

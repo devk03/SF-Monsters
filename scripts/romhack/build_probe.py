@@ -6,6 +6,7 @@ import json
 import re
 import shutil
 import subprocess
+import sys
 import uuid
 from bootstrap import ROOT, EMERALD, EMERALD_REVISION, SDK, checkout
 from maps import apply_maps
@@ -121,6 +122,21 @@ def main():
     creature_receipt = apply_title_creature(ROOT, EMERALD, target)
     song_receipt = apply_title_song(ROOT, EMERALD, target)
     house_receipt = apply_house_art(ROOT, EMERALD, target)
+    # Validate the final cartridge, not just copied PNGs or generated caches.
+    # The portable ELF reader works with host and Docker-produced artifacts.
+    sys.path.insert(0, str(ROOT / 'scripts/quality'))
+    from check_creature_resources import audit as audit_creatures
+    compiled_creatures = audit_creatures(target, EMERALD / 'sf-engine-probe.elf', ROOT,
+                                        EMERALD / 'include/constants/species.h')
+    validation_bytes = (json.dumps(compiled_creatures, indent=2) + '\n').encode()
+    validation_directory = ROOT / '.tools/romhack-validation'
+    validation_directory.mkdir(parents=True, exist_ok=True)
+    validation_path = validation_directory / ('creatures-' + uuid.uuid4().hex + '.json')
+    with validation_path.open('xb') as stream:
+        stream.write(validation_bytes)
+    if compiled_creatures.get('passed') is not True:
+        raise ValueError('Compiled creature resources failed; preserved receipt: ' + str(validation_path))
+    print('Compiled creature resources verified: ' + json.dumps(compiled_creatures['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -170,6 +186,13 @@ def main():
     }
     manifest['build_backend'] = args.backend
     manifest['normal_compilation_verified'] = True
+    manifest['compiled_creatures'] = {
+        'passed': True, 'counts': compiled_creatures['counts'],
+        'receipt_sha256': hashlib.sha256(validation_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/quality/check_creature_resources.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending',
+        'scope': 'Compiled resource identity and bindings; not human art or gameplay approval'
+    }
     if args.backend == 'host':
         manifest['host_toolchain'] = json.loads((EMERALD / 'sf-host-build.json').read_text())
     manifest['interface_text'] = text_receipt

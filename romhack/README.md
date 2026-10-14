@@ -161,6 +161,14 @@ Native PNGs must satisfy the dimensions and indexed-color contracts; source art
 and conversion notes stay editable under `assets/monsters`. Palette groups 3–5
 are shared by original party icons; icons in a group must use that group's colors.
 
+Overlay installation refreshes input timestamps, including identical authored
+files, so an older source timestamp cannot leave inherited generated graphics in
+place. Before creating any BPS, `build_probe.py` checks final ROM/ELF resource
+bytes, table bindings, icon selectors and cry data against the authored sources.
+A mismatch stops the build. Full receipts stay under `.tools/romhack-validation`;
+release manifests expose only counts and hashes. The checker reads ELF directly
+and needs no host binutils, including when the ROM was built with Docker.
+
 Content revision upgrades run once on Continue and cover party and storage.
 Only an exact former default nickname changes; custom names remain. Earned
 early moves fill empty slots without removing existing moves. Party stats are
