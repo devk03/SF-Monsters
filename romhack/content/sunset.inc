@@ -42,7 +42,32 @@ SF_Karpathy_Heal::
 	special HealPlayerParty
 	playfanfare MUS_HEAL
 	waitfanfare
+	goto_if_set FLAG_BADGE01_GET, SF_Karpathy_HealBadge
+	goto_if_ge VAR_UNUSED_0x40DB, 3, SF_Karpathy_HealChallenge
+	goto_if_eq VAR_UNUSED_0x40DB, 2, SF_Karpathy_HealOutput
+	goto_if_eq VAR_UNUSED_0x40DB, 1, SF_Karpathy_HealInput
+	goto_if_ge VAR_UNUSED_0x40F7, 4, SF_Karpathy_HealTransit
+	goto_if_eq VAR_UNUSED_0x40F7, 3, SF_Karpathy_HealReturn
 	msgbox SF_Text_Heal, MSGBOX_DEFAULT
+	goto SF_Karpathy_HealDone
+SF_Karpathy_HealReturn::
+	msgbox SF_Text_HealReturn, MSGBOX_DEFAULT
+	goto SF_Karpathy_HealDone
+SF_Karpathy_HealTransit::
+	msgbox SF_Text_HealTransit, MSGBOX_DEFAULT
+	goto SF_Karpathy_HealDone
+SF_Karpathy_HealInput::
+	msgbox SF_Text_HealInput, MSGBOX_DEFAULT
+	goto SF_Karpathy_HealDone
+SF_Karpathy_HealOutput::
+	msgbox SF_Text_HealOutput, MSGBOX_DEFAULT
+	goto SF_Karpathy_HealDone
+SF_Karpathy_HealChallenge::
+	msgbox SF_Text_HealChallenge, MSGBOX_DEFAULT
+	goto SF_Karpathy_HealDone
+SF_Karpathy_HealBadge::
+	msgbox SF_Text_HealBadge, MSGBOX_DEFAULT
+SF_Karpathy_HealDone::
 	release
 	end
 
@@ -140,7 +165,16 @@ SF_Roon_Return::
 	end
 
 SF_Roon_After::
+	goto_if_set FLAG_BADGE01_GET, SF_Roon_AfterBadge
+	goto_if_ge VAR_UNUSED_0x40DB, 1, SF_Roon_AfterDelivery
 	msgbox SF_Text_RoonAfter, MSGBOX_DEFAULT
+	goto SF_Roon_AfterDone
+SF_Roon_AfterDelivery::
+	msgbox SF_Text_RoonAfterDelivery, MSGBOX_DEFAULT
+	goto SF_Roon_AfterDone
+SF_Roon_AfterBadge::
+	msgbox SF_Text_RoonAfterBadge, MSGBOX_DEFAULT
+SF_Roon_AfterDone::
 	release
 	end
 
@@ -174,6 +208,18 @@ SF_Text_Choose::
 	.string "KARPATHY: Training data is useful.\nSo is going outside.\pChoose one of these three companions.\nThen check the beach north of ROON.\pHold B to run. Come back here\nwhenever your team needs a rest.$"
 SF_Text_Heal::
 	.string "KARPATHY: Your team is refreshed.\pThe prototype washed up on the beach,\nnorth of ROON. Watch the shore grass.$"
+SF_Text_HealReturn::
+	.string "KARPATHY: Your team is refreshed.\pYou have the sensor. ROON is south\nalong the Ocean Beach boardwalk.$"
+SF_Text_HealTransit::
+	.string "KARPATHY: Your team is refreshed.\pTake the sensor to SCOTT in SoMa.\nJONATHAN'S MUNI leaves from JUDAH.$"
+SF_Text_HealInput::
+	.string "KARPATHY: Your team is refreshed.\pRestore COGNITION'S blue INPUT first.\nPractice battles are optional.$"
+SF_Text_HealOutput::
+	.string "KARPATHY: Your team is refreshed.\pBlue INPUT is stable.\nRestore the green OUTPUT relay next.$"
+SF_Text_HealChallenge::
+	.string "KARPATHY: Your team is refreshed.\pBoth relays are stable.\nSCOTT is ready for your challenge.$"
+SF_Text_HealBadge::
+	.string "KARPATHY: Your team is refreshed.\pSCOTT'S incident log has a new entry.\nRead it before the next delivery.$"
 SF_Text_Bloom::
 	.string "SPROUTSLUG dreams of growing wings.\nFor now, its garden comes along.\pChoose SPROUTSLUG?$"
 SF_Text_Ember::
@@ -196,6 +242,10 @@ SF_Text_RoonReturn::
 	.string "ROON: You found it!\nDelivery fee: 500 coins.\pThat signal should not be there.\nSCOTT WU can read it at COGNITION.\pHis lab is near SOUTH PARK in SoMa.\nTake MUNI from the JUDAH crossing.\pAnd don't tweet the serial number.$"
 SF_Text_RoonAfter::
 	.string "ROON: COGNITION, near SOUTH PARK.\nShow SCOTT the sensor.\pI will investigate the signal.\nMy posts will become less helpful.$"
+SF_Text_RoonAfterDelivery::
+	.string "ROON: SCOTT has the sensor now.\nI am tracing the sender.\pKeep those safety relays stable.\nThe sender only posts 'ship it'.$"
+SF_Text_RoonAfterBadge::
+	.string "ROON: OVERCLOCK has merch already.\nOf course the logo shipped first.\pSCOTT saved my trace in his lab log.\nRead it before chasing the signal.$"
 SF_Text_Naval::
 	.string "NAVAL: The fog has no personal brand.\nIt arrives, then leaves.\pExcept here. Here it has tenure.$"
 SF_Text_Jonathan::

@@ -5362,3 +5362,25 @@ Site46 v55 publication verified:
   after Scott has received the sensor. Rewards/party healing/save schema and
   travel gates remain unchanged. Validate branches with actual campaign states.
   Full scope/deadline unchanged; human domains0/11; goal active.
+
+Contextual story hints, v56 source checkpoint:
+
+- Karpathy retains the same HealPlayerParty/fanfare sequence, then selects one
+  hint from actual parcel, relay and earned-badge state. Players without a starter
+  still receive companion selection. Beach advice stops once the sensor is held;
+  delivered sensors point to the blue INPUT/green OUTPUT/challenge sequence,
+  and an earned badge points to the available incident log.
+- Roon's post-return dialogue distinguishes delivery pending, Scott working on
+  the sensor and earned-badge follow-up. Existing recovery reward500coins and
+  quest3→4 transition remain unchanged and occur once. No new flags, save schema,
+  battles, rewards, travel gates, maps or party-healing rules added.
+- Five bounded source safety checks cover the seven mentor objectives, no-starter
+  choice, badge priority over an older relay value, Roon's five later phases,
+  and reward-once behavior. These parse source control flow; they are explicitly
+  not native engine execution proof. Fourteen map checks/fullcheck.sh pass.
+- Alignment found genuine v49 Sprout controller states for q2/q3/q4 and relay
+  phases0/1/2/3; ordinary older batteries are being prepared with source RAM and
+  saved phases verified separately. Main owns v56 native/WASM cold/interaction
+  checks; no synthetic campaign state or byte-edited battery will count.
+  Public staysv55/Site46 until verification. Next alignment check by16:45UTC;
+  prep hardstop17:00UTC. Full human domains0/11; full goal remains active.
