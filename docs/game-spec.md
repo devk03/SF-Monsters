@@ -774,8 +774,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.50-practice-guidance-preview; targetedcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78; Site40. Adds pre-sightline practice warnings, roster/type guidance and free-clinic directions to courier/facade improvements. Human approvals remain0/11. |
-| Latest local source build | Private v51park frontage targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe. Native/WASM old-save relocation and service doors pass;490tiles/134metatiles. All336 mechanics scenarios and local checks pass. Normal release/publication pending. |
+| Public build | 0.0.51-park-frontage-preview; targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe; Site41. Tighter South Park frontage with varied facades, preserved service doors and older-save relocation proof. Human approvals remain0/11. |
+| Latest local source build | v51normal source3aa702f reproduces targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe. Native/WASM old-save relocation and service doors pass;490tiles/134metatiles. All336 mechanics scenarios and local checks pass. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -4728,3 +4728,17 @@ v51 normal-release packaging:
   explicit checks that every new decorative butter cell has no door behavior
   and remains blocked, including global635 shared with a Sunset door-table row.
   Border retention, seven park resource tests and two door tests pass.
+
+
+v51 public deployment:
+
+- Sites source d100e53208bdb8acb84bfde4ed937b7dfb33c8c1 passed typecheck/build.
+  Exact archive audit:84files, one matching BPS/manifest, no commercial-derived
+  cartridge or AppleDouble metadata. Original SFMM homebrew identity verified.
+- Site41 saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_12407711e1bc8191bff534b1bede0665;
+  deployment appgdep_6acf5a7150dc81919487dcf61f69fea2 succeeded at
+  2026-10-14T10:33:29Z. Public URL/auth/audience unchanged. No DB/GitHub Actions.
+  Evidence density-v51-public-archive-audit.json; actual-browser v51 QA pending.
+- Alignment pruning audit complete with no unsafe active references. Next finite
+  mechanics coverage audit active until11:02UTC; continue implementation meanwhile.
