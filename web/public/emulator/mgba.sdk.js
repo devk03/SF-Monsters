@@ -1,6 +1,7 @@
 /* Modified for SF Mini Monsters: battery saves, frame-safe input, video pacing. MPL-2.0. */
 import { manifest } from './mgba.manifest.js';
 import { WORKLET_SOURCE } from './mgba.audio-worklet.js';
+import { createPerformanceProbe, validateFinalAudioSnapshot } from './mgba.performance.js';
 import { bindConfig, createSettingsStore, } from './mgba.config.js';
 import { coerceOptionValue, DEFAULT_MGBA_OPTIONS, MGBA_ENGINE_OPTIONS, MGBA_GB_MODEL_VALUES, MGBA_LOG_LEVEL_IDS, MGBA_PLATFORM_IDS, toEscMenuGroups, } from './mgba.options.js';
 import { extractRom } from './mgba.zip.js';
@@ -166,9 +167,33 @@ export async function load(config) {
     sink.connect(gain).connect(audioCtx.destination);
     let enqueuedFrames = 0;
     let consumedFrames = 0;
-    sink.port.onmessage = (e) => {
-        consumedFrames = e.data;
+    let performanceProbe = null, diagnosticEpoch = 0, diagnosticResult = null;
+    let diagnosticFinish = null, pendingInput = null, lastDiagnosticTick = null;
+    const finishDiagnostics = (audioFinalSnapshot, error = null) => {
+        if (!diagnosticFinish) return;
+        const pending = diagnosticFinish;
+        diagnosticFinish = null;
+        clearTimeout(pending.timer);
+        const report = { ...pending.report, audioFinalSnapshot,
+            audioFinalAcknowledged: audioFinalSnapshot !== null,
+            audioFinalError: error ?? (audioFinalSnapshot ? null : 'Final audio acknowledgement timed out') };
+        try { pending.onReport?.(report); } catch { /* Host code must not stop emulation. */ }
+        pending.resolve(report);
     };
+    sink.port.onmessage = (e) => {
+        if (typeof e.data === 'number') consumedFrames = e.data;
+        else if (e.data?.type === 'diagnostics' && e.data.epoch === diagnosticEpoch) {
+            if (diagnosticFinish && e.data.final !== false) {
+                try {
+                    finishDiagnostics(validateFinalAudioSnapshot(e.data, diagnosticFinish.report.audio, diagnosticEpoch));
+                } catch (error) { finishDiagnostics(null, error.message); }
+            } else performanceProbe?.record('audio', e.data);
+        }
+    };
+    const onDiagnosticVisibility = () => {
+        performanceProbe?.record('visibility', { state: document.visibilityState });
+    };
+    document.addEventListener('visibilitychange', onDiagnosticVisibility);
     // --------------------------------------------------------------- module
     const jsUrl = config.jsUrl ?? new URL('./mgba.js', import.meta.url).href;
     const wasmUrl = config.wasmUrl ?? new URL('./mgba.wasm', jsUrl).href;
@@ -320,9 +345,17 @@ export async function load(config) {
     let padMask = 0;
     let sentMask = -1;
     let codeToBit = new Map();
-    const pushInput = () => {
+    const pushInput = (domAt) => {
         const mask = keyMask | padMask;
         if (mask !== sentMask) {
+            if (performanceProbe?.active) {
+                if (pendingInput) performanceProbe.record('input', {
+                    ...(pendingInput.domAt === undefined ? {} : {
+                        domToDispatchMs: pendingInput.dispatchAt - pendingInput.domAt }),
+                    supersededBeforeFrame: true,
+                });
+                pendingInput = { dispatchAt: performance.now(), domAt };
+            }
             sentMask = mask;
             mod._mgbawasm_set_keys(mask);
         }
@@ -342,30 +375,32 @@ export async function load(config) {
         }
     };
     buildKeymap(DEFAULT_KEYMAP);
-    const applyKey = (code, down) => {
+    const applyKey = (code, down, domAt) => {
         const bit = codeToBit.get(code);
         if (bit === undefined)
             return false;
         const flag = 1 << bit;
         keyMask = down ? keyMask | flag : keyMask & ~flag;
-        pushInput();
+        pushInput(domAt);
         return true;
     };
     const keyTimes = new Map();
     const releaseTimers = new Map();
     const onKeyDown = (e) => {
+        const domAt = performance.now();
         clearTimeout(releaseTimers.get(e.code));
-        keyTimes.set(e.code, performance.now());
+        keyTimes.set(e.code, domAt);
         if (e.repeat)
             return;
-        if (applyKey(e.code, true))
+        if (applyKey(e.code, true, domAt))
             e.preventDefault();
     };
     const onKeyUp = (e) => {
         if (!codeToBit.has(e.code)) return;
         e.preventDefault();
-        const delay = Math.max(0, 70 - (performance.now() - (keyTimes.get(e.code) || 0)));
-        releaseTimers.set(e.code, setTimeout(() => applyKey(e.code, false), delay));
+        const domAt = performance.now();
+        const delay = Math.max(0, 70 - (domAt - (keyTimes.get(e.code) || 0)));
+        releaseTimers.set(e.code, setTimeout(() => applyKey(e.code, false, domAt), delay));
     };
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
@@ -556,10 +591,39 @@ export async function load(config) {
         const due = Math.floor(((now - wallClockStart) / 1000) * framerate);
         frames = due - wallClockFrames;
         wallClockFrames = due;
+        const requestedFrames = Math.max(0, frames);
         frames = Math.max(0, Math.min(MAX_FRAMES_PER_TICK, frames));
+        const observing = performanceProbe?.active;
+        const beforeCounter = observing ? mod._mgbawasm_frame_counter() : 0;
+        const beforeRun = observing ? performance.now() : 0;
+        let afterRun = beforeRun, afterRender = beforeRun;
         if (frames > 0) {
             runFrames(frames);
+            if (observing) afterRun = performance.now();
             renderFrame();
+            if (observing) afterRender = performance.now();
+        }
+        if (observing) {
+            const actualVideoFrames = (mod._mgbawasm_frame_counter() - beforeCounter) >>> 0;
+            performanceProbe.record('tick', {
+                rafGapMs: lastDiagnosticTick === null ? 0 : now - lastDiagnosticTick,
+                rafGapMeasured: lastDiagnosticTick !== null,
+                requestedFrames, executedFrames: frames, actualVideoFrames,
+                discardedFrames: requestedFrames - frames,
+                runMs: afterRun - beforeRun, renderMs: afterRender - afterRun,
+                renderSubmissions: frames > 0 ? 1 : 0, visibility: document.visibilityState,
+            });
+            lastDiagnosticTick = now;
+            if (pendingInput && actualVideoFrames > 0) {
+                performanceProbe.record('input', {
+                    ...(pendingInput.domAt === undefined ? {} : {
+                        domToDispatchMs: pendingInput.dispatchAt - pendingInput.domAt }),
+                    dispatchToFrameMs: afterRun - pendingInput.dispatchAt,
+                    dispatchToSubmitMs: afterRender - pendingInput.dispatchAt,
+                    supersededBeforeFrame: false,
+                });
+                pendingInput = null;
+            }
         }
         if (!fpsWindowStart)
             fpsWindowStart = now;
@@ -645,6 +709,37 @@ export async function load(config) {
     const instance = {
         config: engineConfig,
         system,
+        startDiagnostics(options = {}) {
+            if (!options || typeof options !== 'object' ||
+                (options.onReport !== undefined && typeof options.onReport !== 'function'))
+                throw new TypeError('Diagnostics options require an optional report function.');
+            if (!running || paused) throw new Error('Start foreground playback before diagnostics.');
+            if (document.visibilityState !== 'visible') throw new Error('Keep the diagnostic tab visible.');
+            if (performanceProbe?.active || diagnosticFinish)
+                throw new Error('Finish the existing diagnostic window first.');
+            let resolve;
+            const result = new Promise((complete) => { resolve = complete; });
+            const probe = createPerformanceProbe({ ...options, onReport(report) {
+                diagnosticFinish = { report: { ...report, pendingInputAtEnd: pendingInput !== null },
+                    resolve, onReport: options.onReport,
+                    timer: setTimeout(() => finishDiagnostics(null), 500) };
+                sink.port.postMessage({ type: 'diagnostics', enabled: false, epoch: diagnosticEpoch });
+            } });
+            pendingInput = null;
+            lastDiagnosticTick = null;
+            performanceProbe = probe;
+            diagnosticResult = result;
+            ++diagnosticEpoch;
+            probe.start({ ...options.context, framerate, diagnosticEpoch, visibility: document.visibilityState,
+                userAgent: navigator.userAgent, audioState: audioCtx.state,
+                inputScope: 'DOM handler time, changed masks including releases; completed frame-batch upper bound and canvas submission, not KEYINPUT acknowledgement or physical paint' });
+            sink.port.postMessage({ type: 'diagnostics', enabled: true, epoch: diagnosticEpoch });
+            return result;
+        },
+        stopDiagnostics(reason = 'manual') {
+            performanceProbe?.stop(reason);
+            return diagnosticResult;
+        },
         escMenuGroups() {
             return toEscMenuGroups(engineConfig.values());
         },
@@ -663,6 +758,7 @@ export async function load(config) {
         pause() {
             if (!running || paused)
                 return;
+            performanceProbe?.record('pause', {});
             paused = true;
             cancelAnimationFrame(rafId);
             rafId = 0;
@@ -677,6 +773,7 @@ export async function load(config) {
             startLoop();
         },
         reset() {
+            performanceProbe?.record('reset', {});
             const needsReboot = opts.system !== bootedSystem ||
                 opts.gbModel !== bootedGbModel ||
                 opts.skipBios !== bootedSkipBios;
@@ -705,6 +802,7 @@ export async function load(config) {
             return bytes;
         },
         importBattery(bytes) {
+            performanceProbe?.record('reset', {});
             releaseAllKeys();
             if (!(bytes instanceof Uint8Array) || ![32768, 131072].includes(bytes.length))
                 throw new Error('Expected a supported GBA battery save.');
@@ -745,6 +843,7 @@ export async function load(config) {
             return bytes;
         },
         async loadState(data) {
+            performanceProbe?.record('reset', {});
             const size = mod._mgbawasm_state_size();
             if (data.length !== size) {
                 throw new Error(`mgba: savestate is ${data.length} bytes but this core expects ${size} — it belongs to a different game or a different build`);
@@ -781,6 +880,7 @@ export async function load(config) {
             return { data, settings: true };
         },
         destroy() {
+            performanceProbe?.record('pause', {});
             for (const timer of releaseTimers.values()) clearTimeout(timer);
             running = false;
             paused = false;
@@ -794,6 +894,7 @@ export async function load(config) {
             window.removeEventListener('keydown', onKeyDown);
             window.removeEventListener('keyup', onKeyUp);
             window.removeEventListener('blur', releaseAllKeys);
+            document.removeEventListener('visibilitychange', onDiagnosticVisibility);
             window.removeEventListener('pointerdown', resumeAudio);
             window.removeEventListener('keydown', resumeAudio);
             sink.disconnect();

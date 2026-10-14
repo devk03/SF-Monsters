@@ -5551,3 +5551,32 @@ Browser audio measurement foundation:
   Main reviewed the interface and independently ran all13 supplied guards: pass.
   SDK integration and actual browser observations are still pending; no live
   browser performance claim. Module is committed as a separate coherent checkpoint.
+
+Actual foreground browser pipeline smoke checks:
+
+- SDK diagnostics are opt-in and preserve existing five-frame pacing/input rules.
+  Count pre-cap demand/discarded debt, actual video counter increments, batch work,
+  canvas submission and changed-input pipeline timings. First rAF gap is excluded;
+  hidden starts rejected. Pause/reset/import/load/destroy end measurement scope.
+- Worklet epoch IDs bind final asynchronous audio ACKs. Final packets require
+  exact type/epoch/boolean marker, nonregressing finite counters, positive sample
+  rate and a contiguous output interval. Missing/invalid ACKs remain explicit.
+  Probe stops at10minutes maximum plus bounded500ms final-ACK wait.
+- Two real visible IAB Chrome155 ten-second field checks each record1200rAF ticks,
+  597actual video frames, no discarded debt/video mismatch and8scripted DOM-input
+  changes. Original run max dispatch-to-submit11.8ms; hardened run12.5ms. These
+  end at completed frame-batch/canvas submission, not physical key/paint/guest ACK.
+- Hardened report web-performance-v2/report-2476350893ed41e5a6e6a0c53cb3f81b.json
+  SHA32980b05aa29e2130bcb2dbbbff7f2b059292c8fac42d1f1dcca745810ef3758.
+  Final audio240128outputframes at24000Hz,1876quanta;0warmup/starvation/drop.
+  Audio epoch10.005333s is asynchronous to main10.0011s, not exact thread alignment.
+  Earlier run retained480000frames/48000Hz. Actual sample rate is recorded per run.
+- Original runtime snapshots/identity hashes retained for both runs. Offline auditor
+  verifies them and report accounting, preserving its own exact source. All15 probe
+  guards/worklet tests/full local checks pass. Hardened smoke overlapped local QA;
+  no quiet-host or instrumentation-overhead conclusion. Public staysSite47.
+- Measured120Hz rAF requires more than40000samples for10minutes; tick capacity now
+  bounded160000, input40000. A fresh600000ms field-only run started~17:52UTC with
+  visible browser, fixed30minute local server and no public save/account changes.
+  Mixed battle/menu/story, disabled/enabled overhead, physical phone/Safari,
+  guest-update/display deadlines and human approvals remain open. Full goal active.

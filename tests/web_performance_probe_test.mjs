@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createPerformanceProbe } from '../web/public/emulator/mgba.performance.js';
+import { createPerformanceProbe, validateFinalAudioSnapshot } from '../web/public/emulator/mgba.performance.js';
 
 function fixture(options = {}) {
     let time = 100;
@@ -203,9 +203,9 @@ test('pause/reset terminate and invalidate uninterrupted measurement scope', () 
 test('capacity overflow invalidates the report instead of silently dropping samples', () => {
     const f = fixture();
     f.probe.start();
-    for (let i = 0; i < 40000; ++i) assert.equal(f.probe.record('tick', tick()), true);
+    for (let i = 0; i < 160000; ++i) assert.equal(f.probe.record('tick', tick()), true);
     assert.equal(f.probe.record('tick', tick()), false);
-    assert.equal(f.reports[0].ticks.count, 40000);
+    assert.equal(f.reports[0].ticks.count, 160000);
     assert.equal(f.reports[0].valid, false);
     assert.match(f.reports[0].error, /capacity/);
 });
@@ -220,4 +220,24 @@ test('invalid duration and clock values fail closed', () => {
     assert.equal(f.probe.record('tick', tick()), false);
     assert.equal(f.reports[0].valid, false);
     assert.equal(f.reports[0].elapsedMs, 0);
+});
+
+test('initially hidden context cannot become a foreground-only report without hidden ticks', () => {
+    const f = fixture();
+    f.probe.start({ visibility: 'hidden' });
+    f.probe.record('tick', tick());
+    assert.equal(f.probe.stop().scope.foregroundOnly, false);
+});
+
+test('final audio tail requires exact epoch, nonregressing counters and a contiguous output interval', () => {
+    const previous = audio();
+    const final = { ...audio({ renderedOutputFrames: 128, processQuanta: 2,
+        observedThroughOutputFrame: 256, final: true }), type: 'diagnostics',
+        epoch: 7, firstOutputFrame: 128, outputSampleRate: 48000 };
+    assert.equal(validateFinalAudioSnapshot(final, previous, 7), final);
+    for (const changed of [{epoch: 6}, {final: 'true'}, {underrunOutputFrames: 1},
+        {queueDepthFrames: NaN}, {renderedOutputFrames: 127}, {outputSampleRate: 0},
+        {droppedSourceFrames: undefined}, {processQuanta: -1}]) {
+        assert.throws(() => validateFinalAudioSnapshot({ ...final, ...changed }, previous, 7));
+    }
 });

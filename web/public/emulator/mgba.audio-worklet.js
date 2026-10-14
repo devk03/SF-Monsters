@@ -28,7 +28,7 @@ class MgbaSink extends AudioWorkletProcessor {
       if (msg && msg.type === 'diagnostics') {
         if (msg.enabled) {
           this.diagnostics = {
-            type: 'diagnostics', firstOutputFrame: currentFrame,
+            type: 'diagnostics', epoch: msg.epoch ?? null, firstOutputFrame: currentFrame,
             observedThroughOutputFrame: currentFrame, renderedOutputFrames: 0,
             warmupOutputFrames: 0, underrunOutputFrames: 0,
             droppedSourceFrames: 0, processQuanta: 0,

@@ -1,5 +1,6 @@
 /** Explicit, one-shot browser diagnostics. No guest-consumption or paint claims. */
-const MAX_SAMPLES = 40000;
+const MAX_TICK_SAMPLES = 160000; // Ten minutes at up to240Hz, with bounded margin.
+const MAX_INPUT_SAMPLES = 40000;
 const MAX_DURATION_MS = 600000;
 const AUDIO_COUNTERS = [
     'warmupOutputFrames', 'underrunOutputFrames', 'droppedSourceFrames',
@@ -28,6 +29,24 @@ function distribution(values) {
         mean: sorted.reduce((mean, value, index) => mean + (value - mean) / (index + 1), 0),
         p50: percentile(50), p95: percentile(95), p99: percentile(99),
     };
+}
+
+/** Validate the asynchronous final audio tail after the timed probe has closed. */
+export function validateFinalAudioSnapshot(snapshot, previous, epoch) {
+    if (!snapshot || snapshot.type !== 'diagnostics' || snapshot.final !== true || snapshot.epoch !== epoch) {
+        throw new TypeError('Invalid final audio epoch or marker');
+    }
+    for (const name of AUDIO_COUNTERS) {
+        nonnegative(snapshot[name], name, true);
+        if (snapshot[name] < previous[name]) throw new TypeError(`Final audio counter regressed: ${name}`);
+    }
+    nonnegative(snapshot.firstOutputFrame, 'firstOutputFrame', true);
+    nonnegative(snapshot.outputSampleRate, 'outputSampleRate', true);
+    nonnegative(snapshot.queueDepthFrames, 'queueDepthFrames');
+    if (!snapshot.outputSampleRate || snapshot.observedThroughOutputFrame - snapshot.firstOutputFrame !== snapshot.renderedOutputFrames) {
+        throw new TypeError('Invalid final audio output interval');
+    }
+    return snapshot;
 }
 
 /**
@@ -115,10 +134,10 @@ export function createPerformanceProbe(options = {}, environment = {}) {
             },
             limits: [
                 'Browser diagnostic epoch; frame counts are not game update counts',
-                'Input timings end at dispatch, core frame completion, or render submission',
+                'Input timings end at dispatch, completed core batch upper bound, or render submission',
                 'Render submissions do not prove physical presentation',
                 'Audio counters cover only reported worklet observations; final=false is incomplete',
-                'Nearest-rank percentiles; at most 40000 tick and input records',
+                'Nearest-rank percentiles; at most 160000 tick and 40000 input records',
             ],
         };
         onReport?.(report);
@@ -146,7 +165,7 @@ export function createPerformanceProbe(options = {}, environment = {}) {
             }
             if (!data || typeof data !== 'object') throw new TypeError('Missing event data');
             if (type === 'tick') {
-                if (ticks.count === MAX_SAMPLES) throw new RangeError('Tick sample capacity exceeded');
+                if (ticks.count === MAX_TICK_SAMPLES) throw new RangeError('Tick sample capacity exceeded');
                 for (const name of TICK_TIMES) nonnegative(data[name], name);
                 for (const name of FRAME_COUNTS) nonnegative(data[name], name, true);
                 if (data.rafGapMeasured !== undefined && typeof data.rafGapMeasured !== 'boolean') {
@@ -173,7 +192,7 @@ export function createPerformanceProbe(options = {}, environment = {}) {
                     }
                 }
             } else if (type === 'input') {
-                if (inputs.count === MAX_SAMPLES) throw new RangeError('Input sample capacity exceeded');
+                if (inputs.count === MAX_INPUT_SAMPLES) throw new RangeError('Input sample capacity exceeded');
                 if (typeof data.supersededBeforeFrame !== 'boolean') {
                     throw new TypeError('Missing input supersededBeforeFrame');
                 }
@@ -229,6 +248,7 @@ export function createPerformanceProbe(options = {}, environment = {}) {
                 throw new TypeError('Diagnostic context must be bounded JSON');
             }
             context = JSON.parse(serialized);
+            if (context?.visibility === 'hidden') ++visibility.hidden;
             startedAtMs = lastTime = time;
             state = 'active';
             timer = schedule(() => stop('duration'), durationMs);
