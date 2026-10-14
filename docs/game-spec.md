@@ -3975,3 +3975,31 @@ Cutoff removed by explicit user instruction:
 - Resume v44 build, native/WASM and supported-save checks, three-loop review
   preparation and independent alignment review. Public staysv43 until a
   validated release. No quality approval is inferred; music remains2/4.
+
+v44 build, regression and loop-evidence checkpoint:
+
+- Cutoff remains revoked. Independent alignment thread reviewed the source and
+  loop protocol; no code-level blocker was found, and no human score inferred.
+- Native v44 build/BPS round trip passes: target
+  735197f21e88fe58b6d0d6ee86329b816cf98599c0621cd58719707742dadc6b,
+  patch866420 bytes, source56deb55. Normal release exists locally; public stays
+  v43 until publishing. Local checks pass, including four new loop-evidence
+  contract cases; actual reference/native captures exercise the observation path.
+- Native/WASM18000-frame idle PCM and Flash match byte-for-byte. Native/WASM
+  2048-frame healing RGB/PCM/Flash match; v43/v44 healing RGB is unchanged.
+  Healing restores HP4/31 to31/31 and EmberPP16 to25, preserving money4000,
+  three Potions, moves, level, badge and gym stage4.
+- Added optional read-only per-frame native MPlay trace with matching-ELF/ROM
+  identity checks. First guard incorrectly assumed EWRAM-only track storage;
+  failed safely and diagnostic remains preserved. Correct guard accepts bounded
+  native IWRAM/EWRAM. No engine RAM writes or cheat input are introduced.
+- SF actual first-track jumps occur at3613/8044/12475/16906:3072 ticks and
+  4431frames per period. Exact ROM GOTO corroborates them. Reference periods are
+  1536ticks,2215/2216frames. Static score checks support equal periods across
+  all7 SF and9 reference tracks; only first-track runtime cursors are observed.
+- Reproducible private listening packager keeps raw WAVs, constant RMS-matched
+  copies, hashes/sample bounds,250ms padding and frame-level uncertainty. It
+  does not certify sample-exact phase, clean joins, underruns or quality.
+  Protocol: docs/quality/clinic-music-review.md. Final review packet, public
+  deployment and user review remain pending. Latest human score stays2/4,
+  full approvals0/11; full campaign/system gates remain unchanged.

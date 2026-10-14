@@ -53,9 +53,9 @@ static FILE* output(const char* prefix, const char* extension)
 
 int main(int argc, char** argv)
 {
-    if(argc < 4 || argc > 8)
+    if(argc < 4 || argc > 9)
     {
-        fprintf(stderr, "Usage: core_capture ROM PREFIX INPUT_CSV [STATE|-] [TELEMETRY_HEX] [trace] [BATTERY|-]\n");
+        fprintf(stderr, "Usage: core_capture ROM PREFIX INPUT_CSV [STATE|-] [TELEMETRY_HEX] [trace] [BATTERY|-] [MUSIC_PLAYER_HEX]\n");
         return 2;
     }
     struct mLogger logger = {.log = log_errors};
@@ -109,6 +109,9 @@ int main(int argc, char** argv)
     capture.stream.postAudioFrame = audio_frame;
     core->setAVStream(core, &capture.stream);
     uint32_t telemetry = argc > 5 ? strtoul(argv[5], NULL, 16) : 0;
+    uint32_t music_player = argc > 8 ? strtoul(argv[8], NULL, 16) : 0;
+    FILE* music = music_player ? output(argv[2], "music.csv") : NULL;
+    if(music) fprintf(music, "capture_frame,clock,status,song,track,command,wait,pattern_level\n");
     fprintf(trace, "frame,keys,bg0_x,bg0_y,bg1_x,bg1_y,bg2_x,bg2_y,bg3_x,bg3_y,updates,missed,cpu_q12,x,y,steps,map\n");
     unsigned mask, frames;
     unsigned long total = 0;
@@ -119,6 +122,19 @@ int main(int argc, char** argv)
         for(unsigned frame = 0; frame < frames; ++frame)
         {
             core->runFrame(core);
+            if(music)
+            {
+                // Read-only observation of the pinned native MPlay layout.
+                uint32_t track = core->busRead32(core, music_player + 0x2c);
+                if(! ((track >= 0x02000000 && track <= 0x0203ffb0) ||
+                      (track >= 0x03000000 && track <= 0x03007fb0))) return 2;
+                fprintf(music, "%lu,%u,%u,%u,%u,%u,%u,%u\n", total + frame,
+                    core->busRead32(core, music_player + 0x0c),
+                    core->busRead32(core, music_player + 4),
+                    core->busRead32(core, music_player), track,
+                    core->busRead32(core, track + 0x40),
+                    core->busRead8(core, track + 1), core->busRead8(core, track + 2));
+            }
             if(video && fwrite(pixels, sizeof(pixels), 1, video) != 1) return 2;
             fprintf(trace, "%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%d,%d,%u,%u\n",
                 core->frameCounter(core), mask,
@@ -137,6 +153,7 @@ int main(int argc, char** argv)
         total += frames;
     }
     if(! feof(sequence) || ! total || ! capture.rate) return 2;
+    if(music) fclose(music);
     if(telemetry && core->busRead32(core, telemetry) != 0x53464654)
     {
         fprintf(stderr, "Foundation telemetry signature mismatch\n");

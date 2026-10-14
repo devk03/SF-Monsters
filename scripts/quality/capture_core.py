@@ -90,6 +90,8 @@ def main():
     parser.add_argument('--battery', type=Path, help='Resume an actual emulator battery save.')
     parser.add_argument('--telemetry', default='0')
     parser.add_argument('--trace-only', action='store_true')
+    parser.add_argument('--music-elf', type=Path,
+                        help='Read MPlay clocks/cursors each frame using a matching native ELF.')
     args = parser.parse_args()
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,63}', args.name):
         parser.error('Use a short lowercase benchmark name.')
@@ -105,6 +107,17 @@ def main():
     rom = args.rom.read_bytes()
     digest = hashlib.sha256(rom).hexdigest()
     code = rom[0xac:0xb0]
+    music_player = 0
+    if args.music_elf:
+        if code != b'BPEE' or not args.music_elf.is_file() or not args.music_elf.with_suffix('.gba').is_file():
+            parser.error('Music observation needs a native ELF and companion BPEE cartridge.')
+        if hashlib.sha256(args.music_elf.with_suffix('.gba').read_bytes()).hexdigest() != digest:
+            parser.error('Music ELF companion differs from the captured cartridge.')
+        symbols = subprocess.check_output(['arm-none-eabi-nm','--defined-only',str(args.music_elf)],text=True)
+        matches = re.findall(r'(?m)^([0-9a-fA-F]+)\s+\w\s+gMPlayInfo_BGM$',symbols)
+        if len(matches)!=1 or not 0x03000000 <= int(matches[0],16) < 0x03007fc0:
+            parser.error('Pinned BGM player symbol is missing or outside native IWRAM.')
+        music_player = int(matches[0],16)
     if args.battery and args.battery.stat().st_size != (131072 if code == b'BPEE' else 32768):
         parser.error('Battery-save size does not match the cartridge family.')
     if code == b'BPEE' and digest != REFERENCE_HASH:
@@ -169,7 +182,8 @@ def main():
     prefix = output / 'capture'
     execute(executable, visible(args.rom), visible(prefix), visible(args.input),
         visible(args.state) if args.state else '-', args.telemetry,
-        'trace' if args.trace_only else 'video', visible(battery) if battery else '-')
+        'trace' if args.trace_only else 'video', visible(battery) if battery else '-',
+        f'{music_player:x}')
     metadata = json.loads(prefix.with_suffix('.json').read_text())
     metadata.update({
         'rom_sha256': digest, 'game_code': code.decode(),
@@ -183,6 +197,13 @@ def main():
     })
     if args.backend == 'host':
         metadata['host_core_build'] = host_info
+    if music_player:
+        metadata['music_observation'] = {
+            'player_address': hex(music_player),
+            'elf_sha256': hashlib.sha256(args.music_elf.read_bytes()).hexdigest(),
+            'trace': prefix.with_suffix('.music.csv').name,
+            'mode': 'read-only native MPlay clock and first-track cursor, once per frame'
+        }
     metadata['source_worktree_dirty'] = bool(subprocess.check_output(
         ['git', 'status', '--porcelain'], text=True).strip())
     prefix.with_suffix('.json').write_text(json.dumps(metadata, indent=2) + '\n')
