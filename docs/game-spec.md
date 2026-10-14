@@ -775,13 +775,13 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.51-park-frontage-preview; targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe; Site42. Tighter South Park frontage plus native-compatible safe Flash import validation. Human approvals remain0/11. |
-| Latest local source build | v51normal source3aa702f reproduces targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe. Native/WASM old-save relocation and service doors pass;490tiles/134metatiles. All336 mechanics scenarios and local checks pass. |
+| Latest local source build | v52normal sourcea81ac69 reproduces targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0. Native/WASM signs/dialog/doors pass;498tiles/136metatiles. All711 mechanics scenarios and local checks pass. Public deployment remainsSite42/v51 until noted below. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
-| Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
+| Next work | Finish ten actual desktop save cycles and their independent evidence seal; publish verified v52 service signs, then continue Stage B art/audio and integrated mechanics. All three starters have first-badge evidence; full campaigns, clip reviews and slice acceptance remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4956,3 +4956,26 @@ Service-sign differentiation in progress:
   public remainsv51/Site42. No human visual approval inferred from this change.
 - Actual desktop save cycles1–4 complete consecutively (native counter13);
   cycle5 in browser now. Full save/auth/device/campaign gates remain open.
+
+
+Verified v52 service-sign release (public deployment pending):
+
+- Normal source builda81ac69929d51dfae3eab6f32a4bd0de98e976f1 reproduces
+  draft targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0.
+  Patch882173bytes SHA44579e29a8453662ed49a60bd40a192669bcd95b1adcce742402d411699f40f9.
+  Exact independent BPS reapplication passes; only patch/manifest are public.
+- Native ordinary old-save Continue relocates the v50 gap save to17,4, then
+  normal controls reach/read both new signs at10,7 and29,7. Gym and clinic
+  display their correct existing dialogue pages. Four sign/dialog finalRGB/PCM
+  checks match WASM; delayed clinic text required another normal close input,
+  preserved failed approach evidence was not counted as successful movement.
+- All316 RGBframes and PCMbytes match for each gym/clinic entry and exit.
+  Expected interiors and sidewalk returns13,6/32,6 verified. No save-transfer or
+  real-browser performance claim from these controlled frame captures. Evidence
+  service-signs-v52-resources/{runtime-parity,door-parity}.json.
+- All16 mechanics catalogs independently reran on this immutable v52 cartridge:
+  mechanics-v52-summary.json711/711,57 doubles; complete mechanics gate open.
+- Six actual desktop save cycles passed consecutively through native17. Seventh
+  in progress. CUA import/download provenance is retrospectively indexed from
+  actual tool events, explicitly not independently cryptographically attested.
+  Alignment audits final sealing; localhost Site42 assets remain frozen.
