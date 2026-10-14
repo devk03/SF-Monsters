@@ -32,6 +32,14 @@ returns;10–12 are wait entry, VBlank-bit clear completion and wait return.
 NULL callback skips cannot create pending callback spans. Initial/final partial
 spans require explicit treatment by any downstream analysis.
 
+Kind13 records native VBlank callback delivery and lateness derived from the
+already-scheduled Hblank event. Nominal time is delivery minus lateness. Run
+`analyze_native_loop.py --capture PATH` on an accepted step capture to pair spans,
+retain edge partials and compare work-clear completion against the first nominal
+VBlank after each observed loop start. That marker is not a browser paint or a
+complete renderer handoff. Event schema1 and exact metadata/trace hashes are
+required; source/build inputs must stay unchanged through calibration.
+
 These short native calibrations establish no browser/mobile, input-to-photon,
 ten-minute stability, display deadline or human quality gate. Single-pair wall
 timings include audio output callbacks and do not establish instrumentation cost.

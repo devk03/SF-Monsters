@@ -5503,3 +5503,22 @@ Instruction boundary calibration:
   callback dispatch/pending return and wait/clear/return. No display-deadline or
   host responsiveness claim. Initial/final partial spans still need interpretation;
   independent alignment review in progress, ends17:50UTC. Five safety guards pass.
+
+Native work/wait interpretation pilot:
+
+- Added schema1 VBlank-delivery observations using actual vcount160 and the
+  already-scheduled video event. Nominal time subtracts measured delivery lateness;
+  all120 consecutive nominal periods equal280896 guest cycles. No paint inferred.
+- Final five-way calibration input-v56-step-vblank-pilot-v3/receipt.json
+  SHA68f7cd69a73b048bb65d03524526a8c5cb9b31593aefd8dc2f3ebfd02a8215f1
+  retains exact outputs and input-hook timing. Source/build inputs are fingerprinted
+  before compilation and checked unchanged afterward; mode metadata hashes bound.
+- Interpreter loop-summary.json SHAcb4d40565232dbb188e6b928319e5cc43ebaac7e679b5aad9cb7c40c11e5ca82:
+  120paired callback1/2 spans,119 complete start-to-start periods and119 waits.
+  One initial wait/loop return and one trailing open wait/loop are excluded.
+  Callback2 max104937cycles; observed work-through-wait-clear max136467cycles.
+  All120 work-clear points precede the first nominal VBlank after loop start;
+  minimum margin113561cycles. This is a short native work metric, not a display
+  deadline/99percent host or full performance acceptance. All larger gates open.
+- Six interpreter guards and full local scripts/check.sh pass. Independent nominal
+  clock/pairing review ends18:00UTC; next alignment check by17:57UTC. Full goal active.

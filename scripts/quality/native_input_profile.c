@@ -4,6 +4,7 @@
 #include <mgba/core/log.h>
 #include <mgba/core/timing.h>
 #include <mgba/internal/arm/arm.h>
+#include <mgba/internal/gba/gba.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +26,8 @@ struct Frame {
 enum EventKind {
     LOOP_START = 1, KEYS_LOADED, KEYS_RETURNED, WRAPPER_ENTRY,
     CALLBACKS_ENTRY, CALLBACK1_ENTER, CALLBACK2_ENTER,
-    CALLBACK1_RETURN, CALLBACK2_RETURN, WAIT_ENTER, WAIT_CLEAR, WAIT_RETURN
+    CALLBACK1_RETURN, CALLBACK2_RETURN, WAIT_ENTER, WAIT_CLEAR, WAIT_RETURN,
+    VBLANK_DELIVERED
 };
 struct Event { uint64_t cycle; unsigned frame, kind, from, to, value; };
 struct Profile {
@@ -217,6 +219,18 @@ static void keys_read(void* context)
     };
 }
 
+static void video_ended(void* context)
+{
+    struct Profile* profile = context;
+    const struct GBA* gba = profile->core->board;
+    int32_t until = mTimingUntil(profile->core->timing, &gba->video.event);
+    if(gba->video.vcount != 160 || until < 0 || until > 1008)
+        fail("Unexpected VBlank callback scheduling point");
+    /* Existing video code schedules Hblank before this callback. Remove event
+     * delivery lateness to recover nominal VBlank time; do not call it a paint. */
+    event(profile, VBLANK_DELIVERED, 0, gba->video.frameCounter + 1u, 1008 - until);
+}
+
 static void audio_rate(struct mAVStream* stream, unsigned rate)
 {
     ((struct Profile*) stream)->sample_rate = rate;
@@ -293,7 +307,8 @@ int main(int argc, char** argv)
     profile.stream.audioRateChanged = audio_rate;
     profile.stream.postAudioFrame = audio_frame;
     core->setAVStream(core, &profile.stream);
-    struct mCoreCallbacks callbacks = {.context = &profile, .keysRead = keys_read};
+    struct mCoreCallbacks callbacks = {.context = &profile, .keysRead = keys_read,
+                                      .videoFrameEnded = video_ended};
     int observe = ! strcmp(argv[6], "observe") || ! strcmp(argv[6], "step-observe");
     int stepping = ! strncmp(argv[6], "step-", 5);
     profile.step_observe = stepping && observe;
@@ -383,7 +398,7 @@ int main(int argc, char** argv)
     fclose(save);
     free(bytes);
     FILE* result = output(argv[5], "json");
-    fprintf(result, "{\"frames\":%u,\"hooks\":%u,\"sample_rate\":%u,"
+    fprintf(result, "{\"event_schema\":1,\"frames\":%u,\"hooks\":%u,\"sample_rate\":%u,"
         "\"audio_samples\":%" PRIu64 ",\"guest_cycles\":%" PRIu64 ","
         "\"emulation_wall_seconds\":%.9f,\"initial_held_raw\":%u,\"observe\":%s,"
         "\"stepping\":%s,\"instructions\":%" PRIu64 ",\"event_drains\":%" PRIu64 "}\n",

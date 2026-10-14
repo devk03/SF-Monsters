@@ -130,6 +130,10 @@ def main():
     output = ROOT / '.tools/benchmarks' / args.name
     output.mkdir()  # Never replace existing evidence.
     frozen = {name: digest(ROOT / 'scripts/quality' / name) for name in FROZEN}
+    source_inputs = {str(path): digest(path) for path in [Path(__file__),
+        ROOT / 'scripts/quality/native_input_profile.c',
+        ROOT / 'scripts/quality/input_layout.c', ROOT / 'scripts/quality/native_abi.py',
+        HOST_BUILD / 'include/mgba/flags.h', HOST_BUILD / 'libmgba.a']}
     layout = verify_native_layout(ROOT / '.tools/pokeemerald-host', output,
         ROOT / 'scripts/quality/input_layout.c', [4, 0x28, 0x2a, 0x2c, 0x2e])
     linked = output / 'linked.bin'
@@ -187,13 +191,18 @@ def main():
     if any(digest(Path(path)) != identity for path, identity in identities.items()) or (
             frozen != {name: digest(ROOT / 'scripts/quality' / name) for name in FROZEN}):
         raise ValueError('An input or frozen capture helper changed')
+    if any(digest(Path(path)) != identity for path, identity in source_inputs.items()):
+        raise ValueError('Profiler sources/build inputs changed during compilation or capture')
     receipt = {'passed': True, 'inputs': identities, 'core': core, 'layout': layout,
         'profiler_sha256': digest(source), 'wrapper_sha256': digest(Path(__file__)),
         'flags_sha256': digest(HOST_BUILD / 'include/mgba/flags.h'),
         'executable_sha256': digest(executable), 'frozen_helpers': frozen,
+        'source_inputs_before_compile': source_inputs,
         'calibration': calibration, 'step_calibration': step_calibration,
         'function_sha256': function_hashes, 'observations': observations,
         'raw_instruction_events_sha256': digest(output / 'step-observe.events.csv') if args.step else None,
+        'mode_artifacts': {mode: {suffix: digest(output / (mode + '.' + suffix))
+            for suffix in ('json', 'frames.csv', 'hooks.csv', 'events.csv')} for mode in modes},
         'clock': 'Unsigned-unwrapped mTimingCurrentTime; relative to loaded state',
         'limits': ['At most120 native guest frames; not a ten-minute run',
             'KEYINPUT hook entry precedes the instruction completion charge',
