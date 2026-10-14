@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 23:03 UTC:
+Current checkpoint — October 14, 2026, 23:29 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v66 / Site 57 is live.
-  Native release source b761eb3; website source ad385f54. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v67 / Site 58 is live.
+  Native release source 35e97a1; website source 4a13dc1b. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -588,6 +588,9 @@ Current checkpoint — October 14, 2026, 23:03 UTC:
 - Native JOURNAL now shows current chapter objective from existing state and
   location, preserves Save row, returns cleanly to menu/field, and survives ordinary
   C7 save/reload. Human interface acceptance and the complete SF map remain open.
+- South Park now has an enterable seed room in the denser western frontage.
+  Native/browser notes and return, indoor Save/coldContinue and map parent pass.
+  No new reward/quest flag; custom door animation and human review remain open.
 - Guide AREA now uses a geographic SF map and original courier marker. Actual
   two/one/no-wild-habitat scenarios and five player-parent contexts pass native
   checks; Chrome displays it and returns to the Guide. Art approval remains open.
@@ -597,7 +600,7 @@ Current checkpoint — October 14, 2026, 23:03 UTC:
   Prior eight custom cast sprites remain byte-exact; human art approval pending.
 - Alignment confirms exact map-return plaintext gameplay preservation; native RNG
   and wandering Dylan differ. Actual map→Save→coldContinue also passes. Next
-  check by23:25UTC; finite seed-room implementation active.
+  check by23:40UTC; seed-room handoff/review finished, root continues polish.
 
 ### 15.1 Objective and completion rule
 
@@ -819,7 +822,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.66-park-frontage-preview; targetb2b5e135f52c711d626640a9ab54cd127f98b3d05e42f35ff1de29d578230bda; Site57. Denser western South Park frontage; actual older-save collision recovery. Human approvals remain0/11. |
+| Public build | 0.0.67-seed-room-preview; target96d5b50698d5b91e36dbcd606404694312f28ec7e4c1630c24a0b0a5a223c662; Site58. Enterable seed room connects existing story/berry discoveries, with Save/notes/return acceptance. Human approvals remain0/11. |
 | Latest local source build | v64 normal source709e295 reproduces tested target32b57512. Map17/17, cast36/36, intro5/5 and creature255 controls pass. Scoped native habitats/five player parents/C8 travel-save-reload and actual Chrome map/return checks pass; full performance/art gates remain open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
@@ -6769,3 +6772,44 @@ v67 native room acceptance and source checks — October14,23:23UTC:
   gameplay/audio, one SF track only, not a matched Emerald reference or approval.
   Browser route/smoke/publication acceptance is being finalized. Publicv66/Site57
   stays live; no new fullcampaign/crossplatform/device/performance credits.
+
+
+v67 public seed-room release — October14,23:29UTC:
+
+- Native normal source35e97a1 reproduces target
+  96d5b50698d5b91e36dbcd606404694312f28ec7e4c1630c24a0b0a5a223c662.
+  BPS1023731bytes SHAa140ec31e8bfe44ffb80042efb67d554a3dbf9bb1784e12e802e668a5de0dab5.
+  Local suite and compiled creature255/cast40/intro5/map17 checks pass; source
+  5088a04 (243lines) and companion35e97a1 (236lines) are pushed with skip-ci.
+- Browser route18/18 completes notes and automatic exterior return; actual
+  manual ArrowUp (turn, then step) re-enters the room and X displays recovered
+  prototype field notes. Screenshotseed-room-v67-browser-notes.png proves the
+  observed browser scene; return screenshot separately retained.
+  Scoped manual measurement55.436seconds,3311 executed/video frames,6652 visible
+  ticks, zero debt/mismatch/audio drops/underruns/warmup, final audio ACK.
+  Report4c73b1d967824683976bb00dea3a5de5; maxcontrollerlateness2.686ms is not
+  physical/guest-consumption proof. Owned tab/emulator/audio/server18791 stopped.
+- Private39.982second2388-frame native visit/notes/return clipreview.mp4 SHA
+  c53e110efff253b9efa0aabd8d1a46adeeec830353aa5c14fcf43b831604e37b
+  is human-unreviewed and contains one SF track. Metadata pins actual source
+  5088a04/target96d5b506/core/controller; normal source35e97a1 reproduces sameROM.
+  It is not a paired Emerald comparison or music listening acceptance.
+- Sites58 source4a13dc1b849cc9626c248826bd7d1825213fd7ef; savedversion
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_f5312c7267d8819190e2740d6aaa508c.
+  Deploymentappgdep_6ad00fd907108191a5324f8685406880 succeeded23:27:30UTC.
+  Archive903d551111da5d570c5c0e9cccb726e4838799afedc6b9a22f088be6e29aa1e2
+  passes88-file audit, with no commercial ROM/private saves/fixture/ELF/movie/
+  ZIP/AppleDouble. Approved original SFMM homebrew and15 runtime files unchanged;
+  hosting/audience/public auth/storage retained. Production BPSdecoder matchesROM.
+- Both anonymous canonical live resources match local bytes; receiptSHA
+  aadd5bbe6231044fe8f93190ccf1f4f9ba68f31cdf1ce3910ad698dd6260ff74.
+  Public loader screenshotpublic-v67-loader-visible.png; no public ROM/save
+  import/account mutation. Unrelated userPDF remains untouched/untracked.
+- Six authored maps remain two hubs plus four interiors, not six neighborhoods.
+  Eight text branches and read-only environmental discovery add first-slice
+  exploration; no gift, new quest flag or score approval. Door currently uses
+  native non-animated fade; matching opening frames/arrival-apron polish remain
+  concrete next gaps. Full campaign and all human/performance/mechanics/device/
+  save gates remain open (0/11 approved; last clinicmusic2/4 atv40).
+  Goal remains active until October15,18:00 Pacific. Next alignment exchange
+  by23:40UTC; no new monitor, GitHub workflow, DB migration or PR merge.
