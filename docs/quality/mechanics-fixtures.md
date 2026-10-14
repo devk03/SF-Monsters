@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **364 independently specified scenarios**, including
-**57 double-battle interactions**. All364 pass on the approved Emerald reference
+The catalogs contain **611 independently specified scenarios**, including
+**57 double-battle interactions**. All611 pass on the approved Emerald reference
 and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,72 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus28 capture-command cases. This is partial evidence.
+action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus28 capture-command cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -283,3 +283,26 @@ This command does not consume a bag item, animate the queued scene, register a
 new catalog entry, add the monster to a party or transfer it to storage. Those
 integrations and the remaining ball types remain required. Total364/57 does
 not close the full mechanics gate. No fixture produces a durable campaign save.
+
+
+## Complete ordered type matrix
+
+`type-matrix.json` adds247 previously missing ordered monotype pairs. Combined
+with the42 canonical pairs in `type-effects.json`, all289 relationships among
+the17 ordinary GenIII types are explicit and pass on reference/v51. The existing
+30 STAB, dual-type, ability, immunity-bypass and integer-boundary cases remain.
+The complete type catalogs contain319 scenarios, not72+289 duplicated scenarios.
+
+The oracle comes from the pinned reference relationships before execution; every
+unspecified pair is explicitly neutral. Mystery9 and the Foresight/end markers
+are excluded from ordinary types; no Fairy or later-generation chart is assumed.
+Distribution:179 neutral,57 resisted,46 super-effective and7 immune pairs.
+The dataset guard requires exactly the full Cartesian product, no repeated pair,
+42 old/247 new relationships and consistent flags/intermediate damage.
+
+Run the existing mechanics runner with `--cases
+data/quality/mechanics/type-matrix.json`. Evidence:
+`mechanics-v51-type-matrix-initial`,247/247 on both cartridges. These results test
+TypeCalc's flags and intermediate damage; they do not establish final randomized
+attack resolution, all SF species mappings or human approval of an SF type chart.
+The full mechanics gate remains open despite the611/57 numerical totals.

@@ -24,6 +24,7 @@ python3 tests/creature_audio_test.py
 python3 tests/field_music_test.py
 python3 tests/music_loop_review_test.py
 python3 tests/mechanics_fixture_test.py
+python3 tests/type_matrix_test.py
 python3 tests/stat_fixture_test.py
 python3 tests/action_fixture_test.py
 python3 tests/accuracy_fixture_test.py

@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
-| Remaining system gates | 364 independent native scenarios pass,57 doubles, including28 capture-command outcomes. Numerical minimums are met; capture inventory/storage integration, remaining balls, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 611 independent native scenarios pass,57 doubles, including all289 native ordered type pairs and28 capture-command outcomes. Capture inventory/storage integration, remaining balls, SF species mappings, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4763,3 +4763,17 @@ v51 actual-browser and capture-command checkpoint:
   changed after execution. Capture driver/core/harness unchanged. New strict
   allocation, vector and write-bound guards/local check.sh pass. Final evidence
   mechanics-v51-capture-guarded. All full-domain approvals remain0/11.
+
+
+Complete native type-chart checkpoint:
+
+- Added247 previously uncovered ordered monotype pairs, independently specified
+  from pinned reference relationships before execution. Combined with42 existing
+  pairs, all17×17=289 native relationships pass reference/v51; retain the30
+  existing interaction/boundary cases. No duplicate42-pair count.
+- TypeCalc flags and intermediate damage are checked, with179 neutral/57 resisted/
+  46 super-effective/7 immune pairs. Dedicated dataset guard checks exact full
+  product, unique pairs, flags/damage and42old/247new counts. Full check.sh passes.
+  Evidence mechanics-v51-type-matrix-initial. Total611/57 doubles; integrated
+  move resolution, capture integration, SF species mappings and full gate remain
+  open. No public patch change is needed for these verification tools/vectors.

@@ -1,0 +1,4745 @@
+{
+  "function": "TypeCalc",
+  "scope": "247 previously untested ordered monotype pairs. Combine with42 canonical pairs and30 interaction/boundary scenarios in type-effects.json. Count each scenario once; not integrated move resolution.",
+  "reference_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "primary_source": "src/battle_main.c:gTypeEffectiveness + src/battle_script_commands.c:TypeCalc/ModulateDmgByType2",
+  "matrix_types": [
+    "NORMAL",
+    "FIGHTING",
+    "FLYING",
+    "POISON",
+    "GROUND",
+    "ROCK",
+    "BUG",
+    "GHOST",
+    "STEEL",
+    "FIRE",
+    "WATER",
+    "GRASS",
+    "ELECTRIC",
+    "PSYCHIC",
+    "ICE",
+    "DRAGON",
+    "DARK"
+  ],
+  "move_types": {
+    "MOVE_POUND": "TYPE_NORMAL",
+    "MOVE_KARATE_CHOP": "TYPE_FIGHTING",
+    "MOVE_GUST": "TYPE_FLYING",
+    "MOVE_POISON_STING": "TYPE_POISON",
+    "MOVE_EARTHQUAKE": "TYPE_GROUND",
+    "MOVE_ROCK_THROW": "TYPE_ROCK",
+    "MOVE_SIGNAL_BEAM": "TYPE_BUG",
+    "MOVE_SHADOW_BALL": "TYPE_GHOST",
+    "MOVE_METAL_CLAW": "TYPE_STEEL",
+    "MOVE_FLAMETHROWER": "TYPE_FIRE",
+    "MOVE_WATER_GUN": "TYPE_WATER",
+    "MOVE_VINE_WHIP": "TYPE_GRASS",
+    "MOVE_THUNDER_SHOCK": "TYPE_ELECTRIC",
+    "MOVE_CONFUSION": "TYPE_PSYCHIC",
+    "MOVE_ICE_BEAM": "TYPE_ICE",
+    "MOVE_DRAGON_CLAW": "TYPE_DRAGON",
+    "MOVE_BITE": "TYPE_DARK"
+  },
+  "expected_distribution": {
+    "10": 179,
+    "5": 57,
+    "0": 7,
+    "20": 46
+  },
+  "cases": [
+    {
+      "id": "matrix-normal-normal",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-fighting",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-flying",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-poison",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-ground",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-bug",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-steel",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII NORMAL -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-normal-fire",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-water",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-grass",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-electric",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-psychic",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-ice",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-dragon",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-normal-dark",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII NORMAL -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-fighting",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-flying",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FIGHTING -> monotype FLYING: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-fighting-ground",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-rock",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIGHTING -> monotype ROCK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-fighting-bug",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FIGHTING -> monotype BUG: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-fighting-steel",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIGHTING -> monotype STEEL: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-fighting-fire",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-water",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-grass",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-electric",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-psychic",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FIGHTING -> monotype PSYCHIC: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-fighting-ice",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIGHTING -> monotype ICE: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-fighting-dragon",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIGHTING -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fighting-dark",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIGHTING -> monotype DARK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-flying-normal",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-flying",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-poison",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-ground",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-bug",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FLYING -> monotype BUG: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-flying-ghost",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-steel",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FLYING -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-flying-fire",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-water",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-grass",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FLYING -> monotype GRASS: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-flying-electric",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FLYING -> monotype ELECTRIC: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-flying-psychic",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-ice",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-dragon",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-flying-dark",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FLYING -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-normal",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-fighting",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-flying",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-ground",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII POISON -> monotype GROUND: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-poison-rock",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII POISON -> monotype ROCK: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-poison-bug",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-ghost",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII POISON -> monotype GHOST: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-poison-fire",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-water",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-electric",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-psychic",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-ice",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-dragon",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-poison-dark",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII POISON -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-normal",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-fighting",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-poison",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GROUND -> monotype POISON: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ground-ground",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-rock",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GROUND -> monotype ROCK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ground-bug",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GROUND -> monotype BUG: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-ground-ghost",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-steel",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GROUND -> monotype STEEL: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ground-fire",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GROUND -> monotype FIRE: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ground-water",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-psychic",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-ice",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-dragon",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ground-dark",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GROUND -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-normal",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-flying",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ROCK -> monotype FLYING: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-rock-poison",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-ground",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ROCK -> monotype GROUND: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-rock-rock",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-bug",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ROCK -> monotype BUG: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-rock-ghost",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-steel",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ROCK -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-rock-water",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-grass",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-electric",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-psychic",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-ice",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ROCK -> monotype ICE: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-rock-dragon",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-rock-dark",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ROCK -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-normal",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-fighting",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII BUG -> monotype FIGHTING: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-bug-flying",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII BUG -> monotype FLYING: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-bug-poison",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII BUG -> monotype POISON: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-bug-ground",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-rock",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-bug",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-ghost",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII BUG -> monotype GHOST: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-bug-steel",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII BUG -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-bug-water",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-grass",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII BUG -> monotype GRASS: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-bug-electric",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-ice",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-dragon",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII BUG -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-bug-dark",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII BUG -> monotype DARK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ghost-fighting",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-flying",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-poison",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-ground",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-rock",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-bug",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-steel",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GHOST -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-ghost-fire",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-water",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-grass",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-electric",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-psychic",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GHOST -> monotype PSYCHIC: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ghost-ice",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ghost-dragon",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GHOST -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-normal",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-fighting",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-flying",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-poison",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-ground",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-rock",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII STEEL -> monotype ROCK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-steel-bug",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-ghost",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-fire",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII STEEL -> monotype FIRE: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-steel-water",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII STEEL -> monotype WATER: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-steel-grass",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-electric",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII STEEL -> monotype ELECTRIC: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-steel-psychic",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-dragon",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-steel-dark",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII STEEL -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-fighting",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-flying",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-poison",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-ground",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-rock",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FIRE -> monotype ROCK: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-fire-bug",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIRE -> monotype BUG: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-fire-ghost",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-steel",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIRE -> monotype STEEL: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-fire-fire",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FIRE -> monotype FIRE: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-fire-electric",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-psychic",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-fire-ice",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII FIRE -> monotype ICE: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-fire-dragon",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII FIRE -> monotype DRAGON: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-fire-dark",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII FIRE -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-normal",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-fighting",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-flying",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-poison",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-ground",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII WATER -> monotype GROUND: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-water-rock",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII WATER -> monotype ROCK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-water-bug",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-ghost",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-steel",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype STEEL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-water",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII WATER -> monotype WATER: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-water-electric",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-psychic",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-ice",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-water-dragon",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII WATER -> monotype DRAGON: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-water-dark",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII WATER -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-normal",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-fighting",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-flying",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GRASS -> monotype FLYING: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-grass-poison",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GRASS -> monotype POISON: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-grass-ground",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GRASS -> monotype GROUND: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-grass-rock",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII GRASS -> monotype ROCK: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-grass-bug",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GRASS -> monotype BUG: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-grass-ghost",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-steel",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GRASS -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-grass-grass",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GRASS -> monotype GRASS: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-grass-electric",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-psychic",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-ice",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-grass-dragon",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII GRASS -> monotype DRAGON: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-grass-dark",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII GRASS -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-fighting",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-flying",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype FLYING: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-electric-poison",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-rock",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-bug",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-ghost",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-steel",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype STEEL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-fire",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-electric",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype ELECTRIC: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-electric-psychic",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-ice",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-electric-dragon",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype DRAGON: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-electric-dark",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ELECTRIC -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-normal",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-flying",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-poison",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype POISON: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-psychic-ground",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-rock",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-bug",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-ghost",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-steel",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-psychic-fire",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-water",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-grass",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-electric",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-ice",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-psychic-dragon",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII PSYCHIC -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-normal",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-fighting",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-flying",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ICE -> monotype FLYING: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ice-poison",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-ground",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ICE -> monotype GROUND: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ice-rock",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-bug",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-ghost",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-steel",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ICE -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-ice-fire",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ICE -> monotype FIRE: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-ice-grass",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII ICE -> monotype GRASS: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-ice-electric",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-psychic",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-ice-ice",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII ICE -> monotype ICE: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-ice-dark",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII ICE -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-normal",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-fighting",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype FIGHTING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-flying",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-poison",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-ground",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-rock",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-bug",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-ghost",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype GHOST: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-fire",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-water",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-grass",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-electric",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-psychic",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype PSYCHIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-ice",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dragon-dark",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DRAGON -> monotype DARK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-normal",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype NORMAL: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-flying",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype FLYING: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-poison",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype POISON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-ground",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype GROUND: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-rock",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype ROCK: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-bug",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_BUG",
+        "type2": "TYPE_BUG",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype BUG: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-ghost",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Pinned GenIII DARK -> monotype GHOST: 20/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*20/10=200; resultflag2."
+    },
+    {
+      "id": "matrix-dark-steel",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII DARK -> monotype STEEL: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    },
+    {
+      "id": "matrix-dark-fire",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype FIRE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-water",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype WATER: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-grass",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype GRASS: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-electric",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype ELECTRIC: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-ice",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype ICE: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-dragon",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Pinned GenIII DARK -> monotype DRAGON: 10/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*10/10=100; resultflag0."
+    },
+    {
+      "id": "matrix-dark-dark",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY",
+        "ability": 0
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK",
+        "ability": 0,
+        "status2": 0
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Pinned GenIII DARK -> monotype DARK: 5/10 effectiveness; noSTAB,ability,Foresight or dualtype. Damage100*5/10=50; resultflag4."
+    }
+  ]
+}
