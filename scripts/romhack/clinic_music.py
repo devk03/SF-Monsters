@@ -5,6 +5,9 @@ from clinic_instruments import clinic_samples
 def clinic_tracks(score):
     if score['ticks_per_quarter'] != 24 or not 60 <= score['tempo'] <= 140:
         raise ValueError('Clinic score needs the reviewed native clock and tempo.')
+    revision = score.get('arrangement_revision', 1)
+    if type(revision) is not int or revision not in (1,2):
+        raise ValueError('Unsupported clinic arrangement revision.')
     names = ['flute', 'guitar', 'bass', 'piano', 'kick', 'brush', 'shaker']
     tracks = [[] for _ in names]
     for channel, (name, program) in enumerate(zip(names, [0, 4, 1, 2, 5, 6, 7])):
@@ -32,11 +35,17 @@ def clinic_tracks(score):
         bridge = section == 'B'
         for bar, melody in enumerate(phrase):
             start, offset = (section_index * 8 + bar) * 96, 0
+            rests=[]
+            dynamics = score['phrasing'][section][bar] if revision == 2 else 82
+            if type(dynamics) is not int or not 24 <= dynamics <= 110:
+                raise ValueError('Clinic phrase dynamics must retain usable headroom.')
             for pitch, length in melody:
                 if type(length) is not int or length < 6:
                     raise ValueError('Clinic note/rest must last at least six ticks.')
                 if pitch is not None:
-                    note(0, start + offset, length - 3, pitch, 82 if offset % 24 == 0 else 72)
+                    velocity=dynamics if offset % 24 == 0 else dynamics-10
+                    note(0, start + offset, length - 3, pitch, velocity)
+                else: rests.append((offset,length))
                 offset += length
             if offset != 96:
                 raise ValueError('Clinic melody must fill a four-beat bar.')
@@ -46,17 +55,38 @@ def clinic_tracks(score):
             minor = quality == 'minor7'
             tracks[3].append((start, 1, bytes([0xc3, 3 if minor else 2])))
             # Voiced chord samples keep the seven tracks monophonic on GBA.
-            for tick in ([12, 60] if bridge else [12, 48, 78]):
+            comp = score['accompaniment'][section] if revision == 2 else None
+            keys = comp['keys'][bar%4] if comp else ([12,60] if bridge else [12,48,78])
+            if any(type(t) is not int or not 0 <= t <= 81 for t in keys) or \
+               any(b-a<15 for a,b in zip(keys,keys[1:])):
+                raise ValueError('Clinic key strikes must fit the bar without overlapping.')
+            for tick in keys:
                 note(3, start + tick, 15, chord, 60 if tick == 12 else 50)
-            for tick, interval in [(0, 0), (48, 7)]:
-                note(2, start + tick, 39, root + interval, 76 if tick == 0 else 62)
+            approach=comp and bar in comp['bass_approach_bars']
+            note(2,start,39,root,76)
+            note(2,start+48,19 if approach else 39,root+7,62)
+            if approach:
+                next_section=score['sections'][(section_index+1)%len(score['sections'])]
+                next_root=(harmony[bar+1] if bar<7 else score['harmony'][next_section][0])[0]
+                note(2,start+72,18,next_root-1,54)
             if not bridge or bar >= 4:
-                for tick, interval in [(24, 7), (66, 10 if minor else 11)]:
-                    note(1, start + tick, 18, chord + interval, 54)
+                if revision == 1:
+                    for tick, interval in [(24, 7), (66, 10 if minor else 11)]:
+                        note(1, start + tick, 18, chord + interval, 54)
+                else:
+                    # Answer only in written rests, leaving the melody's space intact.
+                    for tick,length in rests:
+                        for i,relative in enumerate(range(1,length-9,12)):
+                            note(1,start+tick+relative,9,chord+(7 if i%2==0 else 10 if minor else 11),46-i*4)
             # Let the bridge breathe; percussion returns halfway through.
             if not bridge or bar >= 4:
                 for tick in [0, 48]: note(4, start + tick, 8, 60, 56)
                 for tick in [24, 72]: note(5, start + tick, 10, 60, 50)
-                for eighth in range(8):
-                    note(6, start + eighth * 12, 5, 60, 42 if eighth % 2 else 30)
+                division=comp['shaker_division'] if comp else 12
+                if division not in (12,24):raise ValueError('Unsupported clinic shaker division.')
+                for tick in range(0,96,division):
+                    # One-tick offbeat displacement adds a restrained lilt.
+                    offbeat=tick%24!=0
+                    shifted=tick+(1 if revision==2 and offbeat else 0)
+                    note(6,start+shifted,5,60,42 if offbeat else 30)
     return tracks, 32 * 96

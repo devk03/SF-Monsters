@@ -2,9 +2,23 @@
   "title": "Park Bench Break",
   "arrangement": "clinic",
   "instrument_revision": 2,
+  "asset_revision": 3,
+  "arrangement_revision": 2,
   "tempo": 104,
   "ticks_per_quarter": 24,
   "sections": ["A", "A2", "B", "A3"],
+  "phrasing": {
+    "A": [74,78,82,68,78,80,74,64],
+    "A2": [78,82,76,68,84,80,76,66],
+    "B": [74,78,72,64,80,82,74,66],
+    "A3": [74,78,82,68,78,80,72,62]
+  },
+  "accompaniment": {
+    "A": {"keys": [[12,48],[24,66],[12,60],[36]], "bass_approach_bars": [3,7], "shaker_division": 24},
+    "A2": {"keys": [[0,42,72],[12,60],[24,66],[12,48]], "bass_approach_bars": [3,5,7], "shaker_division": 12},
+    "B": {"keys": [[0],[12,60],[24],[12,60]], "bass_approach_bars": [3,7], "shaker_division": 24},
+    "A3": {"keys": [[12,48],[24,66],[12,60],[36]], "bass_approach_bars": [3], "shaker_division": 24}
+  },
   "phrases": {
     "A": [
       [[null,12],[72,24],[76,12],[79,24],[76,24]],

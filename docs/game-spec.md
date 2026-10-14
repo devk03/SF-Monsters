@@ -759,7 +759,7 @@ Current snapshot (October 13, 2026; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | Resumed by the user on October 13, 2026. The October 8 cutoff is historical and does not reapply. Its reminder stays disabled. Full scope and acceptance gates remain required. |
+| Execution | Resumed October 13, then stopped when the updated goal reinstated a 6 PM cutoff for today. Verified clock was already 11:06 PM Pacific when that update arrived. Pause requested under that cutoff; no new build/deploy started. Old reminder stays disabled. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
@@ -769,7 +769,7 @@ Current snapshot (October 13, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | v43 healing visual subset review requested; latest explicit clinic music score remains2/4. Improve the clinic soundtrack's composition/instruments/mix against a matched listening baseline, while preserving mechanics and tracking other first-slice art/interface gaps. v41 instrument A/B remains unreviewed. Actions stay manual-only. |
+| Next work after resume/new deadline | Build and evaluate the committed, unbuilt v44 arrangement candidate: three-loop level-matched audio, 30–60-second reference scene, entry/heal/resume and supported-save/native-WASM regression checks. Check final guitar release across loop boundary. User music score remains2/4; no new approval inferred. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3927,3 +3927,40 @@ replacement schedule or monitor is created. All section15 requirements remain.
   unapproved gates while awaiting optional user feedback; never invent approval.
 - Continue coherent small commits and routine local checks. GitHub Actions stays
   manual-only. No DB changes, PR merges or commercial ROM/media publication.
+
+
+October 13 bounded arrangement candidate and updated deadline:
+
+- Independent thread01a13900-5c2c-7973-bea7-389deda8a5ab completed its finite
+  alignment/source reviews and stopped. It agreed the2/4 clinic music is the
+  next bounded priority and caught the earlier two-loop evidence shortfall.
+  The protocol requires at least three consecutive loops.
+- Code-based inference: nearly identical backing patterns across A/A2/A3 may
+  sound repetitive. This is not an auditory diagnosis; this session cannot
+  audition audio directly. Asked the user which music gap is largest; pending.
+- Implemented one arrangement experiment: phrase dynamics, section-specific key
+  rhythms, bass approaches, guitar responses only in explicit rests, and
+  sparser percussion. Multiple sequencing features limit causal attribution.
+- Melody pitches/durations/rests, harmony, tempo, channel volume/pan and native
+  volume remain unchanged. Independently compared v2/v3 generated PCM, headers,
+  sustain offsets, voices.inc and waves.inc: byte-identical. Asset revision3
+  is separate from unchanged instrument revision2, preserving v1/v2 files.
+- Existing MIDI/sample tests pass with v3 included. Reviewer independently
+  confirms legacy revision1 event lists match1b1a199, seven-track monophony,
+  valid bass targets and note-offs before3072 ticks. Final guitar response
+  ends at3070: release across the boundary still needs native listening.
+- Genuine baseline centre idle capture:15000 controller-only frames, about
+  251.14seconds, .tools/benchmarks/clinic-audio-v44-emerald-three-loops.
+  Its name denotes the planned review; loop periods have not yet been analyzed.
+  No claim that the entire three-loop comparison packet is complete.
+- v44 source/assets are committed as an unbuilt, unreviewed candidate. No native
+  v44 cartridge, BPS release, WASM replay, audio comparison or public deployment
+  exists yet. Latest verified public release remains v43/Site35.
+- Updated objective arrived with a6PM Pacific-today stop. Clock read
+  2026-10-14T06:06:20Z = October13,11:06PM Pacific, already past that cutoff.
+  Stopped implementation/build/deploy immediately, collected the running
+  read-only review, and made the final concrete-change/spec commit and push.
+  No active build/capture/publishing process remained. No monitor was created.
+- Full campaign, all required system checks and0/11 domain approvals remain
+  unchanged. Goal pause requested by the updated deadline, not completion.
+  No GitHub Actions, DB changes, PR merge or commercial media publication.

@@ -108,6 +108,14 @@ def instrument_revision(score):
     return revision
 
 
+def asset_revision(score):
+    """Preserve prior MIDI when an arrangement changes without new instruments."""
+    revision = score.get('asset_revision', instrument_revision(score))
+    if type(revision) is not int or not 1 <= revision <= 99:
+        raise ValueError('Asset revision must be a supported positive integer.')
+    return revision
+
+
 def write_song(score, output):
     group, directory, stem, prefix = BINDINGS[score['native_song']]
     if score['native_voicegroup'] != group:
@@ -150,6 +158,10 @@ def write_song(score, output):
     info = {'title': score['title'], 'tempo': score['tempo'],
         'bars': end // 96, 'tracks': len(tracks), 'loop_ticks': end,
         'nominal_loop_seconds': end / 24 * 60 / score['tempo'], 'quality_approval': 'pending'}
+    if 'asset_revision' in score:
+        info.update(asset_revision=asset_revision(score),
+                    instrument_revision=instrument_revision(score),
+                    arrangement_revision=score.get('arrangement_revision',1))
     if playback == 'one-shot':
         info['duration_ticks'] = info.pop('loop_ticks')
         info['nominal_duration_seconds'] = info.pop('nominal_loop_seconds')
@@ -170,7 +182,7 @@ def apply_field_music(content, root, engine, original):
             raise ValueError('Native song bindings must be reviewed and unique.')
         used.add(song)
         group, directory, stem, _ = BINDINGS[song]
-        source = root / 'assets/audio' / (plan.stem + '-native-v' + str(instrument_revision(score)))
+        source = root / 'assets/audio' / (plan.stem + '-native-v' + str(asset_revision(score)))
         write_song(score, source)
         if group in CUSTOM_GROUPS:
             configuration, count = re.subn(rf'(?m)^({re.escape(song)}\.mid:.*?-G_)\w+',
@@ -214,5 +226,5 @@ def apply_field_music(content, root, engine, original):
 if __name__ == '__main__':
     for name in ['ocean-commute', 'fogbank-frenzy', 'park-bench-break', 'team-refresh']:
         score = json.loads((ROOT / f'assets/audio/{name}.json').read_text())
-        write_song(score, ROOT / f'assets/audio/{name}-native-v{instrument_revision(score)}')
+        write_song(score, ROOT / f'assets/audio/{name}-native-v{asset_revision(score)}')
     print('Wrote original field/battle scores and synthesized instruments.')
