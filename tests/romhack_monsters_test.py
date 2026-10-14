@@ -2,12 +2,16 @@
 from copy import deepcopy
 from pathlib import Path
 import json
+import os
+import shutil
+import subprocess
 import sys
+import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
-from monsters import check_monster, check_catalog, png_palette, check_progression, apply_progression
+from monsters import check_monster, check_catalog, png_palette, check_progression, apply_progression, install_creature_art
 
 
 class MonsterContracts(unittest.TestCase):
@@ -25,6 +29,36 @@ class MonsterContracts(unittest.TestCase):
                             [('front', (64, 64)), ('anim_front', (64, 128)), ('back', (64, 64))]]
                 self.assertTrue(all(palette == palettes[0] for palette in palettes))
         with self.assertRaises(ValueError): png_palette(art / 'front.png', (32, 32))
+
+    def test_reapplying_authored_art_rebuilds_newer_inherited_make_outputs(self):
+        # No ROM fixture: these are our real indexed art sources and a small
+        # dependency rule exercising the same timestamp contract as native Make.
+        directory = Path(tempfile.mkdtemp(prefix='creature-art-cache-', dir=ROOT/'.tools'))
+        source, engine = directory/'authored', directory/'engine'
+        source.mkdir(); engine.mkdir()
+        art = ROOT/'assets/monsters/sproutslug/native-v1'
+        names = ['front.png', 'anim_front.png', 'back.png', 'icon.png', 'normal.pal', 'shiny.pal']
+        for name in names:
+            shutil.copyfile(art/name, source/name)
+            os.utime(source/name, (1000, 1000))
+            shutil.copy2(source/name, engine/name)  # The previous installer.
+            (engine/('built-'+name)).write_bytes(b'INHERITED CACHE')
+            os.utime(engine/('built-'+name), (2000, 2000))
+        makefile = 'all: ' + ' '.join('built-'+name for name in names) + '\n'
+        makefile += ''.join(f'built-{name}: {name}\n\tcp {name} built-{name}\n' for name in names)
+        (engine/'Makefile').write_text(makefile)
+        command = ['make', '-s', '--no-print-directory', 'all']
+        subprocess.run(command, cwd=engine, check=True, capture_output=True)
+        self.assertTrue(all((engine/('built-'+name)).read_bytes() == b'INHERITED CACHE' for name in names),
+                        'The old preserved-mtime input must reproduce the stale build first')
+        palette_lines = (art/'normal.pal').read_text().splitlines()[3:]
+        palette = bytes(int(channel) for line in palette_lines for channel in line.split())
+        install_creature_art(source, engine, palette)
+        subprocess.run(command, cwd=engine, check=True, capture_output=True)
+        for name in names:
+            with self.subTest(asset=name):
+                self.assertEqual((engine/('built-'+name)).read_bytes(), (source/name).read_bytes())
+        # Evidence is retained; no removal operation is needed for this fixture.
 
     def test_name_stats_and_learnset_bounds(self):
         changes = [{'name': 'X' * 11}, {'category': 'X' * 12}, {'stats': {'baseHP': 50}},

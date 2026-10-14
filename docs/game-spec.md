@@ -560,6 +560,9 @@ Current checkpoint — October14,2026,19:45UTC:
   release source7cffa0b, website sourcea0ca6c9. The native lawn/audio preview is live.
 - Human final approvals0/11. Full16hub/8gym/150monster campaign and final
   acceptance remain unfinished; first-slice approval is still required.
+- Criticalv57finding: all108creature visual/palette blobs remain stock despite
+  authored source art; original cries do match18/18. v58build integration fix is
+  in progress. Existing creature-art integration claims are superseded by this audit.
 -711 independently specified mechanics cases/57doubles pass; full-turn/type/catalog
   gates remain open. Ten save round trips are sealed at one first-badge checkpoint,
   not50 distinct campaign checkpoints or full device/auth coverage.
@@ -5856,3 +5859,32 @@ Published v57 / Site48:
 - Fullcampaign/11humanqualitydomains, Safari/phone, IABlongclockdeficit, physical
   input/display deadlines, fullaudio/listening and50distinctsavecheckpoints remain
   open. This publication is an improved preview; fullgoal staysactive.
+
+
+Critical creature-asset integration audit and fix:
+
+- Independent immutablev57ROM/ELFaudit: all18species×6visual resources (stillfront,
+  animatedfront, back, icon, normal/shinypalette)=108/108match Emerald baseline,
+  0/108match intendedauthored assets. Engine PNG/paletteinputs do match authored
+  files, but everyinput isolder than its generatedcache. All90tablebindings,
+  18iconselectors and3sharedpalettes are correct. All18compiledcries match recipes.
+  The battle screenshot indeed shows stockTreecko/Magnemite under SF names; prior
+  original-creature visual-integration claims were wrong. Human approvals stay0/11.
+- Cause: copy2 preserves oldsource mtimes, so Make retains newer inherited .4bpp,
+  .gbapal andcompressedoutputs. Preserved216pre-fix intermediatefiles for18species
+  privately before rebuilding. No filesremoved. Native contentrevision remains8;
+  species/saveidentities/stats/moves/progression remain unchanged.
+- Actual art-install boundary now validates front/back/animation/iconpalettes and
+  uses timestamp-updating copies for allsix files/shared iconpaletteinputs. An
+  independent real-Make test first reproduces six stale outputs with preserved
+  timestamps, then reapplies identicalauthored inputs and rebuilds everytarget to
+  exactsourcebytes. Six creature authoring/build tests pass. Nativev58build and
+ 108compiled-resource validation/coldsave/actualbattle/browser are pending.
+- Alignment owns focused compiled-resource checker/tests only, deadline20:15UTC;
+  root owns source installation/build/capture/publication. No more generic harness
+  work ahead of this visible integration failure. Next check by20:10UTC.
+- FreshIAB120s40ms-buffer smoke passes0audiofailures/debt/mismatch,7167video /
+ 14400visibleticks,8DOM inputs maxsubmit10.4ms; context/output120.000726s vs
+  wall120.0006s. Report SHA57952ac274a51f5c41027237df903822ff79def15ce6f53f544436c29b037207.
+  This short run does not close the older600s IAB discrepancy or fullaudio gate.
+  Owned test tab/server stopped; browser visibility restored.

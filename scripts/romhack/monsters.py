@@ -130,6 +130,26 @@ def png_palette(path, expected_size):
     return palette
 
 
+def install_creature_art(art, destination, icon_palette):
+    """Validate native views and refresh their build-input timestamps.
+
+    Reapplying identical authored PNGs must also repair an engine checkout with
+    newer inherited intermediates. Preserving old source mtimes makes Make keep
+    those stale graphics even though the engine PNGs contain the correct art.
+    """
+    palettes = [png_palette(art / (name + '.png'), size) for name, size in
+                [('front', (64, 64)), ('anim_front', (64, 128)), ('back', (64, 64))]]
+    if any(palette != palettes[0] for palette in palettes):
+        raise ValueError('Creature views must share a palette.')
+    if png_palette(art / 'icon.png', (32, 64)) != icon_palette:
+        raise ValueError('Party icon does not match its shared native palette group.')
+    names = ('front.png', 'anim_front.png', 'back.png', 'icon.png', 'normal.pal', 'shiny.pal')
+    destination.mkdir(parents=True, exist_ok=True)
+    for name in names:
+        shutil.copyfile(art / name, destination / name)
+    return names
+
+
 def apply_monsters(content, root, engine, original):
     if 'monster_content' not in content: return []
     reference = (root / 'romhack/content' / content['monster_content']).resolve()
@@ -148,7 +168,7 @@ def apply_monsters(content, root, engine, original):
         icon_palettes[int(group)] = bytes(int(channel) for line in lines[3:] for channel in line.split())
         if len(icon_palettes[int(group)]) != 48: raise ValueError('Icon colors need three channels each.')
         icon_paths[int(group)] = f'graphics/pokemon/icon_palettes/sf_icon_palette_{group}.pal'
-        shutil.copy2(palette_source, engine / icon_paths[int(group)])
+        shutil.copyfile(palette_source, engine / icon_paths[int(group)])
 
     def edit(path, pattern, value):
         source[path] = replace_one(source.get(path, original(path)), pattern, value)
@@ -159,14 +179,8 @@ def apply_monsters(content, root, engine, original):
         identifiers.add(species)
         art = (root / mon['art']).resolve(); art.relative_to(root / 'assets/monsters')
         destination = 'graphics/pokemon/' + mon['engine_asset_dir']
-        palettes = []
-        for name, size in [('front', (64, 64)), ('anim_front', (64, 128)), ('back', (64, 64))]:
-            palettes.append(png_palette(art / (name + '.png'), size))
-        if any(palette != palettes[0] for palette in palettes): raise ValueError('Creature views must share a palette.')
-        if png_palette(art / 'icon.png', (32, 64)) != icon_palettes.get(mon['icon_palette']):
-            raise ValueError('Party icon does not match its shared native palette group.')
-        for name in ['front.png', 'anim_front.png', 'back.png', 'icon.png', 'normal.pal', 'shiny.pal']:
-            path = destination + '/' + name; shutil.copy2(art / name, engine / path); changed.append(path)
+        names = install_creature_art(art, engine / destination, icon_palettes.get(mon['icon_palette']))
+        changed.extend(destination + '/' + name for name in names)
         edit('src/data/text/species_names.h', rf'\[{species}\] = _\("[^"]*"\)', f'[{species}] = _("{mon["name"]}")')
         path = 'src/data/pokemon/species_info.h'
         info = source.get(path, original(path))
