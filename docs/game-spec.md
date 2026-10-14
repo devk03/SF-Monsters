@@ -755,11 +755,11 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 8, 2026; historical checkpoint details follow):
+Current snapshot (October 13, 2026; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Deadline stop | Work stopped at the requested 6 PM San Francisco local cutoff on October 8, 2026 (2026-10-09T01:00Z). Goal pause requested; unfinished acceptance gates remain required. No further implementation, builds or deployments started. |
+| Execution | Resumed by the user on October 13, 2026. The October 8 cutoff is historical and does not reapply. Its reminder stays disabled. Full scope and acceptance gates remain required. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
@@ -769,7 +769,7 @@ Current snapshot (October 8, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work after explicit resume | v43 healing visual subset review requested; latest explicit clinic music score remains2/4. Improve the clinic soundtrack's composition/instruments/mix against a matched listening baseline, while preserving mechanics and tracking other first-slice art/interface gaps. v41 instrument A/B remains unreviewed. Actions stay manual-only. |
+| Next work | v43 healing visual subset review requested; latest explicit clinic music score remains2/4. Improve the clinic soundtrack's composition/instruments/mix against a matched listening baseline, while preserving mechanics and tracking other first-slice art/interface gaps. v41 instrument A/B remains unreviewed. Actions stay manual-only. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3903,3 +3903,27 @@ The goal is not complete. Required outstanding work includes:
 The complete section15 objective is preserved. Pause at the user's request;
 resume work only after the user resumes the goal. Final commit contains this
 honest deadline snapshot only; no database change or PR merge is involved.
+
+
+### 15.8 October 13 resume and independent alignment review
+
+The user explicitly resumed implementation and requested another thread to work
+with the main thread and keep it aligned with the goal. The goal is active again;
+the old October 8 deadline is historical, not a new daily stop condition. No
+replacement schedule or monitor is created. All section15 requirements remain.
+
+- Starting commit1b1a199; public v43/Site35. No content or quality score is
+  upgraded merely because execution resumed. Full domain approvals stay0/11;
+  latest explicit clinic music score stays2/4.
+- Created project thread “SF Monsters goal alignment review”, id
+  01a13900-5c2c-7973-bea7-389deda8a5ab, for one finite read-only audit. It will
+  check priorities and concrete first-slice gaps; main thread owns edits, builds,
+  commits and releases. Main may send authorized follow-up review requests.
+- Immediate candidate: a controlled clinic soundtrack revision, preserving the
+  existing cue, recovery behavior and supported saves. Ask for the largest music
+  gap, retain original comparisons, and evaluate native captures before release.
+  Independent review may identify a higher-impact first-slice blocker.
+- No campaign expansion before the section15.5B slice review. Do useful work on
+  unapproved gates while awaiting optional user feedback; never invent approval.
+- Continue coherent small commits and routine local checks. GitHub Actions stays
+  manual-only. No DB changes, PR merges or commercial ROM/media publication.
