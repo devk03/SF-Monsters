@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 21:06 UTC:
+Current checkpoint — October 14, 2026, 21:51 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v61 / Site 52 is live.
-  Native release source 6bde309; website source 0185c853. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v62 / Site 53 is live.
+  Native release source abab613; website source f75c4dbb. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -582,8 +582,11 @@ Current checkpoint — October 14, 2026, 21:06 UTC:
 - Original Naval intro figure is integrated and visible in native/browser play.
   Matched new-game/name flow and existing-save Continue preserve full save blocks.
   Only796 bytes inside the intro graphics/palette allocations change from v60.
-- Alignment exchange 21:03–21:05 UTC identified a safe original Naval field-sprite
-  slot/palette/cache plan. Next check by 21:30 UTC.
+- Original Naval field sprite now survives older-save Continue, ordinary Save and
+  reload. Native comparisons preserve all gameplay state; actual Chrome older-save
+  Continue shows the new figure without leaving the map. Human art approval pending.
+- Alignment independently verified four inert cached ROM-pointer relocations;
+  next first-slice priority review requested21:50UTC. Next check by22:20UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -805,8 +808,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.61-naval-intro-preview; target238d7bed7afa88c3db9204d8c921b8de83cabb31af4cb1637e709dfd03c31c96; Site52. Original Naval welcome figure, joined bench approach and integrated creature art. Human approvals remain0/11. |
-| Latest local source build | v61 normal source6bde309 reproduces tested target238d7bed. Two intro resources/three bindings and existing creature controls pass; all ROM bytes outside the two raw intro allocations stay exact. Native new-game/old-save blocks match v60. |
+| Public build | 0.0.62-naval-field-preview; target00da16f1e22d38710e7a353c5e03ff1f88878446d7cd8eb711759c591a08a30e; Site53. Original Naval intro/field figures, joined bench approach and integrated creature art. Human approvals remain0/11. |
+| Latest local source build | v62 normal sourceabab613 reproduces tested target00da16f1. Field cast36/36, intro5/5 and creature255 controls pass. Genuine C5 older-save Continue, ordinary Save C6/reload and actual Chrome older-cache Continue pass their scoped checks. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -6156,3 +6159,56 @@ v62 original Naval field sprite — October14,21:21UTC:
 - Existing cast authoring/resume tests pass. Full checks after the final compiled
   guard, v62 native build, compiled pointer normalization and actual native/browser
   old-cache/save/reload checks remain pending. Public staysv61/Site52; goal active.
+
+
+v62 / Site53 verified and published — October14,21:51UTC:
+
+- Draft and normal target00da16f1e22d38710e7a353c5e03ff1f88878446d7cd8eb711759c591a08a30e;
+  BPS960239bytes SHA4fe6c92523fa8fc549fe06e7b6035c9a70315789fc7e997747bd5bf29d2c8856.
+  Local full checks pass. Compiled cast36/36, intro5/5 and creature255 controls
+  pass before patch creation. All239 field graphics pointers normalize identically
+  except intended slot64; prior seven original cast figures/three palettes and
+  Garry's Gentleman48 resources remain byte-identical.
+- Genuine v61 ordinary FlashC5, Sunset18,18, caches Naval as48. Matched controller
+  coldContinue on v61/v62 changes exactly nine SaveBlock1 bytes: Naval template
+  graphics at0xd01 becomes64, plus two bytes each in four inert ROM pointers.
+  Exact symbol identities at0xde8/0xed8/0x1160/0x1268 are OldaleTown_MapWarps,
+  DewfordTown_MapWarps, FallarborTown_MapWarps, VerdanturfTown_ObjectEvents.
+  The unchanged inherited48-byte LoadSaveblockObjEventScripts copies64 records
+  even when the map contains8, so adjacent ROM event headers enter unused localId0
+  cache records15/25/52/63. Source and destination offsets were verified against
+  each ELF, not broadly ignored. No unrelated inherited-loop change was made.
+- Every other15752-byte SaveBlock1 byte, all3884 SaveBlock2 bytes,600 party bytes
+  and128KiB input Flash are exact. Of576 active object bytes, only Naval graphics
+  at0x71 changes. Position/facing/movement/flags and other NPC state stay exact.
+  Initial unclassified failure receipt is retained alongside final symbol-aware
+  legacy-cache-comparison.json; alignment independently confirmed provenance.
+- Actual native Save menu upgradesC5→C6; declared party/items/money/quests/badges/
+  location/settings remain unchanged, save counter/stat increment once, clock
+  advances. ColdC6 reload retains Naval64. Flash audit passes. This is scoped
+  compatibility, not another cross-platform round trip or campaign checkpoint.
+- Actual Chrome starts from a v62 title-state with unupgraded genuineC5 Flash and
+  cached Naval48, then normal controller X opens CONTINUE and enters Sunset. New
+  Naval appears without map exit. It is not a pre-upgraded field checkpoint.
+  No browser save/export was made. Own emulator/audio/tab/finite server stopped.
+  Screenshotnaval-v62-browser-legacy-continued.png; public player progress untouched.
+- Matched40.182s actual walking/conversation SF before/after clip:
+  naval-field-v62-before-after/comparison.mp4 SHA
+  3ec2b6da94ab4a2fb4786933fc7737b790c23f9f3d24abd7453041bd97ae3475.
+  Equal controller input and byte-identical PCM. This is not vanilla Emerald
+  reference footage; art/likeness/animation acceptance remains pending.
+- Website sourcef75c4dbb748a3806291760992df0f89adf78e987; saved Site53 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_1a5f9d19577081918d0f901f2b48d421;
+  deploymentappgdep_6acff8c281588191b44940f94e9eba67 succeeded21:48:59UTC.
+  Clean88-file archive SHAbed65395f4c8fc95e4a5ea0efdd420031e42fee2ce457ef3d1bf4add1e35c93d;
+  no commercial cartridge/private saves/AppleDouble. Browser BPS decoder matches
+  exact target. Initial live patch fetch differed during publication; subsequent
+  canonical revalidation and versioned URL both match. Final two-resource receipt
+  SHA936fb0cd13bd3fae0b4970e5c97c92134640335d10259ae9c581828ac975cbca.
+  Unchanged15-file runtime matches audited archive. Live loader screenshot
+  public-v62-loader-visible.png. Public audience/auth/storage unchanged.
+- No GitHub Actions, DB migration, redundant download or campaign expansion. Human
+  full-domain approvals remain0/11. October15,18:00 Pacific deadline stays active.
+  Alignment next-priority review requested21:50UTC, finite20minute read-only task.
+  Full campaign, first-slice comparison, music, performance/device and50distinct
+  save-checkpoint acceptance gates remain open.
