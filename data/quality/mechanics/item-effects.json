@@ -1,0 +1,1036 @@
+{
+  "scope": "Native effect function only, complete fixed object and declared resources; no bag action/turn/controller response/UI/save proof.",
+  "cases": [
+    {
+      "id": "potion-restores-twenty",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Potion heals50+20=70; outside battle no battle-RAM update.",
+      "expected": {
+        "return_value": 0,
+        "hp": 70,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "potion-clamps-max",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. HP100+20 clamps105.",
+      "hp": 100,
+      "expected": {
+        "return_value": 0,
+        "hp": 105,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 100,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "potion-full-no-effect",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. FullHP105 unchanged, return1.",
+      "hp": 105,
+      "expected": {
+        "return_value": 1,
+        "hp": 105,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 105,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "potion-fainted-no-effect",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Potion does not revive HP0.",
+      "hp": 0,
+      "expected": {
+        "return_value": 1,
+        "hp": 0,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 0,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "super-potion-restores-fifty",
+      "item": "ITEM_SUPER_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. SuperPotion heals10+50=60.",
+      "hp": 10,
+      "expected": {
+        "return_value": 0,
+        "hp": 60,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 10,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "max-potion-restores-all",
+      "item": "ITEM_MAX_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. MaxPotion heals1 to105.",
+      "hp": 1,
+      "expected": {
+        "return_value": 0,
+        "hp": 105,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 1,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "revive-halves-odd-max",
+      "item": "ITEM_REVIVE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Revive at0HP restores floor105/2=52.",
+      "hp": 0,
+      "expected": {
+        "return_value": 0,
+        "hp": 52,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 0,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "revive-living-no-effect",
+      "item": "ITEM_REVIVE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Revive cannot affect a living50HP object.",
+      "expected": {
+        "return_value": 1,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "max-revive-restores-all",
+      "item": "ITEM_MAX_REVIVE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. MaxRevive restores fainted0 to105.",
+      "hp": 0,
+      "expected": {
+        "return_value": 0,
+        "hp": 105,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 0,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "antidote-clears-poison",
+      "item": "ITEM_ANTIDOTE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Poison8 clears.",
+      "status": 8,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 8,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "antidote-clears-toxic-counter",
+      "item": "ITEM_ANTIDOTE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Toxic128+counter3*256=896 clears both poison and counter bits.",
+      "status": 896,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 896,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "antidote-does-not-cure-burn",
+      "item": "ITEM_ANTIDOTE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Burn16 is outside Antidote cure mask; return1.",
+      "status": 16,
+      "expected": {
+        "return_value": 1,
+        "hp": 50,
+        "status": 16,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 16,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "burn-heal-clears-burn",
+      "item": "ITEM_BURN_HEAL",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Burn16 clears.",
+      "status": 16,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 16,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "ice-heal-clears-freeze",
+      "item": "ITEM_ICE_HEAL",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Freeze32 clears.",
+      "status": 32,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 32,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "awakening-clears-sleep-duration",
+      "item": "ITEM_AWAKENING",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Sleep counter3 clears.",
+      "status": 3,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 3,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "paralyze-heal-clears-paralysis",
+      "item": "ITEM_PARALYZE_HEAL",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Paralysis64 clears.",
+      "status": 64,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 64,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "full-heal-clears-paralysis",
+      "item": "ITEM_FULL_HEAL",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. FullHeal clears Paralysis64.",
+      "status": 64,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 64,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "full-heal-healthy-no-effect",
+      "item": "ITEM_FULL_HEAL",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. No status, so FullHeal returns1 unchanged.",
+      "expected": {
+        "return_value": 1,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "full-restore-hp-and-status",
+      "item": "ITEM_FULL_RESTORE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. FullRestore simultaneously cures poison8 and heals50 to105.",
+      "status": 8,
+      "expected": {
+        "return_value": 0,
+        "hp": 105,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 8,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "ether-restores-ten-one-slot",
+      "item": "ITEM_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Pound35max at10PP restores10 to20; other slots unchanged.",
+      "pp": [
+        10,
+        30,
+        25,
+        25
+      ],
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          20,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          10,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "ether-clamps-one-slot",
+      "item": "ITEM_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Pound32+10 clamps35.",
+      "pp": [
+        32,
+        30,
+        25,
+        25
+      ],
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          32,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "ether-full-no-effect",
+      "item": "ITEM_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Selected Pound already35PP; return1.",
+      "expected": {
+        "return_value": 1,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "ether-honors-three-pp-ups",
+      "item": "ITEM_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Pound3PPups gives35+floor35*.6=56 max;50+10 clamps56; PPbonus3 preserved.",
+      "pp": [
+        50,
+        30,
+        25,
+        25
+      ],
+      "pp_bonus": 3,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          56,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          50,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "max-ether-restores-selected-third",
+      "item": "ITEM_MAX_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Selected slot2 WaterGun goes1 to25; other PP2/3/4 stay unchanged.",
+      "move_index": 2,
+      "pp": [
+        2,
+        3,
+        1,
+        4
+      ],
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          2,
+          3,
+          25,
+          4
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          2,
+          3,
+          1,
+          4
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "elixir-restores-all-with-clamps",
+      "item": "ITEM_ELIXIR",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Elixir adds10 each:1->11,22->30 clamp,25 stays25,0->10.",
+      "pp": [
+        1,
+        22,
+        25,
+        0
+      ],
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          11,
+          30,
+          25,
+          10
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          1,
+          22,
+          25,
+          0
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "max-elixir-restores-all",
+      "item": "ITEM_MAX_ELIXIR",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. MaxElixir brings PP1/22/25/0 to35/30/25/25.",
+      "pp": [
+        1,
+        22,
+        25,
+        0
+      ],
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          1,
+          22,
+          25,
+          0
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "elixir-full-no-effect",
+      "item": "ITEM_ELIXIR",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. All moves already full; return1.",
+      "expected": {
+        "return_value": 1,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-potion-direct-sync-and-query",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Battle Potion heals party object and battler50->70, increments healing count, queues GetMonData0/request0/partyMask0 without answering it.",
+      "in_battle": true,
+      "expected": {
+        "return_value": 0,
+        "hp": 70,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 70,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 1,
+        "controller_flags": 1,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-potion-healing-counter-saturates",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Battle Potion heals50->70 while healing counter255 stays255; query remains pending.",
+      "in_battle": true,
+      "healing_items": 255,
+      "expected": {
+        "return_value": 0,
+        "hp": 70,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 70,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 255,
+        "controller_flags": 1,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-potion-full-no-query",
+      "item": "ITEM_POTION",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. FullHP105 prevents healing/count increment/controller query.",
+      "in_battle": true,
+      "hp": 105,
+      "expected": {
+        "return_value": 1,
+        "hp": 105,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 105,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-antidote-syncs-toxic",
+      "item": "ITEM_ANTIDOTE",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Antidote clears toxic896 in object and matching battler; no controller request.",
+      "in_battle": true,
+      "status": 896,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-awakening-clears-nightmare",
+      "item": "ITEM_AWAKENING",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Awakening clears sleep3 in object and battler and clears battle Nightmare bit27.",
+      "in_battle": true,
+      "status": 3,
+      "battle_status2": 134217728,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          35,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-ether-syncs-permanent-move",
+      "item": "ITEM_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Permanent Pound PP10->20 updates object and battler; no query.",
+      "in_battle": true,
+      "pp": [
+        10,
+        30,
+        25,
+        25
+      ],
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          20,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 0,
+        "battle_pp": [
+          20,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    },
+    {
+      "id": "battle-ether-transformed-no-pp-sync",
+      "item": "ITEM_ETHER",
+      "derivation": "Fixed native Rattata19 level50 IV31 EV0 Hardy: HPmax105, stats76/55/92/45/55, EXP125000; all100 object bytes independently specified. No effect API returns1; effect returns0. Seed305419896 unchanged. Transformed status2 bit21 blocks battler PP sync: object10->20, battler stays10; permanent object moves stay unchanged.",
+      "in_battle": true,
+      "pp": [
+        10,
+        30,
+        25,
+        25
+      ],
+      "battle_status2": 2097152,
+      "expected": {
+        "return_value": 0,
+        "hp": 50,
+        "status": 0,
+        "pp": [
+          20,
+          30,
+          25,
+          25
+        ],
+        "battle_hp": 50,
+        "battle_status": 0,
+        "battle_status2": 2097152,
+        "battle_pp": [
+          10,
+          30,
+          25,
+          25
+        ],
+        "healing_items": 0,
+        "controller_flags": 0,
+        "rng": 305419896
+      }
+    }
+  ]
+}
