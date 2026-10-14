@@ -1,4 +1,4 @@
-"""Run explicit base-damage vectors on actual ROM functions, never campaign play."""
+"""Run explicit mechanics vectors on actual ROM functions, never campaign play."""
 import argparse
 import ast
 import hashlib
@@ -32,7 +32,7 @@ def digest(path):
 
 def constants(engine):
     definitions = {}
-    for header in ('battle', 'pokemon', 'moves', 'abilities', 'items'):
+    for header in ('battle', 'pokemon', 'moves', 'abilities', 'items', 'species'):
         text = subprocess.check_output(['git', 'show',
             f'{EMERALD_REVISION}:include/constants/{header}.h'], cwd=engine, text=True)
         for name, expression in re.findall(r'^#define\s+(\w+)\s+([^\n]+)', text, re.M):
@@ -64,7 +64,8 @@ def constants(engine):
 
 
 def symbols(elf, function=FUNCTION):
-    wanted, result = set(GLOBALS) | {function}, {}
+    functions = {function} if isinstance(function, str) else set(function)
+    wanted, result = set(GLOBALS) | functions, {}
     for line in subprocess.check_output(['arm-none-eabi-nm', '-S', '--defined-only', str(elf)], text=True).splitlines():
         match = re.fullmatch(r'([0-9a-f]+) ([0-9a-f]+) [A-Za-z] (\w+)', line)
         if match and match[3] in wanted:
@@ -192,7 +193,7 @@ def validate_cases(document):
     return cases
 
 
-def run_side(label, rom, elf, state, executable, cases, resolve, output, function=FUNCTION):
+def verify_bundle(label, rom, elf, state, output, functions):
     identity = digest(rom)
     cartridge = rom.read_bytes()
     if len(cartridge) != 16777216 or cartridge[0xac:0xb0] != b'BPEE':
@@ -205,13 +206,23 @@ def run_side(label, rom, elf, state, executable, cases, resolve, output, functio
         raise ValueError('Fixture state belongs to another ROM or core revision.')
     if label == 'reference' and identity != REFERENCE_HASH:
         raise ValueError('Use the fixed approved Emerald reference.')
-    syms = symbols(elf, function)
+    syms = symbols(elf, functions)
     linked = output / (label + '-linked.bin')
     subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', str(elf), str(linked)], check=True)
-    address, size = syms[function]
-    offset = address - 0x08000000
-    if offset < 0 or size < 1 or offset + size > rom.stat().st_size or rom.read_bytes()[offset:offset + size] != linked.read_bytes()[offset:offset + size]:
-        raise ValueError('Fixture function in ELF does not match the tested ROM.')
+    hashes = {}
+    binary = linked.read_bytes()
+    for function in functions:
+        address, size = syms[function]
+        offset = address - 0x08000000
+        if offset < 0 or size < 1 or offset + size > len(cartridge) or cartridge[offset:offset + size] != binary[offset:offset + size]:
+            raise ValueError('Fixture function in ELF does not match the tested ROM.')
+        hashes[function] = hashlib.sha256(cartridge[offset:offset + size]).hexdigest()
+    return {'rom_sha256': identity, 'elf_sha256': digest(elf), 'state_sha256': digest(state),
+            'function_sha256': hashes}, syms
+
+
+def run_side(label, rom, elf, state, executable, cases, resolve, output, function=FUNCTION):
+    identity, syms = verify_bundle(label, rom, elf, state, output, {function})
     sequences = [commands(case, syms, resolve, function) for case in cases]
     if len(set(sequences)) != len(sequences):
         raise ValueError('Duplicate effective native fixtures do not increase coverage.')
@@ -221,7 +232,7 @@ def run_side(label, rom, elf, state, executable, cases, resolve, output, functio
                             text=True, capture_output=True, timeout=60)
     (output / (label + '-stdout.txt')).write_text(result.stdout)
     (output / (label + '-stderr.txt')).write_text(result.stderr)
-    if result.returncode or digest(rom) != identity:
+    if result.returncode or digest(rom) != identity['rom_sha256']:
         raise ValueError('Native fixture process failed or changed its input ROM.')
     lines = result.stdout.splitlines()
     if len(lines) != len(cases) * 4:
@@ -238,9 +249,23 @@ def run_side(label, rom, elf, state, executable, cases, resolve, output, functio
                          'instructions': int(match[2]), 'rng_before': before, 'rng_after': after,
                          'rng_pass': before == case.get('rng_seed', before)
                              and after == case.get('expected_rng', before)})
-    return {'rom_sha256': identity, 'elf_sha256': digest(elf), 'state_sha256': digest(state),
-            'function_sha256': hashlib.sha256(rom.read_bytes()[offset:offset + size]).hexdigest(),
-            'cases': observed}
+    return {**identity, 'cases': observed}
+
+
+
+def build_driver():
+    core = verified_host_build()
+    if subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip() != REVISION:
+        raise ValueError('Pinned native core source revision changed.')
+    executable = ROOT / '.tools' / ('function-fixture-' + uuid.uuid4().hex)
+    frameworks = ['-framework', 'CoreFoundation'] if platform.system() == 'Darwin' else []
+    subprocess.run(['cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-D_GNU_SOURCE', '-DBUILD_STATIC',
+        '-I' + str(SOURCE / 'include'), '-I' + str(HOST_BUILD / 'include'),
+        str(ROOT / 'scripts/quality/function_fixture.c'), str(HOST_BUILD / 'libmgba.a'),
+        '-lm', '-lpthread', *frameworks, '-o', str(executable)], check=True)
+    return executable, {**core,
+        'fixture_driver_source_sha256': digest(ROOT / 'scripts/quality/function_fixture.c'),
+        'fixture_driver_binary_sha256': digest(executable)}
 
 
 def main():
@@ -255,22 +280,18 @@ def main():
     output = ROOT / '.tools/benchmarks' / args.name
     if output.exists():
         parser.error('Choose a new evidence name; prior results are preserved.')
-    core = verified_host_build()
-    if subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip() != REVISION:
-        parser.error('Pinned native core source revision changed.')
     document = json.loads(args.cases.read_text())
     cases = validate_cases(document)
     function = document.get('function', FUNCTION)
     output.mkdir(parents=True)
-    executable = ROOT / '.tools' / ('function-fixture-' + uuid.uuid4().hex)
-    frameworks = ['-framework', 'CoreFoundation'] if platform.system() == 'Darwin' else []
-    subprocess.run(['cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-D_GNU_SOURCE', '-DBUILD_STATIC',
-        '-I' + str(SOURCE / 'include'), '-I' + str(HOST_BUILD / 'include'),
-        str(ROOT / 'scripts/quality/function_fixture.c'), str(HOST_BUILD / 'libmgba.a'),
-        '-lm', '-lpthread', *frameworks, '-o', str(executable)], check=True)
+    executable, core = build_driver()
     resolve = constants(ROOT / '.tools/pokeemerald-host')
     evidence = {'kind': 'controlled native function fixtures; RAM/register setup; not controller/campaign evidence',
-                'function': function, 'core': core, 'cases_sha256': digest(args.cases), 'sides': {}}
+                'function': function, 'core': core, 'cases_sha256': digest(args.cases),
+                'runner_sha256': digest(Path(__file__)),
+                'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                'source_worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip()),
+                'sides': {}}
     for label in ('reference', 'candidate'):
         evidence['sides'][label] = run_side(label, getattr(args, label + '_rom'), getattr(args, label + '_elf'),
             getattr(args, label + '_state'), executable, cases, resolve, output, function)

@@ -775,13 +775,13 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
-| Latest local source build | v47, sourcecb71361. Normal build/BPS and local checks pass. Sunset1728-frame and South Park2008-frame native/WASM RGB/PCM/Flash match. Old newly blocked saved position relocates safely. |
+| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify98 named scenarios against the reference. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 58 independent native scenarios pass against Emerald/SF:24 base-damage and34 pairwise turn-order, including10 doubles. At least242 further broad scenarios and40 further doubles remain, plus uncovered type/stat/status/resource/action-resolution gates. Performance traces, save round trips/checkpoints and complete campaigns remain outstanding. |
-| Next work | Add original facade variety while preserving compact layout, per-edge actor visibility and supported saves. Alignment chat is preparing genuine Calvin/Scott introduction comparison. Obtain subset reviews while continuing independent slice/system work; no campaign expansion before slice approval. |
+| Remaining system gates | 98 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats;10 doubles. At least202 additional broad scenarios and40 additional doubles remain, plus type/status/accuracy/resource/full action resolution. Performance, save and full campaign gates stay outstanding. |
+| Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is completing the earned first-gym route. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4340,3 +4340,45 @@ Native turn-order checkpoint:
   mechanics-v48-base-after-turn-support under private benchmarks. Full approval
   remains0/11. Next: actual generated stats/natures/IV/EV boundaries, then full
   action/type/status/resource/capture behavior; at least242cases/40doubles remain.
+
+
+Native generated-stat checkpoint:
+
+-40 scenarios pass actual CreateMon/SetMonData/CalculateMonStats/GetNature on
+  reference andv48. Each checks seven HP/stat values, nature, level and unchanged
+  RNG. Covered all25 natures, IV/EV/level rounding boundaries, distinct IV fields,
+  fainted/damaged HP preservation, Shedinja exception and declared SF starter
+  stat mappings. Three intentional base-stat differences have explicit separate
+  reference/candidate vectors; formulas remain the same.
+- Refactored common driver identity/compilation for actual reuse. Reran all
+  catalogs afterward:24/24damage,34/34turn-order,40/40stats. Total98scenarios,
+ 10doubles, counted once each. Native input ROM hashes remain unchanged.
+- Driver/runner/data source hashes, binary hashes, source commit and dirty-state
+  provenance accompany final artifacts. Fixture-schema/ABI tests and full local
+  check.sh pass. Native stat fixtures do not establish natural RNG distributions,
+  actual EV award caps, evolution or campaign acquisition gates.
+- Catalog generated-stats.json and protocol docs/quality/mechanics-fixtures.md
+  are public source; complete ROMs/snapshots and results remain private under
+  mechanics-v48-stats-guarded-final and sibling shared-driver evidence directories.
+  Full human approval stays0/11. At least202more broad cases/40more doubles remain.
+
+
+Alignment check October14,01:43 Pacific /08:43UTC:
+
+- Alignment chat completed the historicalv45 Fire-starter first-gym route using
+  normal controls: Steven won, one Scott loss to a critical hit, normal recovery,
+  then Scott won. No stat edits or rollback. Earned Build Badge/stage4, exactly
+  one Reflect TM, money1900 and level11 CinderCoy25/31HP survive gym re-entry,
+  repeat dialogue and normal save/cold Continue. One viable preparation/recovery
+  route is established; three balanced strategies/campaigns are not established.
+- Main cold-loaded that actual earned battery onv48 in native and WASM:3752
+  frames each. Final RGB, complete PCM and Flash match; trainer flags, badge,
+  stage, money, party/moves/PP and one TM are preserved. This is save compatibility
+  evidence, not a replay of the historical battles onv48. Private evidence:
+  earned-alignment-v48-cold-native/compatibility-result.json and sibling-wasm.
+- Reviewer now tests a fresh Water-starterv48 route with an empty save and normal
+  controls only. Task is bounded to90minutes, ending by10:13UTC; report the actual
+  saved checkpoint/blocker if unfinished. Capture harness remains frozen during
+  that task. Main owns mechanics fixtures and source changes independently.
+- Next alignment check due by09:12UTC /02:12 Pacific. No new quality approval;
+  continue work through the explicit October15,6PM Pacific cutoff in15.1.

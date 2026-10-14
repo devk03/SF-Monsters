@@ -1,8 +1,8 @@
 # Native mechanics fixtures
 
-The catalogs contain **58 independently specified scenarios**, including
-**10 double-battle interactions**. All58 pass on the approved Emerald reference
-and SFv48:24 base-damage cases plus34 turn-order cases. This is partial evidence.
+The catalogs contain **98 independently specified scenarios**, including
+**10 double-battle interactions**. All98 pass on the approved Emerald reference
+and SFv48:24 base-damage,34 turn-order and40 generated-stat cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -99,3 +99,34 @@ Evidence: `mechanics-v48-turn-order-initial/result.json`. The24 damage cases
 were rerun after shared setup changes at `mechanics-v48-base-after-turn-support`.
 Pairwise turn comparison does not establish complete four-battler action sorting,
 switch/item priorities, move execution or battle outcome correctness.
+
+
+## Generated-stat catalog
+
+`generated-stats.json` supplies40 scenarios for the actual native CreateMon,
+SetMonData, CalculateMonStats and GetNature routines. Run
+`scripts/quality/stat_fixtures.py` with the same six ROM/ELF/state arguments and
+a new evidence name. Each scenario checks current/max HP, all five other stats,
+level, nature and unchanged RNG; it counts once, not once per checked field.
+
+Coverage includes all25 natures, IV0/31 and independent IV fields, level1/100,
+EV3/4 and252/255 rounding, fainted/damaged HP when maximum HP changes, and
+Shedinja's one-HP exception. Explicit expected vectors come from integer stat
+equations and pinned base-stat inputs, never observed results. SF's three starter
+base-stat changes are declared intentional content differences: each side has
+its own explicit expected vector while using the same arithmetic rules. Read
+reference bases from pinned Git, because the working engine tables contain SF
+overlays.
+
+The constructor uses fixed IV/personality and preset OT ID in scratch RAM.
+Getter/recalculation calls operate on that private object; no player party or
+save is changed. This does not test natural RNG distributions, actual EV award
+caps or item/growth/evolution acquisition behavior. Per-file source fingerprints,
+ELF/function bytes, snapshot/core identities, driver binary and source-commit
+provenance accompany the records.
+
+Final shared-driver verification: mechanics-v48-base-shared-final24/24,
+mechanics-v48-turn-shared-final34/34 and mechanics-v48-stats-guarded-final40/40.
+All98 scenarios pass on both ROMs;10 exercise doubles. The300-case/50-doubles
+gate, full state resolution, type chart, accuracy/status, capture/resource and
+campaign/performance/save gates remain incomplete.

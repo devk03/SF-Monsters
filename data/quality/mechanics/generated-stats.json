@@ -1,0 +1,659 @@
+{
+  "scope": "Native CreateMon, SetMonData, CalculateMonStats and GetNature on scratch Pokemon data. One scenario includes the seven HP/stat values, level, nature and unchanged RNG. Not campaign generation or EV-acquisition limits.",
+  "oracle": "Explicit vectors independently authored from integer GenIII stat equations and pinned base-stat inputs. Native observed values are not used to generate expectations.",
+  "base_stat_source": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881:src/data/pokemon/species_info.h; SF differences explicitly declared per case.",
+  "vector_order": [
+    "current_hp",
+    "max_hp",
+    "attack",
+    "defense",
+    "speed",
+    "sp_attack",
+    "sp_defense"
+  ],
+  "cases": [
+    {
+      "id": "nature-hardy",
+      "nature": 0,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-lonely",
+      "nature": 1,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        75,
+        62,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-brave",
+      "nature": 2,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        75,
+        69,
+        58,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-adamant",
+      "nature": 3,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        75,
+        69,
+        65,
+        76,
+        85
+      ]
+    },
+    {
+      "id": "nature-naughty",
+      "nature": 4,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        75,
+        69,
+        65,
+        85,
+        76
+      ]
+    },
+    {
+      "id": "nature-bold",
+      "nature": 5,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        62,
+        75,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-docile",
+      "nature": 6,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-relaxed",
+      "nature": 7,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        75,
+        58,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-impish",
+      "nature": 8,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        75,
+        65,
+        76,
+        85
+      ]
+    },
+    {
+      "id": "nature-lax",
+      "nature": 9,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        75,
+        65,
+        85,
+        76
+      ]
+    },
+    {
+      "id": "nature-timid",
+      "nature": 10,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        62,
+        69,
+        71,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-hasty",
+      "nature": 11,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        62,
+        71,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-serious",
+      "nature": 12,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-jolly",
+      "nature": 13,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        71,
+        76,
+        85
+      ]
+    },
+    {
+      "id": "nature-naive",
+      "nature": 14,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        71,
+        85,
+        76
+      ]
+    },
+    {
+      "id": "nature-modest",
+      "nature": 15,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        62,
+        69,
+        65,
+        93,
+        85
+      ]
+    },
+    {
+      "id": "nature-mild",
+      "nature": 16,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        62,
+        65,
+        93,
+        85
+      ]
+    },
+    {
+      "id": "nature-quiet",
+      "nature": 17,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        58,
+        93,
+        85
+      ]
+    },
+    {
+      "id": "nature-bashful",
+      "nature": 18,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "nature-rash",
+      "nature": 19,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        93,
+        76
+      ]
+    },
+    {
+      "id": "nature-calm",
+      "nature": 20,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        62,
+        69,
+        65,
+        85,
+        93
+      ]
+    },
+    {
+      "id": "nature-gentle",
+      "nature": 21,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        62,
+        65,
+        85,
+        93
+      ]
+    },
+    {
+      "id": "nature-sassy",
+      "nature": 22,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        58,
+        85,
+        93
+      ]
+    },
+    {
+      "id": "nature-careful",
+      "nature": 23,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        76,
+        93
+      ]
+    },
+    {
+      "id": "nature-quirky",
+      "nature": 24,
+      "derivation": "Neutral base vector HP45/Atk49/Def49/Speed45/SpAtk65/SpDef65, fixed IV31, level50; nature row/column applies integer110%/90% to its designated stats; HP unchanged.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "zero-ivs-level50",
+      "iv": 0,
+      "derivation": "Zero-IV lower boundary: HP105,54/54/50/70/70 other stats at neutral level50.",
+      "expected": [
+        105,
+        105,
+        54,
+        54,
+        50,
+        70,
+        70
+      ]
+    },
+    {
+      "id": "minimum-level-zero-ivs",
+      "level": 1,
+      "iv": 0,
+      "derivation": "Level1 truncation gives HP11 and5/5/5/6/6 stats.",
+      "expected": [
+        11,
+        11,
+        5,
+        5,
+        5,
+        6,
+        6
+      ]
+    },
+    {
+      "id": "maximum-level-full-ivs",
+      "level": 100,
+      "derivation": "At level100 the integer level factor is1; HP231,134/134/126/166/166.",
+      "expected": [
+        231,
+        231,
+        134,
+        134,
+        126,
+        166,
+        166
+      ]
+    },
+    {
+      "id": "attack-ev-three-no-point",
+      "evs": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivation": "floor(EV3/4)=0, so neutral Attack remains69.",
+      "expected": [
+        120,
+        120,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "attack-ev-four-first-point",
+      "evs": [
+        0,
+        4,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivation": "floor(EV4/4)=1; at this level/stat rounding Attack increases69 to70.",
+      "expected": [
+        120,
+        120,
+        70,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "attack-ev252",
+      "evs": [
+        0,
+        252,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivation": "EV252 contributes63 to the pre-level term; floor((98+31+63)/2)+5=101 Attack.",
+      "expected": [
+        120,
+        120,
+        101,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "attack-ev255-same-quotient",
+      "evs": [
+        0,
+        255,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivation": "EV255 also contributes63 after division by4; Attack remains101.",
+      "expected": [
+        120,
+        120,
+        101,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "individual-iv-fields",
+      "ivs": [
+        31,
+        0,
+        31,
+        31,
+        31,
+        0
+      ],
+      "derivation": "Independent Attack/SpDef IV0 fields reduce only Attack to54 and SpDef to70.",
+      "expected": [
+        120,
+        120,
+        54,
+        69,
+        65,
+        85,
+        70
+      ]
+    },
+    {
+      "id": "fainted-hp-stays-zero-on-recalculation",
+      "current_hp": 0,
+      "evs": [
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivation": "HP EV4 grows max120 to121, while an already fainted mon remains at currentHP0.",
+      "expected": [
+        0,
+        121,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "damaged-hp-adjusts-with-max-delta",
+      "current_hp": 10,
+      "evs": [
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivation": "MaxHP120 to121 adds one to currentHP10, producing11.",
+      "expected": [
+        11,
+        121,
+        69,
+        69,
+        65,
+        85,
+        85
+      ]
+    },
+    {
+      "id": "shedinja-one-hp-exception",
+      "species": "SPECIES_SHEDINJA",
+      "derivation": "Shedinja max/currentHP remain1 regardless of the ordinary HP formula; other five stats use its declared bases.",
+      "expected": [
+        1,
+        1,
+        110,
+        65,
+        60,
+        50,
+        50
+      ]
+    },
+    {
+      "id": "shedinja-fainted-preserved",
+      "species": "SPECIES_SHEDINJA",
+      "current_hp": 0,
+      "derivation": "Recalculation preserves fainted Shedinja currentHP0 and maxHP1.",
+      "expected": [
+        0,
+        1,
+        110,
+        65,
+        60,
+        50,
+        50
+      ]
+    },
+    {
+      "id": "cindercoy-mapped-base-stats",
+      "species": "SPECIES_TORCHIC",
+      "derivation": "Use each side's declared base stats in HP=floor((2B+31)*50/100)+60; other stats=floor((2B+31)*50/100)+5, neutral nature.",
+      "intentional_content_difference": "CINDERCOY intentionally replaces this native species with the base stats declared in romhack/content/monsters.json; arithmetic rules must agree.",
+      "reference_expected": [
+        120,
+        120,
+        80,
+        60,
+        65,
+        90,
+        70
+      ],
+      "candidate_expected": [
+        123,
+        123,
+        75,
+        62,
+        84,
+        81,
+        65
+      ]
+    },
+    {
+      "id": "brinepup-mapped-base-stats",
+      "species": "SPECIES_MUDKIP",
+      "derivation": "Use each side's declared base stats in HP=floor((2B+31)*50/100)+60; other stats=floor((2B+31)*50/100)+5, neutral nature.",
+      "intentional_content_difference": "BRINEPUP intentionally replaces this native species with the base stats declared in romhack/content/monsters.json; arithmetic rules must agree.",
+      "reference_expected": [
+        125,
+        125,
+        90,
+        70,
+        60,
+        70,
+        70
+      ],
+      "candidate_expected": [
+        130,
+        130,
+        68,
+        78,
+        61,
+        76,
+        77
+      ]
+    },
+    {
+      "id": "sproutslug-mapped-base-stats",
+      "species": "SPECIES_TREECKO",
+      "derivation": "Use each side's declared base stats in HP=floor((2B+31)*50/100)+60; other stats=floor((2B+31)*50/100)+5, neutral nature.",
+      "intentional_content_difference": "SPROUTSLUG intentionally replaces this native species with the base stats declared in romhack/content/monsters.json; arithmetic rules must agree.",
+      "reference_expected": [
+        115,
+        115,
+        65,
+        55,
+        90,
+        85,
+        75
+      ],
+      "candidate_expected": [
+        128,
+        128,
+        63,
+        77,
+        63,
+        76,
+        83
+      ]
+    }
+  ]
+}
