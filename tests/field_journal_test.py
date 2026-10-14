@@ -12,7 +12,8 @@ work = Path(tempfile.mkdtemp(prefix='case-', dir=parent))
 (work / 'constants').mkdir()
 (work / 'constants/vars.h').write_text(
     '#define VAR_UNUSED_0x40F7 0x40f7\n#define VAR_UNUSED_0x40DB 0x40db\n')
-subprocess.run(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror',
-                '-fsanitize=address,undefined', '-I' + str(work),
-                str(root / 'tests/field_journal_test.c'), '-o', str(work / 'test')], check=True)
-subprocess.run([str(work / 'test')], check=True)
+for name in ('field_journal_test', 'field_map_test'):
+    subprocess.run(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror',
+                    '-fsanitize=address,undefined', '-I' + str(work),
+                    str(root / 'tests' / (name + '.c')), '-o', str(work / name)], check=True)
+    subprocess.run([str(work / name)], check=True)

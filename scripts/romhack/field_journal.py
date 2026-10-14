@@ -26,4 +26,20 @@ def apply_field_journal(root, engine, original):
         source = source.replace(before, after, 1)
     (engine / path).write_text(source)
     shutil.copyfile(root / 'romhack/engine/field_journal.h', engine / 'src/sf_field_journal.h')
-    return [path]
+    map_path = 'src/field_region_map.c'
+    source = original(map_path)
+    edits = [
+        ('void FieldInitRegionMap(MainCallback callback)',
+         '#include "sf_field_map.h"\n\nvoid FieldInitRegionMap(MainCallback callback)'),
+        ('GetStringCenterAlignXOffset(FONT_NORMAL, gText_Hoenn, 0x38)',
+         'GetStringCenterAlignXOffset(FONT_NORMAL, SFFieldMapTitle(), 0x38)'),
+        ('AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, gText_Hoenn, offset, 1, 0, NULL)',
+         'AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, SFFieldMapTitle(), offset, 1, 0, NULL)')
+    ]
+    for before, after in edits:
+        if source.count(before) != 1:
+            raise ValueError('Pinned journal field-map anchor changed: ' + before)
+        source = source.replace(before, after, 1)
+    (engine / map_path).write_text(source)
+    shutil.copyfile(root / 'romhack/engine/field_map.h', engine / 'src/sf_field_map.h')
+    return [path, map_path]

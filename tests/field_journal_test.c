@@ -33,7 +33,10 @@ typedef uint8_t bool8;
 #define COPYWIN_FULL 3
 #define SE_SELECT 5
 #define B_BUTTON 2
+#define SELECT_BUTTON 4
 #define START_BUTTON 8
+#define FADE_TO_BLACK 1
+#define FADE_FROM_BLACK 2
 #define JOY_NEW(keys) (buttons & (keys))
 #define PIXEL_FILL(n) ((n) | ((n) << 4))
 struct WindowTemplate {u8 bg,tilemapLeft,tilemapTop,width,height,paletteNum;u16 baseBlock;};
@@ -46,12 +49,15 @@ static struct SaveBlock save, *gSaveBlock1Ptr = &save;
 static u16 buttons;
 static u8 allocation = 3;
 static int removed, unfreezes, unlocks, menuRestores, draws;
+static int mapAttempts, cleanups, extraCleanups, lastFade, journalClears;
+static bool8 mapCanOpen = TRUE;
+static struct {bool8 active;} gPaletteFade;
 static const u8 *drawnObjective;
 static bool8 (*gMenuCallback)(void);
 static u16 VarGet(u16 id) {return save.vars[id - 0x4000];}
 static bool8 FlagGet(u16 id) {return save.flags[id];}
 static void PlaySE(int id) {assert(id == SE_SELECT);}
-static void ClearStdWindowAndFrameToTransparent(u8 id, bool8 copy) {(void)id;(void)copy;}
+static void ClearStdWindowAndFrameToTransparent(u8 id, bool8 copy) {if(id==3 && copy) journalClears++;}
 static void RemoveWindow(u8 id) {assert(id == 3);removed++;}
 static void ScriptUnfreezeObjectEvents(void) {unfreezes++;}
 static void UnlockPlayerFieldControls(void) {unlocks++;}
@@ -74,6 +80,17 @@ static void FillWindowPixelRect(u8 id,int fill,int x,int y,int w,int h) {
     assert(id==3 && fill>=0 && x>=0 && y>=0 && x+w<=208 && y+h<=136);
 }
 static void CopyWindowToVram(u8 id,int mode) {assert(id==3 && mode==COPYWIN_FULL);}
+static void CB2_ReturnToFieldWithOpenMenu(void) {menuRestores++;}
+bool8 SFTryOpenFieldMap(void (*callback)(void)) {
+    assert(callback==CB2_ReturnToFieldWithOpenMenu);
+    // Allocation/ownership transfer must be attempted before freeing the journal.
+    assert(removed==1);
+    mapAttempts++;
+    return mapCanOpen;
+}
+static void FadeScreen(int mode,int delay) {assert(!delay);lastFade=mode;gPaletteFade.active=TRUE;}
+static void RemoveExtraStartMenuWindows(void) {extraCleanups++;}
+static void CleanupOverworldWindowsAndTilemaps(void) {assert(removed==2);cleanups++;}
 #include "../romhack/engine/field_journal.h"
 
 int main(void) {
@@ -126,5 +143,37 @@ int main(void) {
     allocation=WINDOW_NONE;removed=unfreezes=unlocks=0;
     assert(StartMenuSFJournalCallback()==FALSE && gMenuCallback==HandleStartMenuInput);
     assert(removed==0 && unfreezes==0 && unlocks==0);
+    {
+        struct SaveBlock before=save;
+        allocation=3;buttons=SELECT_BUTTON;
+        removed=unfreezes=unlocks=mapAttempts=cleanups=extraCleanups=journalClears=0;
+        assert(StartMenuSFJournalCallback()==FALSE);
+        // SELECT is available only once the short staged drawing has completed.
+        for (i=0;i<8;i++) assert(gMenuCallback()==FALSE);
+        assert(mapAttempts==0 && !gPaletteFade.active);
+        assert(SFJournalInput()==FALSE && lastFade==FADE_TO_BLACK);
+        buttons=B_BUTTON|START_BUTTON;
+        assert(gMenuCallback()==FALSE && mapAttempts==0 && removed==1);
+        gPaletteFade.active=FALSE;mapCanOpen=FALSE;
+        assert(gMenuCallback()==FALSE && mapAttempts==1 && lastFade==FADE_FROM_BLACK);
+        assert(removed==1 && cleanups==0 && sSFJournalWindowId==3);
+        // Input during recovery cannot close a window while its palette is fading.
+        assert(SFJournalInput()==FALSE && unfreezes==0 && unlocks==0);
+        gPaletteFade.active=FALSE;buttons=SELECT_BUTTON;
+        assert(SFJournalInput()==FALSE);
+        gPaletteFade.active=FALSE;mapCanOpen=TRUE;
+        assert(gMenuCallback()==TRUE && mapAttempts==2);
+        assert(removed==2 && cleanups==1 && extraCleanups==1);
+        assert(journalClears==0); // No window-copy work queued after the map owns VBlank.
+        assert(sSFJournalWindowId==WINDOW_NONE && unfreezes==0 && unlocks==0);
+        assert(memcmp(&before,&save,sizeof(save))==0);
+    }
+    // START takes precedence over simultaneous SELECT and closes directly to field.
+    buttons=0;removed=unfreezes=unlocks=0;
+    assert(StartMenuSFJournalCallback()==FALSE);
+    for (i=0;i<8;i++) assert(gMenuCallback()==FALSE);
+    buttons=START_BUTTON|SELECT_BUTTON;
+    assert(SFJournalInput()==TRUE && unfreezes==1 && unlocks==1 && mapAttempts==2);
     puts("Journal: eight chapter leads, badge precedence, read-only state, B/Start cleanup and allocation failure passed.");
+    puts("Journal map: staged SELECT, fade ownership, allocation recovery, native menu return callback and read-only state passed.");
 }

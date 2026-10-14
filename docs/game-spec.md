@@ -6469,3 +6469,39 @@ Original Garry candidate and city-map access collaboration — October14,22:32UT
   JOURNAL SELECT→native SF MAP preserves eight menu rows/Save position and save
   schema; short SF MAP title must fit native seven-tile window. Source/acceptance
   pending. Next alignment exchange by22:59UTC; user stop October15,18:00 Pacific.
+
+
+v65 journal map handoff and first native checks — October14,22:40UTC:
+
+- Alignment delivered/froze six owned files22:34:55UTC, within its30minute task.
+  Root reviewed production/native return lifecycle and reran both sanitizer
+  binaries. SELECT fades from JOURNAL into the existing native field map; A/B
+  returns to Start menu with JOURNAL selected. Existing B→menu/Start→field behavior
+  remains. Allocation failure retains journal ownership and fades it back in;
+  no queued journal DMA follows native VBlank handoff. No flags/items/schema change.
+- Short SF MAP title stays within the native seven-tile title window; non-SF
+  scaffolding keeps its original title. Existing native display/cursor/close loop
+  is reused. Root's full local checks pass after reviewing one expected whole-plan
+  snapshot: the sole source-world JSON change is Garry's symbolic alias, which
+  still expands to numeric48; map rows/events/coordinates/flags otherwise exact.
+- Combined draft0.0.65-city-map-and-garry-preview target
+  0b5d830eed40015d3f782f6bfa420732cd110013b210754a4d5f10ce7c986fff builds.
+  Compiled cast40/40, map17/17, intro5/5 and creature255 controls pass. Native map
+  opens from both Park older-save JOURNAL and fresh no-starter Sunset JOURNAL;
+  SF MAP/section labels fit. Actual B returns eight-row menu with SAVE unchanged;
+  another B and Left moves33,23→32,23. Screenshotscity-map-v65-park/newgame/back-menu.
+- Genuine v64 ordinaryC5 Save beside Garry atPark33,23 has SHA
+  b56489a2a318fab7d345c66707100072bc5c95b04c66696780ee2e54cfcc499a.
+  ColdContinue displays original Garry without leaving the map. Cached graphics
+  stays48→48. All3884 SaveBlock2,600 party and576 active-object bytes match v64.
+- Exactly14 SaveBlock1 bytes differ, solely13 script-pointer words: three actual
+  SF NPC scripts and ten unused records from the unchanged inherited64-record
+  copy loop over the current three-NPC Oldale array. EACH pointer is verified
+  against this ROM's exact copy-source offset and same named target in both ELFs;
+  no Sunset exceptions reused. All remaining SaveBlock1 bytes exact. Copy-function
+  bytes match. Raw unclassified receipt retained; symbol-aware proof SHA
+  9ee613c9ea62edcd42f2d5edc1423534fe6b903475087f5463fb24091a047887.
+- Native/browser dialog/clinic/ordinarySave, footer/read-only map workflow and
+  final release acceptance remain pending. Public staysv64/Site55; human0/11.
+  Latest alignment handoff acknowledged22:36UTC; next check by23:05UTC. Root owns
+  all further edits/builds/publication; peer task stopped. No GitHub Actions.

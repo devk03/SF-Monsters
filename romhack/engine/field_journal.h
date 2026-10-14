@@ -9,7 +9,7 @@ EWRAM_DATA static u8 sSFJournalDrawStep = 0;
 static const u8 sSFJournalLabel[] = _("JOURNAL");
 static const u8 sSFJournalTitle[] = _("FIELD JOURNAL");
 static const u8 sSFJournalNext[] = _("NEXT OBJECTIVE");
-static const u8 sSFJournalHelp[] = _("B: MENU         START: CLOSE");
+static const u8 sSFJournalHelp[] = _("SELECT: MAP  B: MENU  START: FIELD");
 static const u8 sSFJournalSunset[] = _("OUTER SUNSET");
 static const u8 sSFJournalApartment[] = _("YOUR APARTMENT / SUNSET");
 static const u8 sSFJournalPark[] = _("SOUTH PARK / SOMA");
@@ -89,15 +89,51 @@ static const u8 *SFJournalDirections(u8 line)
     return sSFJournalObjectives[sSFJournalStage].directions[line];
 }
 
+bool8 SFTryOpenFieldMap(void (*callback)(void));
+static bool8 SFJournalInput(void);
+
+static void SFJournalRemoveWindow(bool8 clear)
+{
+    if (clear)
+        ClearStdWindowAndFrameToTransparent(sSFJournalWindowId, TRUE);
+    RemoveWindow(sSFJournalWindowId);
+    sSFJournalWindowId = WINDOW_NONE;
+}
+
+static bool8 SFJournalOpenMapAfterFade(void)
+{
+    if (gPaletteFade.active)
+        return FALSE;
+    // On failure the journal still owns its window; restore it without unlocking.
+    if (!SFTryOpenFieldMap(CB2_ReturnToFieldWithOpenMenu))
+    {
+        FadeScreen(FADE_FROM_BLACK, 0);
+        gMenuCallback = SFJournalInput;
+        return FALSE;
+    }
+    // Already black: do not queue window DMA after the map disables VBlank.
+    SFJournalRemoveWindow(FALSE);
+    RemoveExtraStartMenuWindows();
+    CleanupOverworldWindowsAndTilemaps();
+    return TRUE; // Native Start-menu task is destroyed; the field map owns main.
+}
+
 static bool8 SFJournalInput(void)
 {
     bool8 close = JOY_NEW(START_BUTTON);
+    if (gPaletteFade.active)
+        return FALSE;
+    if (!close && !JOY_NEW(B_BUTTON) && JOY_NEW(SELECT_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        FadeScreen(FADE_TO_BLACK, 0);
+        gMenuCallback = SFJournalOpenMapAfterFade;
+        return FALSE;
+    }
     if (!close && !JOY_NEW(B_BUTTON))
         return FALSE;
     PlaySE(SE_SELECT);
-    ClearStdWindowAndFrameToTransparent(sSFJournalWindowId, TRUE);
-    RemoveWindow(sSFJournalWindowId);
-    sSFJournalWindowId = WINDOW_NONE;
+    SFJournalRemoveWindow(TRUE);
     if (close)
     {
         ScriptUnfreezeObjectEvents();

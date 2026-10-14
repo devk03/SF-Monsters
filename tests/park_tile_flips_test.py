@@ -49,7 +49,7 @@ class NativeTileFlips(unittest.TestCase):
         # Entire map outside the frontage gap, including the v60 bench landing.
         self.assertEqual(hashlib.sha256(json.dumps(restored, sort_keys=True,
                          separators=(',', ':')).encode()).hexdigest(),
-                         'b4027f918bc51e157320d4299be56160ad3467d76e01195960df793aceee5b3d')
+                         '89f6d3d31744419676f6bd2126b3d10290fb5ac2926c14a1fc54bb38295e00f1')
         self.assertNotEqual(plan['rows'][5][25], 'P')  # Abuts butter facade.
         self.assertNotEqual(plan['rows'][5][29], 'P')  # Abuts clinic facade.
         for x in range(26, 29):
