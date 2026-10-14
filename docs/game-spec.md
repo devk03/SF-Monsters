@@ -4071,3 +4071,31 @@ Scott portrait draft compilation checkpoint:
 - Compiled slot/table/decompression/trainer-record audit is running in the
   alignment thread. Actual trainer encounter and older-save/victory/re-entry
   replays are still required. Public remainsv44/Site36.
+
+
+### 15.9 October 14 priority update and new stop deadline
+
+- The latest explicit stop is October 15, 2026 at 6 PM America/Los_Angeles
+  (October 16 at 01:00 UTC). This supersedes the no-cutoff instruction above.
+  Reused the paused deadline automation as a single fixed-date invocation; it
+  must disable itself on firing. No recurring monitor or GitHub workflow.
+- User reports courier hidden beneath Sunset rowhouses and buildings spaced
+  too far apart. Reproduce the bottom-facade overlap, correct draw priority,
+  then tighten the residential frontage while keeping entrances accessible.
+- v45 Scott portrait normal release is locally built: target b4846cfe0b614b8d
+  278b91cb4ad50b4076493ced0c732e5ff4bf9986c35c977b; patch874488 bytes.
+  Same2048-frame introduction input produces identical native/WASM RGB, PCM
+  and Flash. Portrait is visible in the actual encounter at frame1400.
+  Existing prebadge and earned-badge battery saves cold-resume; repeat dialogue
+  preserves money/bag bytes and earned flags. No new victory is claimed.
+- An old long trainer input replay blacked out; retained as a failed controller
+  diagnostic. A subsequent normal Steven retry is unfinished. This does not
+  establish balance or a completed first-gym route. Public staysv44/Site36 while
+  the user-reported facade issue takes priority; v45 is not published.
+- Alignment thread completed genuine controller-only Emerald progression to
+  Calvin: rival, healing, Dex/Balls gate, Route102. Verified pre-encounter
+  snapshot and34.29s intro/deployment clip support a fair presentation subset
+  comparison. Commercial reference media remain private. It independently
+  identified bottom-facade foreground priority as a plausible overlap cause.
+- Human domain approvals remain0/11; music's latest explicit subset score2/4.
+  The full campaign, mechanics, art, audio, performance and release gates remain.
