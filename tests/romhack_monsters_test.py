@@ -11,7 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
-from monsters import check_monster, check_catalog, png_palette, check_progression, apply_progression, install_creature_art
+from monsters import check_monster, check_catalog, png_palette, check_progression, apply_progression, install_creature_art, apply_enemy_elevation
 
 
 class MonsterContracts(unittest.TestCase):
@@ -65,12 +65,22 @@ class MonsterContracts(unittest.TestCase):
                    {'learnset': [[6, 'MOVE_EMBER'], [5, 'MOVE_SCRATCH']]},
                    {'learnset': [[101, 'MOVE_EMBER']]}, {'species': 'unsafe slot'},
                    {'icon_palette': 6}, {'migration_move': [1, 'MOVE_SURF']}]
+        changes.extend({'enemy_elevation': value} for value in [None, True, -1, 33, 1.5])
         changes.append({'coordinates': {'front': [72, 56, 4], 'back': [56, 56, 4]}})
         changes.extend([{'evolutions': [{'level': 101, 'species': 'SPECIES_COMBUSKEN'}]},
                         {'evolutions': [{'level': 16, 'species': self.mon['species']}]}])
         for fields in changes:
             with self.subTest(fields=fields), self.assertRaises(ValueError):
                 check_monster({**deepcopy(self.mon), **fields})
+
+    def test_grounded_replacement_preserves_other_species_flight(self):
+        header = 'const u8 gEnemyMonElevation[NUM_SPECIES] =\n{\n    [SPECIES_MAGNEMITE] = 16,\n    [SPECIES_WINGULL] = 16,\n};\n'
+        grounded = apply_enemy_elevation(header, 'SPECIES_MAGNEMITE', 0)
+        self.assertEqual(grounded, header.replace('[SPECIES_MAGNEMITE] = 16', '[SPECIES_MAGNEMITE] = 0'))
+        inserted = apply_enemy_elevation(grounded, 'SPECIES_TREECKO', 0)
+        self.assertEqual(inserted.count('[SPECIES_TREECKO] = 0,'), 1)
+        self.assertEqual(apply_enemy_elevation(inserted, 'SPECIES_TREECKO', 0), inserted)
+        self.assertIn('[SPECIES_WINGULL] = 16,', inserted)
 
     def test_authored_evolution_targets_thresholds_and_cycles(self):
         line = []

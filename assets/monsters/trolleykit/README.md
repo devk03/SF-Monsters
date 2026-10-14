@@ -24,3 +24,8 @@ No commercial creature artwork or recorded cry was used as source material.
 Original asset licensing follows repository CC BY 4.0 terms, to the extent licensable.
 Pixel cleanup, native battle/party review and user art/audio approval remain pending.
 Generation and format compliance do not establish Emerald-tier visual quality.
+
+Battle placement is explicitly grounded (`enemy_elevation: 0`). Its stable
+Magnemite slot must not retain the inherited 16-pixel lift and airborne shadow.
+PierPeep retains its separately authored flight offset; placement does not alter
+abilities, species identities or saved progression.

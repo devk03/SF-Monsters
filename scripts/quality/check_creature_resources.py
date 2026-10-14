@@ -75,7 +75,7 @@ class Cartridge:
                 if name_index >= len(names) or end < 0:
                     raise ValueError('Invalid ELF symbol name')
                 name = names[name_index:end].decode('ascii')
-                if not name.startswith(('gMon', 'Cry_')):
+                if not name.startswith(('gMon', 'Cry_')) and name != 'gEnemyMonElevation':
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')
@@ -194,6 +194,8 @@ def audit(rom, elf, root, species_header):
                       lambda: cart.data(table)[species * stride:species * stride + 4])
             check('icon_selector', mon['species'], bytes([mon['icon_palette']]),
                   lambda: cart.data('gMonIconPaletteIndices')[species:species + 1])
+            check('enemy_elevation', mon['species'], bytes([mon['enemy_elevation']]),
+                  lambda: cart.data('gEnemyMonElevation')[species:species + 1])
         for group, reference in catalog['icon_palettes'].items():
             path = root / reference; source(path)
             check('shared_palette', group, palette_bytes(path),

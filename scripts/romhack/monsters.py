@@ -71,6 +71,8 @@ def check_monster(mon):
     if [level, move] not in mon['learnset']: raise ValueError('Migration move must be earned in the learnset.')
     if any(type(mon[key]) is not int or not 1 <= mon[key] <= 65535 for key in ['height', 'weight']): raise ValueError('Invalid field-guide size.')
     if not 3 <= mon['icon_palette'] <= 5: raise ValueError('Original icons use reserved palette groups 3–5.')
+    if type(mon.get('enemy_elevation')) is not int or not 0 <= mon['enemy_elevation'] <= 32:
+        raise ValueError('Declare enemy elevation from 0–32 native pixels; zero is grounded.')
     for side in ['front', 'back']:
         width, height, offset = mon['coordinates'][side]
         if any(type(value) is not int for value in [width, height, offset]) or width not in range(8, 65, 8) or height not in range(8, 65, 8) or not 0 <= offset <= 32:
@@ -150,6 +152,16 @@ def install_creature_art(art, destination, icon_palette):
     return names
 
 
+def apply_enemy_elevation(source, species, elevation):
+    # Native nonzero elevation both raises the front sprite and enables its
+    # airborne shadow. A replacement creature must not inherit flight by slot.
+    pattern = rf'\[{species}\]\s*=\s*\d+,'
+    entry = f'[{species}] = {elevation},'
+    if re.search(pattern, source):
+        return replace_one(source, pattern, entry)
+    return replace_one(source, r'\n\};\s*\Z', '\n    ' + entry + '\n};\n')
+
+
 def apply_monsters(content, root, engine, original):
     if 'monster_content' not in content: return []
     reference = (root / 'romhack/content' / content['monster_content']).resolve()
@@ -210,6 +222,8 @@ def apply_monsters(content, root, engine, original):
             width, height, offset = mon['coordinates'][side]
             edit(f'src/data/pokemon_graphics/{side}_pic_coordinates.h', rf'\[{species}\]\s*=\s*\{{[^}}]*\}}',
                  f'[{species}] = {{ .size = MON_COORDS_SIZE({width}, {height}), .y_offset = {offset} }}')
+        path = 'src/data/pokemon_graphics/enemy_mon_elevation.h'
+        source[path] = apply_enemy_elevation(source.get(path, original(path)), species, mon['enemy_elevation'])
         edit('src/data/pokemon_graphics/front_pic_anims.h', rf'static const union AnimCmd sAnim_{symbol}_1\[\] =\n\{{.*?\n\}};',
              f'static const union AnimCmd sAnim_{symbol}_1[] = {{\n    ANIMCMD_FRAME(0, 12),\n    ANIMCMD_FRAME(1, 6),\n    ANIMCMD_FRAME(0, 10),\n    ANIMCMD_END,\n}};')
         edit('src/pokemon_icon.c', rf'\[{species}\] = \d+,', f'[{species}] = {mon["icon_palette"]},')

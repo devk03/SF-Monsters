@@ -5939,3 +5939,23 @@ v58 / Site 49 publication — October 14, 20:25 UTC:
   task is correct authored creature placement and a matched review clip.
 - Full campaign, 11 human domains and outstanding performance/save gates remain
   open. Goal stays active; no completion claim.
+
+
+v59 creature placement work — October 14, 20:30 UTC:
+
+- Peer read-only audit confirms TrolleyKit inherited enemy elevation 16 from its
+  stable Magnemite slot. Native battle code raises the sprite and enables the
+  airborne shadow for a nonzero value. Its authored cable-stoat concept is grounded.
+  All 36 front/back coordinate records already match intended authored settings.
+- Added explicit per-creature enemy elevation: TrolleyKit 0; the other 17 retain
+  their current effective values, including airborne PierPeep 16. The installer
+  overrides inherited or implicit entries. Compiled-resource gate now checks all
+  18 placement bytes. Seven authoring tests / twelve format tests pass locally.
+- Acceptance pending: compiled table changes only byte81, fresh native/browser
+  ordinary-Continue battle, feet/crop/UI check and same-route save comparison.
+  A native matched review clip and user art score remain pending. No art score,
+  content-revision change or full-campaign progress is claimed for metadata alone.
+
+- Negative-control audit on immutable v58 fails exactly TrolleyKit elevation
+  (17/18 placement matches); all 237 existing visual/binding/selector/palette/cry
+  controls still pass. Full local checks pass before the v59 native build.
