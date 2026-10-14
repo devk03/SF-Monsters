@@ -5201,3 +5201,27 @@ Verified v54 compact-frontage release (publication pending):
 - Alignment independently audits final recovery identities/bounds/events; no
   human quality approval inferred. Public remainsv53/Site44 until publication.
   Full domain approvals0/11, full goal active, deadline October15 18:00 Pacific.
+
+Site45 v54 published; independent recovery audit sealed:
+
+- Site source442364d1a2ceadbfba0d4fb5eb8661f96e056dd8 passes TypeScript/build;
+  audited84-file archive SHA7461aa9637d7219e234258d135c104243809f7020241efef518f298910f43c38
+  retains exact patch/manifest, original SFMM prototype, zero commercial full
+  cartridges/private saves/AppleDouble. Prior Site44 dist preserved.
+- Saved versionappgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_21d04e472e5c8191a39cf0d21b52a5ca;
+  deploymentappgdep_6acf8b26a1a08191ad408a41536b3866 succeeded
+  2026-10-14T14:01:21.905371Z. Public loader/patch download and anonymous normal
+  browser-agent HTTP200 retrieve exactv54bytes. Public ROM/Continue and guest
+  progress untouched; QA tab closed. Audience/auth/DBbindings unchanged, no Actions.
+- Independent recovery receiptcompact-frontage-v54-legacy-independent-audit/receipt.json
+  SHAa2bf9efc69e6d2c583dd8ac38b125804abdeb77ae9d2fbc8662b23bbf8f38afa
+  binds423 evidence files and all native/web/private helpers, ROM/ELF/plan and
+  inputs/states/batteries/audio. Actual positions match existing resolver's
+  Manhattan tie order, strict bounds and NPC/warp avoidance for all twelve cells.
+  Location changes are exactly bytes2/6/8/9/10/11; all other declared domains,
+  prior active Flash slots and special sectors preserve expected semantics.
+  Cold reloads are stable. Continuous final Flash/RGB and same-boundary Save-leg
+  PCM scopes remain explicit; failed cross-boundary PCM comparison excluded.
+- Original Roon/NPC comparison remains pending user rating. Full human domains
+  stay0/11; first-slice polish, real-browser/device performance and full campaign
+  remain unfinished. Goal active; next alignment check no later14:20UTC.
