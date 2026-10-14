@@ -1,13 +1,13 @@
 # Native mechanics fixtures
 
-The first catalog contains **24 independently specified base-damage cases**,
-including **four double-battle interactions**. All24 pass on the approved Emerald
-reference and SFv48. This is partial mechanics evidence. The300-case gate,
-including50 doubles and coverage of every required mechanic, remains open.
+The catalogs contain **58 independently specified scenarios**, including
+**10 double-battle interactions**. All58 pass on the approved Emerald reference
+and SFv48:24 base-damage cases plus34 turn-order cases. This is partial evidence.
+The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
 CPU registers to establish isolated battle states, then executes the actual
-Thumb function in each ROM under pinned mGBA0.10.5. They are not normal gameplay,
+Thumb functions in each ROM under pinned mGBA0.10.5. They are not normal gameplay,
 trainer wins, campaign progress, save-transfer checks or performance traces.
 The existing controller-only capture harness is unchanged.
 
@@ -42,7 +42,8 @@ number of participants. Separate scratch RAM supplies the native resource flags.
   address space. It never exports a modified cartridge, save or campaign state.
 - Each call has a2-million-instruction limit; each side has a60-second process
   limit. ROM hashes are checked again after execution. RNG is observed before
-  and after each arithmetic call and must remain unchanged.
+  and after every call. Arithmetic/non-tie cases must preserve it; declared
+  tie cases must match their independently specified32-bit LCG transition.
 - Every case resets its input snapshot. Duplicate IDs, ignored/misspelled
   controls, missing oracles and duplicate effective fixture commands are rejected.
 - Raw commands, stdout/stderr, identities and individual results stay in the
@@ -75,3 +76,26 @@ negative controls reject ROM writes, wrapped addresses and non-ROM calls while
 preserving the reference file hash. These controls do not increase the24-case
 mechanics count. Local `scripts/check.sh` runs the fixture-schema/ABI unit checks;
 it does not claim these ROM-dependent native cases ran on another machine.
+
+
+## Turn-order catalog
+
+`turn-order.json` targets `GetWhoStrikesFirst`. Use the same invocation above
+with `--cases data/quality/mechanics/turn-order.json` and a fresh evidence name.
+The34 scenarios cover speed/stages, GenIII paralysis, MachoBrace, SwiftSwim,
+Chlorophyll, active/absent partner weather suppression, QuickClaw's strict
+activation threshold, priority brackets, ignoring chosen moves and equal-speed
+RNG ties. Fixed item IDs come from the pinned native enum, not guessed values.
+
+All four battle slots and chosen move slots are initialized. An absent slot
+gets zero HP as well as its absent flag, so a stale partner ability cannot
+incorrectly affect the field. A separate native scratch battle structure supplies
+chosen move positions; no player party or battery save is rewritten.
+
+Tie expectations explicitly include the seed and next state: LCG(0)=24691 and
+LCG(3)=3310570426. This controlled seeding is fixture setup, not normal gameplay
+RNG evidence. The winner and RNG transition must both match on each ROM.
+Evidence: `mechanics-v48-turn-order-initial/result.json`. The24 damage cases
+were rerun after shared setup changes at `mechanics-v48-base-after-turn-support`.
+Pairwise turn comparison does not establish complete four-battler action sorting,
+switch/item priorities, move execution or battle outcome correctness.

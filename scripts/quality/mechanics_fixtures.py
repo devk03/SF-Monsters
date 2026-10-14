@@ -16,11 +16,14 @@ sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from bootstrap import EMERALD_REVISION
 
 FUNCTION = 'CalculateBaseDamage'
+FUNCTIONS = {FUNCTION, 'GetWhoStrikesFirst'}
 GLOBALS = {'gBattleMons': 352, 'gBattlerPositions': 4, 'gBattlersCount': 1,
            'gBattlerAttacker': 1, 'gBattlerTarget': 1, 'gActiveBattler': 1,
            'gAbsentBattlerFlags': 1, 'gCurrentMove': 2, 'gBattleTypeFlags': 4,
            'gCritMultiplier': 1, 'gBattleWeather': 2, 'gStatuses3': 16,
-           'gBattleResources': 4, 'gBattleMovePower': 2, 'gRngValue': 4}
+           'gBattleResources': 4, 'gBattleMovePower': 2, 'gRngValue': 4,
+           'gBattleStruct': 4, 'gProtectStructs': 64, 'gChosenActionByBattler': 4,
+           'gRandomTurnNumber': 2}
 
 
 def digest(path):
@@ -34,6 +37,13 @@ def constants(engine):
             f'{EMERALD_REVISION}:include/constants/{header}.h'], cwd=engine, text=True)
         for name, expression in re.findall(r'^#define\s+(\w+)\s+([^\n]+)', text, re.M):
             definitions[name] = expression.split('//')[0].strip()
+        if header == 'items':
+            clean = re.sub(r'/\*.*?\*/|//[^\n]*', '', text, flags=re.S)
+            for body in re.findall(r'enum\s*\{(.*?)\}', clean, re.S):
+                for value, name in enumerate(name.strip() for name in body.split(',') if name.strip()):
+                    if not re.fullmatch(r'\w+', name):
+                        raise ValueError('Pinned item enum changed; review its explicit values.')
+                    definitions[name] = str(value)
     operators = {ast.LShift: lambda a, b: a << b, ast.BitOr: lambda a, b: a | b,
                  ast.Add: lambda a, b: a + b, ast.Sub: lambda a, b: a - b}
     def resolve(value):
@@ -53,8 +63,8 @@ def constants(engine):
     return resolve
 
 
-def symbols(elf):
-    wanted, result = set(GLOBALS) | {FUNCTION}, {}
+def symbols(elf, function=FUNCTION):
+    wanted, result = set(GLOBALS) | {function}, {}
     for line in subprocess.check_output(['arm-none-eabi-nm', '-S', '--defined-only', str(elf)], text=True).splitlines():
         match = re.fullmatch(r'([0-9a-f]+) ([0-9a-f]+) [A-Za-z] (\w+)', line)
         if match and match[3] in wanted:
@@ -73,9 +83,10 @@ def battle_mon(changes, resolve):
               'max_hp': (44, 'H', 90), 'item': (46, 'H', 0), 'status': (76, 'I', 0)}
     stages = {'attack_stage': 25, 'defense_stage': 26, 'speed_stage': 27,
               'sp_attack_stage': 28, 'sp_defense_stage': 29}
-    if set(changes) - (set(fields) | set(stages)):
+    if set(changes) - (set(fields) | set(stages) | {'move'}):
         raise ValueError('Unsupported battle-mon fixture field.')
     data = bytearray(88)
+    struct.pack_into('<H', data, 12, resolve(changes.get('move', 1)))
     data[24:32] = bytes([6]) * 8
     for name, (offset, fmt, default) in fields.items():
         value = resolve(changes.get(name, default))
@@ -92,39 +103,56 @@ def battle_mon(changes, resolve):
     return bytes(data)
 
 
-def commands(case, syms, resolve):
+def commands(case, syms, resolve, function=FUNCTION):
     move = resolve(case.get('move', 'MOVE_POUND'))
     doubles = case.get('double', False)
     if type(doubles) is not bool:
         raise ValueError('Double flag must be a boolean.')
-    mons = [battle_mon(case.get(name, {}), resolve) for name in
-            ('attacker', 'defender', 'ally', 'opponent_ally')]
+    absent = case.get('absent', 0 if doubles else 12)
+    mons = []
+    for index, name in enumerate(('attacker', 'defender', 'ally', 'opponent_ally')):
+        data = bytearray(battle_mon(case.get(name, {}), resolve))
+        if absent & (1 << index):
+            struct.pack_into('<H', data, 40, 0)
+        mons.append(bytes(data))
     arena, flags = 0x0203f000, 0x0203f040
     resources = bytearray(32)
     struct.pack_into('<I', resources, 4, flags)
     writes = {'gBattleMons': b''.join(mons), 'gBattlerPositions': bytes(range(4)),
               'gBattlersCount': bytes([4 if doubles else 2]), 'gBattlerAttacker': b'\0',
               'gBattlerTarget': b'\1', 'gActiveBattler': b'\0',
-              'gAbsentBattlerFlags': bytes([case.get('absent', 0 if doubles else 12)]),
+              'gAbsentBattlerFlags': bytes([absent]),
               'gCurrentMove': struct.pack('<H', move), 'gBattleTypeFlags': struct.pack('<I', 3 if doubles else 2),
               'gCritMultiplier': bytes([case.get('critical', 1)]),
               'gBattleWeather': struct.pack('<H', resolve(case.get('weather', 0))),
               'gStatuses3': struct.pack('<4I', resolve(case.get('sport', 0)), 0, 0, 0),
-              'gBattleResources': struct.pack('<I', arena)}
+              'gBattleResources': struct.pack('<I', arena),
+              'gBattleStruct': struct.pack('<I', arena + 0x100),
+              'gProtectStructs': bytes(64), 'gChosenActionByBattler': bytes(4),
+              'gRandomTurnNumber': struct.pack('<H', case.get('quick_claw_draw', 65535))}
+    if 'rng_seed' in case:
+        writes['gRngValue'] = struct.pack('<I', case['rng_seed'])
     lines = ['reset']
     for name, value in writes.items():
         lines.append(f'write {syms[name][0]:x} {value.hex()}')
     lines += [f'write {arena:x} {resources.hex()}',
               f'write {flags:x} ' + struct.pack('<4I', int(case.get('flash_fire', False)), 0, 0, 0).hex(),
+              f'write {arena + 0x100:x} ' + bytes(132).hex(),
               f'read {syms["gRngValue"][0]:x} 4']
     args = [syms['gBattleMons'][0], syms['gBattleMons'][0] + 88, move,
             resolve(case.get('side_status', 0)), case.get('power_override', 0), 0, 0, 1]
-    lines += ['call ' + f'{syms[FUNCTION][0]:x} ' + ' '.join(f'{arg:x}' for arg in args),
-              f'read {syms["gBattleMovePower"][0]:x} 2', f'read {syms["gRngValue"][0]:x} 4']
+    if function == 'GetWhoStrikesFirst':
+        args = [0, 1, int(case.get('ignore_moves', False)), 0, 0, 0, 0, 0]
+    detail = 'gBattleMovePower' if function == FUNCTION else 'gRandomTurnNumber'
+    lines += ['call ' + f'{syms[function][0]:x} ' + ' '.join(f'{arg:x}' for arg in args),
+              f'read {syms[detail][0]:x} 2', f'read {syms["gRngValue"][0]:x} 4']
     return '\n'.join(lines) + '\n'
 
 
 def validate_cases(document):
+    function = document.get('function', FUNCTION)
+    if function not in FUNCTIONS:
+        raise ValueError('Only explicitly supported native fixture functions are allowed.')
     cases = document.get('cases')
     if not isinstance(cases, list) or not 1 <= len(cases) <= 512:
         raise ValueError('Use1–512 uniquely named mechanics cases.')
@@ -136,6 +164,10 @@ def validate_cases(document):
         allowed = {'id', 'expected', 'derivation', 'move', 'attacker', 'defender', 'ally',
                    'opponent_ally', 'double', 'absent', 'critical', 'weather', 'sport',
                    'side_status', 'flash_fire', 'power_override'}
+        if function == 'GetWhoStrikesFirst':
+            allowed = {'id', 'expected', 'derivation', 'attacker', 'defender', 'ally',
+                       'opponent_ally', 'double', 'absent', 'weather', 'rng_seed',
+                       'expected_rng', 'quick_claw_draw', 'ignore_moves'}
         if set(case) - allowed:
             raise ValueError('Unknown fixture field; reject ignored or misspelled controls.')
         if type(case['expected']) is not int or case['expected'] < 0 or not case.get('derivation'):
@@ -146,12 +178,21 @@ def validate_cases(document):
             raise ValueError('Critical context must be1 or2.')
         if type(case.get('absent', 0)) is not int or not 0 <= case.get('absent', 0) <= 15:
             raise ValueError('Absent mask must identify at most four battlers.')
+        for key in ('rng_seed', 'expected_rng'):
+            if key in case and (type(case[key]) is not int or not 0 <= case[key] <= 0xffffffff):
+                raise ValueError('RNG fixtures require explicit32-bit values.')
+        if 'expected_rng' in case and 'rng_seed' not in case:
+            raise ValueError('Expected RNG transition needs its explicit seed.')
+        if type(case.get('quick_claw_draw', 65535)) is not int or not 0 <= case.get('quick_claw_draw', 65535) <= 65535:
+            raise ValueError('QuickClaw draw must be a native16-bit value.')
+        if type(case.get('ignore_moves', False)) is not bool:
+            raise ValueError('Ignore-moves control must be boolean.')
     if len({case['id'] for case in cases}) != len(cases):
         raise ValueError('Use uniquely named mechanics cases.')
     return cases
 
 
-def run_side(label, rom, elf, state, executable, cases, resolve, output):
+def run_side(label, rom, elf, state, executable, cases, resolve, output, function=FUNCTION):
     identity = digest(rom)
     cartridge = rom.read_bytes()
     if len(cartridge) != 16777216 or cartridge[0xac:0xb0] != b'BPEE':
@@ -164,14 +205,14 @@ def run_side(label, rom, elf, state, executable, cases, resolve, output):
         raise ValueError('Fixture state belongs to another ROM or core revision.')
     if label == 'reference' and identity != REFERENCE_HASH:
         raise ValueError('Use the fixed approved Emerald reference.')
-    syms = symbols(elf)
+    syms = symbols(elf, function)
     linked = output / (label + '-linked.bin')
     subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', str(elf), str(linked)], check=True)
-    address, size = syms[FUNCTION]
+    address, size = syms[function]
     offset = address - 0x08000000
     if offset < 0 or size < 1 or offset + size > rom.stat().st_size or rom.read_bytes()[offset:offset + size] != linked.read_bytes()[offset:offset + size]:
         raise ValueError('Fixture function in ELF does not match the tested ROM.')
-    sequences = [commands(case, syms, resolve) for case in cases]
+    sequences = [commands(case, syms, resolve, function) for case in cases]
     if len(set(sequences)) != len(sequences):
         raise ValueError('Duplicate effective native fixtures do not increase coverage.')
     sequence = ''.join(sequences)
@@ -189,11 +230,14 @@ def run_side(label, rom, elf, state, executable, cases, resolve, output):
     for index, case in enumerate(cases):
         before, returned, power, after = lines[index * 4:(index + 1) * 4]
         match = re.fullmatch(r'return ([0-9a-f]{8}) steps (\d+)', returned)
-        if not match or before != after:
-            raise ValueError('Fixture did not return cleanly or unexpectedly consumed RNG.')
+        if not match:
+            raise ValueError('Fixture did not return cleanly.')
+        before, after = [int.from_bytes(bytes.fromhex(value), 'little') for value in (before, after)]
         observed.append({'id': case['id'], 'value': int(match[1], 16),
-                         'move_power': int.from_bytes(bytes.fromhex(power), 'little'),
-                         'instructions': int(match[2]), 'rng_unchanged': True})
+                         'move_power' if function == FUNCTION else 'quick_claw_draw': int.from_bytes(bytes.fromhex(power), 'little'),
+                         'instructions': int(match[2]), 'rng_before': before, 'rng_after': after,
+                         'rng_pass': before == case.get('rng_seed', before)
+                             and after == case.get('expected_rng', before)})
     return {'rom_sha256': identity, 'elf_sha256': digest(elf), 'state_sha256': digest(state),
             'function_sha256': hashlib.sha256(rom.read_bytes()[offset:offset + size]).hexdigest(),
             'cases': observed}
@@ -214,7 +258,9 @@ def main():
     core = verified_host_build()
     if subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip() != REVISION:
         parser.error('Pinned native core source revision changed.')
-    cases = validate_cases(json.loads(args.cases.read_text()))
+    document = json.loads(args.cases.read_text())
+    cases = validate_cases(document)
+    function = document.get('function', FUNCTION)
     output.mkdir(parents=True)
     executable = ROOT / '.tools' / ('function-fixture-' + uuid.uuid4().hex)
     frameworks = ['-framework', 'CoreFoundation'] if platform.system() == 'Darwin' else []
@@ -224,15 +270,17 @@ def main():
         '-lm', '-lpthread', *frameworks, '-o', str(executable)], check=True)
     resolve = constants(ROOT / '.tools/pokeemerald-host')
     evidence = {'kind': 'controlled native function fixtures; RAM/register setup; not controller/campaign evidence',
-                'function': FUNCTION, 'core': core, 'cases_sha256': digest(args.cases), 'sides': {}}
+                'function': function, 'core': core, 'cases_sha256': digest(args.cases), 'sides': {}}
     for label in ('reference', 'candidate'):
         evidence['sides'][label] = run_side(label, getattr(args, label + '_rom'), getattr(args, label + '_elf'),
-            getattr(args, label + '_state'), executable, cases, resolve, output)
+            getattr(args, label + '_state'), executable, cases, resolve, output, function)
     results = []
     for case, reference, candidate in zip(cases, evidence['sides']['reference']['cases'], evidence['sides']['candidate']['cases']):
         results.append({'id': case['id'], 'expected': case['expected'], 'reference': reference['value'],
                         'candidate': candidate['value'], 'double': case.get('double', False),
-                        'pass': reference['value'] == candidate['value'] == case['expected']})
+                        'rng_pass': reference['rng_pass'] and candidate['rng_pass'],
+                        'pass': reference['value'] == candidate['value'] == case['expected']
+                            and reference['rng_pass'] and candidate['rng_pass']})
     evidence.update({'results': results, 'passed': sum(row['pass'] for row in results), 'total': len(results),
                      'full_mechanics_gate_complete': False, 'human_quality_approval': 'pending'})
     (output / 'result.json').write_text(json.dumps(evidence, indent=2) + '\n')

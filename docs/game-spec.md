@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 24 independently specified base-damage cases pass against Emerald/SF, including4 doubles. At least276 further broad mechanics scenarios and46 further doubles remain, plus full type-chart/stat/status/resource coverage. Three ten-minute traces, ten save round trips, fifty campaign checkpoints and three complete starter campaigns remain outstanding. |
+| Remaining system gates | 58 independent native scenarios pass against Emerald/SF:24 base-damage and34 pairwise turn-order, including10 doubles. At least242 further broad scenarios and40 further doubles remain, plus uncovered type/stat/status/resource/action-resolution gates. Performance traces, save round trips/checkpoints and complete campaigns remain outstanding. |
 | Next work | Add original facade variety while preserving compact layout, per-edge actor visibility and supported saves. Alignment chat is preparing genuine Calvin/Scott introduction comparison. Obtain subset reviews while continuing independent slice/system work; no campaign expansion before slice approval. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4320,3 +4320,23 @@ Native mechanics fixture foundation:
   and all uncovered system gates remain. No human approval inferred.
 - Next mechanics work: speed/priority/held-item/weather interactions, followed
   by stat generation, full hit/type/status resolution and capture/resource cases.
+
+
+Native turn-order checkpoint:
+
+- Added34 independent GetWhoStrikesFirst scenarios: speed/stages/paralysis,
+  MachoBrace, weather abilities and six doubles partner-presence interactions,
+  QuickClaw strict threshold13107, positive/negative priorities and tie branches.
+  Actual reference andv48 functions match every expected winner. Three tie
+  cases also match the specified LCG state advance; non-ties preserve RNG.
+- Native chosen-move positions/protection/action data are explicit scratch
+  fixtures. Absent slots also have0 HP. Pinned item enum values are parsed;
+  no item IDs or native outcomes are guessed from observations.
+- Re-ran24damage cases after shared setup changes: all pass. Total58 distinct
+  scenarios,10doubles; not116 counted separately by ROM. Full local check.sh
+  and fixture guard tests pass. These are still controlled native-function
+  fixtures, not controller-only battles or complete action/HP resolution.
+- Evidence: mechanics-v48-turn-order-initial and
+  mechanics-v48-base-after-turn-support under private benchmarks. Full approval
+  remains0/11. Next: actual generated stats/natures/IV/EV boundaries, then full
+  action/type/status/resource/capture behavior; at least242cases/40doubles remain.

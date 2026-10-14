@@ -40,6 +40,24 @@ class MechanicsFixtures(unittest.TestCase):
             with self.subTest(changes=changes), self.assertRaises(ValueError):
                 battle_mon(changes, int)
 
+    def test_turn_ties_need_explicit_seed_and_rng_transition(self):
+        document = {'function': 'GetWhoStrikesFirst', 'cases': [{
+            'id': 'odd-tie', 'expected': 2, 'rng_seed': 3,
+            'expected_rng': 3310570426, 'derivation': 'One LCG step gives0xC5534BBA.'}]}
+        validate_cases(document)
+        missing = deepcopy(document)
+        del missing['cases'][0]['rng_seed']
+        with self.assertRaisesRegex(ValueError, 'explicit seed'):
+            validate_cases(missing)
+        for field, value in [('rng_seed', -1), ('expected_rng', True),
+                             ('quick_claw_draw', 65536), ('ignore_moves', 1)]:
+            bad = deepcopy(document)
+            bad['cases'][0][field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                validate_cases(bad)
+        with self.assertRaisesRegex(ValueError, 'supported'):
+            validate_cases({**document, 'function': 'ArbitraryRoutine'})
+
 
 
 if __name__ == '__main__':
