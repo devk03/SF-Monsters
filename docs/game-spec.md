@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October14,2026,19:26UTC:
+Current checkpoint — October14,2026,19:45UTC:
 
-- Goal active; deadline remains October15,18:00 Pacific. Publicv56/Site47, native
-  story source7e6ce94. v57native-lawn draft is verified locally, not public yet.
+- Goal active; deadline remains October15,18:00 Pacific. Publicv57/Site48, native
+  release source7cffa0b, website sourcea0ca6c9. The native lawn/audio preview is live.
 - Human final approvals0/11. Full16hub/8gym/150monster campaign and final
   acceptance remain unfinished; first-slice approval is still required.
 -711 independently specified mechanics cases/57doubles pass; full-turn/type/catalog
@@ -571,8 +571,8 @@ Current checkpoint — October14,2026,19:26UTC:
 - v57ordinaryFlash coldContinue/Save2→3/coldreload preserves audited game domains.
   Independent compiled audit confirms only intended lawn/house-underlay pixels
   change; maps/collision/events/palettes/attributes remain exact. Human art pending.
-- Last alignment exchange19:25UTC; finite read-only replay audit ends19:45UTC.
-  Next check by19:45UTC. Detailed receipts and remaining gates append below.
+- Last alignment exchange19:41UTC; finite read-only replay audit finished and both
+  identified gaps were fixed/tested. Next check by20:00UTC. Detailed receipts and remaining gates append below.
 
 ### 15.1 Objective and completion rule
 
@@ -5832,3 +5832,27 @@ Actual mixed-browser and finite-lease checks:
   runtime used in the passing600sfieldcheck. Prior Site47build preserved intact,
   public hosting/auth/storage configuration unchanged. Typecheck/package inprogress;
   archive and publication checks pending. Public remainsSite47 until deployment.
+
+
+Published v57 / Site48:
+
+- Saved versionappgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_3daee28930f48191b035429c90f66438;
+  deploymentappgdep_6acfdb1da5a881919c2132aa2740b68c succeeded2026-10-14T19:42:31.780463Z.
+  URLhttps://sf-mini-monsters.devkunjadia03.chatgpt.site/; sourcea0ca6c9e83b98a1b0fbe17927e97539189cac6e9.
+- First archivefailed AppleDouble check (111macOSmetadata members); retained private,
+  neveruploaded. Repacked unchangedbuild/source withCOPYFILE_DISABLE=1; cleanarchive
+  SHA59b0712fa275eb9711b84e63e20b0b90f5e2d4ce35fe45cd1341bf7013f42224.
+ 88-fileaudit passes, exacttested15-fileemulator runtime andv57manifest/BPS; no
+  commercialcartridge/privateSave. Only ownedSFMMprototypeGBA iswhitelisted.
+- ActualvisibleIAB loaderpaintscorrectly; DownloadSFpatch produces888452bytes,
+  exactBPS SHA82880edae3130610686c9dd41d6817c38ce811034dbb33d9ce8f28cd19e34c68.
+  Guest/signin controls remainavailable, ROMupload required, emulatorcontrolsinactive.
+  No ROMimport/Continue/existingusergameprogress mutation. Own QA tabclosed and
+  previousbrowservisibilityrestored. Screenshotpublic-v57-loader-visible.png.
+- First anonymousHTTPbatch raised403; failingpath wasnotretained, so no cause is
+  asserted. ExplicitQAUserAgentrecheck returns200andbyte-exactcontent forall18
+  runtime/manifest/patch/originalprototype resources. Actualbrowserdownload also
+  matches independently. Accessstayspublic; auth/storage unchanged; noGitHubActions.
+- Fullcampaign/11humanqualitydomains, Safari/phone, IABlongclockdeficit, physical
+  input/display deadlines, fullaudio/listening and50distinctsavecheckpoints remain
+  open. This publication is an improved preview; fullgoal staysactive.
