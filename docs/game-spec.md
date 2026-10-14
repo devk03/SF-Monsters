@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 21:51 UTC:
+Current checkpoint — October 14, 2026, 22:04 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v62 / Site 53 is live.
-  Native release source abab613; website source f75c4dbb. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v63 / Site 54 is live.
+  Native release source f8d873e; website source 8bc17cc9. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -585,6 +585,9 @@ Current checkpoint — October 14, 2026, 21:51 UTC:
 - Original Naval field sprite now survives older-save Continue, ordinary Save and
   reload. Native comparisons preserve all gameplay state; actual Chrome older-save
   Continue shows the new figure without leaving the map. Human art approval pending.
+- Native JOURNAL now shows current chapter objective from existing state and
+  location, preserves Save row, returns cleanly to menu/field, and survives ordinary
+  C7 save/reload. Human interface acceptance and the complete SF map remain open.
 - Alignment independently verified four inert cached ROM-pointer relocations;
   next first-slice priority review requested21:50UTC. Next check by22:20UTC.
 
@@ -808,8 +811,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.62-naval-field-preview; target00da16f1e22d38710e7a353c5e03ff1f88878446d7cd8eb711759c591a08a30e; Site53. Original Naval intro/field figures, joined bench approach and integrated creature art. Human approvals remain0/11. |
-| Latest local source build | v62 normal sourceabab613 reproduces tested target00da16f1. Field cast36/36, intro5/5 and creature255 controls pass. Genuine C5 older-save Continue, ordinary Save C6/reload and actual Chrome older-cache Continue pass their scoped checks. |
+| Public build | 0.0.63-field-journal-preview; target663539f154c5456caa4b17b13501f0b4b58a4f58447d30136b2cd750278451dd; Site54. Read-only portable chapter journal, original Naval intro/field figures and integrated creature art. Human approvals remain0/11. |
+| Latest local source build | v63 normal sourcef8d873e reproduces tested target663539f1. Field cast36/36, intro5/5 and creature255 controls pass. Journal fresh-game/older-save/badge UI, ordinary C7 save/reload, read-only gameplay and actual Chrome controls pass scoped checks. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -6276,3 +6279,33 @@ v63 journal native acceptance — October14,22:02UTC:
 - Public remains v62/Site53 until v63 normal build and publication verify. All
   first-slice quality/complete SF map/music/device/performance/campaign gates and
   full human approvals0/11 remain open. No GitHub Actions or DB changes.
+
+
+v63 / Site54 verified and published — October14,22:04UTC:
+
+- Normal sourcef8d873e363830554c1e791d5f0e90c197009f003 reproduces final draft
+  target663539f154c5456caa4b17b13501f0b4b58a4f58447d30136b2cd750278451dd.
+  BPS1004087bytes SHA79e3e8050e32d77a952e09674402c9c77c839bc87d2f8172b7bbbed77f1bb275.
+  Native resource gates and complete local checks pass. Public patch roundtrip
+  through the actual browser decoder matches the exact target.
+- Final Chrome normal X opens the journal with corrected COGNITION clinic hint.
+  Ten-second visible opening smoke records597video frames/1200ticks, no discarded
+  debt/frame mismatch/audio drops/underruns/warmup and final audio ACK. Two DOM
+  events max68.4ms to dispatch and4.1ms dispatch-to-submit. Not physical input,
+  guest consumption, full native update deadlines or a broader performance pass.
+  Report SHA1bca5b1ade0752bf7d5e89ee2d957ca9d474ff25412ee48aa47bccfea2a3b69d.
+  Screenshotjournal-v63-final-browser-page.png. Own emulator/audio/tab/server stopped.
+- Website source8bc17cc966a945939145277a4e36437092cd4ac9; saved Site54 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_258e951fa498819195322055a1f2a4c0;
+  deploymentappgdep_6acffc23ef048191a09fe963c7528d43 succeeded22:03:25UTC.
+  Clean88-file archive SHA824af56b5bb942363b6f75e637fb66dfceee736697f1370aff062cf673f0a7e4;
+  no commercial ROM/private saves/AppleDouble. Unchanged15-file runtime and hosting
+  match; public audience/auth/storage retained. Immediate manifest response was
+  stale during propagation; subsequent canonical revalidation matches both assets.
+  Live receipt SHA6b4e3bfc598d911fd87fed2c1e53d2b974cc8b3880fc193bb290adab08f63f6c.
+  Live screenshotpublic-v63-loader-visible.png; no player ROM/save imported.
+- Journal is one completed scoped workflow, not full interface/map/campaign or
+  first-slice quality acceptance. All eleven human domains remain0/11. SF city map,
+  Guide AREA geography, original audio/remaining cast, campaign, real-device/full
+  performance and50distinct-save-checkpoint gates remain open. No GitHub Actions.
+  Goal continues through October15,18:00 Pacific; next alignment check by22:20UTC.
