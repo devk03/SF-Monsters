@@ -44,7 +44,8 @@ def encode_portrait(root):
     preview.putdata(pixels);preview.save(directory/'portrait.png',transparency=0,bits=4)
     data=pack4(tiles8(pixels,64,64,8,8))
     pal=b''.join(struct.pack('<H',sum(round(rgb[c]*31/255)<<(5*c) for c in range(3))) for rgb in palette)
-    files={'portrait.4bpp':data,'portrait.gbapal':pal}
+    files={'portrait.4bpp':data,'portrait.gbapal':pal,
+           'portrait.png':(directory/'portrait.png').read_bytes()}
     for name,value in files.items():(directory/name).write_bytes(value)
     (directory/'conversion.json').write_text(json.dumps({
         'source_sha256':hashlib.sha256((directory/'source.png').read_bytes()).hexdigest(),

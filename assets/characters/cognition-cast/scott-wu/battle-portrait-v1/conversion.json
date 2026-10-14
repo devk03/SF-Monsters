@@ -20,6 +20,7 @@
   "pixel_cleanup": "pending",
   "files": {
     "portrait.4bpp": "6b132b9f8c4c05db3db4c4de6130d5b9d7200eb50c0aa38ae5cf082b296da79b",
-    "portrait.gbapal": "f4e2ab2aebd7b600bccb4e0369be51f02636e00fbbf866ae30e178d2439dcec6"
+    "portrait.gbapal": "f4e2ab2aebd7b600bccb4e0369be51f02636e00fbbf866ae30e178d2439dcec6",
+    "portrait.png": "2aeac0be432e5acf2a18715aa44b6d286cb8172fff242ee42194da01d25507da"
   }
 }

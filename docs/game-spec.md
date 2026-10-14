@@ -4058,3 +4058,16 @@ v44 public release and Scott portrait source checkpoint:
   replayed or released. Source review is running in the alignment thread.
 - Full approvals remain0/11; all complete campaign/system gates stay required.
   Cutoff remains revoked; no workflow, DB mutation or PR merge ran.
+
+Scott portrait draft compilation checkpoint:
+
+- Draft v45 normal compilation/BPS round trip passes. Target
+  b4846cfe0b614b8d278b91cb4ad50b4076493ced0c732e5ff4bf9986c35c977b,
+  patch874488 bytes. Human art/likeness review remains pending.
+- Reviewer found no pre-build blocker and independently confirmed native PNG
+  packing/palette/baseline and trainer-data preservation. Both reviewer and
+  main identified the consumed-PNG hash gap; conversion metadata now also
+  protects portrait.png, preventing stale previews bypassing binary guards.
+- Compiled slot/table/decompression/trainer-record audit is running in the
+  alignment thread. Actual trainer encounter and older-save/victory/re-entry
+  replays are still required. Public remainsv44/Site36.
