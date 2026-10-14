@@ -5163,3 +5163,41 @@ Compact lavender frontage source candidate:
   v53 saved batteries at future footprint cells with frozen controller harness,
   ending14:40UTC. Main owns newv54 coldContinue/save/WASM checks. No publication
   or human quality approval claimed; public staysv53/Site44. Check by14:20UTC.
+
+Verified v54 compact-frontage release (publication pending):
+
+- Normal source6dad1e6 reproduces draft target
+  cdd792f000185d7ef46cd7ceab8b37be6a703570e37873edbd8274b0d344c05b;
+  exact BPS roundtrip passes. Patch885387bytes SHA256
+  2258b3bd58a025de5f8b8af0090cd8694e264f725a6abcd8f60256a5f9dd5c38.
+- Independent actual compiled LZ/ELF audit matches all502 tiles/148 metatiles,
+  attributes/palettes/header bindings to source. Prior136 pixel/bank oracle and
+  old attributes remain exact. Only twelve actual map words change, all blocked;
+  borders, service warps and event/script bindings remain unchanged. Actual
+  compiled clinic/office resources preserve their existing zero-tile padding.
+  Receipt park-v54-compiled-resource-audit/receipt.json SHA5c6aa320...a40ea93.
+- Normal Up pushes at all three front columns26/27/28 remain on row6. All1024
+  frontage-walk RGBframes/PCM match native and NodeWASM. Clinic/gym entry404/708
+  and exit316/316 frames also match entirely, returning32,6 and13,6. Six focused
+  tests, eight park checks and fullcheck.sh pass; all711 mechanics/57 doubles
+  rerun successfully. No actual-browser performance or full mechanics claim.
+- Alignment prepared twelve actual v53 batteries with ordinary Save at every
+  future occupied cell. Actual v54 coldContinue relocates upper rows2/3 to safe
+  row1, lower rows4/5 to sidewalk6, keeping each column. Ordinary Save26→27 and
+  subsequent coldContinue retain that location. Native/WASM full resulting Flash
+  and finalRGB match for all twelve; other declared persistent domains remain
+  unchanged. Only current-position/same-map warp ID/coordinate header bytes are
+  permitted to change; map IDs and other warps remain strict. Recovery receipt
+  compact-frontage-v54-legacy-recovery.json SHAaf84da804270578a805d6acdcd7c7fa0905efc7aee21ca85247a11795a2f01d2.
+- The initial split-native recording versus continuous-WASM PCM comparison
+  failed after the savestate boundary and remains preserved, not counted as
+  parity. Added identical-parent-state/input1260frame Save-leg comparisons:
+  all twelve PCMstreams match. Continuous walking/door comparisons above have
+  no such boundary difference. Frozen native/shared harnesses remain unchanged.
+- Separate earned v51 clinic checkpoint25→26 on v54 preserves party/PC/resources
+  and all declared domains, with equal native/WASM Flash/finalRGB/PCM. This and
+  twelve layout recovery positions do not complete fifty campaign checkpoints,
+  public authentication/device/persistence or full save acceptance gates.
+- Alignment independently audits final recovery identities/bounds/events; no
+  human quality approval inferred. Public remainsv53/Site44 until publication.
+  Full domain approvals0/11, full goal active, deadline October15 18:00 Pacific.
