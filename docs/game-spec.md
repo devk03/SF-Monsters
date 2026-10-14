@@ -774,12 +774,12 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
-| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify298 named scenarios against the reference. |
+| Public build | 0.0.49-courier-throw-preview; target45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8aea5c6d80d7a052; Site39. Original courier battle throw joins facade variety, compact Sunset spacing and actor-edge layering. Human approvals remain0/11. |
+| Latest local source build | v49, source0fc1eb6; normal build reproduces corrected target45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8aea5c6d80d7a052. Courier intro, native resources, older-save replays and local checks pass. All298 mechanics scenarios pass on this exact target. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
+| Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
 | Remaining system gates | 298 independent native scenarios pass across damage, stats, type, order, accuracy, critical, PP and HP commands;52 meaningful doubles. The count threshold is nearly reached; status/capture, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is testing a fresh Water-starter route onv48. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
@@ -4511,3 +4511,41 @@ v49 normal-release packaging:
   (mechanics-v49-*-mapped). Public release manifests selectv49; Sites checks/build
   and publication are in progress. Current public remains Site38/v48 until the
   deployment result confirms otherwise. No GitHub Actions or DB changes.
+
+
+v49 public deployment and initial browser QA:
+
+- Site39 source792cd454e3b31ed39aa4c3b4fe736376ba159a6a passed typecheck and
+  production build. Saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_6ce44c86d2d08191aea8d64b08cd4b6a;
+  deployment appgdep_6acf4b190eb08191a0e33c2fe81baa81 succeeded at
+  2026-10-14T09:28:01Z. Audience/auth remain unchanged. No DB/GitHub Actions.
+- Archive identity audit confirms one v49 patch/manifest and no commercial-derived
+  cartridge. Earlier extension/name guards were too broad: the archived original
+  67820-byte SFMM homebrew prototype and AppleDouble metadata remain distinct
+  from the BPEE hack. Exact original checksum verified; failed audits preserved.
+- Actual public browser selected the local Emerald base, patched it on-device,
+  and exported a16777216-byte GBA file with exact target45985c62...d7a052 hash.
+  Save-backup UI also exported131072 bytes. Existing guest save was auto-restored;
+  no test save was imported over it and no in-game save was performed. Native
+  cold load of those actual downloaded files is being checked. This is not yet
+  a completed browser/native/browser roundtrip or fresh authentication gate.
+
+
+v49 public export/resume verification completed:
+
+- The actual website-exported ROM and128KiB guest backup cold-load under pinned
+  native mGBA: clinic position6,8, stage4/badge, money4000, Potions3 and level11
+  CinderCoy4/31HP with moves/PP intact. Private evidence:
+  courier-v49-public-export-native-cold-mounted. The capture harness requires
+  project-local paths, so byte-identical copies of Downloads files were used;
+  the initial outside-root invocation was rejected before emulation.
+- The browser also visibly reaches Continue (one badge) and the SF clinic from
+  that existing guest slot. No test save imported, no in-game save performed;
+  the temporary QA tab was muted, paused and closed. Screenshot:
+  .tools/browser-review/public-v49-resume.png. Download identity receipts:
+  courier-v49-public-{rom,save}-download.json under private benchmarks.
+- This establishes local patching, usable GBA export, backup download and one-way
+  browser-to-native save compatibility. It is not one of the ten completed
+  browser/native/browser save roundtrips. Authentication isolation, Safari/mobile,
+  sustained browser performance/audio and human quality gates remain open.
