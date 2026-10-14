@@ -1,0 +1,62 @@
+{
+  "engine_map": "OldaleTown_House1",
+  "script": "seed-room.inc",
+  "border_tile": 622,
+  "tilesets": {"secondary": "gTileset_CourierHome"},
+  "legend": {
+    "L": [512, true, 3],
+    "P": [513, true, 3],
+    "T": [514, true, 3],
+    "Z": [515, true, 3],
+    "U": [516, true, 3],
+    "V": [517, true, 3],
+    "X": [519, true, 3],
+    "R": [522, true, 3],
+    "l": [523, true, 3],
+    "a": [524, true, 3],
+    "g": [525, true, 3],
+    "f": [526, true, 3],
+    "b": [527, true, 3],
+    "c": [528, true, 3],
+    "e": [530, true, 3],
+    "r": [533, true, 3],
+    ".": [539, false, 3],
+    "A": [569, true, 3],
+    "B": [570, true, 3],
+    "C": [580, true, 3],
+    "E": [581, true, 3],
+    "m": [591, false, 3],
+    "o": [592, false, 3],
+    "F": [611, true, 3],
+    "h": [612, true, 3],
+    "D": [616, false, 3],
+    "G": [621, true, 3]
+  },
+  "rows": [
+    "LPTZUVXR",
+    "lagfbcer",
+    "l......r",
+    "lAB....r",
+    "lCE....r",
+    "lmo....r",
+    "l......r",
+    "FhhDhhhG"
+  ],
+  "npcs": [],
+  "warp_events": [
+    {"x": 3, "y": 7, "elevation": 0, "dest_map": "MAP_OLDALE_TOWN", "dest_warp_id": "2"}
+  ],
+  "bg_events": [
+    {"type": "sign", "x": 2, "y": 4, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "SF_SeedFieldNotes"},
+    {"type": "sign", "x": 1, "y": 1, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH", "script": "SF_SeedCareNotes"}
+  ],
+  "metadata": {
+    "music": "MUS_LITTLEROOT",
+    "map_type": "MAP_TYPE_INDOOR",
+    "weather": "WEATHER_NONE",
+    "allow_running": false,
+    "allow_cycling": false,
+    "allow_escaping": false,
+    "region_map_section": "MAPSEC_OLDALE_TOWN"
+  }
+}

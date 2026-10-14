@@ -14,7 +14,7 @@ parent.mkdir(parents=True, exist_ok=True)
 work = Path(tempfile.mkdtemp(prefix='case-', dir=parent))
 (work / 'sf_habitat_maps.h').write_text('static const u8 sSFHabitatMapIds[][2]={{0,9},{0,10}};\n')
 (work / 'sf_city_map_parents.h').write_text(
-    'static const u8 sSFRegionMapParents[][3]={{0,9,0},{1,0,0},{0,10,1},{1,4,1},{11,3,1}};\n')
+    'static const u8 sSFRegionMapParents[][3]={{0,9,0},{1,0,0},{0,10,1},{1,4,1},{11,3,1},{2,0,1}};\n')
 subprocess.run(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror', '-fsanitize=address,undefined',
                 '-I' + str(work), str(ROOT / 'tests/city_map_native_test.c'), '-o', str(work / 'test')], check=True)
 subprocess.run([str(work / 'test')], check=True)

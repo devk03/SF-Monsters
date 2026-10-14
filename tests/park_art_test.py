@@ -84,8 +84,8 @@ class ParkResources(unittest.TestCase):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         raw, records, attributes, palettes = park_resources(ROOT)
         self.assertLessEqual(len(raw) // 32, 504)
-        self.assertEqual((len(records), len(attributes), len(palettes)), (148 * 16, 296, 512))
-        flags = struct.unpack('<148H', attributes)
+        self.assertEqual((len(records), len(attributes), len(palettes)), (149 * 16, 298, 512))
+        flags = struct.unpack('<149H', attributes)
         occupied = {(n['x'], n['y']) for n in plan['npcs']}
         start = (13, 6); visited = {start}; queue = deque([start])
         while queue:
@@ -100,7 +100,7 @@ class ParkResources(unittest.TestCase):
         for y, row in enumerate(plan['rows']):
             for x, token in enumerate(row):
                 tile = park_tile(plan, x, y) - 512
-                self.assertIn(tile, range(148))
+                self.assertIn(tile, range(149))
                 if token in 'RP.FGB#T':
                     self.assertEqual(flags[tile] >> 12, 1)
         self.assertEqual((flags[71], flags[106]), (0x1069, 0x1069))
@@ -115,7 +115,7 @@ class ParkResources(unittest.TestCase):
 
     def test_pruning_cannot_change_any_referenced_cell_or_facade_animation(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
-        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(148)]
+        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(149)]
         result = prune_unused_terrain(cells, plan)
         changed = {i for i, pair in enumerate(zip(cells, result)) if pair[0] != pair[1]}
         self.assertEqual(changed, {21, 22, 23, 30, 31, 34, 35})
@@ -123,7 +123,7 @@ class ParkResources(unittest.TestCase):
                       for y, row in enumerate(plan['rows']) for x in range(len(row))}
         referenced.add(plan['border_tile'] - 512)
         self.assertFalse(changed & referenced)
-        for i in referenced | set(range(40, 148)) | set(range(20)):
+        for i in referenced | set(range(40, 149)) | set(range(20)):
             self.assertEqual(result[i], cells[i])
         self.assertEqual(cells[21][0], bytes([7]) * 256)  # Input stays intact.
         for index in changed:
@@ -161,25 +161,40 @@ class ParkResources(unittest.TestCase):
             self.assertEqual(bytes(pixels), b''.join(
                 expected[y * 48 + left:y * 48 + left + 16] for y in range(top, top + 16)))
 
-    def test_western_houses_block_all_footprints_and_keep_both_public_approaches(self):
+    def test_western_houses_block_walls_and_leave_only_the_seed_room_entry_open(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         # The previous empty plaza is now one compact street wall, never a path.
         for y in range(13, 17):
             for x in range(11, 17):
-                self.assertTrue(plan['legend'][plan['rows'][y][x]][1], (x, y))
+                self.assertEqual(plan['legend'][plan['rows'][y][x]][1],
+                                 (x, y) != (16, 16), (x, y))
         for left, first in ((11, 622), (14, 634)):
             for dy in range(4):
                 for dx in range(3):
-                    self.assertEqual(park_tile(plan, left+dx, 13+dy), first+dy*3+dx)
+                    self.assertEqual(park_tile(plan, left+dx, 13+dy),
+                                     660 if (left+dx, 13+dy) == (16, 16) else first+dy*3+dx)
         # Two unobstructed sidewalk rows face the cross street; the garden and
-        # road sides both reconnect below the houses. No fake walk-through door.
+        # road sides both reconnect below the houses. Only the real entry is open.
         approaches = ([(x, y) for y in (11, 12, 17) for x in range(10, 18)]
                       + [(x, y) for x in (10, 17) for y in range(13, 17)])
         for x, y in approaches:
             self.assertFalse(plan['legend'][plan['rows'][y][x]][1], (x, y))
         self.assertFalse(any(11 <= event['x'] < 17 and 13 <= event['y'] < 17
                              for key in ('npcs', 'warp_events', 'bg_events')
-                             for event in plan[key]))
+                             for event in plan[key] if (event['x'], event['y']) != (16, 16)))
+
+    def test_seed_room_door_reuses_pixels_without_opening_other_butter_facades(self):
+        raw, records, attributes, palettes = park_resources(ROOT)
+        self.assertEqual(records[148*16:149*16], records[133*16:134*16])
+        flags = struct.unpack('<149H', attributes)
+        self.assertEqual((flags[133], flags[148]), (0x1000, 0x1060))
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        self.assertEqual(plan['warp_events'][2], {
+            'x': 16, 'y': 16, 'elevation': 0,
+            'dest_map': 'MAP_OLDALE_TOWN_HOUSE1', 'dest_warp_id': '0'})
+        self.assertTrue(plan['legend'][plan['rows'][5][25]][1])
+        self.assertFalse(plan['legend'][plan['rows'][16][16]][1])
+        self.assertEqual(park_tile(plan, 25, 5), 645)
 
     def test_compact_frontage_keeps_two_clear_sidewalk_rows_and_service_anchors(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
@@ -193,7 +208,7 @@ class ParkResources(unittest.TestCase):
                 if (x, y) == (29, 6):
                     continue  # Existing clinic sign.
                 self.assertFalse(plan['legend'][plan['rows'][y][x]][1])
-        self.assertEqual([(w['x'], w['y']) for w in plan['warp_events']], [(13, 5), (32, 5)])
+        self.assertEqual([(w['x'], w['y']) for w in plan['warp_events']], [(13, 5), (32, 5), (16, 16)])
         for x, y in ((19, 4), (24, 4)):
             self.assertTrue(plan['legend'][plan['rows'][y][x]][1])
         self.assertEqual([f[:2] for f in FACADES if f[4] == 110], [(18, 2), (11, 20), (11, 13)])

@@ -39,6 +39,10 @@ class NativeTileFlips(unittest.TestCase):
     def test_lavender_frontage_fills_only_twelve_gap_cells(self):
         plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
         restored = json.loads(json.dumps(plan))
+        self.assertEqual(restored['legend'].pop('Q'), [660, False, 3])
+        self.assertEqual(restored['warp_events'].pop(), {
+            'x': 16, 'y': 16, 'elevation': 0,
+            'dest_map': 'MAP_OLDALE_TOWN_HOUSE1', 'dest_warp_id': '0'})
         for y in range(13, 17):
             row = restored['rows'][y]
             restored['rows'][y] = row[:11] + 'P'*6 + row[17:]

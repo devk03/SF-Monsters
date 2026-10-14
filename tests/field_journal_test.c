@@ -23,6 +23,7 @@ typedef uint8_t bool8;
 #define MAP_NUM(map) ((map) & 255)
 #define MAP_LITTLEROOT_TOWN 9
 #define MAP_OLDALE_TOWN 10
+#define MAP_OLDALE_TOWN_HOUSE1 0x200
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F 0x100
 #define MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB 0x104
 #define MAP_RUSTBORO_CITY_GYM 0xb03
@@ -127,8 +128,8 @@ int main(void) {
         assert(memcmp(&save,&before,sizeof(save))==0);
     }
     {
-        const u16 maps[]={9,0x100,10,0x104,0xb03};
-        const char *locations[]={"OUTER SUNSET","YOUR APARTMENT / SUNSET","SOUTH PARK / SOMA","SOUTH PARK FIELD CLINIC","COGNITION / SOUTH PARK"};
+        const u16 maps[]={9,0x100,10,0x104,0xb03,0x200};
+        const char *locations[]={"OUTER SUNSET","YOUR APARTMENT / SUNSET","SOUTH PARK / SOMA","SOUTH PARK FIELD CLINIC","COGNITION / SOUTH PARK","SEED ROOM / SOUTH PARK"};
         for(i=0;i<ARRAY_COUNT(maps);i++) {
             save.location.mapGroup=MAP_GROUP(maps[i]);save.location.mapNum=MAP_NUM(maps[i]);
             assert(strcmp((const char *)SFJournalLocation(),locations[i])==0);

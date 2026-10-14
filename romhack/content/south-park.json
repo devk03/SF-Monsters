@@ -109,6 +109,11 @@
       541,
       true,
       3
+    ],
+    "Q": [
+      660,
+      false,
+      3
     ]
   },
   "rows": [
@@ -128,7 +133,7 @@
     "FPPPPPRRRPPabcabcPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPdefdefPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPghfghfPP..............PPPPPPF",
-    "FPPPPPRRRPPijfijf...T..........T...PPPPF",
+    "FPPPPPRRRPPijfijQ...T..........T...PPPPF",
     "FPPPPPRRRPPPPPPP.............B......PPPF",
     "FPPPPPRRRPPPPPP..GG..................PPF",
     "FPPPPPRRRPPPPPP......................PPF",
@@ -158,6 +163,13 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_OLDALE_TOWN_HOUSE1",
       "dest_warp_id": "0"
     }
   ],

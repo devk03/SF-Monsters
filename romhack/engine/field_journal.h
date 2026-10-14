@@ -12,6 +12,7 @@ static const u8 sSFJournalNext[] = _("NEXT OBJECTIVE");
 static const u8 sSFJournalHelp[] = _("SELECT: MAP  B: MENU  START: FIELD");
 static const u8 sSFJournalSunset[] = _("OUTER SUNSET");
 static const u8 sSFJournalApartment[] = _("YOUR APARTMENT / SUNSET");
+static const u8 sSFJournalSeedRoom[] = _("SEED ROOM / SOUTH PARK");
 static const u8 sSFJournalPark[] = _("SOUTH PARK / SOMA");
 static const u8 sSFJournalClinic[] = _("SOUTH PARK FIELD CLINIC");
 static const u8 sSFJournalCognition[] = _("COGNITION / SOUTH PARK");
@@ -60,6 +61,9 @@ static u8 SFJournalObjective(void)
 
 static const u8 *SFJournalLocation(void)
 {
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_OLDALE_TOWN_HOUSE1)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_OLDALE_TOWN_HOUSE1))
+        return sSFJournalSeedRoom;
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_RUSTBORO_CITY_GYM)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_RUSTBORO_CITY_GYM))
         return sSFJournalCognition;

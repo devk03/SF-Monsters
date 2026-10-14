@@ -6673,3 +6673,66 @@ v66 public western frontage — October14,23:03UTC:
   Root continues integration preparation for alignment's bounded seed room;
   next exchange by23:25UTC. User stop October15,18:00 Pacific unchanged.
   No GitHub workflow run, DB migration, PR merge or new monitor.
+
+
+v67 optional seed room integration started — October14,23:07UTC:
+
+- Public remainsv66/Site57. Alignment owns only new seed-room JSON/script and
+  focused tests; root owns integration, native/browser checks and publication.
+  Unmanned8×8 community room reuses original apartment tiles and Ocean Commute
+  music, with coherent whole furniture groups, no bed, no inherited room graphics.
+- New entry16,16 in the butter frontage connects to OldaleTown_House1(2,0),
+  with exit/arrival warp3,7 facing north and clear inward aisle3,6.
+  Dedicated clone metatile660 preserves original
+  butter door pixels/palette without making every reused butter facade enterable.
+  Functional candidate uses native non-animated door behavior0x60; custom matching
+  door animation is explicitly unfinished and cannot be counted as parity.
+- Two environmental interactions refer to existing Roon sensor/window discovery
+  and held-berry care. No rewards, new flags, inventory changes or real-person
+  NPC invented for this room. Main quest/badge stays independent of entry/reading.
+- Acceptance: native/browser walk-in/read/return, all branch text fits and matches
+  existing quest states, original art/music bindings, six authored map parents,
+  Journal/map location, old Save compatibility and native Save/coldContinue in
+  room. All23 other frontage cells stay blocked; original butter doors stay
+  blocked. Room entry is an intentional doorway, never free walking under walls.
+  Human story/art/animation approval and complete sixteen-hub campaign stay open.
+
+
+v67 integration build repair — October14,23:13UTC:
+
+- First native build stopped before producing a BPS: the Sunset resource guard
+  assumed every authored map's layout name equals engine_map+_Layout. Native
+  OldaleTown_House1 actually references shared LAYOUT_HOUSE1. Root now resolves
+  each map's actual metadata layout ID, matching the existing map installer,
+  while retaining the check rejecting another active SF user of Petalburg art.
+  No guard was removed. First full local suite passed; native rebuild pending.
+- Room JSON/script/test handoff is frozen with all three peer hashes verified.
+  Root integration-focused Park/Journal/six-parent tests pass. Root owns all
+  further source/build/publication; alignment's15minute read-only integration
+  review ends by23:27UTC. Next check no later23:40UTC. Public staysv66/Site57.
+
+- Alignment finished read-only integration review23:13UTC: no blocker beyond
+  correcting the proposed arrival wording. Native non-door arrival remains at
+  room warp3,7 facing north; the clear3,6 aisle needs an inward step. Returning
+  to exterior0x60 door automatically steps16,16→16,17. Source/anchor/read-only
+  story review passes; root runtime checks remain pending. Peer task stopped.
+
+
+v67 source/native first-entry checkpoint — October14,23:17UTC:
+
+- Corrected drafttarget96d5b50698d5b91e36dbcd606404694312f28ec7e4c1630c24a0b0a5a223c662
+  builds with compiled creature255/cast40/intro5/map17 controls passing. Full
+  local suite passes after the actual-layout-ID repair, including the seven
+  source room checks and existing Park/Journal/six-parent protections.
+- Genuine ordinaryv66 C7 Save at16,17 (SHA
+  84ebbf0dafbb59c8a7352ae1e4524310d99953ee7ec06fda81e8263dec30cb19)
+  coldContinues with the new door collision, without a map exit to refresh it.
+  Normal Up enters room3,7(2,0); inward step reaches3,6. Actual native field and
+  care notes display readable first pages, using the existing prototype-recovered
+  and held-berry branches. Native return, Save/coldContinue and complete read-only
+  dialog comparison are being finalized. Browser/publication remain pending.
+- All original148 Park records/296 attribute bytes/512 palette bytes independently
+  match immutable compiledv66; dedicated record148 clones original133 exactly,
+  only newattribute0x1060. Unique8px graphic count497 remains unchanged.
+  Native room visual uses coherent original wood/walls/furniture; human review
+  remains pending. Source checkpoint does not claim parity or final acceptance.

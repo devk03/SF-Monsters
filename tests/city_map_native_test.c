@@ -65,7 +65,7 @@ int main(void) {
         if(cases[i].count)assert(found[0]==cases[i].first && found[cases[i].count-1]==cases[i].last);
     }
     const struct {u8 group,number,section,x,y;} locations[]={
-        {0,9,0,8,10},{1,0,0,8,10},{0,10,1,19,7},{1,4,1,19,7},{11,3,1,19,7}
+        {0,9,0,8,10},{1,0,0,8,10},{0,10,1,19,7},{1,4,1,19,7},{11,3,1,19,7},{2,0,1,19,7}
     };
     memset(&save,0xa5,sizeof(save));
     for(unsigned i=0;i<ARRAY_COUNT(locations);i++) {
@@ -80,5 +80,5 @@ int main(void) {
     save.location.mapGroup=0;save.location.mapNum=3;
     struct RegionMap before=region;
     assert(SFInitRegionMapPlayer()==FALSE && memcmp(&region,&before,sizeof(region))==0);
-    puts("SF habitat whitelist, all four encounter bounds, stale-count reset and five read-only player parents passed.");
+    puts("SF habitat whitelist, all four encounter bounds, stale-count reset and six read-only player parents passed.");
 }

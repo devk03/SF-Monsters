@@ -285,7 +285,8 @@ def apply_house_art(root, emerald, target):
     layouts = json.loads((emerald / 'data/layouts/layouts.json').read_text())['layouts']
     for name in json.loads((root / 'romhack/content/engine-probe.json').read_text())['maps']:
         other = json.loads((root / 'romhack/content' / name).read_text())
-        layout = next(entry for entry in layouts if entry['name'] == other['engine_map'] + '_Layout')
+        metadata = json.loads((emerald / ('data/maps/' + other['engine_map'] + '/map.json')).read_text())
+        layout = next(entry for entry in layouts if entry['id'] == metadata['layout'])
         if other['engine_map'] != plan['engine_map'] and layout['secondary_tileset'] == 'gTileset_Petalburg':
             raise ValueError('A second active SF map shares the facade tileset; review its references.')
     blocks, origins = remap_houses(plan, linked[offset:offset + capacity])
