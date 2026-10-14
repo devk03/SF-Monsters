@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
-| Remaining system gates | 677 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts and21 residual-phase scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4906,3 +4906,37 @@ Site42 native Flash validation deployment:
   guards pass for CRC/rotation/recovery/native slot choice, all24 Pokemon layouts,
   key normalization, all declared domains, time/stat bounds and corruption.
   Synthetic tests are not gameplay/save-transfer evidence.
+
+
+Actual desktop save-transfer cycle1:
+
+- Site42 localhost IAB rejects synthetic wrong-slot/truncated imports, then
+  exports exactly the original baseline131072 bytes (SHAfa2e377bf3153c6ecde01c
+  06567b6c30b8c098dde2ef05695b49563afa81e1c9). Evidence
+  roundtrip-v51-invalid-inputs/retention-result.json. Current progress retained.
+- Native counter5 → actual browser ordinary Save6 → native coldContinue and
+  ordinary Save7. All declared persistent domains match, including raw600-party
+  and33744-PC bytes, settings, flags/vars, money and decrypted inventory.
+  Cycle receipt roundtrip-v51-cycle-01/complete-cycle.json; source/core identity
+  and complete consecutive lineage in roundtrip-v51-actual-browser-ledger.json.
+- Count1/10 desktop direction subtest only. Public auth/isolation, other devices,
+  close/reopen persistence,50 campaign checkpoints and full save release gates
+  remain open. Cycle2 in progress; public guest origin untouched.
+
+
+Native item-effect checkpoint:
+
+- Main reviewed the alignment chat's three new files and independently reran
+  mechanics-v51-item-effects-main-review:34/34 reference/v51. Eight focused
+  schema/object/resource/controller/canary guards pass. Pinned native ABI and
+  actual Main.inBattle bitfield mask verified; fixed whole-mon oracles include
+  all600 party bytes, battle objects, inventory/save resources and exact RNG.
+- Healing/revival/cures/PP restoration include clamps, no-effect cases, toxic
+  counters, PPups and seven direct battle contexts. HP queries remain pending
+  without fabricated replies. No actual bag action/consumption, battle Revive
+  dispatch, UI/full turn or durable-save evidence claimed. Total711/57 doubles;
+  complete mechanics gate and all human full quality domains remain open.
+- Actual save-transfer cycle2 also passed native9 after browser8; cycle3 underway.
+  Isolated Site42 localhost guest only; public auth/device/full save gates open.
+- Alignment now reviews the smallest Stage B visual improvement read-only,
+  reporting by12:25UTC with a12:35UTC hardstop; no monitor/build/deploy.

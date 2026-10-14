@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **677 independently specified scenarios**, including
-**57 double-battle interactions**. All677 pass on the approved Emerald reference
+The catalogs contain **711 independently specified scenarios**, including
+**57 double-battle interactions**. All711 pass on the approved Emerald reference
 and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases, plus10 move-script and21 residual-phase scenarios. This is partial evidence.
+action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases, plus10 move-script,21 residual-phase and34 item-effect scenarios. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -408,3 +408,29 @@ Eight focused units and main native rerun `mechanics-v51-residual-main-review`
 pass21/21 both ROMs. Native living party objects prevent unrelated team-loss
 decisions; ACKs do not synchronize party HP. No move actions, move-end dispatch,
 fainting, full turn, presentation or durable-save proof is claimed. Total677/57.
+
+
+## Native healing and PP item effects
+
+`item-effects.json` specifies34 independent cases for native
+`ExecuteTableBasedItemEffect`/`PokemonUseItemEffects`: Potion/Super/Max healing,
+clamps/full/fainted rejection, field Revive/MaxRevive, every major status cure,
+toxic-counter cleanup, FullRestore and selected/all-move PP restoration with
+PPUps. Seven battle contexts cover direct HP/status/PP synchronization, healing
+count saturation, Awakening/Nightmare and transformed PP exclusion.
+
+Each case constructs fixed-PID Rattata through native CreateMon/SetMonData, then
+copies it into the actual player-party slot. Independently specified complete
+100-byte objects, all600 party bytes,352 battle-mon bytes, save blocks, pointers,
+controller buffers/results and RNG must match. Eight scratch boundary guards
+and pinned agbcc layout/Main.inBattle mask probes protect the setup. Native HP
+healing queries remain pending: no controller response or inventory consumption
+is fabricated. Eight focused guard tests reject missing oracles, duplicate
+effective inputs, unreviewed paths, truncated reads, changed resources and
+incorrect return/query behavior.
+
+Main independently reran both immutable reference and public v51 cartridges:
+`mechanics-v51-item-effects-main-review`,34/34. These are effect-function and
+controlled-object checks. Actual bag-use actions, consumption, controller UI,
+battle Revive dispatch, complete turns and durable saving remain unproved.
+The complete mechanics gate remains open; total711 scenarios/57 doubles.

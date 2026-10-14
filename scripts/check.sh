@@ -33,6 +33,7 @@ python3 tests/capture_fixture_test.py
 python3 tests/delivery_fixture_test.py
 python3 tests/move_pipeline_fixture_test.py
 python3 tests/residual_fixture_test.py
+python3 tests/item_effect_fixture_test.py
 python3 tests/flash_audit_test.py
 python3 tests/frame_storage_test.py
 python3 tests/interface_text_test.py
