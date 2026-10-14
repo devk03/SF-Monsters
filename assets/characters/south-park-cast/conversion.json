@@ -71,9 +71,10 @@
       "common_scale": 0.0625,
       "files": {
         "source.png": "311d3b737354763e18c4fa5662edf8cbbca8c39764e74837f53627f32ce627cd",
-        "walk.png": "d1540b90a3f65f9dee54620dd05d7960f5fd50a215a7564a8204d3f4d01ca218",
+        "walk.png": "52bd57e9e934330411b8abb8c305c8825f8c6cec9a5e7f680c78ea2ee0b3a131",
         "walk.4bpp": "0d11fb8eb828dc81b4c90ab9be5e0725f2734ecbc3b79c61ee2999c74abc3363",
-        "native-gallery.png": "c667f7dd89126e43d56532a42f9d984112fdd93fe29a4736a32e6d4d901f0492"
+        "native-gallery.png": "3f1dcfb056e83c871e425ed0cf0ced47876bcfc4a6bdc220c042217a2df9bb6d",
+        "quantization-palette.gbapal": "2ebd0b851507a271fb7841b4c78cd0292e158d10f15ac5f334177a1f8be03558"
       }
     },
     {
@@ -147,9 +148,87 @@
       "common_scale": 0.061381074168797956,
       "files": {
         "source.png": "78029e441459002473b2f643ac9628d3108087ea50642d467c88675424d20050",
-        "walk.png": "bbf94b318d14c0315f671d26f02c6d044c500af0e1c79755e6be2e3f15f21752",
+        "walk.png": "bbbbe77f12e67ce68490b3ca900ef12014d5817065101aa376f6cb585e7d3c1f",
         "walk.4bpp": "c29a2ff5f349b0fb5f8c14e79e891221b18da4bba67b19f450ebe924c5dc8bb6",
-        "native-gallery.png": "30c7b4ccb7d3d42c85aab3675de8f0913c7f2cc210bcfd667e996938e2bb08ff"
+        "native-gallery.png": "69ba0a280775653f01c6e863565e193c65792db62bc9c7a1d232d6b21a2dbcf9",
+        "quantization-palette.gbapal": "2ebd0b851507a271fb7841b4c78cd0292e158d10f15ac5f334177a1f8be03558"
+      }
+    },
+    {
+      "slug": "garry-tan",
+      "name": "Garry Tan",
+      "symbol": "SFGarryTan",
+      "graphics": "OBJ_EVENT_GFX_SF_GARRY_TAN",
+      "reserved_slot": "OBJ_EVENT_GFX_GENTLEMAN",
+      "script": "SF_GarryTan",
+      "map": "south-park.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          73,
+          73,
+          269,
+          458
+        ],
+        [
+          409,
+          73,
+          607,
+          458
+        ],
+        [
+          754,
+          73,
+          952,
+          458
+        ],
+        [
+          74,
+          569,
+          272,
+          952
+        ],
+        [
+          410,
+          569,
+          611,
+          952
+        ],
+        [
+          754,
+          569,
+          952,
+          952
+        ],
+        [
+          75,
+          1048,
+          285,
+          1449
+        ],
+        [
+          410,
+          1048,
+          624,
+          1449
+        ],
+        [
+          753,
+          1048,
+          963,
+          1449
+        ]
+      ],
+      "common_scale": 0.059850374064837904,
+      "files": {
+        "source.png": "0db4bc3b514ec4ba3078e23b4fda1d5d61f127c26406ecdf50c59896b49d0e55",
+        "walk.png": "4999c748ffeff27836b682d8766a22a5491c799892569b3e0a610a7b30828c1a",
+        "walk.4bpp": "dc0b33434280d46fd7534b89e8646406c662c616bd9ff512adaf9e4465da63a4",
+        "native-gallery.png": "a14155ada382fa68fad2117731df4877ffda8bb8679bda28b1a6b4d8ac166e7d",
+        "native-cleanup.json": "68dbbac5dc412581cee0efd9f6c49c9621911f8ff5ee987b5104657bead75298"
       }
     }
   ],
@@ -173,6 +252,7 @@
   "east_view": "native horizontal flip of original west frames",
   "palette_tag": "0x1126",
   "palette_slot": "PALSLOT_NPC_SPECIAL",
-  "palette_sha256": "2ebd0b851507a271fb7841b4c78cd0292e158d10f15ac5f334177a1f8be03558",
-  "quality_approval": "pending"
+  "palette_sha256": "c55fcf5cb84f61317fa911d2141cc15c6e8ce10f613c42bf7cc22c2211350bdd",
+  "quality_approval": "pending",
+  "palette_policy_sha256": "0d0b07d6e74221d100c6f3ddcaf1a510ea520bd3c297959db30e4fa7c347ed7d"
 }

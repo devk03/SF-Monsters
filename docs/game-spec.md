@@ -6439,3 +6439,33 @@ v64 / Site55 verified and published — October14,22:25UTC:
   Remaining Jonathan/Dylan/Garry field placeholders are visible first-slice art
   gaps. Root owns research/art/implementation/build/publication; next check by
   22:54UTC. October15,18:00 Pacific stop remains active.
+
+
+Original Garry candidate and city-map access collaboration — October14,22:32UTC:
+
+- v64 remains public. Existing Garry is the sole authored SF owner of Gentleman48
+  at South Park34,23. Original nine-pose public-person caricature uses his official
+  YC portrait appearance and our original Karpathy atlas as style reference.
+  Photo reference stays private; original generated source and exact prompt tracked.
+  Outfit/game dialogue are fictional. No NPC/position/script/movement expansion.
+- Initial fixed32-byte South Park palette reproduces both prior clinic characters'
+  packed PNG/gallery exactly. First native Garry pass makes overshirt merge with
+  skin. Deliberate followup uses only previously unused14/15 for cream and gray;
+  snapshots preserve original quantization for Justine/Patrick. First28 palette
+  bytes, both2304-byte sprites and all their visible RGBA pixels stay exact.
+  Whole shared palette/PNG metadata are not claimed identical after this change.
+- A232-edit pinned native head pass stabilizes south/west head positions across
+  steps and separates spectacle lens gaps, cheeks and beard. North and all body/
+  footstep pixels y19+ remain untouched. Source/palette/before/after/every pixel
+  are hash-pinned by existing cleanup tooling; no new art framework. Human
+  likeness/readability/animation approval remains pending.
+- Existing slot48 can stay numeric48 on older saves; new pointer/appearance and
+  special palette load will require actual coldContinue/clinic/save tests. Native
+  engine build is deliberately held while the alignment chat owns separate files.
+- Alignment's22:29 exchange prioritizes discoverable city-map access alongside
+  art: finite30minute implementation task owns field_journal.h/field_journal.py
+  and focused map-bridge/tests only, with no builds/deploy/commits. Root owns
+  cast/content/art and all integration review/build/spec/publication. Intended
+  JOURNAL SELECT→native SF MAP preserves eight menu rows/Save position and save
+  schema; short SF MAP title must fit native seven-tile window. Source/acceptance
+  pending. Next alignment exchange by22:59UTC; user stop October15,18:00 Pacific.

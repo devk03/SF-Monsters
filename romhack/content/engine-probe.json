@@ -1,9 +1,9 @@
 {
-  "version": "0.0.64-sf-habitat-map-preview",
+  "version": "0.0.65-garry-field-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Geographic SF habitat map candidate and read-only JOURNAL show the next opening-chapter objective; eight named field-sprite candidates include Naval and the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
+  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Geographic SF habitat map candidate and read-only JOURNAL show the next opening-chapter objective; nine named field-sprite candidates include Garry, Naval and the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "maps": [
     "sunset.json",
     "apartment.json",

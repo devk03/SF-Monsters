@@ -183,7 +183,7 @@
       "id": 3,
       "x": 34,
       "y": 23,
-      "graphics": "OBJ_EVENT_GFX_GENTLEMAN",
+      "graphics": "OBJ_EVENT_GFX_SF_GARRY_TAN",
       "script": "SF_GarryTan"
     }
   ],

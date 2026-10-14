@@ -22,8 +22,9 @@ GROUPS = ((ASSET, 'SFCognitionCast', TAG, '0x1125'),
            'OBJ_EVENT_PAL_TAG_SF_SUNSET_CAST', '0x1127'))
 # The six unused doll slots are occupied. Reuse reviewed stock appearances for
 # their explicit SF owners; keep the static table and native dynamic IDs stable.
-# PROF_BIRCH has no authored SF owner; GENTLEMAN remains available to Garry.
-AUTHORED_REPLACEMENTS = {'OBJ_EVENT_GFX_SCIENTIST_1': ('sunset.json', 'SF_Karpathy'),
+# Each replacement is restricted to its named existing SF owner.
+AUTHORED_REPLACEMENTS = {'OBJ_EVENT_GFX_GENTLEMAN': ('south-park.json', 'SF_GarryTan'),
+                         'OBJ_EVENT_GFX_SCIENTIST_1': ('sunset.json', 'SF_Karpathy'),
                          'OBJ_EVENT_GFX_PROF_BIRCH': ('sunset.json', 'SF_Naval')}
 
 

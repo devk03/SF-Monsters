@@ -17,12 +17,23 @@
       "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PIKACHU_DOLL",
       "script": "SF_PatrickShop",
       "map": "services.json"
+    },
+    {
+      "slug": "garry-tan",
+      "name": "Garry Tan",
+      "symbol": "SFGarryTan",
+      "graphics": "OBJ_EVENT_GFX_SF_GARRY_TAN",
+      "reserved_slot": "OBJ_EVENT_GFX_GENTLEMAN",
+      "script": "SF_GarryTan",
+      "map": "south-park.json"
     }
   ],
-  "outfits": "Fictional game costumes; clinic roles and dialogue are invented.",
+  "outfits": "Fictional game costumes; clinic roles and all game dialogue are invented.",
   "source_basis": [
     "https://a16z.com/author/justine-moore/",
     "https://www.kalzumeus.com/about/",
-    "https://businessofsoftware.org/talks/speakers/patrick-mckenzie/"
+    "https://businessofsoftware.org/talks/speakers/patrick-mckenzie/",
+    "https://www.ycombinator.com/people/garry-tan",
+    "https://blog.garrytan.com/about-me"
   ]
 }
