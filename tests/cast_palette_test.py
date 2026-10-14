@@ -16,7 +16,9 @@ class SharedCastPalette(unittest.TestCase):
         parent = ROOT/'.tools/cast-palette-tests'
         parent.mkdir(exist_ok=True)
         self.directory = Path(tempfile.mkdtemp(prefix='case-', dir=parent))
-        self.old = (ROOT/'assets/characters/sunset-cast/cast.gbapal').read_bytes()
+        source = ROOT/'assets/characters/sunset-cast/roon/quantization-palette.gbapal'
+        self.old = source.read_bytes() if source.exists() else (
+            ROOT/'assets/characters/sunset-cast/cast.gbapal').read_bytes()
 
     def document(self):
         return {'format': 1, 'intent': 'Use an unused opaque color for the next character.',

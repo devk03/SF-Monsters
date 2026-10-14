@@ -5245,3 +5245,24 @@ Next Stage B cast improvement, Karpathy source candidate:
   complete. Karpathy still stock scientist in publicv54/Site45. Next checks are
   native pose readability, reserved-slot ownership, palette preservation, normal
   interaction and older-save refresh. No new approval inferred; full goal active.
+
+Karpathy native-art source integration:
+
+- Registered original nine16x32 Karpathy poses in Sunset's existing palette group.
+  Shared palette changes only unused index15 toRGB5(31,27,23); Roon's exact packed
+  walking hash remains e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc.
+  Roon's old source palette and18-pixel recipe remain pinned; only unused PNG
+  palette metadata changes. Other five cast assets/palettes remain untouched.
+- All six unused doll slots are occupied, so this reviewed replacement retains
+  Karpathy's existing scientist slot46.239-entry graphics table and dynamic ID
+  ranges stay unchanged. The allowlist permits onlySF_Karpathy/sunset.json;
+  registry rejects another authored NPC using the old scientist appearance.
+  Quest/mentor/party-healing scripts, positions and movement stay unchanged.
+- Ten cast checks, four palette checks, five cleanup checks and fullcheck.sh
+  pass. Independent source/palette/pose audit pending; native build, ordinary
+  mentor dialogue/healing, older-save/cache and compiled preservation are next.
+  Public staysv54/Site45. No art/walking/domain approval inferred from conversion.
+- Public persona reference checked2026-10-14:https://karpathy.ai/ identifies
+  Karpathy as an AI researcher and educator. Game outfit/mentor role are fiction;
+  source photos/site images were not copied. Atlas source/prompts remain original.
+  Goal active; next alignment check no later14:30UTC.

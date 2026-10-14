@@ -50,3 +50,17 @@ The native special NPC palette/reflection slot is shared. All original cast
 visible on one authored map must belong to one palette group; the registry
 rejects independently paletted groups on the same map before compilation.
 Adding later Twitter cast members should extend that map's existing group.
+
+Karpathy's original navy-crewneck mentor atlas extends the Sunset group. The
+group's `palette-policy.json` preserves every Roon-used color and assigns the
+previously unused duplicate-black index15 to a skin/sneaker highlight. Roon's
+`quantization-palette.gbapal` retains its original quantization/cleanup oracle;
+the converter rejects changes to any color used by an existing pose. His packed
+walking bytes remain identical. Optional palette-policy and quantization files
+are included in conversion integrity checks, like native cleanup recipes.
+
+All six unused doll slots are occupied. Karpathy replaces his existing authored
+SCIENTIST_1 appearance at native slot46, keeping the239-entry table and dynamic
+IDs unchanged. This one reviewed replacement is limited to SF_Karpathy in
+Sunset; registry validation rejects another authored owner of the old appearance.
+The fictional mentor outfit and all animation/art remain pending human approval.

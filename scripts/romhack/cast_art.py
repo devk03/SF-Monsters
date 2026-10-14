@@ -19,6 +19,9 @@ GROUPS = ((ASSET, 'SFCognitionCast', TAG, '0x1125'),
            'OBJ_EVENT_PAL_TAG_SF_SOUTH_PARK_CAST', '0x1126'),
           ('assets/characters/sunset-cast', 'SFSunsetCast',
            'OBJ_EVENT_PAL_TAG_SF_SUNSET_CAST', '0x1127'))
+# The six explicitly unused doll slots are occupied. Replace this one stock
+# appearance only for its existing authored SF owner; keep native dynamic IDs.
+AUTHORED_REPLACEMENTS = {'OBJ_EVENT_GFX_SCIENTIST_1': ('sunset.json', 'SF_Karpathy')}
 
 
 def catalog(root, asset=ASSET):
@@ -30,8 +33,10 @@ def catalog(root, asset=ASSET):
     for entry in entries:
         if not re.fullmatch('[a-z]+(?:-[a-z]+)*', entry['slug']):
             raise ValueError('Cast asset names must be safe paths.')
-        if not re.fullmatch('OBJ_EVENT_GFX_UNUSED_[A-Z_0-9]+', entry['reserved_slot']):
-            raise ValueError('Only explicitly unused native slots may be reserved.')
+        slot = entry['reserved_slot']
+        if not re.fullmatch('OBJ_EVENT_GFX_UNUSED_[A-Z_0-9]+', slot) and \
+           AUTHORED_REPLACEMENTS.get(slot) != (entry['map'], entry['script']):
+            raise ValueError('Reserve an unused slot or its reviewed authored SF appearance.')
     return entries
 
 
@@ -172,6 +177,11 @@ def registered_groups(root):
             owners = [npc for npc in plan['npcs'] if npc['script']==entry['script']]
             if len(owners)!=1 or owners[0]['graphics']!=entry['graphics']:
                 raise ValueError('Cast event must use its registered graphics: '+entry['slug'])
+            if entry['reserved_slot'] in AUTHORED_REPLACEMENTS:
+                for path in (root/'romhack/content').glob('*.json'):
+                    for npc in json.loads(path.read_text()).get('npcs', []):
+                        if npc.get('graphics') == entry['reserved_slot']:
+                            raise ValueError('Stock cast appearance still has another authored owner.')
     return groups
 
 

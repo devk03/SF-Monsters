@@ -9,10 +9,51 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
-from cast_art import apply_cast, source_cells, GROUPS, registered_groups, verified_cast
+from cast_art import apply_cast, source_cells, GROUPS, registered_groups, verified_cast, catalog
 
 
 class NativeCast(unittest.TestCase):
+    def test_karpathy_shares_palette_without_changing_roons_cartridge_pixels(self):
+        import hashlib
+        directory = ROOT/'assets/characters/sunset-cast'
+        source = (directory/'roon/quantization-palette.gbapal').read_bytes()
+        shared = (directory/'cast.gbapal').read_bytes()
+        self.assertEqual(shared[:30], source[:30])
+        self.assertEqual(struct.unpack_from('<H', shared, 30)[0], 31 | 27 << 5 | 23 << 10)
+        roon = Image.open(directory/'roon/walk.png')
+        self.assertNotIn(15, roon.tobytes())
+        self.assertEqual(hashlib.sha256((directory/'roon/walk.4bpp').read_bytes()).hexdigest(),
+                         'e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc')
+        karpathy = Image.open(directory/'karpathy/walk.png')
+        self.assertIn(15, karpathy.tobytes())
+        self.assertNotEqual(karpathy.tobytes(), roon.tobytes())
+
+    def test_stock_slot_replacement_cannot_claim_another_map_or_script(self):
+        parent = ROOT/'.tools/cast-ownership-tests'; parent.mkdir(exist_ok=True)
+        folder = Path(tempfile.mkdtemp(prefix='case-', dir=parent))
+        asset = folder/'assets/characters/sunset-cast'; asset.mkdir(parents=True)
+        entry = next(e for e in catalog(ROOT, 'assets/characters/sunset-cast')
+                     if e['slug']=='karpathy')
+        for change in ({'map':'services.json'}, {'script':'SF_AnotherPerson'},
+                       {'reserved_slot':'OBJ_EVENT_GFX_MAN_1'}):
+            (asset/'cast.json').write_text(json.dumps({'characters':[dict(entry, **change)]}))
+            with self.assertRaisesRegex(ValueError, 'reviewed authored'):
+                catalog(folder, 'assets/characters/sunset-cast')
+
+    def test_replaced_stock_graphics_cannot_recolor_a_second_authored_npc(self):
+        import shutil
+        parent = ROOT/'.tools/cast-ownership-tests'; parent.mkdir(exist_ok=True)
+        folder = Path(tempfile.mkdtemp(prefix='case-', dir=parent))
+        (folder/'assets').symlink_to(ROOT/'assets', target_is_directory=True)
+        content = folder/'romhack/content'
+        shutil.copytree(ROOT/'romhack/content', content)
+        path = content/'services.json'; plan = json.loads(path.read_text())
+        plan['npcs'].append({'id':99,'x':1,'y':1,'graphics':'OBJ_EVENT_GFX_SCIENTIST_1',
+                              'script':'SF_UnrelatedScientist'})
+        path.write_text(json.dumps(plan))
+        with self.assertRaisesRegex(ValueError, 'another authored owner'):
+            registered_groups(folder)
+
     def test_roons_corrected_west_steps_alternate_and_wander_area_is_clear(self):
         directory = ROOT/'assets/characters/sunset-cast/roon'
         image = Image.open(directory/'walk.png')

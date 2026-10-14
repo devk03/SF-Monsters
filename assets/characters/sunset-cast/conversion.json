@@ -71,10 +71,87 @@
       "common_scale": 0.06,
       "files": {
         "source.png": "360a74014041d011511fc9cacc8f760a329fce15c7ff76289688c16cdfd79cf5",
-        "walk.png": "bebec5defb3835b20027c5f89f9d5852e53fac38408eff7a10af03297b38df71",
+        "walk.png": "bd644ab2087d093efcccee89b354d20a3f013c3acc6db0c1623aea3efb267989",
         "walk.4bpp": "e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc",
-        "native-gallery.png": "ac95384ece28f7e32b24785d86ec2ed9395ed09b0b794fc80786dd1bb976710b",
-        "native-cleanup.json": "ba47fba8fad7ac27403c1dabcd317037612de7bebd08d8c1034e856c8579ae37"
+        "native-gallery.png": "37134aeb5e673472bbbcf12e3833f4c4b3f8edfbb2ee54bbc3d7430c82a30cdb",
+        "native-cleanup.json": "ba47fba8fad7ac27403c1dabcd317037612de7bebd08d8c1034e856c8579ae37",
+        "quantization-palette.gbapal": "9eb83182e5b3141187d10de06dff06b28894ffacd5b22c81c65c40269e3089a6"
+      }
+    },
+    {
+      "slug": "karpathy",
+      "name": "Andrej Karpathy",
+      "symbol": "SFKarpathy",
+      "graphics": "OBJ_EVENT_GFX_SF_KARPATHY",
+      "reserved_slot": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "script": "SF_Karpathy",
+      "map": "sunset.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          71,
+          70,
+          265,
+          446
+        ],
+        [
+          408,
+          70,
+          604,
+          446
+        ],
+        [
+          756,
+          70,
+          949,
+          446
+        ],
+        [
+          77,
+          567,
+          272,
+          942
+        ],
+        [
+          418,
+          567,
+          611,
+          942
+        ],
+        [
+          761,
+          567,
+          955,
+          942
+        ],
+        [
+          71,
+          1044,
+          281,
+          1445
+        ],
+        [
+          407,
+          1044,
+          619,
+          1445
+        ],
+        [
+          756,
+          1044,
+          967,
+          1445
+        ]
+      ],
+      "common_scale": 0.059850374064837904,
+      "files": {
+        "source.png": "a60e087653530020fd75052419432d805497d92bac2f9be9b3e8df176f97d940",
+        "walk.png": "a6bb7f963df0d744f5190136344dda6c5cb6f6bc6c3b4fda0edd55a2235a9f95",
+        "walk.4bpp": "1404f71b8b5aaad97a4327d010b34ce5ad854798caac92bc632365d26c8997ba",
+        "native-gallery.png": "8a53cb133f293a1c4626d57934d8020560232b3e90ce2a35cbd2e31e42f66a8b"
       }
     }
   ],
@@ -98,6 +175,7 @@
   "east_view": "native horizontal flip of original west frames",
   "palette_tag": "0x1127",
   "palette_slot": "PALSLOT_NPC_SPECIAL",
-  "palette_sha256": "9eb83182e5b3141187d10de06dff06b28894ffacd5b22c81c65c40269e3089a6",
-  "quality_approval": "pending"
+  "palette_sha256": "f4fc7a765270447d16a2b604e00296d749b7e35aad7d408add2ba586b4c0aad5",
+  "quality_approval": "pending",
+  "palette_policy_sha256": "61fa478fd61972e25d5cfa7c2f8bd1eb2cff04f3f2fb31741b61bf556c1d6121"
 }
