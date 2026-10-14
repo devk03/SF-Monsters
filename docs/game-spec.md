@@ -4119,3 +4119,25 @@ Facade edge regression checkpoint (local candidate v46):
   blocker, confirmed bottom-row indices and per-half animation behavior. Further
   South Park doorway/corner replays are pending; no full visual approval inferred.
 - Public remainsv44 until the denser-frontage candidate passes local checks.
+
+
+Compact Sunset block checkpoint (candidate v47):
+
+- Shifted only the second residential column fromx22 tox19. Six houses remain;
+  the gap narrows from four16px tiles to one. First column, apartment entrance
+ 16,8, central rows16–23, starter/NPC coordinates and scripts remain unchanged.
+  Residential side streets move tox25–27; no campaign or balance changes.
+- Independent layout review found all652 non-NPC walkable tiles connected,
+  every road cell accepted by the selector, and all existing events accessible.
+ 45 formerly walkable coordinates are newly occupied; existing resume resolver
+  has safe reachable destinations for all45 in the reviewer's static check.
+- Actual v46 controller save completed at19,13 (Flash section/counter verified).
+  Cold Continue on v47 relocates to18,13, preserving party, HP/PP, money3500,
+  Potions3 and progression. Earlier confirmation attempts stopped mid-save;
+  retained as diagnostics, not counted as relocation evidence.
+-1728-frame walking/running/apartment-route replay matches native/WASM every
+  RGB frame, PCM sample and Flash byte. Supported pre-change coast save stays
+ 4,8; earned-badge save stays8,4 with badge/reward state intact.
+- Local check.sh passes. South Park doorway/annex edge replay is underway.
+  Screenshot comparison: .tools/benchmarks/compact-v47-frontage-review.png.
+  Native art/lighting/variety still need human review; full approvals remain0/11.

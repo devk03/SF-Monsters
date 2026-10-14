@@ -19,14 +19,14 @@ class HouseArt(unittest.TestCase):
         plan = json.loads((ROOT / 'romhack/content/sunset.json').read_text())
         original = encode_layout(plan)[2]
         changed, origins = remap_houses(plan, original)
-        self.assertEqual(origins, [[13, 4], [22, 4], [13, 10], [22, 10], [13, 25], [22, 25]])
+        self.assertEqual(origins, [[13, 4], [19, 4], [13, 10], [19, 10], [13, 25], [19, 25]])
         before, after = struct.unpack('<1024H', original), struct.unpack('<1024H', changed)
         differences = {index for index, values in enumerate(zip(before, after)) if values[0] != values[1]}
         expected = {(y + dy) * 32 + x + dx for x, y in origins for dy in range(5) for dx in range(5)}
         self.assertEqual(differences, expected)
         self.assertTrue(all(a & 0xfc00 == b & 0xfc00 for a, b in zip(before, after)))
         self.assertEqual(after[4 * 32 + 13] & 0x3ff, 612)
-        self.assertEqual(after[29 * 32 + 26] & 0x3ff, 636)
+        self.assertEqual(after[29 * 32 + 23] & 0x3ff, 636)
         with self.assertRaises(ValueError):
             remap_houses(plan, bytes(len(original)))
 
