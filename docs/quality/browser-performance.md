@@ -61,3 +61,13 @@ These are quantized context-clock observations, not hardware/speaker timestamps.
 A discrepancy is retained as evidence; it does not select a cause or adjust pitch
 or pacing. Historical receipts without start anchors remain explicitly unavailable
 for this comparison. The anchor calls run only when diagnostics start/close.
+
+
+The new sink candidate accumulates40ms of source-rate PCM once before initial
+playback and after an explicit playback reset. This deliberately adds audio delay
+(plus chunk/quantum alignment); guest execution, video pacing and interpolation
+ratio remain unchanged. It never reprimes after starvation. A durable playback
+flag separates initial warmup from all later underruns, across diagnostic epochs
+and source-rate changes. No-PCM output stays visible as warmup/playbackStarted=false,
+not a continuity pass. This cushion does not correct a sustained audio-clock deficit.
+Actual browser long-run/transition checks and listening approval remain required.

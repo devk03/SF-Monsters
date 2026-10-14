@@ -127,7 +127,10 @@ test('playback reset acknowledges its epoch and removes stale PCM and consumptio
     assert.deepEqual(sink.render(16), [Array(16).fill(0), Array(16).fill(0)]);
     assert.equal(sink.messages.at(-1), ack, 'An empty reset queue does not emit stale consumption');
 
-    sink.send(marker(2048, -8192, -16384));
+    sink.send(marker(32, -8192, -16384));
+    assert.deepEqual(sink.render(16), [Array(16).fill(0), Array(16).fill(0)],
+        'A real playback reset starts a fresh prefill, without consuming new PCM early');
+    sink.send(marker(2016, -8192, -16384));
     const after = sink.render(1024);
     assert.ok(after[0].every(value => value === -.25), 'Only new left-channel PCM survives');
     assert.ok(after[1].every(value => value === -.5), 'Only new right-channel PCM survives');
@@ -138,7 +141,7 @@ test('playback reset acknowledges its epoch and removes stale PCM and consumptio
 test('starting a diagnostic epoch observes already queued PCM without flushing playback', () => {
     const sink = worklet();
     sink.send({ rate: 48000 });
-    sink.send(marker(8, 8192, -8192));
+    sink.send(marker(2048, 8192, -8192));
     assert.deepEqual(sink.render(1), [[.25], [-.25]]);
     sink.send({ type: 'diagnostics', enabled: true, epoch: 9 });
     assert.deepEqual(sink.render(4), [Array(4).fill(.25), Array(4).fill(-.25)]);
@@ -148,8 +151,56 @@ test('starting a diagnostic epoch observes already queued PCM without flushing p
     assert.equal(report.epoch, 9);
     assert.equal(report.warmupOutputFrames, 0);
     assert.equal(report.underrunOutputFrames, 0);
-    assert.equal(report.queueDepthFrames, 3);
+    assert.equal(report.queueDepthFrames, 2043);
     assert.equal(sink.messages.filter(value => value?.type === 'playback-reset').length, 0);
+});
+
+test('startup waits for40ms of source PCM, reports warmup and preserves the first sample', () => {
+    for (const rate of [24000, 44100, 48000, 65536, 131072]) {
+        const sink = worklet(), target = Math.ceil(rate * .04);
+        sink.send({ rate });
+        sink.send({ type: 'diagnostics', enabled: true, epoch: 1 });
+        sink.send(marker(target - 1, 8192, -8192));
+        assert.deepEqual(sink.render(128), [Array(128).fill(0), Array(128).fill(0)]);
+        sink.send(marker(1, 8192, -8192));
+        assert.deepEqual(sink.render(1), [[.25], [-.25]], `source rate=${rate}`);
+        sink.send({ type: 'diagnostics', enabled: false, epoch: 1 });
+        const report = sink.messages.at(-1);
+        assert.equal(report.prefillTargetSourceFrames, target);
+        assert.equal(report.warmupOutputFrames, 128);
+        assert.equal(report.underrunOutputFrames, 0);
+        assert.equal(report.playbackStarted, true);
+    }
+});
+
+test('starvation never reprimes or becomes hidden warmup after playback starts', () => {
+    const sink = worklet();
+    sink.send({ rate: 48000 });
+    sink.send({ type: 'diagnostics', enabled: true, epoch: 1 });
+    sink.send(marker(1920, 8192, -8192));
+    sink.render(1921);
+    sink.send(marker(16, -8192, 8192));
+    sink.send({ rate: 131072 }); // A live source-rate change must not re-prime.
+    assert.deepEqual(sink.render(2), [[.25, -.25], [-.25, .25]],
+        'New PCM resumes immediately across a rate change, including the retained endpoint');
+    sink.send({ type: 'diagnostics', enabled: false, epoch: 1 });
+    const report = sink.messages.at(-1);
+    assert.equal(report.warmupOutputFrames, 0);
+    assert.equal(report.underrunOutputFrames, 2);
+});
+
+test('a diagnostic started on a depleted playing sink still counts real starvation', () => {
+    const sink = worklet();
+    sink.send({ rate: 48000 });
+    sink.send(marker(1920, 8192, -8192));
+    sink.render(1920);
+    sink.send({ type: 'diagnostics', enabled: true, epoch: 2 });
+    sink.render(128);
+    sink.send({ type: 'diagnostics', enabled: false, epoch: 2 });
+    const report = sink.messages.at(-1);
+    assert.equal(report.playbackStarted, true);
+    assert.equal(report.warmupOutputFrames, 0);
+    assert.equal(report.underrunOutputFrames, 128);
 });
 
 // Rejection of delayed playback-reset ACKs belongs to the SDK pending-epoch

@@ -5714,3 +5714,26 @@ Next native visual candidate — quieter Sunset lawn:
   these three independently checked authored cells with preserved original-art
   fixtures. Palettes/attributes and reserved-door capacity checks remain strict.
   The original failed check log is retained; revised six pack/decode tests pass.
+
+
+One-time playback cushion candidate:
+
+- Sink now waits for40ms of source-rate PCM at boot/actualplayback-reset only.
+  Threshold fits below the ring capacity; no extra guestframes, rate/pitch or wall
+  video pacing changes. Deliberate audio delay includes chunk/quantum alignment.
+  Durable started flag survives diagnostic epochs and live rate changes; later
+  starvation always remains an underrun and never triggers another prefill.
+- Ten reset/source-rate/marker tests and sink interpolation/observer checks pass.
+  Audits expose initial warmup and playbackStarted=false, so no-PCM startup is
+  not misrepresented as a continuity pass. Full local checks pass. Actual browser
+  candidate validation remains pending; this does not fix the sustained IAB deficit.
+- v57draft target22beceecbe5d5edf607a3411fa19af4585a51e92a7ddd1cf1c6bbb1b54df1afd
+  builds normally. Existing ordinaryFlash coldContinue succeeds atSunset28,21 with
+  party2. Native/WASM final38400RGBpixels,16,467,520PCMbytes and131072Flashbytes
+  match exactly. RawRGBA buffers differ only in unused alpha(native0/WASM255);
+  whole-buffer failed comparison is preserved separately from proper RGB proof.
+- First ordinarySave1→2 persists existing legacyContinue revision0→8/TVwatchflag
+  changes; strict stationary audit correctlyfails and is retained. ActualRAM already
+  contains those values beforeSave; party/PC remain exact. A second ordinarySave2→3
+  passes the unmodified full declared-domain audit with no changed domains. Native
+  coldreload of that normalized realSave is in progress. No new full roundtrip claim.

@@ -29,19 +29,22 @@ const normal = sink(), observed = sink();
 observed.send({ type: 'diagnostics', enabled: true });
 for (const device of [normal, observed]) {
   device.send({ rate: 24000 });
-  device.send(new Int16Array([0, 0, 8192, -8192, 16384, -16384, 24576, -24576]));
+  const samples = new Int16Array(960 * 2); //40ms at the declared source rate.
+  samples.set([0, 0, 8192, -8192, 16384, -16384, 24576, -24576]);
+  device.send(samples);
 }
 const expected = [[0, .125, .25, .375], [0, -.125, -.25, -.375]];
 assert.deepEqual(normal.render(4), expected, 'half-rate linear interpolation');
 assert.deepEqual(observed.render(4), expected, 'observer preserves interpolation');
-assert.deepEqual(normal.render(12), observed.render(12), 'depleted buffers preserve identical silence');
+assert.deepEqual(normal.render(12), observed.render(12), 'queued zero PCM remains identical');
+assert.deepEqual(normal.render(1912), observed.render(1912), 'depleted buffers preserve identical silence');
 observed.send({ type: 'diagnostics', enabled: false });
 const report = observed.messages.find(message => message?.type === 'diagnostics' && message.final);
-assert.equal(report.renderedOutputFrames, 16);
-assert.equal(report.underrunOutputFrames, 10, 'six valid interpolation positions, then ten starved output frames');
+assert.equal(report.renderedOutputFrames, 1928);
+assert.equal(report.underrunOutputFrames, 10, '1918 valid interpolation positions, then ten starved output frames');
 assert.equal(report.warmupOutputFrames, 0);
-assert.equal(report.processQuanta, 2);
-assert.equal(report.observedThroughOutputFrame, 16);
+assert.equal(report.processQuanta, 3);
+assert.equal(report.observedThroughOutputFrame, 1928);
 assert.equal(normal.messages.filter(value => typeof value === 'object').length, 0);
 
 const startup = sink();
@@ -51,6 +54,7 @@ startup.send({ type: 'diagnostics', enabled: false });
 const warmup = startup.messages.at(-1);
 assert.equal(warmup.warmupOutputFrames, 128);
 assert.equal(warmup.underrunOutputFrames, 0, 'pre-audio startup is reported separately');
+assert.equal(warmup.playbackStarted, false, 'No-PCM warmup cannot imply audible playback');
 
 const overflow = sink();
 overflow.send({ type: 'diagnostics', enabled: true });

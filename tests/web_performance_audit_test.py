@@ -58,6 +58,20 @@ class WebPerformanceAuditTest(unittest.TestCase):
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 audit(report, self.identity, self.runtime)
 
+    def test_warmup_and_playback_start_are_explicit_without_becoming_a_pass(self):
+        report = copy.deepcopy(self.report)
+        report['audioFinalSnapshot'].update({'warmupOutputFrames': 128,
+            'playbackStarted': False, 'prefillTargetSourceFrames': 2622})
+        result = audit(report, self.identity, self.runtime)
+        self.assertEqual(result['warmup_output_frames'], 128)
+        self.assertIs(result['playback_started'], False)
+        for changed in ({'playbackStarted': 'false'}, {'prefillTargetSourceFrames': 32768},
+                        {'prefillTargetSourceFrames': 0}, {'prefillTargetSourceFrames': 2.5}):
+            invalid = copy.deepcopy(report)
+            invalid['audioFinalSnapshot'].update(changed)
+            with self.subTest(changed=changed), self.assertRaises(ValueError):
+                audit(invalid, self.identity, self.runtime)
+
     def test_frame_accounting_and_input_percentiles_are_checked(self):
         report = copy.deepcopy(self.report)
         report['ticks']['discardedFrames'] = 1

@@ -21,6 +21,10 @@ class MgbaSink extends AudioWorkletProcessor {
     this.pos = 0; // fractional read cursor, in source frames
     this.w = 0;   // source frames written
     this.ratio = 1;
+    // Accumulate a short cushion once per playback epoch. This adds audio
+    // latency, without advancing the guest or changing the resampling ratio.
+    this.prefillFrames = Math.min(this.cap - 1, Math.ceil(sampleRate * .04));
+    this.started = false;
     this.lastPost = 0;
     this.diagnostics = null;
     this.playbackEpoch = 0;
@@ -32,6 +36,7 @@ class MgbaSink extends AudioWorkletProcessor {
         // never flushes this ring or changes its interpolation position.
         this.playbackEpoch = msg.epoch;
         this.pos = this.w = this.lastPost = 0;
+        this.started = false;
         this.port.postMessage({ type: 'playback-reset', epoch: msg.epoch });
         return;
       }
@@ -43,7 +48,6 @@ class MgbaSink extends AudioWorkletProcessor {
             warmupOutputFrames: 0, underrunOutputFrames: 0,
             droppedSourceFrames: 0, processQuanta: 0,
           };
-          this.hasDiagnosticAudio = this.w - this.pos > 1;
           this.lastDiagnosticPost = currentFrame;
         } else if (this.diagnostics) {
           this.reportDiagnostics(true);
@@ -53,6 +57,7 @@ class MgbaSink extends AudioWorkletProcessor {
       }
       if (msg && msg.rate) {
         this.ratio = msg.rate / sampleRate;
+        this.prefillFrames = Math.max(2, Math.min(this.cap - 1, Math.ceil(msg.rate * .04)));
         return;
       }
       const s = msg; // Int16Array, interleaved stereo
@@ -67,12 +72,12 @@ class MgbaSink extends AudioWorkletProcessor {
         this.buf[idx + 1] = s[i * 2 + 1] / 32768;
         this.w++;
       }
-      if (this.diagnostics && frames && this.w - this.pos > 1) this.hasDiagnosticAudio = true;
     };
   }
   reportDiagnostics(final) {
     this.port.postMessage({ ...this.diagnostics, final,
-      outputSampleRate: sampleRate, queueDepthFrames: Math.max(0, this.w - this.pos) });
+      outputSampleRate: sampleRate, queueDepthFrames: Math.max(0, this.w - this.pos),
+      prefillTargetSourceFrames: this.prefillFrames, playbackStarted: this.started });
     this.lastDiagnosticPost = this.diagnostics.observedThroughOutputFrame;
   }
   process(inputs, outputs) {
@@ -80,9 +85,10 @@ class MgbaSink extends AudioWorkletProcessor {
     const L = out[0];
     const R = out[1] || out[0];
     const n = L.length;
+    if (!this.started && this.w - this.pos >= this.prefillFrames) this.started = true;
     for (let i = 0; i < n; i++) {
       // One source frame must be left past the cursor to interpolate against.
-      if (this.pos + 1 < this.w) {
+      if (this.started && this.pos + 1 < this.w) {
         const base = Math.floor(this.pos);
         const frac = this.pos - base;
         const a = (base % this.cap) * 2;
@@ -94,7 +100,7 @@ class MgbaSink extends AudioWorkletProcessor {
         L[i] = 0;
         R[i] = 0;
         if (this.diagnostics) {
-          if (this.hasDiagnosticAudio) this.diagnostics.underrunOutputFrames++;
+          if (this.started) this.diagnostics.underrunOutputFrames++;
           else this.diagnostics.warmupOutputFrames++;
         }
       }

@@ -82,6 +82,11 @@ def audit(report, identity, runtime):
         raise ValueError('Final audio acknowledgement is missing')
     number(final['epoch'], True)
     number(final['queueDepthFrames'])
+    if 'playbackStarted' in final and type(final['playbackStarted']) is not bool:
+        raise ValueError('Playback-start marker must be a boolean')
+    if 'prefillTargetSourceFrames' in final and not 2 <= number(
+            final['prefillTargetSourceFrames'], True) < 32768:
+        raise ValueError('Audio prefill must fit inside the source ring')
     if final.get('type') != 'diagnostics' or (
             'diagnosticEpoch' in report['context'] and final['epoch'] != report['context']['diagnosticEpoch']):
         raise ValueError('Final audio epoch or payload is invalid')
@@ -106,6 +111,8 @@ def audit(report, identity, runtime):
         'audio_observed_seconds': audio_seconds,
         'audio_window_difference_seconds': audio_seconds - report['durationMs'] / 1000,
         'underrun_output_frames': final['underrunOutputFrames'],
+        'warmup_output_frames': final['warmupOutputFrames'],
+        'playback_started': final.get('playbackStarted'),
         'dropped_source_frames': final['droppedSourceFrames'],
         'foreground_only': report['scope']['foregroundOnly'],
         'audio_clock_observation': audio_clock_observation(report),
