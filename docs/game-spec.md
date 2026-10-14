@@ -759,7 +759,7 @@ Current snapshot (October 13, 2026; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | Resumed October 13, then stopped when the updated goal reinstated a 6 PM cutoff for today. Verified clock was already 11:06 PM Pacific when that update arrived. Pause requested under that cutoff; no new build/deploy started. Old reminder stays disabled. |
+| Execution | User explicitly removed the cutoff and instructed continued work. All previous time-based stop conditions are revoked. The old reminder stays disabled; full scope and acceptance gates remain required. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
@@ -769,7 +769,7 @@ Current snapshot (October 13, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work after resume/new deadline | Build and evaluate the committed, unbuilt v44 arrangement candidate: three-loop level-matched audio, 30–60-second reference scene, entry/heal/resume and supported-save/native-WASM regression checks. Check final guitar release across loop boundary. User music score remains2/4; no new approval inferred. |
+| Next work | Build and evaluate the committed, unbuilt v44 arrangement candidate: three-loop level-matched audio, 30–60-second reference scene, entry/heal/resume and supported-save/native-WASM regression checks. Check final guitar release across loop boundary. User music score remains2/4; no new approval inferred. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -3964,3 +3964,14 @@ October 13 bounded arrangement candidate and updated deadline:
 - Full campaign, all required system checks and0/11 domain approvals remain
   unchanged. Goal pause requested by the updated deadline, not completion.
   No GitHub Actions, DB changes, PR merge or commercial media publication.
+
+
+Cutoff removed by explicit user instruction:
+
+- The user said “remove the cut off and keep going.” This supersedes every
+  earlier6PM stop and the stale cutoff sentence in the goal record. Continue
+  the full section15 objective without a time-based stop; do not recreate the
+  expired reminder. Historical stop entries above remain historical evidence.
+- Resume v44 build, native/WASM and supported-save checks, three-loop review
+  preparation and independent alignment review. Public staysv43 until a
+  validated release. No quality approval is inferred; music remains2/4.
