@@ -774,8 +774,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.49-courier-throw-preview; target45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8aea5c6d80d7a052; Site39. Original courier battle throw joins facade variety, compact Sunset spacing and actor-edge layering. Human approvals remain0/11. |
-| Latest local source build | v49, source0fc1eb6; normal build reproduces corrected target45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8aea5c6d80d7a052. Courier intro, native resources, older-save replays and local checks pass. All336 mechanics scenarios pass on this exact target. |
+| Public build | 0.0.50-practice-guidance-preview; targetedcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78; Site40. Adds pre-sightline practice warnings, roster/type guidance and free-clinic directions to courier/facade improvements. Human approvals remain0/11. |
+| Latest local source build | v50, source1cab358; normal build reproduces targetedcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78. Native/WASM guidance paging, stage0→1, older-save preservation and local checks pass. All336 mechanics scenarios pass on this exact target. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -4646,3 +4646,20 @@ v50 normal-release packaging:
   All336 native mechanics scenarios pass this exact target. Web manifests select
   v50; Sites checks/build/publication are in progress. Public is still Site39/v49
   until a deployment result confirms otherwise. No DB/GitHub Actions.
+
+
+v50 public deployment:
+
+- Source1b2ae6b3c0f1cbd6ab8fa31773b8f1159f2557e4 passed Sites typecheck and
+  production build. Exact archive audit found84 files, one matching patch/manifest,
+  no commercial-derived cartridge and no AppleDouble metadata. Original SFMM
+  homebrew prototype identity is separately verified.
+- Site40 saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_9598368d13088191932214eef8e37783;
+  deployment appgdep_6acf551a048c8191828b84de8909c5bc succeeded at
+  2026-10-14T10:10:41Z. Existing public URL/auth/audience unchanged. No DB/GitHub
+  Actions. No separate actual-browser v50 replay claimed beyond prior v49 export
+  checks and exact v50 native/WASM render/save tests.
+- Continue with South Park street density while the finite Grass route and user
+  comparison review proceed. Preserve door/recovery locations if possible and
+  prove older saves escape any newly occupied tiles. Full scope/gates stay open.
