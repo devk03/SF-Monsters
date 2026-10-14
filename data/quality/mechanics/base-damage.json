@@ -1,0 +1,30 @@
+{
+  "scope": "CalculateBaseDamage only: pre-STAB, pre-effectiveness, pre-random final damage. Fixed link-rule fixtures disable badge bonuses; they are not campaign play.",
+  "defaults": "Level50, all five battle stats100, neutral stages6, HP90/90, no item or ability, Pound40. Integer divisions truncate at each stated step. GenIII class depends on move type.",
+  "cases": [
+    {"id":"physical-neutral", "expected":19, "derivation":"floor(floor(22*40*100/100)/50)+2 =17+2."},
+    {"id":"special-neutral", "move":"MOVE_WATER_GUN", "expected":19, "derivation":"Water is special; equal100 special stats give17+2."},
+    {"id":"fire-contact-is-special", "move":"MOVE_FLAME_WHEEL", "attacker":{"attack":200,"sp_attack":50}, "defender":{"defense":50}, "expected":15, "derivation":"Fire uses special stats despite contact: floor(22*60*50/100/50)+2 =13+2."},
+    {"id":"dark-bite-is-special", "move":"MOVE_BITE", "attacker":{"attack":200,"sp_attack":50}, "defender":{"defense":50}, "expected":15, "derivation":"GenIII Dark uses special stats: floor(22*60*50/100/50)+2 =13+2."},
+    {"id":"physical-burn", "attacker":{"status":"STATUS1_BURN"}, "expected":10, "derivation":"Neutral17 intermediate is halved by burn before+2: floor(17/2)+2."},
+    {"id":"guts-burn-interaction", "attacker":{"status":"STATUS1_BURN","ability":"ABILITY_GUTS"}, "expected":28, "derivation":"Guts makes Attack150 and suppresses burn's damage reduction: floor(22*40*150/100/50)+2 =26+2."},
+    {"id":"huge-power", "attacker":{"ability":"ABILITY_HUGE_POWER"}, "expected":37, "derivation":"Attack doubles to200: floor(22*40*200/100/50)+2 =35+2."},
+    {"id":"reflect-single", "side_status":"SIDE_STATUS_REFLECT", "expected":10, "derivation":"Reflect halves neutral17 before+2: floor(17/2)+2."},
+    {"id":"reflect-double-two-defenders", "double":true, "side_status":"SIDE_STATUS_REFLECT", "expected":12, "derivation":"Two defending battlers use the GenIII screen rounding: 2*floor(17/3)+2 =12."},
+    {"id":"reflect-double-one-defender", "double":true, "absent":8, "side_status":"SIDE_STATUS_REFLECT", "expected":10, "derivation":"Defending ally absent selects single-defender screen: floor(17/2)+2 =10."},
+    {"id":"critical-bypasses-unfavorable-stages", "critical":2, "attacker":{"attack_stage":4}, "defender":{"defense_stage":8}, "expected":19, "derivation":"Critical context ignores negative attack and positive defense stages; neutral17+2. Actual critical multiplier is applied outside this function."},
+    {"id":"critical-keeps-favorable-stages", "critical":2, "attacker":{"attack_stage":8}, "defender":{"defense_stage":4}, "expected":72, "derivation":"Keep Attack200 and Defense50: floor(22*40*200/50/50)+2 =70+2; final critical multiplier is outside scope."},
+    {"id":"unfavorable-stages-no-critical", "attacker":{"attack_stage":4}, "defender":{"defense_stage":8}, "expected":6, "derivation":"Attack50 and Defense200 give floor(22*40*50/200/50)+2 =4+2."},
+    {"id":"minimum-physical-intermediate", "attacker":{"level":1,"attack":1}, "defender":{"defense":65535}, "power_override":1, "expected":3, "derivation":"Physical intermediate truncates to0, clamps to1, then this function adds2. Final damage/randomness is outside scope."},
+    {"id":"thick-fat-fire", "move":"MOVE_EMBER", "defender":{"ability":"ABILITY_THICK_FAT"}, "expected":10, "derivation":"ThickFat halves effective special attack to50: floor(22*40*50/100/50)+2 =8+2."},
+    {"id":"light-screen-single", "move":"MOVE_WATER_GUN", "side_status":"SIDE_STATUS_LIGHTSCREEN", "expected":10, "derivation":"Screen halves special neutral17 before+2: floor(17/2)+2."},
+    {"id":"rain-weakens-fire", "move":"MOVE_EMBER", "weather":"B_WEATHER_RAIN_TEMPORARY", "expected":10, "derivation":"Rain halves Fire intermediate17: floor(17/2)+2."},
+    {"id":"rain-boosts-water", "move":"MOVE_WATER_GUN", "weather":"B_WEATHER_RAIN_TEMPORARY", "expected":27, "derivation":"Rain multiplies Water intermediate17 by1.5: floor(17*15/10)+2 =25+2."},
+    {"id":"sun-boosts-fire", "move":"MOVE_EMBER", "weather":"B_WEATHER_SUN_TEMPORARY", "expected":27, "derivation":"Sun multiplies Fire intermediate17 by1.5: floor(17*15/10)+2."},
+    {"id":"sun-weakens-water", "move":"MOVE_WATER_GUN", "weather":"B_WEATHER_SUN_TEMPORARY", "expected":10, "derivation":"Sun halves Water intermediate17: floor(17/2)+2."},
+    {"id":"blaze-exact-third-hp", "move":"MOVE_EMBER", "attacker":{"hp":30,"ability":"ABILITY_BLAZE"}, "expected":28, "derivation":"At30/90 HP Blaze changes power40 to60: floor(22*60/50)+2 =26+2."},
+    {"id":"blaze-above-third-hp", "move":"MOVE_EMBER", "attacker":{"hp":31,"ability":"ABILITY_BLAZE"}, "expected":19, "derivation":"31/90 is above the one-third threshold, so power stays40 and damage19."},
+    {"id":"rock-slide-double-two-targets", "move":"MOVE_ROCK_SLIDE", "double":true, "expected":18, "derivation":"Power75 gives intermediate33; two-target spread halves it before+2: floor(33/2)+2 =18."},
+    {"id":"rock-slide-double-one-target", "move":"MOVE_ROCK_SLIDE", "double":true, "absent":8, "expected":35, "derivation":"One defending target remains, so spread reduction is absent: floor(22*75/50)+2 =33+2."}
+  ]
+}

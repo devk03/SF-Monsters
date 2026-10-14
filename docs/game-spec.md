@@ -774,13 +774,13 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.47-compact-blocks-preview; targetfa373906c1d315922d8e966d11f75b23535ec15d631472ca7990532ab47ce382; Site37. Courier/building overlap fixed and Sunset gaps narrowed. All quality reviews remain open. |
+| Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
 | Latest local source build | v47, sourcecb71361. Normal build/BPS and local checks pass. Sunset1728-frame and South Park2008-frame native/WASM RGB/PCM/Flash match. Old newly blocked saved position relocates safely. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
+| Remaining system gates | 24 independently specified base-damage cases pass against Emerald/SF, including4 doubles. At least276 further broad mechanics scenarios and46 further doubles remain, plus full type-chart/stat/status/resource coverage. Three ten-minute traces, ten save round trips, fifty campaign checkpoints and three complete starter campaigns remain outstanding. |
 | Next work | Add original facade variety while preserving compact layout, per-edge actor visibility and supported saves. Alignment chat is preparing genuine Calvin/Scott introduction comparison. Obtain subset reviews while continuing independent slice/system work; no campaign expansion before slice approval. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4279,3 +4279,44 @@ v48 public deployment:
 - Next work moves toward the still-missing300-case mechanics gate while user
   art/audio/intro subset reviews are pending. Controlled function fixtures must
   be labeled separately from controller-only campaign/progression evidence.
+
+
+Alignment check October14,01:14 Pacific /08:14UTC:
+
+- Previous alignment turn was interrupted after winning Steven, completing
+  normal save/cold resume and activating blue INPUT. Status was notLoaded;
+  work was not assumed live. Explicit continuation sent from the earned state,
+  with a new60-minute limit ending09:14UTC. No route restart/stat changes.
+- Exchanged priorities/evidence: v48 original facade integration and24 passing
+  native base-damage fixtures (including4 doubles) on main; earned first-gym
+  route and weakest-slice assessment on reviewer. No approval inferred.
+- Next alignment check due by08:44UTC /01:44 Pacific. Main proceeds with fixture
+  identity/negative controls and documented mechanics coverage in the meantime.
+
+
+Native mechanics fixture foundation:
+
+- Added our own RAM/register fixture driver and Python identity/expectation
+  runner. It executes actual CalculateBaseDamage instructions in the exact
+  reference andv48 cartridges under pinned native mGBA. The campaign capture
+  harness is unchanged. Fixtures are explicitly not controller-only gameplay,
+  trainer wins, saves or performance evidence. No fixture ROM is published.
+-24 independently specified base-damage scenarios pass against both the fixed
+  Emerald reference andv48. Four exercise real doubles screen/spread/absent-ally
+  branches. Covered: GenIII physical/special types, integer rounding, stat
+  stages/critical-stage bypass, burn/Guts, HugePower, ThickFat, Blaze threshold,
+  rain/sun and screens. Each stores a hand-derived expected integer. Final
+  critical multiplier, STAB/effectiveness/randomness/HP resolution are excluded.
+- Exact ROM/state/core/ELF companion and function-byte identity are checked.
+  Per-case reset, explicit native ABI, RNG-before/after observation, ROM hash
+  preservation, instruction/time limits and duplicate-input rejection protect
+  the evidence. Schema/ABI unit checks and full check.sh pass. Three extra
+  negative controls reject ROM writes, wrapped addresses and non-ROM calls;
+  these controls do not add mechanics cases.
+- Final evidence: mechanics-v48-base-damage-final/result.json under private
+  benchmarks. Catalog: data/quality/mechanics/base-damage.json. Protocol and
+  exact invocation: docs/quality/mechanics-fixtures.md.24cases count once each,
+  not once per ROM. At least276additional broad scenarios/46additional doubles
+  and all uncovered system gates remain. No human approval inferred.
+- Next mechanics work: speed/priority/held-item/weather interactions, followed
+  by stat generation, full hit/type/status resolution and capture/resource cases.
