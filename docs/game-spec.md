@@ -6243,3 +6243,36 @@ v63 portable field journal — October14,22:00UTC:
   observation, not a native deadline, physical-input or performance-gate pass.
 - Public remains v62/Site53. Full human approvals0/11 and all campaign/map/audio/
   first-slice/performance/save-checkpoint gates remain open. No GitHub Actions.
+
+
+v63 journal native acceptance — October14,22:02UTC:
+
+- Full local checks pass with sanitized production-header journal tests included.
+  Nine independent chapter cases cover the eight leads plus badge overriding old
+  quest/relay state; five location captions and Muni-arrival hint are checked.
+  Native window allocation bounds, read-only state, B/Start lifecycle and allocation
+  failure pass. Tests use small native-ABI stubs without a private SDK dependency.
+- Final compiled cartridge actually displays companion choice after fresh NewGame,
+  Scott challenge from genuine olderC6 Save, and preview endpoint from an earned
+  first-badgeC4 Save. Opening dialogue was advanced through normal controller A;
+  no quest injection or state from another cartridge was used. These are three
+  native scenarios; all eight leads are not claimed as native campaign captures.
+- Matched final-cartridge C6 coldContinue routes differ only by opening JOURNAL
+  versus waiting in Start menu for equal requested frames. All15752 SaveBlock1
+  bytes,600 party bytes and input Flash remain exact. SaveBlock2 differs only at
+  observed playTimeVBlanks offset0x12 (journal17, idle21); all other3883 bytes equal.
+  No blanket clock/opaque-byte exclusion. Read-only gameplay receiptSHA
+  c5ddd66fa695a9afa8fae5e33d830e481a81c9fd3176d209f6361e29d69b7a6b.
+  This clock observation does not prove native render deadlines or physical input.
+- Native B returns the eight-row menu with JOURNAL selected and SAVE still row4.
+  Start closes; actual controller Right then moves18,18→19,18 in the staged build.
+  Actual Chrome controls also open/B-return/reopen/Start-close and resume movement.
+  Latest text variant browser review is underway; no public save/auth touched.
+- After opening the final journal, normal B→two Up→SAVE produces ordinaryC7.
+  Flash audit passes unchanged declared party/items/money/quest/badge/location/
+  settings, one counter/stat increment and nondecreasing clock. ColdC7 reload
+  opens the correct Scott objective. This is not an additional cross-platform
+  round trip or another distinct completed campaign checkpoint.
+- Public remains v62/Site53 until v63 normal build and publication verify. All
+  first-slice quality/complete SF map/music/device/performance/campaign gates and
+  full human approvals0/11 remain open. No GitHub Actions or DB changes.
