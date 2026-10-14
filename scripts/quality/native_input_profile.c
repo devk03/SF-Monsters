@@ -22,6 +22,12 @@ struct Frame {
     uint64_t cycle, set_cycle;
     unsigned sequence, keys, held_raw, hooks;
 };
+enum EventKind {
+    LOOP_START = 1, KEYS_LOADED, KEYS_RETURNED, WRAPPER_ENTRY,
+    CALLBACKS_ENTRY, CALLBACK1_ENTER, CALLBACK2_ENTER,
+    CALLBACK1_RETURN, CALLBACK2_RETURN, WAIT_ENTER, WAIT_CLEAR, WAIT_RETURN
+};
+struct Event { uint64_t cycle; unsigned frame, kind, from, to, value; };
 struct Profile {
     struct mAVStream stream;
     struct mCore* core;
@@ -30,6 +36,11 @@ struct Profile {
     struct Frame frames[MAX_FRAMES];
     unsigned count, frame, sequence, keys, sample_rate;
     uint64_t samples;
+    uint64_t instructions, event_drains;
+    struct Event events[8192];
+    unsigned event_count;
+    int step_observe;
+    int callback_pending[2];
     FILE* audio;
 };
 
@@ -93,6 +104,106 @@ static double wall_now(void)
     return value.tv_sec + value.tv_nsec / 1e9;
 }
 
+static uint32_t next_pc(const struct ARMCore* cpu)
+{
+    return (uint32_t) cpu->gprs[ARM_PC] - (cpu->executionMode == MODE_THUMB ? 2 : 4);
+}
+
+static void event(struct Profile* profile, unsigned kind, unsigned from,
+                  unsigned to, unsigned value)
+{
+    if(profile->event_count == 8192) fail("Instruction event buffer full");
+    profile->events[profile->event_count++] = (struct Event) {
+        .cycle = guest_now(profile), .frame = profile->frame,
+        .kind = kind, .from = from, .to = to, .value = value
+    };
+}
+
+/* Called only after an actually executed instruction, after pending events were
+ * drained before pre-PC sampling. Never infer execution from a pre-IRQ PC. */
+static void transition(struct Profile* profile, unsigned from, unsigned mode,
+                       unsigned opcode, unsigned r0, unsigned lr)
+{
+    const struct ARMCore* cpu = profile->core->cpu;
+    unsigned to = next_pc(cpu);
+    if(cpu->executionMode == MODE_THUMB)
+    {
+        for(unsigned slot = 0; slot < 2; ++slot)
+            if(profile->callback_pending[slot] && to == 0x0800052a + 10 * slot)
+            {
+                event(profile, CALLBACK1_RETURN + slot, from, to, 0);
+                profile->callback_pending[slot] = 0;
+            }
+    }
+    if(mode != MODE_THUMB) return;
+    unsigned kind = 0, expected = 0, destination = 0, value = 0;
+    switch(from)
+    {
+    case 0x0800042c: kind = LOOP_START; expected = 0xf8db; destination = 0x080005e4; break;
+    case 0x080005e8:
+        kind = KEYS_LOADED; expected = 0x8801; destination = 0x080005ea;
+        value = ((unsigned) cpu->gprs[1] ^ 0x3ff) & 0x3ff; break;
+    case 0x08000678:
+        if(r0 != 0x0800042f) return;
+        kind = KEYS_RETURNED; expected = 0x4700; destination = 0x0800042e;
+        value = profile->core->rawRead16(profile->core, MAIN_HELD_RAW, -1); break;
+    case 0x08000460: kind = WRAPPER_ENTRY; expected = 0xf831; destination = 0x080004c4; break;
+    case 0x08000494: kind = WRAPPER_ENTRY; expected = 0xf817; destination = 0x080004c4; break;
+    case 0x080004ac: kind = WRAPPER_ENTRY; expected = 0xf80b; destination = 0x080004c4; break;
+    case 0x080004d2: kind = CALLBACKS_ENTRY; expected = 0xf824; destination = 0x0800051c; break;
+    case 0x082ea358:
+        if(lr != 0x0800052b && lr != 0x08000535) return;
+        {
+            unsigned slot = lr == 0x08000535;
+            if(profile->callback_pending[slot]) fail("Overlapping callback span");
+            profile->callback_pending[slot] = 1;
+            kind = CALLBACK1_ENTER + slot; expected = 0x4700;
+            destination = r0 & ~1u; value = r0;
+        }
+        break;
+    case 0x080004bc: kind = WAIT_ENTER; expected = 0xf9f7; destination = 0x080008ac; break;
+    case 0x080008b8: kind = WAIT_CLEAR; expected = 0x8390; destination = 0x080008ba; break;
+    case 0x080008d2:
+        if(r0 != 0x080004bf) return;
+        kind = WAIT_RETURN; expected = 0x4700; destination = 0x080004be; break;
+    default: return;
+    }
+    if(opcode != expected || to != destination) fail("Executed observation site changed");
+    event(profile, kind, from, to, value);
+}
+
+/* Match ARMRun's existing event-drain prefix, then its existing step function.
+ * Yield immediately after the event that changes frameCounter: stock runFrame
+ * returns there too. Stepping once after that event would overshoot the boundary.
+ * This executes the pinned core's emulation; it never substitutes IRQ/timing code. */
+static void step_frame(struct Profile* profile)
+{
+    struct mCore* core = profile->core;
+    struct ARMCore* cpu = core->cpu;
+    uint32_t frame = core->frameCounter(core);
+    uint32_t start = (uint32_t) mTimingCurrentTime(core->timing);
+    while(core->frameCounter(core) == frame)
+    {
+        if((uint32_t) ((uint32_t) mTimingCurrentTime(core->timing) - start) >
+           FRAME_CYCLES + 1232) fail("Step frame exceeded stock frame guard");
+        while(cpu->cycles >= cpu->nextEvent)
+        {
+            if(++profile->event_drains > 10000000) fail("Event-drain limit exceeded");
+            cpu->irqh.processEvents(cpu);
+            if(core->frameCounter(core) != frame) return;
+        }
+        if(++profile->instructions > 100000000) fail("Instruction limit exceeded");
+        if(profile->step_observe)
+        {
+            unsigned from = next_pc(cpu), mode = cpu->executionMode;
+            unsigned opcode = cpu->prefetch[0], r0 = cpu->gprs[0], lr = cpu->gprs[ARM_LR];
+            core->step(core);
+            transition(profile, from, mode, opcode, r0, lr);
+        }
+        else core->step(core);
+    }
+}
+
 static void keys_read(void* context)
 {
     struct Profile* profile = context;
@@ -142,8 +253,9 @@ static void* load_bytes(const char* path, size_t size)
 int main(int argc, char** argv)
 {
     if(argc == 2 && ! strcmp(argv[1], "--clock-test")) return clock_test();
-    if(argc != 7 || (strcmp(argv[6], "control") && strcmp(argv[6], "observe")))
-        fail("Usage: native_input_profile ROM STATE BATTERY INPUT_CSV PREFIX control|observe");
+    if(argc != 7 || (strcmp(argv[6], "control") && strcmp(argv[6], "observe") &&
+        strcmp(argv[6], "step-control") && strcmp(argv[6], "step-observe")))
+        fail("Usage: native_input_profile ROM STATE BATTERY INPUT_CSV PREFIX control|observe|step-control|step-observe");
     struct mLogger logger = {.log = log_errors};
     mLogSetDefaultLogger(&logger);
     struct mCore* core = mCoreFind(argv[1]);
@@ -182,7 +294,9 @@ int main(int argc, char** argv)
     profile.stream.postAudioFrame = audio_frame;
     core->setAVStream(core, &profile.stream);
     struct mCoreCallbacks callbacks = {.context = &profile, .keysRead = keys_read};
-    int observe = ! strcmp(argv[6], "observe");
+    int observe = ! strcmp(argv[6], "observe") || ! strcmp(argv[6], "step-observe");
+    int stepping = ! strncmp(argv[6], "step-", 5);
+    profile.step_observe = stepping && observe;
     if(observe) core->addCoreCallbacks(core, &callbacks);
     FILE* input = fopen(argv[4], "r");
     if(! input) fail("Input sequence unavailable");
@@ -208,7 +322,8 @@ int main(int argc, char** argv)
             if(wall_now() - start > 60) fail("Pilot wall-time limit exceeded");
             uint32_t before_frame = core->frameCounter(core);
             double before = wall_now();
-            core->runFrame(core); /* Same stock frame boundary in both modes. */
+            if(stepping) step_frame(&profile);
+            else core->runFrame(core);
             emulation_seconds += wall_now() - before;
             if((uint32_t) (core->frameCounter(core) - before_frame) != 1)
                 fail("Stock frame call did not advance exactly one video frame");
@@ -246,6 +361,15 @@ int main(int argc, char** argv)
             hook->sequence, hook->keys, hook->cycle);
     }
     fclose(hooks);
+    FILE* events = output(argv[5], "events.csv");
+    fprintf(events, "frame,kind,from,to,value,completion_cycle\n");
+    for(unsigned i = 0; i < profile.event_count; ++i)
+    {
+        const struct Event* item = &profile.events[i];
+        fprintf(events, "%u,%u,%u,%u,%u,%" PRIu64 "\n", item->frame,
+            item->kind, item->from, item->to, item->value, item->cycle);
+    }
+    fclose(events);
     bytes = malloc(core->stateSize(core));
     if(! bytes || ! core->saveState(core, bytes)) fail("Final state capture failed");
     FILE* state = output(argv[5], "state");
@@ -261,9 +385,11 @@ int main(int argc, char** argv)
     FILE* result = output(argv[5], "json");
     fprintf(result, "{\"frames\":%u,\"hooks\":%u,\"sample_rate\":%u,"
         "\"audio_samples\":%" PRIu64 ",\"guest_cycles\":%" PRIu64 ","
-        "\"emulation_wall_seconds\":%.9f,\"initial_held_raw\":%u,\"observe\":%s}\n",
+        "\"emulation_wall_seconds\":%.9f,\"initial_held_raw\":%u,\"observe\":%s,"
+        "\"stepping\":%s,\"instructions\":%" PRIu64 ",\"event_drains\":%" PRIu64 "}\n",
         profile.frame, profile.count, profile.sample_rate, profile.samples,
-        profile.clock.elapsed, emulation_seconds, initial_held, observe ? "true" : "false");
+        profile.clock.elapsed, emulation_seconds, initial_held, observe ? "true" : "false",
+        stepping ? "true" : "false", profile.instructions, profile.event_drains);
     fclose(result);
     core->deinit(core);
     return 0;

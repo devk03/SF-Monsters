@@ -5487,3 +5487,19 @@ Reusable input calibration command verified:
   in any output. A real truncated CSV fails native execution with exit2; partial
   artifacts retained and never accepted. Full local scripts/check.sh passes.
   No new game ROM, deployment or workflow run needed for this tooling change.
+
+Instruction boundary calibration:
+
+- Optional separate step path drains the pinned core's actual pending event
+  function before PC observation, then uses core->step. At frameCounter change
+  it yields immediately after processEvents, matching stock runFrame rather than
+  executing an extra instruction. No guest RAM/register edits or breakpoints.
+- input-v56-step-calibrated-v1/receipt.json
+  SHAefff414e120b0cb39427559e6eb8475bd7334f7625988609727ad190111f3542
+  verifies exact RGBA/PCM/state/Flash across five variants: stock control/observer,
+  step control/observer and frozen capture. All120 KEYINPUT hook cycles match
+  stock exactly;11630195 instructions and115689 event drains observed.
+- Records1440 actual transitions across12 selected event kinds, including actual
+  callback dispatch/pending return and wait/clear/return. No display-deadline or
+  host responsiveness claim. Initial/final partial spans still need interpretation;
+  independent alignment review in progress, ends17:50UTC. Five safety guards pass.

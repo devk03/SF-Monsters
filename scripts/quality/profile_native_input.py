@@ -90,6 +90,8 @@ def main():
     for name in ('rom', 'elf', 'state', 'input'):
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--step', action='store_true',
+                        help='Also calibrate event-drained instruction stepping and raw call events')
     args = parser.parse_args()
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,43}', args.name):
         parser.error('Use a new lowercase name of at most44 characters')
@@ -134,15 +136,24 @@ def main():
     run(['arm-none-eabi-objcopy', '-O', 'binary', args.elf, linked], output, 'elf')
     symbols = subprocess.check_output(['arm-none-eabi-nm', '-S', '--defined-only',
                                       str(args.elf)], text=True)
-    match = re.findall(r'(?m)^([0-9a-f]+) ([0-9a-f]+) [tT] ReadKeys$', symbols)
-    if len(match) != 1 or not re.search(r'(?m)^030022c0 \w+ [bB] gMain$', symbols):
-        raise ValueError('Validated ReadKeys/Main symbol addresses changed')
-    address, size = (int(value, 16) for value in match[0])
-    if address != 0x080005e4 or not 0x98 <= size <= len(rom) - 0x5e4:
-        raise ValueError('Validated ReadKeys observation span changed')
-    offset = address - 0x08000000
-    if linked.read_bytes()[offset:offset + size] != rom[offset:offset + size]:
-        raise ValueError('ELF ReadKeys bytes differ from tested ROM')
+    expected_sites = {'ReadKeys': (0x080005e4, 0xa0)}
+    if args.step:
+        expected_sites.update({'AgbMain': (0x080003a4, 0x120),
+            'UpdateLinkAndCallCallbacks': (0x080004c4, 0x14),
+            'CallCallbacks': (0x0800051c, 0x24), 'WaitForVBlank': (0x080008ac, 0x30),
+            '_call_via_r0': (0x082ea358, 4)})
+    function_hashes, binary = {}, linked.read_bytes()
+    if not re.search(r'(?m)^030022c0 \w+ [bB] gMain$', symbols):
+        raise ValueError('Validated Main address changed')
+    for name, expected in expected_sites.items():
+        match = re.findall(r'(?m)^([0-9a-f]+) ([0-9a-f]+) [tT] ' + name + '$', symbols)
+        if len(match) != 1 or tuple(int(value, 16) for value in match[0]) != expected:
+            raise ValueError('Validated function span changed: ' + name)
+        address, size = expected
+        offset = address - 0x08000000
+        if binary[offset:offset + size] != rom[offset:offset + size]:
+            raise ValueError('ELF function bytes differ from tested ROM: ' + name)
+        function_hashes[name] = hashlib.sha256(rom[offset:offset + size]).hexdigest()
     executable = output / 'native_input_profile'
     source = ROOT / 'scripts/quality/native_input_profile.c'
     frameworks = ['-framework', 'CoreFoundation'] if platform.system() == 'Darwin' else []
@@ -151,7 +162,8 @@ def main():
         HOST_BUILD / 'libmgba.a', '-lm', '-lpthread', *frameworks, '-o', executable],
         output, 'compile')
     run([executable, '--clock-test'], output, 'clock')
-    for mode in ('control', 'observe'):
+    modes = ['control', 'observe'] + (['step-control', 'step-observe'] if args.step else [])
+    for mode in modes:
         run([executable, args.rom, args.state, battery, args.input, output / mode, mode],
             output, mode)
     reference_name = args.name + '-frozen-control'
@@ -160,6 +172,15 @@ def main():
         '--name', reference_name], output, 'frozen-control')
     calibration = compare_outputs(output / 'control', output / 'observe',
         ROOT / '.tools/benchmarks' / reference_name / 'capture')
+    step_calibration = None
+    if args.step:
+        step_calibration = compare_outputs(output / 'control', output / 'step-control',
+                                           output / 'step-observe')
+        if summarize(output / 'control', output / 'step-observe') != summarize(
+                output / 'control', output / 'observe'):
+            raise ValueError('Instruction stepping changed input sample observations')
+        if (output / 'step-observe.hooks.csv').read_bytes() != (output / 'observe.hooks.csv').read_bytes():
+            raise ValueError('Instruction stepping changed actual hook-entry cycles')
     observations = summarize(output / 'control', output / 'observe')
     if observations['frame_samples'] != sum(duration for _, duration in blocks):
         raise ValueError('Observed duration differs from the complete input sequence')
@@ -170,12 +191,15 @@ def main():
         'profiler_sha256': digest(source), 'wrapper_sha256': digest(Path(__file__)),
         'flags_sha256': digest(HOST_BUILD / 'include/mgba/flags.h'),
         'executable_sha256': digest(executable), 'frozen_helpers': frozen,
-        'calibration': calibration, 'observations': observations,
+        'calibration': calibration, 'step_calibration': step_calibration,
+        'function_sha256': function_hashes, 'observations': observations,
+        'raw_instruction_events_sha256': digest(output / 'step-observe.events.csv') if args.step else None,
         'clock': 'Unsigned-unwrapped mTimingCurrentTime; relative to loaded state',
         'limits': ['At most120 native guest frames; not a ten-minute run',
             'KEYINPUT hook entry precedes the instruction completion charge',
             'Held-state ACK sampled at frame end is an upper bound',
-            'No callback-completion, render-deadline or browser/mobile timing proof',
+            'Step events are executed native transitions; partial spans need separate interpretation',
+            'No render-deadline or browser/mobile timing proof',
             'Wall emulation timings are pilot overhead observations, not a performance gate']}
     (output / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print('Calibrated native input pilot:', output)
