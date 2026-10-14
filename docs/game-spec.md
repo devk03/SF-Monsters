@@ -595,8 +595,9 @@ Current checkpoint — October 14, 2026, 22:49 UTC:
   the native menu. Browser controls and no-starter native access are verified.
 - Original Garry field art survives old-save Continue, native Save and cold reload.
   Prior eight custom cast sprites remain byte-exact; human art approval pending.
-- Alignment independently reviews exact map-return save encryption/volatile state
-  after the22:46UTC exchange. Next alignment check by23:16UTC.
+- Alignment confirms exact map-return plaintext gameplay preservation; native RNG
+  and wandering Dylan differ. Actual map→Save→coldContinue also passes. Next
+  check by23:20UTC; finite first-slice priority review requested.
 
 ### 15.1 Objective and completion rule
 
@@ -6550,8 +6551,25 @@ v65 public city-map access and original Garry — October14,22:49UTC:
 - Opening/closing native map changes encryption keys as the inherited engine
   relocates save blocks. Initial raw comparison (382 SaveBlock1/seven SaveBlock2
   byte differences) is retained, not called byte-exact. Alignment independently
-  reviews exact field decryption and active-object differences; final classified
-  proof remains pending. Flash itself and party remain exact.
+  review confirms ALL15752 plaintext SaveBlock1 bytes exact after decrypting
+  ONLY native encrypted fields with EACH capture own key. SaveBlock2 changes
+  solely key representation/berry powder encryption and five VBlank ticks.
+  Party/storage/Flash exact; seven live Dylan bytes and RNG differ as native
+  field return consumes Random and resumes existing wandering. Whole RAM/future
+  trajectories are NOT called exact. Root independently reproduces plaintext
+  proof; raw differences are retained in city-map-v65-readonly.
+- Actual Map→B menu→B field→ordinarySave→coldContinue createsC6 SHA
+  486b917d8666bbcde95e8a3a2194aa05f2b0a07f5f9de6928b930e650e94e62b.
+  All audited gameplay domains preserve C5 values; counter/saveStat each+1.
+  ColdContinue preserves ALL15752 plaintext SaveBlock1 bytes and exact Flash;
+  SaveBlock2 differs only clock seconds/VBlanks and key representation after
+  exact berryPowder decryption. Raw RAM encrypted bytes are NOT identical.
+  save-proof.json records both actual keys and every residual offset.
+- First attempted post-map Save route assumed cursor0 and opened Bag instead
+  (C5 unchanged); failed evidence retained. Corrected route respects retained
+  JOURNAL cursor6 and chooses SAVE4 via two Up presses. Initial raw post-map
+  cold-reload assertion also failed on legitimate encryption differences;
+  field-by-field plaintext comparison passes without blanket byte exclusions.
 - Sites56 sourceaa5a3d1429b70591aed2198fd0b4593259d4206c; saved version
   appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_2ea24b021660819198a0d21354e8702d.
   Deploymentappgdep_6ad006b76fd481918ed0a277a6a373f5 succeeded22:48:31UTC.
@@ -6565,5 +6583,6 @@ v65 public city-map access and original Garry — October14,22:49UTC:
 - Goal active through October15,18:00 Pacific. Human approvals0/11, music2/4
   last ratedv40; revisedv44 pending. Full campaign/performance/mechanics/save
   gates remain open. No GitHub Actions, DB migration, PR merge or new monitor.
-  Alignment's finite read-only acceptance task assigned22:46UTC (30minute limit);
-  next exchange by23:16UTC. Root owns all implementation/build/publication.
+  Alignment's finite read-only acceptance task finished22:50UTC; followup
+  twenty-minute first-slice priority review requested. Next exchange by23:20UTC.
+  Root owns all implementation/build/publication.
