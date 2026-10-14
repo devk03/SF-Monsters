@@ -4498,3 +4498,16 @@ Original courier battle-back checkpoint (private v49):
 - Public stays v48 until normal release packaging/deployment. All298 mechanics
   cases also pass on this corrected immutable target in mechanics-v49-*-mapped. No quality domain is
   approved by these implementation checks; the complete campaign remains open.
+
+
+v49 normal-release packaging:
+
+- Normal rebuild from source0fc1eb64acdbd691992921a2ac427ab35194c9b4 reproduces
+  corrected target45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8aea5c6d80d7a052.
+  Patch881879 bytes, SHA256
+  fc9e6fd70eaf32320879961943359ef4693ef4ab1ec07baa0a878a875182f242.
+  BPS roundtrip is byte-identical; only patch/manifests enter public sources.
+- All298 focused mechanics cases also pass on this exact corrected target
+  (mechanics-v49-*-mapped). Public release manifests selectv49; Sites checks/build
+  and publication are in progress. Current public remains Site38/v48 until the
+  deployment result confirms otherwise. No GitHub Actions or DB changes.

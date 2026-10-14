@@ -1,16 +1,16 @@
 {
-  "version": "0.0.48-sunset-facade-variety-preview",
+  "version": "0.0.49-courier-throw-preview",
   "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Five named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc",
+  "target_sha256": "45985c62da0fbe8c8e3a6a2b0041856e06f6f50a71beaa3c8aea5c6d80d7a052",
   "target_bytes": 16777216,
-  "patch_sha256": "cc4d008cf764423bdbfed29708c42f0a0f2edd28e467e3fc445932f340584519",
-  "patch_bytes": 878088,
+  "patch_sha256": "fc9e6fd70eaf32320879961943359ef4693ef4ab1ec07baa0a878a875182f242",
+  "patch_bytes": 881879,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "c0e2dad588ca5932a16b1cfa451d54d0b3d8bb55",
+  "source_commit": "0fc1eb64acdbd691992921a2ac427ab35194c9b4",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
@@ -41,8 +41,8 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "c8e7093750c410cdcd36688dc4095c3edc8c3b28670330dfc2c2f262b0a18297",
-    "target_sha256": "65af6110e934f3c0d7c6ac33d96f022822c20c5aaa2778ac0b98a899293da08a",
+    "input_sha256": "cb1f21833ed0737a68b4a48683457d1ec8ae7ae035f764548653732bf094fdb4",
+    "target_sha256": "894f80ef5b754a94da78ccffa3e21c578202d21287ce1e5d2ad6d7af82cfead2",
     "labels": [
       {
         "symbol": "gText_Pokemon",
@@ -391,7 +391,7 @@
   },
   "interface_graphics": {
     "symbol": "gPokedexMenu_Gfx",
-    "offset": 14425200,
+    "offset": 14425240,
     "capacity": 2584,
     "compressed_bytes": 2564,
     "raw_bytes": 8192,
@@ -402,7 +402,7 @@
   "title_art": [
     {
       "symbol": "gTitleScreenPokemonLogoGfx",
-      "offset": 14543404,
+      "offset": 14543444,
       "capacity": 5892,
       "encoded_bytes": 3668,
       "raw_bytes": 16384,
@@ -411,7 +411,7 @@
     },
     {
       "symbol": "gTitleScreenBgPalettes",
-      "offset": 14542324,
+      "offset": 14542364,
       "capacity": 480,
       "encoded_bytes": 448,
       "raw_bytes": 448,
@@ -420,7 +420,7 @@
     },
     {
       "symbol": "gTitleScreenEmeraldVersionGfx",
-      "offset": 14549296,
+      "offset": 14549336,
       "capacity": 1588,
       "encoded_bytes": 1588,
       "raw_bytes": 4096,
@@ -429,7 +429,7 @@
     },
     {
       "symbol": "gTitleScreenEmeraldVersionPal",
-      "offset": 14542804,
+      "offset": 14542844,
       "capacity": 32,
       "encoded_bytes": 32,
       "raw_bytes": 32,
@@ -645,6 +645,84 @@
       "attributes.bin": "80d868016e2bfb02b5ff48f7698b2edaa47f4dd89b6deff72a024a4f8a0aeecb",
       "palettes.gbapal": "63a0849b40ebec56bac0c3ef0284d4013c950a955db6cb548250b88ad7153fa5",
       "tiles.png": "8ddc1f2c1fa13417d82511633b5adb296c94f9b9aa6be38b09de788c73667126"
+    }
+  },
+  "courier_battle": {
+    "source_sha256": "100a93a328c73c328440225ca430ce066473f9bbed62ec03980a0210ca6eeb47",
+    "source_size": [
+      2172,
+      724
+    ],
+    "source_layout": "four separated horizontal figures, left to right",
+    "source_cells": [
+      [
+        79,
+        141,
+        439,
+        624
+      ],
+      [
+        575,
+        136,
+        1031,
+        624
+      ],
+      [
+        1141,
+        129,
+        1563,
+        624
+      ],
+      [
+        1623,
+        173,
+        2157,
+        624
+      ]
+    ],
+    "waist_anchors": [
+      [
+        207.0,
+        483
+      ],
+      [
+        187.5,
+        488
+      ],
+      [
+        208.0,
+        495
+      ],
+      [
+        209.5,
+        451
+      ]
+    ],
+    "shared_canvas": [
+      534,
+      495
+    ],
+    "common_scale": 0.11235955056179775,
+    "native_frame_size": [
+      64,
+      64
+    ],
+    "frames": 4,
+    "native_frame_order": [
+      1,
+      2,
+      3,
+      0
+    ],
+    "idle_native_frame": 3,
+    "native_layout": "four vertical frames",
+    "waist_baseline": 64,
+    "shared_gender_design": true,
+    "quality_approval": "pending",
+    "files": {
+      "back.png": "03d596000871803c301906bac9956dfbd1eee6908a8727c2eaedec592108c2a5",
+      "back.4bpp": "766552cfcb5b85d5c3d626799b2dae702f9b8437bbfc06d48bc024d4182ee775",
+      "back.gbapal": "509d8bafc6360ef38a68253eef23e4afc64ad817fcac3263de8fa6cdef48e518"
     }
   },
   "cognition_cast": {
