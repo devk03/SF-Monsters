@@ -556,10 +556,22 @@ the coherent checkpoint they substantiate.
 
 ### 15.1 Objective and completion rule
 
-User-requested work cutoff: October 8, 2026, 6 PM San Francisco local time
-(October 9, 01:00 UTC). Stop new work at the cutoff, record remaining gates,
-make the final coherent commit, and pause the goal. A one-time thread reminder
-is scheduled; no recurring monitor or GitHub workflow is authorized by this.
+Current user-requested stop: **October 15, 2026, 6 PM America/Los_Angeles**
+(October 16, 01:00 UTC). Keep working through intermediate commits, fixes, reviews
+and deployments until that mark; do not treat a completed subtask as the end of
+the full goal. At the deadline stop new implementation/build/deployment work,
+record honest remaining gates, make the final coherent commit/push, and pause.
+A fixed-date one-time stop reminder is active; no indefinite monitor is authorized.
+
+Alignment requirement (explicitly requested October 14): check in with the
+**SF Monsters goal alignment review** chat at least every **30 minutes of elapsed
+active work**. Read its latest result/status, exchange current priorities and
+acceptance evidence, resolve disagreements against this spec, and record the
+last/next check-in below. Work with that chat on implementation, reviews,
+reference capture or testing as useful. Coordinate file ownership and engine
+builds before parallel mutations. Each dispatched task/monitor remains finite
+and under two hours; no recurring GitHub Actions. These check-ins support the
+full acceptance goal and must not become a substitute for implementation.
 
 Architecture revision approved by the user on October 7, 2026: use an Emerald
 ROM hack. The user explicitly accepts a public website that asks players to load
@@ -755,21 +767,21 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 13, 2026; historical checkpoint details follow):
+Current snapshot (October 14, 2026; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | User explicitly removed the cutoff and instructed continued work. All previous time-based stop conditions are revoked. The old reminder stays disabled; full scope and acceptance gates remain required. |
+| Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card remains paused; resuming that control is user-only. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.44-clinic-arrangement-preview; target735197f21e88fe58b6d0d6ee86329b816cf98599c0621cd58719707742dadc6b; Site36. Arrangement revision only; latest explicit clinic music score stays2/4 and all human approvals remain open. |
-| Latest local source build | v44 target735197f21e88fe58b6d0d6ee86329b816cf98599c0621cd58719707742dadc6b, source56deb55. Normal build/BPS/local checks pass; native/WASM18000-frame music PCM/Flash and2048-frame healing RGB/PCM/Flash match. Public remainsv43 until the pending deployment. |
+| Public build | 0.0.47-compact-blocks-preview; targetfa373906c1d315922d8e966d11f75b23535ec15d631472ca7990532ab47ce382; Site37. Courier/building overlap fixed and Sunset gaps narrowed. All quality reviews remain open. |
+| Latest local source build | v47, sourcecb71361. Normal build/BPS and local checks pass. Sunset1728-frame and South Park2008-frame native/WASM RGB/PCM/Flash match. Old newly blocked saved position relocates safely. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
+| Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Finish publicv44 guest QA and build/verify one original Scott Wu trainer portrait in the existing first gym. Preserve trainer/team/rewards/quest/save behavior and collect battle-introduction/native-WASM evidence. Clinic music review is pending; do not repeat endless clinic revisions or expand campaign before slice approval. |
+| Next work | Add original facade variety while preserving compact layout, per-edge actor visibility and supported saves. Alignment chat is preparing genuine Calvin/Scott introduction comparison. Obtain subset reviews while continuing independent slice/system work; no campaign expansion before slice approval. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4182,3 +4194,18 @@ v47 public deployment confirmation:
   .tools/browser-review/public-v47-smoke.png. Test-only tab muted, paused and
   closed afterward; original user tab remains open. Existing open sessions must
   reload the page and locally load their ROM again to use the new patch.
+
+
+### 15.10 Continuous work and alignment cadence — October 14
+
+- User reiterated: always keep going until the6PM mark, including after local
+  fixes and public releases. This is October15,6PM Pacific per latest deadline.
+  No task completion is inferred from a shipped subset.
+- User explicitly authorizes broad collaboration with the existing alignment
+  chat and requires a check-in every30minutes. Last check: October14 00:45
+  Pacific /07:45UTC; next due by01:15 Pacific /08:15UTC. Main is producing
+  original facade variants; reviewer is preparing the genuine trainer-intro
+  comparison with a60-minute task limit. Main owns engine builds/publication.
+- App goal card remains paused and stale; only the user can resume/change that
+  control. Canonical spec governs current work and preserves the full objective.
+  This limitation was stated to the user; no fake completion/replacement goal.
