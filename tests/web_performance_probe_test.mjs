@@ -79,7 +79,8 @@ test('unknown initial rAF gap is excluded without losing tick or frame totals', 
 });
 
 test('creates no timer before explicit start; expires once and stops idempotently', () => {
-    const f = fixture();
+    let closes = 0;
+    const f = fixture({ onClose() { ++closes; } });
     assert.equal(f.probe.active, false);
     assert.equal(f.scheduled.length, 0);
     assert.equal(f.probe.stop(), null);
@@ -94,6 +95,7 @@ test('creates no timer before explicit start; expires once and stops idempotentl
     assert.equal(f.probe.active, false);
     assert.equal(f.reports.length, 1);
     assert.equal(f.probe.stop(), report);
+    assert.equal(closes, 1);
     assert.deepEqual(f.cancelled, [1]);
     assert.equal(f.probe.record('tick', tick()), false);
     assert.throws(() => f.probe.start(), /new probe/);
@@ -122,6 +124,55 @@ test('reentrant reporting sees the same closed report and publishes once', () =>
     assert.equal(calls, 1);
 });
 
+test('onClose captures the boundary before reporting and is idempotent under reentry', () => {
+    const order = [];
+    let f;
+    f = fixture({ onClose(close) {
+        order.push('close');
+        assert.equal(f.probe.active, false);
+        assert.equal(f.probe.record('tick', tick()), false);
+        assert.equal(f.probe.stop('reentrant'), null);
+        assert.equal(f.reports.length, 0);
+        assert.equal(close.reason, 'complete');
+        assert.equal(close.endedAtMs, 200);
+        assert.equal(close.elapsedMs, 100);
+        f.time(5000); // Application close work cannot extend the recorded epoch.
+    } });
+    f.probe.start();
+    f.probe.record('tick', tick());
+    f.time(200);
+    const report = f.probe.stop('complete');
+    order.push('report');
+    assert.equal(f.reports[0], report);
+    assert.equal(report.endedAtMs, 200);
+    assert.equal(report.elapsedMs, 100);
+    assert.equal(report.ticks.count, 1);
+    assert.equal(f.probe.stop(), report);
+    f.scheduled[0].fn();
+    assert.deepEqual(order, ['close', 'report']);
+    assert.equal(f.reports.length, 1);
+    assert.deepEqual(f.cancelled, [1]);
+});
+
+test('onClose failure invalidates the report but still delivers it exactly once', () => {
+    for (const failure of [new Error('Close failed'), 'Close failed']) {
+        let closes = 0;
+        const f = fixture({ onClose() { ++closes; throw failure; } });
+        f.probe.start();
+        const report = f.probe.stop();
+        f.scheduled[0].fn();
+        assert.equal(report.valid, false);
+        assert.equal(report.scope.valid, false);
+        assert.equal(report.error, 'Close failed');
+        assert.equal(closes, 1);
+        assert.equal(f.reports.length, 1);
+        assert.equal(f.probe.stop(), report);
+    }
+    for (const onClose of [null, 1, 'callback', {}]) {
+        assert.throws(() => createPerformanceProbe({ onClose }), /onClose/);
+    }
+});
+
 test('delayed timeout cannot extend the accepted sample window', () => {
     const f = fixture({ durationMs: 50 });
     f.probe.start();
@@ -146,6 +197,38 @@ test('nearest-rank percentiles preserve tail samples and optional input stages',
     assert.equal(report.input.dispatchToSubmitMs.p99, 8);
     assert.equal(report.input.supersededBeforeFrame, 1);
     assert.equal(report.scope.guestKeyConsumptionProven, false);
+});
+
+test('duplicate-heavy samples retain exact rank weights and accurate means', () => {
+    const { probe } = fixture();
+    probe.start();
+    // 1000 observations: 900 at.1, 50 at.2, 40 at.3, 10 at3.3.
+    // The 500th/950th/990th observations must be.1/.2/.3 respectively.
+    for (const [value, count] of [[.3, 40], [3.3, 10], [.1, 900], [.2, 50]]) {
+        for (let i = 0; i < count; ++i) probe.record('tick', tick({ runMs: value }));
+    }
+    const report = probe.stop();
+    assert.equal(report.ticks.runMs.count, 1000);
+    assert.equal(report.ticks.runMs.min, .1);
+    assert.equal(report.ticks.runMs.max, 3.3);
+    assert.equal(report.ticks.runMs.p50, .1);
+    assert.equal(report.ticks.runMs.p95, .2);
+    assert.equal(report.ticks.runMs.p99, .3);
+    assert.ok(Math.abs(report.ticks.runMs.mean - .145) < 1e-15);
+});
+
+test('distinct adjacent Number values remain distinct in timing distributions', () => {
+    const { probe } = fixture();
+    probe.start();
+    probe.record('input', { domToDispatchMs: .30000000000000004, supersededBeforeFrame: false });
+    probe.record('input', { domToDispatchMs: .3, supersededBeforeFrame: false });
+    const report = probe.stop();
+    assert.equal(report.input.domToDispatchMs.count, 2);
+    assert.equal(report.input.domToDispatchMs.min, .3);
+    assert.equal(report.input.domToDispatchMs.max, .30000000000000004);
+    assert.equal(report.input.domToDispatchMs.p50, .3);
+    assert.equal(report.input.domToDispatchMs.p95, .30000000000000004);
+    assert.equal(report.input.domToDispatchMs.p99, .30000000000000004);
 });
 
 test('invalid and missing event values close the epoch without partial acceptance', () => {
