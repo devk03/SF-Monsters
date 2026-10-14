@@ -5822,3 +5822,13 @@ Actual mixed-browser and finite-lease checks:
   client/server teardown timestamp was not independently recorded. Report SHA
   e0ff1f0521099c7c56251b64684b1eb2625709610e44950731b74c0aa8694f1f.
   Full local checks pass; all private sessions/tabs stopped. Public unchanged.
+
+
+- v57normal release rebuilt to the exact tested drafttarget22beceecbe5d5edf607a3411fa19af4585a51e92a7ddd1cf1c6bbb1b54df1afd.
+  BPS888452bytes/SHA82880edae3130610686c9dd41d6817c38ce811034dbb33d9ce8f28cd19e34c68,
+  source7cffa0b469fc2693e177b1167212dbd3431ab87b; applyingtoverifiedbase is byte-identical.
+  Only manifest/delta are committed. Full cartridges/ELFs/native saves remain private.
+- Site48preparation copies all five changed/new SDKmodules from the exact15-file
+  runtime used in the passing600sfieldcheck. Prior Site47build preserved intact,
+  public hosting/auth/storage configuration unchanged. Typecheck/package inprogress;
+  archive and publication checks pending. Public remainsSite47 until deployment.
