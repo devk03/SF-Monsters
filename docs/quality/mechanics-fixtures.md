@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **298 independently specified scenarios**, including
-**52 double-battle interactions**. All298 pass on the approved Emerald reference
+The catalogs contain **336 independently specified scenarios**, including
+**57 double-battle interactions**. All336 pass on the approved Emerald reference
 and SFv48:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,72 type-effect,54 accuracy,23 critical,16 PP and14 HP cases. This is partial evidence.
+action-order cases,72 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -227,3 +227,29 @@ earlier245 cases pass again in the after-resources runs. Total298 scenarios /
 matrix, integrated move resolution and a coverage review remain required.
 These isolated commands queue controller updates; durable party/save writes
 and complete battle outcomes are separate controller-only checks.
+
+
+## Status application
+
+`status.json` adds 38 SetMoveEffect scenarios, including five doubles. Use the
+battle-command runner with `--cases data/quality/mechanics/status.json`. Each
+checks status1/status2, the native script destination and stack depth, queued
+controller updates, effect byte, result/ability flags, hit markers and exact RNG.
+Script expectations name whitelisted native status/prevention labels, resolved
+against each verified ELF. No expectations come from observed return values.
+
+Coverage includes poison, burn, freeze, paralysis, toxic, sleep and confusion;
+sleep/confusion duration boundaries; prevention abilities and types; existing
+status, fainting and Substitute; ShieldDust/Safeguard secondary prevention and
+ability-origin bypass; sun freeze prevention, active/absent weather suppression
+and ally Uproar/Soundproof. Scratch stack/history structures are initialized.
+
+This isolates application. It does not execute outer move-script checks, the
+secondary-effect chance roll, Synchronize, residual ticks, cures or animations.
+GenIII rules remain intentional: Electric typing alone does not grant paralysis
+immunity. An isolated primary function call is not an end-to-end status move.
+
+All earlier298 scenarios pass again. Final results are in
+`mechanics-v49-*-after-status`; total336 scenarios /57 doubles. Numerical
+minimums are met. Capture, the complete ordered type matrix, integrated attack
+resolution and the coverage review still prevent mechanics-gate completion.

@@ -1,0 +1,793 @@
+{
+  "profile": "status",
+  "cases": [
+    {
+      "id": "apply-poison",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 8,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 2,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectPoison",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "Apply the native primary status flag; queue target update and matching status script. No RNG is consumed."
+    },
+    {
+      "id": "apply-burn",
+      "effect": "MOVE_EFFECT_BURN",
+      "rng_seed": 0,
+      "expected": {
+        "status": 16,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 3,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectBurn",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "Apply the native primary status flag; queue target update and matching status script. No RNG is consumed."
+    },
+    {
+      "id": "apply-freeze",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 32,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 4,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectFreeze",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Apply the native primary status flag; queue target update and matching status script. No RNG is consumed."
+    },
+    {
+      "id": "apply-paralysis",
+      "effect": "MOVE_EFFECT_PARALYSIS",
+      "rng_seed": 0,
+      "expected": {
+        "status": 64,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 5,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectParalysis",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "Apply the native primary status flag; queue target update and matching status script. No RNG is consumed."
+    },
+    {
+      "id": "apply-toxic",
+      "effect": "MOVE_EFFECT_TOXIC",
+      "rng_seed": 0,
+      "expected": {
+        "status": 128,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 6,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectToxic",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "Apply the native primary status flag; queue target update and matching status script. No RNG is consumed."
+    },
+    {
+      "id": "sleep-two-turns",
+      "effect": "MOVE_EFFECT_SLEEP",
+      "rng_seed": 0,
+      "expected": {
+        "status": 2,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 1,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectSleep",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 24691
+      },
+      "derivation": "LCG0 advances to24691, upper16=0; sleep timer(0&3)+2=2."
+    },
+    {
+      "id": "sleep-five-turns",
+      "effect": "MOVE_EFFECT_SLEEP",
+      "rng_seed": 3,
+      "expected": {
+        "status": 5,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 1,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectSleep",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 3310570426
+      },
+      "derivation": "LCG3 advances to3310570426, upper16 low2bits3; sleep timer5."
+    },
+    {
+      "id": "confusion-two-turns",
+      "effect": "MOVE_EFFECT_CONFUSION",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 2,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectConfusion",
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 24691
+      },
+      "derivation": "LCG0 gives duration2 in volatile status2; no durable status controller update."
+    },
+    {
+      "id": "confusion-five-turns",
+      "effect": "MOVE_EFFECT_CONFUSION",
+      "rng_seed": 3,
+      "expected": {
+        "status": 0,
+        "status2": 5,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectConfusion",
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 3310570426
+      },
+      "derivation": "LCG3 gives volatile confusion duration5."
+    },
+    {
+      "id": "immunity-primary-poison-prevention",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 17,
+        "effect_byte": 0,
+        "stack_size": 1,
+        "pointer": "BattleScript_PSNPrevention",
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Immunity blocks primary poison and selects its prevention script.",
+      "defender": {
+        "ability": "ABILITY_IMMUNITY"
+      }
+    },
+    {
+      "id": "water-veil-burn-prevention",
+      "effect": "MOVE_EFFECT_BURN",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 41,
+        "effect_byte": 0,
+        "stack_size": 1,
+        "pointer": "BattleScript_BRNPrevention",
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "WaterVeil blocks burn and selects its prevention script.",
+      "defender": {
+        "ability": "ABILITY_WATER_VEIL"
+      }
+    },
+    {
+      "id": "limber-paralysis-prevention",
+      "effect": "MOVE_EFFECT_PARALYSIS",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 7,
+        "effect_byte": 0,
+        "stack_size": 1,
+        "pointer": "BattleScript_PRLZPrevention",
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Limber blocks paralysis and selects its prevention script.",
+      "defender": {
+        "ability": "ABILITY_LIMBER"
+      }
+    },
+    {
+      "id": "immunity-secondary-poison-silent",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Uncertain secondary poison is blocked silently by Immunity.",
+      "primary": false,
+      "defender": {
+        "ability": "ABILITY_IMMUNITY"
+      }
+    },
+    {
+      "id": "poison-type-rejects-poison",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Poison-type status target is immune to ordinary poisoning.",
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON"
+      }
+    },
+    {
+      "id": "steel-type-rejects-poison",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Steel-type status target is immune to ordinary poisoning.",
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL"
+      }
+    },
+    {
+      "id": "steel-type-toxic-result-flag",
+      "effect": "MOVE_EFFECT_TOXIC",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 8,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Toxic on Steel sets native immunity flag8, leaves status unchanged.",
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL"
+      }
+    },
+    {
+      "id": "fire-type-rejects-burn",
+      "effect": "MOVE_EFFECT_BURN",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Fire type rejects burn without replacing its current status.",
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      }
+    },
+    {
+      "id": "ice-type-rejects-freeze",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Ice type rejects freeze.",
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE"
+      }
+    },
+    {
+      "id": "magma-armor-rejects-freeze",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "MagmaArmor prevents freeze.",
+      "defender": {
+        "ability": "ABILITY_MAGMA_ARMOR"
+      }
+    },
+    {
+      "id": "insomnia-rejects-sleep",
+      "effect": "MOVE_EFFECT_SLEEP",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Insomnia prevents sleep before drawing a duration.",
+      "defender": {
+        "ability": "ABILITY_INSOMNIA"
+      }
+    },
+    {
+      "id": "vital-spirit-rejects-sleep",
+      "effect": "MOVE_EFFECT_SLEEP",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "VitalSpirit prevents sleep before drawing a duration.",
+      "defender": {
+        "ability": "ABILITY_VITAL_SPIRIT"
+      }
+    },
+    {
+      "id": "own-tempo-rejects-confusion",
+      "effect": "MOVE_EFFECT_CONFUSION",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "OwnTempo prevents volatile confusion and consumes no RNG.",
+      "defender": {
+        "ability": "ABILITY_OWN_TEMPO"
+      }
+    },
+    {
+      "id": "shield-dust-rejects-secondary-status",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "ShieldDust blocks a secondary poison effect.",
+      "primary": false,
+      "defender": {
+        "ability": "ABILITY_SHIELD_DUST"
+      }
+    },
+    {
+      "id": "safeguard-rejects-secondary-status",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Safeguard blocks a secondary poison effect.",
+      "primary": false,
+      "safeguard": true
+    },
+    {
+      "id": "shield-dust-allows-primary-status",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 8,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 2,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectPoison",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "ShieldDust does not block primary status effects.",
+      "defender": {
+        "ability": "ABILITY_SHIELD_DUST"
+      }
+    },
+    {
+      "id": "existing-status-not-replaced",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 16,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Existing burn16 is preserved when poison is attempted.",
+      "defender": {
+        "status": 16
+      }
+    },
+    {
+      "id": "fainted-target-rejects-status",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Fainted target cannot acquire poison.",
+      "defender": {
+        "hp": 0
+      }
+    },
+    {
+      "id": "substitute-blocks-target-status",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 16777216,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Substitute blocks a status effect directed at the opponent.",
+      "defender": {
+        "status2": "STATUS2_SUBSTITUTE"
+      }
+    },
+    {
+      "id": "sun-prevents-freeze",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Effective sun prevents freezing.",
+      "weather": "B_WEATHER_SUN_TEMPORARY"
+    },
+    {
+      "id": "rain-allows-freeze",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 32,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 4,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectFreeze",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Rain does not forbid freezing.",
+      "weather": "B_WEATHER_RAIN_TEMPORARY"
+    },
+    {
+      "id": "ally-air-lock-removes-sun-freeze-protection",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 32,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 77,
+        "effect_byte": 4,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectFreeze",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Active ally AirLock suppresses sun, permitting freeze.",
+      "double": true,
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "opponent-cloud-nine-removes-sun-freeze-protection",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 32,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 13,
+        "effect_byte": 4,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectFreeze",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Active opposing partner CloudNine suppresses sun, permitting freeze.",
+      "double": true,
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "opponent_ally": {
+        "ability": "ABILITY_CLOUD_NINE"
+      }
+    },
+    {
+      "id": "absent-air-lock-keeps-sun-protection",
+      "effect": "MOVE_EFFECT_FREEZE",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Absent ally AirLock cannot suppress sun, so freeze is blocked.",
+      "double": true,
+      "absent": 4,
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "ally-uproar-blocks-sleep",
+      "effect": "MOVE_EFFECT_SLEEP",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 0,
+        "stack_size": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "An active ally Uproar prevents ordinary sleep without a random draw.",
+      "double": true,
+      "ally": {
+        "status2": "STATUS2_UPROAR"
+      }
+    },
+    {
+      "id": "soundproof-ignores-ally-uproar",
+      "effect": "MOVE_EFFECT_SLEEP",
+      "rng_seed": 0,
+      "expected": {
+        "status": 2,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 1,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectSleep",
+        "controller": 2,
+        "hitmarker": 0,
+        "rng": 24691
+      },
+      "derivation": "Soundproof target ignores the ally Uproar sleep barrier; seeded duration2.",
+      "double": true,
+      "ally": {
+        "status2": "STATUS2_UPROAR"
+      },
+      "defender": {
+        "ability": "ABILITY_SOUNDPROOF"
+      }
+    },
+    {
+      "id": "certain-secondary-immunity-message",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 0,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 17,
+        "effect_byte": 0,
+        "stack_size": 1,
+        "pointer": "BattleScript_PSNPrevention",
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Certain secondary poison invokes Immunity prevention rather than silent failure.",
+      "primary": false,
+      "certain": true,
+      "defender": {
+        "ability": "ABILITY_IMMUNITY"
+      }
+    },
+    {
+      "id": "ability-status-bypasses-safeguard",
+      "effect": "MOVE_EFFECT_POISON",
+      "rng_seed": 0,
+      "expected": {
+        "status": 8,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 2,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectPoison",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "Ability-status marker bypasses Safeguard, clears that marker and sets Synchronize marker.",
+      "primary": false,
+      "safeguard": true,
+      "hitmarker": "HITMARKER_STATUS_ABILITY_EFFECT"
+    },
+    {
+      "id": "gen-three-electric-type-can-be-paralyzed",
+      "effect": "MOVE_EFFECT_PARALYSIS",
+      "rng_seed": 0,
+      "expected": {
+        "status": 64,
+        "status2": 0,
+        "flags": 0,
+        "last_ability": 0,
+        "effect_byte": 5,
+        "stack_size": 1,
+        "pointer": "BattleScript_MoveEffectParalysis",
+        "controller": 2,
+        "hitmarker": 16384,
+        "rng": 0
+      },
+      "derivation": "GenIII has no generic Electric-type paralysis immunity in status application.",
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC"
+      }
+    }
+  ]
+}

@@ -29,7 +29,8 @@ GLOBALS = {'gBattleMons': 352, 'gBattlerPositions': 4, 'gBattlersCount': 1,
            'gDisableStructs': 112, 'gBattleCommunication': 8, 'gLastUsedAbility': 1,
            'gLastLandedMoves': 8, 'gLastHitByType': 8,
            'gBattleControllerExecFlags': 4, 'gCurrMovePos': 1,
-           'gSpecialStatuses': 80, 'gHpDealt': 4, 'gBideDmg': 16, 'gBideTarget': 4}
+           'gSpecialStatuses': 80, 'gHpDealt': 4, 'gBideDmg': 16, 'gBideTarget': 4,
+           'gSideStatuses': 4, 'gBattleScripting': 40, 'gEffectBattler': 1}
 
 
 def digest(path):

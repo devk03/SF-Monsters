@@ -7,8 +7,12 @@ import struct
 import subprocess
 from mechanics_fixtures import ROOT, battle_setup, build_driver, constants, digest, verify_bundle
 
-FUNCTIONS = {'critical': 'Cmd_critcalc', 'pp': 'Cmd_ppreduce', 'hp': 'Cmd_datahpupdate'}
+FUNCTIONS = {'critical': 'Cmd_critcalc', 'pp': 'Cmd_ppreduce', 'hp': 'Cmd_datahpupdate',
+             'status': 'SetMoveEffect'}
 SLOTS = ('attacker', 'defender', 'ally', 'opponent_ally')
+STATUS_SCRIPTS = {'BattleScript_MoveEffect' + name for name in
+                  ('Sleep', 'Poison', 'Burn', 'Freeze', 'Paralysis', 'Toxic', 'Confusion')}
+STATUS_SCRIPTS |= {'BattleScript_' + name + 'Prevention' for name in ('PSN', 'BRN', 'PRLZ')}
 
 
 def validate(document):
@@ -23,10 +27,11 @@ def validate(document):
         allowed = {'id', 'derivation', *SLOTS, 'move', 'double', 'absent', 'rng_seed', 'expected'}
         allowed |= {'critical': {'no_crit', 'battle_flags'},
                     'pp': {'pp', 'hitmarker', 'pressure_exempt', 'mimicked', 'controller_busy'},
-                    'hp': {'damage', 'result_flags', 'hitmarker', 'substitute_hp', 'controller_busy'}}[profile]
+                    'hp': {'damage', 'result_flags', 'hitmarker', 'substitute_hp', 'controller_busy'},
+                    'status': {'effect', 'primary', 'certain', 'safeguard', 'weather', 'hitmarker'}}[profile]
         if set(case) - allowed or not case.get('derivation'):
             raise ValueError('Reject unknown command controls or missing derivations.')
-        for key in ('double', 'no_crit', 'pressure_exempt', 'mimicked', 'controller_busy'):
+        for key in ('double', 'no_crit', 'pressure_exempt', 'mimicked', 'controller_busy', 'primary', 'certain', 'safeguard'):
             if key in case and type(case[key]) is not bool:
                 raise ValueError('Command switches must be boolean.')
         if type(case.get('rng_seed', 0)) is not int or not 0 <= case.get('rng_seed', 0) <= 0xffffffff:
@@ -34,10 +39,15 @@ def validate(document):
         required = {'critical': {'critical', 'pointer', 'rng'},
                     'pp': {'pp', 'pointer', 'controller', 'hitmarker', 'rng'},
                     'hp': {'hp', 'dealt', 'substitute_hp', 'physical', 'special', 'shell_bell',
-                           'bide', 'pointer', 'controller', 'hitmarker', 'rng'}}[profile]
+                           'bide', 'pointer', 'controller', 'hitmarker', 'rng'},
+                    'status': {'status', 'status2', 'flags', 'last_ability', 'effect_byte',
+                               'stack_size', 'pointer', 'controller', 'hitmarker', 'rng'}}[profile]
         expected = case.get('expected')
-        if not isinstance(expected, dict) or set(expected) != required or any(type(v) is not int for v in expected.values()):
+        valid_symbol = lambda key, value: profile == 'status' and key == 'pointer' and isinstance(value, str) and value in STATUS_SCRIPTS
+        if not isinstance(expected, dict) or set(expected) != required or any(type(v) is not int and not valid_symbol(k, v) for k, v in expected.items()):
             raise ValueError('Every native observable needs an explicit integer expectation.')
+        if profile == 'status' and case.get('effect') not in {'MOVE_EFFECT_' + name for name in ('SLEEP', 'POISON', 'BURN', 'FREEZE', 'PARALYSIS', 'TOXIC', 'CONFUSION')}:
+            raise ValueError('Use an explicitly supported status effect.')
         for key in ('pp', 'substitute_hp'):
             if key in case and (type(case[key]) is not int or not 0 <= case[key] <= 255):
                 raise ValueError('PP and substitute HP must fit native bytes.')
@@ -47,7 +57,7 @@ def validate(document):
 
 
 def program(profile, case, syms, resolve):
-    controls = {key: value for key, value in case.items() if key in {*SLOTS, 'move', 'double', 'absent', 'rng_seed'}}
+    controls = {key: value for key, value in case.items() if key in {*SLOTS, 'move', 'double', 'absent', 'rng_seed', 'weather'}}
     controls['rng_seed'] = case.get('rng_seed', 0)
     lines = battle_setup(controls, syms, resolve)
     script = 0x0203f600
@@ -72,8 +82,23 @@ def program(profile, case, syms, resolve):
         lines.append(f'write {syms["gBattleMons"][0] + 36:x} {case.get("pp", 10):02x}')
     if profile == 'hp':
         lines.append(f'write {syms["gBattleMoveDamage"][0]:x} ' + struct.pack('<i', case.get('damage', 20)).hex())
+    args = '0 0 0 0 0 0 0 0'
+    if profile == 'status':
+        communication = bytearray(8)
+        communication[3] = resolve(case['effect'])  # MOVE_EFFECT_BYTE
+        resource = bytearray(32)
+        struct.pack_into('<I', resource, 4, 0x0203f040)
+        struct.pack_into('<I', resource, 8, 0x0203f800)
+        struct.pack_into('<I', resource, 24, 0x0203f880)
+        for name, data in {'gBattleCommunication': communication, 'gBattleScripting': bytes(40),
+                           'gLastUsedAbility': b'\0', 'gEffectBattler': b'\0',
+                           'gSideStatuses': struct.pack('<2H', 0, 32 if case.get('safeguard') else 0)}.items():
+            lines.append(f'write {syms[name][0]:x} {data.hex()}')
+        lines += [f'write 203f000 {resource.hex()}', 'write 203f800 ' + bytes(36).hex(),
+                  'write 203f880 ' + bytes(256).hex()]
+        args = f'{int(case.get("primary", True)):x} {128 if case.get("certain") else 0:x} 0 0 0 0 0 0'
     # BS_TARGET=0; the command chooses the actual target slot initialized above.
-    lines += [f'write {script:x} 0000', f'call {syms[FUNCTIONS[profile]][0]:x} 0 0 0 0 0 0 0 0']
+    lines += [f'write {script:x} 0000', f'call {syms[FUNCTIONS[profile]][0]:x} {args}']
     reads = {'pointer': (syms['gBattlescriptCurrInstr'][0], 4, False),
              'rng': (syms['gRngValue'][0], 4, False)}
     if profile == 'critical':
@@ -91,12 +116,25 @@ def program(profile, case, syms, resolve):
                       'special': (syms['gProtectStructs'][0] + 16 + 8, 4, False),
                       'shell_bell': (syms['gSpecialStatuses'][0] + 20 + 4, 4, True),
                       'bide': (syms['gBideDmg'][0] + 4, 4, False)})
+    if profile == 'status':
+        reads.update({'status': (syms['gBattleMons'][0] + 88 + 76, 4, False),
+                      'status2': (syms['gBattleMons'][0] + 88 + 80, 4, False),
+                      'flags': (syms['gMoveResultFlags'][0], 1, False),
+                      'last_ability': (syms['gLastUsedAbility'][0], 1, False),
+                      'effect_byte': (syms['gBattleCommunication'][0] + 3, 1, False),
+                      'stack_size': (0x0203f820, 1, False)})
     lines += [f'read {address:x} {size:x}' for address, size, _ in reads.values()]
     return '\n'.join(lines) + '\n', reads
 
 
 def run_side(label, profile, rom, elf, state, executable, cases, resolve, output):
     identity, syms = verify_bundle(label, rom, elf, state, output, {FUNCTIONS[profile]})
+    scripts = {}
+    if profile == 'status':
+        for row in subprocess.check_output(['arm-none-eabi-nm', '--defined-only', str(elf)], text=True).splitlines():
+            words = row.split()
+            if len(words) == 3 and words[2] in STATUS_SCRIPTS:
+                scripts[words[2]] = int(words[0], 16)
     programs = [program(profile, case, syms, resolve) for case in cases]
     if len({s for s, _ in programs}) != len(cases):
         raise ValueError('Duplicate effective command fixtures cannot add coverage.')
@@ -116,8 +154,10 @@ def run_side(label, profile, rom, elf, state, executable, cases, resolve, output
             raise ValueError('Command returned incomplete observations.')
         actual = {key: int.from_bytes(bytes.fromhex(raw), 'little', signed=spec[2])
                   for (key, spec), raw in zip(reads.items(), chunk[2:])}
-        observed.append({'id': case['id'], 'actual': actual, 'expected': case['expected'],
-                         'pass': actual == case['expected'] and int.from_bytes(bytes.fromhex(chunk[0]), 'little') == case.get('rng_seed', 0)})
+        expected = {key: scripts[value] if isinstance(value, str) else value for key, value in case['expected'].items()}
+        observed.append({'id': case['id'], 'actual': actual, 'expected': expected,
+                         'expected_labels': case['expected'],
+                         'pass': actual == expected and int.from_bytes(bytes.fromhex(chunk[0]), 'little') == case.get('rng_seed', 0)})
     if lines:
         raise ValueError('Unexpected extra native observations.')
     return {**identity, 'cases': observed}

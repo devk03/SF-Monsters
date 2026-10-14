@@ -26,6 +26,24 @@ class BattleCommandFixtures(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate({'profile': 'pp', 'cases': document['cases'] * 2})
 
+    def test_status_oracle_can_name_only_explicit_native_status_scripts(self):
+        document = {'profile': 'status', 'cases': [{'id': 'poison', 'effect': 'MOVE_EFFECT_POISON',
+            'expected': {'status': 8, 'status2': 0, 'flags': 0, 'last_ability': 0,
+                         'effect_byte': 2, 'stack_size': 1, 'pointer': 'BattleScript_MoveEffectPoison',
+                         'controller': 2, 'hitmarker': 16384, 'rng': 0},
+            'derivation': 'Primary poison sets flag8, queues target status and its script.'}]}
+        validate(document)
+        for key, value in [('effect', 'MOVE_EFFECT_STEAL_ITEM'), ('primary', 1), ('certain', 1)]:
+            bad = deepcopy(document)
+            bad['cases'][0][key] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                validate(bad)
+        for key, value in [('pointer', 'BattleScript_Unknown'), ('status', '8')]:
+            bad = deepcopy(document)
+            bad['cases'][0]['expected'][key] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                validate(bad)
+
 
 if __name__ == '__main__':
     unittest.main()
