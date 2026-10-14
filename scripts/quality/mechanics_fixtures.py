@@ -24,7 +24,10 @@ GLOBALS = {'gBattleMons': 352, 'gBattlerPositions': 4, 'gBattlersCount': 1,
            'gBattleResources': 4, 'gBattleMovePower': 2, 'gRngValue': 4,
            'gBattleStruct': 4, 'gProtectStructs': 64, 'gChosenActionByBattler': 4,
            'gRandomTurnNumber': 2, 'gActionsByTurnOrder': 4,
-           'gBattlerByTurnOrder': 4, 'gBattleMainFunc': 4, 'gBattleMoveDamage': 4}
+           'gBattlerByTurnOrder': 4, 'gBattleMainFunc': 4, 'gBattleMoveDamage': 4,
+           'gBattlescriptCurrInstr': 4, 'gHitMarker': 4, 'gMoveResultFlags': 1,
+           'gDisableStructs': 112, 'gBattleCommunication': 8, 'gLastUsedAbility': 1,
+           'gLastLandedMoves': 8, 'gLastHitByType': 8}
 
 
 def digest(path):
@@ -86,7 +89,8 @@ def battle_mon(changes, resolve):
               'max_hp': (44, 'H', 90), 'item': (46, 'H', 0), 'status': (76, 'I', 0),
               'type1': (33, 'B', 0), 'type2': (34, 'B', 0), 'status2': (80, 'I', 0)}
     stages = {'attack_stage': 25, 'defense_stage': 26, 'speed_stage': 27,
-              'sp_attack_stage': 28, 'sp_defense_stage': 29}
+              'sp_attack_stage': 28, 'sp_defense_stage': 29,
+              'accuracy_stage': 30, 'evasion_stage': 31}
     if set(changes) - (set(fields) | set(stages) | {'move'}):
         raise ValueError('Unsupported battle-mon fixture field.')
     data = bytearray(88)

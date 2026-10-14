@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **191 independently specified scenarios**, including
-**31 double-battle interactions**. All191 pass on the approved Emerald reference
+The catalogs contain **245 independently specified scenarios**, including
+**46 double-battle interactions**. All245 pass on the approved Emerald reference
 and SFv48:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases, plus72 type-effect cases. This is partial evidence.
+action-order cases,72 type-effect and54 accuracy cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -175,3 +175,29 @@ failed evidence is preserved and adds no count. All 119 earlier cases pass after
 this shared change. Evidence: `mechanics-v48-type-effects-deduplicated` and
 `mechanics-v48-{base,turn,stats,action}-after-types`. Total 191 / 300 scenarios,
 31 / 50 doubles; all other mechanics, campaign and quality gates stay open.
+
+
+## Accuracy commands
+
+`accuracy.json` adds 54 scenarios, including 15 doubles. Run
+`scripts/quality/accuracy_fixtures.py` with the same six ROM/ELF/state arguments
+and a fresh evidence name. It executes Cmd_accuracycheck on a scratch RAM script
+and observes the next-script branch, result flags, miss message, hit-marker
+consumption and exact final RNG. It does not execute the eventual attack.
+
+Coverage includes exact chance boundaries, accuracy/evasion stages and clamps,
+CompoundEyes, Hustle, evasion items, Foresight, weather Thunder, always-hit moves,
+Protect, LockOn ownership and semi-invulnerable states. Doubles exercise both
+partner slots, both weather-suppressing abilities, absence and spread-move miss
+messages. Explicit precedence cases ensure always-hit mechanics do not bypass
+Protect or airborne states unless a corresponding exception applies.
+
+Seeds are independently selected using the native LCG equation to produce
+specified percentile rolls; expected next states are stored in the catalog.
+No-RNG branches must preserve the state. This is deterministic branch evidence,
+not a statistical RNG-distribution claim.
+
+Final results: `mechanics-v48-accuracy-guarded`54/54 and all earlier191 cases
+rerun in `mechanics-v48-{base,turn,stats,action,types}-after-accuracy`. Total245
+scenarios /46 doubles; at least55 broad cases /4 doubles remain. Status, capture,
+resource consumption and complete move-resolution coverage remain required.

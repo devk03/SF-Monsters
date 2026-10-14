@@ -1,0 +1,693 @@
+{
+  "function": "Cmd_accuracycheck",
+  "cases": [
+    {
+      "id": "full-accuracy-roll-one",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 24691,
+      "derivation": "Neutral Pound100 hits roll1. LCG seed0 produces roll1 (upper16 modulo100 plus1)."
+    },
+    {
+      "id": "full-accuracy-roll-hundred",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Neutral Pound100 hits roll100. LCG seed116 produces roll100 (upper16 modulo100 plus1)."
+    },
+    {
+      "id": "thunder-exact-seventy",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 16,
+      "expected_rng": 476399427,
+      "derivation": "Thunder70 hits at boundary70. LCG seed16 produces roll70 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER"
+    },
+    {
+      "id": "thunder-over-seventy",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 164,
+      "expected_rng": 587898439,
+      "derivation": "Thunder70 misses roll71. LCG seed164 produces roll71 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER"
+    },
+    {
+      "id": "accuracy-plus-one-rounding",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 99,
+      "expected_rng": 1873851546,
+      "derivation": "Thunder70 at accuracy+1 uses floor70*133/100=93. LCG seed99 produces roll93 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER",
+      "attacker": {
+        "accuracy_stage": 7
+      }
+    },
+    {
+      "id": "accuracy-plus-one-over-boundary",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 37,
+      "expected_rng": 2175383092,
+      "derivation": "Threshold93 misses roll94. LCG seed37 produces roll94 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER",
+      "attacker": {
+        "accuracy_stage": 7
+      }
+    },
+    {
+      "id": "evasion-plus-one-boundary",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 126,
+      "expected_rng": 1603992089,
+      "derivation": "Target evasion+1 gives stage-1:100*75/100=75. LCG seed126 produces roll75 (upper16 modulo100 plus1).",
+      "defender": {
+        "evasion_stage": 7
+      }
+    },
+    {
+      "id": "evasion-plus-one-miss",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 64,
+      "expected_rng": 1905523635,
+      "derivation": "Threshold75 misses roll76. LCG seed64 produces roll76 (upper16 modulo100 plus1).",
+      "defender": {
+        "evasion_stage": 7
+      }
+    },
+    {
+      "id": "compound-eyes-boundary",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 13,
+      "expected_rng": 1460820988,
+      "derivation": "Thunder70*130/100=91. LCG seed13 produces roll91 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER",
+      "attacker": {
+        "ability": "ABILITY_COMPOUND_EYES"
+      }
+    },
+    {
+      "id": "compound-eyes-over-boundary",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 161,
+      "expected_rng": 1572320000,
+      "derivation": "CompoundEyes Thunder91 misses roll92. LCG seed161 produces roll92 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER",
+      "attacker": {
+        "ability": "ABILITY_COMPOUND_EYES"
+      }
+    },
+    {
+      "id": "hustle-physical-boundary",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 57,
+      "expected_rng": 2770851512,
+      "derivation": "Physical Pound100*80/100=80. LCG seed57 produces roll80 (upper16 modulo100 plus1).",
+      "attacker": {
+        "ability": "ABILITY_HUSTLE"
+      }
+    },
+    {
+      "id": "hustle-physical-miss",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 26,
+      "expected_rng": 2921617285,
+      "derivation": "Hustle Pound80 misses roll81. LCG seed26 produces roll81 (upper16 modulo100 plus1).",
+      "attacker": {
+        "ability": "ABILITY_HUSTLE"
+      }
+    },
+    {
+      "id": "hustle-special-unchanged",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Hustle does not reduce special WaterGun100. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "ability": "ABILITY_HUSTLE"
+      }
+    },
+    {
+      "id": "bright-powder-boundary",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 44,
+      "expected_rng": 1310055215,
+      "derivation": "BrightPowder reduces100 by10 percent to90. LCG seed44 produces roll90 (upper16 modulo100 plus1).",
+      "defender": {
+        "item": "ITEM_BRIGHT_POWDER"
+      }
+    },
+    {
+      "id": "bright-powder-over-boundary",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 13,
+      "expected_rng": 1460820988,
+      "derivation": "BrightPowder threshold90 misses91. LCG seed13 produces roll91 (upper16 modulo100 plus1).",
+      "defender": {
+        "item": "ITEM_BRIGHT_POWDER"
+      }
+    },
+    {
+      "id": "lax-incense-boundary",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 6,
+      "expected_rng": 2326148865,
+      "derivation": "LaxIncense reduces100 by5 percent to95. LCG seed6 produces roll95 (upper16 modulo100 plus1).",
+      "defender": {
+        "item": "ITEM_LAX_INCENSE"
+      }
+    },
+    {
+      "id": "lax-incense-over-boundary",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 154,
+      "expected_rng": 2437647877,
+      "derivation": "LaxIncense threshold95 misses96. LCG seed154 produces roll96 (upper16 modulo100 plus1).",
+      "defender": {
+        "item": "ITEM_LAX_INCENSE"
+      }
+    },
+    {
+      "id": "foresight-ignores-target-evasion",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Foresight uses attacker accuracy alone despite target evasion+6. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "defender": {
+        "evasion_stage": 12,
+        "status2": "STATUS2_FORESIGHT"
+      }
+    },
+    {
+      "id": "foresight-keeps-attacker-accuracy-loss",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 155,
+      "expected_rng": 3541163122,
+      "derivation": "Foresight ignores target evasion, but attacker stage-6 still gives33. LCG seed155 produces roll34 (upper16 modulo100 plus1).",
+      "attacker": {
+        "accuracy_stage": 0
+      },
+      "defender": {
+        "evasion_stage": 12,
+        "status2": "STATUS2_FORESIGHT"
+      }
+    },
+    {
+      "id": "extreme-stage-clamp-low",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 155,
+      "expected_rng": 3541163122,
+      "derivation": "Attacker-6 minus target+6 clamps to stage-6 threshold33. LCG seed155 produces roll34 (upper16 modulo100 plus1).",
+      "attacker": {
+        "accuracy_stage": 0
+      },
+      "defender": {
+        "evasion_stage": 12
+      }
+    },
+    {
+      "id": "extreme-stage-clamp-high",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Attacker+6 minus target-6 clamps high and always hits ordinary roll100. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "attacker": {
+        "accuracy_stage": 12
+      },
+      "defender": {
+        "evasion_stage": 0
+      }
+    },
+    {
+      "id": "rain-thunder-no-random-check",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Rain makes Thunder hit without accuracy roll. This branch consumes no RNG.",
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY"
+    },
+    {
+      "id": "sun-thunder-boundary",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 11,
+      "expected_rng": 3548757794,
+      "derivation": "Sun sets Thunder accuracy50; roll50 hits. LCG seed11 produces roll50 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_SUN_TEMPORARY"
+    },
+    {
+      "id": "sun-thunder-over-boundary",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 190,
+      "expected_rng": 3509491033,
+      "derivation": "Sun Thunder50 misses51. LCG seed190 produces roll51 (upper16 modulo100 plus1).",
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_SUN_TEMPORARY"
+    },
+    {
+      "id": "swift-bypasses-evasion",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Swift bypasses ordinary accuracy/evasion. This branch consumes no RNG.",
+      "move": "MOVE_SWIFT",
+      "defender": {
+        "evasion_stage": 12
+      }
+    },
+    {
+      "id": "vital-throw-bypasses-evasion",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "VitalThrow bypasses ordinary accuracy/evasion. This branch consumes no RNG.",
+      "move": "MOVE_VITAL_THROW",
+      "defender": {
+        "evasion_stage": 12
+      }
+    },
+    {
+      "id": "protect-blocks-before-roll",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 1,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Protect blocks Pound before consuming random accuracy. This branch consumes no RNG.",
+      "protect": true
+    },
+    {
+      "id": "semi-invulnerable-air",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Target is semi-invulnerable; ordinary attack fails before roll. This branch consumes no RNG.",
+      "target_status3": "STATUS3_ON_AIR"
+    },
+    {
+      "id": "ignore-air-consumed",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Explicit ignore marker allows hit and is consumed before normal roll. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "target_status3": "STATUS3_ON_AIR",
+      "hitmarker": "HITMARKER_IGNORE_ON_AIR"
+    },
+    {
+      "id": "semi-invulnerable-underground",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Target is semi-invulnerable; ordinary attack fails before roll. This branch consumes no RNG.",
+      "target_status3": "STATUS3_UNDERGROUND"
+    },
+    {
+      "id": "ignore-underground-consumed",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Explicit ignore marker allows hit and is consumed before normal roll. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "target_status3": "STATUS3_UNDERGROUND",
+      "hitmarker": "HITMARKER_IGNORE_UNDERGROUND"
+    },
+    {
+      "id": "semi-invulnerable-underwater",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Target is semi-invulnerable; ordinary attack fails before roll. This branch consumes no RNG.",
+      "target_status3": "STATUS3_UNDERWATER"
+    },
+    {
+      "id": "ignore-underwater-consumed",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Explicit ignore marker allows hit and is consumed before normal roll. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "target_status3": "STATUS3_UNDERWATER",
+      "hitmarker": "HITMARKER_IGNORE_UNDERWATER"
+    },
+    {
+      "id": "lock-on-correct-owner",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "LockOn for attacker0 bypasses accuracy and invulnerability. This branch consumes no RNG.",
+      "target_status3": "STATUS3_ALWAYS_HITS",
+      "sure_hit_battler": 0
+    },
+    {
+      "id": "lock-on-wrong-owner",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 155,
+      "expected_rng": 3541163122,
+      "derivation": "LockOn owned by slot2 does not help attacker0; accuracy-6 misses34. LCG seed155 produces roll34 (upper16 modulo100 plus1).",
+      "target_status3": "STATUS3_ALWAYS_HITS",
+      "sure_hit_battler": 2,
+      "attacker": {
+        "accuracy_stage": 0
+      }
+    },
+    {
+      "id": "rain-suppressed-ally-air-lock",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 164,
+      "expected_rng": 587898439,
+      "derivation": "Active partner weather suppression removes guaranteed Thunder hit; base70 misses71. LCG seed164 produces roll71 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "rain-suppressed-opponent-air-lock",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 164,
+      "expected_rng": 587898439,
+      "derivation": "Active partner weather suppression removes guaranteed Thunder hit; base70 misses71. LCG seed164 produces roll71 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "opponent_ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "rain-suppressed-ally-cloud-nine",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 164,
+      "expected_rng": 587898439,
+      "derivation": "Active partner weather suppression removes guaranteed Thunder hit; base70 misses71. LCG seed164 produces roll71 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_CLOUD_NINE"
+      }
+    },
+    {
+      "id": "rain-suppressed-opponent-cloud-nine",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 164,
+      "expected_rng": 587898439,
+      "derivation": "Active partner weather suppression removes guaranteed Thunder hit; base70 misses71. LCG seed164 produces roll71 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "opponent_ally": {
+        "ability": "ABILITY_CLOUD_NINE"
+      }
+    },
+    {
+      "id": "absent-ally-air-lock-does-not-suppress-rain",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Absent slot2 AirLock cannot cancel rain Thunder guarantee. This branch consumes no RNG.",
+      "double": true,
+      "absent": 4,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "absent-opponent-cloud-nine-does-not-suppress-rain",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Absent slot3 CloudNine cannot cancel rain guarantee. This branch consumes no RNG.",
+      "double": true,
+      "absent": 8,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "opponent_ally": {
+        "ability": "ABILITY_CLOUD_NINE"
+      }
+    },
+    {
+      "id": "sun-ally-air-lock-restores-seventy",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 29,
+      "expected_rng": 1937195724,
+      "derivation": "Active ally AirLock removes sun50 penalty; base70 hits60. LCG seed29 produces roll60 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "sun-opponent-cloud-nine-restores-seventy",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 29,
+      "expected_rng": 1937195724,
+      "derivation": "Active opponent partner CloudNine removes sun50 penalty. LCG seed29 produces roll60 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "opponent_ally": {
+        "ability": "ABILITY_CLOUD_NINE"
+      }
+    },
+    {
+      "id": "sun-absent-air-lock-keeps-penalty",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 29,
+      "expected_rng": 1937195724,
+      "derivation": "Absent AirLock cannot remove sun50 penalty; roll60 misses. LCG seed29 produces roll60 (upper16 modulo100 plus1).",
+      "double": true,
+      "absent": 4,
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "sand-ally-air-lock-cancels-veil",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 44,
+      "expected_rng": 1310055215,
+      "derivation": "AirLock cancels SandVeil weather reduction;100 hits90. LCG seed44 produces roll90 (upper16 modulo100 plus1).",
+      "double": true,
+      "weather": "B_WEATHER_SANDSTORM_TEMPORARY",
+      "defender": {
+        "ability": "ABILITY_SAND_VEIL"
+      },
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "sand-opponent-cloud-nine-cancels-veil",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 44,
+      "expected_rng": 1310055215,
+      "derivation": "Opponent partner CloudNine cancels SandVeil weather reduction. LCG seed44 produces roll90 (upper16 modulo100 plus1).",
+      "double": true,
+      "weather": "B_WEATHER_SANDSTORM_TEMPORARY",
+      "defender": {
+        "ability": "ABILITY_SAND_VEIL"
+      },
+      "opponent_ally": {
+        "ability": "ABILITY_CLOUD_NINE"
+      }
+    },
+    {
+      "id": "sand-absent-air-lock-keeps-veil",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 44,
+      "expected_rng": 1310055215,
+      "derivation": "Absent AirLock leaves SandVeil threshold80, so90 misses. LCG seed44 produces roll90 (upper16 modulo100 plus1).",
+      "double": true,
+      "absent": 4,
+      "weather": "B_WEATHER_SANDSTORM_TEMPORARY",
+      "defender": {
+        "ability": "ABILITY_SAND_VEIL"
+      },
+      "ally": {
+        "ability": "ABILITY_AIR_LOCK"
+      }
+    },
+    {
+      "id": "earthquake-doubles-miss-message",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 2,
+      "rng_seed": 116,
+      "expected_rng": 3453741527,
+      "derivation": "Spread Earthquake at accuracy-6 misses roll100 with avoided-attack message2. LCG seed116 produces roll100 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "accuracy_stage": 0
+      }
+    },
+    {
+      "id": "rock-slide-doubles-miss-message",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 2,
+      "rng_seed": 13,
+      "expected_rng": 1460820988,
+      "derivation": "Spread RockSlide90 misses roll91 with doubles avoided message2. LCG seed13 produces roll91 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_ROCK_SLIDE"
+    },
+    {
+      "id": "surf-doubles-evasion-miss",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 2,
+      "rng_seed": 64,
+      "expected_rng": 1905523635,
+      "derivation": "Spread Surf against evasion+1 has75 accuracy, misses76 with message2. LCG seed64 produces roll76 (upper16 modulo100 plus1).",
+      "double": true,
+      "move": "MOVE_SURF",
+      "defender": {
+        "evasion_stage": 7
+      }
+    },
+    {
+      "id": "lock-on-overcomes-air-state",
+      "expected_hit": true,
+      "expected_flags": 0,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "LockOn timer24 plus airborne64 permits the marked attacker to hit before invulnerability checks. No RNG is consumed.",
+      "target_status3": 88
+    },
+    {
+      "id": "rain-thunder-does-not-bypass-air",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Air invulnerability is checked before rain Thunder guarantee. No RNG is consumed.",
+      "move": "MOVE_THUNDER",
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "target_status3": "STATUS3_ON_AIR"
+    },
+    {
+      "id": "swift-does-not-bypass-protect",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 1,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Protect precedes always-hit accuracy bypass. No RNG is consumed.",
+      "move": "MOVE_SWIFT",
+      "protect": true
+    },
+    {
+      "id": "vital-throw-does-not-bypass-air",
+      "expected_hit": false,
+      "expected_flags": 1,
+      "expected_message": 0,
+      "rng_seed": 0,
+      "expected_rng": 0,
+      "derivation": "Air invulnerability precedes VitalThrow accuracy bypass. No RNG is consumed.",
+      "move": "MOVE_VITAL_THROW",
+      "target_status3": "STATUS3_ON_AIR"
+    }
+  ]
+}

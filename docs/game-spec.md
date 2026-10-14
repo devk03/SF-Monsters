@@ -775,12 +775,12 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
-| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify191 named scenarios against the reference. |
+| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify245 named scenarios against the reference. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 191 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats,21 complete four-battler action sorts,72 type/STAB/ability interactions;31 doubles. At least109 additional broad scenarios and19 additional doubles remain, plus status/accuracy/resource/full move resolution. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 245 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats,21 full action sorts,72 type/STAB/ability interactions,54 accuracy commands;46 doubles. At least55 additional broad scenarios and4 additional doubles remain, plus status/capture/resource/full move resolution. Performance, save and full campaign gates stay outstanding. |
 | Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is testing a fresh Water-starter route onv48. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4421,3 +4421,24 @@ Native type-interaction checkpoint:
   mechanics-v48-{base,turn,stats,action}-after-types. Public catalog:
   data/quality/mechanics/type-effects.json. Total 191 scenarios / 31 doubles;
   at least 109 broad cases / 19 doubles remain. Human approvals stay 0/11.
+
+
+Native accuracy-command checkpoint:
+
+- 54 scenarios pass actual Cmd_accuracycheck on reference and v48, including
+  15 meaningful doubles. Explicit hit/miss branch, result flags, miss message,
+  consumed hit markers and final RNG are checked. Native seeded LCG expectations
+  are authored mathematically, not inferred from observed outcomes. This does
+  not establish natural RNG distributions or complete attack execution.
+- Coverage: exact accuracy thresholds, accuracy/evasion stages and clamps,
+  CompoundEyes, Hustle physical versus special, BrightPowder, LaxIncense,
+  Foresight, rain/sun Thunder, Swift/VitalThrow, Protect, LockOn ownership,
+  airborne/underground/underwater states and consumed bypass markers. Doubles
+  exercise active/absent partner AirLock/CloudNine weather suppression and
+  spread-move miss messages. Protection/invulnerability precedence is explicit.
+- All earlier 191 cases pass after shared ABI changes. Full local check.sh and
+  accuracy input guards pass. Private final evidence: mechanics-v48-accuracy-guarded
+  and mechanics-v48-{base,turn,stats,action,types}-after-accuracy. Public catalog:
+  data/quality/mechanics/accuracy.json. Total 245 scenarios / 46 doubles; at
+  least 55 broad cases / 4 doubles remain, alongside uncovered required systems.
+  Human approvals remain 0/11; counting cases alone cannot complete the gate.
