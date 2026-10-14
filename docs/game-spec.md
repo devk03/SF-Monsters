@@ -5338,3 +5338,27 @@ Independent v55 compiled/cache review before publication:
   is claimed. FinalRGB/PCM agree. Approach/talk seeded from the same native
   parent state match all RAM as well as full RGB/PCM. No human, performance or
   full release approval inferred. Public publication pending; full goal active.
+
+Site46 v55 publication verified:
+
+- Site source461973c88670eb84638678d01940e0f31b9e3ecf passes TypeScript/build;
+  archivec89f91822cdd45a724b4fecf2ecaf7f82fd50012467d15a079b32d6d765c4bfc
+  audits84files with exact patch/manifest, original SFMM prototype and no
+  commercial full cartridges/private saves/AppleDouble. Previous dist preserved.
+- Saved versionappgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_f363702ea5a08191bb861d76882fe9bf;
+  deploymentappgdep_6acfab4704748191b81b0d82ba0d7040 succeeded
+  2026-10-14T16:18:24.908590Z. Actual public IAB loader/download and anonymous
+  normal-browser-agent HTTP200 retrieve exact886933-byte patch54a2384b...38c75.
+  No public ROM/Continue or guest progress changed; QA tab closed. Existing
+  audience/auth/DBbindings preserved; no GitHub workflow or DB operation.
+- Final independent cache/palette receipt55d2a80cc327f351171bb6a20fb56817fd759c59dcf5d118fa279bf972bf9dca
+  binds42 evidence files. Both unfaded/faded palette buffers and hardware PRAM
+  match intended shared/courier palettes in all six snapshots. FinalRGB/PCM
+  agree for all pairs; cold RTC-minute RAM difference remains explicitly scoped.
+- Next story fix: mentor heals as before, then gives the current objective:
+  starter/chosen→beach; sensor recovered→Roon; sensor returned→Muni/Scott;
+  delivered→blue INPUT; first relay→green OUTPUT; second relay→Scott challenge;
+  badge→incident log. Roon's post-return hints also stop repeating delivery
+  after Scott has received the sensor. Rewards/party healing/save schema and
+  travel gates remain unchanged. Validate branches with actual campaign states.
+  Full scope/deadline unchanged; human domains0/11; goal active.
