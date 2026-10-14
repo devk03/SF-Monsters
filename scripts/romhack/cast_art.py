@@ -8,13 +8,16 @@ import struct
 from courier_art import opaque_bands, insert_once
 from title_art import tiles8
 from title_creature import pack4
+from cast_cleanup import apply_cleanup
 
 ASSET = 'assets/characters/cognition-cast'
 ORDER = (0, 3, 6, 1, 2, 4, 5, 7, 8)
 TAG = 'OBJ_EVENT_PAL_TAG_SF_COGNITION_CAST'
 GROUPS = ((ASSET, 'SFCognitionCast', TAG, '0x1125'),
           ('assets/characters/south-park-cast', 'SFSouthParkCast',
-           'OBJ_EVENT_PAL_TAG_SF_SOUTH_PARK_CAST', '0x1126'))
+           'OBJ_EVENT_PAL_TAG_SF_SOUTH_PARK_CAST', '0x1126'),
+          ('assets/characters/sunset-cast', 'SFSunsetCast',
+           'OBJ_EVENT_PAL_TAG_SF_SUNSET_CAST', '0x1127'))
 
 
 def catalog(root, asset=ASSET):
@@ -93,10 +96,14 @@ def encode_cast(root, asset=ASSET, palette_tag='0x1125'):
     receipts = []
     for entry, image, mask, boxes in prepared:
         frames, scale = native_frames(image, mask, boxes, colors)
+        path = directory / entry['slug']
+        cleanup = path / 'native-cleanup.json'
+        if cleanup.exists():
+            frames = apply_cleanup(frames, json.loads(cleanup.read_text()),
+                                   (path/'source.png').read_bytes(), raw_palette)
         selected = [frames[index] for index in ORDER]
         strip = bytes(p for y in range(32) for frame in selected for p in frame[y*16:(y+1)*16])
         raw = pack4(tiles8(strip, 144, 32, 2, 4))
-        path = directory / entry['slug']
         native = Image.new('P', (144, 32), 0); native.putpalette(flat); native.putdata(strip)
         native.save(path / 'walk.png', transparency=0, bits=4)
         (path / 'walk.4bpp').write_bytes(raw)
@@ -107,7 +114,8 @@ def encode_cast(root, asset=ASSET, palette_tag='0x1125'):
         gallery.save(path / 'native-gallery.png', transparency=0, bits=4)
         receipts.append(dict(entry, source_size=list(image.size), source_cells=boxes,
                              common_scale=scale, files={name: hashlib.sha256((path/name).read_bytes()).hexdigest()
-                             for name in ('source.png', 'walk.png', 'walk.4bpp', 'native-gallery.png')}))
+                             for name in ('source.png', 'walk.png', 'walk.4bpp', 'native-gallery.png')
+                             + (('native-cleanup.json',) if cleanup.exists() else ())}))
     metadata = {'characters': receipts, 'frames_per_character': 9, 'native_order': ORDER,
                 'native_frame_size': [16, 32], 'feet_baseline': 30,
                 'east_view': 'native horizontal flip of original west frames',
@@ -126,6 +134,8 @@ def verified_cast(root, asset):
     if hashlib.sha256((directory/'cast.gbapal').read_bytes()).hexdigest() != metadata['palette_sha256']:
         raise ValueError('Cast palette differs from its receipt.')
     for entry in metadata['characters']:
+        if (directory/entry['slug']/'native-cleanup.json').exists() != ('native-cleanup.json' in entry['files']):
+            raise ValueError('Regenerate cast after adding/removing native cleanup: '+entry['slug'])
         for name, digest in entry['files'].items():
             if hashlib.sha256((directory/entry['slug']/name).read_bytes()).hexdigest() != digest:
                 raise ValueError('Regenerate native cast after changing asset: '+entry['slug'])
@@ -141,6 +151,12 @@ def registered_groups(root):
         values = [entry[field] for *_, entries, metadata in groups for entry in entries]
         if len(values) != len(set(values)):
             raise ValueError('Cast groups collide on '+field)
+    map_palettes = {}
+    for asset, symbol, tag, value, entries, metadata in groups:
+        for entry in entries:
+            if entry['map'] in map_palettes and map_palettes[entry['map']] != value:
+                raise ValueError('Named cast on one map must share its special palette group.')
+            map_palettes[entry['map']] = value
     for asset, symbol, tag, value, entries, metadata in groups:
         if metadata['palette_tag'] != value:
             raise ValueError('Cast group palette tag differs from its receipt.')

@@ -1,0 +1,18 @@
+{
+  "characters": [
+    {
+      "slug": "roon",
+      "name": "Roon",
+      "symbol": "SFRoon",
+      "graphics": "OBJ_EVENT_GFX_SF_ROON",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PORYGON2_DOLL",
+      "script": "SF_Roon",
+      "map": "sunset.json"
+    }
+  ],
+  "outfits": "Original fictional amber-hood courier-oracle costume, not a claim about private appearance or biography.",
+  "source_basis": [
+    "https://roonscape.ai/"
+  ],
+  "quality_approval": "pending"
+}

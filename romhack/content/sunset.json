@@ -71,7 +71,7 @@
     {"id": 2, "x": 21, "y": 20, "graphics": "OBJ_EVENT_GFX_ITEM_BALL", "script": "SF_Starter_Bloom", "flag": "FLAG_SYS_POKEMON_GET"},
     {"id": 3, "x": 23, "y": 20, "graphics": "OBJ_EVENT_GFX_ITEM_BALL", "script": "SF_Starter_Ember", "flag": "FLAG_SYS_POKEMON_GET"},
     {"id": 4, "x": 25, "y": 20, "graphics": "OBJ_EVENT_GFX_ITEM_BALL", "script": "SF_Starter_Tide", "flag": "FLAG_SYS_POKEMON_GET"},
-    {"id": 5, "x": 6, "y": 18, "graphics": "OBJ_EVENT_GFX_MAN_3", "script": "SF_Roon", "movement": "MOVEMENT_TYPE_LOOK_AROUND"},
+    {"id": 5, "x": 6, "y": 18, "graphics": "OBJ_EVENT_GFX_SF_ROON", "script": "SF_Roon", "movement": "MOVEMENT_TYPE_WANDER_AROUND", "range_x": 1, "range_y": 1},
     {"id": 6, "x": 6, "y": 7, "graphics": "OBJ_EVENT_GFX_BIRCHS_BAG", "script": "SF_Prototype", "flag": "FLAG_UNUSED_0x040"},
     {"id": 7, "x": 14, "y": 17, "graphics": "OBJ_EVENT_GFX_GENTLEMAN", "script": "SF_Naval", "movement": "MOVEMENT_TYPE_WANDER_AROUND", "range_x": 1, "range_y": 1},
     {"id": 8, "x": 29, "y": 22, "graphics": "OBJ_EVENT_GFX_MAN_5", "script": "SF_Jonathan", "movement": "MOVEMENT_TYPE_LOOK_AROUND"}

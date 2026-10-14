@@ -27,3 +27,26 @@ with matching reflection metadata. Three explicitly unused doll graphics slots
 76–78 are reserved without changing dynamic graphics IDs or battery schemas.
 No inherited human sprite pixels are used in these assets. Other characters
 still have placeholders. See spec section 15 for actual runtime evidence.
+
+
+## Sunset field cast
+
+`sunset-cast/cast.json` registers Roon as an original fictional amber-hooded
+courier-oracle. The costume does not assert the pseudonymous person's private
+appearance or biography. Palette tag0x1127 uses unused graphics slot81; the
+other five original cast sprites and their palettes remain unchanged. The small
+wandering radius stays on a clear boardwalk area, away from quest/warp anchors.
+Cached movement is preserved on an older same-map Continue until map re-entry.
+
+Optional `native-cleanup.json` files describe reviewed indexed-pixel edits after
+source conversion and before native packing. They pin source/palette hashes,
+complete input/output poses, and each old/new pixel. The converter rejects stale
+or duplicate edits, out-of-frame/palette values, and collapsed footsteps; the
+conversion receipt includes the recipe hash. Roon's first recipe changes only18
+pixels in west stride2's lower legs, leaving head, torso and arms intact.
+Human art/likeness/animation approval remains pending.
+
+The native special NPC palette/reflection slot is shared. All original cast
+visible on one authored map must belong to one palette group; the registry
+rejects independently paletted groups on the same map before compilation.
+Adding later Twitter cast members should extend that map's existing group.

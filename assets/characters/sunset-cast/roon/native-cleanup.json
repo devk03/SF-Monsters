@@ -1,0 +1,140 @@
+{
+  "format": 1,
+  "intent": "Unapproved native pixel cleanup: alternate the west stride2 lower-leg phase, preserving all head/torso/arm pixels above y26. Exactly18 reviewed indexed-pixel edits, source unchanged.",
+  "source_sha256": "360a74014041d011511fc9cacc8f760a329fce15c7ff76289688c16cdfd79cf5",
+  "palette_sha256": "9eb83182e5b3141187d10de06dff06b28894ffacd5b22c81c65c40269e3089a6",
+  "before_frame_sha256": {
+    "8": "b3f6fe9c7ac8329e6f1ff0e58c7899e94fdf976a88cca9f4ed5fba87715a3c5c"
+  },
+  "after_frame_sha256": {
+    "8": "1cc6545cdc5f50fcd60f8f2b33368120a6af3165a1174ab3f85d014c7fa79d4e"
+  },
+  "changes": [
+    {
+      "frame": 8,
+      "x": 4,
+      "y": 26,
+      "old": 0,
+      "new": 11
+    },
+    {
+      "frame": 8,
+      "x": 7,
+      "y": 26,
+      "old": 10,
+      "new": 12
+    },
+    {
+      "frame": 8,
+      "x": 8,
+      "y": 26,
+      "old": 12,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 11,
+      "y": 26,
+      "old": 11,
+      "new": 0
+    },
+    {
+      "frame": 8,
+      "x": 5,
+      "y": 27,
+      "old": 10,
+      "new": 11
+    },
+    {
+      "frame": 8,
+      "x": 6,
+      "y": 27,
+      "old": 10,
+      "new": 14
+    },
+    {
+      "frame": 8,
+      "x": 7,
+      "y": 27,
+      "old": 14,
+      "new": 0
+    },
+    {
+      "frame": 8,
+      "x": 8,
+      "y": 27,
+      "old": 0,
+      "new": 14
+    },
+    {
+      "frame": 8,
+      "x": 9,
+      "y": 27,
+      "old": 14,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 10,
+      "y": 27,
+      "old": 11,
+      "new": 10
+    },
+    {
+      "frame": 8,
+      "x": 3,
+      "y": 28,
+      "old": 14,
+      "new": 0
+    },
+    {
+      "frame": 8,
+      "x": 4,
+      "y": 28,
+      "old": 9,
+      "new": 14
+    },
+    {
+      "frame": 8,
+      "x": 11,
+      "y": 28,
+      "old": 14,
+      "new": 9
+    },
+    {
+      "frame": 8,
+      "x": 12,
+      "y": 28,
+      "old": 0,
+      "new": 14
+    },
+    {
+      "frame": 8,
+      "x": 5,
+      "y": 29,
+      "old": 14,
+      "new": 0
+    },
+    {
+      "frame": 8,
+      "x": 6,
+      "y": 29,
+      "old": 14,
+      "new": 0
+    },
+    {
+      "frame": 8,
+      "x": 9,
+      "y": 29,
+      "old": 0,
+      "new": 14
+    },
+    {
+      "frame": 8,
+      "x": 10,
+      "y": 29,
+      "old": 0,
+      "new": 14
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
-  "version": "0.0.52-service-signs-preview",
+  "version": "0.0.53-roon-field-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Five named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
+  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Six named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "maps": [
     "sunset.json",
     "apartment.json",

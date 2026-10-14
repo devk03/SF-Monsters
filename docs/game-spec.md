@@ -5045,3 +5045,26 @@ Site43 v52 deployment and independent final review:
 - Next: original Roon native-pixel cleanup/registry/old-save appearance refresh,
   more Stage B visual variety and credible update/input/audio instrumentation.
   Full scope/deadline unchanged; next alignment check no later12:55UTC.
+
+
+Roon native-art integration in progress:
+
+- Original fictional amber-hood Roon source remains360a740...9cf5; native palette
+ 9eb83182...089a6, nine16x32 poses. Reviewed recipe changes18 west-stride2
+ lower-leg pixels only, yielding1cc6545c...9d4e, with source/head/torso/arms intact.
+ Other five original cast sources/native files/palettes were not regenerated.
+- Dedicated Sunset palette0x1127 and unused slot81 replace Roon's shared stock
+ MAN_3 appearance. Fresh map entry permits one-tile wandering on nine clear
+ boardwalk cells; NPC/quest/warp anchors unchanged. Existing Continue hook changes
+ appearance while preserving cached movement/positions until map re-entry.
+- Source/palette/whole-pose hashes and every old pixel are checked before edits;
+ stale, duplicate, no-op, out-of-bounds, missing-oracle or collapsed poses fail.
+ Five cleanup and six native cast checks pass; fullcheck.sh passes. Generic cast
+ manifest collection now includes this third group's conversion/recipe receipt.
+- v53source awaits native build, actual movement/dialogue, old-save appearance
+ and palette/reflection checks. Public staysv52/Site43. No new human approval.
+
+- Independent Roon review confirms exact18 edits, unique slot81/tag0x1127 and
+ unchanged older cast files. Added a registry guard against multiple independent
+ special NPC palettes on one map (a real shared native/reflection-slot limit);
+ seven cast and five cleanup units pass. All manifest cast groups are included.

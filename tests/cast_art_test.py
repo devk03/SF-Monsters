@@ -13,7 +13,26 @@ from cast_art import apply_cast, source_cells, GROUPS, registered_groups, verifi
 
 
 class NativeCast(unittest.TestCase):
-    def test_all_five_people_have_distinct_native_pose_cycles_and_group_palettes(self):
+    def test_roons_corrected_west_steps_alternate_and_wander_area_is_clear(self):
+        directory = ROOT/'assets/characters/sunset-cast/roon'
+        image = Image.open(directory/'walk.png')
+        steps = [image.crop((index*16,0,index*16+16,32)).tobytes() for index in (7,8)]
+        feet = [[x for x in range(16) if pose[29*16+x]] for pose in steps]
+        self.assertTrue(feet[0] and feet[1])
+        self.assertLess(max(feet[0]), 8)
+        self.assertGreaterEqual(min(feet[1]), 8)
+        plan = json.loads((ROOT/'romhack/content/sunset.json').read_text())
+        roon = next(npc for npc in plan['npcs'] if npc['script']=='SF_Roon')
+        self.assertEqual((roon['movement'],roon['range_x'],roon['range_y']),
+                         ('MOVEMENT_TYPE_WANDER_AROUND',1,1))
+        occupied = {(npc['x'],npc['y']) for npc in plan['npcs'] if npc is not roon}
+        occupied |= {(warp['x'],warp['y']) for warp in plan['warp_events']}
+        for y in range(roon['y']-1,roon['y']+2):
+            for x in range(roon['x']-1,roon['x']+2):
+                self.assertFalse(plan['legend'][plan['rows'][y][x]][1])
+                self.assertNotIn((x,y),occupied)
+
+    def test_registered_people_have_distinct_native_pose_cycles_and_group_palettes(self):
         records = []
         for asset, symbol, tag, value in GROUPS:
             directory = ROOT / asset
@@ -51,7 +70,7 @@ class NativeCast(unittest.TestCase):
                 unpacked.append(bytes(decoded))
             self.assertEqual(unpacked, frames)
             identities.append(frames[0])
-        self.assertEqual(len(set(identities)), 5)
+        self.assertEqual(len(set(identities)), len(records))
 
     def test_a_new_cast_group_cannot_replace_an_existing_native_graphics_slot(self):
         from copy import deepcopy
@@ -64,13 +83,23 @@ class NativeCast(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'collide on reserved_slot'):
                 registered_groups(ROOT)
 
+    def test_independent_special_palettes_cannot_recolor_people_on_the_same_map(self):
+        from copy import deepcopy
+        from unittest.mock import patch
+        prepared = {asset:deepcopy(verified_cast(ROOT,asset)) for asset,*_ in GROUPS}
+        prepared[GROUPS[1][0]][0][0]['map'] = prepared[GROUPS[0][0]][0][0]['map']
+        with patch('cast_art.verified_cast',side_effect=lambda root,asset:prepared[asset]):
+            with self.assertRaisesRegex(ValueError,'share its special palette'):
+                registered_groups(ROOT)
+
     def test_registered_character_must_be_used_by_its_actual_service_event(self):
         import shutil
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             (root/'assets').symlink_to(ROOT/'assets',target_is_directory=True)
             content=root/'romhack/content';content.mkdir(parents=True)
-            for name in ('cognition.json','services.json'):
+            maps = {entry['map'] for asset,*_ in GROUPS for entry in verified_cast(ROOT,asset)[0]}
+            for name in maps:
                 shutil.copy2(ROOT/'romhack/content'/name,content/name)
             plan=json.loads((content/'services.json').read_text())
             plan['npcs'][0]['graphics']='OBJ_EVENT_GFX_WOMAN_1'

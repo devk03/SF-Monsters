@@ -1,0 +1,103 @@
+{
+  "characters": [
+    {
+      "slug": "roon",
+      "name": "Roon",
+      "symbol": "SFRoon",
+      "graphics": "OBJ_EVENT_GFX_SF_ROON",
+      "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PORYGON2_DOLL",
+      "script": "SF_Roon",
+      "map": "sunset.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          62,
+          65,
+          278,
+          441
+        ],
+        [
+          404,
+          65,
+          620,
+          441
+        ],
+        [
+          747,
+          65,
+          963,
+          441
+        ],
+        [
+          62,
+          562,
+          278,
+          941
+        ],
+        [
+          404,
+          562,
+          620,
+          941
+        ],
+        [
+          747,
+          562,
+          962,
+          941
+        ],
+        [
+          53,
+          1051,
+          275,
+          1451
+        ],
+        [
+          395,
+          1051,
+          618,
+          1451
+        ],
+        [
+          739,
+          1051,
+          961,
+          1451
+        ]
+      ],
+      "common_scale": 0.06,
+      "files": {
+        "source.png": "360a74014041d011511fc9cacc8f760a329fce15c7ff76289688c16cdfd79cf5",
+        "walk.png": "bebec5defb3835b20027c5f89f9d5852e53fac38408eff7a10af03297b38df71",
+        "walk.4bpp": "e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc",
+        "native-gallery.png": "ac95384ece28f7e32b24785d86ec2ed9395ed09b0b794fc80786dd1bb976710b",
+        "native-cleanup.json": "ba47fba8fad7ac27403c1dabcd317037612de7bebd08d8c1034e856c8579ae37"
+      }
+    }
+  ],
+  "frames_per_character": 9,
+  "native_order": [
+    0,
+    3,
+    6,
+    1,
+    2,
+    4,
+    5,
+    7,
+    8
+  ],
+  "native_frame_size": [
+    16,
+    32
+  ],
+  "feet_baseline": 30,
+  "east_view": "native horizontal flip of original west frames",
+  "palette_tag": "0x1127",
+  "palette_slot": "PALSLOT_NPC_SPECIAL",
+  "palette_sha256": "9eb83182e5b3141187d10de06dff06b28894ffacd5b22c81c65c40269e3089a6",
+  "quality_approval": "pending"
+}

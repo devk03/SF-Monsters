@@ -22,7 +22,7 @@ from title_creature import apply_title_creature
 from title_song_overlay import apply_title_song
 from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
-from cast_art import apply_cast
+from cast_art import apply_cast, GROUPS
 from trainer_portraits import apply_portrait
 from courier_battle_art import apply_courier_battle
 from office_art import apply_office, office_resources
@@ -182,10 +182,9 @@ def main():
         'assets/tiles/courier-apartment/conversion.json').read_text())
     manifest['courier_battle'] = json.loads((ROOT /
         'assets/characters/courier-battle-v1/conversion.json').read_text())
-    manifest['cognition_cast'] = json.loads((ROOT /
-        'assets/characters/cognition-cast/conversion.json').read_text())
-    manifest['south_park_cast'] = json.loads((ROOT /
-        'assets/characters/south-park-cast/conversion.json').read_text())
+    for asset, *_ in GROUPS:
+        manifest[Path(asset).name.replace('-', '_')] = json.loads(
+            (ROOT/asset/'conversion.json').read_text())
     office_data = office_resources(ROOT)
     manifest['cognition_office'] = {'native_tiles':len(office_data[0])//32,
         'metatiles':len(office_data[1])//16, 'quality_approval':'pending',
