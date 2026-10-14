@@ -4266,3 +4266,16 @@ v48 normal release checkpoint:
   production build pass. Audited archive contains one matching patch/manifest
   and no commercial cartridge. Native source/public changes are committed
   independently of later mechanics work. Public deployment confirmation pending.
+
+
+v48 public deployment:
+
+- Site38 saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_48afd423e59c8191b9843903a73b4823
+  uses source46976905d143024f910b69fc3c111548a156a314. Deployment
+  appgdep_6acf37009f3481918c0cabad67c91b03 succeeded2026-10-14T08:02:17Z.
+  Existing public URL, access and authentication remain unchanged. No DB or
+  GitHub Actions. Existing sessions need reload/local ROM loading to adoptv48.
+- Next work moves toward the still-missing300-case mechanics gate while user
+  art/audio/intro subset reviews are pending. Controlled function fixtures must
+  be labeled separately from controller-only campaign/progression evidence.
