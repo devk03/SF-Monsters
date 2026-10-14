@@ -36,12 +36,23 @@ def audit(report, identity, runtime):
     if ticks['requestedFrames'] != ticks['executedFrames'] + ticks['discardedFrames'] or (
             ticks['count'] != ticks['visible'] + ticks['hidden']):
         raise ValueError('Frame accounting is inconsistent')
-    for distribution in [ticks[name] for name in ('rafGapMs', 'runMs', 'renderMs')]:
+    inputs = report['input']
+    number(inputs['count'], True)
+    if number(inputs['supersededBeforeFrame'], True) > inputs['count']:
+        raise ValueError('Input supersession count is inconsistent')
+    distributions = [(ticks[name], ticks['count']) for name in ('rafGapMs', 'runMs', 'renderMs')]
+    distributions += [(inputs[name], inputs['count']) for name in
+                      ('domToDispatchMs', 'dispatchToFrameMs', 'dispatchToSubmitMs')]
+    for distribution, maximum in distributions:
         number(distribution['count'], True)
+        if distribution['count'] > maximum:
+            raise ValueError('Timing sample count exceeds observed records')
         if distribution['count']:
             values = [number(distribution[name]) for name in ('min', 'p50', 'p95', 'p99', 'max')]
             if values != sorted(values):
                 raise ValueError('Timing percentiles are inconsistent')
+    if type(report['pendingInputAtEnd']) is not bool or type(report['scope']['foregroundOnly']) is not bool:
+        raise ValueError('Observation scope flags must be booleans')
     final = report.get('audioFinalSnapshot')
     if report.get('audioFinalAcknowledged') is not True or not final or final.get('final') is not True:
         raise ValueError('Final audio acknowledgement is missing')

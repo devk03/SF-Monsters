@@ -5616,3 +5616,14 @@ Ten-minute field finding and reusable local harness:
   ROM is packaged; server binds127.0.0.1 only, expires at most3600seconds and
   refuses existing evidence names. Main added an explicit two-minute comparison
   option and visible audio-drop counts. Source reviewed; no public deployment.
+
+- Guarded offline auditing now checks input percentile cardinality/order and scope
+  booleans too. Four owning tests reject mismatched runtime, invalid audio tails,
+  inconsistent frame totals and malformed timings while retaining actual drops
+  as findings. Reusable review instructions are in docs/quality/browser-performance.md.
+- Regular Chrome two-minute comparison records7167video frames/14399visible ticks,
+  no debt/drop/starvation and120.012336audio seconds at44100Hz. Report SHA
+  28b7e06bdfea274eab8f0c774ba7644058566e440530d732f8c21dcdca1084ae.
+  Different duration/rate prevents declaring an IAB-specific cause. A fresh600s
+  Chrome baseline started~18:17UTC, using an immutable old-runtime snapshot;
+  newer working-tree reset fixes do not affect that ongoing capture.

@@ -42,6 +42,7 @@ python3 tests/flash_audit_test.py
 python3 tests/frame_storage_test.py
 python3 tests/input_profile_test.py
 python3 tests/native_loop_analysis_test.py
+python3 tests/web_performance_audit_test.py
 python3 tests/interface_text_test.py
 python3 tests/interface_graphics_test.py
 python3 tests/native_resources_test.py
