@@ -59,6 +59,16 @@ def load_buildings(root):
     return [data[:8960], data[8960:]], [palettes[:32], palettes[32:]]
 
 
+def tile_orientations(tile):
+    """Native BG flips reuse one tile without changing its palette or pixels."""
+    pixels = bytes((value >> shift) & 15 for value in tile for shift in (0, 4))
+    for bits in (0, 0x400, 0x800, 0xc00):
+        oriented = bytes(pixels[(7-y if bits & 0x800 else y)*8
+                                + (7-x if bits & 0x400 else x)]
+                         for y in range(8) for x in range(8))
+        yield bytes(oriented[i] | oriented[i+1] << 4 for i in range(0, 64, 2)), bits
+
+
 def pack_park_cells(cells, attributes):
     """Every cell chooses a palette; ground uses BG2 and architecture uses BG1."""
     if len(cells) != len(attributes) or len(cells) > 512:
@@ -72,10 +82,16 @@ def pack_park_cells(cells, attributes):
         for offset in range(0, 128, 32):
             tile = encoded[offset:offset + 32]
             if tile not in pool:
-                if len(pool) == 512:
+                index = len(raw) // 32
+                # Tiles1016..1023 belong to native service-door animation.
+                if index == 504:
                     raise ValueError('Original South Park art exceeds secondary VRAM capacity.')
-                pool[tile] = len(pool); raw.extend(tile)
-            quadrants.append((bank << 12) | (512 + pool[tile]))
+                raw.extend(tile)
+                for oriented, bits in tile_orientations(tile):
+                    # Symmetric tiles retain the first, least-flipped binding.
+                    pool.setdefault(oriented, (index, bits))
+            index, bits = pool[tile]
+            quadrants.append((bank << 12) | (512 + index) | bits)
         records.extend(struct.pack('<8H', 0, 0, 0, 0, *quadrants))
     return bytes(raw), bytes(records), struct.pack('<' + 'H' * len(attributes), *attributes)
 

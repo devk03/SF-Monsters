@@ -5125,3 +5125,19 @@ Site44 v53 published and checked:
   after packaging without changing decompressed bytes. No reviewed technical
   blocker; human NPC rating, full domains and actual-browser gameplay remain
   separate gates. Goal stays active; next alignment check no later14:08UTC.
+
+South Park graphics budget, source iteration:
+
+- Native horizontal/vertical BG flips reduce existing resources498→459 tiles,
+  freeing39 slots with no art reduction. All136 released metatiles independently
+  decode to their prior indexed pixels/palette banks; attributes and palettes
+  retain pinned pre-change hashes. The normal native door reserve1016..1023 is
+  enforced by the packer, using actual stored tile count rather than alias count.
+- Four focused checks cover all four orientations/all secondary palette banks,
+  deterministic symmetric ties, exact503/504 acceptance and505 rejection, and
+  released pixel preservation. Eight existing park checks pass with flip-aware
+  native decoding. Independent alignment source review pending, ends14:15UTC.
+- No new cartridge or visual improvement is claimed yet. This creates space
+  for a varied facade filling the three-tile butter-house/clinic frontage gap.
+  Existing collision, event, service-door and map placements are unchanged.
+  Public staysv53/Site44; next alignment check no later14:15UTC.

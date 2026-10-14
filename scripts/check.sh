@@ -52,6 +52,7 @@ python3 tests/apartment_art_test.py
 python3 tests/door_art_test.py
 python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_art_test.py
+.tools/venv/bin/python tests/park_tile_flips_test.py
 .tools/venv/bin/python tests/office_art_test.py
 .tools/venv/bin/python tests/clinic_art_test.py
 node tests/web_capture_test.cjs

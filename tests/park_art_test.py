@@ -34,7 +34,9 @@ class ParkResources(unittest.TestCase):
                 for y in range(8):
                     for x in range(8):
                         decoded[(quadrant//2*8+y)*16+quadrant%2*8+x] = (
-                            raw[offset+y*4+x//2] >> (x%2*4)) & 15
+                            raw[offset+(7-y if word & 0x800 else y)*4
+                                +(7-x if word & 0x400 else x)//2]
+                            >> ((7-x if word & 0x400 else x)%2*4)) & 15
             self.assertEqual(bytes(decoded), pixels)
             self.assertEqual({pixels[i] for i in (0,15,240,255)}, {0})
         for x, y in ((10,7),(29,7)):
@@ -152,7 +154,9 @@ class ParkResources(unittest.TestCase):
                 for y in range(8):
                     for x in range(8):
                         pixels[(quadrant // 2 * 8 + y) * 16 + quadrant % 2 * 8 + x] = (
-                            raw[offset + y * 4 + x // 2] >> (x % 2 * 4)) & 15
+                            raw[offset + (7-y if word & 0x800 else y)*4
+                                + (7-x if word & 0x400 else x)//2]
+                            >> ((7-x if word & 0x400 else x)%2*4)) & 15
             left, top = cell % 3 * 16, cell // 3 * 16
             self.assertEqual(bytes(pixels), b''.join(
                 expected[y * 48 + left:y * 48 + left + 16] for y in range(top, top + 16)))
