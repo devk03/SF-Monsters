@@ -554,6 +554,23 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
+Current checkpoint — October14,2026,18:10UTC:
+
+- Goal active; deadline remains October15,18:00 Pacific. Publicv56/Site47, native
+  story source7e6ce94. Browser diagnostics sourcee82b67e is local/repository only.
+- Human final approvals0/11. Full16hub/8gym/150monster campaign and final
+  acceptance remain unfinished; first-slice approval is still required.
+-711 independently specified mechanics cases/57doubles pass; full-turn/type/catalog
+  gates remain open. Ten save round trips are sealed at one first-badge checkpoint,
+  not50 distinct campaign checkpoints or full device/auth coverage.
+- A600second visible desktop field trace records35837video frames/0discarded debt,
+  but FAILS audio continuity:469829dropped sourceframes and592.864audio-clock seconds.
+  Pipeline timing is not guest-input/physical-paint proof. Mixed traces, phone,
+  Safari and disabled/enabled overhead remain open. Next priority: diagnose this
+  clock/queue failure and compare actual Chrome before changing audio architecture.
+- Last alignment exchange18:11UTC; bounded reset-test work ends18:40UTC.
+  Next check-in no later18:25UTC. Details/evidence append below.
+
 ### 15.1 Objective and completion rule
 
 Current user-requested stop: **October 15, 2026, 6 PM America/Los_Angeles**
@@ -5580,3 +5597,22 @@ Actual foreground browser pipeline smoke checks:
   visible browser, fixed30minute local server and no public save/account changes.
   Mixed battle/menu/story, disabled/enabled overhead, physical phone/Safari,
   guest-update/display deadlines and human approvals remain open. Full goal active.
+
+Ten-minute field finding and reusable local harness:
+
+- Actual desktop host: MacBookProMac16,5, AppleM4Max/36GB, macOS26.6.2; IAB
+  Chrome155 agent.600.0013s main epoch,71999visible ticks/35837actual videoframes,
+  0discarded debt/mismatch,16scripted DOM-input records, maxdispatch→submit16.9ms.
+  Report web-performance-v2/report-bd939735a46341eda8127327b75fc48a.json
+  SHA14ab94c369c307f6e58c4833583a31a363919b9f181f16ac8a18c6f0ffbf1c99.
+- Audio FAIL:469829sourceframes dropped,0sink starvation,14228736outputframes at
+  24000Hz=592.864audio seconds. No hidden/pause/reset events. Well-formed receipt
+  is not a passing performance result; no proven hardware-drift or silence cause.
+  Existing wall pacing has no queue feedback. Do not revive posted-minus-consumed
+  accounting after drops: posted samples include rejected worklet data.
+- Reusable finite localhost server/page preserve runtime, HTML, state metadata,
+  identity and server source. Actual generic browser load/report smoke succeeds;
+  wrongHost/path/Origin rejected and a one-second session exits normally. No full
+  ROM is packaged; server binds127.0.0.1 only, expires at most3600seconds and
+  refuses existing evidence names. Main added an explicit two-minute comparison
+  option and visible audio-drop counts. Source reviewed; no public deployment.

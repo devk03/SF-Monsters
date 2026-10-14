@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Verified SF browser timing</title>
+<style>
+body{margin:24px;background:#f5f0e6;color:#292d34;font:15px system-ui;max-width:950px}
+h1{font-size:23px}button{padding:10px;margin:4px;border:1px solid #777;background:white;color:#222}
+canvas{display:block;width:min(720px,100%);height:auto;image-rendering:pixelated;background:#171717}
+pre{white-space:pre-wrap;font:12px monospace}p{max-width:75ch}
+</style>
+<h1>Verified SF browser timing — isolated local checkpoint</h1>
+<p>This private session uses a verified SF cartridge and controller-only checkpoint.
+Diagnostics measure emulation, canvas submission and audio buffering. They do not prove physical presentation or guest key consumption.</p>
+<button id="load">Load verified SF checkpoint</button>
+<button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="long" disabled>Measure 10 minutes</button>
+<button id="stop" disabled>Stop measurement</button><button id="move" disabled>Walk a short loop</button>
+<button id="finish" disabled>Finish local QA</button>
+<p role="status" id="status">Ready to load. No public saves or account data are used.</p>
+<canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas>
+<pre id="report">No diagnostic report yet.</pre>
+<script type="module">
+let game, identity, timers=[], measuring=false, finished=false;
+const status=document.querySelector('#status'), report=document.querySelector('#report');
+const button=id=>document.querySelector('#'+id);
+function controls(){
+  for(const id of ['short','medium','long'])button(id).disabled=!game||finished||measuring;
+  for(const id of ['move','finish'])button(id).disabled=!game||finished;
+  button('stop').disabled=!measuring||finished;
+}
+const hash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+async function verified(url,expected){
+  const response=await fetch(url,{cache:'no-store'});
+  if(!response.ok)throw Error('Fetch failed: '+url);
+  const bytes=await response.arrayBuffer();
+  if(await hash(bytes)!==expected)throw Error('Identity mismatch: '+url);
+  return new Uint8Array(bytes);
+}
+const showError=error=>{status.textContent='Test failed: '+error.message;};
+button('load').onclick=async()=>{try{
+  button('load').disabled=true;status.textContent='Verifying local cartridge, checkpoint and browser runtime…';
+  const response=await fetch('/identity.json',{cache:'no-store'});
+  if(!response.ok)throw Error('Session identity unavailable');identity=await response.json();
+  const [rom,battery,state]=await Promise.all(['rom.gba','battery.sav','state.bin'].map(name=>verified('/'+name,identity.files[name])));
+  for(const [path,digest] of Object.entries(identity.runtime))await verified('/emulator/'+path,digest);
+  const {load}=await import('/emulator/mgba.sdk.js');
+  game=await load({canvasEl:document.querySelector('canvas'),assets:{rom},persist:null,
+    storageNamespace:'sf-performance-isolated-v1',options:{gamepads:false,interframeBlending:false,volume:.15}});
+  game.importBattery(battery);await game.loadState(state);game.start();
+  status.textContent='Verified SF checkpoint playing. Arrow keys move; X/Z are A/B. Let audio settle before measuring.';
+}catch(error){if(game){game.destroy();game=null;}showError(error);}finally{controls();}};
+async function measure(durationMs){try{
+  if(measuring||finished||!game)return;measuring=true;controls();
+  status.textContent='Measuring '+durationMs/1000+' seconds; visibility='+document.visibilityState+'.';
+  const result=await game.startDiagnostics({durationMs,context:{identity,scenario:'Verified SF checkpoint; manual or explicitly scripted DOM keyboard actions'}});
+  report.textContent=JSON.stringify(result,null,2);
+  const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)});
+  if(!saved.ok)throw Error('Could not preserve local report');
+  const receipt=await saved.json();
+  status.textContent='Saved '+receipt.name+'; data valid='+result.valid+'; foreground='+result.scope.foregroundOnly+'; final audio ACK='+result.audioFinalAcknowledged+'; audio drops='+(result.audioFinalSnapshot?.droppedSourceFrames??'unknown')+'; underruns='+(result.audioFinalSnapshot?.underrunOutputFrames??'unknown')+'.';
+}catch(error){showError(error);}finally{measuring=false;controls();}}
+button('short').onclick=()=>measure(10000);button('medium').onclick=()=>measure(120000);button('long').onclick=()=>measure(600000);
+button('stop').onclick=()=>game?.stopDiagnostics('manual');
+button('move').onclick=()=>{
+  if(timers.length||finished||!game)return;
+  status.textContent='One finite four-direction DOM-key loop; no game memory edits. This does not detect a scene.';
+  for(const [index,code] of ['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].entries()){
+    timers.push(setTimeout(()=>window.dispatchEvent(new KeyboardEvent('keydown',{code,bubbles:true})),index*600));
+    timers.push(setTimeout(()=>window.dispatchEvent(new KeyboardEvent('keyup',{code,bubbles:true})),index*600+250));
+  }
+  timers.push(setTimeout(()=>{timers=[];if(!finished)status.textContent='Input loop finished; any measurement retains its finite deadline.';},2500));
+};
+button('finish').onclick=async()=>{
+  if(finished)return;finished=true;controls();
+  for(const timer of timers)clearTimeout(timer);timers=[];
+  if(measuring)await game.stopDiagnostics('finished-qa');
+  game.destroy();controls();
+  status.textContent='Local QA finished; emulator and audio stopped. Public progress was untouched.';
+};
+</script></html>
