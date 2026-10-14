@@ -1,0 +1,167 @@
+{
+  "scope": "Controlled native selected move-effect scripts through MoveEnd entry; no controller presentation, move-end or full-turn proof.",
+  "cases": [
+    {
+      "id": "pound-neutral-hit",
+      "move": "MOVE_POUND",
+      "rng_seed": 0,
+      "derivation": "Level50 stats100 power40: floor(floor(22*40*100/100)/50)+2=19. No STAB/type change. Accuracy draw0 hits; crit draw59774 mod16=14 no crit; damage draw21105 gives99percent ->18; zero-chance secondary still consumes draw12720. HP300-18=282; PP10-1=9; status/flags0; fourth LCG=833674724.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 282,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 0,
+        "rng": 833674724
+      }
+    },
+    {
+      "id": "pound-stab-hit",
+      "move": "MOVE_POUND",
+      "rng_seed": 0,
+      "attacker": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "derivation": "Same four draws as neutral. Base19, Normal STAB floor19*15/10=28; random99percent floors27. HP300-27=273, PP9.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 273,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 0,
+        "rng": 833674724
+      }
+    },
+    {
+      "id": "water-fourfold-hit",
+      "move": "MOVE_WATER_GUN",
+      "rng_seed": 0,
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_ROCK"
+      },
+      "derivation": "Base19, Water against Fire/Rock multiplies twice by2 ->76; random99percent floors75. HP225, PP9, super flag2, four draws.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 225,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 2,
+        "rng": 833674724
+      }
+    },
+    {
+      "id": "normal-ghost-immunity",
+      "move": "MOVE_POUND",
+      "rng_seed": 0,
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST"
+      },
+      "derivation": "Normal versus Ghost makes damage0 and flag8. Accuracy, crit, random adjustment even at0damage, and zero-chance secondary each consume one draw. HP300, PP9.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 300,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 8,
+        "rng": 833674724
+      }
+    },
+    {
+      "id": "pound-critical-hit",
+      "move": "MOVE_POUND",
+      "rng_seed": 7,
+      "derivation": "Seed7 draws52332 accuracyhit,15344 mod16=0 crit,54753 mod16=1 ->99percent,46046 secondary. Base19*2=38; floor38*.99=37, HP263, PP9.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 263,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 0,
+        "rng": 3017693019
+      }
+    },
+    {
+      "id": "armor-skips-critical-draw",
+      "move": "MOVE_POUND",
+      "rng_seed": 0,
+      "defender": {
+        "ability": "ABILITY_BATTLE_ARMOR"
+      },
+      "derivation": "BattleArmor short-circuits critical RNG. Accuracydraw0, damage draw59774 mod16=14 ->86percent, secondary21105. floor19*.86=16, HP284; thirdLCG1383151765.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 284,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 0,
+        "rng": 1383151765
+      }
+    },
+    {
+      "id": "pressure-reduces-two-pp",
+      "move": "MOVE_POUND",
+      "rng_seed": 0,
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      },
+      "derivation": "Pressure costs2PP on this selected opposing target. Other calculations and four RNG draws match neutral; HP282 and PP8.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 282,
+        "pp": 8,
+        "defender_status": 0,
+        "flags": 0,
+        "rng": 833674724
+      }
+    },
+    {
+      "id": "tackle-accuracy-miss",
+      "move": "MOVE_TACKLE",
+      "rng_seed": 30,
+      "derivation": "First draw46397 gives98 on1..100, exceeding Tackle95. Native miss script consumes1PP, skips crit/damage/secondary; HP300, missedflag1, exactlyoneLCG.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 300,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 1,
+        "rng": 3040710969
+      }
+    },
+    {
+      "id": "ember-secondary-burn",
+      "move": "MOVE_EMBER",
+      "rng_seed": 61,
+      "derivation": "Native burn-hit script sets burn effect then runs hit pipeline. Draws44097 accuracyhit,19005 noCrit,61543 mod16=7 ->93percent,59709 mod100=9<10 burn. floor19*.93=17, HP283, burn16, PP9.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 283,
+        "pp": 9,
+        "defender_status": 16,
+        "flags": 0,
+        "rng": 3913098481
+      }
+    },
+    {
+      "id": "fire-type-prevents-burn",
+      "move": "MOVE_EMBER",
+      "rng_seed": 61,
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      },
+      "derivation": "Same draw chain and10percent effect selection. Fire resists: floor19/2=9, floor9*.93=8 ->HP292, resistedflag4; Fire typing blocks burn without additional RNG.",
+      "expected": {
+        "attacker_hp": 90,
+        "defender_hp": 292,
+        "pp": 9,
+        "defender_status": 0,
+        "flags": 4,
+        "rng": 3913098481
+      }
+    }
+  ]
+}
