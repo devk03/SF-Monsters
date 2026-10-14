@@ -554,17 +554,17 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 20:25 UTC:
+Current checkpoint — October 14, 2026, 20:32 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v58 / Site 49 is live.
-  Native release source 0d7c006; website source 96f1f701. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v59 / Site 50 is live.
+  Native release source 29293f0; website source b73b5d07. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
   The compiled checker now blocks BPS creation on a mismatch. Pixel quality and
   animation acceptance remain pending; integration alone does not satisfy parity.
 - Actual native cold Continue, party icons and gym battle, plus Chrome battle /
-  party controls, show the authored assets. Matched v57/v58 native controller
+  party controls, show the authored assets. Matched v57/v58/v59 native controller
   routes produce byte-identical ordinary Flash saves at counter 4.
 - 711 independently specified mechanics cases / 57 doubles pass at the v56
   baseline; full-turn/type/catalog gates remain open. Ten save round trips cover
@@ -574,8 +574,10 @@ Current checkpoint — October 14, 2026, 20:25 UTC:
   response, native deadlines, Safari/phone and listening acceptance remain open.
 - Full 16-neighborhood / eight-gym / 150-monster campaign remains unfinished.
   First-slice approval is required before campaign expansion.
-- Alignment exchange 20:23 UTC; peer is auditing inherited creature placement
-  metadata read-only, with a finite 20-minute task. Next exchange by 20:52 UTC.
+- TrolleyKit is grounded: one ROM byte changes from v58; other 411 elevation
+  entries remain identical. Fresh native and Chrome battle views pass this fix.
+- Alignment exchange 20:31 UTC; peer is reviewing first-slice map composition
+  read-only for at most 20 minutes. Next exchange by 21:01 UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -797,8 +799,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.52-service-signs-preview; targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0; Site43. Distinct code/heart service signs, preserved tighter frontage and native-compatible Flash validation. Human approvals remain0/11. |
-| Latest local source build | v52normal sourcea81ac69 reproduces targetf45c62fe57188f96349adb2e4c001a88356c2ec854c88a54ec66a8804d08bef0. Native/WASM signs/dialog/doors pass;498tiles/136metatiles. All711 mechanics scenarios and local checks pass. Public deployment isSite43/v52. |
+| Public build | 0.0.59-creature-placement-preview; target3c4950c727ef1bdd84487245571e6342a349ed47a169fa997a839a75f28df01f; Site50. Authored creature resources integrated and TrolleyKit grounded. Human approvals remain0/11. |
+| Latest local source build | v59 normal source29293f0 reproduces tested target3c4950c7. All108 visual resources,90bindings,18selectors,18elevations,3palettes,18cries pass. Same-route native save remains byte-identical to v58. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -5941,7 +5943,7 @@ v58 / Site 49 publication — October 14, 20:25 UTC:
   open. Goal stays active; no completion claim.
 
 
-v59 creature placement work — October 14, 20:30 UTC:
+v59 creature placement work — October 14, 20:26 UTC:
 
 - Peer read-only audit confirms TrolleyKit inherited enemy elevation 16 from its
   stable Magnemite slot. Native battle code raises the sprite and enables the
@@ -5959,3 +5961,47 @@ v59 creature placement work — October 14, 20:30 UTC:
 - Negative-control audit on immutable v58 fails exactly TrolleyKit elevation
   (17/18 placement matches); all 237 existing visual/binding/selector/palette/cry
   controls still pass. Full local checks pass before the v59 native build.
+
+
+v59 compiled/native/browser placement acceptance — October 14, 20:29 UTC:
+
+- Draft and normal release reproduce target
+  3c4950c727ef1bdd84487245571e6342a349ed47a169fa997a839a75f28df01f.
+  Whole-ROM comparison to v58 changes exactly one byte at offset 3182917:
+  gEnemyMonElevation[81] 16→0. Other 411 elevation bytes and every remaining ROM
+  byte are unchanged. All 18 placement and existing 237 resource controls pass.
+- Native cold Continue with existing ordinary Flash, gym deployment and one
+  Absorb places TrolleyKit on the platform without airborne shadow or clipped
+  feet/UI overlap. The matched route ends at 24/26 HP, Absorb PP19. All 131072
+  Flash bytes match v58 at save counter4; zero changed declared save domains.
+- Actual Chrome shows the same grounded pose. Ten-second static battle smoke:
+  597 video frames / 1200 visible ticks; zero debt/mismatch/drop/underrun/warmup,
+  final audio acknowledged. Report SHA
+  e19e7a813bf767d05df1e6d1367550312cd84092bc3ab284763b67b73010d99b.
+  No measured inputs; not a new performance or full round-trip acceptance.
+  Temporary browser tab/server stopped; public progress untouched.
+- Private 53.309-second matched controller-only native comparison shows v57
+  inherited creature art beside v59 authored art and corrected placement. This
+  is an SF before/after, not a vanilla Emerald quality reference. Clip SHA
+  8ae176ba676edc98b250a4b7b72b513a2d97f37a4eef39281518acc42ea5439b;
+  path creature-placement-v59-before-after/comparison.mp4. User review requested;
+  no score inferred. Full quality-domain approvals remain 0/11.
+- Peer survey also notes inherited entrance motions and three possible hovering
+  poses for later art review. PierPeep's folded-wing pose deserves separate
+  review; this fix preserves its existing elevation16 rather than expanding scope.
+
+
+v59 / Site 50 publication — October 14, 20:32 UTC:
+
+- BPS 958258 bytes, SHA8e3774a6d9e88706fb591449d7c1491b856b5ba96fab6dd532e9efc10acc7b69.
+  Website source b73b5d0793b5ff3a35d512082be01311bd899fbc; saved Site50 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_5e8019fdc1088191b9251f54f3de0d67;
+  deployment appgdep_6acfe674d0f48191b81e5a54549c8774 succeeded20:30:56UTC.
+- Clean88-file archive SHA50d8e5a7a827c2984797d7a339e5217d85255d754302917bb9ac895430b02ef1;
+  no commercial ROM/private saves/AppleDouble. Browser BPS decoder produces exact
+  tested target. All18 anonymous public resources match local bytes. Live loader
+  and actual Download SF patch verified; screenshotpublic-v59-loader-visible.png.
+- Public audience, auth/storage and player progress unchanged. Temporary QA tab
+  closed and IAB visibility restored. GitHub Actions not run. Human scores still
+  pending, goal active, stop deadline unchanged. Next: actual Safari120s smoke
+  while alignment reviews the next concrete first-slice world-art improvement.

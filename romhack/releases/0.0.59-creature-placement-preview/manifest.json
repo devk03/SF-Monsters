@@ -1,0 +1,1479 @@
+{
+  "version": "0.0.59-creature-placement-preview",
+  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Seven named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
+  "game_code": "BPEE",
+  "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
+  "base_bytes": 16777216,
+  "target_sha256": "3c4950c727ef1bdd84487245571e6342a349ed47a169fa997a839a75f28df01f",
+  "target_bytes": 16777216,
+  "patch_sha256": "8e3774a6d9e88706fb591449d7c1491b856b5ba96fab6dd532e9efc10acc7b69",
+  "patch_bytes": 958258,
+  "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
+  "source_commit": "29293f03d763d827892102aa85719afc7451f93c",
+  "source_worktree_dirty": true,
+  "patch_roundtrip": "byte-identical",
+  "quality_approval": "pending",
+  "build_backend": "host",
+  "normal_compilation_verified": true,
+  "compiled_creatures": {
+    "passed": true,
+    "counts": {
+      "visual": {
+        "total": 108,
+        "matched": 108
+      },
+      "binding": {
+        "total": 90,
+        "matched": 90
+      },
+      "icon_selector": {
+        "total": 18,
+        "matched": 18
+      },
+      "enemy_elevation": {
+        "total": 18,
+        "matched": 18
+      },
+      "shared_palette": {
+        "total": 3,
+        "matched": 3
+      },
+      "cry": {
+        "total": 18,
+        "matched": 18
+      }
+    },
+    "receipt_sha256": "ce9052c71dfa92db3c12cb5f173f56e86cf1b768b9c534a2ac127f7987d52874",
+    "validator_sha256": "8c6ce93c027270b60ab92812151acbc5885d3c9809f1077ddde586d777ddb8f2",
+    "quality_approval": "pending",
+    "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
+  },
+  "host_toolchain": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+    "agbcc_revision": "da598c1d918402c42c0c0d7128ba14567f3175e9",
+    "compiler_sha256": {
+      "agbcc_arm": "33a485692ee542fbb77e11c278fdd2bea2e406626aa49b7c99784673db68af0f",
+      "old_agbcc": "1c1d8cd651a6ec232d22dfdba465517ad08dde071a7649fc4d805656e1c36b20",
+      "agbcc": "3bd2a272238777c151a7fc976040331bcdcdda4870fda5fabc6b5ac848e510d0"
+    },
+    "library_sha256": {
+      "libc.a": "bbc6d857fdf405130c30c479e9de233a2fbc8c496a170e07d17d10fd948887e9",
+      "libgcc.a": "064810f9140e9cca61ce07a2bac13ae905af6a04426985375b4c76e79450eb36"
+    },
+    "tool_versions": {
+      "arm-none-eabi-as": "GNU assembler (GNU Binutils) 2.47.20260726",
+      "arm-none-eabi-ld": "GNU ld (GNU Binutils) 2.47.20260726",
+      "arm-none-eabi-cpp": "arm-none-eabi-cpp (GCC) 16.2.0",
+      "make": "GNU Make 3.81"
+    },
+    "baseline_sha1": "f3ae088181bf583e55daf962a92bb46f4f1d07b7",
+    "baseline_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
+    "cleanup": "preserved; no destructive clean targets"
+  },
+  "interface_text": {
+    "input_sha256": "0ce785a7b2d850698271043cf23478a4e47c3550303d3005d3abcbdd51766804",
+    "target_sha256": "85aee32493666a48ca25810cfd83139d797618d5aa300c732d37c603a6b720c9",
+    "labels": [
+      {
+        "symbol": "gText_Pokemon",
+        "offset": 6274728,
+        "capacity": 8,
+        "text": "MONSTER",
+        "encoded_bytes": 8
+      },
+      {
+        "symbol": "gText_5MarksPokemon",
+        "offset": 6275832,
+        "capacity": 14,
+        "text": "????? MONSTER",
+        "encoded_bytes": 14
+      },
+      {
+        "symbol": "gText_PokedexRegistration",
+        "offset": 6275957,
+        "capacity": 32,
+        "text": "Field Guide entry recorded.",
+        "encoded_bytes": 28
+      },
+      {
+        "symbol": "gText_NoMatchingPkmnWereFound",
+        "offset": 6276037,
+        "capacity": 32,
+        "text": "No matching monsters found.",
+        "encoded_bytes": 28
+      },
+      {
+        "symbol": "gText_SearchForPkmnBasedOnParameters",
+        "offset": 6276069,
+        "capacity": 49,
+        "text": "Search for monsters using\nselected parameters.",
+        "encoded_bytes": 47
+      },
+      {
+        "symbol": "gText_SwitchPokedexListings",
+        "offset": 6276118,
+        "capacity": 25,
+        "text": "Switch Guide listings.",
+        "encoded_bytes": 23
+      },
+      {
+        "symbol": "gText_ReturnToPokedex",
+        "offset": 6276143,
+        "capacity": 23,
+        "text": "Return to the Guide.",
+        "encoded_bytes": 21
+      },
+      {
+        "symbol": "gText_SelectPokedexMode",
+        "offset": 6276166,
+        "capacity": 25,
+        "text": "Select the Guide mode.",
+        "encoded_bytes": 23
+      },
+      {
+        "symbol": "gText_SelectPokedexListingMode",
+        "offset": 6276191,
+        "capacity": 33,
+        "text": "Select Guide listing mode.",
+        "encoded_bytes": 27
+      },
+      {
+        "symbol": "gText_ListByFirstLetter",
+        "offset": 6276224,
+        "capacity": 60,
+        "text": "List by first letter of the name.\nSpotted monsters only.",
+        "encoded_bytes": 57
+      },
+      {
+        "symbol": "gText_ListByBodyColor",
+        "offset": 6276284,
+        "capacity": 42,
+        "text": "List by color.\nSpotted monsters only.",
+        "encoded_bytes": 38
+      },
+      {
+        "symbol": "gText_ListByType",
+        "offset": 6276326,
+        "capacity": 34,
+        "text": "List by type.\nOwned monsters.",
+        "encoded_bytes": 30
+      },
+      {
+        "symbol": "gText_DexHoennDescription",
+        "offset": 6276580,
+        "capacity": 23,
+        "text": "San Francisco Guide",
+        "encoded_bytes": 20
+      },
+      {
+        "symbol": "gText_DexNatDescription",
+        "offset": 6276603,
+        "capacity": 25,
+        "text": "Complete Field Guide",
+        "encoded_bytes": 21
+      },
+      {
+        "symbol": "gText_DexSortNumericalDescription",
+        "offset": 6276628,
+        "capacity": 46,
+        "text": "List monsters in order of\ntheir Guide number.",
+        "encoded_bytes": 46
+      },
+      {
+        "symbol": "gText_DexSortAtoZDescription",
+        "offset": 6276674,
+        "capacity": 53,
+        "text": "List spotted and owned monsters\nfrom A to Z.",
+        "encoded_bytes": 45
+      },
+      {
+        "symbol": "gText_DexSortHeaviestDescription",
+        "offset": 6276727,
+        "capacity": 60,
+        "text": "List owned monsters from\nheaviest to lightest.",
+        "encoded_bytes": 47
+      },
+      {
+        "symbol": "gText_DexSortLightestDescription",
+        "offset": 6276787,
+        "capacity": 60,
+        "text": "List owned monsters from\nlightest to heaviest.",
+        "encoded_bytes": 47
+      },
+      {
+        "symbol": "gText_DexSortTallestDescription",
+        "offset": 6276847,
+        "capacity": 59,
+        "text": "List owned monsters from\ntallest to smallest.",
+        "encoded_bytes": 46
+      },
+      {
+        "symbol": "gText_DexSortSmallestDescription",
+        "offset": 6276906,
+        "capacity": 59,
+        "text": "List owned monsters from\nsmallest to tallest.",
+        "encoded_bytes": 46
+      },
+      {
+        "symbol": "gText_ConfirmStarterChoice",
+        "offset": 6277328,
+        "capacity": 28,
+        "text": "Choose this monster?",
+        "encoded_bytes": 21
+      },
+      {
+        "symbol": "gText_ChoosePokemon",
+        "offset": 6281859,
+        "capacity": 18,
+        "text": "Choose a monster.",
+        "encoded_bytes": 18
+      },
+      {
+        "symbol": "gText_ChoosePokemon2",
+        "offset": 6282159,
+        "capacity": 18,
+        "text": "Choose a monster.",
+        "encoded_bytes": 18
+      },
+      {
+        "symbol": "gText_TeachWhichPokemon",
+        "offset": 6281892,
+        "capacity": 21,
+        "text": "Teach which monster?",
+        "encoded_bytes": 21
+      },
+      {
+        "symbol": "gText_UseOnWhichPokemon",
+        "offset": 6281913,
+        "capacity": 22,
+        "text": "Use on which monster?",
+        "encoded_bytes": 22
+      },
+      {
+        "symbol": "gText_GiveToWhichPokemon",
+        "offset": 6281935,
+        "capacity": 23,
+        "text": "Give to which monster?",
+        "encoded_bytes": 23
+      },
+      {
+        "symbol": "gText_DoWhatWithPokemon",
+        "offset": 6281958,
+        "capacity": 22,
+        "text": "What should it do?",
+        "encoded_bytes": 19
+      },
+      {
+        "symbol": "gText_NoPokemonForBattle",
+        "offset": 6282136,
+        "capacity": 23,
+        "text": "No monster for battle!",
+        "encoded_bytes": 23
+      },
+      {
+        "symbol": "gText_ChoosePokemonCancel",
+        "offset": 6282320,
+        "capacity": 26,
+        "text": "Choose monster or CANCEL.",
+        "encoded_bytes": 26
+      },
+      {
+        "symbol": "gText_ChoosePokemonConfirm",
+        "offset": 6282346,
+        "capacity": 28,
+        "text": "Choose monster and confirm.",
+        "encoded_bytes": 28
+      },
+      {
+        "symbol": "gText_PkmnInfo",
+        "offset": 6283279,
+        "capacity": 13,
+        "text": "MONSTER INFO",
+        "encoded_bytes": 13
+      },
+      {
+        "symbol": "gText_PkmnSkills",
+        "offset": 6283292,
+        "capacity": 15,
+        "text": "MONSTER SKILLS",
+        "encoded_bytes": 15
+      },
+      {
+        "symbol": "gText_MenuOptionPokedex",
+        "offset": 6287004,
+        "capacity": 8,
+        "text": "GUIDE",
+        "encoded_bytes": 6
+      },
+      {
+        "symbol": "gText_MenuOptionPokemon",
+        "offset": 6287012,
+        "capacity": 8,
+        "text": "TEAM",
+        "encoded_bytes": 5
+      },
+      {
+        "symbol": "gText_MenuPokedex",
+        "offset": 6300419,
+        "capacity": 8,
+        "text": "GUIDE",
+        "encoded_bytes": 6
+      },
+      {
+        "symbol": "gText_MenuPokemon",
+        "offset": 6300427,
+        "capacity": 8,
+        "text": "TEAM",
+        "encoded_bytes": 5
+      },
+      {
+        "symbol": "gText_SavingPokedex",
+        "offset": 6302068,
+        "capacity": 8,
+        "text": "GUIDE",
+        "encoded_bytes": 6
+      },
+      {
+        "symbol": "gText_ContinueMenuPokedex",
+        "offset": 6297871,
+        "capacity": 8,
+        "text": "GUIDE",
+        "encoded_bytes": 6
+      },
+      {
+        "symbol": "gText_WithdrawPokemon",
+        "offset": 6289329,
+        "capacity": 17,
+        "text": "WITHDRAW MONSTER",
+        "encoded_bytes": 17
+      },
+      {
+        "symbol": "gText_DepositPokemon",
+        "offset": 6289346,
+        "capacity": 16,
+        "text": "DEPOSIT MONSTER",
+        "encoded_bytes": 16
+      },
+      {
+        "symbol": "gText_MovePokemon",
+        "offset": 6289362,
+        "capacity": 13,
+        "text": "MOVE MONSTER",
+        "encoded_bytes": 13
+      },
+      {
+        "symbol": "gText_WithdrawMonDescription",
+        "offset": 6289394,
+        "capacity": 44,
+        "text": "Move monsters from BOXES to\nyour party.",
+        "encoded_bytes": 40
+      },
+      {
+        "symbol": "gText_DepositMonDescription",
+        "offset": 6289438,
+        "capacity": 38,
+        "text": "Store party monsters in BOXES.",
+        "encoded_bytes": 31
+      },
+      {
+        "symbol": "gText_MoveMonDescription",
+        "offset": 6289476,
+        "capacity": 49,
+        "text": "Organize monsters in BOXES and\nin your party.",
+        "encoded_bytes": 46
+      },
+      {
+        "symbol": "gText_MoveItemsDescription",
+        "offset": 6289525,
+        "capacity": 55,
+        "text": "Move items held by monsters\nin BOXES or your party.",
+        "encoded_bytes": 52
+      },
+      {
+        "symbol": "gText_BattleMenu",
+        "offset": 6162042,
+        "capacity": 26,
+        "text": "FIGHT{CLEAR_TO 56}BAG\nTEAM{CLEAR_TO 56}RUN",
+        "encoded_bytes": 23
+      },
+      {
+        "symbol": "sText_PkmnBrokeFree",
+        "offset": 6159211,
+        "capacity": 32,
+        "text": "Oh, no!\nThe monster broke free!",
+        "encoded_bytes": 32
+      },
+      {
+        "symbol": "sText_PkmnDataAddedToDex",
+        "offset": 6159465,
+        "capacity": 37,
+        "text": "{B_OPPONENT_MON1_NAME}'s data was\nadded to the Guide.\\p",
+        "encoded_bytes": 35
+      },
+      {
+        "symbol": "sText_UseNextPkmn",
+        "offset": 6150319,
+        "capacity": 18,
+        "text": "Use next monster?",
+        "encoded_bytes": 18
+      }
+    ]
+  },
+  "interface_graphics": {
+    "symbol": "gPokedexMenu_Gfx",
+    "offset": 14429676,
+    "capacity": 2584,
+    "compressed_bytes": 2564,
+    "raw_bytes": 8192,
+    "mask_sha256": "0c0b4b73536a989e587aac9541cb1c7ac4f46877408ae94fd208579030e5c3f6",
+    "raw_sha256": "9db46a4780f1be81a35154d4c787a2c455ec3c5d160626ad09e1f7ba16d64d3f",
+    "quality_approval": "pending"
+  },
+  "title_art": [
+    {
+      "symbol": "gTitleScreenPokemonLogoGfx",
+      "offset": 14547880,
+      "capacity": 5892,
+      "encoded_bytes": 3668,
+      "raw_bytes": 16384,
+      "raw_sha256": "b25689942c6b1a98b99ad8135728cc660b39cc29af6d5812462ea25547aceb17",
+      "preserved_tail_bytes": 0
+    },
+    {
+      "symbol": "gTitleScreenBgPalettes",
+      "offset": 14546800,
+      "capacity": 480,
+      "encoded_bytes": 448,
+      "raw_bytes": 448,
+      "raw_sha256": "d669789e5020a61ce07fad4c2504f68b707fcc0c6cff128d1631f59828b5948a",
+      "preserved_tail_bytes": 32
+    },
+    {
+      "symbol": "gTitleScreenEmeraldVersionGfx",
+      "offset": 14553772,
+      "capacity": 1588,
+      "encoded_bytes": 1588,
+      "raw_bytes": 4096,
+      "raw_sha256": "4b3f11a96131354831fbed0741f439151673faf9e69dcbfabccf6d9f3647e46e",
+      "preserved_tail_bytes": 0
+    },
+    {
+      "symbol": "gTitleScreenEmeraldVersionPal",
+      "offset": 14547280,
+      "capacity": 32,
+      "encoded_bytes": 32,
+      "raw_bytes": 32,
+      "raw_sha256": "99ac196789eba5ca0b98104dda5161cae2c885968dff899ffa8ee66b2812761f",
+      "preserved_tail_bytes": 0
+    }
+  ],
+  "title_creature": [
+    {
+      "symbol": "sTitleScreenRayquazaGfx",
+      "offset": 5582496,
+      "capacity": 2020,
+      "encoded_bytes": 1276,
+      "raw_bytes": 8192,
+      "raw_sha256": "aa942ed6f9b4e6882d351d36f0482dd6732efd03e44b5ccd0a03357c6d7bb414",
+      "preserved_tail_bytes": 0
+    },
+    {
+      "symbol": "sTitleScreenRayquazaTilemap",
+      "offset": 5584516,
+      "capacity": 768,
+      "encoded_bytes": 460,
+      "raw_bytes": 2048,
+      "raw_sha256": "c8d8fce97f2539b6389e2219c0ec47e698d649aa772f5b52c781e15694cd4e62",
+      "preserved_tail_bytes": 0
+    }
+  ],
+  "title_song": {
+    "title": "Foglight Overture",
+    "region_address": 144115040,
+    "header_address": 144126776,
+    "allocated_bytes": 11784,
+    "score_bytes": 1988,
+    "tracks": 8,
+    "voicegroup_address": 141220344,
+    "native_volume": 90,
+    "midi_sha256": "a5fa33ca074408a6958d785d882f172468225b28461856419b9d86fbcdb58a16",
+    "score_sha256": "efd68d10562d19d5abdccce8e29a4d1441ad1770b517c63ddd8a3c2af67d3306",
+    "waveform_sources_verified": true,
+    "quality_approval": "pending"
+  },
+  "sunset_house": {
+    "resources": [
+      {
+        "symbol": "gTilesetTiles_Petalburg",
+        "offset": 3396124,
+        "capacity": 7708,
+        "encoded_bytes": 7708,
+        "raw_bytes": 16384,
+        "raw_sha256": "b3d61aaa7594b0dc84398b19222660c73b7179ae0f9a48c9ed9d8ede8525af98",
+        "preserved_tail_bytes": 0
+      },
+      {
+        "symbol": "gTilesetPalettes_Petalburg",
+        "offset": 3403832,
+        "capacity": 512,
+        "encoded_bytes": 512,
+        "raw_bytes": 512,
+        "raw_sha256": "4969ae204a1e5997536e2e77fe16b864cb5b0797fefeb57c341b55da356a1bbc",
+        "preserved_tail_bytes": 0
+      },
+      {
+        "symbol": "gMetatiles_Petalburg",
+        "offset": 3819288,
+        "capacity": 3104,
+        "encoded_bytes": 3104,
+        "raw_bytes": 3104,
+        "raw_sha256": "3061b52def2e7be25d2351510d3e2a150f1690cdda69f1f0b15d10f1fd23b4c5",
+        "preserved_tail_bytes": 0
+      },
+      {
+        "symbol": "gMetatileAttributes_Petalburg",
+        "offset": 3822392,
+        "capacity": 388,
+        "encoded_bytes": 388,
+        "raw_bytes": 388,
+        "raw_sha256": "04c1a4d257532683e0af86fc279c4b60fe341ec8694de287da024ce93c7273fc",
+        "preserved_tail_bytes": 0
+      },
+      {
+        "symbol": "LittlerootTown_Layout_Blockdata",
+        "offset": 4162764,
+        "capacity": 2048,
+        "encoded_bytes": 2048,
+        "raw_bytes": 2048,
+        "raw_sha256": "a3959bfceda3bd9d679ee1a539d8f9b66b1eab5de9d27e2bb1c131c20756279a",
+        "preserved_tail_bytes": 0
+      }
+    ],
+    "origins": [
+      [
+        13,
+        4
+      ],
+      [
+        19,
+        4
+      ],
+      [
+        13,
+        10
+      ],
+      [
+        19,
+        10
+      ],
+      [
+        13,
+        25
+      ],
+      [
+        19,
+        25
+      ]
+    ],
+    "unique_tiles": 401,
+    "native_size": [
+      80,
+      80
+    ],
+    "collision_elevation_preserved": true,
+    "street_variants": {
+      "5": 4,
+      "1": 39,
+      "6": 4,
+      "4": 48,
+      "14": 20,
+      "2": 48,
+      "0": 39,
+      "17": 2,
+      "9": 5,
+      "10": 5,
+      "13": 32,
+      "15": 4,
+      "8": 4,
+      "3": 39,
+      "12": 5,
+      "11": 5,
+      "7": 4
+    },
+    "terrain_variants": {
+      "2": 96,
+      "3": 32,
+      "5": 54,
+      "16": 1,
+      "1": 116,
+      "13": 78,
+      "12": 79,
+      "0": 71,
+      "6": 30,
+      "4": 8,
+      "8": 1,
+      "17": 1
+    },
+    "secondary_tiles": 512,
+    "architectural_variants": [
+      {
+        "name": "butter",
+        "first_metatile": 144,
+        "palette_bank": 6,
+        "placements": [
+          [
+            19,
+            4
+          ],
+          [
+            13,
+            25
+          ]
+        ]
+      },
+      {
+        "name": "lavender",
+        "first_metatile": 169,
+        "palette_bank": 7,
+        "placements": [
+          [
+            19,
+            10
+          ],
+          [
+            19,
+            25
+          ]
+        ]
+      }
+    ],
+    "enterable_apartment": true,
+    "decorative_houses": 5,
+    "door_animation": "three original stages; native opening/closing timing",
+    "quality_approval": "pending"
+  },
+  "courier_apartment": {
+    "source_sha256": "05d5fc4b938259d573bdafb4e874f98255cbbd8a1f741a032a3aaf417159b775",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "native_size": [
+      176,
+      160
+    ],
+    "palette_bank": 6,
+    "tile_count": 444,
+    "metatile_count": 111,
+    "border_metatile": 622,
+    "exit_metatile": 616,
+    "exit_behavior": "MB_SOUTH_ARROW_WARP",
+    "quality_approval": "pending",
+    "files": {
+      "tiles.4bpp": "910c4cc62eb6698ffd82c667ba6f35bafec769b9f5e8ba2f9ffff854ed28b759",
+      "metatiles.bin": "4eb8c4291e642421e724b881d04304c293602d4a3369fe8abad9f17b7e4de898",
+      "attributes.bin": "80d868016e2bfb02b5ff48f7698b2edaa47f4dd89b6deff72a024a4f8a0aeecb",
+      "palettes.gbapal": "63a0849b40ebec56bac0c3ef0284d4013c950a955db6cb548250b88ad7153fa5",
+      "tiles.png": "8ddc1f2c1fa13417d82511633b5adb296c94f9b9aa6be38b09de788c73667126"
+    }
+  },
+  "courier_battle": {
+    "source_sha256": "100a93a328c73c328440225ca430ce066473f9bbed62ec03980a0210ca6eeb47",
+    "source_size": [
+      2172,
+      724
+    ],
+    "source_layout": "four separated horizontal figures, left to right",
+    "source_cells": [
+      [
+        79,
+        141,
+        439,
+        624
+      ],
+      [
+        575,
+        136,
+        1031,
+        624
+      ],
+      [
+        1141,
+        129,
+        1563,
+        624
+      ],
+      [
+        1623,
+        173,
+        2157,
+        624
+      ]
+    ],
+    "waist_anchors": [
+      [
+        207.0,
+        483
+      ],
+      [
+        187.5,
+        488
+      ],
+      [
+        208.0,
+        495
+      ],
+      [
+        209.5,
+        451
+      ]
+    ],
+    "shared_canvas": [
+      534,
+      495
+    ],
+    "common_scale": 0.11235955056179775,
+    "native_frame_size": [
+      64,
+      64
+    ],
+    "frames": 4,
+    "native_frame_order": [
+      1,
+      2,
+      3,
+      0
+    ],
+    "idle_native_frame": 3,
+    "native_layout": "four vertical frames",
+    "waist_baseline": 64,
+    "shared_gender_design": true,
+    "quality_approval": "pending",
+    "files": {
+      "back.png": "03d596000871803c301906bac9956dfbd1eee6908a8727c2eaedec592108c2a5",
+      "back.4bpp": "766552cfcb5b85d5c3d626799b2dae702f9b8437bbfc06d48bc024d4182ee775",
+      "back.gbapal": "509d8bafc6360ef38a68253eef23e4afc64ad817fcac3263de8fa6cdef48e518"
+    }
+  },
+  "cognition_cast": {
+    "characters": [
+      {
+        "slug": "scott-wu",
+        "name": "Scott Wu",
+        "symbol": "SFScottWu",
+        "graphics": "OBJ_EVENT_GFX_SF_SCOTT_WU",
+        "reserved_slot": "OBJ_EVENT_GFX_UNUSED_NATU_DOLL",
+        "script": "SF_Scott",
+        "map": "cognition.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            69,
+            67,
+            264,
+            440
+          ],
+          [
+            411,
+            67,
+            606,
+            440
+          ],
+          [
+            756,
+            67,
+            950,
+            440
+          ],
+          [
+            77,
+            565,
+            273,
+            938
+          ],
+          [
+            418,
+            565,
+            614,
+            938
+          ],
+          [
+            759,
+            565,
+            956,
+            938
+          ],
+          [
+            63,
+            1057,
+            276,
+            1446
+          ],
+          [
+            402,
+            1057,
+            616,
+            1446
+          ],
+          [
+            751,
+            1057,
+            965,
+            1446
+          ]
+        ],
+        "common_scale": 0.061696658097686374,
+        "files": {
+          "source.png": "7d235fc50da273558b2d30ca6f0a78d1937ecfd59d8c1fe445890656e4b55c88",
+          "walk.png": "82629e6e066384eb07e90393406161db518b774a4b8a9f23266da73fdbdfbcd7",
+          "walk.4bpp": "e9d296cbfe0e4b1b26746ecdad98b146ceb47edcd1cc66093ec9289e90dadb69",
+          "native-gallery.png": "58172dd2dd79d53be5457a4adcd5c619bb430914b457ced8e68e5debe1d85f02"
+        }
+      },
+      {
+        "slug": "walden-yan",
+        "name": "Walden Yan",
+        "symbol": "SFWaldenYan",
+        "graphics": "OBJ_EVENT_GFX_SF_WALDEN_YAN",
+        "reserved_slot": "OBJ_EVENT_GFX_UNUSED_MAGNEMITE_DOLL",
+        "script": "SF_WaldenYan",
+        "map": "cognition.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            75,
+            106,
+            271,
+            455
+          ],
+          [
+            417,
+            106,
+            615,
+            455
+          ],
+          [
+            761,
+            106,
+            958,
+            455
+          ],
+          [
+            75,
+            599,
+            267,
+            953
+          ],
+          [
+            419,
+            599,
+            611,
+            953
+          ],
+          [
+            761,
+            599,
+            952,
+            953
+          ],
+          [
+            65,
+            1087,
+            261,
+            1431
+          ],
+          [
+            410,
+            1087,
+            606,
+            1431
+          ],
+          [
+            755,
+            1087,
+            950,
+            1431
+          ]
+        ],
+        "common_scale": 0.06779661016949153,
+        "files": {
+          "source.png": "fcce142af89360479ce874f3b09f7da26037c096509efd1ba494ec24516518c8",
+          "walk.png": "55e6bb4f482087f4f4ea8a1cd6b0c1053b97ded43c80825917857a686ebbcd44",
+          "walk.4bpp": "dfc9234244d78c4210750fcd3101dcb3c1177a9f67c9e2d2a4e7c5b624cbc27b",
+          "native-gallery.png": "9488bb733cdc48afbd18c6b12e58ef8d136934990b39a018542f7dba1c7dda35"
+        }
+      },
+      {
+        "slug": "steven-hao",
+        "name": "Steven Hao",
+        "symbol": "SFStevenHao",
+        "graphics": "OBJ_EVENT_GFX_SF_STEVEN_HAO",
+        "reserved_slot": "OBJ_EVENT_GFX_UNUSED_SQUIRTLE_DOLL",
+        "script": "SF_StevenHao",
+        "map": "cognition.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            73,
+            75,
+            290,
+            473
+          ],
+          [
+            402,
+            75,
+            616,
+            473
+          ],
+          [
+            735,
+            75,
+            949,
+            473
+          ],
+          [
+            72,
+            574,
+            294,
+            978
+          ],
+          [
+            403,
+            574,
+            627,
+            978
+          ],
+          [
+            734,
+            574,
+            956,
+            978
+          ],
+          [
+            72,
+            1069,
+            294,
+            1460
+          ],
+          [
+            402,
+            1069,
+            623,
+            1460
+          ],
+          [
+            735,
+            1069,
+            955,
+            1460
+          ]
+        ],
+        "common_scale": 0.0594059405940594,
+        "files": {
+          "source.png": "0c84186f14dfad1f10785730d0a03c52c8e925094997bf422a654f1df07aa224",
+          "walk.png": "4b75118ce0520880c2d018162562c71d28403378ca9d4207a63dc017cd3601ec",
+          "walk.4bpp": "053038ed9c924e532558d4daf225ba3cc5230436043985e32d2f87c9bce364ee",
+          "native-gallery.png": "a90070a9c7debe5a6657fdaa6945f2608fba67dc7ea2630385ebd7fe3065c980"
+        }
+      }
+    ],
+    "frames_per_character": 9,
+    "native_order": [
+      0,
+      3,
+      6,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8
+    ],
+    "native_frame_size": [
+      16,
+      32
+    ],
+    "feet_baseline": 30,
+    "east_view": "native horizontal flip of original west frames",
+    "palette_tag": "0x1125",
+    "palette_slot": "PALSLOT_NPC_SPECIAL",
+    "palette_sha256": "92d9ed7574b9c9449a1912c0add41e4831e3cbf1a5d863c34f66e77cafb30da0",
+    "quality_approval": "pending"
+  },
+  "south_park_cast": {
+    "characters": [
+      {
+        "slug": "justine-moore",
+        "name": "Justine Moore",
+        "symbol": "SFJustineMoore",
+        "graphics": "OBJ_EVENT_GFX_SF_JUSTINE_MOORE",
+        "reserved_slot": "OBJ_EVENT_GFX_UNUSED_WOOPER_DOLL",
+        "script": "SF_JustineClinic",
+        "map": "services.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            54,
+            77,
+            283,
+            448
+          ],
+          [
+            394,
+            77,
+            624,
+            448
+          ],
+          [
+            743,
+            77,
+            972,
+            448
+          ],
+          [
+            54,
+            575,
+            284,
+            954
+          ],
+          [
+            393,
+            575,
+            623,
+            954
+          ],
+          [
+            738,
+            575,
+            967,
+            954
+          ],
+          [
+            71,
+            1060,
+            289,
+            1444
+          ],
+          [
+            409,
+            1060,
+            625,
+            1444
+          ],
+          [
+            758,
+            1060,
+            973,
+            1444
+          ]
+        ],
+        "common_scale": 0.0625,
+        "files": {
+          "source.png": "311d3b737354763e18c4fa5662edf8cbbca8c39764e74837f53627f32ce627cd",
+          "walk.png": "d1540b90a3f65f9dee54620dd05d7960f5fd50a215a7564a8204d3f4d01ca218",
+          "walk.4bpp": "0d11fb8eb828dc81b4c90ab9be5e0725f2734ecbc3b79c61ee2999c74abc3363",
+          "native-gallery.png": "c667f7dd89126e43d56532a42f9d984112fdd93fe29a4736a32e6d4d901f0492"
+        }
+      },
+      {
+        "slug": "patrick-mckenzie",
+        "name": "Patrick McKenzie",
+        "symbol": "SFPatrickMcKenzie",
+        "graphics": "OBJ_EVENT_GFX_SF_PATRICK_MCKENZIE",
+        "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PIKACHU_DOLL",
+        "script": "SF_PatrickShop",
+        "map": "services.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            67,
+            66,
+            269,
+            442
+          ],
+          [
+            406,
+            66,
+            609,
+            442
+          ],
+          [
+            748,
+            66,
+            954,
+            442
+          ],
+          [
+            76,
+            565,
+            276,
+            940
+          ],
+          [
+            416,
+            565,
+            617,
+            940
+          ],
+          [
+            758,
+            565,
+            958,
+            940
+          ],
+          [
+            61,
+            1056,
+            276,
+            1447
+          ],
+          [
+            401,
+            1056,
+            618,
+            1447
+          ],
+          [
+            750,
+            1056,
+            965,
+            1447
+          ]
+        ],
+        "common_scale": 0.061381074168797956,
+        "files": {
+          "source.png": "78029e441459002473b2f643ac9628d3108087ea50642d467c88675424d20050",
+          "walk.png": "bbf94b318d14c0315f671d26f02c6d044c500af0e1c79755e6be2e3f15f21752",
+          "walk.4bpp": "c29a2ff5f349b0fb5f8c14e79e891221b18da4bba67b19f450ebe924c5dc8bb6",
+          "native-gallery.png": "30c7b4ccb7d3d42c85aab3675de8f0913c7f2cc210bcfd667e996938e2bb08ff"
+        }
+      }
+    ],
+    "frames_per_character": 9,
+    "native_order": [
+      0,
+      3,
+      6,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8
+    ],
+    "native_frame_size": [
+      16,
+      32
+    ],
+    "feet_baseline": 30,
+    "east_view": "native horizontal flip of original west frames",
+    "palette_tag": "0x1126",
+    "palette_slot": "PALSLOT_NPC_SPECIAL",
+    "palette_sha256": "2ebd0b851507a271fb7841b4c78cd0292e158d10f15ac5f334177a1f8be03558",
+    "quality_approval": "pending"
+  },
+  "sunset_cast": {
+    "characters": [
+      {
+        "slug": "roon",
+        "name": "Roon",
+        "symbol": "SFRoon",
+        "graphics": "OBJ_EVENT_GFX_SF_ROON",
+        "reserved_slot": "OBJ_EVENT_GFX_UNUSED_PORYGON2_DOLL",
+        "script": "SF_Roon",
+        "map": "sunset.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            62,
+            65,
+            278,
+            441
+          ],
+          [
+            404,
+            65,
+            620,
+            441
+          ],
+          [
+            747,
+            65,
+            963,
+            441
+          ],
+          [
+            62,
+            562,
+            278,
+            941
+          ],
+          [
+            404,
+            562,
+            620,
+            941
+          ],
+          [
+            747,
+            562,
+            962,
+            941
+          ],
+          [
+            53,
+            1051,
+            275,
+            1451
+          ],
+          [
+            395,
+            1051,
+            618,
+            1451
+          ],
+          [
+            739,
+            1051,
+            961,
+            1451
+          ]
+        ],
+        "common_scale": 0.06,
+        "files": {
+          "source.png": "360a74014041d011511fc9cacc8f760a329fce15c7ff76289688c16cdfd79cf5",
+          "walk.png": "bd644ab2087d093efcccee89b354d20a3f013c3acc6db0c1623aea3efb267989",
+          "walk.4bpp": "e5dc40733671ee6bb4f7198253e6cf812f8eeb5fdd8d4e16a8585497592d91fc",
+          "native-gallery.png": "37134aeb5e673472bbbcf12e3833f4c4b3f8edfbb2ee54bbc3d7430c82a30cdb",
+          "native-cleanup.json": "ba47fba8fad7ac27403c1dabcd317037612de7bebd08d8c1034e856c8579ae37",
+          "quantization-palette.gbapal": "9eb83182e5b3141187d10de06dff06b28894ffacd5b22c81c65c40269e3089a6"
+        }
+      },
+      {
+        "slug": "karpathy",
+        "name": "Andrej Karpathy",
+        "symbol": "SFKarpathy",
+        "graphics": "OBJ_EVENT_GFX_SF_KARPATHY",
+        "reserved_slot": "OBJ_EVENT_GFX_SCIENTIST_1",
+        "script": "SF_Karpathy",
+        "map": "sunset.json",
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_cells": [
+          [
+            71,
+            70,
+            265,
+            446
+          ],
+          [
+            408,
+            70,
+            604,
+            446
+          ],
+          [
+            756,
+            70,
+            949,
+            446
+          ],
+          [
+            77,
+            567,
+            272,
+            942
+          ],
+          [
+            418,
+            567,
+            611,
+            942
+          ],
+          [
+            761,
+            567,
+            955,
+            942
+          ],
+          [
+            71,
+            1044,
+            281,
+            1445
+          ],
+          [
+            407,
+            1044,
+            619,
+            1445
+          ],
+          [
+            756,
+            1044,
+            967,
+            1445
+          ]
+        ],
+        "common_scale": 0.059850374064837904,
+        "files": {
+          "source.png": "a60e087653530020fd75052419432d805497d92bac2f9be9b3e8df176f97d940",
+          "walk.png": "6de806110fae7c855d09652a8eb04e41d292bb44b758c28e7855a4a6d1cbd554",
+          "walk.4bpp": "02f0c4b074da27d427fd1e5b43e0769ddc95409ac94983b1997b309ef4006065",
+          "native-gallery.png": "4b56e5669f5774b660e3b8b6982c7469824acf1c5831ea35515454d34bb900d6",
+          "native-cleanup.json": "5c2cf30cf91f46bc51f9df1155894ba3eada4aaf344a1c25992d09004cf5e643"
+        }
+      }
+    ],
+    "frames_per_character": 9,
+    "native_order": [
+      0,
+      3,
+      6,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8
+    ],
+    "native_frame_size": [
+      16,
+      32
+    ],
+    "feet_baseline": 30,
+    "east_view": "native horizontal flip of original west frames",
+    "palette_tag": "0x1127",
+    "palette_slot": "PALSLOT_NPC_SPECIAL",
+    "palette_sha256": "f4fc7a765270447d16a2b604e00296d749b7e35aad7d408add2ba586b4c0aad5",
+    "quality_approval": "pending",
+    "palette_policy_sha256": "61fa478fd61972e25d5cfa7c2f8bd1eb2cff04f3f2fb31741b61bf556c1d6121"
+  },
+  "cognition_office": {
+    "native_tiles": 319,
+    "metatiles": 81,
+    "quality_approval": "pending",
+    "resource_sha256": {
+      "tiles": "53642994122f4167700e845fe73c28fd763dd1539356fe53bb6ce7df19c3e62d",
+      "metatiles": "0658e8ef05128bcea3f5027b13b7758ba083e1e9682e235e2ec09fbf1c329b03",
+      "attributes": "fbe73ab43561ad03b3d497437f1343f3431f65b8ed7c1da766dc02e4d2066bb3",
+      "palettes": "c7fbe32f4d314d25016ca82f7c78ba87a0d111ecb29877f397d8e52be97d03d7"
+    }
+  },
+  "south_park_clinic": {
+    "native_tiles": 328,
+    "metatiles": 106,
+    "quality_approval": "pending",
+    "resource_sha256": {
+      "tiles": "a94391ab234df856cdce1170abc42e31f936152087f0deee56f4b336821438ee",
+      "metatiles": "09caf85b325556bcc7832f9565f8fbc29a8304338475ffd40cf5ea0b8ff3f108",
+      "attributes": "14b28c9bc21880d16a2dee7ac28f65e0f5e1480ccc9c55fe7043ad60c37b77e8",
+      "palettes": "ce5e94df8e3a513b047fe66904b68c92ba47038a6f72cf7a96bf77eeb55d20ce"
+    }
+  },
+  "rowhouse_door": {
+    "native_frame_size": [
+      16,
+      32
+    ],
+    "frames": 3,
+    "metatile": 635,
+    "palette_bank": 10,
+    "source_sha256": "920833794528b2962fa5058956ab0097a07cbe538176e994baf484f2cd7a5cbe",
+    "palette_sha256": "c9f4d87bd13b83f3b7d24d92b640c0a7dfc0e6d023bea09e10dfc5f11606139e",
+    "frame_offsets": [
+      0,
+      256,
+      512
+    ],
+    "animation_timing": "inherited native table",
+    "quality_approval": "pending",
+    "files": {
+      "frames.png": "6c794899dedb0b8b3d1787a667abdd3e874e335c0905bbb1bd83e8ecd51c4cd4",
+      "frames.4bpp": "a3767e2ace6ae9f85f47e56103a04522855b842b33d0b71f7382d5b81d77c680"
+    }
+  },
+  "coastal_terrain": {
+    "source_sha256": "a27a3f2d27f038f36768211ad72c9ae2c66d6b07bb6858bc27f3ddce3ff44818",
+    "native_grass_sha256": "af36c3aa257c4ef4199a34a22fe5b1808a5d6d1f8bb007255084cc4cb7a60c1f",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "native_size": [
+      64,
+      64
+    ],
+    "palette_bank": 12,
+    "wave_tile_start": 240,
+    "wave_tiles": 8,
+    "wave_frames": 3,
+    "wave_frame_bytes": 256,
+    "wave_cadence_frames": 16,
+    "quality_approval": "pending",
+    "files": {
+      "tiles.indices": "b4dc70e2cecaa564b5be140251b4cb2f32dc03e03b6f8a3299c17fd0fca43698",
+      "terrain.gbapal": "ef4b0babd1c4f03a1a39db7a446d8be6783e5e6250b94d5f7b03d18c05d80757",
+      "waves.4bpp": "c3f8350cb8074a8706f08c358da6974808ad1cf1fad6cd3e0c9d498b637dbaac"
+    }
+  },
+  "south_park": {
+    "native_tiles": 497,
+    "metatiles": 148,
+    "quality_approval": "pending",
+    "resource_sha256": {
+      "tiles": "d1b0e5b8beadca50abaf2b334f321e7ce4771cf53c25361ef84ab1242d8d72c8",
+      "metatiles": "2e0c54d1f9817c93520709768b3a1ef12ffdc752da4f6f372205033586e4ba9d",
+      "attributes": "493bbb6584d625349e640fb795c22b22743e0b8defdcce9dfe593f5886077130",
+      "palettes": "73e3ba1b6d1f0a9385e97e92eba6a4a2d1268384e4cdf6f45f452a49fda512db"
+    }
+  },
+  "south_park_doors": {
+    "source_sha256": "b9455f412d06220d84d73844b728e05096726b836c15da0208d5a63cdb8d6cb3",
+    "palette_sha256": "e932cbba8d8b6123619af28e6beccdd778dec2eaeaf59cdf2d5c9d76d09ee88c",
+    "frame_size": [
+      16,
+      32
+    ],
+    "frames_per_door": 3,
+    "palette_banks": [
+      8,
+      9
+    ],
+    "door_metatiles": [
+      583,
+      618
+    ],
+    "native_timing": "unchanged",
+    "quality_approval": "pending",
+    "files": {
+      "warehouse.4bpp": "f0401e04de41439b94a3d5554ade2cad58fff64a3b0c4bb8409dfa286d149713",
+      "clinic.4bpp": "39bdcab7a8ee0457acf2554bfec5c9409d507a8070ba9ca96e08364780d6071a",
+      "warehouse.png": "353b628af96c541f539e9e3e7cecbc78cc5d45c5985af4f4d244bd006cdab522",
+      "clinic.png": "acddefe588f00ac33299996e1830c02ba6df5fdbfe6282a4e6fd2330679db232"
+    }
+  }
+}
