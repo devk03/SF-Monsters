@@ -774,7 +774,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.51-park-frontage-preview; targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe; Site41. Tighter South Park frontage with varied facades, preserved service doors and older-save relocation proof. Human approvals remain0/11. |
+| Public build | 0.0.51-park-frontage-preview; targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe; Site42. Tighter South Park frontage plus native-compatible safe Flash import validation. Human approvals remain0/11. |
 | Latest local source build | v51normal source3aa702f reproduces targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe. Native/WASM old-save relocation and service doors pass;490tiles/134metatiles. All336 mechanics scenarios and local checks pass. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
@@ -4886,3 +4886,23 @@ Flash import safety correction (publication pending):
   parity rejection and equal-counter/schema checks. Valid earned populated
   counter5 save remains accepted. No save bytes rewritten or import attempted
   before validation. New code is under local checks, public remainsSite41.
+
+
+Site42 native Flash validation deployment:
+
+- Source286f9b0bae7cf7874e89a70ca1721ed24559bf2e passed Sites typecheck/build.
+  Audited84-file archive has one exact v51 patch/manifest, no commercial-derived
+  cartridge/AppleDouble metadata; original SFMM prototype identity verified.
+- Saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_64992b874298819189b5007e0816c26c;
+  deployment appgdep_6acf6ad1c5808191b83fec6422ceb8e1 succeeded at
+  2026-10-14T11:43:20Z. PublicURL/audience/auth unchanged, same v51 GBA hash.
+  No DB/GitHub Actions. Actual import-retention UI checks are next.
+- Local worker restarted from this exact source/build BEFORE cycle1, with a new
+  6000-second hardstop. Fresh baseline counter5 has party2 (PAR Sprout, fainted
+  Hushmoth), Box1 BinPossum; clock0/Safari0/revision8/consistentDex verified.
+  Zero completed roundtrips yet; origin remains isolated from public guest.
+- Read-only flash_audit.py never rewrites batteries. Twenty independent synthetic
+  guards pass for CRC/rotation/recovery/native slot choice, all24 Pokemon layouts,
+  key normalization, all declared domains, time/stat bounds and corruption.
+  Synthetic tests are not gameplay/save-transfer evidence.
