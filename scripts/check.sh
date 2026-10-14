@@ -12,6 +12,8 @@ clang -std=c11 -Wall -Wextra -Werror game/core.c game/content.c tests/save_fixtu
 build/save-fixture build/save-fixture.sav
 node --experimental-strip-types tests/save-format.test.mjs build/save-fixture.sav
 node tests/emulator.test.cjs
+node tests/audio_worklet_test.mjs
+python3 tests/prepare_web_test.py
 node --experimental-strip-types tests/bps.test.mjs
 node --experimental-strip-types tests/flash-save.test.mjs
 python3 tests/romhack_maps_test.py

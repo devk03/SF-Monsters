@@ -1,5 +1,6 @@
 /* Modified for SF Mini Monsters: battery saves, frame-safe input, video pacing. MPL-2.0. */
 import { manifest } from './mgba.manifest.js';
+import { WORKLET_SOURCE } from './mgba.audio-worklet.js';
 import { bindConfig, createSettingsStore, } from './mgba.config.js';
 import { coerceOptionValue, DEFAULT_MGBA_OPTIONS, MGBA_ENGINE_OPTIONS, MGBA_GB_MODEL_VALUES, MGBA_LOG_LEVEL_IDS, MGBA_PLATFORM_IDS, toEscMenuGroups, } from './mgba.options.js';
 import { extractRom } from './mgba.zip.js';
@@ -42,76 +43,6 @@ const DEFAULT_KEYMAP = {
     'p1.start': 'Enter',
     'p1.select': 'ShiftRight',
 };
-/**
- * AudioWorklet processor: an SPSC float ring fed int16 chunks, resampling on
- * the way out.
- *
- * The resampling is here rather than in the SDK because these cores emit at a
- * rate the SDK does not choose and cannot pin: 131072 Hz on Game Boy, and 32768
- * or 65536 Hz on GBA depending on what the running game has written to
- * SOUNDBIAS. A `rate` message retunes the read cursor mid-stream, so a game
- * changing resolution is a ratio change and not a glitch.
- *
- * `consumed` is reported in *source* frames — that is the unit the SDK's pacing
- * arithmetic works in, since that is what the core produces.
- */
-const WORKLET_SOURCE = `
-class MgbaSink extends AudioWorkletProcessor {
-  constructor() {
-    super();
-    this.cap = 32768; // source frames
-    this.buf = new Float32Array(this.cap * 2);
-    this.pos = 0; // fractional read cursor, in source frames
-    this.w = 0;   // source frames written
-    this.ratio = 1;
-    this.lastPost = 0;
-    this.port.onmessage = (e) => {
-      const msg = e.data;
-      if (msg && msg.rate) {
-        this.ratio = msg.rate / sampleRate;
-        return;
-      }
-      const s = msg; // Int16Array, interleaved stereo
-      const frames = s.length >> 1;
-      for (let i = 0; i < frames; i++) {
-        if (this.w - this.pos >= this.cap) break; // full: drop excess
-        const idx = (this.w % this.cap) * 2;
-        this.buf[idx] = s[i * 2] / 32768;
-        this.buf[idx + 1] = s[i * 2 + 1] / 32768;
-        this.w++;
-      }
-    };
-  }
-  process(inputs, outputs) {
-    const out = outputs[0];
-    const L = out[0];
-    const R = out[1] || out[0];
-    const n = L.length;
-    for (let i = 0; i < n; i++) {
-      // One source frame must be left past the cursor to interpolate against.
-      if (this.pos + 1 < this.w) {
-        const base = Math.floor(this.pos);
-        const frac = this.pos - base;
-        const a = (base % this.cap) * 2;
-        const b = ((base + 1) % this.cap) * 2;
-        L[i] = this.buf[a] + (this.buf[b] - this.buf[a]) * frac;
-        R[i] = this.buf[a + 1] + (this.buf[b + 1] - this.buf[a + 1]) * frac;
-        this.pos += this.ratio;
-      } else {
-        L[i] = 0;
-        R[i] = 0;
-      }
-    }
-    const consumed = Math.floor(this.pos);
-    if (consumed - this.lastPost >= 1024) {
-      this.port.postMessage(consumed);
-      this.lastPost = consumed;
-    }
-    return true;
-  }
-}
-registerProcessor('mgba-sink', MgbaSink);
-`;
 const scriptLoadCache = new Map();
 function loadClassicScriptOnce(src) {
     const cached = scriptLoadCache.get(src);

@@ -5522,3 +5522,24 @@ Native work/wait interpretation pilot:
   deadline/99percent host or full performance acceptance. All larger gates open.
 - Six interpreter guards and full local scripts/check.sh pass. Independent nominal
   clock/pairing review ends18:00UTC; next alignment check by17:57UTC. Full goal active.
+
+Browser audio measurement foundation:
+
+- Extracted the maintained MPL audio sink into mgba.audio-worklet.js. Optional
+  diagnostic messages enable cumulative startup-silence, post-start starvation,
+  dropped source frames, rendered output frames/quanta and queue-depth counts.
+  Enabling/stopping observation never flushes or alters the audio ring/cursor.
+  Default playback sends only its existing numeric consumption messages.
+- Actual worklet VM checks verify analytical half-rate interpolation, identical
+  observed/control output through depletion,128 startup frames classified separately,
+  ten post-start starved frames, four excess dropped source frames and disabled
+  reporting. These are controlled sink tests, not live-browser audio acceptance.
+- Preparation previously regenerated the SDK from upstream, risking loss of SF
+  fixes. It now preserves maintained SDK/audio/performance modules while verifying
+  pinned core artifacts. An isolated two-run regression check and actual workspace
+  prepare preserve frontend hashes. Full local checks pass; public remainsSite47.
+- Native alignment review confirms current formula/pairing; arbitrary snapshots
+  with an unobserved initial wait-clear, pre-epoch nominal VBlank or lateness over
+  1008cycles fail closed and are not universally supported. Next: foreground web
+  pacing/input/audio instrumentation. Alignment owns bounded probe aggregation
+  and its tests only, hardstop18:15UTC; main owns SDK and actual browser checks.
