@@ -4159,3 +4159,26 @@ v47 release validation and publication:
   checkpoint. Same existing Site/audience/authentication; no database changes.
   Supported Sites source workflow is packaging the release; public deployment
   confirmation and guest browser smoke check are pending.
+
+
+v47 public deployment confirmation:
+
+- Site37 saved version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_da4bfb4622548191a7bccb059088aaab
+  uses source5387f469e7b05fcf0f3c42c1f82bfd47079bc2bd. Audited archive has
+  exactly one current patch and manifest, with no commercial BPEE cartridge.
+- Deploymentappgdep_6acf315ff810819195b8739c8bde53f3 succeeded
+  2026-10-14T07:38:18Z at the existing public URL. Audience/auth unchanged.
+- Actual IAB guest smoke check locally patches the supplied baseline, restores
+  the existing guest slot, shows Continue with earned badge, and reaches the
+  clinic field. Walking responds. This checks basic public boot/Continue, not
+  full browser performance/audio gates or a human art approval.
+- No GitHub Actions dispatched. Source, native fix and density change are in
+  separate coherent commits. User's unrelated PDF remains untracked/untouched.
+  Full-scope quality goal remains unfinished; October15 6PM Pacific stop applies.
+
+- Deployed guest doorway smoke check also exits the clinic to South Park with
+  complete courier head visible in front of the facade. Screenshot:
+  .tools/browser-review/public-v47-smoke.png. Test-only tab muted, paused and
+  closed afterward; original user tab remains open. Existing open sessions must
+  reload the page and locally load their ROM again to use the new patch.
