@@ -6353,3 +6353,27 @@ v64 SF habitat-map engine integration — October14,22:14UTC:
   compiled-map verification, native behavioral tests, wild highlights/interior
   markers, browser controls and ordinary save acceptance remain pending. Public
   staysv63/Site54; human0/11. No new travel/campaign/areas or GitHub Actions.
+
+
+v64 habitat integration controls — October14,22:17UTC:
+
+- Mandatory pre-BPS map gate reads final ROM/ELF: ten background/head resources,
+  shared420-byte grid, two entry rectangles/two label pointers, four-byte habitat
+  whitelist and fifteen-byte player-parent table. All17 checks pass. The same
+  validator on immutablev63 passes only the two preexisting names and fails15
+  integration checks. Full private receipts retained; quality approval pending.
+- Portable ELF reader admits the specific map resource families/tables. Existing
+  twelve parser/resource tests pass. Guarded rebuild reproduces32b575128a803e44d4f1d2c81a94294496b2d365be215fc190a14fd324ea5686.
+  Full local checks pass, including native sanitizer tests and map serialization.
+- Production habitat tests poison foreign encounter pointers, verify Sunset-only,
+  Park-only/both/absent species, exact land12/water5/rock5/fishing10 bounds and
+  stale special-count reset. Five player-parent cases ignore stale warp fields
+  and preserve full supplied game state; unsupported maps preserve native state.
+  Hardware-format test reconstructs both tilemap strides and verifies geographic
+  anchors(7,8)/(18,5), palette isolation and109≤232 tile budget.
+- Actual controller Binpossum AREA capture reads native species288, two areas
+  (0,9,section0)/(0,10,section1), and zero special areas. Both highlights align
+  with SF pins; no legacy map highlighted. Starter AREA remains unknown as expected.
+  This is scoped native evidence, not all150-monster/campaign/art acceptance.
+- Interior native marker/save checks and browser/matched review still pending.
+  Public remainsv63/Site54; full human approvals0/11 and all broader gates open.

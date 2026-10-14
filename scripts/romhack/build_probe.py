@@ -14,6 +14,7 @@ from battle_content import apply_battles
 from engine_guards import apply_engine_guards
 from field_journal import apply_field_journal
 from city_map import apply_city_map
+from city_map_audit import audit_city_map
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
@@ -160,6 +161,14 @@ def main():
     if compiled_cast.get('passed') is not True:
         raise ValueError('Compiled original field cast failed; preserved receipt: ' + str(cast_path))
     print('Compiled original field cast verified: ' + json.dumps(compiled_cast['counts']))
+    compiled_map = audit_city_map(target, EMERALD / 'sf-engine-probe.elf', ROOT, EMERALD)
+    map_bytes = (json.dumps(compiled_map, indent=2) + '\n').encode()
+    map_path = validation_directory / ('city-map-' + uuid.uuid4().hex + '.json')
+    with map_path.open('xb') as stream:
+        stream.write(map_bytes)
+    if compiled_map.get('passed') is not True:
+        raise ValueError('Compiled SF map failed; preserved receipt: ' + str(map_path))
+    print('Compiled SF map verified: ' + json.dumps(compiled_map['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -208,6 +217,12 @@ def main():
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending'
     }
     manifest['build_backend'] = args.backend
+    manifest['compiled_city_map'] = {
+        'passed': True, 'counts': compiled_map['counts'],
+        'receipt_sha256': hashlib.sha256(map_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/city_map_audit.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_map['scope']
+    }
     manifest['compiled_field_cast'] = {
         'passed': True, 'counts': compiled_cast['counts'],
         'receipt_sha256': hashlib.sha256(cast_bytes).hexdigest(),
