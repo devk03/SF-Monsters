@@ -90,8 +90,8 @@ static const u8 sSFDoorPalettes[] = {10, 10, 10, 10, 10, 10, 10, 10};
         raise ValueError('Pinned door drawing hook changed; inspect before integrating.')
     camera = camera.replace('#include "text.h"',
                             '#include "text.h"\n#include "constants/maps.h"')
-    camera = camera.replace(draw_anchor, '''        // The SF facade occupies the top background, above the native fog.
-        // Put its animated replacement on that same layer, without changing timing.
+    camera = camera.replace(draw_anchor, '''        // Keep each animated half on its static facade layer. The bottom
+        // half sits behind actors approaching from the sidewalk.
         if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN)
           && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN)
           && (MapGridGetMetatileIdAt(x, y) == 630 || MapGridGetMetatileIdAt(x, y) == 635))
@@ -110,7 +110,7 @@ static const u8 sSFDoorPalettes[] = {10, 10, 10, 10, 10, 10, 10, 10};
                 sfTiles[i] = sfGround[i + 4];
                 sfTiles[i + 4] = tiles[i];
             }
-            DrawMetatile(METATILE_LAYER_TYPE_NORMAL, sfTiles, offset);
+            DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), sfTiles, offset);
         }
         else
             DrawMetatile(METATILE_LAYER_TYPE_COVERED, tiles, offset);''')

@@ -187,9 +187,12 @@ def owned_field_attributes(original):
         struct.pack_into('<H', attributes, index * 2, 0x1000)
     for index, behavior in ((1, 0x21), (2, 0x15), (4, 0x02)):
         struct.pack_into('<H', attributes, (FIRST_TERRAIN + index) * 2, 0x1000 | behavior)
-    # Vertical facades and their animated doors keep the foreground layer.
+    # Upper walls stay foreground; the blocked front edge belongs behind actors
+    # standing immediately south. Their 32px sprites extend into the row above.
     attributes[FIRST_METATILE * 2:(FIRST_METATILE + 25) * 2] = bytes(50)
-    struct.pack_into('<H', attributes, 123 * 2, 0x69)
+    for index in range(FIRST_METATILE + 20, FIRST_METATILE + 25):
+        struct.pack_into('<H', attributes, index * 2, 0x1000)
+    struct.pack_into('<H', attributes, 123 * 2, 0x1069)
     return bytes(attributes)
 
 

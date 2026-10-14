@@ -113,9 +113,12 @@ class HouseArt(unittest.TestCase):
             self.assertEqual(result[index] >> 12, 1)
         self.assertEqual((result[61] & 255, result[62] & 255, result[64] & 255),
                          (0x21, 0x15, 0x02))
-        self.assertEqual(result[123], 0x69)
-        for index in range(100, 125):
+        self.assertEqual(result[123], 0x1069)
+        for index in range(100, 120):
             self.assertEqual(result[index] >> 12, 0)
+        # A courier south of the collision edge must render over its bottom row.
+        for index in range(120, 125):
+            self.assertEqual(result[index] >> 12, 1)
         self.assertEqual(result[80:100], (0x2040,) * 20)
         with self.assertRaises(ValueError):
             owned_field_attributes(bytes(286))

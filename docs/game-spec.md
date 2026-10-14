@@ -4099,3 +4099,23 @@ Scott portrait draft compilation checkpoint:
   identified bottom-facade foreground priority as a plausible overlap cause.
 - Human domain approvals remain0/11; music's latest explicit subset score2/4.
   The full campaign, mechanics, art, audio, performance and release gates remain.
+
+
+Facade edge regression checkpoint (local candidate v46):
+
+- Reproduced reported hidden head at Sunset25,15 on v45 from a supported
+  older battery save. The same position/input on v46 shows the complete head.
+  All six rowhouses' blocked bottom rows now draw behind approaching actors;
+  roof/upper-wall foreground layers and collision/elevation words are preserved.
+- Applied the same correction to both South Park service facades and annexes.
+  Static door behavior remains0x69. Animated upper/lower halves follow their
+  respective static layer so animation cannot restore the bad foreground edge.
+- Native1296-frame wall/door replay stays25,15 against the blocked wall, walks
+  around the block, enters the apartment, and exits to16,9. Every RGB frame,
+  PCM sample and Flash byte matches WASM after decoding its lossless frame file.
+  Evidence: facade-v46-door-native and facade-v46-door-wasm; screenshot pair
+  facade-v46-before-after.png. No cross-ROM savestate was used.
+- Local full check.sh passes. Independent read-only review found no code-level
+  blocker, confirmed bottom-row indices and per-half animation behavior. Further
+  South Park doorway/corner replays are pending; no full visual approval inferred.
+- Public remainsv44 until the denser-frontage candidate passes local checks.

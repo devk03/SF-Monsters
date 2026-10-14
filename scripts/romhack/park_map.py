@@ -30,10 +30,13 @@ def park_resources(root):
     cells.append((furniture[:256], 7)); flags.append(0x1000)
     for frame, bank in zip(frames, (8, 9)):
         cells += facade_cells(frame, 112, 80, bank); flags += [0] * 35
-    flags[71] = flags[106] = 0x69  # Original frames use native animated door behavior.
+    for first in (68, 103):
+        flags[first:first + 7] = [0x1000] * 7
+    flags[71] = flags[106] = 0x1069  # Original frames use native animated door behavior.
     annex = Image.open(root / 'assets/tiles/sunset-rowhouse/native-preview.png').resize(
         (48, 64), Image.Resampling.NEAREST).tobytes()
     cells += facade_cells(annex, 48, 64, 10); flags += [0] * 12
+    flags[119:122] = [0x1000] * 3
     raw, records, attributes = pack_park_cells(cells, flags)
     if len(raw) // 32 > 504:
         raise ValueError('Park art must reserve the last eight secondary tiles for native doors.')
