@@ -71,3 +71,14 @@ flag separates initial warmup from all later underruns, across diagnostic epochs
 and source-rate changes. No-PCM output stays visible as warmup/playbackStarted=false,
 not a continuity pass. This cushion does not correct a sustained audio-clock deficit.
 Actual browser long-run/transition checks and listening approval remain required.
+
+
+Optional `--input /absolute/path/verified-input.csv` freezes a headerless native
+keyMask,frames route alongside the session. The private page offers a three-minute
+measurement/replay control for routes shorter than that window. Durations convert
+using the pinned guest frame period, but DOM scheduling is approximate wall time.
+A single outstanding timer replays every row, releases keys on completion/cancel,
+and aborts if timing slips over50ms or the document hides. Reports bind the actual
+input bytes and retain dispatch timestamps. Planned route labels do not establish
+observed browser scenes. A replay from an earlier measurement is never attached
+to a later window. No public game progress is used.

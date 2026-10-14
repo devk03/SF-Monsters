@@ -14,16 +14,20 @@ Diagnostics measure emulation, canvas submission and audio buffering. They do no
 <button id="stop" disabled>Stop measurement</button><button id="move" disabled>Walk a short loop</button>
 <button id="finish" disabled>Finish local QA</button>
 <button id="snapshot" disabled>Verify snapshot restore</button>
+<button id="route" disabled>Measure supplied route (3 minutes)</button>
 <p role="status" id="status">Ready to load. No public saves or account data are used.</p>
 <canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas>
 <pre id="report">No diagnostic report yet.</pre>
 <script type="module">
 let game, identity, timers=[], sessionTimer, measuring=false, finished=false, checking=false;
+let replayModule, routeText, replay, replayResult=null, heldMask=0;
 const status=document.querySelector('#status'), report=document.querySelector('#report');
 const button=id=>document.querySelector('#'+id);
 function controls(){
-  for(const id of ['short','medium','long','snapshot'])button(id).disabled=!game||finished||measuring||checking;
+  for(const id of ['short','medium','long','snapshot'])button(id).disabled=!game||finished||measuring||checking||replay?.active;
   for(const id of ['move','finish'])button(id).disabled=!game||finished||checking;
+  button('move').disabled ||= replay?.active;
+  button('route').disabled=!game||!routeText||finished||checking||measuring||replay?.active;
   button('stop').disabled=!measuring||finished;
 }
 const hash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
@@ -41,6 +45,12 @@ button('load').onclick=async()=>{try{
   if(!response.ok)throw Error('Session identity unavailable');identity=await response.json();
   const [rom,battery,state]=await Promise.all(['rom.gba','battery.sav','state.bin'].map(name=>verified('/'+name,identity.files[name])));
   for(const [path,digest] of Object.entries(identity.runtime))await verified('/emulator/'+path,digest);
+  await verified('/controller-replay.js',identity.files['controller-replay.js']);
+  replayModule=await import('/controller-replay.js');
+  if(identity.controller_route){
+    routeText=new TextDecoder().decode(await verified('/route.csv',identity.files['route.csv']));
+    replayModule.parseControllerRoute(routeText);
+  }
   const {load}=await import('/emulator/mgba.sdk.js');
   game=await load({canvasEl:document.querySelector('canvas'),assets:{rom},persist:null,
     storageNamespace:'sf-performance-isolated-v1',options:{gamepads:false,interframeBlending:false,volume:.15}});
@@ -51,7 +61,10 @@ button('load').onclick=async()=>{try{
 async function measure(durationMs){try{
   if(measuring||finished||!game)return;measuring=true;controls();
   status.textContent='Measuring '+durationMs/1000+' seconds; visibility='+document.visibilityState+'.';
-  const result=await game.startDiagnostics({durationMs,context:{identity,scenario:'Verified SF checkpoint; manual or explicitly scripted DOM keyboard actions'}});
+  const measured=await game.startDiagnostics({durationMs,context:{identity,scenario:'Verified SF checkpoint; manual or explicitly scripted DOM keyboard actions'}});
+  const completedReplay=replayResult&&replayResult.startedAtMs>=measured.startedAtMs&&replayResult.startedAtMs<=measured.endedAtMs?replayResult:null;
+  const activeReplay=replay?.active&&replay.startedAtMs>=measured.startedAtMs?{reason:'in-progress',startedAtMs:replay.startedAtMs}:null;
+  const result={...measured,controllerReplay:completedReplay??activeReplay};
   report.textContent=JSON.stringify(result,null,2);
   const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)});
   if(!saved.ok)throw Error('Could not preserve local report');
@@ -75,6 +88,25 @@ button('snapshot').onclick=async()=>{
   }catch(error){showError(error);}finally{checking=false;game.resume();controls();}
 };
 button('stop').onclick=()=>game?.stopDiagnostics('manual');
+const keyCodes=['KeyX','KeyZ','ShiftRight','Enter','ArrowRight','ArrowLeft','ArrowUp','ArrowDown','KeyS','KeyA'];
+function applyMask(mask){
+  for(let bit=0;bit<10;++bit)if((mask^heldMask)&(1<<bit)){
+    window.dispatchEvent(new KeyboardEvent(mask&(1<<bit)?'keydown':'keyup',{code:keyCodes[bit],bubbles:true}));
+  }
+  heldMask=mask;
+}
+button('route').onclick=()=>{
+  if(!routeText||replay?.active||measuring||finished||checking||timers.length)return;
+  const route=replayModule.parseControllerRoute(routeText);
+  if(route.durationMs>180000){status.textContent='Supplied route exceeds the three-minute measurement; use a shorter route.';return;}
+  replayResult=null;void measure(180000);
+  if(!measuring)return;
+  replay=replayModule.startControllerReplay(routeText,applyMask,result=>{
+    replayResult=result;status.textContent='Controller replay '+result.reason+'; rows '+result.appliedRows+'/'+result.totalRows+'. Scene coverage requires actual observation.';controls();
+  });
+  controls();
+};
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible')replay?.stop('hidden');});
 button('move').onclick=()=>{
   if(timers.length||finished||!game)return;
   status.textContent='One finite four-direction DOM-key loop; no game memory edits. This does not detect a scene.';
@@ -86,6 +118,7 @@ button('move').onclick=()=>{
 };
 async function finishLocalQa(){
   if(finished)return;finished=true;controls();
+  replay?.stop('finished-qa');
   clearTimeout(sessionTimer);
   for(const timer of timers)clearTimeout(timer);timers=[];
   if(measuring)await game.stopDiagnostics('finished-qa');

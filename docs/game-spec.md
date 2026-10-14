@@ -5737,3 +5737,23 @@ One-time playback cushion candidate:
   contains those values beforeSave; party/PC remain exact. A second ordinarySave2→3
   passes the unmodified full declared-domain audit with no changed domains. Native
   coldreload of that normalized realSave is in progress. No new full roundtrip claim.
+
+
+- Normalized v57ordinarySavecounter3 coldContinue passes: all600partybytes match
+  the actual saved payload, party2, Sunset28,21, contentrevision8; Flash unchanged
+  SHA15aa2ce44b14653f21d9acbf75c6545df9d9aadb56edd6449710c9f2a559df52.
+- Alignment completed native mixed-route proof (receipt62af40f722bacfd0bb308c1d126d969577a459097dd0c3ef5704a5bcb277b1e7):
+  8888continuousframes coverparty, relaydialogue, warp, ordinarySave3→4, leader,
+  battle/action/move menus and oneAbsorbturn. AllRGBframes match selected segments;
+  segmentedPCM doesNOTmatch continuousPCM after state-reload boundaries. Continuous
+  PCM is authoritative; no browser/speaker or battlewin claim. Failed earlySave
+  branches remain preserved and excluded from the verified controller sequence.
+- New private finite DOM-replay helper parses actual verified8888frame input into
+  148.809174nominal seconds. Headerless masks/durations/rowcount are bounded; only
+  one timer is outstanding, keysrelease on every stop, >50ms lateness or hidden tab
+  aborts. Actual dispatch logs remain separate from scene/guest-key claims. Five
+  replay tests and HTML/Python syntax checks pass. Actual browser replay pending.
+- New40ms-cushion Chrome600s field observation started~19:15UTC using frozenv57
+  runtime/normalizednativeSave; result pending. Alignment now audits compiledv57
+  resource preservation read-only, hardstop19:45UTC; next exchange by19:35UTC.
+  Human approvals remain0/11, public staysv56/Site47, full goal active.

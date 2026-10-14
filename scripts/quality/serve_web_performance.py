@@ -52,6 +52,28 @@ def snapshot(args):
             state[16:32] != rom[0xa0:0xb0]):
         raise ValueError('Native checkpoint header, cartridge identity or state layout differs')
     runtime, routes = {}, {'/rom.gba': rom, '/state.bin': state, '/battery.sav': battery}
+    replay_source = Path(__file__).with_name('controller_replay.mjs').read_bytes()
+    routes['/controller-replay.js'] = replay_source
+    controller_route = None
+    if args.input:
+        route_bytes = args.input.read_bytes()
+        lines = route_bytes.decode('ascii').strip().splitlines()
+        if len(route_bytes) > 20000 or not 1 <= len(lines) <= 1000:
+            raise ValueError('Controller route must fit its finite row/byte bound')
+        frames = 0
+        for line in lines:
+            if not re.fullmatch(r'\d+,\d+', line):
+                raise ValueError('Use headerless keyMask,frames controller rows')
+            mask, count = map(int, line.split(','))
+            if not 0 <= mask <= 1023 or count < 1:
+                raise ValueError('Invalid controller route mask/duration')
+            frames += count
+        if frames * 280896 / 16777216 > 600:
+            raise ValueError('Controller route exceeds ten minutes')
+        routes['/route.csv'] = route_bytes
+        controller_route = {'rows': len(lines), 'frames': frames,
+            'duration_ms': frames * 280896 / 16777216 * 1000,
+            'scope': 'Supplied controller sequence; browser timing and scenes require observation'}
     for path in sorted((ROOT / 'web/public/emulator').iterdir()):
         if path.is_file() and path.suffix in ('.js', '.wasm', '.txt', '.json'):
             routes['/emulator/' + path.name] = path.read_bytes()
@@ -75,10 +97,14 @@ def snapshot(args):
         'inputs': {str(path.resolve()): digest(data) for path, data in (
             (args.rom, rom), (args.state, state), (battery_path, battery), (metadata_path, metadata_bytes))},
         'server_source_sha256': digest(Path(__file__).read_bytes()),
+        'controller_route': controller_route,
         'public_progress_touched': False, 'server_limit_seconds': args.seconds,
         'provenance_scope': 'Controller-only capture metadata and matching native state header; companion Flash hashed separately',
     }
     routes['/identity.json'] = json_bytes(identity)
+    if args.input:
+        identity['inputs'][str(args.input.resolve())] = digest(route_bytes)
+        routes['/identity.json'] = json_bytes(identity)
     output = ROOT / '.tools/benchmarks' / args.name
     output.mkdir()  # An existing name fails; evidence is never overwritten.
     (output / 'runtime').mkdir()
@@ -87,6 +113,9 @@ def snapshot(args):
     write_new(output / 'web_performance.html', page)
     write_new(output / 'state.metadata.json', metadata_bytes)
     write_new(output / 'server-source.py', Path(__file__).read_bytes())
+    write_new(output / 'controller-replay.js', replay_source)
+    if args.input:
+        write_new(output / 'route.csv', route_bytes)
     write_new(output / 'identity.json', routes['/identity.json'])
     return output, identity, routes
 
@@ -168,6 +197,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--rom', type=Path, required=True)
     parser.add_argument('--state', type=Path, required=True)
+    parser.add_argument('--input', type=Path, help='Optional finite controller CSV; replay uses approximate wall time')
     parser.add_argument('--name', required=True)
     parser.add_argument('--port', type=int, default=18766)
     parser.add_argument('--seconds', type=int, default=1800)

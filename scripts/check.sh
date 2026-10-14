@@ -16,6 +16,7 @@ node tests/audio_worklet_test.mjs
 node --test tests/audio_playback_reset_test.mjs
 node --test tests/state_serialization_test.mjs
 node --test tests/web_performance_probe_test.mjs
+node --test tests/controller_replay_test.mjs
 python3 tests/prepare_web_test.py
 node --experimental-strip-types tests/bps.test.mjs
 node --experimental-strip-types tests/flash-save.test.mjs
