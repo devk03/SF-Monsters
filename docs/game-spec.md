@@ -5543,3 +5543,11 @@ Browser audio measurement foundation:
   1008cycles fail closed and are not universally supported. Next: foreground web
   pacing/input/audio instrumentation. Alignment owns bounded probe aggregation
   and its tests only, hardstop18:15UTC; main owns SDK and actual browser checks.
+
+- Alignment completed the bounded web performance aggregation module. Explicit
+  start creates one timeout, maximum10minutes; no automatic/recurring job. It
+  separates requested/executed/video frames, discarded debt, hidden ticks, input
+  pipeline stages and cumulative audio counters; first unknown rAF gap is excluded.
+  Main reviewed the interface and independently ran all13 supplied guards: pass.
+  SDK integration and actual browser observations are still pending; no live
+  browser performance claim. Module is committed as a separate coherent checkpoint.
