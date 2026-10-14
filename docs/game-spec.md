@@ -4253,3 +4253,16 @@ Facade integration checkpoint (v48):
   it may not alter stats/balance or count its historicalv45 route asv48 evidence.
 - Goal card is now ACTIVE, confirmed2026-10-14T07:58:30Z after user resumed it.
   Keep working until the explicit October15,6PM Pacific deadline in15.1.
+
+
+v48 normal release checkpoint:
+
+- Normal rebuild at sourcec0e2dad reproduces the corrected draft exactly:
+  target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc,
+  patch878088bytes, SHA256
+  cc4d008cf764423bdbfed29708c42f0a0f2edd28e467e3fc445932f340584519.
+  Repeat-build safety is exercised by that normal rebuild after the draft.
+- Web/Sites patch manifests selectv48. Supported source workflow typecheck and
+  production build pass. Audited archive contains one matching patch/manifest
+  and no commercial cartridge. Native source/public changes are committed
+  independently of later mechanics work. Public deployment confirmation pending.
