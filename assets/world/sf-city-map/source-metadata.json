@@ -1,0 +1,205 @@
+{
+  "id" : "j2bu-swwd",
+  "name" : "Analysis Neighborhoods",
+  "assetType" : "dataset",
+  "averageRating" : 0,
+  "category" : "Geographic Locations and Boundaries",
+  "createdAt" : 1697567157,
+  "description" : "A. SUMMARY\nThe Department of Public Health and the Mayor’s Office of Housing and Community Development, with support from the Planning Department, created these 41 neighborhoods by grouping 2010 Census tracts, using common real estate and residents’ definitions for the purpose of providing consistency in the analysis and reporting of socio-economic, demographic, and environmental data, and data on City-funded programs and services. These neighborhoods are not codified in Planning Code nor Administrative Code, although this map is referenced in Planning Code Section 415 as the “American Community Survey Neighborhood Profile Boundaries Map.\nNote: These are NOT statistical boundaries as they are not controlled for population size. This is also NOT an official map of neighborhood boundaries in SF but an aggregation of Census tracts and should be used in conjunction with other spatial boundaries for decision making.\nB. HOW THE DATASET IS CREATED\nThis dataset is produced by assigning Census tracts to neighborhoods based on existing neighborhood definitions used by Planning and MOHCD. A qualitative assessment is made to identify the appropriate neighborhood for a given tract based on understanding of population distribution and significant landmarks. Once all tracts have been assigned a neighborhood, the tracts are dissolved to produce this dataset, Analysis Neighborhoods.\nC. UPDATE PROCESS\nThis dataset is static. Changes to the analysis neighborhood boundaries will be evaluated as needed by the Analysis Neighborhood working group led by DataSF and the Planning department and includes staff from various other city departments. Contact us\nfor any questions.\nD. HOW TO USE THIS DATASET\nDownloading this dataset and opening it in Excel may cause some of the data values to be lost or not display properly (particularly the Analysis Neighborhood column). For a simple list of Analysis Neighborhoods without geographic coordinates, click here: https://data.sfgov.org/resource/xfcw-9evu.csv?$select=nhood\nE. RELATED DATASETS\n2020 Census tracts assigned a neighborhood\n2010 Census tracts assigned a neighborhood\n <u><a href=\"https://sfgov.maps.arcgis.com/home/item.html?id=09801373234345c4a8722aac1c141e78\">View this dataset on ArcGIS Online</a></u>",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "domainCName" : "data.sf.gov",
+  "downloadCount" : 3196,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "licenseId" : "PDDL",
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 40080388,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1697567417,
+  "publicationGroup" : 19330626,
+  "publicationStage" : "published",
+  "rowsUpdatedAt" : 1697567411,
+  "tableId" : 19330626,
+  "totalTimesRated" : 0,
+  "viewCount" : 8148,
+  "viewLastModified" : 1758822636,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1704816297,
+    "reviewedAutomatically" : false,
+    "state" : "approved",
+    "submissionId" : 6055556,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1704816285,
+    "targetAudience" : "public",
+    "workflowId" : 2546,
+    "reviewer" : {
+      "id" : "hm34-miik",
+      "displayName" : "Patricia King"
+    },
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "endedAt" : 1704816298,
+      "failureCount" : 0,
+      "startedAt" : 1704816297,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "hm34-miik",
+      "displayName" : "Patricia King"
+    }
+  }, {
+    "message" : "The `strict_permissions` flag must be on to enable internal approvals.",
+    "state" : "unsubmittable",
+    "targetAudience" : "internal",
+    "workflowId" : 5264
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 583154009,
+    "name" : "the_geom",
+    "dataTypeName" : "multipolygon",
+    "description" : "",
+    "fieldName" : "the_geom",
+    "position" : 1,
+    "renderTypeName" : "multipolygon",
+    "tableColumnId" : 149313859,
+    "format" : { }
+  }, {
+    "id" : 583154010,
+    "name" : "nhood",
+    "dataTypeName" : "text",
+    "description" : "",
+    "fieldName" : "nhood",
+    "position" : 2,
+    "renderTypeName" : "text",
+    "tableColumnId" : 149313860,
+    "cachedContents" : {
+      "non_null" : "41",
+      "largest" : "West of Twin Peaks",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Chinatown",
+        "count" : "1"
+      }, {
+        "item" : "Potrero Hill",
+        "count" : "1"
+      }, {
+        "item" : "Presidio Heights",
+        "count" : "1"
+      }, {
+        "item" : "Mission Bay",
+        "count" : "1"
+      }, {
+        "item" : "Lone Mountain/USF",
+        "count" : "1"
+      }, {
+        "item" : "Sunset/Parkside",
+        "count" : "1"
+      }, {
+        "item" : "Outer Richmond",
+        "count" : "1"
+      }, {
+        "item" : "Bernal Heights",
+        "count" : "1"
+      }, {
+        "item" : "Financial District/South Beach",
+        "count" : "1"
+      }, {
+        "item" : "Twin Peaks",
+        "count" : "1"
+      }, {
+        "item" : "Pacific Heights",
+        "count" : "1"
+      }, {
+        "item" : "South of Market",
+        "count" : "1"
+      }, {
+        "item" : "Presidio",
+        "count" : "1"
+      }, {
+        "item" : "Glen Park",
+        "count" : "1"
+      }, {
+        "item" : "Castro/Upper Market",
+        "count" : "1"
+      }, {
+        "item" : "Golden Gate Park",
+        "count" : "1"
+      }, {
+        "item" : "Oceanview/Merced/Ingleside",
+        "count" : "1"
+      }, {
+        "item" : "Lakeshore",
+        "count" : "1"
+      }, {
+        "item" : "Noe Valley",
+        "count" : "1"
+      }, {
+        "item" : "Visitacion Valley",
+        "count" : "1"
+      } ],
+      "smallest" : "Bayview Hunters Point",
+      "count" : "41",
+      "cardinality" : "41"
+    },
+    "format" : { }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "license" : {
+    "name" : "Open Data Commons Public Domain Dedication and License",
+    "termsLink" : "http://opendatacommons.org/licenses/pddl/1.0/"
+  },
+  "metadata" : {
+    "custom_fields" : {
+      "Department Metrics" : {
+        "Publishing Department" : "Planning"
+      },
+      "Internal Management" : {
+        "Inventory ID" : "CPC-0137"
+      },
+      "Detailed Descriptive" : {
+        "Geographic unit" : "Neighborhood"
+      },
+      "Publishing Details" : {
+        "Data change frequency" : "As needed",
+        "Program link" : "",
+        "Publishing frequency" : "As needed",
+        "Geographic unit" : ""
+      }
+    },
+    "rowLabel" : "analysis neighborhood",
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ]
+  },
+  "owner" : {
+    "id" : "dbag-6qd9",
+    "displayName" : "OpenData",
+    "screenName" : "OpenData",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula" ]
+  },
+  "query" : { },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "dbag-6qd9",
+    "displayName" : "OpenData",
+    "screenName" : "OpenData",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula" ]
+  },
+  "flags" : [ "default", "federated", "internalToPublicFederatedView", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

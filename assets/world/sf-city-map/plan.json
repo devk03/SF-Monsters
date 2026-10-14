@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source_sha256": "376c25348e45a41c540d995c3557ef48232805a152953da75ced2e5b66c86621",
+  "source_url": "https://data.sfgov.org/resource/j2bu-swwd.geojson",
+  "source_catalog": "https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h",
+  "license": "Open Data Commons Public Domain Dedication and License 1.0",
+  "projection": {"center_longitude": -122.438, "center_latitude": 37.76, "pixels_per_latitude_degree": 1050, "center_x": 120, "center_y": 82},
+  "parks": ["Golden Gate Park", "Presidio", "Lincoln Park", "McLaren Park"],
+  "hubs": [
+    {"section": "MAPSEC_LITTLEROOT_TOWN", "name": "OUTER SUNSET", "longitude": -122.501, "latitude": 37.757},
+    {"section": "MAPSEC_OLDALE_TOWN", "name": "SOMA / SOUTH PARK", "longitude": -122.394, "latitude": 37.781}
+  ],
+  "scope": "Geographic first-slice map. Hub points are representative neighborhood anchors, not exact office addresses. No additional playable areas. Census-based analysis polygons are used as an illustrative coastline/park reference, not asserted as official neighborhood boundaries."
+}

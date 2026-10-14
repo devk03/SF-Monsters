@@ -6309,3 +6309,22 @@ v63 / Site54 verified and published — October14,22:04UTC:
   Guide AREA geography, original audio/remaining cast, campaign, real-device/full
   performance and50distinct-save-checkpoint gates remain open. No GitHub Actions.
   Goal continues through October15,18:00 Pacific; next alignment check by22:20UTC.
+
+
+SF habitat map preparation — October14,22:11UTC:
+
+- Actual controller Guide→detail→AREA in v63 confirms visible Hoenn geography and
+  inherited player head, despite SF labels. Private screenshot sf-map-v63-area-before.
+  Alignment completed a finite read-only engine audit; next check by22:35UTC.
+- Pinned DataSF Analysis Neighborhoods actual source j2bu-swwd, PDDL metadata,
+  produces an original geographic SF coastline/park/urban pixel-map candidate.
+  Catalog p5b7-5n3h is a visualization; its returned null-geometry GeoJSON is kept
+  privately as diagnostic evidence. Exact source hash and projection are tracked.
+- Native atlas fits232 tiles. Shared geometry exports both32x32u16 Guide tilemap
+  and64x64u8 affine regular-map tilemap, plus full48-color96byte palette atBG7–9.
+  Only Outer Sunset/South Park receive active markers; no new campaign areas.
+- Engine integration still pending: replace both backgrounds, same28x15 section
+  grid and two entry bounds, SF-only encounter filtering before table scans,
+  correct per-kind encounter lengths, explicit five-map player-parent positions
+  and an original courier map head. Legacy special/roamer paths must not add
+  Hoenn habitats. Art/native/browser/save acceptance remains pending; publicv63.

@@ -1,0 +1,32 @@
+{
+  "tile_count": 109,
+  "guide_tile_limit": 232,
+  "region_tile_limit": 233,
+  "palette_start": 112,
+  "palette_colors": 48,
+  "hubs": [
+    {
+      "section": "MAPSEC_LITTLEROOT_TOWN",
+      "name": "OUTER SUNSET",
+      "longitude": -122.501,
+      "latitude": 37.757,
+      "x": 7,
+      "y": 8,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "section": "MAPSEC_OLDALE_TOWN",
+      "name": "SOMA / SOUTH PARK",
+      "longitude": -122.394,
+      "latitude": 37.781,
+      "x": 18,
+      "y": 5,
+      "width": 1,
+      "height": 1
+    }
+  ],
+  "geometry_sha256": "376c25348e45a41c540d995c3557ef48232805a152953da75ced2e5b66c86621",
+  "approval": "pending",
+  "engine_integration": "pending"
+}
