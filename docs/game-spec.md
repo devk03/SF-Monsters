@@ -4635,3 +4635,14 @@ Preparation guidance checkpoint (private v50):
   supplied pre-Scott save22 without rollback and continues sequentially. Reviewer
   writes private route evidence only; main owns source/builds. Next check by10:21 UTC.
   Capture harness remains frozen; no quality approval inferred.
+
+
+v50 normal-release packaging:
+
+- Source1cab3587c62fc1b4d9e1821cc57c431c0b18e5f4 normal rebuild reproduces
+  edcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78 exactly.
+  Patch882803 bytes, SHA256
+  9aa89b313e7a37bba2edf03261a188e766f3c453936f63e0236819ab7ec14b99.
+  All336 native mechanics scenarios pass this exact target. Web manifests select
+  v50; Sites checks/build/publication are in progress. Public is still Site39/v49
+  until a deployment result confirms otherwise. No DB/GitHub Actions.
