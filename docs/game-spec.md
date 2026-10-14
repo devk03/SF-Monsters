@@ -4141,3 +4141,21 @@ Compact Sunset block checkpoint (candidate v47):
 - Local check.sh passes. South Park doorway/annex edge replay is underway.
   Screenshot comparison: .tools/benchmarks/compact-v47-frontage-review.png.
   Native art/lighting/variety still need human review; full approvals remain0/11.
+
+
+v47 release validation and publication:
+
+- Normal build at sourcecb71361 reproduces draft targetfa373906c1d315922d8e966d
+  11f75b23535ec15d631472ca7990532ab47ce382 and BPS874892bytes, SHA256
+ 34299d8520818e9dd5846f50c3bb5833411eef2dc9ca78dc63e9de6f529e5ebf.
+-2008-frame South Park office entry/exit plus both annex front-edge collision
+  replay matches native/WASM RGB, PCM and Flash. Separate clinic entry/exit
+  returns32,6 with earned badge, party,4000money and2Potions preserved. Native
+  contact sheet confirms unobscured heads below both annexes and service doors.
+- Sunset1728-frame native review.mp4 preserves walking/running, camera and
+  apartment round trip. Native frame evidence is losslessly compressed after
+  encoding; raw music/Flash/snapshot artifacts remain private.
+- Web patch/manifest now selectv47, including the verified original Scott portrait
+  checkpoint. Same existing Site/audience/authentication; no database changes.
+  Supported Sites source workflow is packaging the release; public deployment
+  confirmation and guest browser smoke check are pending.
