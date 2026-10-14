@@ -58,6 +58,7 @@ python3 tests/house_art_test.py
 .tools/venv/bin/python tests/cast_art_test.py
 .tools/venv/bin/python tests/cast_cleanup_test.py
 .tools/venv/bin/python tests/cast_palette_test.py
+python3 tests/portrait_cleanup_test.py
 python3 tests/cast_resume_test.py
 python3 tests/street_art_test.py
 python3 tests/apartment_art_test.py

@@ -6064,3 +6064,30 @@ v60 / Site 51 acceptance and publication — October 14, 20:43 UTC:
   but NAVAL dialogue still accompanies baseline64x64 Birch art (2048rawbytes,
   dedicated16-color palette). Next: one original full-body Naval intro candidate,
   retaining current text, fades, platform, monster, player-selection and save flow.
+
+
+v61 original Naval intro figure — October 14, 20:54 UTC:
+
+- Replaces the inherited large Birch figure accompanying existing NAVAL welcome
+  text with one original generated public-person caricature. A second source
+  improves head proportions; a deliberate RGB555 palette preserves gray beard
+  and eye accents. Eighteen pinned native face pixels separate eyes/brows and
+  connect beard clusters. Likeness/pixel-art approval remains pending.
+- Selected source and both exact prompts/appearance reference are in
+  assets/characters/naval-intro-v1. Original first two native conversions are
+  preserved privately. Native output: one64x64 frame, fifteen opaque colors plus
+  transparent index0, figure27x58, baseline62. No commercial image used as input.
+- Reuses the portrait converter and existing palette-policy parser. Rebuilding
+  Scott's default portrait privately yields identical PNG/2048graphics/32palette
+  bytes. Hash-pinned native cleanup rejects changed source/palette/input/output,
+  duplicate/invalid/no-op edits; four independent pixel contract tests pass.
+- New engine graphics path avoids inherited caches. Only two raw graphics/palette
+  declarations change; existing tag0x1006, template, coordinates, fades, platform,
+  displayed creature and player-selection behavior are retained. Pre-BPS compiled
+  check reads both actual linked blobs and three frame/palette/template bindings.
+- Selected-art negative control on immutable v60 fails exactly graphics/palette
+  while all three display bindings match. Existing full local checks pass.
+  Native build, actual NewGame/Continue paths and browser appearance still pending.
+- Naval's separate field placeholder and inherited gender-selection portraits
+  remain separate future work. No new NPCs, stats, save schema or content revision.
+  Public staysv60/Site51 while this candidate is verified. Full human approvals0/11.

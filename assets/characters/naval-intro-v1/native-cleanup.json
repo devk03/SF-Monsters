@@ -1,0 +1,118 @@
+{
+  "format": 1,
+  "intent": "Unapproved native face drawing pass: separate eyebrows and eye dots, retain a near-eye highlight, and connect neutral beard clusters. Preserve all pixels outside the face. Human likeness/art approval pending.",
+  "source_sha256": "35adfd1a1bfca6d82e73b019e69f1a329fd63d5116903d94e7a71dfaca1c85df",
+  "palette_sha256": "14784d6b776bcc4a01b1cd67e452442cd30a8d2cc5e3086545043b0ec8261cb0",
+  "before_sha256": "89f9ad150575af4735bebdf228fb4b0e0e4fdc0c941b72412c63e65a3468fe29",
+  "after_sha256": "17342498c9e2a688637f030d25d0d4a2a1bdb31a91d128b8a95836ee0f28d549",
+  "changes": [
+    {
+      "x": 27,
+      "y": 11,
+      "old": 8,
+      "new": 2
+    },
+    {
+      "x": 30,
+      "y": 11,
+      "old": 8,
+      "new": 2
+    },
+    {
+      "x": 31,
+      "y": 11,
+      "old": 8,
+      "new": 2
+    },
+    {
+      "x": 29,
+      "y": 12,
+      "old": 2,
+      "new": 8
+    },
+    {
+      "x": 30,
+      "y": 12,
+      "old": 2,
+      "new": 8
+    },
+    {
+      "x": 27,
+      "y": 13,
+      "old": 6,
+      "new": 1
+    },
+    {
+      "x": 31,
+      "y": 13,
+      "old": 1,
+      "new": 15
+    },
+    {
+      "x": 26,
+      "y": 14,
+      "old": 1,
+      "new": 8
+    },
+    {
+      "x": 27,
+      "y": 14,
+      "old": 1,
+      "new": 8
+    },
+    {
+      "x": 30,
+      "y": 14,
+      "old": 15,
+      "new": 8
+    },
+    {
+      "x": 31,
+      "y": 14,
+      "old": 2,
+      "new": 8
+    },
+    {
+      "x": 29,
+      "y": 16,
+      "old": 14,
+      "new": 1
+    },
+    {
+      "x": 29,
+      "y": 17,
+      "old": 14,
+      "new": 4
+    },
+    {
+      "x": 30,
+      "y": 17,
+      "old": 8,
+      "new": 5
+    },
+    {
+      "x": 31,
+      "y": 17,
+      "old": 8,
+      "new": 4
+    },
+    {
+      "x": 30,
+      "y": 18,
+      "old": 8,
+      "new": 4
+    },
+    {
+      "x": 31,
+      "y": 18,
+      "old": 7,
+      "new": 4
+    },
+    {
+      "x": 29,
+      "y": 19,
+      "old": 12,
+      "new": 4
+    }
+  ]
+}

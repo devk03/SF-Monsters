@@ -3,11 +3,39 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
-import struct
 from title_art import tiles8
 from title_creature import pack4
+from cast_palette import cast_palette
 
 ASSET='assets/characters/cognition-cast/scott-wu/battle-portrait-v1'
+
+
+def portrait_cleanup(pixels, document, source, palette):
+    """Apply a bounded, hash-pinned native drawing pass to one original frame."""
+    digest=lambda value:hashlib.sha256(value).hexdigest()
+    fields={'format','intent','source_sha256','palette_sha256','before_sha256','after_sha256','changes'}
+    if not isinstance(document,dict) or set(document)!=fields or type(document['format']) is not int or document['format']!=1 or not isinstance(document['intent'],str) or not document['intent'].strip():
+        raise ValueError('Portrait cleanup needs its format and drawing intent.')
+    if len(pixels)!=4096 or max(pixels)>15 or len(palette)!=32 or any(
+            document[key]!=digest(value) for key,value in
+            [('source_sha256',source),('palette_sha256',palette),('before_sha256',pixels)]):
+        raise ValueError('Portrait cleanup source, palette or native input changed.')
+    changes=document['changes']
+    if not isinstance(changes,list) or not 1<=len(changes)<=4096:
+        raise ValueError('Portrait cleanup must declare bounded pixel edits.')
+    result=bytearray(pixels);seen=set()
+    for edit in changes:
+        if not isinstance(edit,dict) or set(edit)!={'x','y','old','new'} or any(
+                type(edit[key]) is not int or not 0<=edit[key]<limit
+                for key,limit in [('x',64),('y',64),('old',16),('new',16)]):
+            raise ValueError('Portrait cleanup leaves the native frame or palette.')
+        index=edit['y']*64+edit['x']
+        if index in seen or edit['old']==edit['new'] or result[index]!=edit['old']:
+            raise ValueError('Portrait cleanup repeats a point or changes an unexpected pixel.')
+        seen.add(index);result[index]=edit['new']
+    if document['after_sha256']!=digest(result):
+        raise ValueError('Portrait cleanup differs from its reviewed native output.')
+    return bytes(result)
 
 
 def replace_once(source,anchor,replacement):
@@ -15,9 +43,9 @@ def replace_once(source,anchor,replacement):
     return source.replace(anchor,replacement,1)
 
 
-def encode_portrait(root):
+def encode_portrait(root, asset=ASSET):
     from PIL import Image
-    directory=root/ASSET
+    directory=root/asset
     image=Image.open(directory/'source.png').convert('RGBA')
     mask=image.getchannel('A').point(lambda a:255 if a>=128 else 0)
     bounds=mask.getbbox()
@@ -28,10 +56,7 @@ def encode_portrait(root):
     cell=cell.resize(size,Image.Resampling.NEAREST)
     mask=mask.resize(size,Image.Resampling.NEAREST)
     colors=[rgb[:3] for rgb,a in zip(cell.get_flattened_data(),mask.get_flattened_data()) if a]
-    samples=Image.new('RGB',(len(colors),1));samples.putdata(colors)
-    reduced=samples.quantize(colors=15,method=Image.Quantize.MEDIANCUT).getpalette()[:45]
-    palette=[(0,0,0)]+[tuple(round(c*31/255)*255//31 for c in reduced[i:i+3])
-                         for i in range(0,45,3)]
+    palette,pal,palette_policy_sha256=cast_palette(directory,colors)
     pixels=bytearray(4096);left=(64-size[0])//2;top=63-size[1]
     for y in range(size[1]):
         for x in range(size[0]):
@@ -39,11 +64,15 @@ def encode_portrait(root):
                 rgb=cell.getpixel((x,y))
                 pixels[(top+y)*64+left+x]=min(range(1,16),key=lambda i:
                     sum((rgb[c]-palette[i][c])**2 for c in range(3)))
+    cleanup=directory/'native-cleanup.json'
+    cleanup_bytes=cleanup.read_bytes() if cleanup.exists() else None
+    if cleanup_bytes:
+        pixels=portrait_cleanup(bytes(pixels),json.loads(cleanup_bytes),
+                                (directory/'source.png').read_bytes(),pal)
     preview=Image.new('P',(64,64),0)
     preview.putpalette([c for rgb in palette for c in rgb]+[0]*720)
     preview.putdata(pixels);preview.save(directory/'portrait.png',transparency=0,bits=4)
     data=pack4(tiles8(pixels,64,64,8,8))
-    pal=b''.join(struct.pack('<H',sum(round(rgb[c]*31/255)<<(5*c) for c in range(3))) for rgb in palette)
     files={'portrait.4bpp':data,'portrait.gbapal':pal,
            'portrait.png':(directory/'portrait.png').read_bytes()}
     for name,value in files.items():(directory/name).write_bytes(value)
@@ -51,6 +80,8 @@ def encode_portrait(root):
         'source_sha256':hashlib.sha256((directory/'source.png').read_bytes()).hexdigest(),
         'native_size':[64,64],'source_alpha_bounds':list(bounds),'figure_size':list(size),
         'baseline':62,'palette_colors':16,'quality_approval':'pending','pixel_cleanup':'pending',
+        'palette_policy_sha256':palette_policy_sha256,
+        'native_cleanup_sha256':hashlib.sha256(cleanup_bytes).hexdigest() if cleanup_bytes else None,
         'files':{name:hashlib.sha256(value).hexdigest() for name,value in files.items()}},indent=2)+'\n')
 
 

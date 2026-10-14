@@ -25,6 +25,7 @@ from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from cast_art import apply_cast, GROUPS
 from trainer_portraits import apply_portrait
+from intro_art import apply_intro, audit_intro
 from courier_battle_art import apply_courier_battle
 from office_art import apply_office, office_resources
 from clinic_art import apply_clinic, clinic_resources
@@ -97,6 +98,7 @@ def main():
     restored += apply_courier(ROOT, EMERALD, original)
     restored += apply_cast(ROOT, EMERALD, original)
     restored += apply_portrait(ROOT, EMERALD, original)
+    restored += apply_intro(ROOT, EMERALD, original)
     restored += apply_courier_battle(ROOT, EMERALD, original)
     restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     restored += apply_apartment_art(ROOT, EMERALD, original)
@@ -137,6 +139,14 @@ def main():
     if compiled_creatures.get('passed') is not True:
         raise ValueError('Compiled creature resources failed; preserved receipt: ' + str(validation_path))
     print('Compiled creature resources verified: ' + json.dumps(compiled_creatures['counts']))
+    compiled_intro = audit_intro(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    intro_bytes = (json.dumps(compiled_intro, indent=2) + '\n').encode()
+    intro_path = validation_directory / ('intro-' + uuid.uuid4().hex + '.json')
+    with intro_path.open('xb') as stream:
+        stream.write(intro_bytes)
+    if compiled_intro.get('passed') is not True:
+        raise ValueError('Compiled intro figure failed; preserved receipt: ' + str(intro_path))
+    print('Compiled original intro verified: ' + json.dumps(compiled_intro['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -185,6 +195,12 @@ def main():
         'patch_roundtrip': 'byte-identical', 'quality_approval': 'pending'
     }
     manifest['build_backend'] = args.backend
+    manifest['compiled_intro'] = {
+        'passed': True, 'counts': compiled_intro['counts'],
+        'receipt_sha256': hashlib.sha256(intro_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/intro_art.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_intro['scope']
+    }
     manifest['normal_compilation_verified'] = True
     manifest['compiled_creatures'] = {
         'passed': True, 'counts': compiled_creatures['counts'],
