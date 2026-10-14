@@ -1,0 +1,842 @@
+{
+  "scope": "Controlled field/battler end-turn entry, native selected scripts and callback restoration. No move actions/full-turn/presentation/party-sync/save proof.",
+  "cases": [
+    {
+      "id": "poison-eighth",
+      "derivation": "Poison removes floor90/8=11 HP from slot0; status8 persists, RNG0 remains unchanged.",
+      "attacker": {
+        "status": 8
+      },
+      "expected": {
+        "hp": [
+          79,
+          90
+        ],
+        "status": [
+          8,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_PoisonTurnDmg"
+        ],
+        "selected_damage": [
+          11
+        ],
+        "hp_updates": [
+          [
+            0,
+            79
+          ]
+        ]
+      }
+    },
+    {
+      "id": "burn-eighth",
+      "derivation": "GenIII burn removes floor90/8=11 HP; status16 persists, with no RNG draw.",
+      "attacker": {
+        "status": 16
+      },
+      "expected": {
+        "hp": [
+          79,
+          90
+        ],
+        "status": [
+          16,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_BurnTurnDmg"
+        ],
+        "selected_damage": [
+          11
+        ],
+        "hp_updates": [
+          [
+            0,
+            79
+          ]
+        ]
+      }
+    },
+    {
+      "id": "poison-minimum-one",
+      "derivation": "Poison minimum damage1 when maxHP7 gives floor7/8=0; living HP7 becomes6.",
+      "attacker": {
+        "status": 8,
+        "hp": 7,
+        "max_hp": 7
+      },
+      "expected": {
+        "hp": [
+          6,
+          90
+        ],
+        "status": [
+          8,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_PoisonTurnDmg"
+        ],
+        "selected_damage": [
+          1
+        ],
+        "hp_updates": [
+          [
+            0,
+            6
+          ]
+        ]
+      }
+    },
+    {
+      "id": "toxic-first-counter",
+      "derivation": "Toxic128 starts at counter0: increment to1 (status384), floor90/16=5 times1 removes5 HP.",
+      "attacker": {
+        "status": 128
+      },
+      "expected": {
+        "hp": [
+          85,
+          90
+        ],
+        "status": [
+          384,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_PoisonTurnDmg"
+        ],
+        "selected_damage": [
+          5
+        ],
+        "hp_updates": [
+          [
+            0,
+            85
+          ]
+        ]
+      }
+    },
+    {
+      "id": "toxic-third-counter",
+      "derivation": "Toxic counter2 status640 increments to3 status896; floor90/16=5 times3 removes15.",
+      "attacker": {
+        "status": 640
+      },
+      "expected": {
+        "hp": [
+          75,
+          90
+        ],
+        "status": [
+          896,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_PoisonTurnDmg"
+        ],
+        "selected_damage": [
+          15
+        ],
+        "hp_updates": [
+          [
+            0,
+            75
+          ]
+        ]
+      }
+    },
+    {
+      "id": "toxic-counter-caps-fifteen",
+      "derivation": "Counter15 status3968 stays15; floor90/16=5 times15 removes75, leaving15 HP.",
+      "attacker": {
+        "status": 3968
+      },
+      "expected": {
+        "hp": [
+          15,
+          90
+        ],
+        "status": [
+          3968,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_PoisonTurnDmg"
+        ],
+        "selected_damage": [
+          75
+        ],
+        "hp_updates": [
+          [
+            0,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "id": "leftovers-sixteenth",
+      "derivation": "Leftovers heals floor90/16=5; HP50 becomes55; second item pass does not heal again.",
+      "attacker": {
+        "item": "ITEM_LEFTOVERS",
+        "hp": 50
+      },
+      "expected": {
+        "hp": [
+          55,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_ItemHealHP_End2"
+        ],
+        "selected_damage": [
+          -5
+        ],
+        "hp_updates": [
+          [
+            0,
+            55
+          ]
+        ]
+      }
+    },
+    {
+      "id": "leftovers-clamps-max",
+      "derivation": "Leftovers nominal5 healing clamps to2 at HP88/max90.",
+      "attacker": {
+        "item": "ITEM_LEFTOVERS",
+        "hp": 88
+      },
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_ItemHealHP_End2"
+        ],
+        "selected_damage": [
+          -2
+        ],
+        "hp_updates": [
+          [
+            0,
+            90
+          ]
+        ]
+      }
+    },
+    {
+      "id": "leftovers-full-no-event",
+      "derivation": "Full HP blocks Leftovers in both item passes; no HP command or RNG consumption.",
+      "attacker": {
+        "item": "ITEM_LEFTOVERS"
+      },
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "ingrain-sixteenth",
+      "derivation": "Rooted bit1024 heals floor90/16=5 from50 to55 and remains set.",
+      "attacker": {
+        "hp": 50
+      },
+      "status3": [
+        1024,
+        0
+      ],
+      "expected": {
+        "hp": [
+          55,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          1024,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_IngrainTurnHeal"
+        ],
+        "selected_damage": [
+          -5
+        ],
+        "hp_updates": [
+          [
+            0,
+            55
+          ]
+        ]
+      }
+    },
+    {
+      "id": "ingrain-full-no-event",
+      "derivation": "Rooted bit persists at full HP with no healing script.",
+      "status3": [
+        1024,
+        0
+      ],
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          1024,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "leech-seed-drains-and-heals",
+      "derivation": "Seeded slot0 state5 selects receiver1. floor90/8=11 drains90 to79 and heals receiver50 to61.",
+      "defender": {
+        "hp": 50
+      },
+      "status3": [
+        5,
+        0
+      ],
+      "expected": {
+        "hp": [
+          79,
+          61
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          5,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_LeechSeedTurnDrain"
+        ],
+        "selected_damage": [
+          11
+        ],
+        "hp_updates": [
+          [
+            0,
+            79
+          ],
+          [
+            1,
+            61
+          ]
+        ]
+      }
+    },
+    {
+      "id": "liquid-ooze-reverses-seed-heal",
+      "derivation": "LiquidOoze on seeded slot0 preserves11 drain and makes receiver1 lose11 rather than heal; 50 becomes39.",
+      "attacker": {
+        "ability": "ABILITY_LIQUID_OOZE"
+      },
+      "defender": {
+        "hp": 50
+      },
+      "status3": [
+        5,
+        0
+      ],
+      "expected": {
+        "hp": [
+          79,
+          39
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          5,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_LeechSeedTurnDrain"
+        ],
+        "selected_damage": [
+          11
+        ],
+        "hp_updates": [
+          [
+            0,
+            79
+          ],
+          [
+            1,
+            39
+          ]
+        ]
+      }
+    },
+    {
+      "id": "sandstorm-both-battlers",
+      "derivation": "Temporary sandstorm8 duration2 decrements to1; floor90/16=5 damage to each normal/mystery battler.",
+      "weather": 8,
+      "duration": 2,
+      "expected": {
+        "hp": [
+          85,
+          85
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 8,
+        "duration": 1,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_DamagingWeatherContinues"
+        ],
+        "selected_damage": [],
+        "hp_updates": [
+          [
+            0,
+            85
+          ],
+          [
+            1,
+            85
+          ]
+        ]
+      }
+    },
+    {
+      "id": "sandstorm-rock-immune",
+      "derivation": "Rock typing blocks sandstorm damage for slot0; slot1 loses5; temporary duration2 becomes1.",
+      "attacker": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK"
+      },
+      "weather": 8,
+      "duration": 2,
+      "expected": {
+        "hp": [
+          90,
+          85
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 8,
+        "duration": 1,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_DamagingWeatherContinues"
+        ],
+        "selected_damage": [],
+        "hp_updates": [
+          [
+            1,
+            85
+          ]
+        ]
+      }
+    },
+    {
+      "id": "sandstorm-expires-before-damage",
+      "derivation": "Temporary sandstorm8 at duration1 decrements to0 and clears before damage; only ending script.",
+      "weather": 8,
+      "duration": 1,
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_SandStormHailEnds"
+        ],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "rain-decrements-duration",
+      "derivation": "Temporary rain1 duration2 decrements to1; rain continuation script changes no HP/status/RNG.",
+      "weather": 1,
+      "duration": 2,
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 1,
+        "duration": 1,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_RainContinuesOrEnds"
+        ],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "sun-expires",
+      "derivation": "Temporary sun32 duration1 decrements to0 and clears; ending message changes no HP/RNG.",
+      "weather": 32,
+      "duration": 1,
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_SunlightFaded"
+        ],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "reflect-expires",
+      "derivation": "Reflect side0 flag1 timer1 decrements to0 and clears; script announces its ending.",
+      "reflect_timer": 1,
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_SideStatusWoreOff"
+        ],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "reflect-duration-persists",
+      "derivation": "Reflect side0 flag1 timer2 decrements to1 without an ending script.",
+      "reflect_timer": 2,
+      "expected": {
+        "hp": [
+          90,
+          90
+        ],
+        "status": [
+          0,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 1,
+        "side_statuses": [
+          1,
+          0
+        ],
+        "rng": 0,
+        "effects": [],
+        "selected_damage": [],
+        "hp_updates": []
+      }
+    },
+    {
+      "id": "leftovers-before-poison",
+      "derivation": "Native order is Leftovers then poison: HP50+floor90/16=55, then minus floor90/8=11 ->44. Both queued intermediate HP values matter.",
+      "attacker": {
+        "item": "ITEM_LEFTOVERS",
+        "hp": 50,
+        "status": 8
+      },
+      "expected": {
+        "hp": [
+          44,
+          90
+        ],
+        "status": [
+          8,
+          0
+        ],
+        "status3": [
+          0,
+          0
+        ],
+        "weather": 0,
+        "duration": 0,
+        "reflect_timer": 0,
+        "side_statuses": [
+          0,
+          0
+        ],
+        "rng": 0,
+        "effects": [
+          "BattleScript_ItemHealHP_End2",
+          "BattleScript_PoisonTurnDmg"
+        ],
+        "selected_damage": [
+          -5,
+          11
+        ],
+        "hp_updates": [
+          [
+            0,
+            55
+          ],
+          [
+            0,
+            44
+          ]
+        ]
+      }
+    }
+  ]
+}
