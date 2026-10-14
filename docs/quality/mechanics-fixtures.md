@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **638 independently specified scenarios**, including
-**57 double-battle interactions**. All638 pass on the approved Emerald reference
+The catalogs contain **646 independently specified scenarios**, including
+**57 double-battle interactions**. All646 pass on the approved Emerald reference
 and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command cases. This is partial evidence.
+action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -335,3 +335,31 @@ Timer246/255 cases explicitly preserve pinned8-bit multiplier wrap and subsequen
 integer-division behavior. No later-generation or floating-point formula is used.
 Bag/Safari-ball consumption, actual acquisition/storage, Dex registration and
 complete presentation/save paths remain separate required integrations.
+
+
+## Capture-to-delivery function chains
+
+`delivery.json` has eight independently specified shared-state chains: actual
+Cmd_handleballthrow guaranteed capture followed by GiveMonToPlayer, with native
+capacity checks before/after. Includes party slots2/6, full-PC but available party
+space, first/last box slots, wrapping from box13 to0, the420th final available
+slot, completely full refusal, and boxed PP restoration35/56 with PPups.
+
+The runner creates valid encrypted Pokemon, fills occupied boxes with native
+CopyMon, checks whole-party/whole-PC bytes outside the destination, PC boundary
+canaries and independent decryption/checksum validation. Party retains HP/status/
+low PP; boxed entries restore PP. Source and recipient share the normal wild
+trainer ID. An initial mismatched-ID setup exposed that GiveMonToPlayer's direct
+OT-ID setter does not re-encrypt a foreign trade; corrected creation precondition
+without changing the independent expected outputs. Failed evidence is preserved.
+
+Native sizeof/offset proofs use agbcc, including storage0x83d0/Pokemon100/boxed80.
+Common native_abi helper is reused by capture; all55 capture cases pass after
+that refactor. Delivery evidence: `mechanics-v51-delivery-boundary-guarded`,8/8
+reference/v51. The three focused schema/decoder/canary tests and fullcheck.sh pass.
+
+The negative full-capacity case deliberately calls delivery after a rejecting
+preflight to verify refusal. This bypasses actual bag UI and the result-script
+scene; it is not proof of that handler's no-spend branch. No bag decrement, Dex
+registration, actual controller synchronization, whole-turn or save/export gate
+is claimed. Total646/57 remains partial mechanics evidence.

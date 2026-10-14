@@ -1,0 +1,358 @@
+{
+  "scope": "Native Cmd_handleballthrow -> GiveMonToPlayer shared-state chain with real Pokemon objects and capacity checks. Explicit controller bypass; no bag consumption, actual UI, Dex registration or durable save claim.",
+  "cases": [
+    {
+      "id": "party-recruits-slot-two",
+      "party_size": 1,
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns0 intoparty, box65535/slot65535; party count2, capacity after=0. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 0,
+        "postflight": 0,
+        "party_count": 2,
+        "box": 65535,
+        "slot": 65535,
+        "destination": "party",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            3,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 0,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": 45,
+          "max_hp": 90,
+          "status": 64
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "party-last-slot-even-when-pc-full",
+      "party_size": 5,
+      "filled_boxes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns0 intoparty, box65535/slot65535; party count6, capacity after=1. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 0,
+        "postflight": 1,
+        "party_count": 6,
+        "box": 65535,
+        "slot": 65535,
+        "destination": "party",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            3,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 0,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": 45,
+          "max_hp": 90,
+          "status": 64
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "full-party-uses-first-pc-slot",
+      "party_size": 6,
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns1 intopc, box0/slot0; party count6, capacity after=0. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 1,
+        "postflight": 0,
+        "party_count": 6,
+        "box": 0,
+        "slot": 0,
+        "destination": "pc",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            35,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 0,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": null,
+          "max_hp": null,
+          "status": null
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "pc-last-slot-in-current-box",
+      "party_size": 6,
+      "first_slots": 29,
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns1 intopc, box0/slot29; party count6, capacity after=0. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 1,
+        "postflight": 0,
+        "party_count": 6,
+        "box": 0,
+        "slot": 29,
+        "destination": "pc",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            35,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 0,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": null,
+          "max_hp": null,
+          "status": null
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "pc-wrap-from-last-box",
+      "party_size": 6,
+      "box": 13,
+      "filled_boxes": [
+        13
+      ],
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns1 intopc, box0/slot0; party count6, capacity after=0. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 1,
+        "postflight": 0,
+        "party_count": 6,
+        "box": 0,
+        "slot": 0,
+        "destination": "pc",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            35,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 0,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": null,
+          "max_hp": null,
+          "status": null
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "party-and-all-boxes-full",
+      "party_size": 6,
+      "filled_boxes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=1; native GiveMonToPlayer returns2 intonone, box65535/slot65535; party count6, capacity after=1. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 1,
+        "delivery": 2,
+        "postflight": 1,
+        "party_count": 6,
+        "box": 65535,
+        "slot": 65535,
+        "destination": "none",
+        "mon": null,
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "pc-final-capacity-slot",
+      "party_size": 6,
+      "filled_boxes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "hole": 419,
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns1 intopc, box13/slot29; party count6, capacity after=1. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 1,
+        "postflight": 1,
+        "party_count": 6,
+        "box": 13,
+        "slot": 29,
+        "destination": "pc",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            35,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 0,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": null,
+          "max_hp": null,
+          "status": null
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    },
+    {
+      "id": "boxed-pp-up-restoration",
+      "party_size": 6,
+      "pp_bonus": 3,
+      "derivation": "Independently specified native capture/delivery chain: guaranteed capture odds255 (Rattata255,HP45/max90,PAR) consumes no RNG. Capacity check before=0; native GiveMonToPlayer returns1 intopc, box0/slot0; party count6, capacity after=0. Party copy retains HP/status/3PP; PC copy restores Tackle35PP or56 with3 PPups. All other party/PC bytes remain identical. Negative full-storage case intentionally calls delivery after guard to test refusal; not actual bag/UI flow.",
+      "expected": {
+        "preflight": 0,
+        "delivery": 1,
+        "postflight": 0,
+        "party_count": 6,
+        "box": 0,
+        "slot": 0,
+        "destination": "pc",
+        "mon": {
+          "species": 19,
+          "held_item": 0,
+          "moves": [
+            33,
+            0,
+            0,
+            0
+          ],
+          "pp": [
+            56,
+            0,
+            0,
+            0
+          ],
+          "pp_bonus": 3,
+          "ball": 4,
+          "ot_gender": 1,
+          "ot_id": 287454020,
+          "hp": null,
+          "max_hp": null,
+          "status": null
+        },
+        "rng_before": 0,
+        "rng_after": 0,
+        "neighbors_preserved": true
+      }
+    }
+  ]
+}

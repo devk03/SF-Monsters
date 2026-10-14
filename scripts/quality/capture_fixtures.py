@@ -7,6 +7,7 @@ import struct
 import subprocess
 from mechanics_fixtures import ROOT, EMERALD_REVISION, battle_setup, build_driver, constants, digest, verify_bundle
 from stat_fixtures import property_ids
+from native_abi import verify_native_layout
 
 FUNCTIONS = {'Cmd_handleballthrow', 'CreateMon', 'SetMonData', 'GetMonData2',
              'GetCurrentMapType', 'GetSetPokedexFlag'}
@@ -24,18 +25,8 @@ LOCATIONS = {'surface': (0, 10), 'underwater': (0, 50)}
 
 def verify_layout(engine, output):
     """Audit scratch save offsets using the same old compiler as the ROM."""
-    source = ROOT / 'scripts/quality/capture_layout.c'
-    preprocessed, assembly = output / 'capture-layout.i', output / 'capture-layout.s'
-    compiler = engine / 'tools/agbcc/bin/agbcc'
-    subprocess.run(['arm-none-eabi-cpp', '-I', 'include', '-I', 'tools/agbcc/include',
-        '-I', 'tools/agbcc', '-nostdinc', '-undef', '-std=gnu89', '-DMODERN=0',
-        str(source), '-o', str(preprocessed)], cwd=engine, check=True, timeout=10)
-    subprocess.run([str(compiler), '-mthumb-interwork', '-O2', '-fhex-asm',
-        '-o', str(assembly), str(preprocessed)], cwd=engine, check=True, timeout=10)
-    values = [int(word, 16) for word in re.findall(r'\.word\s+0x([0-9a-f]+)', assembly.read_text())]
     expected = [0x3d88, 0xf2c, 0x7c, 4, 0x988, 0x3b24, 0x28, 0x5c]
-    if values != expected:
-        raise ValueError('Pinned save/capture ABI changed; do not guess scratch offsets.')
+    proof = verify_native_layout(engine, output, ROOT / 'scripts/quality/capture_layout.c', expected)
     groups = json.loads(subprocess.check_output(['git', 'show',
         f'{EMERALD_REVISION}:data/maps/map_groups.json'], cwd=engine, text=True))
     for kind, mapname in [('surface', 'OldaleTown'), ('underwater', 'Underwater_Route124')]:
@@ -43,8 +34,7 @@ def verify_layout(engine, output):
                  enumerate(groups['group_order']) if mapname in groups[name]]
         if found != [LOCATIONS[kind]]:
             raise ValueError('Review fixture map IDs against the pinned reference.')
-    return {'values': values, 'source_sha256': digest(source), 'compiler_sha256': digest(compiler),
-            'method': 'Pinned agbcc compiler sizeof/offsetof; not modern GCC or host layout',
+    return {**proof,
             'surface_map': LOCATIONS['surface'], 'underwater_map': LOCATIONS['underwater']}
 
 
