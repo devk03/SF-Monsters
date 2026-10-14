@@ -23,7 +23,8 @@ GLOBALS = {'gBattleMons': 352, 'gBattlerPositions': 4, 'gBattlersCount': 1,
            'gCritMultiplier': 1, 'gBattleWeather': 2, 'gStatuses3': 16,
            'gBattleResources': 4, 'gBattleMovePower': 2, 'gRngValue': 4,
            'gBattleStruct': 4, 'gProtectStructs': 64, 'gChosenActionByBattler': 4,
-           'gRandomTurnNumber': 2}
+           'gRandomTurnNumber': 2, 'gActionsByTurnOrder': 4,
+           'gBattlerByTurnOrder': 4, 'gBattleMainFunc': 4}
 
 
 def digest(path):
@@ -32,12 +33,13 @@ def digest(path):
 
 def constants(engine):
     definitions = {}
-    for header in ('battle', 'pokemon', 'moves', 'abilities', 'items', 'species'):
+    for header in ('constants/battle', 'constants/pokemon', 'constants/moves',
+                   'constants/abilities', 'constants/items', 'constants/species', 'battle'):
         text = subprocess.check_output(['git', 'show',
-            f'{EMERALD_REVISION}:include/constants/{header}.h'], cwd=engine, text=True)
+            f'{EMERALD_REVISION}:include/{header}.h'], cwd=engine, text=True)
         for name, expression in re.findall(r'^#define\s+(\w+)\s+([^\n]+)', text, re.M):
             definitions[name] = expression.split('//')[0].strip()
-        if header == 'items':
+        if header == 'constants/items':
             clean = re.sub(r'/\*.*?\*/|//[^\n]*', '', text, flags=re.S)
             for body in re.findall(r'enum\s*\{(.*?)\}', clean, re.S):
                 for value, name in enumerate(name.strip() for name in body.split(',') if name.strip()):
@@ -104,7 +106,7 @@ def battle_mon(changes, resolve):
     return bytes(data)
 
 
-def commands(case, syms, resolve, function=FUNCTION):
+def battle_setup(case, syms, resolve):
     move = resolve(case.get('move', 'MOVE_POUND'))
     doubles = case.get('double', False)
     if type(doubles) is not bool:
@@ -140,6 +142,12 @@ def commands(case, syms, resolve, function=FUNCTION):
               f'write {flags:x} ' + struct.pack('<4I', int(case.get('flash_fire', False)), 0, 0, 0).hex(),
               f'write {arena + 0x100:x} ' + bytes(132).hex(),
               f'read {syms["gRngValue"][0]:x} 4']
+    return lines
+
+
+def commands(case, syms, resolve, function=FUNCTION):
+    move = resolve(case.get('move', 'MOVE_POUND'))
+    lines = battle_setup(case, syms, resolve)
     args = [syms['gBattleMons'][0], syms['gBattleMons'][0] + 88, move,
             resolve(case.get('side_status', 0)), case.get('power_override', 0), 0, 0, 1]
     if function == 'GetWhoStrikesFirst':

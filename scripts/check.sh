@@ -25,6 +25,7 @@ python3 tests/field_music_test.py
 python3 tests/music_loop_review_test.py
 python3 tests/mechanics_fixture_test.py
 python3 tests/stat_fixture_test.py
+python3 tests/action_fixture_test.py
 python3 tests/frame_storage_test.py
 python3 tests/interface_text_test.py
 python3 tests/interface_graphics_test.py

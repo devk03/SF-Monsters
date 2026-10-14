@@ -1,0 +1,541 @@
+{
+  "function": "SetActionsAndBattlersTurnOrder",
+  "cases": [
+    {
+      "id": "four-speed-brackets",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "expected_order": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "derivation": "All neutral attacks sort by distinct speeds120>100>80>60."
+    },
+    {
+      "id": "slow-partner-quick-attack",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60,
+        "move": "MOVE_QUICK_ATTACK"
+      },
+      "expected_order": [
+        3,
+        0,
+        2,
+        1
+      ],
+      "derivation": "Slow opponent partner priority+1 precedes every priority0 attack."
+    },
+    {
+      "id": "helping-hand-protect-quick-attack",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80,
+        "move": "MOVE_PROTECT"
+      },
+      "ally": {
+        "speed": 100,
+        "move": "MOVE_HELPING_HAND"
+      },
+      "opponent_ally": {
+        "speed": 60,
+        "move": "MOVE_QUICK_ATTACK"
+      },
+      "expected_order": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "derivation": "HelpingHand+5, Protect+3, QuickAttack+1, then normal0."
+    },
+    {
+      "id": "negative-priority-brackets",
+      "attacker": {
+        "speed": 120,
+        "move": "MOVE_FOCUS_PUNCH"
+      },
+      "defender": {
+        "speed": 80,
+        "move": "MOVE_COUNTER"
+      },
+      "ally": {
+        "speed": 100,
+        "move": "MOVE_VITAL_THROW"
+      },
+      "opponent_ally": {
+        "speed": 60,
+        "move": "MOVE_ROAR"
+      },
+      "expected_order": [
+        2,
+        0,
+        1,
+        3
+      ],
+      "derivation": "VitalThrow-1, FocusPunch-3, Counter-5, Roar-6; raw speeds cannot reverse priority."
+    },
+    {
+      "id": "slow-item-before-fast-attacks",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_ITEM"
+      ],
+      "expected_order": [
+        3,
+        0,
+        2,
+        1
+      ],
+      "derivation": "Item action is queued before all moves even for the slowest battler."
+    },
+    {
+      "id": "slow-switch-before-priority-move",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80,
+        "move": "MOVE_PROTECT"
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_SWITCH"
+      ],
+      "expected_order": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "derivation": "Switch queues first; Protect then remaining normal attacks."
+    },
+    {
+      "id": "item-and-switch-retain-slot-order",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_SWITCH",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_ITEM"
+      ],
+      "expected_order": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "derivation": "Pre-move switch/item group preserves battler enumeration, not speed or action numeric value."
+    },
+    {
+      "id": "two-items-before-moves",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_ITEM",
+        "B_ACTION_USE_ITEM",
+        "B_ACTION_USE_MOVE"
+      ],
+      "expected_order": [
+        1,
+        2,
+        0,
+        3
+      ],
+      "derivation": "Two item actions preserve slot order; remaining attacks sort by speed."
+    },
+    {
+      "id": "all-switches-preserve-slot-order",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_SWITCH",
+        "B_ACTION_SWITCH",
+        "B_ACTION_SWITCH",
+        "B_ACTION_SWITCH"
+      ],
+      "expected_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "derivation": "Four switches preserve battler enumeration regardless of speed."
+    },
+    {
+      "id": "partner-run-short-circuits-sorting",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_RUN",
+        "B_ACTION_USE_MOVE"
+      ],
+      "expected_order": [
+        2,
+        0,
+        1,
+        3
+      ],
+      "derivation": "Run action in slot2 leads; other battlers remain in enumeration order."
+    },
+    {
+      "id": "opponent-run-link-rule-branch",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_RUN",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_USE_MOVE"
+      ],
+      "expected_order": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "derivation": "Link-rule run in slot1 leads; remaining slots preserve enumeration."
+    },
+    {
+      "id": "two-runners-first-slot-wins",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "actions": [
+        "B_ACTION_RUN",
+        "B_ACTION_USE_MOVE",
+        "B_ACTION_RUN",
+        "B_ACTION_USE_MOVE"
+      ],
+      "expected_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "derivation": "Link-rule run search selects the first runner, without speed sorting."
+    },
+    {
+      "id": "paralysis-reorders-whole-field",
+      "attacker": {
+        "speed": 120,
+        "status": "STATUS1_PARALYSIS"
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "expected_order": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "derivation": "GenIII paralysis divides120 speed by4 to30; other speeds100>80>60."
+    },
+    {
+      "id": "macho-brace-reorders-whole-field",
+      "attacker": {
+        "speed": 120,
+        "item": "ITEM_MACHO_BRACE"
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 70
+      },
+      "expected_order": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "derivation": "MachoBrace reduces120 to60 below partner70 and opponents100/80."
+    },
+    {
+      "id": "rain-swift-swim-partner-leads",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 70,
+        "ability": "ABILITY_SWIFT_SWIM"
+      },
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "expected_order": [
+        3,
+        0,
+        2,
+        1
+      ],
+      "derivation": "Rain doubles partner70 to140 above120/100/80."
+    },
+    {
+      "id": "active-ally-air-lock-suppresses-rain",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100,
+        "ability": "ABILITY_AIR_LOCK"
+      },
+      "opponent_ally": {
+        "speed": 70,
+        "ability": "ABILITY_SWIFT_SWIM"
+      },
+      "weather": "B_WEATHER_RAIN_TEMPORARY",
+      "expected_order": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "derivation": "Active AirLock cancels partner SwiftSwim so raw120>100>80>70 applies."
+    },
+    {
+      "id": "sun-chlorophyll-ally-leads",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100,
+        "ability": "ABILITY_CHLOROPHYLL"
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "weather": "B_WEATHER_SUN_TEMPORARY",
+      "expected_order": [
+        2,
+        0,
+        1,
+        3
+      ],
+      "derivation": "Sun doubles ally100 to200 before120/80/60."
+    },
+    {
+      "id": "quick-claw-slow-partner-leads",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60,
+        "item": "ITEM_QUICK_CLAW"
+      },
+      "quick_claw_draw": 13106,
+      "expected_order": [
+        3,
+        0,
+        2,
+        1
+      ],
+      "derivation": "Claw draw13106 is below13107, giving slow partner maximum effective speed."
+    },
+    {
+      "id": "quick-claw-strict-threshold",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60,
+        "item": "ITEM_QUICK_CLAW"
+      },
+      "quick_claw_draw": 13107,
+      "expected_order": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "derivation": "Claw draw13107 does not activate; raw speed order remains."
+    },
+    {
+      "id": "protect-outranks-activated-quick-claw",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80,
+        "move": "MOVE_PROTECT"
+      },
+      "ally": {
+        "speed": 100
+      },
+      "opponent_ally": {
+        "speed": 60,
+        "item": "ITEM_QUICK_CLAW"
+      },
+      "quick_claw_draw": 0,
+      "expected_order": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "derivation": "Protect priority+3 beats activated Claw at priority0; Claw then leads ordinary moves."
+    },
+    {
+      "id": "ally-speed-stage-fourfold",
+      "attacker": {
+        "speed": 120
+      },
+      "defender": {
+        "speed": 80
+      },
+      "ally": {
+        "speed": 100,
+        "speed_stage": 12
+      },
+      "opponent_ally": {
+        "speed": 60
+      },
+      "expected_order": [
+        2,
+        0,
+        1,
+        3
+      ],
+      "derivation": "Stage+6 multiplies ally100 by4 to400; remaining speeds120>80>60."
+    }
+  ]
+}

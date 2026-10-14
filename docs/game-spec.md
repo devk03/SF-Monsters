@@ -775,12 +775,12 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
-| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify98 named scenarios against the reference. |
+| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify119 named scenarios against the reference. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 98 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats;10 doubles. At least202 additional broad scenarios and40 additional doubles remain, plus type/status/accuracy/resource/full action resolution. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 119 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats,21 complete four-battler action sorts;31 doubles. At least181 additional broad scenarios and19 additional doubles remain, plus type/status/accuracy/resource/full move resolution. Performance, save and full campaign gates stay outstanding. |
 | Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is completing the earned first-gym route. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4382,3 +4382,22 @@ Alignment check October14,01:43 Pacific /08:43UTC:
   that task. Main owns mechanics fixtures and source changes independently.
 - Next alignment check due by09:12UTC /02:12 Pacific. No new quality approval;
   continue work through the explicit October15,6PM Pacific cutoff in15.1.
+
+
+Native complete-action-order checkpoint:
+
+-21 four-battler scenarios pass actual SetActionsAndBattlersTurnOrder on both
+  reference andv48. Covered item/switch group precedence, multiple simultaneous
+  items/switches, run selection, positive/negative priority brackets, paralysis,
+  MachoBrace, weather abilities and AirLock, QuickClaw activation/strict threshold
+  and priority interaction, and speed stages across the whole field.
+- Each checks the complete battler permutation and matching action array, native
+  next-turn callback, reset FocusPunch tracker and unchanged RNG. Distinct speeds
+  avoid accidental tie randomness. All four participants are present; no party
+  or save changes. This verifies scheduling, not execution/HP/resource outcomes.
+- Shared setup extraction is exercised by rerunning every earlier catalog:
+ 24/24damage,34/34pairwise order,40/40stats,21/21complete sorting. Total119
+  independent scenarios,31 meaningful doubles. Full local check.sh passes.
+  Evidence: mechanics-v48-{base,turn,stats}-after-actions and
+  mechanics-v48-action-order-guarded under private benchmarks. Full human
+  approval remains0/11; at least181 broad cases/19 doubles remain.

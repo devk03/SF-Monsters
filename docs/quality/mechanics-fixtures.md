@@ -1,8 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **98 independently specified scenarios**, including
-**10 double-battle interactions**. All98 pass on the approved Emerald reference
-and SFv48:24 base-damage,34 turn-order and40 generated-stat cases. This is partial evidence.
+The catalogs contain **119 independently specified scenarios**, including
+**31 double-battle interactions**. All119 pass on the approved Emerald reference
+and SFv48:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
+action-order cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -130,3 +131,25 @@ mechanics-v48-turn-shared-final34/34 and mechanics-v48-stats-guarded-final40/40.
 All98 scenarios pass on both ROMs;10 exercise doubles. The300-case/50-doubles
 gate, full state resolution, type chart, accuracy/status, capture/resource and
 campaign/performance/save gates remain incomplete.
+
+
+## Complete action-order catalog
+
+`action-order.json` supplies21 four-battler scenarios. Run
+`scripts/quality/action_fixtures.py` with the same six ROM/ELF/state arguments
+and a new evidence name. Each executes the actual full scheduling routine and
+checks the entire battler/action arrays, next-turn callback, FocusPunch tracker
+reset and unchanged RNG. Distinct effective speeds avoid accidental ties.
+
+Coverage includes item/switch precedence, multiple simultaneous items/switches,
+run selection, mixed positive/negative move priorities, weather and active ally
+suppression, paralysis, MachoBrace, QuickClaw activation/strict threshold/priority,
+and speed stages. All four participants are present. Link-rule flags suppress
+campaign badge boosts; no multiplayer is added. Actual moves, switches, items
+and flee outcomes are not executed by this fixture.
+
+After shared setup extraction, all earlier catalogs pass again in
+`mechanics-v48-{base,turn,stats}-after-actions`; complete sorting passes in
+`mechanics-v48-action-order-guarded`. Total119 scenarios/31 doubles. At least181
+additional broad scenarios/19 doubles remain; a count never replaces required
+mechanics coverage or controller-only gameplay and human quality approvals.
