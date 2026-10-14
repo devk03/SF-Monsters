@@ -114,6 +114,35 @@ class WebPerformanceAuditTest(unittest.TestCase):
             with self.subTest(start=start, end=end), self.assertRaises(ValueError):
                 audit(report, self.identity, self.runtime)
 
+    def test_replay_requires_preserved_input_matching_dispatches_and_current_window(self):
+        report, identity = copy.deepcopy(self.report), copy.deepcopy(self.identity)
+        # Use session-unique auxiliary names through an isolated runtime parent.
+        directory = self.runtime / 'session'; runtime = directory / 'runtime'
+        runtime.mkdir(parents=True)
+        (runtime/'sdk.js').write_bytes((self.runtime/'sdk.js').read_bytes())
+        inputs = {'route.csv': b'8,8\n0,8\n', 'controller-replay.js': b'verified helper fixture'}
+        identity['files'] = {}
+        for name, data in inputs.items():
+            (directory/name).write_bytes(data)
+            identity['files'][name] = hashlib.sha256(data).hexdigest()
+        duration = 16 * 1000 * 280896 / 16777216
+        identity['controller_route'] = {'rows': 2, 'frames': 16}
+        report['context']['identity'] = identity
+        report.update({'startedAtMs': 1000, 'endedAtMs': 11001,
+            'controllerReplay': {'reason': 'complete', 'startedAtMs': 1100, 'endedAtMs': 1370,
+                'appliedRows': 2, 'totalRows': 2, 'declaredFrames': 16,
+                'declaredDurationMs': duration, 'maxLatenessMs': 0,
+                'dispatches': [{'row': 0, 'mask': 8, 'dueMs': 1100, 'actualMs': 1100},
+                    {'row': 1, 'mask': 0, 'dueMs': 1100+duration/2, 'actualMs': 1100+duration/2}]}})
+        self.assertEqual(audit(report, identity, runtime)['controller_replay']['status'], 'complete')
+        for changes in ({'startedAtMs': 999}, {'appliedRows': 1}, {'maxLatenessMs': 51}):
+            invalid = copy.deepcopy(report); invalid['controllerReplay'].update(changes)
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                audit(invalid, identity, runtime)
+        (directory/'route.csv').write_bytes(b'1,16\n')
+        with self.assertRaisesRegex(ValueError, 'input/helper changed'):
+            audit(report, identity, runtime)
+
 
 if __name__ == '__main__':
     unittest.main()

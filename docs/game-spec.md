@@ -5757,3 +5757,13 @@ One-time playback cushion candidate:
   runtime/normalizednativeSave; result pending. Alignment now audits compiledv57
   resource preservation read-only, hardstop19:45UTC; next exchange by19:35UTC.
   Human approvals remain0/11, public staysv56/Site47, full goal active.
+
+
+- Finite route server preflight freezes the exact62row/8888frame input and helper,
+  verifies both hashes, then exits normally after one second. No emulator playback
+  occurred in that preflight. Browser replay still pending.
+- Replay receipt audit now binds preserved CSV/helper bytes, row/mask/duration
+  totals, dispatch order/timing and the current measurement window. A stale replay,
+  altered input, hidden lateness or partial completion cannot claim complete input
+  coverage. Eight audit tests pass. Stop measurement now also releases replay keys.
+  This remains dispatch evidence, not guest key/scene or physical presentation proof.

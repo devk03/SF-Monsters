@@ -42,6 +42,55 @@ def audio_clock_observation(report):
         'scope': 'Main-thread AudioContext clock reads; quantized context time, not hardware output or physical speaker timing'}
 
 
+def controller_observation(report, identity, directory):
+    for name in ('controller-replay.js', 'route.csv'):
+        expected = identity.get('files', {}).get(name)
+        if expected and digest(directory / name) != expected:
+            raise ValueError('Preserved controller input/helper changed: ' + name)
+    configured = identity.get('controller_route')
+    if not configured:
+        return None
+    replay = report.get('controllerReplay')
+    if replay is None:
+        return {'status': 'not-run'}
+    start = number(replay['startedAtMs'])
+    if not number(report['startedAtMs']) <= start <= number(report['endedAtMs']):
+        raise ValueError('Replay belongs to another measurement window')
+    if replay['reason'] == 'in-progress':
+        return {'status': 'in-progress'}
+    rows = [tuple(map(int, line.split(','))) for line in
+            (directory / 'route.csv').read_text().strip().splitlines()]
+    frames = sum(count for _, count in rows)
+    duration = frames * (1000 * 280896 / 16777216)
+    count = number(replay['appliedRows'], True)
+    if not 0 <= count <= len(rows) or number(replay['totalRows'], True) != len(rows) or (
+            number(replay['declaredFrames'], True) != frames or configured['frames'] != frames or
+            configured['rows'] != len(rows) or
+            not math.isclose(replay['declaredDurationMs'], duration, rel_tol=0, abs_tol=1e-6)):
+        raise ValueError('Replay totals differ from preserved controller input')
+    if len(replay['dispatches']) != count:
+        raise ValueError('Replay dispatch count differs from applied rows')
+    due = start
+    for index, dispatch in enumerate(replay['dispatches']):
+        mask, frames = rows[index]
+        if number(dispatch['row'], True) != index or number(dispatch['mask'], True) != mask or not math.isclose(
+                number(dispatch['dueMs']), due, rel_tol=0, abs_tol=1e-6):
+            raise ValueError('Replay dispatch differs from supplied input')
+        actual = number(dispatch['actualMs'])
+        if not start <= actual <= number(replay['endedAtMs']):
+            raise ValueError('Replay dispatch falls outside its observation interval')
+        if actual - due > number(replay['maxLatenessMs']) + 1e-6:
+            raise ValueError('Replay hides observed timer lateness')
+        due += frames * (1000 * 280896 / 16777216)
+    lateness = number(replay['maxLatenessMs'])
+    if number(replay['endedAtMs']) > report['endedAtMs'] or (
+            replay['reason'] == 'complete' and (count != len(rows) or lateness > 50)):
+        raise ValueError('Replay completion scope is inconsistent')
+    return {'status': replay['reason'], 'applied_rows': count, 'declared_rows': len(rows),
+        'max_lateness_ms': lateness,
+        'scope': 'Input-dispatch evidence only; no guest consumption or scene coverage'}
+
+
 def audit(report, identity, runtime):
     if report.get('schema') != 1 or report.get('valid') is not True or (
             report.get('context', {}).get('identity') != identity):
@@ -116,6 +165,7 @@ def audit(report, identity, runtime):
         'dropped_source_frames': final['droppedSourceFrames'],
         'foreground_only': report['scope']['foregroundOnly'],
         'audio_clock_observation': audio_clock_observation(report),
+        'controller_replay': controller_observation(report, identity, runtime.parent),
         'scope': 'Browser pipeline/audio observations; no guest consumption, physical paint or full gate acceptance'}
 
 
