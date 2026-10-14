@@ -6212,3 +6212,34 @@ v62 / Site53 verified and published — October14,21:51UTC:
   Alignment next-priority review requested21:50UTC, finite20minute read-only task.
   Full campaign, first-slice comparison, music, performance/device and50distinct
   save-checkpoint acceptance gates remain open.
+
+
+v63 portable field journal — October14,22:00UTC:
+
+- Alignment's finite read-only review identifies the absent journal as the next
+  useful first-slice workflow. Correct SF city-map art/markers/Guide AREA mapping
+  remain separate unfinished work; renamed labels do not replace Hoenn geometry.
+- Adds SF-only JOURNAL before EXIT in the normal native Start menu. SAVE/OPTION
+  indices stay unchanged. Inherited PokeNav is suppressed only on authored SF maps,
+  including older saves with its flag set, keeping the menu within eight rows.
+  No flag grant, item/reward, new NPC, save schema or content-revision change.
+- Eight read-only leads use existing starter/parcel/relay/badge state, with earned
+  badge priority. Location caption covers all five authored maps. Sensor delivery
+  directions adapt after Muni arrival instead of sending the player back west.
+  Post-badge text explicitly identifies the preview endpoint and future chapter.
+- Native framed26x17-tile card uses the existing font/palette and one short text
+  line per callback. B restores the Start menu/cursor; Start closes and restores
+  field controls. Allocation failure preserves the existing menu. Default menu
+  fade is excluded. The page never writes quest/party/item/save state.
+- Draft target663539f154c5456caa4b17b13501f0b4b58a4f58447d30136b2cd750278451dd;
+  existing compiled cast36/36, intro5/5 and creature255 controls pass. Sanitized
+  production-header tests cover all eight leads, badge precedence, five location
+  captions, arrival directions, read-only state, cleanup and allocation failure.
+- Earlier native/browser candidates display the journal and return to normal
+  movement. Fresh no-starter and earned-badge pages are readable. Final text
+  variant native/browser/save acceptance and normal publication remain pending.
+  Initial synchronous text build showed seven play-clock VBlank-count difference
+  from a matched idle menu; staged text reduced this to four. This remains scoped
+  observation, not a native deadline, physical-input or performance-gate pass.
+- Public remains v62/Site53. Full human approvals0/11 and all campaign/map/audio/
+  first-slice/performance/save-checkpoint gates remain open. No GitHub Actions.
