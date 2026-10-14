@@ -5104,3 +5104,24 @@ Verified v53 Roon candidate (public publication pending):
   next check no later14:08UTC. Deadline remains October15 18:00 Pacific.
   Public remainsv52/Site43 until audited Site publication succeeds. Full human
   domains remain0/11. Next visual priority is denser, varied South Park frontage.
+
+Site44 v53 published and checked:
+
+- Site source29ac591eec86fefe84e3ad157c692cf71083a5f7 passes TypeScript/build.
+  Archive098c0bde967b5390b384e33bb1e3c85578086a42c9ed9847a1878fe9d568e4ed
+  contains84files, exact patch/manifest and the original SFMM prototype only;
+  zero commercial cartridges/private saves/AppleDouble. Prior dist preserved.
+- Saved versionappgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_cadb41638bc48191bcf993b2d07afe51;
+  deploymentappgdep_6acf86b8b48081919287e7c5f47368f2 succeeded
+  2026-10-14T13:42:28.096330Z. Existing public audience/auth/DBbindings unchanged.
+- Actual public IAB loader/patch download and anonymous normal-browser-agent
+  HTTP200 checks retrieve the exact885003-byte patch31354d47...6a9015 and release
+  manifest. No public ROM import/Continue performed or guest progress modified;
+  temporary QA tab closed. No GitHub workflow or DB operation performed.
+- Alignment independently decodes2400frames from both source clips and paired
+  clip, verifies labels/scale/clock/parent states/controller hashes and copied
+  audio tracks. Lossless raw frames remain the pixel oracle; encoded reviews
+  have expected H264 loss and AAC resampling. Reference gzip metadata was added
+  after packaging without changing decompressed bytes. No reviewed technical
+  blocker; human NPC rating, full domains and actual-browser gameplay remain
+  separate gates. Goal stays active; next alignment check no later14:08UTC.
