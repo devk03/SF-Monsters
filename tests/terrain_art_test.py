@@ -4,11 +4,12 @@ from pathlib import Path
 import struct
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from maps import encode_layout
-from terrain_art import load_terrain, remap_terrain, terrain_variant, TOKENS
+from terrain_art import load_terrain, load_native_grass, remap_terrain, terrain_variant, TOKENS
 
 
 class CoastalTerrain(unittest.TestCase):
@@ -50,6 +51,35 @@ class CoastalTerrain(unittest.TestCase):
         # Every stage begins with ocean, then shoreline, eight 8x8 tiles total.
         for offset in (0, 256, 512):
             self.assertEqual(len(waves[offset:offset + 256]), 8 * 32)
+
+    def test_authored_lawn_is_consumed_exactly_without_replacing_other_terrain(self):
+        directory = ROOT / 'assets/tiles/sunset-terrain'
+        cells, _, _ = load_terrain(ROOT)
+        authored, _ = load_native_grass(directory)
+        self.assertEqual(set(authored), {0, 12, 13})
+        for index, pixels in authored.items():
+            self.assertEqual(cells[index], pixels)
+            self.assertEqual(set(pixels), {5, 7, 10})  # Lawn shades; no ocean colors.
+            self.assertEqual(pixels[:16], cells[0][:16])
+        self.assertEqual(len(set(authored.values())), 3)
+
+    def test_lawn_source_rejects_unrelated_cells_ocean_colors_and_visible_seams(self):
+        directory = ROOT / 'assets/tiles/sunset-terrain'
+        source = json.loads((directory / 'grass-native.json').read_text())
+        cases = []
+        unrelated = json.loads(json.dumps(source))
+        unrelated['cells']['4'] = unrelated['cells'].pop('0')
+        cases.append(unrelated)
+        for x, y, color in [(4, 4, 'D'), (0, 4, '5'), (4, 0, 'A')]:
+            changed = json.loads(json.dumps(source))
+            row = changed['cells']['0'][y]
+            changed['cells']['0'][y] = row[:x] + color + row[x + 1:]
+            cases.append(changed)
+        for invalid in cases:
+            with self.subTest(cells=list(invalid['cells'])), patch.object(
+                    Path, 'read_text', return_value=json.dumps(invalid)):
+                with self.assertRaises(ValueError):
+                    load_native_grass(directory)
 
 
 if __name__ == '__main__':

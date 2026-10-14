@@ -5673,3 +5673,17 @@ Playback reset and measurement-boundary fixes:
   no recurring monitor starts. Unused duplicate local server stopped explicitly.
   New ten-minute candidate uses frozen runtime and the genuine mentor-approach
   checkpoint; results pending. Full objective, approvals and public version unchanged.
+
+
+Next native visual candidate — quieter Sunset lawn:
+
+- Authored three editable16x16palette-index lawn cells instead of resampling more
+  bitmap detail. Shared sage ground/edges removes the alternating lighter cell;
+  six deliberate blade pixels per tile replace scattered blue/dark speckles.
+- Only native cells0,12,13 change:315of768pixels differ across those cells. Other
+  thirteen terrain cells, RGB555 palette and all shoreline/water animation bytes
+  match the preserved preceding assets exactly. Map/traversal/event coordinates
+  and encounter behavior are unchanged. Source identity is checked on consumption.
+- Five terrain tests pass, including source→native fidelity and rejection of
+  unrelated cell ownership, ocean-color indices and edge seams. Native ROM build,
+  actual field comparison and user quality approval are pending. Public staysv56.

@@ -10,3 +10,13 @@ Row 4: (13) subtle alternate short lawn texture, same sage base and density as c
 Keep rails and sign proportions true to 16x16 terrain. Clear native-sized pixel silhouettes. This is production bitmap art for an original SF RPG, without any commercial-game artwork.
 
 Technical conversion: four equal rows/columns, nearest 16x16 native cells, one 15-color RGB555 palette plus transparent index zero, three native wave stages. Human quality approval remains pending.
+
+
+Native lawn cleanup candidate (October14,2026): the editable `grass-native.json`
+is authoritative for cells0,12,13 after source conversion. This is direct native
+palette-index authoring, rather than another scaled bitmap. All three cells share
+index7 ground and seamless edges; each has two three-pixel blade clusters using
+existing grass indices5 and10. Ocean-colored speckles and the brighter third-cell
+background are removed. The other13cells, original RGB555 palette and all three
+shoreline/water animation stages remain byte-identical. Native visual comparison
+and human approval are pending; the high-resolution source remains preserved.

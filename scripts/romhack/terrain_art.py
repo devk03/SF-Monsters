@@ -18,6 +18,29 @@ VARIANTS = [(index, 0) for index in range(16)] + [(7, turn) for turn in (1, 2, 3
 TOKENS = set('.WESFG#')
 
 
+def load_native_grass(directory):
+    """Read editable native indices for the three lawn cells only."""
+    source = directory / 'grass-native.json'
+    data = json.loads(source.read_text())
+    if data.get('schema') != 1 or set(data.get('cells', {})) != {'0', '12', '13'}:
+        raise ValueError('Native lawn cleanup must own exactly the three lawn cells.')
+    cells = {}
+    for index, rows in data['cells'].items():
+        if len(rows) != 16 or any(not isinstance(row, str) or len(row) != 16 or
+                                  set(row) - set('57A') for row in rows):
+            raise ValueError('Native lawn needs sixteen rows of shared grass indices.')
+        if rows[0] != '7' * 16 or rows[-1] != '7' * 16 or any(
+                row[0] != '7' or row[-1] != '7' for row in rows):
+            raise ValueError('All lawn edges must share the same seamless ground.')
+        pixels = bytes(int(value, 16) for row in rows for value in row)
+        if not 3 <= sum(value != 7 for value in pixels) <= 18:
+            raise ValueError('Native lawn texture must remain sparse and visible.')
+        cells[int(index)] = pixels
+    if len(set(cells.values())) != 3:
+        raise ValueError('Keep three distinct lawn patterns on the shared ground.')
+    return cells, hashlib.sha256(source.read_bytes()).hexdigest()
+
+
 def encode_terrain(root):
     from PIL import Image
     directory = root / ASSET
@@ -36,6 +59,10 @@ def encode_terrain(root):
     indexed.putpalette([value for color in colors for value in color] + [0] * 720)
     indexed.putdata([min(range(1, 16), key=lambda i: sum((rgb[c] - colors[i][c]) ** 2
                                                       for c in range(3))) for rgb in native.get_flattened_data()])
+    grass, grass_hash = load_native_grass(directory)
+    for index, pixels in grass.items():
+        cell = Image.frombytes('P', (16, 16), pixels)
+        indexed.paste(cell, ((index % 4) * 16, (index // 4) * 16))
     indexed.save(directory / 'native-atlas.png', bits=4)
     cells = [indexed.crop((column * 16, row * 16, column * 16 + 16, row * 16 + 16)).tobytes()
              for row in range(4) for column in range(4)]
@@ -50,6 +77,7 @@ def encode_terrain(root):
         (directory / name).write_bytes(data)
     (directory / 'conversion.json').write_text(json.dumps({
         'source_sha256': hashlib.sha256((directory / 'source.png').read_bytes()).hexdigest(),
+        'native_grass_sha256': grass_hash,
         'source_size': list(source.size), 'native_size': [64, 64], 'palette_bank': PALETTE_BANK,
         'wave_tile_start': WAVE_TILE_START, 'wave_tiles': 8, 'wave_frames': 3,
         'wave_frame_bytes': 256, 'wave_cadence_frames': 16,
@@ -66,6 +94,10 @@ def load_terrain(root):
        any(hashlib.sha256(data).hexdigest() != metadata['files'][name] for name, data in files.items()):
         raise ValueError('Regenerate coastal terrain after changing its source.')
     pixels = files['tiles.indices']
+    grass, grass_hash = load_native_grass(directory)
+    if metadata.get('native_grass_sha256') != grass_hash or any(
+            pixels[index * 256:(index + 1) * 256] != cell for index, cell in grass.items()):
+        raise ValueError('Regenerate coastal terrain after native lawn changes.')
     if len(pixels) != 4096 or not all(1 <= value <= 15 for value in pixels) or \
        len(files['terrain.gbapal']) != 32 or len(files['waves.4bpp']) != 768:
         raise ValueError('Coastal art needs sixteen opaque cells, one palette and three wave stages.')
