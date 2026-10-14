@@ -1,16 +1,16 @@
 {
-  "version": "0.0.65-city-map-and-garry-preview",
+  "version": "0.0.66-park-frontage-preview",
   "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. SELECT from JOURNAL opens the native SF city map; the geographic habitat map and read-only JOURNAL show the next opening-chapter objective; nine named field-sprite candidates include Garry, Naval and the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "0b5d830eed40015d3f782f6bfa420732cd110013b210754a4d5f10ce7c986fff",
+  "target_sha256": "b2b5e135f52c711d626640a9ab54cd127f98b3d05e42f35ff1de29d578230bda",
   "target_bytes": 16777216,
-  "patch_sha256": "333aa289bfaff81ad13f50e485d5f00dc50786339a651ac0fa05e83cd431b688",
-  "patch_bytes": 1024149,
+  "patch_sha256": "65a469be8161b192abfc836ce99c1029972177570b173beab02d0dbe2cb9e50f",
+  "patch_bytes": 1024185,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "8bff425edf75b94672bfe784e79bcadb468bb9af",
+  "source_commit": "b761eb32f9b85e251244d4d326743942dc4e7a63",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
@@ -21,7 +21,7 @@
       "total": 17,
       "matched": 17
     },
-    "receipt_sha256": "3b98028a71e79f779d58140ac49ddd198f7359c10a9339f62e4dd61bb82cce7c",
+    "receipt_sha256": "e97c6a363a67dd433092ba5765e77da0bab8b18142524456468677f9a38e77c8",
     "validator_sha256": "e4b136a97ff24e9a91f1474c617a7a0453c3db448f706d3295dc5171e60ee898",
     "quality_approval": "pending",
     "scope": "Compiled SF background/head/grid/entry/whitelist integration; not art, save, behavior or performance acceptance"
@@ -32,7 +32,7 @@
       "total": 40,
       "matched": 40
     },
-    "receipt_sha256": "82affb5100e37a890b915cbac639ca33e8fc15d89738adcd7ef0adf6b7770da0",
+    "receipt_sha256": "fe8b773860e30afe03c8cc166e2ddaf0b2f100b8edb1bf48870a9c4e3c2d03e2",
     "validator_sha256": "bd6ffd8156b149d72f161592b1f1e146f0e98271c5b67aac4f24b58a36203321",
     "quality_approval": "pending",
     "scope": "Compiled field cast integration; no likeness/animation/save approval"
@@ -43,7 +43,7 @@
       "total": 5,
       "matched": 5
     },
-    "receipt_sha256": "faad5a6fc68f5a651098d407815eec3eafd3a4abeb95c60e4b67a3272f001d4c",
+    "receipt_sha256": "c430b47d22576e39f0863a9a607dd2a6641ed1cde07acfba7c56f4afc44b944e",
     "validator_sha256": "708041c98d73809efa6bdb1d3838b4cdfe050d8dab2944827ea74a98442560b6",
     "quality_approval": "pending",
     "scope": "Intro figure integration only; human likeness/art/flow approval pending"
@@ -77,7 +77,7 @@
         "matched": 18
       }
     },
-    "receipt_sha256": "c7c521c39b1e8d1ff6954a8910e8e44e6fa1913df1f5a98c379e5622498685d0",
+    "receipt_sha256": "49f554851fbe30fde63b05583ac75b6045675859b7103b2ac9433f278dd94e34",
     "validator_sha256": "fb26bf2f4871e6627e482bb08254ae5f6a7672b0ed82706740159622157d8cfb",
     "quality_approval": "pending",
     "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
@@ -107,8 +107,8 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "4b53ebd84ae62174bc87b704aa29e717f455d97120866a6c87eb0761af5974a1",
-    "target_sha256": "d1b1e7836023b707abf549e1d833fc73d2ece16b66f29218cf2f49b927b383d2",
+    "input_sha256": "7735cc4b88157f463c65b00bbd939f275ac806e002ca4c9536b6e31e939f8519",
+    "target_sha256": "cdb655d22ca91536db6d02e9add7ea4b37e08c9744fe92da502b13a89ab47005",
     "labels": [
       {
         "symbol": "gText_Pokemon",

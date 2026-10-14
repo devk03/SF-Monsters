@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 22:49 UTC:
+Current checkpoint — October 14, 2026, 23:03 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v65 / Site 56 is live.
-  Native release source 8bff425; website source aa5a3d14. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v66 / Site 57 is live.
+  Native release source b761eb3; website source ad385f54. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -597,7 +597,7 @@ Current checkpoint — October 14, 2026, 22:49 UTC:
   Prior eight custom cast sprites remain byte-exact; human art approval pending.
 - Alignment confirms exact map-return plaintext gameplay preservation; native RNG
   and wandering Dylan differ. Actual map→Save→coldContinue also passes. Next
-  check by23:20UTC; finite first-slice priority review requested.
+  check by23:25UTC; finite seed-room implementation active.
 
 ### 15.1 Objective and completion rule
 
@@ -819,7 +819,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.65-city-map-and-garry-preview; target0b5d830eed40015d3f782f6bfa420732cd110013b210754a4d5f10ce7c986fff; Site56. JOURNAL SELECT opens SF MAP before starter unlock; original Garry field art. Human approvals remain0/11. |
+| Public build | 0.0.66-park-frontage-preview; targetb2b5e135f52c711d626640a9ab54cd127f98b3d05e42f35ff1de29d578230bda; Site57. Denser western South Park frontage; actual older-save collision recovery. Human approvals remain0/11. |
 | Latest local source build | v64 normal source709e295 reproduces tested target32b57512. Map17/17, cast36/36, intro5/5 and creature255 controls pass. Scoped native habitats/five player parents/C8 travel-save-reload and actual Chrome map/return checks pass; full performance/art gates remain open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
@@ -6639,3 +6639,37 @@ v66 native density candidate acceptance — October14,23:00UTC:
   door/warp integration, builds, commits and publication. Planned butter entrance
   is RIGHTMOST16,16 with apron16,17; no third building or Park raster allocation.
   First-slice scope remains locked; no claim of map-art/user parity approval.
+
+
+v66 public western frontage — October14,23:03UTC:
+
+- Native sourceb761eb3 normal build reproduces drafttarget
+  b2b5e135f52c711d626640a9ab54cd127f98b3d05e42f35ff1de29d578230bda.
+  BPS1024185bytes SHA65a469be8161b192abfc836ce99c1029972177570b173beab02d0dbe2cb9e50f.
+  Native48-byte isolation/recovery/collision proofs above pass; original
+  creature255/cast40/intro5/map17 compiled gates and local checks pass.
+- Actual Chromium controller route24/24 rows completes around the new street
+  wall, with final Up blocked outside the butter front. Screenshot
+  park-frontage-v66-browser-blocked.png shows the observed scene. Manual scoped
+  measurement lasted43.493seconds (NOT the180seconds on the route button).
+  Report169062dc424343afbaa372b10d79100a:2598 executed/video frames,5219 visible
+  ticks, zero debt/mismatch/dropped source frames/underruns/warmup and final
+  audio acknowledgment. Controller schedule latenessmax3.393ms is not guest
+  key consumption/physical response proof. Owned tab/audio/server18790 stopped.
+- Sites57 sourcead385f54b7d08cd272847a16b046c77dd0f4e1b5, saved
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_cca262024168819183519176da233480.
+  Deploymentappgdep_6ad009c34b1c819190ae7846f8faa1db succeeded23:01:32UTC.
+  Archivec2a3699db26c65560a0a80b4939ec6fcaec32e5b0c42fd58c6cfba30c19ea4cf
+  passes88-file audit: no commercial ROM/private saves/fixture/ELF/movie/ZIP/
+  AppleDouble; approved original SFMM homebrew unchanged. All15 runtime files
+  and hosting configuration exact; public audience/auth/storage retained.
+- Both anonymous canonical live resources match local bytes; receiptSHA
+  9478f55c9a2a0b4ebadf4d388a307d9f1351ecb0f704802a50448044ab83217a.
+  Production web BPS decoder reproduces target. Public loader screenshot
+  public-v66-loader-visible.png; no ROM/save imported publicly.
+- This improves one empty stretch using original existing facade art; it does
+  not claim new interiors, architectural art variety approval or complete SF
+  world design. Human approvals0/11 and all remaining gates remain open.
+  Root continues integration preparation for alignment's bounded seed room;
+  next exchange by23:25UTC. User stop October15,18:00 Pacific unchanged.
+  No GitHub workflow run, DB migration, PR merge or new monitor.
