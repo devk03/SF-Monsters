@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 20:32 UTC:
+Current checkpoint — October 14, 2026, 20:43 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v59 / Site 50 is live.
-  Native release source 29293f0; website source b73b5d07. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v60 / Site 51 is live.
+  Native release source aa512a3; website source 5db0a91d. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -576,8 +576,11 @@ Current checkpoint — October 14, 2026, 20:32 UTC:
   First-slice approval is required before campaign expansion.
 - TrolleyKit is grounded: one ROM byte changes from v58; other 411 elevation
   entries remain identical. Fresh native and Chrome battle views pass this fix.
-- Alignment exchange 20:31 UTC; peer is reviewing first-slice map composition
-  read-only for at most 20 minutes. Next exchange by 21:01 UTC.
+- South Park discovery bench has a continuous sidewalk landing; five tile IDs
+  change, with every other ROM byte unchanged. Actual native/browser interaction
+  passes; human art review remains pending. Safari smoke was rejected as hidden.
+- Alignment exchange 20:40–20:41 UTC identified the stock Birch intro figure
+  under NAVAL dialogue as the next cast replacement. Next check by 21:10 UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -799,8 +802,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.59-creature-placement-preview; target3c4950c727ef1bdd84487245571e6342a349ed47a169fa997a839a75f28df01f; Site50. Authored creature resources integrated and TrolleyKit grounded. Human approvals remain0/11. |
-| Latest local source build | v59 normal source29293f0 reproduces tested target3c4950c7. All108 visual resources,90bindings,18selectors,18elevations,3palettes,18cries pass. Same-route native save remains byte-identical to v58. |
+| Public build | 0.0.60-park-bench-approach-preview; target3ae1f9d52904d4e1efe3d04785f905b6a92f1c67d8c9bb49a104c2262b1deff6; Site51. Native/browser discovery bench has a joined paved approach. Human approvals remain0/11. |
+| Latest local source build | v60 normal sourceaa512a3 reproduces tested target3ae1f9d5. Whole-ROM diff from v59 changes only five intended map bytes. Existing creature resource gate passes; matched native interaction/save blocks remain identical. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -6029,3 +6032,35 @@ Safari attempt / v60 park approach — October 14, 20:35 UTC:
 - Existing frontage whole-map snapshot correctly detected the five planned lawn
   changes. Its expected baseline now includes only that reviewed landing; the
   frontage assertions and all other map/event/collision protection are retained.
+
+
+v60 / Site 51 acceptance and publication — October 14, 20:43 UTC:
+
+- Draft and normal target3ae1f9d52904d4e1efe3d04785f905b6a92f1c67d8c9bb49a104c2262b1deff6;
+  BPS958259bytes SHA4d8f97ddb8ea223ffc610871241e9f5eebf5c729cf88541582ffa2fdc9daaced.
+  Whole-ROM diff from v59 is exactly five intended map bytes. Other1275 mapwords,
+  every collision/elevation bit and all other ROM bytes/resource addresses remain
+  equal, including events, scripts, doors and graphics. Existing local checks pass.
+- Actual native cold Continue and40.182s controller route reaches17,21 beside
+  bench18,21, sets the one-time flag and awards3 Oran Berries. Full SaveBlock1
+  (15752bytes), SaveBlock2(3884bytes) and party match the same v59 route exactly.
+  This is in-RAM interaction evidence, not an ordinary Save or new round trip.
+- Actual Chrome displays a flush connected landing. Controller A activates the
+  already-claimed branch: "A sunny bench... REBRAND BEFORE DEMO DAY." Own test
+  instance/tab/server stopped. Screenshotpark-v60-browser-bench-repeat.png.
+- Matched40.182s SF before/after clip: park-approach-v60-before-after/comparison.mp4.
+  Human art approval pending; this is not the vanilla Emerald reference gate.
+- Website source5db0a91d7f23acc27987336452b3c42891c83519; Site51 savedversion
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_1290379aca408191b49b923db158d85d;
+  deploymentappgdep_6acfe8e26f588191994d54c711faf3e4 succeeded20:41:23UTC.
+  Clean88-file archive SHA84fef9b59c904636f21d5ec5ef8e740c0ae649514d52ed64ccb9918eb976e68c,
+  no commercial ROM/private saves/AppleDouble. Browser BPS decoder matches exact
+  target. Both changed live resources match local bytes; unchanged15-file runtime
+  matches the audited archive. Live loader screenshotpublic-v60-loader-visible.png.
+  Download control unchanged from v59; no redundant user-folder download needed.
+- Public audience/auth/storage/player progress unchanged. No GitHub Actions.
+  Human full-domain approvals0/11; all campaign/performance/save gates stay open.
+- Alignment's finite intro audit confirms original PuddlePrig already renders,
+  but NAVAL dialogue still accompanies baseline64x64 Birch art (2048rawbytes,
+  dedicated16-color palette). Next: one original full-body Naval intro candidate,
+  retaining current text, fades, platform, monster, player-selection and save flow.

@@ -1,16 +1,16 @@
 {
-  "version": "0.0.59-creature-placement-preview",
+  "version": "0.0.60-park-bench-approach-preview",
   "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. Seven named field-sprite candidates include the clinic pair. Native cleanup, remaining cast/battle portraits, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "3c4950c727ef1bdd84487245571e6342a349ed47a169fa997a839a75f28df01f",
+  "target_sha256": "3ae1f9d52904d4e1efe3d04785f905b6a92f1c67d8c9bb49a104c2262b1deff6",
   "target_bytes": 16777216,
-  "patch_sha256": "8e3774a6d9e88706fb591449d7c1491b856b5ba96fab6dd532e9efc10acc7b69",
-  "patch_bytes": 958258,
+  "patch_sha256": "4d8f97ddb8ea223ffc610871241e9f5eebf5c729cf88541582ffa2fdc9daaced",
+  "patch_bytes": 958259,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "29293f03d763d827892102aa85719afc7451f93c",
+  "source_commit": "aa512a314fed062d29ab7a19c8b22fd52fcdfe58",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
@@ -44,7 +44,7 @@
         "matched": 18
       }
     },
-    "receipt_sha256": "ce9052c71dfa92db3c12cb5f173f56e86cf1b768b9c534a2ac127f7987d52874",
+    "receipt_sha256": "ae122a5a821c78027db0e7f62e003bb306c4ce77b6daf083918909b656f516a6",
     "validator_sha256": "8c6ce93c027270b60ab92812151acbc5885d3c9809f1077ddde586d777ddb8f2",
     "quality_approval": "pending",
     "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
@@ -74,8 +74,8 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "0ce785a7b2d850698271043cf23478a4e47c3550303d3005d3abcbdd51766804",
-    "target_sha256": "85aee32493666a48ca25810cfd83139d797618d5aa300c732d37c603a6b720c9",
+    "input_sha256": "3422f77db6bfd07a14141bea7379111d5b4064c46e17a31612bb8a82bf171ba4",
+    "target_sha256": "cf1157f6472eda5d92befe10c16f026b543589dd3cba948209b5534db9fbb4ea",
     "labels": [
       {
         "symbol": "gText_Pokemon",
