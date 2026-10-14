@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 22:04 UTC:
+Current checkpoint — October 14, 2026, 22:25 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v63 / Site 54 is live.
-  Native release source f8d873e; website source 8bc17cc9. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v64 / Site 55 is live.
+  Native release source 709e295; website source 56f1cb6f. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -588,8 +588,11 @@ Current checkpoint — October 14, 2026, 22:04 UTC:
 - Native JOURNAL now shows current chapter objective from existing state and
   location, preserves Save row, returns cleanly to menu/field, and survives ordinary
   C7 save/reload. Human interface acceptance and the complete SF map remain open.
-- Alignment independently verified four inert cached ROM-pointer relocations;
-  next first-slice priority review requested21:50UTC. Next check by22:20UTC.
+- Guide AREA now uses a geographic SF map and original courier marker. Actual
+  two/one/no-wild-habitat scenarios and five player-parent contexts pass native
+  checks; Chrome displays it and returns to the Guide. Art approval remains open.
+- Alignment map audit completed; new original-Garry slot/palette safety review
+  requested22:24UTC. Next alignment check by22:54UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -811,8 +814,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.63-field-journal-preview; target663539f154c5456caa4b17b13501f0b4b58a4f58447d30136b2cd750278451dd; Site54. Read-only portable chapter journal, original Naval intro/field figures and integrated creature art. Human approvals remain0/11. |
-| Latest local source build | v63 normal sourcef8d873e reproduces tested target663539f1. Field cast36/36, intro5/5 and creature255 controls pass. Journal fresh-game/older-save/badge UI, ordinary C7 save/reload, read-only gameplay and actual Chrome controls pass scoped checks. |
+| Public build | 0.0.64-sf-habitat-map-preview; target32b575128a803e44d4f1d2c81a94294496b2d365be215fc190a14fd324ea5686; Site55. Geographic SF habitat map/player marker, portable journal, original Naval and creature art. Human approvals remain0/11. |
+| Latest local source build | v64 normal source709e295 reproduces tested target32b57512. Map17/17, cast36/36, intro5/5 and creature255 controls pass. Scoped native habitats/five player parents/C8 travel-save-reload and actual Chrome map/return checks pass; full performance/art gates remain open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -6377,3 +6380,62 @@ v64 habitat integration controls — October14,22:17UTC:
   This is scoped native evidence, not all150-monster/campaign/art acceptance.
 - Interior native marker/save checks and browser/matched review still pending.
   Public remainsv63/Site54; full human approvals0/11 and all broader gates open.
+
+
+v64 native/browser acceptance — October14,22:23UTC:
+
+- Actual native Guide AREA verifies Binpossum both SF maps, Pinepip Sunset only
+  (native species298), Hushmoth Park only(species392), and zero special areas.
+  These three actual wild cases plus gift-starter unknown complement the bounded
+  production-header tests; all150 species are not claimed as checked.
+- Actual ordinary saved-context Continue opens AREA from Sunset, South Park,
+  clinic and gym. A new normal walk into the apartment, ordinaryC8 Save and cold
+  Continue supplies the fifth context. All five map pairs/sections/cursor/icon
+  values match native anchors(8,10)/(19,7), cavefalse. Full receipt SHA
+  4230044e712c361547740d83cea2a2b326f3dc39391e212617c920c02aa2b10b.
+- Apartment travel changes declared location/warps, friendship-step variable
+  0x402A91→103 and GAME_STAT_STEPS347→360. All other declared domains remain exact;
+  save counter/stat increment once. Initial overly strict location-only assertion
+  failed; exact walking counters were checked against native definitions. No
+  blanket variable/stat exclusion and no stationary/cross-platform roundtrip claim.
+- Chrome displays the SF map with both habitat glows; normal B returns to actual
+  Binpossum info. Ten-second visible smoke597video/1200ticks, zero audio drops/
+  underruns/warmup/frame-debt/mismatch, final ACK. Two DOM events max69.4ms dispatch,
+  max4.9ms dispatch-to-submit. Scoped pipeline receipt SHA
+  dea10a55a4b66630f26812493e8b75f152ea36d5a1db6f0c09222578e78e4a17.
+  Screenshot sf-map-v64-browser-two-habitats.png. Own emulator/audio/tab/server stopped.
+- Matched31.543s controller before/after (SFv63 inherited geography vsSFv64 SF map):
+  sf-map-v64-before-after/comparison.mp4 SHA
+  0bf4d58183168a043b54e4ec4f329deef886eaa6a298141c92605951943256d6.
+  Both complete native240x160 captures share input/clock/frame count. Native PCM
+  differs; both audio tracks retained, unscored. This is not a vanilla Emerald
+  reference gate. Art/likeness/geography readability approval remains pending.
+- Normal source709e295017c3aa9eae40ee645d6e3cde957ae246 reproduces tested target
+  32b575128a803e44d4f1d2c81a94294496b2d365be215fc190a14fd324ea5686;
+  BPS1021231bytes SHA3dcf90344c33f8209056453e28e6e67127fe20829f83364835099c6928d2c5ad.
+  Compiled map17/17, cast36/36, intro5/5 and creature255 controls pass; full local
+  checks pass. Publication pending; public staysv63/Site54. Human0/11; full16hub
+  interactive map/campaign/device/performance/save gates remain open. No CI runs.
+
+
+v64 / Site55 verified and published — October14,22:25UTC:
+
+- Website source56f1cb6f59d2fb888f3877db31ce5fbf751ab24f; saved Site55 version
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_22de2efae17881918f308bf02793a274;
+  deploymentappgdep_6ad000f8d0408191a770be6a687e7f2f succeeded22:24:00UTC.
+  Clean88-file archive SHA1142aba7e4e0f42f6cdc3315b3a7204d07e621a89404fbb561d23c753cd59c98;
+  no commercial cartridge/private saves/AppleDouble. Actual production BPS decoder
+  reproduces exact target32b57512. Both changed canonical live resources match local
+  bytes; receipt SHA4880300f61fb28cafbce3e19760a36d7ea2390a1bf8fcc223ecbd14a73c1e96b.
+  Unchanged15-file runtime/hosting match; public audience/auth/storage retained.
+  Live screenshotpublic-v64-loader-visible.png; no ROM/save imported publicly.
+- Original SF geographic outline, two first-slice habitat entries, courier head
+  and source-derived player/encounter tables are integrated; geometry/art/habitat
+  clip approval remains pending. This does not complete the sixteen-hub map,
+  full interface, campaign, native/device/performance or50checkpoint gates.
+  Full human approvals remain0/11. No GitHub Actions, DB migration or new monitor.
+- Alignment check22:24UTC shared all native/browser/save evidence and assigned a
+  finite20minute read-only Garry Tan field-sprite slot/palette/cache safety audit.
+  Remaining Jonathan/Dylan/Garry field placeholders are visible first-slice art
+  gaps. Root owns research/art/implementation/build/publication; next check by
+  22:54UTC. October15,18:00 Pacific stop remains active.
