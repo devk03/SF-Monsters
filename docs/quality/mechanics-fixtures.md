@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **646 independently specified scenarios**, including
-**57 double-battle interactions**. All646 pass on the approved Emerald reference
+The catalogs contain **656 independently specified scenarios**, including
+**57 double-battle interactions**. All656 pass on the approved Emerald reference
 and current SFv51:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases. This is partial evidence.
+action-order cases,319 type-effect,54 accuracy,23 critical,16 PP,14 HP and38 status cases, plus55 capture-command and8 capture-to-delivery chain cases, plus10 move-script scenarios. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -363,3 +363,27 @@ preflight to verify refusal. This bypasses actual bag UI and the result-script
 scene; it is not proof of that handler's no-spend branch. No bag decrement, Dex
 registration, actual controller synchronization, whole-turn or save/export gate
 is claimed. Total646/57 remains partial mechanics evidence.
+
+
+## Native move-effect interpreter
+
+`move-pipeline.json` contains ten independently specified executions of actual
+BattleScript_EffectHit/BurnHit bytecode through the entry of BattleScript_MoveEnd.
+Unlike isolated arithmetic commands, the interpreter sequences attack cancellation,
+accuracy, PP/Pressure, critical calculation, base damage, STAB/type effects, random
+adjustment, HP and secondary-effect selection/prevention. Cases cover neutral/STAB,
+4x Water, Ghost immunity, critical/BattleArmor, Pressure, a Tackle miss, Ember burn
+and Fire-type prevention, with exact final HP/PP/status/flags/RNG.
+
+The unchanged C helper is driven through a finite PTY transport. Only whitelisted
+controller writes/animation/audio commands are ACKed; requests needing a response
+fail closed. Queued PP/HP/status packet values and native opcode paths must match
+the independent oracle. ABI proofs use agbcc, scratch canaries detect overflow,
+duplicate effective setups are rejected before execution and ROM hashes are
+rechecked after driver close. Eight negative/schema/path/protocol tests pass.
+
+Evidence `mechanics-v51-move-pipeline-split-transport`:10/10 reference/v51, following
+main review and extraction of the bounded transport into its own module. Stop is
+BEFORE move-end: residuals, fainting, party synchronization, obedience, next action,
+full turns and all presentation/performance/save behavior remain outside this
+profile. It does not close the full mechanics gate. Total656/57 doubles.

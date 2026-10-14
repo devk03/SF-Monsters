@@ -780,7 +780,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
-| Remaining system gates | 646 independent native scenarios pass,57 doubles, including all289 native ordered type pairs,55 capture-command outcomes and8 capture-to-party/PC function chains. Actual bag/Dex/save integration, SF species mappings, complete turn resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 656 independent native scenarios pass,57 doubles: includes all289 native ordered type pairs,55 capture outcomes,8 delivery chains and10 native move-effect-script scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/residual/full-turn resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4820,3 +4820,20 @@ Capture-to-party/PC delivery checkpoint:
 - Alignment returned ten passing bounded move-effect-script scenarios. Main
   requested duplicate-state and post-run ROM-integrity guards; both added and
   fresh native evidence passes. Main review/commit pending; not counted yet.
+
+
+Native move-script integration checkpoint:
+
+- Main reviewed alignment's ten independently specified actual move-effect-script
+  scenarios, requested effective-state deduplication and post-run ROM hashes, and
+  verified both guards. Native interpreter executes cancellation/accuracy/PP/crit/
+  damage/STAB/type/randomHP/secondary paths to MoveEnd entry. Queued controller
+  PP/HP/status payloads, script opcodes, exact RNG and scratch canaries pass.
+- Extracted finite native PTY transport for coherent commits and reuse. Final
+  main-reviewed source passes10/10 reference/v51 at
+  mechanics-v51-move-pipeline-split-transport. Eight focused guards/fullcheck.sh
+  pass. Total656/57 doubles; no full turn, fainting, residual, party sync,
+  presentation/performance or durable-save claim. All human full domains0/11.
+- Continue native move-end/residual verification with the alignment chat and
+  hands-on desktop browser save roundtrips, keeping existing public guest saves
+  isolated from QA. Public patch remainsv51/Site41; tooling needs no redeploy.
