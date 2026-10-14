@@ -763,7 +763,7 @@ Current snapshot (October 13, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
-| Latest local source build | v43 target, source25603f2. Normal compilation/BPS/all local checks pass. Native/WASM2048 healing frames match RGB/PCM/Flash; HP4/31 becomes31/31, EmberPP16 becomes25, money/items/badge/stage retained. Native Down replay verifies return control. |
+| Latest local source build | v44 target735197f21e88fe58b6d0d6ee86329b816cf98599c0621cd58719707742dadc6b, source56deb55. Normal build/BPS/local checks pass; native/WASM18000-frame music PCM/Flash and2048-frame healing RGB/PCM/Flash match. Public remainsv43 until the pending deployment. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -4003,3 +4003,32 @@ v44 build, regression and loop-evidence checkpoint:
   Protocol: docs/quality/clinic-music-review.md. Final review packet, public
   deployment and user review remain pending. Latest human score stays2/4,
   full approvals0/11; full campaign/system gates remain unchanged.
+
+v44 review packet and release preparation:
+
+- Final private packet: clinic-arrangement-v44-final-three-loop-review under
+  .tools/benchmarks, with raw WAVs, separate level-matched MP3s and receipt.
+  SF three observed periods are74.1869316s each; reference37.1018372/37.0850945/
+  37.0850945s. Reference RMS2513.8 is attenuated to SF RMS1453.88 with one
+  fixed gain; no limiter/crossfade. These are first-track runtime periods with
+  independent static multitrack duration checks, not quality/underrun approval.
+- A49-second old/new review plays24s v43,1s silence,24s v44. Both retain the
+  same melody/instruments and global three-period RMS matching. Full before/
+  after files remain available. Asked user for a0-4 clinic-subset score and gap;
+  pending. Latest explicit score remains2/4, full-domain approvals0/11.
+- Actual entry/healing attempt initially ended one tile short, HP unchanged;
+  preserved diagnostic. Corrected Up96 to112 reaches6,5 and restores HP/PP.
+  Valid46.48s native clip: clinic-arrangement-v44-entry-healing-valid/review.mp4.
+  Door fade pauses are frames136–147 and410–421; healing pauses BGM734–899.
+  End state has fanfare counter0 and seven BGM tracks active/unpaused. These
+  transition intervals are observed behavior, not a browser deadline certificate.
+- Additional native Down replay proves released control at6,6. Same-input
+  genuine34.29s healing comparison is clinic-arrangement-v44-heal-paired-review.
+- Public publishing is underway through the existing Site identity/audience.
+  Old temporary Site checkout has unreadable Git metadata; it is preserved.
+  Supported helper restored the same remote source into a new empty checkout,
+  retaining source919cec27e674fced3219c3176e43befbb22d70fa before edits.
+- Alignment reviewer recommends Scott Wu's original trainer portrait next:
+  the current first-gym trainer still selects LEADER_BRAWLY. Bound next work to
+  one original portrait integrated into the existing encounter, preserving team,
+  AI, rewards, flags and saves; do not expand campaign while slice review waits.
