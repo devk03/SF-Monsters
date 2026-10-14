@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **119 independently specified scenarios**, including
-**31 double-battle interactions**. All119 pass on the approved Emerald reference
+The catalogs contain **191 independently specified scenarios**, including
+**31 double-battle interactions**. All191 pass on the approved Emerald reference
 and SFv48:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases. This is partial evidence.
+action-order cases, plus72 type-effect cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -153,3 +153,25 @@ After shared setup extraction, all earlier catalogs pass again in
 `mechanics-v48-action-order-guarded`. Total119 scenarios/31 doubles. At least181
 additional broad scenarios/19 doubles remain; a count never replaces required
 mechanics coverage or controller-only gameplay and human quality approvals.
+
+
+## Type effects, STAB and blocking flags
+
+`type-effects.json` adds 72 TypeCalc scenarios, using the main mechanics runner
+with `--cases data/quality/mechanics/type-effects.json`. Each has independent
+expectations for both intermediate damage and result flags. Coverage includes
+all 17 standard attacking types, seven basic immunities, dual-type stacking and
+cancellation, STAB and integer floors, Foresight, Levitate, Wonder Guard,
+Struggle and minimum damage. This is not the full ordered type matrix.
+
+A blocked attack need not have zero intermediate damage: Levitate can return
+missed+immune flags while preserving that value; Wonder Guard can mark a
+neutral/resisted attack missed. Later battle scripts determine actual HP loss.
+The fixture checks these separately and does not claim complete HP resolution.
+
+The native BattlePokemon ABI now explicitly initializes both types and status2.
+One redundant monotype scenario was rejected before execution and omitted; the
+failed evidence is preserved and adds no count. All 119 earlier cases pass after
+this shared change. Evidence: `mechanics-v48-type-effects-deduplicated` and
+`mechanics-v48-{base,turn,stats,action}-after-types`. Total 191 / 300 scenarios,
+31 / 50 doubles; all other mechanics, campaign and quality gates stay open.

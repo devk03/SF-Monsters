@@ -16,7 +16,7 @@ sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from bootstrap import EMERALD_REVISION
 
 FUNCTION = 'CalculateBaseDamage'
-FUNCTIONS = {FUNCTION, 'GetWhoStrikesFirst'}
+FUNCTIONS = {FUNCTION, 'GetWhoStrikesFirst', 'TypeCalc'}
 GLOBALS = {'gBattleMons': 352, 'gBattlerPositions': 4, 'gBattlersCount': 1,
            'gBattlerAttacker': 1, 'gBattlerTarget': 1, 'gActiveBattler': 1,
            'gAbsentBattlerFlags': 1, 'gCurrentMove': 2, 'gBattleTypeFlags': 4,
@@ -24,7 +24,7 @@ GLOBALS = {'gBattleMons': 352, 'gBattlerPositions': 4, 'gBattlersCount': 1,
            'gBattleResources': 4, 'gBattleMovePower': 2, 'gRngValue': 4,
            'gBattleStruct': 4, 'gProtectStructs': 64, 'gChosenActionByBattler': 4,
            'gRandomTurnNumber': 2, 'gActionsByTurnOrder': 4,
-           'gBattlerByTurnOrder': 4, 'gBattleMainFunc': 4}
+           'gBattlerByTurnOrder': 4, 'gBattleMainFunc': 4, 'gBattleMoveDamage': 4}
 
 
 def digest(path):
@@ -83,7 +83,8 @@ def battle_mon(changes, resolve):
     fields = {'species': (0, 'H', 1), 'attack': (2, 'H', 100), 'defense': (4, 'H', 100),
               'speed': (6, 'H', 100), 'sp_attack': (8, 'H', 100), 'sp_defense': (10, 'H', 100),
               'ability': (32, 'B', 0), 'hp': (40, 'H', 90), 'level': (42, 'B', 50),
-              'max_hp': (44, 'H', 90), 'item': (46, 'H', 0), 'status': (76, 'I', 0)}
+              'max_hp': (44, 'H', 90), 'item': (46, 'H', 0), 'status': (76, 'I', 0),
+              'type1': (33, 'B', 0), 'type2': (34, 'B', 0), 'status2': (80, 'I', 0)}
     stages = {'attack_stage': 25, 'defense_stage': 26, 'speed_stage': 27,
               'sp_attack_stage': 28, 'sp_defense_stage': 29}
     if set(changes) - (set(fields) | set(stages) | {'move'}):
@@ -152,9 +153,14 @@ def commands(case, syms, resolve, function=FUNCTION):
             resolve(case.get('side_status', 0)), case.get('power_override', 0), 0, 0, 1]
     if function == 'GetWhoStrikesFirst':
         args = [0, 1, int(case.get('ignore_moves', False)), 0, 0, 0, 0, 0]
-    detail = 'gBattleMovePower' if function == FUNCTION else 'gRandomTurnNumber'
+    if function == 'TypeCalc':
+        lines.append(f'write {syms["gBattleMoveDamage"][0]:x} ' + struct.pack('<i', case.get('damage', 100)).hex())
+        args = [move, 0, 1, 0, 0, 0, 0, 0]
+    detail = {FUNCTION: 'gBattleMovePower', 'GetWhoStrikesFirst': 'gRandomTurnNumber',
+              'TypeCalc': 'gBattleMoveDamage'}[function]
     lines += ['call ' + f'{syms[function][0]:x} ' + ' '.join(f'{arg:x}' for arg in args),
-              f'read {syms[detail][0]:x} 2', f'read {syms["gRngValue"][0]:x} 4']
+              f'read {syms[detail][0]:x} ' + ('4' if function == 'TypeCalc' else '2'),
+              f'read {syms["gRngValue"][0]:x} 4']
     return '\n'.join(lines) + '\n'
 
 
@@ -177,6 +183,13 @@ def validate_cases(document):
             allowed = {'id', 'expected', 'derivation', 'attacker', 'defender', 'ally',
                        'opponent_ally', 'double', 'absent', 'weather', 'rng_seed',
                        'expected_rng', 'quick_claw_draw', 'ignore_moves'}
+        if function == 'TypeCalc':
+            allowed = {'id', 'expected', 'expected_damage', 'damage', 'derivation', 'move',
+                       'attacker', 'defender'}
+            for key in ('damage', 'expected_damage'):
+                value = case.get(key, 100 if key == 'damage' else None)
+                if type(value) is not int or not 0 <= value <= 1000000:
+                    raise ValueError('Type fixtures need explicit nonnegative native damage expectations.')
         if set(case) - allowed:
             raise ValueError('Unknown fixture field; reject ignored or misspelled controls.')
         if type(case['expected']) is not int or case['expected'] < 0 or not case.get('derivation'):
@@ -252,8 +265,9 @@ def run_side(label, rom, elf, state, executable, cases, resolve, output, functio
         if not match:
             raise ValueError('Fixture did not return cleanly.')
         before, after = [int.from_bytes(bytes.fromhex(value), 'little') for value in (before, after)]
+        detail = {FUNCTION: 'move_power', 'GetWhoStrikesFirst': 'quick_claw_draw', 'TypeCalc': 'damage'}[function]
         observed.append({'id': case['id'], 'value': int(match[1], 16),
-                         'move_power' if function == FUNCTION else 'quick_claw_draw': int.from_bytes(bytes.fromhex(power), 'little'),
+                         detail: int.from_bytes(bytes.fromhex(power), 'little'),
                          'instructions': int(match[2]), 'rng_before': before, 'rng_after': after,
                          'rng_pass': before == case.get('rng_seed', before)
                              and after == case.get('expected_rng', before)})
@@ -309,7 +323,11 @@ def main():
                         'candidate': candidate['value'], 'double': case.get('double', False),
                         'rng_pass': reference['rng_pass'] and candidate['rng_pass'],
                         'pass': reference['value'] == candidate['value'] == case['expected']
-                            and reference['rng_pass'] and candidate['rng_pass']})
+                            and reference['rng_pass'] and candidate['rng_pass']
+                            and (function != 'TypeCalc' or reference['damage'] == candidate['damage'] == case['expected_damage'])})
+        if function == 'TypeCalc':
+            results[-1].update({'reference_damage': reference['damage'], 'candidate_damage': candidate['damage'],
+                                'expected_damage': case['expected_damage']})
     evidence.update({'results': results, 'passed': sum(row['pass'] for row in results), 'total': len(results),
                      'full_mechanics_gate_complete': False, 'human_quality_approval': 'pending'})
     (output / 'result.json').write_text(json.dumps(evidence, indent=2) + '\n')

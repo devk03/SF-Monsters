@@ -58,6 +58,21 @@ class MechanicsFixtures(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'supported'):
             validate_cases({**document, 'function': 'ArbitraryRoutine'})
 
+    def test_type_effects_require_damage_and_flags_as_separate_oracles(self):
+        document = {'function': 'TypeCalc', 'cases': [{
+            'id': 'levitate', 'expected': 9, 'expected_damage': 100,
+            'defender': {'ability': 26}, 'derivation': 'Blocked flag9 preserves intermediate100.'}]}
+        validate_cases(document)
+        for field, value in [('expected_damage', None), ('expected_damage', True),
+                             ('damage', -1), ('damage', 1000001), ('double', True)]:
+            bad = deepcopy(document)
+            bad['cases'][0][field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                validate_cases(bad)
+        raw = battle_mon({'type1': 10, 'type2': 12, 'status2': 1 << 29}, int)
+        self.assertEqual(raw[33:35], bytes([10, 12]))
+        self.assertEqual(struct.unpack_from('<I', raw, 80)[0], 1 << 29)
+
 
 
 if __name__ == '__main__':

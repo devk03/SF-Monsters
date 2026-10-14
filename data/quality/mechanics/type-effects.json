@@ -1,0 +1,1167 @@
+{
+  "function": "TypeCalc",
+  "cases": [
+    {
+      "id": "fighting-super-normal",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "FIGHTING is2x against monotype NORMAL;100*2=200, super flag2."
+    },
+    {
+      "id": "flying-super-fighting",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "FLYING is2x against monotype FIGHTING;100*2=200, super flag2."
+    },
+    {
+      "id": "poison-super-grass",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "POISON is2x against monotype GRASS;100*2=200, super flag2."
+    },
+    {
+      "id": "ground-super-electric",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_ELECTRIC",
+        "type2": "TYPE_ELECTRIC"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "GROUND is2x against monotype ELECTRIC;100*2=200, super flag2."
+    },
+    {
+      "id": "rock-super-fire",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "ROCK is2x against monotype FIRE;100*2=200, super flag2."
+    },
+    {
+      "id": "bug-super-psychic",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "BUG is2x against monotype PSYCHIC;100*2=200, super flag2."
+    },
+    {
+      "id": "ghost-super-ghost",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "GHOST is2x against monotype GHOST;100*2=200, super flag2."
+    },
+    {
+      "id": "steel-super-ice",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_ICE",
+        "type2": "TYPE_ICE"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "STEEL is2x against monotype ICE;100*2=200, super flag2."
+    },
+    {
+      "id": "fire-super-grass",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "FIRE is2x against monotype GRASS;100*2=200, super flag2."
+    },
+    {
+      "id": "water-super-fire",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "WATER is2x against monotype FIRE;100*2=200, super flag2."
+    },
+    {
+      "id": "grass-super-water",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "GRASS is2x against monotype WATER;100*2=200, super flag2."
+    },
+    {
+      "id": "electric-super-water",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "ELECTRIC is2x against monotype WATER;100*2=200, super flag2."
+    },
+    {
+      "id": "psychic-super-fighting",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "PSYCHIC is2x against monotype FIGHTING;100*2=200, super flag2."
+    },
+    {
+      "id": "ice-super-dragon",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "ICE is2x against monotype DRAGON;100*2=200, super flag2."
+    },
+    {
+      "id": "dragon-super-dragon",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_DRAGON"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "DRAGON is2x against monotype DRAGON;100*2=200, super flag2."
+    },
+    {
+      "id": "dark-super-psychic",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "DARK is2x against monotype PSYCHIC;100*2=200, super flag2."
+    },
+    {
+      "id": "normal-resisted-rock",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "NORMAL is0.5x against monotype ROCK;100/2=50, resisted flag4."
+    },
+    {
+      "id": "fighting-resisted-poison",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "FIGHTING is0.5x against monotype POISON;100/2=50, resisted flag4."
+    },
+    {
+      "id": "flying-resisted-rock",
+      "move": "MOVE_GUST",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "FLYING is0.5x against monotype ROCK;100/2=50, resisted flag4."
+    },
+    {
+      "id": "poison-resisted-poison",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_POISON",
+        "type2": "TYPE_POISON"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "POISON is0.5x against monotype POISON;100/2=50, resisted flag4."
+    },
+    {
+      "id": "ground-resisted-grass",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "GROUND is0.5x against monotype GRASS;100/2=50, resisted flag4."
+    },
+    {
+      "id": "rock-resisted-fighting",
+      "move": "MOVE_ROCK_THROW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "ROCK is0.5x against monotype FIGHTING;100/2=50, resisted flag4."
+    },
+    {
+      "id": "bug-resisted-fire",
+      "move": "MOVE_SIGNAL_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "BUG is0.5x against monotype FIRE;100/2=50, resisted flag4."
+    },
+    {
+      "id": "ghost-resisted-dark",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "GHOST is0.5x against monotype DARK;100/2=50, resisted flag4."
+    },
+    {
+      "id": "steel-resisted-steel",
+      "move": "MOVE_METAL_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "STEEL is0.5x against monotype STEEL;100/2=50, resisted flag4."
+    },
+    {
+      "id": "fire-resisted-water",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "FIRE is0.5x against monotype WATER;100/2=50, resisted flag4."
+    },
+    {
+      "id": "water-resisted-grass",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "WATER is0.5x against monotype GRASS;100/2=50, resisted flag4."
+    },
+    {
+      "id": "grass-resisted-fire",
+      "move": "MOVE_VINE_WHIP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "GRASS is0.5x against monotype FIRE;100/2=50, resisted flag4."
+    },
+    {
+      "id": "electric-resisted-grass",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "ELECTRIC is0.5x against monotype GRASS;100/2=50, resisted flag4."
+    },
+    {
+      "id": "psychic-resisted-psychic",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_PSYCHIC",
+        "type2": "TYPE_PSYCHIC"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "PSYCHIC is0.5x against monotype PSYCHIC;100/2=50, resisted flag4."
+    },
+    {
+      "id": "ice-resisted-water",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "ICE is0.5x against monotype WATER;100/2=50, resisted flag4."
+    },
+    {
+      "id": "dragon-resisted-steel",
+      "move": "MOVE_DRAGON_CLAW",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "DRAGON is0.5x against monotype STEEL;100/2=50, resisted flag4."
+    },
+    {
+      "id": "dark-resisted-fighting",
+      "move": "MOVE_BITE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIGHTING",
+        "type2": "TYPE_FIGHTING"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "DARK is0.5x against monotype FIGHTING;100/2=50, resisted flag4."
+    },
+    {
+      "id": "normal-immune-ghost",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "NORMAL cannot affect GHOST; zero damage, immunity flag8."
+    },
+    {
+      "id": "fighting-immune-ghost",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "FIGHTING cannot affect GHOST; zero damage, immunity flag8."
+    },
+    {
+      "id": "poison-immune-steel",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_STEEL",
+        "type2": "TYPE_STEEL"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "POISON cannot affect STEEL; zero damage, immunity flag8."
+    },
+    {
+      "id": "ground-immune-flying",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FLYING",
+        "type2": "TYPE_FLYING"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "GROUND cannot affect FLYING; zero damage, immunity flag8."
+    },
+    {
+      "id": "electric-immune-ground",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GROUND",
+        "type2": "TYPE_GROUND"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "ELECTRIC cannot affect GROUND; zero damage, immunity flag8."
+    },
+    {
+      "id": "psychic-immune-dark",
+      "move": "MOVE_CONFUSION",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_DARK",
+        "type2": "TYPE_DARK"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "PSYCHIC cannot affect DARK; zero damage, immunity flag8."
+    },
+    {
+      "id": "ghost-immune-normal",
+      "move": "MOVE_SHADOW_BALL",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "GHOST cannot affect NORMAL; zero damage, immunity flag8."
+    },
+    {
+      "id": "fire-neutral-normal",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Fire has neutral effectiveness against Normal; no STAB."
+    },
+    {
+      "id": "electric-neutral-normal",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Electric has neutral effectiveness against Normal; no STAB."
+    },
+    {
+      "id": "fire-double-weakness",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_ICE"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 400,
+      "derivation": "Two2x weaknesses stack to4x, super flag stays2."
+    },
+    {
+      "id": "fire-double-resistance",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_DRAGON"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 25,
+      "derivation": "Two0.5x resistances stack toquarter damage."
+    },
+    {
+      "id": "fire-cancelled-dual",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Water resistance and Grass weakness cancel; flags cancel too."
+    },
+    {
+      "id": "water-double-weakness",
+      "move": "MOVE_WATER_GUN",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_ROCK"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 400,
+      "derivation": "Water2x against both Fire and Rock gives4x."
+    },
+    {
+      "id": "electric-double-weakness",
+      "move": "MOVE_THUNDER_SHOCK",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_FLYING"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 400,
+      "derivation": "Electric2x against Water and Flying gives4x."
+    },
+    {
+      "id": "ice-double-weakness",
+      "move": "MOVE_ICE_BEAM",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_DRAGON",
+        "type2": "TYPE_FLYING"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 400,
+      "derivation": "Ice2x against Dragon and Flying gives4x."
+    },
+    {
+      "id": "ground-immunity-beats-fire-weakness",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FLYING"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "Flying immunity overrides Fire weakness and clears super flag."
+    },
+    {
+      "id": "poison-immunity-beats-grass-weakness",
+      "move": "MOVE_POISON_STING",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_STEEL"
+      },
+      "damage": 100,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "Steel immunity overrides Grass weakness."
+    },
+    {
+      "id": "stab-first-type",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 150,
+      "derivation": "First offensive type Fire grants100*1.5=150."
+    },
+    {
+      "id": "stab-second-type",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_FIRE"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 150,
+      "derivation": "Second offensive type Fire grants the same single bonus."
+    },
+    {
+      "id": "stab-duplicate-type-once",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_FIRE"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 150,
+      "derivation": "Two matching offensive types grant one STAB bonus."
+    },
+    {
+      "id": "stab-super-effective",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 300,
+      "derivation": "100*1.5*2=300."
+    },
+    {
+      "id": "stab-resisted",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 75,
+      "derivation": "100*1.5/2=75."
+    },
+    {
+      "id": "stab-odd-damage-floor",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "damage": 101,
+      "expected": 0,
+      "expected_damage": 151,
+      "derivation": "floor101*15/10=151."
+    },
+    {
+      "id": "stab-before-resistance-rounding",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_FIRE",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 3,
+      "expected": 4,
+      "expected_damage": 2,
+      "derivation": "floor3*1.5=4, thenhalf=2."
+    },
+    {
+      "id": "levitate-blocks-ground",
+      "move": "MOVE_EARTHQUAKE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": "ABILITY_LEVITATE"
+      },
+      "damage": 100,
+      "expected": 9,
+      "expected_damage": 100,
+      "derivation": "Levitate sets missed+immune9 without zeroing intermediate damage; later script blocks HP loss."
+    },
+    {
+      "id": "levitate-does-not-block-fire",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": "ABILITY_LEVITATE"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Levitate only blocks Ground; Fire remains super effective."
+    },
+    {
+      "id": "wonder-guard-neutral",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL",
+        "ability": "ABILITY_WONDER_GUARD"
+      },
+      "damage": 100,
+      "expected": 1,
+      "expected_damage": 100,
+      "derivation": "WonderGuard neutral damage is marked missed; intermediate damage remains100."
+    },
+    {
+      "id": "wonder-guard-resisted",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER",
+        "ability": "ABILITY_WONDER_GUARD"
+      },
+      "damage": 100,
+      "expected": 5,
+      "expected_damage": 50,
+      "derivation": "Resisted4 plus missed1; intermediate damage50 is not an HP change."
+    },
+    {
+      "id": "wonder-guard-super",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_GRASS",
+        "ability": "ABILITY_WONDER_GUARD"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 200,
+      "derivation": "Super-effective attack passes WonderGuard."
+    },
+    {
+      "id": "wonder-guard-dual-cancel",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_GRASS",
+        "ability": "ABILITY_WONDER_GUARD"
+      },
+      "damage": 100,
+      "expected": 1,
+      "expected_damage": 100,
+      "derivation": "Dual types cancel to neutral so WonderGuard blocks."
+    },
+    {
+      "id": "wonder-guard-fourfold",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GRASS",
+        "type2": "TYPE_ICE",
+        "ability": "ABILITY_WONDER_GUARD"
+      },
+      "damage": 100,
+      "expected": 2,
+      "expected_damage": 400,
+      "derivation": "Fourfold weakness passes WonderGuard."
+    },
+    {
+      "id": "foresight-normal-ghost",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "status2": "STATUS2_FORESIGHT"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Foresight bypasses Ghost immunity for Normal."
+    },
+    {
+      "id": "foresight-fighting-ghost",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST",
+        "status2": "STATUS2_FORESIGHT"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Foresight also bypasses Ghost immunity for Fighting."
+    },
+    {
+      "id": "foresight-retains-rock-resistance",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_ROCK",
+        "status2": "STATUS2_FORESIGHT"
+      },
+      "damage": 100,
+      "expected": 4,
+      "expected_damage": 50,
+      "derivation": "Foresight bypasses Ghost immunity but Rock resistance still applies."
+    },
+    {
+      "id": "struggle-bypasses-ghost",
+      "move": "MOVE_STRUGGLE",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST"
+      },
+      "damage": 100,
+      "expected": 0,
+      "expected_damage": 100,
+      "derivation": "Struggle returns before type calculation and does not inherit Normal immunity."
+    },
+    {
+      "id": "struggle-bypasses-stab-and-rock",
+      "move": "MOVE_STRUGGLE",
+      "attacker": {
+        "type1": "TYPE_NORMAL",
+        "type2": "TYPE_NORMAL"
+      },
+      "defender": {
+        "type1": "TYPE_ROCK",
+        "type2": "TYPE_ROCK"
+      },
+      "damage": 101,
+      "expected": 0,
+      "expected_damage": 101,
+      "derivation": "Struggle ignores STAB and Rock resistance, preserving101."
+    },
+    {
+      "id": "resistance-minimum-one",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_WATER"
+      },
+      "damage": 1,
+      "expected": 4,
+      "expected_damage": 1,
+      "derivation": "Nonzero type multiplier retains minimum damage1."
+    },
+    {
+      "id": "double-resistance-minimum-one",
+      "move": "MOVE_FLAMETHROWER",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_WATER",
+        "type2": "TYPE_DRAGON"
+      },
+      "damage": 1,
+      "expected": 4,
+      "expected_damage": 1,
+      "derivation": "Each nonzero resisted multiplication retains minimum1."
+    },
+    {
+      "id": "immunity-remains-zero",
+      "move": "MOVE_POUND",
+      "attacker": {
+        "type1": "TYPE_MYSTERY",
+        "type2": "TYPE_MYSTERY"
+      },
+      "defender": {
+        "type1": "TYPE_GHOST",
+        "type2": "TYPE_GHOST"
+      },
+      "damage": 1,
+      "expected": 8,
+      "expected_damage": 0,
+      "derivation": "Zero multiplier is immune even at inputdamage1."
+    }
+  ]
+}

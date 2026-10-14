@@ -775,13 +775,13 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
-| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify119 named scenarios against the reference. |
+| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify191 named scenarios against the reference. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 119 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats,21 complete four-battler action sorts;31 doubles. At least181 additional broad scenarios and19 additional doubles remain, plus type/status/accuracy/resource/full move resolution. Performance, save and full campaign gates stay outstanding. |
-| Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is completing the earned first-gym route. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
+| Remaining system gates | 191 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats,21 complete four-battler action sorts,72 type/STAB/ability interactions;31 doubles. At least109 additional broad scenarios and19 additional doubles remain, plus status/accuracy/resource/full move resolution. Performance, save and full campaign gates stay outstanding. |
+| Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is testing a fresh Water-starter route onv48. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4401,3 +4401,23 @@ Native complete-action-order checkpoint:
   Evidence: mechanics-v48-{base,turn,stats}-after-actions and
   mechanics-v48-action-order-guarded under private benchmarks. Full human
   approval remains0/11; at least181 broad cases/19 doubles remain.
+
+
+Native type-interaction checkpoint:
+
+- 72 distinct scenarios pass actual TypeCalc on reference and v48: one weakness
+  per attacking type that has one, one resistance for each of the 17 standard
+  types, all seven basic immunities, neutral cases, dual-type stacking and
+  cancellation, STAB and integer rounding, Levitate, Wonder Guard, Foresight,
+  Struggle and minimum damage. This is not the entire ordered type matrix.
+- Every scenario checks both result flags and intermediate damage. Levitate and
+  Wonder Guard blocking flags do not necessarily zero the intermediate value;
+  actual subsequent HP resolution remains a separate required gate. No doubles
+  count is added for isolated two-participant type calculations.
+- An initially redundant monotype scenario was rejected by the duplicate-input
+  guard and omitted. Failed evidence is preserved; it is not counted. All 119
+  earlier cases pass after shared ABI/profile changes; full local check.sh passes.
+- Private results: mechanics-v48-type-effects-deduplicated and
+  mechanics-v48-{base,turn,stats,action}-after-types. Public catalog:
+  data/quality/mechanics/type-effects.json. Total 191 scenarios / 31 doubles;
+  at least 109 broad cases / 19 doubles remain. Human approvals stay 0/11.
