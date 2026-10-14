@@ -8,6 +8,28 @@ from park_art import load_buildings, facade_cells, pack_park_cells
 from street_art import load_streets, rotate_pixels, road_edge_variant
 from terrain_art import load_terrain
 from maps import encode_layout
+from house_variants import load_variants
+
+# Existing service doors retain their metatile IDs and recovery coordinates.
+FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
+           (18, 2, 3, 4, 110), (11, 20, 3, 4, 110), (23, 2, 3, 4, 122))
+
+
+def prune_unused_terrain(cells, plan):
+    """Keep IDs stable; reclaim graphics only from unreferenced terrain cells.
+
+    South Park has no tileset animation callback or terrain-changing scripts.
+    Animated service doors occupy facade IDs71/106 and separate reserved VRAM.
+    All street, furniture and architectural cells remain untouched.
+    """
+    used = {park_tile(plan, x, y) - 512
+            for y, row in enumerate(plan['rows']) for x in range(len(row))}
+    used.add(plan['border_tile'] - 512)
+    result = list(cells)
+    for index in range(20, 39):
+        if index not in used:
+            result[index] = (bytes(256), cells[index][1])
+    return result
 
 
 def park_resources(root):
@@ -37,18 +59,26 @@ def park_resources(root):
         (48, 64), Image.Resampling.NEAREST).tobytes()
     cells += facade_cells(annex, 48, 64, 10); flags += [0] * 12
     flags[119:122] = [0x1000] * 3
+    variants = {variant['name']: variant for variant in load_variants(root)}
+    butter = Image.open(root / 'assets/tiles/sunset-rowhouse-butter/native-preview.png').resize(
+        (48, 64), Image.Resampling.NEAREST).tobytes()
+    cells += facade_cells(butter, 48, 64, 11); flags += [0] * 12
+    flags[131:134] = [0x1000] * 3
+    plan = json.loads((root / 'romhack/content/south-park.json').read_text())
+    cells = prune_unused_terrain(cells, plan)
     raw, records, attributes = pack_park_cells(cells, flags)
     if len(raw) // 32 > 504:
         raise ValueError('Park art must reserve the last eight secondary tiles for native doors.')
     # Alpha around facades reveals our own sidewalk, not inherited scenery.
     records = bytearray(records)
     sidewalk = records[19 * 16 + 8:20 * 16]
-    for index in range(40, 122):
+    for index in range(40, len(cells)):
         records[index * 16:index * 16 + 8] = sidewalk
     palettes = bytearray(512)
-    for bank, data in zip((6, 7, 8, 9, 10), (street_palette, terrain_palette,
+    for bank, data in zip((6, 7, 8, 9, 10, 11), (street_palette, terrain_palette,
                                            *building_palettes,
-                                           (root / 'assets/tiles/sunset-rowhouse/house.gbapal').read_bytes())):
+                                           (root / 'assets/tiles/sunset-rowhouse/house.gbapal').read_bytes(),
+                                           variants['butter']['palette'])):
         palettes[bank * 32:(bank + 1) * 32] = data
     return raw, bytes(records), attributes, bytes(palettes)
 
@@ -74,8 +104,7 @@ def park_tile(plan, x, y):
         last_x, last_y = len(plan['rows'][0]) - 1, len(plan['rows']) - 1
         corner = {(0, 0): 7, (last_x, 0): 16, (last_x, last_y): 17, (0, last_y): 18}
         return 532 + corner.get((x, y), 6 if x in (0, last_x) else 5)
-    for left, top, width, height, first in ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
-                                          (11, 12, 3, 4, 110), (11, 20, 3, 4, 110)):
+    for left, top, width, height, first in FACADES:
         if left <= x < left + width and top <= y < top + height:
             return 512 + first + (y - top) * width + x - left
     raise ValueError(f'Unmapped South Park token {token} at {x},{y}.')

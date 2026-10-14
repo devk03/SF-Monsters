@@ -9,7 +9,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from park_art import load_buildings, pack_park_cells, facade_cells
-from park_map import park_resources, park_tile
+from park_map import park_resources, park_tile, prune_unused_terrain, FACADES
 
 
 class ParkResources(unittest.TestCase):
@@ -55,8 +55,8 @@ class ParkResources(unittest.TestCase):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         raw, records, attributes, palettes = park_resources(ROOT)
         self.assertLessEqual(len(raw) // 32, 504)
-        self.assertEqual((len(records), len(attributes), len(palettes)), (122 * 16, 244, 512))
-        flags = struct.unpack('<122H', attributes)
+        self.assertEqual((len(records), len(attributes), len(palettes)), (134 * 16, 268, 512))
+        flags = struct.unpack('<134H', attributes)
         occupied = {(n['x'], n['y']) for n in plan['npcs']}
         start = (13, 6); visited = {start}; queue = deque([start])
         while queue:
@@ -71,18 +71,76 @@ class ParkResources(unittest.TestCase):
         for y, row in enumerate(plan['rows']):
             for x, token in enumerate(row):
                 tile = park_tile(plan, x, y) - 512
-                self.assertIn(tile, range(122))
+                self.assertIn(tile, range(134))
                 if token in 'RP.FGB#T':
                     self.assertEqual(flags[tile] >> 12, 1)
         self.assertEqual((flags[71], flags[106]), (0x1069, 0x1069))
-        for tile in list(range(40, 68)) + list(range(75, 103)) + list(range(110, 119)):
+        for tile in list(range(40, 68)) + list(range(75, 103)) + list(range(110, 119)) + list(range(122, 131)):
             self.assertEqual(flags[tile] >> 12, 0)
-        for tile in list(range(68, 75)) + list(range(103, 110)) + list(range(119, 122)):
+        for tile in list(range(68, 75)) + list(range(103, 110)) + list(range(119, 122)) + list(range(131, 134)):
             self.assertEqual(flags[tile] >> 12, 1)
         for door, expected in (((13,5),583),((32,5),618)):
             self.assertEqual(park_tile(plan,*door), expected)
         self.assertTrue(plan['legend'][plan['rows'][5][11]][1])
         self.assertFalse(plan['legend'][plan['rows'][6][11]][1])
+
+    def test_pruning_cannot_change_any_referenced_cell_or_facade_animation(self):
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(134)]
+        result = prune_unused_terrain(cells, plan)
+        changed = {i for i, pair in enumerate(zip(cells, result)) if pair[0] != pair[1]}
+        self.assertEqual(changed, {21, 22, 23, 30, 31, 34, 35})
+        referenced = {park_tile(plan, x, y) - 512
+                      for y, row in enumerate(plan['rows']) for x in range(len(row))}
+        referenced.add(plan['border_tile'] - 512)
+        self.assertFalse(changed & referenced)
+        for i in referenced | set(range(40, 134)) | set(range(20)):
+            self.assertEqual(result[i], cells[i])
+        self.assertEqual(cells[21][0], bytes([7]) * 256)  # Input stays intact.
+        for index in changed:
+            with self.subTest(border_cell=index):
+                plan['border_tile'] = 512 + index
+                self.assertEqual(prune_unused_terrain(cells, plan)[index], cells[index])
+
+    def test_new_facade_keeps_its_native_pixels_palette_and_sidewalk_underlay(self):
+        from PIL import Image
+        raw, records, _, palettes = park_resources(ROOT)
+        expected = Image.open(ROOT / 'assets/tiles/sunset-rowhouse-butter/native-preview.png').resize(
+            (48, 64), Image.Resampling.NEAREST).tobytes()
+        self.assertEqual(palettes[11 * 32:12 * 32],
+                         (ROOT / 'assets/tiles/sunset-rowhouse-butter/house.gbapal').read_bytes())
+        for cell in range(12):
+            words = struct.unpack_from('<8H', records, (122 + cell) * 16)
+            self.assertEqual(records[(122 + cell) * 16:(122 + cell) * 16 + 8],
+                             records[19 * 16 + 8:20 * 16])
+            pixels = bytearray(256)
+            for quadrant, word in enumerate(words[4:]):
+                self.assertEqual(word >> 12, 11)
+                offset = ((word & 1023) - 512) * 32
+                for y in range(8):
+                    for x in range(8):
+                        pixels[(quadrant // 2 * 8 + y) * 16 + quadrant % 2 * 8 + x] = (
+                            raw[offset + y * 4 + x // 2] >> (x % 2 * 4)) & 15
+            left, top = cell % 3 * 16, cell // 3 * 16
+            self.assertEqual(bytes(pixels), b''.join(
+                expected[y * 48 + left:y * 48 + left + 16] for y in range(top, top + 16)))
+
+    def test_compact_frontage_keeps_two_clear_sidewalk_rows_and_service_anchors(self):
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        gap = maximum = 0
+        for token in plan['rows'][5][10:36]:
+            gap = gap + 1 if token == 'P' else 0
+            maximum = max(maximum, gap)
+        self.assertLessEqual(maximum, 3)
+        for y in (6, 7):
+            for x in range(11, 36):
+                if (x, y) == (29, 6):
+                    continue  # Existing clinic sign.
+                self.assertFalse(plan['legend'][plan['rows'][y][x]][1])
+        self.assertEqual([(w['x'], w['y']) for w in plan['warp_events']], [(13, 5), (32, 5)])
+        for x, y in ((19, 4), (24, 4)):
+            self.assertTrue(plan['legend'][plan['rows'][y][x]][1])
+        self.assertEqual([f[:2] for f in FACADES if f[4] == 110], [(18, 2), (11, 20)])
 
 
 if __name__ == '__main__':

@@ -775,13 +775,13 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.50-practice-guidance-preview; targetedcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78; Site40. Adds pre-sightline practice warnings, roster/type guidance and free-clinic directions to courier/facade improvements. Human approvals remain0/11. |
-| Latest local source build | v50, source1cab358; normal build reproduces targetedcd4d8554820b60d69f0e89c617da59248e54f874f1f08bbcd495718a007d78. Native/WASM guidance paging, stage0→1, older-save preservation and local checks pass. All336 mechanics scenarios pass on this exact target. |
+| Latest local source build | Private v51park frontage targetba3d954bcbb4b83a33f81e9d646ea47960faf89c56956703170f127e87314abe. Native/WASM old-save relocation and service doors pass;490tiles/134metatiles. All336 mechanics scenarios and local checks pass. Normal release/publication pending. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
-| Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
+| Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site39 IAB locally patches the base, exports a GBA file matching the native v49 hash, downloads the existing guest backup and resumes Continue in the clinic. Actual exported ROM/save also cold-load in native mGBA with badge/party/resources preserved. Browser performance/audio, fresh auth/isolation, Safari/mobile and complete save roundtrips remain open. |
 | Remaining system gates | 336 independent native scenarios pass across damage, stats, type, order, accuracy, critical, PP, HP and status commands;57 meaningful doubles. Numerical minimums are met; capture, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
-| Next work | Close remaining capture/type-matrix/integrated-move coverage, improve first-play preparation and review urban density. Alignment chat is testing a fresh Grass-starter route onv49. Courier/facade changes are deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
+| Next work | Publish verified South Park frontage, then close capture/type-matrix/integrated-move coverage. All three starters have actual first-badge evidence; full campaigns remain untested. Alignment chat audits resource safety and remaining mechanics coverage. Clip reviews and the slice gate remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4663,3 +4663,53 @@ v50 public deployment:
 - Continue with South Park street density while the finite Grass route and user
   comparison review proceed. Preserve door/recovery locations if possible and
   prove older saves escape any newly occupied tiles. Full scope/gates stay open.
+
+
+Grass first-badge and alignment checkpoint October14,03:32 Pacific:
+
+- Reviewer completed a fresh Grass v49 first-badge route:143 controller captures,
+  normal inputs, no state edits/rollback/XP farming. Walden13 rounds, Steven8,
+  Scott44; all first attempts. Hushmoth fainted, Sprout retained paralysis.
+  All8 Potions used,7 against Scott; this is a difficult viable route, not balance
+  approval or evidence for a nerf. The57:17 game clock includes automation waits.
+- Earned battery sprout-route-alignment-142-earned-badge-saved/capture.sav SHA256
+  9bd05b8efc687de3486a97219bc2a4980354e9afd14e428b83e169b4c2726b1e; report
+  sprout-route-alignment-143-earned-badge-cold/fresh-grass-route-result.json.
+  Stage4/all3 trainers, one Reflect TM, money3400,0 Potions/3 capture items.
+  Sprout11(20/32HP,PAR), BinPossum3(15/15), Hushmoth3(0/15).
+- Actual earned battery cold-loads onv50 with native/WASM final RGB, full PCM and
+  Flash identical: sprout-earned-v50-cold-{native,wasm}/compatibility-result.json.
+  This is compatibility only. Three first-badge routes do not satisfy the three
+  full starter campaigns, performance or ten complete save-roundtrip gates.
+- Alignment completed a finite South Park geometry audit: connected services and
+  adventures,24 newly blocked/12 freed cells, native relocation model within2tiles.
+  Follow-up checks external resource references and immutable compiled cells.
+  Next bounded read-only task reviews remaining mechanics/capture/type coverage,
+  ending by11:02UTC. Main retains source/build ownership; harness remains frozen.
+  Next routine check no later than11:02UTC, collect finite task completion earlier.
+
+Private v51 South Park frontage:
+
+- Move the upper coral annex to18,2, add existing original butter facade at23,2,
+  retain lower coral11,20. Largest north-frontage sidewalk gap12→3 tiles. Gym and
+  clinic doors, recovery, signs, NPCs and adventure anchors stay fixed.
+- Prune pixels only for seven unreferenced terrain metatiles; keep all IDs,
+  attributes and referenced cells. New allocation490/504 graphics tiles and134
+  metatiles. Native service-door VRAM remains reserved. Border references prevent
+  pruning; tests verify all seven. No tileset animation callback is introduced.
+- Actual normal v50 saves at19,4 and24,4 cold-load onv51 at17,4/22,4. Native/WASM
+  final RGB, complete PCM and Flash match; team/money/items/stage preserved. Both
+  older batteries were first cold-verified onv50; no RAM/save-coordinate edits.
+  Evidence density-v51-old-save-parity.json, gap-{19,24}-cold-{native,wasm}.
+- Normal approaches stop at coral19,6/westedge17,3 and butter24,6. Each service
+  entrance matches all316 RGB frames/PCM/Flash across cores; normal exits return
+  to13,6/32,6 with final RGB/PCM/Flash identical. Door evidence:
+  density-v51-{gym,clinic}-{enter,exit}-{native,wasm}, door-parity.json.
+- All336 mechanics scenarios pass this immutable target,57 doubles; full mechanics
+  coverage gate remains open. Full local check.sh passes; seven focused resource
+  tests include packed native pixels/palette/underlay, bounds, graph and border
+  retention. No human quality approval, full campaign or publicv51 claim.
+- Independent alignment decoding of immutable v50/v51 ROMs confirms all115
+  nonpruned prior metatiles render identically, all122 prior attributes and
+  registered door bytes match, and South Park has zero retired-ID references.
+  Evidence density-alignment-20261014/pruning-review/compiled-v50-v51-proof.json.
