@@ -762,14 +762,14 @@ Current snapshot (October 13, 2026; historical checkpoint details follow):
 | Execution | User explicitly removed the cutoff and instructed continued work. All previous time-based stop conditions are revoked. The old reminder stays disabled; full scope and acceptance gates remain required. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.43-recovery-animation-preview; target aca23d84b531a2b76e103ecddeeecb931a231b62bb7ed9f252c4a82b70066ce6; Site version35. Original amber equipment phases and healer gesture retain neutral flooring and the original cue. Latest explicit clinic music score stays2/4; all human approvals remain open. |
+| Public build | 0.0.44-clinic-arrangement-preview; target735197f21e88fe58b6d0d6ee86329b816cf98599c0621cd58719707742dadc6b; Site36. Arrangement revision only; latest explicit clinic music score stays2/4 and all human approvals remain open. |
 | Latest local source build | v44 target735197f21e88fe58b6d0d6ee86329b816cf98599c0621cd58719707742dadc6b, source56deb55. Normal build/BPS/local checks pass; native/WASM18000-frame music PCM/Flash and2048-frame healing RGB/PCM/Flash match. Public remainsv43 until the pending deployment. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site35 Chrome account restores the old save, downloads a cartridge matching v43, triggers visible amber healing/healer turn, closes dialogue and walks away. Muted/paused afterward. Browser audio deadline, fresh auth/account isolation/Safari/mobile/full save/performance gates remain open. |
 | Remaining system gates | 300 independent mechanics cases, three ten-minute deadline/audio traces, ten full save round trips, fifty campaign checkpoints and three fresh complete campaigns are outstanding. |
-| Next work | Build and evaluate the committed, unbuilt v44 arrangement candidate: three-loop level-matched audio, 30–60-second reference scene, entry/heal/resume and supported-save/native-WASM regression checks. Check final guitar release across loop boundary. User music score remains2/4; no new approval inferred. |
+| Next work | Finish publicv44 guest QA and build/verify one original Scott Wu trainer portrait in the existing first gym. Preserve trainer/team/rewards/quest/save behavior and collect battle-introduction/native-WASM evidence. Clinic music review is pending; do not repeat endless clinic revisions or expand campaign before slice approval. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -4032,3 +4032,29 @@ v44 review packet and release preparation:
   the current first-gym trainer still selects LEADER_BRAWLY. Bound next work to
   one original portrait integrated into the existing encounter, preserving team,
   AI, rewards, flags and saves; do not expand campaign while slice review waits.
+
+
+v44 public release and Scott portrait source checkpoint:
+
+- Site36 saved id
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_406eed41f5388191b38c10c24e850234.
+  Source79c71148903f1176d33a2e8e0d78b32b490cc239; archive
+  .tools/site-v44-clinic-arrangement.tar.gz verifies one current patch/manifest
+  and no commercial BPEE cartridge. Deployment
+  appgdep_6acf275ffc188191afcbb695105d969f succeeded2026-10-14T06:55:37Z,
+  retaining public audience and existing authentication. Actual guest IAB QA
+  underway; old Chrome4 connection is unavailable. No product regression
+  inferred from a disconnected browser.
+- Using imagegen built-in tool, generated one original Scott battle portrait
+  from the established field appearance reference. Source and exact prompt are
+  in assets/characters/cognition-cast/scott-wu/battle-portrait-v1. Original
+  fictional costume; likeness/native cleanup/art approval remain pending.
+- New native picture slot93 preserves original0–92. Original figure converts
+  to one64x64 four-bit frame/2048bytes and16-color/32byte palette, baseline62.
+  Importer registers coords, sheet, palette and one-frame animation, preserving
+  existing field-cast graphics declarations. Only Scott's portrait selector
+  changes in battle data; independent comparison preserves every other field.
+- Three battle-content tests pass. v45 portrait candidate is not yet built,
+  replayed or released. Source review is running in the alignment thread.
+- Full approvals remain0/11; all complete campaign/system gates stay required.
+  Cutoff remains revoked; no workflow, DB mutation or PR merge ran.

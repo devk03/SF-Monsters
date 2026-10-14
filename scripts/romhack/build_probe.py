@@ -23,6 +23,7 @@ from title_song_overlay import apply_title_song
 from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from cast_art import apply_cast
+from trainer_portraits import apply_portrait
 from office_art import apply_office, office_resources
 from clinic_art import apply_clinic, clinic_resources
 from apartment_art import apply_apartment_art
@@ -93,6 +94,7 @@ def main():
     restored += apply_field_music(content, ROOT, EMERALD, original)
     restored += apply_courier(ROOT, EMERALD, original)
     restored += apply_cast(ROOT, EMERALD, original)
+    restored += apply_portrait(ROOT, EMERALD, original)
     restored += prepare_sunset_tiles(ROOT, EMERALD, original)
     restored += apply_apartment_art(ROOT, EMERALD, original)
     restored += apply_door_art(ROOT, EMERALD, original)

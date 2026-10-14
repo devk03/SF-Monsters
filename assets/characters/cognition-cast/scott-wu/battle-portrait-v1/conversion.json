@@ -1,0 +1,25 @@
+{
+  "source_sha256": "5bfd79e835978ab9b528c8d1dc88fe56427ab0e0176f01086d163c619be6858b",
+  "native_size": [
+    64,
+    64
+  ],
+  "source_alpha_bounds": [
+    308,
+    104,
+    864,
+    1142
+  ],
+  "figure_size": [
+    31,
+    58
+  ],
+  "baseline": 62,
+  "palette_colors": 16,
+  "quality_approval": "pending",
+  "pixel_cleanup": "pending",
+  "files": {
+    "portrait.4bpp": "6b132b9f8c4c05db3db4c4de6130d5b9d7200eb50c0aa38ae5cf082b296da79b",
+    "portrait.gbapal": "f4e2ab2aebd7b600bccb4e0369be51f02636e00fbbf866ae30e178d2439dcec6"
+  }
+}
