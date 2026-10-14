@@ -1,6 +1,7 @@
 """Decode native BG words independently; preserve released pixels and door VRAM."""
 from pathlib import Path
 import hashlib
+import json
 import struct
 import sys
 import unittest
@@ -8,7 +9,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from park_art import pack_park_cells
-from park_map import park_resources
+from park_map import park_resources, park_tile
 
 
 def decode_tile(raw, word):
@@ -35,6 +36,49 @@ def cell_from_tiles(tiles):
 
 
 class NativeTileFlips(unittest.TestCase):
+    def test_lavender_frontage_fills_only_twelve_gap_cells(self):
+        plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        restored = json.loads(json.dumps(plan))
+        for y in range(2, 6):
+            for x in range(26, 29):
+                token = plan['rows'][y][x]
+                self.assertTrue(plan['legend'][token][1])
+                self.assertEqual(park_tile(plan, x, y), 648+(y-2)*3+x-26)
+            row = restored['rows'][y]
+            restored['rows'][y] = row[:26]+'PPP'+row[29:]
+        # Entire prior map, events, NPCs, collision and elevations outside gap.
+        self.assertEqual(hashlib.sha256(json.dumps(restored, sort_keys=True,
+                         separators=(',', ':')).encode()).hexdigest(),
+                         '40fdb3fdc1de3a37035325c452b06ebe73aeef8af4e403cd96522fa3f16deb79')
+        self.assertNotEqual(plan['rows'][5][25], 'P')  # Abuts butter facade.
+        self.assertNotEqual(plan['rows'][5][29], 'P')  # Abuts clinic facade.
+        for x in range(26, 29):
+            self.assertFalse(plan['legend'][plan['rows'][6][x]][1])
+            self.assertFalse(plan['legend'][plan['rows'][7][x]][1])
+
+    def test_lavender_native_art_has_its_own_palette_and_blocked_front(self):
+        from PIL import Image
+        raw, records, attrs, palettes = park_resources(ROOT)
+        expected = Image.open(ROOT/'assets/tiles/sunset-rowhouse-lavender/native-preview.png').resize(
+            (48, 64), Image.Resampling.NEAREST).tobytes()
+        palette = (ROOT/'assets/tiles/sunset-rowhouse-lavender/house.gbapal').read_bytes()
+        self.assertEqual(palettes[384:416], palette)
+        self.assertEqual(hashlib.sha256(palette).hexdigest(),
+                         'f453c43e03310151ed5ea3b6566e843f32d71137ed63818f29ca9fc6a8c3b3ea')
+        for cell in range(12):
+            offset = (136+cell)*16
+            words = struct.unpack_from('<8H', records, offset)
+            decoded = [decode_tile(raw, word) for word in words[4:]]
+            pixels = cell_from_tiles(decoded)
+            left, top = (cell % 3)*16, (cell//3)*16
+            self.assertEqual(pixels, b''.join(expected[y*48+left:y*48+left+16]
+                                             for y in range(top, top+16)))
+            self.assertEqual([word >> 12 for word in words[4:]], [12]*4)
+            self.assertEqual(records[offset:offset+8], records[19*16+8:20*16])
+            self.assertEqual(struct.unpack_from('<H', attrs, (136+cell)*2)[0],
+                             0 if cell < 9 else 0x1000)
+        self.assertEqual(len(raw)//32, 502)
+
     def test_four_orientations_reuse_one_tile_in_every_secondary_palette(self):
         original = bytes((x*x + 3*y + x*y) % 16 for y in range(8) for x in range(8))
         horizontal = b''.join(original[y*8:(y+1)*8][::-1] for y in range(8))
@@ -42,7 +86,7 @@ class NativeTileFlips(unittest.TestCase):
         variants = [original, horizontal, vertical, original[::-1]]
         cell = cell_from_tiles(variants)
         cells = [(cell, bank) for bank in range(6, 13)]
-        raw, records, flags = pack_park_cells(cells, [0x1000]*len(cells))
+        raw, records, flags = pack_park_cells(cells, [0x1000]*len(cells), reuse_flips=True)
         self.assertEqual(len(raw), 32)
         self.assertEqual(flags, struct.pack('<7H', *([0x1000]*7)))
         for bank, offset in zip(range(6, 13), range(0, len(records), 16)):
@@ -57,7 +101,7 @@ class NativeTileFlips(unittest.TestCase):
         self.assertEqual(cells[0], (cell, 6))
 
     def test_symmetric_ties_keep_unflipped_first_binding(self):
-        raw, records, _ = pack_park_cells([(bytes([15])*256, 12)]*2, [0, 0])
+        raw, records, _ = pack_park_cells([(bytes([15])*256, 12)]*2, [0, 0], reuse_flips=True)
         self.assertEqual(raw, bytes([255])*32)
         self.assertEqual(struct.unpack('<16H', records),
                          (0, 0, 0, 0, *([0xc200]*4))*2)
@@ -78,9 +122,9 @@ class NativeTileFlips(unittest.TestCase):
                      for i in range(0, len(selected), 4)]
             if count == 505:
                 with self.assertRaisesRegex(ValueError, 'VRAM capacity'):
-                    pack_park_cells(cells, [0]*len(cells))
+                    pack_park_cells(cells, [0]*len(cells), reuse_flips=True)
                 continue
-            raw, records, _ = pack_park_cells(cells, [0]*len(cells))
+            raw, records, _ = pack_park_cells(cells, [0]*len(cells), reuse_flips=True)
             self.assertEqual(len(raw)//32, count)
             words = struct.unpack('<'+'H'*(len(records)//2), records)
             self.assertLessEqual(max(word & 0x3ff for word in words), 1015)
@@ -96,9 +140,13 @@ class NativeTileFlips(unittest.TestCase):
                          '74247ad02bc5624367da7f555d2faaf85f4b3d967d95886cb4a10ec3a4769ba0')
         self.assertEqual(hashlib.sha256(attributes[:272]).hexdigest(),
                          '6bc89718054757ea9191edc3af602b745a9655c6447711031be2bdc255624485')
-        self.assertEqual(hashlib.sha256(palettes).hexdigest(),
+        # New lavender facade occupies previously unused bank12 only.
+        old_palettes = palettes[:384] + bytes(32) + palettes[416:]
+        self.assertEqual(hashlib.sha256(old_palettes).hexdigest(),
                          '19aa2722f040f2d30e65c33f80bcf6c9681947e0612f4e8cb2e0ce4a742598af')
-        self.assertLessEqual(len(raw)//32, 460)
+        old_words = struct.unpack('<'+'H'*(136*8), records[:136*16])
+        self.assertEqual(len({word & 1023 for word in old_words if word}), 459)
+        self.assertLessEqual(len(raw)//32, 504)
 
 
 if __name__ == '__main__':

@@ -84,8 +84,8 @@ class ParkResources(unittest.TestCase):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         raw, records, attributes, palettes = park_resources(ROOT)
         self.assertLessEqual(len(raw) // 32, 504)
-        self.assertEqual((len(records), len(attributes), len(palettes)), (136 * 16, 272, 512))
-        flags = struct.unpack('<136H', attributes)
+        self.assertEqual((len(records), len(attributes), len(palettes)), (148 * 16, 296, 512))
+        flags = struct.unpack('<148H', attributes)
         occupied = {(n['x'], n['y']) for n in plan['npcs']}
         start = (13, 6); visited = {start}; queue = deque([start])
         while queue:
@@ -100,13 +100,13 @@ class ParkResources(unittest.TestCase):
         for y, row in enumerate(plan['rows']):
             for x, token in enumerate(row):
                 tile = park_tile(plan, x, y) - 512
-                self.assertIn(tile, range(136))
+                self.assertIn(tile, range(148))
                 if token in 'RP.FGB#T':
                     self.assertEqual(flags[tile] >> 12, 1)
         self.assertEqual((flags[71], flags[106]), (0x1069, 0x1069))
-        for tile in list(range(40, 68)) + list(range(75, 103)) + list(range(110, 119)) + list(range(122, 131)):
+        for tile in list(range(40, 68)) + list(range(75, 103)) + list(range(110, 119)) + list(range(122, 131)) + list(range(136, 145)):
             self.assertEqual(flags[tile] >> 12, 0)
-        for tile in list(range(68, 75)) + list(range(103, 110)) + list(range(119, 122)) + list(range(131, 134)):
+        for tile in list(range(68, 75)) + list(range(103, 110)) + list(range(119, 122)) + list(range(131, 134)) + list(range(145, 148)):
             self.assertEqual(flags[tile] >> 12, 1)
         for door, expected in (((13,5),583),((32,5),618)):
             self.assertEqual(park_tile(plan,*door), expected)
@@ -115,7 +115,7 @@ class ParkResources(unittest.TestCase):
 
     def test_pruning_cannot_change_any_referenced_cell_or_facade_animation(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
-        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(136)]
+        cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(148)]
         result = prune_unused_terrain(cells, plan)
         changed = {i for i, pair in enumerate(zip(cells, result)) if pair[0] != pair[1]}
         self.assertEqual(changed, {21, 22, 23, 30, 31, 34, 35})
@@ -123,7 +123,7 @@ class ParkResources(unittest.TestCase):
                       for y, row in enumerate(plan['rows']) for x in range(len(row))}
         referenced.add(plan['border_tile'] - 512)
         self.assertFalse(changed & referenced)
-        for i in referenced | set(range(40, 136)) | set(range(20)):
+        for i in referenced | set(range(40, 148)) | set(range(20)):
             self.assertEqual(result[i], cells[i])
         self.assertEqual(cells[21][0], bytes([7]) * 256)  # Input stays intact.
         for index in changed:

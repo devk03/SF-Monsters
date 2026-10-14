@@ -13,7 +13,8 @@ from park_signs import sign_cells
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
-           (18, 2, 3, 4, 110), (11, 20, 3, 4, 110), (23, 2, 3, 4, 122))
+           (18, 2, 3, 4, 110), (11, 20, 3, 4, 110), (23, 2, 3, 4, 122),
+           (26, 2, 3, 4, 136))
 
 
 def prune_unused_terrain(cells, plan):
@@ -68,7 +69,10 @@ def park_resources(root):
     plan = json.loads((root / 'romhack/content/south-park.json').read_text())
     cells = prune_unused_terrain(cells, plan)
     cells += sign_cells(); flags += [0x1000, 0x1000]
-    raw, records, attributes = pack_park_cells(cells, flags)
+    lavender = Image.open(root / 'assets/tiles/sunset-rowhouse-lavender/native-preview.png').resize(
+        (48, 64), Image.Resampling.NEAREST).tobytes()
+    cells += facade_cells(lavender, 48, 64, 12); flags += [0]*9 + [0x1000]*3
+    raw, records, attributes = pack_park_cells(cells, flags, reuse_flips=True)
     if len(raw) // 32 > 504:
         raise ValueError('Park art must reserve the last eight secondary tiles for native doors.')
     # Alpha around facades reveals our own sidewalk, not inherited scenery.
@@ -77,10 +81,11 @@ def park_resources(root):
     for index in range(40, len(cells)):
         records[index * 16:index * 16 + 8] = sidewalk
     palettes = bytearray(512)
-    for bank, data in zip((6, 7, 8, 9, 10, 11), (street_palette, terrain_palette,
+    for bank, data in zip((6, 7, 8, 9, 10, 11, 12), (street_palette, terrain_palette,
                                            *building_palettes,
                                            (root / 'assets/tiles/sunset-rowhouse/house.gbapal').read_bytes(),
-                                           variants['butter']['palette'])):
+                                           variants['butter']['palette'],
+                                           variants['lavender']['palette'])):
         palettes[bank * 32:(bank + 1) * 32] = data
     return raw, bytes(records), attributes, bytes(palettes)
 

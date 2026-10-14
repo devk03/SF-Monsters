@@ -5141,3 +5141,25 @@ South Park graphics budget, source iteration:
   for a varied facade filling the three-tile butter-house/clinic frontage gap.
   Existing collision, event, service-door and map placements are unchanged.
   Public staysv53/Site44; next alignment check no later14:15UTC.
+
+Compact lavender frontage source candidate:
+
+- Added original lavender facade26..28,y2..5 between butter and clinic, appending
+  IDs136..147 after both service signs. Bank12 occupies previously zero palette
+  space; all earlier136 metatile pixels/attributes and old palette banks retain
+  their pre-change oracle.502/504 static tiles leave native door slots intact.
+- All twelve new footprint cells block walking, including the visible bottom
+  row. Both sidewalk rows6/7 stay clear. Restoring those twelve tokens toPPP
+  reproduces the entire releasedv53 plan hash40fdb3fd...deb79, including every
+  other collision/elevation, NPC, warp, script and interaction anchor.
+- Full local checks initially caught the shared packer changing clinic storage
+  counts. Restricted flip reuse to an explicit park-only option; independent
+  resource hashes confirm office/clinic graphics, records, attributes and
+  palettes are byte-identical to releasedv53. Revised fullcheck.sh passes.
+  Six focused flip/frontage tests and eight park tests pass.
+- Native build/visual, door paths, collision and actual older-save resumes are
+  pending. Existing generic resume resolver remains unchanged; safe relocation
+  must be observed, not inferred from tests. Alignment prepares twelve ordinary
+  v53 saved batteries at future footprint cells with frozen controller harness,
+  ending14:40UTC. Main owns newv54 coldContinue/save/WASM checks. No publication
+  or human quality approval claimed; public staysv53/Site44. Check by14:20UTC.

@@ -69,7 +69,7 @@ def tile_orientations(tile):
         yield bytes(oriented[i] | oriented[i+1] << 4 for i in range(0, 64, 2)), bits
 
 
-def pack_park_cells(cells, attributes):
+def pack_park_cells(cells, attributes, *, reuse_flips=False):
     """Every cell chooses a palette; ground uses BG2 and architecture uses BG1."""
     if len(cells) != len(attributes) or len(cells) > 512:
         raise ValueError('Native cell/attribute allocations must agree and fit a tileset.')
@@ -87,7 +87,8 @@ def pack_park_cells(cells, attributes):
                 if index == 504:
                     raise ValueError('Original South Park art exceeds secondary VRAM capacity.')
                 raw.extend(tile)
-                for oriented, bits in tile_orientations(tile):
+                orientations = tile_orientations(tile) if reuse_flips else ((tile, 0),)
+                for oriented, bits in orientations:
                     # Symmetric tiles retain the first, least-flipped binding.
                     pool.setdefault(oriented, (index, bits))
             index, bits = pool[tile]
