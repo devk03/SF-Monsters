@@ -13,6 +13,7 @@ from maps import apply_maps
 from battle_content import apply_battles
 from engine_guards import apply_engine_guards
 from field_journal import apply_field_journal
+from city_map import apply_city_map
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
@@ -92,6 +93,7 @@ def main():
     (EMERALD / speech_path).write_text(speech)
     restored = [sections_path, speech_path] + apply_maps(content, ROOT, EMERALD, original)
     restored += apply_battles(content, ROOT, EMERALD, original)
+    restored += apply_city_map(content, ROOT, EMERALD, original)
     restored += apply_engine_guards(ROOT, EMERALD, original)
     restored += apply_field_journal(ROOT, EMERALD, original)
     restored += apply_monsters(content, ROOT, EMERALD, original)

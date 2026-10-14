@@ -6328,3 +6328,28 @@ SF habitat map preparation — October14,22:11UTC:
   correct per-kind encounter lengths, explicit five-map player-parent positions
   and an original courier map head. Legacy special/roamer paths must not add
   Hoenn habitats. Art/native/browser/save acceptance remains pending; publicv63.
+
+
+v64 SF habitat-map engine integration — October14,22:14UTC:
+
+- Native first candidate32b575128a803e44d4f1d2c81a94294496b2d365be215fc190a14fd324ea5686
+  renders the geographic SF map through ordinary Guide→detail→AREA controls.
+  Original courier head appears at the Sunset anchor. Starter wild-area unknown
+  is expected for the gift/evolution lines; wild-species highlights still pending.
+- Both native background surfaces use one109-tile original atlas, distinct correct
+  tilemap encodings and full48-color palette. Two hub entry rectangles and the
+  28x15 section grid share the same projected coordinates; other cells are NONE.
+  Existing map IDs/headers and real-world five-map SF graph remain unchanged.
+- Native habitat search reads only the canonical encounter-map whitelist derived
+  from existing chapter data, before accessing encounter lists. Four encounter
+  kinds use their own native lengths, including ten fishing slots. Inherited
+  special/hidden/roamer logic is retained as unused scaffolding and bypassed by
+  the SF entry point. No encounter probabilities/species/world/save data change.
+- Explicit parent rows derived from the five authored headers place apartment
+  at Sunset and clinic/gym at South Park, ignoring stale escape/dynamic warps.
+  Original map head reuses the courier's authored indexed face/palette for both
+  current shared player looks; native128-byte graphic/32-byte palette per path.
+- Draft builds and prior compiled creature/intro/cast controls pass. Mandatory
+  compiled-map verification, native behavioral tests, wild highlights/interior
+  markers, browser controls and ordinary save acceptance remain pending. Public
+  staysv63/Site54; human0/11. No new travel/campaign/areas or GitHub Actions.
