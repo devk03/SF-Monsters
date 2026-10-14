@@ -1,0 +1,316 @@
+{
+  "profile": "hp",
+  "cases": [
+    {
+      "id": "physical-damage-trackers",
+      "expected": {
+        "hp": 30,
+        "dealt": 20,
+        "substitute_hp": 0,
+        "physical": 20,
+        "special": 0,
+        "shell_bell": 20,
+        "bide": 20,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "50HP minus20; physical, ShellBell and Bide record20. HP command consumes no RNG.",
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "special-damage-trackers",
+      "expected": {
+        "hp": 30,
+        "dealt": 20,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 20,
+        "shell_bell": 20,
+        "bide": 20,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "WaterGun uses GenIII special category and records20. HP command consumes no RNG.",
+      "move": "MOVE_WATER_GUN",
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "dark-is-special-in-gen-three",
+      "expected": {
+        "hp": 30,
+        "dealt": 20,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 20,
+        "shell_bell": 20,
+        "bide": 20,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Bite is Dark and therefore special in GenIII. HP command consumes no RNG.",
+      "move": "MOVE_BITE",
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "overkill-saturates-hp-and-dealt",
+      "expected": {
+        "hp": 0,
+        "dealt": 50,
+        "substitute_hp": 0,
+        "physical": 50,
+        "special": 0,
+        "shell_bell": 50,
+        "bide": 80,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "80 calculated damage removes only50 actualHP; trackers use actual loss, Bide stores80. HP command consumes no RNG.",
+      "damage": 80,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "exact-lethal-hit",
+      "expected": {
+        "hp": 0,
+        "dealt": 50,
+        "substitute_hp": 0,
+        "physical": 50,
+        "special": 0,
+        "shell_bell": 50,
+        "bide": 50,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Exact50 damage leaves0HP and records50. HP command consumes no RNG.",
+      "damage": 50,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "healing-restores-hp",
+      "expected": {
+        "hp": 70,
+        "dealt": 0,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 0,
+        "bide": 0,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Negative20 damage heals50 to70. HP command consumes no RNG.",
+      "damage": -20,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "healing-caps-at-maximum",
+      "expected": {
+        "hp": 90,
+        "dealt": 0,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 0,
+        "bide": 0,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Negative50 healing caps50 at max90. HP command consumes no RNG.",
+      "damage": -50,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "immune-hit-no-hp-loss",
+      "expected": {
+        "hp": 50,
+        "dealt": 0,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 65535,
+        "bide": 0,
+        "controller": 0,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Immune result leavesHP unchanged and sets ShellBell ignore sentinel65535. HP command consumes no RNG.",
+      "result_flags": 8,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "missed-hit-no-hp-loss",
+      "expected": {
+        "hp": 50,
+        "dealt": 0,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 65535,
+        "bide": 0,
+        "controller": 0,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Missed result leavesHP unchanged and prevents ShellBell recovery. HP command consumes no RNG.",
+      "result_flags": 1,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "passive-loss-skips-retaliation-trackers",
+      "expected": {
+        "hp": 30,
+        "dealt": 20,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 0,
+        "bide": 0,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Passive20 HP loss skips ShellBell/physical trackers; IgnoreBide skips accumulation; both markers clear. HP command consumes no RNG.",
+      "damage": 20,
+      "hitmarker": 1048608,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "substitute-absorbs-nonbreaking-hit",
+      "expected": {
+        "hp": 50,
+        "dealt": 20,
+        "substitute_hp": 10,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 20,
+        "bide": 0,
+        "controller": 0,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Substitute30 absorbs20, leaves10 and realHP50; no HP controller update. HP command consumes no RNG.",
+      "substitute_hp": 30,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90,
+        "status2": "STATUS2_SUBSTITUTE"
+      }
+    },
+    {
+      "id": "ignore-substitute-hits-real-hp",
+      "expected": {
+        "hp": 30,
+        "dealt": 20,
+        "substitute_hp": 30,
+        "physical": 20,
+        "special": 0,
+        "shell_bell": 20,
+        "bide": 20,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Bypass marker damages realHP, keeps Substitute30 and is consumed. HP command consumes no RNG.",
+      "substitute_hp": 30,
+      "hitmarker": "HITMARKER_IGNORE_SUBSTITUTE",
+      "defender": {
+        "hp": 50,
+        "max_hp": 90,
+        "status2": "STATUS2_SUBSTITUTE"
+      }
+    },
+    {
+      "id": "pain-split-skips-counter-record",
+      "expected": {
+        "hp": 30,
+        "dealt": 20,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 20,
+        "bide": 20,
+        "controller": 2,
+        "pointer": 33814018,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "PainSplit damage does not enter physical Counter tracker. HP command consumes no RNG.",
+      "move": "MOVE_PAIN_SPLIT",
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    },
+    {
+      "id": "busy-controller-defers-hp-update",
+      "expected": {
+        "hp": 50,
+        "dealt": 0,
+        "substitute_hp": 0,
+        "physical": 0,
+        "special": 0,
+        "shell_bell": 0,
+        "bide": 0,
+        "controller": 1,
+        "pointer": 33814016,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Busy controller defers HP change and script advance. HP command consumes no RNG.",
+      "controller_busy": true,
+      "defender": {
+        "hp": 50,
+        "max_hp": 90
+      }
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 # Native mechanics fixtures
 
-The catalogs contain **245 independently specified scenarios**, including
-**46 double-battle interactions**. All245 pass on the approved Emerald reference
+The catalogs contain **298 independently specified scenarios**, including
+**52 double-battle interactions**. All298 pass on the approved Emerald reference
 and SFv48:24 base-damage,34 pairwise turn-order,40 generated-stat and21 complete
-action-order cases,72 type-effect and54 accuracy cases. This is partial evidence.
+action-order cases,72 type-effect,54 accuracy,23 critical,16 PP and14 HP cases. This is partial evidence.
 The300-case gate, including50 doubles and every required mechanic, remains open.
 
 These are controlled function fixtures. The helper intentionally writes RAM and
@@ -201,3 +201,29 @@ Final results: `mechanics-v48-accuracy-guarded`54/54 and all earlier191 cases
 rerun in `mechanics-v48-{base,turn,stats,action,types}-after-accuracy`. Total245
 scenarios /46 doubles; at least55 broad cases /4 doubles remain. Status, capture,
 resource consumption and complete move-resolution coverage remain required.
+
+
+## Critical hits and resource commands
+
+`critical.json`, `pp.json` and `hp.json` provide 23, 16 and 14 scenarios for
+Cmd_critcalc, Cmd_ppreduce and Cmd_datahpupdate. Use
+`scripts/quality/battle_command_fixtures.py` with `--cases` selecting one catalog
+and the same six ROM/ELF/state arguments. Every scenario supplies a complete
+expected observation object; omitted or ignored controls are rejected.
+
+Critical checks cover stage odds/clamping, FocusEnergy, high-critical moves,
+ScopeLens, correct/incorrect species-specific items and armor/status/tutorial
+suppression. PP covers Pressure across opposing/all-field targets, saturation,
+temporary moves, bypass markers and controller deferral. Six are meaningful
+doubles. HP checks actual damage/healing saturation, retaliation and ShellBell
+trackers, Bide's calculated-versus-actual distinction, missed/immune attacks,
+passive damage, Substitute absorption/bypass and PainSplit.
+
+An initial PP/HP run caught missing default RNG initialization in the fixture
+setup. The harness now explicitly initializes it; unchanged oracles all pass
+in `mechanics-v48-{critical,pp,hp}-seed-guarded`. Failed evidence remains. All
+earlier245 cases pass again in the after-resources runs. Total298 scenarios /
+52 doubles. **The mechanics gate stays open:** status/capture, the complete type
+matrix, integrated move resolution and a coverage review remain required.
+These isolated commands queue controller updates; durable party/save writes
+and complete battle outcomes are separate controller-only checks.

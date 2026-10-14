@@ -775,12 +775,12 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.48-sunset-facade-variety-preview; target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc; Site38. Three architectural designs, compact Sunset spacing and actor-edge layering are integrated. Human approvals remain0/11. |
-| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify245 named scenarios against the reference. |
+| Latest local source build | v48, sourcec0e2dad; normal build matches target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda29710eb4a2b002dc. Facade/collision/older-save replays and local checks pass. Native mechanics fixtures now verify298 named scenarios against the reference. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Public 0.0.24 earned Fire-starter first-gym route; local 0.0.26 old caught-party resume and four-direction walking/running. Native/WASM RGB, audio and Flash match for the recorded routes. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site37 IAB guest locally patches ROM, restores existing earned-badge save, boots Continue, walks and exits clinic with full head visible. Browser performance/audio, fresh auth/isolation, Safari/mobile and full download/save gates remain open. |
-| Remaining system gates | 245 independent native scenarios pass:24 base damage,34 pairwise turn order,40 generated stats,21 full action sorts,72 type/STAB/ability interactions,54 accuracy commands;46 doubles. At least55 additional broad scenarios and4 additional doubles remain, plus status/capture/resource/full move resolution. Performance, save and full campaign gates stay outstanding. |
+| Remaining system gates | 298 independent native scenarios pass across damage, stats, type, order, accuracy, critical, PP and HP commands;52 meaningful doubles. The count threshold is nearly reached; status/capture, full type matrix, complete move resolution and coverage review still prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Next work | Continue native mechanics coverage toward300/50doubles and align it with actual battle outcomes. Alignment chat is testing a fresh Water-starter route onv48. Original facade variety is deployed; clip reviews remain pending. Preserve the slice gate before campaign expansion. |
 
 - Goal definition and reviewer preference are established. Reference capture
@@ -4442,3 +4442,31 @@ Native accuracy-command checkpoint:
   data/quality/mechanics/accuracy.json. Total 245 scenarios / 46 doubles; at
   least 55 broad cases / 4 doubles remain, alongside uncovered required systems.
   Human approvals remain 0/11; counting cases alone cannot complete the gate.
+
+
+Native critical/resource checkpoint and 09:08 UTC alignment:
+
+- 23 critical-hit cases, 16 PP cases and 14 HP cases pass on both ROMs. Critical
+  coverage includes stage odds/clamping, FocusEnergy, high-critical moves,
+  ScopeLens, species-specific items and suppression. This checks deterministic
+  branches and exact RNG transitions, not empirical probability distributions.
+- PP checks normal/Pressure costs, opposing versus all-field spread targets,
+  zero saturation, temporary moves, bypass markers and controller deferral.
+  Six new doubles bring the total to 52. HP checks actual loss/heal saturation,
+  physical/special retaliation trackers, overkill, missed/immune results, passive
+  damage, Substitute absorption/bypass, PainSplit and controller deferral.
+- An initial PP/HP fixture run exposed missing default RNG initialization. Fixed
+  the harness to seed explicitly; original expectations were retained and all
+  cases rerun. Failed artifacts remain. Final results: mechanics-v48-{critical,
+  pp,hp}-seed-guarded. Earlier 245 cases pass again in the after-resources runs;
+  full local check.sh passes. Total 298 scenarios, 52 doubles. Status/capture,
+  the complete type matrix and integrated move resolution still need coverage;
+  the mechanics gate remains open regardless of reaching a numerical minimum.
+- These commands mutate private battle RAM and queue controller updates. They
+  do not establish durable party/save writes, complete attacks or campaign wins.
+- Alignment chat is active on the fresh Water route: BrinePup level 8 learned
+  MudSlap normally; BinPossum recruited; clinic revived/healed both and cleared
+  contact paralysis. Shared the earned Fire save compatibility and fixture
+  results, and requested exact checkpoint artifacts plus first-play clarity gap.
+  Existing finite task ends by 10:13 UTC. Next alignment check by 09:38 UTC.
+  Public remains v48; human approvals remain 0/11.

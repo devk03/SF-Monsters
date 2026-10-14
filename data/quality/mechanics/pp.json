@@ -1,0 +1,245 @@
+{
+  "profile": "pp",
+  "cases": [
+    {
+      "id": "ordinary-pp-cost",
+      "expected": {
+        "pp": 9,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Ordinary attack consumes one of10 PP. PP reduction consumes no RNG."
+    },
+    {
+      "id": "target-pressure-cost",
+      "expected": {
+        "pp": 8,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Target Pressure consumes two PP. PP reduction consumes no RNG.",
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "ally-pressure-not-single-target",
+      "expected": {
+        "pp": 9,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Single-target attack ignores ally Pressure. PP reduction consumes no RNG.",
+      "double": true,
+      "ally": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "spread-two-opponents-pressure",
+      "expected": {
+        "pp": 7,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "RockSlide consumes1+2 opposing Pressure PP. PP reduction consumes no RNG.",
+      "double": true,
+      "move": "MOVE_ROCK_SLIDE",
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      },
+      "opponent_ally": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "spread-ignores-ally-pressure",
+      "expected": {
+        "pp": 9,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "RockSlide targets only foes; allied Pressure adds no cost. PP reduction consumes no RNG.",
+      "double": true,
+      "move": "MOVE_ROCK_SLIDE",
+      "ally": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "earthquake-all-others-pressure",
+      "expected": {
+        "pp": 6,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Earthquake targets foes and ally:1+3 Pressure costs4. PP reduction consumes no RNG.",
+      "double": true,
+      "move": "MOVE_EARTHQUAKE",
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      },
+      "ally": {
+        "ability": "ABILITY_PRESSURE"
+      },
+      "opponent_ally": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "earthquake-allied-pressure-counts",
+      "expected": {
+        "pp": 8,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Earthquake includes allied Pressure, cost2. PP reduction consumes no RNG.",
+      "double": true,
+      "move": "MOVE_EARTHQUAKE",
+      "ally": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "pressure-last-pp-clamps-zero",
+      "expected": {
+        "pp": 0,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "One remaining PP under Pressure saturates at0. PP reduction consumes no RNG.",
+      "pp": 1,
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "multiple-pressure-clamps-zero",
+      "expected": {
+        "pp": 0,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Three remaining PP versus cost4 saturates at0. PP reduction consumes no RNG.",
+      "pp": 3,
+      "double": true,
+      "move": "MOVE_EARTHQUAKE",
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      },
+      "ally": {
+        "ability": "ABILITY_PRESSURE"
+      },
+      "opponent_ally": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "zero-pp-no-write",
+      "expected": {
+        "pp": 0,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Already0 PP emits no update. PP reduction consumes no RNG.",
+      "pp": 0
+    },
+    {
+      "id": "no-deduct-marker-consumed",
+      "expected": {
+        "pp": 10,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "NoPPDeduct prevents cost and is cleared. PP reduction consumes no RNG.",
+      "hitmarker": "HITMARKER_NO_PPDEDUCT"
+    },
+    {
+      "id": "no-attackstring-marker-retained",
+      "expected": {
+        "pp": 10,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 512,
+        "rng": 0
+      },
+      "derivation": "NoAttackString prevents cost and remains set. PP reduction consumes no RNG.",
+      "hitmarker": "HITMARKER_NO_ATTACKSTRING"
+    },
+    {
+      "id": "pressure-exemption-normal-cost",
+      "expected": {
+        "pp": 9,
+        "pointer": 33814017,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Pressure exemption restores normal one-PP cost. PP reduction consumes no RNG.",
+      "pressure_exempt": true,
+      "defender": {
+        "ability": "ABILITY_PRESSURE"
+      }
+    },
+    {
+      "id": "transformed-move-not-persisted",
+      "expected": {
+        "pp": 9,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Transformed move PP changes only in battle; no durable-data controller update. PP reduction consumes no RNG.",
+      "attacker": {
+        "status2": "STATUS2_TRANSFORMED"
+      }
+    },
+    {
+      "id": "mimicked-move-not-persisted",
+      "expected": {
+        "pp": 9,
+        "pointer": 33814017,
+        "controller": 0,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Mimicked slot PP changes only in battle; no controller update. PP reduction consumes no RNG.",
+      "mimicked": true
+    },
+    {
+      "id": "busy-controller-defers-command",
+      "expected": {
+        "pp": 10,
+        "pointer": 33814016,
+        "controller": 1,
+        "hitmarker": 0,
+        "rng": 0
+      },
+      "derivation": "Busy controller defers PP deduction and script advance. PP reduction consumes no RNG.",
+      "controller_busy": true
+    }
+  ]
+}

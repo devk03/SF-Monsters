@@ -1,0 +1,301 @@
+{
+  "profile": "critical",
+  "cases": [
+    {
+      "id": "ordinary-critical",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 24691
+      },
+      "derivation": "Neutral stage uses1/16; zero remainder crits. Seed0 advances to24691, upper16 modulo16=0."
+    },
+    {
+      "id": "ordinary-not-critical",
+      "rng_seed": 18,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 2683429917
+      },
+      "derivation": "Neutral stage nonzero remainder does not crit. Seed18 advances to2683429917, upper16 modulo16=1."
+    },
+    {
+      "id": "high-critical-move-stage-one",
+      "rng_seed": 14,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 2564336233
+      },
+      "derivation": "KarateChop gives stage1 odds1/8. Seed14 advances to2564336233, upper16 modulo16=8.",
+      "move": "MOVE_KARATE_CHOP"
+    },
+    {
+      "id": "ordinary-same-draw-not-critical",
+      "rng_seed": 14,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 2564336233
+      },
+      "derivation": "Same remainder8 draw is not critical at neutral stage. Seed14 advances to2564336233, upper16 modulo16=8."
+    },
+    {
+      "id": "high-critical-move-nonzero",
+      "rng_seed": 4,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 119118375
+      },
+      "derivation": "KarateChop stage1 nonzero modulo8 does not crit. Seed4 advances to119118375, upper16 modulo8=1.",
+      "move": "MOVE_KARATE_CHOP"
+    },
+    {
+      "id": "focus-energy-stage-two",
+      "rng_seed": 2,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 2207055181
+      },
+      "derivation": "FocusEnergy adds2 stages: odds1/4. Seed2 advances to2207055181, upper16 modulo8=4.",
+      "attacker": {
+        "status2": "STATUS2_FOCUS_ENERGY"
+      }
+    },
+    {
+      "id": "focus-energy-nonzero",
+      "rng_seed": 4,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 119118375
+      },
+      "derivation": "FocusEnergy stage2 nonzero remainder fails. Seed4 advances to119118375, upper16 modulo4=1.",
+      "attacker": {
+        "status2": "STATUS2_FOCUS_ENERGY"
+      }
+    },
+    {
+      "id": "scope-lens-stage-one",
+      "rng_seed": 14,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 2564336233
+      },
+      "derivation": "ScopeLens adds1 stage:1/8. Seed14 advances to2564336233, upper16 modulo16=8.",
+      "attacker": {
+        "item": "ITEM_SCOPE_LENS"
+      }
+    },
+    {
+      "id": "focus-plus-high-stage-three",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 24691
+      },
+      "derivation": "FocusEnergy2 plus high-crit1 gives stage3 odds1/3. Seed0 advances to24691, upper16 modulo3=0.",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "status2": "STATUS2_FOCUS_ENERGY"
+      }
+    },
+    {
+      "id": "stage-three-nonzero",
+      "rng_seed": 2,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 2207055181
+      },
+      "derivation": "Stage3 nonzero modulo3 fails. Seed2 advances to2207055181, upper16 modulo3=1.",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "status2": "STATUS2_FOCUS_ENERGY"
+      }
+    },
+    {
+      "id": "focus-high-lens-stage-four",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 24691
+      },
+      "derivation": "Focus2 high1 lens1 gives stage4 odds1/2. Seed0 advances to24691, upper16 modulo2=0.",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "status2": "STATUS2_FOCUS_ENERGY",
+        "item": "ITEM_SCOPE_LENS"
+      }
+    },
+    {
+      "id": "stage-four-nonzero",
+      "rng_seed": 3,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 3310570426
+      },
+      "derivation": "Highest stage nonzero modulo2 fails. Seed3 advances to3310570426, upper16 modulo2=1.",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "status2": "STATUS2_FOCUS_ENERGY",
+        "item": "ITEM_SCOPE_LENS"
+      }
+    },
+    {
+      "id": "chansey-lucky-punch-stage-two",
+      "rng_seed": 2,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 2207055181
+      },
+      "derivation": "LuckyPunch adds2 stages only for Chansey. Seed2 advances to2207055181, upper16 modulo8=4.",
+      "attacker": {
+        "species": "SPECIES_CHANSEY",
+        "item": "ITEM_LUCKY_PUNCH"
+      }
+    },
+    {
+      "id": "wrong-species-lucky-punch-ignored",
+      "rng_seed": 21,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 1699008356
+      },
+      "derivation": "LuckyPunch on Bulbasaur does not raise neutral stage. Seed21 advances to1699008356, upper16 modulo16=4.",
+      "attacker": {
+        "species": "SPECIES_BULBASAUR",
+        "item": "ITEM_LUCKY_PUNCH"
+      }
+    },
+    {
+      "id": "farfetchd-stick-stage-two",
+      "rng_seed": 2,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 2207055181
+      },
+      "derivation": "Stick adds2 stages only for Farfetchd. Seed2 advances to2207055181, upper16 modulo8=4.",
+      "attacker": {
+        "species": "SPECIES_FARFETCHD",
+        "item": "ITEM_STICK"
+      }
+    },
+    {
+      "id": "wrong-species-stick-ignored",
+      "rng_seed": 21,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 1699008356
+      },
+      "derivation": "Stick on Bulbasaur does not raise stage. Seed21 advances to1699008356, upper16 modulo16=4.",
+      "attacker": {
+        "species": "SPECIES_BULBASAUR",
+        "item": "ITEM_STICK"
+      }
+    },
+    {
+      "id": "over-stage-four-clamped",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 2,
+        "pointer": 33814017,
+        "rng": 24691
+      },
+      "derivation": "LuckyPunch2 Focus2 high1 clamps to stage4, odds1/2. Seed0 advances to24691, upper16 modulo2=0.",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "species": "SPECIES_CHANSEY",
+        "item": "ITEM_LUCKY_PUNCH",
+        "status2": "STATUS2_FOCUS_ENERGY"
+      }
+    },
+    {
+      "id": "over-stage-four-nonzero",
+      "rng_seed": 3,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 3310570426
+      },
+      "derivation": "Clamped maximum retains half chance, not guaranteed crit. Seed3 advances to3310570426, upper16 modulo2=1.",
+      "move": "MOVE_KARATE_CHOP",
+      "attacker": {
+        "species": "SPECIES_CHANSEY",
+        "item": "ITEM_LUCKY_PUNCH",
+        "status2": "STATUS2_FOCUS_ENERGY"
+      }
+    },
+    {
+      "id": "battle-armor-suppresses",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 0
+      },
+      "derivation": "BattleArmor suppresses critical checks. Suppression consumes no RNG.",
+      "defender": {
+        "ability": "ABILITY_BATTLE_ARMOR"
+      }
+    },
+    {
+      "id": "shell-armor-suppresses",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 0
+      },
+      "derivation": "ShellArmor suppresses critical checks. Suppression consumes no RNG.",
+      "defender": {
+        "ability": "ABILITY_SHELL_ARMOR"
+      }
+    },
+    {
+      "id": "cannot-score-critical-status",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 0
+      },
+      "derivation": "Critical-forbidden status suppresses RNG draw. Suppression consumes no RNG.",
+      "no_crit": true
+    },
+    {
+      "id": "first-battle-forbids-critical",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 0
+      },
+      "derivation": "First-battle rule suppresses critical RNG. Suppression consumes no RNG.",
+      "battle_flags": 16
+    },
+    {
+      "id": "tutorial-forbids-critical",
+      "rng_seed": 0,
+      "expected": {
+        "critical": 1,
+        "pointer": 33814017,
+        "rng": 0
+      },
+      "derivation": "Wally tutorial rule suppresses critical RNG. Suppression consumes no RNG.",
+      "battle_flags": 512
+    }
+  ]
+}
