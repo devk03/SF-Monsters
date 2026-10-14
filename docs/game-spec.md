@@ -5627,3 +5627,35 @@ Ten-minute field finding and reusable local harness:
   Different duration/rate prevents declaring an IAB-specific cause. A fresh600s
   Chrome baseline started~18:17UTC, using an immutable old-runtime snapshot;
   newer working-tree reset fixes do not affect that ongoing capture.
+
+Playback reset and measurement-boundary fixes:
+
+- Regular Chrome600s baseline also fails strict audio continuity:35837actual
+  video frames,0debt/drop,873starved outputframes at44100Hz (~19.8ms), final
+  rendered interval600.044263s. Report SHA8eb58a3981360b56a81d611dc573fc451adb48049f90f001976efe6ecbd4d531.
+  Last periodic count142 precedes final873 by133.5ms of output, including44ms
+  beyond the main epoch. Do not attribute all tail starvation to aggregation.
+- New onClose stops worklet observation before aggregate processing. Exact-number
+  count histograms preserve rank percentiles while sorting unique values; no
+  rounding, sample dropping or worst-case overhead guarantee. Separate callback
+  error/idempotence/rank checks pass; reportPreparationMs is now measured.
+- Successful reset/reboot/import/load discard bounded stale shim PCM, clear the
+  sink via a separate acknowledged playback epoch, resend source rate and rebase
+  presentation clocks/ledgers. Diagnostics start never flushes playback. Missing
+  playback ACK is recorded after500ms; wall-video behavior stays unblocked.
+- Seven real-helper/worklet marker checks and independent review pass. Actual
+  Node/WASM drains5620queued sourceframes without advancing frame3974; all397312
+  serialized bytes and131072Flash bytes match after canonical output initialization.
+  Proof audio-reset-v56-core-state-proof-zeroed/receipt.json
+  SHA fefd55eef52affba92d02934d877df8583d568a69c0c878cc17dda84ee83b60f.
+  Initial uninitialized-output comparison failed981bytes in unwritten/conditional
+  fields/IO holes0x138..7ff; preserved as failed. No captured bytes were masked.
+- SDK snapshot exports now initialize only allocated output scratch after checking
+  allocation success, with guaranteed cleanup. Four memory-safety/determinism
+  guards and real-helper WASM repeat pass. Frozen capture helpers remain unchanged.
+- Actual Chrome UI checks repeated exports and restored RAM/Flash exactly. Fresh
+  ten-second candidate:597video/1200visible ticks,0debt/starvation/drop, playback
+  resetepoch3 ACK=true/no timeout, report preparation0.5ms. Report SHA
+  0c2251d75357682f1b20a1b1983f0a5f6085f7f9497e4e6862ebc30b2bc09363.
+  Full local checks pass. This proves local reset/export behavior, not a new Save
+  checkpoint or full audio gate. Public staysSite47; longer/mixed traces remain open.

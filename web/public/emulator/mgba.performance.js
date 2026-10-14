@@ -20,14 +20,35 @@ function nonnegative(value, name, integer = false) {
     }
 }
 
-function distribution(values) {
-    if (!values.length) return { count: 0 };
-    const sorted = [...values].sort((a, b) => a - b);
-    const percentile = (percent) => sorted[Math.ceil(percent * sorted.length / 100) - 1];
+function histogram() {
+    return { count: 0, values: new Map() };
+}
+
+function sample(histogram, value) {
+    ++histogram.count;
+    histogram.values.set(value, (histogram.values.get(value) ?? 0) + 1);
+}
+
+function distribution(histogram) {
+    if (!histogram.count) return { count: 0 };
+    // Exact Number keys: no rounding, bucketing, sampling or dropped duplicates.
+    // Unique keys can still reach the enclosing record cap in the worst case.
+    const sorted = [...histogram.values.keys()].sort((a, b) => a - b);
+    const ranks = [50, 95, 99].map(percent => Math.ceil(percent * histogram.count / 100));
+    const percentiles = [];
+    let cumulative = 0, mean = 0;
+    for (const value of sorted) {
+        const weight = histogram.values.get(value);
+        cumulative += weight;
+        // Weighted mean avoids overflowing value*weight or the total sum.
+        mean += (value - mean) * (weight / cumulative);
+        while (percentiles.length < ranks.length && cumulative >= ranks[percentiles.length]) {
+            percentiles.push(value);
+        }
+    }
     return {
-        count: sorted.length, min: sorted[0], max: sorted[sorted.length - 1],
-        mean: sorted.reduce((mean, value, index) => mean + (value - mean) / (index + 1), 0),
-        p50: percentile(50), p95: percentile(95), p99: percentile(99),
+        count: histogram.count, min: sorted[0], max: sorted[sorted.length - 1], mean,
+        p50: percentiles[0], p95: percentiles[1], p99: percentiles[2],
     };
 }
 
@@ -55,6 +76,8 @@ export function validateFinalAudioSnapshot(snapshot, previous, epoch) {
  * records return false. Reports contain aggregates only, never unbounded logs.
  * Input latency fields are optional; supersededBeforeFrame is required.
  * Audio counters are cumulative since this epoch began, never per-message deltas.
+ * Optional synchronous onClose(closeMetadata) runs once after the end clock is
+ * captured and recording closes, before distributions or the report are built.
  */
 export function createPerformanceProbe(options = {}, environment = {}) {
     if (!options || typeof options !== 'object' || !environment || typeof environment !== 'object') {
@@ -68,7 +91,10 @@ export function createPerformanceProbe(options = {}, environment = {}) {
     if (options.onReport !== undefined && typeof options.onReport !== 'function') {
         throw new TypeError('onReport must be a function');
     }
-    const onReport = options.onReport;
+    if (options.onClose !== undefined && typeof options.onClose !== 'function') {
+        throw new TypeError('onClose must be a function');
+    }
+    const onReport = options.onReport, onClose = options.onClose;
     const now = environment.now ?? (() => performance.now());
     const schedule = environment.setTimeout ?? ((fn, delay) => globalThis.setTimeout(fn, delay));
     const cancel = environment.clearTimeout ?? ((id) => globalThis.clearTimeout(id));
@@ -80,9 +106,9 @@ export function createPerformanceProbe(options = {}, environment = {}) {
     let valid = true, error = null;
     const ticks = { count: 0, visible: 0, hidden: 0, videoFrameMismatchTicks: 0 };
     const frameTotals = Object.fromEntries(FRAME_COUNTS.map((name) => [name, 0]));
-    const tickTimes = Object.fromEntries(TICK_TIMES.map((name) => [name, []]));
+    const tickTimes = Object.fromEntries(TICK_TIMES.map((name) => [name, histogram()]));
     const inputs = { count: 0, supersededBeforeFrame: 0 };
-    const inputTimes = Object.fromEntries(INPUT_TIMES.map((name) => [name, []]));
+    const inputTimes = Object.fromEntries(INPUT_TIMES.map((name) => [name, histogram()]));
     const visibility = { visible: 0, hidden: 0 };
     const invalidations = { pause: 0, reset: 0 };
     const audio = {
@@ -111,6 +137,13 @@ export function createPerformanceProbe(options = {}, environment = {}) {
             valid = false;
             error ??= failure.message;
             endedAtMs = lastTime;
+        }
+        try {
+            onClose?.({ reason, startedAtMs, endedAtMs,
+                elapsedMs: endedAtMs - startedAtMs, valid, error });
+        } catch (failure) {
+            valid = false;
+            error ??= typeof failure?.message === 'string' ? failure.message : String(failure);
         }
         report = {
             schema: 1, reason, valid, error, context, durationMs,
@@ -188,7 +221,7 @@ export function createPerformanceProbe(options = {}, environment = {}) {
                 for (const name of FRAME_COUNTS) frameTotals[name] += data[name];
                 for (const name of TICK_TIMES) {
                     if (name !== 'rafGapMs' || data.rafGapMeasured !== false) {
-                        tickTimes[name].push(data[name]);
+                        sample(tickTimes[name], data[name]);
                     }
                 }
             } else if (type === 'input') {
@@ -203,7 +236,7 @@ export function createPerformanceProbe(options = {}, environment = {}) {
                 for (const name of present) nonnegative(data[name], name);
                 ++inputs.count;
                 if (data.supersededBeforeFrame) ++inputs.supersededBeforeFrame;
-                for (const name of present) inputTimes[name].push(data[name]);
+                for (const name of present) sample(inputTimes[name], data[name]);
             } else if (type === 'audio') {
                 if (audio.final) throw new TypeError('Audio received after final snapshot');
                 for (const name of AUDIO_COUNTERS) {

@@ -13,16 +13,17 @@ Diagnostics measure emulation, canvas submission and audio buffering. They do no
 <button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="long" disabled>Measure 10 minutes</button>
 <button id="stop" disabled>Stop measurement</button><button id="move" disabled>Walk a short loop</button>
 <button id="finish" disabled>Finish local QA</button>
+<button id="snapshot" disabled>Verify snapshot restore</button>
 <p role="status" id="status">Ready to load. No public saves or account data are used.</p>
 <canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas>
 <pre id="report">No diagnostic report yet.</pre>
 <script type="module">
-let game, identity, timers=[], measuring=false, finished=false;
+let game, identity, timers=[], sessionTimer, measuring=false, finished=false, checking=false;
 const status=document.querySelector('#status'), report=document.querySelector('#report');
 const button=id=>document.querySelector('#'+id);
 function controls(){
-  for(const id of ['short','medium','long'])button(id).disabled=!game||finished||measuring;
-  for(const id of ['move','finish'])button(id).disabled=!game||finished;
+  for(const id of ['short','medium','long','snapshot'])button(id).disabled=!game||finished||measuring||checking;
+  for(const id of ['move','finish'])button(id).disabled=!game||finished||checking;
   button('stop').disabled=!measuring||finished;
 }
 const hash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
@@ -44,6 +45,7 @@ button('load').onclick=async()=>{try{
   game=await load({canvasEl:document.querySelector('canvas'),assets:{rom},persist:null,
     storageNamespace:'sf-performance-isolated-v1',options:{gamepads:false,interframeBlending:false,volume:.15}});
   game.importBattery(battery);await game.loadState(state);game.start();
+  sessionTimer=setTimeout(()=>void finishLocalQa(),identity.server_limit_seconds*1000);
   status.textContent='Verified SF checkpoint playing. Arrow keys move; X/Z are A/B. Let audio settle before measuring.';
 }catch(error){if(game){game.destroy();game=null;}showError(error);}finally{controls();}};
 async function measure(durationMs){try{
@@ -57,6 +59,21 @@ async function measure(durationMs){try{
   status.textContent='Saved '+receipt.name+'; data valid='+result.valid+'; foreground='+result.scope.foregroundOnly+'; final audio ACK='+result.audioFinalAcknowledged+'; audio drops='+(result.audioFinalSnapshot?.droppedSourceFrames??'unknown')+'; underruns='+(result.audioFinalSnapshot?.underrunOutputFrames??'unknown')+'.';
 }catch(error){showError(error);}finally{measuring=false;controls();}}
 button('short').onclick=()=>measure(10000);button('medium').onclick=()=>measure(120000);button('long').onclick=()=>measure(600000);
+button('snapshot').onclick=async()=>{
+  if(!game||finished||measuring||checking)return;
+  if(timers.length){status.textContent='Wait for the finite input loop to finish first.';return;}
+  checking=true;controls();game.pause();
+  try{
+    const beforeFlash=game.exportBattery(),first=await game.saveState(),second=await game.saveState();
+    const equal=(a,b)=>a.length===b.length&&a.every((value,index)=>value===b[index]);
+    if(!equal(first,second))throw Error('Paused canonical snapshot exports differ');
+    await game.loadState(first);
+    const restored=await game.saveState(),afterFlash=game.exportBattery();
+    if(!equal(first.subarray(0x19000,0x61000),restored.subarray(0x19000,0x61000)))throw Error('Guest RAM changed on restore');
+    if(!equal(beforeFlash,afterFlash))throw Error('Flash changed on snapshot restore');
+    status.textContent='Snapshot check passed: repeated exports exact, restored guest RAM and Flash exact. This is not an ordinary Save checkpoint.';
+  }catch(error){showError(error);}finally{checking=false;game.resume();controls();}
+};
 button('stop').onclick=()=>game?.stopDiagnostics('manual');
 button('move').onclick=()=>{
   if(timers.length||finished||!game)return;
@@ -67,11 +84,13 @@ button('move').onclick=()=>{
   }
   timers.push(setTimeout(()=>{timers=[];if(!finished)status.textContent='Input loop finished; any measurement retains its finite deadline.';},2500));
 };
-button('finish').onclick=async()=>{
+async function finishLocalQa(){
   if(finished)return;finished=true;controls();
+  clearTimeout(sessionTimer);
   for(const timer of timers)clearTimeout(timer);timers=[];
   if(measuring)await game.stopDiagnostics('finished-qa');
   game.destroy();controls();
   status.textContent='Local QA finished; emulator and audio stopped. Public progress was untouched.';
-};
+}
+button('finish').onclick=finishLocalQa;
 </script></html>

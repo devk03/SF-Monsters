@@ -2,6 +2,8 @@
 import { manifest } from './mgba.manifest.js';
 import { WORKLET_SOURCE } from './mgba.audio-worklet.js';
 import { createPerformanceProbe, validateFinalAudioSnapshot } from './mgba.performance.js';
+import { discardPendingAudio } from './mgba.audio-reset.js';
+import { serializeCoreState } from './mgba.state.js';
 import { bindConfig, createSettingsStore, } from './mgba.config.js';
 import { coerceOptionValue, DEFAULT_MGBA_OPTIONS, MGBA_ENGINE_OPTIONS, MGBA_GB_MODEL_VALUES, MGBA_LOG_LEVEL_IDS, MGBA_PLATFORM_IDS, toEscMenuGroups, } from './mgba.options.js';
 import { extractRom } from './mgba.zip.js';
@@ -167,6 +169,8 @@ export async function load(config) {
     sink.connect(gain).connect(audioCtx.destination);
     let enqueuedFrames = 0;
     let consumedFrames = 0;
+    let playbackEpoch = 0, pendingPlaybackEpoch = 0, playbackAckTimer = null;
+    let lastPlaybackReset = null;
     let performanceProbe = null, diagnosticEpoch = 0, diagnosticResult = null;
     let diagnosticFinish = null, pendingInput = null, lastDiagnosticTick = null;
     const finishDiagnostics = (audioFinalSnapshot, error = null) => {
@@ -181,7 +185,16 @@ export async function load(config) {
         pending.resolve(report);
     };
     sink.port.onmessage = (e) => {
-        if (typeof e.data === 'number') consumedFrames = e.data;
+        if (typeof e.data === 'number') {
+            if (!pendingPlaybackEpoch) consumedFrames = e.data;
+        } else if (e.data?.type === 'playback-reset' && pendingPlaybackEpoch &&
+                   e.data.epoch === pendingPlaybackEpoch) {
+            pendingPlaybackEpoch = 0;
+            consumedFrames = 0;
+            clearTimeout(playbackAckTimer);
+            playbackAckTimer = null;
+            lastPlaybackReset.acknowledged = true;
+        }
         else if (e.data?.type === 'diagnostics' && e.data.epoch === diagnosticEpoch) {
             if (diagnosticFinish && e.data.final !== false) {
                 try {
@@ -281,6 +294,23 @@ export async function load(config) {
     // of a frame's worth of stereo samples.
     const AUDIO_SCRATCH_FRAMES = 4096;
     const audioPtr = mod._malloc(AUDIO_SCRATCH_FRAMES * 2 * 2);
+    const resetPresentationAudio = (reason) => {
+        const discardedShimFrames = discardPendingAudio(mod, audioPtr, AUDIO_SCRATCH_FRAMES);
+        clearTimeout(playbackAckTimer);
+        const epoch = ++playbackEpoch;
+        pendingPlaybackEpoch = epoch;
+        lastPlaybackReset = { epoch, reason, discardedShimFrames,
+            acknowledged: false, acknowledgementTimedOut: false };
+        enqueuedFrames = consumedFrames = 0;
+        // Messages on this port are ordered: flush precedes the fresh rate/chunks.
+        sink.port.postMessage({ type: 'playback-reset', epoch });
+        coreRate = 0;
+        syncCoreRate();
+        wallClockFrames = wallClockStart = 0;
+        playbackAckTimer = setTimeout(() => {
+            if (pendingPlaybackEpoch === epoch) lastPlaybackReset.acknowledgementTimedOut = true;
+        }, 500);
+    };
     // ---------------------------------------------------------- persistence
     const persistEnabled = config.persist !== null && typeof navigator !== 'undefined';
     /**
@@ -711,19 +741,27 @@ export async function load(config) {
         system,
         startDiagnostics(options = {}) {
             if (!options || typeof options !== 'object' ||
-                (options.onReport !== undefined && typeof options.onReport !== 'function'))
-                throw new TypeError('Diagnostics options require an optional report function.');
+                ['onReport', 'onClose'].some(name => options[name] !== undefined && typeof options[name] !== 'function'))
+                throw new TypeError('Diagnostics options require optional callback functions.');
             if (!running || paused) throw new Error('Start foreground playback before diagnostics.');
             if (document.visibilityState !== 'visible') throw new Error('Keep the diagnostic tab visible.');
             if (performanceProbe?.active || diagnosticFinish)
                 throw new Error('Finish the existing diagnostic window first.');
             let resolve;
+            let closeAnchor = null;
             const result = new Promise((complete) => { resolve = complete; });
-            const probe = createPerformanceProbe({ ...options, onReport(report) {
-                diagnosticFinish = { report: { ...report, pendingInputAtEnd: pendingInput !== null },
+            const probe = createPerformanceProbe({ ...options, onClose(close) {
+                closeAnchor = { endedAtMs: close.endedAtMs, audioTime: audioCtx.currentTime,
+                    audioState: audioCtx.state };
+                // Stop audio observations before preparing aggregate distributions.
+                sink.port.postMessage({ type: 'diagnostics', enabled: false, epoch: diagnosticEpoch });
+                options.onClose?.(close);
+            }, onReport(report) {
+                diagnosticFinish = { report: { ...report, pendingInputAtEnd: pendingInput !== null,
+                    reportPreparationMs: Math.max(0, performance.now() - closeAnchor.endedAtMs),
+                    audioClockAtClose: closeAnchor },
                     resolve, onReport: options.onReport,
                     timer: setTimeout(() => finishDiagnostics(null), 500) };
-                sink.port.postMessage({ type: 'diagnostics', enabled: false, epoch: diagnosticEpoch });
             } });
             pendingInput = null;
             lastDiagnosticTick = null;
@@ -731,6 +769,7 @@ export async function load(config) {
             diagnosticResult = result;
             ++diagnosticEpoch;
             probe.start({ ...options.context, framerate, diagnosticEpoch, visibility: document.visibilityState,
+                playbackReset: lastPlaybackReset ? { ...lastPlaybackReset } : null,
                 userAgent: navigator.userAgent, audioState: audioCtx.state,
                 inputScope: 'DOM handler time, changed masks including releases; completed frame-batch upper bound and canvas submission, not KEYINPUT acknowledgement or physical paint' });
             sink.port.postMessage({ type: 'diagnostics', enabled: true, epoch: diagnosticEpoch });
@@ -779,6 +818,7 @@ export async function load(config) {
                 opts.skipBios !== bootedSkipBios;
             if (!needsReboot) {
                 mod._mgbawasm_reset();
+                resetPresentationAudio('reset');
                 return;
             }
             // A reboot throws the cartridge away and maps a new one, so battery RAM
@@ -794,6 +834,7 @@ export async function load(config) {
                 mod._mgbawasm_sram_load(ptr, sram.length);
                 mod._free(ptr);
             }
+            resetPresentationAudio('reboot');
         },
         setInput,
         exportBattery() {
@@ -829,18 +870,10 @@ export async function load(config) {
             applyLiveSettings();
             mod._mgbawasm_set_keys(0);
             sentMask = -1;
+            resetPresentationAudio('import-battery');
         },
         async saveState() {
-            const size = mod._mgbawasm_state_size();
-            if (!size)
-                throw new Error('mgba: failed to save state');
-            const ptr = mod._malloc(size);
-            const ok = mod._mgbawasm_state_save(ptr);
-            const bytes = ok ? mod.HEAPU8.slice(ptr, ptr + size) : null;
-            mod._free(ptr);
-            if (!bytes)
-                throw new Error('mgba: failed to save state');
-            return bytes;
+            return serializeCoreState(mod);
         },
         async loadState(data) {
             performanceProbe?.record('reset', {});
@@ -853,6 +886,7 @@ export async function load(config) {
             mod._free(ptr);
             if (!ok)
                 throw new Error('mgba: failed to load state');
+            resetPresentationAudio('load-state');
         },
         async screenshot() {
             renderFrame();
@@ -881,6 +915,7 @@ export async function load(config) {
         },
         destroy() {
             performanceProbe?.record('pause', {});
+            clearTimeout(playbackAckTimer);
             for (const timer of releaseTimers.values()) clearTimeout(timer);
             running = false;
             paused = false;

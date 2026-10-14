@@ -22,7 +22,7 @@ class PrepareWebTest(unittest.TestCase):
         vendor = root / 'web/node_modules/@wasm-gaming/mgba-wasm/dist/mgba'
         output.mkdir(parents=True)
         vendor.mkdir(parents=True)
-        owned = ('mgba.sdk.js', 'mgba.audio-worklet.js', 'mgba.performance.js')
+        owned = ('mgba.sdk.js', 'mgba.audio-worklet.js', 'mgba.performance.js', 'mgba.audio-reset.js', 'mgba.state.js')
         for name in owned:
             (output / name).write_bytes(b'authored SF source: ' + name.encode())
             (vendor / name).write_bytes(b'upstream replacement')

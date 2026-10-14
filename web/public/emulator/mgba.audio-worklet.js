@@ -23,8 +23,18 @@ class MgbaSink extends AudioWorkletProcessor {
     this.ratio = 1;
     this.lastPost = 0;
     this.diagnostics = null;
+    this.playbackEpoch = 0;
     this.port.onmessage = (e) => {
       const msg = e.data;
+      if (msg && msg.type === 'playback-reset') {
+        if (!Number.isSafeInteger(msg.epoch) || msg.epoch <= this.playbackEpoch) return;
+        // SDK ends diagnostics before resetting playback. Observation alone
+        // never flushes this ring or changes its interpolation position.
+        this.playbackEpoch = msg.epoch;
+        this.pos = this.w = this.lastPost = 0;
+        this.port.postMessage({ type: 'playback-reset', epoch: msg.epoch });
+        return;
+      }
       if (msg && msg.type === 'diagnostics') {
         if (msg.enabled) {
           this.diagnostics = {

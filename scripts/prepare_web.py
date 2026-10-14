@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 source=ROOT/'web/node_modules/@wasm-gaming/mgba-wasm/dist/mgba'
 out=ROOT/'web/public/emulator';out.mkdir(parents=True,exist_ok=True)
 # The tracked frontend is maintained source; never regenerate it from upstream.
-owned = {'mgba.sdk.js', 'mgba.audio-worklet.js', 'mgba.performance.js'}
+owned = {'mgba.sdk.js', 'mgba.audio-worklet.js', 'mgba.performance.js', 'mgba.audio-reset.js', 'mgba.state.js'}
 if not (out/'mgba.sdk.js').is_file():
     raise ValueError('Restore the tracked SF SDK before preparing the runtime.')
 for path in source.iterdir():
