@@ -62,7 +62,7 @@ def encode_house(root, asset=ASSET, palette_bank=10):
     }, indent=2) + '\n')
 
 
-def remap_houses(plan, original):
+def remap_houses(plan, original, placements=None):
     width, height, expected = encode_layout(plan)
     if (width, height) != (32, 32) or original != expected:
         raise ValueError('Sunset block data no longer matches its authored map.')
@@ -71,26 +71,30 @@ def remap_houses(plan, original):
         for x in range(width - 4):
             if all(plan['rows'][y + dy][x:x + 5].replace('D', 'v') == row for dy, row in enumerate(HOUSE_ROWS)):
                 origins.append([x, y])
+                first = (placements or {}).get((x, y), FIRST_METATILE)
                 for dy in range(5):
                     for dx in range(5):
                         address = ((y + dy) * width + x + dx) * 2
                         word = struct.unpack_from('<H', original, address)[0]
                         struct.pack_into('<H', output, address, (word & 0xfc00) |
-                                         (512 + FIRST_METATILE + dy * 5 + dx))
+                                         (512 + first + dy * 5 + dx))
     if len(origins) != 6:
         raise ValueError('Review facade footprints when changing the Sunset layout.')
+    if set(placements or {}) - {tuple(origin) for origin in origins}:
+        raise ValueError('Variant placement must match an actual facade footprint.')
     return bytes(output), origins
 
 
-def compose_tiles(original, owned, metatiles, streets=None, terrain=None):
-    count = 256 if terrain is not None else (192 if streets is not None else 159)
-    if len(original) != count * 32 or len(owned) != 100 * 32 or len(metatiles) != 144 * 16:
+def compose_tiles(original, owned, metatiles, streets=None, terrain=None, variants=None):
+    count = 512 if variants else (256 if terrain is not None else (192 if streets is not None else 159))
+    records_count = 194 if variants else 144
+    if len(original) != count * 32 or len(owned) != 100 * 32 or len(metatiles) != records_count * 16:
         raise ValueError('Pinned secondary tiles/metatiles allocation changed.')
     # Preserve the actual road quadrants, including flip and palette flags.
     if struct.unpack_from('<8H', metatiles, 16) != (0x2002, 0x2003, 0x2003, 0x2002,
                                                   0x5250, 0x5251, 0x5260, 0x5261):
         raise ValueError('Review secondary road references before changing its tile pool.')
-    tiles, mapping, unique = bytearray(len(original)), [], {}
+    tiles, unique = bytearray(len(original)), {}
     reserved = ROAD_TILES if streets is None else set()
     if terrain is not None:
         reserved = set(range(WAVE_TILE_START, WAVE_TILE_START + 8))
@@ -106,16 +110,24 @@ def compose_tiles(original, owned, metatiles, streets=None, terrain=None):
             unique[tile] = index
             tiles[index * 32:index * 32 + 32] = tile
         return unique[tile]
-    for start in range(0, len(owned), 32):
-        tile = owned[start:start + 32]
-        mapping.append(allocate(tile))
     records = bytearray(metatiles)
-    for y in range(5):
-        for x in range(5):
-            top = y * 20 + x * 2
-            quadrants = [0xa200 | mapping[top + delta] for delta in (0, 1, 10, 11)]
-            struct.pack_into('<8H', records, (FIRST_METATILE + y * 5 + x) * 16,
-                             0x2002, 0x2003, 0x2003, 0x2002, *quadrants)
+    facades = [{'first': FIRST_METATILE, 'bank': 10, 'graphics': owned}, *(variants or [])]
+    occupied = set()
+    for facade in facades:
+        first, bank, raw = facade['first'], facade['bank'], facade['graphics']
+        if len(raw) != 3200 or not 100 <= first <= records_count - 25 or bank not in (6, 7, 10):
+            raise ValueError('Invalid native facade allocation or palette bank.')
+        slots = set(range(first, first + 25))
+        if occupied & slots:
+            raise ValueError('Facade metatile allocations overlap.')
+        occupied |= slots
+        mapping = [allocate(raw[start:start + 32]) for start in range(0, len(raw), 32)]
+        for y in range(5):
+            for x in range(5):
+                top = y * 20 + x * 2
+                quadrants = [(bank << 12) | 0x200 | mapping[top + delta] for delta in (0, 1, 10, 11)]
+                struct.pack_into('<8H', records, (first + y * 5 + x) * 16,
+                                 0x2002, 0x2003, 0x2003, 0x2002, *quadrants)
     if streets is not None:
         if FIRST_ROAD + len(streets) > FIRST_METATILE or any(len(cell) != 256 for cell in streets):
             raise ValueError('Street records overlap houses or have an invalid native cell size.')
@@ -144,21 +156,30 @@ def compose_tiles(original, owned, metatiles, streets=None, terrain=None):
                              0, 0, 0, 0, *quadrants)
         # Transparent facade margins use original SF lawn rather than inherited grass.
         grass = struct.unpack_from('<4H', records, FIRST_TERRAIN * 16 + 8)
-        for index in range(FIRST_METATILE, FIRST_METATILE + 25):
-            struct.pack_into('<4H', records, index * 16, *grass)
+        for facade in facades:
+            for index in range(facade['first'], facade['first'] + 25):
+                struct.pack_into('<4H', records, index * 16, *grass)
     return bytes(tiles), bytes(records), len(unique) + (8 if terrain is not None else 0)
 
 
 def prepare_sunset_tiles(root, emerald, original):
     from PIL import Image
+    from house_variants import load_variants, METATILE_COUNT, TILE_COUNT
+    from bootstrap import EMERALD_REVISION
+    def pinned_bytes(path):
+        return subprocess.check_output(['git', 'show', f'{EMERALD_REVISION}:{path}'], cwd=emerald)
     variants, _ = load_streets(root)
     terrain, _, _ = load_terrain(root)
-    records = (emerald / 'data/tilesets/secondary/petalburg/metatiles.bin').read_bytes()
-    graphics, _, unique = compose_tiles(bytes(256 * 32), (root / ASSET / 'house.4bpp').read_bytes(), records, variants, terrain)
+    records = pinned_bytes('data/tilesets/secondary/petalburg/metatiles.bin')
+    if len(records) != 144 * 16:
+        raise ValueError('Pinned Sunset metatile allocation changed.')
+    facades = load_variants(root)
+    records += bytes((METATILE_COUNT - 144) * 16)
+    graphics, _, unique = compose_tiles(bytes(TILE_COUNT * 32), (root / ASSET / 'house.4bpp').read_bytes(), records, variants, terrain, facades)
     # Indexed PNG is a native build input. RGB palette selection is in metatiles.
-    image = Image.new('P', (128, 128), 0)
+    image = Image.new('P', (128, TILE_COUNT // 16 * 8), 0)
     image.putpalette(Image.open(root / ASSET / 'native-preview.png').getpalette())
-    for tile in range(256):
+    for tile in range(TILE_COUNT):
         for y in range(8):
             for x in range(8):
                 byte = graphics[tile * 32 + y * 4 + x // 2]
@@ -170,15 +191,23 @@ def prepare_sunset_tiles(root, emerald, original):
     line = 'const u32 gTilesetTiles_Petalburg[] = INCGFX_U32("data/tilesets/secondary/petalburg/tiles.png", ".4bpp.lz", "-num_tiles 159 -Wnum_tiles");'
     if source.count(line) != 1:
         raise ValueError('Pinned native tileset compilation declaration changed.')
-    (emerald / header).write_text(source.replace(line, line.replace('159', '256'), 1))
-    if unique > 256:
+    (emerald / header).write_text(source.replace(line, line.replace('159', str(TILE_COUNT)), 1))
+    expanded = []
+    for name, unit in (('metatiles.bin', 16), ('metatile_attributes.bin', 2)):
+        resource = 'data/tilesets/secondary/petalburg/' + name
+        raw = pinned_bytes(resource)
+        if len(raw) != 144 * unit:
+            raise ValueError('Pinned secondary native resource size changed.')
+        (emerald / resource).write_bytes(raw + bytes((METATILE_COUNT - 144) * unit))
+        expanded.append(resource)
+    if unique > TILE_COUNT:
         raise ValueError('Original SF sheet exceeds the native tile allocation.')
-    return [path, header]
+    return [path, header, *expanded]
 
 
 def owned_field_attributes(original):
-    if len(original) != 288:
-        raise ValueError('Native secondary attributes need 144 sixteen-bit records.')
+    if len(original) not in (288, 388):
+        raise ValueError('Native secondary attributes need144 or194 sixteen-bit records.')
     attributes = bytearray(original)
     # Walkable ground belongs below elevation-three field sprites, on BG2.
     for index in range(FIRST_ROAD, FIRST_ROAD + 18):
@@ -193,10 +222,15 @@ def owned_field_attributes(original):
     for index in range(FIRST_METATILE + 20, FIRST_METATILE + 25):
         struct.pack_into('<H', attributes, index * 2, 0x1000)
     struct.pack_into('<H', attributes, 123 * 2, 0x1069)
+    if len(original) == 388:
+        for first in (144, 169):
+            for index in range(25):
+                struct.pack_into('<H', attributes, (first + index) * 2, 0x1000 if index >= 20 else 0)
     return bytes(attributes)
 
 
 def apply_house_art(root, emerald, target):
+    from house_variants import load_variants, facade_placements, METATILE_COUNT, TILE_COUNT
     directory = root / ASSET
     metadata = json.loads((directory / 'conversion.json').read_text())
     files = {name: (directory / name).read_bytes() for name in metadata['files']}
@@ -231,13 +265,16 @@ def apply_house_art(root, emerald, target):
     subprocess.run([str(codec), 'decode', str(packed), str(raw)], check=True)
     streets, street_palette = load_streets(root)
     terrain, terrain_palette, _ = load_terrain(root)
-    graphics, records, unique = compose_tiles(raw.read_bytes(), files['house.4bpp'], read(STEMS[2], 2304), streets, terrain)
-    palette, attributes = bytearray(read(STEMS[1], 512)), bytearray(read(STEMS[3], 288))
+    facades = load_variants(root)
+    graphics, records, unique = compose_tiles(raw.read_bytes(), files['house.4bpp'], read(STEMS[2], METATILE_COUNT * 16), streets, terrain, facades)
+    palette, attributes = bytearray(read(STEMS[1], 512)), bytearray(read(STEMS[3], METATILE_COUNT * 2))
     if len(files['house.gbapal']) != 32:
         raise ValueError('House palette must contain exactly sixteen native colors.')
     palette[320:352] = files['house.gbapal']
     palette[352:384] = street_palette
     palette[384:416] = terrain_palette
+    for facade in facades:
+        palette[facade['bank'] * 32:(facade['bank'] + 1) * 32] = facade['palette']
     attributes = owned_field_attributes(attributes)
     offset, capacity = bounded_span(addresses, 'LittlerootTown_Layout_Blockdata', 'LittlerootTown_Layout')
     plan = json.loads((root / 'romhack/content/sunset.json').read_text())
@@ -252,6 +289,8 @@ def apply_house_art(root, emerald, target):
         if other['engine_map'] != plan['engine_map'] and layout['secondary_tileset'] == 'gTileset_Petalburg':
             raise ValueError('A second active SF map shares the facade tileset; review its references.')
     blocks, origins = remap_houses(plan, linked[offset:offset + capacity])
+    placements = facade_placements(plan, origins, facades)
+    blocks, _ = remap_houses(plan, linked[offset:offset + capacity], placements)
     blocks, road_counts = remap_roads(plan, blocks)
     blocks, terrain_counts = remap_terrain(plan, blocks)
     resources = [{'symbol': name, 'data': data, 'compressed': index == 0}
@@ -260,7 +299,10 @@ def apply_house_art(root, emerald, target):
                       'end_symbol': 'LittlerootTown_Layout', 'data': blocks})
     return {'resources': apply_resources(root, emerald, target, resources), 'origins': origins,
             'unique_tiles': unique, 'native_size': [80, 80], 'collision_elevation_preserved': True,
-            'street_variants': road_counts, 'terrain_variants': terrain_counts, 'secondary_tiles': 256,
+            'street_variants': road_counts, 'terrain_variants': terrain_counts, 'secondary_tiles': TILE_COUNT,
+            'architectural_variants': [{'name': item['name'], 'first_metatile': item['first'],
+                'palette_bank': item['bank'], 'placements': [list(origin) for origin, first in placements.items()
+                    if first == item['first']]} for item in facades],
             'enterable_apartment': True, 'decorative_houses': 5,
             'door_animation': 'three original stages; native opening/closing timing', 'quality_approval': 'pending'}
 

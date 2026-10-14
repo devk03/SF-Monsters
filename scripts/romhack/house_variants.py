@@ -6,8 +6,8 @@ from pathlib import Path
 from house_art import encode_house
 
 STYLES = (
-    ('butter', 'assets/tiles/sunset-rowhouse-butter', 144, 13),
-    ('lavender', 'assets/tiles/sunset-rowhouse-lavender', 169, 14),
+    ('butter', 'assets/tiles/sunset-rowhouse-butter', 144, 6),
+    ('lavender', 'assets/tiles/sunset-rowhouse-lavender', 169, 7),
 )
 METATILE_COUNT = 194
 TILE_COUNT = 512

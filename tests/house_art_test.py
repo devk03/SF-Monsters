@@ -12,9 +12,67 @@ from maps import encode_layout
 from native_resources import bounded_span
 from street_art import load_streets
 from terrain_art import load_terrain
+from house_variants import load_variants, facade_placements
 
 
 class HouseArt(unittest.TestCase):
+    def test_distinct_facades_reconstruct_native_pixels_without_wave_aliases(self):
+        records = bytearray(194 * 16)
+        struct.pack_into('<8H', records, 16, 0x2002, 0x2003, 0x2003, 0x2002,
+                         0x5250, 0x5251, 0x5260, 0x5261)
+        owned = (ROOT / 'assets/tiles/sunset-rowhouse/house.4bpp').read_bytes()
+        streets, _ = load_streets(ROOT)
+        terrain, _, _ = load_terrain(ROOT)
+        variants = load_variants(ROOT)
+        graphics, changed, count = compose_tiles(bytes(512 * 32), owned, bytes(records), streets, terrain, variants)
+        self.assertLessEqual(count, 512)
+        self.assertEqual(len(graphics), 512 * 32)
+        self.assertEqual(len(changed), 194 * 16)
+        for facade in variants:
+            for y in range(5):
+                for x in range(5):
+                    words = struct.unpack_from('<8H', changed, (facade['first'] + y * 5 + x) * 16)
+                    self.assertTrue(all(word >> 12 == 12 for word in words[:4]))
+                    for word, delta in zip(words[4:], (0, 1, 10, 11)):
+                        index = (word & 0x3ff) - 512
+                        self.assertNotIn(index, range(240, 248))
+                        self.assertEqual(word >> 12, facade['bank'])
+                        tile = y * 20 + x * 2 + delta
+                        self.assertEqual(graphics[index * 32:(index + 1) * 32],
+                                         facade['graphics'][tile * 32:(tile + 1) * 32])
+        with self.assertRaisesRegex(ValueError, 'overlap'):
+            compose_tiles(bytes(512 * 32), owned, bytes(records), streets, terrain,
+                          [variants[0], {**variants[1], 'first': 144}])
+        # Emerald loads map BG palettes0..12. Slots13..15 are not map art banks.
+        for reserved_bank in (13, 14, 15):
+            with self.assertRaisesRegex(ValueError, 'palette bank'):
+                compose_tiles(bytes(512 * 32), owned, bytes(records), streets, terrain,
+                              [{**variants[0], 'bank': reserved_bank}, variants[1]])
+
+    def test_decorative_variants_preserve_walls_and_the_enterable_original(self):
+        plan = json.loads((ROOT / 'romhack/content/sunset.json').read_text())
+        original = encode_layout(plan)[2]
+        _, origins = remap_houses(plan, original)
+        variants = load_variants(ROOT)
+        placements = facade_placements(plan, origins, variants)
+        changed, _ = remap_houses(plan, original, placements)
+        before, after = struct.unpack('<1024H', original), struct.unpack('<1024H', changed)
+        self.assertTrue(all(a & 0xfc00 == b & 0xfc00 for a, b in zip(before, after)))
+        self.assertEqual(after[8 * 32 + 16] & 0x3ff, 635)
+        self.assertFalse(after[8 * 32 + 16] & 0xc00)
+        self.assertEqual(after[4 * 32 + 19] & 0x3ff, 656)
+        self.assertEqual(after[10 * 32 + 19] & 0x3ff, 681)
+        attributes = struct.unpack('<194H', owned_field_attributes(bytes(388)))
+        self.assertEqual(attributes[123], 0x1069)
+        for first in (144, 169):
+            self.assertEqual(attributes[first:first + 20], (0,) * 20)
+            self.assertEqual(attributes[first + 20:first + 25], (0x1000,) * 5)
+        with self.assertRaisesRegex(ValueError, 'actual facade'):
+            remap_houses(plan, original, {(0, 0): 144})
+        invalid = {**plan, 'warp_events': [{'x': 22, 'y': 8}]}
+        with self.assertRaisesRegex(ValueError, 'enterable'):
+            facade_placements(invalid, origins, variants)
+
     def test_only_six_facades_change_without_changing_collision_or_elevation(self):
         plan = json.loads((ROOT / 'romhack/content/sunset.json').read_text())
         original = encode_layout(plan)[2]

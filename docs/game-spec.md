@@ -771,7 +771,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card remains paused; resuming that control is user-only. |
+| Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.47-compact-blocks-preview; targetfa373906c1d315922d8e966d11f75b23535ec15d631472ca7990532ab47ce382; Site37. Courier/building overlap fixed and Sunset gaps narrowed. All quality reviews remain open. |
@@ -4225,3 +4225,31 @@ Original facade variety source checkpoint:
 - Loader and fixed decorative placements are staged separately from integration.
   Enterable original apartment facade/animation stays unchanged. Existing six
   house tests pass; public staysv47 while native resource expansion is developed.
+
+
+Facade integration checkpoint (v48):
+
+- Native compilation expands only Sunset's secondary graphics allocation to
+ 512tiles and194metatiles;406slots used including isolated wave animation slots.
+  Original enterable house stays at its existing IDs. Four decorative footprints
+  use two original variants. All authored collision/elevation words, event/warp
+  coordinates, compact layout and animated apartment door remain unchanged.
+- First private draft used reserved palette slots13/14, causing dark/miscolored
+  houses. Failed native/WASM evidence is preserved; no public release used it.
+  Pinned engine loads map palettes0–12. Corrected variants use unused6/7;
+  regression rejects13–15. Expanded tables now rebuild from pinned Git bytes,
+  avoiding double expansion after an earlier overlay.
+- Corrected draft target86bb0553cd5f8f5311f0ade096c3416a28ae571d4f176dda297
+ 10eb4a2b002dc; patch878088bytes. Eight owning tests and full check.sh pass.
+  Every RGB frame, PCM sample and Flash byte matches across native/WASM for
+  the1728-frame walk/run/apartment route. Older saved19,13 relocates to18,13
+  with party, HP/PP, money3500, Potions3 and progression preserved.
+- Actual captured native art: facade-variety-v48-fixed-frontage.png and
+  facade-variety-v48-fixed-walk/review.mp4 under private benchmarks. This28.93s
+  implementation clip is not a completed30–60s matched Emerald quality gate.
+- Genuine34.29s Calvin/Scott intro comparison packet is ready and requested
+  for user0–4 subset review. Human approval remains pending; full domains0/11.
+  Alignment thread now has a90-minute controller-only Steven/Scott route task;
+  it may not alter stats/balance or count its historicalv45 route asv48 evidence.
+- Goal card is now ACTIVE, confirmed2026-10-14T07:58:30Z after user resumed it.
+  Keep working until the explicit October15,6PM Pacific deadline in15.1.
