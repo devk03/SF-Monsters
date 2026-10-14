@@ -4209,3 +4209,19 @@ v47 public deployment confirmation:
 - App goal card remains paused and stale; only the user can resume/change that
   control. Canonical spec governs current work and preserves the full objective.
   This limitation was stated to the user; no fake completion/replacement goal.
+
+
+Original facade variety source checkpoint:
+
+- Added two distinct original architectural candidates: butter-yellow with
+  inset side windows and a red slatted garage, lavender with a central bay,
+  flanking sash windows and scalloped cornice. Sources/exact prompts are under
+  assets/tiles/sunset-rowhouse-butter and sunset-rowhouse-lavender. Built-in
+  image tool used; deterministic80x80 native conversion uses15 opaque RGB555
+  colors plus transparency. No commercial building art is copied.
+- Native previews show different window/cornice/garage designs, not recolors.
+  Per-file/source hashes include the consumed preview. Pixel cleanup/readability
+  and in-game human review remain pending; art approval is not inferred.
+- Loader and fixed decorative placements are staged separately from integration.
+  Enterable original apartment facade/animation stays unchanged. Existing six
+  house tests pass; public staysv47 while native resource expansion is developed.

@@ -20,10 +20,10 @@ ROAD_TILES = {80, 81, 96, 97}
 FIRST_METATILE = 100
 
 
-def encode_house(root):
+def encode_house(root, asset=ASSET, palette_bank=10):
     # Only crop, nearest resampling, RGB555 quantization and native serialization.
     from PIL import Image
-    directory = root / ASSET
+    directory = root / asset
     source = Image.open(directory / 'source.png').convert('RGBA')
     mask = source.getchannel('A').point(lambda alpha: 255 if alpha >= 128 else 0)
     bounds = mask.getbbox()
@@ -56,7 +56,7 @@ def encode_house(root):
         (directory / name).write_bytes(data)
     (directory / 'conversion.json').write_text(json.dumps({
         'source_size': list(source.size), 'alpha_bounds': list(bounds), 'native_size': [80, 80],
-        'visible_size': list(size), 'palette_bank': 10, 'quality_approval': 'pending',
+        'visible_size': list(size), 'palette_bank': palette_bank, 'quality_approval': 'pending',
         'source_sha256': hashlib.sha256((directory / 'source.png').read_bytes()).hexdigest(),
         'files': {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}
     }, indent=2) + '\n')
