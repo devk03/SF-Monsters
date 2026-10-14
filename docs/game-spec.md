@@ -5068,3 +5068,39 @@ Roon native-art integration in progress:
  unchanged older cast files. Added a registry guard against multiple independent
  special NPC palettes on one map (a real shared native/reflection-slot limit);
  seven cast and five cleanup units pass. All manifest cast groups are included.
+
+Verified v53 Roon candidate (public publication pending):
+
+- Normal source build0e40db9 reproduces immutable draft target
+  04196df813241d27b5d14f145c30d130712656cc65fd0461aba544521d7a9bbf.
+  Exact BPS reapplication passes:885003bytes, patch SHA256
+  31354d47c90b39c4fd15e5034fd16dfe12a42f44d3ebe069fb988a24316a9015.
+- Independent compiled-resource audit verifies all nine native frames, palette,
+  animation pointers and the sole graphics-slot replacement81. All238 other
+  graphics bindings,39 old palette bindings, five earlier original cast sources,
+  courier field/run and battle resources retain their prior content.
+- Actual older Sunset battery coldContinue refreshes only Roon's cached graphics
+  field, preserving cached coordinates/movement/ranges. Normal dialogue works.
+  Ordinary native/WASM Save advances3→4 with identical Flash and unchanged
+  declared persistent domains; coldContinue restores the saved appearance.
+  Existing cached LOOK_AROUND stays until actual map re-entry. Palette/reflection
+  checks preserve the courier and clinic; dynamic live facing/flags may change.
+- Earned first-badge controls exit the clinic, reach Jonathan's Muni and return
+  to Sunset. Actual fresh map entry activates Roon's one-tile native wandering.
+  Independent audit matches exactly one source-derived opaque sprite pose in
+  every one of2400 frames, observing all twelve direction/phase combinations.
+  All full-frame RGB and PCM match native/NodeWASM. North idle feet remain one
+  pixel higher; no human art approval or browser performance claim is inferred.
+- All16 independently specified mechanics catalogs rerun on v53:711/711 pass,
+  including57 doubles. Complete actions/move-end/whole-turn integration and all
+  other full mechanics gates remain open.
+- Private matched40.183s review:roon-v53-paired-cast-review/comparison.mp4,
+  SHA56435d8ee51665124bc3927d43d5b9d6459178d79962d905489ff0e13db538e3.
+  Genuine Emerald BOY_2 and original Roon use the same2400-frame controller input,
+  native clock and equal nearest3x scale, with two audio tracks. Authored wander
+  paths/radii differ. Requested rating covers NPC art/readability/walking only;
+  world, audio and full quality-domain approval remain separate and pending.
+- Alignment reviews clip provenance read-only by14:00UTC, hardstop14:10UTC;
+  next check no later14:08UTC. Deadline remains October15 18:00 Pacific.
+  Public remainsv52/Site43 until audited Site publication succeeds. Full human
+  domains remain0/11. Next visual priority is denser, varied South Park frontage.

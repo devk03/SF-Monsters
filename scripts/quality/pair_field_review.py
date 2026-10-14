@@ -41,7 +41,7 @@ def main():
                         help='Visible candidate scene name in uppercase letters and spaces.')
     parser.add_argument('--reference-label',default='EMERALD LAB',
                         help='Visible genuine reference scene name in uppercase letters and spaces.')
-    parser.add_argument('--review-scope',choices=['interior','healing','trainer'],default='interior')
+    parser.add_argument('--review-scope',choices=['interior','healing','trainer','cast'],default='interior')
     args=parser.parse_args()
     if not re.fullmatch(r'[A-Z][A-Z ]{1,39}',args.candidate_label):
         parser.error('Candidate label must use 2–40 uppercase letters/spaces.')
@@ -84,7 +84,8 @@ def main():
                     '-i',str(video),'-frames:v','1',str(output/'comparison.png')],check=True)
     scope = {'healing':'Recovery event presentation and audio cue only; full domains incomplete',
              'interior':'Interior art/readability and walking presentation only; full domains incomplete',
-             'trainer':'Trainer introduction/deployment and courier throw only; full domains incomplete'}[args.review_scope]
+             'trainer':'Trainer introduction/deployment and courier throw only; full domains incomplete',
+             'cast':'Field NPC art/readability and native walking only; full domains incomplete'}[args.review_scope]
     receipt={'scope':scope,
              'seconds':seconds,'frames_per_side':metadata[0]['frames'],'scale':'equal nearest 3x',
              'same_controller_input':True,'audio_tracks':['Emerald reference','SF candidate'],
