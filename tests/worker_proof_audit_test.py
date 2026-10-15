@@ -136,6 +136,7 @@ class WorkerReceipt(unittest.TestCase):
         report['boot'].update(clockPolicy='consumed-source-v1',prefillLeadNativeFrames=4)
         w.update(clockPolicy='consumed-source-v1',prefillLeadNativeFrames=4,coreRate=65536,rawLedger=rows,
                  initialSourceFramesPosted=initial_posted,finalSourceFramesPosted=posted,sourceFramesPosted=posted-initial_posted,
+                 initialConsumedSourceFrames=5000,finalConsumedSourceFrames=rows[-1][8],
                  initialDue=initial_due,finalGuestCounter=counter,
                  initialPacing=dict(due=initial_due,executed=initial_due,overflowDropped=0,backlog=0),
                  finalPacing=dict(due=due,executed=due,overflowDropped=0,backlog=0))
@@ -150,12 +151,20 @@ class WorkerReceipt(unittest.TestCase):
                    lambda w:w['rawLedger'][4].__setitem__(9,0),
                    lambda w:w['rawLedger'][4].__setitem__(10,0),
                    lambda w:w.update(coreRate=65535),lambda w:w.update(prefillLeadNativeFrames=5),
-                   lambda w:w.update(sourceFramesPosted=0),lambda w:w.update(clockPolicy='worker-wall-v1'),
+                   lambda w:w.update(sourceFramesPosted=0),lambda w:w.update(finalConsumedSourceFrames=0),lambda w:w.update(clockPolicy='worker-wall-v1'),
                    lambda w:w['rawLedger'][4].pop()]
         for mutate in mutations:
             with self.subTest(mutation=mutations.index(mutate)):
                 changed=self.consumed_fixture();mutate(changed['worker'])
                 with self.assertRaises(ValueError):self.audit(changed)
+
+    def test_real_output_cannot_be_supplied_by_a_zero_progress_source_ledger(self):
+        report=self.consumed_fixture();w=report['worker'];initial=w['initialPacing']['due'];counter=w['initialGuestCounter']
+        posted=w['initialSourceFramesPosted']
+        w['rawLedger']=[[0,0,0,0,0,row[5],counter,counter,5000,posted,posted]for row in w['rawLedger']]
+        w.update(finalGuestCounter=counter,maxPending=0,finalSourceFramesPosted=posted,sourceFramesPosted=0,
+                 finalConsumedSourceFrames=5000,finalPacing=dict(due=initial,executed=initial,overflowDropped=0,backlog=0))
+        with self.assertRaisesRegex(ValueError,'cannot supply'):self.audit(report)
 
     def input_fixture(self):
         report=self.fixture();origin=1000000000.

@@ -168,7 +168,7 @@ def audit(report,identity,directory):
     equal(boot.get('clockPolicy','worker-wall-v1'),policy,'boot/measurement clock policy')
     source_clock=policy=='consumed-source-v1'
     posted=num(worker['initialSourceFramesPosted'],'initial posted PCM',integer=True) if source_clock else None
-    previous_consumed=num(worker.get('initialConsumedSourceFrames',0),'initial acknowledged source frames',integer=True) if source_clock else 0
+    previous_consumed=num(worker['initialConsumedSourceFrames'],'initial acknowledged source frames',integer=True) if source_clock else 0
     if source_clock:
         equal(worker['prefillLeadNativeFrames'],4,'declared lead')
         equal(boot['prefillLeadNativeFrames'],4,'boot lead')
@@ -221,7 +221,7 @@ def audit(report,identity,directory):
         fresh_total+=fresh;planned_total+=planned;actual_total+=actual;drop_total+=drop;mismatches+=planned!=actual
     if source_clock:
         equal(worker['finalSourceFramesPosted'],posted,'final native PCM posted')
-        final_consumed=num(worker.get('finalConsumedSourceFrames',previous_consumed),'final acknowledged source frames',integer=True)
+        final_consumed=num(worker['finalConsumedSourceFrames'],'final acknowledged source frames',integer=True)
         if not previous_consumed<=final_consumed<=posted:raise ValueError('Closing source clock is outside posted PCM')
         equal(worker['sourceFramesPosted'],posted-worker['initialSourceFramesPosted'],'measured native PCM posted')
     equal(final['due'],due,'final due');equal(final['backlog'],debt,'final debt')
@@ -236,6 +236,20 @@ def audit(report,identity,directory):
     equal(worker['audioFinalError'],None,'raw final audio error')
     epoch=num(worker['epoch'],'audio diagnostic epoch',integer=True)
     final_audio=audio(worker['audioFinalSnapshot'],epoch);equal(final_audio['final'],True,'final audio flag')
+    source_balance=None
+    if source_clock:
+        consumed_output=(final_audio['renderedOutputFrames']-final_audio['warmupOutputFrames']-final_audio['underrunOutputFrames'])*worker['coreRate']/final_audio['outputSampleRate']
+        inferred_initial_queue=final_audio['queueDepthFrames']+consumed_output-worker['sourceFramesPosted']+final_audio['droppedSourceFrames']
+        # Ordered messages: enable follows all prewindow PCM; disable follows
+        # all measured PCM and precedes later PCM. Same unchanged fixed-rate ring.
+        # Handlers run between whole quanta; no fabricated scheduling slack.
+        if not 0<=inferred_initial_queue<=32768:
+            raise ValueError('Measured native PCM cannot supply the actual worklet output interval')
+        source_balance={'inferred_initial_queue_source_frames':inferred_initial_queue,
+                        'handler_boundary_allowance_source_frames':0,
+                        'ring_capacity_source_frames':32768,'measured_native_pcm_source_frames':worker['sourceFramesPosted'],
+                        'actual_output_consumption_source_frames':consumed_output,
+                        'scope':'Fixed-rate, unchanged same-port diagnostic/PCM ordering; source balance only, not a physical audio or speed approval.'}
     previous=None
     for observed in worker['audioSnapshots']:
         num(observed['workerReceivedAt'],'worklet receipt time')
@@ -302,7 +316,7 @@ def audit(report,identity,directory):
         overlap_frames.append(sum(row[2] for row,t in zip(rows,tick_times) if begin<=t<=finish))
     if len(overlap)>1:raise ValueError('Repeated stall action is not this bounded experiment')
     return {'receipt_integrity':True,'scope':'Private Worker conservation and raw worklet transport observations only; no full performance, physical output, guest key consumption or production persistence approval.',
-            'clock_policy':policy,'native_seconds':actual_total/fps,'native_minus_worklet_seconds':actual_total/fps-final_audio['renderedOutputFrames']/final_audio['outputSampleRate'],
+            'clock_policy':policy,'source_balance':source_balance,'native_seconds':actual_total/fps,'native_minus_worklet_seconds':actual_total/fps-final_audio['renderedOutputFrames']/final_audio['outputSampleRate'],
             'ticks':len(rows),'fresh_frames':fresh_total,'planned_frames':planned_total,'actual_frames':actual_total,
             'overflow_dropped_frames':drop_total,'closing_backlog':debt,'planned_mismatch_ticks':mismatches,
             'max_worker_tick_gap_ms':max_gap,'worker_ticks_during_each_main_stall':overlap,

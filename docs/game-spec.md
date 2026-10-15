@@ -9121,3 +9121,25 @@ Optional consumed-source clock — October15,10:48UTC:
   The browser receipts above precede this added guard, with their own exact frozen
   source hashes. Final-source browser/save/long-run checks remain next. Public
   game/SDK/core/WASM/worklet unchanged; no full gate or production promotion.
+
+
+Audit strengthening and local regression — October15,10:56UTC:
+
+- Full scripts/check.sh passes locally, including native fixtures, maps/art,
+  browser protocol/clock corruption tests and TypeScript. GitHub Actions remains
+  manual-only; routine commits/pushes do not request workflow runs.
+- A structurally conserved source-clock ledger alone could still falsely pair
+  zero native progress with a long raw-audio interval. The independent auditor
+  now reconstructs initial accepted queue from actual worklet consumption,
+  measured native PCM posted, final queue and recorded source drops. Same-port
+  FIFO diagnostic/PCM ordering makes the source balance explicit. It must fit
+  the unchanged32768source-frame ring; no invented quantum scheduling allowance.
+  New zero-progress/real-output corruption case rejects that impossible pairing.
+- Consumed-source receipts now require initial/final acknowledged source counters;
+  older candidate receipts retain their earlier exact auditor snapshots rather
+  than silently gaining newly unrecorded facts. Source consistency is scoped
+  transport evidence, not physical speed/listening or full performance approval.
+- Alignment separately hardens pause-auditor absolute audio endpoints, per-cycle
+  metadata/epoch continuity and strict initial-ACK/visibility requirements in an
+  isolated copy. Root continues final-source ordinary Save and native cold-load
+  checks. Public v80 and all full acceptance gates remain unchanged/open.
