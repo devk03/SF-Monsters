@@ -554,9 +554,9 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 06:06 UTC:
+Current checkpoint — October 15, 2026, 06:27 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v78 / Site 69 is live.
+- Goal active; stop October 15 at 05:00 Pacific. Public v78 / Site 69 is live.
   The user says the homes are good and asks for streetlights and other city
   decorations. The new city candidate adds ten curbside props while preserving
   homes and clear routes. Actual recovery/collision checks pass all14 new bases;
@@ -630,8 +630,8 @@ Current checkpoint — October 15, 2026, 06:06 UTC:
 
 ### 15.1 Objective and completion rule
 
-Current user-requested stop: **October 15, 2026, 6 PM America/Los_Angeles**
-(October 16, 01:00 UTC). Keep working through intermediate commits, fixes, reviews
+Current user-requested stop: **October 15, 2026, 5 AM America/Los_Angeles**
+(October 15, 12:00 UTC). This supersedes the prior 6 PM cutoff. Keep working through intermediate commits, fixes, reviews
 and deployments until that mark; do not treat a completed subtask as the end of
 the full goal. At the deadline stop new implementation/build/deployment work,
 record honest remaining gates, make the final coherent commit/push, and pause.
@@ -846,7 +846,7 @@ Current snapshot (October 15, 2026,06:06UTC; historical checkpoint details follo
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
+| Execution | Continue full-spec work through intermediate releases until October15,5AM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.78-city-furniture-preview; target46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943; Site69. Accepted home direction preserved; ten curbside props add lamps, meters, hydrant, bin, rack, tree, bench and recycling. City-dressing subset comparison pending. No numeric/full-domain approval. |
@@ -8477,3 +8477,16 @@ Latest city review and density direction — October15,06:22UTC:
   producer integration and actual native/browser/save checks. Publicv78 unchanged.
   The concrete rAF pacing debt cause/proposal is recorded in the alignment chat;
   no runtime code was changed or performance gate cleared.
+
+Deadline override — October15,06:27UTC:
+
+- Direct human instruction: "stop at 5am." New hard cutoff is October15,2026,
+ 05:00 America/Los_Angeles =12:00UTC, replacing the previous18:00 cutoff.
+  Earlier journal references to6PM are historical and do not control execution.
+- Updated the existing one-time stop reminder in place (same automation ID),
+  verified ACTIVE with October15/05:00/COUNT1 scheduling and the exact stop
+  instructions. No recurring monitor was added. Alignment received the change.
+- Continue authorized work until then. At the deadline start no implementation,
+  builds or deployment; safely finish/stop operations, record honest outstanding
+  gates here, commit/push authorized work without Actions and pause the goal.
+  Unfinished quality/campaign gates prevent declaring completion.
