@@ -8717,3 +8717,19 @@ Independent frame-debt evidence format — October15,07:55UTC:
 - Input debt before the next RAF may exceed the post-plan30frame cap; it remains
   honest/unclamped up to the bounded observation range. Duplicate unsuperseded
   counter claims and impossible initial debt are rejected. No public SDK change.
+
+Frame-debt corruption and private SDK checks — October15,08:02UTC:
+
+- Added14independent fault/provenance cases and the8policy cases to localchecks;
+  all14new+9old auditor tests pass. Private actual SDK/probe with a synthetic
+  core-counter fixture passes five integration cases: RAFtimestamp0, two key
+  edges before catch-up/supersession, release during debt, partial core progress,
+  and the final batch crossing the diagnostic deadline. These are mock-core
+  tests, not real browser/audio/performance acceptance.
+- Alignment identified the close-boundary race: executing before admission could
+  omit a final tick from the ledger while counting it at close. Private probe
+  now admits before execution, records/settles that batch and its input, then
+  closes, explicitly reporting one-batch overrun. Synthetic9999→10001ms case
+  preserves every actual counter advance; no guessed tail subtraction.
+- A real finite200ms stall comparison is next. Public SDK/probe/WASM/audio and
+  old failed600sec evidence remain unchanged. The full performance gate is open.
