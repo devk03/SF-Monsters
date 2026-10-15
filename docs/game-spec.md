@@ -8528,3 +8528,25 @@ Density corruption and projection checks — October15,06:32UTC:
   roles cannot be hidden by normalization. Invalid mode combinations fail closed.
 - Added the source and compiled density suites to local check.sh. These remain
   format/integration tests rather than human art, campaign or performance approval.
+
+Native South Park density checks — October15,06:48UTC:
+
+- Normal privatev79 target185cab500852af16e5229e9005cc601b7a16ac6cf764ce30778a7a15bbe820db
+  built from9e122143ce09a26fdbc857f272e0072a4ddd5889. Density37/37,
+  city166/166, connected135/135 and services278/278 compiled checks pass.
+  Full localcheck.sh passes; log SHA
+  caa83769c4988dbd129e8b8cb6940a340e8e48297d800da79277d5ede184b5b4.
+- All56 newly solid cells have genuine controller-created v78 ordinary Flash
+  saves, independently verified C9/checksums/positions. Actual v79 battery-only
+  cold Continue relocates each to the predicted safe tile. A push into a declared
+  new facade stays blocked and a legal escape succeeds; Flash stays unchanged.
+  The nine freed cells are controller-walkable. These are geometry upgrade cases,
+  not50 meaningful campaign resume checkpoints or full save-transfer acceptance.
+- Office/clinic/seed entries and returns pass; all511primary/476secondary tiles
+  and13palette banks reload exactly. Native/browser saving and review still next.
+- Prepared an unused Sunset density producer and four passing source/resource
+  tests. Three verified empty lawn lots add36wall/9gray approach cells, preserving
+  all actual roads/events and remaining routes. Original-only v79 baseline is
+  frozen; two accepted house cards plus native mirrored variant add90unique tiles,
+  leaving491..503 free and504..511 reserved for doors. Sunset is not integrated,
+  built, deployed or human-approved. Alignment owns the independent gate/tests.

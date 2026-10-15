@@ -1,0 +1,36 @@
+{
+  "source_target_sha256": "185cab500852af16e5229e9005cc601b7a16ac6cf764ce30778a7a15bbe820db",
+  "source_commit": "9e122143ce09a26fdbc857f272e0072a4ddd5889",
+  "legacy_postlink_baseline": true,
+  "secondary_tiles": 512,
+  "used_prefix_tiles": 401,
+  "old_metatiles": 194,
+  "old_attributes": 194,
+  "map_size": [
+    32,
+    32
+  ],
+  "full_metatiles_sha256": "3061b52def2e7be25d2351510d3e2a150f1690cdda69f1f0b15d10f1fd23b4c5",
+  "full_attributes_sha256": "04c1a4d257532683e0af86fc279c4b60fe341ec8694de287da024ce93c7273fc",
+  "palettes_excluding8_and9_sha256": "d8e093bb62151dcfaada2f99408b3eaf5b80c419c2aed1acb5f19b43def93722",
+  "full_palettes_sha256": "4969ae204a1e5997536e2e77fe16b864cb5b0797fefeb57c341b55da356a1bbc",
+  "public_baseline_scope": "Entire secondary graphics are original SF composition or zero. Records include only authored SF groups. Opaque unused inherited records and palettes are represented by hashes only.",
+  "files": {
+    "secondary.4bpp": {
+      "bytes": 16384,
+      "sha256": "b3d61aaa7594b0dc84398b19222660c73b7179ae0f9a48c9ed9d8ede8525af98"
+    },
+    "owned-records.json": {
+      "bytes": 9996,
+      "sha256": "3e301b1e59cd8971af50f35e945d2716189bec040ce59847a877cd2a9fb29a6c"
+    },
+    "source-plan.json": {
+      "bytes": 3542,
+      "sha256": "7bfa566bdb8d4f8c3ba7495d51c4f9674867ac52af083b33bf40713f130f22e5"
+    },
+    "sunset-map.bin": {
+      "bytes": 2048,
+      "sha256": "a3959bfceda3bd9d679ee1a539d8f9b66b1eab5de9d27e2bb1c131c20756279a"
+    }
+  }
+}

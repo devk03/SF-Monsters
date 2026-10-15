@@ -1,0 +1,438 @@
+{
+  "1": {
+    "metatile": "02200320032002201cb31db31eb31fb3",
+    "attribute": "0010"
+  },
+  "40": {
+    "metatile": "02200320032002201cb31db31eb31fb3",
+    "attribute": "0010"
+  },
+  "41": {
+    "metatile": "022003200320022020b321b322b323b3",
+    "attribute": "0010"
+  },
+  "42": {
+    "metatile": "022003200320022024b325b326b327b3",
+    "attribute": "0010"
+  },
+  "43": {
+    "metatile": "022003200320022028b329b32ab32bb3",
+    "attribute": "0010"
+  },
+  "44": {
+    "metatile": "02200320032002202cb32db32eb32fb3",
+    "attribute": "0010"
+  },
+  "45": {
+    "metatile": "022003200320022030b331b332b333b3",
+    "attribute": "0010"
+  },
+  "46": {
+    "metatile": "022003200320022034b335b336b337b3",
+    "attribute": "0010"
+  },
+  "47": {
+    "metatile": "022003200320022038b339b33ab33bb3",
+    "attribute": "0010"
+  },
+  "48": {
+    "metatile": "02200320032002203cb33db33eb33fb3",
+    "attribute": "0010"
+  },
+  "49": {
+    "metatile": "022003200320022040b341b342b343b3",
+    "attribute": "0010"
+  },
+  "50": {
+    "metatile": "022003200320022044b345b346b347b3",
+    "attribute": "0010"
+  },
+  "51": {
+    "metatile": "022003200320022048b349b34ab34bb3",
+    "attribute": "0010"
+  },
+  "52": {
+    "metatile": "02200320032002204cb34db34eb34fb3",
+    "attribute": "0010"
+  },
+  "53": {
+    "metatile": "022003200320022050b351b352b353b3",
+    "attribute": "0010"
+  },
+  "54": {
+    "metatile": "022003200320022054b355b356b357b3",
+    "attribute": "0010"
+  },
+  "55": {
+    "metatile": "022003200320022058b359b35ab35bb3",
+    "attribute": "0010"
+  },
+  "56": {
+    "metatile": "02200320032002205cb35cb35cb35db3",
+    "attribute": "0010"
+  },
+  "57": {
+    "metatile": "02200320032002205eb35fb360b361b3",
+    "attribute": "0010"
+  },
+  "60": {
+    "metatile": "000000000000000062c363c363c364c3",
+    "attribute": "0010"
+  },
+  "61": {
+    "metatile": "000000000000000065c366c367c368c3",
+    "attribute": "2110"
+  },
+  "62": {
+    "metatile": "0000000000000000f0c2f1c2f2c2f3c2",
+    "attribute": "1510"
+  },
+  "63": {
+    "metatile": "0000000000000000f4c2f5c2f6c2f7c2",
+    "attribute": "0010"
+  },
+  "64": {
+    "metatile": "000000000000000069c36ac36bc36cc3",
+    "attribute": "0210"
+  },
+  "65": {
+    "metatile": "00000000000000006dc36ec36fc370c3",
+    "attribute": "0010"
+  },
+  "66": {
+    "metatile": "000000000000000071c372c373c374c3",
+    "attribute": "0010"
+  },
+  "67": {
+    "metatile": "000000000000000075c376c377c378c3",
+    "attribute": "0010"
+  },
+  "68": {
+    "metatile": "000000000000000079c37ac37bc37cc3",
+    "attribute": "0010"
+  },
+  "69": {
+    "metatile": "00000000000000007dc37ec37fc380c3",
+    "attribute": "0010"
+  },
+  "72": {
+    "metatile": "000000000000000063c381c382c363c3",
+    "attribute": "0010"
+  },
+  "73": {
+    "metatile": "000000000000000083c363c363c384c3",
+    "attribute": "0010"
+  },
+  "76": {
+    "metatile": "000000000000000085c386c387c388c3",
+    "attribute": "0010"
+  },
+  "77": {
+    "metatile": "000000000000000089c38ac38bc38cc3",
+    "attribute": "0010"
+  },
+  "78": {
+    "metatile": "00000000000000008dc38ec38fc390c3",
+    "attribute": "0010"
+  },
+  "100": {
+    "metatile": "62c363c363c364c300a201a208a209a2",
+    "attribute": "0000"
+  },
+  "101": {
+    "metatile": "62c363c363c364c302a203a20aa20ba2",
+    "attribute": "0000"
+  },
+  "102": {
+    "metatile": "62c363c363c364c303a203a20ca20da2",
+    "attribute": "0000"
+  },
+  "103": {
+    "metatile": "62c363c363c364c304a205a20ea20fa2",
+    "attribute": "0000"
+  },
+  "104": {
+    "metatile": "62c363c363c364c306a207a210a211a2",
+    "attribute": "0000"
+  },
+  "105": {
+    "metatile": "62c363c363c364c312a213a21ca21da2",
+    "attribute": "0000"
+  },
+  "106": {
+    "metatile": "62c363c363c364c314a215a21ea21fa2",
+    "attribute": "0000"
+  },
+  "107": {
+    "metatile": "62c363c363c364c316a217a220a221a2",
+    "attribute": "0000"
+  },
+  "108": {
+    "metatile": "62c363c363c364c318a219a222a223a2",
+    "attribute": "0000"
+  },
+  "109": {
+    "metatile": "62c363c363c364c31aa21ba224a225a2",
+    "attribute": "0000"
+  },
+  "110": {
+    "metatile": "62c363c363c364c31ca226a21ca22ea2",
+    "attribute": "0000"
+  },
+  "111": {
+    "metatile": "62c363c363c364c327a228a22fa230a2",
+    "attribute": "0000"
+  },
+  "112": {
+    "metatile": "62c363c363c364c329a22aa231a232a2",
+    "attribute": "0000"
+  },
+  "113": {
+    "metatile": "62c363c363c364c322a22ba233a234a2",
+    "attribute": "0000"
+  },
+  "114": {
+    "metatile": "62c363c363c364c32ca22da235a22da2",
+    "attribute": "0000"
+  },
+  "115": {
+    "metatile": "62c363c363c364c336a237a21ca240a2",
+    "attribute": "0000"
+  },
+  "116": {
+    "metatile": "62c363c363c364c338a239a241a242a2",
+    "attribute": "0000"
+  },
+  "117": {
+    "metatile": "62c363c363c364c33aa23ba243a244a2",
+    "attribute": "0000"
+  },
+  "118": {
+    "metatile": "62c363c363c364c33ca23da245a246a2",
+    "attribute": "0000"
+  },
+  "119": {
+    "metatile": "62c363c363c364c33ea23fa247a22da2",
+    "attribute": "0000"
+  },
+  "120": {
+    "metatile": "62c363c363c364c348a249a251a252a2",
+    "attribute": "0010"
+  },
+  "121": {
+    "metatile": "62c363c363c364c34aa24ba253a254a2",
+    "attribute": "0010"
+  },
+  "122": {
+    "metatile": "62c363c363c364c34ca24da255a256a2",
+    "attribute": "0010"
+  },
+  "123": {
+    "metatile": "62c363c363c364c34ea24fa257a258a2",
+    "attribute": "6910"
+  },
+  "124": {
+    "metatile": "62c363c363c364c350a22da259a25aa2",
+    "attribute": "0010"
+  },
+  "144": {
+    "metatile": "62c363c363c364c35b625c6265626662",
+    "attribute": "0000"
+  },
+  "145": {
+    "metatile": "62c363c363c364c35d625e6267626862",
+    "attribute": "0000"
+  },
+  "146": {
+    "metatile": "62c363c363c364c35f62606269626a62",
+    "attribute": "0000"
+  },
+  "147": {
+    "metatile": "62c363c363c364c3616262626b626c62",
+    "attribute": "0000"
+  },
+  "148": {
+    "metatile": "62c363c363c364c3636264626d626e62",
+    "attribute": "0000"
+  },
+  "149": {
+    "metatile": "62c363c363c364c36f62706279627a62",
+    "attribute": "0000"
+  },
+  "150": {
+    "metatile": "62c363c363c364c3716272627b627c62",
+    "attribute": "0000"
+  },
+  "151": {
+    "metatile": "62c363c363c364c3736274627d627e62",
+    "attribute": "0000"
+  },
+  "152": {
+    "metatile": "62c363c363c364c3756276627f628062",
+    "attribute": "0000"
+  },
+  "153": {
+    "metatile": "62c363c363c364c37762786281628262",
+    "attribute": "0000"
+  },
+  "154": {
+    "metatile": "62c363c363c364c3836284628c628d62",
+    "attribute": "0000"
+  },
+  "155": {
+    "metatile": "62c363c363c364c3856286628e628f62",
+    "attribute": "0000"
+  },
+  "156": {
+    "metatile": "62c363c363c364c38762886290629162",
+    "attribute": "0000"
+  },
+  "157": {
+    "metatile": "62c363c363c364c389628a6292629362",
+    "attribute": "0000"
+  },
+  "158": {
+    "metatile": "62c363c363c364c38b62826294628262",
+    "attribute": "0000"
+  },
+  "159": {
+    "metatile": "62c363c363c364c3956296629f62a062",
+    "attribute": "0000"
+  },
+  "160": {
+    "metatile": "62c363c363c364c397629862a162a262",
+    "attribute": "0000"
+  },
+  "161": {
+    "metatile": "62c363c363c364c399629a62a362a462",
+    "attribute": "0000"
+  },
+  "162": {
+    "metatile": "62c363c363c364c39b629c62a562a662",
+    "attribute": "0000"
+  },
+  "163": {
+    "metatile": "62c363c363c364c39d629e62a7628262",
+    "attribute": "0000"
+  },
+  "164": {
+    "metatile": "62c363c363c364c3a862a962b062b162",
+    "attribute": "0010"
+  },
+  "165": {
+    "metatile": "62c363c363c364c3aa62ab62b262b362",
+    "attribute": "0010"
+  },
+  "166": {
+    "metatile": "62c363c363c364c3ab62ac62b362b462",
+    "attribute": "0010"
+  },
+  "167": {
+    "metatile": "62c363c363c364c3ad62ae62b562b662",
+    "attribute": "0010"
+  },
+  "168": {
+    "metatile": "62c363c363c364c3af628262b762b862",
+    "attribute": "0010"
+  },
+  "169": {
+    "metatile": "62c363c363c364c3b972ba72c172c272",
+    "attribute": "0000"
+  },
+  "170": {
+    "metatile": "62c363c363c364c3bb72bc72c372c472",
+    "attribute": "0000"
+  },
+  "171": {
+    "metatile": "62c363c363c364c3bc72bc72c572c672",
+    "attribute": "0000"
+  },
+  "172": {
+    "metatile": "62c363c363c364c3bd72be72c772c872",
+    "attribute": "0000"
+  },
+  "173": {
+    "metatile": "62c363c363c364c3bf72c072c972ca72",
+    "attribute": "0000"
+  },
+  "174": {
+    "metatile": "62c363c363c364c3cb72cc72d572d672",
+    "attribute": "0000"
+  },
+  "175": {
+    "metatile": "62c363c363c364c3cd72ce72d772d872",
+    "attribute": "0000"
+  },
+  "176": {
+    "metatile": "62c363c363c364c3cf72d072d972da72",
+    "attribute": "0000"
+  },
+  "177": {
+    "metatile": "62c363c363c364c3d172d272db72dc72",
+    "attribute": "0000"
+  },
+  "178": {
+    "metatile": "62c363c363c364c3d372d472dd72de72",
+    "attribute": "0000"
+  },
+  "179": {
+    "metatile": "62c363c363c364c3d572df72d572e772",
+    "attribute": "0000"
+  },
+  "180": {
+    "metatile": "62c363c363c364c3e072e172e872e972",
+    "attribute": "0000"
+  },
+  "181": {
+    "metatile": "62c363c363c364c3e272e372ea72eb72",
+    "attribute": "0000"
+  },
+  "182": {
+    "metatile": "62c363c363c364c3e472e572ec72ed72",
+    "attribute": "0000"
+  },
+  "183": {
+    "metatile": "62c363c363c364c3e672de72ee72ef72",
+    "attribute": "0000"
+  },
+  "184": {
+    "metatile": "62c363c363c364c3f872f972d5720273",
+    "attribute": "0000"
+  },
+  "185": {
+    "metatile": "62c363c363c364c3fa72fb7203730473",
+    "attribute": "0000"
+  },
+  "186": {
+    "metatile": "62c363c363c364c3fc72fd7205730673",
+    "attribute": "0000"
+  },
+  "187": {
+    "metatile": "62c363c363c364c3fe72ff7207730873",
+    "attribute": "0000"
+  },
+  "188": {
+    "metatile": "62c363c363c364c3007301730973de72",
+    "attribute": "0000"
+  },
+  "189": {
+    "metatile": "62c363c363c364c3d5720a7312731373",
+    "attribute": "0010"
+  },
+  "190": {
+    "metatile": "62c363c363c364c30b730c7314731573",
+    "attribute": "0010"
+  },
+  "191": {
+    "metatile": "62c363c363c364c30d730e7316731773",
+    "attribute": "0010"
+  },
+  "192": {
+    "metatile": "62c363c363c364c30f73107318731973",
+    "attribute": "0010"
+  },
+  "193": {
+    "metatile": "62c363c363c364c31173de721a731b73",
+    "attribute": "0010"
+  }
+}
