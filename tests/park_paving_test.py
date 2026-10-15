@@ -3,6 +3,7 @@ from pathlib import Path
 import hashlib
 import json
 import shutil
+import struct
 import sys
 import tempfile
 import unittest
@@ -12,6 +13,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts/romhack'))
 from park_paving import ASSET, encode_paving, load_paving, repeated
+from park_art import pack_park_cells
 
 
 class PavingResources(unittest.TestCase):
@@ -24,10 +26,10 @@ class PavingResources(unittest.TestCase):
         street.mkdir(parents=True)
         shutil.copy2(ROOT/'assets/tiles/sunset-streets/street.gbapal', street/'street.gbapal')
         # Synthetic codec fixture; never installed as game artwork.
-        image = Image.new('RGB', (8, 8), (222, 213, 189))
+        image = Image.new('RGB', (8, 8), (222, 222, 222))
         for i in range(8):
-            image.putpixel((i, 7), (189, 180, 172))
-            image.putpixel((7, i), (189, 180, 172))
+            image.putpixel((i, 7), (189, 189, 189))
+            image.putpixel((7, i), (189, 189, 189))
         image.save(self.directory/'source.png')
         (self.directory/'prompt.md').write_text('Synthetic portable conversion fixture.\n')
         self.original_palette = (street/'street.gbapal').read_bytes()
@@ -49,6 +51,9 @@ class PavingResources(unittest.TestCase):
                      for dy in (0, 8) for dx in (0, 8)}
         self.assertEqual(len(quadrants), 1)
         self.assertEqual((self.root/'assets/tiles/sunset-streets/street.gbapal').read_bytes(), self.original_palette)
+        with Image.open(self.directory/'paving.png') as image:
+            self.assertEqual(image.getpalette()[3:9], [222]*3+[189]*3)
+        self.assertEqual(json.loads((self.directory/'conversion.json').read_text())['palette_bank'],4)
         metadata = (self.directory/'conversion.json').read_bytes()
         encode_paving(self.root)
         self.assertEqual((self.directory/'conversion.json').read_bytes(), metadata)
@@ -82,6 +87,24 @@ class PavingResources(unittest.TestCase):
         self.rehash('master8.indices')
         with self.assertRaises(ValueError):
             load_paving(self.root)
+
+    def test_rehashed_warm_paving_palette_cannot_restore_the_rejected_yellow_hue(self):
+        (self.directory/'paving.gbapal').write_bytes(self.original_palette)
+        self.rehash('paving.gbapal')
+        with self.assertRaisesRegex(ValueError, 'neutral light gray'):
+            load_paving(self.root)
+
+    def test_primary_bank4_is_reserved_for_opaque_repeated_ground_art(self):
+        pixels = load_paving(self.root)
+        raw, records, attrs = pack_park_cells([(pixels,4)], [0x1000], reuse_flips=True)
+        self.assertEqual(len(raw),32)
+        self.assertEqual(struct.unpack('<8H',records),(0,0,0,0,*([0x4200]*4)))
+        self.assertEqual(attrs,struct.pack('<H',0x1000))
+        changed = bytearray(pixels)
+        changed[8] = 2
+        for image,flag in ((pixels,0),(bytes(changed),0x1000),(bytes([3])*256,0x1000)):
+            with self.subTest(flag=flag), self.assertRaises(ValueError):
+                pack_park_cells([(image,4)], [flag], reuse_flips=True)
 
     def test_rejects_transparent_out_of_palette_dark_and_bad_size_masters(self):
         for master in (bytes(64), bytes([1]*63+[3]), bytes([1]*47+[2]*17), bytes([1]*64), bytes(63)):

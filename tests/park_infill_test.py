@@ -58,7 +58,9 @@ class PrimaryInfill(unittest.TestCase):
         self.assertEqual((len(raw)//32,len(records)//16,len(attrs)//2,len(palettes)),
                          (213,54,54,512))
         self.assertEqual(raw[:32],bytes(32))
-        self.assertEqual(palettes[128:],bytes(384))
+        self.assertEqual(palettes[128:160],
+            (ROOT/'assets/tiles/south-park-paving-v1/paving.gbapal').read_bytes())
+        self.assertEqual(palettes[160:],bytes(352))
         cards = {c['name']:c for c in load(ROOT)}
         for _,name,_,_,width,height,first in PLACEMENTS:
             card = cards[name]
@@ -84,7 +86,7 @@ class PrimaryInfill(unittest.TestCase):
 
     def test_primary_rejects_secondary_underlay_outside_existing_residency(self):
         records = bytearray(park_resources(ROOT)[1])
-        for word in (0x6000,0x63f8,0x7200):
+        for word in (0x4000,0x43f8,0x6200,0x7200):
             bad = records[:];struct.pack_into('<H',bad,19*16+8,word)
             with self.assertRaisesRegex(ValueError,'underlay'):resources(ROOT,bytes(bad))
 

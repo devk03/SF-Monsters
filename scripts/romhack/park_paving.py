@@ -6,7 +6,9 @@ import struct
 
 ASSET = 'assets/tiles/south-park-paving-v1'
 PALETTE_SHA = 'c9056768a5543b99f664e5a21ae2aa609f84391b2dcd006f3c133fdb5c1c2b13'
-FILES = ('master8.indices', 'paving.indices', 'paving.png')
+FILES = ('master8.indices', 'paving.indices', 'paving.png', 'paving.gbapal')
+GRAY_PALETTE = struct.pack('<16H', 0, 27 | 27 << 5 | 27 << 10,
+                           23 | 23 << 5 | 23 << 10, *([0]*13))
 
 
 def sha(data):
@@ -17,6 +19,9 @@ def palette(root):
     raw = (root / 'assets/tiles/sunset-streets/street.gbapal').read_bytes()
     if len(raw) != 32 or sha(raw) != PALETTE_SHA:
         raise ValueError('Keep the original sixteen-color street palette unchanged.')
+    raw = (root / ASSET / 'paving.gbapal').read_bytes()
+    if raw != GRAY_PALETTE:
+        raise ValueError('Keep the isolated paving palette neutral light gray.')
     return [tuple(((word >> (5*c)) & 31)*255//31 for c in range(3))
             for word in struct.unpack('<16H', raw)]
 
@@ -33,6 +38,7 @@ def encode_paving(root):
     source = Image.open(directory / 'source.png').convert('RGB')
     if source.width != source.height or not 8 <= source.width <= 8192:
         raise ValueError('Require one square, edge-to-edge original texture source.')
+    (directory/'paving.gbapal').write_bytes(GRAY_PALETTE)
     colors = palette(root)
     samples = [source.getpixel(((2*x+1)*source.width//16,
                                 (2*y+1)*source.height//16))
@@ -49,7 +55,8 @@ def encode_paving(root):
     metadata = {'source_sha256': sha((directory/'source.png').read_bytes()),
         'prompt_sha256': sha((directory/'prompt.md').read_bytes()),
         'source_size': list(source.size), 'native_size': [16, 16],
-        'method': 'eight-by-eight center samples; nearest original colors1/2; repeat2x2',
+        'method': 'eight-by-eight center samples; nearest neutral gray colors1/2; repeat2x2',
+        'palette_bank': 4, 'paving_palette_sha256': sha(GRAY_PALETTE),
         'street_palette_sha256': PALETTE_SHA, 'quality_approval': 'pending',
         'files': {name: sha((directory/name).read_bytes()) for name in FILES}}
     (directory/'conversion.json').write_text(json.dumps(metadata, indent=2)+'\n')
@@ -61,7 +68,8 @@ def load_paving(root):
     directory = root / ASSET
     metadata = json.loads((directory/'conversion.json').read_text())
     if metadata.get('native_size') != [16, 16] or set(metadata.get('files', {})) != set(FILES) or \
-       metadata.get('street_palette_sha256') != PALETTE_SHA:
+       metadata.get('street_palette_sha256') != PALETTE_SHA or metadata.get('palette_bank') != 4 or \
+       metadata.get('paving_palette_sha256') != sha(GRAY_PALETTE):
         raise ValueError('Require the declared native paving resources and unchanged palette.')
     for name, expected in {'source.png': metadata['source_sha256'],
                            'prompt.md': metadata['prompt_sha256'],
@@ -77,6 +85,11 @@ def load_paving(root):
            image.getpalette()[:48] != [c for color in palette(root) for c in color]:
             raise ValueError('Native paving PNG, indices and palette disagree.')
     return pixels
+
+
+def load_paving_palette(root):
+    load_paving(root)
+    return (root/ASSET/'paving.gbapal').read_bytes()
 
 
 if __name__ == '__main__':

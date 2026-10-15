@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import struct
+from park_paving_audit import audit_paving
 
 # Acceptance positions and banks are independent of the production placement table.
 CARDS=(('brick',2,1,3,5,1,0),('sage',2,12,3,5,16,1),
@@ -22,7 +23,7 @@ def audit_infill(rom,elf,root):
     checks,hashes,errors=[],{},[]
     result={'passed':False,'checks':checks,'hashes':hashes,'errors':errors,'quality_approval':'pending',
         'scope':'Compiled original primary frontage pixels/palettes/layers,53 solid map cells, '
-                'layout/header bindings and byte-preserved v71 secondary resources. '
+                'layout/header bindings and independently bounded secondary paving delta. '
                 'No art, animation, old-save recovery, campaign or performance approval.'}
 
     def source(path):
@@ -70,7 +71,11 @@ def audit_infill(rom,elf,root):
             return b'40x32:original-primary:preserved-secondary'
         compare('layout_binding',b'40x32:original-primary:preserved-secondary',layout)
 
+        # Original palettes/behaviors remain byte-exact. Native tile repacking is
+        # allowed only when the independent all-quadrant comparison also passes.
         for name,(length,digest) in SECONDARY.items():
+            if name in ('gTilesetTiles_SFSouthPark', 'gMetatiles_SFSouthPark'):
+                continue
             def preserved(name=name,length=length):
                 raw=data(name);return decode_lz(raw) if name=='gTilesetTiles_SFSouthPark' else raw
             row={'name':name+':preserved','passed':False,'expected_bytes':length,'expected_sha256':digest}
@@ -81,6 +86,11 @@ def audit_infill(rom,elf,root):
                 row['error']=str(error);errors.append(name+': '+str(error))
             checks.append(row)
 
+        paving = audit_paving(rom, elf, root)
+        result['paving'] = paving
+        checks.append({'name': 'secondary_paving_delta', 'passed': paving['passed'],
+                       'independent_counts': paving['counts']})
+
         raw=decode_lz(data('gTilesetTiles_SFParkFrontage'))
         records=data('gMetatiles_SFParkFrontage');attrs=data('gMetatileAttributes_SFParkFrontage')
         palettes=data('gTilesetPalettes_SFParkFrontage')
@@ -89,7 +99,7 @@ def audit_infill(rom,elf,root):
         compare('transparent_primary_tile0',bytes(32),lambda:raw[:32])
         secondary_records=data('gMetatiles_SFSouthPark')
         sidewalk=secondary_records[19*16+8:20*16]
-        if len(sidewalk)!=8 or any(w>>12!=6 or not 512<=(w&1023)<1016 for w in struct.unpack('<4H',sidewalk)):
+        if len(sidewalk)!=8 or any(w>>12!=4 or not 512<=(w&1023)<1016 for w in struct.unpack('<4H',sidewalk)):
             raise ValueError('Facade underlay must use resident secondary sidewalk, never door VRAM.')
         compare('all54_secondary_underlays',sidewalk*54,
                 lambda:b''.join(records[i*16:i*16+8] for i in range(54)))
@@ -107,6 +117,7 @@ def audit_infill(rom,elf,root):
            info.get('alpha_threshold')!=128 or len(info['cards'])!=4:
             raise ValueError('Original frontage source/prompt contract changed.')
         expected_palettes=bytearray(512)
+        expected_palettes[4*32:5*32]=source(root/'assets/tiles/south-park-paving-v1/paving.gbapal')
         for number,(name,left,top,width,height,first,bank) in enumerate(CARDS):
             card=info['cards'][number]
             if (card['name'],card['size'],card['bank'])!=(name,[width*16,height*16],bank) or \
@@ -165,10 +176,10 @@ def audit_infill(rom,elf,root):
         compare('primary_map_footprint',b'exact53-cell-primary-footprint',primary_footprint)
         def reservation():
             secondary=decode_lz(data('gTilesetTiles_SFSouthPark'))
-            if len(secondary)!=503*32 or any((word&1023)>=1016 for word in struct.unpack('<1200H',secondary_records)):
+            if len(secondary)!=502*32 or any((word&1023)>=1016 for word in struct.unpack('<1200H',secondary_records)):
                 raise ValueError('Secondary art overlaps the eight native door-animation tiles.')
-            return b'primary213:secondary503:door1016..1023-reserved'
-        compare('resident_door_reservation',b'primary213:secondary503:door1016..1023-reserved',reservation)
+            return b'primary213:secondary502:door1016..1023-reserved'
+        compare('resident_door_reservation',b'primary213:secondary502:door1016..1023-reserved',reservation)
     except (OSError,ValueError,KeyError,TypeError,struct.error) as error:
         errors.append(str(error));checks.append({'name':'audit_inputs','passed':False,'error':str(error)})
     result['counts']={'total':len(checks),'matched':sum(c['passed'] for c in checks)}

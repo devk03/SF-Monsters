@@ -13,6 +13,7 @@ from trainer_portrait_audit_test import MemoryFile,literal_lz,linked_pair
 
 FILES=('tiles.4bpp','metatiles.bin','attributes.bin','palettes.gbapal')
 SYMBOLS=('gTilesetTiles_SFSouthPark','gMetatiles_SFSouthPark','gMetatileAttributes_SFSouthPark','gTilesetPalettes_SFSouthPark')
+GRAY=bytes.fromhex('00007b6ff75e'+'00'*26)
 BASE=ROOT/'assets/tiles/south-park-paving-v1/baseline-v74'
 
 
@@ -34,7 +35,7 @@ def independent_fixture():
         for q in range(8):
             if (record in (16,19) and q in (4,5,6,7)) or (record>=40 and q in (0,1,2,3)):
                 local=q%4;tile=552 if local in (0,3) else 553
-                struct.pack_into('<H',records,record*16+q*2,6<<12|local<<10|tile)
+                struct.pack_into('<H',records,record*16+q*2,4<<12|local<<10|tile)
     return old,(bytes(raw),bytes(records),old[2],old[3]),pixels
 
 
@@ -59,7 +60,7 @@ class PavingPixels(unittest.TestCase):
                                (0x800,rows[::-1]),(0xc00,[r[::-1] for r in rows[::-1]])]:
             with self.subTest(flags=flags):self.assertEqual(decode_quadrant(raw,512|flags),b''.join(expected))
 
-    def test_every_declared_paving_quadrant_requires_the_new_bank6_pixels(self):
+    def test_every_declared_paving_quadrant_requires_the_new_bank4_pixels(self):
         for record in (16,19,*range(40,150)):
             quadrants=range(4,8) if record<40 else range(4)
             for q in quadrants:
@@ -123,8 +124,12 @@ class CompiledPaving(unittest.TestCase):
         cls.directory=cls.root/'assets/tiles/south-park-paving-v1'
         shutil.copytree(BASE,cls.directory/'baseline-v74')
         (cls.directory/'paving.indices').write_bytes(cls.pixels)
+        (cls.directory/'paving.gbapal').write_bytes(GRAY)
 
-    def resources(self):return {name:literal_lz(value) if index==0 else value for index,(name,value) in enumerate(zip(SYMBOLS,self.actual))}
+    def resources(self):
+        result={name:literal_lz(value) if index==0 else value for index,(name,value) in enumerate(zip(SYMBOLS,self.actual))}
+        result['gTilesetPalettes_SFParkFrontage']=bytes(128)+GRAY+bytes(352)
+        return result
 
     def audit(self,resources=None):return audit_paving(*linked_pair(self.resources() if resources is None else resources),self.root)
 
@@ -134,7 +139,7 @@ class CompiledPaving(unittest.TestCase):
         self.assertEqual(result['quality_approval'],'pending');self.assertTrue(result['hashes'])
 
     def test_missing_symbols_stale_rom_elf_malformed_lz_and_sections_fail(self):
-        for name in SYMBOLS:
+        for name in (*SYMBOLS,'gTilesetPalettes_SFParkFrontage'):
             resources=self.resources();del resources[name]
             self.assertFalse(self.audit(resources)['passed'])
         resources=self.resources();resources[SYMBOLS[0]]=b'bad'
@@ -143,6 +148,36 @@ class CompiledPaving(unittest.TestCase):
         self.assertFalse(audit_paving(MemoryFile(data),elf,self.root)['passed'])
         data=bytearray(elf.data);struct.pack_into('<I',data,96,8)
         self.assertFalse(audit_paving(rom,MemoryFile(data),self.root)['passed'])
+
+    def test_primary_bank4_requires_exact_neutral_gray_and_complete_allocation(self):
+        self.assertEqual(struct.unpack('<16H',GRAY),(0,27*1057,23*1057,*([0]*13)))
+        for offset in (128,130,132,134,159):
+            resources=self.resources();primary=bytearray(resources['gTilesetPalettes_SFParkFrontage'])
+            primary[offset]^=1;resources['gTilesetPalettes_SFParkFrontage']=bytes(primary)
+            result=self.audit(resources)
+            self.assertFalse(result['passed'])
+            self.assertTrue(any(c['name']=='primary_paving_gray_bank4' and not c['passed'] for c in result['checks']))
+        for size in (160,511,513):
+            resources=self.resources();resources['gTilesetPalettes_SFParkFrontage']=bytes(size)
+            self.assertFalse(self.audit(resources)['passed'])
+        # The old yellow bank6 must fail even with identical paving indices.
+        resources=self.resources();records=bytearray(resources[SYMBOLS[1]])
+        for record in (16,19,*range(40,150)):
+            for q in (range(4,8) if record<40 else range(4)):
+                offset=record*16+q*2;word=struct.unpack_from('<H',records,offset)[0]
+                struct.pack_into('<H',records,offset,(word&0xfff)|0x6000)
+        resources[SYMBOLS[1]]=bytes(records)
+        self.assertFalse(self.audit(resources)['passed'])
+
+    def test_self_consistent_wrong_hue_asset_and_rom_cannot_override_literal_gray(self):
+        parent=ROOT/'.tools/park-paving-audit-tests'
+        root=Path(tempfile.mkdtemp(prefix='hue-fault-',dir=parent))
+        target=root/'assets/tiles/south-park-paving-v1';shutil.copytree(self.directory,target)
+        wrong=bytearray(GRAY);wrong[2]^=1
+        (target/'paving.gbapal').write_bytes(wrong)
+        resources=self.resources();resources['gTilesetPalettes_SFParkFrontage']=bytes(128)+wrong+bytes(352)
+        result=audit_paving(*linked_pair(resources),root)
+        self.assertFalse(result['passed']);self.assertTrue(any('neutral RGB555' in e for e in result['errors']))
 
     def test_rehashed_baseline_mutation_cannot_replace_the_pinned_original(self):
         parent=ROOT/'.tools/park-paving-audit-tests'

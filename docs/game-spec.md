@@ -7819,7 +7819,7 @@ South Park paving asset checkpoint — October15,03:15UTC:
   Publicv74/Site65, human0/11, music2/4 pending revision; goalACTIVE.
 
 
-Independent paving audit checkpoint — October15,03:21UTC:
+Independent paving audit checkpoint — October15,03:20UTC:
 
 - Root reviewed/reran peer's independent native auditor on immutable candidate
  7686e352185010e5397d91d3ffdf16d5d939beed7ffd7d68ac5dc0fa6ffd72a8.
@@ -7839,3 +7839,60 @@ Independent paving audit checkpoint — October15,03:21UTC:
   and native candidate are still local/unpublished. Same-input native frontage
   shows brighter fine slabs and intact architecture. Human approval is pending.
   Publicv74/Site65, human0/11, goalACTIVE; doorway/browser/save checks next.
+
+
+User paving-color correction — October15,03:23UTC:
+
+- User likes the grid but rejects the yellow hue, preferring light/dark gray.
+  Preserve the exact grid; use neutral light-gray222 with gray189 joints. No
+  numeric score or full-domain approval inferred. Yellowv75 draft7686e352 was
+  never published; public remainsv74/Site65. Its source/evidence remain intact.
+- Root isolates paving in previously unused primarypalette4, keeping all
+  secondarypalette bytes/road/curb/crossing/building/Sunset colors unchanged.
+  Original building banks0..3 remain exact; primarybank5 and later unused tail
+  remain zero. This adds a deliberate narrow palette allocation, not a global
+  tint or change to the user's approved grid. Native gray result still pending.
+- Built-in image edit supplies recolored source; original warm candidate and
+  exact prompt retained privately. Converter guards now enforce literal neutral
+  RGB555 palette, source/PNG/indices consistency and bank4. New auditor guards
+  independently enforce gray/source/native bank4 plus the old secondarypalette.
+- Peer owns only auditor/test correction through04:09UTC; root owns source/
+  production/test integration and captures. No further yellow-browser run or
+  publication; own emulator/audio/tab/server stopped. Gray native cache/doors/
+  matched review/save/browser checks will run on its own immutable new target.
+  GoalACTIVE, human0/11 and broad campaign/audio/performance gatesOPEN.
+
+
+Gray paving source/runtime checkpoint — October15,03:30UTC:
+
+- Gray draft47909520ff1e419cdab4286c9e4507d2c35c66e83ae8703084721164dc3d0938
+  keeps the user's approved master8 and16x16 grid indices BYTE-EXACT to the
+  yellow candidate. Only its two visible colors become neutral222/189, isolated
+  in unused primarybank4. The entire original secondarypalette stays exact; no
+  road/curb/crossing/building/Sunset tint. Native before/after shown to user.
+- Root reviewed/reran corrected independent auditor153/153, all1200 quadrant
+  roles. Actual rejected yellow draft now fails112 paving records plus primary
+  gray palette check,40/153matched/no input errors. Root receipts match peer:
+  positivea9f83d1371227b2a39c2447eb112223ac83ac955d8c23393efe97c0946951d22;
+  negative9f971adc5b3c46922accacf9a3938c4c4c48a3272698cbfc95e4ec2359a2100b.
+- Thirteen audit guards and eight converter/palette/packer guards pass, including
+  self-consistent wrong source/native hue, wrongbank6 with samegrid, transparent/
+  unused palette values, primary allocation errors and bank4 used by non-paving
+  cells. Primary0..3/frontage images remain exact; primary5+tail stayzero.
+- Composite infill now22checks plus nested153paving checks: keep original
+  headers/roles/nullcallbacks/layout/53solidcells/54underlays/foregroundpixels/
+  layers/palette validation. Only former full secondary rawtile/metatile identity
+  is replaced by independent decoded-delta proof; attrs/palette remain pinned.
+  Historical render pins normalize only checked paving pixels AND oldbank6,
+  alongside preexisting lawn normalization. Whole old fingerprints retained.
+- All existing local checks and compiled gates pass. Native gray coldContinue
+  from genuine olderC8, matched33sec walking, and all three actual interior
+  entry/returns pass. All502 secondary/213primary tiles and all6primary/7secondary
+  unfaded palette banks match compiled bytes after every return. All1280 native
+  map words remain exactv74; no Flash writes during these walks. Receipt
+ 067732c8f9c7a2b22dc8a542f85d9b327c93b3d3337daf2155a857be2faf8958.
+- Matched ordinary save checks/browser/normal clean build/publication still
+  pending. Matched Emerald gray clip prepared privately; no score inferred.
+  Yellow remains unpublished/superseded. Peer returned both files frozen; root
+  owns all sources. Last alignment exchange03:27UTC,next03:57UTC. Publicv74/
+  Site65, human0/11, goalACTIVE.

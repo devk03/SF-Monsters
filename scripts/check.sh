@@ -74,6 +74,8 @@ python3 tests/door_art_test.py
 .tools/venv/bin/python tests/trainer_portrait_audit_test.py
 python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_frontage_test.py
+.tools/venv/bin/python tests/park_paving_test.py
+.tools/venv/bin/python tests/park_paving_audit_test.py
 .tools/venv/bin/python tests/park_infill_test.py
 .tools/venv/bin/python tests/park_infill_audit_test.py
 .tools/venv/bin/python tests/park_art_test.py

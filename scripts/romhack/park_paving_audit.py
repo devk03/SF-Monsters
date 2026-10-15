@@ -10,6 +10,7 @@ BASELINE={
     'attributes.bin':('gMetatileAttributes_SFSouthPark',300,'5d75b62c2517473238cfe7967401f492d506a41ffbbd5de58ea9c99ad39eab2f'),
     'palettes.gbapal':('gTilesetPalettes_SFSouthPark',512,'73e3ba1b6d1f0a9385e97e92eba6a4a2d1268384e4cdf6f45f452a49fda512db'),
 }
+GRAY_PALETTE=struct.pack('<16H',0,27|(27<<5)|(27<<10),23|(23<<5)|(23<<10),*([0]*13))
 BASELINE_ROM='9335199708e8d38a95d705074f8f6e38c340026a83d7a1318f9fb8972de821f7'
 
 
@@ -22,7 +23,7 @@ def paving_quadrant(record,quadrant):
 
 def candidate_quadrants(pixels):
     if len(pixels)!=256 or any(v not in (1,2) for v in pixels):
-        raise ValueError('Paving must be256 opaque bank6 indices1/2.')
+        raise ValueError('Paving must be256 opaque bank4 indices1/2.')
     quadrants=[bytes(pixels[(qy*8+y)*16+qx*8+x] for y in range(8) for x in range(8))
                for qy in range(2) for qx in range(2)]
     if len(set(quadrants))!=1:raise ValueError('Paving must repeat one native8x8 master in16x16.')
@@ -71,7 +72,7 @@ def compare_paving(baseline,actual,pixels):
                 else:
                     old_pixels=decode_quadrant(old_raw,old)
                     target=paving_quadrant(record,quadrant)
-                    expected.extend(b'R'+bytes([6 if target else old>>12])+(candidates[quadrant%4] if target else old_pixels))
+                    expected.extend(b'R'+bytes([4 if target else old>>12])+(candidates[quadrant%4] if target else old_pixels))
                     observed.extend(b'R'+bytes([word>>12])+decode_quadrant(raw,word))
                     paving+=int(target)
                 checked+=1
@@ -88,7 +89,7 @@ def audit_paving(rom,elf,root):
     from check_creature_resources import Cartridge,decode_lz
     result={'passed':False,'checks':[],'counts':{'total':0,'matched':0},'hashes':{},'errors':[],
             'quality_approval':'pending','scope':'All150 South Park metatiles decoded against frozen original SF v74 art; '
-            'only ground16/19 upper and facade40..149 lower quadrants may change to bank6 paving. '
+            'only ground16/19 upper and facade40..149 lower quadrants may change to bank4 grayscale paving. '
             'No visual, animation, collision, map binding, save, campaign or performance approval.'}
     def source(path):
         data=path.read_bytes();result['hashes'][str(path)]=sha(data);return data
@@ -106,9 +107,21 @@ def audit_paving(rom,elf,root):
                 raise ValueError('Frozen original baseline differs: '+filename)
             baseline.append(data)
         pixels=source(directory/'paving.indices')
+        gray=source(directory/'paving.gbapal')
+        if gray!=GRAY_PALETTE:
+            raise ValueError('Paving source must be exact neutral RGB555 gray27/23,transparent0 and thirteen zero colors.')
         cart=Cartridge(rom,elf)
         actual=[cart.data(symbol) for symbol,_,_ in BASELINE.values()]
         actual[0]=decode_lz(actual[0])
         result.update(compare_paving(tuple(baseline),tuple(actual),pixels))
-    except (OSError,ValueError,TypeError,KeyError,struct.error) as error:result['errors'].append(str(error))
+        primary=cart.data('gTilesetPalettes_SFParkFrontage')
+        if len(primary)!=512:raise ValueError('Require the complete512-byte primary palette allocation.')
+        bank=primary[128:160]
+        row={'name':'primary_paving_gray_bank4','passed':bank==GRAY_PALETTE,
+             'expected_sha256':sha(GRAY_PALETTE),'actual_sha256':sha(bank)}
+        result['checks'].append(row)
+        result['counts']['total']+=1;result['counts']['matched']+=int(row['passed'])
+        result['passed']=result['passed'] and row['passed']
+    except (OSError,ValueError,TypeError,KeyError,struct.error) as error:
+        result['passed']=False;result['errors'].append(str(error))
     return result

@@ -18,14 +18,15 @@ CARDS=(('brick',2,1,3,5,1,0),('sage',2,12,3,5,16,1),
 
 
 def fixture():
-    # Only the historical secondary resources use their existing source compiler.
+    # Only the secondary resources use their existing source compiler.
     # Primary pixels, words, pointers and map cells below are serialized here.
-    # The auditor checks secondary bytes against fixed historical hashes.
+    # The independent auditor checks the exact decoded paving delta.
     from park_map import park_resources
     secondary,old_records,old_attrs,old_palette=park_resources(ROOT)
     sidewalk=old_records[19*16+8:20*16]
     tiles=bytearray(32);records=bytearray(sidewalk+bytes(8));attrs=[0x1000]
     palette=bytearray(512);blocks=[0xE00]*(40*32)
+    palette[128:160]=(ROOT/'assets/tiles/south-park-paving-v1/paving.gbapal').read_bytes()
     for name,left,top,width,height,first,bank in CARDS:
         with Image.open(ROOT/'assets/tiles/south-park-frontage-v1'/(name+'.png')) as image:
             pixels=image.tobytes()
@@ -89,7 +90,9 @@ class ParkInfillAuditTest(unittest.TestCase):
     def test_original_pixels_all_flip_states_and_bindings_pass_without_artifact_writes(self):
         result=self.audit()
         self.assertTrue(result['passed'],result)
-        self.assertEqual(result['counts'],{'total':23,'matched':23})
+        self.assertEqual(result['counts'],{'total':22,'matched':22})
+        self.assertTrue(result['paving']['passed'])
+        self.assertEqual(result['paving']['counts']['logical_quadrants_checked'],1200)
         self.assertEqual(result['errors'],[])
         self.assertEqual(result['quality_approval'],'pending')
 
@@ -137,10 +140,12 @@ class ParkInfillAuditTest(unittest.TestCase):
         for offset in (0,32,64,96,128,511):
             self.reject(self.fault('gTilesetPalettes_SFParkFrontage',offset),'all_primary_palette_bytes')
 
-    def test_secondary_resources_remain_exact_and_door_vram_is_reserved(self):
+    def test_secondary_paving_delta_is_bounded_and_door_vram_is_reserved(self):
         for name in ('gTilesetTiles_SFSouthPark','gMetatiles_SFSouthPark',
                      'gMetatileAttributes_SFSouthPark','gTilesetPalettes_SFSouthPark'):
-            self.reject(self.fault(name,5),name+':preserved')
+            target = 'secondary_paving_delta' if name in ('gTilesetTiles_SFSouthPark',
+                'gMetatiles_SFSouthPark') else name+':preserved'
+            self.reject(self.fault(name,5),target)
         resources=self.resources.copy();records=bytearray(resources['gMetatiles_SFSouthPark'])
         struct.pack_into('<H',records,0,1016)
         resources['gMetatiles_SFSouthPark']=bytes(records)
@@ -181,6 +186,8 @@ class ParkInfillAuditTest(unittest.TestCase):
         root=Path(tempfile.mkdtemp(prefix='case-',dir=parent))
         target=root/'assets/tiles/south-park-frontage-v1'
         shutil.copytree(ROOT/'assets/tiles/south-park-frontage-v1',target)
+        shutil.copytree(ROOT/'assets/tiles/south-park-paving-v1',
+                        root/'assets/tiles/south-park-paving-v1')
         self.assertTrue(self.audit(root=root)['passed'])
         (target/'brick.indices').write_bytes(b'bad')
         result=self.audit(root=root)

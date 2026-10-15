@@ -58,7 +58,12 @@ class ParkResources(unittest.TestCase):
         self.assertEqual({point for point in before if before[point] != after[point]}, changed)
         for point, tile in expected.items():
             self.assertEqual(after[point], tile | 0xC00 | (0x3000 if point == (19, 20) else 0))
-        resources = park_resources(ROOT)
+        # This v69 map checkpoint predates the later explicit paving reskin.
+        # Preserve its original resource fingerprints; the new paving auditor
+        # independently checks every current decoded quadrant against them.
+        baseline = ROOT/'assets/tiles/south-park-paving-v1/baseline-v74'
+        resources = tuple((baseline/name).read_bytes() for name in
+                          ('tiles.4bpp','metatiles.bin','attributes.bin','palettes.gbapal'))
         self.assertEqual([(len(data), hashlib.sha256(data).hexdigest()) for data in resources], [
             (16096, '1028cc530238a128ba379d2de5f8153cdbf2eb6c1054f67501f5e4900ce2b6c8'),
             (2400, 'c5a357ba4d453bb0e856b09a594334303b50ead542ef7081b92a243a7269a0c8'),

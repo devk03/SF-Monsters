@@ -4,6 +4,7 @@ from park_art import facade_cells, tile_orientations
 from park_frontage import load
 from title_art import tiles8
 from title_creature import pack4
+from park_paving import load_paving_palette
 
 # token, name, left, top, width, height, first native metatile
 PLACEMENTS = (('W', 'brick', 2, 1, 3, 5, 1),
@@ -41,7 +42,7 @@ def resources(root, secondary_records):
     if len(secondary_records) != 150 * 16:
         raise ValueError('Review the pinned secondary metatile allocation.')
     sidewalk = secondary_records[19*16+8:20*16]
-    if any(word >> 12 != 6 or not 512 <= (word & 1023) < 1016
+    if any(word >> 12 != 4 or not 512 <= (word & 1023) < 1016
            for word in struct.unpack('<4H', sidewalk)):
         raise ValueError('Primary facade underlay must use the existing secondary sidewalk.')
     cards = {card['name']: card for card in load(root)}
@@ -50,6 +51,7 @@ def resources(root, secondary_records):
     records = bytearray(sidewalk + bytes(8))
     attributes = bytearray(struct.pack('<H', 0x1000))
     palettes = bytearray(512)
+    palettes[4*32:5*32] = load_paving_palette(root)
     for _, name, _, _, width, height, first in PLACEMENTS:
         card = cards[name]
         if (card['width'], card['height']) != (width*16, height*16) or \

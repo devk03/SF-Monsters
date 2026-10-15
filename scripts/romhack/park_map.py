@@ -12,6 +12,7 @@ from house_variants import load_variants
 from park_signs import sign_cells
 from seed_door_art import load as load_seed_door
 from park_infill import infill_tile, apply as apply_infill
+from park_paving import load_paving
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -40,6 +41,8 @@ def prune_unused_terrain(cells, plan):
 def park_resources(root):
     from PIL import Image
     streets, street_palette = load_streets(root)
+    # Park-only pixels use isolated primary palette4; street palette6 stays intact.
+    streets[16] = load_paving(root)
     terrain, terrain_palette, _ = load_terrain(root)
     furniture_root = root / 'assets/tiles/south-park-furniture'
     metadata = json.loads((furniture_root / 'conversion.json').read_text())
@@ -50,7 +53,8 @@ def park_resources(root):
         raise ValueError('Regenerate the original park furnishings after changes.')
     terrain[8], terrain[9] = furniture[512:], furniture[256:512]
     frames, building_palettes = load_buildings(root)
-    cells = [(cell, 6) for cell in streets + [rotate_pixels(streets[15], 1), streets[16]]]
+    cells = [(cell, 4 if index in (16,19) else 6) for index,cell in
+             enumerate(streets + [rotate_pixels(streets[15], 1), streets[16]])]
     flags = [0x1000] * 20
     cells += [(cell, 7) for cell in terrain]; flags += [0x1000] * 19
     flags[24] = 0x1002  # Tall grass keeps native encounter behavior.

@@ -1,6 +1,6 @@
 {
-  "source_sha256": "2577ac0e1fb918cd804f721460728ed36dc36ee38085dc5b196863057270cbe8",
-  "prompt_sha256": "be548e78e29beda5c7296fcb5c8b1b7f6b5251ac84e9f2aea8667f2450c04708",
+  "source_sha256": "0a9a5e6fc0b3228ad9cb8e2bbb2f5fc3b4493fde96be1473ca5c4e912fb118a5",
+  "prompt_sha256": "f0edbec65664dbb4cf0db0c0a88d017e1cbb4a4f86c53ffbba0cd495bfd24389",
   "source_size": [
     1254,
     1254
@@ -9,12 +9,15 @@
     16,
     16
   ],
-  "method": "eight-by-eight center samples; nearest original colors1/2; repeat2x2",
+  "method": "eight-by-eight center samples; nearest neutral gray colors1/2; repeat2x2",
+  "palette_bank": 4,
+  "paving_palette_sha256": "9e4b3bb698c497d3086a05137d0d71af1a8b7b5c47fff9e2056e17aee38e0c86",
   "street_palette_sha256": "c9056768a5543b99f664e5a21ae2aa609f84391b2dcd006f3c133fdb5c1c2b13",
   "quality_approval": "pending",
   "files": {
     "master8.indices": "abc57fa59cab578112d578c18b4a2c524770ed2b58fce83123afb17f6b3722bf",
     "paving.indices": "36d87ab45a3526bad751c51b330e8b66baf9f13f53d20fd32c191be678be9b96",
-    "paving.png": "ec1647b98fe9462aef59d5953a2bff5ffec8e863a3991d1abefad649f5fef293"
+    "paving.png": "d53d1c01b3405db54c1beb7a329de0d0d94d2345e883bf6b37b57d7a920096a9",
+    "paving.gbapal": "9e4b3bb698c497d3086a05137d0d71af1a8b7b5c47fff9e2056e17aee38e0c86"
   }
 }

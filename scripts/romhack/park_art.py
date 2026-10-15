@@ -74,9 +74,12 @@ def pack_park_cells(cells, attributes, *, reuse_flips=False):
     if len(cells) != len(attributes) or len(cells) > 512:
         raise ValueError('Native cell/attribute allocations must agree and fit a tileset.')
     raw, records, pool = bytearray(), bytearray(), {}
-    for pixels, bank in cells:
-        if len(pixels) != 256 or max(pixels) > 15 or bank not in range(6, 13):
+    for cell_number, (pixels, bank) in enumerate(cells):
+        if len(pixels) != 256 or max(pixels) > 15 or bank not in (4, *range(6, 13)):
             raise ValueError('Park cells need 16x16 four-bit pixels and a secondary palette bank.')
+        if bank == 4 and (attributes[cell_number] != 0x1000 or set(pixels) != {1,2} or any(
+                pixels[y*16+x] != pixels[(y%8)*16+x%8] for y in range(16) for x in range(16))):
+            raise ValueError('Primary palette4 is reserved for the repeated opaque paving master.')
         encoded = pack4(tiles8(pixels, 16, 16, 2, 2))
         quadrants = []
         for offset in range(0, 128, 32):

@@ -159,7 +159,12 @@ class NativeTileFlips(unittest.TestCase):
 
     def test_released_pixels_preserved_except_exact_authored_lawn_replacements(self):
         from terrain_art import load_native_grass
+        from park_paving import load_paving
         raw, records, attributes, palettes = park_resources(ROOT)
+        paving = load_paving(ROOT)
+        baseline = ROOT/'assets/tiles/south-park-paving-v1/baseline-v74'
+        old_paving_raw = (baseline/'tiles.4bpp').read_bytes()
+        old_paving_records = (baseline/'metatiles.bin').read_bytes()
         current_grass, _ = load_native_grass(ROOT/'assets/tiles/sunset-terrain')
         old_grass = json.loads((ROOT/'tests/fixtures/coastal-lawn-v56.json').read_text())
         self.assertEqual(old_grass['source_sha256'],
@@ -171,6 +176,15 @@ class NativeTileFlips(unittest.TestCase):
         for offset, word in enumerate(struct.unpack('<'+'H'*(136*8), records[:136*16])):
             cell, layer_quadrant = divmod(offset, 8)
             pixels = decode_tile(raw, word)
+            bank = word >> 12
+            if (cell in (16,19) and layer_quadrant >= 4) or (40 <= cell < 136 and layer_quadrant < 4):
+                self.assertEqual(bank, 4)
+                self.assertEqual(pixels, quadrant(paving, layer_quadrant % 4))
+                # Normalize only the independently checked paving quadrants;
+                # retain the older full-render fingerprint for every other pixel.
+                previous_word = struct.unpack_from('<H',old_paving_records,offset*2)[0]
+                pixels = decode_tile(old_paving_raw, previous_word)
+                bank = previous_word >> 12
             if cell in (20, 32, 33) and layer_quadrant >= 4:
                 lawn = cell - 20
                 self.assertEqual(word >> 12, 7)
@@ -179,7 +193,7 @@ class NativeTileFlips(unittest.TestCase):
                 # restoring only these explicitly checked source-art quadrants.
                 pixels = quadrant(bytes.fromhex(old_grass['cells'][str(lawn)]), layer_quadrant - 4)
             for index in pixels:
-                decoded.extend((index, word >> 12))
+                decoded.extend((index, bank))
         # Pinned before this change, from the independently decoded v53 resource.
         self.assertEqual(hashlib.sha256(decoded).hexdigest(),
                          '74247ad02bc5624367da7f555d2faaf85f4b3d967d95886cb4a10ec3a4769ba0')
