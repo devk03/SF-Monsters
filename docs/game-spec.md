@@ -7302,3 +7302,47 @@ v72 primary/map source checkpoint — October15,01:35UTC:
 - Full local check passes after historical map tests remove only the new infill
   before asserting their unchanged older map hashes. New53-cell pinned test
   separately covers the complete new delta; no historical expected hash changed.
+
+Controlled turn-resolution runner checkpoint — October15,01:39UTC:
+
+- Alignment's frozen runner is reviewed and independently rerun by root against
+  exact Emerald a9dec84d and immutable v71 target353ff5bd, using each cartridge's
+  matching ELF and genuine in-battle controller snapshot. Both pass2/2 and the
+  declared normalized observations agree. RunnerSHAb9e0a71016cb42771d1280a895dd51ad385cb0686a6816b5387f0bb7acd18adb.
+- Living case executes both selected Pound attacks, native MoveEnd/residual
+  callbacks and returns to next-turn action selection: HP72/72, PP9/9,
+  RNG4231221723 after nine independently derived LCG draws, turn1, empty stacks.
+  KO case reaches an unanswered native player CHOOSEPOKEMON plus opponent
+  standby: HP0/90, PP10/9, RNG833674724 after four draws, faint1, turn0. Native
+  faint cleanup restores Normal types; native party-screen command increments
+  its switch counter before asking. This is a partial boundary, not completed
+  replacement, cancellation after replacement or a complete KO turn.
+- Actual native per-side SETMONDATA handlers update secure party records; only
+  explicitly listed presentation packets are acknowledged by transport. All
+ 1200 party bytes/nonparticipants/checksums,352 battle-mon bytes,68 result
+  bytes, packet order, save blocks/pointers, party counts, action order, stacks,
+  outcomes, RNG and canaries match fixed source-derived postconditions. Unknown
+  choices/controllers/scripts fail closed. Controlled Rattata parties and
+  battle-only stat/type/speed overrides are disclosed, with TRAINER|BATTLE_TOWER
+  rules and no LINK flag. This is not player UI, natural stat generation,
+  animation/audio, EXP, durable-save or campaign evidence.
+- Actual native agbcc ABI probes verify struct sizes/offsets, message-window
+  allocation and Main.inBattle mask; no host sizeof assumption. Each case45s /
+  4096 dispatches, whole CLI240s, driver120s/2M instructions per call; private
+  unique executable avoids concurrent frame-capture binary ownership.
+- Root receipt turn-resolution-root-reviewed-v71/result.json
+  SHA603bcc90587b3b8a9356626a6fb852d82f597b3582ae3dd6229a87779cf3da8f.
+  Peer positive receipt SHA797772a34381804a53b62017ec41e4446f0bdb6da874b8be2295f03d3cfb65b2;
+  native wrong-RNG negative SHAb2580120bd4a4b7581a1894dd562ada29554141029c3a8f05078986f3e3d64fa
+  fails only the deliberately wrong oracle. Frozen capture_core.py,
+  core_capture.c and function_fixture.c remain unchanged. Broader existing
+ 711/57 totals are not automatically inflated by two stronger overlap profiles.
+- The483-line runner is one coherent native setup/dispatch/oracle lifecycle and
+  is committed intact as a justified size exception; its201-line portable
+  guard suite/check wiring follows as a separate checkpoint. Existing mechanics
+  guards4/4 and move-pipeline guards8/8 pass. Full-turn acceptance remainsOPEN.
+- v72 draft1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249
+  compiles with all pre-existing gates passing, but its new primary audit and
+  genuine53-position recovery/runtime/browser checks are still in progress.
+  One genuine old v71 saved occupied center3,14 resumes outside the new sage
+  building in native v72; complete save-domain proof is still pending.
