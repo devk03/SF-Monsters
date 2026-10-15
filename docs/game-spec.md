@@ -7967,3 +7967,54 @@ Active-field workload preparation — October15,03:42UTC:
   deadline probe. Full99%guest-update/render deadlines, mixed/menu workloads,
   Safari/phone, physical input and listening remainOPEN. Publicv75/Site66,
   human0/11, goalACTIVE; last alignment exchange03:41UTC,next04:11UTC.
+
+
+Active-field acceptance frozen before result — October15,03:48UTC:
+
+- First600second Chrome run began03:43:55UTC, with visible start and midrun
+  road movement observed. Results are not yet available. No concurrent builds/
+  captures/test suites; only low-load source review/writes. First result stays
+  preserved whether it passes or fails. Fresh snapshot required for any retry.
+- Separate active-field qualifier reuses the generic exact-runtime/report audit
+  and requires the pinned ROM/CSV, matching310row totals, declared590..599sec
+  route with at least95%directional duty,600000ms duration-end,
+  uninterrupted visible scope, complete/error-free
+  replay, exactly310planned input events, no pending input, zero discarded
+  debt/video-count mismatches, running/primed audio and zero warmup/drop/underrun.
+  These criteria are declared before reading this run's final counters.
+- A generic valid/green diagnostic with an aborted/hidden/late route cannot
+  qualify. Directional duty is declared input, not measured walking fraction;
+  actual scenes/motion still need separate visible evidence. New qualifier/tests
+  are written but tests wait until the measurement ends to avoid local load.
+  No physical response/guest deadlines/native real-time/Safari/phone/listening
+  or fullPerformance approval inferred. Publicv75/Site66; goalACTIVE.
+
+- Pre-result alignment review tightens qualification: the generic auditor already
+  requires the full600000ms, so no shorter quantization exception applies.
+  Verified generic complete dispatch timing and configured route totals are
+  mandatory; missing controller_route cannot bypass dispatch validation.
+  Masks are restricted to neutral/right/left/down; action-only input cannot
+  count as walking duty. These changes do not alter the running session.
+
+
+First active-field result — October15,03:56UTC:
+
+- Preserved Chrome report480c716902f042c9aac0cd3e94a20d56 SHA
+ a92345bc5e1a8e01f9421f1bc15d6bd33dd680739af8a4b469185c4e68825b5f,
+  exactgrayv75/runtime15.600000.2ms,71950visible/0hidden ticks; complete
+ 310/310dispatches/maxlateness3.3926ms. Visible start/midrun/end remain
+  road scenes; no assertion of browser exact native ending coordinates.
+- Generic report integrity passes; strict field qualificationFAILS:334input
+  observations vs310planned,16discarded frame debt,13738audio underrun
+  outputframes at44100Hz (~0.3115sec).0droppedsource/0warmup, finalsame-epoch
+  audioACK received,35820executed/video frames/no mismatch/no pending input.
+  No causal diagnosis from these aggregates; extra input/stall timing needs
+  targeted observation. Failure is preserved, not replaced by a later retry.
+- New qualifier87lines+classificationfixtures136lines;11local tests and
+ 8existing generic integrity tests pass. Negative cases include interrupted/
+  aborted/incomplete replay, input/frame/audio loss, rehashedidle/action-only
+  route, missinggenericdispatchvalidation/configuration and shortwindow.
+  Actual receipt invokes real generic auditor, not mockedclassificationdata.
+- Own local QA emulator/audio/tab/server stopped. Publicv75 unchanged.
+  Fullperformance and all11human gates remainOPEN; goalACTIVE. Last alignment
+  exchange03:56UTC,next04:26UTC; finite read-only diagnosis task requested.
