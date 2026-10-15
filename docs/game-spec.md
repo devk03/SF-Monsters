@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 02:05 UTC:
+Current checkpoint — October 15, 2026, 02:55 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v72 / Site 63 is live.
-  Native release source cacdc7e; website source e7862d79. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v73 / Site 64 is live.
+  Native release source aec9c111; website source 28198502. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -837,8 +837,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.72-park-infill-preview; target1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249; Site63. Four original frontage cards fill53 cells; native recoveries/walls/three doors and scoped Chrome checks pass. Earlier338-frame audio underrun is preserved alongside clean repeat. Human approvals0/11. |
-| Latest local source build | v73 private draft37e60ad325df1f8e3369b13aa707ca418cd5a02c4905de59cb919ad8cf0d0c6b adds two scoped Builder labels. All older compiled gates pass, root native getter857/857 before/after and trainer scalar/team/table preservation pass, ordinary native intros show both labels. Stationary saves/browser/normal release remain pending; public staysv72. |
+| Public build | 0.0.73-builder-labels-preview; target37e60ad325df1f8e3369b13aa707ca418cd5a02c4905de59cb919ad8cf0d0c6b; Site64. Two Cognition trainers use scoped Builder labels; other855-ID getter results, shared class table, trainer scalar/team data and stationary saves pass. Denser53-cell frontage retained. Earlier338-frame audio underrun remains preserved alongside clean repeat. Human approvals0/11. |
+| Latest local source build | v73 normal repeat build from committed aec9c111 reproduces immutable37e60ad3. All older compiled gates pass. Root getter857/857 on both builds, full class/trainer/team preservation, three stationary cold-Continue/save checks, both native intro labels and Chrome Walden intro pass. Public manifest/BPS match local release exactly. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7650,3 +7650,37 @@ Controlled first-miss full-turn checkpoint — October15,02:40UTC:
 - Alignment delivered a read-only source-derived immunity plan; no fifth case
   is implemented or accepted yet. Root owns source, human0/11 and all broad
   type/catalog/full-turn/performance/campaign gatesOPEN; goalACTIVE.
+
+
+v73 public Builder-label checkpoint — October15,02:55UTC:
+
+- Normal repeat build from committed aec9c11180d4e0ef1db2266618ba104ef3e0aa54
+  reproduces target37e60ad325df1f8e3369b13aa707ca418cd5a02c4905de59cb919ad8cf0d0c6b.
+  Release0.0.73-builder-labels-preview includes BPS1037990bytes, SHA
+ 527d8b396ec20c5f9309538a66630b0c5b73e94b142e7ea26abc5b49595e959f.
+  Public content changes only the two ordinary Cognition trainer class labels;
+  no global class rename, new team, reward, ability or campaign claim. All older
+  compiled gates, six source guards and nine getter guards pass.
+- Both ordinary native introductions show BUILDER WALDEN YAN / STEVEN HAO.
+  Three genuine older batteries coldContinue and stationarySave with declared
+  gameplay domains exact, counter/statistic+1 and monotonic playtime. Chrome
+  Walden introduction confirms actual rendered label/portrait; no performance
+  inference from this text-only check. Native audio/video captures retained.
+- Site64 succeeded2026-10-15T02:52:36.091350UTC, website source
+ 28198502ea5008e2860b80e78893471c2ac977de; savedversion
+ appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_1edbee10d5cc8191b9417a4a1e2274da;
+  deploymentappgdep_6ad03fea7e608191adedb0a2294b0b63. Archive
+ site-v73-builder-labels.tar.gz SHA7f194e4141f62ae98dc791f80854fc3d06b7bd34064a4911085ebacd986505a5
+  independently audits88 files: approved homebrew prototype only, no commercial
+  ROM/ELF/private save/ZIP/movie/AppleDouble/symlink/traversal. Production BPS
+  decoder reproduces exact target37e60ad3. Runtime15 emulator files unchanged.
+- Anonymous live manifest and BPS return200 and byte-match local release.
+  First default urllib user-agent got403; ordinary Mozilla user-agent succeeds,
+  no authentication/bypass used. Receipt builder-v73-live-resources.json SHA
+ 1f8dafb963143ba8e9784980f95fcd44016438cc542d41eca15e11e3d65810d7.
+  Own visible public IAB loader verified and screenshot saved; own tab closed,
+  user tab/saves/accounts untouched. No GitHub workflow or database operation.
+- Alignment handoff delivered one immunity extension; root review/rerun is
+  underway, not accepted by this release. Peer files remain separately unstaged.
+  Last exchange02:53UTC; next by03:23UTC. Peer read-only first-slice priority
+  recommendation is finite30min. Human0/11 and broad gatesOPEN, goalACTIVE.
