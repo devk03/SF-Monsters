@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 14, 2026, 23:29 UTC:
+Current checkpoint — October 15, 2026, 00:10 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v67 / Site 58 is live.
-  Native release source 35e97a1; website source 4a13dc1b. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v68 / Site 59 is live.
+  Native release source a5e28ff; website source 8023fdae. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -590,7 +590,8 @@ Current checkpoint — October 14, 2026, 23:29 UTC:
   C7 save/reload. Human interface acceptance and the complete SF map remain open.
 - South Park now has an enterable seed room in the denser western frontage.
   Native/browser notes and return, indoor Save/coldContinue and map parent pass.
-  No new reward/quest flag; custom door animation and human review remain open.
+  No new reward/quest flag; centered native door animation passes technical
+  entry/exit and old-save checks. Human art review remains open.
 - Guide AREA now uses a geographic SF map and original courier marker. Actual
   two/one/no-wild-habitat scenarios and five player-parent contexts pass native
   checks; Chrome displays it and returns to the Guide. Art approval remains open.
@@ -600,7 +601,8 @@ Current checkpoint — October 14, 2026, 23:29 UTC:
   Prior eight custom cast sprites remain byte-exact; human art approval pending.
 - Alignment confirms exact map-return plaintext gameplay preservation; native RNG
   and wandering Dylan differ. Actual map→Save→coldContinue also passes. Next
-  check by23:40UTC; seed-room handoff/review finished, root continues polish.
+  check by00:40UTC; seed-door technical review finished. Alignment now reviews
+  density/collision source geometry in a finite read-only task; root continues polish.
 
 ### 15.1 Objective and completion rule
 
@@ -822,14 +824,14 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.67-seed-room-preview; target96d5b50698d5b91e36dbcd606404694312f28ec7e4c1630c24a0b0a5a223c662; Site58. Enterable seed room connects existing story/berry discoveries, with Save/notes/return acceptance. Human approvals remain0/11. |
-| Latest local source build | v64 normal source709e295 reproduces tested target32b57512. Map17/17, cast36/36, intro5/5 and creature255 controls pass. Scoped native habitats/five player parents/C8 travel-save-reload and actual Chrome map/return checks pass; full performance/art gates remain open. |
+| Public build | 0.0.68-centered-door-preview; targete7fa86a10acc213c6b3d7e2722799cc3ccda74b20af6d12e4f39327b55dd04d9; Site59. Centered seed-room opening/closing, fixed window/frame pixels, paved landing, native old-save and Chrome route/manual entry checks pass. Human approvals remain0/11. |
+| Latest local source build | v68 normal sourcea5e28ff reproduces testede7fa86a1. Compiled creature255/cast40/intro5/map17/seed-door11 checks pass. Full local checks include six door-art and eight independent compiled-fixture checks. Old indoor C9→C10 and return C7→C8→coldContinue pass scoped persistent-domain checks; full performance/art gates remain open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site41 public IAB patches/exports exact v51. Site42 source/core in isolated localhost IAB completed ten consecutive desktop native→browser→native save cycles, independently sealed; populated party/storage/resources preserved. Fresh public auth/isolation, Safari/mobile, browser performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
-| Next work | Finish ten actual desktop save cycles and their independent evidence seal; publish verified v52 service signs, then continue Stage B art/audio and integrated mechanics. All three starters have first-badge evidence; full campaigns, clip reviews and slice acceptance remain pending. |
+| Next work | Continue Stage B spatial density/collision and remaining cast/audio polish, integrated mechanics and matched first-slice review. Ten desktop save cycles are already independently sealed at one checkpoint;50 distinct campaign checkpoints remain open. Human approval and complete campaigns remain pending. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -6898,3 +6900,42 @@ v68 save and independent technical review — October15,00:08UTC:
   Animatedentry differs about20frames from oldinstantdoor: clips cannot imply
   correspondingworldpositions after warp. Humanartapproval remains pending.
   Root proceeds to actual privatebrowserroute, normalbuild and publicpatch.
+
+
+v68 public centered-door release — October15,00:10UTC:
+
+- Source8d923af native integration/gate and a5e28ff companion checks are pushed
+  with skip-ci. Normal sourcea5e28ff reproduces actualdrafttarget
+  e7fa86a10acc213c6b3d7e2722799cc3ccda74b20af6d12e4f39327b55dd04d9.
+  BPS1023389bytes SHA9c3a40cd94af219e44b2e84b8bbc5ac51eae118f5b023d7db6d77c37ac0b838d.
+  Creature255/cast40/intro5/map17/seed-door11 compiled checks all pass.
+- Native returnC8 coldContinue independently retains SouthPark16,17 and exact
+  Flash; privatecold-return-proof.json records scope. OldindoorC9→C10 ordinary
+  save semantic acceptance remains valid. No new campaign checkpoint credit.
+- Actual Chrome suppliedroute23/23rows completes38.508seconds; observed42.8445s,
+  2559executed/video frames,5141visible ticks, zero debt/mismatch/audio drops/
+  underruns/warmup, finalACK. Report122056f02847426d811d0e703e4460bc.
+  Manual ordinarykeyboard re-entry works; exterior-return and interior-entry
+  screenshots retained. Maxreplaylateness4.234375ms is not guest/physicalinput
+  proof. Owned tab/emulator/audio/server18792 are stopped. Full device/deadline/
+  listening/long-duration performance gates stay open.
+- Native SFv67/SFv68 before-after clip2300frames38.508seconds retains bothaudio
+  tracks and metadata; comparison.mp4 SHA
+  ac211b83035f02081f696794d50f61baf0a012ad57f0679c734f52999866febe.
+  This is SF versus previousSF, NOT an Emerald comparison or approval. Native
+  animation changes transition duration; later scenes are not position-aligned.
+- Site59 source8023fdaea18b0d0efa4750b13ab2b70c15c195f6; savedversion
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_27fc3ef71df481919711dbfd0c1d97f2.
+  Deploymentappgdep_6ad0199a61c481919844006195dcd055 succeeded00:09:07UTC.
+  Archivef7bce16064b5e6c1472375a2fa5ee13e58f5f35709a40692490f5391c128e40a
+  passes88file audit; no commercial ROM/private save/ELF/movie/AppleDouble.
+  ApprovedSFMMprototype/15runtimefiles/hosting/auth/storage/publicaudience exact.
+  Production BPS decoder reproduces candidate. Both canonical live resources
+  byte-match local; receipthash91fca7737fbdac41ec7d5006e16081722b41c6121fd72b34caabef37813f61f2.
+  Publicloader screenshotpublic-v68-loader-visible.png retained; no public
+  ROM/save import or accountmutation. OwnIAB18closed; unrelatedPDF untouched.
+- Goal staysACTIVE untilOctober15,18:00Pacific; humanapproval0/11, musiclast2/4
+  atv40, sixmaps/twohubs, completecampaign and remainingacceptance gatesOPEN.
+  Alignment next performs finite20minute read-only density/collision source
+  review, reportingby00:30UTC; next exchangeby00:40UTC. No new monitor, GitHub
+  workflow, DB migration or PR merge. Root continues first-slice polish.
