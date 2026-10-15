@@ -8702,3 +8702,18 @@ Private frame-debt policy — October15,07:37UTC:
   No frame deadline, audio, input or full performance gate is cleared by these
   unit cases. Next: private SDK/probe integration with schema2conservation and
   input/debt age accounting, followed by a finite controlled-stall comparison.
+
+Independent frame-debt evidence format — October15,07:55UTC:
+
+- Root reviewed alignment's schema2auditor and reran14new/9old audit cases, all
+  pass. A bounded exact14byte/tick ledger preserves fresh demand, planned/actual
+  core progress, overflow, debt and binary64 RAF elapsed time. Independent parser
+  derives native-rate deadlines, all totals/maxima and exact nearest-rank debt
+  ages; closing uint32core counter must match actual progress, including wrap.
+- Only after the raw ledger passes may an explicit, nonmutating projection reuse
+  old runtime/timing/final-audio integrity checks. Old schema1auditor and both
+  failed600sec receipts remain unchanged. Loss-free, caught-up and planned-match
+  facts stay separate; none approves deadlines, audio, input, paint or full parity.
+- Input debt before the next RAF may exceed the post-plan30frame cap; it remains
+  honest/unclamped up to the bounded observation range. Duplicate unsuperseded
+  counter claims and impossible initial debt are rejected. No public SDK change.
