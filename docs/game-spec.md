@@ -8929,3 +8929,24 @@ Private save-before-draw protocol — October15,09:22UTC:
   hash/reply preparation inside the mutation transaction;8pure bridge cases pass,
   including forced post-import hash failure restoring original state/Flash and
   remaining paused in a new fence epoch. Public runtime is still unchanged.
+
+
+Private Worker save operations integrated — October15,09:25UTC:
+
+- Experimental Worker now supports paused-only canonical state and whole-Flash
+  export/import, retained-ROM initialization/byte verification, rollback, epoch
+  fences and immutable video+Flash metadata at the same guest counter. Raw byte
+  changes advance revision independently of selected native save counters. Old
+  flight ACK/recycle cannot release a newer epoch's buffer; post-reset pixels
+  are withheld until a native frame actually repacks RGBA.
+- Eight pure bridge cases and fresh actual v80 native unit pass. Repeated paused
+  states/load roundtrip are byte-exact, full131072Flash bytes preserved, unused
+  byte120000 survives raw import with valid-slot footer bytes unchanged, original
+  state/Flash restore atcounter3753, stale recycle ignored. Root added an actual
+  equality assertion to the unit rather than merely reporting its Boolean.
+- Root's updated manual native transport unit again passes independent200ms
+  main-stall progress/PCM delivery and mandatory buffer recycling against this
+  save-enabled source. Earlier minimal-Worker performance receipts stay frozen;
+  added full-byte cloning/hash/storage costs require a new browser measurement.
+  Pacing-only host handles reset-not-ready frames and explicit recycle identity;
+  it does not claim browser persistence. Public SDK/WASM/shim/worklet unchanged.

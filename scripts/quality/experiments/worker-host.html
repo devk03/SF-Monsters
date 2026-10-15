@@ -51,12 +51,12 @@ function render(now){
   if(!ready||videoPending)return;videoPending=true;
   const requestedAt=absolute();
   rpc('video').then(frame=>{
-    if(finished)return;
+    if(finished||frame.ready===false)return;
     const rgba=frame.rgba instanceof Uint8Array?frame.rgba:new Uint8Array(frame.pixels??frame.rgba);
     if(frame.width!==240||frame.height!==160||rgba.length!==153600)throw Error('Invalid GBA video dimensions');
     ctx.putImageData(new ImageData(new Uint8ClampedArray(rgba.buffer,rgba.byteOffset,rgba.byteLength),240,160),0,0);
     if(measuring&&submissions.length<160000)submissions.push({requestedAt,receivedAt:absolute(),workerAt:frame.workerAt,counter:frame.counter??frame.guestCounter});
-    return rpc('recycle',{pixels:rgba.buffer},[rgba.buffer]);
+    return rpc('recycle',{frameId:frame.frameId,saveEpoch:frame.saveEpoch,pixels:rgba.buffer},[rgba.buffer]);
   }).catch(error=>{if(!finished)fail(error);}).finally(()=>{videoPending=false;});
 }
 function input(nextMask,domAt=absolute()){

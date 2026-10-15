@@ -9,6 +9,11 @@ let measurement = null, closing = null, finalTimer = null, lastReport = null, ep
 let latestSequence = -1, latestMask = 0, pendingInput = null, videoInFlight = false, recycled = null;
 let bootDiscardedSourceFrames = 0, batteryVerified = false;
 let playbackAcknowledged = false;
+let retainedRom = null, saveEpoch = 0, rawRevision = 0, flashCache = null;
+let frameSerial = 0, flight = null, controlBusy = false, fatalSaveError = null, videoFrameReady = false;
+let lastHostReceipt = null;
+const lifecycleFacts = [];
+let lifecycleFactOverflow = false;
 const now = () => performance.now();
 const absoluteNow = () => performance.timeOrigin + now();
 const counter = () => mod._mgbawasm_frame_counter() >>> 0;
@@ -33,6 +38,135 @@ function failure(request, error) {
 function heapCopy(view, use) {
   const ptr = mod._malloc(view.byteLength); if (!ptr) throw new Error('Core allocation failed');
   try { mod.HEAPU8.set(view, ptr); return use(ptr); } finally { mod._free(ptr); }
+}
+function cloneFlash() {
+  const size = mod._mgbawasm_sram_save();
+  if (!size) return null;
+  if (![32768, 131072].includes(size)) throw new Error('Unexpected native battery size');
+  const ptr = mod._mgbawasm_sram_ptr();
+  if (!ptr || ptr + size > mod.HEAPU8.length) throw new Error('Native battery output is outside heap');
+  return mod.HEAPU8.slice(ptr, ptr + size);
+}
+function refreshFlash() {
+  const current = cloneFlash();
+  if (!current) {
+    if (flashCache) throw new Error('Previously initialized native Flash disappeared');
+    return null;
+  }
+  if (!flashCache || current.length !== flashCache.bytes.length || current.some((v, i) => v !== flashCache.bytes[i])) {
+    flashCache = { bytes: current, rawRevision: ++rawRevision, saveEpoch, digest: null };
+  }
+  return flashCache;
+}
+async function flashPacket(cache, atCounter, includeBytes = true) {
+  if (!cache) return { available: false, saveEpoch, rawRevision: 0, counter: atCounter, size: 0 };
+  // Internal immutable cache is never transferred/detached. Hashes bind its
+  // entire raw content, including incomplete/inactive slots and unused bytes.
+  cache.digest ??= crypto.subtle.digest('SHA-256', cache.bytes).then(value =>
+    Array.from(new Uint8Array(value), byte => byte.toString(16).padStart(2, '0')).join('')).catch(error => {
+      cache.digest = null; throw error;
+    });
+  const packet = { available: true, saveEpoch: cache.saveEpoch, rawRevision: cache.rawRevision,
+    counter: atCounter, size: cache.bytes.length, sha256: await cache.digest };
+  if (includeBytes) packet.bytes = cache.bytes.slice();
+  return packet;
+}
+function requirePaused() {
+  if (!mod) throw new Error('Boot first');
+  if (running) throw new Error('Pause and await its acknowledgement before save operations');
+  if (measurement || closing) throw new Error('Finish diagnostic window and final acknowledgement first');
+  if (fatalSaveError) throw new Error('Worker save state is uncertain: ' + fatalSaveError);
+}
+function canonicalState() {
+  const size = mod._mgbawasm_state_size(); integer(size, 'native state size', 4 * 1024 * 1024);
+  if (!size) throw new Error('Native state unavailable');
+  const ptr = mod._malloc(size); if (!ptr) throw new Error('Native state scratch allocation failed');
+  try {
+    if (ptr + size > mod.HEAPU8.length) throw new Error('Native state scratch exceeds heap');
+    mod.HEAPU8.fill(0, ptr, ptr + size);
+    if (mod._mgbawasm_state_save(ptr) !== 1) throw new Error('Native state export failed');
+    return mod.HEAPU8.slice(ptr, ptr + size);
+  } finally { mod._free(ptr); }
+}
+function nativeBootRom() {
+  if (!heapCopy(retainedRom, ptr => mod._mgbawasm_load(ptr, retainedRom.length, 0, 0, -1, 0, 1))) throw new Error('Native ROM reboot failed');
+  mod._mgbawasm_set_log_level(1); mod._mgbawasm_set_idle_optimization?.(1); mod._mgbawasm_set_allow_opposing_directions?.(0);
+}
+function restoreRawBattery(raw, reboot = true) {
+  if (![32768, 131072].includes(raw.length)) throw new Error('Unsupported native battery size');
+  if (reboot) nativeBootRom();
+  let initialized = false;
+  for (let frame = 0; frame < 120; ++frame) {
+    mod._mgbawasm_run_frame();
+    if (mod._mgbawasm_sram_save() === raw.length) { initialized = true; break; }
+  }
+  if (!initialized) throw new Error('Native save memory did not initialize within120frames');
+  if (!heapCopy(raw, ptr => mod._mgbawasm_sram_load(ptr, raw.length))) throw new Error('Native battery restore failed');
+  const restored = cloneFlash();
+  if (!restored || restored.length !== raw.length || restored.some((v, i) => v !== raw[i])) throw new Error('Native battery round-trip differs');
+  mod._mgbawasm_reset(); mod._mgbawasm_set_idle_optimization?.(1); mod._mgbawasm_set_allow_opposing_directions?.(0);
+  batteryVerified = true;
+}
+function restoreState(raw) {
+  if (raw.length !== mod._mgbawasm_state_size()) throw new Error('State size differs from unchanged core ABI');
+  if (!heapCopy(raw, ptr => mod._mgbawasm_state_load(ptr))) throw new Error('Native state load failed');
+}
+function advanceSaveEpoch(reason) {
+  const old = { saveEpoch, due, executed, overflowDropped: dropped, abandonedFrames: backlog,
+    queuedSourceFramesEstimate: Math.max(0, enqueued - consumed), workerAt: absoluteNow(), reason };
+  if (lifecycleFacts.length === 64) throw new Error('Lifecycle fact capacity reached; create a fresh Worker');
+  lifecycleFacts.push(old);
+  saveEpoch++; rawRevision = 0; flashCache = null; lastHostReceipt = null;
+  flight = null; videoInFlight = false; videoFrameReady = false; recycled = null;
+  pendingInput = null; latestMask = 0; mod._mgbawasm_set_keys(0);
+  origin = null; due = backlog = executed = dropped = 0;
+  const drainedSourceFrames = drainAudio(false); old.discardedShimSourceFrames = drainedSourceFrames;
+  old.playbackReset = { previousEpoch: playbackEpoch, nextEpoch: playbackEpoch + 1 };
+  enqueued = consumed = 0; coreRate = 0; playbackAcknowledged = false;
+  port.postMessage({ type: 'playback-reset', epoch: ++playbackEpoch }); syncRate();
+  refreshFlash();
+}
+async function saveOperation(request, op) {
+  requirePaused();
+  if (controlBusy) throw new Error('A paused save operation is already in flight');
+  controlBusy = true;
+  try {
+    if (op === 'export-battery') {
+      const packet = await flashPacket(refreshFlash(), counter());
+      if (!packet.available) throw new Error('No native battery exists yet');
+      return reply(request, packet, [packet.bytes.buffer]);
+    }
+    if (op === 'export-state') {
+      const state = canonicalState(), atCounter = counter();
+      const flash = await flashPacket(refreshFlash(), atCounter);
+      const result = { saveEpoch, counter: atCounter, state, flash };
+      return reply(request, result, [state.buffer, ...(flash.bytes ? [flash.bytes.buffer] : [])]);
+    }
+    const raw = op === 'import-battery' ? bytes(request.bytes ?? request.battery, 'raw battery', 131072).slice() : null;
+    const state = op === 'load-state' ? bytes(request.state, 'native state', 4 * 1024 * 1024).slice() : null;
+    const companion = op === 'load-state' && request.battery ? bytes(request.battery, 'companion battery', 131072).slice() : null;
+    if (state && state.length !== mod._mgbawasm_state_size()) throw new Error('State size differs from unchanged core ABI');
+    if ((raw && ![32768, 131072].includes(raw.length)) || (companion && ![32768, 131072].includes(companion.length))) throw new Error('Unsupported battery size');
+    const previousState = canonicalState(), previousFlash = cloneFlash();
+    if (lifecycleFacts.length >= 62) throw new Error('Lifecycle history nearly full; create a fresh Worker before another reset');
+    let committed = false;
+    try {
+      if (raw || companion) restoreRawBattery(raw ?? companion);
+      if (state) restoreState(state);
+      advanceSaveEpoch(op);
+      const flash = await flashPacket(refreshFlash(), counter());
+      reply(request, { ...snapshot(), flash, reset: true }, flash.bytes ? [flash.bytes.buffer] : []);
+      committed = true;
+      return;
+    } finally {
+      if (!committed) {
+        try {
+          if (previousFlash) restoreRawBattery(previousFlash); else nativeBootRom();
+          restoreState(previousState); advanceSaveEpoch('failed-' + op + '-rolled-back');
+        } catch (rollback) { fatalSaveError = String(rollback?.message ?? rollback); }
+      }
+    }
+  } finally { controlBusy = false; }
 }
 function syncRate() {
   const rate = mod._mgbawasm_sample_rate();
@@ -75,6 +209,8 @@ function snapshot() {
     estimatedSourceQueue: Math.max(0, enqueued - consumed),
     audioLatest: lastAudio, audioLatestReceivedAt: lastAudioAt,
     playbackEpoch, playbackAcknowledged, batteryVerified, bootDiscardedSourceFrames,
+    saveEpoch, rawRevision, flashAvailable: flashCache !== null, videoFrameReady,
+    lastHostReceipt, lifecycleFacts: lifecycleFacts.map(value => ({ ...value })), lifecycleFactOverflow, fatalSaveError,
     measurementActive: measurement !== null, closing: closing !== null,
     scope: 'Worker clock/core counters and raw worklet reports; queue estimate includes messages in flight; no AudioContext/hardware clock claim.' };
 }
@@ -106,6 +242,11 @@ function closeMeasurement(reason = 'duration', request = null) {
   finalTimer = setTimeout(() => finishMeasurement(null), 500);
 }
 function pause(reason = 'pause') {
+  if (mod && (running || due || backlog)) {
+    const fact = { reason, saveEpoch, due, executed, overflowDropped: dropped, abandonedFrames: backlog,
+      workerAt: absoluteNow(), audioReset: false };
+    if (lifecycleFacts.length < 64) lifecycleFacts.push(fact); else lifecycleFactOverflow = true;
+  }
   running = false; clearTimeout(loopTimer); clearTimeout(stopTimer); loopTimer = stopTimer = null;
   closeMeasurement(reason);
   const abandoned = backlog;
@@ -134,6 +275,7 @@ function tick() {
     if (actual > planned) throw new Error('Core counter exceeds planned execution');
     due = nextDue; backlog = pending - actual; executed += actual; dropped += overflow;
     if (due !== executed + dropped + backlog) throw new Error('Worker debt conservation failed');
+    if (actual) { refreshFlash(); videoFrameReady = true; }
     if (observed && measurement === observed) {
       // [fresh, planned, actual, overflow, after, elapsedMsSinceClockOrigin,
       //  nativeCounterBefore, nativeCounterAfter]
@@ -159,7 +301,7 @@ async function boot(request) {
   if (mod || booting) throw new Error('Worker already booted or booting');
   booting = true;
   try {
-    const rom = bytes(request.rom, 'rom', 32 * 1024 * 1024);
+    const rom = bytes(request.rom, 'rom', 32 * 1024 * 1024); retainedRom = rom.slice();
     if (!request.audioPort || typeof request.audioPort.postMessage !== 'function') throw new Error('Transfer the actual worklet MessagePort');
     port = request.audioPort; port.onmessage = audioMessage; port.start?.();
     importScripts(request.jsUrl);
@@ -193,11 +335,13 @@ async function boot(request) {
     bootDiscardedSourceFrames = drainAudio(false); port.postMessage({ type: 'playback-reset', epoch: ++playbackEpoch }); syncRate();
     fps = mod._mgbawasm_framerate_micro() / 1e6;
     if (!Number.isFinite(fps) || fps <= 0) throw new Error('Invalid native framerate');
+    saveEpoch = 1; refreshFlash();
     return { ...snapshot(), width: mod._mgbawasm_video_width(), height: mod._mgbawasm_video_height() };
   } finally { booting = false; }
 }
 function start(request) {
   if (!mod) throw new Error('Boot first');
+  if (controlBusy || fatalSaveError) throw new Error('Save operation is pending or core state is uncertain');
   if (running) return snapshot();
   const duration = integer(request.durationMs ?? LIMITS.durationMs, 'finite run duration', LIMITS.runDurationMs);
   if (!duration) throw new Error('Finite run duration must be positive');
@@ -214,7 +358,7 @@ function begin(request) {
   measurement = { epoch: ++epoch, durationMs, startedAtMs, startedAt: absoluteNow(), deadlineMs: startedAtMs + durationMs,
     workerTimeOrigin: performance.timeOrigin, clockOriginMs: origin, framerate: fps, initialDue: due,
     initialBacklog: backlog, initialGuestCounter: counter(), rawLedger: [], inputs: [], audioSnapshots: [],
-    initialPacing: { due, executed, overflowDropped: dropped, backlog }, coreRate, playbackEpoch,
+    initialPacing: { due, executed, overflowDropped: dropped, backlog }, coreRate, playbackEpoch, saveEpoch, rawRevision,
     sourceFramesPosted: 0, initialSourceFramesPosted: enqueued, maxPending: 0, maxBacklog: 0,
     maxWorkerTickGapMs: 0, lastTickMs: startedAtMs, requests: [request],
     scope: 'Private Worker proof. Raw native counters, Worker timer ledger and unchanged worklet diagnostics; no main AudioContext clock, physical output, input-consumption or production compatibility claim.' };
@@ -223,6 +367,8 @@ function begin(request) {
 }
 function input(request) {
   if (!mod) throw new Error('Boot first');
+  if (controlBusy || fatalSaveError) throw new Error('Wait for the paused save operation to finish');
+  if (request.saveEpoch !== undefined && request.saveEpoch !== saveEpoch) throw new Error('Stale input epoch');
   if (measurement && now() >= measurement.deadlineMs) closeMeasurement('duration');
   const sequence = integer(request.sequence ?? request.seq, 'input sequence');
   const mask = integer(request.mask, 'input mask', 1023);
@@ -237,17 +383,30 @@ function input(request) {
     guestCounterAtReceipt: counter() };
   return { sequence, mask, workerReceivedAt: pendingInput.workerReceivedAt };
 }
-function video(request) {
+async function video(request) {
   if (!mod) throw new Error('Boot first');
+  if (controlBusy || fatalSaveError) throw new Error('Wait for the paused save operation to finish');
   // One push-free request returns one latest frame. The host must recycle its
   // buffer before requesting another, so a stalled UI cannot accumulate frames.
   if (videoInFlight) throw new Error('Recycle the previous video buffer before requesting another');
+  if (!videoFrameReady) return reply(request, { ready: false, saveEpoch, counter: counter(), reason: 'Wait for the first completed native frame after reset' });
   const width = mod._mgbawasm_video_width(), height = mod._mgbawasm_video_height();
   if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height) || width < 1 || height < 1 || width > 256 || height > 224) throw new Error('Invalid native geometry');
+  const cache = refreshFlash(), capturedEpoch = saveEpoch, atCounter = counter(), frameId = ++frameSerial;
   const size = width * height * 4, ptr = mod._mgbawasm_video_ptr();
   const buffer = recycled?.byteLength === size ? recycled : new ArrayBuffer(size); recycled = null;
   const rgba = new Uint8Array(buffer); rgba.set(mod.HEAPU8.subarray(ptr, ptr + size)); videoInFlight = true;
-  reply(request, { width, height, counter: counter(), rgba, pixels: buffer, workerAt: absoluteNow() }, [buffer]);
+  flight = { frameId, saveEpoch: capturedEpoch, rawRevision: cache?.rawRevision ?? 0, bufferSize: size };
+  const includeBytes = request.knownEpoch !== capturedEpoch || request.knownRevision !== cache?.rawRevision;
+  const workerAt = absoluteNow();
+  try {
+    const flash = await flashPacket(cache, atCounter, includeBytes);
+    reply(request, { ready: true, frameId, saveEpoch: capturedEpoch, width, height, counter: atCounter, rgba, pixels: buffer, workerAt, flash },
+      [buffer, ...(flash.bytes ? [flash.bytes.buffer] : [])]);
+  } catch (error) {
+    if (flight?.frameId === frameId && flight.saveEpoch === capturedEpoch) { flight = null; videoInFlight = false; }
+    throw error;
+  }
 }
 async function dispatch(request) {
   const op = request.op ?? request.type;
@@ -257,10 +416,17 @@ async function dispatch(request) {
   if (op === 'input') return reply(request, input(request));
   if (op === 'snapshot' || op === 'report') return reply(request, snapshot());
   if (op === 'video') return video(request);
+  if (['export-battery', 'import-battery', 'export-state', 'load-state'].includes(op)) return saveOperation(request, op);
+  if (op === 'ack-flash') {
+    if (!flight || request.saveEpoch !== saveEpoch || request.frameId !== flight.frameId || request.rawRevision !== flight.rawRevision) throw new Error('Stale or mismatched Flash receipt acknowledgement');
+    lastHostReceipt = { saveEpoch, frameId: flight.frameId, rawRevision: flight.rawRevision, acknowledgedAt: absoluteNow() };
+    return reply(request, { ...lastHostReceipt, receiptAcknowledged: true, storageVerified: false });
+  }
   if (op === 'recycle') {
+    if (!flight || request.saveEpoch !== saveEpoch || request.frameId !== flight.frameId) return reply(request, { ignored: true, reason: 'Stale frame epoch or identifier' });
     const buffer = request.pixels ?? request.rgba?.buffer;
-    if (!(buffer instanceof ArrayBuffer) || buffer.byteLength > 256 * 224 * 4) throw new Error('Invalid recycled video buffer');
-    recycled = buffer; videoInFlight = false; return reply(request, { recycled: true });
+    if (!(buffer instanceof ArrayBuffer) || buffer.byteLength !== flight.bufferSize) throw new Error('Invalid recycled video buffer');
+    recycled = buffer; videoInFlight = false; flight = null; return reply(request, { recycled: true });
   }
   if (op === 'begin' || op === 'diagnostics-start') return begin(request);
   if (op === 'end' || op === 'diagnostics-stop') return closeMeasurement(request.reason ?? 'manual', request);

@@ -81,7 +81,9 @@ if (workerData?.role === 'core') {
     assert.ok(sourceDuringStall > 0, 'Transferred PCM did not reach the independent sink during main stall');
     const frame = await rpc('video'); assert.equal(frame.rgba.length, 240 * 160 * 4);
     await assert.rejects(rpc('video'), /Recycle/);
-    await rpc('recycle', { pixels: frame.rgba.buffer }, [frame.rgba.buffer]);
+    await rpc('recycle', { frameId: frame.frameId, saveEpoch: frame.saveEpoch, pixels: frame.rgba.buffer }, [frame.rgba.buffer]);
+    const nextFrame=await rpc('video');assert.equal(nextFrame.ready,true);
+    await rpc('recycle',{frameId:nextFrame.frameId,saveEpoch:nextFrame.saveEpoch,pixels:nextFrame.rgba.buffer},[nextFrame.rgba.buffer]);
     const paused = await rpc('pause');
     const report = { kind: 'native-node-worker-transport-unit',
       identity:{rom_sha256:sha(rom),state_sha256:sha(state),battery_sha256:sha(battery),
