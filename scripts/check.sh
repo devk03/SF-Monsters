@@ -26,6 +26,7 @@ python3 tests/worker_proof_audit_test.py
 python3 tests/saved_frames_audit_test.py
 python3 tests/audio_pause_audit_test.py
 python3 tests/native_cycle_audit_test.py
+python3 tests/save_chain_audit_test.py
 node --test tests/controller_replay_test.mjs
 node --test tests/field_observation_test.mjs
 python3 tests/prepare_web_test.py

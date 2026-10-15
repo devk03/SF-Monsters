@@ -9213,3 +9213,19 @@ Excluded replay-boundary attempt — October15,11:26UTC:
   actual admission timestamps and preserves raw unselected replay for future RCA.
   Eighth controller regression covers the boundary without rewriting timestamps
   or widening the auditor. Retrying from the last verified native C18 checkpoint.
+
+
+Linked-cycle graph verifier — October15,11:37UTC:
+
+- Added a finite offline ten-cycle graph audit with7pure corruption groups,
+  passing normally and under python-O. It freshly re-audits each bound browser/
+  native cold proof and checks Flash, actual native state and capture-metadata
+  links into the NEXT frozen browser boot. Duplicate, out-of-order, stale-state,
+  changed-Worker and missing-proof inputs reject. No polling or emulator is run.
+- It explicitly reports ten LINKED successful private cycles, not ten consecutive
+  attempts or a public gate. One excluded reporting attempt stays hashed beside
+  the result. Same Worker/core/ROM and the3party/0boxed fixture limits are explicit.
+  Dependencies and own source are frozen; output is exclusive/private.
+- Aggregate execution is reserved until the remaining cycles and600sec field
+  measurement finish. Seven linked cycles are currently verified C13→20, after
+  the prospective reporter guard passed C18→19. No full acceptance gate changed.
