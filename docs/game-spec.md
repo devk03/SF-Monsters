@@ -9172,3 +9172,27 @@ Strict pause review and chained native load — October15,11:02UTC:
   count as50campaign checkpoints, public storage/auth or physical-phone proof.
 - Own browser/core/audio stopped before native cold capture. Routine localchecks
   passed; GitHub Actions remains manual-only. No public runtime/deployment change.
+
+
+Native-cycle audit and progress — October15,11:22UTC:
+
+- Five chained private stationary cycles now pass C13→14→15→16→17→18, using
+  each actual native cold result as the next browser checkpoint. This exercises
+  rotating Flash banks/sections, rather than repeatedly resetting one seed.
+  The fixture has3party monsters and0boxed monsters; broader campaign/storage
+  populations, public adapter/auth and physical devices remain unqualified.
+- Native loaded SaveCounter and saved-game-stat equal each NEW slot, with party
+  count and playtime checked too. This distinguishes actual latest-slot Continue
+  from merely preserving the new battery beside old in-memory game data.
+  All16loaded checks and full128KiBFlash equality pass on all five captures.
+- Reusable offline verifier now explicitly checks requirements even under Python
+  optimization, re-audits bound browser reports/Flash backups, pins exact v80 and
+  the3752frame cold route, and freezes verifier dependencies. Current capture
+  source is labeled as a verifier dependency, not capture-time attestation.
+  Eight grouped corruption tests pass normally and with python-O. Manual changed
+  party byte, bad state CRC and wrong battery hash reject; prior wrong-proof-kind/
+  report-hash false passes are now rejected. Earlier evidence remains preserved.
+- The native verifier is manual/private-ROM-only; pure corruption cases join
+  routine local checks. Root is continuing the chain and then a longer traversal
+  measurement on the same final Worker source. Public v80 and all full release
+  gates remain unchanged. Hard stop remains05:00SF/12:00UTC today.
