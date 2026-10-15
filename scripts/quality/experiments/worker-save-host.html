@@ -8,9 +8,10 @@ body{margin:24px;background:#eee;color:#222;font:15px system-ui;max-width:960px}
 <p id="status" role="status">Ready. No public saves or account data are used.</p>
 <canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="flash" disabled>Preserve paused raw Flash receipt</button><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
 <script type="module">
+import {createAudioLifecycle} from "/emulator/audio-lifecycle.js";
 import {createPresentedSaveStore,decodeRaw,encodeRaw} from "/emulator/presented-save.js";
 let worker,audio,sink,gain,identity,boot,ready=false,finished=false,measuring=false,stallUsed=false,stallReady=false;
-let saveStore,saveEpoch,storeKey,checking=false,storagePaused=false,injectQuota=false,adapterGeneration=1;
+let lifecycle,saveStore,saveEpoch,storeKey,checking=false,storagePaused=false,injectQuota=false,adapterGeneration=1;
 let storageEvents=[],saveActions=[],activeFrame=null,inflightVideo=null,videoTicket=0,pendingVideoTicket=0;
 const saveStatus=document.querySelector("#save-status");
 let replayModule,routeText,replay,replayResult=null,routeUsed=false;
@@ -72,7 +73,7 @@ function render(now){
     saveStatus.textContent='Stored raw revision '+receipt.rawRevision+' before frame '+receipt.frameId+'; storage writes '+saveStore.snapshot().writeSerial+'.';
   }).catch(async error=>{
     if(finished||generation!==adapterGeneration)return;
-    releaseAll();ready=false;storagePaused=true;const paused=await rpc('pause').catch(()=>null);await audio.suspend();
+    releaseAll();ready=false;storagePaused=true;const paused=await lifecycle.pause().catch(()=>null);
     const previous=saveStore.cachedPresented();
     const record={type:'presentation-failure',at:absolute(),error:error.message,store:saveStore.snapshot(),
       workerPaused:paused?.running===false,workerLastReceipt:paused?.lastHostReceipt??null,
@@ -124,6 +125,7 @@ button('load').onclick=async()=>{try{
   worker.onmessage=event=>{const message=event.data;if(message.type==='worker-error'){void finish().then(()=>fail(Error(message.error)));return;}const p= pending.get(message.id);if(!p)return;clearTimeout(p.timer);pending.delete(message.id);message.ok?p.resolve(message.result??message.value):p.reject(Error(message.error??'Worker RPC failed'));};
   worker.onerror=event=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error(event.message||'Worker failed'));}pending.clear();fail(Error(event.message||'Worker failed'));};
   boot=await rpc('boot',{rom,battery,state,audioPort:sink.port,jsUrl:new URL('/emulator/mgba.js',location.href).href,wasmUrl:new URL('/emulator/mgba.wasm',location.href).href},[sink.port],20000);
+  lifecycle=createAudioLifecycle({audio,rpc,record:fact=>saveActions.push({...fact,at:absolute()})});
   saveEpoch=boot.saveEpoch;storeKey='sf-worker-save-proof-v1:'+identity.rom_sha256+':'+location.host;
   let writeAttempt=0,lastWrite=null;
   const storage={setItem(key,value){
@@ -133,7 +135,7 @@ button('load').onclick=async()=>{try{
   },getItem(key){const value=localStorage.getItem(key);storageEvents.push({type:'read',attempt:lastWrite?.attempt??null,matchesWrite:!!lastWrite&&lastWrite.key===key&&lastWrite.value===value,at:absolute(),encodedLength:value?.length??0,...activeFrame});return value;}};
   saveStore=createPresentedSaveStore({storage,key:storeKey,epoch:saveEpoch});
   await lease();await rpc('start' ,{durationMs:Math.min(900000,Math.floor(mainDeadline-performance.now()-2000))});
-  ready=true;raf=requestAnimationFrame(render);status.textContent='Verified Worker checkpoint playing; visibility='+document.visibilityState+'. Let audio settle before measuring. Arrow keys move; X/Z confirm/back.';
+  lifecycle.started();ready=true;raf=requestAnimationFrame(render);status.textContent='Verified Worker checkpoint playing; visibility='+document.visibilityState+'. Let audio settle before measuring. Arrow keys move; X/Z confirm/back.';
 }catch(error){await finish();fail(error);}finally{controls();}};
 async function measure(durationMs,onStarted){
   if(!ready||finished||measuring)return;if(document.visibilityState!=='visible'){fail(Error('Raise this test window before foreground measurement; visibility='+document.visibilityState));return;}measuring=true;stallReady=false;controls();
@@ -189,16 +191,16 @@ async function finish(){
   if(measuring)await rpc('end',{reason:'finished-qa'});await rpc('destroy',{},[],2000);}catch(error){out.textContent+='\nCleanup: '+error.message;}
   worker?.terminate();worker=null;sink?.disconnect();gain?.disconnect();if(audio)await audio.close();ready=false;controls();status.textContent='Local Worker QA finished; Worker, emulator and audio stopped. Public progress was untouched.';
 }
-window.addEventListener('pointerdown',()=>{if(audio?.state==='suspended')void audio.resume();});
+window.addEventListener('pointerdown',()=>{if(ready&&!checking&&!storagePaused&&!finished)void lifecycle?.unlock().catch(error=>{ready=false;storagePaused=true;fail(error);controls();});});
 async function action(run){
   if(checking||finished||measuring)return;checking=true;controls();releaseAll();
-  try{await rpc('pause');await audio.suspend();await inflightVideo;await run();}
+  try{await lifecycle.pause();await inflightVideo;await run();}
   catch(error){ready=false;storagePaused=true;saveStatus.textContent='Save action failed: '+error.message;saveActions.push({type:'action-failure',at:absolute(),error:error.message});}
   finally{checking=false;controls();}
 }
 async function resumeKnownEpoch(){
   const state=await rpc('snapshot');saveEpoch=state.saveEpoch;adapterGeneration++;saveStore.fence(saveEpoch);pendingVideoTicket=0;
-  await audio.resume();await rpc('resume',{durationMs:Math.max(1,Math.min(900000,Math.floor(mainDeadline-performance.now()-2000)))});
+  await lifecycle.resume({durationMs:Math.max(1,Math.min(900000,Math.floor(mainDeadline-performance.now()-2000)))});
   ready=true;storagePaused=false;
 }
 button('roundtrip').onclick=()=>void action(async()=>{

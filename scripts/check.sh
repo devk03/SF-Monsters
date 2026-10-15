@@ -17,6 +17,7 @@ node --test tests/audio_playback_reset_test.mjs
 node --test tests/state_serialization_test.mjs
 node --test tests/web_performance_probe_test.mjs
 node --test tests/frame_pacer_test.mjs
+node --test tests/audio_lifecycle_test.mjs
 node --test tests/presented_save_test.mjs
 node tests/worker_save_bridge_test.mjs
 python3 tests/frame_debt_audit_test.py
