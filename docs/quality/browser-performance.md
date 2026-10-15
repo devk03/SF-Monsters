@@ -74,11 +74,28 @@ Actual browser long-run/transition checks and listening approval remain required
 
 
 Optional `--input /absolute/path/verified-input.csv` freezes a headerless native
-keyMask,frames route alongside the session. The private page offers a three-minute
-measurement/replay control for routes shorter than that window. Durations convert
+keyMask,frames route alongside the session. The private page offers a bounded measurement/replay control, with a three-minute
+minimum and ten-minute maximum. It rounds the route plus one second up to whole
+seconds; routes over599seconds are rejected so completion and final key release
+fit inside the measurement. The existing session-lifetime check still applies. Durations convert
 using the pinned guest frame period, but DOM scheduling is approximate wall time.
 A single outstanding timer replays every row, releases keys on completion/cancel,
 and aborts if timing slips over50ms or the document hides. Reports bind the actual
 input bytes and retain dispatch timestamps. Planned route labels do not establish
 observed browser scenes. A replay from an earlier measurement is never attached
 to a later window. No public game progress is used.
+
+
+The active-field route in `data/quality/park-active-field.csv` starts at the
+verified gray-build South Park checkpoint21,6, descends to roadrow8 and shuttles
+within x21..35. Its310rows span35756 native frames (598.652206seconds),96.39%
+with a directional key held. Native endpoint/camera evidence validates that
+route; browser wall-time scheduling can still drift and needs visible checks.
+The enclosing browser window is600seconds, including a short released tail.
+
+For an accepted active-route observation, separately require replay reason
+`complete`, all310rows dispatched during the measurement and final key release.
+A valid generic diagnostic report with an aborted/hidden/late replay does not
+prove the active workload completed. Retain first failures. Zero drops/underruns
+and correct frame identities remain explicit requirements; neither replaces
+guest-deadline, physical-input, Safari/phone or human listening acceptance.

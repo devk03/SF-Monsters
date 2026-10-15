@@ -1,6 +1,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseControllerRoute, startControllerReplay } from '../scripts/quality/controller_replay.mjs';
+import { controllerMeasurementDuration, parseControllerRoute, startControllerReplay } from '../scripts/quality/controller_replay.mjs';
+
+test('route measurement retains a completion margin within its finite ten-minute limit', () => {
+    for (const [routeMs, expected] of [[1,180000],[179000,180000],[179000.01,181000],
+        [240000,241000],[598652.2064208984,600000],[599000,600000]]) {
+        const windowMs = controllerMeasurementDuration(routeMs);
+        assert.equal(windowMs,expected);
+        assert.ok(windowMs-routeMs>=1000);
+        assert.ok(windowMs<=600000);
+    }
+    for (const invalid of [0,-1,599000.01,600000,NaN,Infinity,'1000',null])
+        assert.throws(()=>controllerMeasurementDuration(invalid));
+});
 
 function clock() {
     let time = 100, next = 0;

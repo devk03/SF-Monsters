@@ -14,7 +14,7 @@ Diagnostics measure emulation, canvas submission and audio buffering. They do no
 <button id="stop" disabled>Stop measurement</button><button id="move" disabled>Walk a short loop</button>
 <button id="finish" disabled>Finish local QA</button>
 <button id="snapshot" disabled>Verify snapshot restore</button>
-<button id="route" disabled>Measure supplied route (3 minutes)</button>
+<button id="route" disabled>Measure supplied route (up to 10 minutes)</button>
 <p role="status" id="status">Ready to load. No public saves or account data are used.</p>
 <canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas>
 <pre id="report">No diagnostic report yet.</pre>
@@ -117,8 +117,10 @@ function applyMask(mask){
 button('route').onclick=()=>{
   if(!routeText||replay?.active||measuring||finished||checking||timers.length)return;
   const route=replayModule.parseControllerRoute(routeText);
-  if(route.durationMs>180000){status.textContent='Supplied route exceeds the three-minute measurement; use a shorter route.';return;}
-  replayResult=null;void measure(180000,()=>{
+  let measurementMs;
+  try{measurementMs=replayModule.controllerMeasurementDuration(route.durationMs);}
+  catch(error){showError(error);return;}
+  replayResult=null;void measure(measurementMs,()=>{
     replay=replayModule.startControllerReplay(routeText,applyMask,result=>{
       replayResult=result;status.textContent='Controller replay '+result.reason+'; rows '+result.appliedRows+'/'+result.totalRows+'. Scene coverage requires actual observation.';controls();
     });

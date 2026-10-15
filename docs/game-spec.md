@@ -7941,3 +7941,29 @@ v75 public neutral-gray paving checkpoint — October15,03:34UTC:
   field workload instead of long idle. Last exchange03:33UTC,next04:03UTC.
   Root owns all source. Human0/11, clinic music last explicit2/4/revision pending,
   broad full-campaign/performance/audio gatesOPEN. GoalACTIVE through6PM Pacific.
+
+
+Active-field workload preparation — October15,03:42UTC:
+
+- Private replay page no longer hard-stops supplied routes at180seconds. A
+  tested helper selects180..600seconds, rounds route+one-second completion
+  margin upward, and rejects routes over599seconds. Existing session deadline,
+ 50ms timer-slip abort, hidden-page abort and final release stay unchanged.
+  Six replay tests pass; no public emulator/runtime/game source changed.
+- New explicit field route310rows/35756frames/598.652206seconds starts21,6,
+  descends to row8 and shuttles x21..35. Direction-held34464frames (96.39%);
+  no doors/NPC patrols/signs/grass/warps on corridor. Normal walking2154steps.
+  Browser timings remain approximate wall-time dispatch, not guest synchronization.
+- Actual native pilot reaches35,8 and returns21,8; complete route also ends
+ 21,8 with Flash exact. Native background scroll changes34464transitions,
+  supporting active movement rather than idle. Native receipt
+ b19e15bd2abb747da69ef9fa2781fe729e14f034e7e7c9ab9e87983bdc0be90b.
+  Native runFrame capture is not real-time performance or speaker-interval proof.
+- Alignment independently confirms geometry/arithmetic/evidence limits. Browser
+ 600second run is next, with complete310/310 replay/foreground/duration/final
+  audioACK and zero drops/underruns/debt/mismatch required for this narrow
+  checkpoint. No heavy concurrent builds/captures during measurement.
+- Short native guest-loop profiler remains120frames, not an accepted10minute
+  deadline probe. Full99%guest-update/render deadlines, mixed/menu workloads,
+  Safari/phone, physical input and listening remainOPEN. Publicv75/Site66,
+  human0/11, goalACTIVE; last alignment exchange03:41UTC,next04:11UTC.

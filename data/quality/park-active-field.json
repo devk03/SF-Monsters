@@ -1,0 +1,30 @@
+{
+  "scope": "Deterministic native-frame input; browser replay is approximate wall time. Active horizontal road corridor, no interiors/battles/scene detection.",
+  "target_sha256": "47909520ff1e419cdab4286c9e4507d2c35c66e83ae8703084721164dc3d0938",
+  "start": [
+    21,
+    6,
+    0,
+    10
+  ],
+  "expected_end": [
+    21,
+    8,
+    0,
+    10
+  ],
+  "corridor": {
+    "y": 8,
+    "left": 21,
+    "right": 35
+  },
+  "rows": 310,
+  "frames": 35756,
+  "seconds": 598.6522064208984,
+  "held_frames": 34464,
+  "held_fraction": 0.9638662042734086,
+  "expected_measurement_ms": 600000,
+  "input_sha256": "1748dda038e3689d3bdefd9601180674fbea8d56a3850c0b1b0bbfdf60205ffb",
+  "normal_walking_steps": 2154,
+  "performance_approval": "pending"
+}

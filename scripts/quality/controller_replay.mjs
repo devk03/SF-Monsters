@@ -1,5 +1,11 @@
 /** Finite private QA input replay. Wall-time DOM events are not guest-frame sync. */
 const FRAME_MS = 1000 * 280896 / 16777216;
+export function controllerMeasurementDuration(routeDurationMs) {
+    if (!Number.isFinite(routeDurationMs) || routeDurationMs <= 0 || routeDurationMs > 599000)
+        throw Error('Leave at least one second for route completion inside the ten-minute window');
+    return Math.max(180000, Math.ceil((routeDurationMs + 1000) / 1000) * 1000);
+}
+
 export function parseControllerRoute(text) {
     if (typeof text !== 'string' || text.length > 20000) throw Error('Invalid controller CSV');
     const lines = text.trim().split(/\r?\n/);
