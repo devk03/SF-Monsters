@@ -9064,3 +9064,26 @@ Private readonly-pause candidate — October15,10:38UTC:
   finite AudioContext timeout. No core/worklet modifications or invented clocks.
   Browser repeated-pause/queue-growth verification remains next;97frame failed
   receipt remains retained. Public runtime and live v80 game remain unchanged.
+
+
+Actual twenty-pause transition failure — October15,10:42UTC:
+
+- Added a separate finite raw-worklet watch spanning readonly pauses. It excludes
+  normal diagnostics and save mutations; ordinary exports remain available. It
+  observes the unchanged actual worklet rather than replacing the transition with
+  a later clean window.17pure Worker cases pass including watch expiry/cleanup.
+- Combined phase-preserving Worker and host coordinator still FAIL:20actual
+  Chrome readonly pauses produce1087underrun output frames (~24.6ms),0warmup/
+  dropped source frames. Private receiptSHA
+  4457721b5ecf956f718c86142cb62529fbc82a698345fcf7d420829f9abbd4f7.
+  Independently audited integrity passes; zero-reported-audio-loss is FALSE.
+  Observed periodic queue min~0.77/max~4418source frames, final~802; periodic
+  observations do not establish instantaneous maxima. No public runtime change.
+- Actual AudioContext reads advance2.902/5.805ms on resume despite typical1–2ms
+  Worker wall intervals; queue depletion is visible over repeated cycles. This
+  suggests clock coordination needs further work; it is not a proven hardware
+  diagnosis. Do not hide or clear those underrun counters. The initial candidate
+  did not wait for first periodic worklet ACK before first pause; a stricter next
+  host now waits at most500ms and records visibility changes. Old report retained.
+- Own Worker/audio/tab/server stopped. Further remedies remain private; all full
+  acceptance gates, public SDK async storage migration and Safari/phone stay open.

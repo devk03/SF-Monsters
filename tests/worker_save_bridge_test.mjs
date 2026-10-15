@@ -256,4 +256,25 @@ await test('binary64 frame-boundary credits cannot regress after a large fractio
   assert.equal(after.phaseAnchorElapsedMs, paused.pausedPhase.elapsedMs);
   await f.rpc('destroy');
 });
+await test('readonly audio watch spans pauses but excludes state mutation and other diagnostics',async()=>{
+  const f=fixture();await f.boot();await f.rpc('start',{durationMs:1000});
+  const opened=await f.rpc('audio-watch-start',{durationMs:500});
+  await assert.rejects(f.rpc('begin',{durationMs:10}),/diagnostic window/);
+  await assert.rejects(f.rpc('audio-watch-start'),/exclusive/);
+  await f.advance(20);const paused=await f.rpc('pause');await f.rpc('export-battery');
+  await assert.rejects(f.rpc('load-state',{state:f.state}),/readonly audio watch/);
+  await f.advance(100);assert.equal((await f.rpc('snapshot')).counter,paused.counter);
+  await f.rpc('resume');await f.advance(20);const report=await f.rpc('audio-watch-end');
+  assert.equal(report.epoch,opened.epoch);assert.equal(report.reason,'manual');assert.equal(report.finalAcknowledged,true);
+  assert.equal(report.initial.saveEpoch,report.final.saveEpoch);assert.equal(report.final.playbackEpoch,report.initial.playbackEpoch);
+  await f.rpc('destroy');
+});
+await test('audio watch has a finite expiry and destroy does not leave diagnostics active',async()=>{
+  const f=fixture();await f.boot();await f.rpc('start',{durationMs:1000});
+  await assert.rejects(f.rpc('audio-watch-start',{durationMs:60001}),/duration/);
+  await f.rpc('audio-watch-start',{durationMs:50});await f.advance(60);
+  await assert.rejects(f.rpc('audio-watch-end'),/No active/);
+  await f.rpc('audio-watch-start',{durationMs:100});await f.rpc('destroy');
+  assert.equal(f.audioMessages.filter(m=>m?.type==='diagnostics'&&m.enabled===false).length,2);
+});
 console.log(JSON.stringify({ passed, kind: 'pure-fakecore-phase-and-save-protocol', nativeEmulation: false }));

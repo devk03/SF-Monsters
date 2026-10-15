@@ -10,7 +10,7 @@ let enqueued = 0, consumed = 0, lastAudio = null, lastAudioAt = null;
 let measurement = null, closing = null, finalTimer = null, lastReport = null, epoch = 0;
 let latestSequence = -1, latestMask = 0, pendingInput = null, videoInFlight = false, recycled = null;
 let bootDiscardedSourceFrames = 0, batteryVerified = false;
-let playbackAcknowledged = false;
+let playbackAcknowledged = false, audioWatch = null, watchClosing = null;
 let retainedRom = null, saveEpoch = 0, rawRevision = 0, flashCache = null;
 let frameSerial = 0, flight = null, controlBusy = false, fatalSaveError = null, videoFrameReady = false;
 let lastHostReceipt = null;
@@ -171,6 +171,7 @@ async function saveOperation(request, op) {
       const result = { saveEpoch, counter: atCounter, state, flash };
       return reply(request, result, [state.buffer, ...(flash.bytes ? [flash.bytes.buffer] : [])]);
     }
+    if (audioWatch || watchClosing) throw new Error('End readonly audio watch before a save mutation');
     const raw = op === 'import-battery' ? bytes(request.bytes ?? request.battery, 'raw battery', 131072).slice() : null;
     const state = op === 'load-state' ? bytes(request.state, 'native state', 4 * 1024 * 1024).slice() : null;
     const companion = op === 'load-state' && request.battery ? bytes(request.battery, 'companion battery', 131072).slice() : null;
@@ -223,12 +224,42 @@ function audioMessage(event) {
   if (data?.type === 'playback-reset' && data.epoch === playbackEpoch) { playbackAcknowledged = true; return; }
   if (data?.type === 'diagnostics') {
     lastAudio = data; lastAudioAt = absoluteNow();
+    if(audioWatch&&data.epoch===audioWatch.epoch){
+      if(audioWatch.snapshots.length<LIMITS.audioSnapshots)audioWatch.snapshots.push({workerReceivedAt:lastAudioAt,snapshot:data});
+      else endAudioWatch('snapshot-capacity');
+    }
+    if(watchClosing&&data.epoch===watchClosing.epoch&&data.final===true)finishAudioWatch(data);
     if (measurement && data.epoch === measurement.epoch) {
       if (measurement.audioSnapshots.length === LIMITS.audioSnapshots) closeMeasurement('audio-snapshot-capacity');
       else measurement.audioSnapshots.push({ workerReceivedAt: lastAudioAt, snapshot: data });
     }
     if (closing && data.epoch === closing.epoch && data.final === true) finishMeasurement(data);
   }
+}
+function startAudioWatch(request){
+  if(!running||measurement||closing||audioWatch||watchClosing)throw new Error('Audio watch needs exclusive running diagnostics');
+  const durationMs=integer(request.durationMs??30000,'audio watch duration',60000);
+  if(!durationMs)throw new Error('Audio watch must be finite');
+  audioWatch={epoch:++epoch,startedAt:absoluteNow(),durationMs,snapshots:[],initial:snapshot(),requests:[]};
+  audioWatch.timer=setTimeout(()=>endAudioWatch('duration'),durationMs);
+  port.postMessage({type:'diagnostics',enabled:true,epoch});
+  return {epoch,startedAt:audioWatch.startedAt};
+}
+function endAudioWatch(reason,request=null){
+  if(watchClosing){if(request)watchClosing.requests.push(request);return;}
+  if(!audioWatch)throw new Error('No active audio watch');
+  watchClosing=audioWatch;audioWatch=null;clearTimeout(watchClosing.timer);
+  watchClosing.reason=reason;watchClosing.endedAt=absoluteNow();watchClosing.final=snapshot();
+  if(request)watchClosing.requests.push(request);
+  port.postMessage({type:'diagnostics',enabled:false,epoch:watchClosing.epoch});
+  watchClosing.timer=setTimeout(()=>finishAudioWatch(null),500);
+}
+function finishAudioWatch(finalAudio){
+  if(!watchClosing)return;
+  const result=watchClosing;watchClosing=null;clearTimeout(result.timer);delete result.timer;
+  const requests=result.requests;delete result.requests;
+  result.finalAudio=finalAudio;result.finalAcknowledged=finalAudio!==null;
+  for(const request of requests)reply(request,result);
 }
 function snapshot() {
   return { running, counter: mod ? counter() : null, framerate: fps, coreRate,
@@ -409,7 +440,7 @@ function start(request) {
 }
 function begin(request) {
   if (!running || origin === null) throw new Error('Start Worker first');
-  if (measurement || closing) throw new Error('A diagnostic window is already active or closing');
+  if (measurement || closing || audioWatch || watchClosing) throw new Error('A diagnostic window is already active or closing');
   const durationMs = integer(request.durationMs ?? 10000, 'diagnostic duration', LIMITS.durationMs);
   if (!durationMs) throw new Error('Diagnostic duration must be positive');
   const startedAtMs = now(); pendingInput = null;
@@ -468,6 +499,9 @@ async function video(request) {
 }
 async function dispatch(request) {
   const op = request.op ?? request.type;
+  if (op === 'audio-watch-start') return reply(request,startAudioWatch(request));
+  if (op === 'audio-watch-status') return reply(request,{epoch:audioWatch?.epoch??null,first:audioWatch?.snapshots[0]??null,latest:audioWatch?.snapshots.at(-1)??null});
+  if (op === 'audio-watch-end') return endAudioWatch('manual',request);
   if (op === 'boot') return reply(request, await boot(request));
   if (op === 'start' || op === 'resume') return reply(request, start(request));
   if (op === 'pause') return reply(request, pause('pause'));
@@ -490,6 +524,7 @@ async function dispatch(request) {
   if (op === 'end' || op === 'diagnostics-stop') return closeMeasurement(request.reason ?? 'manual', request);
   if (op === 'destroy') {
     pause('destroy'); if (closing) finishMeasurement(null);
+    if(audioWatch)endAudioWatch('destroy');if(watchClosing)finishAudioWatch(null);
     const abandonedPhase = pacingPhase();
     const abandonedFrames = backlog + (abandonedPhase?.earnedUnplannedFrames ?? 0);
     clearTimeout(stopTimer); stopTimer = null;

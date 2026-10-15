@@ -6,7 +6,7 @@ body{margin:24px;background:#eee;color:#222;font:15px system-ui;max-width:960px}
 <p>Same verified SF cartridge, native checkpoint, mGBA core and audio sink. Worker core/audio timing is separate from main-thread canvas submissions. No production save compatibility or physical presentation claim.</p>
 <button id="load">Load verified Worker checkpoint</button><button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="minute" disabled>Measure 1 minute</button><button id="stall" disabled>Controlled 200ms main-thread stall</button><button id="move" disabled>Walk a short loop</button><button id="finish" disabled>Finish local QA</button><button id="route" disabled>Measure supplied active route</button>
 <p id="status" role="status">Ready. No public saves or account data are used.</p>
-<canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="flash" disabled>Preserve paused raw Flash receipt</button><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
+<canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="cycles" disabled>Observe 20 readonly pauses</button><button id="flash" disabled>Preserve paused raw Flash receipt</button><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
 <script type="module">
 import {createAudioLifecycle} from "/emulator/audio-lifecycle.js";
 import {createPresentedSaveStore,decodeRaw,encodeRaw} from "/emulator/presented-save.js";
@@ -29,7 +29,7 @@ function controls(){
   button('move').disabled=!ready||finished||timers.size>0||replay?.active||checking;
   button('route').disabled=!ready||!routeText||finished||measuring||timers.size>0||routeUsed||checking;
   button('finish').disabled=!worker||finished||checking;
-  for(const id of ['roundtrip','quota','flash'])button(id).disabled=!ready||finished||measuring||checking||timers.size>0;
+  for(const id of ['roundtrip','quota','flash','cycles'])button(id).disabled=!ready||finished||measuring||checking||timers.size>0;
   button('recover').disabled=!storagePaused||finished||checking;
 }
 function fail(error){status.textContent='Proof failed: '+error.message;}
@@ -203,6 +203,36 @@ async function resumeKnownEpoch(){
   await lifecycle.resume({durationMs:Math.max(1,Math.min(900000,Math.floor(mainDeadline-performance.now()-2000)))});
   ready=true;storagePaused=false;
 }
+button('cycles').onclick=async()=>{
+  if(checking||finished||measuring||!ready)return;checking=true;controls();releaseAll();
+  const observations=[],before=audioClock(),startedAt=absolute(),visibilityTrace=[{state:document.visibilityState,at:absolute()}];let watch,firstAck;
+  const visibilityChanged=()=>visibilityTrace.push({state:document.visibilityState,at:absolute()});document.addEventListener('visibilitychange',visibilityChanged);
+  try{
+    if(document.visibilityState!=='visible'||await lease()<35000)throw Error('Need visible window and35seconds of finite lease');
+    const admitted=await rpc('audio-watch-start',{durationMs:30000}),ackDeadline=performance.now()+500;
+    do{firstAck=(await rpc('audio-watch-status')).first;if(firstAck)break;if(performance.now()>ackDeadline)throw Error('Initial raw worklet acknowledgement timed out');await new Promise(resolve=>setTimeout(resolve,10));}while(true);
+    if(firstAck.snapshot.epoch!==admitted.epoch)throw Error('Worklet acknowledged another watch');
+    for(let i=0;i<20;++i){
+      await new Promise(resolve=>setTimeout(resolve,73+i%5));
+      const pauseBefore=audioClock(),paused=await lifecycle.pause(),pauseAfter=audioClock();
+      await inflightVideo;const packet=await rpc('export-battery');
+      await new Promise(resolve=>setTimeout(resolve,35+i%3));
+      const still=await rpc('snapshot'),resumeBefore=audioClock();
+      const resumed=await lifecycle.resume({durationMs:Math.max(1,Math.floor(mainDeadline-performance.now()-2000))});
+      observations.push({i,pauseBefore,pauseAfter,paused,packet:{counter:packet.counter,saveEpoch:packet.saveEpoch,sha256:packet.sha256},
+        still,resumeBefore,resumeAfter:audioClock(),resumed});
+    }
+    await new Promise(resolve=>setTimeout(resolve,3000));
+    watch=await rpc('audio-watch-end');
+    const result={schema:2,kind:'private-audio-pause-watch-v1',context:{identity},before,after:audioClock(),startedAt,endedAt:absolute(),
+      observations,watch,firstAck,visibilityTrace,visibility:document.visibilityState,scope:{private:true,physicalOutputProven:false,productionCompatible:false}};
+    const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(5000)});
+    if(!saved.ok)throw Error('Cannot preserve pause watch');const receipt=await saved.json();
+    out.textContent=JSON.stringify({receipt,cycles:observations.length,finalAudio:watch.finalAudio},null,2);
+    status.textContent='Saved readonly pause watch '+receipt.name+'; independent audit required.';
+  }catch(error){await rpc('audio-watch-end').catch(()=>{});ready=false;storagePaused=true;await lifecycle.pause().catch(()=>{});fail(error);}
+  finally{document.removeEventListener('visibilitychange',visibilityChanged);checking=false;controls();}
+};
 button('roundtrip').onclick=()=>void action(async()=>{
   const before=await rpc('export-state'),repeat=await rpc('export-state');
   const equal=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
