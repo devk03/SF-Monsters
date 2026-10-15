@@ -1,16 +1,16 @@
 {
-  "version": "0.0.71-cognition-portraits-preview",
-  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. SELECT from JOURNAL opens the native SF city map; the geographic habitat map and read-only JOURNAL show the next opening-chapter objective; eleven named field people in twelve map-specific sprite candidates include Jonathan, Dylan, Garry, Naval and the clinic pair. All three Cognition trainers now have original portrait candidates. Native cleanup, future cast, music and the full campaign remain unfinished.",
+  "version": "0.0.72-park-infill-preview",
+  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. SELECT from JOURNAL opens the native SF city map; the geographic habitat map and read-only JOURNAL show the next opening-chapter objective; eleven named field people in twelve map-specific sprite candidates include Jonathan, Dylan, Garry, Naval and the clinic pair. All three Cognition trainers have original portrait candidates. Four distinct original frontage candidates fill western pavement and join the northern South Park terrace. Native cleanup, future cast, music and the full campaign remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "353ff5bd5adb5b52df1d6b7f1b2d68bbb7df9956ab283e4d99ca2e991937c667",
+  "target_sha256": "1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249",
   "target_bytes": 16777216,
-  "patch_sha256": "ecae227cb17d352d29ed64526f5eceff8ad8738329f76b44270f5bb55274abbd",
-  "patch_bytes": 1026146,
+  "patch_sha256": "ccbc89b0c089d79699e4f3b8a33b06b7beef5bc4c89754f88766e545609a51ef",
+  "patch_bytes": 1034127,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "e7da69c7a3e0b99d433162c987c788239a0c4260",
+  "source_commit": "cacdc7e3f5dc2b48a50fe074f91dbe781b32f117",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
@@ -21,10 +21,21 @@
       "total": 17,
       "matched": 17
     },
-    "receipt_sha256": "8ce54668a86be3f7531d42a83c5f0f38b92772c55269c9cdcf3c9494060dddb5",
+    "receipt_sha256": "91d1f97decf684ad755e3aaae194ae77d6dbd0c0c62fdf4219e5ddb46db864b1",
     "validator_sha256": "e4b136a97ff24e9a91f1474c617a7a0453c3db448f706d3295dc5171e60ee898",
     "quality_approval": "pending",
     "scope": "Compiled SF background/head/grid/entry/whitelist integration; not art, save, behavior or performance acceptance"
+  },
+  "compiled_park_infill": {
+    "passed": true,
+    "counts": {
+      "total": 23,
+      "matched": 23
+    },
+    "receipt_sha256": "06c59c4542cddd85dd2e5c30708dfcb0d11c6e1e29e3b6a265b5e1eb9875f107",
+    "validator_sha256": "e46dbef77807b0ce9e398ce1b4508799f5c3ce7d1f30e00946ed7bb111e7d93d",
+    "quality_approval": "pending",
+    "scope": "Compiled original primary frontage pixels/palettes/layers,53 solid map cells, layout/header bindings and byte-preserved v71 secondary resources. No art, animation, old-save recovery, campaign or performance approval."
   },
   "compiled_seed_door": {
     "passed": true,
@@ -32,7 +43,7 @@
       "total": 11,
       "matched": 11
     },
-    "receipt_sha256": "ab1ba269b030e15f1121735080090c5255606ed05545e5d84b1ddc9511adc205",
+    "receipt_sha256": "d2e7f13cd11bc7fab6ea8f33e67ca69d415eb0ef4af0be40900a00a680116aa5",
     "validator_sha256": "d23f632b62c13daca8d60cb9b778a74fcf0c454e4b01619bf3d717ea99984000",
     "resident_tiles": 503,
     "quality_approval": "pending",
@@ -44,7 +55,7 @@
       "total": 52,
       "matched": 52
     },
-    "receipt_sha256": "7f9396e9ff7195b6f02be328d4ef4ef1e929b82d98dde6bc222e014f34be8c4e",
+    "receipt_sha256": "17e3d792be091573f9e9feb0a42a048cca299a8445c1cde80ddfc46ba8a06ef3",
     "validator_sha256": "20eebd356419c70a5696459816130fec564e4718c75d921026d9d59992482b1d",
     "quality_approval": "pending",
     "scope": "Compiled field cast integration; no likeness/animation/save approval"
@@ -55,7 +66,7 @@
       "total": 26,
       "matched": 26
     },
-    "receipt_sha256": "66bf47a7523e9386db47930be35e68272210c4b8ebe106254f4807121989ec01",
+    "receipt_sha256": "f71141aa10551517d4d322eccf0e5358dc023b4481bfb0d1cb95f0ec0dcb6012",
     "validator_sha256": "ac4ef92c0cde8139668e8d1d8d568285cc5af1e2ade2ee82b90b1bfc96ccbd84",
     "quality_approval": "pending",
     "scope": "Exact Scott93/Walden94/Steven95 pixels, palettes and native bindings; all96 front-table entries structurally bounded. Stock0..92 resource identity, battle mechanics, saves, likeness and runtime animation are outside this receipt."
@@ -66,7 +77,7 @@
       "total": 5,
       "matched": 5
     },
-    "receipt_sha256": "b5286a5beb415c01f4bc807fc0bf32cfa73150a40b5d86fd5b5fb0475753bce8",
+    "receipt_sha256": "f72d1d18ac8f7c0c350f513aa446fd045c098146d835cb924bc457148195d0be",
     "validator_sha256": "708041c98d73809efa6bdb1d3838b4cdfe050d8dab2944827ea74a98442560b6",
     "quality_approval": "pending",
     "scope": "Intro figure integration only; human likeness/art/flow approval pending"
@@ -100,8 +111,8 @@
         "matched": 18
       }
     },
-    "receipt_sha256": "2e7c538d508c845bafa4f408a5ebd84c691f7a245d25b784e7f7c01aba442782",
-    "validator_sha256": "51bd12f01998c1b447b202fe2b1fcb3811d3fd4281bb3c569911bf3517218554",
+    "receipt_sha256": "d5bf3b8cfac6879c0f24dbad4cb851b1f83760820abe242b693ce471f3619fea",
+    "validator_sha256": "7617b092702badf05fe9d7fafcc25446326db5def6bfb590e61945203a4561f1",
     "quality_approval": "pending",
     "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
   },
@@ -130,348 +141,348 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "c162b1f01fb5342e902b49e1d214e88f6e75d46a5bac6ec5184d3d22bfd3a3b3",
-    "target_sha256": "f8ebd60d1c511f8c49970c16573335f80d7566874985939a13228d653315ac9c",
+    "input_sha256": "eaed162b8b75b388b01c13b073d11734287eded856a28ab1c99a6c9b7f79e74b",
+    "target_sha256": "17200ffc9f74430822fccc00f6273a98400b79052b586e790a402eebba7d882f",
     "labels": [
       {
         "symbol": "gText_Pokemon",
-        "offset": 6291972,
+        "offset": 6299632,
         "capacity": 8,
         "text": "MONSTER",
         "encoded_bytes": 8
       },
       {
         "symbol": "gText_5MarksPokemon",
-        "offset": 6293076,
+        "offset": 6300736,
         "capacity": 14,
         "text": "????? MONSTER",
         "encoded_bytes": 14
       },
       {
         "symbol": "gText_PokedexRegistration",
-        "offset": 6293201,
+        "offset": 6300861,
         "capacity": 32,
         "text": "Field Guide entry recorded.",
         "encoded_bytes": 28
       },
       {
         "symbol": "gText_NoMatchingPkmnWereFound",
-        "offset": 6293281,
+        "offset": 6300941,
         "capacity": 32,
         "text": "No matching monsters found.",
         "encoded_bytes": 28
       },
       {
         "symbol": "gText_SearchForPkmnBasedOnParameters",
-        "offset": 6293313,
+        "offset": 6300973,
         "capacity": 49,
         "text": "Search for monsters using\nselected parameters.",
         "encoded_bytes": 47
       },
       {
         "symbol": "gText_SwitchPokedexListings",
-        "offset": 6293362,
+        "offset": 6301022,
         "capacity": 25,
         "text": "Switch Guide listings.",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_ReturnToPokedex",
-        "offset": 6293387,
+        "offset": 6301047,
         "capacity": 23,
         "text": "Return to the Guide.",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_SelectPokedexMode",
-        "offset": 6293410,
+        "offset": 6301070,
         "capacity": 25,
         "text": "Select the Guide mode.",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_SelectPokedexListingMode",
-        "offset": 6293435,
+        "offset": 6301095,
         "capacity": 33,
         "text": "Select Guide listing mode.",
         "encoded_bytes": 27
       },
       {
         "symbol": "gText_ListByFirstLetter",
-        "offset": 6293468,
+        "offset": 6301128,
         "capacity": 60,
         "text": "List by first letter of the name.\nSpotted monsters only.",
         "encoded_bytes": 57
       },
       {
         "symbol": "gText_ListByBodyColor",
-        "offset": 6293528,
+        "offset": 6301188,
         "capacity": 42,
         "text": "List by color.\nSpotted monsters only.",
         "encoded_bytes": 38
       },
       {
         "symbol": "gText_ListByType",
-        "offset": 6293570,
+        "offset": 6301230,
         "capacity": 34,
         "text": "List by type.\nOwned monsters.",
         "encoded_bytes": 30
       },
       {
         "symbol": "gText_DexHoennDescription",
-        "offset": 6293824,
+        "offset": 6301484,
         "capacity": 23,
         "text": "San Francisco Guide",
         "encoded_bytes": 20
       },
       {
         "symbol": "gText_DexNatDescription",
-        "offset": 6293847,
+        "offset": 6301507,
         "capacity": 25,
         "text": "Complete Field Guide",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_DexSortNumericalDescription",
-        "offset": 6293872,
+        "offset": 6301532,
         "capacity": 46,
         "text": "List monsters in order of\ntheir Guide number.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_DexSortAtoZDescription",
-        "offset": 6293918,
+        "offset": 6301578,
         "capacity": 53,
         "text": "List spotted and owned monsters\nfrom A to Z.",
         "encoded_bytes": 45
       },
       {
         "symbol": "gText_DexSortHeaviestDescription",
-        "offset": 6293971,
+        "offset": 6301631,
         "capacity": 60,
         "text": "List owned monsters from\nheaviest to lightest.",
         "encoded_bytes": 47
       },
       {
         "symbol": "gText_DexSortLightestDescription",
-        "offset": 6294031,
+        "offset": 6301691,
         "capacity": 60,
         "text": "List owned monsters from\nlightest to heaviest.",
         "encoded_bytes": 47
       },
       {
         "symbol": "gText_DexSortTallestDescription",
-        "offset": 6294091,
+        "offset": 6301751,
         "capacity": 59,
         "text": "List owned monsters from\ntallest to smallest.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_DexSortSmallestDescription",
-        "offset": 6294150,
+        "offset": 6301810,
         "capacity": 59,
         "text": "List owned monsters from\nsmallest to tallest.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_ConfirmStarterChoice",
-        "offset": 6294572,
+        "offset": 6302232,
         "capacity": 28,
         "text": "Choose this monster?",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_ChoosePokemon",
-        "offset": 6299103,
+        "offset": 6306763,
         "capacity": 18,
         "text": "Choose a monster.",
         "encoded_bytes": 18
       },
       {
         "symbol": "gText_ChoosePokemon2",
-        "offset": 6299403,
+        "offset": 6307063,
         "capacity": 18,
         "text": "Choose a monster.",
         "encoded_bytes": 18
       },
       {
         "symbol": "gText_TeachWhichPokemon",
-        "offset": 6299136,
+        "offset": 6306796,
         "capacity": 21,
         "text": "Teach which monster?",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_UseOnWhichPokemon",
-        "offset": 6299157,
+        "offset": 6306817,
         "capacity": 22,
         "text": "Use on which monster?",
         "encoded_bytes": 22
       },
       {
         "symbol": "gText_GiveToWhichPokemon",
-        "offset": 6299179,
+        "offset": 6306839,
         "capacity": 23,
         "text": "Give to which monster?",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_DoWhatWithPokemon",
-        "offset": 6299202,
+        "offset": 6306862,
         "capacity": 22,
         "text": "What should it do?",
         "encoded_bytes": 19
       },
       {
         "symbol": "gText_NoPokemonForBattle",
-        "offset": 6299380,
+        "offset": 6307040,
         "capacity": 23,
         "text": "No monster for battle!",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_ChoosePokemonCancel",
-        "offset": 6299564,
+        "offset": 6307224,
         "capacity": 26,
         "text": "Choose monster or CANCEL.",
         "encoded_bytes": 26
       },
       {
         "symbol": "gText_ChoosePokemonConfirm",
-        "offset": 6299590,
+        "offset": 6307250,
         "capacity": 28,
         "text": "Choose monster and confirm.",
         "encoded_bytes": 28
       },
       {
         "symbol": "gText_PkmnInfo",
-        "offset": 6300523,
+        "offset": 6308183,
         "capacity": 13,
         "text": "MONSTER INFO",
         "encoded_bytes": 13
       },
       {
         "symbol": "gText_PkmnSkills",
-        "offset": 6300536,
+        "offset": 6308196,
         "capacity": 15,
         "text": "MONSTER SKILLS",
         "encoded_bytes": 15
       },
       {
         "symbol": "gText_MenuOptionPokedex",
-        "offset": 6304248,
+        "offset": 6311908,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_MenuOptionPokemon",
-        "offset": 6304256,
+        "offset": 6311916,
         "capacity": 8,
         "text": "TEAM",
         "encoded_bytes": 5
       },
       {
         "symbol": "gText_MenuPokedex",
-        "offset": 6317663,
+        "offset": 6325323,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_MenuPokemon",
-        "offset": 6317671,
+        "offset": 6325331,
         "capacity": 8,
         "text": "TEAM",
         "encoded_bytes": 5
       },
       {
         "symbol": "gText_SavingPokedex",
-        "offset": 6319312,
+        "offset": 6326972,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_ContinueMenuPokedex",
-        "offset": 6315115,
+        "offset": 6322775,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_WithdrawPokemon",
-        "offset": 6306573,
+        "offset": 6314233,
         "capacity": 17,
         "text": "WITHDRAW MONSTER",
         "encoded_bytes": 17
       },
       {
         "symbol": "gText_DepositPokemon",
-        "offset": 6306590,
+        "offset": 6314250,
         "capacity": 16,
         "text": "DEPOSIT MONSTER",
         "encoded_bytes": 16
       },
       {
         "symbol": "gText_MovePokemon",
-        "offset": 6306606,
+        "offset": 6314266,
         "capacity": 13,
         "text": "MOVE MONSTER",
         "encoded_bytes": 13
       },
       {
         "symbol": "gText_WithdrawMonDescription",
-        "offset": 6306638,
+        "offset": 6314298,
         "capacity": 44,
         "text": "Move monsters from BOXES to\nyour party.",
         "encoded_bytes": 40
       },
       {
         "symbol": "gText_DepositMonDescription",
-        "offset": 6306682,
+        "offset": 6314342,
         "capacity": 38,
         "text": "Store party monsters in BOXES.",
         "encoded_bytes": 31
       },
       {
         "symbol": "gText_MoveMonDescription",
-        "offset": 6306720,
+        "offset": 6314380,
         "capacity": 49,
         "text": "Organize monsters in BOXES and\nin your party.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_MoveItemsDescription",
-        "offset": 6306769,
+        "offset": 6314429,
         "capacity": 55,
         "text": "Move items held by monsters\nin BOXES or your party.",
         "encoded_bytes": 52
       },
       {
         "symbol": "gText_BattleMenu",
-        "offset": 6179278,
+        "offset": 6186938,
         "capacity": 26,
         "text": "FIGHT{CLEAR_TO 56}BAG\nTEAM{CLEAR_TO 56}RUN",
         "encoded_bytes": 23
       },
       {
         "symbol": "sText_PkmnBrokeFree",
-        "offset": 6176447,
+        "offset": 6184107,
         "capacity": 32,
         "text": "Oh, no!\nThe monster broke free!",
         "encoded_bytes": 32
       },
       {
         "symbol": "sText_PkmnDataAddedToDex",
-        "offset": 6176701,
+        "offset": 6184361,
         "capacity": 37,
         "text": "{B_OPPONENT_MON1_NAME}'s data was\nadded to the Guide.\\p",
         "encoded_bytes": 35
       },
       {
         "symbol": "sText_UseNextPkmn",
-        "offset": 6167555,
+        "offset": 6175215,
         "capacity": 18,
         "text": "Use next monster?",
         "encoded_bytes": 18
@@ -529,7 +540,7 @@
   "title_creature": [
     {
       "symbol": "sTitleScreenRayquazaGfx",
-      "offset": 5600856,
+      "offset": 5608516,
       "capacity": 2020,
       "encoded_bytes": 1276,
       "raw_bytes": 8192,
@@ -538,7 +549,7 @@
     },
     {
       "symbol": "sTitleScreenRayquazaTilemap",
-      "offset": 5602876,
+      "offset": 5610536,
       "capacity": 768,
       "encoded_bytes": 460,
       "raw_bytes": 2048,
@@ -548,15 +559,15 @@
   ],
   "title_song": {
     "title": "Foglight Overture",
-    "region_address": 144130992,
-    "header_address": 144142728,
+    "region_address": 144138652,
+    "header_address": 144150388,
     "allocated_bytes": 11784,
     "score_bytes": 1988,
     "tracks": 8,
-    "voicegroup_address": 141236296,
+    "voicegroup_address": 141243956,
     "native_volume": 90,
     "midi_sha256": "a5fa33ca074408a6958d785d882f172468225b28461856419b9d86fbcdb58a16",
-    "score_sha256": "90ca08035325f512d150ab8fffefaf684960f268c3362a20e759631ff3c9d2ad",
+    "score_sha256": "1996dd3674211a3691d14a5ba0d224e3999f3c0cf51da37125da14e4ca74319a",
     "waveform_sources_verified": true,
     "quality_approval": "pending"
   },
@@ -582,7 +593,7 @@
       },
       {
         "symbol": "gMetatiles_Petalburg",
-        "offset": 3823260,
+        "offset": 3829924,
         "capacity": 3104,
         "encoded_bytes": 3104,
         "raw_bytes": 3104,
@@ -591,7 +602,7 @@
       },
       {
         "symbol": "gMetatileAttributes_Petalburg",
-        "offset": 3826364,
+        "offset": 3833028,
         "capacity": 388,
         "encoded_bytes": 388,
         "raw_bytes": 388,
@@ -600,7 +611,7 @@
       },
       {
         "symbol": "LittlerootTown_Layout_Blockdata",
-        "offset": 4166772,
+        "offset": 4174432,
         "capacity": 2048,
         "encoded_bytes": 2048,
         "raw_bytes": 2048,

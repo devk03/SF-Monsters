@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 01:45 UTC:
+Current checkpoint — October 15, 2026, 02:05 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v71 / Site 62 is live.
-  Native release source e7da69c; website source be095d2e. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v72 / Site 63 is live.
+  Native release source cacdc7e; website source e7862d79. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -612,9 +612,9 @@ Current checkpoint — October 15, 2026, 01:45 UTC:
   branches pass their technical scopes. Human paired art reviews remain pending.
 - Alignment confirms exact map-return gameplay preservation; native RNG and
   wandering Dylan differ. Its finite full-turn/party-sync fixture task is active,
-  two-case handoff completed. Last exchange01:45UTC; next by02:15UTC. Root owns
-  field/browser/publication; peer owns a finite one-case priority extension,
-  due02:30UTC, and edits only its turn fixture/tests.
+  three-case handoff completed and root rerun passes. Last exchange02:03UTC;
+  next by02:30UTC. Root owns publication and next first-slice UI polish; peer
+  finished read-only scoped BUILDER-label recommendations.
 
 ### 15.1 Objective and completion rule
 
@@ -837,8 +837,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.71-cognition-portraits-preview; target353ff5bd5adb5b52df1d6b7f1b2d68bbb7df9956ab283e4d99ca2e991937c667; Site62. Original portraits for Scott, Walden and Steven have compiled/native/browser technical checks. Eleven named fieldpeople have twelve map-specific candidates; human approvals0/11. |
-| Latest local source build | v72 private draft1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249 adds four original frontage cards at53 cells. Independent primary23/23 and all older compiled gates pass. All53 actual occupied-save recovery/resave cases pass. Normal gated rebuild, complete field/door/browser checks and human approval remain pending; public staysv71. |
+| Public build | 0.0.72-park-infill-preview; target1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249; Site63. Four original frontage cards fill53 cells; native recoveries/walls/three doors and scoped Chrome checks pass. Earlier338-frame audio underrun is preserved alongside clean repeat. Human approvals0/11. |
+| Latest local source build | v72 normal sourcecacdc7e reproduces tested1f404cb6. Compiled creature255/cast52/intro5/map17/door11/portraits26/primary23 and full local suite pass. All53 genuine occupied-save recoveries/resaves and213VRAM/four-palette checks after three interior returns pass. All broader art/audio/performance/campaign acceptance stays open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7445,3 +7445,66 @@ Controlled priority-turn checkpoint — October15,01:53UTC:
   That sample is preserved, not counted as an audio-clean pass. A settled repeat
   without mid-route screenshots/native jobs is active; no causal fix is claimed.
   All broad performance gates and0/11 human approvals remainOPEN.
+
+v72 public denser-frontage checkpoint — October15,02:05UTC:
+
+- Normal native sourcecacdc7e3f5dc2b48a50fe074f91dbe781b32f117 reproduces exact
+  drafttarget1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249.
+  BPS1034127bytes SHAccbc89b0c089d79699e4f3b8a33b06b7beef5bc4c89754f88766e545609a51ef.
+  New primary23/23 gate runs before patch creation alongside all older gates;
+  full local checks including13 turn guards and12 primary-audit guards pass.
+- Actual six held-wall checks stop outside brick east/front, sage front,
+  sandstone roof/front and coffee front. First coffee route hit the existing
+  Cognition sign10,6; failed diagnostic is retained. Corrected route uses row7
+  and succeeds; earlier five matching-prefix captures are reused only after
+  verifying exact input/target provenance. Native59.604s3560frame review shows
+  all four facades and camera/walking. No all-boundary or human occlusion score
+  is inferred. Native wall receiptSHA12092b40699ffa7acc68508316a6a0bf11b814f6fd1dde87fcd4633ba81ee373.
+- Actual clinic/Cognition/seedroom entries and returns land respectively at
+  Park32,6 /13,6 /16,17 with Flash unchanged. All213 primary VRAM tiles and all
+  four unfaded palette banks match compiled resources after every return.
+  Return receiptSHA7b71ab5e0fbe76a7ae76c6074554b73929cddc6852db14ec1837e95440c7aa5e;
+  loaded-resource receiptSHA81662669720cca56b810159d21729f27cb5b673ae97f5b3efaf78a823bf30eb1.
+  This does not claim opaque RAM identity, current clinic blackout destination
+  or additional campaign-save checkpoint credit. Earlier53 recovery cases stay
+  bounded to gameplay domains/location/warps as recorded above.
+- Chrome49row59.604s route visually reaches coffee. First75.4099s sample:
+ 4504 core/video frames,4501 render submissions,338 underrun outputframes,
+  zero discard/mismatch/source-audio drop and final ACK. It is not a clean audio
+  pass. Settled129.7993s repeat with no mid-route screenshot/native jobs has
+ 7752 core/video/submission frames,0discard/mismatch/warmup/drop/underrun,
+  maxRAFgap10.4ms and finalACK. Both receipts retained; no causal fix claimed.
+  Clean repeatSHA8fecb29075dec44b33f7fe987561767c90b80b59feafc522616953db41a6f1e3;
+  firstSHAe916e7b77d908c884e07ea133bc5cbbea52144540610103b40410700e0bdc451.
+  Repeat includes about70s idle after the route; not129s of distinct gameplay.
+- Ordinary browser keys enter/leave clinic and show the correct street again.
+  Screenshots retained; own tab/audio/core and finite1200s server closed. No
+  public save/account/ROM upload. Physical response, guest update deadlines,
+  three ten-minute workload classes, Safari/phone and listening remainOPEN.
+- Private genuine Emerald Oldale/SF frontage comparison uses identical1992frame
+ 33.3514709473s controls/native clock, equal nearest3x and two original audio
+  tracks. Both first loops meet a facade wall, then circle the sidewalk; no
+  commercial reference is published. Scope explicitly exterior-frontage art/
+  readability/native walking; helper adds only that label, without relaxing
+  pairing provenance or bounds. Existing pairing guards3/3 pass.
+  VideoSHAc386ffef9c0003a11ea86ef62add43cf04fc94fab1665cedd2fee2dc0cd480ea.
+  User0–4 request is pending. Neither this row nor all four cards grants whole
+  world art approval. Earlier Walden/Steven review also stays pending.
+- Site63 succeeded2026-10-15T02:03:34.486156UTC, website source
+  e7862d79648dff805d35eb3223eee0c0b8a0a44d; savedversion
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_deaefdc0920081918ed11bbe8b59f1a3;
+  deploymentappgdep_6ad0346e60148191af5da997fd79303c. Archive
+ 59a05b5451e45acfc95accf04ef17994938ce7c1b01430b86812096b4b8f963e has88
+  audited files: no commercial ROM, private save, ELF, ZIP, movie, AppleDouble,
+  symlink or traversal. Approved originalSFMM homebrew remains. Production BPS
+  decoder matches target byte-for-byte;15 runtime files/hosting/auth/storage exact.
+- Anonymous live manifest/BPS match local; receipt
+ 30ea6f7277dbbf60077e6fb36342fc083b28cf830a409835277d2aff4f3b5ac3.
+  Visible public loader verified/screenshot saved and own tab closed. Versioned
+  release, public patch, comparison scope and this spec are committed together.
+  GitHubActions remains manual-only, all pushes[skip ci].
+- GoalACTIVE throughOctober15,18Pacific. Human0/11; clinic music remains last
+  explicit2/4 with revision awaiting review; full campaign/quality gatesOPEN.
+  Next first-slice cleanup is scoped BUILDER role labels for Walden/Steven,
+  preserving all numeric classes and unrelated table text. Alignment's read-only
+  recommendation is complete; no label change is included in publicv72.

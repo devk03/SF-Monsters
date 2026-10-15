@@ -41,7 +41,7 @@ def main():
                         help='Visible candidate scene name in uppercase letters and spaces.')
     parser.add_argument('--reference-label',default='EMERALD LAB',
                         help='Visible genuine reference scene name in uppercase letters and spaces.')
-    parser.add_argument('--review-scope',choices=['interior','healing','trainer','cast'],default='interior')
+    parser.add_argument('--review-scope',choices=['interior','healing','trainer','cast','exterior'],default='interior')
     args=parser.parse_args()
     if not re.fullmatch(r'[A-Z][A-Z ]{1,39}',args.candidate_label):
         parser.error('Candidate label must use 2–40 uppercase letters/spaces.')
@@ -82,7 +82,8 @@ def main():
                     '-c:a','copy','-movflags','+faststart',str(video)],check=True)
     subprocess.run(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-n','-ss','4',
                     '-i',str(video),'-frames:v','1',str(output/'comparison.png')],check=True)
-    scope = {'healing':'Recovery event presentation and audio cue only; full domains incomplete',
+    scope = {'exterior':'Exterior frontage art/readability and native walking only; full world domain incomplete',
+             'healing':'Recovery event presentation and audio cue only; full domains incomplete',
              'interior':'Interior art/readability and walking presentation only; full domains incomplete',
              'trainer':'Trainer introduction/deployment and courier throw only; full domains incomplete',
              'cast':'Field NPC art/readability and native walking only; full domains incomplete'}[args.review_scope]
