@@ -39,8 +39,8 @@ def rebind(resources):
         out['gTileset_'+suffix]=struct.pack('<BB2x5I',1,secondary,
             *(a[p+suffix] for p in ('gTilesetTiles_','gTilesetPalettes_','gMetatiles_','gMetatileAttributes_')),
             a['InitTilesetAnim_'+suffix]|1)
-    out['LittlerootTown_Layout']=struct.pack('<ii4I2B2x',32,32,a['LittlerootTown_Layout_Border'],
-        a['LittlerootTown_Layout_Blockdata'],a['gTileset_General'],a['gTileset_Petalburg'],2,2)
+    out['LittlerootTown_Layout']=struct.pack('<ii4I',32,32,a['LittlerootTown_Layout_Border'],
+        a['LittlerootTown_Layout_Blockdata'],a['gTileset_General'],a['gTileset_Petalburg'])
     out['sDoorAnimGraphicsTable']=struct.pack('<HBBII',635,0,1,a['sSFDoorTiles'],a['sSFDoorPalettes'])
     init=bytearray(out['InitTilesetAnim_Petalburg']);struct.pack_into('<I',init,32,a['TilesetAnim_SFCoast']|1)
     out['InitTilesetAnim_Petalburg']=bytes(init)
@@ -103,7 +103,7 @@ def fixture():
     resources.update({'gTilesetTiles_Petalburg':literal_lz(graphics),'gMetatiles_Petalburg':bytes(records),
         'gMetatileAttributes_Petalburg':bytes(attrs),'gTilesetPalettes_Petalburg':bytes(pal),
         'LittlerootTown_Layout_Blockdata':bytes(blocks),'LittlerootTown_Layout_Border':old('LittlerootTown_Layout_Border',8),
-        'gTileset_General':bytes(24),'gTileset_Petalburg':bytes(24),'LittlerootTown_Layout':bytes(28),
+        'gTileset_General':bytes(24),'gTileset_Petalburg':bytes(24),'LittlerootTown_Layout':bytes(24),
         'sDoorAnimGraphicsTable':bytes(12),'AppendTilesetAnimToBuffer':bytes.fromhex('7047')})
     return rebind(resources)
 
@@ -188,7 +188,7 @@ class SunsetCompiledAuditTest(unittest.TestCase):
     def test_headers_allocations_missing_symbols_lz_and_stale_elf_fail_closed(self):
         for name in ('gTileset_General','gTileset_Petalburg'):
             for at in (0,1,4,8,12,16,20):self.reject(self.fault(name,at),name.split('_',1)[1]+':header')
-        for at in (0,4,8,12,16,20,24):self.reject(self.fault('LittlerootTown_Layout',at),'layout_binding')
+        for at in (0,4,8,12,16,20):self.reject(self.fault('LittlerootTown_Layout',at),'layout_binding')
         for name in self.resources:
             r=self.resources.copy();del r[name]
             with self.subTest(missing=name):self.reject(r)

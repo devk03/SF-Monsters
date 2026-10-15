@@ -8629,3 +8629,15 @@ Sunset density production integration — October15,07:04UTC:
 - Four density, five compilation, eight old house and14map tests pass. Normal
   build now requires independent Sunset compiled gate and records its actual
   counts/receipt. Full local checks and actual cartridge/native recovery are next.
+
+Native validator boundary correction — October15,07:07UTC:
+
+- First actual v80 build stopped before patch generation:226/227 Sunset checks
+  passed; layout binding failed. Inspection of pinned global.fieldmap.h and
+  generated layouts.inc proves MapLayout is24bytes, with no border dimensions.
+  The validator had read28bytes, accidentally including the next map's border.
+- Corrected only that bound/expected structure and linked fixture to24bytes;
+  independent eight-byte border check stays. All9 fault tests pass and the actual
+  normally compiled Sunset resources now pass227/227, no producer changes or
+  post-link repairs. Preserved first failed receipt for audit. Normal build/BPS
+  rerun and native gameplay remain required before publication.

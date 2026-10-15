@@ -99,9 +99,11 @@ def audit_sunset_density(rom,elf,root):
             compare(suffix+':header',struct.pack('<BB2x5I',1,secondary,
                     *(address(p+suffix) for p in ('gTilesetTiles_','gTilesetPalettes_','gMetatiles_','gMetatileAttributes_')),
                     address('InitTilesetAnim_'+suffix)|1),lambda header=header:header)
-        layout=data('LittlerootTown_Layout',28)
-        compare('layout_binding',struct.pack('<ii4I2B2x',32,32,address('LittlerootTown_Layout_Border'),
-                address('LittlerootTown_Layout_Blockdata'),address('gTileset_General'),address('gTileset_Petalburg'),2,2),lambda:layout)
+        # The pinned MapLayout is24 bytes. The next bytes belong to the next
+        # map's border; Emerald does not store border dimensions in this struct.
+        layout=data('LittlerootTown_Layout',24)
+        compare('layout_binding',struct.pack('<ii4I',32,32,address('LittlerootTown_Layout_Border'),
+                address('LittlerootTown_Layout_Blockdata'),address('gTileset_General'),address('gTileset_Petalburg')),lambda:layout)
         border=data('LittlerootTown_Layout_Border',8)
         compare('native_border',bytes.fromhex('d401d501dc01dd01'),lambda:border)
         oldwords=struct.unpack('<1024H',frozen['sunset-map.bin'])
