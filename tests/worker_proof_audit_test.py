@@ -49,7 +49,7 @@ class WorkerReceipt(unittest.TestCase):
             'finalPacing':{'due':due,'executed':due,'overflowDropped':0,'backlog':0},'initialDue':initial_due,
             'initialBacklog':0,'initialGuestCounter':initial_counter,'finalGuestCounter':counter,'finalBacklog':0,
             'maxPending':1,'maxBacklog':0,'maxWorkerTickGapMs':5.,'rawLedger':rows,
-            'epoch':1,'audioFinalAcknowledged':True,'audioFinalError':None,'audioSnapshots':[],
+            'inputs':[],'pendingInputAtEnd':False,'epoch':1,'audioFinalAcknowledged':True,'audioFinalError':None,'audioSnapshots':[],
             'audioFinalSnapshot':{'type':'diagnostics','epoch':1,'final':True,'firstOutputFrame':132352,
                 'observedThroughOutputFrame':176512,'renderedOutputFrames':44160,'warmupOutputFrames':0,
                 'underrunOutputFrames':0,'droppedSourceFrames':0,'processQuanta':345,'queueDepthFrames':2622.,
@@ -124,6 +124,39 @@ class WorkerReceipt(unittest.TestCase):
         with self.assertRaises(ValueError):self.audit(report)
         report=self.fixture();report['main']['audioClockBefore']['currentTime']=0.
         with self.assertRaises(ValueError):self.audit(report)
+
+    def input_fixture(self):
+        report=self.fixture();origin=1000000000.
+        report['main']['inputs']=[{'sequence':1,'mask':16,'domAt':origin+102.,'sentAt':origin+102.5}]
+        report['worker']['inputs']=[{'sequence':1,'mask':16,'domAt':origin+102.,
+            'workerReceivedAt':origin+103.,'guestCounterAtReceipt':1000,'superseded':False,
+            'firstGuestCounter':1001,'completedBatchAt':origin+106.2}]
+        return report
+
+    def test_input_transport_and_first_subsequent_counter_are_separate_from_consumption(self):
+        report=self.input_fixture();facts=self.audit(report)['input_transport']
+        self.assertTrue(facts['all_reported_edges_accounted_for'])
+        self.assertEqual(facts['first_subsequent_counter_observed'],1)
+        self.assertFalse(facts['guest_key_consumption_proven'])
+        report['main']['inputs'].append({'sequence':2,'mask':0,'domAt':1000001100.4,'sentAt':1000001100.5})
+        facts=self.audit(report)['input_transport'];self.assertEqual(facts['unmatched_main_sequences'],[2])
+        self.assertFalse(facts['all_reported_edges_accounted_for'])
+        for key,value in (('mask',0),('domAt',1000000101.),('workerReceivedAt',1000000107.),
+                          ('guestCounterAtReceipt',1001),('firstGuestCounter',1002),
+                          ('completedBatchAt',1000000102.),('superseded',True)):
+            with self.subTest(key=key):
+                report=self.input_fixture();report['worker']['inputs'][0][key]=value
+                with self.assertRaises(ValueError):self.audit(report)
+
+    def test_supersession_never_claims_guest_consumption_for_the_old_mask(self):
+        report=self.input_fixture();first=report['worker']['inputs'][0]
+        second=copy.deepcopy(first);second['sequence']=2;second['mask']=32
+        report['worker']['inputs']=[first,second]
+        first['superseded']=True;first.pop('firstGuestCounter');first.pop('completedBatchAt')
+        report['main']['inputs'].append({**report['main']['inputs'][0],'sequence':2,'mask':32})
+        facts=self.audit(report)['input_transport']
+        self.assertEqual(facts['superseded_before_next_frame'],1)
+        self.assertEqual(facts['first_subsequent_counter_observed'],1)
 
     def test_preserved_runtime_and_host_must_match_frozen_identity(self):
         for name in ('runtime/mgba.audio-worklet.js','web_performance.html','sources/capture.sav','state.metadata.json'):

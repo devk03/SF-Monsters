@@ -8833,3 +8833,21 @@ Private long-report storage preflight — October15,08:49UTC:
   Raw long-run data stay private; the UI now shows a bounded summary rather than
   rendering the complete tick ledger. Restart the exact600sec route from fresh
   original checkpoint/audio state; no failed attempt or gate is hidden.
+
+
+Worker input transport evidence — October15,08:54UTC:
+
+- Added independent main/Worker sequence and mask matching, ordered receipt
+  counters at completed native batch boundaries, supersession checks, and first
+  subsequent guest-counter validation. Unmatched boundary edges and closing
+  pending input remain explicit; this does not claim KEYINPUT consumption or
+  physical input latency. Seven grouped audit tests pass, including false mask,
+  timestamp, stale/first counter, completion and supersession corruption cases.
+- Original10sec receipt reaudits unchanged:7main/Worker edges,7first subsequent
+  counters,0superseded/unmatched/pending. Worker receipt→batch completion spans
+ 4.1–15.4ms in this subset. Cross-realm dispatch readings include a−0.1ms value
+  within the disclosed1ms clock quantization tolerance; it is not clamped or
+  presented as negative physical latency. New auditor
+ 22882753a96731b1da552d5f18012259288efd0b4d9f3701c4c3d4b077926885.
+- Fresh exact600sec historical v75 road replay is active under the explicit
+  64MiB/900sec private session. Publicv80 unchanged; no long-run result yet.

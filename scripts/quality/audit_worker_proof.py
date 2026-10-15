@@ -71,6 +71,70 @@ def checkpoint(identity,directory):
     equal(metadata['mgba_revision'],identity['mgba_revision'],'checkpoint core provenance')
 
 
+def input_observations(report):
+    """Cross-check message transport and first subsequent counters, not KEYINPUT."""
+    worker=report['worker'];main=report['main'];rows=worker['rawLedger']
+    dispatched=main['inputs'];observed=worker['inputs']
+    if any(type(values)is not list or len(values)>40000 for values in (dispatched,observed)):
+        raise ValueError('Invalid bounded Worker input ledger')
+    pending=worker['pendingInputAtEnd']
+    if type(pending)is not bool:raise ValueError('Missing closing input-pending observation')
+    sent={};previous=0
+    for event in dispatched:
+        seq=num(event['sequence'],'main input sequence',integer=True)
+        num(event['mask'],'main input mask',integer=True,maximum=1023)
+        dom=num(event['domAt'],'main input DOM time');at=num(event['sentAt'],'main input send time')
+        if seq<=previous or dom>at+1 or at>main['mainResultReceivedAt']:
+            raise ValueError('Main input order or timestamp is inconsistent')
+        previous=seq;sent[seq]=event
+    boundaries={worker['initialGuestCounter']:worker['startedAt']};next_batch={}
+    for row in rows:
+        at=worker['workerTimeOrigin']+worker['clockOriginMs']+row[5]
+        if row[2]:boundaries[row[7]]=at;next_batch[row[6]]=at
+    matched=set();previous_seq=0;previous_ack=0;superseded=acknowledged=0
+    transport=[];completion=[]
+    for index,event in enumerate(observed):
+        seq=num(event['sequence'],'Worker input sequence',integer=True)
+        if seq<=previous_seq or seq not in sent:raise ValueError('Worker input has no ordered main dispatch')
+        previous_seq=seq;source=sent[seq];matched.add(seq)
+        equal(event['mask'],source['mask'],'input mask transport')
+        equal(event['domAt'],source['domAt'],'input DOM timestamp transport')
+        received=num(event['workerReceivedAt'],'Worker input receipt time')
+        if not worker['startedAt']-1<=received<=worker['endedAt']+1 or received<source['sentAt']-1:
+            raise ValueError('Worker input receipt is outside its window or precedes dispatch')
+        cursor=num(event['guestCounterAtReceipt'],'input receipt counter',integer=True,maximum=0xFFFFFFFF)
+        if cursor not in boundaries or received<boundaries[cursor]-1:
+            raise ValueError('Input receipt counter is not a completed native batch boundary')
+        if cursor in next_batch and received>next_batch[cursor]+1:
+            raise ValueError('Input receipt counter is stale relative to native execution')
+        transport.append(received-source['sentAt'])
+        flag=event['superseded']
+        if type(flag)is not bool:raise ValueError('Invalid input supersession flag')
+        if flag:
+            if 'firstGuestCounter'in event or index==len(observed)-1 and not pending:
+                raise ValueError('Superseded input invents a first-frame acknowledgement')
+            superseded+=1;continue
+        first=num(event['firstGuestCounter'],'first subsequent guest counter',integer=True,maximum=0xFFFFFFFF)
+        distance=(first-worker['initialGuestCounter'])&0xFFFFFFFF
+        if first!=(cursor+1)&0xFFFFFFFF or distance<=previous_ack or cursor not in next_batch:
+            raise ValueError('Input first subsequent counter does not match native progression')
+        completed=num(event['completedBatchAt'],'input batch completion time')
+        if completed<received or completed<next_batch[cursor]-1 or completed>worker['endedAt']+1:
+            raise ValueError('Input completion is outside its acknowledged native batch window')
+        previous_ack=distance;acknowledged+=1;completion.append(completed-received)
+    def spread(values):
+        if not values:return {'count':0}
+        ordered=sorted(values);count=len(values)
+        return {'count':count,'min':ordered[0],'max':ordered[-1],'p95':ordered[math.ceil(.95*count)-1]}
+    return {'main_edges_reported':len(dispatched),'worker_edges_observed':len(observed),
+        'superseded_before_next_frame':superseded,'first_subsequent_counter_observed':acknowledged,
+        'unmatched_main_sequences':sorted(set(sent)-matched),'pending_worker_input_at_close':pending,
+        'all_reported_edges_accounted_for':len(dispatched)==len(observed) and not pending,
+        'reported_dispatch_to_worker_ms':spread(transport),'worker_receipt_to_batch_completion_ms':spread(completion),
+        'cross_realm_clock_tolerance_ms':1,'guest_key_consumption_proven':False,
+        'scope':'Matching main/Worker message sequences, masks, receipt batch boundaries and first subsequent native counter only; unmatched boundary edges remain explicit. No guest KEYINPUT or physical latency proof.'}
+
+
 def audit(report,identity,directory):
     equal(report['schema'],2,'schema');equal(report['kind'],'private-worker-proof-v1','kind')
     equal(report['context']['identity'],identity,'frozen identity')
@@ -192,6 +256,7 @@ def audit(report,identity,directory):
         if index==0 and not main_origin+before['beforeMs']-50<=at<=main['mainBeginSentAt']:
             raise ValueError('Initial visibility does not precede the measured window')
         previous_at=at
+    input_facts=input_observations(report)
     overlap=[];overlap_frames=[]
     for stall in main['stalls']:
         begin=num(stall['startedAt'],'main stall start');finish=num(stall['endedAt'],'main stall finish')
@@ -209,7 +274,7 @@ def audit(report,identity,directory):
             'audio':{key:final_audio[key] for key in ('renderedOutputFrames','warmupOutputFrames','underrunOutputFrames','droppedSourceFrames','queueDepthFrames','outputSampleRate')},
             'main_audio_context_seconds':after['currentTime']-before['currentTime'],
             'main_canvas_submission_count':len(main['submissions']),'reported_main_input_count':len(main['inputs']),
-            'audio_clock_binding_allowance_ms':50,
+            'audio_clock_binding_allowance_ms':50,'input_transport':input_facts,
             'foreground_observed':all(v['state']=='visible' for v in main['visibility']),
             'loss_free':drop_total==0,'caught_up_at_close':debt==0}
 
