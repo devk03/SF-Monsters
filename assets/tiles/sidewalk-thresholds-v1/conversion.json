@@ -1,0 +1,112 @@
+{
+  "source_sha256": "c482553ccafd092415eaa3f216ebf77ef2a7ba4195483c48e98632b3b568aac1",
+  "prompt_sha256": "9abb0afcabc25eab484fe33ba7505ae31cb1fe8cfa0eef6810bcd42618a203bc",
+  "source_size": [
+    1774,
+    887
+  ],
+  "palette_sha256": "952170ffa443bb2935073843e9ca368960becfc4ef5ed1339094ef1156c762ad",
+  "alpha_threshold": 128,
+  "bank": 5,
+  "cards": [
+    {
+      "name": "bay",
+      "size": [
+        48,
+        16
+      ],
+      "art_height": 6,
+      "source_quadrant": [
+        0,
+        0,
+        887,
+        443
+      ],
+      "source_bounds": [
+        44,
+        209,
+        847,
+        312
+      ],
+      "files": {
+        "bay.png": "7e661f8722dda6596c89be4a37620135433cbd78fbebf65918619df70cbe887d",
+        "bay.indices": "daa0ca211dc36ea6bba8d3ef30eb11921e39db6fb5c90a90a056a30374731619"
+      }
+    },
+    {
+      "name": "brick",
+      "size": [
+        48,
+        16
+      ],
+      "art_height": 5,
+      "source_quadrant": [
+        887,
+        0,
+        1774,
+        443
+      ],
+      "source_bounds": [
+        41,
+        208,
+        845,
+        297
+      ],
+      "files": {
+        "brick.png": "658700de589a79ba9390c7f8aa0fdf3af33f0966a5897ef35df22100479d2186",
+        "brick.indices": "c2933d69820cd5afc417c8feaa19362e8ccb5c63e767ad9b98832d23fec79515"
+      }
+    },
+    {
+      "name": "sage",
+      "size": [
+        48,
+        16
+      ],
+      "art_height": 6,
+      "source_quadrant": [
+        0,
+        443,
+        887,
+        887
+      ],
+      "source_bounds": [
+        44,
+        165,
+        847,
+        268
+      ],
+      "files": {
+        "sage.png": "8322d7d5ea8ff594bd2b9fcccb09df35e003065fdb105899c70ce1551e80d2fd",
+        "sage.indices": "7c938fb6a01b26544f16fce3c5418aa96b73b213394f6c2580394670242fd7a5"
+      }
+    },
+    {
+      "name": "coffee",
+      "size": [
+        32,
+        16
+      ],
+      "art_height": 3,
+      "source_quadrant": [
+        887,
+        443,
+        1774,
+        887
+      ],
+      "source_bounds": [
+        41,
+        165,
+        845,
+        249
+      ],
+      "files": {
+        "coffee.png": "9f9617f18f2d77902e5493cda16881f2bd5b03c506e2b0779e5112bdf02b54cb",
+        "coffee.indices": "5f23663269278e5b61d1e36603be8c73789fc5546f4df16286f746545d97e6b4"
+      }
+    }
+  ],
+  "method": "Quadrant alpha crop; aspect-preserving nearest resize; top-aligned; shared RGB55515; transparent0",
+  "generator": "Built-in imagegen, original architectural ground details",
+  "quality_approval": "pending"
+}
