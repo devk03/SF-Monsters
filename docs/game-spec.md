@@ -8906,3 +8906,26 @@ Safari Worker probe remains unqualified — October15,09:12UTC:
 - Chrome private600sec evidence stands within its declared scope. Safari
   foreground/phone/full performance remain open. Next is the isolated save
   bridge/storage protocol; no public runtime change or full quality approval.
+
+
+Private save-before-draw protocol — October15,09:22UTC:
+
+- Added an unused browser-side raw snapshot protocol with8passing deterministic
+  cases. It verifies fullbyte hash/size and video/Flash guest-counter+epoch,
+  writes/readbacks exact raw base64 before Worker receipt ACK and synchronous
+  canvas submission, and reuses unchanged verified revisions without rewriting.
+  Changes outside completed-save data still persist; no native save-counter filter.
+- Quota failure leaves old stored bytes and withholds ACK/draw. A readback failure
+  after writing is explicitly uncertain, never described as a successful rollback.
+  Cached presented bytes remain independently owned copies. Delayed hash/ACK
+  replies cannot write/draw after a reset fence or clear a newer in-flight commit.
+  Single active writer per key is a caller precondition, not yet a public feature.
+- This is browser-storage readback before canvas submission, not physical paint,
+  latest unseen Worker-tail, speaker confirmation or OS-fsync durability. It makes
+  no fresh synchronous export claim. Actual browser persistence/SaveComplete/
+  pagehide tests and performance with full-byte cloning remain to be done.
+- Root review also caught a Worker mutation corner: native import could succeed
+  and then metadata hashing fail without rollback. The private bridge now keeps
+  hash/reply preparation inside the mutation transaction;8pure bridge cases pass,
+  including forced post-import hash failure restoring original state/Flash and
+  remaining paused in a new fence epoch. Public runtime is still unchanged.
