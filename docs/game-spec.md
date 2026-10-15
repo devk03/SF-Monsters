@@ -8519,3 +8519,12 @@ Compact-density source integration — October15,06:32UTC:
   restore the128 declared cells. Default legacy modes remain strict. Manifest
   records actual511 allocation separately from protected449/395 prefixes.
   Actual cartridge build, native recovery and visual checks are next.
+
+Density corruption and projection checks — October15,06:32UTC:
+
+- Root reran9 independent linked ARM density tests, all pass in10.520s. The new
+  projection case confirms actual511 resources validate, the old449/395 gates
+  stay strict by default, and corrupted new art, old sidewalk cells or layer
+  roles cannot be hidden by normalization. Invalid mode combinations fail closed.
+- Added the source and compiled density suites to local check.sh. These remain
+  format/integration tests rather than human art, campaign or performance approval.
