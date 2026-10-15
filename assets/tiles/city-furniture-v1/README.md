@@ -11,4 +11,6 @@ native candidates; no new palette bank is needed. These are deliberately small
 props with broad color groups. Tall props have walkable upper cells and solid
 bottom cells; placement and actual layering must be checked in the native game.
 
-Not yet integrated or approved as final quality. Houses remain unchanged.
+Integrated as a v78 candidate with ten curbside placements. Independent native
+resource checks pass; actual movement/recovery/browser and human quality review
+are separate gates. Houses remain unchanged.

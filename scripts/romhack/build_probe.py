@@ -274,7 +274,8 @@ def main():
         'passed': True, 'counts': compiled_connected['counts'],
         'receipt_sha256': hashlib.sha256(infill_bytes).hexdigest(),
         'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/connected_frontage_audit.py').read_bytes()).hexdigest(),
-        'quality_approval': 'pending', 'scope': compiled_connected['scope']
+        'quality_approval': 'pending', 'scope': compiled_connected['scope'],
+        'normalization': compiled_connected.get('normalization')
     }
     manifest['compiled_city_furniture'] = {
         'passed': True, 'counts': compiled_furniture['counts'],

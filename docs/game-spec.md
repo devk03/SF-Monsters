@@ -8408,3 +8408,21 @@ City audit fault coverage — October15,05:58UTC:
   cannot bypass the existing connected gate through normalization.
 - This new suite is included in local check.sh. No actual native v78, recovery,
   browser, performance or human quality gate is claimed from linked fixtures.
+
+Compiled city and actual upgrade recovery — October15,06:02UTC:
+
+- Normal private v78 frombf9004b produces target46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943;
+  furniture166/166, normalized legacy connected135/135 and service278/278 pass.
+  BPS roundtrip exact. Full bash scripts/check.sh passes; preserved log SHA
+  591cb2f2e7626d0281a132b66dc451ea9316c6852acfa87b3338b3a8379e2a99.
+- All14 actual controller-only old ordinary saves cold-load on the new cartridge,
+  relocate from solid bases to nearby walkable cells, stop on Down pushes into
+  each base and escape sideways. Flash bytes remain exactly unchanged; native
+  save at22,6 remains22,6. Evidence .tools/benchmarks/city-v78-plan/upgrade-recovery-proof.json.
+  Inspected actual native lamp/tree/hydrant/meter/rack views; intentional overhead
+  tree occlusion remains escapable. This is not a full campaign/save-transfer gate.
+- Publication manifest will explicitly retain the verified connected-prefix
+  normalization record; its395 count describes the preserved prefix, while
+  the separate city gate records the actual449/135 allocation. Preserve the first
+  private manifest before a normal canonical metadata rebuild; no capture relabeling.
+  Browser, service returns, ordinary resave/reload and human city review pending.
