@@ -39,6 +39,18 @@ class NativeTileFlips(unittest.TestCase):
     def test_lavender_frontage_fills_only_twelve_gap_cells(self):
         plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
         restored = json.loads(json.dumps(plan))
+        dylan = next(n for n in restored['npcs'] if n['script'] == 'SF_DylanField')
+        self.assertEqual(dylan['graphics'], 'OBJ_EVENT_GFX_SF_DYLAN_FIELD')
+        dylan['graphics'] = 'OBJ_EVENT_GFX_MAN_3'
+        # Restore the later lower-west neighbor and its one relocated tree first.
+        self.assertEqual(restored['rows'][20][19], 'T')
+        row = restored['rows'][20]
+        restored['rows'][20] = row[:19] + '.' + row[20:]
+        for y, current, previous in ((20, 'abc', 'P.T'), (21, 'def', 'PPP'),
+                                     (22, 'ghf', 'PPP'), (23, 'ijf', 'PPP')):
+            row = restored['rows'][y]
+            self.assertEqual(row[14:17], current)
+            restored['rows'][y] = row[:14] + previous + row[17:]
         self.assertEqual(restored['legend'].pop('Q'), [660, False, 3])
         self.assertEqual(restored['legend'].pop('q'), [661, True, 0])
         row = restored['rows'][17]

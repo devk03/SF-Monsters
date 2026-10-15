@@ -230,6 +230,83 @@
         "native-gallery.png": "a14155ada382fa68fad2117731df4877ffda8bb8679bda28b1a6b4d8ac166e7d",
         "native-cleanup.json": "68dbbac5dc412581cee0efd9f6c49c9621911f8ff5ee987b5104657bead75298"
       }
+    },
+    {
+      "slug": "dylan-field",
+      "name": "Dylan Field",
+      "symbol": "SFDylanField",
+      "graphics": "OBJ_EVENT_GFX_SF_DYLAN_FIELD",
+      "reserved_slot": "OBJ_EVENT_GFX_MAN_3",
+      "script": "SF_DylanField",
+      "map": "south-park.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          75,
+          101,
+          268,
+          467
+        ],
+        [
+          410,
+          101,
+          605,
+          467
+        ],
+        [
+          750,
+          101,
+          941,
+          467
+        ],
+        [
+          79,
+          581,
+          273,
+          946
+        ],
+        [
+          414,
+          581,
+          609,
+          946
+        ],
+        [
+          751,
+          581,
+          945,
+          946
+        ],
+        [
+          74,
+          1055,
+          283,
+          1441
+        ],
+        [
+          408,
+          1055,
+          616,
+          1441
+        ],
+        [
+          744,
+          1055,
+          951,
+          1441
+        ]
+      ],
+      "common_scale": 0.06217616580310881,
+      "files": {
+        "source.png": "e2eff8d8ea30710ec8f15de60858d8067321bf7ce01fbffdbecf9d15409baec3",
+        "walk.png": "1e67651a685bcceed8c5cc106c262b49beafd501dd5794f02396ca844a4c4d0a",
+        "walk.4bpp": "3abc9af1ac44c7f75e2be2065efd058cc37c42cc84030ca95155c2c040ddccf1",
+        "native-gallery.png": "39151b261f1e67dd0370a8ec94609d9ee6298cb9b603d43bbd18a2253adb8c13",
+        "native-cleanup.json": "97012a5f346b419db642827c8525e4ff4f5c5b4f4db31c093b1c1f0f19bef1b2"
+      }
     }
   ],
   "frames_per_character": 9,

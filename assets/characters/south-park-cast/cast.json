@@ -26,6 +26,15 @@
       "reserved_slot": "OBJ_EVENT_GFX_GENTLEMAN",
       "script": "SF_GarryTan",
       "map": "south-park.json"
+    },
+    {
+      "slug": "dylan-field",
+      "name": "Dylan Field",
+      "symbol": "SFDylanField",
+      "graphics": "OBJ_EVENT_GFX_SF_DYLAN_FIELD",
+      "reserved_slot": "OBJ_EVENT_GFX_MAN_3",
+      "script": "SF_DylanField",
+      "map": "south-park.json"
     }
   ],
   "outfits": "Fictional game costumes; clinic roles and all game dialogue are invented.",
@@ -34,6 +43,8 @@
     "https://www.kalzumeus.com/about/",
     "https://businessofsoftware.org/talks/speakers/patrick-mckenzie/",
     "https://www.ycombinator.com/people/garry-tan",
-    "https://blog.garrytan.com/about-me"
+    "https://blog.garrytan.com/about-me",
+    "https://www.figma.com/newsroom/",
+    "https://www.figma.com/blog/7-moments-that-shaped-figma/"
   ]
 }

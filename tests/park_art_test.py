@@ -2,6 +2,7 @@
 from pathlib import Path
 import struct
 import json
+import hashlib
 from collections import deque
 import sys
 import unittest
@@ -12,10 +13,91 @@ from park_art import load_buildings, pack_park_cells, facade_cells
 from park_map import park_resources, park_tile, prune_unused_terrain, FACADES
 from park_signs import sign_cells
 from seed_door_art import load as load_seed_door
+from maps import encode_layout
 from park_tile_flips_test import decode_tile, cell_from_tiles
 
 
 class ParkResources(unittest.TestCase):
+    def test_lower_west_neighbor_changes_only_thirteen_cells_without_new_resources(self):
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        previous = json.loads(json.dumps(plan))
+        expected = {}
+        for y, current, old in ((20, 'abc', 'P.T'), (21, 'def', 'PPP'),
+                                (22, 'ghf', 'PPP'), (23, 'ijf', 'PPP')):
+            row = previous['rows'][y]
+            self.assertEqual(row[14:17], current)
+            previous['rows'][y] = row[:14] + old + row[17:]
+            for x in range(14, 17):
+                expected[(x, y)] = 634 + (y - 20) * 3 + x - 14
+                self.assertEqual(plan['legend'][current[x - 14]][1:], [True, 0])
+        self.assertEqual(plan['rows'][20][19], 'T')
+        row = previous['rows'][20]
+        previous['rows'][20] = row[:19] + '.' + row[20:]
+        expected[(19, 20)] = 541
+        self.assertEqual(plan['legend']['T'][1:], [True, 3])
+        dylan = next(n for n in previous['npcs'] if n['script'] == 'SF_DylanField')
+        self.assertEqual(dylan['graphics'], 'OBJ_EVENT_GFX_SF_DYLAN_FIELD')
+        dylan['graphics'] = 'OBJ_EVENT_GFX_MAN_3'
+        # Pin the complete preceding map, including events, not just the patch.
+        self.assertEqual(hashlib.sha256(json.dumps(previous, sort_keys=True,
+            separators=(',', ':')).encode()).hexdigest(),
+            'c4e3245db44e54b62607be148c951fc73f00efccaab668d80ba8b6c4d2d57c50')
+        changed = {(x, y) for y, row in enumerate(plan['rows']) for x, token in enumerate(row)
+                   if token != previous['rows'][y][x]}
+        self.assertEqual(changed, set(expected))
+        # The real map installer replaces low ten bits after encode_layout.
+        def words(p):
+            width, height, data = encode_layout(p)
+            return {(x, y): (struct.unpack_from('<H', data, (y * width + x) * 2)[0] & 0xFC00)
+                    | park_tile(p, x, y) for y in range(height) for x in range(width)}
+        before, after = words(previous), words(plan)
+        self.assertEqual({point for point in before if before[point] != after[point]}, changed)
+        for point, tile in expected.items():
+            self.assertEqual(after[point], tile | 0xC00 | (0x3000 if point == (19, 20) else 0))
+        resources = park_resources(ROOT)
+        self.assertEqual([(len(data), hashlib.sha256(data).hexdigest()) for data in resources], [
+            (16096, '1028cc530238a128ba379d2de5f8153cdbf2eb6c1054f67501f5e4900ce2b6c8'),
+            (2400, 'c5a357ba4d453bb0e856b09a594334303b50ead542ef7081b92a243a7269a0c8'),
+            (300, '5d75b62c2517473238cfe7967401f492d506a41ffbbd5de58ea9c99ad39eab2f'),
+            (512, '73e3ba1b6d1f0a9385e97e92eba6a4a2d1268384e4cdf6f45f452a49fda512db')])
+
+    def test_lower_west_neighbor_preserves_routes_encounters_and_recovery_candidates(self):
+        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        # Eleven newly blocked house cells plus the relocated tree = twelve.
+        footprint = {(x, y) for y in range(20, 24) for x in range(14, 17)}
+        new_blocks = footprint - {(16, 20)} | {(19, 20)}
+        self.assertEqual(len(new_blocks), 12)
+        self.assertTrue(all(plan['legend'][plan['rows'][y][x]][1] for x, y in new_blocks))
+        events = plan['npcs'] + plan['warp_events'] + plan['bg_events']
+        self.assertFalse(new_blocks & {(e['x'], e['y']) for e in events})
+        occupied = {(n['x'], n['y']) for n in plan['npcs']}
+        walkable = {(x, y) for y, row in enumerate(plan['rows']) for x, token in enumerate(row)
+                    if not plan['legend'][token][1]} - occupied
+        def flood(allowed):
+            seen = {(7, 26)}; queue = deque(seen)
+            while queue:
+                x, y = queue.popleft()
+                for point in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                    if point in allowed and point not in seen:
+                        seen.add(point); queue.append(point)
+            return seen
+        before, after = flood(walkable | new_blocks), flood(walkable)
+        self.assertEqual(before - new_blocks, after)
+        self.assertEqual(before - after, new_blocks)
+        for point in ((17,21),(19,21),(18,20),(18,22),  # All four bench approaches.
+                      (13,6),(32,6),(16,17),(7,24),(26,17),(34,22)):
+            self.assertIn(point, after)
+        for y in (19, 24):
+            for x in range(10, 18):
+                self.assertIn((x, y), after)
+        grass = {(x, y) for y, row in enumerate(plan['rows']) for x, token in enumerate(row) if token == 'G'}
+        self.assertEqual(grass, {(17,18),(18,18),(31,21),(32,21),(21,23),(22,23)})
+        self.assertLessEqual(grass, after)
+        # Source-level availability only; root validates native old-save relocation.
+        safe = after - {(e['x'], e['y']) for e in plan['warp_events']}
+        for x, y in new_blocks:
+            self.assertLessEqual(min(abs(x-xx) + abs(y-yy) for xx, yy in safe), 2)
+
     def test_service_signs_are_distinct_without_moving_history_or_service_doors(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         raw, records, attributes, palettes = park_resources(ROOT)

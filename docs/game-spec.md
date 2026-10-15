@@ -6939,3 +6939,33 @@ v68 public centered-door release — October15,00:10UTC:
   Alignment next performs finite20minute read-only density/collision source
   review, reportingby00:30UTC; next exchangeby00:40UTC. No new monitor, GitHub
   workflow, DB migration or PR merge. Root continues first-slice polish.
+
+
+v69 first-slice source checkpoint — October15,00:16UTC:
+
+- Alignment's density review identified isolated lower-west house frontage.
+  Accepted source adds one adjacent existing butter house at14..16,20..23 and
+  moves tree16,20→19,20. Exact13mapwords change; original503resident tiles,
+  150records,150attributes and512palette bytes all remain exact. Eleven newly
+  occupied house walkable cells plus relocatedtree make12newblocked positions.
+  All NPC/warp/sign anchors, six encountergrass cells and four bench approaches
+  remain reachable; no extra route disconnection or new house warp.
+- Source handoff hashes independently match, source is frozen. Full local suite
+  passes including12park-art/6flip/14map/7room/6door-art/8compiled-door tests and
+  native map-resume harness. These tests establish source geometry/resources;
+  genuine old-position Save/Continue and actual rendering remain separate gates.
+- Original Dylan nine-pose candidate generated using built-in imagegen, source
+  stored atassets/characters/south-park-cast/dylan-field/source.png and prompt.md;
+  official Figma newsroom photo is private reference only. Native436pixel edits
+  pin directional heads, neutralgray tee and creamsneakers. Sharedpalette and all
+  nine prior native cast graphics remain exact. Dylan exclusively reuses MAN_3
+  slot, retaining eventid2/26,18/wandering ranges1/script/dialogue. Ten original
+  field cast candidates now compile; likeness/art/animation approval pending.
+- Draft275444c30a17cb877f87778fa7cf61e06f7b278d1f278833789f3078b2944a85
+  passes compiledcreature255/cast44/intro5/map17/door11. BPS1024477bytes remains
+  private; public staysv68/Site59. Native controller-only ordinary oldv68C9s are
+  being recorded at each12newblocked positions before v69 coldContinue/recovery.
+  No battery/RAM edits; all save/campaign/quality claims remain scoped.
+- Alignment implemented only four owned map/test files, then returned ownership;
+  root handles cast/build/native/browser/publication. Next exchangeby00:40UTC.
+  GoalACTIVE throughOctober15,18Pacific; humanapprovals0/11; remainingfull gatesOPEN.

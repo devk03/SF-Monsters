@@ -14,6 +14,35 @@ from cast_art import apply_cast, source_cells, GROUPS, registered_groups, verifi
 
 
 class NativeCast(unittest.TestCase):
+    def test_dylan_direction_heads_stay_fixed_while_hands_and_feet_animate(self):
+        image = Image.open(ROOT/'assets/characters/south-park-cast/dylan-field/native-gallery.png')
+        frames = [image.crop((i%3*16,i//3*32,i%3*16+16,i//3*32+32)).tobytes()
+                  for i in range(9)]
+        for row in range(3):
+            poses = frames[row*3:row*3+3]
+            self.assertEqual(len({pose[:18*16] for pose in poses}), 1)
+            self.assertEqual(len({pose[18*16:26*16] for pose in poses}), 3)
+            self.assertEqual(len({pose[26*16:] for pose in poses}), 3)
+            for pose in poses:
+                self.assertNotIn(2, pose[18*16:24*16])  # No cyan nearest-color tee.
+                self.assertIn(15, pose[18*16:24*16])
+                self.assertIn(14, pose[26*16:30*16])
+                self.assertFalse(any(pose[30*16:]))
+        # West alternate steps place the nearest cream toe on opposite sides.
+        contacts = [[x for x in range(16) if frames[i][28*16+x]==14] for i in (7,8)]
+        self.assertLess(min(contacts[0]), min(contacts[1]))
+        self.assertLess(max(contacts[0]), max(contacts[1]))
+
+    def test_dylan_addition_preserves_previous_park_native_art_and_palette(self):
+        directory = ROOT/'assets/characters/south-park-cast'
+        expected = {'justine-moore': '0d11fb8eb828dc81b4c90ab9be5e0725f2734ecbc3b79c61ee2999c74abc3363',
+                    'patrick-mckenzie': 'c29a2ff5f349b0fb5f8c14e79e891221b18da4bba67b19f450ebe924c5dc8bb6',
+                    'garry-tan': 'dc0b33434280d46fd7534b89e8646406c662c616bd9ff512adaf9e4465da63a4'}
+        for slug, digest in expected.items():
+            self.assertEqual(hashlib.sha256((directory/slug/'walk.4bpp').read_bytes()).hexdigest(),digest)
+        self.assertEqual(hashlib.sha256((directory/'cast.gbapal').read_bytes()).hexdigest(),
+                         'c55fcf5cb84f61317fa911d2141cc15c6e8ce10f613c42bf7cc22c2211350bdd')
+
     def test_karpathy_shares_palette_without_changing_roons_cartridge_pixels(self):
         import hashlib
         directory = ROOT/'assets/characters/sunset-cast'
