@@ -81,6 +81,7 @@ python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_paving_audit_test.py
 .tools/venv/bin/python tests/park_infill_test.py
 .tools/venv/bin/python tests/city_dressing_test.py
+.tools/venv/bin/python tests/city_furniture_audit_test.py
 .tools/venv/bin/python tests/park_infill_audit_test.py
 .tools/venv/bin/python tests/service_door_art_test.py
 .tools/venv/bin/python tests/connected_frontage_audit_test.py

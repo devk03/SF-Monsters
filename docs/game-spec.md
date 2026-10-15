@@ -8397,3 +8397,14 @@ City-dressing source integration — October15,05:57UTC:
   future solid base, counter9 with native slot checksums and exact saved positions.
   They are private fixtures for actual cold upgrade/resume tests; no new-version
   recovery result yet. Normal compiled v78 gates and browser/native QA are next.
+
+City audit fault coverage — October15,05:58UTC:
+
+- Root reviewed and reran the independent linked ARM furniture suite:8/8 pass
+  in7.086s. It accepts the original-only positive extension and strict historical
+  v77, and rejects corrupted prop pixels/palettes/flips, old prefixes, ground
+  layers, all declared map/collision/elevation roles, pointer/count/cache faults,
+  off-footprint edits and modified/self-rehashed provenance. Invalid extensions
+  cannot bypass the existing connected gate through normalization.
+- This new suite is included in local check.sh. No actual native v78, recovery,
+  browser, performance or human quality gate is claimed from linked fixtures.
