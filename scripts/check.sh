@@ -22,6 +22,7 @@ node tests/worker_save_bridge_test.mjs
 python3 tests/frame_debt_audit_test.py
 python3 tests/pacer_harness_test.py
 python3 tests/worker_proof_audit_test.py
+python3 tests/saved_frames_audit_test.py
 node --test tests/controller_replay_test.mjs
 node --test tests/field_observation_test.mjs
 python3 tests/prepare_web_test.py
