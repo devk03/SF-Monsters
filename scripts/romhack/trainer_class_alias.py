@@ -42,11 +42,28 @@ def transform(pokemon, battle_message):
     return pokemon, battle_message
 
 
+
+def refresh(pokemon, battle_message):
+    """Undo only our complete previous hook before composing a repeat build."""
+    if 'gSFBuilderClassName' in pokemon:
+        pokemon = replace_once(pokemon, ALIASED_GETTER, GETTER)
+        pokemon = replace_once(pokemon,
+            '#include "constants/trainers.h"\n#include "constants/opponents.h"\n',
+            '#include "constants/trainers.h"\n')
+        battle_message = replace_once(battle_message,
+            '#include "palette.h"\n#include "pokemon.h"\n', '#include "palette.h"\n')
+        for side in ('A', 'B'):
+            battle_message = replace_once(battle_message,
+                f'toCpy = GetTrainerClassNameFromId(gTrainerBattleOpponent_{side});',
+                f'toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent_{side}].trainerClass];')
+    return transform(pokemon, battle_message)
+
+
 def apply_alias(root, engine):
     # Compose after earlier species hooks. Never restore/overwrite their edits.
     paths = ['src/pokemon.c', 'src/battle_message.c']
     sources = [(engine / path).read_text() for path in paths]
-    changed = transform(*sources)  # Validate both complete sources before writing either.
+    changed = refresh(*sources)  # Validate both complete sources before writing either.
     for path, source in zip(paths, changed):
         (engine / path).write_text(source)
     return paths

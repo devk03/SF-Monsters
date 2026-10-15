@@ -7596,3 +7596,23 @@ v73 getter guards/save/browser checkpoint — October15,02:30UTC:
   one-miss native handoff is now ready but NOT yet accepted/committed by root;
   root still must review/rerun it independently. Root owns all files again.
   Normal v73 rebuild and publication follow; public staysv72/Site63, human0/11.
+
+v73 repeat-build repair — October15,02:35UTC:
+
+- First normal rebuild correctly stopped: the engine workspace still contained
+  this hook from the draft, so a fresh-only source anchor refused to apply it
+  twice. Preserved logbuilder-v73-release-build.log records the failure; no
+  public v73 was published from that attempt. This was an overlay repeatability
+  error, not a change to the already verified draft gameplay.
+- The installer now removes ONLY its own complete prior getter/include/two
+  lookup changes, validates both complete sources, then reapplies. Unrelated
+  earlier/later edits stay exact. Partial/stale/duplicate hooks still fail
+  before either file is written. No general anchor checks were weakened.
+- Six source guards pass, including repeated installation, unrelated-overlay
+  preservation and atomic failure on an incomplete prior hook. Repaired normal
+  build reproduces exact37e60ad3 with every older compiled gate passing. A
+  further normal rebuild after committing this fix verifies repeatability and
+  records the committed source rather than an uncommitted repair.
+- Public staysv72/Site63; root owns source/turn handoffs. Last alignment exchange
+  at02:34UTC; next by03:04UTC. Peer only derives an immunity oracle read-only,
+  due02:50UTC. Native miss4/4 root verification is ready but not yet committed.

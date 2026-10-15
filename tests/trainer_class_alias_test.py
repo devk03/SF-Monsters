@@ -82,6 +82,25 @@ class ScopedClassAlias(unittest.TestCase):
         with self.assertRaises(ValueError):apply_alias(ROOT,engine)
         self.assertEqual((first.read_bytes(),second.read_bytes()),before)
 
+    def test_repeat_build_refreshes_only_its_own_complete_hook(self):
+        engine = ROOT / '.tools' / ('class-alias-test-' + uuid.uuid4().hex)
+        (engine/'src').mkdir(parents=True)
+        first,second = engine/'src/pokemon.c',engine/'src/battle_message.c'
+        first.write_text(self.pokemon);second.write_text(self.messages)
+        apply_alias(ROOT,engine)
+        once = (first.read_text(),second.read_text())
+        apply_alias(ROOT,engine)
+        self.assertEqual((first.read_text(),second.read_text()),once)
+        marker = '\n// Later unrelated overlay stays exact.\n'
+        first.write_text(first.read_text()+marker)
+        apply_alias(ROOT,engine)
+        self.assertEqual((first.read_text(),second.read_text()),(once[0]+marker,once[1]))
+        # An incomplete prior hook fails without touching either current file.
+        second.write_text(second.read_text().replace('GetTrainerClassNameFromId(gTrainerBattleOpponent_B)', 'stale_B'))
+        before = (first.read_bytes(),second.read_bytes())
+        with self.assertRaises(ValueError):apply_alias(ROOT,engine)
+        self.assertEqual((first.read_bytes(),second.read_bytes()),before)
+
     @unittest.skipUnless((ROOT/'.tools/pokeemerald-host/.git').exists(),
                          'Optional full pinned-engine source check; portable guards run without it.')
     def test_complete_pinned_engine_sources_preserve_every_unrelated_byte(self):
