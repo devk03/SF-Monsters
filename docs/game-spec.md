@@ -554,18 +554,16 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 05:10 UTC:
+Current checkpoint — October 15, 2026, 05:45 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v76 / Site 67 is live,
-  but the user rejected the frontage art: buildings still do not fit the scene.
-  Rail-like base strips do not solve inconsistent projection or pixel scale.
-  Stop further strip/shadow patches; prototype one complete connected block
-  with consistent roof depth, door scale, foundations and adjacent gray paving.
-  No human quality approval or numeric score was received.
-  Native release source e4685806; website source d5ef93ec. Human approvals 0/11.
-  Gray paving now meets original shallow foundations/stoops in44walkablecells;
-  native/browser entries/returns and ordinary-save compatibility pass their
-  scopes. Three starter prompts explain type/first attack before confirmation.
+- Goal active; stop October 15 at 18:00 Pacific. Public v77 / Site 68 is live.
+  The user says the homes are good and asks for streetlights and other city
+  decorations. Preserve the connected homes; next add coherent curbside
+  furniture with clear entries, walkable routes and native collision checks.
+  This is qualitative approval of a subset, not a numeric/full-domain score.
+  Native release source7032e6b; website source0922327b. Human approvals0/11.
+  Connected block, matching services and stable native doors are installed;
+  scoped native/browser entries, caches, collision and ordinary save/reload pass.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -843,22 +841,22 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,05:10UTC; historical checkpoint details follow):
+Current snapshot (October 15, 2026,05:45UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | ART REJECTED by user; 0.0.76-street-threshold-preview; target9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733; Site67. Neutral gray paving with original shallow foundations/stoops, right-door brick/cafe alignment and informative starter prompts. Native/browser rendering and three native door/cache returns pass their scopes; human0/11. |
-| Latest local source build | Normal v76 build from e4685806 reproduces immutable911925. Primary235tiles/65records; secondary502/504. Independent infill42+nestedpaving153 checks and full local checks pass. Allold213primarytiles/54records/54attributes and1236nonapronmapwords remain exactv75;44formerlywalkablePcells nowusegroundaprons without collision/elevation changes. Ordinary C8->C9 declared data preserved. Manifest dirty marker retained for generated/untracked output/PDF; no clean-checkout credit. |
+| Public build | 0.0.77-connected-street-preview; targete5a58e40fcc3f3c6ef4763eb15755ba23236bdb68edbf339a997546c011b8c73; Site68. Original connected northern homes, simplified matching services and stable animated doors. User: homes are good, city lacks street decorations. No numeric/full-domain approval. |
+| Latest local source build | Normal gated v77 build from7032e6b reproduces immutablee5a58e40. Primary395tiles/120records; secondary476/504. Connected135/135 and services278/278 independent compiled checks pass. All1280 collision/elevation fields remain v76; four actual front pushes and three native entry/returns pass. Ordinary C8→C9 preservation and C9 cold reload pass one checkpoint. Dirty marker honestly retained; no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site67 loader visible; authenticated canonical manifest/BPS200 and exactlocal911925. Fresh anonymous/auth acceptance not inferred. Site41 public IAB patches/exports exact v51. Site42 source/core in isolated localhost IAB completed ten consecutive desktop native→browser→native save cycles, independently sealed; populated party/storage/resources preserved. Fresh public auth/isolation, Safari/mobile, browser performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
+| Public QA | Site68 loader visible; authenticated canonical manifest/BPS200 and exact locale5a58e40. Fresh anonymous/auth acceptance not inferred. Private Chrome uses exact public runtime bytes; visible office entry/return and10sec smoke pass their narrow scopes. Site42 completed ten independently sealed desktop native→browser→native save cycles at one checkpoint. Fresh public auth/isolation, Safari/mobile, full performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Active performance issue | First v75 active600sec Chrome run: complete310row route, zero hidden ticks, but16discarded frame debt,13738underrun outputframes (~0.3115sec),334input observations vs310planned. Strict qualifier fails. Instrumented repeat also fails9debt/8330underruns, with exactly310inputs and no unexpected DOM/focus/longtask entries. No pacing fix yet. Earlier clean idle/short observations do not supersede this failure. |
-| Next work | Diagnose active-field stalls/input contamination, starter-choice information and native/browser checks now implemented within their narrow scopes. Continue Stage B art/audio/interface polish and matched review; no campaign expansion before approval. Ten desktop save cycles remain one checkpoint;50 campaign checkpoints and full campaigns stay open. |
+| Next work | Add coherent city dressing around accepted homes: lamps, meters, hydrants, racks, bins and trees, with clear doors and route/collision/save recovery checks. Continue Stage B art/audio/interface polish and matched review; no campaign expansion before approval. Full active-field performance remains unresolved; ten save cycles remain one checkpoint. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -8334,3 +8332,27 @@ Release metadata correction — October15,05:29UTC:
   the first private manifest, then generate a fresh canonical manifest through
   the normal gated build. Cartridge bytes and validated native captures stay
   unchanged; do not manually relabel old capture provenance.
+
+Connected-street release and latest review — October15,05:45UTC:
+
+- Published v77 / Site68 successfully at05:34:48UTC. Native targete5a58e40,
+  source7032e6b; Sites source0922327b. Canonical BPS SHA
+  be68a977938cdc14f5507ce6de055aeeac4a9cec9f5a97d0c7d34e3fcbc2c78e
+  (1041293bytes); manifest SHA
+  2246440f2fcf97b43a732660b912207376a2fea34bbb6ff0cc93fbde86d905d7.
+  Archive audit finds88files, all15runtime files exact and no commercial ROM,
+  private save or reference media. Existing authenticated public resources200
+  and byte-exact; no new anonymous/sign-in acceptance claimed.
+- Actual native C8→C9 stationary save preserves every declared gameplay domain,
+  then genuine C9 cold Continue restores22,6 in South Park. Reload proof SHA
+  67414022beaa4f5e8bd1edf19a31404811bad36c0a3dadd1a3a89e56a1e254f6.
+  Browser office entry/return is visible;10sec598-frame smoke has zero discarded
+  debt/audio loss. This does not supersede the failed600sec performance gate.
+- User reviewed33.351sec genuine Emerald/v77 paired capture: "the homes are
+  good"; biggest gap is lack of city decorations, specifically light posts.
+  Earlier "Closer; keep refining this style" remains consistent. No numeric
+  score or whole-art approval. Preserve simplified homes and improve public
+  street composition with furniture, tree pits and curbside details.
+- Alignment chat assigned a bounded20minute read-only placement/collision audit.
+  No new city art or collision changes installed yet. Public v77 is the honest
+  checkpoint; original overly detailed architecture is not the target style.
