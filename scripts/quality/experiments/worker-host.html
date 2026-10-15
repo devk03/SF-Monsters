@@ -92,10 +92,10 @@ button('load').onclick=async()=>{try{
   worker.onerror=event=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error(event.message||'Worker failed'));}pending.clear();fail(Error(event.message||'Worker failed'));};
   boot=await rpc('boot',{rom,battery,state,audioPort:sink.port,jsUrl:new URL('/emulator/mgba.js',location.href).href,wasmUrl:new URL('/emulator/mgba.wasm',location.href).href},[sink.port],20000);
   await lease();await rpc('start',{durationMs:Math.min(900000,Math.floor(mainDeadline-performance.now()-2000))});
-  ready=true;raf=requestAnimationFrame(render);status.textContent='Verified Worker checkpoint playing. Let audio settle before measuring. Arrow keys move; X/Z confirm/back.';
+  ready=true;raf=requestAnimationFrame(render);status.textContent='Verified Worker checkpoint playing; visibility='+document.visibilityState+'. Let audio settle before measuring. Arrow keys move; X/Z confirm/back.';
 }catch(error){await finish();fail(error);}finally{controls();}};
 async function measure(durationMs,onStarted){
-  if(!ready||finished||measuring)return;measuring=true;stallReady=false;controls();
+  if(!ready||finished||measuring)return;if(document.visibilityState!=='visible'){fail(Error('Raise this test window before foreground measurement; visibility='+document.visibilityState));return;}measuring=true;stallReady=false;controls();
   try{
     if(await lease()<durationMs+3000)throw Error('Insufficient finite session time');
     mainTicks=[];submissions=[];inputs=[];stalls=[];visibility=[{state:document.visibilityState,at:absolute()}];focus=[];longTasks=[];
@@ -108,7 +108,7 @@ async function measure(durationMs,onStarted){
     status.textContent='Measuring Worker core/audio '+durationMs/1000+' seconds. One explicit 200ms UI stall is available.';
     const workerReport=await measurementPromise,after=audioClock(),mainResultReceivedAt=absolute();
     stallReady=false;controls();observer?.disconnect();
-    const result={schema:2,kind:'private-worker-proof-v1',context:{identity},controllerReplay:replayResult??null,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks,submissions,inputs,stalls,visibility,focus,longTasks}};
+    const result={schema:2,kind:'private-worker-proof-v1',context:{identity,environment:{userAgent:navigator.userAgent,vendor:navigator.vendor,crossOriginIsolated:globalThis.crossOriginIsolated}},controllerReplay:replayResult??null,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks,submissions,inputs,stalls,visibility,focus,longTasks}};
     const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(5000)});
     if(!saved.ok)throw Error('Could not preserve Worker proof report');const receipt=await saved.json();
     out.textContent=JSON.stringify({receipt,boot,worker:{reason:workerReport.reason,elapsedMs:workerReport.elapsedMs,rawLedgerRows:workerReport.rawLedger.length,inputs:workerReport.inputs.length,audioSnapshots:workerReport.audioSnapshots.length,initialPacing:workerReport.initialPacing,finalPacing:workerReport.finalPacing,audioFinalAcknowledged:workerReport.audioFinalAcknowledged,audioFinalSnapshot:workerReport.audioFinalSnapshot},main:{rafTicks:mainTicks.length,submissions:submissions.length,inputs:inputs.length,stalls,visibility,focus,longTasks}},null,2);

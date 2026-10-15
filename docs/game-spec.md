@@ -8887,3 +8887,22 @@ Private600sec Worker field result — October15,09:01UTC:
   presented bytes. Do not claim fresh synchronous Worker export or unseen-tail
   durability. Alignment owns new ignored save bridge only, handoff09:30UTC.
   Publicv80 remains unchanged; fullquality0/11 and all outstanding gates remain.
+
+
+Safari Worker probe remains unqualified — October15,09:12UTC:
+
+- Actual Safari26.6.2/WebKit605.1.15 boots unchanged v80 core/checkpoint with the
+  transferred worklet port. First10sec/one200ms-stall raw receipt has598actual
+  frames/0overflow/debt, but initial visibility is hidden, RAF/canvas counts0,
+  audio underruns6781output frames and final queue13466source frames. Preserve
+  SHA94ad48cffe45d1a82482d0c6ad189bda65538b9233db961ef68f35146a3ab636;
+  this is NOT a valid foreground or audio-loss comparison and clears no gate.
+- Added explicit browser environment/visibility status and a foreground admission
+  guard to the private host. A fresh Safari attempt is refused while hidden,
+  even after raise/full-screen/normal app-open attempts through UI. Cause is not
+  established; do not infer either foreground support or a causal audio fix.
+  Own Safari Worker/audio/test windows, temporary Finder Applications window and
+  300sec-bounded servers stopped/closed. Existing user windows were preserved.
+- Chrome private600sec evidence stands within its declared scope. Safari
+  foreground/phone/full performance remain open. Next is the isolated save
+  bridge/storage protocol; no public runtime change or full quality approval.
