@@ -7363,3 +7363,29 @@ Controlled turn guard checkpoint — October15,01:40UTC:
   UTC, only new auditor/tests and seven explicit bounded reader symbol names.
   Root owns engine compilation and native53-position save-recovery work. No
   public v72 release is claimed before those checks and field/browser traversal.
+
+v72 compiled primary gate checkpoint — October15,01:45UTC:
+
+- Root reviewed and reran the independent auditor: actual immutable draftv72
+  passes23/23; actualv71 fails for absent new primary/header/layout bindings.
+  Exact native24-byte headers include compression/role/resource pointers and
+  NULL callbacks. The40x32 layout binds both tilesets correctly. All213 primary
+  tiles/54 metatiles/54 layer attributes/512 palette bytes are bounded, all53
+  solid/elevation0 map cells are pinned independently of production placement,
+  and original PNG pixels are decoded with actual4bpp/palette/flip semantics.
+- All54 secondary sidewalk underlays, transparent primary tile0 and palette
+  tail are checked. Entire v71 secondary resources remain pinned by exact
+  hashes;503 resident tiles leave1016..1023 available to native door animation.
+  Only seven named resource symbols were added to the existing strict reader;
+  bounds, ELF-section backing and ROM/ELF byte agreement remain unchanged.
+- Root actual positive receipt06c59c4542cddd85dd2e5c30708dfcb0d11c6e1e29e3b6a265b5e1eb9875f107;
+  oldv71 negative receipt66ea4302158009eecc54c3061f6e8cfd261a372c927afe77816c7fbb92321527.
+  Separate direct compiled-map comparison confirms exactly53 changed words and
+  all1227 others byte-exact: park-frontage-v72-plan/compiled-map-delta.json.
+- Build now preserves a unique independent primary audit receipt and refuses
+  BPS creation on failure, alongside existing gates. The manifest records audit
+  counts and validator/receipt hashes with human approval pending. Twelve
+  portable fault-vector cases pass; their separate source checkpoint follows.
+- Existing draft1f404cb6 predates gate wiring and remains immutable evidence;
+  a subsequent normal build must reproduce it with the new gate. Native53-case
+  old-save recovery is still running; no public v72 deployment is claimed.

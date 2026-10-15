@@ -94,7 +94,10 @@ class Cartridge:
                         'gTrainerFrontPicCoords', 'gTrainerFrontPicTable',
                         'gTrainerFrontPicPaletteTable', 'gTrainerFrontAnimsPtrTable',
                         'sAnims_ScottWu', 'sAnims_WaldenYan', 'sAnims_StevenHao',
-                        'sAnim_GeneralFrame0', 'gTrainers'):
+                        'sAnim_GeneralFrame0', 'gTrainers',
+                        'gTilesetTiles_SFParkFrontage', 'gTilesetPalettes_SFParkFrontage',
+                        'gMetatiles_SFParkFrontage', 'gMetatileAttributes_SFParkFrontage',
+                        'gTileset_SFParkFrontage', 'OldaleTown_Layout', 'gTileset_SFSouthPark'):
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')
