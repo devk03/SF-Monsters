@@ -8018,3 +8018,25 @@ First active-field result — October15,03:56UTC:
 - Own local QA emulator/audio/tab/server stopped. Publicv75 unchanged.
   Fullperformance and all11human gates remainOPEN; goalACTIVE. Last alignment
   exchange03:56UTC,next04:26UTC; finite read-only diagnosis task requested.
+
+
+Field diagnostics checkpoint — October15,03:58UTC:
+
+- Private bounded observer retains mapped DOM keys (trusted/repeat markers),
+  window focus/blur and supported browser long tasks; cap2048 with explicit
+  overflow, exactmeasurement-window filtering. No unbound typing collection,
+  guest-memory access, public runtime/control or pacing changes.
+- Suppliedroute is now single-use per loadedcheckpoint, including aborted
+  attempts. A fresh local session is required; button stays disabled after
+  abort. This prevents accidentally restarting the descent from row8.
+- Frozenobserverbytes join exacthelper/CSV verification; auditor also checks
+  original private page/server bytes when pinned. Sixobserver+sixreplay+
+ 9generic+11fieldclassification local tests pass.
+- Chrome10sec pilot captures1trustedRightdown/1keyup,597video frames,zero
+  debt/mismatch/drop/underrun/warmup and finalACK. Receipt8127f611812ecb2b1fd6d6abb2999b723d9ef00c2039f4709bb3cce6b7953372.
+  Deliberate3.04secabort records3/310replayrows+4synthetickey events and
+  disabledroutebutton; preservedfd23c5d563ca0a87e88566b01a8145dfc3ec88467412f53627538a6c81b14bbd.
+  Abort is not a performance pass. Own QA/audio/tab/server stopped.
+- Next diagnostic repeat uses original snapshot and samegame/runtime, no
+  concurrent builds/captures. First600secfailure remains authoritative evidence
+  of an unresolved issue until cause/fix/retest. GoalACTIVE,publicv75 unchanged.

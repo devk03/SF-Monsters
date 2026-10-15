@@ -21,13 +21,14 @@ Diagnostics measure emulation, canvas submission and audio buffering. They do no
 <script type="module">
 let game, identity, timers=[], sessionTimer, measuring=false, finished=false, checking=false;
 let replayModule, routeText, replay, replayResult=null, heldMask=0, sessionDeadline=0;
+let fieldObservation, longTaskObserver, routeUsed=false;
 const status=document.querySelector('#status'), report=document.querySelector('#report');
 const button=id=>document.querySelector('#'+id);
 function controls(){
   for(const id of ['short','medium','long','snapshot'])button(id).disabled=!game||finished||measuring||checking||replay?.active;
   for(const id of ['move','finish'])button(id).disabled=!game||finished||checking;
   button('move').disabled ||= replay?.active;
-  button('route').disabled=!game||!routeText||finished||checking||measuring||replay?.active;
+  button('route').disabled=!game||!routeText||finished||checking||measuring||replay?.active||routeUsed;
   button('stop').disabled=!measuring||finished;
 }
 const hash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
@@ -62,6 +63,17 @@ button('load').onclick=async()=>{try{
   for(const [path,digest] of Object.entries(identity.runtime))await verified('/emulator/'+path,digest);
   await verified('/controller-replay.js',identity.files['controller-replay.js']);
   replayModule=await import('/controller-replay.js');
+  await verified('/field-observation.js',identity.files['field-observation.js']);
+  fieldObservation=(await import('/field-observation.js')).createFieldObservation();
+  for(const type of ['keydown','keyup'])window.addEventListener(type,event=>fieldObservation.keyboard(event));
+  for(const type of ['blur','focus'])window.addEventListener(type,event=>{
+    if(event.target===window)fieldObservation.focus(type);
+  });
+  if(globalThis.PerformanceObserver?.supportedEntryTypes.includes('longtask')){
+    longTaskObserver=new PerformanceObserver(list=>{
+      for(const entry of list.getEntries())fieldObservation.longTask(entry);
+    });
+  }
   if(identity.controller_route){
     routeText=new TextDecoder().decode(await verified('/route.csv',identity.files['route.csv']));
     replayModule.parseControllerRoute(routeText);
@@ -78,18 +90,23 @@ async function measure(durationMs,onStarted){try{
   const remaining=await refreshSessionDeadline();if(finished)return;
   if(remaining<durationMs+2500)throw Error('Not enough local session time for this measurement and report upload. Start a fresh session.');
   status.textContent='Measuring '+durationMs/1000+' seconds; visibility='+document.visibilityState+'.';
+  fieldObservation.start();longTaskObserver?.observe({type:'longtask'});
   const pending=game.startDiagnostics({durationMs,context:{identity,scenario:'Verified SF checkpoint; manual or explicitly scripted DOM keyboard actions'}});
   onStarted?.();
   const measured=await pending;
+  for(const entry of longTaskObserver?.takeRecords()??[])fieldObservation.longTask(entry);
+  longTaskObserver?.disconnect();
+  const fieldEvents=fieldObservation.stop(measured.startedAtMs,measured.endedAtMs);
   const completedReplay=replayResult&&replayResult.startedAtMs>=measured.startedAtMs&&replayResult.startedAtMs<=measured.endedAtMs?replayResult:null;
   const activeReplay=replay?.active&&replay.startedAtMs>=measured.startedAtMs?{reason:'in-progress',startedAtMs:replay.startedAtMs}:null;
-  const result={...measured,controllerReplay:completedReplay??activeReplay};
+  const result={...measured,controllerReplay:completedReplay??activeReplay,fieldEvents,
+    longTasksSupported:!!longTaskObserver};
   report.textContent=JSON.stringify(result,null,2);
   const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(1500)});
   if(!saved.ok)throw Error('Could not preserve local report');
   const receipt=await saved.json();
   status.textContent='Saved '+receipt.name+'; data valid='+result.valid+'; foreground='+result.scope.foregroundOnly+'; final audio ACK='+result.audioFinalAcknowledged+'; audio drops='+(result.audioFinalSnapshot?.droppedSourceFrames??'unknown')+'; underruns='+(result.audioFinalSnapshot?.underrunOutputFrames??'unknown')+'.';
-}catch(error){game?.stopDiagnostics('harness-error');showError(error);}finally{measuring=false;controls();}}
+}catch(error){game?.stopDiagnostics('harness-error');longTaskObserver?.disconnect();fieldObservation?.cancel();showError(error);}finally{measuring=false;controls();}}
 button('short').onclick=()=>measure(10000);button('medium').onclick=()=>measure(120000);button('long').onclick=()=>measure(600000);
 button('snapshot').onclick=async()=>{
   if(!game||finished||measuring||checking)return;
@@ -115,14 +132,15 @@ function applyMask(mask){
   heldMask=mask;
 }
 button('route').onclick=()=>{
-  if(!routeText||replay?.active||measuring||finished||checking||timers.length)return;
+  if(!routeText||replay?.active||measuring||finished||checking||timers.length||routeUsed)return;
   const route=replayModule.parseControllerRoute(routeText);
   let measurementMs;
   try{measurementMs=replayModule.controllerMeasurementDuration(route.durationMs);}
   catch(error){showError(error);return;}
   replayResult=null;void measure(measurementMs,()=>{
+    routeUsed=true;
     replay=replayModule.startControllerReplay(routeText,applyMask,result=>{
-      replayResult=result;status.textContent='Controller replay '+result.reason+'; rows '+result.appliedRows+'/'+result.totalRows+'. Scene coverage requires actual observation.';controls();
+      replayResult=result;status.textContent='Controller replay '+result.reason+'; rows '+result.appliedRows+'/'+result.totalRows+'. Start a fresh session to replay from the original checkpoint.';controls();
     });
     controls();
   });

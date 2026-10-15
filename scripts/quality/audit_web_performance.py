@@ -43,7 +43,7 @@ def audio_clock_observation(report):
 
 
 def controller_observation(report, identity, directory):
-    for name in ('controller-replay.js', 'route.csv'):
+    for name in ('controller-replay.js', 'route.csv', 'field-observation.js'):
         expected = identity.get('files', {}).get(name)
         if expected and digest(directory / name) != expected:
             raise ValueError('Preserved controller input/helper changed: ' + name)
@@ -102,6 +102,10 @@ def audit(report, identity, runtime):
         raise ValueError('Require a completed finite diagnostic window')
     if number(report['elapsedMs']) < report['durationMs']:
         raise ValueError('Diagnostic ended before its declared window')
+    for key,name in [('page_sha256','web_performance.html'),
+                     ('server_source_sha256','server-source.py')]:
+        if identity.get(key) and digest(runtime.parent / name) != identity[key]:
+            raise ValueError('Preserved diagnostic source changed: ' + name)
     for name, expected in identity['runtime'].items():
         if not re.fullmatch(r'[A-Za-z0-9._-]+', name) or digest(runtime / name) != expected:
             raise ValueError('Original runtime bytes changed or are unavailable: ' + name)

@@ -49,6 +49,23 @@ class WebPerformanceAuditTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'runtime bytes'):
             audit(self.report, self.identity, self.runtime)
 
+    def test_preserved_diagnostic_page_and_server_must_match_original_identity(self):
+        for key,name in [('page_sha256','web_performance.html'),
+                         ('server_source_sha256','server-source.py')]:
+            # Each synthetic runtime lives in a private temporary directory;
+            # use its own sibling parent rather than a shared repository path.
+            isolated=self.runtime/'isolated';isolated.mkdir(exist_ok=True)
+            runtime=isolated/'runtime';runtime.mkdir(exist_ok=True)
+            (runtime/'sdk.js').write_bytes((self.runtime/'sdk.js').read_bytes())
+            path=isolated/name;path.write_bytes(b'original diagnostic source')
+            identity=copy.deepcopy(self.identity)
+            identity[key]=hashlib.sha256(path.read_bytes()).hexdigest()
+            report=copy.deepcopy(self.report);report['context']['identity']=identity
+            self.assertTrue(audit(report,identity,runtime)['receipt_well_formed'])
+            path.write_bytes(b'later altered source')
+            with self.assertRaisesRegex(ValueError,'diagnostic source changed'):
+                audit(report,identity,runtime)
+
     def test_invalid_audio_tail_and_epoch_are_rejected(self):
         for changed in ({'epoch': 8}, {'final': False}, {'outputSampleRate': 0},
                         {'renderedOutputFrames': 479999}, {'underrunOutputFrames': 0},

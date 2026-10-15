@@ -54,6 +54,8 @@ def snapshot(args):
     runtime, routes = {}, {'/rom.gba': rom, '/state.bin': state, '/battery.sav': battery}
     replay_source = Path(__file__).with_name('controller_replay.mjs').read_bytes()
     routes['/controller-replay.js'] = replay_source
+    observation_source = Path(__file__).with_name('field_observation.mjs').read_bytes()
+    routes['/field-observation.js'] = observation_source
     controller_route = None
     if args.input:
         route_bytes = args.input.read_bytes()
@@ -114,6 +116,7 @@ def snapshot(args):
     write_new(output / 'state.metadata.json', metadata_bytes)
     write_new(output / 'server-source.py', Path(__file__).read_bytes())
     write_new(output / 'controller-replay.js', replay_source)
+    write_new(output / 'field-observation.js', observation_source)
     if args.input:
         write_new(output / 'route.csv', route_bytes)
     write_new(output / 'identity.json', routes['/identity.json'])
