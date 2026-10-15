@@ -622,11 +622,11 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 - All three Cognition trainers have original portrait candidates. Compiled26
   checks, actual native/browser entrances and two ordinary loss/save/coldContinue
   branches pass their technical scopes. Human paired art reviews remain pending.
-- Current alignment exchange05:10UTC,next05:40UTC. Root owns the whole-block
-  art experiment, native validation and canonical spec. Peer completed finite
-  read-only visual critique: entry openings remain too narrow beside the hero,
-  and adjacent service buildings still use a different feature scale. No peer
-  writes are active. Existing map/save/turn evidence remains scoped below.
+- Current alignment exchange06:54UTC,next07:24UTC. Root owns all files, native
+  validation, publication and canonical spec. Peer handed back the independent
+  Sunset gate/fault tests and completed a bounded read-only build-order review.
+  South Park densityv79 is live; Sunset normal-compilation integration is next.
+  No peer writes or recurring monitors are active; all evidence stays scoped.
 
 ### 15.1 Objective and completion rule
 
@@ -842,22 +842,22 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,06:06UTC; historical checkpoint details follow):
+Current snapshot (October 15, 2026,06:55UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
 | Execution | Continue full-spec work through intermediate releases until October15,5AM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.78-city-furniture-preview; target46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943; Site69. Accepted home direction preserved; ten curbside props add lamps, meters, hydrant, bin, rack, tree, bench and recycling. City-dressing subset comparison pending. No numeric/full-domain approval. |
-| Latest local source build | Normal gated v78 from62c9aee reproduces immutable46d971f8. Actual449primarytiles/135records;476secondary. Independent furniture166/166, validated legacy-prefix connected135/135 and services278/278 pass. Old395tiles/120records/attrs/allpalettebytes exactv77;18declared map cells include14new solid bases. All14 actual old-save cold recoveries, blocked pushes and escapes pass, plus valid22,6 unchanged. C8→C9 domains preserved and C9 cold reload pass one checkpoint. Dirty marker honest; no clean-checkout credit. |
+| Public build | 0.0.79-park-density-preview; target185cab500852af16e5229e9005cc601b7a16ac6cf764ce30778a7a15bbe820db; Site70. South Park13→21buildings; approved northern homes and all curb props preserved. User said v78 looks better and requested more buildings; density subset clip awaits review. No numeric/full-domain approval. |
+| Latest local source build | Normal gated v79 from9e12214; actual511primarytiles/151records and unchanged476secondary. Density37/37, city166/166, connected135/135, services278/278 pass. All56new solid old-save cold recoveries/new facade pushes/escapes and9freed walkable cells pass. Three service returns reload every tile/palette; one C8→C9 native save/cold reload preserves declared domains. Dirty marker honest; no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site69 loader visible; existing authenticated canonical manifest/BPS200 and exactlocal46d971f8. Fresh anonymous/auth acceptance not inferred. Private Chrome exact public runtime shows city dressing and finite8-input loop;10sec597frames,0debt/hidden/audio loss. Site42 completed ten sealed desktop native→browser→native save cycles at one checkpoint. Fresh public auth/isolation, Safari/mobile, full performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
+| Public QA | Site70 loader visible; existing authenticated canonical manifest/BPS200 and exactlocal185cab. Fresh anonymous/auth acceptance not inferred. Private Chrome exact public runtime shows denser park frontage and finite8-input loop;10sec598/598frames,0debt/hidden/audio loss, finalACK. Site42 ten desktop native→browser→native save cycles remain one checkpoint. Fresh auth/isolation, Safari/mobile, full performance/audio and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Active performance issue | First v75 active600sec Chrome run: complete310row route, zero hidden ticks, but16discarded frame debt,13738underrun outputframes (~0.3115sec),334input observations vs310planned. Strict qualifier fails. Instrumented repeat also fails9debt/8330underruns, with exactly310inputs and no unexpected DOM/focus/longtask entries. No pacing fix yet. Earlier clean idle/short observations do not supersede this failure. |
-| Next work | City-dressing subset review pending after livev78. Preserve homes and clear street routes; continue Stage B art/audio/interface polish and matched review. Clinic music last scored2/4; full active-field performance remains unresolved. No campaign expansion before approval; ten save cycles remain one checkpoint. |
+| Next work | Density subset review pending after livev79. Integrate three compact Sunset homes with gray foundations on empty lawn lots, preserving actual roads/events. Compile all Sunset resources normally and independently verify bindings before native/browser/old-save checks. Continue Stage B art/audio/interface; clinic music last scored2/4 and active-field performance unresolved. No campaign expansion before approval. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -8551,7 +8551,7 @@ Native South Park density checks — October15,06:48UTC:
   leaving491..503 free and504..511 reserved for doors. Sunset is not integrated,
   built, deployed or human-approved. Alignment owns the independent gate/tests.
 
-Independent Sunset density gate — October15,06:55UTC:
+Independent Sunset density gate — October15, after native density checks:
 
 - Alignment handed back a194-line independent compiled auditor. Root reviewed it
   and reran all9 linked/provenance tests: pass. Positive ARM Thumb fixture checks
@@ -8564,7 +8564,7 @@ Independent Sunset density gate — October15,06:55UTC:
   all9South Park density fault tests pass. Actual Sunset normal compilation,
   geometry upgrade recovery, runtime visuals and human approval remain pending.
 
-Sunset density corruption coverage — October15,06:56UTC:
+Sunset density corruption coverage — October15, after independent gate review:
 
 - Added the201-line independent fault suite and both Sunset suites to localchecks.
   Three original-source/provenance cases always run. Six compiled binding cases
@@ -8572,3 +8572,30 @@ Sunset density corruption coverage — October15,06:56UTC:
   private cartridge is absent; no inherited fixture payload is published.
 - Root's rerun passes9/9, including source self-rehash, old/new pixels, mirrors,
   layers, every parcel/road/event approach, tails, headers, Thumb BL and stale ELF.
+
+South Park density release — October15,06:55UTC:
+
+- Publicv79/Site70 succeeded06:53:35UTC, deployment
+  appgdep_6ad0786632448191825366d67b64b674, saved
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_7ba71aad880c819195912da0540b3212.
+  Sites sourcee2bfecc9353e9cc2465a8da3d3b0b35d247a4dd1; native source9e12214.
+  BPS1043621bytes SHAdc496e250d3536cad23a1326bd852d14f65f13fdb8f0d27e7d259da911a04ef1;
+  manifest61799bytes SHA5c193adf72de48507b7c50df090782ae58342361bbc10ac29ffba8de696e8d90.
+- Original-only archive passes88file check/all15runtime files exact, no commercial
+  cartridges, private saves, clips or AppleDouble. Archive SHA
+  fc061beab4282563b89df978d8cd9a8c37a74a7d47fa2224a4650018e0e1ec66.
+  Existing authenticated live resource checks return200/exactbytes; receipt SHA
+  bfe271f9dd9aa4d80568a28d36fe3e8915e81b91f8753598e718514f68599252.
+  Fresh anonymous/sign-in acceptance remains open. Actual loader screenshot saved.
+- Native ordinary C8→C9 save preserves declared gameplay domains and cold C9
+  reload stays22,6. Browser10second park check598requested/executed frames,
+ 1200visible/0hidden ticks,8DOM inputs,0discarded frames/mismatch/pending/audio
+  drops/underruns/warmup; finalACK. Report SHA
+ 919f26356233c8d3bc509b135cf351cd652c140521affdda2d333f87102a04f9.
+  Private helper600sec maximum was stopped after QA; emulator/audio and own tabs
+  stopped/closed. Short smoke does not supersede the failed600sec performance gate.
+- Actual33.351second/1992frame Emerald paired density clip requested for human
+  review at .tools/benchmarks/density-v79-emerald-paired-review/comparison.mp4.
+  Equal native clock/controller route and nearest3x scale; both audio tracks.
+  Review is density/placement subset only, full domains still0/11. Continue Sunset
+  infill and normal compilation next; deadline remains05:00SF/12:00UTC.
