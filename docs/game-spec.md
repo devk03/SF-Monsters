@@ -7569,3 +7569,30 @@ v73 independent getter checkpoint — October15,02:24UTC:
   table writer stay unchanged. Portable guard suite/check wiring follows as a
   separate checkpoint; actual model code214lines remains one coherent audit.
   Publicv72/Site63 and human0/11 unchanged; all broad gatesOPEN, goalACTIVE.
+
+v73 getter guards/save/browser checkpoint — October15,02:30UTC:
+
+- Nine portable getter/resource guard cases are wired into routine checking.
+  Synthetic distinct66-row class strings keep commercial table bytes out of
+  public fixtures; only two short interoperability labels are retained. Tests
+  locally substitute a synthetic table hash, while actual native runs continue
+  to enforce original full-tableSHA745460e8. The real fingerprint constant is
+  separately pinned; synthetic transcript passes are not native evidence.
+- Tests reject every class/alias-byte mutation, invalid class/party allocation,
+  bad indirect team pointer, scalar/team changes across builds, stale/truncated/
+  non-file-backed ROM/ELF, wrong native return/alias/ID/fallback, instruction/
+  side deadlines and protected-state changes. Full local checks pass.
+- Genuine old ParkC7 and preWaldenC3/preStevenC4 batteries coldContinue in v73
+  and ordinary stationarySaveC8/C4/C5 with EVERY declared gameplay domain exact.
+  Counter/save statistic increases once and playtime is monotonic. Receipt
+ 22fc4cbfeb38d8339cbe4852f2559943447325775596f10ac00ceb0492fcf9cb.
+  These are stationary compatibility subsets, not additional campaign checkpoints.
+- Ordinary Chrome input on a verified37e60ad3 checkpoint shows BUILDER WALDEN
+  YAN in the actual native introduction. Native captures separately show both
+  people. Browser screenshot retained; no timing/performance approval inferred.
+  Own browser/audio/core and finite900s server closed; public saves/accounts
+  untouched. This text-only scope does not change the earlier art-review clips.
+- Full local check ran with the turn-extension source held fixed. Alignment's
+  one-miss native handoff is now ready but NOT yet accepted/committed by root;
+  root still must review/rerun it independently. Root owns all files again.
+  Normal v73 rebuild and publication follow; public staysv72/Site63, human0/11.

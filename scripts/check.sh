@@ -36,6 +36,7 @@ python3 tests/field_music_test.py
 python3 tests/music_loop_review_test.py
 python3 tests/mechanics_fixture_test.py
 python3 tests/turn_resolution_fixtures_test.py
+.tools/venv/bin/python tests/trainer_class_fixtures_test.py
 python3 tests/type_matrix_test.py
 python3 tests/stat_fixture_test.py
 python3 tests/action_fixture_test.py
