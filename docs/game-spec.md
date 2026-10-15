@@ -554,14 +554,15 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 05:45 UTC:
+Current checkpoint — October 15, 2026, 06:06 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v77 / Site 68 is live.
+- Goal active; stop October 15 at 18:00 Pacific. Public v78 / Site 69 is live.
   The user says the homes are good and asks for streetlights and other city
-  decorations. Preserve the connected homes; next add coherent curbside
-  furniture with clear entries, walkable routes and native collision checks.
+  decorations. The new city candidate adds ten curbside props while preserving
+  homes and clear routes. Actual recovery/collision checks pass all14 new bases;
+  a matched city-dressing subset review is pending.
   This is qualitative approval of a subset, not a numeric/full-domain score.
-  Native release source7032e6b; website source0922327b. Human approvals0/11.
+  Native release source62c9aee; website sourcedf7de03b. Human approvals0/11.
   Connected block, matching services and stable native doors are installed;
   scoped native/browser entries, caches, collision and ordinary save/reload pass.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
@@ -841,22 +842,22 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,05:45UTC; historical checkpoint details follow):
+Current snapshot (October 15, 2026,06:06UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.77-connected-street-preview; targete5a58e40fcc3f3c6ef4763eb15755ba23236bdb68edbf339a997546c011b8c73; Site68. Original connected northern homes, simplified matching services and stable animated doors. User: homes are good, city lacks street decorations. No numeric/full-domain approval. |
-| Latest local source build | Normal gated v77 build from7032e6b reproduces immutablee5a58e40. Primary395tiles/120records; secondary476/504. Connected135/135 and services278/278 independent compiled checks pass. All1280 collision/elevation fields remain v76; four actual front pushes and three native entry/returns pass. Ordinary C8→C9 preservation and C9 cold reload pass one checkpoint. Dirty marker honestly retained; no clean-checkout credit. |
+| Public build | 0.0.78-city-furniture-preview; target46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943; Site69. Accepted home direction preserved; ten curbside props add lamps, meters, hydrant, bin, rack, tree, bench and recycling. City-dressing subset comparison pending. No numeric/full-domain approval. |
+| Latest local source build | Normal gated v78 from62c9aee reproduces immutable46d971f8. Actual449primarytiles/135records;476secondary. Independent furniture166/166, validated legacy-prefix connected135/135 and services278/278 pass. Old395tiles/120records/attrs/allpalettebytes exactv77;18declared map cells include14new solid bases. All14 actual old-save cold recoveries, blocked pushes and escapes pass, plus valid22,6 unchanged. C8→C9 domains preserved and C9 cold reload pass one checkpoint. Dirty marker honest; no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site68 loader visible; authenticated canonical manifest/BPS200 and exact locale5a58e40. Fresh anonymous/auth acceptance not inferred. Private Chrome uses exact public runtime bytes; visible office entry/return and10sec smoke pass their narrow scopes. Site42 completed ten independently sealed desktop native→browser→native save cycles at one checkpoint. Fresh public auth/isolation, Safari/mobile, full performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
+| Public QA | Site69 loader visible; existing authenticated canonical manifest/BPS200 and exactlocal46d971f8. Fresh anonymous/auth acceptance not inferred. Private Chrome exact public runtime shows city dressing and finite8-input loop;10sec597frames,0debt/hidden/audio loss. Site42 completed ten sealed desktop native→browser→native save cycles at one checkpoint. Fresh public auth/isolation, Safari/mobile, full performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Active performance issue | First v75 active600sec Chrome run: complete310row route, zero hidden ticks, but16discarded frame debt,13738underrun outputframes (~0.3115sec),334input observations vs310planned. Strict qualifier fails. Instrumented repeat also fails9debt/8330underruns, with exactly310inputs and no unexpected DOM/focus/longtask entries. No pacing fix yet. Earlier clean idle/short observations do not supersede this failure. |
-| Next work | Add coherent city dressing around accepted homes: lamps, meters, hydrants, racks, bins and trees, with clear doors and route/collision/save recovery checks. Continue Stage B art/audio/interface polish and matched review; no campaign expansion before approval. Full active-field performance remains unresolved; ten save cycles remain one checkpoint. |
+| Next work | City-dressing subset review pending after livev78. Preserve homes and clear street routes; continue Stage B art/audio/interface polish and matched review. Clinic music last scored2/4; full active-field performance remains unresolved. No campaign expansion before approval; ten save cycles remain one checkpoint. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -8426,3 +8427,34 @@ Compiled city and actual upgrade recovery — October15,06:02UTC:
   the separate city gate records the actual449/135 allocation. Preserve the first
   private manifest before a normal canonical metadata rebuild; no capture relabeling.
   Browser, service returns, ordinary resave/reload and human city review pending.
+
+City-dressing v78 published — October15,06:06UTC:
+
+- Site69 deployed successfully06:05:15UTC. Target46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943,
+  native source62c9aee; Sites sourcedf7de03b5bf6a055f7f14b541517e3699ffbc1e0.
+  Canonical manifest59524bytes SHA
+  2b6d1b795a53dce71a420636158b347b34e23eb9917b6f044251d9d4bae6f80c;
+  BPS1042208bytes SHA
+  8a7c552950cde2ee0ebe9818ebe2c4b53ab4bc5eb8ab56aaa8808a6b6ff71503.
+- Existing authenticated public resource verification200/exact, receipt SHA
+  5da6947688012d7d87194f6e9cbc98e7e60c42258f17d8a1e1d5b983ea6cf4f1.
+  Public loader visible; no private ROM/save uploaded. Archive88files/all15runtime
+  bytes exact/no commercial cartridges/private saves/reference media; archive SHA
+  f8ae54911218c7fa74e89d4d401b213ce1de32bc0b9ff03b66a1b4b50bc2bc77.
+- Three actual service entry/returns preserve all449/476resident tiles and13
+  unfaded palette banks, Flash unchanged; proof SHA
+  a408590ee4bc4c565ad8c02b8bafb0f125916a73674b07e8d1f67b7284d9913f.
+  C8→C9 ordinary save preserves all declared gameplay domains; C9 cold Continue
+ 22,6 with exactFlash; reload proof SHA
+  8293c27023e10ecd980d9b867821a97aa6379264a6bf4cfa24d4dc1ed44295c8.
+  Initial private proof helper passed raw bytes to a parsed-state comparator;
+  preserved the successful capture and corrected the helper, with no game change.
+- Actual private Chrome short loop:597frames/10sec,8syntheticDOMinputs,1199visible
+  ticks/0hidden,0discarded debt/mismatch/pending/audio drop/underrun/warmup, final
+  ACKtrue. Independent report audit passes; SHA
+ 97e5533fb8628c5378fb82f93724ab6b6e60cd9a0b9375027c3c98b30a80a109.
+  Emulator/audio/tab/server stopped. This does not replace the failed600sec gate.
+- Requested city-dressing-only0–4 review of33.351sec1992-frame genuine Emerald
+  paired capture, equal nearest3x and exact controller input. Evidence
+  .tools/benchmarks/city-v78-emerald-paired-review/comparison.mp4. Pending; human
+  full-domain approvals remain0/11. Existing home feedback is qualitative only.

@@ -1,16 +1,16 @@
 {
-  "version": "0.0.77-connected-street-preview",
-  "status": "Unfinished SF opening chapter with original Mini Monsters, Sunset, South Park, the clinic, seed room and Cognition office. The northern South Park block uses connected houses with shared roof depth, readable entrances, attached steps and gray paving; the clinic and office use simpler matching architecture and original opening doors. Three starter prompts explain native types and first attacks. JOURNAL and SF MAP track the opening objective and locations. Artwork, music, the full sixteen-neighborhood campaign and user quality acceptance remain unfinished.",
+  "version": "0.0.78-city-furniture-preview",
+  "status": "Unfinished SF opening chapter with original Mini Monsters, Sunset, South Park, the clinic, seed room and Cognition office. The northern South Park block uses connected houses with shared roof depth, readable entrances, attached steps and gray paving; the clinic and office use simpler matching architecture and original opening doors. Original curbside lamps, meters, a hydrant, bins, rack, bench and tree add street activity; their solid bases preserve clear entries and crossings. Three starter prompts explain native types and first attacks. JOURNAL and SF MAP track the opening objective and locations. Artwork, music, the full sixteen-neighborhood campaign and user quality acceptance remain unfinished.",
   "game_code": "BPEE",
   "base_sha256": "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af",
   "base_bytes": 16777216,
-  "target_sha256": "e5a58e40fcc3f3c6ef4763eb15755ba23236bdb68edbf339a997546c011b8c73",
+  "target_sha256": "46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943",
   "target_bytes": 16777216,
-  "patch_sha256": "be68a977938cdc14f5507ce6de055aeeac4a9cec9f5a97d0c7d34e3fcbc2c78e",
-  "patch_bytes": 1041293,
+  "patch_sha256": "8a7c552950cde2ee0ebe9818ebe2c4b53ab4bc5eb8ab56aaa8808a6b6ff71503",
+  "patch_bytes": 1042208,
   "emerald_revision": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
   "flips_revision": "ff216a75df0987047a67d7923567dc4482ce07ac",
-  "source_commit": "7032e6b726eae1ec4ce4c562ed718ceaf3eb1bd6",
+  "source_commit": "62c9aeee1bdc6b08c115522f158c505d896b6511",
   "source_worktree_dirty": true,
   "patch_roundtrip": "byte-identical",
   "quality_approval": "pending",
@@ -21,7 +21,7 @@
       "total": 17,
       "matched": 17
     },
-    "receipt_sha256": "270da1cf823cb8914b6edb51415113d5c1f96c1b31a95a44ff9d75f3a589942e",
+    "receipt_sha256": "cf2a4931d2883803196db95b57875c121f9e213f64c2b2082b3ae856e4155e02",
     "validator_sha256": "e4b136a97ff24e9a91f1474c617a7a0453c3db448f706d3295dc5171e60ee898",
     "quality_approval": "pending",
     "scope": "Compiled SF background/head/grid/entry/whitelist integration; not art, save, behavior or performance acceptance"
@@ -38,10 +38,33 @@
       "total": 135,
       "matched": 135
     },
-    "receipt_sha256": "de06058559518213bf244f771b282715298bfb6ccedbfbf35259d223283e0526",
-    "validator_sha256": "6fb9b98b678b7ff55eb1b8a9fc202ebfcf2667b68b46b42941b3427a2ed54805",
+    "receipt_sha256": "fd6641dd8206ba01adc97b38070593b6bb8e533c2322121670204bc8b57a2295",
+    "validator_sha256": "3ed4feb77d01bd8489424d7d96a25a92cefe5d7fb415edf5fccdd36fc64c829a",
     "quality_approval": "pending",
-    "scope": "Independent compiled connected frontage resources and exact map-delta audit.\n\nThis does not approve artwork, service/door resources, animations, events, saves,\ncampaign behavior or performance. It never imports the production converter.\n"
+    "scope": "Independent compiled connected frontage resources and exact map-delta audit.\n\nThis does not approve artwork, service/door resources, animations, events, saves,\ncampaign behavior or performance. It never imports the production converter.\n",
+    "normalization": {
+      "validated_furniture": true,
+      "restored_map_cells": 18,
+      "preserved_primary_tiles": 395,
+      "preserved_records": 120
+    }
+  },
+  "compiled_city_furniture": {
+    "passed": true,
+    "counts": {
+      "new_records": 15,
+      "new_map_cells": 18,
+      "solid_bases": 14,
+      "walkable_upper_cells": 4,
+      "primary_map_cells": 118,
+      "primary_tiles": 449,
+      "total": 166,
+      "matched": 166
+    },
+    "receipt_sha256": "84a17b13bfb5c6d754ef55ed00028babf7d6bbed11381dc1516e723d214d5c3a",
+    "validator_sha256": "3aa93dfde8bd9e486cae375c8423240df9644805c6183b5b34936de18e293dbb",
+    "quality_approval": "pending",
+    "scope": "Independent compiled city-furniture extension of frozen v77 resources.\n\nNo art, recovery, animation, save, campaign, browser, performance or human\napproval is established. Native source conversion and producers are not imported.\n"
   },
   "compiled_service_architecture": {
     "passed": true,
@@ -56,7 +79,7 @@
       "total": 278,
       "matched": 278
     },
-    "receipt_sha256": "a4e1affc8a212aa2772b57c3895b5a8efd3e23651b74a81c8eeb045a26510774",
+    "receipt_sha256": "952c46257a33b6bba041e5e551111c6483ac7fc42124721349e04bd32e0a6a85",
     "validator_sha256": "c9a21406c67abf5effd193ea443822a8a7d9f73e8acef7b34f047386adb4571e",
     "quality_approval": "pending",
     "scope": "Independent compiled service buildings, static doors and registrations.\n\nResource integrity only. No art/animation quality, timing, save, browser,\nperformance, campaign or human approval is established by this audit.\n"
@@ -67,7 +90,7 @@
       "total": 11,
       "matched": 11
     },
-    "receipt_sha256": "17cbb7f53a01178d268bbd0ad185b187634a102077c6e18b46e986878e29abab",
+    "receipt_sha256": "85f9a77cd7e90a7f5b2b15c1aea5ff0c9be0569dbe6dda2885d1381662fbcdda",
     "validator_sha256": "d23f632b62c13daca8d60cb9b778a74fcf0c454e4b01619bf3d717ea99984000",
     "resident_tiles": 476,
     "quality_approval": "pending",
@@ -79,7 +102,7 @@
       "total": 52,
       "matched": 52
     },
-    "receipt_sha256": "59b068ff5a2f2b9e1530c62e59a456eee79a760dbe502e54ab1ef30ad6710c42",
+    "receipt_sha256": "ad7a630abc86b26ff72e852a2d691855d7e9733890ba5f75bb7d223b53b5e572",
     "validator_sha256": "20eebd356419c70a5696459816130fec564e4718c75d921026d9d59992482b1d",
     "quality_approval": "pending",
     "scope": "Compiled field cast integration; no likeness/animation/save approval"
@@ -90,7 +113,7 @@
       "total": 26,
       "matched": 26
     },
-    "receipt_sha256": "88e680e926047429fd7b52fdaf8ce18579d2b879afc694b4671d1098c043b973",
+    "receipt_sha256": "20aa9e2c21e2ddb0d17bc785698ea8b79bd9360fceb5155361e1bbb6252bad67",
     "validator_sha256": "ac4ef92c0cde8139668e8d1d8d568285cc5af1e2ade2ee82b90b1bfc96ccbd84",
     "quality_approval": "pending",
     "scope": "Exact Scott93/Walden94/Steven95 pixels, palettes and native bindings; all96 front-table entries structurally bounded. Stock0..92 resource identity, battle mechanics, saves, likeness and runtime animation are outside this receipt."
@@ -101,7 +124,7 @@
       "total": 5,
       "matched": 5
     },
-    "receipt_sha256": "48fbef22007aad0dcc53dd572fdca7931277490a7644dfbbefd7d5bf8b682dbd",
+    "receipt_sha256": "edf8ab3a2a04160bd65195cc233e9eac269a3b7e0d514f4be05d397706829154",
     "validator_sha256": "708041c98d73809efa6bdb1d3838b4cdfe050d8dab2944827ea74a98442560b6",
     "quality_approval": "pending",
     "scope": "Intro figure integration only; human likeness/art/flow approval pending"
@@ -135,7 +158,7 @@
         "matched": 18
       }
     },
-    "receipt_sha256": "8ead011bdbba4066136641311b1568e7d76ee315f25d96247ee7196b0d073a55",
+    "receipt_sha256": "fc6d57080a4f0bf8ba6b0bf39c087c58b2fe60e229a53afce2c20f323a6822a9",
     "validator_sha256": "545d272bba509fb0b0816e80e4ab2fde124caeb1b1dea9f46d9602a08764df4a",
     "quality_approval": "pending",
     "scope": "Compiled resource identity and bindings; not human art or gameplay approval"
@@ -165,348 +188,348 @@
     "cleanup": "preserved; no destructive clean targets"
   },
   "interface_text": {
-    "input_sha256": "99e2dd5c1134215e0423b370b898617278a4df7be1dee6f188b93248e6c87205",
-    "target_sha256": "f01c51843a5e0baab8d2f5fadf99fa87f9b816827a1dd2d7f57410de5335538f",
+    "input_sha256": "05bb10a6cb3bfb69926ecb157e077ce581c1ebb87b2d14885259a1b113730207",
+    "target_sha256": "3b988d8002c9bd1d752b43d99a421195ff5071916cda983d353c0fbdcaedc04d",
     "labels": [
       {
         "symbol": "gText_Pokemon",
-        "offset": 6302620,
+        "offset": 6303864,
         "capacity": 8,
         "text": "MONSTER",
         "encoded_bytes": 8
       },
       {
         "symbol": "gText_5MarksPokemon",
-        "offset": 6303724,
+        "offset": 6304968,
         "capacity": 14,
         "text": "????? MONSTER",
         "encoded_bytes": 14
       },
       {
         "symbol": "gText_PokedexRegistration",
-        "offset": 6303849,
+        "offset": 6305093,
         "capacity": 32,
         "text": "Field Guide entry recorded.",
         "encoded_bytes": 28
       },
       {
         "symbol": "gText_NoMatchingPkmnWereFound",
-        "offset": 6303929,
+        "offset": 6305173,
         "capacity": 32,
         "text": "No matching monsters found.",
         "encoded_bytes": 28
       },
       {
         "symbol": "gText_SearchForPkmnBasedOnParameters",
-        "offset": 6303961,
+        "offset": 6305205,
         "capacity": 49,
         "text": "Search for monsters using\nselected parameters.",
         "encoded_bytes": 47
       },
       {
         "symbol": "gText_SwitchPokedexListings",
-        "offset": 6304010,
+        "offset": 6305254,
         "capacity": 25,
         "text": "Switch Guide listings.",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_ReturnToPokedex",
-        "offset": 6304035,
+        "offset": 6305279,
         "capacity": 23,
         "text": "Return to the Guide.",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_SelectPokedexMode",
-        "offset": 6304058,
+        "offset": 6305302,
         "capacity": 25,
         "text": "Select the Guide mode.",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_SelectPokedexListingMode",
-        "offset": 6304083,
+        "offset": 6305327,
         "capacity": 33,
         "text": "Select Guide listing mode.",
         "encoded_bytes": 27
       },
       {
         "symbol": "gText_ListByFirstLetter",
-        "offset": 6304116,
+        "offset": 6305360,
         "capacity": 60,
         "text": "List by first letter of the name.\nSpotted monsters only.",
         "encoded_bytes": 57
       },
       {
         "symbol": "gText_ListByBodyColor",
-        "offset": 6304176,
+        "offset": 6305420,
         "capacity": 42,
         "text": "List by color.\nSpotted monsters only.",
         "encoded_bytes": 38
       },
       {
         "symbol": "gText_ListByType",
-        "offset": 6304218,
+        "offset": 6305462,
         "capacity": 34,
         "text": "List by type.\nOwned monsters.",
         "encoded_bytes": 30
       },
       {
         "symbol": "gText_DexHoennDescription",
-        "offset": 6304472,
+        "offset": 6305716,
         "capacity": 23,
         "text": "San Francisco Guide",
         "encoded_bytes": 20
       },
       {
         "symbol": "gText_DexNatDescription",
-        "offset": 6304495,
+        "offset": 6305739,
         "capacity": 25,
         "text": "Complete Field Guide",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_DexSortNumericalDescription",
-        "offset": 6304520,
+        "offset": 6305764,
         "capacity": 46,
         "text": "List monsters in order of\ntheir Guide number.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_DexSortAtoZDescription",
-        "offset": 6304566,
+        "offset": 6305810,
         "capacity": 53,
         "text": "List spotted and owned monsters\nfrom A to Z.",
         "encoded_bytes": 45
       },
       {
         "symbol": "gText_DexSortHeaviestDescription",
-        "offset": 6304619,
+        "offset": 6305863,
         "capacity": 60,
         "text": "List owned monsters from\nheaviest to lightest.",
         "encoded_bytes": 47
       },
       {
         "symbol": "gText_DexSortLightestDescription",
-        "offset": 6304679,
+        "offset": 6305923,
         "capacity": 60,
         "text": "List owned monsters from\nlightest to heaviest.",
         "encoded_bytes": 47
       },
       {
         "symbol": "gText_DexSortTallestDescription",
-        "offset": 6304739,
+        "offset": 6305983,
         "capacity": 59,
         "text": "List owned monsters from\ntallest to smallest.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_DexSortSmallestDescription",
-        "offset": 6304798,
+        "offset": 6306042,
         "capacity": 59,
         "text": "List owned monsters from\nsmallest to tallest.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_ConfirmStarterChoice",
-        "offset": 6305220,
+        "offset": 6306464,
         "capacity": 28,
         "text": "Choose this monster?",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_ChoosePokemon",
-        "offset": 6309751,
+        "offset": 6310995,
         "capacity": 18,
         "text": "Choose a monster.",
         "encoded_bytes": 18
       },
       {
         "symbol": "gText_ChoosePokemon2",
-        "offset": 6310051,
+        "offset": 6311295,
         "capacity": 18,
         "text": "Choose a monster.",
         "encoded_bytes": 18
       },
       {
         "symbol": "gText_TeachWhichPokemon",
-        "offset": 6309784,
+        "offset": 6311028,
         "capacity": 21,
         "text": "Teach which monster?",
         "encoded_bytes": 21
       },
       {
         "symbol": "gText_UseOnWhichPokemon",
-        "offset": 6309805,
+        "offset": 6311049,
         "capacity": 22,
         "text": "Use on which monster?",
         "encoded_bytes": 22
       },
       {
         "symbol": "gText_GiveToWhichPokemon",
-        "offset": 6309827,
+        "offset": 6311071,
         "capacity": 23,
         "text": "Give to which monster?",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_DoWhatWithPokemon",
-        "offset": 6309850,
+        "offset": 6311094,
         "capacity": 22,
         "text": "What should it do?",
         "encoded_bytes": 19
       },
       {
         "symbol": "gText_NoPokemonForBattle",
-        "offset": 6310028,
+        "offset": 6311272,
         "capacity": 23,
         "text": "No monster for battle!",
         "encoded_bytes": 23
       },
       {
         "symbol": "gText_ChoosePokemonCancel",
-        "offset": 6310212,
+        "offset": 6311456,
         "capacity": 26,
         "text": "Choose monster or CANCEL.",
         "encoded_bytes": 26
       },
       {
         "symbol": "gText_ChoosePokemonConfirm",
-        "offset": 6310238,
+        "offset": 6311482,
         "capacity": 28,
         "text": "Choose monster and confirm.",
         "encoded_bytes": 28
       },
       {
         "symbol": "gText_PkmnInfo",
-        "offset": 6311171,
+        "offset": 6312415,
         "capacity": 13,
         "text": "MONSTER INFO",
         "encoded_bytes": 13
       },
       {
         "symbol": "gText_PkmnSkills",
-        "offset": 6311184,
+        "offset": 6312428,
         "capacity": 15,
         "text": "MONSTER SKILLS",
         "encoded_bytes": 15
       },
       {
         "symbol": "gText_MenuOptionPokedex",
-        "offset": 6314896,
+        "offset": 6316140,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_MenuOptionPokemon",
-        "offset": 6314904,
+        "offset": 6316148,
         "capacity": 8,
         "text": "TEAM",
         "encoded_bytes": 5
       },
       {
         "symbol": "gText_MenuPokedex",
-        "offset": 6328311,
+        "offset": 6329555,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_MenuPokemon",
-        "offset": 6328319,
+        "offset": 6329563,
         "capacity": 8,
         "text": "TEAM",
         "encoded_bytes": 5
       },
       {
         "symbol": "gText_SavingPokedex",
-        "offset": 6329960,
+        "offset": 6331204,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_ContinueMenuPokedex",
-        "offset": 6325763,
+        "offset": 6327007,
         "capacity": 8,
         "text": "GUIDE",
         "encoded_bytes": 6
       },
       {
         "symbol": "gText_WithdrawPokemon",
-        "offset": 6317221,
+        "offset": 6318465,
         "capacity": 17,
         "text": "WITHDRAW MONSTER",
         "encoded_bytes": 17
       },
       {
         "symbol": "gText_DepositPokemon",
-        "offset": 6317238,
+        "offset": 6318482,
         "capacity": 16,
         "text": "DEPOSIT MONSTER",
         "encoded_bytes": 16
       },
       {
         "symbol": "gText_MovePokemon",
-        "offset": 6317254,
+        "offset": 6318498,
         "capacity": 13,
         "text": "MOVE MONSTER",
         "encoded_bytes": 13
       },
       {
         "symbol": "gText_WithdrawMonDescription",
-        "offset": 6317286,
+        "offset": 6318530,
         "capacity": 44,
         "text": "Move monsters from BOXES to\nyour party.",
         "encoded_bytes": 40
       },
       {
         "symbol": "gText_DepositMonDescription",
-        "offset": 6317330,
+        "offset": 6318574,
         "capacity": 38,
         "text": "Store party monsters in BOXES.",
         "encoded_bytes": 31
       },
       {
         "symbol": "gText_MoveMonDescription",
-        "offset": 6317368,
+        "offset": 6318612,
         "capacity": 49,
         "text": "Organize monsters in BOXES and\nin your party.",
         "encoded_bytes": 46
       },
       {
         "symbol": "gText_MoveItemsDescription",
-        "offset": 6317417,
+        "offset": 6318661,
         "capacity": 55,
         "text": "Move items held by monsters\nin BOXES or your party.",
         "encoded_bytes": 52
       },
       {
         "symbol": "gText_BattleMenu",
-        "offset": 6189926,
+        "offset": 6191170,
         "capacity": 26,
         "text": "FIGHT{CLEAR_TO 56}BAG\nTEAM{CLEAR_TO 56}RUN",
         "encoded_bytes": 23
       },
       {
         "symbol": "sText_PkmnBrokeFree",
-        "offset": 6187095,
+        "offset": 6188339,
         "capacity": 32,
         "text": "Oh, no!\nThe monster broke free!",
         "encoded_bytes": 32
       },
       {
         "symbol": "sText_PkmnDataAddedToDex",
-        "offset": 6187349,
+        "offset": 6188593,
         "capacity": 37,
         "text": "{B_OPPONENT_MON1_NAME}'s data was\nadded to the Guide.\\p",
         "encoded_bytes": 35
       },
       {
         "symbol": "sText_UseNextPkmn",
-        "offset": 6178203,
+        "offset": 6179447,
         "capacity": 18,
         "text": "Use next monster?",
         "encoded_bytes": 18
@@ -564,7 +587,7 @@
   "title_creature": [
     {
       "symbol": "sTitleScreenRayquazaGfx",
-      "offset": 5611504,
+      "offset": 5612748,
       "capacity": 2020,
       "encoded_bytes": 1276,
       "raw_bytes": 8192,
@@ -573,7 +596,7 @@
     },
     {
       "symbol": "sTitleScreenRayquazaTilemap",
-      "offset": 5613524,
+      "offset": 5614768,
       "capacity": 768,
       "encoded_bytes": 460,
       "raw_bytes": 2048,
@@ -583,15 +606,15 @@
   ],
   "title_song": {
     "title": "Foglight Overture",
-    "region_address": 144141640,
-    "header_address": 144153376,
+    "region_address": 144142884,
+    "header_address": 144154620,
     "allocated_bytes": 11784,
     "score_bytes": 1988,
     "tracks": 8,
-    "voicegroup_address": 141246944,
+    "voicegroup_address": 141248188,
     "native_volume": 90,
     "midi_sha256": "a5fa33ca074408a6958d785d882f172468225b28461856419b9d86fbcdb58a16",
-    "score_sha256": "362116a5cd9649141a386ca86f9a89a6de39b108f3e14204167d362baba70bf5",
+    "score_sha256": "e937cfc5a9b41b5371c74c4d53e94b617a5bb8cd284f92498658f2f9034f6346",
     "waveform_sources_verified": true,
     "quality_approval": "pending"
   },
@@ -617,7 +640,7 @@
       },
       {
         "symbol": "gMetatiles_Petalburg",
-        "offset": 3831724,
+        "offset": 3832696,
         "capacity": 3104,
         "encoded_bytes": 3104,
         "raw_bytes": 3104,
@@ -626,7 +649,7 @@
       },
       {
         "symbol": "gMetatileAttributes_Petalburg",
-        "offset": 3834828,
+        "offset": 3835800,
         "capacity": 388,
         "encoded_bytes": 388,
         "raw_bytes": 388,
@@ -635,7 +658,7 @@
       },
       {
         "symbol": "LittlerootTown_Layout_Blockdata",
-        "offset": 4177420,
+        "offset": 4178664,
         "capacity": 2048,
         "encoded_bytes": 2048,
         "raw_bytes": 2048,
@@ -2087,5 +2110,136 @@
       "buildings.indices": "f31039636d261d556bd579896134d1a3a2a45097ea82099823f989c033891b86",
       "building-palettes.gbapal": "a27f25bf4bdb0eea3ce7214f4d8e0c4f05d05f482165dee5f3af5435f8e45361"
     }
+  },
+  "city_furniture": {
+    "generator": "Built-in imagegen; original city furniture",
+    "source_sha256": "e7c7a9289c8f904c8fd30245077cd9b352d590f4abe634c86c3197edfe91cc00",
+    "prompt_sha256": "7ae91082403a47b2682607337b98927ae3446f2512fda355e0705bc6e7f655b8",
+    "reference_sha256": "bad3ee2d2370fef7279cdc6defc42f85e2cf2199093e41a1db4932bbbeb9a791",
+    "method": "Fixed original crops; proportional nearest; bottom-center alignment; alpha128; shared RGB55515",
+    "palette_sha256": "2c4864885ac0b05ef38c629d7e700df61c3a81e88633edf19604b534e7cc65bf",
+    "cards": [
+      {
+        "name": "lamp",
+        "bounds": [
+          118,
+          106,
+          292,
+          579
+        ],
+        "size": [
+          16,
+          32
+        ],
+        "indices_sha256": "4ba0cd683515cd62acce7929312edb139be5ec98350e054b386adeff85e04580",
+        "png_sha256": "ce906ae98fb395f834cb46ed020ebb6692eaa9f4d4ceccebfd31d651fe9b95e9"
+      },
+      {
+        "name": "meter",
+        "bounds": [
+          533,
+          390,
+          619,
+          578
+        ],
+        "size": [
+          16,
+          16
+        ],
+        "indices_sha256": "1d6d352d943816f4754f234a594b60ac953e88caa20196e10abbf543578a68dd",
+        "png_sha256": "ff34c0539114e5bb830afd385a7982c67a2ea6314efd00d0cecd9643c2cd30ec"
+      },
+      {
+        "name": "hydrant",
+        "bounds": [
+          897,
+          414,
+          1027,
+          580
+        ],
+        "size": [
+          16,
+          16
+        ],
+        "indices_sha256": "c1a0dd4a44054d9a290417feea0477e380db43d74324d2e9c6d45c46b97702dd",
+        "png_sha256": "b1f5abf7d10b22e0b495664255e4354bfd25c4425976202ac1191f744766ea54"
+      },
+      {
+        "name": "bin",
+        "bounds": [
+          1264,
+          404,
+          1394,
+          578
+        ],
+        "size": [
+          16,
+          16
+        ],
+        "indices_sha256": "a9b58d23f38cb202481efecec82361983be4d5d7dc7d1d25f6010e6ff16e22a7",
+        "png_sha256": "800e300aaa71110a6fb426fcb68acdb4e28e71aef3309ff07c3c5440daa44d3c"
+      },
+      {
+        "name": "rack",
+        "bounds": [
+          43,
+          804,
+          353,
+          966
+        ],
+        "size": [
+          32,
+          16
+        ],
+        "indices_sha256": "d75f4b3d9d152ab6769869d189eb142b90ec8de0e162412c2ac55aeef5d926eb",
+        "png_sha256": "d89ed0ffbe558c040f3eba89248b8bb51674f6519b56987c58c0a6c994e6f21f"
+      },
+      {
+        "name": "tree",
+        "bounds": [
+          426,
+          583,
+          720,
+          972
+        ],
+        "size": [
+          32,
+          32
+        ],
+        "indices_sha256": "dc75caed4cbad393fef6c45fd202db10900e4b5185c5fb8b3bc31b86a5648025",
+        "png_sha256": "93cd17e55a6ff83a823d0b9f3765cb50afd61c8d80da9954265dee1110c066dd"
+      },
+      {
+        "name": "bench",
+        "bounds": [
+          811,
+          802,
+          1110,
+          974
+        ],
+        "size": [
+          32,
+          16
+        ],
+        "indices_sha256": "a025d84bc36af2a5db2127b8f42861c81d8247c03557721cca81ff5be71598c4",
+        "png_sha256": "4779bd4ebc38b8c21c6d14493f87401ba93402275e831c3b855d91413d7977c2"
+      },
+      {
+        "name": "recycling",
+        "bounds": [
+          1204,
+          797,
+          1477,
+          974
+        ],
+        "size": [
+          32,
+          16
+        ],
+        "indices_sha256": "3a570f453a54e4c2996b65a6d13657c0f499bfa85da5a1a147560e1ac74b430d",
+        "png_sha256": "7b34a210428742005656f6f5e50de5dbe189281401db57cd95a79d52b872b29a"
+      }
+    ],
+    "approval": "Candidate; native placement and human quality acceptance pending"
   }
 }
