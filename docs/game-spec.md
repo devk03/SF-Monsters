@@ -8771,3 +8771,29 @@ Controlled frame-debt A/B result — October15,08:25UTC:
   private proof must not imply production compatibility. Root owns host/harness;
   alignment owns new ignored Worker files only, no deployment or Git mutation.
   Hard stop remains05:00SF/12:00UTC October15; stop with honest outstanding gates.
+
+
+Private Worker audio proof — October15,08:39UTC:
+
+- Unchanged core/WASM/shim/worklet now boot the exact v80 native checkpoint in
+  a private classic Worker; the actual AudioWorklet MessagePort transfers there
+  directly. Main UI only requests/recycles one latest video buffer and sends
+  current input masks. No production SDK or synchronous persistence replacement.
+- Actual Chrome10sec proof:597fresh/planned/actual frames,0overflow/backlog/core
+  mismatch,1267Worker ticks, maximum tick gap12.8ms. During one200ms main-thread
+  stall,27Worker ticks admitted12actual guest frames. Unchanged real worklet
+  rendered441088output frames with0warmup/underrun/drop; final queue2205source
+  frames (~34ms at65536Hz). Main7input edges and1162canvas submissions observed;
+  an eighth loop edge falls outside the window, so no eight-input claim.
+- Raw report SHA790be78030db17bab1362816471d433877960a45bc2fd7bac223bf3978c026ea;
+  independent auditor53a47ef59d003dd085eaa50a071184a7ec5ee1da2f3449eadc2bb48f9f62579f.
+  Auditor derives each fresh clock credit,5/30bounds, connected uint32counters,
+  initial/final global conservation, unchanged pinned runtime bytes, worklet
+  output/quanta and real main AudioContext read brackets. Corruption cases pass.
+  It explicitly does not approve99%deadlines, physical paint/input/speaker timing,
+  guest KEYINPUT consumption, production persistence or full performance.
+- Own Worker/audio/browser and600sec-bounded server stopped after preserving
+  actual screenshot. Next: longer active-field proof and read-only peer review.
+  Worker run watchdog permits at most900sec, separate from≤600sec measurement,
+  so a settled ten-minute sample can end before the finite run deadline. Public
+  v80 SDK/probe/audio/core remain unchanged; original private receipts retained.
