@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 00:24 UTC:
+Current checkpoint — October 15, 2026, 00:39 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v69 / Site 60 is live.
-  Native release source 5ca3b23; website source baf463c6. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v70 / Site 61 is live.
+  Native release source 3111cd0; website source 75382381. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -599,6 +599,9 @@ Current checkpoint — October 15, 2026, 00:24 UTC:
   the native menu. Browser controls and no-starter native access are verified.
 - Original Garry field art survives old-save Continue, native Save and cold reload.
   Prior eight custom cast sprites remain byte-exact; human art approval pending.
+- Original Jonathan now appears at both Muni stops with existing map palettes.
+  Both old-save Continue/resave/reload paths, native two-way journey and actual
+  browser route/manual outbound trip pass; art/likeness approval stays pending.
 - Original Dylan field art now walks/talks in native and browser play; all nine
   prior cast sprites and shared palettes remain exact. Human review is pending.
 - Lower-west South Park frontage has an adjacent butter house. All12 newly
@@ -607,8 +610,8 @@ Current checkpoint — October 15, 2026, 00:24 UTC:
 - Alignment confirms exact map-return plaintext gameplay preservation; native RNG
   and wandering Dylan differ. Actual map→Save→coldContinue also passes. Next
   check by00:45UTC; seed-door/density source and bounded technical reviews finished.
-  Alignment now audits Jonathan two-map slots/palettes and public appearance
-  sources in a finite read-only task; root continues first-slice polish.
+  Alignment completed Jonathan slot/palette and remaining battle-portrait audits.
+  Root continues first-slice polish; next exchange by01:00UTC.
 
 ### 15.1 Objective and completion rule
 
@@ -830,8 +833,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.69-park-neighbors-preview; target275444c30a17cb877f87778fa7cf61e06f7b278d1f278833789f3078b2944a85; Site60. Lower-west paired frontage and original Dylan field art pass native old-save/wall/interaction and scoped Chrome checks. Human approvals remain0/11. |
-| Latest local source build | v69 normal source5ca3b23 reproduces tested275444c3. Compiled creature255/cast44/intro5/map17/door11 and full local suite pass. All12 newly blocked old positions coldContinue/resave with only location/warp domain changes; five native wall pushes stay outside. Full performance/art gates remain open. |
+| Public build | 0.0.70-jonathan-muni-preview; targetfc3fbf94ad2440fccc4d35276cb4319181508c619ea0d042e1ba59e66c109f4c; Site61. Original Jonathan works at both Muni stops, with old-save/resave/reload, native round-trip and scoped Chrome route/manual outbound evidence. Eleven named fieldpeople have twelve map-specific candidates; human approvals0/11. |
+| Latest local source build | v70 normal source3111cd0 reproduces testedfc3fbf94. Compiled creature255/cast52/intro5/map17/door11 and full local suite pass. Ten prior cast sprites/three palettes and physical Park layout remain exact; static native table remains239slots. Remaining quality/performance/campaign gates are open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7054,3 +7057,50 @@ v70 two-map Jonathan source checkpoint — October15,00:31UTC:
   field integration, not all trainer portraits or full art acceptance. Public
   remainsv69/Site60, fullcampaign and acceptancegatesOPEN, humanapprovals0/11.
   GoalACTIVE throughOctober15,18Pacific; next alignment exchangeby00:45UTC.
+
+
+v70 public original Muni operator release — October15,00:39UTC:
+
+- Normal source3111cd09b2a37388d8bd954295d608d87d86c7a2 reproduces draft
+  fc3fbf94ad2440fccc4d35276cb4319181508c619ea0d042e1ba59e66c109f4c.
+  BPS1026706bytes SHA4b4ec15aa38b9382f88b4e80f55b9d9c2d09c64cbfc68d8befedce72bd417c57.
+  Full local suite and compiled255/52/5/17/11 pass. Actual13prior native cast/
+  palette resources and Park blockdata exact; static pointertable956bytes239slots.
+  Compiled-preservation proofSHA279f4299fcb1b71d3c4838361f978441b92f6a6a3517b215f0337655c536480f.
+- Genuineoldv69ParkC11 and SunsetC12 coldContinue in v70 at unchangedpositions
+  7,24 and28,22 with Flash exact. Currentlive Jonathan is local1/gfx65 in Park,
+  local8/gfx66 in Sunset. Ordinaryresaves increment12/13 and preserve EVERY
+  declared gameplay domain; two-map proofSHA
+  acae74a2076e8890b780cdc6ed9c4556ca8ef3db1def503e8c23aa1fb3740eca.
+  Independent coldreloads of those new ordinarysaves retain matching positions,
+  live graphics65/66 and entireFlash exact. No opaque-RAM/fullcampaign claim.
+- Native3308frame55.384872s full Muni outward/return journey shows both source
+  variants, dialogue/YesNo prompts and finalSunset28,22; original Flash unchanged.
+  ClipSHA103cc5b7ee35fac27751a0691f0a5d1ea6c1399eb1fc47e4fe65b66a1b7b88a3.
+  This is a single SF interaction review, not an Emerald reference/qualityapproval.
+- Actual Chrome route23/23 completes55.3849s; scoped89.7317s observation,
+  5360executed/video frames,10766visible ticks,0debt/mismatch/audio drop/underrun/
+  warmup, finalACK. Report898a080c23074f108cbeb9d265c0a3d3. Replaylateness3.817ms
+  does not prove guest/physicalinput. Separate ordinarykeyboard conversation
+  advances through allpages/YesNo and visibly arrives in SouthPark with matching
+  Jonathan. Screenshotsbrowser-sunset-dialogue/browser-park-arrival retained.
+  Owned Chrome tab/audio/core and finite1200s server18794 stopped. Full devices,
+  guest deadlines, physical response and listening/long-duration gates remainOPEN.
+- Site61 source75382381e59c91383f8046f8440e9b0aefa89bf4; savedversion
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_3c7bb053b3b081919579cf1ae86811d9.
+  Deploymentappgdep_6ad020463fa08191bcaca9c2c1a9cbc6 succeeded00:37:34UTC.
+  Archive63ce1b66a84230ed76a7429c1f853149e914e74487bc873976aefb1bee4f5294
+  passes88file/no-commercialROM/privateSave/ELF/movie/AppleDouble audit.
+  ApprovedSFMMprototype/15runtimefiles/hosting/auth/storage/publicaudience exact.
+  ProductionBPSdecoder reproduces target. Anonymous canonical livepatch/manifest
+  exact; receipthash7729f5e7866c48267434696c9d21307d0df5f85a02614b9bd658da1b3dad6c32.
+  Publicloader screenshotpublic-v70-loader-visible.png retained; no publicROM/
+  Save import or accountmutation. OwnIAB20closed; unrelatedPDF untouched.
+- Eleven named fieldpeople now have twelve map-specific original candidates.
+  Originality/integration is not human art/likeness approval or all battleportrait
+  completion. Fullscope, remainingmechanics/performance/50resume/campaign gates
+  stayOPEN; humanapprovals0/11, lastmusic2/4 atv40. GoalACTIVE toOctober15,18Pacific.
+  Alignment completed finite read-only remainingbattleportrait audit: append
+  Walden94/Steven95 after existingScott93, no stock slot or battle-rule changes.
+  Root will handle original art and native/browser acceptance; next exchange
+  by01:00UTC. No new monitor/GitHubworkflow/DBmigration/PRmerge; work continues.
