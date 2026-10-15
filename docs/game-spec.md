@@ -8599,3 +8599,18 @@ South Park density release — October15,06:55UTC:
   Equal native clock/controller route and nearest3x scale; both audio tracks.
   Review is density/placement subset only, full domains still0/11. Continue Sunset
   infill and normal compilation next; deadline remains05:00SF/12:00UTC.
+
+Sunset normal-compilation preparation — October15,07:01UTC:
+
+- New unused composer/preparer derives all five native resources from pinned
+  engine inputs and original assets. Legacy output exactly reproduces actualv79
+  rawgraphics, record/attribute/palette hashes and all1024mapwords; density output
+  fits491used secondary slots and231records. No post-link replacement is required.
+- Five filesystem/linked verification tests pass: deliberately stale native files
+  regenerate correctly and repeat byte-identically, every native output is final
+  before make, invalid declarations leave files unchanged, and verify-only calls
+  preserve both ROM/ELF on success and reject mismatched or jointly wrong bytes
+  without repair. Private test checkout is retained; no commercial fixture ships.
+- Production pipeline integration/build/native recovery remain next. Existing
+  roads/collision are preserved outside the36declared new solid cells; the receipt
+  explicitly distinguishes that scoped guarantee from preserving all collision.
