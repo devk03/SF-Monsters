@@ -14,12 +14,13 @@ from park_map import park_resources, park_tile, prune_unused_terrain, FACADES
 from park_signs import sign_cells
 from seed_door_art import load as load_seed_door
 from maps import encode_layout
+from park_infill import previous_plan
 from park_tile_flips_test import decode_tile, cell_from_tiles
 
 
 class ParkResources(unittest.TestCase):
     def test_lower_west_neighbor_changes_only_thirteen_cells_without_new_resources(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = previous_plan(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         previous = json.loads(json.dumps(plan))
         expected = {}
         for y, current, old in ((20, 'abc', 'P.T'), (21, 'def', 'PPP'),
@@ -186,7 +187,11 @@ class ParkResources(unittest.TestCase):
             self.assertIn(target, visited)
         for y, row in enumerate(plan['rows']):
             for x, token in enumerate(row):
-                tile = park_tile(plan, x, y) - 512
+                native_tile = park_tile(plan, x, y)
+                if native_tile < 512:
+                    self.assertIn(token, 'WXYZ')
+                    continue  # New primary resources have separate exact pixel/attribute checks.
+                tile = native_tile - 512
                 self.assertIn(tile, range(150))
                 if token in 'RP.FGB#T':
                     self.assertEqual(flags[tile] >> 12, 1)
@@ -207,7 +212,8 @@ class ParkResources(unittest.TestCase):
         changed = {i for i, pair in enumerate(zip(cells, result)) if pair[0] != pair[1]}
         self.assertEqual(changed, {21, 22, 23, 30, 31, 34, 35})
         referenced = {park_tile(plan, x, y) - 512
-                      for y, row in enumerate(plan['rows']) for x in range(len(row))}
+                      for y, row in enumerate(plan['rows']) for x in range(len(row))
+                      if park_tile(plan, x, y) >= 512}
         referenced.add(plan['border_tile'] - 512)
         self.assertFalse(changed & referenced)
         for i in referenced | set(range(40, 150)) | set(range(20)):

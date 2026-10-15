@@ -2,7 +2,8 @@
   "engine_map": "OldaleTown",
   "script": "south-park.inc",
   "tilesets": {
-    "secondary": "gTileset_SFSouthPark"
+    "secondary": "gTileset_SFSouthPark",
+    "primary": "gTileset_SFParkFrontage"
   },
   "legend": {
     ".": [
@@ -119,34 +120,54 @@
       661,
       true,
       0
+    ],
+    "W": [
+      0,
+      true,
+      0
+    ],
+    "X": [
+      0,
+      true,
+      0
+    ],
+    "Y": [
+      0,
+      true,
+      0
+    ],
+    "Z": [
+      0,
+      true,
+      0
     ]
   },
   "rows": [
     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
-    "FPPPPPRRRPabbbbbcPPPPPPPPPPPPabbbbbcPPPF",
-    "FPPPPPRRRPdeeeeefPabcPPabcabcdeeeeefPPPF",
-    "FPPPPPRRRPghhhhhfPdefPPdefdefghhhhhfPPPF",
-    "FPPPPPRRRPijjjjjfPghfPPghfghfijjjjjfPPPF",
-    "FPPPPPRRRPKKKDKKKPijfPPijfijfKKKHKKKPPPF",
+    "FPWWWPRRRPabbbbbcPPPPPPPPPPPPabbbbbcPPPF",
+    "FPWWWPRRRPdeeeeefPabcZZabcabcdeeeeefPPPF",
+    "FPWWWPRRRPghhhhhfPdefZZdefdefghhhhhfPPPF",
+    "FPWWWPRRRPijjjjjfPghfZZghfghfijjjjjfPPPF",
+    "FPWWWPRRRPKKKDKKKPijfZZijfijfKKKHKKKPPPF",
     "FPPPPPRRRP#PPPPPPPPPPPPPPPPPP#PPPPPPPPPF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPPPPPRRRPPabcabcPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPPPPPRRRPPdefdefPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPPPPPRRRPPghfghqPP..............PPPPPPF",
-    "FPPPPPRRRPPijfijQ...T..........T...PPPPF",
+    "FPXXXPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPXXXPRRRPPabcabcPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPXXXPRRRPPdefdefPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPXXXPRRRPPghfghqPP..............PPPPPPF",
+    "FPXXXPRRRPPijfijQ...T..........T...PPPPF",
     "FPPPPPRRRPPPPPPPPP...........B......PPPF",
     "FPPPPPRRRPPPPPP..GG..................PPF",
     "FPPPPPRRRPPPPPP......................PPF",
-    "FPPPPPRRRPPabcabc..T....B........#T..PPF",
-    "FPPPPPRRRPPdefdefPB............GG....PPF",
-    "FPPPPPRRRPPghfghfP..................PPPF",
-    "FPPPPPRRRPPijfijf....GG............PPPPF",
-    "FPPPPPRRRPPPPPPPPPP..............PPPPPPF",
+    "FPYYYPRRRPPabcabc..T....B........#T..PPF",
+    "FPYYYPRRRPPdefdefPB............GG....PPF",
+    "FPYYYPRRRPPghfghfP..................PPPF",
+    "FPYYYPRRRPPijfijf....GG............PPPPF",
+    "FPYYYPRRRPPPPPPPPPP..............PPPPPPF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",

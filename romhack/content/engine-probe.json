@@ -1,9 +1,9 @@
 {
-  "version": "0.0.71-cognition-portraits-preview",
+  "version": "0.0.72-park-infill-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. SELECT from JOURNAL opens the native SF city map; the geographic habitat map and read-only JOURNAL show the next opening-chapter objective; eleven named field people in twelve map-specific sprite candidates include Jonathan, Dylan, Garry, Naval and the clinic pair. All three Cognition trainers now have original portrait candidates. Native cleanup, future cast, music and the full campaign remain unfinished.",
+  "status": "Unreviewed SF chapter with original creature/title/courier, Sunset terrain/apartment, South Park outdoor/clinic and Cognition office art. SELECT from JOURNAL opens the native SF city map; the geographic habitat map and read-only JOURNAL show the next opening-chapter objective; eleven named field people in twelve map-specific sprite candidates include Jonathan, Dylan, Garry, Naval and the clinic pair. All three Cognition trainers have original portrait candidates. Four distinct original frontage candidates fill western pavement and join the northern South Park terrace. Native cleanup, future cast, music and the full campaign remain unfinished.",
   "maps": [
     "sunset.json",
     "apartment.json",

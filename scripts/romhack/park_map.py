@@ -11,6 +11,7 @@ from maps import encode_layout
 from house_variants import load_variants
 from park_signs import sign_cells
 from seed_door_art import load as load_seed_door
+from park_infill import infill_tile, apply as apply_infill
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -99,6 +100,8 @@ def park_resources(root):
 
 def park_tile(plan, x, y):
     token = plan['rows'][y][x]
+    if token in 'WXYZ':
+        return infill_tile(plan, x, y)
     if token == 'R':
         edge = road_edge_variant(plan, x, y, tokens='R')
         if edge:
@@ -169,4 +172,4 @@ const struct Tileset gTileset_SFSouthPark = {
             offset = (y * width + x) * 2; word = struct.unpack_from('<H', data, offset)[0]
             struct.pack_into('<H', data, offset, word & 0xfc00 | park_tile(plan, x, y))
     (engine / 'data/layouts/OldaleTown/map.bin').write_bytes(data)
-    return list(additions)
+    return list(additions) + apply_infill(root, engine, records)

@@ -7270,3 +7270,35 @@ v72 frontage asset checkpoint — October15,01:33UTC:
   its latest01:30 result is two controlled native cases with stronger party/
   callback/packet checks, still awaiting handoff/independent root review. These
   are not yet added to accepted fixture totals. GoalACTIVE; all broad gatesOPEN.
+
+v72 primary/map source checkpoint — October15,01:35UTC:
+
+- Four original frontage cards occupy53 previously walkable cells: brick at
+  2,1 (3x5), sage2,12 (3x5), sandstone2,20 (3x5), coffee21,2 (2x4). Coffee joins
+  the gap between northern rowhouses. Western sidewalk column5 and surrounding
+  cross-street approaches remain open. Decorative doors are solid, with no new
+  interior, warp, quest, item or real-business-location claim.
+- Original primary allocation:213 resident8x8tiles,54metatiles/attributes,
+  banks0..3; callbackNULL. Primary tile0 is transparent. Native records retain
+  the existing secondary sidewalk under every facade. Front foundation rows
+  use BG2 priority behind the approaching hero; upper walls use BG1. Every
+  footprint cell is collision-blocked at elevation0. Existing secondary503
+  tiles/150records/attributes/palettes and door-reserved tiles stay byte-exact.
+- Three independent source/resource cases decode all53 primary facade cells,
+  including RGB555 bank binding, quadrant flips, underlay and layer attributes.
+  Pinned prior map hash proves only53 cells and the primary binding change;
+  remaining reachable space stays reachable, event/warp/grass locations stay
+  exact, and a safe recovery candidate is at most3 Manhattan steps away.
+  Malformed cross-tileset underlays are rejected. Existing map14/park12/door6
+  tests pass; routine local check includes both new asset and infill suites.
+- The static source comparison is inspected and retained in
+  park-frontage-v72-plan/source-comparison.png. It is explicitly a proposal,
+  not in-engine proof. Native compilation, independently bounded ROM/ELF audit,
+  actual occupied-save recovery, collision/door checks and browser play remain
+  required before publication. No art approval or finished-neighborhood credit.
+- Public staysv71/Site62; forthcoming version0.0.72-park-infill-preview remains
+  source-only at this checkpoint. Root continues integration; alignment still
+  owns only its isolated full-turn fixture/tests. Broad gates remainOPEN.
+- Full local check passes after historical map tests remove only the new infill
+  before asserting their unchanged older map hashes. New53-cell pinned test
+  separately covers the complete new delta; no historical expected hash changed.

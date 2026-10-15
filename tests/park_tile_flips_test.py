@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from park_art import pack_park_cells
 from park_map import park_resources, park_tile
+from park_infill import previous_plan
 
 
 def decode_tile(raw, word):
@@ -37,7 +38,7 @@ def cell_from_tiles(tiles):
 
 class NativeTileFlips(unittest.TestCase):
     def test_lavender_frontage_fills_only_twelve_gap_cells(self):
-        plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        plan = previous_plan(json.loads((ROOT/'romhack/content/south-park.json').read_text()))
         restored = json.loads(json.dumps(plan))
         dylan = next(n for n in restored['npcs'] if n['script'] == 'SF_DylanField')
         self.assertEqual(dylan['graphics'], 'OBJ_EVENT_GFX_SF_DYLAN_FIELD')
