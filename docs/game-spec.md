@@ -8733,3 +8733,17 @@ Frame-debt corruption and private SDK checks — October15,08:02UTC:
   preserves every actual counter advance; no guessed tail subtraction.
 - A real finite200ms stall comparison is next. Public SDK/probe/WASM/audio and
   old failed600sec evidence remain unchanged. The full performance gate is open.
+
+Finite private pacing harness — October15,08:09UTC:
+
+- The local collector now supports an explicit .tools-only runtime override and
+  opt-in schema2/8MiB bounded report for raw ledgers. Default schema1/public
+  runtime/1MiB behavior stays. Five config/provenance/HTTP tests pass: wrong
+  schema/type/origin/identity and oversized reports fail; opted-in large payload
+  stores exactly. The test server ends after2seconds; private outputs stay local.
+- Optional stress UI exposes one200ms main-thread stall only after measurement
+  has started, records exact start/end/duration, and cannot repeat in a session.
+  Native cartridge/checkpoint/core stay identical across variants. First unused
+  baseline snapshot was retained/stopped before measurement while readiness was
+  tightened. Actual baseline and private fixed-runtime runs are next; no full
+  performance claim or public runtime change follows from harness tests.

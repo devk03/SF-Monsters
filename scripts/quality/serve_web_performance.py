@@ -33,7 +33,48 @@ def reject_constant(value):
     raise ValueError('Nonfinite JSON value: ' + value)
 
 
+def runtime_config(args):
+    override = getattr(args, 'private_runtime', None)
+    schema = getattr(args, 'report_schema', 1)
+    if type(schema) is not int or schema not in (1, 2):
+        raise ValueError('Diagnostic schema must be1 or2.')
+    directory = ROOT / 'web/public/emulator'
+    if override is not None:
+        directory = Path(override).resolve()
+        directory.relative_to((ROOT / '.tools').resolve())
+        if not directory.is_dir():
+            raise ValueError('Private runtime directory is missing.')
+    elif schema != 1:
+        raise ValueError('Schema2 requires an explicit private runtime.')
+    return directory, schema
+
+
+def controlled_stall_page(page):
+    """One explicit200ms main-thread interruption; never a recurring timer."""
+    def replace(old, new):
+        nonlocal page
+        if page.count(old) != 1:
+            raise ValueError('Private stress-page anchor changed.')
+        page = page.replace(old, new, 1)
+    replace(b'<p role="status"', b'<button id="stall" disabled>Controlled200ms stall</button>\n<p role="status"')
+    replace(b'let fieldObservation,', b'let controlledStalls=[],stallUsed=false,stallReady=false;\nlet fieldObservation,')
+    replace(b"button('stop').disabled=!measuring||finished;", b"button('stop').disabled=!measuring||finished;\n  button('stall').disabled=!stallReady||finished||stallUsed;")
+    replace(b"button('short').onclick=", b"""button('stall').onclick=()=>{
+  if(!stallReady||finished||stallUsed)return;stallUsed=true;controls();
+  const startedAtMs=performance.now(),until=startedAtMs+200;
+  while(performance.now()<until){}
+  const endedAtMs=performance.now();controlledStalls.push({requestedMs:200,startedAtMs,endedAtMs,actualMs:endedAtMs-startedAtMs});
+  status.textContent='Controlled stall completed; waiting for the finite report.';
+};
+button('short').onclick=""")
+    replace(b'  onStarted?.();', b'  stallReady=true;controls();\n  onStarted?.();')
+    replace(b'measuring=false;controls();}}', b'measuring=false;stallReady=false;controls();}}')
+    replace(b'const result={...measured,controllerReplay:', b'const result={...measured,controlledStalls:controlledStalls.filter(s=>s.startedAtMs>=measured.startedAtMs&&s.endedAtMs<=measured.endedAtMs),controllerReplay:')
+    return page
+
+
 def snapshot(args):
+    runtime_directory, report_schema = runtime_config(args)
     rom = args.rom.read_bytes()
     state = args.state.read_bytes()
     battery_path, metadata_path = args.state.with_suffix('.sav'), args.state.with_suffix('.json')
@@ -76,7 +117,9 @@ def snapshot(args):
         controller_route = {'rows': len(lines), 'frames': frames,
             'duration_ms': frames * 280896 / 16777216 * 1000,
             'scope': 'Supplied controller sequence; browser timing and scenes require observation'}
-    for path in sorted((ROOT / 'web/public/emulator').iterdir()):
+    for path in sorted(runtime_directory.iterdir()):
+        if path.is_symlink():
+            raise ValueError('Runtime snapshots must contain regular local files.')
         if path.is_file() and path.suffix in ('.js', '.wasm', '.txt', '.json'):
             routes['/emulator/' + path.name] = path.read_bytes()
             runtime[path.name] = digest(routes['/emulator/' + path.name])
@@ -90,6 +133,9 @@ def snapshot(args):
         if name not in runtime:
             raise ValueError('Missing browser diagnostic runtime: ' + name)
     page = Path(__file__).with_name('web_performance.html').read_bytes()
+    controlled_stall = getattr(args, 'controlled_stall', False)
+    if controlled_stall:
+        page = controlled_stall_page(page)
     routes['/'] = page
     identity = {
         'rom_sha256': digest(rom), 'mgba_revision': REVISION,
@@ -100,6 +146,9 @@ def snapshot(args):
             (args.rom, rom), (args.state, state), (battery_path, battery), (metadata_path, metadata_bytes))},
         'server_source_sha256': digest(Path(__file__).read_bytes()),
         'controller_route': controller_route,
+        'performance_schema': report_schema,
+        'private_runtime_override': getattr(args, 'private_runtime', None) is not None,
+        'controlled_stall_ms': 200 if controlled_stall else None,
         'public_progress_touched': False, 'server_limit_seconds': args.seconds,
         'provenance_scope': 'Controller-only capture metadata and matching native state header; companion Flash hashed separately',
     }
@@ -127,6 +176,7 @@ def serve(args, output, identity, routes):
     authority = '127.0.0.1:' + str(args.port)
     origin = 'http://' + authority
     deadline = time.monotonic() + args.seconds
+    max_report_bytes = MAX_REPORT_BYTES * (8 if identity.get('performance_schema', 1) == 2 else 1)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_args):
@@ -162,7 +212,7 @@ def serve(args, output, identity, routes):
                 return self.respond(403)
             try:
                 size = int(self.headers.get('Content-Length', '0'))
-                if not 0 < size <= MAX_REPORT_BYTES or self.headers.get('Transfer-Encoding'):
+                if not 0 < size <= max_report_bytes or self.headers.get('Transfer-Encoding'):
                     raise ValueError('Invalid report length')
                 if self.headers.get_content_type() != 'application/json':
                     raise ValueError('Require JSON')
@@ -170,11 +220,11 @@ def serve(args, output, identity, routes):
                 if len(body) != size:
                     raise ValueError('Incomplete report')
                 report = json.loads(body, parse_constant=reject_constant)
-                if not isinstance(report, dict) or report.get('schema') != 1 or (
+                if not isinstance(report, dict) or type(report.get('schema')) is not int or report.get('schema') != identity.get('performance_schema', 1) or (
                         report.get('context', {}).get('identity') != identity):
                     raise ValueError('Report identity differs from this frozen session')
                 data = json_bytes(report)
-                if len(data) > MAX_REPORT_BYTES:
+                if len(data) > max_report_bytes:
                     raise ValueError('Expanded report exceeds storage bound')
             except (ValueError, TypeError, AttributeError, RecursionError, OSError):
                 return self.respond(400)
@@ -209,6 +259,9 @@ def main():
     parser.add_argument('--name', required=True)
     parser.add_argument('--port', type=int, default=18766)
     parser.add_argument('--seconds', type=int, default=1800)
+    parser.add_argument('--private-runtime', type=Path, help='Explicit experimental runtime under this workspace .tools only.')
+    parser.add_argument('--report-schema', type=int, choices=[1, 2], default=1)
+    parser.add_argument('--controlled-stall', action='store_true', help='Expose one local200ms stress action during measurement.')
     args = parser.parse_args()
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,43}', args.name):
         parser.error('Use a fresh lowercase benchmark name of at most 44 characters')
