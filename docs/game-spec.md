@@ -8686,3 +8686,19 @@ Sunset density native/browser release — October15,07:30UTC:
   high-contrast paving and old road stubs/margins remain rough. Human full0/11.
   Next is a private bounded pacing experiment; the public runtime is unchanged.
   Hard stop remains October15,05:00SF/12:00UTC; continue until then.
+
+Private frame-debt policy — October15,07:37UTC:
+
+- Added an unused, bounded frame-credit ledger under quality/experiments and8
+  passing deterministic cases. Public SDK/WASM/audio/probe remain unchanged.
+  Fresh demand is counted once; five-frame execution cap remains; backlog is
+  limited to30frames. Only actual guest-counter progress retires scheduled work.
+- Due[0,12,13,13] executes[0,5,5,3], carries[0,7,3,0] and loses0; the7fresh frames
+  beyond the old tick cap remain explicitly reported as late-work warning.
+  Due50 explicitly drops20 at the ceiling, executes5 and retains25; overflow
+  remains loss/failure. Partial/zero guest progress stays owed and exposes a
+  planned-versus-actual mismatch. Pause/load reset reports abandoned work/epochs.
+- Invalid/regressed/duplicate transitions fail without mutating the ledger.
+  No frame deadline, audio, input or full performance gate is cleared by these
+  unit cases. Next: private SDK/probe integration with schema2conservation and
+  input/debt age accounting, followed by a finite controlled-stall comparison.
