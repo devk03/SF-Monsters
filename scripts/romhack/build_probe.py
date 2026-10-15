@@ -30,6 +30,7 @@ from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from cast_art import apply_cast, audit_compiled_cast, GROUPS
 from trainer_portraits import apply_portrait
+from trainer_class_alias import apply_alias
 from trainer_portrait_audit import audit_portraits
 from intro_art import apply_intro, audit_intro
 from courier_battle_art import apply_courier_battle
@@ -101,6 +102,7 @@ def main():
     restored += apply_engine_guards(ROOT, EMERALD, original)
     restored += apply_field_journal(ROOT, EMERALD, original)
     restored += apply_monsters(content, ROOT, EMERALD, original)
+    restored += apply_alias(ROOT, EMERALD)
     restored += apply_creature_audio(content, ROOT, EMERALD, original)
     restored += apply_field_music(content, ROOT, EMERALD, original)
     restored += apply_courier(ROOT, EMERALD, original)

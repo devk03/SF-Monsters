@@ -7508,3 +7508,31 @@ v72 public denser-frontage checkpoint — October15,02:05UTC:
   Next first-slice cleanup is scoped BUILDER role labels for Walden/Steven,
   preserving all numeric classes and unrelated table text. Alignment's read-only
   recommendation is complete; no label change is included in publicv72.
+
+v73 scoped role-label source checkpoint — October15,02:10UTC:
+
+- Read-only alignment identified a shared66x13 class table. Globally replacing
+  POKéMANIAC would also rename seven inherited trainers and special-mode
+  displays. Root instead compiles one BUILDER8byte constant and a trainer-ID
+  getter alias for Walden320/Steven321, gated on their existing numericclass23,
+  after the existing out-of-range guard. All original table text stays intact.
+- Ordinary battle A/B class placeholders route through the existing getter.
+  SecretBase/Union/Frontier/Hill/ereader and other special branches remain
+  exact. This catches native battle introductions and other existing class
+  placeholder templates; getter-only changes would miss the actual intro.
+  No trainer class/AI/team/item/level/portrait/reward/flag change is intended.
+- Anchored source overlay composes after species changes and validates both
+  complete sources before writing either. Changed/stale/duplicate anchors or
+  already-applied hooks fail closed. Restore registration includes both native
+  source files; no ROM instruction patch or general text-writer relaxation.
+- Four portable source guards and one optional complete pinned-engine source
+  check pass locally. Portable checks require no ROM or private checkout; the
+  optional complete-source check skips clearly when the engine is absent.
+  Tests preserve all unrelated source bytes/special lookups and verify failed
+  second-source validation cannot partially write the first file.
+- Version0.0.73-builder-labels-preview is source-only at this checkpoint; public
+  remainsv72/Site63. Native compile, independent all855-ID getter/whole-table/
+  trainer-data audit, ordinary intro text for both people and save behavior
+  remain pending. Alignment owns only new getter runner/tests and two exact
+  reader symbols, finite task due03:15UTC. Root owns source/builds/UI evidence.
+  Human0/11 and all broad remaining gates stayOPEN; goalACTIVE.
