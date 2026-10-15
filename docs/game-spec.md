@@ -8747,3 +8747,27 @@ Finite private pacing harness — October15,08:09UTC:
   baseline snapshot was retained/stopped before measurement while readiness was
   tightened. Actual baseline and private fixed-runtime runs are next; no full
   performance claim or public runtime change follows from harness tests.
+
+
+Controlled frame-debt A/B result — October15,08:25UTC:
+
+- Same v80 cartridge/checkpoint, pinned core/WASM/shim and unchanged audio sink;
+  each finite foreground10sec run received one200ms main-thread stall. Public
+  baseline requested598/executed592 and discarded6. Private bounded ledger
+  requested/planned/executed597, overflow0, closing debt0, mismatch0; independent
+  raw-ledger audit passes. This proves conservation for this interruption only.
+- Baseline report SHA26241744a84c1a20cb7986aa2e4468d785679a1824a8585c23d566c402c614a5;
+  private7713e029cba4b915d968c9ad87275847a6801a60b3c8f71968c9a803043681c3.
+  Baseline7073/private6640 audio underrun output frames remain. Private final
+  queue12469 source frames (~190ms at65536Hz), baseline6948 (~106ms). Startup
+  settling differs; small underrun difference is not an improvement claim.
+- Retaining guest frames alone can increase delayed audio after a stall. Do not
+  promote this as complete performance repair, trim diagnostics, or hide loss.
+  Public v80 SDK/probe/audio/WASM remain byte-identical. Both own browsers/audio
+  and600sec-bounded local servers stopped. Full performance gate remains open.
+- Next bounded private proof moves emulation to a Worker with direct worklet
+  audio messages, keeping core/shim/worklet unchanged. Existing synchronous
+  Flash export/import and pagehide persistence are compatibility constraints;
+  private proof must not imply production compatibility. Root owns host/harness;
+  alignment owns new ignored Worker files only, no deployment or Git mutation.
+  Hard stop remains05:00SF/12:00UTC October15; stop with honest outstanding gates.
