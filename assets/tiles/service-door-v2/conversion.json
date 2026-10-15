@@ -1,0 +1,87 @@
+{
+  "source_sha256": "5502852a784e0e49765ed2e464f15f64a8b2ef09043a4022828ffa776197b1b3",
+  "prompt_sha256": "e9ed34ed33d0c7f2a0c8475e11ded6757fc43e1417297f0cfd8c919ff93ab3b9",
+  "source_bounds": [
+    [
+      [
+        43,
+        73,
+        316,
+        596
+      ],
+      [
+        407,
+        73,
+        679,
+        596
+      ],
+      [
+        771,
+        73,
+        1044,
+        596
+      ]
+    ],
+    [
+      [
+        43,
+        763,
+        316,
+        1286
+      ],
+      [
+        407,
+        762,
+        679,
+        1286
+      ],
+      [
+        771,
+        763,
+        1044,
+        1286
+      ]
+    ]
+  ],
+  "moving_rectangle": [
+    3,
+    5,
+    13,
+    26
+  ],
+  "size": [
+    16,
+    32
+  ],
+  "stages": 3,
+  "palette_banks": [
+    8,
+    9
+  ],
+  "references": {
+    "warehouse-closed-reference.png": "c0d372c1cbb4df72133edba071503e236d725ae8e55617683f57c6d10199fc08",
+    "clinic-closed-reference.png": "fef799ba1aea5179530870d1034ea63e4fe5c55ce1fdec9b37197649d055097d"
+  },
+  "palette_sha256": "2c4864885ac0b05ef38c629d7e700df61c3a81e88633edf19604b534e7cc65bf",
+  "method": "Original source crops; nearest16x32; RGB55515; alpha128; fixed closed-frame jambs/steps",
+  "static_door_cells": [
+    [
+      64,
+      71
+    ],
+    [
+      99,
+      106
+    ]
+  ],
+  "quality_approval": "pending",
+  "generator": "Built-in imagegen; original project references only",
+  "files": {
+    "warehouse.png": "ab5e4d69a5fbcb66c37d1ae653f78382d01f2602c0a6dc5669a2d778da3e76d5",
+    "warehouse.indices": "0e701c66663d3be6b6e94fad5008372bfd3c0ec8b5790720f38b8095b6639e0f",
+    "warehouse.4bpp": "096ae5e6379a0cd24b575b2eb5d74a499e04eb2300a38e705b9d2afb239a51a6",
+    "clinic.png": "eb6f895b049821d94ce643726d83f0df9b2ce5efafb50214ae814b0e37cf44da",
+    "clinic.indices": "9fe7c77f9098e0f515bae027b3c5c17de10e09c21c9e632d182638833e89f818",
+    "clinic.4bpp": "e0e4783886ed42dfa1f027a9a0a6a5c66570220b9a664ba37ca352f4e08f6e2f"
+  }
+}

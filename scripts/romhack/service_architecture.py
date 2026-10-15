@@ -7,20 +7,28 @@ from pathlib import Path
 import struct
 from connected_frontage import COLORS, sha
 
-ASSET = 'assets/tiles/south-park-services-v2'
-CARDS = (('warehouse', (89,25,972,703)), ('clinic', (1125,25,2009,703)))
+REVISIONS = {
+    'v2': ((2098,749), (('warehouse',(89,25,972,703)), ('clinic',(1125,25,2009,703)))),
+    'v3': ((2100,749), (('warehouse',(87,23,974,704)), ('clinic',(1124,23,2012,704)))),
+}
 
 
-def encode(root):
+def specification(root, revision):
+    if revision not in REVISIONS:
+        raise ValueError('Unknown service architecture revision.')
+    return root / ('assets/tiles/south-park-services-'+revision), REVISIONS[revision]
+
+
+def encode(root, revision='v2'):
     from PIL import Image
-    directory = root / ASSET
+    directory, (size,cards) = specification(root,revision)
     source = Image.open(directory/'source.png').convert('RGBA')
-    if source.size != (2098,749):
+    if source.size != size:
         raise ValueError('Review service architecture source coordinates.')
     palette = b''.join(struct.pack('<H', sum(rgb[c] << (5*c) for c in range(3)))
                        for rgb in COLORS)
     frames = []
-    for name, bounds in CARDS:
+    for name, bounds in cards:
         native = source.crop(bounds).resize((112,80), Image.Resampling.NEAREST)
         pixels = bytes(0 if rgba[3] < 128 else min(range(1,16), key=lambda index:
             sum((round(rgba[c]*31/255)-COLORS[index][c])**2 for c in range(3)))
@@ -35,11 +43,13 @@ def encode(root):
     references = ('assets/tiles/connected-frontage-v2/native.png',
                   'assets/tiles/south-park-buildings/warehouse.png',
                   'assets/tiles/south-park-buildings/clinic.png')
+    if revision=='v3':
+        references=('assets/tiles/south-park-services-v2/source.png',)
     metadata = {'source_sha256':sha((directory/'source.png').read_bytes()),
         'prompt_sha256':sha((directory/'prompt.md').read_bytes()),
         'generator':'Built-in imagegen, original architecture',
         'quality_approval':'pending; prototype only; door animation not integrated',
-        'native_size':[112,80], 'cards':[{'name':n,'source_bounds':list(b)} for n,b in CARDS],
+        'native_size':[112,80], 'cards':[{'name':n,'source_bounds':list(b)} for n,b in cards],
         'method':'Separate original source bounds; nearest112x80; shared curated RGB55515; alpha128',
         'references':{name:sha((root/name).read_bytes()) for name in references},
         'files':{name:sha((directory/name).read_bytes()) for name in files}}
@@ -47,15 +57,15 @@ def encode(root):
     return metadata
 
 
-def load(root):
+def load(root,revision='v2'):
     from PIL import Image
-    directory = root / ASSET
+    directory, (size,cards) = specification(root,revision)
     info = json.loads((directory/'conversion.json').read_text())
     if info['source_sha256'] != sha((directory/'source.png').read_bytes()) or (
             info['prompt_sha256'] != sha((directory/'prompt.md').read_bytes())):
         raise ValueError('Service architecture source or prompt changed.')
     if info['native_size'] != [112,80] or info['cards'] != [
-            {'name':n,'source_bounds':list(b)} for n,b in CARDS]:
+            {'name':n,'source_bounds':list(b)} for n,b in cards]:
         raise ValueError('Service architecture native footprint changed.')
     for name,digest in info['files'].items():
         if sha((directory/name).read_bytes()) != digest:
@@ -68,7 +78,7 @@ def load(root):
         raise ValueError('Service architecture indexed allocation changed.')
     result = [frames[:8960],frames[8960:]]
     expected = [c*255//31 for rgb in COLORS for c in rgb]
-    for (name,_),pixels in zip(CARDS,result):
+    for (name,_),pixels in zip(cards,result):
         image = Image.open(directory/(name+'.png'))
         if (image.mode,image.size,image.tobytes(),image.getpalette()[:48]) != (
                 'P',(112,80),pixels,expected):
@@ -77,4 +87,8 @@ def load(root):
 
 
 if __name__ == '__main__':
-    print(json.dumps(encode(Path(__file__).resolve().parents[2]),indent=2))
+    import argparse
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--revision',choices=tuple(REVISIONS),default='v2')
+    args=parser.parse_args()
+    print(json.dumps(encode(Path(__file__).resolve().parents[2],args.revision),indent=2))

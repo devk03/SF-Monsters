@@ -554,7 +554,7 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 04:48 UTC:
+Current checkpoint — October 15, 2026, 05:10 UTC:
 
 - Goal active; stop October 15 at 18:00 Pacific. Public v76 / Site 67 is live,
   but the user rejected the frontage art: buildings still do not fit the scene.
@@ -623,7 +623,7 @@ Current checkpoint — October 15, 2026, 04:48 UTC:
 - All three Cognition trainers have original portrait candidates. Compiled26
   checks, actual native/browser entrances and two ordinary loss/save/coldContinue
   branches pass their technical scopes. Human paired art reviews remain pending.
-- Current alignment exchange04:54UTC,next05:24UTC. Root owns the whole-block
+- Current alignment exchange05:10UTC,next05:40UTC. Root owns the whole-block
   art experiment, native validation and canonical spec. Peer completed finite
   read-only visual critique: entry openings remain too narrow beside the hero,
   and adjacent service buildings still use a different feature scale. No peer
@@ -843,7 +843,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,04:37UTC; historical checkpoint details follow):
+Current snapshot (October 15, 2026,05:10UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
@@ -8237,3 +8237,34 @@ Whole-street native candidate — October15,05:04UTC:
   before shipping. Normal build integration, compiled release audits, entries/
   returns, browser verification and user comparison acceptance remain open.
   Publicv76 stays unchanged and remains rejected. No workflow runs requested.
+
+Human style clarification — October15,05:09UTC:
+
+- User reviewed actual connected-street-d-cold native frame: "Closer; keep
+  refining this style". Direction feedback only; no numeric/domain approval.
+- User separately identified the detailed original connected-block source A as
+  "too much detail". Treat that source as explicitly rejected style, not an art
+  target. Roof shingles, individual brick lines, layered ornamental trim and
+  illustration-scale texture should give way to broad flat native pixel groups,
+  simple windows, restrained trim and readable entrances. Judge at240x160 with
+  the actual player and pavement. Later candidates must preserve this simplicity.
+
+Simplified surfaces and stable door stages — October15,05:10UTC:
+
+- Following explicit "too much detail" feedback, original service-v3 removes
+  shingles/brick-line texture while preserving footprint, entry position and
+  roof depth. Original source/prompt/native previews and shared palette remain
+  versioned. Normal production integration is still in progress.
+- Original service-door-v2 source compiles two sets of three16x32 stages. Jambs
+  and steps stay equal to the closed frame outside x3..12/y5..25; every portal
+  pixel remains opaque. Indexed/native/preview/palette provenance checks and
+  five focused tests pass, including independent native tile decode and faults
+  for moving jambs, transparent portals, collapsed stages and invalid buffers.
+  Both doors and simplified services re-encode byte-identically. No actual
+  animated-entry, closing, return/cache, browser or human approval is claimed.
+- The alignment chat owns only a new independent connected-block compiled audit
+  and its fault tests. Root owns producer integration and separate service/door
+  validation. Frozen original-only v76 preservation data are exported alongside
+  v3 source; they are a rejected-art baseline, not an accepted visual reference.
+- Publicv76 remains unchanged and rejected. User's simplified direction remains
+  "Closer; keep refining this style"; all11 quality-domain approvals stay open.

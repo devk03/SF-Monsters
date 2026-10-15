@@ -34,3 +34,9 @@ standalone illustration or source checks.
 
 Public v76 and the normal producer/auditors remain unchanged by this experiment.
 Any experimental cartridge and reference screenshots stay private under .tools.
+
+Human feedback: the user explicitly rejected source-candidate-a.png as "too much
+detail". It is retained solely as provenance for the simpler derived candidates,
+not as a visual target. Prioritize flat colors, broad windows and restrained trim
+at native GBA scale. The later actual street candidate was called "Closer; keep
+refining this style"; that is direction feedback, not a domain quality approval.
