@@ -8367,3 +8367,17 @@ City furnishing originals — October15,05:50UTC:
 - Declared a reversible curbside footprint with solid feet, walkable overhead
   cells and explicit exclusions for existing homes, service doors and events.
   Normal producer remains unchanged until independent integration checks exist.
+
+Independent city-extension gate — October15,05:57UTC:
+
+- Alignment handed back the independent furniture auditor and explicit connected
+  furniture mode. Root reviewed source/prefix/map decoding and confirmed the
+  old actual v77 still passes the strict135-check gate and correctly fails the
+  new furniture gate. Peer linked ARM positive fixture passes166/166 and the
+  normalized connected135/135; linked fault tests remain in progress.
+- The new gate pins original source/crops and frozen original-only v77 payloads,
+  preserves395tiles/120records/attributes/allpalettes, decodes15 added records,
+  checks135 paving underlays and exactly18 map changes, including14 solid bases.
+  Existing connected checks may exclude extension tails and restore18 cells only
+  AFTER the new gate passes on the same ROM/ELF. Default v77 mode stays strict.
+  No native placement/recovery, browser or quality acceptance is inferred.

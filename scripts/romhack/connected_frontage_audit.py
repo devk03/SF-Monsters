@@ -68,7 +68,7 @@ def cell_pixels(raw, words, *, secondary=False, bank=None):
                     + parts[2*(y//8)+1][(y%8)*8:(y%8+1)*8] for y in range(16))
 
 
-def audit_connected(rom, elf, root):
+def audit_connected(rom, elf, root, *, furniture=False):
     from check_creature_resources import Cartridge, decode_lz
     from PIL import Image
 
@@ -101,6 +101,17 @@ def audit_connected(rom, elf, root):
 
     try:
         root = Path(root)
+        if type(furniture) is not bool:
+            raise ValueError('Furniture mode must be an explicit boolean.')
+        if furniture:
+            from city_furniture_audit import audit_furniture, CITY_CELLS
+            city = audit_furniture(rom, elf, root)
+            result['furniture'] = city
+            if not city['passed']:
+                raise ValueError('Independent furniture gate failed; no normalization is allowed.')
+            restored_map = source(root/'assets/tiles/city-furniture-v1/baseline-v77/south-park-map.bin')
+            result['normalization'] = {'validated_furniture':True, 'restored_map_cells':18,
+                'preserved_primary_tiles':395, 'preserved_records':120}
         source(Path(__file__))
         source(Path(__file__).parents[1]/'quality/check_creature_resources.py')
         hashes.update(rom=sha(rom.read_bytes()), elf=sha(elf.read_bytes()))
@@ -142,7 +153,17 @@ def audit_connected(rom, elf, root):
             raise ValueError('The entire sixteen-pixel approach must remain transparent.')
 
         cart = Cartridge(rom, elf)
-        def data(name, length=None): return cart.data(name, length)
+        if furniture and (sha(cart.rom),sha(cart.elf)) != (city['hashes']['rom'],city['hashes']['elf']):
+            raise ValueError('Cartridge changed after furniture validation.')
+        def data(name, length=None):
+            value = cart.data(name, length)
+            if furniture and name == 'OldaleTown_Layout_Blockdata':
+                value = bytearray(value)
+                for x,y,record,solid in CITY_CELLS:
+                    at = (y*40+x)*2
+                    value[at:at+2] = restored_map[at:at+2]
+                return bytes(value)
+            return value
         for suffix, secondary in (('SFParkFrontage',0), ('SFSouthPark',1)):
             def header(suffix=suffix, secondary=secondary):
                 names = ('gTilesetTiles_', 'gTilesetPalettes_', 'gMetatiles_', 'gMetatileAttributes_')
@@ -168,6 +189,12 @@ def audit_connected(rom, elf, root):
         records = data('gMetatiles_SFParkFrontage')
         attrs = data('gMetatileAttributes_SFParkFrontage')
         palettes = data('gTilesetPalettes_SFParkFrontage')
+        if furniture:
+            # Only independently validated extension tails are excluded. All
+            # original resource and map checks below remain the strict v77 gate.
+            raw = raw[:395*32]
+            records = records[:120*16]
+            attrs = attrs[:120*2]
         compare('primary_allocations', struct.pack('<4I',395*32,120*16,120*2,512),
                 lambda:struct.pack('<4I',len(raw),len(records),len(attrs),len(palettes)))
         compare('original235_tile_prefix', baseline['primary.4bpp'], lambda:raw[:235*32])

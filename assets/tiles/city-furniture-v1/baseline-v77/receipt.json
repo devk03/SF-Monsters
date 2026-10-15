@@ -1,0 +1,26 @@
+{
+  "scope": "Original authored SF primary resources and SF map words only. No commercial ROM data, saves or reference media. Frozen v77 preservation baseline; not a quality approval.",
+  "target_sha256": "e5a58e40fcc3f3c6ef4763eb15755ba23236bdb68edbf339a997546c011b8c73",
+  "files": {
+    "primary.4bpp": {
+      "bytes": 12640,
+      "sha256": "326d27bc217cdd3ba11f4de4d4d5880bb7d5c8b74f5f631443648b6a0826aa39"
+    },
+    "metatiles.bin": {
+      "bytes": 1920,
+      "sha256": "08c7fa770909b88f17100bfaae71c15177ee89bf2453a8912fc0b5838a788221"
+    },
+    "attributes.bin": {
+      "bytes": 240,
+      "sha256": "d45e0ca57b5f5e26297676e07bb86974a9673712f52c3c7bea72a32d66d0b45a"
+    },
+    "palettes.gbapal": {
+      "bytes": 512,
+      "sha256": "a8f49d272a8e9acc542a81c8d34c4e50a17727bac85fc27a322c51183c560f4e"
+    },
+    "south-park-map.bin": {
+      "bytes": 2560,
+      "sha256": "f8e7c473e0cf93447cb5c6be9bfdc8a465ff7a8d21cfc7cb1b57e78785fe3f80"
+    }
+  }
+}
