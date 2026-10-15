@@ -8563,3 +8563,12 @@ Independent Sunset density gate — October15,06:55UTC:
   Thumb pointer bits before file reads. Existing12creature reader checks and
   all9South Park density fault tests pass. Actual Sunset normal compilation,
   geometry upgrade recovery, runtime visuals and human approval remain pending.
+
+Sunset density corruption coverage — October15,06:56UTC:
+
+- Added the201-line independent fault suite and both Sunset suites to localchecks.
+  Three original-source/provenance cases always run. Six compiled binding cases
+  use the pinned private v79 legacy bytes in memory and explicitly skip when that
+  private cartridge is absent; no inherited fixture payload is published.
+- Root's rerun passes9/9, including source self-rehash, old/new pixels, mirrors,
+  layers, every parcel/road/event approach, tails, headers, Thumb BL and stale ELF.
