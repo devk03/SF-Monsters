@@ -8112,3 +8112,30 @@ Native street-threshold checkpoint — October15,04:24UTC:
 - Starterprompttext is an independent uncommitted three-line change included
   in the privatecandidate only; nativebranchchecks underway, noUIapprovalclaim.
   Publicremainsv75/Site66; bothperformancefailures remainOPEN; goalACTIVE.
+
+
+Starter-choice information checkpoint — October15,04:31UTC:
+
+- Only3existingtextallocations change: preserveflavor/portrait/cry/finalchoice,
+  add Grass/AbsorbcanrestoreHP, Fire/Embercanburn, Water/WaterGun explanation.
+  Scriptcontrol, levels, stats, moves, starter/reward/quest state unchanged.
+- Actualnativegenuinezero-partyoldsave checks all3flavor/info/finalYesNo
+  pages, No/Bdeclines and independentacceptancebranches. Declines leave
+  party600/count,flags300,vars512,money,pockets,position exact; scriptmode0
+  and fieldcontrols unlocked. Eachacceptance grants existinglevel5species/
+  startingmoves,5balls/3potions, startervariable0/1/2 and quest2, endingunlocked.
+  Correctedreceipt668c04b519e348a6b1b7baca87d25fc7f12e7216a3fdb2aba65cb96e0697b7b1.
+- Earliercapturelabels advancedbefore slowtextfinished. The firstad-hocreceipt
+  didnotprovecompleteddeclines; preservedwithINVALIDATEDsidecar. Repeated
+  capturesv76cvisuallyshowcompleteinfoandYesNo,and requireactualstopped/
+  unlockedcontexts. No creditfromtheinvalidreceipt.
+- ControllednativeFONT_NORMALGetStringWidth measures15lines/max196px,
+  <=202budget. ScratchRAM/CPUfixtureseparatefromcontroller-onlycampaign
+  evidence; no broaderUI, pacing, completecampaign orhumanscoreclaimed.
+- Chrome10secwalksmoke:598video/1200visibleticks,8inputs,zero debt/mismatch/
+  warmup/droppedsource/underrun, finalACK. Native/browsergrayfoundationviews
+  inspected. Separate23.37secclinicroutecompleted10/10dispatches; subsequent
+  manualstopreportisforeground=falsewithhiddenstall/audio loss, rejectedfor
+  performance. Manualclinicentry/returnisvisualproofonly, allrawdata preserved.
+- Lastalignmentexchange04:30UTC,next05:00UTC. Publicv75stilllive while
+  committedsource/releasepublicationfollows; human0/11, performanceOPEN,goalACTIVE.

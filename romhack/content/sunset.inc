@@ -221,11 +221,11 @@ SF_Text_HealChallenge::
 SF_Text_HealBadge::
 	.string "KARPATHY: Your team is refreshed.\pSCOTT'S incident log has a new entry.\nRead it before the next delivery.$"
 SF_Text_Bloom::
-	.string "SPROUTSLUG dreams of growing wings.\nFor now, its garden comes along.\pChoose SPROUTSLUG?$"
+	.string "SPROUTSLUG dreams of growing wings.\nFor now, its garden comes along.\pGRASS type.\nABSORB can restore its HP.\pChoose SPROUTSLUG?$"
 SF_Text_Ember::
-	.string "CINDERCOY warms the Sunset with\na little fire and too much confidence.\pChoose CINDERCOY?$"
+	.string "CINDERCOY warms the Sunset with\na little fire and too much confidence.\pFIRE type.\nEMBER can burn the foe.\pChoose CINDERCOY?$"
 SF_Text_Tide::
-	.string "BRINEPUP loves the cold waves.\nIt thinks every courier is a playmate.\pChoose BRINEPUP?$"
+	.string "BRINEPUP loves the cold waves.\nIt thinks every courier is a playmate.\pWATER type.\nWATER GUN attacks with water.\pChoose BRINEPUP?$"
 SF_Text_Ready::
 	.string "KARPATHY: Take supplies for the beach.\nWeaken a wild monster to recruit it.\pROON is west of GREAT HIGHWAY.\nHis prototype is farther north.\pYour BAG, team and SAVE are available\nfrom the START menu.$"
 SF_Text_Prototype::
