@@ -17,6 +17,7 @@ node --test tests/audio_playback_reset_test.mjs
 node --test tests/state_serialization_test.mjs
 node --test tests/web_performance_probe_test.mjs
 node --test tests/controller_replay_test.mjs
+node --test tests/field_observation_test.mjs
 python3 tests/prepare_web_test.py
 node --experimental-strip-types tests/bps.test.mjs
 node --experimental-strip-types tests/flash-save.test.mjs
@@ -52,6 +53,7 @@ python3 tests/frame_storage_test.py
 python3 tests/input_profile_test.py
 python3 tests/native_loop_analysis_test.py
 python3 tests/web_performance_audit_test.py
+python3 tests/active_field_audit_test.py
 python3 tests/interface_text_test.py
 python3 tests/interface_graphics_test.py
 python3 tests/native_resources_test.py
@@ -74,6 +76,7 @@ python3 tests/door_art_test.py
 .tools/venv/bin/python tests/trainer_portrait_audit_test.py
 python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_frontage_test.py
+.tools/venv/bin/python tests/sidewalk_thresholds_test.py
 .tools/venv/bin/python tests/park_paving_test.py
 .tools/venv/bin/python tests/park_paving_audit_test.py
 .tools/venv/bin/python tests/park_infill_test.py

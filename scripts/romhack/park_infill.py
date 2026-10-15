@@ -5,13 +5,31 @@ from park_frontage import load
 from title_art import tiles8
 from title_creature import pack4
 from park_paving import load_paving_palette
+from sidewalk_thresholds import load as load_thresholds
 
 # token, name, left, top, width, height, first native metatile
 PLACEMENTS = (('W', 'brick', 2, 1, 3, 5, 1),
               ('X', 'sage', 2, 12, 3, 5, 16),
               ('Y', 'sandstone', 2, 20, 3, 5, 31),
               ('Z', 'coffee', 21, 2, 2, 4, 46))
-METATILE_COUNT = 54
+APRON_CARDS = (('brick',54),('sage',57),('bay',60),('coffee',63))
+APRON_ROWS = ((2,6,(60,61,62)), (2,17,(57,58,59)), (2,25,(54,55,56)),
+              (21,6,(63,64)), (18,6,(60,61,62)), (23,6,(60,61,62)),
+              (26,6,(60,61,62)), (11,17,(60,61,62,60,61,62)),
+              (11,24,(60,61,62,60,61,62)),
+              (11,6,(54,54,55,56,56,56)), (30,6,(54,54,55,56,56,56)))
+METATILE_COUNT = 65
+
+
+def apron_tile(plan,x,y):
+    if plan.get('tilesets',{}).get('primary')!='gTileset_SFParkFrontage':
+        return None  # Historical map/resource comparisons have no aprons.
+    for left,top,tiles in APRON_ROWS:
+        if y==top and left<=x<left+len(tiles):
+            if plan['rows'][y][x]!='P' or plan['legend']['P'] != [699,False,3]:
+                raise ValueError('Thresholds require existing walkable elevation3 paving.')
+            return tiles[x-left]
+    return None
 
 
 def infill_tile(plan, x, y):
@@ -52,6 +70,18 @@ def resources(root, secondary_records):
     attributes = bytearray(struct.pack('<H', 0x1000))
     palettes = bytearray(512)
     palettes[4*32:5*32] = load_paving_palette(root)
+    def append_cell(pixels,bank,attribute):
+        encoded = pack4(tiles8(pixels,16,16,2,2));words=[]
+        for offset in range(0,128,32):
+            tile=encoded[offset:offset+32]
+            if tile not in pool:
+                index=len(raw)//32
+                if index>=512:raise ValueError('Original primary frontage exceeds512 resident tiles.')
+                raw.extend(tile)
+                for oriented,bits in tile_orientations(tile):pool.setdefault(oriented,(index,bits))
+            index,bits=pool[tile];words.append((bank<<12)|bits|index)
+        records.extend(sidewalk+struct.pack('<4H',*words))
+        attributes.extend(struct.pack('<H',attribute))
     for _, name, _, _, width, height, first in PLACEMENTS:
         card = cards[name]
         if (card['width'], card['height']) != (width*16, height*16) or \
@@ -60,20 +90,21 @@ def resources(root, secondary_records):
         bank = card['bank'];palettes[bank*32:(bank+1)*32] = card['palette']
         for cell_index, (pixels, _) in enumerate(facade_cells(
                 card['pixels'], card['width'], card['height'], bank)):
-            encoded = pack4(tiles8(pixels, 16, 16, 2, 2));words = []
-            for offset in range(0, 128, 32):
-                tile = encoded[offset:offset+32]
-                if tile not in pool:
-                    index = len(raw)//32
-                    if index >= 512:
-                        raise ValueError('Original primary frontage exceeds512 resident tiles.')
-                    raw.extend(tile)
-                    for oriented, bits in tile_orientations(tile):
-                        pool.setdefault(oriented, (index, bits))
-                index, bits = pool[tile];words.append((bank << 12) | bits | index)
-            records.extend(sidewalk + struct.pack('<4H', *words))
             # Match existing facade priority: front foundation behind the hero.
-            attributes.extend(struct.pack('<H', 0x1000 if cell_index//width == height-1 else 0))
+            append_cell(pixels,bank,0x1000 if cell_index//width==height-1 else 0)
+    thresholds=load_thresholds(root)
+    for name,first in APRON_CARDS:
+        card=thresholds[name]
+        if len(records)//16!=first or card['bank']!=5:
+            raise ValueError('Threshold records must append after existing frontage.')
+        palettes[160:192]=card['palette']
+        # The cafe's door is on the right; mirror the whole ground detail,
+        # preserving its source art and the renderer's native tile flips.
+        pixels=card['pixels']
+        if name=='coffee':
+            pixels=b''.join(pixels[y*card['width']:(y+1)*card['width']][::-1] for y in range(16))
+        for pixels,bank in facade_cells(pixels,card['width'],16,5):
+            append_cell(pixels,bank,0x1000)
     if len(records) != METATILE_COUNT*16 or len(attributes) != METATILE_COUNT*2:
         raise ValueError('Original primary frontage table allocation changed.')
     return bytes(raw), bytes(records), bytes(attributes), bytes(palettes)

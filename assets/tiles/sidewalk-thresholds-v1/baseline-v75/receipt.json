@@ -1,0 +1,27 @@
+{
+  "scope": "Original SF-only primary art/table/palette and authored SF map, exact immutable v75 baseline. No inherited commercial artwork or full ROM included.",
+  "target_sha256": "47909520ff1e419cdab4286c9e4507d2c35c66e83ae8703084721164dc3d0938",
+  "elf_sha256": "b342c9e2825b63018a0ba8d0e49f5a5b7c3433a85d7d5e497e8a14afae297d02",
+  "files": {
+    "primary.4bpp": {
+      "bytes": 6816,
+      "sha256": "589ea80acabdfeb70c983a6bb7f1b28609827162bd18b2474bc1762a6740a9f7"
+    },
+    "metatiles.bin": {
+      "bytes": 864,
+      "sha256": "f5c9f6258e387b52796b1311e99378f11830075a5fc024209230b0f48c9cf322"
+    },
+    "attributes.bin": {
+      "bytes": 108,
+      "sha256": "8985c06b0c2b9d9f874c5b6032f2495614db7ff54ead7273e8488d958a32a6fb"
+    },
+    "palettes.gbapal": {
+      "bytes": 512,
+      "sha256": "77e2473687ea1e106595a54548caf8300dc91b00ca1785b914aae306935a3225"
+    },
+    "south-park-map.bin": {
+      "bytes": 2560,
+      "sha256": "e92d54f122aa3dfab0e7dd2d58d8fb8efb7559b55530589cd185041a82d2cc85"
+    }
+  }
+}

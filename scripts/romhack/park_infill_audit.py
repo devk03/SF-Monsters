@@ -8,6 +8,21 @@ from park_paving_audit import audit_paving
 # Acceptance positions and banks are independent of the production placement table.
 CARDS=(('brick',2,1,3,5,1,0),('sage',2,12,3,5,16,1),
        ('sandstone',2,20,3,5,31,2),('coffee',21,2,2,4,46,3))
+# Original-only resources extracted from immutable v75, never producer output.
+BASELINE={
+    'primary.4bpp':(6816,'589ea80acabdfeb70c983a6bb7f1b28609827162bd18b2474bc1762a6740a9f7'),
+    'metatiles.bin':(864,'f5c9f6258e387b52796b1311e99378f11830075a5fc024209230b0f48c9cf322'),
+    'attributes.bin':(108,'8985c06b0c2b9d9f874c5b6032f2495614db7ff54ead7273e8488d958a32a6fb'),
+    'palettes.gbapal':(512,'77e2473687ea1e106595a54548caf8300dc91b00ca1785b914aae306935a3225'),
+    'south-park-map.bin':(2560,'e92d54f122aa3dfab0e7dd2d58d8fb8efb7559b55530589cd185041a82d2cc85'),
+    'receipt.json':(1027,'f228e2da60580c82d7b8beaa65fec75c5db191e6c32ea2b3beabcaa576fa23ee'),
+}
+APRONS=(('brick',54,48,5),('sage',57,48,6),('bay',60,48,6),('coffee',63,32,3))
+APRON_ROWS=((2,6,(60,61,62)),(2,17,(57,58,59)),(2,25,(54,55,56)),
+    (21,6,(63,64)),(18,6,(60,61,62)),(23,6,(60,61,62)),(26,6,(60,61,62)),
+    (11,17,(60,61,62,60,61,62)),(11,24,(60,61,62,60,61,62)),
+    (11,6,(54,54,55,56,56,56)),(30,6,(54,54,55,56,56,56)))
+
 SECONDARY={
     'gTilesetTiles_SFSouthPark':(16096,'1028cc530238a128ba379d2de5f8153cdbf2eb6c1054f67501f5e4900ce2b6c8'),
     'gMetatiles_SFSouthPark':(2400,'c5a357ba4d453bb0e856b09a594334303b50ead542ef7081b92a243a7269a0c8'),
@@ -23,7 +38,7 @@ def audit_infill(rom,elf,root):
     checks,hashes,errors=[],{},[]
     result={'passed':False,'checks':checks,'hashes':hashes,'errors':errors,'quality_approval':'pending',
         'scope':'Compiled original primary frontage pixels/palettes/layers,53 solid map cells, '
-                'layout/header bindings and independently bounded secondary paving delta. '
+                '44 walkable apron cells, preserved other map words, layout/header bindings and independently bounded secondary paving delta. '
                 'No art, animation, old-save recovery, campaign or performance approval.'}
 
     def source(path):
@@ -94,21 +109,50 @@ def audit_infill(rom,elf,root):
         raw=decode_lz(data('gTilesetTiles_SFParkFrontage'))
         records=data('gMetatiles_SFParkFrontage');attrs=data('gMetatileAttributes_SFParkFrontage')
         palettes=data('gTilesetPalettes_SFParkFrontage')
-        compare('primary_allocations',struct.pack('<4I',213*32,54*16,54*2,512),
+        compare('primary_allocations',struct.pack('<4I',235*32,65*16,65*2,512),
                 lambda:struct.pack('<4I',len(raw),len(records),len(attrs),len(palettes)))
+        baseline_directory=root/'assets/tiles/sidewalk-thresholds-v1/baseline-v75'
+        frozen={}
+        for filename,(length,digest) in BASELINE.items():
+            blob=source(baseline_directory/filename)
+            if len(blob)!=length or hashlib.sha256(blob).hexdigest()!=digest:
+                raise ValueError('Frozen original v75 baseline differs: '+filename)
+            frozen[filename]=blob
+        compare('original213_tile_prefix',frozen['primary.4bpp'],lambda:raw[:213*32])
+        compare('original54_record_prefix',frozen['metatiles.bin'],lambda:records[:54*16])
+        compare('original54_attribute_prefix',frozen['attributes.bin'],lambda:attrs[:54*2])
+        compare('palette_outside_apron_bank',frozen['palettes.gbapal'][:160]+frozen['palettes.gbapal'][192:],
+                lambda:palettes[:160]+palettes[192:])
         compare('transparent_primary_tile0',bytes(32),lambda:raw[:32])
         secondary_records=data('gMetatiles_SFSouthPark')
         sidewalk=secondary_records[19*16+8:20*16]
         if len(sidewalk)!=8 or any(w>>12!=4 or not 512<=(w&1023)<1016 for w in struct.unpack('<4H',sidewalk)):
             raise ValueError('Facade underlay must use resident secondary sidewalk, never door VRAM.')
-        compare('all54_secondary_underlays',sidewalk*54,
-                lambda:b''.join(records[i*16:i*16+8] for i in range(54)))
+        compare('all65_secondary_underlays',sidewalk*65,
+                lambda:b''.join(records[i*16:i*16+8] for i in range(65)))
         compare('primary_empty_metatile0',sidewalk+bytes(8),lambda:records[:16])
-        expected_attrs=[0x1000]+[0]*53
+        expected_attrs=[0x1000]+[0]*53+[0x1000]*11
         for name,left,top,width,height,first,bank in CARDS:
             for index in range(width*height):
                 expected_attrs[first+index]=0x1000 if index//width==height-1 else 0
-        compare('all54_layer_attributes',struct.pack('<54H',*expected_attrs),lambda:attrs)
+        compare('all65_layer_attributes',struct.pack('<65H',*expected_attrs),lambda:attrs)
+
+        def decoded(first,width,height,bank,limit):
+            pixels=bytearray(width*height*256)
+            for cell in range(width*height):
+                at=(first+cell)*16
+                if len(records[at:at+16])!=16:raise ValueError('Truncated original primary metatile.')
+                for q,word in enumerate(struct.unpack_from('<4H',records,at+8)):
+                    tile=word&1023
+                    if word>>12!=bank or tile>=limit or (tile+1)*32>len(raw):
+                        raise ValueError('Primary foreground uses the wrong bank or leaves its reviewed resident tiles.')
+                    for y in range(8):
+                        for x in range(8):
+                            xx=7-x if word&0x400 else x;yy=7-y if word&0x800 else y
+                            value=raw[tile*32+yy*4+xx//2]>>(4*(xx%2))&15
+                            px=cell%width*16+q%2*8+x;py=cell//width*16+q//2*8+y
+                            pixels[py*width*16+px]=value
+            return bytes(pixels)
 
         directory=root/'assets/tiles/south-park-frontage-v1'
         info=json.loads(source(directory/'conversion.json'))
@@ -140,46 +184,84 @@ def audit_infill(rom,elf,root):
                 raise ValueError('Card palette must match its PNG and native RGB555 bank.')
             expected_palettes[bank*32:(bank+1)*32]=palette
 
-            def decoded(first=first,width=width,height=height,bank=bank):
-                pixels=bytearray(width*height*256)
-                for cell in range(width*height):
-                    at=(first+cell)*16
-                    if len(records[at:at+16])!=16:raise ValueError('Truncated original primary metatile.')
-                    for q,word in enumerate(struct.unpack_from('<4H',records,at+8)):
-                        tile=word&1023
-                        if word>>12!=bank or tile>=213 or (tile+1)*32>len(raw):
-                            raise ValueError('Primary foreground uses the wrong bank or leaves213 resident tiles.')
-                        for y in range(8):
-                            for x in range(8):
-                                xx=7-x if word&0x400 else x;yy=7-y if word&0x800 else y
-                                value=raw[tile*32+yy*4+xx//2]>>(4*(xx%2))&15
-                                px=cell%width*16+q%2*8+x;py=cell//width*16+q//2*8+y
-                                pixels[py*width*16+px]=value
-                return bytes(pixels)
-            compare(name+':all_native_pixels',expected_pixels,decoded)
+            compare(name+':all_native_pixels',expected_pixels,
+                    lambda first=first,width=width,height=height,bank=bank:decoded(first,width,height,bank,213))
             expected_map=struct.pack('<'+'H'*(width*height),*(0xC00+first+i for i in range(width*height)))
             def map_cells(left=left,top=top,width=width,height=height):
                 blocks=data('OldaleTown_Layout_Blockdata',40*32*2)
                 return b''.join(blocks[((top+y)*40+left+x)*2:((top+y)*40+left+x)*2+2]
                                 for y in range(height) for x in range(width))
             compare(name+':solid_map_cells',expected_map,map_cells)
+        directory=root/'assets/tiles/sidewalk-thresholds-v1'
+        receipt=source(directory/'conversion.json')
+        if hashlib.sha256(receipt).hexdigest()!='b89f58e8152987a3ce67ff5db74a036bc20e5fe1ae8eacaa0df3c52cdde9b4df':
+            raise ValueError('Original apron conversion receipt differs.')
+        info=json.loads(receipt)
+        if hashlib.sha256(source(directory/'source.png')).hexdigest()!=info['source_sha256'] or \
+           hashlib.sha256(source(directory/'prompt.md')).hexdigest()!=info['prompt_sha256'] or \
+           info.get('alpha_threshold')!=128 or info.get('bank')!=5 or len(info['cards'])!=4:
+            raise ValueError('Original apron source/prompt/bank contract changed.')
+        palette=source(directory/'thresholds.gbapal')
+        if len(palette)!=32 or hashlib.sha256(palette).hexdigest()!=info['palette_sha256']:
+            raise ValueError('Original apron palette receipt differs.')
+        words=struct.unpack('<16H',palette)
+        if words[0] or any(w>0x7fff for w in words):
+            raise ValueError('Apron palette must retain transparent0 and RGB555 colors.')
+        expected_flat=[((w>>(5*c))&31)*255//31 for w in words for c in range(3)]
+        expected_palettes[160:192]=palette
+        descriptors={card['name']:card for card in info['cards']}
+        if set(descriptors)!={row[0] for row in APRONS}:
+            raise ValueError('Original apron card identities differ.')
+        for name,first,width,art_height in APRONS:
+            card=descriptors[name]
+            if card['size']!=[width,16] or card['art_height']!=art_height or \
+               set(card['files'])!={name+'.png',name+'.indices'}:
+                raise ValueError('Original apron geometry/files differ.')
+            for filename,expected in card['files'].items():
+                if hashlib.sha256(source(directory/filename)).hexdigest()!=expected:
+                    raise ValueError('Original apron file differs: '+filename)
+            pixels=source(directory/(name+'.indices'))
+            with Image.open(directory/(name+'.png')) as image:
+                if image.mode!='P' or image.size!=(width,16) or image.info.get('transparency')!=0 or \
+                   image.tobytes()!=pixels or image.getpalette()[:48]!=expected_flat:
+                    raise ValueError('Apron PNG/index/palette/transparency disagree.')
+            if len(pixels)!=width*16 or not any(pixels) or max(pixels)>15 or any(pixels[width*art_height:]):
+                raise ValueError('Apron must preserve its shallow art and transparent lower eight rows.')
+            if name=='coffee':
+                pixels=bytes(pixels[y*width+width-1-x] for y in range(16) for x in range(width))
+            compare(name+':apron_native_pixels',pixels,
+                    lambda first=first,width=width:decoded(first,width//16,1,5,235))
+        blocks=data('OldaleTown_Layout_Blockdata',40*32*2)
+        baseline=bytearray(blocks)
+        apron_points=set()
+        for left,top,ids in APRON_ROWS:
+            offsets=[(top*40+left+x)*2 for x in range(len(ids))]
+            compare('apron_map_%d_%d'%(left,top),struct.pack('<'+'H'*len(ids),*(0x3000|i for i in ids)),
+                    lambda offsets=offsets:b''.join(blocks[at:at+2] for at in offsets))
+            for x,at in enumerate(offsets):
+                apron_points.add((left+x,top))
+                struct.pack_into('<H',baseline,at,0x3000|531)
+        compare('all_nonapron_map_words',frozen['south-park-map.bin'],lambda:bytes(baseline))
         compare('all_primary_palette_bytes',bytes(expected_palettes),lambda:palettes)
 
         def primary_footprint():
             blocks=data('OldaleTown_Layout_Blockdata',40*32*2)
             points={(left+x,top+y) for name,left,top,width,height,first,bank in CARDS
                     for y in range(height) for x in range(width)}
+            points.update(apron_points)
             actual={(i%40,i//40) for i,(word,) in enumerate(struct.iter_unpack('<H',blocks)) if (word&1023)<512}
-            if actual!=points or len(points)!=53:
-                raise ValueError('Only the53 declared map cells may reference primary metatiles.')
-            return b'exact53-cell-primary-footprint'
-        compare('primary_map_footprint',b'exact53-cell-primary-footprint',primary_footprint)
+            if actual!=points or len(points)!=97 or len(apron_points)!=44:
+                raise ValueError('Only the97 declared map cells may reference primary metatiles.')
+            return b'exact97-cell-primary-footprint'
+        compare('primary_map_footprint',b'exact97-cell-primary-footprint',primary_footprint)
         def reservation():
             secondary=decode_lz(data('gTilesetTiles_SFSouthPark'))
             if len(secondary)!=502*32 or any((word&1023)>=1016 for word in struct.unpack('<1200H',secondary_records)):
                 raise ValueError('Secondary art overlaps the eight native door-animation tiles.')
-            return b'primary213:secondary502:door1016..1023-reserved'
-        compare('resident_door_reservation',b'primary213:secondary502:door1016..1023-reserved',reservation)
+            if any((word&1023)>=235 for at in range(65) for word in struct.unpack_from('<4H',records,at*16+8)):
+                raise ValueError('Primary art leaves resident primary allocation.')
+            return b'primary235:secondary502:door1016..1023-reserved'
+        compare('resident_door_reservation',b'primary235:secondary502:door1016..1023-reserved',reservation)
     except (OSError,ValueError,KeyError,TypeError,struct.error) as error:
         errors.append(str(error));checks.append({'name':'audit_inputs','passed':False,'error':str(error)})
     result['counts']={'total':len(checks),'matched':sum(c['passed'] for c in checks)}

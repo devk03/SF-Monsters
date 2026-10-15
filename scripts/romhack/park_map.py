@@ -11,7 +11,7 @@ from maps import encode_layout
 from house_variants import load_variants
 from park_signs import sign_cells
 from seed_door_art import load as load_seed_door
-from park_infill import infill_tile, apply as apply_infill
+from park_infill import infill_tile, apron_tile, apply as apply_infill
 from park_paving import load_paving
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
@@ -118,7 +118,8 @@ def park_tile(plan, x, y):
     if token in 'Qq':
         return 660 if token == 'Q' else 661
     if token == 'P':
-        return 531
+        apron=apron_tile(plan,x,y)
+        return 531 if apron is None else apron
     if token == '.':
         return 532 + (0, 12, 13)[(x * 17 + y * 11) % 3]
     if token in 'GB#T':

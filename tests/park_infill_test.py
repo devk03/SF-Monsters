@@ -10,8 +10,9 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from park_frontage import load
-from park_infill import PLACEMENTS, previous_plan, resources
+from park_infill import PLACEMENTS, APRON_ROWS, APRON_CARDS, previous_plan, resources
 from park_map import park_resources, park_tile
+from sidewalk_thresholds import load as load_thresholds
 
 
 def reachable(plan):
@@ -41,7 +42,14 @@ class PrimaryInfill(unittest.TestCase):
         for x,y in cells:
             self.assertEqual(plan['legend'][plan['rows'][y][x]],[0,True,0])
             self.assertIn(park_tile(plan,x,y),range(1,54))
-        for x,y in reachable(old)-cells:
+        aprons={(left+i,top) for left,top,tiles in APRON_ROWS for i in range(len(tiles))}
+        self.assertEqual(len(aprons),44)
+        self.assertFalse(aprons&cells)
+        for x,y in aprons:
+            self.assertEqual(plan['rows'][y][x],'P')
+            self.assertEqual(plan['legend']['P'],[699,False,3])
+            self.assertIn(park_tile(plan,x,y),range(54,65))
+        for x,y in reachable(old)-cells-aprons:
             self.assertEqual(park_tile(plan,x,y),park_tile(old,x,y))
         self.assertEqual(reachable(old)-cells,reachable(plan))
         for key in ('npcs','warp_events','bg_events','metadata','border_tile'):
@@ -56,11 +64,13 @@ class PrimaryInfill(unittest.TestCase):
     def test_all_primary_cells_decode_exact_pixels_palette_underlay_and_priority(self):
         secondary = park_resources(ROOT);raw,records,attrs,palettes = resources(ROOT,secondary[1])
         self.assertEqual((len(raw)//32,len(records)//16,len(attrs)//2,len(palettes)),
-                         (213,54,54,512))
+                         (235,65,65,512))
         self.assertEqual(raw[:32],bytes(32))
         self.assertEqual(palettes[128:160],
             (ROOT/'assets/tiles/south-park-paving-v1/paving.gbapal').read_bytes())
-        self.assertEqual(palettes[160:],bytes(352))
+        self.assertEqual(palettes[160:192],
+            (ROOT/'assets/tiles/sidewalk-thresholds-v1/thresholds.gbapal').read_bytes())
+        self.assertEqual(palettes[192:],bytes(320))
         cards = {c['name']:c for c in load(ROOT)}
         for _,name,_,_,width,height,first in PLACEMENTS:
             card = cards[name]
@@ -89,6 +99,39 @@ class PrimaryInfill(unittest.TestCase):
         for word in (0x4000,0x43f8,0x6200,0x7200):
             bad = records[:];struct.pack_into('<H',bad,19*16+8,word)
             with self.assertRaisesRegex(ValueError,'underlay'):resources(ROOT,bytes(bad))
+
+    def test_shallow_thresholds_decode_on_ground_without_replacing_existing_art(self):
+        secondary=park_resources(ROOT);raw,records,attrs,palettes=resources(ROOT,secondary[1])
+        cards=load_thresholds(ROOT)
+        for name,first in APRON_CARDS:
+            card=cards[name];width=card['width']//16
+            for index in range(width):
+                words=struct.unpack_from('<8H',records,(first+index)*16)
+                self.assertEqual(records[(first+index)*16:(first+index)*16+8],secondary[1][312:320])
+                self.assertEqual(struct.unpack_from('<H',attrs,(first+index)*2)[0],0x1000)
+                pixels=bytearray(256)
+                for q,word in enumerate(words[4:]):
+                    self.assertEqual(word>>12,5);tile=word&1023
+                    self.assertLess(tile,235)
+                    for y in range(8):
+                        for x in range(8):
+                            xx=7-x if word&1024 else x;yy=7-y if word&2048 else y
+                            pixels[(q//2*8+y)*16+q%2*8+x]=raw[tile*32+yy*4+xx//2]>>(xx%2*4)&15
+                expected=b''.join(card['pixels'][y*card['width']+index*16:y*card['width']+index*16+16]
+                                  for y in range(16))
+                if name=='coffee':
+                    expected=bytes(card['pixels'][y*card['width']+card['width']-1-(index*16+x)]
+                                   for y in range(16) for x in range(16))
+                self.assertEqual(bytes(pixels),expected)
+                self.assertEqual(pixels[128:],bytes(128))
+
+    def test_aprons_cannot_expand_into_walls_or_change_elevation(self):
+        from copy import deepcopy
+        plan=json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        for blocked in (True,False):
+            changed=deepcopy(plan)
+            changed['legend']['P']=[699,blocked,0]
+            with self.assertRaisesRegex(ValueError,'walkable elevation3'):park_tile(changed,3,6)
 
 
 if __name__ == '__main__':

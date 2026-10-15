@@ -8084,3 +8084,31 @@ Instrumented active-field repeat — October15,04:09UTC:
   Alignment reviewing bounded catchup/prefill tradeoffs read-only; root now
   prioritizes user-requested facade-ground integration and starterpromptproof.
   Both600secfailures remain preserved. Publicv75, human0/11, goalACTIVE.
+
+
+Native street-threshold checkpoint — October15,04:24UTC:
+
+- New original primary ground details connect44existingwalkablePcells to
+  foundations/doorsteps/garageaprons; allother1236mapwords,53existing solid
+  frontagecells, original213primarytileprefix/54records/54attributes and
+  paletteoutsideunusedbank5 remain exactv75. Residentprimary235/512, secondary
+ 502/504;65primaryrecords. Doorwarps/signs/collisions/elevations unchanged.
+- Independentcompiledoracle42/42 plusnestedpaving153/153; linkedfaultguards
+ 17/17. Original-only frozenv75baseline protects complete1280mapword history
+  and oldresources. Source/nativeart/palette/alpha/banks/flips/layers/underlays
+  and44precisemaps bindings verified independently of productioncomposer.
+- Firsta71candidate nativecloseup catchescentralbrickstoop belowleftwindow
+  andleftcafemat belowdisplaywindow. Preservedcandidate/captures. Corrected
+  brickusesrightbaystoop; full32pxcafeapron is reflected toputmatbyrightdoor.
+  Correctedprivatecandidate9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733,
+  stillunpublished. Nativecloseup nowalignsbrickstepwithrightdoor.
+- GenuineoldC8nativecold, all3interiorentries/returns pass; aftereachreturn
+  all235primary/all502secondary graphicsbytes and6primary/7secondaryunfaded
+  palettesmatchimmutableROM, withFlashunchanged. Receipt19859f1fd3ecb5c1b3fc1f20adf3735527507876ddc65126b26867bc6c078462.
+- OrdinaryC8->C9save preserves alldeclaredgameplaydomains, counter/stat+1;
+  no new50checkpoint credit. Full localcheckcommands pass after updating the
+  oldprimary-only-WXYZ assertion to recognize preciselydeclaredwalkableaprons.
+  Originalfailedlog preserved; noGitHubActions. Browser/clip/humanreview pending.
+- Starterprompttext is an independent uncommitted three-line change included
+  in the privatecandidate only; nativebranchchecks underway, noUIapprovalclaim.
+  Publicremainsv75/Site66; bothperformancefailures remainOPEN; goalACTIVE.
