@@ -8835,7 +8835,7 @@ Private long-report storage preflight — October15,08:49UTC:
   original checkpoint/audio state; no failed attempt or gate is hidden.
 
 
-Worker input transport evidence — October15,08:54UTC:
+Worker input transport evidence — October15,08:52UTC:
 
 - Added independent main/Worker sequence and mask matching, ordered receipt
   counters at completed native batch boundaries, supersession checks, and first
@@ -8851,3 +8851,39 @@ Worker input transport evidence — October15,08:54UTC:
  22882753a96731b1da552d5f18012259288efd0b4d9f3701c4c3d4b077926885.
 - Fresh exact600sec historical v75 road replay is active under the explicit
   64MiB/900sec private session. Publicv80 unchanged; no long-run result yet.
+
+
+Private600sec Worker field result — October15,09:01UTC:
+
+- Exact historical v75 cartridge/state/Flash and310-row598.652sec road route,
+  matching both earlier failed main-thread runs. Actual fresh Chrome600sec
+  receipt:74419Worker ticks,35836fresh/planned/actual frames,0overflow/backlog/
+  mismatch; maximumWorker tick gap19ms. All310planned masks were dispatched
+  in order, replay complete with2.595ms maximum timer lateness;310Worker receipts
+  and first subsequent native counters,0unmatched/superseded/pending inputs.
+- Actual unchanged worklet renders26460160output frames with0warmup/underrun/drop;
+  final queue2260source frames (~34ms at65536Hz), actual context interval600.0268s.
+  Main71924canvas submissions; initial/ordered visibility stays visible. No
+  induced stall during this route. The earlier10sec test separately includes
+  the deliberate200ms stall. Do not combine these into a three-run/full gate.
+- ReportSHA204f9c8558362196cd99be288722b7e0e348d7a326561737e8478ed3e6135647;
+  auditorac146be5721fc054ca064d80eb4dc17760a0426dcca559ae0bd6323f25899a4d,
+  preserved route-auditor dependencycf1ac5a942884ee2cc95cdd830f029209a9271d8859943465b2317e95b2eb9e2.
+  Independent route checks reuse the existing auditor through an explicit clock
+  origin translation only. Raw report and input event times remain unchanged.
+- This clears one private field pipeline comparison. It does not establish
+  99%guest deadlines, physical presentation/input, KEYINPUT consumption, listening,
+  native realtime, Safari/phone, other workloads or production save compatibility.
+  Own Worker/audio/tab and900sec-bounded server stopped after screenshot capture.
+- Original-only Worker host and manual native transport unit are now reviewable
+  source. Fresh root-run actual v80 transport unit again advances12guest frames
+  and13168PCM source frames during200ms blocked Node main; exact Flash/bootstrap,
+  checkpoint header/core artifact hashes and one-buffer backpressure pass. No
+  fake AudioContext or browser-quality claim is made by that unit.
+- Next private save bridge: immutable rawFlash attached to the same guest counter
+  as video, fullbyte revision rather than nativeSaveCounter, explicit paused
+  export/import/state operations, epoch fences and storage-before-draw receipts.
+  Directaudio may precede a visual storage commit; pagehide can only flush cached
+  presented bytes. Do not claim fresh synchronous Worker export or unseen-tail
+  durability. Alignment owns new ignored save bridge only, handoff09:30UTC.
+  Publicv80 remains unchanged; fullquality0/11 and all outstanding gates remain.

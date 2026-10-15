@@ -257,6 +257,17 @@ def audit(report,identity,directory):
             raise ValueError('Initial visibility does not precede the measured window')
         previous_at=at
     input_facts=input_observations(report)
+    replay_facts=None
+    if identity.get('controller_route'):
+        from audit_web_performance import controller_observation
+        # Explicit clock-origin translation only; the raw Worker report stays
+        # unchanged. Reuse the existing independent route-byte/timing auditor.
+        projected={'controllerReplay':report.get('controllerReplay'),
+            'startedAtMs':worker['startedAt']-main_origin,'endedAtMs':worker['endedAt']-main_origin}
+        replay_facts=controller_observation(projected,identity,directory)
+        masks=[int(line.split(',')[0]) for line in (directory/'route.csv').read_text().strip().splitlines()]
+        replay_facts['all_planned_masks_reported']=masks==[event['mask'] for event in main['inputs']]
+        replay_facts['clock_translation']='Worker absolute start/close minus explicit main time origin; no event-time rewriting.'
     overlap=[];overlap_frames=[]
     for stall in main['stalls']:
         begin=num(stall['startedAt'],'main stall start');finish=num(stall['endedAt'],'main stall finish')
@@ -274,7 +285,7 @@ def audit(report,identity,directory):
             'audio':{key:final_audio[key] for key in ('renderedOutputFrames','warmupOutputFrames','underrunOutputFrames','droppedSourceFrames','queueDepthFrames','outputSampleRate')},
             'main_audio_context_seconds':after['currentTime']-before['currentTime'],
             'main_canvas_submission_count':len(main['submissions']),'reported_main_input_count':len(main['inputs']),
-            'audio_clock_binding_allowance_ms':50,'input_transport':input_facts,
+            'audio_clock_binding_allowance_ms':50,'input_transport':input_facts,'controller_replay':replay_facts,
             'foreground_observed':all(v['state']=='visible' for v in main['visibility']),
             'loss_free':drop_total==0,'caught_up_at_close':debt==0}
 
@@ -286,10 +297,14 @@ def main():
     if args.label and not re.fullmatch('[a-z0-9][a-z0-9-]{0,31}',args.label):parser.error('Use a bounded lowercase audit label')
     result=audit(json.loads(args.report.read_bytes()),json.loads((directory/'identity.json').read_bytes()),directory)
     result['report_sha256']=hash_file(args.report);result['auditor_sha256']=hash_file(Path(__file__))
+    dependency=Path(__file__).with_name('audit_web_performance.py') if result['controller_replay']is not None else None
+    if dependency:result['controller_auditor_sha256']=hash_file(dependency)
     suffix='.'+args.label if args.label else ''
     target=args.report.with_suffix(suffix+'.worker-audit.json')
     with target.open('x')as out:json.dump(result,out,indent=2,allow_nan=False);out.write('\n')
     with args.report.with_suffix(suffix+'.worker-auditor.py').open('xb')as out:out.write(Path(__file__).read_bytes())
+    if dependency:
+        with args.report.with_suffix(suffix+'.worker-controller-auditor.py').open('xb')as out:out.write(dependency.read_bytes())
     print(json.dumps(result,indent=2))
 
 
