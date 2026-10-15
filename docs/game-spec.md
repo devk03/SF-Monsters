@@ -567,7 +567,8 @@ Current checkpoint — October 15, 2026, 02:55 UTC:
   party controls, show the authored assets. Matched v57/v58/v59 native controller
   routes produce byte-identical ordinary Flash saves at counter 4.
 - 711 independently specified mechanics cases / 57 doubles pass at the v56
-  baseline; full-turn/type/catalog gates remain open. Ten save round trips cover
+  baseline; five controlled turn profiles now pass separately (four full living,
+  one partial KO boundary); broad full-turn/type/catalog gates remain open. Ten save round trips cover
   one first-badge checkpoint, not 50 distinct campaign checkpoints.
 - Chrome 600-second field observation and shorter mixed/browser smokes pass
   their scoped audio/video checks. Earlier IAB long-clock failure, physical
@@ -7684,3 +7685,38 @@ v73 public Builder-label checkpoint — October15,02:55UTC:
   underway, not accepted by this release. Peer files remain separately unstaged.
   Last exchange02:53UTC; next by03:23UTC. Peer read-only first-slice priority
   recommendation is finite30min. Human0/11 and broad gatesOPEN, goalACTIVE.
+
+
+Controlled Normal/Ghost immunity checkpoint — October15,02:58UTC:
+
+- Root reviewed and independently reran exactly one fifth controlled scenario
+  against exact a9 Emerald and immutable v71. Faster player110 uses Normal
+  Pound against a Ghost7/7 battle-only target, spends PP without enemy damage;
+  slower enemy90 replies for18 damage. HP72/90, PP9/9, turn1, faint0, empty
+  stacks and next-turn endpoint pass;159 native dispatches and21 checks/side.
+- Oracle derived from pinned source BEFORE execution: accuracy/critical/type/
+  adjustment/chance stages still execute on the immune attack. Damage/HP
+  opcodes run but NO_EFFECT prevents any enemy HP-write packet. Chance0 still
+  consumes RNG. Enemy neutral reply plus end-turn yields ninth state4231221723.
+  Required ordered opcode path differs explicitly from the earlier miss path.
+- All five cases declare complete strict live type pairs in effective setup
+  identity. Original four remainMystery9/9; only this case enemyGhost7/7.
+  Native secure Rattata parties remain natural and independently checked, not
+  rewritten to match the battle-only overrides. Every352 BattleMon bytes,
+  full1200 party bytes,68 results bytes and declared protected spans remain
+  exact; Ghost bytes121/122 cannot silently revert. Controller ACK/transport/
+  ABI/frozen-source policies unchanged; no extra input queries answered.
+- Root receipt turn-resolution-root-immunity-v71/result.json SHA
+ 5f685a56cb132fd615bde92d280ed9521ec61cc5ae3fb6b8274b09f206495a35.
+  Original four traces/packets/checks/party hashes/HP/PP/RNG/turns/faints exactly
+  match prior root miss receipt. Peer positive790567397ae95680242874250473d4e6a3f4991b12c144ef22f02adcb89fb803;
+  wrong early-immunity RNG negative8d985b988d7fa19f99b6e0db93bbcb8db46e597291874c325efd20198e2c8a5b
+  rejects ONLY this case RNG on both sides, preserving all other postconditions.
+- Seventeen portable guards pass; missing/reordered immune stages, absent reply,
+  extra enemy HP packet, corrupted type bytes and wrong RNG all reject. Existing
+  mechanics4/4 and move-pipeline8/8 pass. Exactly five profiles: four full living
+  chosen turns plus one partial unanswered KO replacement boundary. No UI,
+  animation, audio, EXP, replacement completion, durable-save or campaign proof;
+  no additive inflation of overlapping711/57 baseline totals.
+- Publicv73/Site64 unchanged. Human0/11 and broad gatesOPEN; goalACTIVE. Root
+  owns all source again; alignment read-only first-slice recommendation pending.
