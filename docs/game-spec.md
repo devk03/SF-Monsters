@@ -7346,3 +7346,20 @@ Controlled turn-resolution runner checkpoint — October15,01:39UTC:
   genuine53-position recovery/runtime/browser checks are still in progress.
   One genuine old v71 saved occupied center3,14 resumes outside the new sage
   building in native v72; complete save-domain proof is still pending.
+
+Controlled turn guard checkpoint — October15,01:40UTC:
+
+- The201-line portable suite is committed separately and wired into routine
+  local checking. Eleven cases cover independent damage/LCG arithmetic, strict
+  schemas and duplicate setups; native SETMONDATA completion; wrong controller
+  slots/requests/masks; unanswered replacement+standby; truncated observations;
+  instruction/dispatch/wall limits; unknown callbacks/scripts/choices; complete
+  postcondition corruption, omitted second action/MoveEnd and native faint-type
+  cleanup. These are guard transcripts, not extra native mechanics scenarios.
+- Root's actual native paired run remains the evidence for the two scenarios.
+  Full-turn/type/status/ability/item/weather/switching coverage remainsOPEN;
+  the broader711/57 totals and0/11 human approvals remain unchanged.
+- Alignment now owns a finite independent v72 compiled-primary audit, due02:36
+  UTC, only new auditor/tests and seven explicit bounded reader symbol names.
+  Root owns engine compilation and native53-position save-recovery work. No
+  public v72 release is claimed before those checks and field/browser traversal.

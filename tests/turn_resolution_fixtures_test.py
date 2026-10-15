@@ -1,0 +1,201 @@
+"""Protect turn-fixture oracles and fail-closed native transport boundaries.
+
+These unit transcripts test guards only. They do not simulate a battle or count
+as native mechanics evidence; the separate paired ROM runs provide that proof.
+"""
+from copy import deepcopy
+from pathlib import Path
+import struct
+import sys
+import unittest
+from unittest.mock import patch
+
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'scripts/quality'))
+import turn_resolution_fixtures as turn
+from item_effect_fixtures import expected_mon
+
+
+class Transcript:
+    def __init__(self,rows):self.rows=list(rows);self.commands=[]
+    def exchange(self,commands,lines):
+        self.commands.extend(commands)
+        if not lines:return []
+        if not self.rows:raise AssertionError('Unexpected transport response request.')
+        result=self.rows.pop(0)
+        if len(result)!=lines:raise AssertionError('Wrong requested response width.')
+        return result
+
+
+SYMS={'gBattleControllerExecFlags':(0x02000100,4),'gBattleBufferA':(0x02001000,2048),
+      'gActiveBattler':(0x02000200,1),'PlayerHandleSetMonData':(0x08000100,32),
+      'OpponentHandleSetMonData':(0x08000200,32),
+      'RunTurnActionsFunctions':(0x08000300,32)}
+
+
+def observation(c):
+    """Independently specified terminal snapshots, not a move implementation."""
+    ko=c['endpoint']=='replacement-query'
+    old0=expected_mon(18 if ko else 90,0,[10,30,25,25],0)
+    old1=expected_mon(90,0,[10,30,25,25],0)
+    bench=expected_mon(105,0,[10,30,25,25],0)
+    initial=bytearray(352)
+    for i,hp in enumerate([18 if ko else 90,90,0,0]):
+        struct.pack_into('<H',initial,i*88,19)
+        struct.pack_into('<H',initial,i*88+40,hp)
+        initial[i*88+36]=10;initial[i*88+33:i*88+35]=bytes([9,9])
+    state={'before':[old0+bench+bytes(400),old1+bytes(500),bytes([0x17])*0x3d88,bytes([0x28])*0xf2c],
+           'initial_battle_mons':bytes(initial),'save_addresses':[0x02025000,0x0202a000]}
+    after=bytearray(initial)
+    for i,hp in enumerate([0,90] if ko else [72,72]):struct.pack_into('<H',after,i*88+40,hp)
+    after[36]=10 if ko else 9;after[88+36]=9
+    if ko:after[33:35]=bytes(2)
+    results=bytearray(68);results[5]=1;struct.pack_into('<H',results,36,1)
+    if ko:results[0]=1;results[2]=1
+    else:results[19]=1;struct.pack_into('<H',results,34,1)
+    packets=([{'slot':1,'packet':'0209000900000000'}, {'slot':0,'packet':'022a000000000000'},
+              {'slot':0,'packet':'0228000000000000'}, {'slot':0,'packet':'1601000000000000'},
+              {'slot':1,'packet':'3502000000000000','pending':True}] if ko else
+             [{'slot':0,'packet':'0209000900000000'}, {'slot':1,'packet':'022a004800000000'},
+              {'slot':1,'packet':'0209000900000000'}, {'slot':0,'packet':'022a004800000000'}])
+    raw=[expected_mon(0 if ko else 72,0,[10 if ko else 9,30,25,25],0)+bench+bytes(400),
+         expected_mon(90 if ko else 72,0,[9,30,25,25],0)+bytes(500),bytes(after),
+         state['before'][2],state['before'][3],bytes(results),struct.pack('<I',833674724 if ko else 4231221723),
+         b'\0',b'\0',b'\1' if ko else b'\0',bytes(4) if ko else bytes.fromhex('ffff0000'),
+         bytes.fromhex('0100010000000000') if ko else bytes(8),struct.pack('<I',3 if ko else 0),
+         struct.pack('<I',264),*[struct.pack('<I',a) for a in state['save_addresses']],b'\2',b'\1',
+         bytes([1,0] if ko else [0,1]),struct.pack('<I',0x08000301)]
+    trace=([{'opcode':3,'attacker':1},{'opcode':73,'attacker':1}] if ko else
+           [{'opcode':3,'attacker':0},{'opcode':73,'attacker':0},
+            {'opcode':3,'attacker':1},{'opcode':73,'attacker':1}])
+    return state,raw,packets,trace
+
+
+class TurnSchema(unittest.TestCase):
+    def test_two_oracles_have_independent_damage_and_rng_derivations(self):
+        turn.validate_cases(turn.CASES)
+        state=0;draws=[]
+        for _ in range(9):state=(state*0x41c64e6d+0x6073)&0xffffffff;draws.append((state,state>>16))
+        base=((22*40*100//100)//50)+2
+        self.assertEqual(base,19)
+        self.assertEqual([base*(100-draws[i][1]%16)//100 for i in (2,6)],[18,18])
+        self.assertEqual(draws[3][0],turn.CASES[1]['expected_rng'])
+        self.assertEqual(draws[8][0],turn.CASES[0]['expected_rng'])
+        self.assertEqual(turn.CASES[0]['expected_hp'],[72,72])
+        self.assertEqual(turn.CASES[1]['expected_pp'],[10,9])
+
+    def test_unknown_controls_incomplete_oracles_and_duplicate_effective_setups_fail(self):
+        for change in [{'skip_controller':True},{'expected_rng':True},{'player_hp':106},
+                       {'speeds':[90,90]},{'derivation':''},{'expected_hp':[0,72]},
+                       {'expected_updates':[[0,99,9]]}]:
+            c=deepcopy(turn.CASES[0]);c.update(change)
+            with self.subTest(change=change),self.assertRaises(ValueError):turn.validate_cases([c])
+        for key in turn.CASES[0]:
+            c=deepcopy(turn.CASES[0]);del c[key]
+            with self.subTest(missing=key),self.assertRaises(ValueError):turn.validate_cases([c])
+        duplicate=deepcopy(turn.CASES[0]);duplicate.update(id='different-label',derivation='Other prose.',expected_rng=1)
+        with self.assertRaisesRegex(ValueError,'effective'):turn.validate_cases([turn.CASES[0],duplicate])
+        with self.assertRaises(ValueError):turn.call({'f':(0x08000000,4)},'f',*range(9))
+
+
+class NativeControllerBoundary(unittest.TestCase):
+    def test_setmondata_uses_actual_native_setter_and_never_transport_clears_it(self):
+        for slot,name in [(0,'PlayerHandleSetMonData'),(1,'OpponentHandleSetMonData')]:
+            d=Transcript([[struct.pack('<I',1<<slot).hex()],['0209000900000000'],
+                          ['return 00000000 steps 12'],['00000000']])
+            self.assertIsNone(turn.service_controllers(d,SYMS,turn.CASES[0],[]))
+            self.assertFalse(d.rows)
+            self.assertTrue(any(v.startswith('call %x'%SYMS[name][0]) for v in d.commands))
+            self.assertFalse(any(v.startswith('write 2000100 ') for v in d.commands))
+
+    def test_missing_native_completion_wrong_slot_requests_and_masks_fail(self):
+        d=Transcript([['01000000'],['0209000900000000'],['return 00000000 steps 12'],['01000000']])
+        with self.assertRaisesRegex(ValueError,'own controller'):turn.service_controllers(d,SYMS,turn.CASES[0],[])
+        for rows in [[['04000000']], [['01000000'],['0209010900000000']],
+                     [['01000000'],['0200000900000000']], [['01000000'],['1200000000000000']]]:
+            with self.subTest(rows=rows),self.assertRaises(ValueError):
+                turn.service_controllers(Transcript(rows),SYMS,turn.CASES[0],[])
+
+    def test_replacement_query_and_opponent_standby_remain_unanswered(self):
+        rows=[['03000000'],['1601000000000000'],['3502000000000000']]
+        d=Transcript(rows);log=[]
+        self.assertEqual(turn.service_controllers(d,SYMS,turn.CASES[1],log),'replacement-query')
+        self.assertFalse(any(v.startswith(('write ','call ')) for v in d.commands))
+        self.assertEqual(len(log),2)
+        for altered in [[['01000000'],['1601000000000000']],
+                        [['03000000'],['1600000000000000']],
+                        [['03000000'],['1601000000000000'],['3501000000000000']]]:
+            with self.subTest(rows=altered),self.assertRaises(ValueError):
+                turn.service_controllers(Transcript(altered),SYMS,turn.CASES[1],[])
+        with self.assertRaises(ValueError):turn.service_controllers(Transcript(rows),SYMS,turn.CASES[0],[])
+
+    def test_truncated_reads_and_instruction_exhaustion_are_fatal(self):
+        for value in ('','00','zzzzzzzz'):
+            with self.subTest(value=value),self.assertRaises(ValueError):turn.read(Transcript([[value]]),[(0x02000000,4)])
+        for returned in ('return 00000000 steps 2000000','return 00000000 steps 0','garbage'):
+            with self.assertRaises(ValueError):turn.invoke(Transcript([[returned]]),{'f':(0x08000000,4)},'f')
+
+    def test_callbacks_ram_scripts_and_internal_choice_commands_fail_closed(self):
+        syms={name:(0x08000100+i*16,16) for i,name in enumerate(sorted(turn.CALLBACKS))}
+        rom=bytearray(1024)
+        name='RunBattleScriptCommands'
+        for main,pointer in [(0x080003ff,0x08000000),(syms[name][0]|1,0x02000000),
+                             (syms[name][0]|1,0x08000400)]:
+            with self.subTest(main=main,pointer=pointer),self.assertRaises(ValueError):
+                turn.dispatch(main,pointer,10,syms,rom)
+        for opcode in (0x5a,0x5b,0x67):
+            rom[0]=opcode
+            with self.assertRaisesRegex(ValueError,'choice'):turn.dispatch(syms[name][0]|1,0x08000000,10,syms,rom)
+        # A new action initializes its script itself; an old NULL cursor must
+        # not be mistaken for an interpreter dereference at that point.
+        self.assertEqual(turn.dispatch(syms['RunTurnActionsFunctions'][0]|1,0,0,syms,rom),
+                         ('RunTurnActionsFunctions',None))
+
+    def test_finite_dispatch_and_wall_clock_limits_stop_before_unbounded_work(self):
+        syms={'SetActionsAndBattlersTurnOrder':(0x08000100,16),'HandleTurnActionSelectionState':(0x08000200,16)}
+        with patch.object(turn,'setup',return_value={}),patch.object(turn,'invoke'),\
+             patch.object(turn,'MAX_DISPATCHES',0):
+            with self.assertRaisesRegex(ValueError,'dispatch limit'):
+                turn.run_case(Transcript([]),turn.CASES[0],syms,lambda v:0,{},bytes(1024))
+        with patch.object(turn,'setup',return_value={}),patch.object(turn,'invoke'),\
+             patch.object(turn.time,'monotonic',side_effect=[0,2]),patch.object(turn,'CASE_SECONDS',1):
+            with self.assertRaisesRegex(ValueError,'deadline'):
+                turn.run_case(Transcript([]),turn.CASES[0],syms,lambda v:0,{},bytes(1024))
+
+
+class TerminalOracles(unittest.TestCase):
+    def assess(self,c,raw=None,guards=None,packets=None,trace=None):
+        state,base,basepackets,basetrace=observation(c)
+        return turn.assess(c,state,base if raw is None else raw,
+            list(turn.CANARIES.values()) if guards is None else guards,
+            basepackets if packets is None else packets,SYMS,lambda v:255,c['endpoint'],
+            basetrace if trace is None else trace)
+
+    def test_living_turn_and_partial_ko_boundary_have_distinct_complete_oracles(self):
+        for c in turn.CASES:self.assertTrue(self.assess(c)['passed'])
+
+    def test_changed_secure_bytes_nonparticipants_saves_counts_stacks_and_rng_cannot_pass(self):
+        c=turn.CASES[0]
+        for index,offset in [(0,28),(0,120),(1,500),(2,200),(3,4),(4,8),(5,3),
+                             (6,0),(7,0),(8,0),(10,0),(11,0),(12,0),(13,0),
+                             (14,0),(15,0),(16,0),(17,0),(18,0)]:
+            raw=observation(c)[1];b=bytearray(raw[index]);b[offset]^=1;raw[index]=bytes(b)
+            with self.subTest(index=index,offset=offset):self.assertFalse(self.assess(c,raw=raw)['passed'])
+        guards=list(turn.CANARIES.values());guards[0]=bytes(16)
+        self.assertFalse(self.assess(c,guards=guards)['passed'])
+        with self.assertRaises(ValueError):self.assess(c,raw=observation(c)[1][:-1])
+
+    def test_dropped_second_action_wrong_packet_and_skipped_moveend_cannot_pass(self):
+        c=turn.CASES[0];_,_,packets,trace=observation(c)
+        self.assertFalse(self.assess(c,packets=packets[:-1])['passed'])
+        self.assertFalse(self.assess(c,trace=trace[:2])['passed'])
+        self.assertFalse(self.assess(c,trace=[r for r in trace if r['opcode']!=73])['passed'])
+        for index in (12,19):
+            raw=observation(turn.CASES[1])[1];raw[index]=bytes(4)
+            self.assertFalse(self.assess(turn.CASES[1],raw=raw)['passed'])
+        # Restoring Mystery types after faint would hide native cleanup behavior.
+        raw=observation(turn.CASES[1])[1];b=bytearray(raw[2]);b[33:35]=bytes([9,9]);raw[2]=bytes(b)
+        self.assertFalse(self.assess(turn.CASES[1],raw=raw)['passed'])
+
+
+if __name__=='__main__':unittest.main()
