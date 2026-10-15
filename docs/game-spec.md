@@ -554,10 +554,13 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 04:00 UTC:
+Current checkpoint — October 15, 2026, 04:37 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v75 / Site 66 is live.
-  Native release source f85c8906; website source ab096cf5. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v76 / Site 67 is live.
+  Native release source e4685806; website source d5ef93ec. Human approvals 0/11.
+  Gray paving now meets original shallow foundations/stoops in44walkablecells;
+  native/browser entries/returns and ordinary-save compatibility pass their
+  scopes. Three starter prompts explain type/first attack before confirmation.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -834,22 +837,22 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,04:00UTC; historical checkpoint details follow):
+Current snapshot (October 15, 2026,04:37UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.75-park-paving-preview; target47909520ff1e419cdab4286c9e4507d2c35c66e83ae8703084721164dc3d0938; Site66. User-liked fine paving grid now neutral light gray, isolated primarybank4; road/building/Sunset colors unchanged. Full decoded-delta audit, three native door/cache returns, ordinary saves/coldContinue and Chrome clinic roundtrip pass. Human0/11; grid preference is not a domain score. |
-| Latest local source build | v75 normal build from committed f85c8906 reproduces immutable47909520. Existing compiled gates/infill22+nestedpaving153 and full local checks pass. All1280 Park map words unchanged. Every primary/secondary resident tile and loaded palette bank restored after three interiors; matched C8→C9 saves/coldContinue preserve declared data. Manifest dirty marker retained for untracked release/PDF, no clean-checkout credit. |
+| Public build | 0.0.76-street-threshold-preview; target9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733; Site67. Neutral gray paving with original shallow foundations/stoops, right-door brick/cafe alignment and informative starter prompts. Native/browser rendering and three native door/cache returns pass their scopes; human0/11. |
+| Latest local source build | Normal v76 build from e4685806 reproduces immutable911925. Primary235tiles/65records; secondary502/504. Independent infill42+nestedpaving153 checks and full local checks pass. Allold213primarytiles/54records/54attributes and1236nonapronmapwords remain exactv75;44formerlywalkablePcells nowusegroundaprons without collision/elevation changes. Ordinary C8->C9 declared data preserved. Manifest dirty marker retained for generated/untracked output/PDF; no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site41 public IAB patches/exports exact v51. Site42 source/core in isolated localhost IAB completed ten consecutive desktop native→browser→native save cycles, independently sealed; populated party/storage/resources preserved. Fresh public auth/isolation, Safari/mobile, browser performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
+| Public QA | Site67 loader visible; authenticated canonical manifest/BPS200 and exactlocal911925. Fresh anonymous/auth acceptance not inferred. Site41 public IAB patches/exports exact v51. Site42 source/core in isolated localhost IAB completed ten consecutive desktop native→browser→native save cycles, independently sealed; populated party/storage/resources preserved. Fresh public auth/isolation, Safari/mobile, browser performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Active performance issue | First v75 active600sec Chrome run: complete310row route, zero hidden ticks, but16discarded frame debt,13738underrun outputframes (~0.3115sec),334input observations vs310planned. Strict qualifier fails. Instrumented repeat also fails9debt/8330underruns, with exactly310inputs and no unexpected DOM/focus/longtask entries. No pacing fix yet. Earlier clean idle/short observations do not supersede this failure. |
-| Next work | Diagnose active-field stalls/input contamination, then complete truthful starter-choice information and native/browser checks. Continue Stage B art/audio/interface polish and matched review; no campaign expansion before approval. Ten desktop save cycles remain one checkpoint;50 campaign checkpoints and full campaigns stay open. |
+| Next work | Diagnose active-field stalls/input contamination, starter-choice information and native/browser checks now implemented within their narrow scopes. Continue Stage B art/audio/interface polish and matched review; no campaign expansion before approval. Ten desktop save cycles remain one checkpoint;50 campaign checkpoints and full campaigns stay open. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -8139,3 +8142,28 @@ Starter-choice information checkpoint — October15,04:31UTC:
   performance. Manualclinicentry/returnisvisualproofonly, allrawdata preserved.
 - Lastalignmentexchange04:30UTC,next05:00UTC. Publicv75stilllive while
   committedsource/releasepublicationfollows; human0/11, performanceOPEN,goalACTIVE.
+
+
+v76 public foundation/stoop release — October15,04:37UTC:
+
+- Native normalrelease from e46858069d78a729972d696c6a51de2a70cc2063 reproduces
+  tested9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733.
+  BPS1040122bytes/SHA800129c44a3cc9ebbb4ff7debc6bf7ee299147ab8f92aae0c3b28f8d73ba0c66.
+  Manifest50826bytes/SHA50d07986d7784b53cdfc8a64745a0b433bf1b0813465c7d14c2284a4c90595e7.
+  Dirtymarker true for generated/untrackedrelease/PDF; no cleancheckout credit.
+- Sitesource d5ef93ec49bbdfb3ec0e60f82e75252b4a52706d, savedversion
+ appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_1945133626148191aa2352907fb6bd40.
+  Site67 deploymentappgdep_6ad057da2ce0819194c2e773eaf86ff0 succeeded
+  2026-10-15T04:34:42.854156UTC. Samepublicaudience; no DB/account/schema changes.
+- Archivea0e3ada7e9285087401803af269a2c22fe65ad2a7e43d15bbaa19bbda0456a14
+  independentlyaudits88files/15unchangedruntimefiles; approved67820byteprototype
+  only, no commercialcartridge/private save/ELF/media/ZIP/symlink/AppleDouble.
+- ExistingSitescredential authenticates canonicalmanifest/BPS checks:both200
+  and exactlocal. Receipt2aa886beb37d6b9174d56bff2ca8b3e0f654a432af784205c14a78c1bb7c37c3.
+  InitialunauthenticatedHTTP403 is not a guest/auth pass; productionfreshsign-in
+  and isolation remainOPEN. ActualIABpublicloader visible; ownQA tabclosed.
+- ManualChromeclinicentry/return screenshots showfoundationpalette restored;
+  all ownemulators/audio/tabs/servers stopped. Separatepartial/hidden/manual
+  diagnostic is rejected forperformance; earlier10secsmoke does not override
+  either600secfailure. GoalACTIVE; nextworkpairedgroundintegrationreview and
+  remainingpolish. No numeric/art/full-domain approval inferred, human0/11.
