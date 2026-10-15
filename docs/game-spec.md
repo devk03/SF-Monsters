@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 02:55 UTC:
+Current checkpoint — October 15, 2026, 03:07 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v73 / Site 64 is live.
-  Native release source aec9c111; website source 28198502. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v74 / Site 65 is live.
+  Native release source a11720dd; website source 173f0d11. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -838,8 +838,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.73-builder-labels-preview; target37e60ad325df1f8e3369b13aa707ca418cd5a02c4905de59cb919ad8cf0d0c6b; Site64. Two Cognition trainers use scoped Builder labels; other855-ID getter results, shared class table, trainer scalar/team data and stationary saves pass. Denser53-cell frontage retained. Earlier338-frame audio underrun remains preserved alongside clean repeat. Human approvals0/11. |
-| Latest local source build | v73 normal repeat build from committed aec9c111 reproduces immutable37e60ad3. All older compiled gates pass. Root getter857/857 on both builds, full class/trainer/team preservation, three stationary cold-Continue/save checks, both native intro labels and Chrome Walden intro pass. Public manifest/BPS match local release exactly. |
+| Public build | 0.0.74-challenge-briefing-preview; target9335199708e8d38a95d705074f8f6e38c340026a83d7a1318f9fb8972de821f7; Site65. Scott previews team levels/tactics and asks before battle. No/B/repeat decline preserve declared save domains; native Yes generates original team, already-badged bypass and Chrome pages/cancel/movement pass. Denser frontage and scoped Builder labels retained; human0/11. |
+| Latest local source build | v74 normal build from committed a11720dd reproduces immutable93351997. All older compiled gates and full local checks pass. All855 scalar records/resolved teams and66 class rows remain exact; Scott team48bytes unchanged. Public manifest/BPS match local release. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7739,3 +7739,56 @@ v74 challenge briefing source checkpoint — October15,02:58UTC:
   compiled trainer/team preservation and browser interaction remain required.
   Human0/11; publicv73/Site64, goalACTIVE. Alignment last exchange02:57UTC,
   next by03:27UTC; read-only control-flow/data-comparison review due03:17UTC.
+
+
+v74 public challenge-briefing checkpoint — October15,03:07UTC:
+
+- Native four-page briefing at existing relaystage3 talk-to-Scott fits the
+ 202px text area (max199px) and displays complete roster/tactics/clinic hint
+  plus Yes/No. No and B cancel with release/end, not the badge/TM path.
+  Repeat decline remains harmless. Optional trainer sightline scripts unchanged.
+- Three ordinary stationary-save branches (No/B/repeatNo) from a genuine older
+  stage3 battery preserve EVERY declared gameplay domain, samecounter4/save
+  statistic and monotonic playtime versus matched baselineSaveC4. Receipt
+ three-declines-stationary-proof.json SHA97883458a96695489bcf7039060de776b6c4ef11359b5669b4739b2cb57c4275.
+  Native600 party/512 vars/flags exact throughout stationary briefing/declines.
+  Separate down/up movement returns8,4, changing only stepvars402A/B by2.
+- Yes reaches LEADER SCOTT WU introduction and actual native team: species
+ 81/295/392,levels6/7/8,moves84/33/115;55/71/45;93/45/104,OranBerry139 on
+  Hushmoth. These are native SF ID bindings, not inherited creature names.
+  No original battle-initialization friendship changes are masked as equality.
+  Read-only branch receipt592b302afdfd4a522d91bbcd0745e288fa69f2e6ecd53f4a62cde776de865289.
+- Genuine already-badged old save skips briefing and shows existing REFLECT
+  follow-up. Decline→ordinary exit→clinic reaches6,12/map1,4 with stage3.
+  Initial too-short exit and direct sign-blocked routes are preserved failures;
+  extra exit step and row7 sign detour finish the route. Clinic receipt
+ f111b5fed2adcd142d6582a4b7017834df6e3a409288353b5a4780c56bc4a73a.
+  New win/loss/full-bag reward outcomes were not replayed; their source branches
+  and trainer/team data are unchanged. This is not full balance acceptance.
+- Static independent native resources compare all66 class rows,855 first36byte
+  scalar records and855 resolved teams exactly across relocated ELF pointers.
+  Scott48byte team and both Builder32byte teams remain exact. Receipt
+ ed998770193e677d806a1a1aa94ae76c09b5b2f5d6e79845239467327821238e.
+  Chrome actual four pages, B cancellation and resumed movement inspected; no
+  diagnostic performance run or public account/save mutation. Own QA stopped.
+- Normal committedsourcea11720dd6e65b1cc2b897fcfa2c3b73bd3c9c351 reproduces
+  target9335199708e8d38a95d705074f8f6e38c340026a83d7a1318f9fb8972de821f7.
+  BPS1037250bytes SHA571f426ce608515f7e7959b552796494c196f776a6f77a1b9c45aa5b97308314.
+  All older compiled gates/full local checks pass. Production browser BPS
+  decoder produces exact target. Seven native captures losslessly compressed
+  with all original frames/audio/state evidence preserved, no deletion.
+- Site65 succeeded2026-10-15T03:07:09.763408UTC, websitesource
+ 173f0d1178a32c3b910064a8fcdc16c1b93f7c8f; savedversion
+ appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_c666c435c06481918b67071c7e46b5a3;
+  deploymentappgdep_6ad043544bdc81919d4074bd780f3a93. Archive
+ site-v74-challenge-briefing.tar.gz SHA68b68e09ff34c9258c438c83fc379f30a3511762d8c9c1473ed0f27e7edfe47e
+  independently audits88 files, approved prototype only/no commercial ROM/private
+  save/ELF/movie/ZIP/AppleDouble/traversal/symlink. Runtime15 files exact.
+- First immediate postdeploy resource request mismatched during propagation;
+  subsequent canonical manifest and BPS both return200/exact local. Public
+  loader inspected in own visible tab, screenshot saved, own tab closed.
+  No database changes, GitHub workflow or user account/save mutations.
+- Alignment recommendation directly informed this interaction. Last exchange
+ 03:07UTC; next by03:37UTC. Peer finite20min read-only visual priority review
+  pending; root owns all sources. Human0/11, music last explicit2/4/revision
+  pending, all broad gatesOPEN. GoalACTIVE throughOctober15,18Pacific.
