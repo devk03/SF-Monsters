@@ -7137,3 +7137,22 @@ v71 original Cognition portrait source checkpoint — October15,00:53UTC:
   Earlier older batteries underwent existing native species-content upgrade;
   these actual ordinary v70 saves establish the current revision8 baseline.
   Public remainsv70/Site61; goalACTIVE, humanapproval0/11, all remaininggatesOPEN.
+
+
+v71 compiled portrait gate checkpoint — October15,00:54UTC:
+
+- Corrected draft reproduces SAME353ff5bd5adb5b52df1d6b7f1b2d68bbb7df9956ab283e4d99ca2e991937c667,
+  confirming the repair changed only validation. BPS1026146bytes remains private.
+  Compiledcreature255/cast52/intro5/map17/door11/portrait26 all pass. Full local
+  suite passes, including11 independent portrait fixtures and4battle limits.
+- The bounded ELF reader adds EXACT15 portrait/table/animation/trainer symbols,
+  retaining existing resource checks. Audit independently specifies265→93,
+  320→94,321→95, exact pixels/palettes/ABI/animation links and96complete front
+  table entries. Actual oldv70 fails8/26; actual candidatepasses26/26.
+  No stub image or synthetic fixture is counted as native presentation approval.
+- Build now preserves a unique portrait receipt and refuses BPS creation on
+  failure; release metadata carries scoped26checks/validator+receipt hashes.
+  Three source checkpoints separate assets/producer, compiledgate and companion
+  synthetic tests. Public staysv70/Site61 until actual native/browser acceptance.
+  Root proceeds to both real prebattle old-save Continue and native battles;
+  humanapproval0/11 and full goalACTIVE throughOctober15,18Pacific.

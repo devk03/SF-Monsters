@@ -29,6 +29,7 @@ from house_art import apply_house_art, prepare_sunset_tiles
 from courier_art import apply_courier
 from cast_art import apply_cast, audit_compiled_cast, GROUPS
 from trainer_portraits import apply_portrait
+from trainer_portrait_audit import audit_portraits
 from intro_art import apply_intro, audit_intro
 from courier_battle_art import apply_courier_battle
 from office_art import apply_office, office_resources
@@ -178,6 +179,14 @@ def main():
     if compiled_seed_door.get('passed') is not True:
         raise ValueError('Compiled seed door failed; preserved receipt: ' + str(seed_door_path))
     print('Compiled seed door verified: ' + json.dumps(compiled_seed_door['counts']))
+    compiled_portraits = audit_portraits(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    portrait_bytes = (json.dumps(compiled_portraits, indent=2) + '\n').encode()
+    portrait_path = validation_directory / ('trainer-portraits-' + uuid.uuid4().hex + '.json')
+    with portrait_path.open('xb') as stream:
+        stream.write(portrait_bytes)
+    if compiled_portraits.get('passed') is not True:
+        raise ValueError('Compiled trainer portraits failed; preserved receipt: ' + str(portrait_path))
+    print('Compiled trainer portraits verified: ' + json.dumps(compiled_portraits['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -244,6 +253,12 @@ def main():
         'receipt_sha256': hashlib.sha256(cast_bytes).hexdigest(),
         'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/cast_art.py').read_bytes()).hexdigest(),
         'quality_approval': 'pending', 'scope': compiled_cast['scope']
+    }
+    manifest['compiled_trainer_portraits'] = {
+        'passed': True, 'counts': compiled_portraits['counts'],
+        'receipt_sha256': hashlib.sha256(portrait_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/trainer_portrait_audit.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_portraits['scope']
     }
     manifest['compiled_intro'] = {
         'passed': True, 'counts': compiled_intro['counts'],

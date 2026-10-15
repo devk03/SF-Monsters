@@ -87,7 +87,14 @@ class Cartridge:
                         'sSFHabitatMapIds', 'sSFRegionMapParents', 'sDoorAnimGraphicsTable',
                         'gTilesetTiles_SFSouthPark', 'gTilesetPalettes_SFSouthPark',
                         'gMetatiles_SFSouthPark', 'gMetatileAttributes_SFSouthPark',
-                        'OldaleTown_Layout_Blockdata'):
+                        'OldaleTown_Layout_Blockdata',
+                        'gTrainerFrontPic_ScottWu', 'gTrainerFrontPic_WaldenYan',
+                        'gTrainerFrontPic_StevenHao', 'gTrainerPalette_ScottWu',
+                        'gTrainerPalette_WaldenYan', 'gTrainerPalette_StevenHao',
+                        'gTrainerFrontPicCoords', 'gTrainerFrontPicTable',
+                        'gTrainerFrontPicPaletteTable', 'gTrainerFrontAnimsPtrTable',
+                        'sAnims_ScottWu', 'sAnims_WaldenYan', 'sAnims_StevenHao',
+                        'sAnim_GeneralFrame0', 'gTrainers'):
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')
