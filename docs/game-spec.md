@@ -838,7 +838,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.72-park-infill-preview; target1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249; Site63. Four original frontage cards fill53 cells; native recoveries/walls/three doors and scoped Chrome checks pass. Earlier338-frame audio underrun is preserved alongside clean repeat. Human approvals0/11. |
-| Latest local source build | v72 normal sourcecacdc7e reproduces tested1f404cb6. Compiled creature255/cast52/intro5/map17/door11/portraits26/primary23 and full local suite pass. All53 genuine occupied-save recoveries/resaves and213VRAM/four-palette checks after three interior returns pass. All broader art/audio/performance/campaign acceptance stays open. |
+| Latest local source build | v73 private draft37e60ad325df1f8e3369b13aa707ca418cd5a02c4905de59cb919ad8cf0d0c6b adds two scoped Builder labels. All older compiled gates pass, root native getter857/857 before/after and trainer scalar/team/table preservation pass, ordinary native intros show both labels. Stationary saves/browser/normal release remain pending; public staysv72. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7536,3 +7536,36 @@ v73 scoped role-label source checkpoint — October15,02:10UTC:
   remain pending. Alignment owns only new getter runner/tests and two exact
   reader symbols, finite task due03:15UTC. Root owns source/builds/UI evidence.
   Human0/11 and all broad remaining gates stayOPEN; goalACTIVE.
+
+v73 independent getter checkpoint — October15,02:24UTC:
+
+- Actual immutable draft37e60ad325df1f8e3369b13aa707ca418cd5a02c4905de59cb919ad8cf0d0c6b
+  compiles with all older creature/cast/intro/map/door/portrait/primary gates
+  passing. Both ordinary native introductions visibly say BUILDER WALDEN YAN
+  and BUILDER STEVEN HAO with their original portrait candidates. Root retains
+  full2048frame inputs/frames/audio and inspected frame720 montage.
+- Root reviewed and independently reran the pure getter audit against v72/
+  v73 genuine field snapshots. Each passes857/857 calls:855 valid trainer IDs
+  plus855/65535 fallback. Exactly320/321 resolve to the single8byte BUILDER
+  constant. Seven other class23 trainers stay POKéMANIAC; Scott265 staysLEADER.
+- Native agbcc ABI verifies Trainer40bytes/class1/count32/AI28/partyPointer36,
+  four team strides8/16/8/16, save/storage sizes,855trainer count and alias IDs.
+  All66x13 original class rows, all855 first36 scalar bytes and ALL855 resolved
+  team payloads stay exact, including both SF32byte parties. Pointer relocation
+  is resolved semantically rather than comparing absolute ROM addresses.
+- Native getter max19before/25after instructions; accepted bound512 with frozen
+  driver hardcap2M. Sixty seconds per side/240s overall; private unique driver.
+  Fourteen declared protected spans and per-call pointer/count/RNG observations
+  stay exact. Temporary CPU registers/stack may change; no opaque RAM claim.
+  Read-only scope excludes battle UI, durable saves and campaign acceptance;
+  the separate actual introduction captures supply ordinary-A display evidence.
+- Root receipt trainer-class-root-reviewed-v73/result.json
+  SHAdf7438d6877443665a8382f67965857c0b8506c940f12992a1cdd3e510eea7db.
+  Peer final receiptSHAf18d1a422a9920a020c8a23e394d6cba3ef0149df352d27d40382876c03ee7cc;
+  deliberately old-label native negativeSHAf44af39aad872321cb3400f93aa31381a1ef8d5dcccc5623ce33249c7319c4f0
+  rejects exactly the two intended aliases, with protected state preserved.
+- Only two exact data symbols were added to the strict Cartridge whitelist.
+  Frozen capture/core/function drivers, shared transport/ABI and original class
+  table writer stay unchanged. Portable guard suite/check wiring follows as a
+  separate checkpoint; actual model code214lines remains one coherent audit.
+  Publicv72/Site63 and human0/11 unchanged; all broad gatesOPEN, goalACTIVE.

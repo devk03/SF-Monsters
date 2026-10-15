@@ -97,7 +97,8 @@ class Cartridge:
                         'sAnim_GeneralFrame0', 'gTrainers',
                         'gTilesetTiles_SFParkFrontage', 'gTilesetPalettes_SFParkFrontage',
                         'gMetatiles_SFParkFrontage', 'gMetatileAttributes_SFParkFrontage',
-                        'gTileset_SFParkFrontage', 'OldaleTown_Layout', 'gTileset_SFSouthPark'):
+                        'gTileset_SFParkFrontage', 'OldaleTown_Layout', 'gTileset_SFSouthPark',
+                        'gTrainerClassNames', 'gSFBuilderClassName'):
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')
