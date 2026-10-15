@@ -8,10 +8,13 @@ import json
 from pathlib import Path
 import struct
 
-ASSET = 'assets/tiles/connected-frontage-v1'
 SIZE = (176, 80)
-SOURCE_BOUNDS = (67, 20, 1792, 805)
-SOURCE_GROUND_Y = 726
+REVISIONS = {
+    'v1': ('source-candidate-b.png', 'prompt-candidate-b.md',
+           (1859,846), (67,20,1792,805), 726),
+    'v2': ('source.png', 'prompt.md', (1860,846), (0,1,1860,636), 636),
+    'v3': ('source.png', 'prompt.md', (1859,846), (2,2,1858,637), 637),
+}
 COLORS = ((0,0,0), (5,7,10), (12,13,16), (17,17,19), (8,11,15),
           (29,26,20), (22,18,14), (25,14,11), (18,9,8), (18,10,7),
           (28,22,14), (20,17,22), (20,20,20), (14,14,14), (9,14,4), (11,8,9))
@@ -21,17 +24,23 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def encode(root):
+def specification(root, revision):
+    if revision not in REVISIONS:
+        raise ValueError('Unknown connected frontage revision.')
+    return root / ('assets/tiles/connected-frontage-'+revision), REVISIONS[revision]
+
+
+def encode(root, revision='v1'):
     from PIL import Image
-    directory = root / ASSET
-    source = Image.open(directory / 'source-candidate-b.png').convert('RGBA')
-    if source.size != (1859, 846):
+    directory, (source_name, prompt_name, size, bounds, ground_y) = specification(root, revision)
+    source = Image.open(directory / source_name).convert('RGBA')
+    if source.size != size:
         raise ValueError('Review source coordinates for a new generated candidate.')
-    left, top, right, bottom = SOURCE_BOUNDS
+    left, top, right, bottom = bounds
     native = Image.new('RGBA', SIZE)
     # Keep architecture coupled across the whole block. Discard generated ground:
     # the native sidewalk underlay supplies the approach without a pasted panel.
-    zone = source.crop((left, top, right, SOURCE_GROUND_Y))
+    zone = source.crop((left, top, right, ground_y))
     native.paste(zone.resize((176, 64), Image.Resampling.NEAREST), (0, 0))
     colors = COLORS
     pixels = bytes(0 if rgba[3] < 128 else min(range(1, 16), key=lambda index:
@@ -46,11 +55,11 @@ def encode(root):
     (directory / 'block.indices').write_bytes(pixels)
     (directory / 'block.gbapal').write_bytes(packed)
     files = ('native.png', 'block.indices', 'block.gbapal')
-    info = {'source_sha256': sha((directory/'source-candidate-b.png').read_bytes()),
-            'prompt_sha256': sha((directory/'prompt-candidate-b.md').read_bytes()),
+    info = {'source_sha256': sha((directory/source_name).read_bytes()),
+            'prompt_sha256': sha((directory/prompt_name).read_bytes()),
             'generator': 'Built-in imagegen, original connected architecture',
             'quality_approval': 'pending; prototype only', 'size': list(SIZE),
-            'source_bounds': list(SOURCE_BOUNDS), 'source_ground_y': SOURCE_GROUND_Y,
+            'source_bounds': list(bounds), 'source_ground_y': ground_y,
             'method': 'Whole-width architecture crop; nearest176x64; fixed RGB55515; alpha128; transparent approach',
             'blocked_rows': [0,64], 'walkable_rows': [64,80],
             'files': {name: sha((directory/name).read_bytes()) for name in files}}
@@ -58,16 +67,16 @@ def encode(root):
     return info
 
 
-def load(root):
+def load(root, revision='v1'):
     from PIL import Image
-    directory = root / ASSET
+    directory, (source_name, prompt_name, size, bounds, ground_y) = specification(root, revision)
     info = json.loads((directory/'conversion.json').read_text())
-    if info['source_sha256'] != sha((directory/'source-candidate-b.png').read_bytes()):
+    if info['source_sha256'] != sha((directory/source_name).read_bytes()):
         raise ValueError('Connected frontage source changed.')
-    if info['prompt_sha256'] != sha((directory/'prompt-candidate-b.md').read_bytes()):
+    if info['prompt_sha256'] != sha((directory/prompt_name).read_bytes()):
         raise ValueError('Connected frontage prompt provenance changed.')
     if (info['size'], info['source_bounds'], info['source_ground_y']) != (
-            list(SIZE), list(SOURCE_BOUNDS), SOURCE_GROUND_Y):
+            list(SIZE), list(bounds), ground_y):
         raise ValueError('Review native footprint and source split together.')
     for name in ('native.png', 'block.indices', 'block.gbapal'):
         if sha((directory/name).read_bytes()) != info['files'][name]:
@@ -89,4 +98,8 @@ def load(root):
 
 
 if __name__ == '__main__':
-    print(json.dumps(encode(Path(__file__).resolve().parents[2]), indent=2))
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--revision', choices=tuple(REVISIONS), default='v1')
+    args = parser.parse_args()
+    print(json.dumps(encode(Path(__file__).resolve().parents[2], args.revision), indent=2))

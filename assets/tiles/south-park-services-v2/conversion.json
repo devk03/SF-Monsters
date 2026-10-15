@@ -1,0 +1,42 @@
+{
+  "source_sha256": "9269ae6e8e93aa9d17df2d88cda7f8c4566115c141c136b66fb878e649805c40",
+  "prompt_sha256": "2fa7465e0bb164dd69337a57bedd5bd6c0f867ec82b970ea9b2637481eddb00c",
+  "generator": "Built-in imagegen, original architecture",
+  "quality_approval": "pending; prototype only; door animation not integrated",
+  "native_size": [
+    112,
+    80
+  ],
+  "cards": [
+    {
+      "name": "warehouse",
+      "source_bounds": [
+        89,
+        25,
+        972,
+        703
+      ]
+    },
+    {
+      "name": "clinic",
+      "source_bounds": [
+        1125,
+        25,
+        2009,
+        703
+      ]
+    }
+  ],
+  "method": "Separate original source bounds; nearest112x80; shared curated RGB55515; alpha128",
+  "references": {
+    "assets/tiles/connected-frontage-v2/native.png": "05e5d1fb10be0782f273f0e903540fca0bf61e0cdc67c01b9a8ff0c156c4f8b0",
+    "assets/tiles/south-park-buildings/warehouse.png": "9020ec88fb6f676f55c4221d33bbcbea4c1515cba05ac1f77fe330f381a109a8",
+    "assets/tiles/south-park-buildings/clinic.png": "2159e73ab24ae1aa16d285a6f26407d593e1f488349153e52832bbc66a88fd0e"
+  },
+  "files": {
+    "warehouse.png": "95392acfa4e742e23079fbf9e38cf5893afc6e66dfa57c0912e763a4f65719a2",
+    "clinic.png": "ec2a3111df936e7ee4d4844bef9653e772a9e4b9a3666ead50dda16626c4e0dd",
+    "buildings.indices": "ed430f7cdba102c794ffabc9350f4ea080dc38f0a4b16095e204b2144ebd56af",
+    "building-palettes.gbapal": "a27f25bf4bdb0eea3ce7214f4d8e0c4f05d05f482165dee5f3af5435f8e45361"
+  }
+}

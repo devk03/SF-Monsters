@@ -8213,3 +8213,27 @@ Connected frontage experiment — October15,04:55UTC:
   those specific properties but identifies undersized6-8px doors versus16px
   player and mismatched old neighboring service art as the next priorities.
   No numeric score, approval, browser/clean-build/performance/campaign credit.
+
+Whole-street native candidate — October15,05:04UTC:
+
+- Original connected-frontage-v2 increases entry openings; v3 fills them with
+  closed residential/cafe doors. A matching original office/clinic pair is
+  preserved in south-park-services-v2. Sources, exact prompts, native previews,
+  palettes and provenance metadata remain available; all conversions reproduce
+  byte-identical output. This is candidate art, not accepted quality.
+- Private target50d23e2fdfcf5c2ce8f8073a0a964810696d7b0413d358caa06dda5749a3ce06
+  combines the block with matching services. Primary395/512 tiles; secondary
+  479/504 with native door slots reserved. Independent decode verifies all150
+  secondary cells (70 original new service cells,80 preserved), all120 primary
+  underlays/65 preserved foregrounds/55 new scene cells, palette changes only
+  in5/8/9, and unchanged collision/elevation across all1280 map cells.
+- Actual old-Flash coldContinue is22,6 Park0,10. All resident primary/secondary
+  graphics and13 unfaded palette banks match the candidate ROM. Proof SHA
+  5f74827b24345d4f7cfacb1af3302e3247401e7fe463767cf27bb74f60fb22f5
+  at .tools/connected-frontage-prototype/street-native-proof.json. Actual frame
+  connected-street-d-cold/final-4x.png is presented for optional direction
+  feedback while independent work continues. No formal score or approval.
+- Institutional animations are still old art and require replacement/alignment
+  before shipping. Normal build integration, compiled release audits, entries/
+  returns, browser verification and user comparison acceptance remain open.
+  Publicv76 stays unchanged and remains rejected. No workflow runs requested.

@@ -8,8 +8,8 @@ is its built-in refinement; the exact refinement prompt is preserved separately.
 Candidate A's design brief: one original coral/brick/cream/lilac SF block, overhead
 roof depth, shared party walls, consistent native door/window modules, attached
 entry steps and neutral-gray approach, no detached rails, no commercial sprites.
-The exact first tool prompt remains in the originating chat; this brief is a
-summary and is not represented as a verbatim prompt transcript.
+The exact first tool prompt is now preserved in prompt-candidate-a.md; the
+brief above is a summary rather than a replacement for that transcript.
 
 Generated source files are unchanged copies from the built-in imagegen outputs:
 
