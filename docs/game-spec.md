@@ -7817,3 +7817,25 @@ South Park paving asset checkpoint — October15,03:15UTC:
   converter/assets/production integration. Last exchange03:15UTC,next03:45UTC.
   Native seam/door-return/browser/ordinary-save comparisons remain required.
   Publicv74/Site65, human0/11, music2/4 pending revision; goalACTIVE.
+
+
+Independent paving audit checkpoint — October15,03:21UTC:
+
+- Root reviewed/reran peer's independent native auditor on immutable candidate
+ 7686e352185010e5397d91d3ffdf16d5d939beed7ffd7d68ac5dc0fa6ffd72a8.
+  All152checks pass:1200 quadrant roles,448 intended bank6 paving quadrants,
+ 592 unchanged resident pixel/bank quadrants and160 literal blank/nonresident
+  words. Original attrs300/palette512 exact;502 resident tiles reserve doors.
+- Root positive receipt matches peer byte-exact:
+ d4d3a368a7873687cba6884db619553df5a7818515c798780efe607733e5ce7f.
+  Genuine v74 negative rejects all112 paving-bearing records,40/152matched,
+  no input errors; SHAe78a7a35a171910d2e2c4f6a9d93d41d28902bc161b4fc8c5e1422a403eeef10.
+  Eleven portable mutation/flip/ROM-ELF guards pass; no producer import.
+- Baseline source hashes/receipt are independently pinned; candidate allows only
+  opaque1/2 repeated8x8 master. Physical tile repacking/flips are decoded, not
+  treated as artwork changes or masked globally. Palette/bank/attribute, every
+  unauthorized pixel, reserved/blank word, truncation and stale resource reject.
+- Peer returned both files frozen; root owns them again. New gate integration
+  and native candidate are still local/unpublished. Same-input native frontage
+  shows brighter fine slabs and intact architecture. Human approval is pending.
+  Publicv74/Site65, human0/11, goalACTIVE; doorway/browser/save checks next.
