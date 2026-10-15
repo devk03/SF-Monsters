@@ -45,7 +45,7 @@
       "id": "TRAINER_JOSH",
       "name": "WALDEN YAN",
       "class": "TRAINER_CLASS_POKEMANIAC",
-      "portrait": "TRAINER_PIC_POKEMANIAC",
+      "portrait": "TRAINER_PIC_WALDEN_YAN",
       "party": [
         {
           "species": "SPECIES_ZIGZAGOON",
@@ -71,7 +71,7 @@
       "id": "TRAINER_TOMMY",
       "name": "STEVEN HAO",
       "class": "TRAINER_CLASS_POKEMANIAC",
-      "portrait": "TRAINER_PIC_POKEMANIAC",
+      "portrait": "TRAINER_PIC_STEVEN_HAO",
       "party": [
         {
           "species": "SPECIES_WINGULL",

@@ -7104,3 +7104,36 @@ v70 public original Muni operator release — October15,00:39UTC:
   Walden94/Steven95 after existingScott93, no stock slot or battle-rule changes.
   Root will handle original art and native/browser acceptance; next exchange
   by01:00UTC. No new monitor/GitHubworkflow/DBmigration/PRmerge; work continues.
+
+
+v71 original Cognition portrait source checkpoint — October15,00:53UTC:
+
+- Built-in imagegen produced original Walden and Steven battle figures matching
+  their established fictional field costumes. Selectedsource/prompt/native64x64
+  frame2048bytes/palette32bytes/conversion/README are tracked under each
+  cognition-cast/{person}/battle-portrait-v1. Deliberate independent palettes
+  separate green/ivory/skin for Walden and gray/navy/glasses/skin for Steven.
+  Original Scott source, frame6b132b9f...da79b and palettef4e2ab2a...cec6 unchanged.
+- Producer registry keeps Scottpicture93 and appends Walden94/Steven95. Only
+  JOSH320/TOMMY321 picture selectors change; completebattle/encounter/reward
+  document normalizes to original canonicale3a8dc08dea3100eb539cff40ef7578d06cf83c892cfa85ead26ca44dbc1bbb1.
+  No team/item/move/AI/class/flag/script changes or new battle-engine hooks.
+- First actual compile353ff5bd...7c667 correctly failed the new resource gate
+  at23/26: the checker/fixture incorrectly assumed packed2byte MonCoords rows.
+  Pinned agbcc uses STRUCTURE_SIZE_BOUNDARY32: native rows are4bytes08 01 00 00,
+  table96×4=384bytes. SourceC structs and productiontables were correct. Failed
+  receipt and original ROM/ELF are preserved; validator/fixture corrected only.
+  New checks reject packed192byte tables, either nonzero padding byte and wrong
+  semantic coords at each93/94/95. Eleven focused synthetic tests pass.
+- Independent re-audit of the SAME actual firstcandidate now passes26/26; old
+  v70 negativecontrol fails. Scope is compiled pixels/palettes/descriptors/
+  trainer selectors/animation pointers, not humanquality or gameplay acceptance.
+  Peer four-file handoff and corrected two-file hashes independently verified.
+  Root owns completebuild/checks and actual native/browser battles next.
+- Genuine currentv70 prebattle saves recorded by normal play/Save, no flag or
+  RAM/battery edits: preWaldenC3 at4,14 SHA
+  24133218397436dfad3d82bf4219560c0f1365038c1112b6055f9cf084cb50d0;
+  preStevenC4 at4,13 SHAe806a0efec0441cd205c5adee4d52332c700da9018bad64c5abd4845b468624c.
+  Earlier older batteries underwent existing native species-content upgrade;
+  these actual ordinary v70 saves establish the current revision8 baseline.
+  Public remainsv70/Site61; goalACTIVE, humanapproval0/11, all remaininggatesOPEN.

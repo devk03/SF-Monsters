@@ -1,0 +1,28 @@
+{
+  "source_sha256": "ab49cebc06fa80e82e410c6d4322ab6a09f654312fa464dd012ced80207e9b32",
+  "native_size": [
+    64,
+    64
+  ],
+  "source_alpha_bounds": [
+    190,
+    102,
+    892,
+    1344
+  ],
+  "figure_size": [
+    33,
+    58
+  ],
+  "baseline": 62,
+  "palette_colors": 16,
+  "quality_approval": "pending",
+  "pixel_cleanup": "pending",
+  "palette_policy_sha256": "6b79c48ed330440dcb4caaa419ec0045953a674aa075110c2497f4f7294f42a2",
+  "native_cleanup_sha256": null,
+  "files": {
+    "portrait.4bpp": "de07c07f79d2f34ef6f51fa316871cd0668b306358d14ef68a95bebdb515c962",
+    "portrait.gbapal": "feee44d36fdc9ad6de7f169ae53be9bb6d2a286099021bf7318874fbbdbf0b8b",
+    "portrait.png": "1805646acbad4d301255d6a0e4135462b5d4d62cf292692f0df4fa9ac6183c3e"
+  }
+}

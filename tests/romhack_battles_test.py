@@ -1,6 +1,8 @@
 """Limits that keep authored teams safe for the native battle interfaces."""
 import sys
 import unittest
+import hashlib
+import json
 from pathlib import Path
 from copy import deepcopy
 
@@ -9,6 +11,19 @@ from battle_content import trainer_record
 
 
 class TrainerLimits(unittest.TestCase):
+    def test_portrait_refresh_preserves_complete_teams_encounters_and_rewards(self):
+        content = json.loads((Path(__file__).resolve().parents[1] /
+                              'romhack/content/first-chapter-battles.json').read_text())
+        expected = {'TRAINER_JOSH': 'TRAINER_PIC_WALDEN_YAN',
+                    'TRAINER_TOMMY': 'TRAINER_PIC_STEVEN_HAO'}
+        for trainer in content['trainers']:
+            if trainer['id'] in expected:
+                self.assertEqual(trainer['portrait'], expected[trainer['id']])
+                trainer['portrait'] = 'TRAINER_PIC_POKEMANIAC'
+        self.assertEqual(hashlib.sha256(json.dumps(content, sort_keys=True,
+            separators=(',', ':')).encode()).hexdigest(),
+            'e3a8dc08dea3100eb539cff40ef7578d06cf83c892cfa85ead26ca44dbc1bbb1')
+
     def setUp(self):
         self.team = {'id': 'TRAINER_ROXANNE_1', 'name': 'SCOTT WU',
                      'class': 'TRAINER_CLASS_LEADER', 'portrait': 'TRAINER_PIC_LEADER_BRAWLY',
