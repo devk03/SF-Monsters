@@ -56,7 +56,7 @@ CITY_CELLS=((17,6,120,False),(17,7,121,True),(36,6,120,False),(36,7,121,True),
 def sha(blob):return hashlib.sha256(blob).hexdigest()
 
 
-def audit_furniture(rom,elf,root):
+def audit_furniture(rom,elf,root,*,density=False):
     from check_creature_resources import Cartridge,decode_lz
     from PIL import Image
     checks,hashes,errors=[],{},[]
@@ -79,7 +79,16 @@ def audit_furniture(rom,elf,root):
             row['error']=str(error);errors.append(name+': '+str(error))
         checks.append(row)
     try:
-        root=Path(root);source(Path(__file__));source(Path(__file__).with_name('connected_frontage_audit.py'))
+        root=Path(root)
+        if type(density) is not bool:raise ValueError('Density mode must be an explicit boolean.')
+        if density:
+            from park_density_audit import audit_density,parcel_cells
+            extension=audit_density(rom,elf,root);result['density']=extension
+            if not extension['passed']:raise ValueError('Independent density gate failed; no normalization is allowed.')
+            restored=source(root/'assets/tiles/park-density-v1/baseline-v78/south-park-map.bin')
+            result['normalization']={'validated_density':True,'restored_map_cells':128,
+                                     'preserved_primary_tiles':449,'preserved_records':135}
+        source(Path(__file__));source(Path(__file__).with_name('connected_frontage_audit.py'))
         source(Path(__file__).parents[1]/'quality/check_creature_resources.py')
         assets=pinned(root/ASSET,SOURCE);baseline=pinned(root/ASSET/'baseline-v77',BASELINE)
         reference=source(root/'assets/tiles/connected-frontage-v3/native.png')
@@ -138,6 +147,10 @@ def audit_furniture(rom,elf,root):
         raw=decode_lz(cart.data('gTilesetTiles_SFParkFrontage'))
         records=cart.data('gMetatiles_SFParkFrontage');attrs=cart.data('gMetatileAttributes_SFParkFrontage')
         palettes=cart.data('gTilesetPalettes_SFParkFrontage')
+        if density:
+            if (sha(cart.rom),sha(cart.elf))!=(extension['hashes']['rom'],extension['hashes']['elf']):
+                raise ValueError('Cartridge changed after density validation.')
+            raw=raw[:449*32];records=records[:135*16];attrs=attrs[:135*2]
         compare('primary_allocations',struct.pack('<4I',449*32,135*16,135*2,512),
                 lambda:struct.pack('<4I',len(raw),len(records),len(attrs),len(palettes)))
         compare('original395_tile_prefix',baseline['primary.4bpp'],lambda:raw[:395*32])
@@ -178,7 +191,13 @@ def audit_furniture(rom,elf,root):
                 return bytes(result)
             compare(name+':native_pixels',pixels[name],decoded)
         compare('all135_layer_attributes',bytes(expected_attrs),lambda:attrs)
-        blocks=cart.data('OldaleTown_Layout_Blockdata',2560);expected=bytearray(baseline['south-park-map.bin'])
+        blocks=cart.data('OldaleTown_Layout_Blockdata',2560)
+        if density:
+            blocks=bytearray(blocks)
+            for x,y in parcel_cells():
+                at=(y*40+x)*2;blocks[at:at+2]=restored[at:at+2]
+            blocks=bytes(blocks)
+        expected=bytearray(baseline['south-park-map.bin'])
         for x,y,record,solid in CITY_CELLS:
             at=(y*40+x)*2
             if struct.unpack_from('<H',expected,at)[0]!=0x3213:

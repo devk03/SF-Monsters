@@ -10,6 +10,8 @@ from sidewalk_thresholds import load as load_thresholds
 from connected_frontage import load as load_connected
 from city_furniture import load as load_furniture
 from city_dressing import strip as strip_dressing
+from park_density import strip as strip_density
+from compact_townhouses import load as load_compact
 
 # token, name, left, top, width, height, first native metatile
 PLACEMENTS = (('W', 'brick', 2, 1, 3, 5, 1),
@@ -45,7 +47,7 @@ def infill_tile(plan, x, y):
 
 def previous_plan(plan):
     """Remove precisely this infill for pinned historical-map comparisons."""
-    result = strip_dressing(plan)
+    result = strip_dressing(strip_density(plan))
     result['tilesets'].pop('primary')
     for token, _, left, top, width, height, _ in PLACEMENTS:
         result['legend'].pop(token)
@@ -57,7 +59,7 @@ def previous_plan(plan):
     return result
 
 
-def resources(root, secondary_records, *, furniture=True):
+def resources(root, secondary_records, *, furniture=True, density=True):
     """Use primary0..511 for new pixels; underlay references existing sidewalk."""
     if len(secondary_records) != 150 * 16:
         raise ValueError('Review the pinned secondary metatile allocation.')
@@ -125,6 +127,17 @@ def resources(root, secondary_records, *, furniture=True):
                 append_cell(cell,bank,0x1000 if index//(width//16)==height//16-1 else 0)
         if len(records)!=135*16 or len(attributes)!=135*2:
             raise ValueError('City furniture must append exactly15 metatiles.')
+    if density and 'street_blocks' in plan:
+        strip_density(plan)
+        if len(records)!=135*16:
+            raise ValueError('Compact housing must append after all existing furniture.')
+        pixels,palette=load_compact(root)
+        if palettes[160:192]!=palette:
+            raise ValueError('Compact housing must preserve the accepted street palette.')
+        for index,(cell,bank) in enumerate(facade_cells(pixels,64,64,5)):
+            append_cell(cell,bank,0x1000 if index//4==3 else 0)
+        if len(raw)!=511*32 or len(records)!=151*16 or len(attributes)!=151*2:
+            raise ValueError('Review the compact housing resident allocation.')
     return bytes(raw), bytes(records), bytes(attributes), bytes(palettes)
 
 

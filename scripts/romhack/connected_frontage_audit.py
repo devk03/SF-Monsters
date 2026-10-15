@@ -68,7 +68,7 @@ def cell_pixels(raw, words, *, secondary=False, bank=None):
                     + parts[2*(y//8)+1][(y%8)*8:(y%8+1)*8] for y in range(16))
 
 
-def audit_connected(rom, elf, root, *, furniture=False):
+def audit_connected(rom, elf, root, *, furniture=False, density=False):
     from check_creature_resources import Cartridge, decode_lz
     from PIL import Image
 
@@ -101,17 +101,23 @@ def audit_connected(rom, elf, root, *, furniture=False):
 
     try:
         root = Path(root)
-        if type(furniture) is not bool:
-            raise ValueError('Furniture mode must be an explicit boolean.')
+        if type(furniture) is not bool or type(density) is not bool:
+            raise ValueError('Furniture and density modes must be explicit booleans.')
+        if density and not furniture:
+            raise ValueError('Density normalization requires the independent furniture gate.')
         if furniture:
             from city_furniture_audit import audit_furniture, CITY_CELLS
-            city = audit_furniture(rom, elf, root)
+            city = audit_furniture(rom, elf, root, density=density)
             result['furniture'] = city
             if not city['passed']:
                 raise ValueError('Independent furniture gate failed; no normalization is allowed.')
             restored_map = source(root/'assets/tiles/city-furniture-v1/baseline-v77/south-park-map.bin')
             result['normalization'] = {'validated_furniture':True, 'restored_map_cells':18,
                 'preserved_primary_tiles':395, 'preserved_records':120}
+            if density:
+                from park_density_audit import parcel_cells
+                density_map=source(root/'assets/tiles/park-density-v1/baseline-v78/south-park-map.bin')
+                result['normalization'].update(validated_density=True,restored_density_cells=128)
         source(Path(__file__))
         source(Path(__file__).parents[1]/'quality/check_creature_resources.py')
         hashes.update(rom=sha(rom.read_bytes()), elf=sha(elf.read_bytes()))
@@ -159,6 +165,9 @@ def audit_connected(rom, elf, root, *, furniture=False):
             value = cart.data(name, length)
             if furniture and name == 'OldaleTown_Layout_Blockdata':
                 value = bytearray(value)
+                if density:
+                    for x,y in parcel_cells():
+                        at=(y*40+x)*2;value[at:at+2]=density_map[at:at+2]
                 for x,y,record,solid in CITY_CELLS:
                     at = (y*40+x)*2
                     value[at:at+2] = restored_map[at:at+2]

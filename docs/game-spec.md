@@ -8503,3 +8503,19 @@ Independent compact-density gate — October15,06:29UTC:
   unchanged476secondary/150records. Original449/135prefixes and all palettes
   stay exactv78;16new metatiles independently decode the original compact pair.
   Actual native rendering/resume and full normal build are still pending.
+
+Compact-density source integration — October15,06:32UTC:
+
+- Normal v79 source installs the final128-cell parcel plan and original compact
+  pair. Actual source allocation511primarytiles/151records/151attributes;
+  secondary476/150 and all palettes stay exactv78. Northern accepted house
+  pixels, all city props and the full seed house remain unchanged.
+- Four new source/resource/route cases pass, plus historical infill5/city6/art12/
+  flips6. Historical checks explicitly project to their frozen prior layout;
+  new current density cases verify all1280 words,125changes,65collision changes,
+ 56new solid/9freed cells, both side sidewalks and every other walkable cell.
+- Normal build first requires the independent density gate. Only after it passes
+  on the same ROM/ELF may old city/frontage gates exclude validated tails and
+  restore the128 declared cells. Default legacy modes remain strict. Manifest
+  records actual511 allocation separately from protected449/395 prefixes.
+  Actual cartridge build, native recovery and visual checks are next.

@@ -150,34 +150,44 @@
       0,
       true,
       3
+    ],
+    "V": [
+      0,
+      true,
+      0
+    ],
+    "v": [
+      699,
+      false,
+      3
     ]
   },
   "rows": [
     "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
-    "FPWWWPRRRPabbbbbcPPPPPPPPPPPPabbbbbcPPPF",
-    "FPWWWPRRRPdeeeeefPabcZZabcabcdeeeeefPPPF",
-    "FPWWWPRRRPghhhhhfPdefZZdefdefghhhhhfPPPF",
-    "FPWWWPRRRPijjjjjfPghfZZghfghfijjjjjfPPPF",
-    "FPWWWPRRRPKKKDKKKPijfZZijfijfKKKHKKKPPPF",
+    "FVVVVPRRRPabbbbbcPPPPPPPPPPPPabbbbbcPPPF",
+    "FVVVVPRRRPdeeeeefPabcZZabcabcdeeeeefPPPF",
+    "FVVVVPRRRPghhhhhfPdefZZdefdefghhhhhfPPPF",
+    "FVVVVPRRRPijjjjjfPghfZZghfghfijjjjjfPPPF",
+    "FvvvvPRRRPKKKDKKKPijfZZijfijfKKKHKKKPPPF",
     "FPPPPPRRRP#PPPPPPuPPPPPPPPPPP#PPPPPPuuuF",
     "FPPPPPRRRPPUPPPUPUPUPPPUUPUPPPPPPPPPUUUF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
-    "FPPPPPRRRPPPPPPPPPUUPPPPPPPPPPPPPPUUPPPF",
-    "FPXXXPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPXXXPRRRPPabcabcPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPXXXPRRRPPdefdefPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPXXXPRRRPPghfghqPP..............PPPPPPF",
-    "FPXXXPRRRPPijfijQ...T..........T...PPPPF",
+    "FPPPPPRRRPPPPPPPPPUUPPPPPVVVVVVVVVUUPPPF",
+    "FVVVVPRRRPPPPPPPPPPPPPPPPVVVVVVVVVPPPPPF",
+    "FVVVVPRRRPVVVVabcPPPPPPPPVVVVVVVVVPPPPPF",
+    "FVVVVPRRRPVVVVdefPPPPPPPPVVVVVVVVVPPPPPF",
+    "FVVVVPRRRPVVVVghqPP..............PPPPPPF",
+    "FvvvvPRRRPVVVVijQ...T..........T...PPPPF",
     "FPPPPPRRRPPPPPPPPP...........B......PPPF",
     "FPPPPPRRRPPPPPP..GG..................PPF",
     "FPPPPPRRRPPPPPP......................PPF",
-    "FPYYYPRRRPPabcabc..T....B........#T..PPF",
-    "FPYYYPRRRPPdefdefPB............GG....PPF",
-    "FPYYYPRRRPPghfghfP..................PPPF",
-    "FPYYYPRRRPPijfijf....GG............PPPPF",
-    "FPYYYPRRRPPPPPPPPPP..............PPPPPPF",
+    "FVVVVPRRRPVVVVabc..T....B........#T..PPF",
+    "FVVVVPRRRPVVVVdefPB............GG....PPF",
+    "FVVVVPRRRPVVVVghfP..................PPPF",
+    "FVVVVPRRRPVVVVijf....GG............PPPPF",
+    "FvvvvPRRRPPPPPPPPPP..............PPPPPPF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
@@ -323,6 +333,58 @@
       "name": "recycling",
       "x": 34,
       "y": 11
+    }
+  ],
+  "street_blocks": [
+    {
+      "x": 1,
+      "y": 1,
+      "styles": [
+        "pair"
+      ],
+      "clear_front": true
+    },
+    {
+      "x": 1,
+      "y": 12,
+      "styles": [
+        "pair"
+      ],
+      "clear_front": true
+    },
+    {
+      "x": 1,
+      "y": 20,
+      "styles": [
+        "pair"
+      ],
+      "clear_front": true
+    },
+    {
+      "x": 10,
+      "y": 13,
+      "styles": [
+        "pair"
+      ],
+      "clear_front": false
+    },
+    {
+      "x": 10,
+      "y": 20,
+      "styles": [
+        "pair"
+      ],
+      "clear_front": false
+    },
+    {
+      "x": 25,
+      "y": 11,
+      "styles": [
+        "coral",
+        "cream",
+        "lilac"
+      ],
+      "clear_front": false
     }
   ]
 }

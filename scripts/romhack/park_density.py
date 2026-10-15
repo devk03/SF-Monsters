@@ -5,8 +5,8 @@ from pathlib import Path
 
 # left, top, ordered attached house styles, clear an old fifth wall row.
 BLOCKS=((1,1,('pair',),True),(1,12,('pair',),True),
-        (1,20,('pair',),True),(9,13,('cafe','coral'),False),
-        (9,20,('cafe','cream'),False),(25,11,('coral','cream','lilac'),False))
+        (1,20,('pair',),True),(10,13,('pair',),False),
+        (10,20,('pair',),False),(25,11,('coral','cream','lilac'),False))
 STYLES={'coral':(0,3,65,11),'cafe':(3,2,65,11),'cream':(5,3,65,11),
         'lilac':(8,3,65,11),'pair':(0,4,135,4)}
 TOKENS={'V':[0,True,0],'v':[699,False,3]}

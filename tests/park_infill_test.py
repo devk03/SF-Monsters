@@ -9,6 +9,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
+from park_density import strip as strip_density
 from park_frontage import load
 from park_infill import PLACEMENTS, APRON_CARDS, previous_plan, resources
 from park_map import park_resources, park_tile
@@ -29,7 +30,7 @@ def reachable(plan):
 
 class PrimaryInfill(unittest.TestCase):
     def test_infill_and_declared_city_cells_preserve_every_other_source_field(self):
-        plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT/'romhack/content/south-park.json').read_text()))
         old = previous_plan(plan)
         self.assertEqual(hashlib.sha256(json.dumps(old,sort_keys=True,
             separators=(',',':')).encode()).hexdigest(),
@@ -67,7 +68,7 @@ class PrimaryInfill(unittest.TestCase):
         self.assertEqual(plan['tilesets']['primary'],'gTileset_SFParkFrontage')
 
     def test_all_primary_cells_decode_exact_pixels_palette_underlay_and_priority(self):
-        secondary = park_resources(ROOT);raw,records,attrs,palettes = resources(ROOT,secondary[1])
+        secondary = park_resources(ROOT);raw,records,attrs,palettes = resources(ROOT,secondary[1],density=False)
         self.assertEqual((len(raw)//32,len(records)//16,len(attrs)//2,len(palettes)),
                          (449,135,135,512))
         self.assertEqual(raw[:32],bytes(32))
@@ -106,7 +107,7 @@ class PrimaryInfill(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'underlay'):resources(ROOT,bytes(bad))
 
     def test_unused_historical_threshold_prefix_remains_exact(self):
-        secondary=park_resources(ROOT);raw,records,attrs,palettes=resources(ROOT,secondary[1])
+        secondary=park_resources(ROOT);raw,records,attrs,palettes=resources(ROOT,secondary[1],density=False)
         cards=load_thresholds(ROOT)
         for name,first in APRON_CARDS:
             card=cards[name];width=card['width']//16
@@ -129,12 +130,12 @@ class PrimaryInfill(unittest.TestCase):
                                    for y in range(16) for x in range(16))
                 self.assertEqual(bytes(pixels),expected)
                 self.assertEqual(pixels[128:],bytes(128))
-        plan=json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        plan=strip_density(json.loads((ROOT/'romhack/content/south-park.json').read_text()))
         self.assertFalse(any(54<=park_tile(plan,x,y)<65 for y in range(32) for x in range(40)))
 
     def test_connected_approach_cannot_change_collision_or_elevation(self):
         from copy import deepcopy
-        plan=json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        plan=strip_density(json.loads((ROOT/'romhack/content/south-park.json').read_text()))
         for blocked in (True,False):
             changed=deepcopy(plan)
             changed['legend']['P']=[699,blocked,0]

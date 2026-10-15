@@ -16,6 +16,7 @@ from park_paving import load_paving
 from service_architecture import load as load_services
 from service_door_art import load as load_service_doors
 from city_dressing import tile as dressing_tile
+from park_density import tile as density_tile
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -110,6 +111,9 @@ def park_resources(root):
 
 
 def park_tile(plan, x, y):
+    housing=density_tile(plan,x,y)
+    if housing is not None:
+        return housing
     furnishing=dressing_tile(plan,x,y)
     if furnishing is not None:
         return furnishing

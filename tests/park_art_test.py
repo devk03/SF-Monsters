@@ -9,6 +9,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
+from park_density import strip as strip_density
 from park_art import load_buildings, pack_park_cells, facade_cells
 from park_map import park_resources, park_tile, prune_unused_terrain, FACADES
 from park_signs import sign_cells
@@ -71,7 +72,7 @@ class ParkResources(unittest.TestCase):
             (512, '73e3ba1b6d1f0a9385e97e92eba6a4a2d1268384e4cdf6f45f452a49fda512db')])
 
     def test_lower_west_neighbor_preserves_routes_encounters_and_recovery_candidates(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         # Eleven newly blocked house cells plus the relocated tree = twelve.
         footprint = {(x, y) for y in range(20, 24) for x in range(14, 17)}
         new_blocks = footprint - {(16, 20)} | {(19, 20)}
@@ -108,7 +109,7 @@ class ParkResources(unittest.TestCase):
             self.assertLessEqual(min(abs(x-xx) + abs(y-yy) for xx, yy in safe), 2)
 
     def test_service_signs_are_distinct_without_moving_history_or_service_doors(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         raw, records, attributes, palettes = park_resources(ROOT)
         self.assertEqual([park_tile(plan, *point) for point in ((10,6),(29,6),(33,20))],
                          [646,647,540])
@@ -174,7 +175,7 @@ class ParkResources(unittest.TestCase):
 
 
     def test_authored_park_keeps_services_transport_and_discovery_reachable(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         raw, records, attributes, palettes = park_resources(ROOT)
         self.assertLessEqual(len(raw) // 32, 504)
         self.assertEqual((len(records), len(attributes), len(palettes)), (150 * 16, 300, 512))
@@ -218,7 +219,7 @@ class ParkResources(unittest.TestCase):
         self.assertFalse(plan['legend'][plan['rows'][6][11]][1])
 
     def test_pruning_cannot_change_any_referenced_cell_or_facade_animation(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         cells = [(bytes([i % 15 + 1]) * 256, 7) for i in range(150)]
         result = prune_unused_terrain(cells, plan)
         changed = {i for i, pair in enumerate(zip(cells, result)) if pair[0] != pair[1]}
@@ -239,7 +240,7 @@ class ParkResources(unittest.TestCase):
     def test_new_facade_keeps_its_native_pixels_palette_and_sidewalk_underlay(self):
         from PIL import Image
         raw, records, attributes, palettes = park_resources(ROOT)
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         expected = Image.open(ROOT / 'assets/tiles/sunset-rowhouse-butter/native-preview.png').resize(
             (48, 64), Image.Resampling.NEAREST).tobytes()
         self.assertEqual(palettes[11 * 32:12 * 32],
@@ -267,7 +268,7 @@ class ParkResources(unittest.TestCase):
                 expected[y * 48 + left:y * 48 + left + 16] for y in range(top, top + 16)))
 
     def test_western_houses_block_walls_and_leave_only_the_seed_room_entry_open(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         # The previous empty plaza is now one compact street wall, never a path.
         for y in range(13, 17):
             for x in range(11, 17):
@@ -298,7 +299,7 @@ class ParkResources(unittest.TestCase):
             self.assertTrue(all(w >> 12 == 11 for w in words[4:]))
         flags = struct.unpack('<150H', attributes)
         self.assertEqual((flags[133], flags[148], flags[149]), (0x1000, 0x1069, 0))
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         self.assertEqual(plan['warp_events'][2], {
             'x': 16, 'y': 16, 'elevation': 0,
             'dest_map': 'MAP_OLDALE_TOWN_HOUSE1', 'dest_warp_id': '0'})
@@ -310,7 +311,7 @@ class ParkResources(unittest.TestCase):
             self.assertEqual(plan['rows'][point[1]][point[0]], 'P')
 
     def test_compact_frontage_keeps_clear_approach_row_and_declared_curbside_bases(self):
-        plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
+        plan = strip_density(json.loads((ROOT / 'romhack/content/south-park.json').read_text()))
         gap = maximum = 0
         for token in plan['rows'][5][10:36]:
             gap = gap + 1 if token == 'P' else 0

@@ -9,6 +9,7 @@ import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/romhack'))
+from park_density import strip as strip_density
 from city_dressing import decorate,strip,tile
 from city_furniture import load
 from park_map import park_resources,park_tile
@@ -39,7 +40,7 @@ def reachable(plan,start):
 
 class CityDressing(unittest.TestCase):
     def setUp(self):
-        self.plan=json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        self.plan=strip_density(json.loads((ROOT/'romhack/content/south-park.json').read_text()))
         self.old=strip(self.plan)
 
     def test_exact_18_cell_overlay_and_only14_collision_changes(self):
@@ -70,7 +71,7 @@ class CityDressing(unittest.TestCase):
         self.assertFalse(SOLID&visited)
 
     def test_original395_tiles120_records_and_all_palettes_stay_exact(self):
-        secondary=park_resources(ROOT);raw,records,attrs,palettes=resources(ROOT,secondary[1])
+        secondary=park_resources(ROOT);raw,records,attrs,palettes=resources(ROOT,secondary[1],density=False)
         baseline=ROOT/'assets/tiles/city-furniture-v1/baseline-v77'
         self.assertEqual(raw[:395*32],(baseline/'primary.4bpp').read_bytes())
         self.assertEqual(records[:120*16],(baseline/'metatiles.bin').read_bytes())
