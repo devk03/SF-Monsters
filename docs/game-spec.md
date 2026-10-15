@@ -3,7 +3,7 @@
 Status: technical prototype shipped; Emerald quality parity is NOT achieved.
 Section 15 is the active goal and overrides the earlier prototype completion criteria.
 This file is the source of truth for scope, acceptance, and progress.
-Updated: October 14, 2026.
+Updated: October 15, 2026.
 Repository: https://github.com/devk03/SF-Monsters
 
 ## 1. Product
@@ -622,11 +622,11 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 - All three Cognition trainers have original portrait candidates. Compiled26
   checks, actual native/browser entrances and two ordinary loss/save/coldContinue
   branches pass their technical scopes. Human paired art reviews remain pending.
-- Current alignment exchange06:54UTC,next07:24UTC. Root owns all files, native
-  validation, publication and canonical spec. Peer handed back the independent
-  Sunset gate/fault tests and completed a bounded read-only build-order review.
-  South Park densityv79 is live; Sunset normal-compilation integration is next.
-  No peer writes or recurring monitors are active; all evidence stays scoped.
+- Current alignment exchange07:26UTC,next07:56UTC. Root owns all files, native
+  validation, publication and canonical spec. Peer reviewed actual Sunset views
+  and the private pacing experiment contract. Densityv80 is live; private frame
+  debt retention is next. No peer writes or recurring monitors are active; all
+  evidence and human acceptance remain scoped.
 
 ### 15.1 Objective and completion rule
 
@@ -842,22 +842,22 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,06:55UTC; historical checkpoint details follow):
+Current snapshot (October 15, 2026,07:30UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
 | Execution | Continue full-spec work through intermediate releases until October15,5AM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.79-park-density-preview; target185cab500852af16e5229e9005cc601b7a16ac6cf764ce30778a7a15bbe820db; Site70. South Park13→21buildings; approved northern homes and all curb props preserved. User said v78 looks better and requested more buildings; density subset clip awaits review. No numeric/full-domain approval. |
-| Latest local source build | Normal gated v79 from9e12214; actual511primarytiles/151records and unchanged476secondary. Density37/37, city166/166, connected135/135, services278/278 pass. All56new solid old-save cold recoveries/new facade pushes/escapes and9freed walkable cells pass. Three service returns reload every tile/palette; one C8→C9 native save/cold reload preserves declared domains. Dirty marker honest; no clean-checkout credit. |
+| Public build | 0.0.80-sunset-density-preview; target9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd; Site71. South Park21/Sunset9 buildings,11added across the two maps. Approved northern homes/curb props preserved; new Sunset homes have gray approaches. Density subset reviews pending; no numeric/full-domain approval. |
+| Latest local source build | Normal gated v80 fromf3a5049. All five Sunset resources now compile normally and verify ROM/ELF exactly; independent227/227. Sunset491used/512allocated tiles,231records; old401/194prefixes and General resources exact. South Park gates37/166/135/278 still pass. All36new solid old-save recoveries/pushes/escapes and9approach walks pass, plus apartment/Muni/cache and one C12→C13 save/cold reload. Dirty marker honest; no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
-| Public QA | Site70 loader visible; existing authenticated canonical manifest/BPS200 and exactlocal185cab. Fresh anonymous/auth acceptance not inferred. Private Chrome exact public runtime shows denser park frontage and finite8-input loop;10sec598/598frames,0debt/hidden/audio loss, finalACK. Site42 ten desktop native→browser→native save cycles remain one checkpoint. Fresh auth/isolation, Safari/mobile, full performance/audio and50 campaign checkpoints remain open. |
+| Public QA | Site71 loader visible; refreshed existing authenticated canonical manifest/BPS200 and exactlocal9b5e6bc. Fresh anonymous/auth acceptance not inferred. Private Chrome exact public runtime shows Sunset;10sec597/597frames,1200visible/0hidden ticks,8DOM inputs,0discard/audio loss, finalACK. Site42 ten desktop save cycles remain one checkpoint. Fresh auth/isolation, Safari/mobile, full performance/audio and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
 | Active performance issue | First v75 active600sec Chrome run: complete310row route, zero hidden ticks, but16discarded frame debt,13738underrun outputframes (~0.3115sec),334input observations vs310planned. Strict qualifier fails. Instrumented repeat also fails9debt/8330underruns, with exactly310inputs and no unexpected DOM/focus/longtask entries. No pacing fix yet. Earlier clean idle/short observations do not supersede this failure. |
-| Next work | Density subset review pending after livev79. Integrate three compact Sunset homes with gray foundations on empty lawn lots, preserving actual roads/events. Compile all Sunset resources normally and independently verify bindings before native/browser/old-save checks. Continue Stage B art/audio/interface; clinic music last scored2/4 and active-field performance unresolved. No campaign expansion before approval. |
+| Next work | Density subset reviews pending after livev80. Private bounded pacing experiment will retain unexecuted frame debt instead of silently retiring it at the five-frame cap, with honest overflow/late-work accounting and preserved v75 failure receipts. No public runtime fix yet. Continue Stage B audio/interface/art polish; clinic music last scored2/4. No campaign expansion before approval. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -8641,3 +8641,48 @@ Native validator boundary correction — October15,07:07UTC:
   normally compiled Sunset resources now pass227/227, no producer changes or
   post-link repairs. Preserved first failed receipt for audit. Normal build/BPS
   rerun and native gameplay remain required before publication.
+
+Sunset density native/browser release — October15,07:30UTC:
+
+- Normal v80 fromf3a5049 targets9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd.
+  Sunset227/227 passes; its five resources are normal-compiled and verified
+  read-only against ROM/ELF. South Park37/166/135/278 gates stay passing. Full
+  localcheck log SHAbe176a11f6c386782f413f29c2a47ce699f4baf951a7e1db208bc6c613cf870c;
+  nine corrected layout-bound fault cases also reran separately and pass.
+- All36genuine v79 C13 geometry saves cold-resume in v80, block new facade pushes
+  and permit escape, preserving Flash; nine gray approach cells are walkable.
+  Actual apartment entry5,9→inside5,8→threshold5,9→exit16,9 and two-way Muni
+ 28,22→7,26→28,22 pass. Native general animations are checked as valid native
+  stages rather than immutable VRAM; static graphics, coast/door cache and all13
+  map palette banks match, with the native primary color0 forced black. Initial
+  QA helper assumptions about animation bytes and doorway step counts were
+  corrected using pinned code/actual captures; no game repair was needed.
+- Native stationary C12→C13 save/coldreload preserves declared domains at28,22.
+  Private proof hashes in sunset-v80-plan: recovery3a86a60db10e257aa9f975fcff2dd5e73a6ab45106827cb5d57c82fdeee9cc22,
+  services459953895f495a5d8ade825dbe84600eff6ead499f5a7fcadb85daed2d9fa21f,
+  saveabf10d76ee75d40f17ffd8961b6d0dd6353d3a4fa7bef7b77aae8c5f116d3096.
+  These do not establish50 campaign checkpoints or the full cross-platform gate.
+- Browser10sec597/597frames,1200visible/0hidden ticks,8DOM actions and0discard,
+  mismatch/pending/audio drops/underruns/warmup; finalACK. Report SHA
+ 2c6a913f80e0b8d69c9d21ff761efc5227f3712f85bdf4a94844708deb59e156.
+  Own emulator/audio/tab/server stopped; helper had600sec maximum. Scoped smoke
+  does not supersede either failed600sec active-field performance receipt.
+- Site71 succeeded07:26:14UTC, saved
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_ae12e54dda588191811726a43b676932,
+  deploymentappgdep_6ad0800e957481918d05bfe508ae6be1,
+  Sites source0cad583ae5ecba6e23199a218bb1e65833f9a20b. Original-only archive
+ 831497d3985787bb81f912f38011a25c43d1e05af460b4bdbbc555e33a8e381b passes88files,
+  all15runtime files exact/no commercial cartridge/private save/clip/AppleDouble.
+  BPS1044896bytes SHA573a0c5923cbf4fe8ac811bbc4a149ea27b0f02c7d4485e2f75f0deb77ec09ed;
+  manifest62230bytes SHAb3a4b3d5b5db4738054f745ed64dcb7745979b2710bcfaaef6c2461f6aae3831.
+- Initial authenticated live fetch did not match and was rejected. Refreshed
+  current Site metadata/QA credential; canonical URLs then return200/exactv80
+  bytes at07:28:06, receiptSHAcd02ef306933358d9c0aed06b6c7ddf7eda4cfaff03a87c0ebcbafa78e33b7cc.
+  Initial mismatch cause is unproven. Actual loader screenshot saved; fresh
+  anonymous/sign-in acceptance remains open. No cartridge uploaded publicly.
+- Actual33.351sec/1992frame paired clip at
+  .tools/benchmarks/sunset-v80-emerald-paired-review/comparison.mp4 awaits subset
+  review. Alignment finds new homes readable at player scale; foundations have
+  high-contrast paving and old road stubs/margins remain rough. Human full0/11.
+  Next is a private bounded pacing experiment; the public runtime is unchanged.
+  Hard stop remains October15,05:00SF/12:00UTC; continue until then.
