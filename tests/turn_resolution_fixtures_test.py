@@ -33,16 +33,30 @@ SYMS={'gBattleControllerExecFlags':(0x02000100,4),'gBattleBufferA':(0x02001000,2
       'RunTurnActionsFunctions':(0x08000300,32)}
 
 
+def priority_mon(hp,pp):
+    """Independent encrypted delta for Pound1 -> QuickAttack98 at fixed PID0.
+
+    Attack substructure starts at44. XOR encryption changes only encrypted low
+    word by1^98=99, and the plain checksum increases by98-1=97.
+    """
+    result=bytearray(expected_mon(hp,0,pp,0))
+    result[44]^=99
+    struct.pack_into('<H',result,28,(int.from_bytes(result[28:30],'little')+97)&0xffff)
+    return bytes(result)
+
+
 def observation(c):
     """Independently specified terminal snapshots, not a move implementation."""
     ko=c['endpoint']=='replacement-query'
-    old0=expected_mon(18 if ko else 90,0,[10,30,25,25],0)
+    priority=c['id']=='slower-player-priority'
+    old0=priority_mon(90,[10,30,25,25]) if priority else expected_mon(18 if ko else 90,0,[10,30,25,25],0)
     old1=expected_mon(90,0,[10,30,25,25],0)
     bench=expected_mon(105,0,[10,30,25,25],0)
     initial=bytearray(352)
     for i,hp in enumerate([18 if ko else 90,90,0,0]):
         struct.pack_into('<H',initial,i*88,19)
         struct.pack_into('<H',initial,i*88+40,hp)
+        struct.pack_into('<H',initial,i*88+12,98 if priority and i==0 else 1)
         initial[i*88+36]=10;initial[i*88+33:i*88+35]=bytes([9,9])
     state={'before':[old0+bench+bytes(400),old1+bytes(500),bytes([0x17])*0x3d88,bytes([0x28])*0xf2c],
            'initial_battle_mons':bytes(initial),'save_addresses':[0x02025000,0x0202a000]}
@@ -52,13 +66,13 @@ def observation(c):
     if ko:after[33:35]=bytes(2)
     results=bytearray(68);results[5]=1;struct.pack_into('<H',results,36,1)
     if ko:results[0]=1;results[2]=1
-    else:results[19]=1;struct.pack_into('<H',results,34,1)
+    else:results[19]=1;struct.pack_into('<H',results,34,98 if priority else 1)
     packets=([{'slot':1,'packet':'0209000900000000'}, {'slot':0,'packet':'022a000000000000'},
               {'slot':0,'packet':'0228000000000000'}, {'slot':0,'packet':'1601000000000000'},
               {'slot':1,'packet':'3502000000000000','pending':True}] if ko else
              [{'slot':0,'packet':'0209000900000000'}, {'slot':1,'packet':'022a004800000000'},
               {'slot':1,'packet':'0209000900000000'}, {'slot':0,'packet':'022a004800000000'}])
-    raw=[expected_mon(0 if ko else 72,0,[10 if ko else 9,30,25,25],0)+bench+bytes(400),
+    raw=[(priority_mon(72,[9,30,25,25]) if priority else expected_mon(0 if ko else 72,0,[10 if ko else 9,30,25,25],0))+bench+bytes(400),
          expected_mon(90 if ko else 72,0,[9,30,25,25],0)+bytes(500),bytes(after),
          state['before'][2],state['before'][3],bytes(results),struct.pack('<I',833674724 if ko else 4231221723),
          b'\0',b'\0',b'\1' if ko else b'\0',bytes(4) if ko else bytes.fromhex('ffff0000'),
@@ -72,7 +86,7 @@ def observation(c):
 
 
 class TurnSchema(unittest.TestCase):
-    def test_two_oracles_have_independent_damage_and_rng_derivations(self):
+    def test_three_oracles_have_independent_damage_rng_and_priority_derivations(self):
         turn.validate_cases(turn.CASES)
         state=0;draws=[]
         for _ in range(9):state=(state*0x41c64e6d+0x6073)&0xffffffff;draws.append((state,state>>16))
@@ -83,11 +97,19 @@ class TurnSchema(unittest.TestCase):
         self.assertEqual(draws[8][0],turn.CASES[0]['expected_rng'])
         self.assertEqual(turn.CASES[0]['expected_hp'],[72,72])
         self.assertEqual(turn.CASES[1]['expected_pp'],[10,9])
+        priority=turn.CASES[2]
+        self.assertEqual(priority['moves'],[98,1])
+        self.assertEqual(priority['speeds'],[90,110])
+        self.assertEqual(priority['expected_order'],[0,1])
+        self.assertEqual(priority['expected_rng'],draws[8][0])
+        self.assertEqual(priority['expected_hp'],[72,72])
+        self.assertEqual(priority['expected_pp'],[9,9])
 
     def test_unknown_controls_incomplete_oracles_and_duplicate_effective_setups_fail(self):
         for change in [{'skip_controller':True},{'expected_rng':True},{'player_hp':106},
                        {'speeds':[90,90]},{'derivation':''},{'expected_hp':[0,72]},
-                       {'expected_updates':[[0,99,9]]}]:
+                       {'expected_updates':[[0,99,9]]},{'moves':[True,1]},{'moves':[98,98]},
+                       {'moves':[1]},{'expected_order':[1,0]},{'expected_order':[0,True]}]:
             c=deepcopy(turn.CASES[0]);c.update(change)
             with self.subTest(change=change),self.assertRaises(ValueError):turn.validate_cases([c])
         for key in turn.CASES[0]:
@@ -96,6 +118,14 @@ class TurnSchema(unittest.TestCase):
         duplicate=deepcopy(turn.CASES[0]);duplicate.update(id='different-label',derivation='Other prose.',expected_rng=1)
         with self.assertRaisesRegex(ValueError,'effective'):turn.validate_cases([turn.CASES[0],duplicate])
         with self.assertRaises(ValueError):turn.call({'f':(0x08000000,4)},'f',*range(9))
+
+    def test_priority_secure_moves_and_checksum_are_independent_of_observed_native_objects(self):
+        for hp,pp in [(90,[10,30,25,25]),(72,[9,30,25,25])]:
+            self.assertEqual(turn.expected_turn_mon(hp,pp,98),priority_mon(hp,pp))
+            self.assertEqual(turn.expected_turn_mon(hp,pp,1),expected_mon(hp,0,pp,0))
+        # The same speeds and HP as the KO setup remain distinct with a new move.
+        priority=deepcopy(turn.CASES[2]);priority.update(player_hp=18)
+        turn.validate_cases([turn.CASES[1],priority])
 
 
 class NativeControllerBoundary(unittest.TestCase):
@@ -184,6 +214,18 @@ class TerminalOracles(unittest.TestCase):
         guards=list(turn.CANARIES.values());guards[0]=bytes(16)
         self.assertFalse(self.assess(c,guards=guards)['passed'])
         with self.assertRaises(ValueError):self.assess(c,raw=observation(c)[1][:-1])
+
+    def test_priority_cannot_pass_with_speed_order_or_pound_secure_bytes(self):
+        c=turn.CASES[2]
+        raw=observation(c)[1];raw[18]=bytes([1,0])
+        self.assertFalse(self.assess(c,raw=raw)['checks']['ordered_actions'])
+        raw=observation(c)[1];raw[0]=observation(turn.CASES[0])[1][0]
+        self.assertFalse(self.assess(c,raw=raw)['checks']['full_parties'])
+        raw=observation(c)[1];changed=bytearray(raw[5]);changed[34]=1;raw[5]=bytes(changed)
+        self.assertFalse(self.assess(c,raw=raw)['checks']['full_battle_results'])
+        _,_,_,trace=observation(c)
+        trace=[dict(row,attacker=1-row['attacker']) for row in trace]
+        self.assertFalse(self.assess(c,trace=trace)['checks']['executed_pp_order'])
 
     def test_dropped_second_action_wrong_packet_and_skipped_moveend_cannot_pass(self):
         c=turn.CASES[0];_,_,packets,trace=observation(c)

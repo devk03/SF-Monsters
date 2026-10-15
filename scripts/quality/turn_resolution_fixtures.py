@@ -24,6 +24,7 @@ from item_effect_fixtures import expected_mon, OWNER, MOVES, BASE_PP
 
 CASES = (
     {'id':'living-two-hits', 'player_hp':90, 'enemy_hp':90, 'speeds':[110,90],
+     'moves':[1,1], 'expected_order':[0,1],
      'endpoint':'next-turn', 'expected_hp':[72,72], 'expected_pp':[9,9],
      'expected_rng':4231221723, 'turns':1, 'faints':0,
      'expected_updates':[[0,9,9],[1,42,72],[1,9,9],[0,42,72]],
@@ -31,6 +32,7 @@ CASES = (
         'Seed0 draws0/59774/21105/12720 yield18; next36418/58060/44997/26587 yield18. '
         'No speed tie. BattleTurnPassed consumes ninth LCG draw; both PP10->9.'},
     {'id':'player-ko-replacement-boundary', 'player_hp':18, 'enemy_hp':90, 'speeds':[90,110],
+     'moves':[1,1], 'expected_order':[1,0],
      'endpoint':'replacement-query', 'expected_hp':[0,90], 'expected_pp':[10,9],
      'expected_rng':833674724, 'turns':0, 'faints':1,
      'expected_updates':[[1,9,9],[0,42,0],[0,40,0]],
@@ -38,6 +40,18 @@ CASES = (
         'Four RNG draws only before unanswered player replacement; player move never runs. '
         'Healthy bench prevents defeat. FaintClearSetData restores native Rattata Normal/Normal '
         'from the declared Mystery-type battle override. No EXP, replacement response or completed turn claimed.'},
+    {'id':'slower-player-priority', 'player_hp':90, 'enemy_hp':90, 'speeds':[90,110],
+     'moves':[98,1], 'expected_order':[0,1],
+     'endpoint':'next-turn', 'expected_hp':[72,72], 'expected_pp':[9,9],
+     'expected_rng':4231221723, 'turns':1, 'faints':0,
+     'expected_updates':[[0,9,9],[1,42,72],[1,9,9],[0,42,72]],
+     'derivation':'Pinned Emerald731ad5bf battle_moves: QuickAttack98 power40/accuracy100/priority1; '
+        'Pound1 power40/accuracy100/priority0. GetWhoStrikesFirst compares priority before speed '
+        'without Random on unequal priorities, so player90 precedes enemy110. '
+        'EFFECT_QUICK_ATTACK maps to the same BattleScript_EffectHit as Pound. '
+        'Controlled level50/attack100/defense100/Mystery types give base19 and18 damage each. '
+        'Seed0 eight hit draws0/59774/21105/12720/36418/58060/44997/26587, '
+        'then BattleTurnPassed ninth draw gives4231221723; both PP10->9.'},
 )
 FUNCTIONS = {'CreateMon','SetMonData','SetActionsAndBattlersTurnOrder',
     'CheckFocusPunch_ClearVarsBeforeTurnStarts','RunTurnActionsFunctions',
@@ -99,7 +113,7 @@ def validate_cases(cases):
         raise ValueError('Use one to eight explicitly derived controlled turn cases.')
     ids,setups=set(),set()
     required={'id','player_hp','enemy_hp','speeds','endpoint','expected_hp','expected_pp',
-              'expected_rng','turns','faints','expected_updates','derivation'}
+              'expected_rng','turns','faints','expected_updates','derivation','moves','expected_order'}
     for c in cases:
         if not isinstance(c,dict) or set(c)!=required or not isinstance(c['derivation'],str) or not c['derivation'].strip():
             raise ValueError('Require the complete strict turn schema and independent derivation.')
@@ -111,6 +125,13 @@ def validate_cases(cases):
            not isinstance(c['speeds'],list) or len(c['speeds'])!=2 or \
            any(not integer(v,1,65535) for v in c['speeds']) or c['speeds'][0]==c['speeds'][1]:
             raise ValueError('Use bounded living HP and unequal native speeds.')
+        if not isinstance(c['moves'],list) or any(type(v) is not int for v in c['moves']) or \
+           tuple(c['moves']) not in {(1,1),(98,1)} or not isinstance(c['expected_order'],list) or \
+           any(type(v) is not int for v in c['expected_order']) or sorted(c['expected_order'])!=[0,1]:
+            raise ValueError('Declare reviewed per-battler moves and a complete strict action order.')
+        order=[0,1] if c['moves'][0]==98 or c['speeds'][0]>c['speeds'][1] else [1,0]
+        if c['expected_order']!=order:
+            raise ValueError('Declared action order contradicts pinned move priorities and speeds.')
         for key,high in [('expected_hp',105),('expected_pp',35)]:
             if not isinstance(c[key],list) or len(c[key])!=2 or any(not integer(v,0,high) for v in c[key]):
                 raise ValueError('Require two complete HP/PP integer oracles.')
@@ -124,7 +145,7 @@ def validate_cases(cases):
             not isinstance(row,list) or len(row)!=3 or not integer(row[0],0,1) or type(row[1]) is not int or row[1] not in SET_REQUESTS or
             not integer(row[2],0,(1<<(8*SET_REQUESTS[row[1]]))-1) for row in c['expected_updates']):
             raise ValueError('Declare every native party-write packet independently.')
-        key=(c['player_hp'],c['enemy_hp'],tuple(c['speeds']))
+        key=(c['player_hp'],c['enemy_hp'],tuple(c['speeds']),tuple(c['moves']))
         if key in setups:raise ValueError('Duplicate effective turn setup cannot add coverage.')
         setups.add(key)
     return cases
@@ -200,6 +221,20 @@ def valid_ram(address,length):
     return 0x02000000<=address and address+length<=0x02040000
 
 
+def expected_turn_mon(hp,pp,move):
+    """Source-derived secure moves/checksum; never uses native observed bytes.
+
+    Fixed PID0 uses GAEM substructure order; secure attacks begin at plain12.
+    All twelve u32 words use OT11223344 XOR, and checksum sums24 plain u16.
+    """
+    result=bytearray(expected_mon(hp,0,pp,0))
+    plain=bytearray(struct.pack('<12I',*[v^OWNER for v in struct.unpack_from('<12I',result,32)]))
+    struct.pack_into('<H',plain,12,move)
+    struct.pack_into('<H',result,28,sum(struct.unpack('<24H',plain))&0xffff)
+    struct.pack_into('<12I',result,32,*[v^OWNER for v in struct.unpack('<12I',plain)])
+    return bytes(result)
+
+
 def setup(driver,c,syms,resolve,props):
     driver.exchange(['reset'],0)
     main,resource,structure,save1,save2=read(driver,[(syms[n][0],size) for n,size in
@@ -228,7 +263,7 @@ def setup(driver,c,syms,resolve,props):
     write(structure,bytes(676));write(script_stack,bytes(36));write(callback_stack,bytes(36));write(history,bytes(84));write(flags,bytes(16))
     for a,b in CANARIES.items():write(a,b)
     put('gPlayerParty',bytes(600));put('gEnemyParty',bytes(600))
-    for base,hps in [(syms['gPlayerParty'][0],[c['player_hp'],105]),(syms['gEnemyParty'][0],[c['enemy_hp']])]:
+    for side,(base,hps) in enumerate([(syms['gPlayerParty'][0],[c['player_hp'],105]),(syms['gEnemyParty'][0],[c['enemy_hp']])]):
         for index,hp in enumerate(hps):
             mon=base+index*100
             invoke(driver,syms,'CreateMon',mon,19,50,31,1,0,1,OWNER)
@@ -236,7 +271,7 @@ def setup(driver,c,syms,resolve,props):
                 write(VALUE,value if isinstance(value,bytes) else struct.pack('<I',value))
                 invoke(driver,syms,'SetMonData',mon,props[name],VALUE)
             set_data('MON_DATA_NICKNAME',bytes([187])*10);set_data('MON_DATA_OT_NAME',bytes([187])*7)
-            for i,move in enumerate(MOVES):set_data('MON_DATA_MOVE'+str(i+1),move)
+            for i,move in enumerate([c['moves'][side] if index==0 else 1,*MOVES[1:]]):set_data('MON_DATA_MOVE'+str(i+1),move)
             for i,pp in enumerate([10,30,25,25]):set_data('MON_DATA_PP'+str(i+1),pp)
             for name,value in [('HP',hp),('STATUS',0),('PP_BONUSES',0),('MET_LOCATION',21),
                 ('MET_LEVEL',50),('MET_GAME',3),('POKEBALL',4),('OT_GENDER',1)]:set_data('MON_DATA_'+name,value)
@@ -244,7 +279,7 @@ def setup(driver,c,syms,resolve,props):
     for i,hp in enumerate([c['player_hp'],c['enemy_hp'],0,0]):
         mon=bytearray(battle_mon({'species':19,'hp':hp,'max_hp':105,'speed':c['speeds'][i] if i<2 else 0,
             'type1':9,'type2':9},resolve))
-        struct.pack_into('<4H',mon,12,*MOVES);struct.pack_into('<I',mon,20,0x3fffffff)
+        struct.pack_into('<4H',mon,12,c['moves'][i] if i<2 else 1,*MOVES[1:]);struct.pack_into('<I',mon,20,0x3fffffff)
         mon[36:40]=bytes([10,30,25,25]);mon[43]=70;mon[48:59]=bytes([187])*10+b'\xff'
         mon[60:68]=bytes([187])*7+b'\xff';struct.pack_into('<III',mon,68,125000,0,0)
         struct.pack_into('<I',mon,84,OWNER);mons.append(bytes(mon))
@@ -253,15 +288,15 @@ def setup(driver,c,syms,resolve,props):
         'gBattlerAttacker':b'\0','gBattlerTarget':b'\1','gActiveBattler':b'\0',
         'gAbsentBattlerFlags':b'\x0c','gPlayerPartyCount':b'\2','gEnemyPartyCount':b'\1',
         'gBattlerPartyIndexes':bytes(8),'gBattleTypeFlags':struct.pack('<I',264),  # TRAINER | BATTLE_TOWER, never LINK.
-        'gBattleResults':bytes(68),'gBattleOutcome':b'\0','gChosenMoveByBattler':struct.pack('<4H',1,1,0,0),
+        'gBattleResults':bytes(68),'gBattleOutcome':b'\0','gChosenMoveByBattler':struct.pack('<4H',*c['moves'],0,0),
         'gChosenActionByBattler':bytes(4),'gBattleControllerExecFlags':bytes(4),
         'gBattleBufferA':bytes(2048),'gBattleBufferB':bytes(2048),
         'gDisableStructs':bytes(112),'gProtectStructs':bytes(64),'gSpecialStatuses':bytes(80),
         'gStatuses3':bytes(16),'gSideStatuses':bytes(4),'gBattleScripting':bytes(40),
         'gBattleCommunication':bytes(8),'gHitMarker':struct.pack('<I',resolve('HITMARKER_OBEYS')),
         'gMoveResultFlags':b'\0','gBattleWeather':bytes(2),'gCurrentTurnActionNumber':b'\0',
-        'gCurrentActionFuncId':b'\0','gCurrMovePos':b'\0','gCurrentMove':b'\1\0',
-        'gChosenMove':b'\1\0','gChosenMovePos':b'\0','gRandomTurnNumber':b'\xff\xff',
+        'gCurrentActionFuncId':b'\0','gCurrMovePos':b'\0','gCurrentMove':struct.pack('<H',c['moves'][c['expected_order'][0]]),
+        'gChosenMove':struct.pack('<H',c['moves'][c['expected_order'][0]]),'gChosenMovePos':b'\0','gRandomTurnNumber':b'\xff\xff',
         'gRngValue':bytes(4),'gSideTimers':bytes(24),'gWishFutureKnock':bytes(44),
         'gLastMoves':bytes(8),'gLastResultingMoves':bytes(8),'gLastPrintedMoves':bytes(8),
         'gLockedMoves':bytes(8),'gLastHitBy':bytes(4),'gLastUsedItem':bytes(2)}
@@ -270,8 +305,8 @@ def setup(driver,c,syms,resolve,props):
     write(structure+12,bytes([1,0,0,0]));write(structure+0x80,bytes(4))
     before=read(driver,[(syms['gPlayerParty'][0],600),(syms['gEnemyParty'][0],600),
                          (save1,0x3d88),(save2,0xf2c)])
-    expected_before=[expected_mon(c['player_hp'],0,[10,30,25,25],0)+expected_mon(105,0,[10,30,25,25],0)+bytes(400),
-                     expected_mon(c['enemy_hp'],0,[10,30,25,25],0)+bytes(500)]
+    expected_before=[expected_turn_mon(c['player_hp'],[10,30,25,25],c['moves'][0])+expected_mon(105,0,[10,30,25,25],0)+bytes(400),
+                     expected_turn_mon(c['enemy_hp'],[10,30,25,25],c['moves'][1])+bytes(500)]
     if before[:2]!=expected_before:
         raise ValueError('Native initial parties differ from the independent complete-object oracle.')
     return {'initial_battle_mons':initial,'before':before,'save_addresses':[save1,save2],
@@ -369,14 +404,14 @@ def assess(c,state,observed,guards,packets,syms,resolve,endpoint,trace,elapsed=0
     if len(observed)!=len(sizes) or any(len(value)!=size for value,size in zip(observed,sizes)):
         raise ValueError('Incomplete full-party/turn postcondition observation.')
     hp,pp=c['expected_hp'],c['expected_pp']
-    expected_parties=[expected_mon(hp[0],0,[pp[0],30,25,25],0)+state['before'][0][100:],
-                      expected_mon(hp[1],0,[pp[1],30,25,25],0)+state['before'][1][100:]]
+    expected_parties=[expected_turn_mon(hp[0],[pp[0],30,25,25],c['moves'][0])+state['before'][0][100:],
+                      expected_turn_mon(hp[1],[pp[1],30,25,25],c['moves'][1])+state['before'][1][100:]]
     expected_battle=bytearray(state['initial_battle_mons'])
     for i in range(2):struct.pack_into('<H',expected_battle,i*88+40,hp[i]);expected_battle[i*88+36]=pp[i]
     if c['endpoint']=='replacement-query':expected_battle[33:35]=b'\0\0'  # Native faint cleanup restores Rattata's types.
     expected_results=bytearray(68);expected_results[0]=c['faints'];expected_results[5]=1
-    expected_results[19]=c['turns'];struct.pack_into('<H',expected_results,36,1)
-    if c['endpoint']=='next-turn':struct.pack_into('<H',expected_results,34,1)
+    expected_results[19]=c['turns'];struct.pack_into('<H',expected_results,36,c['moves'][1])
+    if c['endpoint']=='next-turn':struct.pack_into('<H',expected_results,34,c['moves'][0])
     else:expected_results[2]=1  # Native openpartyscreen increments before the unanswered mandatory query.
     updates=[]
     for packet in packets:
@@ -392,13 +427,13 @@ def assess(c,state,observed,guards,packets,syms,resolve,endpoint,trace,elapsed=0
         'nonlink_rules':observed[13]==struct.pack('<I',264),
         'save_pointers':observed[14:16]==[struct.pack('<I',a) for a in state['save_addresses']],
         'party_counts':observed[16:18]==[b'\2',b'\1'],
-        'ordered_actions':observed[18]==bytes([0,1] if c['speeds'][0]>c['speeds'][1] else [1,0]),
+        'ordered_actions':observed[18]==bytes(c['expected_order']),
         'stacks':observed[8:10]==([b'\0',b'\0'] if endpoint=='next-turn' else [b'\0',b'\1']),
         'canaries':guards==list(CANARIES.values())}
     if endpoint=='next-turn':
         checks.update(actions_reset=observed[10]==bytes([resolve('B_ACTION_NONE')])*2+bytes(2) and observed[11]==bytes(8))
     else:checks['pending_native_callback']=observed[19]==struct.pack('<I',syms['RunTurnActionsFunctions'][0]|1)
-    checks['executed_pp_order']=[row['attacker'] for row in trace if row['opcode']==3]==([0,1] if endpoint=='next-turn' else [1])
+    checks['executed_pp_order']=[row['attacker'] for row in trace if row['opcode']==3]==(c['expected_order'] if endpoint=='next-turn' else [1])
     checks['move_end_executed']=73 in {row['opcode'] for row in trace}
     return {'id':c['id'],'endpoint':endpoint,'passed':all(checks.values()),'checks':checks,
         'trace':trace,'controller_packets':packets,'observed_rng':int.from_bytes(observed[6],'little'),
@@ -426,10 +461,10 @@ def main():
                   'instructions_per_call':2000000,'driver_seconds':120,'native_response_seconds':10},
         'disclosures':{
             'party':'Native CreateMon/SetMonData: fixedPID0/OT11223344 Rattata19,level50,IV31,EV0, fixed A names; two player slots and one enemy, all other slots zero.',
-            'battle_overrides':'Both live battlers use controlled attack/defense/spAttack/spDefense100, Mystery/Mystery types9/9, ability0, no item, neutral stages, maxHP105, chosen Pound slot0, PP10 and explicitly listed speeds/HP. These stats/types are not inferred from naturally created Rattata.',
+            'battle_overrides':'Both live battlers use controlled attack/defense/spAttack/spDefense100, Mystery/Mystery types9/9, ability0, no item, neutral stages, maxHP105, chosen per-case Pound1 or QuickAttack98 slot0, PP10 and explicitly listed speeds/HP. These stats/types are not inferred from naturally created Rattata.',
             'rules':'TRAINER|BATTLE_TOWER=264 suppresses badge bonuses without LINK transport. Choices are preselected fixture RAM, not player-input evidence.',
             'controllers':'SETMONDATA is applied by actual native per-side handlers. Only explicitly listed presentation commands are ACKed; replacement and standby remain pending.',
-            'claims':'One living full chosen-turn resolution and one partial KO replacement boundary. No battle UI, animation, audio, EXP, replacement completion, durable save or campaign proof.'},
+            'claims':'Two living full chosen-turn resolutions (speed and priority) and one partial KO replacement boundary. No battle UI, animation, audio, EXP, replacement completion, durable save or campaign proof.'},
         'runner_sha256':digest(Path(__file__)),'frozen_dependencies':{name:digest(ROOT/'scripts/quality'/name)
             for name in ['function_fixture.c','native_fixture_transport.py','native_abi.py',
                          'mechanics_fixtures.py','stat_fixtures.py','item_effect_fixtures.py']}}
@@ -446,6 +481,7 @@ def main():
         for label in ['reference','candidate']:
             rom,elf,state=[getattr(args,label+'_'+part) for part in ['rom','elf','state']]
             identity,syms=verify_bundle(label,rom,elf,state,output,FUNCTIONS,ALLOCATIONS)
+            identity['paths']={name:str(path.resolve()) for name,path in [('rom',rom),('elf',elf),('state',state)]}
             metadata=json.loads(state.with_suffix('.json').read_text())
             if metadata.get('controller_only') is not True:
                 raise ValueError('Require a controller-derived in-battle snapshot lineage.')
@@ -472,7 +508,7 @@ def main():
         result['errors'].append(str(error))
     finally:
         signal.alarm(0);signal.signal(signal.SIGALRM,previous_handler)
-    result['counts']={'distinct_scenarios':len(CASES),'living_full_turn':1,'partial_ko_boundary':1,
+    result['counts']={'distinct_scenarios':len(CASES),'living_full_turn':sum(c['endpoint']=='next-turn' for c in CASES),'partial_ko_boundary':sum(c['endpoint']=='replacement-query' for c in CASES),
         'matched_reference':sum(c['passed'] for c in result['sides'].get('reference',{}).get('cases',[])),
         'matched_candidate':sum(c['passed'] for c in result['sides'].get('candidate',{}).get('cases',[]))}
     (output/'result.json').write_text(json.dumps(result,indent=2)+'\n')

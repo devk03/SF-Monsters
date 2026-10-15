@@ -7414,3 +7414,34 @@ v72 audit guard/recovery checkpoint — October15,01:45UTC:
   now running. Root owns these captures and final build/publication. Alignment
   owns only one additional controlled QuickAttack priority-turn profile,
   due02:30UTC; next alignment exchange by02:15UTC. Publicv71/Site62 unchanged.
+
+Controlled priority-turn checkpoint — October15,01:53UTC:
+
+- One additional source-derived full-turn case is integrated: player speed90
+  uses QuickAttack98/priority1 before enemy speed110/Pound1/priority0. Both
+  attacks use power40/accuracy100 and the same native hit script; there is no
+  priority/speed tie RNG. Independent expected HP72/72, PP9/9 and ninth-draw
+  RNG4231221723 match both actual ROMs in root's rerun. Native execution order
+  is player then enemy despite the player's lower speed.
+- Strict cases now declare per-battler moves and expected order. Native secure
+  party initialization uses actual CreateMon/SetMonData. Expected move bytes,
+  checksum and XOR encryption are derived independently from the fixed PID0/
+  owner format; full party and battle-result last-move fields are compared.
+  Unknown move pairs or contradictory order schemas fail closed. No controller
+  ACK, transport, ABI or frozen capture source changes.
+- Thirteen portable guards pass, including rejection of speed-only ordering,
+  unchanged Pound secure bytes, wrong last-move results and reversed executed
+  PP order. Root verifies the original two traces/packets/postconditions and
+  full party hashes stay exact on both ROMs. Counts are three scenarios: two
+  full living turns and one partial unanswered KO boundary, not three complete
+  turns or broad type/status/item/weather/switching acceptance.
+- Root receipt turn-resolution-root-priority-v71/result.json
+  SHA2ae6e2ddbbfdb4dc590a7f3aa0fbd71f8c428ed3224412e5a264466683ce7c7c;
+  peer receiptSHAa52afa29ed33e9d8c221ce0134efbb565eb1b737cab9782d535d1d505812406f.
+  Absolute exact ROM/ELF/state paths now accompany hashes. Functional private
+  fixture proof is on v71, not automatically v72 campaign or UI evidence.
+- The first v72 browser route visually completes but reports338 audio underrun
+  output frames over75.4099s; no frame mismatch/discard or dropped source audio.
+  That sample is preserved, not counted as an audio-clean pass. A settled repeat
+  without mid-route screenshots/native jobs is active; no causal fix is claimed.
+  All broad performance gates and0/11 human approvals remainOPEN.
