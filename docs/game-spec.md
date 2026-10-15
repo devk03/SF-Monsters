@@ -9044,3 +9044,23 @@ Private persistence cost and ordinary Save — October15,10:34UTC:
 - Own browser/core/audio/server stopped after those runs. Deadline remains
   October15 at05:00America/Los_Angeles; full quality0/11 and remaining campaign,
   browser/phone, persistence, listening and user-approval gates remain open.
+
+
+Private readonly-pause candidate — October15,10:38UTC:
+
+- Alignment handed off a phase-preserving Worker candidate. Ordinary pause now
+  freezes its active elapsed time once, retains planned debt and earned-unplanned
+  credits, and shifts origin only by actual paused duration. A stable segment
+  anchor avoids binary64 cancellation at an exact frame boundary. Reset/mutation
+  still explicitly discards phase/debt in a new playback/save epoch.
+- The original finite wall lease keeps counting while paused; resume can shorten
+  but cannot extend it. Fifteen pure Worker cases pass, including20pause cycles,
+  fractional deadlines, debt3, unplanned3, duplicate pause, reset and expiration.
+  One separately bounded actual-native phase probe also passed; this proves no
+  native counter advance while paused, not browser audio queue behavior.
+- Root's separate host coordinator freezes AudioContext consumer before Worker
+  producer, resumes producer before consumer, and guards activation while paused
+  or checking storage. Seven pure cases cover ordering, denial, overlap and a
+  finite AudioContext timeout. No core/worklet modifications or invented clocks.
+  Browser repeated-pause/queue-growth verification remains next;97frame failed
+  receipt remains retained. Public runtime and live v80 game remain unchanged.

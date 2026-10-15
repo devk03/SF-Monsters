@@ -3,6 +3,8 @@
 const LIMITS = Object.freeze({ durationMs: 600000, runDurationMs: 900000, ticks: 160000, inputs: 40000, audioSnapshots: 32000 });
 let mod = null, port = null, audioPtr = 0, fps = 0, coreRate = 0, booting = false;
 let running = false, loopTimer = null, stopTimer = null, origin = null;
+let pausedAtMs = null, pausedPhase = null, runDeadlineMs = null, runExpired = false;
+let phaseAnchorMs = null, phaseAnchorElapsedMs = 0;
 let due = 0, backlog = 0, executed = 0, dropped = 0, playbackEpoch = 0;
 let enqueued = 0, consumed = 0, lastAudio = null, lastAudioAt = null;
 let measurement = null, closing = null, finalTimer = null, lastReport = null, epoch = 0;
@@ -111,15 +113,42 @@ function restoreState(raw) {
   if (raw.length !== mod._mgbawasm_state_size()) throw new Error('State size differs from unchanged core ABI');
   if (!heapCopy(raw, ptr => mod._mgbawasm_state_load(ptr))) throw new Error('Native state load failed');
 }
+function pacingPhase(at = now()) {
+  if (origin === null) return null;
+  const frozenAt = pausedAtMs ?? at;
+  const elapsedMs = activeElapsed(frozenAt), earned = elapsedMs / 1000 * fps;
+  const earnedDue = Math.floor(earned), fractionalFrame = earned - earnedDue;
+  if (elapsedMs < 0 || earnedDue < due) throw new Error('Pacing phase regressed');
+  return { pausedAtMs: frozenAt, originMs: origin, elapsedMs, plannedDue: due, earnedDue,
+    earnedUnplannedFrames: earnedDue - due, fractionalFrame,
+    nextDueInMs: (1 - fractionalFrame) * 1000 / fps, retainedBacklog: backlog,
+    totalRetainedFrames: backlog + earnedDue - due };
+}
+function activeElapsed(at = now()) {
+  if (phaseAnchorMs === null) return 0;
+  // Add nonnegative segment time to the frozen active duration. Subtracting a
+  // large shifted origin can otherwise round a frame-boundary credit backwards.
+  const delta = at - phaseAnchorMs;
+  if (delta < 0) throw new Error('Worker active-clock segment regressed');
+  return phaseAnchorElapsedMs + delta;
+}
+function lifecycle(fact) {
+  if (lifecycleFacts.length < 64) lifecycleFacts.push(fact); else lifecycleFactOverflow = true;
+}
 function advanceSaveEpoch(reason) {
-  const old = { saveEpoch, due, executed, overflowDropped: dropped, abandonedFrames: backlog,
+  const phase = pacingPhase();
+  const old = { saveEpoch, due, executed, overflowDropped: dropped,
+    abandonedFrames: backlog + (phase?.earnedUnplannedFrames ?? 0), abandonedBacklog: backlog,
+    abandonedEarnedUnplannedFrames: phase?.earnedUnplannedFrames ?? 0,
+    discardedFractionalFrame: phase?.fractionalFrame ?? 0, pausedPhase: phase,
     queuedSourceFramesEstimate: Math.max(0, enqueued - consumed), workerAt: absoluteNow(), reason };
   if (lifecycleFacts.length === 64) throw new Error('Lifecycle fact capacity reached; create a fresh Worker');
   lifecycleFacts.push(old);
   saveEpoch++; rawRevision = 0; flashCache = null; lastHostReceipt = null;
   flight = null; videoInFlight = false; videoFrameReady = false; recycled = null;
   pendingInput = null; latestMask = 0; mod._mgbawasm_set_keys(0);
-  origin = null; due = backlog = executed = dropped = 0;
+  origin = null; pausedAtMs = null; pausedPhase = null; phaseAnchorMs = null; phaseAnchorElapsedMs = 0;
+  due = backlog = executed = dropped = 0;
   const drainedSourceFrames = drainAudio(false); old.discardedShimSourceFrames = drainedSourceFrames;
   old.playbackReset = { previousEpoch: playbackEpoch, nextEpoch: playbackEpoch + 1 };
   enqueued = consumed = 0; coreRate = 0; playbackAcknowledged = false;
@@ -204,6 +233,7 @@ function audioMessage(event) {
 function snapshot() {
   return { running, counter: mod ? counter() : null, framerate: fps, coreRate,
     workerAt: absoluteNow(), workerTimeOrigin: performance.timeOrigin, clockOriginMs: origin,
+    pausedAtMs, pausedPhase, phaseAnchorMs, phaseAnchorElapsedMs, runDeadlineMs, runExpired,
     due, backlog, executed, overflowDropped: dropped, latestMask, latestSequence,
     enqueuedSourceFrames: enqueued, consumedSourceFrames: consumed,
     estimatedSourceQueue: Math.max(0, enqueued - consumed),
@@ -242,16 +272,19 @@ function closeMeasurement(reason = 'duration', request = null) {
   finalTimer = setTimeout(() => finishMeasurement(null), 500);
 }
 function pause(reason = 'pause') {
-  if (mod && (running || due || backlog)) {
-    const fact = { reason, saveEpoch, due, executed, overflowDropped: dropped, abandonedFrames: backlog,
-      workerAt: absoluteNow(), audioReset: false };
-    if (lifecycleFacts.length < 64) lifecycleFacts.push(fact); else lifecycleFactOverflow = true;
+  const wasRunning = running;
+  if (wasRunning && origin !== null && pausedAtMs === null) {
+    pausedAtMs = now(); pausedPhase = pacingPhase(pausedAtMs);
+    lifecycle({ reason, saveEpoch, due, executed, overflowDropped: dropped, abandonedFrames: 0,
+      retainedBacklog: backlog, earnedUnplannedFrames: pausedPhase.earnedUnplannedFrames,
+      fractionalFrame: pausedPhase.fractionalFrame, pausedAtMs, workerAt: absoluteNow(), audioReset: false });
   }
-  running = false; clearTimeout(loopTimer); clearTimeout(stopTimer); loopTimer = stopTimer = null;
+  running = false; clearTimeout(loopTimer); loopTimer = null;
   closeMeasurement(reason);
-  const abandoned = backlog;
-  origin = null; due = backlog = executed = dropped = 0;
-  return { ...snapshot(), abandonedFrames: abandoned, reason };
+  return { ...snapshot(), abandonedFrames: 0, retainedBacklog: backlog,
+    earnedUnplannedFrames: pausedPhase?.earnedUnplannedFrames ?? 0,
+    fractionalFrame: pausedPhase?.fractionalFrame ?? 0, phaseFrozen: pausedAtMs !== null,
+    alreadyPaused: !wasRunning, reason };
 }
 function tick() {
   if (!running) return;
@@ -260,8 +293,8 @@ function tick() {
     // Admission precedes core execution. A batch admitted before the deadline
     // is recorded in full before close, even if its <=5 frames cross it.
     if (measurement && started >= measurement.deadlineMs) closeMeasurement('duration');
-    if (origin === null) origin = started;
-    const elapsed = started - origin, nextDue = Math.floor(elapsed / 1000 * fps);
+    if (origin === null) { origin = started; phaseAnchorMs = started; phaseAnchorElapsedMs = 0; }
+    const elapsed = activeElapsed(started), nextDue = Math.floor(elapsed / 1000 * fps);
     if (nextDue < due) throw new Error('Worker clock regressed');
     const fresh = nextDue - due, before = backlog, overflow = Math.max(0, before + fresh - 30);
     const pending = before + fresh - overflow, planned = Math.min(5, pending), beforeCounter = counter();
@@ -345,8 +378,33 @@ function start(request) {
   if (running) return snapshot();
   const duration = integer(request.durationMs ?? LIMITS.durationMs, 'finite run duration', LIMITS.runDurationMs);
   if (!duration) throw new Error('Finite run duration must be positive');
-  running = true; origin = now(); due = backlog = executed = dropped = 0;
-  stopTimer = setTimeout(() => pause('run-duration'), duration); loopTimer = setTimeout(tick, 0);
+  const resumedAt = now();
+  if (runExpired || (runDeadlineMs !== null && resumedAt >= runDeadlineMs)) {
+    runExpired = true; throw new Error('Finite Worker wall-clock run lease expired');
+  }
+  const requestedDeadline = resumedAt + duration;
+  runDeadlineMs = runDeadlineMs === null ? requestedDeadline : Math.min(runDeadlineMs, requestedDeadline);
+  if (origin !== null && pausedAtMs !== null) {
+    const pauseDurationMs = resumedAt - pausedAtMs, oldOrigin = origin;
+    if (pauseDurationMs < 0) throw new Error('Pause clock regressed');
+    origin += pauseDurationMs;
+    phaseAnchorElapsedMs = pausedPhase.elapsedMs; phaseAnchorMs = resumedAt;
+    lifecycle({ reason: 'resume-retained-phase', saveEpoch, pauseDurationMs, pausedAtMs, resumedAtMs: resumedAt,
+      originBeforeMs: oldOrigin, originAfterMs: origin, retainedBacklog: backlog,
+      earnedUnplannedFrames: pausedPhase?.earnedUnplannedFrames ?? 0,
+      fractionalFrame: pausedPhase?.fractionalFrame ?? 0, abandonedFrames: 0, audioReset: false });
+  } else {
+    origin = resumedAt; phaseAnchorMs = resumedAt; phaseAnchorElapsedMs = 0;
+    due = backlog = executed = dropped = 0;
+  }
+  pausedAtMs = null; pausedPhase = null; running = true;
+  clearTimeout(stopTimer);
+  stopTimer = setTimeout(() => {
+    stopTimer = null; runExpired = true;
+    lifecycle({ reason: 'finite-wall-lease-expired', saveEpoch, workerAt: absoluteNow(), runDeadlineMs });
+    pause('run-duration');
+  }, Math.max(0, runDeadlineMs - resumedAt));
+  loopTimer = setTimeout(tick, 0);
   return snapshot();
 }
 function begin(request) {
@@ -432,8 +490,12 @@ async function dispatch(request) {
   if (op === 'end' || op === 'diagnostics-stop') return closeMeasurement(request.reason ?? 'manual', request);
   if (op === 'destroy') {
     pause('destroy'); if (closing) finishMeasurement(null);
+    const abandonedPhase = pacingPhase();
+    const abandonedFrames = backlog + (abandonedPhase?.earnedUnplannedFrames ?? 0);
+    clearTimeout(stopTimer); stopTimer = null;
     if (mod) { if (audioPtr) mod._free(audioPtr); audioPtr = 0; mod._mgbawasm_unload(); mod = null; }
-    port?.close(); port = null; reply(request, { destroyed: true }); self.close(); return;
+    port?.close(); port = null; reply(request, { destroyed: true, abandonedFrames,
+      discardedFractionalFrame: abandonedPhase?.fractionalFrame ?? 0 }); self.close(); return;
   }
   throw new Error('Unknown private Worker operation: ' + op);
 }

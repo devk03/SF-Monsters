@@ -75,6 +75,7 @@ function fixture() {
   const boot = () => rpc('boot', { rom: new Uint8Array([127]), battery: battery.slice(), state: state.slice(),
     audioPort: port, jsUrl: 'https://invalid.local/unchanged-core.js', wasmUrl: 'https://invalid.local/unchanged-core.wasm' });
   return { rpc, advance, boot, battery, state, flash, canonicalScratch, audioMessages, lifecycle,
+    elapseWithoutTimers: duration => { clock += duration; },
     changeFlash: () => { bump = true; }, corruptRestore: () => { corruptNextRestore = true; },
     failState: () => { failNextState = true; }, holdHash: () => { holdNextHash = true; },
     releaseHash: () => { assert.ok(releaseHash); releaseHash(); }, failHash: () => { failNextHash = true; },
@@ -170,4 +171,89 @@ await test('a metadata hash failure after native import rolls back before report
   assert.ok(after.saveEpoch > before.saveEpoch); assert.equal((await f.rpc('snapshot')).running, false);
   await f.rpc('destroy');
 });
-console.log(JSON.stringify({ passed, kind: 'pure-fakecore-save-protocol', nativeEmulation: false }));
+await test('60Hz pause at10ms retains the6.667ms deadline through1000ms suspension', async () => {
+  const f = fixture(); await f.boot(); await f.rpc('start', { durationMs: 5000 }); await f.advance(10);
+  const paused = await f.rpc('pause');
+  assert.ok(Math.abs(paused.pausedPhase.nextDueInMs - 1000 / 60 + 10) < 1e-9);
+  assert.ok(Math.abs(paused.fractionalFrame - .6) < 1e-12); assert.equal(paused.abandonedFrames, 0);
+  await f.advance(1000); const idle = await f.rpc('snapshot'); assert.equal(idle.counter, paused.counter);
+  const resumed = await f.rpc('resume', { durationMs: 5000 });
+  assert.equal(resumed.clockOriginMs, 1000); assert.equal(resumed.runDeadlineMs, 5000);
+  await f.advance(6.6); assert.equal((await f.rpc('snapshot')).counter, paused.counter);
+  // Fixed5ms polling adds <=5ms slack to the6.667ms retained deadline.
+  await f.advance(4); assert.equal((await f.rpc('snapshot')).counter, paused.counter + 1);
+  await f.rpc('destroy');
+});
+await test('earned credits between last tick and pause are executed once after resume', async () => {
+  const f = fixture(); await f.boot(); await f.rpc('start', { durationMs: 5000 }); await f.advance(5);
+  f.elapseWithoutTimers(50); const paused = await f.rpc('pause');
+  assert.equal(paused.earnedUnplannedFrames, 3); assert.equal(paused.due, 0); assert.equal(paused.retainedBacklog, 0);
+  await f.advance(1000); assert.equal((await f.rpc('snapshot')).counter, paused.counter);
+  await f.rpc('resume'); await f.advance(0);
+  const resumed = await f.rpc('snapshot'); assert.equal(resumed.counter, paused.counter + 3);
+  assert.equal(resumed.due, 3); assert.equal(resumed.executed, 3); assert.equal(resumed.overflowDropped, 0);
+  await f.advance(5); assert.equal((await f.rpc('snapshot')).counter, paused.counter + 3);
+  await f.rpc('destroy');
+});
+await test('three already planned debt frames survive a readonly pause without abandonment', async () => {
+  const f = fixture(); await f.boot(); await f.rpc('start', { durationMs: 5000 });
+  f.elapseWithoutTimers(140); await f.advance(0); const before = await f.rpc('snapshot');
+  assert.equal(before.due, 8); assert.equal(before.executed, 5); assert.equal(before.backlog, 3);
+  const paused = await f.rpc('pause'); assert.equal(paused.retainedBacklog, 3); assert.equal(paused.abandonedFrames, 0);
+  await f.advance(1000); await f.rpc('resume'); await f.advance(0);
+  const after = await f.rpc('snapshot'); assert.equal(after.counter, before.counter + 3);
+  assert.equal(after.due, 8); assert.equal(after.executed, 8); assert.equal(after.backlog, 0);
+  await f.rpc('destroy');
+});
+await test('repeated pause is idempotent and readonly state/Flash exports preserve frozen phase', async () => {
+  const f = fixture(); await f.boot(); await f.rpc('start', { durationMs: 10000 }); await f.advance(10);
+  const first = await f.rpc('pause'); await f.advance(500); const repeated = await f.rpc('pause');
+  assert.equal(repeated.alreadyPaused, true); assert.equal(repeated.pausedAtMs, first.pausedAtMs);
+  assert.equal(repeated.lifecycleFacts.length, first.lifecycleFacts.length);
+  await f.rpc('export-state'); await f.rpc('export-battery'); await f.advance(500);
+  const before = await f.rpc('snapshot'); assert.deepEqual(before.pausedPhase, first.pausedPhase); assert.equal(before.counter, first.counter);
+  await f.rpc('resume'); const after = await f.rpc('snapshot'); assert.equal(after.clockOriginMs, 1000);
+  await f.rpc('destroy');
+});
+await test('state reset explicitly discards prior debt/fraction and starts a fresh pacing phase', async () => {
+  const f = fixture(); await f.boot(); await f.rpc('start', { durationMs: 5000 });
+  f.elapseWithoutTimers(140); await f.advance(0); await f.rpc('pause'); await f.advance(1000);
+  const loaded = await f.rpc('load-state', { state: f.state.slice() });
+  assert.equal(loaded.clockOriginMs, null); assert.equal(loaded.pausedAtMs, null);
+  assert.equal(loaded.due, 0); assert.equal(loaded.backlog, 0);
+  const reset = loaded.lifecycleFacts.find(value => value.reason === 'load-state');
+  assert.equal(reset.abandonedBacklog, 3); assert.equal(reset.abandonedFrames, 3);
+  assert.ok(Math.abs(reset.discardedFractionalFrame - .4) < 1e-12);
+  assert.ok(reset.playbackReset.nextEpoch > reset.playbackReset.previousEpoch);
+  await f.rpc('resume'); await f.advance(10); assert.equal((await f.rpc('snapshot')).counter, loaded.counter);
+  await f.advance(10); assert.equal((await f.rpc('snapshot')).counter, loaded.counter + 1);
+  await f.rpc('destroy');
+});
+await test('twenty fractional pauses preserve global credits and cannot extend the original wall lease', async () => {
+  const f = fixture(); await f.boot(); const initial = await f.rpc('start', { durationMs: 10000 });
+  for (let i = 0; i < 20; ++i) {
+    await f.advance(10); const pause = await f.rpc('pause'); const counter = pause.counter;
+    await f.advance(100); assert.equal((await f.rpc('snapshot')).counter, counter);
+    await f.rpc('resume', { durationMs: 10000 });
+  }
+  const end = await f.rpc('snapshot'); assert.equal(end.runDeadlineMs, initial.runDeadlineMs);
+  assert.equal(end.due, end.executed + end.overflowDropped + end.backlog);
+  assert.equal(end.overflowDropped, 0); assert.equal(end.lifecycleFactOverflow, false);
+  //200ms active time has earned12 credits; up to one is still unplanned at RPC.
+  await f.advance(0); assert.equal((await f.rpc('snapshot')).executed, 12);
+  await f.rpc('pause'); await f.advance(10000);
+  assert.equal((await f.rpc('snapshot')).runExpired, true);
+  await assert.rejects(f.rpc('resume', { durationMs: 10000 }), /lease expired/);
+  await f.rpc('export-battery'); await f.rpc('destroy');
+});
+await test('binary64 frame-boundary credits cannot regress after a large fractional origin shift', async () => {
+  const f = fixture(); await f.boot(); await f.rpc('start', { durationMs: 10000 });
+  f.elapseWithoutTimers(1000 / 60); await f.advance(0);
+  const before = await f.rpc('snapshot'); assert.equal(before.due, 1); assert.equal(before.executed, 1);
+  const paused = await f.rpc('pause'); await f.advance(1000.1); await f.rpc('resume'); await f.advance(0);
+  const after = await f.rpc('snapshot'); assert.equal(after.counter, paused.counter);
+  assert.equal(after.due, 1); assert.equal(after.executed, 1); assert.equal(after.running, true);
+  assert.equal(after.phaseAnchorElapsedMs, paused.pausedPhase.elapsedMs);
+  await f.rpc('destroy');
+});
+console.log(JSON.stringify({ passed, kind: 'pure-fakecore-phase-and-save-protocol', nativeEmulation: false }));
