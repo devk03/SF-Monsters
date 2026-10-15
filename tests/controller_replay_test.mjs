@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { controllerMeasurementDuration, parseControllerRoute, startControllerReplay } from '../scripts/quality/controller_replay.mjs';
+import { controllerMeasurementDuration, parseControllerRoute, startControllerReplay, replayForWindow } from '../scripts/quality/controller_replay.mjs';
 
 test('route measurement retains a completion margin within its finite ten-minute limit', () => {
     for (const [routeMs, expected] of [[1,180000],[179000,180000],[179000.01,181000],
@@ -86,4 +86,13 @@ test('dispatch failure stops immediately and attempts a final release', () => {
     assert.equal(reports[0].reason, 'dispatch-error');
     assert.equal(reports[0].appliedRows, 0);
     assert.equal(fake.pending.size, 0);
+});
+
+test('a later measurement cannot inherit a completed replay from an earlier window',()=>{
+    const prior={startedAtMs:100,endedAtMs:500,reason:'complete'};
+    assert.equal(replayForWindow(prior,1000,2000),null);
+    assert.equal(replayForWindow(prior,100,500),prior);
+    assert.equal(replayForWindow(null,100,500),null);
+    assert.deepEqual(prior,{startedAtMs:100,endedAtMs:500,reason:'complete'});
+    assert.throws(()=>replayForWindow(prior,500,100),/window/);
 });

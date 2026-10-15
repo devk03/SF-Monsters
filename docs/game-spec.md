@@ -9003,3 +9003,44 @@ Actual browser save-bridge smoke — October15,09:53UTC:
   matching-write readback facts and denied-frame draw/receipt comparisons.
   Public game unchanged. The draw callback is trusted, direct and synchronous;
   metadata is captured before awaits and reentrant epoch reset is rejected.
+
+
+Private persistence cost and ordinary Save — October15,10:34UTC:
+
+- Save-enabled Chrome600sec repeats the same310-input field route:35836actual
+  frames,0overflow/debt/counter mismatch,0workletwarmup/underrun/drop and2791
+  queued source frames at close. ReportSHA
+  2a7482127b48d9f148039ebfecec2da80dca1e5cc19632bcb2b89eaaa39ebb7f.
+  Independent runtime/input and causal storage audits pass.72828reported canvas
+  submissions include72827inside the diagnostic window and1before; they reuse
+  one verified unchanged whole-Flash write/readback. This is a private field
+  observation, not physical-paint or full cross-platform performance approval.
+- A subsequent receipt was REJECTED because an old completed controller replay
+  belonged to another window. Original failed evidence remains unchanged. The
+  host now selects replay metadata only for its actual measured window; a pure
+  regression covers stale completed replay exclusion.
+- Current v80 ordinary in-game Save route:3583actual frames in60sec,18matched
+  controller events,0loss/debt/audio loss. All249raw Flash changes were retained
+  through250write/read pairs before7278canvas references (7277inside+1tail).
+  No completed-save-counter filter hides partial/inactive-slot writes. ReportSHA
+  fe228610ae51a3e49e0664c4c6e9eb86c583e2e26cc0213af65c1cecabfd4ee9.
+- Paused raw exports and browser readbacks match exactly before/after Save:
+  native counter12→13, ordinary-save statistics+1, position unchanged. Private
+  resulting FlashSHA1744cfa7971b6158ddcaca4e93a8071d9ff8098a0f2b61d1018fcb9d4eb5b515
+  cold-loads in native mGBA at[28,22,0,9], counter13, all128KiBFlash byte-exact.
+  This is one native→browser→native cycle, not50campaign resume checkpoints.
+- Later repeated export/quota/recovery pauses produced97worklet underrun output
+  frames (~2.2ms) in a10sec window. Receipt8034b47183a144d7a4a900e7728061f9
+  passes integrity/storage-history checks but FAILS the zero-audio-loss target.
+  Worker resets fractional pacing on pause and host resumes consumer before
+  producer. Alignment owns a bounded private phase-preserving candidate; root
+  owns host audio coordination. Preserve this failure, no public promotion yet.
+- Reproducible direct-native continuation test retains raw states/Flash/PCM and
+  reports whole-state differences honestly. For the frozen inactive-PSG fixture,
+  600subsequent native frames produce2633392byte-identical PCM bytes; only4PSG
+  cache bytes remain different. Core/WASM/shim unchanged. This does not qualify
+  arbitrary active PSG restores or realtime listening. Manual native transport
+  tests separately expose optional strict-state failure and full raw-save facts.
+- Own browser/core/audio/server stopped after those runs. Deadline remains
+  October15 at05:00America/Los_Angeles; full quality0/11 and remaining campaign,
+  browser/phone, persistence, listening and user-approval gates remain open.

@@ -4,11 +4,11 @@ body{margin:24px;background:#eee;color:#222;font:15px system-ui;max-width:960px}
 </style>
 <h1>Private Worker save proof</h1>
 <p>Same verified SF cartridge, native checkpoint, mGBA core and audio sink. Worker core/audio timing is separate from main-thread canvas submissions. No production save compatibility or physical presentation claim.</p>
-<button id="load">Load verified Worker checkpoint</button><button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="stall" disabled>Controlled 200ms main-thread stall</button><button id="move" disabled>Walk a short loop</button><button id="finish" disabled>Finish local QA</button><button id="route" disabled>Measure supplied active route</button>
+<button id="load">Load verified Worker checkpoint</button><button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="minute" disabled>Measure 1 minute</button><button id="stall" disabled>Controlled 200ms main-thread stall</button><button id="move" disabled>Walk a short loop</button><button id="finish" disabled>Finish local QA</button><button id="route" disabled>Measure supplied active route</button>
 <p id="status" role="status">Ready. No public saves or account data are used.</p>
-<canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
+<canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="flash" disabled>Preserve paused raw Flash receipt</button><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
 <script type="module">
-import {createPresentedSaveStore,decodeRaw} from "/emulator/presented-save.js";
+import {createPresentedSaveStore,decodeRaw,encodeRaw} from "/emulator/presented-save.js";
 let worker,audio,sink,gain,identity,boot,ready=false,finished=false,measuring=false,stallUsed=false,stallReady=false;
 let saveStore,saveEpoch,storeKey,checking=false,storagePaused=false,injectQuota=false,adapterGeneration=1;
 let storageEvents=[],saveActions=[],activeFrame=null,inflightVideo=null,videoTicket=0,pendingVideoTicket=0;
@@ -23,12 +23,12 @@ let observer;
 const codes=['KeyX','KeyZ','ShiftRight','Enter','ArrowRight','ArrowLeft','ArrowUp','ArrowDown','KeyS','KeyA'];
 function controls(){
   button('load').disabled=!!worker||finished;
-  for(const id of ['short','medium'])button(id).disabled=!ready||finished||measuring||checking;
+  for(const id of ['short','medium','minute'])button(id).disabled=!ready||finished||measuring||checking;
   button('stall').disabled=!stallReady||stallUsed||finished;
   button('move').disabled=!ready||finished||timers.size>0||replay?.active||checking;
   button('route').disabled=!ready||!routeText||finished||measuring||timers.size>0||routeUsed||checking;
   button('finish').disabled=!worker||finished||checking;
-  for(const id of ['roundtrip','quota'])button(id).disabled=!ready||finished||measuring||checking||timers.size>0;
+  for(const id of ['roundtrip','quota','flash'])button(id).disabled=!ready||finished||measuring||checking||timers.size>0;
   button('recover').disabled=!storagePaused||finished||checking;
 }
 function fail(error){status.textContent='Proof failed: '+error.message;}
@@ -149,7 +149,8 @@ async function measure(durationMs,onStarted){
     status.textContent='Measuring Worker core/audio '+durationMs/1000+' seconds. One explicit 200ms UI stall is available.';
     const workerReport=await measurementPromise,after=audioClock(),mainResultReceivedAt=absolute();
     stallReady=false;controls();observer?.disconnect();
-    const result={schema:2,kind:'private-worker-proof-v1',saveProtocol:{storageKind:'isolated localStorage',storageEvents,saveActions,store:saveStore.snapshot()},context:{identity,environment:{userAgent:navigator.userAgent,vendor:navigator.vendor,crossOriginIsolated:globalThis.crossOriginIsolated}},controllerReplay:replayResult??null,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks,submissions,inputs,stalls,visibility,focus,longTasks}};
+    const replayInWindow=replayModule?.replayForWindow(replayResult,workerReport.startedAt-performance.timeOrigin,workerReport.endedAt-performance.timeOrigin)??null;
+    const result={schema:2,kind:'private-worker-proof-v1',saveProtocol:{storageKind:'isolated localStorage',storageEvents,saveActions,store:saveStore.snapshot()},context:{identity,environment:{userAgent:navigator.userAgent,vendor:navigator.vendor,crossOriginIsolated:globalThis.crossOriginIsolated}},controllerReplay:replayInWindow,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks,submissions,inputs,stalls,visibility,focus,longTasks}};
     const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(5000)});
     if(!saved.ok)throw Error('Could not preserve Worker proof report');const receipt=await saved.json();
     out.textContent=JSON.stringify({receipt,boot,worker:{reason:workerReport.reason,elapsedMs:workerReport.elapsedMs,rawLedgerRows:workerReport.rawLedger.length,inputs:workerReport.inputs.length,audioSnapshots:workerReport.audioSnapshots.length,initialPacing:workerReport.initialPacing,finalPacing:workerReport.finalPacing,audioFinalAcknowledged:workerReport.audioFinalAcknowledged,audioFinalSnapshot:workerReport.audioFinalSnapshot},main:{rafTicks:mainTicks.length,submissions:submissions.length,inputs:inputs.length,stalls,visibility,focus,longTasks}},null,2);
@@ -160,13 +161,15 @@ async function measure(durationMs,onStarted){
 button('route').onclick=()=>{
   if(!routeText||routeUsed||measuring||finished)return;routeUsed=true;replayResult=null;
   const route=replayModule.parseControllerRoute(routeText);let routeMask=0;
-  void measure(replayModule.controllerMeasurementDuration(route.durationMs),()=>{
+  const windowMs=route.durationMs<118000?Math.max(60000,Math.ceil((route.durationMs+1000)/1000)*1000):replayModule.controllerMeasurementDuration(route.durationMs);
+  void measure(windowMs,()=>{
     replay=replayModule.startControllerReplay(routeText,next=>{
       for(let bit=0;bit<10;++bit)if((routeMask^next)&(1<<bit))window.dispatchEvent(new KeyboardEvent(next&(1<<bit)?'keydown':'keyup',{code:codes[bit],bubbles:true}));
       routeMask=next;
     },result=>{replayResult=result;controls();});controls();
   });
 };
+button('minute').onclick=()=>void measure(60000);
 button('short').onclick=()=>void measure(10000);button('medium').onclick=()=>void measure(120000);
 button('stall').onclick=()=>{
   if(!stallReady||stallUsed||finished)return;stallUsed=true;controls();
@@ -211,6 +214,16 @@ button('roundtrip').onclick=()=>void action(async()=>{
   const record={type:'state-flash-roundtrip',at:absolute(),beforeEpoch:before.saveEpoch,afterEpoch:loaded.saveEpoch,counter:before.counter,
     guestRamExact:true,rawFlashExact:true,repeatedPausedExact:true,wholeStateExact:differences.length===0,differingOffsets:differences,flashSha256:before.flash.sha256};
   saveActions.push(record);saveStatus.textContent='Guest RAM and raw Flash round-trip exact; whole state exact='+record.wholeStateExact+'. Audio-state differences stay explicit.';
+  await resumeKnownEpoch();
+});
+button('flash').onclick=()=>void action(async()=>{
+  const packet=await rpc('export-battery');const encoded=encodeRaw(packet.bytes);
+  if(await hash(packet.bytes)!==packet.sha256)throw Error('Paused native Flash hash differs');
+  const stored=localStorage.getItem(storeKey);
+  saveActions.push({type:'paused-flash-receipt',at:absolute(),saveEpoch:packet.saveEpoch,counter:packet.counter,
+    rawRevision:packet.rawRevision,sha256:packet.sha256,size:packet.size,bytesBase64:encoded,
+    storedBytesExact:stored===encoded,scope:'Private native raw backup; no unseen-tail or public storage guarantee'});
+  if(stored!==encoded)throw Error('Paused native Flash differs from last browser readback');
   await resumeKnownEpoch();
 });
 button('quota').onclick=()=>void action(async()=>{

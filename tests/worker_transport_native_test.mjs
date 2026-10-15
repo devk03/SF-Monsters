@@ -48,7 +48,9 @@ if (workerData?.role === 'core') {
   const sinkSnapshot = () => new Promise(resolve => { sink.once('message', resolve); sink.postMessage('snapshot'); });
   const watchdog = setTimeout(() => { core.terminate(); sink.terminate(); throw Error('Finite transport unit exceeded10seconds'); }, 10000);
   try {
-    const [romPath,statePath,requestedOutput]=process.argv.slice(2);
+    const arguments_=process.argv.slice(2);const [romPath,statePath,requestedOutput]=arguments_.filter(value=>!value.startsWith('--'));
+    const requireStateBytes=arguments_.includes('--require-state-bytes');
+    const observeSaves=requireStateBytes||arguments_.includes('--observe-saves');
     if(!romPath||!statePath?.endsWith('.state'))throw Error('Pass ROM.gba and controller-only capture.state paths');
     const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
     const rom=new Uint8Array(readFileSync(romPath)),state=new Uint8Array(readFileSync(statePath));
@@ -64,6 +66,7 @@ if (workerData?.role === 'core') {
     for(const name of ['mgba.js','mgba.wasm'])assert.equal(sha(readFileSync(root+'web/public/emulator/'+name)),build.artifacts[name]);
     const output=resolve(requestedOutput??root+'.tools/benchmarks/worker-native-'+randomUUID()+'.json');
     if(!output.startsWith(root+'.tools/'))throw Error('Keep private transport receipts under .tools');
+    mkdirSync(dirname(output),{recursive:true});
     const boot = await rpc('boot', { rom,battery,state,
       audioPort: channel.port1, jsUrl: pathToFileURL(root + 'web/public/emulator/mgba.js').href,
       wasmUrl: root + 'web/public/emulator/mgba.wasm' }, [channel.port1]);
@@ -85,15 +88,41 @@ if (workerData?.role === 'core') {
     const nextFrame=await rpc('video');assert.equal(nextFrame.ready,true);
     await rpc('recycle',{frameId:nextFrame.frameId,saveEpoch:nextFrame.saveEpoch,pixels:nextFrame.rgba.buffer},[nextFrame.rgba.buffer]);
     const paused = await rpc('pause');
+    let saveFacts=null;
+    if(observeSaves){
+    const firstState=await rpc('export-state'),secondState=await rpc('export-state');
+    assert.deepEqual(firstState.state,secondState.state);assert.deepEqual(firstState.flash.bytes,battery);
+    assert.equal(firstState.flash.sha256,sha(battery));
+    const changed=battery.slice();changed[120000]^=0x5a;
+    const imported=await rpc('import-battery',{bytes:changed});
+    assert.deepEqual(imported.flash.bytes,changed);assert.equal(imported.running,false);
+    assert.ok(imported.saveEpoch>frame.saveEpoch);assert.equal((await rpc('video')).ready,false);
+    const stalePixels=new ArrayBuffer(240*160*4);
+    assert.equal((await rpc('recycle',{frameId:frame.frameId,saveEpoch:frame.saveEpoch,pixels:stalePixels},[stalePixels])).ignored,true);
+    const restored=await rpc('load-state',{state:firstState.state,battery:firstState.flash.bytes});
+    assert.equal(restored.counter,paused.counter);assert.deepEqual(restored.flash.bytes,battery);
+    const roundTrip=await rpc('export-state');
+    assert.deepEqual(roundTrip.state.subarray(0x1000),firstState.state.subarray(0x1000));
+    const changedStateOffsets=[];for(let i=0;i<firstState.state.length;i++)if(firstState.state[i]!==roundTrip.state[i])changedStateOffsets.push(i);
+    writeFileSync(output+'.before.state',firstState.state,{flag:'wx'});
+    writeFileSync(output+'.after.state',roundTrip.state,{flag:'wx'});
+    saveFacts={canonicalStateRepeatedExact:true,canonicalStateLoadRoundTripExact:changedStateOffsets.length===0,changedStateOffsets,
+      graphicsAndGuestRamRoundTripExact:true,
+      fullRawFlashExportExact:true,unusedByte120000ImportExact:true,staleFrameIgnored:true,
+      originalCounterRestored:restored.counter,originalFullFlashRestored:true,
+      canonicalStateSha256:sha(firstState.state),mutatedRawFlashSha256:sha(changed),
+      browserStorageProven:false,pagehideProven:false,scope:'Exact raw Flash and graphics/guest RAM assertions; all opaque state differences remain reported, never masked. Not arbitrary active-audio or full save compatibility approval.'};
+    }
     const report = { kind: 'native-node-worker-transport-unit',
       identity:{rom_sha256:sha(rom),state_sha256:sha(state),battery_sha256:sha(battery),
         worker_sha256:sha(readFileSync(root+'scripts/quality/experiments/worker-core.js')),mgba_revision:build.mgba_revision},bootCounter: boot.counter, batteryVerified: boot.batteryVerified,
       stallMs: stallEnd - stallStart, guestProgress: progress, pcmSourceFramesReceivedDuringStall: sourceDuringStall,
-      before, after, paused,
+      before, after, paused, saveFacts,
       scope: 'Actual unchanged core/WASM and checkpoint with independent transferred PCM sink. No browser AudioWorklet, AudioContext, audio quality, paint, or full performance claim.' };
     mkdirSync(dirname(output),{recursive:true});
     writeFileSync(output,JSON.stringify(report,null,2)+'\n',{flag:'wx'});
-    console.log(JSON.stringify({ passed: true, guestProgress: progress, pcmSourceFramesReceivedDuringStall: sourceDuringStall }));
+    if(requireStateBytes)assert.equal(saveFacts.canonicalStateLoadRoundTripExact,true,'Strict full-state byte equality remains a separate, retained failing observation');
+    console.log(JSON.stringify({ passed: true, scope:'Transport and explicit raw data assertions only', guestProgress: progress, pcmSourceFramesReceivedDuringStall: sourceDuringStall, saveObservation: saveFacts }));
     await rpc('destroy'); sink.postMessage('destroy');
   } finally { clearTimeout(watchdog); await core.terminate(); await sink.terminate(); }
 }

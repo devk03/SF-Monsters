@@ -62,3 +62,12 @@ export function startControllerReplay(text, applyMask, onDone, environment = {})
     step();
     return { stop, startedAtMs, get active() { return !report && !closing; } };
 }
+
+/** Select an observation for this window without rewriting or mutating it. */
+export function replayForWindow(replay, startedAtMs, endedAtMs) {
+    if (!Number.isFinite(startedAtMs) || !Number.isFinite(endedAtMs) || startedAtMs > endedAtMs)
+        throw Error('Invalid replay observation window');
+    if (!replay) return null;
+    return Number.isFinite(replay.startedAtMs) && replay.startedAtMs >= startedAtMs &&
+        replay.startedAtMs <= endedAtMs ? replay : null;
+}
