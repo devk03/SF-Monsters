@@ -15,7 +15,7 @@ import uuid
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/quality'))
-from serve_web_performance import runtime_config,snapshot,serve,MAX_REPORT_BYTES
+from serve_web_performance import runtime_config,page_source,snapshot,serve,MAX_REPORT_BYTES
 
 
 def directory():
@@ -23,6 +23,22 @@ def directory():
 
 
 class PrivateRuntime(unittest.TestCase):
+    def test_private_host_requires_explicit_isolation_and_exact_bounded_html(self):
+        root=directory();page=root/'host.html';page.write_bytes(b'<!doctype html>private host')
+        args=SimpleNamespace(private_page=page,private_runtime=root,report_schema=2)
+        self.assertEqual(page_source(args),(page.read_bytes(),True))
+        for extra in ({'report_schema':1},{'private_runtime':None},{'controlled_stall':True},
+                      {'private_page':ROOT/'scripts/quality/web_performance.html'}):
+            with self.subTest(extra=extra):
+                with self.assertRaises(ValueError):page_source(SimpleNamespace(**(vars(args)|extra)))
+        link=root/'link.html';link.symlink_to(page)
+        with self.assertRaises(ValueError):page_source(SimpleNamespace(**(vars(args)|{'private_page':link})))
+        for content in (b'',b'x'*131073):
+            page.write_bytes(content)
+            with self.assertRaises(ValueError):page_source(args)
+        self.assertEqual(page_source(SimpleNamespace()),
+                         ((ROOT/'scripts/quality/web_performance.html').read_bytes(),False))
+
     def test_default_runtime_and_schema_stay_public_and_unchanged(self):
         path,schema=runtime_config(SimpleNamespace())
         self.assertEqual(path,ROOT/'web/public/emulator');self.assertEqual(schema,1)
@@ -101,6 +117,13 @@ class NativeSnapshot(unittest.TestCase):
         self.assertEqual((output2/'web_performance.html').read_bytes(),routes2['/'])
         self.assertEqual(identity2['runtime']['probe-marker.js'],hashlib.sha256(routes2['/emulator/probe-marker.js']).hexdigest())
         self.assertEqual(identity2['page_sha256'],hashlib.sha256(routes2['/']).hexdigest())
+        page=runtime/'custom.html';page.write_bytes(b'<!doctype html><title>Private Worker proof</title>')
+        output3,identity3,routes3=snapshot(self.args(private_runtime=runtime/'runtime',report_schema=2,private_page=page))
+        self.assertTrue(identity3['private_page_override'])
+        self.assertEqual(routes3['/'],page.read_bytes())
+        self.assertEqual((output3/'web_performance.html').read_bytes(),page.read_bytes())
+        self.assertEqual(identity3['page_sha256'],hashlib.sha256(page.read_bytes()).hexdigest())
+        self.assertEqual(routes3['/state.bin'],routes['/state.bin'])
 
     def test_runtime_symlinks_fail_before_evidence_is_written(self):
         runtime=directory();(runtime/'linked.js').symlink_to(ROOT/'web/public/emulator/mgba.options.js')

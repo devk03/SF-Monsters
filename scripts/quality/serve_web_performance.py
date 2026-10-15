@@ -73,8 +73,31 @@ button('short').onclick=""")
     return page
 
 
+def page_source(args):
+    """Keep experimental host protocols isolated from the normal SDK harness."""
+    private = getattr(args, 'private_page', None)
+    if private is None:
+        return Path(__file__).with_name('web_performance.html').read_bytes(), False
+    if getattr(args, 'private_runtime', None) is None or getattr(args, 'report_schema', 1) != 2:
+        raise ValueError('Private page requires an explicit private runtime and schema2.')
+    path = Path(private)
+    if path.is_symlink():
+        raise ValueError('Private page must be a regular workspace file.')
+    path = path.resolve()
+    path.relative_to((ROOT / '.tools').resolve())
+    if not path.is_file() or path.suffix != '.html':
+        raise ValueError('Private page must be an HTML file under .tools.')
+    page = path.read_bytes()
+    if not 0 < len(page) <= 131072:
+        raise ValueError('Private page exceeds its finite byte bound.')
+    if getattr(args, 'controlled_stall', False):
+        raise ValueError('Custom page owns its explicit stress actions.')
+    return page, True
+
+
 def snapshot(args):
     runtime_directory, report_schema = runtime_config(args)
+    page, private_page = page_source(args)
     rom = args.rom.read_bytes()
     state = args.state.read_bytes()
     battery_path, metadata_path = args.state.with_suffix('.sav'), args.state.with_suffix('.json')
@@ -132,7 +155,6 @@ def snapshot(args):
     for name in ('mgba.sdk.js', 'mgba.performance.js', 'mgba.audio-worklet.js'):
         if name not in runtime:
             raise ValueError('Missing browser diagnostic runtime: ' + name)
-    page = Path(__file__).with_name('web_performance.html').read_bytes()
     controlled_stall = getattr(args, 'controlled_stall', False)
     if controlled_stall:
         page = controlled_stall_page(page)
@@ -148,6 +170,7 @@ def snapshot(args):
         'controller_route': controller_route,
         'performance_schema': report_schema,
         'private_runtime_override': getattr(args, 'private_runtime', None) is not None,
+        'private_page_override': private_page,
         'controlled_stall_ms': 200 if controlled_stall else None,
         'public_progress_touched': False, 'server_limit_seconds': args.seconds,
         'provenance_scope': 'Controller-only capture metadata and matching native state header; companion Flash hashed separately',
@@ -260,6 +283,7 @@ def main():
     parser.add_argument('--port', type=int, default=18766)
     parser.add_argument('--seconds', type=int, default=1800)
     parser.add_argument('--private-runtime', type=Path, help='Explicit experimental runtime under this workspace .tools only.')
+    parser.add_argument('--private-page', type=Path, help='Explicit experimental HTML under .tools; requires private runtime/schema2.')
     parser.add_argument('--report-schema', type=int, choices=[1, 2], default=1)
     parser.add_argument('--controlled-stall', action='store_true', help='Expose one local200ms stress action during measurement.')
     args = parser.parse_args()
