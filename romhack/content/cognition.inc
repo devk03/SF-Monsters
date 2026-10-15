@@ -23,8 +23,13 @@ SF_Scott::
 	goto_if_eq VAR_UNUSED_0x40DB, 0, SF_Scott_Delivery
 	goto_if_ge VAR_UNUSED_0x40DB, 4, SF_Scott_After
 	goto_if_lt VAR_UNUSED_0x40DB, 3, SF_Scott_Relays
+	msgbox SF_Text_ScottReadiness, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SF_Scott_NotYet
 	trainerbattle_single TRAINER_ROXANNE_1, SF_Text_ScottBattle, SF_Text_ScottDefeat, SF_Cognition_Won, NO_MUSIC
 	goto SF_Scott_After
+	end
+SF_Scott_NotYet::
+	release
 	end
 SF_Scott_Delivery::
 	msgbox SF_Text_Delivery, MSGBOX_DEFAULT
@@ -120,6 +125,8 @@ SF_Text_Delivery::
 	.string "SCOTT WU: That's ROON'S sensor.\pThis signal is forcing habitats\nto accelerate evolution.\pOur safety relays caught the spike.\nHelp restore them before we test it.\pBlue INPUT first, green OUTPUT second.\pPractice battles are optional.\nTrainers battle when they see you.\pRead TEAM PLAN by the entrance.\nThe clinic is east of COGNITION.$"
 SF_Text_Relays::
 	.string "SCOTT: Blue INPUT, then green OUTPUT.\nThe gate opens when both are stable.\pPractice battles are optional.\nTrainers battle when they see you.\pRead TEAM PLAN by the entrance.\nThe clinic is east of COGNITION.$"
+SF_Text_ScottReadiness::
+	.string "SCOTT: TROLLEYKIT 6, PUDDLEPRIG 7,\nHUSHMOTH 8. Bring a healed team.\pREFLECT weakens physical attacks.\nEMBER, WATER GUN and ABSORB ignore it.\pTHUNDER SHOCK and ABSORB are\nstrong against BRINEPUP.\pThe clinic is east. No rush.\nBegin the BUILD CHALLENGE?$"
 SF_Text_ScottBattle::
 	.string "SCOTT WU: The relays are stable.\pA good plan leaves room to adapt.\nShow me how your team does it!$"
 SF_Text_ScottDefeat::

@@ -7687,7 +7687,7 @@ v73 public Builder-label checkpoint — October15,02:55UTC:
   recommendation is finite30min. Human0/11 and broad gatesOPEN, goalACTIVE.
 
 
-Controlled Normal/Ghost immunity checkpoint — October15,02:58UTC:
+Controlled Normal/Ghost immunity checkpoint — October15,02:54UTC:
 
 - Root reviewed and independently reran exactly one fifth controlled scenario
   against exact a9 Emerald and immutable v71. Faster player110 uses Normal
@@ -7720,3 +7720,22 @@ Controlled Normal/Ghost immunity checkpoint — October15,02:58UTC:
   no additive inflation of overlapping711/57 baseline totals.
 - Publicv73/Site64 unchanged. Human0/11 and broad gatesOPEN; goalACTIVE. Root
   owns all source again; alignment read-only first-slice recommendation pending.
+
+
+v74 challenge briefing source checkpoint — October15,02:58UTC:
+
+- Alignment reviewed actual first-slice content: optional TEAM PLAN already
+  explains practice teams, but mandatory Scott fight starts without roster/level
+  preview or confirmation once relaystage3 is reached. Root accepts one scoped
+  improvement: four short native briefing pages followed by Yes/No on existing
+  talk-to-Scott path. No returns control; Yes uses unchanged trainer battle.
+- Briefing names actual TrolleyKit6/Puddleprig7/Hushmoth8, Reflect's physical
+  reduction, existing special-move alternatives, Brinepup's Electric/Grass
+  threats, and eastward clinic access. Pinned normal-font widths138..199px
+  fit202px interior; actual rendering still requires inspection. No roster,
+  stats, items, levels, map, sightline, reward or battle rule change.
+- Source-onlyv74 proposal is not yet built or deployed. Actual old-stage3
+  decline/repeat-decline/movement/save preservation, Yes→original introduction,
+  compiled trainer/team preservation and browser interaction remain required.
+  Human0/11; publicv73/Site64, goalACTIVE. Alignment last exchange02:57UTC,
+  next by03:27UTC; read-only control-flow/data-comparison review due03:17UTC.
