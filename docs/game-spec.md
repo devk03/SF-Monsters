@@ -8550,3 +8550,16 @@ Native South Park density checks — October15,06:48UTC:
   frozen; two accepted house cards plus native mirrored variant add90unique tiles,
   leaving491..503 free and504..511 reserved for doors. Sunset is not integrated,
   built, deployed or human-approved. Alignment owns the independent gate/tests.
+
+Independent Sunset density gate — October15,06:55UTC:
+
+- Alignment handed back a194-line independent compiled auditor. Root reviewed it
+  and reran all9 linked/provenance tests: pass. Positive ARM Thumb fixture checks
+ 227/227, including45map changes/36new solid cells, all new pixels/flipwords,
+  gray foundations,37layer roles, exact401tile/194record legacy prefixes,
+  unchanged General resources, active palette safety, wave callback/cadence/VRAM
+  and apartment door/cache bindings. Opaque inherited payloads remain private.
+- Added bounded reader names for these exact resources and normalized STT_FUNC
+  Thumb pointer bits before file reads. Existing12creature reader checks and
+  all9South Park density fault tests pass. Actual Sunset normal compilation,
+  geometry upgrade recovery, runtime visuals and human approval remain pending.

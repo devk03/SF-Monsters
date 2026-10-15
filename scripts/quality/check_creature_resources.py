@@ -68,7 +68,7 @@ class Cartridge:
                 raise ValueError('Invalid ELF symbol string table')
             names = self.elf[strings[4]:strings[4] + strings[5]]
             for index in range(offset, offset + capacity, 16):
-                name_index, address, length, _, _, section_index = struct.unpack_from('<IIIBBH', self.elf, index)
+                name_index, address, length, info, _, section_index = struct.unpack_from('<IIIBBH', self.elf, index)
                 if section_index == 0:  # Undefined symbols are not resource definitions.
                     continue
                 end = names.find(b'\x00', name_index)
@@ -100,12 +100,22 @@ class Cartridge:
                         'gTilesetTiles_SFParkFrontage', 'gTilesetPalettes_SFParkFrontage',
                         'gMetatiles_SFParkFrontage', 'gMetatileAttributes_SFParkFrontage',
                         'gTileset_SFParkFrontage', 'OldaleTown_Layout', 'gTileset_SFSouthPark',
+                        'gTilesetTiles_Petalburg', 'gTilesetPalettes_Petalburg',
+                        'gMetatiles_Petalburg', 'gMetatileAttributes_Petalburg', 'gTileset_Petalburg',
+                        'gTilesetTiles_General', 'gTilesetPalettes_General',
+                        'gMetatiles_General', 'gMetatileAttributes_General', 'gTileset_General',
+                        'LittlerootTown_Layout', 'LittlerootTown_Layout_Blockdata',
+                        'LittlerootTown_Layout_Border', 'sSFCoastalWaves',
+                        'sSFDoorTiles', 'sSFDoorPalettes', 'InitTilesetAnim_General',
+                        'InitTilesetAnim_Petalburg', 'TilesetAnim_SFCoast', 'AppendTilesetAnimToBuffer',
                         'gTrainerClassNames', 'gSFBuilderClassName'):
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')
                 if name in self.symbols:
                     raise ValueError('Ambiguous resource symbol: ' + name)
+                if info & 15 == 2:  # STT_FUNC: a Thumb pointer bit is not a file-byte offset.
+                    address &= ~1
                 self.symbols[name] = (address, length or None)
         if not self.symbols:
             raise ValueError('ELF contains no defined creature resource symbols')
