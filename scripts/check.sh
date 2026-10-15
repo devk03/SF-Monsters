@@ -82,6 +82,7 @@ python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_infill_test.py
 .tools/venv/bin/python tests/park_infill_audit_test.py
 .tools/venv/bin/python tests/service_door_art_test.py
+.tools/venv/bin/python tests/connected_frontage_audit_test.py
 .tools/venv/bin/python tests/park_art_test.py
 .tools/venv/bin/python tests/park_tile_flips_test.py
 .tools/venv/bin/python tests/office_art_test.py
