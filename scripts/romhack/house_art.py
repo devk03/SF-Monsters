@@ -1,16 +1,13 @@
-"""Original Sunset facade tiles; mixed inherited sheets never leave private builds."""
+"""Original Sunset facade conversion and safe native tile allocation."""
 import hashlib
 import json
 from pathlib import Path
 import struct
-import subprocess
-import uuid
 from maps import encode_layout
-from native_resources import apply_resources, named_addresses, bounded_span
 from title_art import tiles8
 from title_creature import pack4
-from street_art import load_streets, remap_roads, FIRST_METATILE as FIRST_ROAD
-from terrain_art import load_terrain, remap_terrain, FIRST_METATILE as FIRST_TERRAIN, WAVE_TILE_START
+from street_art import FIRST_METATILE as FIRST_ROAD
+from terrain_art import FIRST_METATILE as FIRST_TERRAIN, WAVE_TILE_START
 
 ASSET = 'assets/tiles/sunset-rowhouse'
 STEMS = ('gTilesetTiles_Petalburg', 'gTilesetPalettes_Petalburg',
@@ -98,6 +95,8 @@ def compose_tiles(original, owned, metatiles, streets=None, terrain=None, varian
     reserved = ROAD_TILES if streets is None else set()
     if terrain is not None:
         reserved = set(range(WAVE_TILE_START, WAVE_TILE_START + 8))
+    if variants:
+        reserved |= set(range(504, 512))  # Native animated-door scratch tiles.
     for index in reserved:
         tiles[index * 32:index * 32 + 32] = original[index * 32:index * 32 + 32]
     pool = iter(index for index in range(count) if index not in reserved)
@@ -163,46 +162,8 @@ def compose_tiles(original, owned, metatiles, streets=None, terrain=None, varian
 
 
 def prepare_sunset_tiles(root, emerald, original):
-    from PIL import Image
-    from house_variants import load_variants, METATILE_COUNT, TILE_COUNT
-    from bootstrap import EMERALD_REVISION
-    def pinned_bytes(path):
-        return subprocess.check_output(['git', 'show', f'{EMERALD_REVISION}:{path}'], cwd=emerald)
-    variants, _ = load_streets(root)
-    terrain, _, _ = load_terrain(root)
-    records = pinned_bytes('data/tilesets/secondary/petalburg/metatiles.bin')
-    if len(records) != 144 * 16:
-        raise ValueError('Pinned Sunset metatile allocation changed.')
-    facades = load_variants(root)
-    records += bytes((METATILE_COUNT - 144) * 16)
-    graphics, _, unique = compose_tiles(bytes(TILE_COUNT * 32), (root / ASSET / 'house.4bpp').read_bytes(), records, variants, terrain, facades)
-    # Indexed PNG is a native build input. RGB palette selection is in metatiles.
-    image = Image.new('P', (128, TILE_COUNT // 16 * 8), 0)
-    image.putpalette(Image.open(root / ASSET / 'native-preview.png').getpalette())
-    for tile in range(TILE_COUNT):
-        for y in range(8):
-            for x in range(8):
-                byte = graphics[tile * 32 + y * 4 + x // 2]
-                image.putpixel((tile % 16 * 8 + x, tile // 16 * 8 + y), (byte >> ((x % 2) * 4)) & 15)
-    path = 'data/tilesets/secondary/petalburg/tiles.png'
-    image.save(emerald / path, transparency=0, bits=4)
-    header = 'src/data/tilesets/graphics.h'
-    source = original(header)
-    line = 'const u32 gTilesetTiles_Petalburg[] = INCGFX_U32("data/tilesets/secondary/petalburg/tiles.png", ".4bpp.lz", "-num_tiles 159 -Wnum_tiles");'
-    if source.count(line) != 1:
-        raise ValueError('Pinned native tileset compilation declaration changed.')
-    (emerald / header).write_text(source.replace(line, line.replace('159', str(TILE_COUNT)), 1))
-    expanded = []
-    for name, unit in (('metatiles.bin', 16), ('metatile_attributes.bin', 2)):
-        resource = 'data/tilesets/secondary/petalburg/' + name
-        raw = pinned_bytes(resource)
-        if len(raw) != 144 * unit:
-            raise ValueError('Pinned secondary native resource size changed.')
-        (emerald / resource).write_bytes(raw + bytes((METATILE_COUNT - 144) * unit))
-        expanded.append(resource)
-    if unique > TILE_COUNT:
-        raise ValueError('Original SF sheet exceeds the native tile allocation.')
-    return [path, header, *expanded]
+    from sunset_compilation import prepare
+    return prepare(root, emerald, original)
 
 
 def owned_field_attributes(original):
@@ -230,82 +191,8 @@ def owned_field_attributes(original):
 
 
 def apply_house_art(root, emerald, target):
-    from house_variants import load_variants, facade_placements, METATILE_COUNT, TILE_COUNT
-    directory = root / ASSET
-    metadata = json.loads((directory / 'conversion.json').read_text())
-    files = {name: (directory / name).read_bytes() for name in metadata['files']}
-    if any(hashlib.sha256(data).hexdigest() != metadata['files'][name] for name, data in files.items()) or \
-       hashlib.sha256((directory / 'source.png').read_bytes()).hexdigest() != metadata['source_sha256']:
-        raise ValueError('Regenerate native house assets after changing their source.')
-    work = root / '.tools' / ('house-art-' + uuid.uuid4().hex)
-    work.mkdir()
-    elf = emerald / 'sf-engine-probe.elf'
-    names = set(STEMS) | {'gTileset_Petalburg', 'gTileset_General', 'LittlerootTown_Layout',
-                         'LittlerootTown_Layout_Blockdata'}
-    addresses = named_addresses(elf, names)
-    linked_path, codec = work / 'linked.bin', work / 'native-lz'
-    subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', str(elf), str(linked_path)], check=True)
-    linked = linked_path.read_bytes()
-    layout = addresses['LittlerootTown_Layout'] - 0x08000000
-    if struct.unpack_from('<6I', linked, layout)[0:2] != (32, 32) or \
-       struct.unpack_from('<6I', linked, layout)[3:] != (addresses['LittlerootTown_Layout_Blockdata'],
-           addresses['gTileset_General'], addresses['gTileset_Petalburg']):
-        raise ValueError('Sunset must use the declared 32x32 layout and tilesets.')
-    source = emerald / 'tools/gbagfx'
-    subprocess.run(['cc', '-std=c11', '-O2', '-Wall', '-Wextra', '-Werror', '-I' + str(source),
-        str(root / 'scripts/romhack/native_lz.c'), str(source / 'lz.c'), '-o', str(codec)], check=True)
-    # Native tables are adjacent; validate capacities again through apply_resources.
-    read = lambda name, size: linked[addresses[name] - 0x08000000:addresses[name] - 0x08000000 + size]
-    packed, raw = work / 'original.lz', work / 'original.4bpp'
-    # The complete owned sheet receives its allocation through normal compilation.
-    from interface_text import symbols_from_nm
-    slots = symbols_from_nm(subprocess.check_output(['arm-none-eabi-nm', '-S', '--defined-only',
-        str(elf)], text=True), {STEMS[0]})
-    packed.write_bytes(read(STEMS[0], slots[STEMS[0]][1]))
-    subprocess.run([str(codec), 'decode', str(packed), str(raw)], check=True)
-    streets, street_palette = load_streets(root)
-    terrain, terrain_palette, _ = load_terrain(root)
-    facades = load_variants(root)
-    graphics, records, unique = compose_tiles(raw.read_bytes(), files['house.4bpp'], read(STEMS[2], METATILE_COUNT * 16), streets, terrain, facades)
-    palette, attributes = bytearray(read(STEMS[1], 512)), bytearray(read(STEMS[3], METATILE_COUNT * 2))
-    if len(files['house.gbapal']) != 32:
-        raise ValueError('House palette must contain exactly sixteen native colors.')
-    palette[320:352] = files['house.gbapal']
-    palette[352:384] = street_palette
-    palette[384:416] = terrain_palette
-    for facade in facades:
-        palette[facade['bank'] * 32:(facade['bank'] + 1) * 32] = facade['palette']
-    attributes = owned_field_attributes(attributes)
-    offset, capacity = bounded_span(addresses, 'LittlerootTown_Layout_Blockdata', 'LittlerootTown_Layout')
-    plan = json.loads((root / 'romhack/content/sunset.json').read_text())
-    house_tokens = set(''.join(HOUSE_ROWS)) | {'D'}
-    if any(tile >= 512 and token not in house_tokens | {'P'}
-           for token, (tile, _, _) in plan['legend'].items()):
-        raise ValueError('Review all Sunset secondary references before replacing unused tiles.')
-    layouts = json.loads((emerald / 'data/layouts/layouts.json').read_text())['layouts']
-    for name in json.loads((root / 'romhack/content/engine-probe.json').read_text())['maps']:
-        other = json.loads((root / 'romhack/content' / name).read_text())
-        metadata = json.loads((emerald / ('data/maps/' + other['engine_map'] + '/map.json')).read_text())
-        layout = next(entry for entry in layouts if entry['id'] == metadata['layout'])
-        if other['engine_map'] != plan['engine_map'] and layout['secondary_tileset'] == 'gTileset_Petalburg':
-            raise ValueError('A second active SF map shares the facade tileset; review its references.')
-    blocks, origins = remap_houses(plan, linked[offset:offset + capacity])
-    placements = facade_placements(plan, origins, facades)
-    blocks, _ = remap_houses(plan, linked[offset:offset + capacity], placements)
-    blocks, road_counts = remap_roads(plan, blocks)
-    blocks, terrain_counts = remap_terrain(plan, blocks)
-    resources = [{'symbol': name, 'data': data, 'compressed': index == 0}
-                 for index, (name, data) in enumerate(zip(STEMS, (graphics, bytes(palette), records, bytes(attributes))))]
-    resources.append({'symbol': 'LittlerootTown_Layout_Blockdata',
-                      'end_symbol': 'LittlerootTown_Layout', 'data': blocks})
-    return {'resources': apply_resources(root, emerald, target, resources), 'origins': origins,
-            'unique_tiles': unique, 'native_size': [80, 80], 'collision_elevation_preserved': True,
-            'street_variants': road_counts, 'terrain_variants': terrain_counts, 'secondary_tiles': TILE_COUNT,
-            'architectural_variants': [{'name': item['name'], 'first_metatile': item['first'],
-                'palette_bank': item['bank'], 'placements': [list(origin) for origin, first in placements.items()
-                    if first == item['first']]} for item in facades],
-            'enterable_apartment': True, 'decorative_houses': 5,
-            'door_animation': 'three original stages; native opening/closing timing', 'quality_approval': 'pending'}
+    from sunset_compilation import verify
+    return verify(root, emerald, target)
 
 
 if __name__ == '__main__':

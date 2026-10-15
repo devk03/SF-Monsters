@@ -62,6 +62,7 @@ python3 tests/title_song_overlay_test.py
 python3 tests/house_art_test.py
 .tools/venv/bin/python tests/sunset_density_test.py
 .tools/venv/bin/python tests/sunset_density_audit_test.py
+.tools/venv/bin/python tests/sunset_compilation_test.py
 .tools/venv/bin/python tests/courier_art_test.py
 .tools/venv/bin/python tests/courier_battle_art_test.py
 .tools/venv/bin/python tests/cast_art_test.py

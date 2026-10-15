@@ -8614,3 +8614,18 @@ Sunset normal-compilation preparation — October15,07:01UTC:
 - Production pipeline integration/build/native recovery remain next. Existing
   roads/collision are preserved outside the36declared new solid cells; the receipt
   explicitly distinguishes that scoped guarantee from preserving all collision.
+
+Sunset density production integration — October15,07:04UTC:
+
+- v80source now places three compact homes on the declared empty eastern lots,
+ 6→9Sunset buildings. All36new walls have gray foundations;9approach cells join
+  the new homes to the ground. Actual roads, old homes, apartment door, all events
+  and coastal animation stay unchanged. Native visual approval is still pending.
+- Normal pipeline prepares finalized graphics, palettes, records, attributes and
+  map before make. Posthook only checks exact ROM/ELF bytes and expected original
+  resources; it performs no repair/writes. Shared header reset remains before the
+  apartment/park appenders. Pinned inputs make repeated stale-checkout builds
+  deterministic; generated private palette is excluded from tracked restore list.
+- Four density, five compilation, eight old house and14map tests pass. Normal
+  build now requires independent Sunset compiled gate and records its actual
+  counts/receipt. Full local checks and actual cartridge/native recovery are next.

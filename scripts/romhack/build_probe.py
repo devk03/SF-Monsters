@@ -19,6 +19,7 @@ from seed_door_audit import audit_seed_door
 from connected_frontage_audit import audit_connected
 from city_furniture_audit import audit_furniture
 from park_density_audit import audit_density
+from sunset_density_audit import audit_sunset_density
 from service_architecture_audit import audit_services
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
@@ -137,6 +138,16 @@ def main():
     creature_receipt = apply_title_creature(ROOT, EMERALD, target)
     song_receipt = apply_title_song(ROOT, EMERALD, target)
     house_receipt = apply_house_art(ROOT, EMERALD, target)
+    compiled_sunset = audit_sunset_density(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    sunset_bytes = (json.dumps(compiled_sunset, indent=2) + '\n').encode()
+    sunset_directory = ROOT / '.tools/romhack-validation'
+    sunset_directory.mkdir(parents=True, exist_ok=True)
+    sunset_path = sunset_directory / ('sunset-density-' + uuid.uuid4().hex + '.json')
+    with sunset_path.open('xb') as stream:
+        stream.write(sunset_bytes)
+    if compiled_sunset.get('passed') is not True:
+        raise ValueError('Compiled Sunset density failed; preserved receipt: ' + str(sunset_path))
+    print('Compiled Sunset density verified: ' + json.dumps(compiled_sunset['counts']))
     # Validate the final cartridge, not just copied PNGs or generated caches.
     # The portable ELF reader works with host and Docker-produced artifacts.
     sys.path.insert(0, str(ROOT / 'scripts/quality'))
@@ -346,6 +357,12 @@ def main():
     manifest['title_creature'] = creature_receipt
     manifest['title_song'] = song_receipt
     manifest['sunset_house'] = house_receipt
+    manifest['compiled_sunset_density'] = {
+        'passed': True, 'counts': compiled_sunset['counts'],
+        'receipt_sha256': hashlib.sha256(sunset_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/sunset_density_audit.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_sunset['scope']
+    }
     manifest['courier_apartment'] = json.loads((ROOT /
         'assets/tiles/courier-apartment/conversion.json').read_text())
     manifest['courier_battle'] = json.loads((ROOT /
