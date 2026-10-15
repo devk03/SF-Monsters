@@ -8322,3 +8322,15 @@ Compiled service and native return checks — October15,05:23UTC:
 - Native return screenshots show the candidate entrances. These checks establish
   scoped functionality and resource integrity; animation quality, full-map
   collision, ordinary resave/reload, browser and human comparisons remain open.
+
+Release metadata correction — October15,05:29UTC:
+
+- Gated rebuild reproduces targete5a58e40 with connected135/135 and service278/278.
+  The existing private immutable manifest was intentionally retained by the
+  builder, so it still described the first source59c0a46 and lacked the later
+  service gate. It is not the final publication manifest.
+- Corrected the builder's institutional-door provenance to the actual installed
+  service-door-v2 and added consumed connected/service source receipts. Preserve
+  the first private manifest, then generate a fresh canonical manifest through
+  the normal gated build. Cartridge bytes and validated native captures stay
+  unchanged; do not manually relabel old capture provenance.

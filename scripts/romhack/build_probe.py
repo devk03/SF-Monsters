@@ -342,7 +342,11 @@ def main():
             zip(('tiles', 'metatiles', 'attributes', 'palettes'),
                 (park_raw, park_records, park_attributes, park_palettes))}}
     manifest['south_park_doors'] = json.loads((ROOT /
-        'assets/tiles/south-park-doors/conversion.json').read_text())
+        'assets/tiles/service-door-v2/conversion.json').read_text())
+    manifest['connected_frontage'] = json.loads((ROOT /
+        'assets/tiles/connected-frontage-v3/conversion.json').read_text())
+    manifest['south_park_services'] = json.loads((ROOT /
+        'assets/tiles/south-park-services-v3/conversion.json').read_text())
     if args.fixture:
         manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
                                'campaign_progress_evidence': False}
