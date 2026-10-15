@@ -554,9 +554,14 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 04:37 UTC:
+Current checkpoint — October 15, 2026, 04:48 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v76 / Site 67 is live.
+- Goal active; stop October 15 at 18:00 Pacific. Public v76 / Site 67 is live,
+  but the user rejected the frontage art: buildings still do not fit the scene.
+  Rail-like base strips do not solve inconsistent projection or pixel scale.
+  Stop further strip/shadow patches; prototype one complete connected block
+  with consistent roof depth, door scale, foundations and adjacent gray paving.
+  No human quality approval or numeric score was received.
   Native release source e4685806; website source d5ef93ec. Human approvals 0/11.
   Gray paving now meets original shallow foundations/stoops in44walkablecells;
   native/browser entries/returns and ordinary-save compatibility pass their
@@ -8167,3 +8172,18 @@ v76 public foundation/stoop release — October15,04:37UTC:
   diagnostic is rejected forperformance; earlier10secsmoke does not override
   either600secfailure. GoalACTIVE; nextworkpairedgroundintegrationreview and
   remainingpolish. No numeric/art/full-domain approval inferred, human0/11.
+
+Human frontage rejection — October 15, 04:48 UTC:
+
+- User: "it still looks ass, buildings dont look like they fit in". The supplied
+  public-v76 screenshot shows disconnected rail-like strips under four facades.
+  Facades also have thin roof planes, inconsistent feature scale and frontal
+  perspective against top-down paving. Published v76 is a rejected art candidate.
+- Stopped the planned v77 service-shadow approach before producer integration.
+  Alignment chat handed back two incomplete, untested auditor edits; root saved
+  those drafts privately and restored committed v76 auditors. No passing gate
+  is claimed for those drafts. The exported original-only baseline-v76 remains
+  preserved but is not an accepted visual reference.
+- Next experiment: one whole original connected frontage at native pixel scale,
+  including roof/wall/entry/ground transitions, then actual in-game inspection.
+  All existing human acceptance gates remain open.
