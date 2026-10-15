@@ -157,7 +157,8 @@ class NativeTileFlips(unittest.TestCase):
             words = struct.unpack('<'+'H'*(len(records)//2), records)
             self.assertLessEqual(max(word & 0x3ff for word in words), 1015)
 
-    def test_released_pixels_preserved_except_exact_authored_lawn_replacements(self):
+    def test_released_pixels_preserved_except_checked_lawn_paving_and_service_art(self):
+        from PIL import Image
         from terrain_art import load_native_grass
         from park_paving import load_paving
         raw, records, attributes, palettes = park_resources(ROOT)
@@ -165,6 +166,10 @@ class NativeTileFlips(unittest.TestCase):
         baseline = ROOT/'assets/tiles/south-park-paving-v1/baseline-v74'
         old_paving_raw = (baseline/'tiles.4bpp').read_bytes()
         old_paving_records = (baseline/'metatiles.bin').read_bytes()
+        service_frames=[Image.open(ROOT/'assets/tiles/south-park-services-v3'/(name+'.png')).tobytes()
+                        for name in ('warehouse','clinic')]
+        door_frames=[(ROOT/'assets/tiles/service-door-v2'/(name+'.indices')).read_bytes()[:512]
+                     for name in ('warehouse','clinic')]
         current_grass, _ = load_native_grass(ROOT/'assets/tiles/sunset-terrain')
         old_grass = json.loads((ROOT/'tests/fixtures/coastal-lawn-v56.json').read_text())
         self.assertEqual(old_grass['source_sha256'],
@@ -185,6 +190,21 @@ class NativeTileFlips(unittest.TestCase):
                 previous_word = struct.unpack_from('<H',old_paving_records,offset*2)[0]
                 pixels = decode_tile(old_paving_raw, previous_word)
                 bank = previous_word >> 12
+            if 40<=cell<110 and layer_quadrant>=4:
+                card=(cell-40)//35;local=(cell-40)%35
+                if cell in (64,71,99,106):
+                    top=0 if cell in (64,99) else 16
+                    expected=door_frames[card][top*16:(top+16)*16]
+                else:
+                    left,top=local%7*16,local//7*16
+                    expected=b''.join(service_frames[card][y*112+left:y*112+left+16]
+                                      for y in range(top,top+16))
+                self.assertEqual(bank,8+card)
+                self.assertEqual(pixels,quadrant(expected,layer_quadrant-4))
+                # Normalize only after the newly requested service pixels pass;
+                # the original whole-render oracle still protects every other cell.
+                previous_word=struct.unpack_from('<H',old_paving_records,offset*2)[0]
+                pixels=decode_tile(old_paving_raw,previous_word);bank=previous_word>>12
             if cell in (20, 32, 33) and layer_quadrant >= 4:
                 lawn = cell - 20
                 self.assertEqual(word >> 12, 7)
@@ -201,6 +221,10 @@ class NativeTileFlips(unittest.TestCase):
                          '6bc89718054757ea9191edc3af602b745a9655c6447711031be2bdc255624485')
         # New lavender facade occupies previously unused bank12 only.
         old_palettes = palettes[:384] + bytes(32) + palettes[416:]
+        self.assertEqual(palettes[256:320],
+                         (ROOT/'assets/tiles/south-park-services-v3/building-palettes.gbapal').read_bytes())
+        original_palette=(baseline/'palettes.gbapal').read_bytes()
+        old_palettes=old_palettes[:256]+original_palette[256:320]+old_palettes[320:]
         self.assertEqual(hashlib.sha256(old_palettes).hexdigest(),
                          '19aa2722f040f2d30e65c33f80bcf6c9681947e0612f4e8cb2e0ce4a742598af')
         self.assertLessEqual(len(raw)//32, 504)

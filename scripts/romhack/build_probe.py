@@ -16,7 +16,7 @@ from field_journal import apply_field_journal
 from city_map import apply_city_map
 from city_map_audit import audit_city_map
 from seed_door_audit import audit_seed_door
-from park_infill_audit import audit_infill
+from connected_frontage_audit import audit_connected
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
@@ -190,14 +190,14 @@ def main():
     if compiled_portraits.get('passed') is not True:
         raise ValueError('Compiled trainer portraits failed; preserved receipt: ' + str(portrait_path))
     print('Compiled trainer portraits verified: ' + json.dumps(compiled_portraits['counts']))
-    compiled_infill = audit_infill(target, EMERALD / 'sf-engine-probe.elf', ROOT)
-    infill_bytes = (json.dumps(compiled_infill, indent=2) + '\n').encode()
-    infill_path = validation_directory / ('park-infill-' + uuid.uuid4().hex + '.json')
+    compiled_connected = audit_connected(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    infill_bytes = (json.dumps(compiled_connected, indent=2) + '\n').encode()
+    infill_path = validation_directory / ('connected-frontage-' + uuid.uuid4().hex + '.json')
     with infill_path.open('xb') as stream:
         stream.write(infill_bytes)
-    if compiled_infill.get('passed') is not True:
-        raise ValueError('Compiled park infill failed; preserved receipt: ' + str(infill_path))
-    print('Compiled park infill verified: ' + json.dumps(compiled_infill['counts']))
+    if compiled_connected.get('passed') is not True:
+        raise ValueError('Compiled connected frontage failed; preserved receipt: ' + str(infill_path))
+    print('Compiled connected frontage verified: ' + json.dumps(compiled_connected['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -252,11 +252,11 @@ def main():
         'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/city_map_audit.py').read_bytes()).hexdigest(),
         'quality_approval': 'pending', 'scope': compiled_map['scope']
     }
-    manifest['compiled_park_infill'] = {
-        'passed': True, 'counts': compiled_infill['counts'],
+    manifest['compiled_connected_frontage'] = {
+        'passed': True, 'counts': compiled_connected['counts'],
         'receipt_sha256': hashlib.sha256(infill_bytes).hexdigest(),
-        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/park_infill_audit.py').read_bytes()).hexdigest(),
-        'quality_approval': 'pending', 'scope': compiled_infill['scope']
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/connected_frontage_audit.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_connected['scope']
     }
     manifest['compiled_seed_door'] = {
         'passed': True, 'counts': compiled_seed_door['counts'],

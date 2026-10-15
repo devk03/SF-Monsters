@@ -6,6 +6,7 @@ from seed_door_art import load as load_seed_door, ASSET as SEED_DOOR_ASSET
 import shutil
 import struct
 from door_art import native_frames
+from service_door_art import load as load_service_doors, ASSET as SERVICE_DOORS
 
 ASSET = 'assets/tiles/south-park-doors'
 
@@ -47,13 +48,8 @@ def encode_park_doors(root):
 
 
 def apply_park_doors(root, engine):
-    directory = root / ASSET
-    metadata = json.loads((directory / 'conversion.json').read_text())
-    if hashlib.sha256((directory / 'source.png').read_bytes()).hexdigest() != metadata['source_sha256'] or \
-       hashlib.sha256((root / 'assets/tiles/south-park-buildings/building-palettes.gbapal').read_bytes()).hexdigest() != metadata['palette_sha256'] or \
-       any(hashlib.sha256((directory / name).read_bytes()).hexdigest() != digest
-           for name, digest in metadata['files'].items()):
-        raise ValueError('Regenerate institutional door frames after art or palette changes.')
+    directory = root / SERVICE_DOORS
+    load_service_doors(root)
     for name in ('warehouse', 'clinic'):
         if (directory / (name + '.4bpp')).stat().st_size != 768:
             raise ValueError('Each native institutional door needs three 256-byte stages.')

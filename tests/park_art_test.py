@@ -194,14 +194,11 @@ class ParkResources(unittest.TestCase):
             for x, token in enumerate(row):
                 native_tile = park_tile(plan, x, y)
                 if native_tile < 512:
-                    if token=='P':
-                        from park_infill import APRON_ROWS
-                        points={(left+i,top) for left,top,ids in APRON_ROWS for i in range(len(ids))}
-                        self.assertIn((x,y),points)
-                        self.assertIn(native_tile,range(54,65))
-                        self.assertEqual(plan['legend'][token],[699,False,3])
+                    if 18<=x<29 and 2<=y<7:
+                        self.assertEqual(native_tile,65+(y-2)*11+x-18)
+                        self.assertEqual(plan['legend'][token][1:],[False,3] if y==6 else [True,0])
                     else:
-                        self.assertIn(token, 'WXYZ')
+                        self.assertIn(token, 'WXY')
                     continue  # New primary resources have separate exact pixel/attribute checks.
                 tile = native_tile - 512
                 self.assertIn(tile, range(150))
@@ -304,7 +301,7 @@ class ParkResources(unittest.TestCase):
             'dest_map': 'MAP_OLDALE_TOWN_HOUSE1', 'dest_warp_id': '0'})
         self.assertTrue(plan['legend'][plan['rows'][5][25]][1])
         self.assertFalse(plan['legend'][plan['rows'][16][16]][1])
-        self.assertEqual(park_tile(plan, 25, 5), 645)
+        self.assertEqual(park_tile(plan, 25, 5), 105)  # Same blocked wall, connected artwork.
         self.assertEqual(plan['legend']['q'], [661, True, 0])
         for point in ((16,17),(17,17)):
             self.assertEqual(plan['rows'][point[1]][point[0]], 'P')

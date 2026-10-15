@@ -6,6 +6,7 @@ from title_art import tiles8
 from title_creature import pack4
 from park_paving import load_paving_palette
 from sidewalk_thresholds import load as load_thresholds
+from connected_frontage import load as load_connected
 
 # token, name, left, top, width, height, first native metatile
 PLACEMENTS = (('W', 'brick', 2, 1, 3, 5, 1),
@@ -13,23 +14,22 @@ PLACEMENTS = (('W', 'brick', 2, 1, 3, 5, 1),
               ('Y', 'sandstone', 2, 20, 3, 5, 31),
               ('Z', 'coffee', 21, 2, 2, 4, 46))
 APRON_CARDS = (('brick',54),('sage',57),('bay',60),('coffee',63))
-APRON_ROWS = ((2,6,(60,61,62)), (2,17,(57,58,59)), (2,25,(54,55,56)),
-              (21,6,(63,64)), (18,6,(60,61,62)), (23,6,(60,61,62)),
-              (26,6,(60,61,62)), (11,17,(60,61,62,60,61,62)),
-              (11,24,(60,61,62,60,61,62)),
-              (11,6,(54,54,55,56,56,56)), (30,6,(54,54,55,56,56,56)))
-METATILE_COUNT = 65
+METATILE_COUNT = 120
 
 
-def apron_tile(plan,x,y):
+def connected_tile(plan,x,y):
     if plan.get('tilesets',{}).get('primary')!='gTileset_SFParkFrontage':
-        return None  # Historical map/resource comparisons have no aprons.
-    for left,top,tiles in APRON_ROWS:
-        if y==top and left<=x<left+len(tiles):
-            if plan['rows'][y][x]!='P' or plan['legend']['P'] != [699,False,3]:
-                raise ValueError('Thresholds require existing walkable elevation3 paving.')
-            return tiles[x-left]
-    return None
+        return None
+    if not (18<=x<29 and 2<=y<7):
+        return None
+    rows=('abcZZabcabc','defZZdefdef','ghfZZghfghf','ijfZZijfijf','P'*11)
+    if plan['rows'][y][18:29] != rows[y-2]:
+        raise ValueError('Connected frontage must retain its existing map footprint.')
+    token=plan['rows'][y][x]
+    expected=[699,False,3] if y==6 else [plan['legend'][token][0],True,0]
+    if plan['legend'][token] != expected:
+        raise ValueError('Connected frontage must preserve blocked walls and walkable elevation3 approach.')
+    return 65+(y-2)*11+x-18
 
 
 def infill_tile(plan, x, y):
@@ -105,6 +105,13 @@ def resources(root, secondary_records):
             pixels=b''.join(pixels[y*card['width']:(y+1)*card['width']][::-1] for y in range(16))
         for pixels,bank in facade_cells(pixels,card['width'],16,5):
             append_cell(pixels,bank,0x1000)
+    # Retain the old original-art prefix for independent preservation checks.
+    # Its detached apron records are unused by the map. One complete connected
+    # scene supplies architecture; transparent approach pixels reveal paving.
+    pixels,palette=load_connected(root,'v3')
+    palettes[160:192]=palette
+    for index,(cell,bank) in enumerate(facade_cells(pixels,176,80,5)):
+        append_cell(cell,bank,0x1000 if index//11>=3 else 0)
     if len(records) != METATILE_COUNT*16 or len(attributes) != METATILE_COUNT*2:
         raise ValueError('Original primary frontage table allocation changed.')
     return bytes(raw), bytes(records), bytes(attributes), bytes(palettes)

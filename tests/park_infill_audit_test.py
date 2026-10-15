@@ -22,11 +22,11 @@ CARDS=(('brick',2,1,3,5,1,0),('sage',2,12,3,5,16,1),
 
 
 def fixture():
-    # Only the secondary resources use their existing source compiler.
-    # Primary pixels, words, pointers and map cells below are serialized here.
-    # The independent auditor checks the exact decoded paving delta.
-    from park_map import park_resources
-    secondary,old_records,old_attrs,old_palette=park_resources(ROOT)
+    # This remains a historical v76 audit. Freeze its original secondary bytes
+    # while the current producer installs the user-requested architectural art.
+    frozen=ROOT/'assets/tiles/connected-frontage-v3/baseline-v76'
+    secondary,old_records,old_attrs,old_palette=((frozen/name).read_bytes() for name in
+        ('secondary.4bpp','secondary-metatiles.bin','secondary-attributes.bin','secondary-palettes.gbapal'))
     sidewalk=old_records[19*16+8:20*16]
     baseline=ROOT/'assets/tiles/sidewalk-thresholds-v1/baseline-v75'
     tiles=bytearray((baseline/'primary.4bpp').read_bytes())

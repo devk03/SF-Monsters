@@ -8278,3 +8278,25 @@ Independent connected-block gate — October15,05:12UTC:
   exact1280-word map delta with collision/elevation preserved. Native cache
   slots remain reserved. It does not approve service art, animated entries,
   saves, browser timing or user quality. Actual normal compiled build is pending.
+
+Connected-street source integration — October15,05:20UTC:
+
+- Normal producer now installs connected-frontage-v3 at the existing55-cell
+  northern footprint, retires all44 detached apron bindings, and supplies
+  simpler service-v3 facades. Static service entrances use exactly the closed
+  frame of service-door-v2. All collision/elevation fields, event positions,
+  native service IDs and door timing stay unchanged. Source allocations are
+ 395primary/476secondary tiles,120/150 metatiles; native door cache is reserved.
+- Replaced the live compiled infill gate with the independent connected audit.
+  Historical v76 audit tests now use frozen original-only v76 secondary bytes;
+  their old contract remains tested. Existing full-render regression normalizes
+  only newly verified service pixels/palettes before protecting every other
+  older pixel. New art remains a candidate rather than accepted quality.
+- bash scripts/check.sh passes in full, including source/linked resource guards,
+  native door cases and TypeScript. The initial direct invocation was not
+  executable (exit126); rerunning through bash succeeded without a code change.
+  Preserved successful log .tools/check-v77-connected-second.log SHA
+c0197ddd4fd29387e227e8d910af2df2e461435047fbb0951b00cd074318adcf.
+- Normal v77 cartridge build and actual animated entries/returns/cache/save/browser
+  checks are next. A separate independent service/door compiled audit is being
+  completed by the alignment chat. Public v76 remains unchanged and rejected.

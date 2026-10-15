@@ -10,7 +10,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/romhack'))
 from park_frontage import load
-from park_infill import PLACEMENTS, APRON_ROWS, APRON_CARDS, previous_plan, resources
+from park_infill import PLACEMENTS, APRON_CARDS, previous_plan, resources
 from park_map import park_resources, park_tile
 from sidewalk_thresholds import load as load_thresholds
 
@@ -41,14 +41,16 @@ class PrimaryInfill(unittest.TestCase):
         self.assertEqual(cells,actual)
         for x,y in cells:
             self.assertEqual(plan['legend'][plan['rows'][y][x]],[0,True,0])
-            self.assertIn(park_tile(plan,x,y),range(1,54))
-        aprons={(left+i,top) for left,top,tiles in APRON_ROWS for i in range(len(tiles))}
-        self.assertEqual(len(aprons),44)
+            if 21<=x<=22 and 2<=y<=5:
+                self.assertEqual(park_tile(plan,x,y),65+(y-2)*11+x-18)
+            else:self.assertIn(park_tile(plan,x,y),range(1,54))
+        aprons={(x,6) for x in range(18,29)}
+        self.assertEqual(len(aprons),11)
         self.assertFalse(aprons&cells)
         for x,y in aprons:
             self.assertEqual(plan['rows'][y][x],'P')
             self.assertEqual(plan['legend']['P'],[699,False,3])
-            self.assertIn(park_tile(plan,x,y),range(54,65))
+            self.assertEqual(park_tile(plan,x,y),109+x-18)
         for x,y in reachable(old)-cells-aprons:
             self.assertEqual(park_tile(plan,x,y),park_tile(old,x,y))
         self.assertEqual(reachable(old)-cells,reachable(plan))
@@ -64,12 +66,12 @@ class PrimaryInfill(unittest.TestCase):
     def test_all_primary_cells_decode_exact_pixels_palette_underlay_and_priority(self):
         secondary = park_resources(ROOT);raw,records,attrs,palettes = resources(ROOT,secondary[1])
         self.assertEqual((len(raw)//32,len(records)//16,len(attrs)//2,len(palettes)),
-                         (235,65,65,512))
+                         (395,120,120,512))
         self.assertEqual(raw[:32],bytes(32))
         self.assertEqual(palettes[128:160],
             (ROOT/'assets/tiles/south-park-paving-v1/paving.gbapal').read_bytes())
         self.assertEqual(palettes[160:192],
-            (ROOT/'assets/tiles/sidewalk-thresholds-v1/thresholds.gbapal').read_bytes())
+            (ROOT/'assets/tiles/connected-frontage-v3/block.gbapal').read_bytes())
         self.assertEqual(palettes[192:],bytes(320))
         cards = {c['name']:c for c in load(ROOT)}
         for _,name,_,_,width,height,first in PLACEMENTS:
@@ -100,7 +102,7 @@ class PrimaryInfill(unittest.TestCase):
             bad = records[:];struct.pack_into('<H',bad,19*16+8,word)
             with self.assertRaisesRegex(ValueError,'underlay'):resources(ROOT,bytes(bad))
 
-    def test_shallow_thresholds_decode_on_ground_without_replacing_existing_art(self):
+    def test_unused_historical_threshold_prefix_remains_exact(self):
         secondary=park_resources(ROOT);raw,records,attrs,palettes=resources(ROOT,secondary[1])
         cards=load_thresholds(ROOT)
         for name,first in APRON_CARDS:
@@ -124,14 +126,16 @@ class PrimaryInfill(unittest.TestCase):
                                    for y in range(16) for x in range(16))
                 self.assertEqual(bytes(pixels),expected)
                 self.assertEqual(pixels[128:],bytes(128))
+        plan=json.loads((ROOT/'romhack/content/south-park.json').read_text())
+        self.assertFalse(any(54<=park_tile(plan,x,y)<65 for y in range(32) for x in range(40)))
 
-    def test_aprons_cannot_expand_into_walls_or_change_elevation(self):
+    def test_connected_approach_cannot_change_collision_or_elevation(self):
         from copy import deepcopy
         plan=json.loads((ROOT/'romhack/content/south-park.json').read_text())
         for blocked in (True,False):
             changed=deepcopy(plan)
             changed['legend']['P']=[699,blocked,0]
-            with self.assertRaisesRegex(ValueError,'walkable elevation3'):park_tile(changed,3,6)
+            with self.assertRaisesRegex(ValueError,'walkable elevation3'):park_tile(changed,18,6)
 
 
 if __name__ == '__main__':

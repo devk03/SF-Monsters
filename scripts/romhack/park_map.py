@@ -11,8 +11,10 @@ from maps import encode_layout
 from house_variants import load_variants
 from park_signs import sign_cells
 from seed_door_art import load as load_seed_door
-from park_infill import infill_tile, apron_tile, apply as apply_infill
+from park_infill import infill_tile, connected_tile, apply as apply_infill
 from park_paving import load_paving
+from service_architecture import load as load_services
+from service_door_art import load as load_service_doors
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -52,7 +54,7 @@ def park_resources(root):
        hashlib.sha256(terrain_palette).hexdigest() != metadata['palette_sha256']:
         raise ValueError('Regenerate the original park furnishings after changes.')
     terrain[8], terrain[9] = furniture[512:], furniture[256:512]
-    frames, building_palettes = load_buildings(root)
+    frames, building_palettes = load_services(root,'v3')
     cells = [(cell, 4 if index in (16,19) else 6) for index,cell in
              enumerate(streets + [rotate_pixels(streets[15], 1), streets[16]])]
     flags = [0x1000] * 20
@@ -64,6 +66,10 @@ def park_resources(root):
     for first in (68, 103):
         flags[first:first + 7] = [0x1000] * 7
     flags[71] = flags[106] = 0x1069  # Original frames use native animated door behavior.
+    doors=load_service_doors(root)
+    for name,upper,lower,bank in (('warehouse',64,71,8),('clinic',99,106,9)):
+        # The exact closed animation frame also supplies the static facade.
+        cells[upper],cells[lower]=facade_cells(doors[name][0],16,32,bank)
     annex = Image.open(root / 'assets/tiles/sunset-rowhouse/native-preview.png').resize(
         (48, 64), Image.Resampling.NEAREST).tobytes()
     cells += facade_cells(annex, 48, 64, 10); flags += [0] * 12
@@ -103,6 +109,9 @@ def park_resources(root):
 
 
 def park_tile(plan, x, y):
+    connected=connected_tile(plan,x,y)
+    if connected is not None:
+        return connected
     token = plan['rows'][y][x]
     if token in 'WXYZ':
         return infill_tile(plan, x, y)
@@ -118,8 +127,7 @@ def park_tile(plan, x, y):
     if token in 'Qq':
         return 660 if token == 'Q' else 661
     if token == 'P':
-        apron=apron_tile(plan,x,y)
-        return 531 if apron is None else apron
+        return 531
     if token == '.':
         return 532 + (0, 12, 13)[(x * 17 + y * 11) % 3]
     if token in 'GB#T':

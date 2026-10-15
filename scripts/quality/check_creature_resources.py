@@ -85,6 +85,8 @@ class Cartridge:
                         'sSpriteTemplate_NewGameBirch', 'gObjectEventGraphicsInfoPointers',
                         'gRegionMapEntries', 'sRegionMap_MapSectionLayout',
                         'sSFHabitatMapIds', 'sSFRegionMapParents', 'sDoorAnimGraphicsTable',
+                        'sSFParkWarehouseDoor', 'sSFParkClinicDoor',
+                        'sSFParkWarehousePalette', 'sSFParkClinicPalette',
                         'gTilesetTiles_SFSouthPark', 'gTilesetPalettes_SFSouthPark',
                         'gMetatiles_SFSouthPark', 'gMetatileAttributes_SFSouthPark',
                         'OldaleTown_Layout_Blockdata',
