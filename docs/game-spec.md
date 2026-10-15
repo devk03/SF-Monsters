@@ -8300,3 +8300,25 @@ c0197ddd4fd29387e227e8d910af2df2e461435047fbb0951b00cd074318adcf.
 - Normal v77 cartridge build and actual animated entries/returns/cache/save/browser
   checks are next. A separate independent service/door compiled audit is being
   completed by the alignment chat. Public v76 remains unchanged and rejected.
+
+Compiled service and native return checks — October15,05:23UTC:
+
+- First normal v77 target is e5a58e40fcc3f3c6ef4763eb15755ba23236bdb68edbf339a997546c011b8c73
+  from committed59c0a46. Connected compiled135/135 and all preceding resource
+  gates pass; exact base-ROM/BPS roundtrip passes. Still a private draft.
+- New independent service/door gate passes278/278 on that actual ROM/ELF. Root
+  also reran11 independent fault tests, all pass in22.477s. Source body pixels,
+  static/animated joins, six stages, palette selectors, all150 foregrounds,
+ 110 gray underlays and native registrations are checked independently. Proof
+  .tools/benchmarks/connected-v77-plan/service-compiled-audit.json SHA
+  a4e1affc8a212aa2772b57c3895b5a8efd3e23651b74a81c8eeb045a26510774.
+  The normal build now requires this gate before creating a BPS.
+- Actual controller-only office, clinic and seed-room entry/return positions pass;
+  each return has all395 primary/476 secondary tiles and13 palette banks exact,
+  with ordinary Flash unchanged. Door/cache proof SHA
+ 741e8fa5f691d3775c2ed6c22d0926f81ab373024f60b6ff9955fb88767f1fc2.
+  Four native front pushes stop at20/22/25/28,6, outside houses; proof SHA
+ 4ef6104a7a33b3f996ce33505b773851ec494fe38ec8a8fa7fa76417ea5ffa76.
+- Native return screenshots show the candidate entrances. These checks establish
+  scoped functionality and resource integrity; animation quality, full-map
+  collision, ordinary resave/reload, browser and human comparisons remain open.

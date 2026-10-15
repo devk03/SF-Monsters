@@ -17,6 +17,7 @@ from city_map import apply_city_map
 from city_map_audit import audit_city_map
 from seed_door_audit import audit_seed_door
 from connected_frontage_audit import audit_connected
+from service_architecture_audit import audit_services
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
@@ -198,6 +199,14 @@ def main():
     if compiled_connected.get('passed') is not True:
         raise ValueError('Compiled connected frontage failed; preserved receipt: ' + str(infill_path))
     print('Compiled connected frontage verified: ' + json.dumps(compiled_connected['counts']))
+    compiled_services = audit_services(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    service_bytes = (json.dumps(compiled_services, indent=2) + '\n').encode()
+    service_path = validation_directory / ('service-architecture-' + uuid.uuid4().hex + '.json')
+    with service_path.open('xb') as stream:
+        stream.write(service_bytes)
+    if compiled_services.get('passed') is not True:
+        raise ValueError('Compiled service architecture failed; preserved receipt: ' + str(service_path))
+    print('Compiled service architecture verified: ' + json.dumps(compiled_services['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -257,6 +266,12 @@ def main():
         'receipt_sha256': hashlib.sha256(infill_bytes).hexdigest(),
         'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/connected_frontage_audit.py').read_bytes()).hexdigest(),
         'quality_approval': 'pending', 'scope': compiled_connected['scope']
+    }
+    manifest['compiled_service_architecture'] = {
+        'passed': True, 'counts': compiled_services['counts'],
+        'receipt_sha256': hashlib.sha256(service_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/service_architecture_audit.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_services['scope']
     }
     manifest['compiled_seed_door'] = {
         'passed': True, 'counts': compiled_seed_door['counts'],
