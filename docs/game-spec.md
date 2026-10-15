@@ -8356,3 +8356,14 @@ Connected-street release and latest review — October15,05:45UTC:
 - Alignment chat assigned a bounded20minute read-only placement/collision audit.
   No new city art or collision changes installed yet. Public v77 is the honest
   checkpoint; original overly detailed architecture is not the target style.
+
+City furnishing originals — October15,05:50UTC:
+
+- Created eight original small native props: lamp, meter, hydrant, bin, double
+  bike rack, tree well, bench and recycling pair. Shared palette5 preserves all
+  current colors; transparent source alpha is retained. Exact prompt and source
+  provenance are tracked in assets/tiles/city-furniture-v1. This is candidate
+  art, not an in-game quality claim.
+- Declared a reversible curbside footprint with solid feet, walkable overhead
+  cells and explicit exclusions for existing homes, service doors and events.
+  Normal producer remains unchanged until independent integration checks exist.

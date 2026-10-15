@@ -1,0 +1,131 @@
+{
+  "generator": "Built-in imagegen; original city furniture",
+  "source_sha256": "e7c7a9289c8f904c8fd30245077cd9b352d590f4abe634c86c3197edfe91cc00",
+  "prompt_sha256": "7ae91082403a47b2682607337b98927ae3446f2512fda355e0705bc6e7f655b8",
+  "reference_sha256": "bad3ee2d2370fef7279cdc6defc42f85e2cf2199093e41a1db4932bbbeb9a791",
+  "method": "Fixed original crops; proportional nearest; bottom-center alignment; alpha128; shared RGB55515",
+  "palette_sha256": "2c4864885ac0b05ef38c629d7e700df61c3a81e88633edf19604b534e7cc65bf",
+  "cards": [
+    {
+      "name": "lamp",
+      "bounds": [
+        118,
+        106,
+        292,
+        579
+      ],
+      "size": [
+        16,
+        32
+      ],
+      "indices_sha256": "4ba0cd683515cd62acce7929312edb139be5ec98350e054b386adeff85e04580",
+      "png_sha256": "ce906ae98fb395f834cb46ed020ebb6692eaa9f4d4ceccebfd31d651fe9b95e9"
+    },
+    {
+      "name": "meter",
+      "bounds": [
+        533,
+        390,
+        619,
+        578
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "indices_sha256": "1d6d352d943816f4754f234a594b60ac953e88caa20196e10abbf543578a68dd",
+      "png_sha256": "ff34c0539114e5bb830afd385a7982c67a2ea6314efd00d0cecd9643c2cd30ec"
+    },
+    {
+      "name": "hydrant",
+      "bounds": [
+        897,
+        414,
+        1027,
+        580
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "indices_sha256": "c1a0dd4a44054d9a290417feea0477e380db43d74324d2e9c6d45c46b97702dd",
+      "png_sha256": "b1f5abf7d10b22e0b495664255e4354bfd25c4425976202ac1191f744766ea54"
+    },
+    {
+      "name": "bin",
+      "bounds": [
+        1264,
+        404,
+        1394,
+        578
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "indices_sha256": "a9b58d23f38cb202481efecec82361983be4d5d7dc7d1d25f6010e6ff16e22a7",
+      "png_sha256": "800e300aaa71110a6fb426fcb68acdb4e28e71aef3309ff07c3c5440daa44d3c"
+    },
+    {
+      "name": "rack",
+      "bounds": [
+        43,
+        804,
+        353,
+        966
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "indices_sha256": "d75f4b3d9d152ab6769869d189eb142b90ec8de0e162412c2ac55aeef5d926eb",
+      "png_sha256": "d89ed0ffbe558c040f3eba89248b8bb51674f6519b56987c58c0a6c994e6f21f"
+    },
+    {
+      "name": "tree",
+      "bounds": [
+        426,
+        583,
+        720,
+        972
+      ],
+      "size": [
+        32,
+        32
+      ],
+      "indices_sha256": "dc75caed4cbad393fef6c45fd202db10900e4b5185c5fb8b3bc31b86a5648025",
+      "png_sha256": "93cd17e55a6ff83a823d0b9f3765cb50afd61c8d80da9954265dee1110c066dd"
+    },
+    {
+      "name": "bench",
+      "bounds": [
+        811,
+        802,
+        1110,
+        974
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "indices_sha256": "a025d84bc36af2a5db2127b8f42861c81d8247c03557721cca81ff5be71598c4",
+      "png_sha256": "4779bd4ebc38b8c21c6d14493f87401ba93402275e831c3b855d91413d7977c2"
+    },
+    {
+      "name": "recycling",
+      "bounds": [
+        1204,
+        797,
+        1477,
+        974
+      ],
+      "size": [
+        32,
+        16
+      ],
+      "indices_sha256": "3a570f453a54e4c2996b65a6d13657c0f499bfa85da5a1a147560e1ac74b430d",
+      "png_sha256": "7b34a210428742005656f6f5e50de5dbe189281401db57cd95a79d52b872b29a"
+    }
+  ],
+  "approval": "Candidate; native placement and human quality acceptance pending"
+}
