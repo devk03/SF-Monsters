@@ -8490,3 +8490,16 @@ Deadline override — October15,06:27UTC:
   builds or deployment; safely finish/stop operations, record honest outstanding
   gates here, commit/push authorized work without Actions and pause the goal.
   Unfinished quality/campaign gates prevent declaring completion.
+
+Independent compact-density gate — October15,06:29UTC:
+
+- Final parcels retain both x5 and x9 sidewalks. Five compact pairs fill western
+  and existing mid/lower lots; a separate coral/cream/lilac row faces the park.
+  Plan adds8 buildings,13→21, with128 declared cells/125 actual map changes:
+ 56 newly solid and9 freed cells,189 total primary map cells. Northern homes,
+  props, full seed house, park/habitat, roads and events remain unchanged.
+- Root reviewed the independent compiled gate and reran its8 linked fault tests,
+  all pass. Positive fixture checks37/37;511primary/151records/151attributes and
+  unchanged476secondary/150records. Original449/135prefixes and all palettes
+  stay exactv78;16new metatiles independently decode the original compact pair.
+  Actual native rendering/resume and full normal build are still pending.
