@@ -26,13 +26,24 @@
       "reserved_slot": "OBJ_EVENT_GFX_PROF_BIRCH",
       "script": "SF_Naval",
       "map": "sunset.json"
+    },
+    {
+      "slug": "jonathan-sunset",
+      "name": "Jonathan Liu",
+      "symbol": "SFJonathanSunset",
+      "graphics": "OBJ_EVENT_GFX_SF_JONATHAN_SUNSET",
+      "reserved_slot": "OBJ_EVENT_GFX_MAN_5",
+      "script": "SF_Jonathan",
+      "map": "sunset.json"
     }
   ],
   "outfits": "Original fictional amber-hood oracle, navy-crewneck mentor and charcoal-jacket Naval costumes.",
   "source_basis": [
     "https://roonscape.ai/",
     "https://karpathy.ai/",
-    "https://nav.al/rich"
+    "https://nav.al/rich",
+    "https://www.jonathanliu.dev/",
+    "https://github.com/jonytf"
   ],
   "quality_approval": "pending"
 }

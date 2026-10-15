@@ -231,6 +231,83 @@
         "native-gallery.png": "513bd4e23195e54356a89ea44a4550010e8498cf72eb8edf05c5df389873cb1b",
         "native-cleanup.json": "05b6a061df59bc365d9425da7db587a091b05055a5d0a32e55f050bc019e005c"
       }
+    },
+    {
+      "slug": "jonathan-sunset",
+      "name": "Jonathan Liu",
+      "symbol": "SFJonathanSunset",
+      "graphics": "OBJ_EVENT_GFX_SF_JONATHAN_SUNSET",
+      "reserved_slot": "OBJ_EVENT_GFX_MAN_5",
+      "script": "SF_Jonathan",
+      "map": "sunset.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          76,
+          78,
+          264,
+          447
+        ],
+        [
+          416,
+          78,
+          605,
+          447
+        ],
+        [
+          760,
+          78,
+          949,
+          447
+        ],
+        [
+          77,
+          569,
+          266,
+          943
+        ],
+        [
+          417,
+          569,
+          607,
+          943
+        ],
+        [
+          759,
+          569,
+          950,
+          943
+        ],
+        [
+          70,
+          1054,
+          273,
+          1445
+        ],
+        [
+          408,
+          1054,
+          613,
+          1445
+        ],
+        [
+          754,
+          1054,
+          961,
+          1445
+        ]
+      ],
+      "common_scale": 0.061381074168797956,
+      "files": {
+        "source.png": "f7b35bae7e8969e870f06de3848e6583fab8cfb1fdfa31afdc78420894d73053",
+        "walk.png": "23f1f32f49076b5ac87d94b174f81f504b9fee2886daebc2d520c3dd9954cd06",
+        "walk.4bpp": "22608ce15e310ee7ef5337366d25983a06c481a134fc4d18c0aa1cfb064c1ccb",
+        "native-gallery.png": "5375eb720b12962340fa7bda3422f3c3713714ae3888b5b9a7b6b4e715cd7c29",
+        "native-cleanup.json": "0e7d28a361db1188dbe04f8ee09426392fef5d2fb3be16e9ec4b6cefe6c4c407"
+      }
     }
   ],
   "frames_per_character": 9,

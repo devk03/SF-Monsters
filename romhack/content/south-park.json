@@ -183,7 +183,7 @@
       "id": 1,
       "x": 7,
       "y": 25,
-      "graphics": "OBJ_EVENT_GFX_MAN_5",
+      "graphics": "OBJ_EVENT_GFX_SF_JONATHAN_PARK",
       "script": "SF_Muni_Return"
     },
     {

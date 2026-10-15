@@ -42,6 +42,9 @@ class NativeTileFlips(unittest.TestCase):
         dylan = next(n for n in restored['npcs'] if n['script'] == 'SF_DylanField')
         self.assertEqual(dylan['graphics'], 'OBJ_EVENT_GFX_SF_DYLAN_FIELD')
         dylan['graphics'] = 'OBJ_EVENT_GFX_MAN_3'
+        jonathan = next(n for n in restored['npcs'] if n['script'] == 'SF_Muni_Return')
+        self.assertEqual(jonathan['graphics'], 'OBJ_EVENT_GFX_SF_JONATHAN_PARK')
+        jonathan['graphics'] = 'OBJ_EVENT_GFX_MAN_5'
         # Restore the later lower-west neighbor and its one relocated tree first.
         self.assertEqual(restored['rows'][20][19], 'T')
         row = restored['rows'][20]

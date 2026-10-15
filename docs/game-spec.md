@@ -7025,3 +7025,32 @@ v69 public neighbors/Dylan release — October15,00:24UTC:
   generic. Alignment finite20minute read-only slot/palette/publicappearance audit
   for Jonathan in both hubs ends00:45UTC; next exchangeby00:45UTC. Root continues
   first-slice polish. No new monitor/GitHubworkflow/DBmigration/PRmerge.
+
+
+v70 two-map Jonathan source checkpoint — October15,00:31UTC:
+
+- Alignment's finite slot/palette audit is complete; root implemented original
+  Jonathan art from one built-in-generated atlas, copied byte-identically to
+  sunset-cast/jonathan-sunset and south-park-cast/jonathan-park. Exact prompts
+  and public-reference notes are tracked. Ownwebsite→GitHub/X identity chain
+  verified; public avatar is private QA reference, not game art or endorsement.
+- ExistingSunsetMAN5 slot66 and previously unclaimedParkMAN4 slot65 become unique
+  map aliases. Only two event graphics fields change: Sunsetlocal8/29,22 and
+  Parklocal1/7,25. All scripts, movement, coordinates, warps, layouts and palettes
+  remain fixed. Existing generated native cache refresh handles oldPark66→65;
+  no new rendering hook, group, schema, reward or table expansion.
+- Separate indexed cleanup467Sunset/257Park corrections pins directional heads
+  and cream shirt/hood/sneakers. Sunset removes orange skin quantization using
+  existingcream15; Park retains skin and uses existingcream14. Every one of ten
+  prior native cast graphics and three sharedpalettes stays EXACT (13resource
+  aggregateaea5411ce0e5298cb9b7c36346c8337c42e353b854437e553abac1a5f3fe23c1).
+  Fifteen cast tests plus full local suite pass; humanartapproval stays pending.
+- Draftfc3fbf94ad2440fccc4d35276cb4319181508c619ea0d042e1ba59e66c109f4c
+  passes compiledcreature255/cast52/intro5/map17/door11; BPS1026706bytes private.
+  Genuinev69 ordinaryParkC11 at7,24 and SunsetC12 at28,22 recorded via walking,
+  normal MuniReturn and native Save. No RAM/battery editing. Root is checking
+  both actual old-save Continue/liveactor/ordinaryresave before browser/publication.
+- Eleven named fieldpeople now have twelve map-specific candidates; this is
+  field integration, not all trainer portraits or full art acceptance. Public
+  remainsv69/Site60, fullcampaign and acceptancegatesOPEN, humanapprovals0/11.
+  GoalACTIVE throughOctober15,18Pacific; next alignment exchangeby00:45UTC.

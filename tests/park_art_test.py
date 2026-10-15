@@ -38,6 +38,9 @@ class ParkResources(unittest.TestCase):
         dylan = next(n for n in previous['npcs'] if n['script'] == 'SF_DylanField')
         self.assertEqual(dylan['graphics'], 'OBJ_EVENT_GFX_SF_DYLAN_FIELD')
         dylan['graphics'] = 'OBJ_EVENT_GFX_MAN_3'
+        jonathan = next(n for n in previous['npcs'] if n['script'] == 'SF_Muni_Return')
+        self.assertEqual(jonathan['graphics'], 'OBJ_EVENT_GFX_SF_JONATHAN_PARK')
+        jonathan['graphics'] = 'OBJ_EVENT_GFX_MAN_5'
         # Pin the complete preceding map, including events, not just the patch.
         self.assertEqual(hashlib.sha256(json.dumps(previous, sort_keys=True,
             separators=(',', ':')).encode()).hexdigest(),

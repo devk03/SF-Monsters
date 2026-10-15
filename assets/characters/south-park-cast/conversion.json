@@ -307,6 +307,83 @@
         "native-gallery.png": "39151b261f1e67dd0370a8ec94609d9ee6298cb9b603d43bbd18a2253adb8c13",
         "native-cleanup.json": "97012a5f346b419db642827c8525e4ff4f5c5b4f4db31c093b1c1f0f19bef1b2"
       }
+    },
+    {
+      "slug": "jonathan-park",
+      "name": "Jonathan Liu",
+      "symbol": "SFJonathanPark",
+      "graphics": "OBJ_EVENT_GFX_SF_JONATHAN_PARK",
+      "reserved_slot": "OBJ_EVENT_GFX_MAN_4",
+      "script": "SF_Muni_Return",
+      "map": "south-park.json",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "source_cells": [
+        [
+          76,
+          78,
+          264,
+          447
+        ],
+        [
+          416,
+          78,
+          605,
+          447
+        ],
+        [
+          760,
+          78,
+          949,
+          447
+        ],
+        [
+          77,
+          569,
+          266,
+          943
+        ],
+        [
+          417,
+          569,
+          607,
+          943
+        ],
+        [
+          759,
+          569,
+          950,
+          943
+        ],
+        [
+          70,
+          1054,
+          273,
+          1445
+        ],
+        [
+          408,
+          1054,
+          613,
+          1445
+        ],
+        [
+          754,
+          1054,
+          961,
+          1445
+        ]
+      ],
+      "common_scale": 0.061381074168797956,
+      "files": {
+        "source.png": "f7b35bae7e8969e870f06de3848e6583fab8cfb1fdfa31afdc78420894d73053",
+        "walk.png": "5e30ebae3b976bb277a423df741fd5c6744e0054445f725b3b088dd6d856d39c",
+        "walk.4bpp": "02e751422499ce589816711b5e5619f954100edc67e4cde17e003f791e0c57cb",
+        "native-gallery.png": "6c3b8a9ebd34ec56668e882cf79bd072d5114fe0e0713fdb1b98cc7d0c4e3635",
+        "native-cleanup.json": "a6a3f08f801c48c2139ae3e514eed81eba321c0f2214f6ea090da70e98dbd5a0"
+      }
     }
   ],
   "frames_per_character": 9,

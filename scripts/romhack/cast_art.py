@@ -25,6 +25,8 @@ GROUPS = ((ASSET, 'SFCognitionCast', TAG, '0x1125'),
 # Each replacement is restricted to its named existing SF owner.
 AUTHORED_REPLACEMENTS = {'OBJ_EVENT_GFX_GENTLEMAN': ('south-park.json', 'SF_GarryTan'),
                          'OBJ_EVENT_GFX_MAN_3': ('south-park.json', 'SF_DylanField'),
+                         'OBJ_EVENT_GFX_MAN_4': ('south-park.json', 'SF_Muni_Return'),
+                         'OBJ_EVENT_GFX_MAN_5': ('sunset.json', 'SF_Jonathan'),
                          'OBJ_EVENT_GFX_SCIENTIST_1': ('sunset.json', 'SF_Karpathy'),
                          'OBJ_EVENT_GFX_PROF_BIRCH': ('sunset.json', 'SF_Naval')}
 

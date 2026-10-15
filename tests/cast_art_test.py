@@ -14,6 +14,43 @@ from cast_art import apply_cast, source_cells, GROUPS, registered_groups, verifi
 
 
 class NativeCast(unittest.TestCase):
+    def test_jonathan_addition_preserves_ten_existing_people_and_three_palettes(self):
+        groups = {'cognition-cast': ('scott-wu','steven-hao','walden-yan'),
+                  'south-park-cast': ('justine-moore','patrick-mckenzie','garry-tan','dylan-field'),
+                  'sunset-cast': ('roon','karpathy','naval')}
+        paths = []
+        for group, slugs in groups.items():
+            base = Path('assets/characters')/group
+            paths.append(base/'cast.gbapal')
+            paths += [base/slug/'walk.4bpp' for slug in slugs]
+        digest = hashlib.sha256()
+        for path in sorted(paths):
+            digest.update(str(path).encode()+b'\0'+(ROOT/path).read_bytes())
+        self.assertEqual(digest.hexdigest(),
+                         'aea5411ce0e5298cb9b7c36346c8337c42e353b854437e553abac1a5f3fe23c1')
+
+    def test_jonathan_uses_one_original_source_with_two_existing_native_palettes(self):
+        first = ROOT/'assets/characters/sunset-cast/jonathan-sunset'
+        second = ROOT/'assets/characters/south-park-cast/jonathan-park'
+        self.assertEqual((first/'source.png').read_bytes(), (second/'source.png').read_bytes())
+        self.assertEqual((first/'prompt.md').read_bytes(), (second/'prompt.md').read_bytes())
+        self.assertNotEqual((first/'walk.4bpp').read_bytes(), (second/'walk.4bpp').read_bytes())
+        for path, group, tag, symbol in ((first,'sunset-cast','0x1127','SFJonathanSunset'),
+                                          (second,'south-park-cast','0x1126','SFJonathanPark')):
+            entries, metadata = verified_cast(ROOT, 'assets/characters/'+group)
+            entry = next(e for e in entries if e['symbol']==symbol)
+            self.assertEqual(entry['name'], 'Jonathan Liu')
+            self.assertEqual(metadata['palette_tag'], tag)
+            image = Image.open(path/'native-gallery.png')
+            frames = [image.crop((i%3*16,i//3*32,i%3*16+16,i//3*32+32)).tobytes()
+                      for i in range(9)]
+            for row in range(3):
+                poses = frames[row*3:row*3+3]
+                self.assertEqual(len({p[:18*16] for p in poses}), 1)
+                self.assertEqual(len({p[18*16:] for p in poses}), 3)
+            if group=='sunset-cast':
+                self.assertTrue(all(not set(p)&set(range(1,10)) for p in frames))
+
     def test_dylan_direction_heads_stay_fixed_while_hands_and_feet_animate(self):
         image = Image.open(ROOT/'assets/characters/south-park-cast/dylan-field/native-gallery.png')
         frames = [image.crop((i%3*16,i//3*32,i%3*16+16,i//3*32+32)).tobytes()
