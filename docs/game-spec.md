@@ -554,7 +554,7 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 01:25 UTC:
+Current checkpoint — October 15, 2026, 01:45 UTC:
 
 - Goal active; stop October 15 at 18:00 Pacific. Public v71 / Site 62 is live.
   Native release source e7da69c; website source be095d2e. Human approvals 0/11.
@@ -612,8 +612,9 @@ Current checkpoint — October 15, 2026, 01:25 UTC:
   branches pass their technical scopes. Human paired art reviews remain pending.
 - Alignment confirms exact map-return gameplay preservation; native RNG and
   wandering Dylan differ. Its finite full-turn/party-sync fixture task is active,
-  with handoff due02:20UTC. Last exchange01:23UTC; next by01:53UTC. Root continues
-  first-slice polish and owns publication; peer owns only its new fixture/tests.
+  two-case handoff completed. Last exchange01:45UTC; next by02:15UTC. Root owns
+  field/browser/publication; peer owns a finite one-case priority extension,
+  due02:30UTC, and edits only its turn fixture/tests.
 
 ### 15.1 Objective and completion rule
 
@@ -837,7 +838,7 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.71-cognition-portraits-preview; target353ff5bd5adb5b52df1d6b7f1b2d68bbb7df9956ab283e4d99ca2e991937c667; Site62. Original portraits for Scott, Walden and Steven have compiled/native/browser technical checks. Eleven named fieldpeople have twelve map-specific candidates; human approvals0/11. |
-| Latest local source build | v71 normal sourcee7da69c reproduces tested353ff5bd. Compiled creature255/cast52/intro5/map17/door11/portraits26 and full local suite pass. Existing teams, moves, levels, encounters, rewards, classes, flags and Scott portrait remain unchanged. Remaining quality/performance/campaign gates are open. |
+| Latest local source build | v72 private draft1f404cb626cafde1edeb2d786d41e76471dd1a62446539dcd3e8bdea82186249 adds four original frontage cards at53 cells. Independent primary23/23 and all older compiled gates pass. All53 actual occupied-save recovery/resave cases pass. Normal gated rebuild, complete field/door/browser checks and human approval remain pending; public staysv71. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7245,7 +7246,7 @@ v71 public trainer-portrait checkpoint — October15,01:25UTC:
   work remains first-slice polish plus source-derived full-turn/party-sync proof;
   no campaign expansion is authorized by these technical subset passes.
 
-v72 frontage asset checkpoint — October15,01:33UTC:
+v72 frontage asset checkpoint — October15,01:30UTC:
 
 - User's density/repetition feedback remains the current first-slice priority.
   Built-in imagegen produced four distinct original building candidates: red
@@ -7303,7 +7304,7 @@ v72 primary/map source checkpoint — October15,01:35UTC:
   before asserting their unchanged older map hashes. New53-cell pinned test
   separately covers the complete new delta; no historical expected hash changed.
 
-Controlled turn-resolution runner checkpoint — October15,01:39UTC:
+Controlled turn-resolution runner checkpoint — October15,01:38UTC:
 
 - Alignment's frozen runner is reviewed and independently rerun by root against
   exact Emerald a9dec84d and immutable v71 target353ff5bd, using each cartridge's
@@ -7347,7 +7348,7 @@ Controlled turn-resolution runner checkpoint — October15,01:39UTC:
   One genuine old v71 saved occupied center3,14 resumes outside the new sage
   building in native v72; complete save-domain proof is still pending.
 
-Controlled turn guard checkpoint — October15,01:40UTC:
+Controlled turn guard checkpoint — October15,01:39UTC:
 
 - The201-line portable suite is committed separately and wired into routine
   local checking. Eleven cases cover independent damage/LCG arithmetic, strict
@@ -7364,7 +7365,7 @@ Controlled turn guard checkpoint — October15,01:40UTC:
   Root owns engine compilation and native53-position save-recovery work. No
   public v72 release is claimed before those checks and field/browser traversal.
 
-v72 compiled primary gate checkpoint — October15,01:45UTC:
+v72 compiled primary gate checkpoint — October15,01:43UTC:
 
 - Root reviewed and reran the independent auditor: actual immutable draftv72
   passes23/23; actualv71 fails for absent new primary/header/layout bindings.
@@ -7389,3 +7390,27 @@ v72 compiled primary gate checkpoint — October15,01:45UTC:
 - Existing draft1f404cb6 predates gate wiring and remains immutable evidence;
   a subsequent normal build must reproduce it with the new gate. Native53-case
   old-save recovery is still running; no public v72 deployment is claimed.
+
+v72 audit guard/recovery checkpoint — October15,01:45UTC:
+
+- Twelve portable independent ROM/ELF fault-vector cases pass and are wired
+  into the routine local check. They manually serialize original PNG pixels,
+  all flip combinations, native headers and53 map cells; production primary
+  packing is not their pixel oracle. Wrong pointers/roles/callbacks, map IDs/
+  collision/elevation, underlays/layers, palettes/tails, primary pixels/VRAM,
+  preserved secondary data, missing/truncated/non-file-backed/stale resources
+  and changed source receipts are rejected. Full local check passes.
+- All53 genuinely walked/ordinary v71 C6 occupied-position saves coldContinue
+  in v72 at independently predicted nearest-safe positions, maximum2 tiles
+  away. Cold Flash and all600 party bytes stay exact. Ordinary native C7 Save
+  changes ONLY the declared location/warp domain; counters/save statistics
+  increment once, all other declared gameplay domains stay exact.
+- Private all-occupied-recoveries.json receipt
+  SHA70ecc9176eac1a9b85910d488d4dde16667294a603464d72a76a5511d7ca0be1.
+  Every branch starts from the same genuine v71 pre-travel battery/state; no
+  RAM/battery editing or fabricated coordinates. These53 geometry regressions
+  are not53 distinct campaign checkpoints and do not complete the save gate.
+- Native field held-wall checkpoints and a normal59.604s walking capture are
+  now running. Root owns these captures and final build/publication. Alignment
+  owns only one additional controlled QuickAttack priority-turn profile,
+  due02:30UTC; next alignment exchange by02:15UTC. Publicv71/Site62 unchanged.
