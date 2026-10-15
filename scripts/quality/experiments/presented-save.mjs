@@ -55,6 +55,7 @@ export function createPresentedSaveStore({ storage, key, epoch, hash = digest })
             throw Error('Provide an acknowledgement and a synchronous canvas submission');
         identity(frame); const token = generation, packet = frame.flash;
         current(token, frame.saveEpoch);
+        let storageAttempted = false, storageConfirmed = false;
         if (presented?.saveEpoch === frame.saveEpoch && frame.frameId <= presented.frameId)
             throw Error('Previously submitted frame identifier was replayed');
         busy = token;
@@ -87,8 +88,10 @@ export function createPresentedSaveStore({ storage, key, epoch, hash = digest })
                     current(token, frame.saveEpoch);
                     // Browser setItem is atomic on quota failure. A subsequent
                     // read failure/mismatch is uncertain; do not invent rollback.
+                    storageAttempted = true;
                     storage.setItem(key, encoded);
                     if (storage.getItem(key) !== encoded) throw Error('Browser storage readback differs or has another writer');
+                    storageConfirmed = true;
                     snapshot.writeSerial = ++writeSerial; wrote = true; verified = snapshot;
                 } else snapshot = verified;
             } else {
@@ -114,7 +117,10 @@ export function createPresentedSaveStore({ storage, key, epoch, hash = digest })
                 writeSerial: snapshot?.writeSerial ?? 0, wrote, storageReadbackVerified: snapshot !== null,
                 workerReceiptObserved: true, canvasSubmitted: true, physicalPaintProven: false };
         } catch (error) {
-            if (token === generation) lastFailure = String(error?.message ?? error);
+            if (token === generation) {
+                if (storageAttempted && !storageConfirmed) verified = null;
+                lastFailure = String(error?.message ?? error);
+            }
             throw error; // Host withholds draw/ACK as applicable and pauses on failure.
         } finally { if (busy === token) busy = null; }
     }

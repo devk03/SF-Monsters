@@ -18,6 +18,7 @@ node --test tests/state_serialization_test.mjs
 node --test tests/web_performance_probe_test.mjs
 node --test tests/frame_pacer_test.mjs
 node --test tests/presented_save_test.mjs
+node tests/worker_save_bridge_test.mjs
 python3 tests/frame_debt_audit_test.py
 python3 tests/pacer_harness_test.py
 python3 tests/worker_proof_audit_test.py

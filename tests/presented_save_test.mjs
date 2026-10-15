@@ -13,7 +13,7 @@ function fixture(options={}){
         flash:{available:true,saveEpoch:epoch,counter:100+serial,rawRevision:revision,size:bytes.length,sha256:sha(bytes),bytes}});
     const callbacks={acknowledge:async id=>{events.push('ack');return {...id,receiptAcknowledged:true,storageVerified:false};},
         draw:()=>{events.push('draw');}};
-    return {store,frame,callbacks,events,map,quota:()=>{quota=true;},readFailure:()=>{readFailure=true;}};
+    return {store,frame,callbacks,events,map,quota:()=>{quota=true;},readFailure:(value=true)=>{readFailure=value;}};
 }
 test('all raw bytes round-trip and write/read/ACK precede synchronous canvas submission',async()=>{
     const f=fixture(),bytes=raw();assert.deepEqual(decodeRaw(encodeRaw(bytes)),bytes);
@@ -44,6 +44,16 @@ test('readback failure is explicit and never claims a rollback or successful pre
     const f=fixture();f.readFailure();await assert.rejects(f.store.present(f.frame(),f.callbacks),/Security/);
     assert.deepEqual(f.events,['write','read']);assert.equal(f.store.cachedPresented(),null);
     assert.equal(f.store.snapshot().drawCount,0);
+});
+test('uncertain readback after an earlier success revokes omitted-payload ownership',async()=>{
+    const f=fixture(),a=raw(),b=a.slice();b[120000]^=1;
+    await f.store.present(f.frame(a),f.callbacks);f.readFailure();
+    await assert.rejects(f.store.present(f.frame(b,2),f.callbacks),/Security/);
+    assert.deepEqual(f.store.known(),{});assert.deepEqual(f.store.cachedPresented().bytes,a);
+    f.readFailure(false);const stale=f.frame(a);delete stale.flash.bytes;
+    await assert.rejects(f.store.present(stale,f.callbacks),/Omitted/);
+    assert.deepEqual(decodeRaw(f.map.get('private-unit')),b);assert.equal(f.store.snapshot().drawCount,1);
+    await f.store.present(f.frame(b,2),f.callbacks);assert.deepEqual(f.store.cachedPresented().bytes,b);
 });
 test('hash, counter, omitted payload and false worker storage attestations are rejected',async()=>{
     for(const change of [p=>p.flash.bytes[10]^=1,p=>p.flash.counter++,p=>{delete p.flash.bytes;},p=>p.flash.size--]){

@@ -8950,3 +8950,28 @@ Private Worker save operations integrated — October15,09:25UTC:
   added full-byte cloning/hash/storage costs require a new browser measurement.
   Pacing-only host handles reset-not-ready frames and explicit recycle identity;
   it does not claim browser persistence. Public SDK/WASM/shim/worklet unchanged.
+
+
+Save protocol review and live-state boundary — October15,09:35UTC:
+
+- Alignment found an uncertain-storage ownership hole after an earlier successful
+  write: Bcould be stored while its readback failed, then omitted Adata might
+  still reuse the old verified ownership. Failed write/readback now revokes that
+  ownership; cached already-presented Abytes remain available. Ninth browser-
+  protocol case proves omitted Ais refused and only full Brewrite/readback can
+  resume verified presentation. No fictional storage rollback is claimed.
+- Added8pure Worker protocol cases to routine localchecks: exact bytes/canonical
+  output, any-byte revision, async old-epoch video, mandatory recycle identity,
+  native mutation rollback and metadata-hash failure rollback. They use a fake
+  core explicitly; actual native tests remain separately scoped/private.
+- A stricter new live native state→load→export probe fails full binary equality:
+ 10bytes differ at0x132/142/146/152/17c/17d/184/185/188/189; CPU/timing/FIFO and
+  allother control bytes, VRAM/IWRAM/EWRAM and fullFlash remain exact in v6.
+  Before/after files and failed strict logs are retained in worker-save-root.
+  Earlier exact coldcounter3753 state proof does not establish arbitrary states.
+- Pinned primary source explains these10bytes as PSG lazy-oscillator catchup
+  during deserialize control-register replay: square channels advance206periods;
+  noise advances9LFSRsteps/288cycles exactly. Those envelopes are muted/dead in
+  this fixture. Do not blanket-ignore PSG or infer all future audio equivalence.
+  Alignment is comparing uninterrupted versus reload future PCM in a bounded
+  direct-native-step unit; full-state equality/audio restore remains open.
