@@ -66,6 +66,8 @@ python3 tests/cast_resume_test.py
 python3 tests/street_art_test.py
 python3 tests/apartment_art_test.py
 python3 tests/door_art_test.py
+.tools/venv/bin/python tests/seed_door_art_test.py
+.tools/venv/bin/python tests/seed_door_audit_test.py
 python3 tests/terrain_art_test.py
 .tools/venv/bin/python tests/park_art_test.py
 .tools/venv/bin/python tests/park_tile_flips_test.py

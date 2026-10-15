@@ -6877,3 +6877,24 @@ v68 centered native animation source checkpoint — October15,00:01UTC:
   Next exchange by00:30UTC. Publicv67/Site58 stays live; human approvals0/11.
   Custom door art/animation approval and full campaign/device/performance/save
   gates remain open. No GitHub workflow, DB migration or PR merge.
+
+
+v68 save and independent technical review — October15,00:08UTC:
+
+- Controller-only v68 full visit returns to SouthPark16,17; ordinarySaveC7→C8
+  increments savecounter/stat once. Only declared changes are native location/
+  warp history, friendshipstep402A1→7, poisonstep402B3→1 and stepstat385→391.
+  All other audited persistent domains preserve values. C8 SHA
+  d49c9a2993243ae17d091c40ed5760ec6aaca52883ff45e35ff8663005766b40.
+- Genuinev67 indoorC9 coldContinues in v68 at room3,6 with Flash EXACT, then
+  ordinarySaveC10 passes every stationary semantic check, no changed domains.
+  C10 SHA5860620541864a983cd633c4a39ea3fc08a83dcb972580d100ea40b3d8548a9c.
+  Private seed-door-v68-plan/save-acceptance.json retains actual comparisons.
+  These are persistent-domain checks, not opaque-RAM/cross-platform/newcampaign
+  checkpoint credit. Eight independent compiled-fixture tests join routine checks.
+- Alignment independently inspected all2300RGBAframes/metadata and matched
+  phase pixel counts, stable window/wall/sidewalk before movement, camera and
+  closed-door endpoint. No actionable issue in that boundedtechnicalsample.
+  Animatedentry differs about20frames from oldinstantdoor: clips cannot imply
+  correspondingworldpositions after warp. Humanartapproval remains pending.
+  Root proceeds to actual privatebrowserroute, normalbuild and publicpatch.
