@@ -78,12 +78,16 @@ class Cartridge:
                 if not name.startswith(('gMon', 'Cry_', 'gObjectEventPic_',
                         'gObjectEventPal_', 'gObjectEventGraphicsInfo_', 'sPicTable_SF',
                         'sRegionMapBg_', 'sPokedexAreaMap_',
-                        'sRegionMapPlayerIcon_Brendan', 'sRegionMapPlayerIcon_May')) and name not in (
+                        'sRegionMapPlayerIcon_Brendan', 'sRegionMapPlayerIcon_May',
+                        'sSFSeedDoor_')) and name not in (
                         'gEnemyMonElevation', 'sNewGameBirch_Gfx', 'sNewGameBirch_Pal',
                         'sPicTable_NewGameBirch', 'sSpritePalette_NewGameBirch',
                         'sSpriteTemplate_NewGameBirch', 'gObjectEventGraphicsInfoPointers',
                         'gRegionMapEntries', 'sRegionMap_MapSectionLayout',
-                        'sSFHabitatMapIds', 'sSFRegionMapParents'):
+                        'sSFHabitatMapIds', 'sSFRegionMapParents', 'sDoorAnimGraphicsTable',
+                        'gTilesetTiles_SFSouthPark', 'gTilesetPalettes_SFSouthPark',
+                        'gMetatiles_SFSouthPark', 'gMetatileAttributes_SFSouthPark',
+                        'OldaleTown_Layout_Blockdata'):
                     continue
                 if section_index >= count and section_index != 0xfff1:
                     raise ValueError('Invalid ELF resource section index')

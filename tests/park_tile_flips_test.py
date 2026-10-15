@@ -40,6 +40,10 @@ class NativeTileFlips(unittest.TestCase):
         plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
         restored = json.loads(json.dumps(plan))
         self.assertEqual(restored['legend'].pop('Q'), [660, False, 3])
+        self.assertEqual(restored['legend'].pop('q'), [661, True, 0])
+        row = restored['rows'][17]
+        self.assertEqual(row[16:18], 'PP')
+        restored['rows'][17] = row[:16] + '..' + row[18:]
         self.assertEqual(restored['warp_events'].pop(), {
             'x': 16, 'y': 16, 'elevation': 0,
             'dest_map': 'MAP_OLDALE_TOWN_HOUSE1', 'dest_warp_id': '0'})

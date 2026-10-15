@@ -6850,3 +6850,30 @@ v68 original door-art checkpoint — October14,23:45UTC:
   Root ownsworld/animation/camera integration next. Alignment owns a separate
   bounded35minute compiled-audit helper/test/explicitELFallowlist task, with
   no builds/captures/commits. Next exchange by00:15UTC; public remainsv67/Site58.
+
+
+v68 centered native animation source checkpoint — October15,00:01UTC:
+
+- Combined drafttargete7fa86a10acc213c6b3d7e2722799cc3ccda74b20af6d12e4f39327b55dd04d9
+  passes creature255/cast40/intro5/map17 and NEW seed-door11/11 compiled checks.
+  Immutable v67 negative control fails eight checks (3/11 match), so the gate
+  distinguishes old artwork/behavior; BPS creation now stops on any mismatch.
+  Full local suite passes including six art and eight compiled-audit cases.
+- Actual503 resident tiles: original497tile bytes,148metatile records,148attribute
+  records and all512palette bytes are EXACT against immutablev67. Last resident
+  global1014 leaves1015 free and native1016..1023 animation reservation intact.
+  Only newentry upper661/lower660 cards/attributes and paved16,17/17,17 change
+  field presentation; all existing anchors, shared butter645 and otherdoors fixed.
+- GenuineoldC7 coldContinue preserves16,17 and displays centereddoor. Matched
+  native2300frame38.508second v67/v68 visits are captured. Entryphases119/124/129
+  are entire-RGB exact (no closed-frame snap); half134changes44pixels and full139
+  changes74pixels confined to opening. Native closeup shows actor passing behind
+  opening before warp and door closing afterward. Asset window/jamb/threshold
+  remain fixed. Actualreturn scene differs173pixels inside the player's16×32
+  standing-pose box only; every other visible pixel is exact after fullvisit.
+- Compiled-audit handoff hashes independently verified; source importtiming
+  fix accepted and eight tests pass. Root owns nativeSave/browser/release next;
+  alignment now performs finite15minute technical-only visualreview of phases.
+  Next exchange by00:30UTC. Publicv67/Site58 stays live; human approvals0/11.
+  Custom door art/animation approval and full campaign/device/performance/save
+  gates remain open. No GitHub workflow, DB migration or PR merge.

@@ -1,7 +1,8 @@
-"""Original institutional opening frames, registered with native door timing."""
+"""Original SF entry opening frames, registered with native door timing."""
 import hashlib
 import json
 from pathlib import Path
+from seed_door_art import load as load_seed_door, ASSET as SEED_DOOR_ASSET
 import shutil
 import struct
 from door_art import native_frames
@@ -57,21 +58,34 @@ def apply_park_doors(root, engine):
         if (directory / (name + '.4bpp')).stat().st_size != 768:
             raise ValueError('Each native institutional door needs three 256-byte stages.')
         shutil.copy2(directory / (name + '.png'), engine / ('graphics/door_anims/sf_park_' + name + '.png'))
+    load_seed_door(root)  # Reject stale source/indices before compiling the new door.
+    shutil.copyfile(root / SEED_DOOR_ASSET / 'frames.png',
+                    engine / 'graphics/door_anims/sf_seed_room.png')
     path = 'src/field_door.c'; source = (engine / path).read_text()
     anchor = 'static const struct DoorGraphics sDoorAnimGraphicsTable[] =\n{\n'
     if source.count(anchor) != 1:
         raise ValueError('Review the native door registration point before rebuilding.')
     declaration = '''static const u8 sSFParkWarehouseDoor[] = INCGFX_U8("graphics/door_anims/sf_park_warehouse.png", ".4bpp", "-mwidth 2 -mheight 4");
 static const u8 sSFParkClinicDoor[] = INCGFX_U8("graphics/door_anims/sf_park_clinic.png", ".4bpp", "-mwidth 2 -mheight 4");
+static const u8 sSFSeedDoor_Tiles[] = INCGFX_U8("graphics/door_anims/sf_seed_room.png", ".4bpp", "-mwidth 2 -mheight 4");
+static const u8 sSFSeedDoor_Palettes[] = {11,11,11,11,11,11,11,11};
 static const u8 sSFParkWarehousePalette[] = {8,8,8,8,8,8,8,8};
 static const u8 sSFParkClinicPalette[] = {9,9,9,9,9,9,9,9};
 
 '''
     source = source.replace(anchor, declaration + anchor +
         '    {583, DOOR_SOUND_NORMAL, 1, sSFParkWarehouseDoor, sSFParkWarehousePalette},\n' +
-        '    {618, DOOR_SOUND_NORMAL, 1, sSFParkClinicDoor, sSFParkClinicPalette},\n')
+        '    {618, DOOR_SOUND_NORMAL, 1, sSFParkClinicDoor, sSFParkClinicPalette},\n' +
+        '    {660, DOOR_SOUND_NORMAL, 1, sSFSeedDoor_Tiles, sSFSeedDoor_Palettes},\n')
     (engine / path).write_text(source)
-    return [path]
+    camera_path = 'src/field_camera.c'
+    camera = (engine / camera_path).read_text()
+    anchor = '|| MapGridGetMetatileIdAt(x, y) == 611 || MapGridGetMetatileIdAt(x, y) == 618)))'
+    if camera.count(anchor) != 1:
+        raise ValueError('Review the original SF door layer composition before adding the seed room.')
+    camera = camera.replace(anchor, anchor[:-3] + '\n           || MapGridGetMetatileIdAt(x, y) == 661 || MapGridGetMetatileIdAt(x, y) == 660)))', 1)
+    (engine / camera_path).write_text(camera)
+    return [path, camera_path]
 
 
 if __name__ == '__main__':

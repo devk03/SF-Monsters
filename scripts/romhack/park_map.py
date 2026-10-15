@@ -10,6 +10,7 @@ from terrain_art import load_terrain
 from maps import encode_layout
 from house_variants import load_variants
 from park_signs import sign_cells
+from seed_door_art import load as load_seed_door
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -73,8 +74,11 @@ def park_resources(root):
     lavender = Image.open(root / 'assets/tiles/sunset-rowhouse-lavender/native-preview.png').resize(
         (48, 64), Image.Resampling.NEAREST).tobytes()
     cells += facade_cells(lavender, 48, 64, 12); flags += [0]*9 + [0x1000]*3
-    # A dedicated entrance leaves all other reused butter facades blocked.
-    cells.append(cells[133]); flags.append(0x1060)  # Native non-animated door.
+    # A dedicated centered entrance leaves the original facade records intact.
+    door = load_seed_door(root)
+    upper, lower = facade_cells(door['frames'][0], 16, 32, 11)
+    cells.append(lower); flags.append(0x1069)  # Native animated door, global660.
+    cells.append(upper); flags.append(0)       # Blocked upper facade, global661.
     raw, records, attributes = pack_park_cells(cells, flags, reuse_flips=True)
     if len(raw) // 32 > 504:
         raise ValueError('Park art must reserve the last eight secondary tiles for native doors.')
@@ -104,8 +108,8 @@ def park_tile(plan, x, y):
         if x == 7 and y not in (8, 9, 10, 27, 28, 29):
             return 526  # Vertical center stripe.
         return 512
-    if token == 'Q':
-        return 660  # Community seed-room entrance; original butter-door pixels.
+    if token in 'Qq':
+        return 660 if token == 'Q' else 661
     if token == 'P':
         return 531
     if token == '.':

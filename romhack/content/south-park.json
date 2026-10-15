@@ -114,6 +114,11 @@
       660,
       false,
       3
+    ],
+    "q": [
+      661,
+      true,
+      0
     ]
   },
   "rows": [
@@ -132,9 +137,9 @@
     "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPabcabcPPPPPPPPPPPPPPPPPPPPPPF",
     "FPPPPPRRRPPdefdefPPPPPPPPPPPPPPPPPPPPPPF",
-    "FPPPPPRRRPPghfghfPP..............PPPPPPF",
+    "FPPPPPRRRPPghfghqPP..............PPPPPPF",
     "FPPPPPRRRPPijfijQ...T..........T...PPPPF",
-    "FPPPPPRRRPPPPPPP.............B......PPPF",
+    "FPPPPPRRRPPPPPPPPP...........B......PPPF",
     "FPPPPPRRRPPPPPP..GG..................PPF",
     "FPPPPPRRRPPPPPP......................PPF",
     "FPPPPPRRRPPabcP.T.......B........#T..PPF",

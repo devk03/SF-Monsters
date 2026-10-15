@@ -15,6 +15,7 @@ from engine_guards import apply_engine_guards
 from field_journal import apply_field_journal
 from city_map import apply_city_map
 from city_map_audit import audit_city_map
+from seed_door_audit import audit_seed_door
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
 from field_music import apply_field_music
@@ -169,6 +170,14 @@ def main():
     if compiled_map.get('passed') is not True:
         raise ValueError('Compiled SF map failed; preserved receipt: ' + str(map_path))
     print('Compiled SF map verified: ' + json.dumps(compiled_map['counts']))
+    compiled_seed_door = audit_seed_door(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    seed_door_bytes = (json.dumps(compiled_seed_door, indent=2) + '\n').encode()
+    seed_door_path = validation_directory / ('seed-door-' + uuid.uuid4().hex + '.json')
+    with seed_door_path.open('xb') as stream:
+        stream.write(seed_door_bytes)
+    if compiled_seed_door.get('passed') is not True:
+        raise ValueError('Compiled seed door failed; preserved receipt: ' + str(seed_door_path))
+    print('Compiled seed door verified: ' + json.dumps(compiled_seed_door['counts']))
     checkout(FLIPS, 'https://github.com/Alcaro/Flips.git', FLIPS_REVISION)
     if args.backend == 'host':
         encoder = ROOT / '.tools/flips-macos'
@@ -222,6 +231,13 @@ def main():
         'receipt_sha256': hashlib.sha256(map_bytes).hexdigest(),
         'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/city_map_audit.py').read_bytes()).hexdigest(),
         'quality_approval': 'pending', 'scope': compiled_map['scope']
+    }
+    manifest['compiled_seed_door'] = {
+        'passed': True, 'counts': compiled_seed_door['counts'],
+        'receipt_sha256': hashlib.sha256(seed_door_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/seed_door_audit.py').read_bytes()).hexdigest(),
+        'resident_tiles': compiled_seed_door['resident_tiles'],
+        'quality_approval': 'pending', 'scope': compiled_seed_door['scope']
     }
     manifest['compiled_field_cast'] = {
         'passed': True, 'counts': compiled_cast['counts'],
