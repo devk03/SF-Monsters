@@ -623,10 +623,11 @@ Current checkpoint — October 15, 2026, 04:48 UTC:
 - All three Cognition trainers have original portrait candidates. Compiled26
   checks, actual native/browser entrances and two ordinary loss/save/coldContinue
   branches pass their technical scopes. Human paired art reviews remain pending.
-- Current alignment exchange03:58UTC,next04:28UTC. Root owns performance
-  diagnostics, builds/publication and canonical spec; peer owns only source text
-  for three existing Sunset starter prompts. No builds/captures during the
-  running measurement. Existing map/save/turn evidence remains scoped below.
+- Current alignment exchange04:54UTC,next05:24UTC. Root owns the whole-block
+  art experiment, native validation and canonical spec. Peer completed finite
+  read-only visual critique: entry openings remain too narrow beside the hero,
+  and adjacent service buildings still use a different feature scale. No peer
+  writes are active. Existing map/save/turn evidence remains scoped below.
 
 ### 15.1 Objective and completion rule
 
@@ -849,7 +850,7 @@ Current snapshot (October 15, 2026,04:37UTC; historical checkpoint details follo
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.76-street-threshold-preview; target9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733; Site67. Neutral gray paving with original shallow foundations/stoops, right-door brick/cafe alignment and informative starter prompts. Native/browser rendering and three native door/cache returns pass their scopes; human0/11. |
+| Public build | ART REJECTED by user; 0.0.76-street-threshold-preview; target9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733; Site67. Neutral gray paving with original shallow foundations/stoops, right-door brick/cafe alignment and informative starter prompts. Native/browser rendering and three native door/cache returns pass their scopes; human0/11. |
 | Latest local source build | Normal v76 build from e4685806 reproduces immutable911925. Primary235tiles/65records; secondary502/504. Independent infill42+nestedpaving153 checks and full local checks pass. Allold213primarytiles/54records/54attributes and1236nonapronmapwords remain exactv75;44formerlywalkablePcells nowusegroundaprons without collision/elevation changes. Ordinary C8->C9 declared data preserved. Manifest dirty marker retained for generated/untracked output/PDF; no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
@@ -8187,3 +8188,28 @@ Human frontage rejection — October 15, 04:48 UTC:
 - Next experiment: one whole original connected frontage at native pixel scale,
   including roof/wall/entry/ground transitions, then actual in-game inspection.
   All existing human acceptance gates remain open.
+
+Connected frontage experiment — October15,04:55UTC:
+
+- Preserved original built-in imagegen connected-block sources A/B, refinement
+  prompt, conversion and pending-review limitations in connected-frontage-v1.
+  The first native experiment a463ac56 revealed a mismatched dark pavement panel;
+  it is preserved privately and rejected locally. Revised conversion keeps the
+  generated architecture together but supplies gray paving from the actual game.
+- Private revised target45732141ecfd39a131d421ea8553161c2f931e884a6a1f8846c6964bede5123e
+  appends original resources to immutablev76, redirects its primary header and
+  replaces only declared map art bindings. This is NOT a normal source build or
+  released patch. Exact BPS create/apply roundtrip passes; all1280 collision/
+  elevation bitfields and all original ROM bytes outside header/map are exact.
+  The normal producer, compiled auditors and publicv76 remain untouched.
+- Read-only independent native decode checks all55 scene cells and their layers
+  against the consumed indexed image. Actual old-Flash coldContinue loads all404
+  primary tiles and palette5 exactly. Controller-only front push stays22,6 and
+  approach sweep ends18,6, both Park0,10 with exact resident art. Private proof
+  .tools/connected-frontage-prototype/native-proof.json SHA
+  18d3cf39db476221a11ae43702407e0e5a2fd4fda39be91dd4431e7ebbfd2deb.
+- Actual frame connected-block-b-cold/final-4x.png has shared walls/roof depth and
+  attached bases instead of rails. Alignment critique confirms improvement in
+  those specific properties but identifies undersized6-8px doors versus16px
+  player and mismatched old neighboring service art as the next priorities.
+  No numeric score, approval, browser/clean-build/performance/campaign credit.

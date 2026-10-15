@@ -1,0 +1,31 @@
+{
+  "source_sha256": "4c24386acca174db1fb91d604778fbb377299d285006a2aae0780cd6662397f0",
+  "prompt_sha256": "4c8225d2756b1e7cc427216972f739f4b719f8e7de0cb9e4a82ca058fcdd3f31",
+  "generator": "Built-in imagegen, original connected architecture",
+  "quality_approval": "pending; prototype only",
+  "size": [
+    176,
+    80
+  ],
+  "source_bounds": [
+    67,
+    20,
+    1792,
+    805
+  ],
+  "source_ground_y": 726,
+  "method": "Whole-width architecture crop; nearest176x64; fixed RGB55515; alpha128; transparent approach",
+  "blocked_rows": [
+    0,
+    64
+  ],
+  "walkable_rows": [
+    64,
+    80
+  ],
+  "files": {
+    "native.png": "68b9294e94a0ec05e13948b8493b654457c931776f7157c7989b1d90cb088ba4",
+    "block.indices": "54e4d5b8efbaa6d4bdba7c4f25e48e77c5c90a909bf546933e086cd9d8cd6958",
+    "block.gbapal": "2c4864885ac0b05ef38c629d7e700df61c3a81e88633edf19604b534e7cc65bf"
+  }
+}
