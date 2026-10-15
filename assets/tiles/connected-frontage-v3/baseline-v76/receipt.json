@@ -1,0 +1,42 @@
+{
+  "target_sha256": "9119256974ab0a948810fcce2dc3871c53226c2948023fb76afadf3351018733",
+  "scope": "Original SF art and map resources only; no commercial ROM, code, sprites, soundtrack or saves. Rejected visual candidate used solely for preservation checks.",
+  "files": {
+    "primary.4bpp": {
+      "bytes": 7520,
+      "sha256": "ead15c695c8155da75caf0fb3376ccbac676d21e8acfc3c0e4d30dcda8c93a67"
+    },
+    "metatiles.bin": {
+      "bytes": 1040,
+      "sha256": "22cfd59f547bf780a80111606b4bc063b8133bcdf7d1401dadf9f7004b298ab3"
+    },
+    "attributes.bin": {
+      "bytes": 130,
+      "sha256": "ad210381edd1ddfe7f5a4a43de890c88ecddaa50ecc25fb2dec5699c92c11446"
+    },
+    "palettes.gbapal": {
+      "bytes": 512,
+      "sha256": "7535c33e74b38bf508dbc2de826ebf095895f1a87fde61f08b914892b2400c62"
+    },
+    "south-park-map.bin": {
+      "bytes": 2560,
+      "sha256": "99fd32736d89e67e501c17d6e8fece0d228a42f08cec35f1ece2fecc8a38b26f"
+    },
+    "secondary.4bpp": {
+      "bytes": 16064,
+      "sha256": "025b15ff1b4e9606d010b85031c71476a3071183015300e2466e6c60f98c4d42"
+    },
+    "secondary-metatiles.bin": {
+      "bytes": 2400,
+      "sha256": "c1d17b5e9bc2c04371c6a2aaea46321f2326c70822d9a8c87974fa9ed596a9aa"
+    },
+    "secondary-attributes.bin": {
+      "bytes": 300,
+      "sha256": "5d75b62c2517473238cfe7967401f492d506a41ffbbd5de58ea9c99ad39eab2f"
+    },
+    "secondary-palettes.gbapal": {
+      "bytes": 512,
+      "sha256": "73e3ba1b6d1f0a9385e97e92eba6a4a2d1268384e4cdf6f45f452a49fda512db"
+    }
+  }
+}

@@ -8268,3 +8268,13 @@ Simplified surfaces and stable door stages — October15,05:10UTC:
   v3 source; they are a rejected-art baseline, not an accepted visual reference.
 - Publicv76 remains unchanged and rejected. User's simplified direction remains
   "Closer; keep refining this style"; all11 quality-domain approvals stay open.
+
+Independent connected-block gate — October15,05:12UTC:
+
+- Alignment handed back a read-only compiled resource/map audit. Root reviewed
+  its acceptance oracle and reran the independent linked ARM fixture:11 tests
+  pass in19.974s. The checker pins original sources/baseline, validates the
+  whole176x80 scene, all120 paving underlays, layer/palette/header bindings and
+  exact1280-word map delta with collision/elevation preserved. Native cache
+  slots remain reserved. It does not approve service art, animated entries,
+  saves, browser timing or user quality. Actual normal compiled build is pending.
