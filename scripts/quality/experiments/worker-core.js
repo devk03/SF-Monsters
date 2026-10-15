@@ -10,6 +10,8 @@ let enqueued = 0, consumed = 0, lastAudio = null, lastAudioAt = null;
 let measurement = null, closing = null, finalTimer = null, lastReport = null, epoch = 0;
 let latestSequence = -1, latestMask = 0, pendingInput = null, videoInFlight = false, recycled = null;
 let bootDiscardedSourceFrames = 0, batteryVerified = false;
+let clockPolicy = 'worker-wall-v1',fatalClockError=null;
+const AUDIO_LEAD_NATIVE_FRAMES = 4;
 let playbackAcknowledged = false, audioWatch = null, watchClosing = null;
 let retainedRom = null, saveEpoch = 0, rawRevision = 0, flashCache = null;
 let frameSerial = 0, flight = null, controlBusy = false, fatalSaveError = null, videoFrameReady = false;
@@ -116,10 +118,11 @@ function restoreState(raw) {
 function pacingPhase(at = now()) {
   if (origin === null) return null;
   const frozenAt = pausedAtMs ?? at;
-  const elapsedMs = activeElapsed(frozenAt), earned = elapsedMs / 1000 * fps;
+  const elapsedMs = activeElapsed(frozenAt), earned = clockPolicy==='consumed-source-v1'
+    ? AUDIO_LEAD_NATIVE_FRAMES+consumed/coreRate*fps : elapsedMs / 1000 * fps;
   const earnedDue = Math.floor(earned), fractionalFrame = earned - earnedDue;
   if (elapsedMs < 0 || earnedDue < due) throw new Error('Pacing phase regressed');
-  return { pausedAtMs: frozenAt, originMs: origin, elapsedMs, plannedDue: due, earnedDue,
+  return { clockPolicy,pausedAtMs: frozenAt, originMs: origin, elapsedMs, plannedDue: due, earnedDue,
     earnedUnplannedFrames: earnedDue - due, fractionalFrame,
     nextDueInMs: (1 - fractionalFrame) * 1000 / fps, retainedBacklog: backlog,
     totalRetainedFrames: backlog + earnedDue - due };
@@ -200,6 +203,7 @@ async function saveOperation(request, op) {
 }
 function syncRate() {
   const rate = mod._mgbawasm_sample_rate();
+  if(clockPolicy==='consumed-source-v1'&&coreRate>0&&rate!==coreRate)throw Error('Consumed-source proof requires a fixed native sample rate');
   if (rate > 0 && rate !== coreRate) { coreRate = rate; port.postMessage({ rate }); }
 }
 function drainAudio(send = true) {
@@ -218,9 +222,23 @@ function drainAudio(send = true) {
   }
   throw new Error('Unbounded core audio drain');
 }
+function guardedAudioMessage(event){
+  try{audioMessage(event);}catch(error){
+    fatalClockError=String(error?.message??error);pause('invalid-audio-clock');
+    if(audioWatch)endAudioWatch('invalid-audio-clock');
+    self.postMessage({type:'worker-error',error:fatalClockError});
+  }
+}
 function audioMessage(event) {
   const data = event.data;
-  if (typeof data === 'number') { consumed = data; return; }
+  if (typeof data === 'number') {
+    if(clockPolicy==='consumed-source-v1'){
+      if(!playbackAcknowledged)return;
+      integer(data,'actual consumed source frames');
+      if(data<consumed||data>enqueued)throw Error('Consumed source clock is not ordered within posted native PCM');
+    }
+    consumed = data; return;
+  }
   if (data?.type === 'playback-reset' && data.epoch === playbackEpoch) { playbackAcknowledged = true; return; }
   if (data?.type === 'diagnostics') {
     lastAudio = data; lastAudioAt = absoluteNow();
@@ -262,7 +280,8 @@ function finishAudioWatch(finalAudio){
   for(const request of requests)reply(request,result);
 }
 function snapshot() {
-  return { running, counter: mod ? counter() : null, framerate: fps, coreRate,
+  return { running, counter: mod ? counter() : null, framerate: fps, coreRate,clockPolicy,
+    prefillLeadNativeFrames:clockPolicy==='consumed-source-v1'?AUDIO_LEAD_NATIVE_FRAMES:0,fatalClockError,
     workerAt: absoluteNow(), workerTimeOrigin: performance.timeOrigin, clockOriginMs: origin,
     pausedAtMs, pausedPhase, phaseAnchorMs, phaseAnchorElapsedMs, runDeadlineMs, runExpired,
     due, backlog, executed, overflowDropped: dropped, latestMask, latestSequence,
@@ -295,7 +314,7 @@ function closeMeasurement(reason = 'duration', request = null) {
   active.elapsedMs = active.endedAtMs - active.startedAtMs; active.finalGuestCounter = counter();
   active.finalBacklog = backlog; active.pendingInputAtEnd = pendingInput !== null;
   active.finalPacing = { due, executed, overflowDropped: dropped, backlog };
-  active.finalSourceFramesPosted = enqueued;
+  active.finalSourceFramesPosted = enqueued;active.finalConsumedSourceFrames=consumed;
   if (request) active.requests.push(request);
   closing = active;
   // This direct port message is ordered after every measured audio chunk.
@@ -325,7 +344,9 @@ function tick() {
     // is recorded in full before close, even if its <=5 frames cross it.
     if (measurement && started >= measurement.deadlineMs) closeMeasurement('duration');
     if (origin === null) { origin = started; phaseAnchorMs = started; phaseAnchorElapsedMs = 0; }
-    const elapsed = activeElapsed(started), nextDue = Math.floor(elapsed / 1000 * fps);
+    const elapsed = activeElapsed(started), consumedAtTick=consumed,enqueuedBeforeTick=enqueued;
+    const nextDue = clockPolicy==='consumed-source-v1'
+      ? AUDIO_LEAD_NATIVE_FRAMES+Math.floor(consumedAtTick/coreRate*fps) : Math.floor(elapsed / 1000 * fps);
     if (nextDue < due) throw new Error('Worker clock regressed');
     const fresh = nextDue - due, before = backlog, overflow = Math.max(0, before + fresh - 30);
     const pending = before + fresh - overflow, planned = Math.min(5, pending), beforeCounter = counter();
@@ -343,7 +364,8 @@ function tick() {
     if (observed && measurement === observed) {
       // [fresh, planned, actual, overflow, after, elapsedMsSinceClockOrigin,
       //  nativeCounterBefore, nativeCounterAfter]
-      observed.rawLedger.push([fresh, planned, actual, overflow, backlog, elapsed, beforeCounter, counter()]);
+      observed.rawLedger.push([fresh, planned, actual, overflow, backlog, elapsed, beforeCounter, counter(),
+        ...(clockPolicy==='consumed-source-v1'?[consumedAtTick,enqueuedBeforeTick,enqueued]:[])]);
       observed.maxPending = Math.max(observed.maxPending, pending);
       observed.maxBacklog = Math.max(observed.maxBacklog, backlog);
       observed.maxWorkerTickGapMs = Math.max(observed.maxWorkerTickGapMs, started - observed.lastTickMs);
@@ -358,6 +380,7 @@ function tick() {
     } else if (pendingInput && actual) pendingInput = null;
     loopTimer = setTimeout(tick, 5);
   } catch (error) {
+    if(clockPolicy==='consumed-source-v1')fatalClockError=String(error?.message??error);
     pause('worker-error'); self.postMessage({ type: 'worker-error', error: String(error?.stack ?? error) });
   }
 }
@@ -365,9 +388,11 @@ async function boot(request) {
   if (mod || booting) throw new Error('Worker already booted or booting');
   booting = true;
   try {
+    clockPolicy=request.clockPolicy??'worker-wall-v1';
+    if(!['worker-wall-v1','consumed-source-v1'].includes(clockPolicy))throw Error('Unsupported private pacing policy');
     const rom = bytes(request.rom, 'rom', 32 * 1024 * 1024); retainedRom = rom.slice();
     if (!request.audioPort || typeof request.audioPort.postMessage !== 'function') throw new Error('Transfer the actual worklet MessagePort');
-    port = request.audioPort; port.onmessage = audioMessage; port.start?.();
+    port = request.audioPort; port.onmessage = guardedAudioMessage; port.start?.();
     importScripts(request.jsUrl);
     if (typeof createMgbaModule !== 'function') throw new Error('Unchanged core loader did not define createMgbaModule');
     mod = await createMgbaModule({ locateFile: name => name.endsWith('.wasm') ? request.wasmUrl : new URL(name, request.jsUrl).href });
@@ -405,7 +430,7 @@ async function boot(request) {
 }
 function start(request) {
   if (!mod) throw new Error('Boot first');
-  if (controlBusy || fatalSaveError) throw new Error('Save operation is pending or core state is uncertain');
+  if (controlBusy || fatalSaveError || fatalClockError) throw new Error('Save operation is pending or core/clock state is uncertain');
   if (running) return snapshot();
   const duration = integer(request.durationMs ?? LIMITS.durationMs, 'finite run duration', LIMITS.runDurationMs);
   if (!duration) throw new Error('Finite run duration must be positive');
@@ -445,10 +470,11 @@ function begin(request) {
   if (!durationMs) throw new Error('Diagnostic duration must be positive');
   const startedAtMs = now(); pendingInput = null;
   measurement = { epoch: ++epoch, durationMs, startedAtMs, startedAt: absoluteNow(), deadlineMs: startedAtMs + durationMs,
-    workerTimeOrigin: performance.timeOrigin, clockOriginMs: origin, framerate: fps, initialDue: due,
+    workerTimeOrigin: performance.timeOrigin, clockOriginMs: origin, framerate: fps,clockPolicy,
+    prefillLeadNativeFrames:clockPolicy==='consumed-source-v1'?AUDIO_LEAD_NATIVE_FRAMES:0, initialDue: due,
     initialBacklog: backlog, initialGuestCounter: counter(), rawLedger: [], inputs: [], audioSnapshots: [],
     initialPacing: { due, executed, overflowDropped: dropped, backlog }, coreRate, playbackEpoch, saveEpoch, rawRevision,
-    sourceFramesPosted: 0, initialSourceFramesPosted: enqueued, maxPending: 0, maxBacklog: 0,
+    sourceFramesPosted: 0, initialSourceFramesPosted: enqueued,initialConsumedSourceFrames:consumed, maxPending: 0, maxBacklog: 0,
     maxWorkerTickGapMs: 0, lastTickMs: startedAtMs, requests: [request],
     scope: 'Private Worker proof. Raw native counters, Worker timer ledger and unchanged worklet diagnostics; no main AudioContext clock, physical output, input-consumption or production compatibility claim.' };
   port.postMessage({ type: 'diagnostics', enabled: true, epoch });

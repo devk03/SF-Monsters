@@ -125,6 +125,38 @@ class WorkerReceipt(unittest.TestCase):
         report=self.fixture();report['main']['audioClockBefore']['currentTime']=0.
         with self.assertRaises(ValueError):self.audit(report)
 
+    def consumed_fixture(self):
+        report=self.fixture();w=report['worker'];fps=w['framerate'];due=4+math.floor(5000/65536*fps)
+        initial_due=due;counter=w['initialGuestCounter'];posted=due*1097;initial_posted=posted;rows=[]
+        for elapsed in range(100,1100,5):
+            consumed=5000+math.floor((elapsed-100)/1000*65536)
+            next_due=4+math.floor(consumed/65536*fps);fresh=next_due-due;after=posted+fresh*1097
+            rows.append([fresh,fresh,fresh,0,0,float(elapsed),counter,counter+fresh,consumed,posted,after])
+            due=next_due;counter+=fresh;posted=after
+        report['boot'].update(clockPolicy='consumed-source-v1',prefillLeadNativeFrames=4)
+        w.update(clockPolicy='consumed-source-v1',prefillLeadNativeFrames=4,coreRate=65536,rawLedger=rows,
+                 initialSourceFramesPosted=initial_posted,finalSourceFramesPosted=posted,sourceFramesPosted=posted-initial_posted,
+                 initialDue=initial_due,finalGuestCounter=counter,
+                 initialPacing=dict(due=initial_due,executed=initial_due,overflowDropped=0,backlog=0),
+                 finalPacing=dict(due=due,executed=due,overflowDropped=0,backlog=0))
+        return report
+
+    def test_explicit_consumed_clock_replays_source_credits_without_wall_normalization(self):
+        report=self.consumed_fixture();result=self.audit(report)
+        self.assertEqual(result['clock_policy'],'consumed-source-v1');self.assertTrue(result['loss_free'])
+        self.assertEqual(result['actual_frames'],report['worker']['finalGuestCounter']-report['worker']['initialGuestCounter'])
+        mutations=[lambda w:w['rawLedger'][4].__setitem__(8,999999),
+                   lambda w:w['rawLedger'][4].__setitem__(8,0),
+                   lambda w:w['rawLedger'][4].__setitem__(9,0),
+                   lambda w:w['rawLedger'][4].__setitem__(10,0),
+                   lambda w:w.update(coreRate=65535),lambda w:w.update(prefillLeadNativeFrames=5),
+                   lambda w:w.update(sourceFramesPosted=0),lambda w:w.update(clockPolicy='worker-wall-v1'),
+                   lambda w:w['rawLedger'][4].pop()]
+        for mutate in mutations:
+            with self.subTest(mutation=mutations.index(mutate)):
+                changed=self.consumed_fixture();mutate(changed['worker'])
+                with self.assertRaises(ValueError):self.audit(changed)
+
     def input_fixture(self):
         report=self.fixture();origin=1000000000.
         report['main']['inputs']=[{'sequence':1,'mask':16,'domAt':origin+102.,'sentAt':origin+102.5}]

@@ -9087,3 +9087,37 @@ Actual twenty-pause transition failure — October15,10:42UTC:
   host now waits at most500ms and records visibility changes. Old report retained.
 - Own Worker/audio/tab/server stopped. Further remedies remain private; all full
   acceptance gates, public SDK async storage migration and Safari/phone stay open.
+
+
+Optional consumed-source clock — October15,10:48UTC:
+
+- A separate private consumed-source-v1 policy admits native credits from actual
+  worklet-consumed source samples:4+floor(consumed/coreRate*nativeFPS). This is
+  explicitly different from wall-time admission; default wall policy unchanged.
+  Cap5/debt30 and finite wall lease remain. No synthetic PCM, queue trimming,
+  resume-only refill or invented AudioContext clock. Fixed65536Hz required.
+- Four native frames are a nominal66.97ms initial lead, not a guaranteed actual
+  queue reserve: consumed notifications are chunky and may be delayed/in flight.
+  Actual sample counts/queue depth remain measured. Pinned GBA clocks give exactly
+ 1097.25source samples/frame; exposed FPS truncation changes less than0.6source
+  sample over900seconds. This is a fixed-rate experiment, not a general clock.
+- New11-field ledger preserves the old8fields plus actual consumed/posted-before/
+  posted-after counts. Independent auditor explicitly replays the declared
+  source-clock formula; it does not normalize wall demand into a passing result.
+  Eight audit groups pass, including source/clock/rate/row-policy corruption.
+- Actual strict-ACK20pause observation:0warmup/underrun/drop,212224output frames;
+  periodic queue1445..3930source frames, final3379 (~51.6ms). First→final queue
+  delta+130source (~2ms), not unbounded growth. Native counters/epochs and frozen
+  AudioContext clocks remain stable during each pause. ReportSHA
+  5e81c92aa3078ce5171d34b63794c6ac30b644c6c9f2387cc33aaa4303c648f9.
+- Subsequent60sec+200msUIstall:3583actual native frames,0overflow/debt/mismatch,
+ 0workletwarmup/underrun/drop, final2256source queue (~34.4ms);12native frames
+  admitted while UI stalled. Raw reportSHA
+  983faf8aacb0f3597e4a09182eda5d77575b7a0dd25b894f2aa61f67757133d8.
+  Causal storage/runtime audits pass; this stationary window has0controller edges.
+- Alignment caught invalid numeric worklet-clock errors escaping outside the
+  timer catch path. Current source now stops execution, records fatal clock
+  uncertainty and rejects resume;19pure Worker cases pass including that fault.
+  The browser receipts above precede this added guard, with their own exact frozen
+  source hashes. Final-source browser/save/long-run checks remain next. Public
+  game/SDK/core/WASM/worklet unchanged; no full gate or production promotion.

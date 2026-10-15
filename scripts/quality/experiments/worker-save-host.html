@@ -4,7 +4,7 @@ body{margin:24px;background:#eee;color:#222;font:15px system-ui;max-width:960px}
 </style>
 <h1>Private Worker save proof</h1>
 <p>Same verified SF cartridge, native checkpoint, mGBA core and audio sink. Worker core/audio timing is separate from main-thread canvas submissions. No production save compatibility or physical presentation claim.</p>
-<button id="load">Load verified Worker checkpoint</button><button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="minute" disabled>Measure 1 minute</button><button id="stall" disabled>Controlled 200ms main-thread stall</button><button id="move" disabled>Walk a short loop</button><button id="finish" disabled>Finish local QA</button><button id="route" disabled>Measure supplied active route</button>
+<label><input type="checkbox" id="audio-clock"> Experimental consumed-source pacing (private)</label><br><button id="load">Load verified Worker checkpoint</button><button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="minute" disabled>Measure 1 minute</button><button id="stall" disabled>Controlled 200ms main-thread stall</button><button id="move" disabled>Walk a short loop</button><button id="finish" disabled>Finish local QA</button><button id="route" disabled>Measure supplied active route</button>
 <p id="status" role="status">Ready. No public saves or account data are used.</p>
 <canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="cycles" disabled>Observe 20 readonly pauses</button><button id="flash" disabled>Preserve paused raw Flash receipt</button><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
 <script type="module">
@@ -110,7 +110,7 @@ window.addEventListener('blur',()=>{if(measuring)focus.push({type:'blur',at:abso
 window.addEventListener('focus',()=>{if(measuring)focus.push({type:'focus',at:absolute()});});
 document.addEventListener('visibilitychange',()=>{if(measuring)visibility.push({state:document.visibilityState,at:absolute()});if(document.hidden)releaseAll();});
 button('load').onclick=async()=>{try{
-  button('load').disabled=true;status.textContent='Verifying the frozen private checkpoint and Worker runtime…';
+  button('load').disabled=true;button('audio-clock').disabled=true;status.textContent='Verifying the frozen private checkpoint and Worker runtime…';
   const r=await fetch('/identity.json',{cache:'no-store'});if(!r.ok)throw Error('Identity unavailable');identity=await r.json();
   const [rom,battery,state]=await Promise.all(['rom.gba','battery.sav','state.bin'].map(name=>verified('/'+name,identity.files[name])));
   await lease();
@@ -124,7 +124,7 @@ button('load').onclick=async()=>{try{
   worker=new Worker('/emulator/worker-proof.js');
   worker.onmessage=event=>{const message=event.data;if(message.type==='worker-error'){void finish().then(()=>fail(Error(message.error)));return;}const p= pending.get(message.id);if(!p)return;clearTimeout(p.timer);pending.delete(message.id);message.ok?p.resolve(message.result??message.value):p.reject(Error(message.error??'Worker RPC failed'));};
   worker.onerror=event=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error(event.message||'Worker failed'));}pending.clear();fail(Error(event.message||'Worker failed'));};
-  boot=await rpc('boot',{rom,battery,state,audioPort:sink.port,jsUrl:new URL('/emulator/mgba.js',location.href).href,wasmUrl:new URL('/emulator/mgba.wasm',location.href).href},[sink.port],20000);
+  boot=await rpc('boot',{rom,battery,state,clockPolicy:button('audio-clock').checked?'consumed-source-v1':'worker-wall-v1',audioPort:sink.port,jsUrl:new URL('/emulator/mgba.js',location.href).href,wasmUrl:new URL('/emulator/mgba.wasm',location.href).href},[sink.port],20000);
   lifecycle=createAudioLifecycle({audio,rpc,record:fact=>saveActions.push({...fact,at:absolute()})});
   saveEpoch=boot.saveEpoch;storeKey='sf-worker-save-proof-v1:'+identity.rom_sha256+':'+location.host;
   let writeAttempt=0,lastWrite=null;
@@ -152,10 +152,10 @@ async function measure(durationMs,onStarted){
     const workerReport=await measurementPromise,after=audioClock(),mainResultReceivedAt=absolute();
     stallReady=false;controls();observer?.disconnect();
     const replayInWindow=replayModule?.replayForWindow(replayResult,workerReport.startedAt-performance.timeOrigin,workerReport.endedAt-performance.timeOrigin)??null;
-    const result={schema:2,kind:'private-worker-proof-v1',saveProtocol:{storageKind:'isolated localStorage',storageEvents,saveActions,store:saveStore.snapshot()},context:{identity,environment:{userAgent:navigator.userAgent,vendor:navigator.vendor,crossOriginIsolated:globalThis.crossOriginIsolated}},controllerReplay:replayInWindow,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks,submissions,inputs,stalls,visibility,focus,longTasks}};
+    const result={schema:2,kind:'private-worker-proof-v1',saveProtocol:{storageKind:'isolated localStorage',storageEvents,saveActions,store:saveStore.snapshot()},context:{identity,environment:{userAgent:navigator.userAgent,vendor:navigator.vendor,crossOriginIsolated:globalThis.crossOriginIsolated}},controllerReplay:replayInWindow,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks.slice(),submissions:submissions.slice(),inputs:inputs.slice(),stalls:stalls.slice(),visibility:visibility.slice(),focus:focus.slice(),longTasks:longTasks.slice()}};
     const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(5000)});
     if(!saved.ok)throw Error('Could not preserve Worker proof report');const receipt=await saved.json();
-    out.textContent=JSON.stringify({receipt,boot,worker:{reason:workerReport.reason,elapsedMs:workerReport.elapsedMs,rawLedgerRows:workerReport.rawLedger.length,inputs:workerReport.inputs.length,audioSnapshots:workerReport.audioSnapshots.length,initialPacing:workerReport.initialPacing,finalPacing:workerReport.finalPacing,audioFinalAcknowledged:workerReport.audioFinalAcknowledged,audioFinalSnapshot:workerReport.audioFinalSnapshot},main:{rafTicks:mainTicks.length,submissions:submissions.length,inputs:inputs.length,stalls,visibility,focus,longTasks}},null,2);
+    out.textContent=JSON.stringify({receipt,boot,worker:{reason:workerReport.reason,elapsedMs:workerReport.elapsedMs,rawLedgerRows:workerReport.rawLedger.length,inputs:workerReport.inputs.length,audioSnapshots:workerReport.audioSnapshots.length,initialPacing:workerReport.initialPacing,finalPacing:workerReport.finalPacing,audioFinalAcknowledged:workerReport.audioFinalAcknowledged,audioFinalSnapshot:workerReport.audioFinalSnapshot},main:{rafTicks:result.main.rafTimes.length,submissions:result.main.submissions.length,inputs:result.main.inputs.length,stalls:result.main.stalls,visibility:result.main.visibility,focus:result.main.focus,longTasks:result.main.longTasks}},null,2);
     status.textContent='Saved '+receipt.name+'. Private Worker proof only; independent audit required.';
   }catch(error){fail(error);try{await rpc('end',{reason:'host-error'});}catch{};}
   finally{measuring=false;stallReady=false;observer?.disconnect();controls();}

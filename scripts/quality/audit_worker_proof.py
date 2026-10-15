@@ -163,6 +163,17 @@ def audit(report,identity,directory):
     start=num(worker['startedAtMs'],'Worker start');end=num(worker['endedAtMs'],'Worker close')
     origin=num(worker['clockOriginMs'],'Worker clock origin');time_origin=num(worker['workerTimeOrigin'],'Worker time origin')
     fps=num(worker['framerate'],'native framerate')
+    policy=worker.get('clockPolicy','worker-wall-v1')
+    if policy not in ('worker-wall-v1','consumed-source-v1'):raise ValueError('Unknown private credit clock policy')
+    equal(boot.get('clockPolicy','worker-wall-v1'),policy,'boot/measurement clock policy')
+    source_clock=policy=='consumed-source-v1'
+    posted=num(worker['initialSourceFramesPosted'],'initial posted PCM',integer=True) if source_clock else None
+    previous_consumed=num(worker.get('initialConsumedSourceFrames',0),'initial acknowledged source frames',integer=True) if source_clock else 0
+    if source_clock:
+        equal(worker['prefillLeadNativeFrames'],4,'declared lead')
+        equal(boot['prefillLeadNativeFrames'],4,'boot lead')
+        equal(worker['coreRate'],65536,'fixed native source clock')
+        if previous_consumed>posted:raise ValueError('Initial consumed source clock exceeds posted PCM')
     if abs(fps-16777216/280896)>1e-6:raise ValueError('Framerate differs from native GBA clock')
     if not origin<=start<=end or end-start<duration or abs(worker['elapsedMs']-(end-start))>1e-6:
         raise ValueError('Worker diagnostic window regressed or ended early')
@@ -182,14 +193,22 @@ def audit(report,identity,directory):
     if type(rows) is not list or not 1<=len(rows)<=160000:raise ValueError('Invalid bounded raw tick ledger')
     tick_times=[]
     for i,row in enumerate(rows):
-        if type(row) is not list or len(row)!=8:raise ValueError('Require eight raw fields per Worker tick')
-        fresh,planned,actual,drop,after,elapsed,before_counter,after_counter=row
+        if type(row) is not list or len(row)!=(11 if source_clock else 8):raise ValueError('Raw tick fields differ from declared clock policy')
+        fresh,planned,actual,drop,after,elapsed,before_counter,after_counter=row[:8]
         for key,value in zip(('fresh','planned','actual','drop','after','beforeCounter','afterCounter'),
                              (fresh,planned,actual,drop,after,before_counter,after_counter)):
             num(value,f'{key} row{i}',integer=True,maximum=0xFFFFFFFF if 'Counter'in key else 65535)
         num(elapsed,'elapsed row'+str(i))
         if not previous_elapsed<=elapsed<=end-origin:raise ValueError('Worker tick clock outside ordered window')
-        next_due=math.floor(elapsed/1000*fps)
+        if source_clock:
+            consumed,posted_before,posted_after=row[8:]
+            for key,value in [('consumed',consumed),('posted before',posted_before),('posted after',posted_after)]:num(value,key,integer=True)
+            if not previous_consumed<=consumed<=posted_before<=posted_after or posted_before!=posted:
+                raise ValueError('Actual source clock or posted PCM sequence regressed')
+            if actual==0 and posted_after!=posted_before:raise ValueError('PCM posted without native execution')
+            previous_consumed=consumed;posted=posted_after
+            next_due=4+math.floor(consumed/worker['coreRate']*fps)
+        else:next_due=math.floor(elapsed/1000*fps)
         if next_due<due or fresh!=next_due-due:raise ValueError('Fresh Worker demand differs from raw clock')
         available=debt+fresh;expected_drop=max(0,available-30);available-=expected_drop
         if drop!=expected_drop or planned!=min(5,available) or actual>planned or after!=available-actual:
@@ -200,6 +219,11 @@ def audit(report,identity,directory):
         previous_elapsed=elapsed;tick_times.append(time_origin+origin+elapsed)
         due=next_due;debt=after;counter=after_counter;max_pending=max(max_pending,available);max_debt=max(max_debt,after)
         fresh_total+=fresh;planned_total+=planned;actual_total+=actual;drop_total+=drop;mismatches+=planned!=actual
+    if source_clock:
+        equal(worker['finalSourceFramesPosted'],posted,'final native PCM posted')
+        final_consumed=num(worker.get('finalConsumedSourceFrames',previous_consumed),'final acknowledged source frames',integer=True)
+        if not previous_consumed<=final_consumed<=posted:raise ValueError('Closing source clock is outside posted PCM')
+        equal(worker['sourceFramesPosted'],posted-worker['initialSourceFramesPosted'],'measured native PCM posted')
     equal(final['due'],due,'final due');equal(final['backlog'],debt,'final debt')
     equal(final['executed']-initial['executed'],actual_total,'global actual increment')
     equal(final['overflowDropped']-initial['overflowDropped'],drop_total,'global overflow increment')
@@ -278,6 +302,7 @@ def audit(report,identity,directory):
         overlap_frames.append(sum(row[2] for row,t in zip(rows,tick_times) if begin<=t<=finish))
     if len(overlap)>1:raise ValueError('Repeated stall action is not this bounded experiment')
     return {'receipt_integrity':True,'scope':'Private Worker conservation and raw worklet transport observations only; no full performance, physical output, guest key consumption or production persistence approval.',
+            'clock_policy':policy,'native_seconds':actual_total/fps,'native_minus_worklet_seconds':actual_total/fps-final_audio['renderedOutputFrames']/final_audio['outputSampleRate'],
             'ticks':len(rows),'fresh_frames':fresh_total,'planned_frames':planned_total,'actual_frames':actual_total,
             'overflow_dropped_frames':drop_total,'closing_backlog':debt,'planned_mismatch_ticks':mismatches,
             'max_worker_tick_gap_ms':max_gap,'worker_ticks_during_each_main_stall':overlap,

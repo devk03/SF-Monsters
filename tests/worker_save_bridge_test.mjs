@@ -5,18 +5,18 @@ import { webcrypto, createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 const source = readFileSync(new URL('../scripts/quality/experiments/worker-core.js', import.meta.url), 'utf8');
 const sha = value => createHash('sha256').update(value).digest('hex');
-function fixture() {
+function fixture(options={}) {
   let clock = 0, serial = 0, timerSerial = 0, counter = 0, pc = 0, initialized = false, bump = false;
   let corruptNextRestore = false, failNextState = false, holdNextHash = false, failNextHash = false, releaseHash = null;
   const heap = new Uint8Array(8 * 1024 * 1024); heap.fill(0xAA);
   let alloc = 1024 * 1024; const flash = new Uint8Array(131072), timers = new Map(), pending = new Map();
-  const canonicalScratch = [], audioMessages = [], lifecycle = []; let audioFrames = 0, loads = 0;
+  const canonicalScratch = [], audioMessages = [], lifecycle = [], faults=[]; let audioFrames = 0, loads = 0;
   const mod = {
     HEAPU8: heap, HEAP16: new Int16Array(heap.buffer),
     _malloc(size) { const ptr = alloc; alloc += (size + 7) & ~7; assert.ok(alloc < heap.length); return ptr; }, _free() {},
     _mgbawasm_init() {}, _mgbawasm_set_log_level() {}, _mgbawasm_set_idle_optimization() {}, _mgbawasm_set_allow_opposing_directions() {},
     _mgbawasm_load() { loads++; counter = pc = 0; initialized = false; flash.fill(255); return 1; },
-    _mgbawasm_run_frame() { counter = (counter + 1) >>> 0; initialized = true; pc++; audioFrames += 128;
+    _mgbawasm_run_frame() { counter = (counter + 1) >>> 0; initialized = true; pc++; audioFrames += options.sourceFramesPerFrame??128;
       heap[1024] = counter & 255; if (bump) flash[90000] ^= 1; },
     _mgbawasm_frame_counter: () => counter,
     _mgbawasm_framerate_micro: () => 60000000, _mgbawasm_sample_rate: () => 65536,
@@ -53,6 +53,7 @@ function fixture() {
     importScripts() { context.createMgbaModule = async () => mod; },
     postMessage(value, transfer = []) {
       const message = structuredClone(value, { transfer });
+      if(message.type==='worker-error'){faults.push(message);return;}
       const entry = pending.get(message.id);
       if (!entry) throw Error('Unexpected fake Worker message: ' + JSON.stringify(message));
       pending.delete(message.id); message.ok ? entry.resolve(message.result) : entry.reject(Error(message.error));
@@ -72,9 +73,9 @@ function fixture() {
   };
   const battery = Uint8Array.from({ length: 131072 }, (_, i) => i * 17 & 255);
   const state = new Uint8Array(64); new DataView(state.buffer).setUint32(0, 42, true);
-  const boot = () => rpc('boot', { rom: new Uint8Array([127]), battery: battery.slice(), state: state.slice(),
-    audioPort: port, jsUrl: 'https://invalid.local/unchanged-core.js', wasmUrl: 'https://invalid.local/unchanged-core.wasm' });
-  return { rpc, advance, boot, battery, state, flash, canonicalScratch, audioMessages, lifecycle,
+  const boot = (extra={}) => rpc('boot', { rom: new Uint8Array([127]), battery: battery.slice(), state: state.slice(),
+    audioPort: port, jsUrl: 'https://invalid.local/unchanged-core.js', wasmUrl: 'https://invalid.local/unchanged-core.wasm',...extra });
+  return { rpc, advance, boot, faults,consume:n=>port.onmessage({data:n}),battery, state, flash, canonicalScratch, audioMessages, lifecycle,
     elapseWithoutTimers: duration => { clock += duration; },
     changeFlash: () => { bump = true; }, corruptRestore: () => { corruptNextRestore = true; },
     failState: () => { failNextState = true; }, holdHash: () => { holdNextHash = true; },
@@ -276,5 +277,26 @@ await test('audio watch has a finite expiry and destroy does not leave diagnosti
   await assert.rejects(f.rpc('audio-watch-end'),/No active/);
   await f.rpc('audio-watch-start',{durationMs:100});await f.rpc('destroy');
   assert.equal(f.audioMessages.filter(m=>m?.type==='diagnostics'&&m.enabled===false).length,2);
+});
+await test('optional consumed-source clock uses actual sink progress and a bounded four-frame lead',async()=>{
+  const f=fixture({sourceFramesPerFrame:1097});await f.boot({clockPolicy:'consumed-source-v1'});
+  const start=await f.rpc('start',{durationMs:5000});await f.advance(0);let s=await f.rpc('snapshot');
+  assert.equal(s.executed,4);assert.equal(s.prefillLeadNativeFrames,4);
+  await f.advance(1000);assert.equal((await f.rpc('snapshot')).executed,4);
+  f.consume(1093);await f.advance(5);s=await f.rpc('snapshot');assert.equal(s.executed,5);
+  const paused=await f.rpc('pause');await f.advance(1000);const resumed=await f.rpc('resume');await f.advance(0);
+  assert.equal(resumed.executed,paused.executed);assert.equal((await f.rpc('snapshot')).executed,5);
+  assert.equal(resumed.runDeadlineMs,start.runDeadlineMs);await f.rpc('destroy');
+});
+await test('invalid consumed-source callbacks stop execution and prevent implicit resume',async()=>{
+  for(const kind of ['impossible','regressed']){
+    const f=fixture({sourceFramesPerFrame:1097});await f.boot({clockPolicy:'consumed-source-v1'});
+    await f.rpc('start',{durationMs:1000});await f.advance(0);
+    if(kind==='regressed')f.consume(1000);
+    f.consume(kind==='impossible'?100000:999);
+    const failed=await f.rpc('snapshot');assert.equal(failed.running,false);assert.match(failed.fatalClockError,/ordered/);
+    await f.advance(100);assert.equal((await f.rpc('snapshot')).counter,failed.counter);
+    assert.equal(f.faults.length,1);await assert.rejects(f.rpc('resume'),/uncertain/);await f.rpc('destroy');
+  }
 });
 console.log(JSON.stringify({ passed, kind: 'pure-fakecore-phase-and-save-protocol', nativeEmulation: false }));

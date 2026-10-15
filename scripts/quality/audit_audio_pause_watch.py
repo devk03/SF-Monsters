@@ -92,6 +92,8 @@ def audit(report, identity, directory):
         shift=resumed['clockOriginMs']-paused['clockOriginMs']
         actual_pause=resumed['phaseAnchorMs']-paused['pausedAtMs']
         if actual_pause<0 or abs(shift-actual_pause)>1e-6:raise ValueError('Origin shift differs from actual paused time')
+    if final['observedThroughOutputFrame']/final['outputSampleRate']<=observations[-1]['resumeAfter']['currentTime']+1/59.7275:
+        raise ValueError('Final worklet output does not include a post-resume tail')
     equal(watch['initial']['saveEpoch'],watch['final']['saveEpoch'],'no save reset')
     equal(watch['initial']['playbackEpoch'],watch['final']['playbackEpoch'],'no playback reset')
     if previous_after>after['beforeMs']:raise ValueError('Cycles extend past the observation')
