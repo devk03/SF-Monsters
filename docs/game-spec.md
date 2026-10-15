@@ -7244,3 +7244,29 @@ v71 public trainer-portrait checkpoint — October15,01:25UTC:
   campaign/art/audio/type/catalog/full-turn/performance/save gates OPEN. Next
   work remains first-slice polish plus source-derived full-turn/party-sync proof;
   no campaign expansion is authorized by these technical subset passes.
+
+v72 frontage asset checkpoint — October15,01:33UTC:
+
+- User's density/repetition feedback remains the current first-slice priority.
+  Built-in imagegen produced four distinct original building candidates: red
+  brick loft, sage Edwardian, sandstone warehouse and a narrow coffee storefront.
+  Sources, exact generation prompt, design brief and conversion recipes are
+  stored in assets/tiles/south-park-frontage-v1. No commercial source image.
+- Alpha-band extraction respects actual card bounds; source cards are not
+  perfectly quarter-aligned. Native outputs are48x80 for three facades and32x64
+  for the shop, with individual RGB55515-opaque-color palettes and transparent0.
+  Conversion records the deliberate final dimensions rather than silently
+  claiming the original requested64x80 footprints. Native montage inspected;
+  these remain unreviewed candidates without an art approval increase.
+- Five portable resource-contract cases pass: distinct native cards/banks,
+  stale source/prompt rejection, malformed RGB555 rejection even with an updated
+  hash, preview/index disagreement even with updated hashes, and wrong-bank/
+  missing-resource rejection. Existing secondary graphics are not changed.
+- Root owns forthcoming primary tileset/map integration. Proposed53 blocked
+  cells require source routing, compiled pixels/attributes, genuine occupied
+  old-save recovery, native collision/door traversal, browser and human review.
+  No map change/build/deployment is claimed at this asset-only checkpoint.
+- Public remainsv71/Site62. Alignment owns its finite full-turn profile/tests;
+  its latest01:30 result is two controlled native cases with stronger party/
+  callback/packet checks, still awaiting handoff/independent root review. These
+  are not yet added to accepted fixture totals. GoalACTIVE; all broad gatesOPEN.

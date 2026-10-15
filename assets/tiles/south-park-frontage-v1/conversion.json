@@ -1,0 +1,90 @@
+{
+  "source_sha256": "bcf1bf94e778bd0b3782239c68f703860e4d2f15ef161703d3f95a78e11f5717",
+  "prompt_sha256": "d25320bf953ec94dfbd3b02a65f4008720385f1f43e9fb0cdfc1dc345b6eda3a",
+  "source_size": [
+    1774,
+    887
+  ],
+  "alpha_threshold": 128,
+  "method": "Separate alpha bands; nearest native resize; RGB555 median-cut15; transparent0",
+  "generator": "Built-in imagegen; original designs; no commercial source image",
+  "quality_approval": "pending",
+  "cards": [
+    {
+      "name": "brick",
+      "size": [
+        48,
+        80
+      ],
+      "bank": 0,
+      "source_bounds": [
+        78,
+        57,
+        485,
+        822
+      ],
+      "files": {
+        "brick.png": "18c082c941ae49fc5769c76270c05c46560b1403057558c85f5fe34092353c5e",
+        "brick.indices": "f010a6684405f92508518ab8892c4209838bd4140ed561119f422c619ac8c8d6",
+        "brick.gbapal": "6c5847226570fa53df01c41a4ab5acd5cab8619425d53602e65996883809efcd"
+      }
+    },
+    {
+      "name": "sage",
+      "size": [
+        48,
+        80
+      ],
+      "bank": 1,
+      "source_bounds": [
+        523,
+        32,
+        882,
+        822
+      ],
+      "files": {
+        "sage.png": "220d95693b8ce7ee77d3ed100212a205a536d02c293a613c9f2b8ab0f79034f3",
+        "sage.indices": "a51a3b0fc9f14fb3499c344cb57c3bcb66c5b9ac9efe91fc7b26aff054c78298",
+        "sage.gbapal": "bb906e41a2461cd214b12486ea4c08396453d65c16e7ea34429ca0bbe406ef37"
+      }
+    },
+    {
+      "name": "sandstone",
+      "size": [
+        48,
+        80
+      ],
+      "bank": 2,
+      "source_bounds": [
+        928,
+        36,
+        1322,
+        822
+      ],
+      "files": {
+        "sandstone.png": "3b4854d9c465f1cb25d59a83c43cebeba901301d7cf812556809cced7cee71b9",
+        "sandstone.indices": "4037dd79acfc017eb5bfd58b2e66ab870102c4419c9af9a009d947879c00e941",
+        "sandstone.gbapal": "7c24bc1e807043b15195ee73d1d4017dd60a5fb8e11fec425f10a69cf1edaa04"
+      }
+    },
+    {
+      "name": "coffee",
+      "size": [
+        32,
+        64
+      ],
+      "bank": 3,
+      "source_bounds": [
+        1405,
+        293,
+        1697,
+        822
+      ],
+      "files": {
+        "coffee.png": "ee26ed1255fd2cb9284a66d0b5b4566731ca971ca4605490634ef3ec831c36cd",
+        "coffee.indices": "a9d312a1c3a46531fb8470de06799b9188d3bb158c182c25bb92f198e01b426c",
+        "coffee.gbapal": "f2432c958582f45830a87ebc61e650a1f72c7455d81eda62be8dbab8a46837a3"
+      }
+    }
+  ]
+}
