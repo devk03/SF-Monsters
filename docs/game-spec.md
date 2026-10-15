@@ -9196,3 +9196,20 @@ Native-cycle audit and progress — October15,11:22UTC:
   routine local checks. Root is continuing the chain and then a longer traversal
   measurement on the same final Worker source. Public v80 and all full release
   gates remain unchanged. Hard stop remains05:00SF/12:00UTC today.
+
+
+Excluded replay-boundary attempt — October15,11:26UTC:
+
+- Sixth linked attempt's Save report has18main/Worker edges and0audio loss, but
+  completed replay metadata was discarded as null. New strict cycle verifier
+  rejects it; no native cold cycle or successful-cycle count was added. Raw
+  report540d391d56214cbbab853eacb8fafb03 and postc8fd222f4b394f6a9d72604e0022b20f
+  remain unchanged. Chain stays at five verified edges C13→18.
+- A strict cross-clock boundary can exclude replay start after absolute-time
+  subtraction rounding: projected9530.7001953125ms versus plausible raw9530.7ms.
+  The missing raw replay cannot be recovered, so this is a supported inference,
+  not a reconstructed completion claim. New host waits a REAL5ms after Worker
+  admission before starting the route, keeps the strict window test, records
+  actual admission timestamps and preserves raw unselected replay for future RCA.
+  Eighth controller regression covers the boundary without rewriting timestamps
+  or widening the auditor. Retrying from the last verified native C18 checkpoint.

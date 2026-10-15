@@ -96,3 +96,13 @@ test('a later measurement cannot inherit a completed replay from an earlier wind
     assert.deepEqual(prior,{startedAtMs:100,endedAtMs:500,reason:'complete'});
     assert.throws(()=>replayForWindow(prior,500,100),/window/);
 });
+
+
+test('strict window selection keeps raw boundary rejection and admits a real delayed replay',()=>{
+    const raw={startedAtMs:9530.7,endedAtMs:43484,reason:'complete'};
+    const projectedStart=1792063075715.6-1792063066184.9;
+    assert.equal(replayForWindow(raw,projectedStart,69530),null);
+    const delayed={...raw,startedAtMs:raw.startedAtMs+5,endedAtMs:raw.endedAtMs+5};
+    assert.equal(replayForWindow(delayed,projectedStart,69530),delayed);
+    assert.equal(raw.startedAtMs,9530.7);
+});
