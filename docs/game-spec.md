@@ -7792,3 +7792,28 @@ v74 public challenge-briefing checkpoint — October15,03:07UTC:
  03:07UTC; next by03:37UTC. Peer finite20min read-only visual priority review
   pending; root owns all sources. Human0/11, music last explicit2/4/revision
   pending, all broad gatesOPEN. GoalACTIVE throughOctober15,18Pacific.
+
+
+South Park paving asset checkpoint — October15,03:15UTC:
+
+- Alignment identified the ground's broad muted field and single repeated
+  fleck as a remaining visual gap beneath the denser frontage. Root prepares
+  one original bright concrete candidate for South Park ONLY; shared Sunset
+  street source/palette and all maps/events/collision remain unchanged.
+- Built-in image generation supplied square source; exact prompt/source retained.
+  First dashed-joint candidate was rejected as repetitive and preserved privately.
+  Second source uses an8x8 cream slab with one-pixel bottom/right joints. Native
+  center samples select only existing palette1/2, repeat2x2 into16x16. No palette
+  change/requantization or inherited artwork. Human approval stays pending.
+- Six portable converter guards pass: native color/master/bounds, repeatability,
+  source/prompt drift, desynchronized master/PNG/indices and palette corruption.
+  Synthetic codec fixtures never become game assets; fixture folders preserved.
+- Source-only preflight reduces resident secondary tiles503→502, preserves
+  attributes/palette exactly and leaves reserved door VRAM1016..1023 available.
+  Frozen baseline-v74 contains only original SF resource bytes, matching previous
+  independent hashes, for checking all decoded non-paving art through repacking.
+- Production renderer/compiled gate are not wired yet; no new ROM or publication
+  claimed. Peer owns only new paving auditor/guard files, due03:56UTC. Root owns
+  converter/assets/production integration. Last exchange03:15UTC,next03:45UTC.
+  Native seam/door-return/browser/ordinary-save comparisons remain required.
+  Publicv74/Site65, human0/11, music2/4 pending revision; goalACTIVE.

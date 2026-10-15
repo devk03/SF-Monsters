@@ -1,0 +1,26 @@
+{
+  "scope": "Only original SF South Park art resources, frozen as an independent decoded-pixel baseline. No inherited cartridge, engine or commercial art.",
+  "target_sha256": "9335199708e8d38a95d705074f8f6e38c340026a83d7a1318f9fb8972de821f7",
+  "files": {
+    "tiles.4bpp": {
+      "symbol": "gTilesetTiles_SFSouthPark",
+      "bytes": 16096,
+      "sha256": "1028cc530238a128ba379d2de5f8153cdbf2eb6c1054f67501f5e4900ce2b6c8"
+    },
+    "metatiles.bin": {
+      "symbol": "gMetatiles_SFSouthPark",
+      "bytes": 2400,
+      "sha256": "c5a357ba4d453bb0e856b09a594334303b50ead542ef7081b92a243a7269a0c8"
+    },
+    "attributes.bin": {
+      "symbol": "gMetatileAttributes_SFSouthPark",
+      "bytes": 300,
+      "sha256": "5d75b62c2517473238cfe7967401f492d506a41ffbbd5de58ea9c99ad39eab2f"
+    },
+    "palettes.gbapal": {
+      "symbol": "gTilesetPalettes_SFSouthPark",
+      "bytes": 512,
+      "sha256": "73e3ba1b6d1f0a9385e97e92eba6a4a2d1268384e4cdf6f45f452a49fda512db"
+    }
+  }
+}

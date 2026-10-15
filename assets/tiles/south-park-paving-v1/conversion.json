@@ -1,0 +1,20 @@
+{
+  "source_sha256": "2577ac0e1fb918cd804f721460728ed36dc36ee38085dc5b196863057270cbe8",
+  "prompt_sha256": "be548e78e29beda5c7296fcb5c8b1b7f6b5251ac84e9f2aea8667f2450c04708",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "native_size": [
+    16,
+    16
+  ],
+  "method": "eight-by-eight center samples; nearest original colors1/2; repeat2x2",
+  "street_palette_sha256": "c9056768a5543b99f664e5a21ae2aa609f84391b2dcd006f3c133fdb5c1c2b13",
+  "quality_approval": "pending",
+  "files": {
+    "master8.indices": "abc57fa59cab578112d578c18b4a2c524770ed2b58fce83123afb17f6b3722bf",
+    "paving.indices": "36d87ab45a3526bad751c51b330e8b66baf9f13f53d20fd32c191be678be9b96",
+    "paving.png": "ec1647b98fe9462aef59d5953a2bff5ffec8e863a3991d1abefad649f5fef293"
+  }
+}
