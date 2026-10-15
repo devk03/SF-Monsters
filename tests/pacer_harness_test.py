@@ -15,7 +15,7 @@ import uuid
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/quality'))
-from serve_web_performance import runtime_config,page_source,snapshot,serve,MAX_REPORT_BYTES
+from serve_web_performance import runtime_config,page_source,report_byte_limit,snapshot,serve,MAX_REPORT_BYTES
 
 
 def directory():
@@ -23,6 +23,35 @@ def directory():
 
 
 class PrivateRuntime(unittest.TestCase):
+    def test_only_explicit_private_host_uses_its_larger_finite_report_bound(self):
+        self.assertEqual(report_byte_limit({}),MAX_REPORT_BYTES)
+        self.assertEqual(report_byte_limit({'performance_schema':2}),8*MAX_REPORT_BYTES)
+        identity={'performance_schema':2,'private_page_override':True,'unit_fixture':True}
+        self.assertEqual(report_byte_limit(identity),64*MAX_REPORT_BYTES)
+        with self.assertRaises(ValueError):report_byte_limit({'private_page_override':True,'performance_schema':1})
+        output=directory()
+        with socket.socket()as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
+        thread=threading.Thread(target=serve,args=(SimpleNamespace(port=port,seconds=2),output,identity,{'/':b'fixture'}))
+        thread.start()
+        try:
+            for _ in range(30):
+                try:
+                    connection=http.client.HTTPConnection('127.0.0.1',port,timeout=.2)
+                    connection.request('GET','/');connection.getresponse().read();connection.close();break
+                except OSError:time.sleep(.01)
+            payload={'schema':2,'context':{'identity':identity},'unit_padding':'x'*(9*MAX_REPORT_BYTES)}
+            body=json.dumps(payload).encode();connection=http.client.HTTPConnection('127.0.0.1',port,timeout=2)
+            connection.request('POST','/report',body,{'Origin':f'http://127.0.0.1:{port}','Content-Type':'application/json'})
+            response=connection.getresponse();self.assertEqual(response.status,200)
+            receipt=json.loads(response.read());connection.close()
+            self.assertEqual(json.loads((output/receipt['name']).read_bytes()),payload)
+            connection=http.client.HTTPConnection('127.0.0.1',port,timeout=1)
+            connection.putrequest('POST','/report');connection.putheader('Origin',f'http://127.0.0.1:{port}')
+            connection.putheader('Content-Type','application/json');connection.putheader('Content-Length',str(64*MAX_REPORT_BYTES+1))
+            connection.endheaders();response=connection.getresponse();self.assertEqual(response.status,400)
+            response.read();connection.close()
+        finally:thread.join(3);self.assertFalse(thread.is_alive())
+
     def test_private_host_requires_explicit_isolation_and_exact_bounded_html(self):
         root=directory();page=root/'host.html';page.write_bytes(b'<!doctype html>private host')
         args=SimpleNamespace(private_page=page,private_runtime=root,report_schema=2)

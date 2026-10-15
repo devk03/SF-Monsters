@@ -14,6 +14,7 @@ import zlib
 ROOT = Path(__file__).resolve().parents[2]
 REVISION = '26b7884bc25a5933960f3cdcd98bac1ae14d42e2'
 MAX_REPORT_BYTES = 1048576
+MAX_PRIVATE_HOST_REPORT_BYTES = 64 * MAX_REPORT_BYTES
 
 
 def digest(data):
@@ -93,6 +94,14 @@ def page_source(args):
     if getattr(args, 'controlled_stall', False):
         raise ValueError('Custom page owns its explicit stress actions.')
     return page, True
+
+
+def report_byte_limit(identity):
+    if identity.get('private_page_override') is True:
+        if identity.get('performance_schema') != 2:
+            raise ValueError('Large private host report requires schema2.')
+        return MAX_PRIVATE_HOST_REPORT_BYTES
+    return MAX_REPORT_BYTES * (8 if identity.get('performance_schema', 1) == 2 else 1)
 
 
 def snapshot(args):
@@ -175,6 +184,7 @@ def snapshot(args):
         'public_progress_touched': False, 'server_limit_seconds': args.seconds,
         'provenance_scope': 'Controller-only capture metadata and matching native state header; companion Flash hashed separately',
     }
+    identity['report_byte_limit'] = report_byte_limit(identity)
     routes['/identity.json'] = json_bytes(identity)
     if args.input:
         identity['inputs'][str(args.input.resolve())] = digest(route_bytes)
@@ -199,7 +209,7 @@ def serve(args, output, identity, routes):
     authority = '127.0.0.1:' + str(args.port)
     origin = 'http://' + authority
     deadline = time.monotonic() + args.seconds
-    max_report_bytes = MAX_REPORT_BYTES * (8 if identity.get('performance_schema', 1) == 2 else 1)
+    max_report_bytes = report_byte_limit(identity)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_args):

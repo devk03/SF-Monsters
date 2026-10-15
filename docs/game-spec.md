@@ -8818,3 +8818,18 @@ Worker proof receipt review — October15,08:44UTC:
   main-thread600sec receipts. Only private Worker host/transport changes; this
   isolates architecture from subsequent v79/v80 density. No induced stall during
   route replay, whose existing50ms late-timer guard remains. Publicv80 unchanged.
+
+
+Private long-report storage preflight — October15,08:49UTC:
+
+- Stopped the first600sec Worker attempt early after estimating full raw ledger,
+  worklet snapshots and main canvas observations would exceed the opted-in8MiB
+  report ceiling. No accepted completed receipt was saved; do not score that
+  attempt. Own Worker/audio/tab and900sec-bounded server are stopped.
+- Added a disclosed64MiB ceiling only for explicit .tools private host/schema2
+  sessions. Normal1MiB and existing schema2/8MiB collectors stay unchanged. Seven
+  harness tests pass, including exact9MiB private-host storage, rejection above
+  64MiB, old bounds, provenance, path/origin/schema checks and finite2sec servers.
+  Raw long-run data stay private; the UI now shows a bounded summary rather than
+  rendering the complete tick ledger. Restart the exact600sec route from fresh
+  original checkpoint/audio state; no failed attempt or gate is hidden.
