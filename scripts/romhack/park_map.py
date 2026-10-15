@@ -15,6 +15,7 @@ from park_infill import infill_tile, connected_tile, apply as apply_infill
 from park_paving import load_paving
 from service_architecture import load as load_services
 from service_door_art import load as load_service_doors
+from city_dressing import tile as dressing_tile
 
 # Existing service doors retain their metatile IDs and recovery coordinates.
 FACADES = ((10, 1, 7, 5, 40), (29, 1, 7, 5, 75),
@@ -109,6 +110,9 @@ def park_resources(root):
 
 
 def park_tile(plan, x, y):
+    furnishing=dressing_tile(plan,x,y)
+    if furnishing is not None:
+        return furnishing
     connected=connected_tile(plan,x,y)
     if connected is not None:
         return connected

@@ -13,6 +13,7 @@ from park_frontage import load
 from park_infill import PLACEMENTS, APRON_CARDS, previous_plan, resources
 from park_map import park_resources, park_tile
 from sidewalk_thresholds import load as load_thresholds
+from city_dressing import footprint as city_footprint
 
 
 def reachable(plan):
@@ -27,7 +28,7 @@ def reachable(plan):
 
 
 class PrimaryInfill(unittest.TestCase):
-    def test_map_changes_only_53_solid_cells_and_primary_binding(self):
+    def test_infill_and_declared_city_cells_preserve_every_other_source_field(self):
         plan = json.loads((ROOT/'romhack/content/south-park.json').read_text())
         old = previous_plan(plan)
         self.assertEqual(hashlib.sha256(json.dumps(old,sort_keys=True,
@@ -38,7 +39,9 @@ class PrimaryInfill(unittest.TestCase):
         self.assertEqual(len(cells),53)
         actual = {(x,y) for y,row in enumerate(plan['rows']) for x,t in enumerate(row)
                   if t != old['rows'][y][x]}
-        self.assertEqual(cells,actual)
+        furniture=city_footprint()
+        solid={p for p,(_,t) in furniture.items() if t=='U'}
+        self.assertEqual(cells|furniture.keys(),actual)
         for x,y in cells:
             self.assertEqual(plan['legend'][plan['rows'][y][x]],[0,True,0])
             if 21<=x<=22 and 2<=y<=5:
@@ -51,9 +54,9 @@ class PrimaryInfill(unittest.TestCase):
             self.assertEqual(plan['rows'][y][x],'P')
             self.assertEqual(plan['legend']['P'],[699,False,3])
             self.assertEqual(park_tile(plan,x,y),109+x-18)
-        for x,y in reachable(old)-cells-aprons:
+        for x,y in reachable(old)-cells-aprons-furniture.keys():
             self.assertEqual(park_tile(plan,x,y),park_tile(old,x,y))
-        self.assertEqual(reachable(old)-cells,reachable(plan))
+        self.assertEqual(reachable(old)-cells-solid,reachable(plan))
         for key in ('npcs','warp_events','bg_events','metadata','border_tile'):
             self.assertEqual(plan[key],old[key])
         events = plan['npcs']+plan['warp_events']+plan['bg_events']
@@ -66,7 +69,7 @@ class PrimaryInfill(unittest.TestCase):
     def test_all_primary_cells_decode_exact_pixels_palette_underlay_and_priority(self):
         secondary = park_resources(ROOT);raw,records,attrs,palettes = resources(ROOT,secondary[1])
         self.assertEqual((len(raw)//32,len(records)//16,len(attrs)//2,len(palettes)),
-                         (395,120,120,512))
+                         (449,135,135,512))
         self.assertEqual(raw[:32],bytes(32))
         self.assertEqual(palettes[128:160],
             (ROOT/'assets/tiles/south-park-paving-v1/paving.gbapal').read_bytes())

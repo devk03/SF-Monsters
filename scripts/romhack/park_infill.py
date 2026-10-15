@@ -1,5 +1,6 @@
 """Place original street-wall cards in an isolated, unanimated primary tileset."""
 import struct
+import json
 from park_art import facade_cells, tile_orientations
 from park_frontage import load
 from title_art import tiles8
@@ -7,6 +8,8 @@ from title_creature import pack4
 from park_paving import load_paving_palette
 from sidewalk_thresholds import load as load_thresholds
 from connected_frontage import load as load_connected
+from city_furniture import load as load_furniture
+from city_dressing import strip as strip_dressing
 
 # token, name, left, top, width, height, first native metatile
 PLACEMENTS = (('W', 'brick', 2, 1, 3, 5, 1),
@@ -42,8 +45,7 @@ def infill_tile(plan, x, y):
 
 def previous_plan(plan):
     """Remove precisely this infill for pinned historical-map comparisons."""
-    from copy import deepcopy
-    result = deepcopy(plan)
+    result = strip_dressing(plan)
     result['tilesets'].pop('primary')
     for token, _, left, top, width, height, _ in PLACEMENTS:
         result['legend'].pop(token)
@@ -55,7 +57,7 @@ def previous_plan(plan):
     return result
 
 
-def resources(root, secondary_records):
+def resources(root, secondary_records, *, furniture=True):
     """Use primary0..511 for new pixels; underlay references existing sidewalk."""
     if len(secondary_records) != 150 * 16:
         raise ValueError('Review the pinned secondary metatile allocation.')
@@ -114,6 +116,15 @@ def resources(root, secondary_records):
         append_cell(cell,bank,0x1000 if index//11>=3 else 0)
     if len(records) != METATILE_COUNT*16 or len(attributes) != METATILE_COUNT*2:
         raise ValueError('Original primary frontage table allocation changed.')
+    plan = json.loads((root/'romhack/content/south-park.json').read_text())
+    if furniture and 'city_furniture' in plan:
+        strip_dressing(plan)  # Validate the entire declared footprint, not only used cells.
+        for card in load_furniture(root):
+            width,height = card['width'],card['height']
+            for index,(cell,bank) in enumerate(facade_cells(card['pixels'],width,height,5)):
+                append_cell(cell,bank,0x1000 if index//(width//16)==height//16-1 else 0)
+        if len(records)!=135*16 or len(attributes)!=135*2:
+            raise ValueError('City furniture must append exactly15 metatiles.')
     return bytes(raw), bytes(records), bytes(attributes), bytes(palettes)
 
 

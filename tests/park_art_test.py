@@ -197,6 +197,9 @@ class ParkResources(unittest.TestCase):
                     if 18<=x<29 and 2<=y<7:
                         self.assertEqual(native_tile,65+(y-2)*11+x-18)
                         self.assertEqual(plan['legend'][token][1:],[False,3] if y==6 else [True,0])
+                    elif token in 'uU':
+                        self.assertIn(native_tile,range(120,135))
+                        self.assertEqual(plan['legend'][token],[0,token=='U',3])
                     else:
                         self.assertIn(token, 'WXY')
                     continue  # New primary resources have separate exact pixel/attribute checks.
@@ -306,7 +309,7 @@ class ParkResources(unittest.TestCase):
         for point in ((16,17),(17,17)):
             self.assertEqual(plan['rows'][point[1]][point[0]], 'P')
 
-    def test_compact_frontage_keeps_two_clear_sidewalk_rows_and_service_anchors(self):
+    def test_compact_frontage_keeps_clear_approach_row_and_declared_curbside_bases(self):
         plan = json.loads((ROOT / 'romhack/content/south-park.json').read_text())
         gap = maximum = 0
         for token in plan['rows'][5][10:36]:
@@ -317,7 +320,10 @@ class ParkResources(unittest.TestCase):
             for x in range(11, 36):
                 if (x, y) == (29, 6):
                     continue  # Existing clinic sign.
-                self.assertFalse(plan['legend'][plan['rows'][y][x]][1])
+                solid={(11,7),(15,7),(17,7),(19,7),(23,7),(24,7),(26,7)}
+                self.assertEqual(plan['legend'][plan['rows'][y][x]][1],(x,y) in solid)
+        for x in (13,20,21,22,25,28,32):
+            self.assertFalse(plan['legend'][plan['rows'][7][x]][1])
         self.assertEqual([(w['x'], w['y']) for w in plan['warp_events']], [(13, 5), (32, 5), (16, 16)])
         for x, y in ((19, 4), (24, 4)):
             self.assertTrue(plan['legend'][plan['rows'][y][x]][1])

@@ -17,6 +17,7 @@ from city_map import apply_city_map
 from city_map_audit import audit_city_map
 from seed_door_audit import audit_seed_door
 from connected_frontage_audit import audit_connected
+from city_furniture_audit import audit_furniture
 from service_architecture_audit import audit_services
 from monsters import apply_monsters
 from creature_audio import apply_creature_audio
@@ -191,7 +192,15 @@ def main():
     if compiled_portraits.get('passed') is not True:
         raise ValueError('Compiled trainer portraits failed; preserved receipt: ' + str(portrait_path))
     print('Compiled trainer portraits verified: ' + json.dumps(compiled_portraits['counts']))
-    compiled_connected = audit_connected(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    compiled_furniture = audit_furniture(target, EMERALD / 'sf-engine-probe.elf', ROOT)
+    furniture_bytes = (json.dumps(compiled_furniture, indent=2) + '\n').encode()
+    furniture_path = validation_directory / ('city-furniture-' + uuid.uuid4().hex + '.json')
+    with furniture_path.open('xb') as stream:
+        stream.write(furniture_bytes)
+    if compiled_furniture.get('passed') is not True:
+        raise ValueError('Compiled city furniture failed; preserved receipt: ' + str(furniture_path))
+    print('Compiled city furniture verified: ' + json.dumps(compiled_furniture['counts']))
+    compiled_connected = audit_connected(target, EMERALD / 'sf-engine-probe.elf', ROOT, furniture=True)
     infill_bytes = (json.dumps(compiled_connected, indent=2) + '\n').encode()
     infill_path = validation_directory / ('connected-frontage-' + uuid.uuid4().hex + '.json')
     with infill_path.open('xb') as stream:
@@ -266,6 +275,12 @@ def main():
         'receipt_sha256': hashlib.sha256(infill_bytes).hexdigest(),
         'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/connected_frontage_audit.py').read_bytes()).hexdigest(),
         'quality_approval': 'pending', 'scope': compiled_connected['scope']
+    }
+    manifest['compiled_city_furniture'] = {
+        'passed': True, 'counts': compiled_furniture['counts'],
+        'receipt_sha256': hashlib.sha256(furniture_bytes).hexdigest(),
+        'validator_sha256': hashlib.sha256((ROOT / 'scripts/romhack/city_furniture_audit.py').read_bytes()).hexdigest(),
+        'quality_approval': 'pending', 'scope': compiled_furniture['scope']
     }
     manifest['compiled_service_architecture'] = {
         'passed': True, 'counts': compiled_services['counts'],
@@ -347,6 +362,8 @@ def main():
         'assets/tiles/connected-frontage-v3/conversion.json').read_text())
     manifest['south_park_services'] = json.loads((ROOT /
         'assets/tiles/south-park-services-v3/conversion.json').read_text())
+    manifest['city_furniture'] = json.loads((ROOT /
+        'assets/tiles/city-furniture-v1/conversion.json').read_text())
     if args.fixture:
         manifest['fixture'] = {'name': args.fixture, 'setup': 'native scripted gift and Rare Candy',
                                'campaign_progress_evidence': False}

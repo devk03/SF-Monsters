@@ -8381,3 +8381,19 @@ Independent city-extension gate — October15,05:57UTC:
   Existing connected checks may exclude extension tails and restore18 cells only
   AFTER the new gate passes on the same ROM/ELF. Default v77 mode stays strict.
   No native placement/recovery, browser or quality acceptance is inferred.
+
+City-dressing source integration — October15,05:57UTC:
+
+- Normal v78 producer now appends eight original cards:449 primary tiles,
+ 135records/attributes; secondary stays476 with native cache reserved. All395old
+  primary tiles,120records/attributes and512 palette bytes remain exactv77.
+  Houses and three service-door registrations/timing are unchanged.
+- Ten placed props occupy18 existing sidewalk cells:14 solid bases and4 walkable
+  upper lamp/tree cells. Moved meter to19,7 to preserve the21,7 crossing;
+  opposite bench18..19,11 and recycling34..35,11 keep clear service approaches.
+  Six new source tests and existing infill5/art12/flips6/map14/resume checks pass;
+  all remaining walkable cells stay connected. These are source checks only.
+- Prepared and independently parsed14 genuine ordinary v77 Flash saves at every
+  future solid base, counter9 with native slot checksums and exact saved positions.
+  They are private fixtures for actual cold upgrade/resume tests; no new-version
+  recovery result yet. Normal compiled v78 gates and browser/native QA are next.

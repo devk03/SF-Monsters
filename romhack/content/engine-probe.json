@@ -1,9 +1,9 @@
 {
-  "version": "0.0.77-connected-street-preview",
+  "version": "0.0.78-city-furniture-preview",
   "requires_compiled_world_tiles": true,
   "title": "SF MONSTERS",
   "game_code": "BPEE",
-  "status": "Unfinished SF opening chapter with original Mini Monsters, Sunset, South Park, the clinic, seed room and Cognition office. The northern South Park block uses connected houses with shared roof depth, readable entrances, attached steps and gray paving; the clinic and office use simpler matching architecture and original opening doors. Three starter prompts explain native types and first attacks. JOURNAL and SF MAP track the opening objective and locations. Artwork, music, the full sixteen-neighborhood campaign and user quality acceptance remain unfinished.",
+  "status": "Unfinished SF opening chapter with original Mini Monsters, Sunset, South Park, the clinic, seed room and Cognition office. The northern South Park block uses connected houses with shared roof depth, readable entrances, attached steps and gray paving; the clinic and office use simpler matching architecture and original opening doors. Original curbside lamps, meters, a hydrant, bins, rack, bench and tree add street activity; their solid bases preserve clear entries and crossings. Three starter prompts explain native types and first attacks. JOURNAL and SF MAP track the opening objective and locations. Artwork, music, the full sixteen-neighborhood campaign and user quality acceptance remain unfinished.",
   "maps": [
     "sunset.json",
     "apartment.json",

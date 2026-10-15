@@ -6,9 +6,9 @@ from city_furniture import CARDS
 # North sidewalk bases are row7; the opposite curb is row11.
 PLACEMENTS = (
     ('lamp',17,6), ('lamp',36,6),
-    ('meter',21,7), ('meter',26,7),
+    ('meter',19,7), ('meter',26,7),
     ('hydrant',11,7), ('bin',15,7), ('rack',23,7),
-    ('tree',37,6), ('bench',20,11), ('recycling',33,11),
+    ('tree',37,6), ('bench',18,11), ('recycling',34,11),
 )
 FIRST_RECORD = 120
 TOKENS = {'u':[0,False,3], 'U':[0,True,3]}

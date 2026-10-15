@@ -140,6 +140,16 @@
       0,
       true,
       0
+    ],
+    "u": [
+      0,
+      false,
+      3
+    ],
+    "U": [
+      0,
+      true,
+      3
     ]
   },
   "rows": [
@@ -149,12 +159,12 @@
     "FPWWWPRRRPghhhhhfPdefZZdefdefghhhhhfPPPF",
     "FPWWWPRRRPijjjjjfPghfZZghfghfijjjjjfPPPF",
     "FPWWWPRRRPKKKDKKKPijfZZijfijfKKKHKKKPPPF",
-    "FPPPPPRRRP#PPPPPPPPPPPPPPPPPP#PPPPPPPPPF",
-    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRP#PPPPPPuPPPPPPPPPPP#PPPPPPuuuF",
+    "FPPPPPRRRPPUPPPUPUPUPPPUUPUPPPPPPPPPUUUF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
     "FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRF",
-    "FPPPPPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
+    "FPPPPPRRRPPPPPPPPPUUPPPPPPPPPPPPPPUUPPPF",
     "FPXXXPRRRPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPF",
     "FPXXXPRRRPPabcabcPPPPPPPPPPPPPPPPPPPPPPF",
     "FPXXXPRRRPPdefdefPPPPPPPPPPPPPPPPPPPPPPF",
@@ -262,5 +272,57 @@
   "metadata": {
     "weather": "WEATHER_SUNNY"
   },
-  "border_tile": 532
+  "border_tile": 532,
+  "city_furniture": [
+    {
+      "name": "lamp",
+      "x": 17,
+      "y": 6
+    },
+    {
+      "name": "lamp",
+      "x": 36,
+      "y": 6
+    },
+    {
+      "name": "meter",
+      "x": 19,
+      "y": 7
+    },
+    {
+      "name": "meter",
+      "x": 26,
+      "y": 7
+    },
+    {
+      "name": "hydrant",
+      "x": 11,
+      "y": 7
+    },
+    {
+      "name": "bin",
+      "x": 15,
+      "y": 7
+    },
+    {
+      "name": "rack",
+      "x": 23,
+      "y": 7
+    },
+    {
+      "name": "tree",
+      "x": 37,
+      "y": 6
+    },
+    {
+      "name": "bench",
+      "x": 18,
+      "y": 11
+    },
+    {
+      "name": "recycling",
+      "x": 34,
+      "y": 11
+    }
+  ]
 }
