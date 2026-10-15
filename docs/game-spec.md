@@ -7156,3 +7156,22 @@ v71 compiled portrait gate checkpoint — October15,00:54UTC:
   synthetic tests. Public staysv70/Site61 until actual native/browser acceptance.
   Root proceeds to both real prebattle old-save Continue and native battles;
   humanapproval0/11 and full goalACTIVE throughOctober15,18Pacific.
+
+
+v71 companion tests/native entrance checkpoint — October15,00:57UTC:
+
+- Eleven bounded synthetic ROM/ELF cases reject wrong selectors (including
+  Scott), pointer/tag/size errors, every truncated front table, packed2byte
+  coords, either nonzero nativepadding byte, malformed/stale data, source/PNG
+  disagreement and wrong animation chains. Producer registry misuse and all
+  generated registrations/header preservation are tested independently.
+  Routine local check now runs this suite; all local checks pass.
+- Actual current-v70 preWaldenC3 and preStevenC4 coldContinue in v71 then
+  ordinaryresaveC4/C5 preserve every declared game domain and increment Save
+  exactly once. Native live stages open Walden's green-jacket94 and Steven's
+  glasses/gray-shirt95 images, then continue the original battle entrance.
+  Two2048frame34.289second common-controller captures are retained for matched
+  genuine-Emerald comparison packaging. These are presentation subsets only;
+  completebattle returns, actualbrowser and humanreviews are still pending.
+- Public staysv70/Site61. No mechanics/team/encounter/reward/classID changes;
+  full remaininggatesOPEN and goalACTIVE throughOctober15,18Pacific.
