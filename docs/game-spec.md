@@ -8458,3 +8458,22 @@ City-dressing v78 published — October15,06:06UTC:
   paired capture, equal nearest3x and exact controller input. Evidence
   .tools/benchmarks/city-v78-emerald-paired-review/comparison.mp4. Pending; human
   full-domain approvals remain0/11. Existing home feedback is qualitative only.
+
+Latest city review and density direction — October15,06:22UTC:
+
+- User: "it looks better"; remaining feedback is "way more buildings throughout
+  the city." No numeric score or full-domain approval. City furniture direction
+  improves the street, but sparse surroundings remain below the requested quality.
+- Next Stage B task is density in the existing South Park and Sunset maps; no
+  neighborhood/campaign expansion. Preserve the accepted northern homes, props,
+  roads, park, quest events and service entries. Sunset P tokens are actual roads;
+  only verified empty lawn parcels may receive new houses there.
+- Original compact64x64 paired townhouses are authored to fill western parcels
+  while retaining x5 sidewalk. Native candidate adds62tiles to449 (511/512), using
+  unchanged palette5. Other new South Park groups reuse the accepted house kit
+  in attached rows. Planned count13→21buildings;136declaredcells include64new
+  solid cells and9freed old wall cells. This is a source prototype only.
+- Alignment owns an independent density compiled auditor/fault suite. Root owns
+  producer integration and actual native/browser/save checks. Publicv78 unchanged.
+  The concrete rAF pacing debt cause/proposal is recorded in the alignment chat;
+  no runtime code was changed or performance gate cleared.

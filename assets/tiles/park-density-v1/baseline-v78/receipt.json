@@ -1,0 +1,46 @@
+{
+  "scope": "Original authored SF resources and map/source plan only, frozen v78 before map-only density extension. No inherited commercial ROM bytes, saves or reference media.",
+  "target_sha256": "46d971f88b9345fd36cfba76cb9d1bc528b27bb03d5b7dbb8d529a7d1a45e943",
+  "files": {
+    "primary.4bpp": {
+      "bytes": 14368,
+      "sha256": "f5613d0ba1d03a19cadefe8e8ced3f17f9bfa2a4a17a14331a016267f75e3467"
+    },
+    "primary-metatiles.bin": {
+      "bytes": 2160,
+      "sha256": "8dee2baaa7a90b48377a25e5e6601b8495ca9b2959c347e272fde2d7c998697a"
+    },
+    "primary-attributes.bin": {
+      "bytes": 270,
+      "sha256": "d9ebf396a54b25e8c5d166bbc2eaf7f7c956358d68f3cbb8b03ce476ad0c8f8f"
+    },
+    "primary-palettes.bin": {
+      "bytes": 512,
+      "sha256": "a8f49d272a8e9acc542a81c8d34c4e50a17727bac85fc27a322c51183c560f4e"
+    },
+    "secondary.4bpp": {
+      "bytes": 15232,
+      "sha256": "1a50e9f7ef57a68cd10e39f18dd8e9956f0dea7b1cad04aac504f2cd76f7d95a"
+    },
+    "secondary-metatiles.bin": {
+      "bytes": 2400,
+      "sha256": "2edd2a730271e51d6590e6d6d8bd11a2f04d7fbd0f9759a5db833bc1cf7942e4"
+    },
+    "secondary-attributes.bin": {
+      "bytes": 300,
+      "sha256": "5d75b62c2517473238cfe7967401f492d506a41ffbbd5de58ea9c99ad39eab2f"
+    },
+    "secondary-palettes.bin": {
+      "bytes": 512,
+      "sha256": "53d2f51e1a11b857492336f599d186c147e32a89ddcfa6c6c8eab5cfbc4d60ad"
+    },
+    "south-park-map.bin": {
+      "bytes": 2560,
+      "sha256": "5dedf3f48b650fe1eb007f3f70efd210c64105fb631bb8055517f8a39a0c5782"
+    },
+    "source-plan.json": {
+      "bytes": 5584,
+      "sha256": "896aeaf6e7135dbf3212c3a16d883e463b493eae4eb55f32486d3682c4573119"
+    }
+  }
+}
