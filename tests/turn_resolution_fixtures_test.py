@@ -45,36 +45,45 @@ def priority_mon(hp,pp):
     return bytes(result)
 
 
+def tackle_mon(hp,pp):
+    # Independent1->33 delta: encrypted low byte XOR32, plain checksum+32.
+    result=bytearray(expected_mon(hp,0,pp,0));result[44]^=32
+    struct.pack_into('<H',result,28,(int.from_bytes(result[28:30],'little')+32)&0xffff)
+    return bytes(result)
+
+
 def observation(c):
     """Independently specified terminal snapshots, not a move implementation."""
     ko=c['endpoint']=='replacement-query'
     priority=c['id']=='slower-player-priority'
-    old0=priority_mon(90,[10,30,25,25]) if priority else expected_mon(18 if ko else 90,0,[10,30,25,25],0)
+    miss=c['id']=='player-first-miss-reply'
+    old0=tackle_mon(90,[10,30,25,25]) if miss else priority_mon(90,[10,30,25,25]) if priority else expected_mon(18 if ko else 90,0,[10,30,25,25],0)
     old1=expected_mon(90,0,[10,30,25,25],0)
     bench=expected_mon(105,0,[10,30,25,25],0)
     initial=bytearray(352)
     for i,hp in enumerate([18 if ko else 90,90,0,0]):
         struct.pack_into('<H',initial,i*88,19)
         struct.pack_into('<H',initial,i*88+40,hp)
-        struct.pack_into('<H',initial,i*88+12,98 if priority and i==0 else 1)
+        struct.pack_into('<H',initial,i*88+12,33 if miss and i==0 else 98 if priority and i==0 else 1)
         initial[i*88+36]=10;initial[i*88+33:i*88+35]=bytes([9,9])
     state={'before':[old0+bench+bytes(400),old1+bytes(500),bytes([0x17])*0x3d88,bytes([0x28])*0xf2c],
            'initial_battle_mons':bytes(initial),'save_addresses':[0x02025000,0x0202a000]}
     after=bytearray(initial)
-    for i,hp in enumerate([0,90] if ko else [72,72]):struct.pack_into('<H',after,i*88+40,hp)
+    for i,hp in enumerate([0,90] if ko else [72,90] if miss else [72,72]):struct.pack_into('<H',after,i*88+40,hp)
     after[36]=10 if ko else 9;after[88+36]=9
     if ko:after[33:35]=bytes(2)
     results=bytearray(68);results[5]=1;struct.pack_into('<H',results,36,1)
     if ko:results[0]=1;results[2]=1
-    else:results[19]=1;struct.pack_into('<H',results,34,98 if priority else 1)
+    else:results[19]=1;struct.pack_into('<H',results,34,33 if miss else 98 if priority else 1)
     packets=([{'slot':1,'packet':'0209000900000000'}, {'slot':0,'packet':'022a000000000000'},
               {'slot':0,'packet':'0228000000000000'}, {'slot':0,'packet':'1601000000000000'},
               {'slot':1,'packet':'3502000000000000','pending':True}] if ko else
              [{'slot':0,'packet':'0209000900000000'}, {'slot':1,'packet':'022a004800000000'},
               {'slot':1,'packet':'0209000900000000'}, {'slot':0,'packet':'022a004800000000'}])
-    raw=[(priority_mon(72,[9,30,25,25]) if priority else expected_mon(0 if ko else 72,0,[10 if ko else 9,30,25,25],0))+bench+bytes(400),
-         expected_mon(90 if ko else 72,0,[9,30,25,25],0)+bytes(500),bytes(after),
-         state['before'][2],state['before'][3],bytes(results),struct.pack('<I',833674724 if ko else 4231221723),
+    if miss:packets=[{'slot':0,'packet':'0209000900000000'},{'slot':1,'packet':'0209000900000000'},{'slot':0,'packet':'022a004800000000'}]
+    raw=[(tackle_mon(72,[9,30,25,25]) if miss else priority_mon(72,[9,30,25,25]) if priority else expected_mon(0 if ko else 72,0,[10 if ko else 9,30,25,25],0))+bench+bytes(400),
+         expected_mon(90 if ko or miss else 72,0,[9,30,25,25],0)+bytes(500),bytes(after),
+         state['before'][2],state['before'][3],bytes(results),struct.pack('<I',833674724 if ko else 3063870748 if miss else 4231221723),
          b'\0',b'\0',b'\1' if ko else b'\0',bytes(4) if ko else bytes.fromhex('ffff0000'),
          bytes.fromhex('0100010000000000') if ko else bytes(8),struct.pack('<I',3 if ko else 0),
          struct.pack('<I',264),*[struct.pack('<I',a) for a in state['save_addresses']],b'\2',b'\1',
@@ -82,6 +91,7 @@ def observation(c):
     trace=([{'opcode':3,'attacker':1},{'opcode':73,'attacker':1}] if ko else
            [{'opcode':3,'attacker':0},{'opcode':73,'attacker':0},
             {'opcode':3,'attacker':1},{'opcode':73,'attacker':1}])
+    if miss:trace=[{'opcode':op,'attacker':side} for side,ops in [(0,[1,3,73]),(1,[1,3,4,5,12,73])] for op in ops]
     return state,raw,packets,trace
 
 
@@ -109,7 +119,7 @@ class TurnSchema(unittest.TestCase):
         for change in [{'skip_controller':True},{'expected_rng':True},{'player_hp':106},
                        {'speeds':[90,90]},{'derivation':''},{'expected_hp':[0,72]},
                        {'expected_updates':[[0,99,9]]},{'moves':[True,1]},{'moves':[98,98]},
-                       {'moves':[1]},{'expected_order':[1,0]},{'expected_order':[0,True]}]:
+                       {'moves':[1]},{'rng_seed':True},{'rng_seed':-1},{'rng_seed':0x100000000},{'expected_order':[1,0]},{'expected_order':[0,True]}]:
             c=deepcopy(turn.CASES[0]);c.update(change)
             with self.subTest(change=change),self.assertRaises(ValueError):turn.validate_cases([c])
         for key in turn.CASES[0]:
@@ -126,6 +136,20 @@ class TurnSchema(unittest.TestCase):
         # The same speeds and HP as the KO setup remain distinct with a new move.
         priority=deepcopy(turn.CASES[2]);priority.update(player_hp=18)
         turn.validate_cases([turn.CASES[1],priority])
+
+    def test_first_miss_draws_and_secure_move_bytes_are_derived_independently(self):
+        c=turn.CASES[3];state=30;draws=[]
+        for _ in range(6):state=(state*0x41c64e6d+0x6073)&0xffffffff;draws.append(state>>16)
+        self.assertEqual(c['rng_seed'],30)
+        self.assertEqual(draws,[46397,47244,24877,5747,11048,46750])
+        self.assertEqual(draws[0]%100+1,98);self.assertGreater(98,95)
+        self.assertLessEqual(draws[1]%100+1,100);self.assertNotEqual(draws[2]%16,0)
+        self.assertEqual(19*(100-draws[3]%16)//100,18)
+        self.assertEqual(c['expected_rng'],state)
+        self.assertEqual(c['expected_hp'],[72,90]);self.assertEqual(c['expected_pp'],[9,9])
+        self.assertEqual(c['expected_updates'],[[0,9,9],[1,9,9],[0,42,72]])
+        for hp,pp in [(90,[10,30,25,25]),(72,[9,30,25,25])]:
+            self.assertEqual(turn.expected_turn_mon(hp,pp,33),tackle_mon(hp,pp))
 
 
 class NativeControllerBoundary(unittest.TestCase):
@@ -226,6 +250,18 @@ class TerminalOracles(unittest.TestCase):
         _,_,_,trace=observation(c)
         trace=[dict(row,attacker=1-row['attacker']) for row in trace]
         self.assertFalse(self.assess(c,trace=trace)['checks']['executed_pp_order'])
+
+    def test_miss_cannot_hide_enemy_hp_write_second_action_or_wrong_rng(self):
+        c=turn.CASES[3];_,_,packets,trace=observation(c)
+        for corrupted in (packets+[{'slot':1,'packet':'022a004800000000'}],packets[:-1]):
+            self.assertFalse(self.assess(c,packets=corrupted)['passed'])
+        raw=observation(c)[1];raw[6]=struct.pack('<I',4231221723)
+        self.assertFalse(self.assess(c,raw=raw)['checks']['rng'])
+        raw=observation(c)[1];changed=bytearray(raw[2]);struct.pack_into('<H',changed,128,72);raw[2]=bytes(changed)
+        self.assertFalse(self.assess(c,raw=raw)['checks']['full_battle_mons'])
+        for corrupted in (trace[:3],trace+[{'opcode':4,'attacker':0}],
+                          [row for row in trace if not(row['opcode']==73 and row['attacker']==0)]):
+            self.assertFalse(self.assess(c,trace=corrupted)['checks']['first_miss_then_reply_path'])
 
     def test_dropped_second_action_wrong_packet_and_skipped_moveend_cannot_pass(self):
         c=turn.CASES[0];_,_,packets,trace=observation(c)

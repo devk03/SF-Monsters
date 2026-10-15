@@ -24,7 +24,7 @@ from item_effect_fixtures import expected_mon, OWNER, MOVES, BASE_PP
 
 CASES = (
     {'id':'living-two-hits', 'player_hp':90, 'enemy_hp':90, 'speeds':[110,90],
-     'moves':[1,1], 'expected_order':[0,1],
+     'moves':[1,1], 'expected_order':[0,1], 'rng_seed':0,
      'endpoint':'next-turn', 'expected_hp':[72,72], 'expected_pp':[9,9],
      'expected_rng':4231221723, 'turns':1, 'faints':0,
      'expected_updates':[[0,9,9],[1,42,72],[1,9,9],[0,42,72]],
@@ -32,7 +32,7 @@ CASES = (
         'Seed0 draws0/59774/21105/12720 yield18; next36418/58060/44997/26587 yield18. '
         'No speed tie. BattleTurnPassed consumes ninth LCG draw; both PP10->9.'},
     {'id':'player-ko-replacement-boundary', 'player_hp':18, 'enemy_hp':90, 'speeds':[90,110],
-     'moves':[1,1], 'expected_order':[1,0],
+     'moves':[1,1], 'expected_order':[1,0], 'rng_seed':0,
      'endpoint':'replacement-query', 'expected_hp':[0,90], 'expected_pp':[10,9],
      'expected_rng':833674724, 'turns':0, 'faints':1,
      'expected_updates':[[1,9,9],[0,42,0],[0,40,0]],
@@ -41,7 +41,7 @@ CASES = (
         'Healthy bench prevents defeat. FaintClearSetData restores native Rattata Normal/Normal '
         'from the declared Mystery-type battle override. No EXP, replacement response or completed turn claimed.'},
     {'id':'slower-player-priority', 'player_hp':90, 'enemy_hp':90, 'speeds':[90,110],
-     'moves':[98,1], 'expected_order':[0,1],
+     'moves':[98,1], 'expected_order':[0,1], 'rng_seed':0,
      'endpoint':'next-turn', 'expected_hp':[72,72], 'expected_pp':[9,9],
      'expected_rng':4231221723, 'turns':1, 'faints':0,
      'expected_updates':[[0,9,9],[1,42,72],[1,9,9],[0,42,72]],
@@ -52,6 +52,20 @@ CASES = (
         'Controlled level50/attack100/defense100/Mystery types give base19 and18 damage each. '
         'Seed0 eight hit draws0/59774/21105/12720/36418/58060/44997/26587, '
         'then BattleTurnPassed ninth draw gives4231221723; both PP10->9.'},
+    {'id':'player-first-miss-reply', 'player_hp':90, 'enemy_hp':90, 'speeds':[110,90],
+     'moves':[33,1], 'expected_order':[0,1], 'rng_seed':30,
+     'endpoint':'next-turn', 'expected_hp':[72,90], 'expected_pp':[9,9],
+     'expected_rng':3063870748, 'turns':1, 'faints':0,
+     'expected_updates':[[0,9,9],[1,9,9],[0,42,72]],
+     'derivation':'Pinned Emerald731ad5bfd6e6f265508d0efcca0ba42f9dcf5881: '
+        'Tackle33 EFFECT_HIT/power35/accuracy95/priority0 vs Pound1 power40/accuracy100/priority0. '
+        'Faster player110 acts before enemy90 without a tie draw. Seed30 LCG upper16 draws '
+        '46397/47244/24877/5747/11048/46750. First accuracy46397%100+1=98>95 misses. '
+        'EffectHit jumps to PrintMoveMissed: attackstring/PP reduction/moveend, no crit,damage or HP write. '
+        'Enemy accuracy47244%100+1=45 hits; crit24877%16=13 is noncritical; '
+        'base19*(100-5747%16)//100=18 damage; chance0 still consumes11048. '
+        'BattleTurnPassed consumes sixth draw, state3063870748. '
+        'Both moves are recorded before accuracy resolution, both PP10->9, only player takes damage.'},
 )
 FUNCTIONS = {'CreateMon','SetMonData','SetActionsAndBattlersTurnOrder',
     'CheckFocusPunch_ClearVarsBeforeTurnStarts','RunTurnActionsFunctions',
@@ -101,6 +115,8 @@ def protocol_contract(engine):
     expected={'CONTROLLER_SETMONDATA':2,'CONTROLLER_CHOOSEPOKEMON':22,'CONTROLLER_LINKSTANDBYMSG':53,
               'REQUEST_PPMOVE1_BATTLE':9,'REQUEST_STATUS_BATTLE':40,'REQUEST_HP_BATTLE':42,
               'B_SCR_OP_PPREDUCE':3,'B_SCR_OP_MOVEEND':73,
+              'B_SCR_OP_ACCURACYCHECK':1,'B_SCR_OP_CRITCALC':4,'B_SCR_OP_DAMAGECALC':5,
+              'B_SCR_OP_HEALTHBARUPDATE':11,'B_SCR_OP_DATAHPUPDATE':12,
               'B_SCR_OP_YESNOBOXLEARNMOVE':0x5a,'B_SCR_OP_YESNOBOXSTOPLEARNINGMOVE':0x5b,
               'B_SCR_OP_YESNOBOX':0x67}
     actual={name:(commands|requests|scripts)[name] for name in expected}
@@ -113,7 +129,7 @@ def validate_cases(cases):
         raise ValueError('Use one to eight explicitly derived controlled turn cases.')
     ids,setups=set(),set()
     required={'id','player_hp','enemy_hp','speeds','endpoint','expected_hp','expected_pp',
-              'expected_rng','turns','faints','expected_updates','derivation','moves','expected_order'}
+              'expected_rng','turns','faints','expected_updates','derivation','moves','expected_order','rng_seed'}
     for c in cases:
         if not isinstance(c,dict) or set(c)!=required or not isinstance(c['derivation'],str) or not c['derivation'].strip():
             raise ValueError('Require the complete strict turn schema and independent derivation.')
@@ -126,7 +142,7 @@ def validate_cases(cases):
            any(not integer(v,1,65535) for v in c['speeds']) or c['speeds'][0]==c['speeds'][1]:
             raise ValueError('Use bounded living HP and unequal native speeds.')
         if not isinstance(c['moves'],list) or any(type(v) is not int for v in c['moves']) or \
-           tuple(c['moves']) not in {(1,1),(98,1)} or not isinstance(c['expected_order'],list) or \
+           tuple(c['moves']) not in {(1,1),(98,1),(33,1)} or not isinstance(c['expected_order'],list) or \
            any(type(v) is not int for v in c['expected_order']) or sorted(c['expected_order'])!=[0,1]:
             raise ValueError('Declare reviewed per-battler moves and a complete strict action order.')
         order=[0,1] if c['moves'][0]==98 or c['speeds'][0]>c['speeds'][1] else [1,0]
@@ -135,7 +151,7 @@ def validate_cases(cases):
         for key,high in [('expected_hp',105),('expected_pp',35)]:
             if not isinstance(c[key],list) or len(c[key])!=2 or any(not integer(v,0,high) for v in c[key]):
                 raise ValueError('Require two complete HP/PP integer oracles.')
-        if not integer(c['expected_rng'],0,0xffffffff) or not integer(c['turns'],0,1) or not integer(c['faints'],0,1):
+        if not integer(c['rng_seed'],0,0xffffffff) or not integer(c['expected_rng'],0,0xffffffff) or not integer(c['turns'],0,1) or not integer(c['faints'],0,1):
             raise ValueError('RNG, turn and faint oracles must fit this finite profile.')
         if c['endpoint'] not in {'next-turn','replacement-query'} or \
            (c['endpoint']=='next-turn' and (0 in c['expected_hp'] or c['turns']!=1 or c['faints'])) or \
@@ -145,7 +161,7 @@ def validate_cases(cases):
             not isinstance(row,list) or len(row)!=3 or not integer(row[0],0,1) or type(row[1]) is not int or row[1] not in SET_REQUESTS or
             not integer(row[2],0,(1<<(8*SET_REQUESTS[row[1]]))-1) for row in c['expected_updates']):
             raise ValueError('Declare every native party-write packet independently.')
-        key=(c['player_hp'],c['enemy_hp'],tuple(c['speeds']),tuple(c['moves']))
+        key=(c['player_hp'],c['enemy_hp'],tuple(c['speeds']),tuple(c['moves']),c['rng_seed'])
         if key in setups:raise ValueError('Duplicate effective turn setup cannot add coverage.')
         setups.add(key)
     return cases
@@ -297,7 +313,7 @@ def setup(driver,c,syms,resolve,props):
         'gMoveResultFlags':b'\0','gBattleWeather':bytes(2),'gCurrentTurnActionNumber':b'\0',
         'gCurrentActionFuncId':b'\0','gCurrMovePos':b'\0','gCurrentMove':struct.pack('<H',c['moves'][c['expected_order'][0]]),
         'gChosenMove':struct.pack('<H',c['moves'][c['expected_order'][0]]),'gChosenMovePos':b'\0','gRandomTurnNumber':b'\xff\xff',
-        'gRngValue':bytes(4),'gSideTimers':bytes(24),'gWishFutureKnock':bytes(44),
+        'gRngValue':struct.pack('<I',c['rng_seed']),'gSideTimers':bytes(24),'gWishFutureKnock':bytes(44),
         'gLastMoves':bytes(8),'gLastResultingMoves':bytes(8),'gLastPrintedMoves':bytes(8),
         'gLockedMoves':bytes(8),'gLastHitBy':bytes(4),'gLastUsedItem':bytes(2)}
     for name,b in values.items():put(name,b)
@@ -435,6 +451,11 @@ def assess(c,state,observed,guards,packets,syms,resolve,endpoint,trace,elapsed=0
     else:checks['pending_native_callback']=observed[19]==struct.pack('<I',syms['RunTurnActionsFunctions'][0]|1)
     checks['executed_pp_order']=[row['attacker'] for row in trace if row['opcode']==3]==(c['expected_order'] if endpoint=='next-turn' else [1])
     checks['move_end_executed']=73 in {row['opcode'] for row in trace}
+    if c['id']=='player-first-miss-reply':
+        player={row['opcode'] for row in trace if row['attacker']==0}
+        enemy={row['opcode'] for row in trace if row['attacker']==1}
+        checks['first_miss_then_reply_path']={1,3,73}<=player and not player&{4,5,11,12} and {1,3,4,5,12,73}<=enemy
+
     return {'id':c['id'],'endpoint':endpoint,'passed':all(checks.values()),'checks':checks,
         'trace':trace,'controller_packets':packets,'observed_rng':int.from_bytes(observed[6],'little'),
         'observed_hp':[int.from_bytes(observed[2][i*88+40:i*88+42],'little') for i in range(2)],
@@ -461,10 +482,10 @@ def main():
                   'instructions_per_call':2000000,'driver_seconds':120,'native_response_seconds':10},
         'disclosures':{
             'party':'Native CreateMon/SetMonData: fixedPID0/OT11223344 Rattata19,level50,IV31,EV0, fixed A names; two player slots and one enemy, all other slots zero.',
-            'battle_overrides':'Both live battlers use controlled attack/defense/spAttack/spDefense100, Mystery/Mystery types9/9, ability0, no item, neutral stages, maxHP105, chosen per-case Pound1 or QuickAttack98 slot0, PP10 and explicitly listed speeds/HP. These stats/types are not inferred from naturally created Rattata.',
+            'battle_overrides':'Both live battlers use controlled attack/defense/spAttack/spDefense100, Mystery/Mystery types9/9, ability0, no item, neutral stages, maxHP105, chosen per-case Pound1, QuickAttack98 or Tackle33 slot0, PP10 and explicitly listed speeds/HP. These stats/types are not inferred from naturally created Rattata.',
             'rules':'TRAINER|BATTLE_TOWER=264 suppresses badge bonuses without LINK transport. Choices are preselected fixture RAM, not player-input evidence.',
             'controllers':'SETMONDATA is applied by actual native per-side handlers. Only explicitly listed presentation commands are ACKed; replacement and standby remain pending.',
-            'claims':'Two living full chosen-turn resolutions (speed and priority) and one partial KO replacement boundary. No battle UI, animation, audio, EXP, replacement completion, durable save or campaign proof.'},
+            'claims':'Three living full chosen-turn resolutions (speed, priority and first-miss reply) and one partial KO replacement boundary. No battle UI, animation, audio, EXP, replacement completion, durable save or campaign proof.'},
         'runner_sha256':digest(Path(__file__)),'frozen_dependencies':{name:digest(ROOT/'scripts/quality'/name)
             for name in ['function_fixture.c','native_fixture_transport.py','native_abi.py',
                          'mechanics_fixtures.py','stat_fixtures.py','item_effect_fixtures.py']}}

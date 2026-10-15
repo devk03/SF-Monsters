@@ -7616,3 +7616,37 @@ v73 repeat-build repair — October15,02:35UTC:
 - Public staysv72/Site63; root owns source/turn handoffs. Last alignment exchange
   at02:34UTC; next by03:04UTC. Peer only derives an immunity oracle read-only,
   due02:50UTC. Native miss4/4 root verification is ready but not yet committed.
+
+Controlled first-miss full-turn checkpoint — October15,02:40UTC:
+
+- Root reviewed/reran the fourth controlled native scenario on exact a9 Emerald
+  and immutable v71. Seed30/fasterplayer110 Tackle33 misses accuracy95, still
+  spends PP, and slowerenemy90 Pound1 replies. End HP72/90, PP9/9, turn1,
+  faint0, empty stacks, next-turn endpoint; only player receives an HP update.
+  Full objects/save/pointers/canaries and three exact write packets pass.
+- Oracle was derived from pinned source BEFORE peer execution: upper16 draws
+ 46397/47244/24877/5747/11048/46750; accuracy98>95 misses, reply45hits, crit13
+  is noncritical, base19*97//100=18. Miss skips crit/damage/HP commands but reaches
+  PP and MoveEnd; reply includes its complete path. Sixth LCG state3063870748
+  matches; chance0/end-turn draws are included. Required per-case seed and seed
+  in effective-setup identity prevent hidden default/deduplication ambiguity.
+- Four scenarios pass each ROM: three full living turns plus one partial KO
+  replacement boundary. Root proves original three traces/packets/checks/full
+  party hashes remain exact. Fifteen portable guards cover independent six-draw
+  arithmetic, secure Tackle checksum/XOR bytes, bad seed schema, incorrect enemy
+  HP packet/omitted reply, wrong RNG and forbidden/missing miss-path commands.
+  No extra controller ACK, transport/ABI/frozen-driver edits or object masks.
+- Root receipt turn-resolution-root-miss-v71/result.json
+  SHAb8ac3c1837c23beeeb7a542205395c5d40d74b1097b38bb34dc1b769ae798ff6.
+  Peer positive75936f69f4ed8238fe0d0cc54c05a9f93d0e0ac7cf0941a4efa9757d0edab86a;
+  wrong ninth-draw oracle negativea2cd9f62be8da1c2347fc836df24781e9ba7536fbbff09363925d33e1fcc9999
+  rejects only miss RNG on both sides, preserving every other postcondition.
+  Counts are not automatically added to overlapping711/57 baseline cases.
+- Repaired v73 repeat build and full local check now pass; fresh unpublished
+  manifest records committed sourceaec9c11180d4e0ef1db2266618ba104ef3e0aa54 and
+  identical target37e60ad3/BPS527d8b396ec20c5f9309538a66630b0c5b73e94b142e7ea26abc5b49595e959f.
+  Earlier successful but dirty-source package is retained under private validation
+  storage rather than overwritten. Public remainsv72/Site63 until publication.
+- Alignment delivered a read-only source-derived immunity plan; no fifth case
+  is implemented or accepted yet. Root owns source, human0/11 and all broad
+  type/catalog/full-turn/performance/campaign gatesOPEN; goalACTIVE.
