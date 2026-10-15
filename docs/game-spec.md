@@ -8797,3 +8797,24 @@ Private Worker audio proof — October15,08:39UTC:
   Worker run watchdog permits at most900sec, separate from≤600sec measurement,
   so a settled ten-minute sample can end before the finite run deadline. Public
   v80 SDK/probe/audio/core remain unchanged; original private receipts retained.
+
+
+Worker proof receipt review — October15,08:44UTC:
+
+- Alignment's read-only audit found missing evidence guards: an empty visibility
+  list was vacuously foreground; a tiny audio interval could pass without binding
+  to actual context-clock reads; boot Flash verification and original checkpoint
+  files were not checked by the later receipt auditor. Fixed all four and added
+  corruption cases. Five grouped audit tests pass; source/host/audio corruption,
+  false boot/scope claims, counter/credit faults and uint32wrap are covered.
+- The exact original10sec report still passes the tightened audit. New auditor
+  SHAc6c5c737895f9855f5fef993987aba93ee47f51898a7a969f9c2994a08a5e69c.
+  Raw worklet endpoints must bind to actual AudioContext reads using a disclosed
+  50ms message/quantization allowance plus measured main/Worker RPC prefix/suffix.
+  This is receipt integrity, not a99%deadline or speaker-latency gate. Main input
+  count is explicitly reported rather than claimed as independently acknowledged.
+- Next finite900sec session reuses the exact older v75 cartridge, native state,
+  companion Flash and310-row598.652sec active road route from the two failed
+  main-thread600sec receipts. Only private Worker host/transport changes; this
+  isolates architecture from subsequent v79/v80 density. No induced stall during
+  route replay, whose existing50ms late-timer guard remains. Publicv80 unchanged.

@@ -43,6 +43,34 @@ def audio(snapshot,epoch):
     return snapshot
 
 
+def checkpoint(identity,directory):
+    sources=identity['inputs']
+    if type(sources) is not dict or not 4<=len(sources)<=5:
+        raise ValueError('Require frozen ROM/state/Flash/metadata source hashes')
+    by_suffix={}
+    root=Path(__file__).resolve().parents[2]
+    for name,expected in sources.items():
+        path=Path(name)
+        if not path.is_absolute():raise ValueError('Checkpoint source path must be absolute')
+        path.resolve().relative_to(root)
+        if not re.fullmatch('[0-9a-f]{64}',expected) or path.stat().st_size>32*1024*1024:
+            raise ValueError('Invalid checkpoint source hash or byte bound')
+        equal(hash_file(path),expected,'original checkpoint source')
+        if path.suffix in ('.gba','.state','.sav','.json'):
+            if path.suffix in by_suffix:raise ValueError('Ambiguous checkpoint source suffix')
+            by_suffix[path.suffix]=(path,expected)
+    for suffix,alias in (('.gba','rom.gba'),('.state','state.bin'),('.sav','battery.sav')):
+        equal(by_suffix[suffix][1],identity['files'][alias],'source alias '+alias)
+    equal(identity['rom_sha256'],identity['files']['rom.gba'],'cartridge identity alias')
+    metadata_path,metadata_hash=by_suffix['.json']
+    equal(metadata_hash,identity['source_state_metadata_sha256'],'source metadata hash')
+    equal(hash_file(directory/'state.metadata.json'),metadata_hash,'preserved source metadata')
+    metadata=json.loads(metadata_path.read_bytes())
+    equal(metadata['controller_only'],True,'controller-only checkpoint provenance')
+    equal(metadata['rom_sha256'],identity['rom_sha256'],'checkpoint cartridge provenance')
+    equal(metadata['mgba_revision'],identity['mgba_revision'],'checkpoint core provenance')
+
+
 def audit(report,identity,directory):
     equal(report['schema'],2,'schema');equal(report['kind'],'private-worker-proof-v1','kind')
     equal(report['context']['identity'],identity,'frozen identity')
@@ -58,6 +86,10 @@ def audit(report,identity,directory):
             'mgba.wasm':'8554455ae6d70ae639e98c589fbf1340901a8c16b0303539366ff2575493f00c',
             'mgba.audio-worklet.js':'e886fb55131713940a1a396a99b2d9002a8a33cad1a3622470a7f9ae2b21727a'}
     for name,expected in pinned.items():equal(identity['runtime'][name],expected,'pinned '+name)
+    checkpoint(identity,directory)
+    boot=report['boot'];equal(boot['batteryVerified'],True,'verified boot Flash')
+    equal(boot['width'],240,'boot GBA width');equal(boot['height'],160,'boot GBA height')
+    num(boot['counter'],'boot guest counter',integer=True,maximum=0xFFFFFFFF)
     for key in ('physicalPaintProven','guestKeyConsumptionProven','productionCompatible'):
         equal(report['scope'][key],False,'scope.'+key)
     worker=report['worker'];main=report['main']
@@ -138,6 +170,28 @@ def audit(report,identity,directory):
         raise ValueError('Main audio clock regressed')
     if not main_origin+before['afterMs']<=main['mainBeginSentAt']<=worker['startedAt']+1 or not worker['endedAt']-1<=main_origin+after['beforeMs']<=main['mainResultReceivedAt']:
         raise ValueError('Worker window is outside main RPC/audio clock brackets')
+    # Bind both raw worklet endpoints to actual main AudioContext reads. A
+    # disclosed50ms message/quantization allowance is receipt integrity only.
+    # Measured main/Worker RPC prefix and suffix extend the respective brackets.
+    allowance=.05;rate=final_audio['outputSampleRate']
+    first_seconds=final_audio['firstOutputFrame']/rate
+    final_seconds=final_audio['observedThroughOutputFrame']/rate
+    prefix=max(0,(worker['startedAt']-(main_origin+before['beforeMs']))/1000)
+    suffix=max(0,((main_origin+after['afterMs'])-worker['endedAt'])/1000)
+    if not before['currentTime']-allowance<=first_seconds<=before['currentTime']+prefix+allowance:
+        raise ValueError('Raw worklet start is not bound to the real AudioContext anchor')
+    if not after['currentTime']-suffix-allowance<=final_seconds<=after['currentTime']+allowance:
+        raise ValueError('Raw worklet close is not bound to the real AudioContext anchor')
+    visibility=main['visibility']
+    if type(visibility) is not list or not visibility:raise ValueError('Require initial visibility observation')
+    previous_at=0
+    for index,event in enumerate(visibility):
+        at=num(event['at'],'visibility timestamp')
+        if event['state']not in ('visible','hidden') or not previous_at<=at<=main['mainResultReceivedAt']:
+            raise ValueError('Invalid or regressed visibility observation')
+        if index==0 and not main_origin+before['beforeMs']-50<=at<=main['mainBeginSentAt']:
+            raise ValueError('Initial visibility does not precede the measured window')
+        previous_at=at
     overlap=[];overlap_frames=[]
     for stall in main['stalls']:
         begin=num(stall['startedAt'],'main stall start');finish=num(stall['endedAt'],'main stall finish')
@@ -154,19 +208,23 @@ def audit(report,identity,directory):
             'frames_in_batches_admitted_during_each_main_stall':overlap_frames,
             'audio':{key:final_audio[key] for key in ('renderedOutputFrames','warmupOutputFrames','underrunOutputFrames','droppedSourceFrames','queueDepthFrames','outputSampleRate')},
             'main_audio_context_seconds':after['currentTime']-before['currentTime'],
-            'main_canvas_submission_count':len(main['submissions']),'main_input_count':len(main['inputs']),
+            'main_canvas_submission_count':len(main['submissions']),'reported_main_input_count':len(main['inputs']),
+            'audio_clock_binding_allowance_ms':50,
             'foreground_observed':all(v['state']=='visible' for v in main['visibility']),
             'loss_free':drop_total==0,'caught_up_at_close':debt==0}
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--report',type=Path,required=True)
+    parser.add_argument('--label',default='',help='Optional fresh audit label; preserves earlier audit receipts.')
     args=parser.parse_args();directory=args.report.parent
+    if args.label and not re.fullmatch('[a-z0-9][a-z0-9-]{0,31}',args.label):parser.error('Use a bounded lowercase audit label')
     result=audit(json.loads(args.report.read_bytes()),json.loads((directory/'identity.json').read_bytes()),directory)
     result['report_sha256']=hash_file(args.report);result['auditor_sha256']=hash_file(Path(__file__))
-    target=args.report.with_suffix('.worker-audit.json')
+    suffix='.'+args.label if args.label else ''
+    target=args.report.with_suffix(suffix+'.worker-audit.json')
     with target.open('x')as out:json.dump(result,out,indent=2,allow_nan=False);out.write('\n')
-    with args.report.with_suffix('.worker-auditor.py').open('xb')as out:out.write(Path(__file__).read_bytes())
+    with args.report.with_suffix(suffix+'.worker-auditor.py').open('xb')as out:out.write(Path(__file__).read_bytes())
     print(json.dumps(result,indent=2))
 
 

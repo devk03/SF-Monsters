@@ -22,7 +22,18 @@ class WorkerReceipt(unittest.TestCase):
         for name in ('mgba.js','mgba.wasm','mgba.audio-worklet.js'):
             shutil.copyfile(ROOT/'web/public/emulator'/name,runtime/name)
         for name in ('web_performance.html','server-source.py'):(cls.directory/name).write_text('Synthetic unit fixture\n')
-        cls.identity={'private_runtime_override':True,'private_page_override':True,'public_progress_touched':False,
+        native=cls.directory/'sources';native.mkdir()
+        for name in ('capture.gba','capture.state','capture.sav'):(native/name).write_bytes(('Synthetic '+name).encode())
+        rom_hash=module.hash_file(native/'capture.gba')
+        metadata={'controller_only':True,'rom_sha256':rom_hash,'mgba_revision':'unit-core'}
+        (native/'capture.json').write_text(json.dumps(metadata))
+        shutil.copyfile(native/'capture.json',cls.directory/'state.metadata.json')
+        cls.identity={'rom_sha256':rom_hash,'mgba_revision':'unit-core',
+            'inputs':{str(p):module.hash_file(p) for p in native.iterdir()},
+            'files':{alias:module.hash_file(native/name) for alias,name in
+                     (('rom.gba','capture.gba'),('state.bin','capture.state'),('battery.sav','capture.sav'))},
+            'source_state_metadata_sha256':module.hash_file(native/'capture.json'),
+            'private_runtime_override':True,'private_page_override':True,'public_progress_touched':False,
             'page_sha256':module.hash_file(cls.directory/'web_performance.html'),
             'server_source_sha256':module.hash_file(cls.directory/'server-source.py'),
             'runtime':{p.name:module.hash_file(p) for p in runtime.iterdir()}}
@@ -39,16 +50,16 @@ class WorkerReceipt(unittest.TestCase):
             'initialBacklog':0,'initialGuestCounter':initial_counter,'finalGuestCounter':counter,'finalBacklog':0,
             'maxPending':1,'maxBacklog':0,'maxWorkerTickGapMs':5.,'rawLedger':rows,
             'epoch':1,'audioFinalAcknowledged':True,'audioFinalError':None,'audioSnapshots':[],
-            'audioFinalSnapshot':{'type':'diagnostics','epoch':1,'final':True,'firstOutputFrame':12800,
-                'observedThroughOutputFrame':56960,'renderedOutputFrames':44160,'warmupOutputFrames':0,
+            'audioFinalSnapshot':{'type':'diagnostics','epoch':1,'final':True,'firstOutputFrame':132352,
+                'observedThroughOutputFrame':176512,'renderedOutputFrames':44160,'warmupOutputFrames':0,
                 'underrunOutputFrames':0,'droppedSourceFrames':0,'processQuanta':345,'queueDepthFrames':2622.,
                 'prefillTargetSourceFrames':2622,'outputSampleRate':44100,'playbackStarted':True}}
         main={'timeOrigin':1000000000.,'audioClockBefore':{'beforeMs':99.,'afterMs':99.1,'currentTime':3.,'state':'running','timeOrigin':1000000000.},
               'audioClockAfter':{'beforeMs':1101.,'afterMs':1101.1,'currentTime':4.002,'state':'running','timeOrigin':1000000000.},
               'mainBeginSentAt':1000000099.2,'mainResultReceivedAt':1000001101.2,
               'stalls':[{'requestedMs':200,'startedAt':1000000200.,'endedAt':1000000400.}],
-              'submissions':[],'inputs':[],'visibility':[{'state':'visible'}]}
-        return {'schema':2,'kind':'private-worker-proof-v1','context':{'identity':copy.deepcopy(self.identity)},
+              'submissions':[],'inputs':[],'visibility':[{'state':'visible','at':1000000099.}] }
+        return {'boot':{'batteryVerified':True,'counter':999,'width':240,'height':160},'schema':2,'kind':'private-worker-proof-v1','context':{'identity':copy.deepcopy(self.identity)},
                 'scope':{'productionCompatible':False,'physicalPaintProven':False,'guestKeyConsumptionProven':False},
                 'worker':worker,'main':main}
 
@@ -100,8 +111,22 @@ class WorkerReceipt(unittest.TestCase):
         report=self.fixture();report['main']['stalls'][0]['endedAt']+=1000
         with self.assertRaises(ValueError):self.audit(report)
 
+    def test_visibility_clock_binding_and_boot_cannot_be_vacuously_approved(self):
+        for visibility in ([],[{'state':'bogus','at':1000000099.}],
+                           [{'state':'visible','at':1000000199.}]):
+            report=self.fixture();report['main']['visibility']=visibility
+            with self.assertRaises(ValueError):self.audit(report)
+        report=self.fixture();report['boot']['batteryVerified']=False
+        with self.assertRaises(ValueError):self.audit(report)
+        report=self.fixture();raw=report['worker']['audioFinalSnapshot']
+        raw.update(firstOutputFrame=132352,observedThroughOutputFrame=132480,
+                   renderedOutputFrames=128,processQuanta=1)
+        with self.assertRaises(ValueError):self.audit(report)
+        report=self.fixture();report['main']['audioClockBefore']['currentTime']=0.
+        with self.assertRaises(ValueError):self.audit(report)
+
     def test_preserved_runtime_and_host_must_match_frozen_identity(self):
-        for name in ('runtime/mgba.audio-worklet.js','web_performance.html'):
+        for name in ('runtime/mgba.audio-worklet.js','web_performance.html','sources/capture.sav','state.metadata.json'):
             path=self.directory/name;before=path.read_bytes()
             try:
                 path.write_bytes(before+b'\nunit corruption\n')
