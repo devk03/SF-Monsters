@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 03:07 UTC:
+Current checkpoint — October 15, 2026, 03:34 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v74 / Site 65 is live.
-  Native release source a11720dd; website source 173f0d11. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v75 / Site 66 is live.
+  Native release source f85c8906; website source ab096cf5. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -838,8 +838,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.74-challenge-briefing-preview; target9335199708e8d38a95d705074f8f6e38c340026a83d7a1318f9fb8972de821f7; Site65. Scott previews team levels/tactics and asks before battle. No/B/repeat decline preserve declared save domains; native Yes generates original team, already-badged bypass and Chrome pages/cancel/movement pass. Denser frontage and scoped Builder labels retained; human0/11. |
-| Latest local source build | v74 normal build from committed a11720dd reproduces immutable93351997. All older compiled gates and full local checks pass. All855 scalar records/resolved teams and66 class rows remain exact; Scott team48bytes unchanged. Public manifest/BPS match local release. |
+| Public build | 0.0.75-park-paving-preview; target47909520ff1e419cdab4286c9e4507d2c35c66e83ae8703084721164dc3d0938; Site66. User-liked fine paving grid now neutral light gray, isolated primarybank4; road/building/Sunset colors unchanged. Full decoded-delta audit, three native door/cache returns, ordinary saves/coldContinue and Chrome clinic roundtrip pass. Human0/11; grid preference is not a domain score. |
+| Latest local source build | v75 normal build from committed f85c8906 reproduces immutable47909520. Existing compiled gates/infill22+nestedpaving153 and full local checks pass. All1280 Park map words unchanged. Every primary/secondary resident tile and loaded palette bank restored after three interiors; matched C8→C9 saves/coldContinue preserve declared data. Manifest dirty marker retained for untracked release/PDF, no clean-checkout credit. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7896,3 +7896,48 @@ Gray paving source/runtime checkpoint — October15,03:30UTC:
   Yellow remains unpublished/superseded. Peer returned both files frozen; root
   owns all sources. Last alignment exchange03:27UTC,next03:57UTC. Publicv74/
   Site65, human0/11, goalACTIVE.
+
+
+v75 public neutral-gray paving checkpoint — October15,03:34UTC:
+
+- User requested gray while retaining the liked grid. Native master8/paving
+  indices remain byte-exact; isolated primarybank4 changes only visible paving
+  colors to222/189 neutral gray. All original street/curb/crossing/building/
+  Sunset palette bytes remain exact. Yellow7686e352 was never published.
+- Actual Chrome shows gray paving, ordinary clinic entry and gray return; own
+  emulator/audio/tab/finite900s server stopped. No performance run inferred.
+  Native three-interior cache proof covers all502secondary/213primary tiles and
+  all6primary/7secondary unfaded palette banks, including isolated graybank4.
+- Matched ordinary C8→C9 saves on v74 and grayv75 preserve EVERY declared
+  gameplay domain, counter/stat+1 and monotonic playtime. Their C9 domains are
+  exact across builds. Receiptf3c216c03c27c28bfe39e55b997bb3b56eadefc3ce1cc4ff312bbf8002b6ab40.
+  Genuine grayC9 coldContinue preserves Flash/native600party bytes at22,6;
+  receiptd3102fcb7d5a1e7cff0c4b348a7a9b064921c5b3be84553ee2fa045b306f1ca4.
+  Same one field checkpoint, not extra campaign/save-suite credit.
+- Normal committedsourcef85c8906a6c7bcd2101bdf7fb8ca287cb3ae2f7e reproduces
+  target47909520ff1e419cdab4286c9e4507d2c35c66e83ae8703084721164dc3d0938;
+  BPS1038990bytes SHAa74a788ae865d9bee832be62d54f9667f2129bb6c2bddf981b4514617f83d865.
+  Full local/compiled checks pass; production web decoder reproduces exact ROM.
+  Manifest honestly retains source_worktree_dirty=true for untracked output/
+  preserved unrelated PDF; tracked implementation is committed. No clean-
+  checkout acceptance claim and no modification/staging of that PDF.
+- Site66 succeeded2026-10-15T03:34:06.037664UTC, websitesource
+ ab096cf53af29f93cc80eb888a623949aa0826c9; savedversion
+ appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_a1cf99a11f7481919126b5e4e9ee8357;
+  deploymentappgdep_6ad049a56fc8819193f279a3440b4fd6. Archive
+ site-v75-gray-paving.tar.gz SHA14caf672bd0a5862947ac2c75e37d842ed05882c918baeb97729138d15f1ff79
+  independently audits88 files, approved prototype only/no commercial ROM/
+  private saves/ELF/movie/ZIP/AppleDouble/symlink/traversal. Emulator15 files exact.
+- Canonical live manifest/BPS200 and byte-exact local; receipt
+ a444d4192c8d5d7d3c3fd00b8ada68fba01777ff7e822b4f2dc8f52902ae77b2.
+  Public loader visible/inspected/screenshot saved; own public QA tab closed.
+  No GitHub workflow, database, account or user-save mutation.
+- Revised matched33.351sec Emerald/gray clip prepared under
+ park-paving-v75-gray-emerald-paired-review/comparison.mp4, same1992frames/input/
+  nativeclock/equalnearest3x/two original audio tracks. Color request fulfilled;
+  no numeric/new full-domain approval inferred. Original native frames and
+  superseded yellow evidence losslessly preserved.
+- Alignment next finite read-only task recommends a meaningful600sec active
+  field workload instead of long idle. Last exchange03:33UTC,next04:03UTC.
+  Root owns all source. Human0/11, clinic music last explicit2/4/revision pending,
+  broad full-campaign/performance/audio gatesOPEN. GoalACTIVE through6PM Pacific.
