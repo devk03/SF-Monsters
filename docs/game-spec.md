@@ -554,10 +554,10 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 00:39 UTC:
+Current checkpoint — October 15, 2026, 01:25 UTC:
 
-- Goal active; stop October 15 at 18:00 Pacific. Public v70 / Site 61 is live.
-  Native release source 3111cd0; website source 75382381. Human approvals 0/11.
+- Goal active; stop October 15 at 18:00 Pacific. Public v71 / Site 62 is live.
+  Native release source e7da69c; website source be095d2e. Human approvals 0/11.
 - Fixed stale Make caches that had retained inherited creature graphics. Final
   ROM independently matches all 108 authored visual/palette resources, 90 table
   bindings, 18 icon selectors, three shared palettes and 18 original cry controls.
@@ -607,11 +607,13 @@ Current checkpoint — October 15, 2026, 00:39 UTC:
 - Lower-west South Park frontage has an adjacent butter house. All12 newly
   blocked old-save positions safely reload/resave; native front/side/roof pushes
   remain outside buildings, and browser route passes scoped checks.
-- Alignment confirms exact map-return plaintext gameplay preservation; native RNG
-  and wandering Dylan differ. Actual map→Save→coldContinue also passes. Next
-  check by00:45UTC; seed-door/density source and bounded technical reviews finished.
-  Alignment completed Jonathan slot/palette and remaining battle-portrait audits.
-  Root continues first-slice polish; next exchange by01:00UTC.
+- All three Cognition trainers have original portrait candidates. Compiled26
+  checks, actual native/browser entrances and two ordinary loss/save/coldContinue
+  branches pass their technical scopes. Human paired art reviews remain pending.
+- Alignment confirms exact map-return gameplay preservation; native RNG and
+  wandering Dylan differ. Its finite full-turn/party-sync fixture task is active,
+  with handoff due02:20UTC. Last exchange01:23UTC; next by01:53UTC. Root continues
+  first-slice polish and owns publication; peer owns only its new fixture/tests.
 
 ### 15.1 Objective and completion rule
 
@@ -623,7 +625,8 @@ record honest remaining gates, make the final coherent commit/push, and pause.
 A fixed-date one-time stop reminder is active; no indefinite monitor is authorized.
 
 Alignment requirement (explicitly requested October 14): check in with the
-**SF Monsters goal alignment review** chat at least every **30 minutes of elapsed
+**🧱 SFM Audit Monsters Alignment** chat (ID
+01a13900-5c2c-7973-bea7-389deda8a5ab) at least every **30 minutes of elapsed
 active work**. Read its latest result/status, exchange current priorities and
 acceptance evidence, resolve disagreements against this spec, and record the
 last/next check-in below. Work with that chat on implementation, reviews,
@@ -833,8 +836,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Execution | Continue full-spec work through intermediate releases until October15,6PM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
 | Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
-| Public build | 0.0.70-jonathan-muni-preview; targetfc3fbf94ad2440fccc4d35276cb4319181508c619ea0d042e1ba59e66c109f4c; Site61. Original Jonathan works at both Muni stops, with old-save/resave/reload, native round-trip and scoped Chrome route/manual outbound evidence. Eleven named fieldpeople have twelve map-specific candidates; human approvals0/11. |
-| Latest local source build | v70 normal source3111cd0 reproduces testedfc3fbf94. Compiled creature255/cast52/intro5/map17/door11 and full local suite pass. Ten prior cast sprites/three palettes and physical Park layout remain exact; static native table remains239slots. Remaining quality/performance/campaign gates are open. |
+| Public build | 0.0.71-cognition-portraits-preview; target353ff5bd5adb5b52df1d6b7f1b2d68bbb7df9956ab283e4d99ca2e991937c667; Site62. Original portraits for Scott, Walden and Steven have compiled/native/browser technical checks. Eleven named fieldpeople have twelve map-specific candidates; human approvals0/11. |
+| Latest local source build | v71 normal sourcee7da69c reproduces tested353ff5bd. Compiled creature255/cast52/intro5/map17/door11/portraits26 and full local suite pass. Existing teams, moves, levels, encounters, rewards, classes, flags and Scott portrait remain unchanged. Remaining quality/performance/campaign gates are open. |
 | Content implemented so far | Sunset opening and courier apartment adventure, Muni, South Park, clinic and first Cognition gym draft; eighteen creature candidates and three starter lines. Complete 16-hub/8-gym/150-entry campaign remains unfinished. |
 | Relevant functional evidence | Actual first-badge Firev45, Waterv48 and Grassv49 controller routes; earned batteries cold-load on later native/WASM builds. These establish first-badge viability, not complete campaigns or pacing. |
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
@@ -7175,3 +7178,69 @@ v71 companion tests/native entrance checkpoint — October15,00:57UTC:
   completebattle returns, actualbrowser and humanreviews are still pending.
 - Public staysv70/Site61. No mechanics/team/encounter/reward/classID changes;
   full remaininggatesOPEN and goalACTIVE throughOctober15,18Pacific.
+
+v71 public trainer-portrait checkpoint — October15,01:25UTC:
+
+- Normal sourcee7da69c7a3e0b99d433162c987c788239a0c4260 produces target
+  353ff5bd5adb5b52df1d6b7f1b2d68bbb7df9956ab283e4d99ca2e991937c667.
+  BPS1026146bytes SHAecae227cb17d352d29ed64526f5eceff8ad8738329f76b44270f5bb55274abbd.
+  Worktree-dirty is honestly recorded in the manifest; unrelated PDF and the
+  peer-owned untracked turn fixture are excluded from this release checkpoint.
+- Original Walden green-jacket and Steven glasses/gray-shirt portraits use
+  native IDs94/95; Scott93 remains byte-exact. Built-in image generation used
+  our original character sheets, followed by reproducible palette conversion.
+  Exact prompts/sources/cleanup recipes live under each cognition-cast person's
+  battle-portrait-v1 folder. No commercial image/reference likeness is imported.
+  Both inherited trainer class IDs/display classes remain unchanged in v71.
+- Independent compiled audit passes26/26, and oldv70 fails8/26. The native agbcc
+  MonCoords stride is4 despite two u8 fields; preserved failed receipt identified
+  the validator's original2byte assumption. Correcting validation reproduces the
+  identical first target353ff5bd; no engine or portrait table change hid the error.
+  Eleven bounded companion cases and the full local check pass.
+- Genuine v70 preWaldenC3/preStevenC4 ordinary saves coldContinue and stationary
+  v71 resave preserve all declared gameplay domains. Separate native branches
+  actually approach the trainers, display new portraits, deploy both sides and
+  reach the command menu. Both2048frame34.2890625second captures are paired with
+  genuine Emerald Calvin introductions using identical controller input/native
+  clocks, nearest scaling and two unmodified audio tracks. Human0–4 requests
+  remain pending; no rating or approval is inferred.
+- Both underleveled battle branches end in actual losses, then return to field,
+  heal, ordinarySave and coldContinue. StevenC4→C5 returns to existing last-heal
+  SouthPark6,17; WaldenC3→C4 returns to existing last-heal Sunset23,22. These are
+  legacy save destinations, not proof of current clinic blackout destination.
+  Cold Flash and all600 native party bytes match the ordinary saved result.
+  Flags stay exact: Steven remains undefeated, and Walden's earlier defeated
+  flag is retained only on the separate preSteven branch. Each uses one Potion;
+  money3800→1900 /3500→1750. Walden branch earns a level3→4 bench level before
+  losing to Pinepip's Bide. These are not victories or new campaign checkpoints.
+- Battle-outcome receipt precisely bounds changed domains: existing location/
+  warp history, party, seen-bitfields, native variables, money, one bag item and
+  battle/step/loss statistics. Everything else declared remains exact. Private
+  receipt: portraits-v71-plan/battle-outcome-proof.json; opaque RAM equality,
+  balance and complete campaign-save acceptance are not claimed.
+- Chrome actual new portraits are separately visible in ordinary input QA.
+  Walden sample180001.1ms:10751 core/video frames,21600 visible ticks; complete
+  17row34.289s intro followed by menu idle. Steven complete sample39730.8ms:
+  2373 core/video frames, complete17rows. Both report zero frame mismatch/drop,
+  warmup/drop/underrun and final audio acknowledgement. Steven earlier21.6245s
+  interrupted12/17row receipt is preserved and excluded from complete-route
+  claims. Own QA tabs/finite servers were closed. This is not ten-minute mixed
+  gameplay, physical response, native update deadlines, Safari/phone or listening
+  approval. Private browser screenshots and original timing receipts are retained.
+- Site62 succeeded at2026-10-15T01:24:32.271555UTC; source
+  be095d2e18a5686e6dc8b7ba3665ad78d00a9555. Savedversion
+  appgprj_6ac5f5f2ab588191839f86b3aafb5390~appgver_4e9e294c58508191860c382a4916e4f6;
+  deploymentappgdep_6ad02b4805f88191b8a879852b50ab48.
+  Archivebac9544b75093b7d651d11553124ebc02b9e5bda53957d601908fc751b8e3d27:
+  all88files pass; no commercialcartridge/privateSave/ELF/MP4/ZIP/AppleDouble.
+  Approved originalSFMM prototype remains. Production browser decoder reproduces
+  the target byte-for-byte; all15 runtime files, hosting/auth/storage stay exact.
+- Anonymous public manifest/BPS responses match localSHA at01:24:41UTC; receipt
+  portraits-v71-live-resources.json SHAc1fc1f7464fb95d2aae5ef5367a6af17afae8a88ea3f11841ccadc485b33b54f.
+  Actual visible public loader verified and screenshot retained; no public ROM/
+  save upload or account mutation. Root public patch files and versioned release
+  are committed together with this spec. GitHubActions stays manual-only.
+- GoalACTIVE throughOctober15,18Pacific, humanapprovals0/11, all remaining
+  campaign/art/audio/type/catalog/full-turn/performance/save gates OPEN. Next
+  work remains first-slice polish plus source-derived full-turn/party-sync proof;
+  no campaign expansion is authorized by these technical subset passes.
