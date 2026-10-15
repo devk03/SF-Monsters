@@ -554,7 +554,7 @@ Do not pad code, churn formatting, or leave a broken intermediate build to meet
 the line quota. Scope, tests, screenshots/clips and progress updates travel with
 the coherent checkpoint they substantiate.
 
-Current checkpoint — October 15, 2026, 03:34 UTC:
+Current checkpoint — October 15, 2026, 04:00 UTC:
 
 - Goal active; stop October 15 at 18:00 Pacific. Public v75 / Site 66 is live.
   Native release source f85c8906; website source ab096cf5. Human approvals 0/11.
@@ -570,9 +570,13 @@ Current checkpoint — October 15, 2026, 03:34 UTC:
   baseline; five controlled turn profiles now pass separately (four full living,
   one partial KO boundary); broad full-turn/type/catalog gates remain open. Ten save round trips cover
   one first-badge checkpoint, not 50 distinct campaign checkpoints.
-- Chrome 600-second field observation and shorter mixed/browser smokes pass
-  their scoped audio/video checks. Earlier IAB long-clock failure, physical
-  response, native deadlines, Safari/phone and listening acceptance remain open.
+- Earlier scoped browser smokes passed, but the first active-walking600second
+  Chrome v75 run FAILS:16discarded frames,13738audio underrun outputframes and
+ 334input observations vs310planned. Complete route/foreground/report integrity
+  do not override that failure. The instrumented repeat also fails
+  (9discarded frames/8330underruns), with exactly310planned inputs and no
+  unexpected DOM events. No fix or performance acceptance claimed. Physical response, native deadlines,
+  Safari/phone, other workload classes and listening remain open.
 - Full 16-neighborhood / eight-gym / 150-monster campaign remains unfinished.
   First-slice approval is required before campaign expansion.
 - TrolleyKit is grounded: one ROM byte changes from v58; other 411 elevation
@@ -611,11 +615,10 @@ Current checkpoint — October 15, 2026, 03:34 UTC:
 - All three Cognition trainers have original portrait candidates. Compiled26
   checks, actual native/browser entrances and two ordinary loss/save/coldContinue
   branches pass their technical scopes. Human paired art reviews remain pending.
-- Alignment confirms exact map-return gameplay preservation; native RNG and
-  wandering Dylan differ. Its finite full-turn/party-sync fixture task is active,
-  three-case handoff completed and root rerun passes. Last exchange02:03UTC;
-  next by02:30UTC. Root owns publication and next first-slice UI polish; peer
-  finished read-only scoped BUILDER-label recommendations.
+- Current alignment exchange03:58UTC,next04:28UTC. Root owns performance
+  diagnostics, builds/publication and canonical spec; peer owns only source text
+  for three existing Sunset starter prompts. No builds/captures during the
+  running measurement. Existing map/save/turn evidence remains scoped below.
 
 ### 15.1 Objective and completion rule
 
@@ -831,7 +834,7 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 14, 2026; historical checkpoint details follow):
+Current snapshot (October 15, 2026,04:00UTC; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
@@ -845,7 +848,8 @@ Current snapshot (October 14, 2026; historical checkpoint details follow):
 | Reference movement evidence | Courier candidate's first unblocked four-direction rectangle: sixteen frames/tile, zero difference against the reference. Full movement/performance/input gate remains open. |
 | Public QA | Site41 public IAB patches/exports exact v51. Site42 source/core in isolated localhost IAB completed ten consecutive desktop native→browser→native save cycles, independently sealed; populated party/storage/resources preserved. Fresh public auth/isolation, Safari/mobile, browser performance/audio, fresh-session durability and50 campaign checkpoints remain open. |
 | Remaining system gates | 711 independent native scenarios pass,57 doubles: all289 native type pairs,55 capture outcomes,8 delivery chains,10 move scripts,21 residual-phase and34 item-effect scenarios. Actual bag/Dex/save integration, SF species mappings, move-end/full-turn/faint resolution and coverage review prevent mechanics acceptance. Performance, save and full campaign gates stay outstanding. |
-| Next work | Continue Stage B spatial density/collision and remaining cast/audio polish, integrated mechanics and matched first-slice review. Ten desktop save cycles are already independently sealed at one checkpoint;50 distinct campaign checkpoints remain open. Human approval and complete campaigns remain pending. |
+| Active performance issue | First v75 active600sec Chrome run: complete310row route, zero hidden ticks, but16discarded frame debt,13738underrun outputframes (~0.3115sec),334input observations vs310planned. Strict qualifier fails. Instrumented repeat also fails9debt/8330underruns, with exactly310inputs and no unexpected DOM/focus/longtask entries. No pacing fix yet. Earlier clean idle/short observations do not supersede this failure. |
+| Next work | Diagnose active-field stalls/input contamination, then complete truthful starter-choice information and native/browser checks. Continue Stage B art/audio/interface polish and matched review; no campaign expansion before approval. Ten desktop save cycles remain one checkpoint;50 campaign checkpoints and full campaigns stay open. |
 
 - Goal definition and reviewer preference are established. Reference capture
   tooling and the experimental hardware foundation have started.
@@ -8040,3 +8044,43 @@ Field diagnostics checkpoint — October15,03:58UTC:
 - Next diagnostic repeat uses original snapshot and samegame/runtime, no
   concurrent builds/captures. First600secfailure remains authoritative evidence
   of an unresolved issue until cause/fix/retest. GoalACTIVE,publicv75 unchanged.
+
+
+User facade-ground integration correction — October15,04:03UTC:
+
+- User still sees buildings as flat objects placed on pavement, missing a
+  boundary or a distinct connection to the sidewalk. No numeric paving or
+  full-domain approval was given. Neutral gray/finegrid preference remains.
+- Prioritize shallow foundations, door stoops, garage aprons and subtle contact
+  shadows with architectural variation. Keep existing walls solid, doorway
+  approaches walkable and native door-animation VRAM reserved.
+- Alignment identifies free primarybank5/299primarytile slots; secondary is
+ 502/504residenttiles. First prototype uses primary ground-apron cells below
+  existing facades, not secondary sprite repacking or footprint/collision changes.
+  Brick apron(x2..4,y6),sage(x2..4,y17),sandstone(x2..4,y25),coffee(x21..22,y6);
+  terrace/service approaches remain protected. Native/browser proof is pending.
+- Built-in original threshold sheet and shallow refinement are preserved;
+  aspect-preserving nearest/RGB555 converter source is drafted. No converter/
+  build/capture/test suite executed during the current600second observation.
+  Starterthreepromptsource change is ready but unbuilt; release is stillv75.
+  Last alignment exchange04:03UTC,next04:33UTC; goalACTIVE until agreeddeadline.
+
+
+Instrumented active-field repeat — October15,04:09UTC:
+
+- Same exactv75ROM/runtime15/originalsnapshot/310rowinput, fresh finiteChrome
+  session. Preservedreportb31bec5371ca4832ad2ec5d763498156 SHA
+ f7a3d7dfbd7ced047fe175d130b26758a5751ee27a3a38a6f5578050902d8fa1.
+  Genericintegrity passes; strict field qualificationFAILS9discardeddebtframes
+  and8330underrunoutputframes/44100Hz (~0.1889sec).0drops/warmup/mismatch,
+  finalACK,600000.8ms/71953visible/0hidden ticks,35827video frames.
+- Replaycomplete310/310,maxlateness5.2308ms; SDKobserves310inputs. Bounded
+  log has155syntheticdowns/155ups,0trusted/repeat/blur/focus/longtask entries
+  and0overflow. Extra keyboard inputs are not necessary for this failure.
+  MaxrAFgap200.7ms with corebatchmax9.7ms/rendermax2.8ms supports investigating
+  scheduling gaps; aggregatecounter/timestamp correlation is not causal proof.
+  No engine/core fix or fullperformance acceptance claimed.
+- All localQAaudio/emulator/tab/server stopped; no new long repeat queued.
+  Alignment reviewing bounded catchup/prefill tradeoffs read-only; root now
+  prioritizes user-requested facade-ground integration and starterpromptproof.
+  Both600secfailures remain preserved. Publicv75, human0/11, goalACTIVE.
