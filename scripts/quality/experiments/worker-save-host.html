@@ -1,0 +1,223 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Private SF Worker save proof</title>
+<style>
+body{margin:24px;background:#eee;color:#222;font:15px system-ui;max-width:960px}button{padding:10px;margin:4px}canvas{display:block;width:720px;max-width:100%;image-rendering:pixelated;background:#111}pre{white-space:pre-wrap;font:12px monospace}
+</style>
+<h1>Private Worker save proof</h1>
+<p>Same verified SF cartridge, native checkpoint, mGBA core and audio sink. Worker core/audio timing is separate from main-thread canvas submissions. No production save compatibility or physical presentation claim.</p>
+<button id="load">Load verified Worker checkpoint</button><button id="short" disabled>Measure 10 seconds</button><button id="medium" disabled>Measure 2 minutes</button><button id="stall" disabled>Controlled 200ms main-thread stall</button><button id="move" disabled>Walk a short loop</button><button id="finish" disabled>Finish local QA</button><button id="route" disabled>Measure supplied active route</button>
+<p id="status" role="status">Ready. No public saves or account data are used.</p>
+<canvas width="240" height="160" tabindex="0" aria-label="GBA game screen"></canvas><button id="roundtrip" disabled>Check state and Flash round trip</button><button id="quota" disabled>Inject one storage failure</button><button id="recover" disabled>Resume after storage failure</button><p id="save-status">No browser storage proof yet.</p><pre id="report">No proof report yet.</pre>
+<script type="module">
+import {createPresentedSaveStore,decodeRaw} from "/emulator/presented-save.js";
+let worker,audio,sink,gain,identity,boot,ready=false,finished=false,measuring=false,stallUsed=false,stallReady=false;
+let saveStore,saveEpoch,storeKey,checking=false,storagePaused=false,injectQuota=false,adapterGeneration=1;
+let storageEvents=[],saveActions=[],activeFrame=null,inflightVideo=null,videoTicket=0,pendingVideoTicket=0;
+const saveStatus=document.querySelector("#save-status");
+let replayModule,routeText,replay,replayResult=null,routeUsed=false;
+let nextId=0,raf=0,videoPending=false,mainDeadline=0,leaseTimer,sequence=0,mask=0,measurementPromise;
+const pending=new Map(),timers=new Set(),keys=new Map(),releaseTimers=new Map();
+const status=document.querySelector('#status'),out=document.querySelector('#report'),canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');
+const button=id=>document.querySelector('#'+id),absolute=()=>performance.timeOrigin+performance.now();
+let mainTicks=[],submissions=[],inputs=[],stalls=[],visibility=[],focus=[],longTasks=[];
+let observer;
+const codes=['KeyX','KeyZ','ShiftRight','Enter','ArrowRight','ArrowLeft','ArrowUp','ArrowDown','KeyS','KeyA'];
+function controls(){
+  button('load').disabled=!!worker||finished;
+  for(const id of ['short','medium'])button(id).disabled=!ready||finished||measuring||checking;
+  button('stall').disabled=!stallReady||stallUsed||finished;
+  button('move').disabled=!ready||finished||timers.size>0||replay?.active||checking;
+  button('route').disabled=!ready||!routeText||finished||measuring||timers.size>0||routeUsed||checking;
+  button('finish').disabled=!worker||finished||checking;
+  for(const id of ['roundtrip','quota'])button(id).disabled=!ready||finished||measuring||checking||timers.size>0;
+  button('recover').disabled=!storagePaused||finished||checking;
+}
+function fail(error){status.textContent='Proof failed: '+error.message;}
+function rpc(op,data={},transfer=[],timeoutMs=5000){
+  if(!worker)return Promise.reject(Error('Worker is not available'));
+  const id=++nextId;
+  return new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>{pending.delete(id);reject(Error(op+' RPC timed out'));},timeoutMs);
+    pending.set(id,{resolve,reject,timer});
+    try{worker.postMessage({id,op,...data},transfer);}catch(error){clearTimeout(timer);pending.delete(id);reject(error);}
+  });
+}
+function audioClock(){const beforeMs=performance.now();const value={beforeMs,currentTime:audio.currentTime,state:audio.state,timeOrigin:performance.timeOrigin};value.afterMs=performance.now();return value;}
+const hash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),v=>v.toString(16).padStart(2,'0')).join('');
+async function verified(path,expected){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw Error('Fetch failed '+path);const bytes=new Uint8Array(await r.arrayBuffer());if(await hash(bytes)!==expected)throw Error('Hash differs '+path);return bytes;}
+async function lease(){
+  const before=performance.now(),r=await fetch('/session.json',{cache:'no-store',signal:AbortSignal.timeout(1500)});
+  if(!r.ok)throw Error('Session lease unavailable');const {remaining_ms}=await r.json();
+  if(!Number.isFinite(remaining_ms)||remaining_ms<=0||remaining_ms>identity.server_limit_seconds*1000)throw Error('Session lease invalid');
+  mainDeadline=mainDeadline?Math.min(mainDeadline,before+remaining_ms):before+remaining_ms;
+  clearTimeout(leaseTimer);leaseTimer=setTimeout(()=>void finish(),Math.max(0,mainDeadline-performance.now()-2000));return mainDeadline-performance.now();
+}
+function render(now){
+  if(finished)return;raf=requestAnimationFrame(render);
+  if(measuring&&mainTicks.length<160000)mainTicks.push(now);
+  if(!ready||checking||pendingVideoTicket)return;
+  const ticket=++videoTicket,generation=adapterGeneration;pendingVideoTicket=ticket;
+  const requestedAt=absolute();let ownedFrame;
+  inflightVideo=rpc('video',saveStore.known()).then(async frame=>{
+    ownedFrame=frame;if(finished||frame.ready===false)return;
+    if(generation!==adapterGeneration||frame.saveEpoch!==saveEpoch)return;
+    const rgba=frame.rgba;
+    if(frame.width!==240||frame.height!==160||!(rgba instanceof Uint8Array)||rgba.length!==153600)throw Error('Invalid GBA video buffer');
+    activeFrame={frameId:frame.frameId,saveEpoch:frame.saveEpoch,counter:frame.counter,rawRevision:frame.flash.rawRevision,sha256:frame.flash.sha256};
+    const receipt=await saveStore.present(frame,{
+      acknowledge:id=>rpc('ack-flash',id),
+      draw:packet=>ctx.putImageData(new ImageData(new Uint8ClampedArray(packet.rgba.buffer,packet.rgba.byteOffset,packet.rgba.byteLength),240,160),0,0)
+    });
+    if(measuring&&submissions.length<160000)submissions.push({requestedAt,receivedAt:absolute(),workerAt:frame.workerAt,counter:frame.counter,
+      frameId:receipt.frameId,saveEpoch:receipt.saveEpoch,rawRevision:receipt.rawRevision,storageWriteSerial:receipt.writeSerial});
+    saveStatus.textContent='Stored raw revision '+receipt.rawRevision+' before frame '+receipt.frameId+'; storage writes '+saveStore.snapshot().writeSerial+'.';
+  }).catch(async error=>{
+    if(finished||generation!==adapterGeneration)return;
+    releaseAll();ready=false;storagePaused=true;const paused=await rpc('pause').catch(()=>null);await audio.suspend();
+    const previous=saveStore.cachedPresented();
+    const record={type:'presentation-failure',at:absolute(),error:error.message,store:saveStore.snapshot(),
+      workerPaused:paused?.running===false,workerLastReceipt:paused?.lastHostReceipt??null,
+      cachedPresented:previous?{frameId:previous.frameId,saveEpoch:previous.saveEpoch,rawRevision:previous.rawRevision,counter:previous.counter,sha256:previous.sha256}:null,
+      currentStoredEncodedLength:(()=>{try{return localStorage.getItem(storeKey)?.length??0;}catch{return null;}})()};const armed=saveActions.findLast(action=>action.type==='quota-armed');
+    if(armed){
+      try{const actual=localStorage.getItem(storeKey);record.storedAfterSha256=actual?await hash(decodeRaw(actual)):null;}
+      catch(error){record.storageVerificationError=error.message;}
+      record.quotaStorageUnchanged=record.storedAfterSha256===armed.storedSha256;
+      record.quotaPresentationUnchanged=record.store.drawCount===armed.drawCount&&previous?.frameId===armed.presentedFrameId;
+      record.quotaWorkerReceiptUnchanged=paused?.lastHostReceipt?.frameId===armed.presentedFrameId;
+    }
+    saveActions.push(record);
+    saveStatus.textContent='Presentation stopped: '+error.message+'. Previous submitted bytes retained; no latest-live claim.';controls();
+  }).finally(async()=>{
+    if(ownedFrame?.rgba?.buffer?.byteLength&&worker)await rpc('recycle',{frameId:ownedFrame.frameId,saveEpoch:ownedFrame.saveEpoch,pixels:ownedFrame.rgba.buffer},[ownedFrame.rgba.buffer]).catch(()=>{});
+    if(pendingVideoTicket===ticket)pendingVideoTicket=0;
+  });
+}
+function input(nextMask,domAt=absolute()){
+  if(!ready||finished||nextMask===mask)return;mask=nextMask;const sentAt=absolute(),seq=++sequence;
+  if(measuring)inputs.push({sequence:seq,mask,domAt,sentAt});
+  rpc('input',{mask,sequence:seq,domAt}).catch(error=>{if(!finished)fail(error);});
+}
+function releaseAll(){for(const timer of releaseTimers.values())clearTimeout(timer);releaseTimers.clear();keys.clear();input(0);}
+function key(event,down){
+  const bit=codes.indexOf(event.code);if(bit<0||!ready||finished||checking)return;event.preventDefault();
+  const time=absolute();clearTimeout(releaseTimers.get(event.code));
+  if(down){if(event.repeat)return;keys.set(event.code,time);input(mask|1<<bit,time);}
+  else{const delay=Math.max(0,70-(time-(keys.get(event.code)??time)));releaseTimers.set(event.code,setTimeout(()=>{keys.delete(event.code);input(mask&~(1<<bit),time);},delay));}
+}
+window.addEventListener('keydown',e=>key(e,true));window.addEventListener('keyup',e=>key(e,false));
+window.addEventListener('blur',()=>{if(measuring)focus.push({type:'blur',at:absolute()});releaseAll();});
+window.addEventListener('focus',()=>{if(measuring)focus.push({type:'focus',at:absolute()});});
+document.addEventListener('visibilitychange',()=>{if(measuring)visibility.push({state:document.visibilityState,at:absolute()});if(document.hidden)releaseAll();});
+button('load').onclick=async()=>{try{
+  button('load').disabled=true;status.textContent='Verifying the frozen private checkpoint and Worker runtime…';
+  const r=await fetch('/identity.json',{cache:'no-store'});if(!r.ok)throw Error('Identity unavailable');identity=await r.json();
+  const [rom,battery,state]=await Promise.all(['rom.gba','battery.sav','state.bin'].map(name=>verified('/'+name,identity.files[name])));
+  await lease();
+  for(const [name,digest]of Object.entries(identity.runtime))await verified('/emulator/'+name,digest);
+  if(identity.controller_route){routeText=new TextDecoder().decode(await verified('/route.csv',identity.files['route.csv']));await verified('/controller-replay.js',identity.files['controller-replay.js']);replayModule=await import('/controller-replay.js');replayModule.parseControllerRoute(routeText);}
+  const {WORKLET_SOURCE}=await import('/emulator/mgba.audio-worklet.js');
+  audio=new AudioContext();const url=URL.createObjectURL(new Blob([WORKLET_SOURCE],{type:'application/javascript'}));
+  await audio.audioWorklet.addModule(url);URL.revokeObjectURL(url);
+  sink=new AudioWorkletNode(audio,'mgba-sink',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]});
+  gain=audio.createGain();gain.gain.value=.15;sink.connect(gain).connect(audio.destination);await audio.resume();
+  worker=new Worker('/emulator/worker-proof.js');
+  worker.onmessage=event=>{const message=event.data;if(message.type==='worker-error'){void finish().then(()=>fail(Error(message.error)));return;}const p= pending.get(message.id);if(!p)return;clearTimeout(p.timer);pending.delete(message.id);message.ok?p.resolve(message.result??message.value):p.reject(Error(message.error??'Worker RPC failed'));};
+  worker.onerror=event=>{for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error(event.message||'Worker failed'));}pending.clear();fail(Error(event.message||'Worker failed'));};
+  boot=await rpc('boot',{rom,battery,state,audioPort:sink.port,jsUrl:new URL('/emulator/mgba.js',location.href).href,wasmUrl:new URL('/emulator/mgba.wasm',location.href).href},[sink.port],20000);
+  saveEpoch=boot.saveEpoch;storeKey='sf-worker-save-proof-v1:'+identity.rom_sha256+':'+location.host;
+  let writeAttempt=0,lastWrite=null;
+  const storage={setItem(key,value){
+    const attempt=++writeAttempt;
+    if(injectQuota){injectQuota=false;storageEvents.push({type:'denied',attempt,at:absolute(),...activeFrame});throw new DOMException('Injected private quota failure','QuotaExceededError');}
+    localStorage.setItem(key,value);lastWrite={key,value,attempt,meta:{...activeFrame}};storageEvents.push({type:'write',attempt,at:absolute(),encodedLength:value.length,...activeFrame});
+  },getItem(key){const value=localStorage.getItem(key);storageEvents.push({type:'read',attempt:lastWrite?.attempt??null,matchesWrite:!!lastWrite&&lastWrite.key===key&&lastWrite.value===value,at:absolute(),encodedLength:value?.length??0,...activeFrame});return value;}};
+  saveStore=createPresentedSaveStore({storage,key:storeKey,epoch:saveEpoch});
+  await lease();await rpc('start' ,{durationMs:Math.min(900000,Math.floor(mainDeadline-performance.now()-2000))});
+  ready=true;raf=requestAnimationFrame(render);status.textContent='Verified Worker checkpoint playing; visibility='+document.visibilityState+'. Let audio settle before measuring. Arrow keys move; X/Z confirm/back.';
+}catch(error){await finish();fail(error);}finally{controls();}};
+async function measure(durationMs,onStarted){
+  if(!ready||finished||measuring)return;if(document.visibilityState!=='visible'){fail(Error('Raise this test window before foreground measurement; visibility='+document.visibilityState));return;}measuring=true;stallReady=false;controls();
+  try{
+    if(await lease()<durationMs+3000)throw Error('Insufficient finite session time');
+    mainTicks=[];submissions=[];inputs=[];stalls=[];visibility=[{state:document.visibilityState,at:absolute()}];focus=[];longTasks=[];
+    if(globalThis.PerformanceObserver?.supportedEntryTypes.includes('longtask')){
+      observer=new PerformanceObserver(list=>{for(const e of list.getEntries())longTasks.push({startAt:performance.timeOrigin+e.startTime,duration:e.duration});});observer.observe({type:'longtask'});
+    }
+    const before=audioClock(),mainBeginSentAt=absolute();
+    measurementPromise=rpc('begin',{durationMs},[],durationMs+3000);
+    const admitted=await rpc('snapshot');if(admitted.measurementActive!==true)throw Error('Worker did not admit this diagnostic window');stallReady=true;controls();onStarted?.();
+    status.textContent='Measuring Worker core/audio '+durationMs/1000+' seconds. One explicit 200ms UI stall is available.';
+    const workerReport=await measurementPromise,after=audioClock(),mainResultReceivedAt=absolute();
+    stallReady=false;controls();observer?.disconnect();
+    const result={schema:2,kind:'private-worker-proof-v1',saveProtocol:{storageKind:'isolated localStorage',storageEvents,saveActions,store:saveStore.snapshot()},context:{identity,environment:{userAgent:navigator.userAgent,vendor:navigator.vendor,crossOriginIsolated:globalThis.crossOriginIsolated}},controllerReplay:replayResult??null,scope:{private:true,productionCompatible:false,physicalPaintProven:false,guestKeyConsumptionProven:false},boot,admitted,worker:workerReport,main:{timeOrigin:performance.timeOrigin,mainBeginSentAt,mainResultReceivedAt,audioClockBefore:before,audioClockAfter:after,rafTimes:mainTicks,submissions,inputs,stalls,visibility,focus,longTasks}};
+    const saved=await fetch('/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result),signal:AbortSignal.timeout(5000)});
+    if(!saved.ok)throw Error('Could not preserve Worker proof report');const receipt=await saved.json();
+    out.textContent=JSON.stringify({receipt,boot,worker:{reason:workerReport.reason,elapsedMs:workerReport.elapsedMs,rawLedgerRows:workerReport.rawLedger.length,inputs:workerReport.inputs.length,audioSnapshots:workerReport.audioSnapshots.length,initialPacing:workerReport.initialPacing,finalPacing:workerReport.finalPacing,audioFinalAcknowledged:workerReport.audioFinalAcknowledged,audioFinalSnapshot:workerReport.audioFinalSnapshot},main:{rafTicks:mainTicks.length,submissions:submissions.length,inputs:inputs.length,stalls,visibility,focus,longTasks}},null,2);
+    status.textContent='Saved '+receipt.name+'. Private Worker proof only; independent audit required.';
+  }catch(error){fail(error);try{await rpc('end',{reason:'host-error'});}catch{};}
+  finally{measuring=false;stallReady=false;observer?.disconnect();controls();}
+}
+button('route').onclick=()=>{
+  if(!routeText||routeUsed||measuring||finished)return;routeUsed=true;replayResult=null;
+  const route=replayModule.parseControllerRoute(routeText);let routeMask=0;
+  void measure(replayModule.controllerMeasurementDuration(route.durationMs),()=>{
+    replay=replayModule.startControllerReplay(routeText,next=>{
+      for(let bit=0;bit<10;++bit)if((routeMask^next)&(1<<bit))window.dispatchEvent(new KeyboardEvent(next&(1<<bit)?'keydown':'keyup',{code:codes[bit],bubbles:true}));
+      routeMask=next;
+    },result=>{replayResult=result;controls();});controls();
+  });
+};
+button('short').onclick=()=>void measure(10000);button('medium').onclick=()=>void measure(120000);
+button('stall').onclick=()=>{
+  if(!stallReady||stallUsed||finished)return;stallUsed=true;controls();
+  const startedAt=absolute(),until=performance.now()+200;while(performance.now()<until){};
+  stalls.push({requestedMs:200,startedAt,endedAt:absolute()});status.textContent='Controlled main-thread stall completed; Worker result pending.';
+};
+button('move').onclick=()=>{
+  if(!ready||finished||timers.size)return;
+  for(const [i,code]of ['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].entries())for(const [offset,type]of [[0,'keydown'],[250,'keyup']]){
+    const timer=setTimeout(()=>{timers.delete(timer);window.dispatchEvent(new KeyboardEvent(type,{code,bubbles:true}));controls();},i*600+offset);timers.add(timer);
+  }controls();
+};
+async function finish(){
+  if(finished)return;replay?.stop('finished-qa');finished=true;stallReady=false;controls();cancelAnimationFrame(raf);clearTimeout(leaseTimer);
+  for(const timer of timers)clearTimeout(timer);timers.clear();for(const timer of releaseTimers.values())clearTimeout(timer);releaseTimers.clear();observer?.disconnect();
+  try{adapterGeneration++;saveStore?.fence();
+  if(measuring)await rpc('end',{reason:'finished-qa'});await rpc('destroy',{},[],2000);}catch(error){out.textContent+='\nCleanup: '+error.message;}
+  worker?.terminate();worker=null;sink?.disconnect();gain?.disconnect();if(audio)await audio.close();ready=false;controls();status.textContent='Local Worker QA finished; Worker, emulator and audio stopped. Public progress was untouched.';
+}
+window.addEventListener('pointerdown',()=>{if(audio?.state==='suspended')void audio.resume();});
+async function action(run){
+  if(checking||finished||measuring)return;checking=true;controls();releaseAll();
+  try{await rpc('pause');await audio.suspend();await inflightVideo;await run();}
+  catch(error){ready=false;storagePaused=true;saveStatus.textContent='Save action failed: '+error.message;saveActions.push({type:'action-failure',at:absolute(),error:error.message});}
+  finally{checking=false;controls();}
+}
+async function resumeKnownEpoch(){
+  const state=await rpc('snapshot');saveEpoch=state.saveEpoch;adapterGeneration++;saveStore.fence(saveEpoch);pendingVideoTicket=0;
+  await audio.resume();await rpc('resume',{durationMs:Math.max(1,Math.min(900000,Math.floor(mainDeadline-performance.now()-2000)))});
+  ready=true;storagePaused=false;
+}
+button('roundtrip').onclick=()=>void action(async()=>{
+  const before=await rpc('export-state'),repeat=await rpc('export-state');
+  const equal=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
+  if(!equal(before.state,repeat.state)||!equal(before.flash.bytes,repeat.flash.bytes))throw Error('Repeated paused state/Flash export differs');
+  adapterGeneration++;saveStore.fence();
+  const loaded=await rpc('load-state',{state:before.state,battery:before.flash.bytes});
+  const after=await rpc('export-state');
+  if(loaded.counter!==before.counter)throw Error('Native guest counter differs after restore');
+  if(!equal(before.state.subarray(0x19000),after.state.subarray(0x19000))||!equal(before.flash.bytes,after.flash.bytes))throw Error('Guest RAM or Flash differs after load');
+  const differences=[];before.state.forEach((v,i)=>{if(v!==after.state[i])differences.push(i);});
+  const record={type:'state-flash-roundtrip',at:absolute(),beforeEpoch:before.saveEpoch,afterEpoch:loaded.saveEpoch,counter:before.counter,
+    guestRamExact:true,rawFlashExact:true,repeatedPausedExact:true,wholeStateExact:differences.length===0,differingOffsets:differences,flashSha256:before.flash.sha256};
+  saveActions.push(record);saveStatus.textContent='Guest RAM and raw Flash round-trip exact; whole state exact='+record.wholeStateExact+'. Audio-state differences stay explicit.';
+  await resumeKnownEpoch();
+});
+button('quota').onclick=()=>void action(async()=>{
+  const encoded=localStorage.getItem(storeKey);const previous=saveStore.cachedPresented();
+  saveActions.push({type:'quota-armed',at:absolute(),storedSha256:encoded?await hash(decodeRaw(encoded)):null,presentedSha256:previous?.sha256??null,drawCount:saveStore.snapshot().drawCount,presentedFrameId:previous?.frameId??null,storageWriteSerial:saveStore.snapshot().writeSerial});
+  injectQuota=true;await resumeKnownEpoch();
+});
+button('recover').onclick=()=>void action(async()=>{await resumeKnownEpoch();saveActions.push({type:'explicit-recovery',at:absolute()});});
+button('finish').onclick=()=>void finish();window.addEventListener('pagehide',()=>{worker?.terminate();void audio?.close();});
+</script></html>

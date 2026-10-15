@@ -32,8 +32,9 @@ export function createPresentedSaveStore({ storage, key, epoch, hash = digest })
         throw Error('Provide an isolated, singly owned storage key and storage adapter');
     uint(epoch, 'save epoch');
     let generation = 1, expectedEpoch = epoch, busy = null, verified = null, presented = null;
-    let writeSerial = 0, drawCount = 0, lastFailure = null;
+    let writeSerial = 0, drawCount = 0, lastFailure = null, drawing = false;
     function fence(nextEpoch = null) {
+        if (drawing) throw Error('Canvas submission must not reenter the save fence');
         if (nextEpoch !== null) uint(nextEpoch, 'save epoch');
         generation++; expectedEpoch = nextEpoch; verified = null;
         return generation;
@@ -49,10 +50,11 @@ export function createPresentedSaveStore({ storage, key, epoch, hash = digest })
             throw Error('Video and raw Flash do not share an epoch and guest counter');
         if (typeof frame.flash.available !== 'boolean') throw Error('Invalid Flash availability');
     }
-    async function present(frame, { acknowledge, draw }) {
+    async function present(candidate, { acknowledge, draw }) {
         if (busy === generation) throw Error('One save/frame presentation may be in flight');
         if (typeof acknowledge !== 'function' || typeof draw !== 'function' || draw.constructor.name === 'AsyncFunction')
             throw Error('Provide an acknowledgement and a synchronous canvas submission');
+        const frame = Object.freeze({ ...candidate, flash: candidate?.flash ? Object.freeze({ ...candidate.flash }) : null });
         identity(frame); const token = generation, packet = frame.flash;
         current(token, frame.saveEpoch);
         let storageAttempted = false, storageConfirmed = false;
@@ -107,8 +109,10 @@ export function createPresentedSaveStore({ storage, key, epoch, hash = digest })
                 receipt.rawRevision !== packet.rawRevision)
                 throw Error('Worker receipt is stale or falsely attests browser storage');
             // No await between this fence, the synchronous draw and recording
-            // the cached presented copy. A reset cannot interleave this block.
-            const result = draw(frame);
+            // the cached presented copy. The trusted direct canvas callback must
+            // not reenter the fence or schedule drawing in another task.
+            let result; drawing = true;
+            try { result = draw(frame); } finally { drawing = false; }
             if (result && typeof result.then === 'function') throw Error('Canvas submission must be synchronous');
             presented = snapshot ? { ...snapshot, counter: frame.counter, frameId: frame.frameId } : null;
             drawCount++; lastFailure = null;

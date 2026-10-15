@@ -91,3 +91,16 @@ test('one presentation per generation and a new epoch require explicit full data
     await assert.rejects(f.store.present(f.frame(raw(),1,2),f.callbacks),/One save/);
     await pending;
 });
+
+test('caller metadata mutation during hashing cannot rewrite the acknowledged frame identity',async()=>{
+    let release;const f=fixture({hash:bytes=>new Promise(resolve=>{release=()=>resolve(sha(bytes));})});
+    const packet=f.frame(),original=packet.frameId;let acknowledged,drawn;
+    const pending=f.store.present(packet,{acknowledge:async id=>{acknowledged=id;return {...id,receiptAcknowledged:true,storageVerified:false};},draw:frame=>{drawn=frame.frameId;}});
+    packet.frameId=999;packet.counter=999;packet.flash.counter=999;packet.flash.sha256='0'.repeat(64);
+    release();const result=await pending;
+    assert.equal(acknowledged.frameId,original);assert.equal(drawn,original);assert.equal(result.frameId,original);
+});
+test('trusted synchronous draw callback cannot reenter an epoch reset',async()=>{
+    const f=fixture();await assert.rejects(f.store.present(f.frame(),{...f.callbacks,draw:()=>f.store.fence(2)}),/reenter/);
+    assert.equal(f.store.snapshot().expectedEpoch,1);assert.equal(f.store.cachedPresented(),null);
+});

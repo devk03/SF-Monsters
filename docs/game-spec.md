@@ -8975,3 +8975,31 @@ Save protocol review and live-state boundary — October15,09:35UTC:
   this fixture. Do not blanket-ignore PSG or infer all future audio equivalence.
   Alignment is comparing uninterrupted versus reload future PCM in a bounded
   direct-native-step unit; full-state equality/audio restore remains open.
+
+
+Actual browser save-bridge smoke — October15,09:53UTC:
+
+- Save-enabled v80 Chrome10sec+one200ms UI stall:597actual/fresh frames,0overflow/
+  debt/mismatch,0workletwarmup/underrun/drop,1188reportedcanvas submissions. Private
+  reportSHAe9dbfa7f622abd66e48b1a599ef63d65fc9419c28ccc4904c9741f2a146d90f6.
+  Raw wholeFlash was stored/read back once before first frame, reused thereafter.
+- Actual paused browser state+Flash roundtrip keeps guestRAM/fullFlash exact;
+  whole-state comparison remains false (14PSGbytes in this later live state).
+  Injected one storage denial visibly stops rendering/core/audio, retains prior
+  cached/stored bytes, and requires explicit recovery. Recovery performs a new
+  successful write/readback before drawing. Actual screenshot evidence retained.
+- Post-recovery10sec again597frames/0debt/audio loss. Report
+  d77cd534f10cc03fcd76c5d203772dc360cb00ee974b32468e2e03d4995c85ab retains
+  roundtrip, denial, pause and recovery actions. Basic runtime auditor passes;
+  dedicated causal storage history validation and longer persistence-cost test
+  are next. These are scoped smoke/fault cases, not50campaign checkpoints.
+- Root independently verifies the bounded600-native-frame continuation corpus:
+  uninterrupted and reloaded PCM2633392bytes are EXACT,
+  SHAd56e87e63f9adc151f393bbeb0424cb30049cb010fa580bb8727cc7888592816,
+ 1247296nonzero samples/peak7680/RMS1500.77. Only4inactive-square cache bytes
+  remain different after continuation. This explains the single inactive-PSG
+  fixture, not arbitrary active-audio restores, listening or realtime parity.
+- Own browser/Worker/audio and600sec server stopped. New host adds explicit
+  matching-write readback facts and denied-frame draw/receipt comparisons.
+  Public game unchanged. The draw callback is trusted, direct and synchronous;
+  metadata is captured before awaits and reentrant epoch reset is rejected.
