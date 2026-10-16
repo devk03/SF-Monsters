@@ -9320,3 +9320,19 @@ User cutoff reached — October15,2026,05:00America/Los_Angeles /12:00UTC:
   worklet change was made in this run. Commercial ROMs/states/saves/benchmarks stay
   private under.tools; unrelated data-center-three-hour-learning-guide.pdf is
   untouched. Resume requires a new direct human instruction.
+
+
+Story workshop — October 15–16, 2026 (documentation only):
+
+- Created the requested editable [Google Docs story-node workspace](https://docs.google.com/document/d/19HqVQRvDKg-jYDJzzltUKqi8N54kZ9GDqmsmDQKYIcU/edit).
+  Baseline is commit c1a5853: 69 populated event cards (16 grounded in authored
+  scripts), 18 unresolved decisions, five blank event slots and contributor
+  handoff briefs. Native heading links connect prerequisites and exits.
+- SCRIPTED, OUTLINE and PROPOSED are separate statuses. New connective scenes,
+  gym order and possible outcomes are workshop proposals, not approved canon,
+  implemented content or quality acceptance. The existing Mission lead conflicts
+  with the old hub-numbered act outline; route, rival motivations, climax and
+  Bayveil timing remain explicit decisions rather than invented resolutions.
+- Reconcile approved workshop decisions into this spec before implementation.
+  No outreach, game implementation, build, deployment or recurring work was
+  started. The game goal remains paused; no outstanding acceptance gate closed.
