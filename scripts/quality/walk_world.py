@@ -186,7 +186,12 @@ def main():
                 raise ValueError(f'Gym {n} did not grant native access stamp')
             c.checkpoint('stamp-' + str(n)); print('Native stamp', n, flush=True)
         if args.stop_after == 8:
-            w.travel('angel_island'); c.checkpoint('league')
+            w.travel('angel_island')
+            for section in w.plans['angel_island'].get('world_sections', []):
+                w.go((section['x'], section['y']))
+                c.observations.append({'league_section': section['id'],
+                                       'position': c.position()})
+            c.checkpoint('league')
             for node in ('route_' + f'{n:02d}' for n in range(1, 19)):
                 w.travel(node); w.go((16, 12))
             w.travel('dogpatch'); c.checkpoint('returned-home')

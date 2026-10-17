@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 class Controller:
     def __init__(self, rom, elf, output, *, state=None, battery=None):
         self.rom, self.output = Path(rom), Path(output)
+        self.rom_hash = hashlib.sha256(self.rom.read_bytes()).hexdigest()
         self.output.mkdir(parents=True, exist_ok=False)
         self.deadline = time.monotonic() + 1800
         self.inputs, self.observations = [], []
@@ -34,7 +35,9 @@ class Controller:
                                         stderr=self.stderr)
 
     def digest(self):
-        return hashlib.sha256(self.rom.read_bytes()).hexdigest()
+        if hashlib.sha256(self.rom.read_bytes()).hexdigest() != self.rom_hash:
+            raise ValueError('Cartridge changed during controller evidence capture.')
+        return self.rom_hash
 
     def command(self, command):
         if time.monotonic() > self.deadline:
