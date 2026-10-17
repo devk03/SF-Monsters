@@ -2,6 +2,9 @@
 
 Current goal: generate a traversable world from the user's October 17 plan.
 This file and `docs/game-spec.md` section 15 define the current work priority.
+The first connected blockout is implemented; review its geometry before starting
+art or contributor gym content. See `docs/world/generation.md` and the verification
+receipt in `docs/world/blockout-verification.json`.
 Read `AGENTS.md` first. Do not substitute the older story-writing milestone or
 full Emerald-quality acceptance goal for this bounded implementation task.
 

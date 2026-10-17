@@ -14,6 +14,11 @@ paths, water/traversal gates, a Dogpatch start and eight themed gym placeholders
 Simple development tiles are sufficient for this milestone. Polished graphics,
 audio, final dialogue and contributor-written gym battles come later.
 
+The private v81 draft now generates 45 maps: 18 destinations, 19 connectors and
+eight gym rooms. See the [generation guide](docs/world/generation.md) and
+[blockout verification](docs/world/blockout-verification.json). The public link
+below still serves v80; the new world is a separate draft for map review.
+
 The [editable Excalidraw plan](docs/world/initial-world-plan.excalidraw),
 [interpretation and open decisions](docs/world/plan-notes.md), and
 [world manifest](romhack/world/world.json) are the working inputs. The previous

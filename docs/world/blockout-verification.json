@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-17",
+  "milestone": "connected-world blockout; pending user map review",
+  "public_version": "0.0.80-sunset-density-preview",
+  "private_version": "0.0.81-world-blockout-draft",
+  "rom_sha256": "b967e6cd18500f68d72a21eb90414a29b1716a15b9743f6b7f0752bc63fe759a",
+  "patch_sha256": "3672a43e600ac571f49bc4ad09e8069e1a71ade0c312be1060f40a2365cd94cf",
+  "destinations": 18,
+  "route_maps": 19,
+  "gym_rooms": 8,
+  "native_maps": 45,
+  "native_directional_connections": 76,
+  "native_gym_warps": 16,
+  "native_circuit_passed": true,
+  "native_seen": [
+    "angel_island",
+    "castro",
+    "dogpatch",
+    "financial_district",
+    "giants_stadium",
+    "golden_gate_park",
+    "gym_1",
+    "gym_2",
+    "gym_3",
+    "gym_4",
+    "gym_5",
+    "gym_6",
+    "gym_7",
+    "gym_8",
+    "lands_end",
+    "league_route",
+    "marina",
+    "mission",
+    "mission_bay",
+    "noe_valley",
+    "north_beach",
+    "outer_sunset",
+    "pacific_heights",
+    "potrero_hill",
+    "route_01",
+    "route_02",
+    "route_03",
+    "route_04",
+    "route_05",
+    "route_06",
+    "route_07",
+    "route_08",
+    "route_09",
+    "route_10",
+    "route_11",
+    "route_12",
+    "route_13",
+    "route_14",
+    "route_15",
+    "route_16",
+    "route_17",
+    "route_18",
+    "sutro_tower",
+    "treasure_island",
+    "twin_peaks"
+  ],
+  "league_sections": [
+    "landing",
+    "victory_road_tunnels",
+    "final_rival_staging",
+    "summit_league_entry"
+  ],
+  "negative_gates": {
+    "surf_before_5": true,
+    "waterfall_before_8_and_final_stamp_before_crisis": true
+  },
+  "ordinary_save_cold_continue": {
+    "land": {
+      "passed": true,
+      "restored_position": {
+        "x": 16,
+        "y": 8,
+        "group": 0,
+        "number": 19
+      },
+      "movement_position": {
+        "x": 17,
+        "y": 8,
+        "group": 0,
+        "number": 19
+      },
+      "surfing": false,
+      "flash_unchanged": true,
+      "rom_sha256": "b967e6cd18500f68d72a21eb90414a29b1716a15b9743f6b7f0752bc63fe759a"
+    },
+    "surfing": {
+      "passed": true,
+      "restored_position": {
+        "x": 16,
+        "y": 13,
+        "group": 0,
+        "number": 38
+      },
+      "movement_position": {
+        "x": 17,
+        "y": 13,
+        "group": 0,
+        "number": 38
+      },
+      "surfing": true,
+      "flash_unchanged": true,
+      "rom_sha256": "b967e6cd18500f68d72a21eb90414a29b1716a15b9743f6b7f0752bc63fe759a"
+    }
+  },
+  "wasm_core_replay": {
+    "passed": true,
+    "rom_sha256": "b967e6cd18500f68d72a21eb90414a29b1716a15b9743f6b7f0752bc63fe759a",
+    "controller_frames": 97096,
+    "native_edges": 92,
+    "native_maps": 45,
+    "full_save_block_equal": true,
+    "native_save_block_sha256": "18edbe8913358fe704eddba17ea1a019d68c4010a7cac50c3fc8ee4aeb10b396",
+    "wasm_save_block_sha256": "18edbe8913358fe704eddba17ea1a019d68c4010a7cac50c3fc8ee4aeb10b396",
+    "scope": "Full controller sequence replay in exact public WASM core under Node; final native save block compared. Browser UI timing assessed separately.",
+    "full_guest_ram_equal": true,
+    "native_guest_ram_sha256": "710850b7a603d99257ff5320d38dc5e03db0be44914e276462a030012779d6f6",
+    "wasm_guest_ram_sha256": "710850b7a603d99257ff5320d38dc5e03db0be44914e276462a030012779d6f6"
+  },
+  "browser_dom_route": {
+    "completed": false,
+    "reason": "late-timer",
+    "applied_rows": 98,
+    "planned_rows": 438,
+    "performance_approved": false
+  },
+  "full_game_complete": false,
+  "art_audio_quality_approved": false,
+  "published": false,
+  "browser_short_smoke": {
+    "valid": true,
+    "elapsed_ms": 10000.20000000298,
+    "executed_frames": 598,
+    "foreground": true,
+    "input_observations": 8,
+    "audio_dropped_source_frames": 0,
+    "audio_underrun_output_frames": 0,
+    "scope": "Ten-second foreground walking smoke after the failed timed route; not long-route or mobile acceptance."
+  }
+}

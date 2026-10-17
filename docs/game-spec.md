@@ -635,10 +635,10 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 - All three Cognition trainers have original portrait candidates. Compiled26
   checks, actual native/browser entrances and two ordinary loss/save/coldContinue
   branches pass their technical scopes. Human paired art reviews remain pending.
-- Current alignment exchange07:26UTC,next07:56UTC. Root owns all files, native
+- Historical v80 alignment exchange07:26UTC,next07:56UTC. Root owns all files, native
   validation, publication and canonical spec. Peer reviewed actual Sunset views
-  and the private pacing experiment contract. Densityv80 is live; private frame
-  debt retention is next. No peer writes or recurring monitors are active; all
+  and the private pacing experiment contract. Densityv80 remains live; the October17 connected-world objective below
+  supersedes that earlier private frame-debt experiment as the current priority. No peer writes or recurring monitors are active; all
   evidence and human acceptance remain scoped.
 
 ### 15.1 Objective and completion rule
@@ -679,6 +679,45 @@ review. There is no reinstated historical 5 AM/6 PM deadline or recurring monito
 The app goal is newly active for this milestone; the broader product gates below
 remain required later. Use local checks, frequent coherent commits and manual-only
 GitHub Actions. Do not contact contributors or merge PRs without authorization.
+
+**World blockout implementation checkpoint, October 17.** The new plan, agent
+instructions, README and GitHub About now agree. Both islands are approved.
+The private v81 draft contains 18 destinations, 19 connectors and eight separate
+gym rooms (45 native maps), with Dogpatch spawn, actual Surf/Waterfall cuts,
+reciprocal roads, eight access-stamp placeholders and explicit story checkpoints.
+Angel Island includes landing, tunnel switchbacks, rival staging and summit
+geometry rather than a generic endpoint plaza. The editable manifest owns these
+sections. See [generation guide](world/generation.md) and
+[verification receipt](world/blockout-verification.json).
+
+The independent source audit and 12 grouped broken-world tests pass. Native
+cartridge checks cover 34,560 tiles, all map-group/header and tileset selections,
+76 connections, 29 NPCs and 16 conditioned gym triggers. Generation is deterministic;
+the BPS roundtrip is byte-identical and 283 build inputs/overlays are frozen in
+private hash-addressed storage. The production engine/patch and v80 save identity
+are preserved. Native fresh-game testing earned all eight placeholder stamps,
+visited all four League sections, and proved Surf-before-5, Waterfall-before-8 and
+final-stamp-before-crisis remain blocked. A separate controller circuit visited
+all 45 maps through every one of the 76 directional connections and 16 gym warps,
+returning safely. Ordinary native saves on land and while Surfing passed sector
+checksums; cold Continue restored exact coordinates/traversal modes, allowed
+movement and left Flash unchanged.
+
+The exact public WASM core replayed that 97,096-frame circuit. Its final entire
+IWRAM/EWRAM and 15,752-byte SaveBlock1 matched native byte for byte. This is a
+controller-only Node/WASM core test, separate from browser presentation. The latest
+ROM also loaded in the actual browser and reached a route corridor. Its long DOM
+timed replay stopped after 98/438 rows on a late timer and reported audio underruns;
+that browser route/performance gate remains failed, not silently approved. A
+separate latest-ROM ten-second foreground walking smoke then passed with zero
+audio drops/underruns. It does not override the longer route failure.
+
+Remaining review gates: user review of route pacing/geometry and the new League
+layout; a complete reliable foreground DOM route and broader browser/mobile
+performance acceptance. Graphics/audio, final story scenes, leader battles and
+campaign balance remain deferred. No new public deployment has occurred. The
+world-generation goal can pause here for review without claiming full-game or
+Emerald-quality completion; subsequent work must continue from these exact gaps.
 
 **Historical story-writing milestone, October 16 (superseded priority):** prepare a review-ready,
 coherent SF-only story and map design that the user can edit in the Google Doc
@@ -923,7 +962,7 @@ are in section 15.1; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | October17 world-generation goal active. Both islands approved; connected native blockout implementation proceeds. No scheduled deadline or recurring monitor. |
+| Execution | October17 world blockout ready for user geometry review; goal paused at this review checkpoint. Both islands implemented. Foreground long-route performance remains open; no scheduled deadline or recurring monitor. |
 | Active stage | Native connected world blockout from new Excalidraw/manifest; simple tiles, routes, gates and gym stubs. Story v2 remains a historical draft; full-game acceptance criteria remain required later. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.80-sunset-density-preview; target9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd; Site71. South Park21/Sunset9 buildings,11added across the two maps. Approved northern homes/curb props preserved; new Sunset homes have gray approaches. Density subset reviews pending; no numeric/full-domain approval. |
