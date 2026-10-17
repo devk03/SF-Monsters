@@ -3,7 +3,7 @@
 Status: technical prototype shipped; Emerald quality parity is NOT achieved.
 Section 15 is the active goal and overrides the earlier prototype completion criteria.
 This file is the source of truth for scope, acceptance, and progress.
-Updated: October 16, 2026.
+Updated: October 17, 2026.
 Repository: https://github.com/devk03/SF-Monsters
 
 ## 1. Product
@@ -643,7 +643,43 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**Current objective, revised October 16, 2026:** prepare a review-ready,
+**Current objective, October 17: connected native world generation.** Implement
+the user's new [editable plan](world/initial-world-plan.excalidraw) through
+[the world manifest](../romhack/world/world.json) and
+[DEVELOPMENT_AGENT.md](../DEVELOPMENT_AGENT.md). Start in Dogpatch; connect all
+approved named areas using real walkable routes, explicit water/transport links,
+safe entrances/exits, return paths and eight themed gym placeholders. Preserve
+the new scene's bindings and the [documented interpretation](world/plan-notes.md).
+The previous sixteen-hub story roster and startup-office gym slate are historical
+drafts, superseded for this blockout's topology by the October 17 user plan.
+
+Build one deterministic manifest-to-native-map/script pipeline. Use simple
+existing development tiles; graphics/audio polish, full dialogue, type-chart
+changes, gym battles and the 2x website button are deferred. A graph, concept
+image, renamed stock map or generated JSON alone is not completed world generation.
+Use a separate draft profile, engine directory and save identity; preserve the
+published v80 ROM/player/patch and existing saves. No automatic deployment follows
+from a private blockout build.
+
+Required evidence: complete approved area/gym coverage; zero dangling links or
+invalid arrivals; in-bounds unblocked spawn/entrances; valid native connection
+margins and unique layout slots; reachable progression and safe returns at each
+traversal stage; deterministic output bytes; independently checked compiled map
+tables; actual controller-driven end-to-end native traversal and checkpoint saves;
+and the same draft ROM booting/traversing in the web emulator. Record precise
+coverage, not full-game or Emerald-quality approval.
+
+The current source identifies seventeen SF areas plus an unresolved League venue.
+Angel Island conflicts with the earlier SF-only instruction. User clarification
+is pending; no outside-SF playable map is authorized yet. Continue independent
+core-area work, but do not invent the answer or count the League as completed.
+Pause dependent work for the required decision, or at a fully evidenced blockout
+review. There is no reinstated historical 5 AM/6 PM deadline or recurring monitor.
+The app goal is newly active for this milestone; the broader product gates below
+remain required later. Use local checks, frequent coherent commits and manual-only
+GitHub Actions. Do not contact contributors or merge PRs without authorization.
+
+**Historical story-writing milestone, October 16 (superseded priority):** prepare a review-ready,
 coherent SF-only story and map design that the user can edit in the Google Doc
 and use to commission individual gyms/events. Cover all sixteen neighborhood
 adventures, their travel/return connections and revisit payoffs; give the rival,
@@ -659,7 +695,7 @@ proposed casting and untested balance stay labeled; filling them with invented
 facts is not completion. Drafted scenes are distinct from approved/implemented
 scenes. The original workshop and stable event IDs must remain preserved.
 
-**Current stop condition:** the user explicitly authorizes pausing when useful.
+**Historical story-review stop condition:** the user explicitly authorized pausing when useful.
 Pause once this review-ready package is delivered and checked, before speculative
 rewrites or production work that depend on the user's plot/route decisions and
 contributor assignments. That point has been reached. Next action after a direct
@@ -886,8 +922,8 @@ are in section 15.1; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | Paused for user story/route review under the October16 instruction. Previous deadline executed; no stop reminder or recurring work remains active. |
-| Active stage | Story/map/contributor design draft delivered. User review precedes further narrative production; engine Stage B remains deferred until directly resumed. Full-game acceptance criteria remain required later. |
+| Execution | October17 world-generation goal active. Angel Island decision pending; independent core-area work proceeds. No scheduled deadline or recurring monitor. |
+| Active stage | Native connected world blockout from new Excalidraw/manifest; simple tiles, routes, gates and gym stubs. Story v2 remains a historical draft; full-game acceptance criteria remain required later. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.80-sunset-density-preview; target9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd; Site71. South Park21/Sunset9 buildings,11added across the two maps. Approved northern homes/curb props preserved; new Sunset homes have gray approaches. Density subset reviews pending; no numeric/full-domain approval. |
 | Latest local source build | Normal gated v80 fromf3a5049. All five Sunset resources now compile normally and verify ROM/ELF exactly; independent227/227. Sunset491used/512allocated tiles,231records; old401/194prefixes and General resources exact. South Park gates37/166/135/278 still pass. All36new solid old-save recoveries/pushes/escapes and9approach walks pass, plus apartment/Muni/cache and one C12→C13 save/cold reload. Dirty marker honest; no clean-checkout credit. |
