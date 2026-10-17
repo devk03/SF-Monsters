@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "profile": "world-blockout",
+  "version": "0.0.81-world-blockout-draft",
+  "source": "docs/world/initial-world-plan.excalidraw",
+  "status": "working core manifest; League venue pending user decision",
+  "geometry": {
+    "width": 32,
+    "height": 24,
+    "walk_lane_width": 3
+  },
+  "native": {
+    "primary_tileset": "gTileset_General",
+    "secondary_tileset": "gTileset_Petalburg",
+    "save_magic": 22338,
+    "save_schema": 1,
+    "game_code": "BPEW",
+    "file_name": "sf-world-blockout"
+  },
+  "start": {
+    "area": "dogpatch",
+    "x": 16,
+    "y": 16
+  },
+  "areas": [
+    {
+      "id": "dogpatch",
+      "label": "Dogpatch",
+      "engine_map": "PetalburgCity",
+      "tags": [
+        "start",
+        "starter_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "potrero_hill",
+      "label": "Potrero Hill",
+      "engine_map": "RustboroCity",
+      "tags": [
+        "rival_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "mission",
+      "label": "Mission",
+      "engine_map": "SlateportCity",
+      "tags": [
+        "story_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "castro",
+      "label": "Castro",
+      "engine_map": "MauvilleCity",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "outer_sunset",
+      "label": "Outer Sunset",
+      "engine_map": "LavaridgeTown",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "golden_gate_park",
+      "label": "Golden Gate Park / Richmond",
+      "engine_map": "FallarborTown",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "marina",
+      "label": "Marina",
+      "engine_map": "VerdanturfTown",
+      "tags": [
+        "nimby_introduction_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "pacific_heights",
+      "label": "Pacific Heights",
+      "engine_map": "DewfordTown",
+      "tags": [
+        "meteorite_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "twin_peaks",
+      "label": "Twin Peaks",
+      "engine_map": "PacifidlogTown",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "noe_valley",
+      "label": "Noe Valley",
+      "engine_map": "FortreeCity",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "mission_bay",
+      "label": "Mission Bay",
+      "engine_map": "LilycoveCity",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "giants_stadium",
+      "label": "Giants Stadium",
+      "engine_map": "MossdeepCity",
+      "tags": [
+        "event_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "financial_district",
+      "label": "Financial District",
+      "engine_map": "SootopolisCity",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "north_beach",
+      "label": "North Beach / Jackson Square",
+      "engine_map": "EverGrandeCity",
+      "tags": [],
+      "city": "San Francisco"
+    },
+    {
+      "id": "treasure_island",
+      "label": "Treasure Island",
+      "engine_map": "Route101",
+      "tags": [
+        "island_quest_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "sutro_tower",
+      "label": "Sutro Tower",
+      "engine_map": "Route102",
+      "tags": [
+        "tower_quest_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "lands_end",
+      "label": "Lands End / Sutro Baths",
+      "engine_map": "Route103",
+      "tags": [
+        "legendary_crisis_placeholder"
+      ],
+      "city": "San Francisco"
+    }
+  ],
+  "routes": [
+    {
+      "id": "route_01",
+      "from": "dogpatch",
+      "from_port": "left",
+      "to": "potrero_hill",
+      "to_port": "right",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route105",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_02",
+      "from": "potrero_hill",
+      "from_port": "left",
+      "to": "mission",
+      "to_port": "right",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route106",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_03",
+      "from": "mission",
+      "from_port": "left",
+      "to": "castro",
+      "to_port": "right",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route107",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_04",
+      "from": "castro",
+      "from_port": "left",
+      "to": "outer_sunset",
+      "to_port": "right",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route108",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_05",
+      "from": "outer_sunset",
+      "from_port": "up",
+      "to": "golden_gate_park",
+      "to_port": "down",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route109",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_06",
+      "from": "golden_gate_park",
+      "from_port": "up",
+      "to": "marina",
+      "to_port": "left",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route110",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_07",
+      "from": "marina",
+      "from_port": "down",
+      "to": "pacific_heights",
+      "to_port": "up",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route111",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_08",
+      "from": "pacific_heights",
+      "from_port": "down",
+      "to": "twin_peaks",
+      "to_port": "up",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route112",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_09",
+      "from": "twin_peaks",
+      "from_port": "right",
+      "to": "noe_valley",
+      "to_port": "left",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route113",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_10",
+      "from": "noe_valley",
+      "from_port": "right",
+      "to": "mission_bay",
+      "to_port": "left",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route114",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_11",
+      "from": "mission_bay",
+      "from_port": "up",
+      "to": "giants_stadium",
+      "to_port": "down",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route115",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_12",
+      "from": "giants_stadium",
+      "from_port": "up",
+      "to": "financial_district",
+      "to_port": "down",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route116",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_13",
+      "from": "financial_district",
+      "from_port": "up",
+      "to": "north_beach",
+      "to_port": "down",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route117",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_14",
+      "from": "twin_peaks",
+      "from_port": "left",
+      "to": "sutro_tower",
+      "to_port": "right",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route118",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_15",
+      "from": "sutro_tower",
+      "from_port": "left",
+      "to": "outer_sunset",
+      "to_port": "down",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route119",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_16",
+      "from": "golden_gate_park",
+      "from_port": "left",
+      "to": "lands_end",
+      "to_port": "right",
+      "mode": "surf",
+      "requires_badge": 5,
+      "engine_map": "Route120",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_17",
+      "from": "north_beach",
+      "from_port": "right",
+      "to": "treasure_island",
+      "to_port": "left",
+      "mode": "surf",
+      "requires_badge": 5,
+      "engine_map": "Route121",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_18",
+      "from": "treasure_island",
+      "from_port": "down",
+      "to": "mission_bay",
+      "to_port": "right",
+      "mode": "surf",
+      "requires_badge": 5,
+      "engine_map": "Route122",
+      "bidirectional": true,
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    }
+  ],
+  "gyms": [
+    {
+      "id": "gym_1",
+      "badge": 1,
+      "theme": "caffeine",
+      "area": "castro",
+      "engine_map": "Route124",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_2",
+      "badge": 2,
+      "theme": "wellness",
+      "area": "outer_sunset",
+      "engine_map": "Route125",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_3",
+      "badge": 3,
+      "theme": "clout",
+      "area": "marina",
+      "engine_map": "Route126",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_4",
+      "badge": 4,
+      "theme": "hardware",
+      "area": "twin_peaks",
+      "engine_map": "Route127",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_5",
+      "badge": 5,
+      "theme": "open_source",
+      "area": "noe_valley",
+      "engine_map": "Route128",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_6",
+      "badge": 6,
+      "theme": "stealth",
+      "area": "mission_bay",
+      "engine_map": "Route129",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_7",
+      "badge": 7,
+      "theme": "investor",
+      "area": "financial_district",
+      "engine_map": "Route130",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    },
+    {
+      "id": "gym_8",
+      "badge": 8,
+      "theme": "consumer",
+      "area": "north_beach",
+      "engine_map": "Route131",
+      "status": "entrance and access-stamp placeholder, not a completed gym"
+    }
+  ],
+  "league": {
+    "venue": null,
+    "engine_map": "Route104",
+    "route_engine_map": "Route123",
+    "from_area": "north_beach",
+    "from_port": "up",
+    "requires_badges": [
+      5,
+      8
+    ],
+    "choices": [
+      "Treasure Island (SF-only)",
+      "Angel Island (explicit exception required)"
+    ],
+    "status": "not generated until user resolves scope"
+  },
+  "story_waypoints": [
+    "dogpatch",
+    "potrero_hill",
+    "mission",
+    "castro",
+    "outer_sunset",
+    "golden_gate_park",
+    "marina",
+    "pacific_heights",
+    "twin_peaks",
+    "pacific_heights",
+    "noe_valley",
+    "mission_bay",
+    "giants_stadium",
+    "financial_district",
+    "north_beach",
+    "treasure_island",
+    "sutro_tower",
+    "lands_end",
+    "north_beach"
+  ],
+  "stage_markers": {
+    "tower_after": "treasure_island",
+    "crisis_after": [
+      "treasure_island",
+      "sutro_tower"
+    ],
+    "gym_8_requires": "crisis_marker"
+  },
+  "deferred": [
+    "2x website speed",
+    "final type chart",
+    "full dialogue and real-person cast research",
+    "gym trainers and leader battles",
+    "polished art/audio"
+  ]
+}

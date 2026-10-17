@@ -1,124 +1,97 @@
 # SF Mini Monsters
 
-A San Francisco creature RPG with public SF content and development tools.
+An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
-## Adventure map concept
+[Play the current preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/) ·
+[Game spec and progress](docs/game-spec.md#15-active-emerald-parity-goal) ·
+[Development agent](DEVELOPMENT_AGENT.md)
 
-![San Francisco adventure map showing proposed story stops, gyms and return routes](docs/story/adventure-map-concept.png)
+## Current development goal: a connected world
 
-User-supplied concept map for the story workshop. Locations, gym themes and route
-order are proposals; this image does not represent the current playable build.
+We are generating a playable **world blockout** from the user's October 17 plan:
+all approved areas connected by real routes, safe entrances and exits, return
+paths, water/traversal gates, a Dogpatch start and eight themed gym placeholders.
+Simple development tiles are sufficient for this milestone. Polished graphics,
+audio, final dialogue and contributor-written gym battles come later.
 
-The main build is now an Emerald ROM hack. Players supply their own base
-ROM to the website for local patching. The pinned engine baseline reproduces
-Emerald exactly; the first SF content overlay is an unreviewed engine proof.
-See [the hack workflow](romhack/README.md) and the active spec in section 15.
+The [editable Excalidraw plan](docs/world/initial-world-plan.excalidraw),
+[interpretation and open decisions](docs/world/plan-notes.md), and
+[world manifest](romhack/world/world.json) are the working inputs. The previous
+[story treatment](docs/story/README.md) is retained as a historical draft; the
+new Dogpatch route supersedes its Sunset-first route for this blockout.
 
-Status: the current preview includes the Outer Sunset opening, Muni travel,
-South Park clinic and Cognition's first gym draft. BrinePup, SproutSlug and
-CinderCoy are original starter/call candidates. Ocean Commute and Fogbank Frenzy
-are the original Sunset and wild-battle theme candidates. The preview now has
-eighteen original creature candidates, original title art/music and six Sunset
-rowhouse facades, street textures and coastal ground/wave animation. The first house now has an original
-enterable courier studio with an animated doorway: a fog-beacon puzzle, one-time capsule reward, team
-rest and an N-Judah history postcard. South Park now has original brick/clinic facades, street paving, park furniture
-and animated entrances. Cast art, other interiors and other music still use
-placeholders. The full SF campaign and Emerald quality
-approval remain outstanding.
-CinderCoy now has authored Ashrunner (level 16) and Solhowl (level 36)
-evolution candidates, with new views, icon poses, cries and move progression.
-BrinePup now has Brinebull (level 16) and Water/Ice Tideroar (level 36)
-candidates with their own art, cries and defensive move progression.
-SproutSlug now has FernSlug (16) and Grass/Bug Canoptera (36) candidates.
-All three authored lines still need pixel cleanup and user quality approval.
-The gym/clinic now have furnished interiors, an incident log, a planning board
-and a one-time emergency Potion. Older saves reload updated rooms safely.
-Cognition now has distinct original field-sprite candidates for Scott Wu,
-Walden Yan and Steven Hao, each with native walking poses. Trainer battle
-portraits and the other named cast remain unfinished.
+![User-supplied San Francisco adventure-map concept](docs/story/adventure-map-concept.png)
 
-[Play online](https://sf-mini-monsters.devkunjadia03.chatgpt.site) ·
-[Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps) ·
-[Earlier standalone prototype](https://sf-mini-monsters.devkunjadia03.chatgpt.site/prototype)
+This illustration is a planning concept, not the current playable map. The newer
+editable scene has differences documented in the plan notes. The Angel Island
+League conflicts with the earlier SF-only rule and awaits the user's decision.
 
-Load the supported Emerald `.gba` or ZIP to play. ROM bytes stay on your device.
-The player can download the patched cartridge for a standard GBA emulator.
+| Gym | Theme | Planned area |
+| --- | --- | --- |
+| 1 | Caffeine | Castro |
+| 2 | Wellness | Outer Sunset |
+| 3 | Clout | Marina |
+| 4 | Hardware | Twin Peaks |
+| 5 | Open Source | Noe Valley |
+| 6 | Stealth | Mission Bay |
+| 7 | Investor | Financial District |
+| 8 | Consumer Agents | North Beach / Jackson Square |
 
-## Game scope
+Contributors can later own individual gyms and story events. Stable entrances,
+outputs and IDs will let those packages fit the same world. No contributor has
+been assigned or contacted by the planning tools.
 
-- 16 accessible neighborhood hubs, each with a mini-adventure.
-- 150 collectible mini-monster entries, including evolution stages.
-- Real tech people and recognizable online personalities as the proposed cast.
-- Adult SF comedy, playable drunk/high character states, and optional weird dates.
-- Eight famous-startup gyms with real-person leaders and sourced geographic placements.
-- A four-member championship followed by a champion battle.
-- A recurring antagonist, a villain organization, and one legendary mini monster.
-- Original SF creatures, artwork, music, dialogue and campaign on Emerald's engine.
-- A GBA ROM playable in standard GBA emulators and a browser through WebAssembly.
-- Public source, editable content, and documented builds for contributors.
+## What is playable now
 
-The [v1 specification](docs/game-spec.md) defines the full proposed game.
-It includes support for approximately 50 additional researched Twitter personalities
-after the main game is complete.
-Sourced character candidates and fictional roles are in [cast research](docs/cast-research.md).
+The public preview is **v0.0.80**: Outer Sunset, Muni to SoMa/South Park, clinic,
+courier apartment, Seed Room and the first Cognition gym draft, with eighteen
+original creature candidates and three starter evolution lines. It is unfinished;
+the new Dogpatch world and diagram's themed gyms are not yet implemented there.
 
-## Previous technical milestone
+Players supply the supported Emerald .gba or ZIP. The website patches it locally;
+ROM bytes stay on the player's device. The resulting cartridge can be downloaded
+for a standard GBA emulator. [Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps).
 
-Build Outer Sunset and SoMa with three starter choices, approximately
-12 mini monsters, one Cognition gym, one complete courier quest, encounters, recruitment,
-turn-based battles, and persistent saving.
+World generation uses a separate draft profile and save identity. Keep v80 saves
+backed up; do not assume a new starting map is a compatible continuation.
+The [earlier standalone prototype](https://sf-mini-monsters.devkunjadia03.chatgpt.site/prototype)
+is an archived experiment.
 
-Scope, acceptance criteria, and current progress are maintained in
-[the canonical specification](docs/game-spec.md#15-active-emerald-parity-goal).
-The active goal requires Emerald-tier quality across all eleven audited domains,
-with user-approved comparison clips and the complete SF campaign.
+## Development and acceptance
 
-Acceptance criteria:
+Read [AGENTS.md](AGENTS.md) and [DEVELOPMENT_AGENT.md](DEVELOPMENT_AGENT.md).
+The immediate proof is actual traversal on the same GBA ROM in native mGBA and
+the web emulator, deterministic generation, valid arrivals/connections, no
+unreachable required area, and safe returns at each traversal stage. A graph or
+renamed stock map alone does not satisfy the world-generation goal.
 
-- Finish the quest and gym on the same ROM in mGBA and the browser player.
-- Save, close the player, reopen it, and resume progress on both platforms.
-- Verify manual save export/import between the supported players.
-- Build from documented prerequisites without proprietary game assets.
+See [native build/patch workflow](romhack/README.md) and
+[controls, save transfer and QA](docs/testing.md). Original map data and scripts
+are compiled into the cartridge. The web wrapper uses React/Vinext and Sites;
+there is no cloud-save database. Guest and signed-in device-local saves are separate.
 
-## Architecture
+Commit coherent changes frequently, around 200–300 code lines where practical.
+Use local checks, preserve unrelated work and keep GitHub Actions manual-only.
+Do not publish commercial ROMs or private saves. Publication of a new blockout
+is a separate reviewable release; the existing preview remains available.
 
-The main build overlays SF content on a pinned Emerald decompilation and releases
-a BPS patch. A player's local base ROM becomes the same patched cartridge used
-in native mGBA and the WebAssembly player. Full inherited cartridges stay private.
-The earlier freestanding C prototype remains archived and playable at `/prototype`.
-The website uses React/Vinext and Sites hosting with optional ChatGPT sign-in.
+## Longer-term game scope
 
-Maps, encounters, monsters, and dialogue should have editable source data
-compiled into the ROM. The browser wrapper supplies touch controls, keyboard
-and gamepad input, local persistence, and save import/export.
-
-Guest play is available. Signed-in players get a separate device-local save slot.
-There is no database or cloud-save service.
-
-See [build, controls, save transfer, and QA instructions](docs/testing.md).
-
-## Development workflow
-
-Commit coherent changes every 200–300 handwritten code lines when practical,
-with smaller completed fixes committed at logical boundaries.
-
-Verify the diff and run checks relevant to the change before committing.
-Stage explicit project files. Do not include credentials or unrelated changes.
-Commits are authorized; remote publication and PR merges require their own scope.
+The larger game still targets 150 collectible mini monsters, starter evolution
+lines, recurring rivals, Team NIMBY/story events, eight gyms, a championship,
+a legendary quest, SF jokes/lore, Marina bars, optional drunk/high play and dates.
+The [spec](docs/game-spec.md) records acceptance and remaining production work.
+World-blockout completion is not full campaign completion or Emerald-quality approval.
+Later cast additions remain modular, researched content.
 
 ## Licensing and originality
 
-Original code and documentation are available under the [MIT license](LICENSE).
-Original generated sprite atlases are offered under CC BY 4.0 to the extent
-licensable; see [asset credits](assets/README.md).
-Dependencies and separately licensed assets retain their own licenses.
-Track the author, source, and license of contributed assets.
+Original code/documentation use [MIT](LICENSE). Original generated sprite atlases
+are offered under CC BY 4.0 to the extent licensable; see [asset credits](assets/README.md).
+User-supplied planning images are attributed as such. Dependencies and inherited
+commercial engine/assets retain their own rights; our license does not relicense them.
 
-Publish original SF contributions and patches, never full commercial or
-reconstructed cartridges. Our license does not relicense Emerald's inherited
-engine or assets. Keep full ROMs in ignored local storage.
-
-## Platform references
-
-- [mGBA](https://github.com/mgba-emu/mgba)
-- [Candidate WebAssembly wrapper](https://github.com/wasm-gaming/mGBA-wasm)
+Publish original SF sources, tools and approved versioned patches. Keep commercial
+and reconstructed full cartridges in ignored local storage. Players provide their
+own validated base ROM. See [mGBA](https://github.com/mgba-emu/mgba) and the pinned
+[Emerald workflow](romhack/README.md) for platform/build context.
