@@ -77,7 +77,8 @@ Run meaningful local checks. GitHub Actions remains manual-only; use `[skip ci]`
 Pause dependent work for a required user decision or a review-ready evidenced
 blockout. Continue independent approved work while a decision is pending. Never
 mark the goal complete with an unresolved required venue or failed traversal gate.
-Angel Island is outside SF city limits: preserve that conflict explicitly until
-the user chooses an exception or an SF venue. Do not invent authorization.
+Both Treasure Island and Angel Island are approved. Angel Island is the sole
+outside-SF exception, containing Victory Road and the League; retain Treasure
+Island as a separate story destination. This decision was explicit on October 17.
 No contributor outreach, PR merge, DB migration, indefinite monitor or automatic
 workflow is authorized by a world-map task. Do not run `rm` in any form.

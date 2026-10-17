@@ -669,10 +669,11 @@ tables; actual controller-driven end-to-end native traversal and checkpoint save
 and the same draft ROM booting/traversing in the web emulator. Record precise
 coverage, not full-game or Emerald-quality approval.
 
-The current source identifies seventeen SF areas plus an unresolved League venue.
-Angel Island conflicts with the earlier SF-only instruction. User clarification
-is pending; no outside-SF playable map is authorized yet. Continue independent
-core-area work, but do not invent the answer or count the League as completed.
+The current source identifies seventeen SF destinations plus Angel Island.
+On October 17 the user explicitly required both islands: Treasure Island retains
+its story quest and Angel Island contains Victory Road and the League as the sole
+exception to the earlier SF-only rule. The core manifest reserves nineteen route
+maps and eight separate gym rooms. These are blockout slots, not finished scenes.
 Pause dependent work for the required decision, or at a fully evidenced blockout
 review. There is no reinstated historical 5 AM/6 PM deadline or recurring monitor.
 The app goal is newly active for this milestone; the broader product gates below
@@ -922,7 +923,7 @@ are in section 15.1; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | October17 world-generation goal active. Angel Island decision pending; independent core-area work proceeds. No scheduled deadline or recurring monitor. |
+| Execution | October17 world-generation goal active. Both islands approved; connected native blockout implementation proceeds. No scheduled deadline or recurring monitor. |
 | Active stage | Native connected world blockout from new Excalidraw/manifest; simple tiles, routes, gates and gym stubs. Story v2 remains a historical draft; full-game acceptance criteria remain required later. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.80-sunset-density-preview; target9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd; Site71. South Park21/Sunset9 buildings,11added across the two maps. Approved northern homes/curb props preserved; new Sunset homes have gray approaches. Density subset reviews pending; no numeric/full-domain approval. |

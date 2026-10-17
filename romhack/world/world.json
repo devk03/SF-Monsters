@@ -3,7 +3,7 @@
   "profile": "world-blockout",
   "version": "0.0.81-world-blockout-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
-  "status": "working core manifest; League venue pending user decision",
+  "status": "active connected-world blockout; both islands approved October 17",
   "geometry": {
     "width": 32,
     "height": 24,
@@ -14,7 +14,7 @@
     "secondary_tileset": "gTileset_Petalburg",
     "save_magic": 22338,
     "save_schema": 1,
-    "game_code": "BPEW",
+    "game_code": "BPEE",
     "file_name": "sf-world-blockout"
   },
   "start": {
@@ -447,7 +447,7 @@
     }
   ],
   "league": {
-    "venue": null,
+    "venue": "angel_island",
     "engine_map": "Route104",
     "route_engine_map": "Route123",
     "from_area": "north_beach",
@@ -456,11 +456,10 @@
       5,
       8
     ],
-    "choices": [
-      "Treasure Island (SF-only)",
-      "Angel Island (explicit exception required)"
-    ],
-    "status": "not generated until user resolves scope"
+    "status": "approved blockout destination",
+    "label": "Angel Island - League",
+    "city": "Tiburon / Marin County",
+    "scope_exception": "User explicitly requested both islands on October 17; Angel Island is the sole outside-SF exception."
   },
   "story_waypoints": [
     "dogpatch",
@@ -481,7 +480,8 @@
     "treasure_island",
     "sutro_tower",
     "lands_end",
-    "north_beach"
+    "north_beach",
+    "angel_island"
   ],
   "stage_markers": {
     "tower_after": "treasure_island",
@@ -497,5 +497,11 @@
     "full dialogue and real-person cast research",
     "gym trainers and leader battles",
     "polished art/audio"
-  ]
+  ],
+  "tile_semantics": {
+    ".": "land",
+    "#": "wall",
+    "W": "surf",
+    "V": "waterfall"
+  }
 }

@@ -23,8 +23,9 @@ new Dogpatch route supersedes its Sunset-first route for this blockout.
 ![User-supplied San Francisco adventure-map concept](docs/story/adventure-map-concept.png)
 
 This illustration is a planning concept, not the current playable map. The newer
-editable scene has differences documented in the plan notes. The Angel Island
-League conflicts with the earlier SF-only rule and awaits the user's decision.
+editable scene has differences documented in the plan notes. Both islands are
+approved: Treasure Island for its quest and Angel Island for the League, the
+sole exception to the SF-city-limits rule.
 
 | Gym | Theme | Planned area |
 | --- | --- | --- |

@@ -17,4 +17,5 @@ dist/
 /engine/generated/
 /engine/audio/
 __pycache__/
+/romhack/content/world-blockout/
 !web/public/game/sf-mini-monsters.gba

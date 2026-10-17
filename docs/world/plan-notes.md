@@ -20,9 +20,9 @@ neighborhoods. The map should support contributor scenes without inventing them.
 
 ## Differences preserved instead of silently resolved
 
-- **Scope:** the scene requests Angel Island for the League; earlier instructions
-  require SF city limits. User decision pending: sole exception or Treasure Island
-  League. Do not create an outside-SF playable map before the answer.
+- **Scope resolved October 17:** the user explicitly requires both islands.
+  Treasure Island retains its story quest; Angel Island contains Victory Road
+  and the League as the sole exception to the SF-city-limits rule.
 - **Order:** bound arrows show Pacific Heights → Twin Peaks → meteorite quest →
   Noe Valley and Treasure Island → Sutro Tower → Lands End. The earlier rendered
   illustration places the meteorite earlier and reverses the latter two landmarks.

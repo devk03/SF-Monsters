@@ -20,8 +20,8 @@ def host_make(directory, *arguments):
                    check=True, timeout=5400)
 
 
-def ensure_baseline(info):
-    cartridge = ENGINE / 'pokeemerald.gba'
+def ensure_baseline(info, engine=ENGINE):
+    cartridge = engine / 'pokeemerald.gba'
     if hashlib.sha1(cartridge.read_bytes()).hexdigest() != bootstrap.REFERENCE_SHA1:
         raise ValueError('Cached native host baseline no longer matches the reference.')
     destination = ROOT / '.tools/romhack-baseline'
@@ -36,23 +36,24 @@ def ensure_baseline(info):
         proof.write_text(json.dumps(info, indent=2) + '\n')
 
 
-def prepare_host():
+def prepare_host(engine=ENGINE):
+    engine = Path(engine)
     for name in ('arm-none-eabi-as', 'arm-none-eabi-ar', 'arm-none-eabi-cpp',
                  'arm-none-eabi-ld', 'arm-none-eabi-objcopy', 'pkg-config'):
         if not shutil.which(name):
             raise ValueError('Missing native-host build dependency: ' + name)
     bootstrap.checkout(bootstrap.EMERALD, 'https://github.com/pret/pokeemerald.git', bootstrap.EMERALD_REVISION)
-    bootstrap.checkout(ENGINE, str(bootstrap.EMERALD), bootstrap.EMERALD_REVISION)
+    bootstrap.checkout(engine, str(bootstrap.EMERALD), bootstrap.EMERALD_REVISION)
     bootstrap.checkout(bootstrap.AGBCC, 'https://github.com/pret/agbcc.git', bootstrap.AGBCC_REVISION)
-    bootstrap.EMERALD = ENGINE
+    bootstrap.EMERALD = engine
     bootstrap.build_compilers('-host-' + platform.system().lower())
-    bootstrap.preserve_cleanup(ENGINE)
-    marker = ENGINE / 'sf-host-build.json'
-    compiler_dir = ENGINE / 'tools/agbcc/bin'
+    bootstrap.preserve_cleanup(engine)
+    marker = engine / 'sf-host-build.json'
+    compiler_dir = engine / 'tools/agbcc/bin'
     hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
               for path in compiler_dir.iterdir() if path.is_file()}
     libraries = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-                 for path in (ENGINE / 'tools/agbcc/lib').glob('*.a')}
+                 for path in (engine / 'tools/agbcc/lib').glob('*.a')}
     versions = {name: subprocess.check_output([name, '--version'], text=True).splitlines()[0]
                 for name in ('arm-none-eabi-as', 'arm-none-eabi-ld', 'arm-none-eabi-cpp', 'make')}
     if marker.exists():
@@ -63,11 +64,11 @@ def prepare_host():
             raise ValueError('Native host compiler identity changed; preserve and inspect its build.')
         if info['baseline_sha1'] != bootstrap.REFERENCE_SHA1:
             raise ValueError('Native host baseline has not reproduced the pinned reference.')
-        ensure_baseline(info)
-        return ENGINE
+        ensure_baseline(info, engine)
+        return engine
     # A fresh checkout must reproduce Emerald before any SF overlay is applied.
-    host_make(ENGINE)
-    baseline = (ENGINE / 'pokeemerald.gba').read_bytes()
+    host_make(engine)
+    baseline = (engine / 'pokeemerald.gba').read_bytes()
     digest = hashlib.sha1(baseline).hexdigest()
     if digest != bootstrap.REFERENCE_SHA1:
         raise ValueError('Native host base reproduction mismatch: ' + digest)
@@ -78,8 +79,8 @@ def prepare_host():
         'baseline_sha256': hashlib.sha256(baseline).hexdigest(),
         'cleanup': 'preserved; no destructive clean targets'}
     marker.write_text(json.dumps(info, indent=2) + '\n')
-    ensure_baseline(info)
-    return ENGINE
+    ensure_baseline(info, engine)
+    return engine
 
 
 if __name__ == '__main__':
