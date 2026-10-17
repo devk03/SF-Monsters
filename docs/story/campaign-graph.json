@@ -1,0 +1,2801 @@
+{
+  "schema_version": 1,
+  "status": "proposed_story_treatment_not_implemented",
+  "date": "2026-10-16",
+  "baseline_commit": "c8366f4",
+  "scope": "Story/map/contributor planning only. New semantic state outputs are design contracts, not allocated native flags or an executable campaign.",
+  "start": "O01",
+  "main_ending": "L02",
+  "main_order": [
+    "O01",
+    "O02",
+    "O03",
+    "O04",
+    "O05",
+    "O06",
+    "O07",
+    "O08",
+    "G01",
+    "O09",
+    "H05",
+    "M51",
+    "M52",
+    "P01",
+    "H06",
+    "H07",
+    "P02",
+    "G08",
+    "H04",
+    "C41",
+    "H03",
+    "G02",
+    "H02",
+    "H11",
+    "P03",
+    "H08",
+    "H09",
+    "H10",
+    "G05",
+    "H12",
+    "H13",
+    "M31",
+    "H14",
+    "H15",
+    "G03",
+    "G04",
+    "P05",
+    "H16",
+    "G06",
+    "P04",
+    "G07",
+    "F01",
+    "P06",
+    "F02",
+    "P07",
+    "L01",
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "L02"
+  ],
+  "hubs": [
+    {
+      "id": "outer_sunset",
+      "name": "Outer Sunset",
+      "first_visit": 1,
+      "schematic": {
+        "x": 90,
+        "y": 630
+      },
+      "unlock_event": "O01",
+      "anchor": "Judah / Great Highway",
+      "landmarks": "Beach boardwalk, connected low-rise homes, courier studio, field mentor corner",
+      "entrances": "Apartment door→Judah sidewalk; west→boardwalk; north beach pocket; east signed Muni stop",
+      "adventure": "Recover the sensor; optional window/beacon calibration",
+      "services": "Home/studio supplies, Karpathy healing, basic encounters",
+      "revisit": "Calibrated beacon displays two genuinely different readings; Karpathy notices the starter's growth",
+      "art": "Cold gray pavement, ocean blue, warm house fronts; benches, low fences, transit pole",
+      "secret": "Apartment beacon and N-Judah postcard",
+      "event_ids": [
+        "A01",
+        "A02",
+        "A03"
+      ]
+    },
+    {
+      "id": "soma",
+      "name": "SoMa / South Park",
+      "first_visit": 2,
+      "schematic": {
+        "x": 740,
+        "y": 500
+      },
+      "unlock_event": "O05",
+      "anchor": "South Park / Third Street",
+      "landmarks": "Oval park, compact office street, Cognition, clinic, Seed Room",
+      "entrances": "Transit arrival→south apron; park walk loop; clinic east of gym; service alleys return to same street",
+      "adventure": "Repair relays and earn Cognition's Build Badge; later contain an escaped demo",
+      "services": "Clinic, shop/storage, safe save/rest area",
+      "revisit": "Park discovery notebook changes from a startup-name list to a field-care checklist",
+      "art": "Neutral paving, planted edges, warm office windows; preserve accepted dense homes and street props",
+      "secret": "Berry bench, startup notebook, Seed Room hints",
+      "event_ids": [
+        "O06",
+        "O07",
+        "O08",
+        "G01",
+        "O09",
+        "H07",
+        "A04",
+        "S01",
+        "S02"
+      ]
+    },
+    {
+      "id": "mission",
+      "name": "Mission",
+      "first_visit": 3,
+      "schematic": {
+        "x": 550,
+        "y": 700
+      },
+      "unlock_event": "H05",
+      "anchor": "Valencia / mural side street",
+      "landmarks": "Mural block, small plaza, print workshop, demonstration alley",
+      "entrances": "Signed Mission arrival→plaza; mural order leads around block, not through walls; Dogpatch transit at southeast exit",
+      "adventure": "Track missing pigments, expose a projected habitat and rescue a frightened companion",
+      "services": "Clinic kiosk, storage, low-cost supplies",
+      "revisit": "Repaired mural includes the neighborhood's own changing weather marks",
+      "art": "Warm painted walls on gray walks; stoops, bike racks, paper notices; no generic giant lab",
+      "secret": "A pigment mark visible only from the public side of a fence",
+      "event_ids": [
+        "M51",
+        "M52",
+        "P01"
+      ]
+    },
+    {
+      "id": "dogpatch",
+      "name": "Dogpatch",
+      "first_visit": 4,
+      "schematic": {
+        "x": 720,
+        "y": 730
+      },
+      "unlock_event": "H06",
+      "anchor": "Third Street industrial connector",
+      "landmarks": "Brick workshops, rail-edge fence, machinery court, waterfront lookout",
+      "entrances": "Third Street arrival→workshop forecourt; fenced nonwalkable rail boundary; signed Mission Bay branch",
+      "adventure": "Route safe workshop power and recover the controller coupler",
+      "services": "Workshop rest/storage terminal and supplies",
+      "revisit": "Danielle tests a slow, reliable repair while a formerly frantic helper naps",
+      "art": "Brick and steel with restrained orange accents; loading aprons and readable curbs",
+      "secret": "A spare parts bin contains a cosmetic workshop stamp",
+      "event_ids": [
+        "H06"
+      ]
+    },
+    {
+      "id": "castro",
+      "name": "Castro",
+      "first_visit": 5,
+      "schematic": {
+        "x": 430,
+        "y": 660
+      },
+      "unlock_event": "H04",
+      "anchor": "Castro / Market corridor",
+      "landmarks": "Celebration plaza, compact storefronts, stage, sheltered rest garden",
+      "entrances": "Market arrival→public plaza; circuits are inspectable without entering the stage walls; north route via Duboce",
+      "adventure": "Restore light, stage power and a quiet rest area in a deliberate order",
+      "services": "Field clinic, storage and supplies",
+      "revisit": "Celebration becomes a small recurring gathering with a visibly calm rest corner",
+      "art": "Bright flags and signs over neutral paving; avoid flooding the full map with saturated tiles",
+      "secret": "A poster changes after the celebration rather than spawning a mandatory fetch quest",
+      "event_ids": [
+        "C41"
+      ]
+    },
+    {
+      "id": "haight",
+      "name": "Haight-Ashbury",
+      "first_visit": 6,
+      "schematic": {
+        "x": 365,
+        "y": 530
+      },
+      "unlock_event": "H03",
+      "anchor": "Haight street / parkward path",
+      "landmarks": "Flyer wall, record-shop pocket, tiny performance court, connected houses",
+      "entrances": "Duboce/Castro connector→south; correct flyer sequence points to court; west path leads toward Inner Sunset",
+      "adventure": "Reconstruct a performance's real timing from conflicting flyers",
+      "services": "Healing contact, shop and storage in compact service interior",
+      "revisit": "The correct flyer gains a pencilled set time; the performer remembers the player's choice",
+      "art": "Muted painted façades, paper notices, trees, lamp posts; original pixel density",
+      "secret": "A wrong flyer leads to a short optional conversation and returns to route",
+      "event_ids": [
+        "H03",
+        "S11"
+      ]
+    },
+    {
+      "id": "inner_sunset",
+      "name": "Inner Sunset",
+      "first_visit": 7,
+      "schematic": {
+        "x": 260,
+        "y": 580
+      },
+      "unlock_event": "H02",
+      "anchor": "Ninth / Irving / park edge",
+      "landmarks": "Greenhouse, three varied beds, small shopping block, park gate",
+      "entrances": "East approach→service block; greenhouse has visible front door; north gate enters Golden Gate Park route",
+      "adventure": "Read soil/light before restoring the beds",
+      "services": "Greenhouse rest point and ordinary storage/shop services nearby",
+      "revisit": "One unchosen starter source is unlocked after credits through a repeatable care task",
+      "art": "Leafy cool green, pale walls and gray walks; beds bordered rather than pasted on paving",
+      "secret": "Inspectable seed drawer hints at later starter access",
+      "event_ids": [
+        "H02"
+      ]
+    },
+    {
+      "id": "richmond",
+      "name": "Richmond District",
+      "first_visit": 8,
+      "schematic": {
+        "x": 235,
+        "y": 355
+      },
+      "unlock_event": "H11",
+      "anchor": "Geary / coastal route",
+      "landmarks": "Residential shops, archive room, Lands End path, Sutro tidal pocket",
+      "entrances": "Park approach→south; coastal path west; tide puzzle is contained and does not require real-time tide",
+      "adventure": "Compare archive clues with tide markers and find a fog-creature glimpse",
+      "services": "Archive-side healing/storage and supplies",
+      "revisit": "Repaired tide refuge is one Bayveil observation site; no random hourly spawn",
+      "art": "Windy grass and stone borders, blue-gray coast; safe railings and short readable stairs",
+      "secret": "A sourced Sutro plaque gives real history separately from relay notes",
+      "event_ids": [
+        "P03"
+      ]
+    },
+    {
+      "id": "tenderloin",
+      "name": "Tenderloin",
+      "first_visit": 9,
+      "schematic": {
+        "x": 630,
+        "y": 430
+      },
+      "unlock_event": "H08",
+      "anchor": "Community room / music block",
+      "landmarks": "Ordinary shops, rehearsal room, busy corner, supported community garden",
+      "entrances": "Signed central transit→wide sidewalk; musician clues through visible public doors; west connector to Fillmore",
+      "adventure": "Find the musician sheltering a stressed creature; restore a rest interval",
+      "services": "Community clinic, shop and storage",
+      "revisit": "Rehearsal room now plays music with real pauses; musician offers optional cry-listening activity",
+      "art": "Dense occupied frontage, posters, lamps and planters; community life beyond the surreal branch",
+      "secret": "Optional altered descriptions reveal a cosmetic-note joke; main clue is available sober",
+      "event_ids": [
+        "S04"
+      ]
+    },
+    {
+      "id": "fillmore",
+      "name": "Fillmore",
+      "first_visit": 10,
+      "schematic": {
+        "x": 490,
+        "y": 385
+      },
+      "unlock_event": "H09",
+      "anchor": "Fillmore music corridor",
+      "landmarks": "Ensemble rehearsal, three nearby instrument stops, small venue",
+      "entrances": "East approach from central connector; instruments remain on one readable loop; north/east Post route to Japantown",
+      "adventure": "Return instruments by their sounds, then demonstrate staggered rhythm",
+      "services": "Venue rest area plus supplies/storage",
+      "revisit": "Hear the completed rehearsal; optional repeat challenge grants a modest capped reward",
+      "art": "Warm venue windows, music posters, ordinary curbs and seating",
+      "secret": "A quiet audience seat has an original callback rather than copied lyrics",
+      "event_ids": [
+        "H09"
+      ]
+    },
+    {
+      "id": "japantown",
+      "name": "Japantown",
+      "first_visit": 11,
+      "schematic": {
+        "x": 530,
+        "y": 360
+      },
+      "unlock_event": "H10",
+      "anchor": "Post Street plaza route",
+      "landmarks": "Festival square, lantern shop pocket, quiet gallery, supply court",
+      "entrances": "Fillmore/Post entrance→plaza; gallery has an explicitly quiet side path; central transit reaches Transbay",
+      "adventure": "Distribute lantern and gallery supplies according to different needs",
+      "services": "Clinic/storage near square; ordinary shop access",
+      "revisit": "A small fog companion returns to the quiet gallery; hosts remember leaving it unlit",
+      "art": "Lantern accents over restrained architecture and gray paving; no invented historic claims",
+      "secret": "A festival stamp appears in the Field Journal, not as a new mandatory badge",
+      "event_ids": [
+        "H10"
+      ]
+    },
+    {
+      "id": "presidio",
+      "name": "Presidio",
+      "first_visit": 12,
+      "schematic": {
+        "x": 285,
+        "y": 160
+      },
+      "unlock_event": "H12",
+      "anchor": "Woodland route / Fort Point approach",
+      "landmarks": "Woodland fork, signal overlook, shelter, supervised Fort Point route",
+      "entrances": "Explicit west/north transit arrival; reflected signal branch loops back; east walk continues toward Marina",
+      "adventure": "Distinguish reflected signal from the source and protect habitat coordinates",
+      "services": "Ranger-style field rest kiosk with recurring researched cast, supplies/storage",
+      "revisit": "Shelter becomes the third quiet observation site; field notes redact exact animal locations",
+      "art": "Trees, muted stone, ocean edges, protective rails; avoid giant empty lawns",
+      "secret": "An optional researched exposition plaque is separate from the fictional signal plot",
+      "event_ids": [
+        "H12"
+      ]
+    },
+    {
+      "id": "marina",
+      "name": "Marina",
+      "first_visit": 13,
+      "schematic": {
+        "x": 470,
+        "y": 180
+      },
+      "unlock_event": "H13",
+      "anchor": "Chestnut Street / waterfront link",
+      "landmarks": "Dense mixed-use block, three fictional bars, laundry-tag clue, karaoke pocket",
+      "entrances": "Presidio side arrives west; three venues share a legible walkable block; east corridor approaches Russian Hill",
+      "adventure": "Recover the quarter-zip and its controller log using three concrete clues",
+      "services": "Rest/recovery, diner supplies and storage; sober route always works",
+      "revisit": "Jacket owner returns as a recurring joke; the karaoke monster remains a venue companion",
+      "art": "Warm storefront light, benches, street trees and compact upper floors",
+      "secret": "Optional Jonathan date assistant and drink variants",
+      "event_ids": [
+        "M31",
+        "S03",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09"
+      ]
+    },
+    {
+      "id": "russian_hill",
+      "name": "Russian Hill",
+      "first_visit": 14,
+      "schematic": {
+        "x": 640,
+        "y": 245
+      },
+      "unlock_event": "H14",
+      "anchor": "Cable-car / stairs route",
+      "landmarks": "Control shed, short cable-car segment, stair landings, overlook",
+      "entrances": "West connector climbs by visible stairs; control shed front door; north/east exit reaches North Beach",
+      "adventure": "Restore brake/wheel/signal acknowledgement order",
+      "services": "Service rest stop, storage, ordinary supplies",
+      "revisit": "Cable-car shortcut operates; a repaired sign acknowledges waiting for confirmation",
+      "art": "Hills shown with consistent ledges/stairs and roof heights, not random elevation cuts",
+      "secret": "A sourced cable-car plaque accompanies the fictional machinery fault",
+      "event_ids": [
+        "H14"
+      ]
+    },
+    {
+      "id": "north_beach",
+      "name": "North Beach",
+      "first_visit": 15,
+      "schematic": {
+        "x": 735,
+        "y": 230
+      },
+      "unlock_event": "H15",
+      "anchor": "Columbus / Bay Street branch",
+      "landmarks": "Notebook café pocket, parrot overlook, bookshop, office-route sign",
+      "entrances": "Russian Hill approach→overlook loop; Bay Street office branch goes to Cursor; south walk to Chinatown",
+      "adventure": "Order the notebook observations without mistaking repetition for importance",
+      "services": "Café healing contact, storage and supplies",
+      "revisit": "Parrot repeats a new short line chosen from the player's earlier harmless response",
+      "art": "Warm stucco, outdoor seating, lamp posts and tight shopfronts",
+      "secret": "Optional notebook marginalia changes after Roon publishes the redacted method",
+      "event_ids": [
+        "H15"
+      ]
+    },
+    {
+      "id": "chinatown",
+      "name": "Chinatown",
+      "first_visit": 16,
+      "schematic": {
+        "x": 745,
+        "y": 330
+      },
+      "unlock_event": "H16",
+      "anchor": "Community festival / downtown boundary",
+      "landmarks": "Festival square, supply passage, relay court, uplink access interior",
+      "entrances": "North Beach approach→public square; clearly separate Financial District branch; uplink entrance visible before finale",
+      "adventure": "Restore festival distribution; expose uplink; return after rehearsals for Launch Night",
+      "services": "Full pre-finale healing, storage, shop and safe save staging area",
+      "revisit": "Festival lighting shows different areas operating independently; a quiet corner remains quiet",
+      "art": "Lantern highlights, gray paving, distinct thresholds; community is affected by scheme, not cast as faction",
+      "secret": "A repaired sign has a small Launch Night callback after credits",
+      "event_ids": [
+        "F01",
+        "P06",
+        "F02",
+        "P07"
+      ]
+    }
+  ],
+  "office_pockets": [
+    {
+      "id": "office_cognition",
+      "district": "SoMa / South Park",
+      "hub": "soma",
+      "gym": "G01",
+      "access_after": "O05",
+      "entrance": "Third Street block, facing the park-side approach",
+      "anchor": "550 Third Street (reported occupied); do not treat the 333 Brannan expansion lease as already occupied.",
+      "confidence": "Reported occupied, dated local reporting; company careers confirms SF office.",
+      "sources": [
+        "https://cognition.com/careers",
+        "https://www.sfchronicle.com/realestate/article/new-sf-ai-startup-cognition-takes-cruise-s-office-22406725.php/"
+      ]
+    },
+    {
+      "id": "office_notion",
+      "district": "Market Street / Monadnock block",
+      "hub": "soma",
+      "gym": "G08",
+      "access_after": "P02",
+      "entrance": "Clearly signed Market office branch; do not label this block Inner Sunset or Mission",
+      "anchor": "685 Market Street; local reporting describes the occupied move in 2025. Newer design coverage still describes Market Street.",
+      "confidence": "Occupied historical reporting, consistent later coverage; not a live occupancy guarantee.",
+      "sources": [
+        "https://www.notion.com/about",
+        "https://sfstandard.com/2025/06/08/notion-san-francisco-headquarters-market-street/",
+        "https://www.fastcompany.com/91599202/notion-designed-its-new-hq-as-an-ode-to-classic-design"
+      ]
+    },
+    {
+      "id": "office_midjourney",
+      "district": "Central SF office connector — exact district provisional",
+      "hub": "tenderloin",
+      "gym": "G02",
+      "access_after": "H03",
+      "entrance": "Transit branch from Haight, returns to the same stop; district label is a release gate",
+      "anchor": "SF office confirmed by company careers. No occupied street address verified. The 300 Grant proposed spa is a future concept, not a verified current HQ.",
+      "confidence": "SF confirmed; exact district UNVERIFIED. Interior can be assigned now; exterior/map anchor cannot be finalized.",
+      "sources": [
+        "https://www.midjourney.com/careers",
+        "https://www.bizjournals.com/sanfrancisco/news/2026/06/17/midjourney-scanner-ai-wellness-spa-union-square.html"
+      ]
+    },
+    {
+      "id": "office_mercor",
+      "district": "Transbay / Fremont Street",
+      "hub": "soma",
+      "gym": "G05",
+      "access_after": "H10",
+      "entrance": "Signed Fremont office route reached by central transit; return ticket to Japantown/Presidio",
+      "anchor": "181 Fremont Street is explicitly named Mercor HQ in company job listings.",
+      "confidence": "Primary company careers evidence names HQ; exact interior is fictional.",
+      "sources": [
+        "https://www.mercor.com/careers/"
+      ]
+    },
+    {
+      "id": "office_cursor",
+      "district": "Bay Street / North Beach waterfront branch",
+      "hub": "north_beach",
+      "gym": "G03",
+      "access_after": "H15",
+      "entrance": "Bay Street office pocket north of the main notebook loop",
+      "anchor": "295 Bay Street described as Cursor's home in May 2026 local property reporting; legal/mailing address can differ.",
+      "confidence": "Dated occupied media report plus primary SF-careers confirmation; recheck before final release.",
+      "sources": [
+        "https://www.bizjournals.com/sanfrancisco/news/2026/05/26/helios-real-estate-cursor-295-bay.html",
+        "https://prod.cursor.com/careers/startup-events-community"
+      ]
+    },
+    {
+      "id": "office_perplexity",
+      "district": "Financial District / Sansome — provisional occupancy",
+      "hub": "chinatown",
+      "gym": "G04",
+      "access_after": "G03",
+      "entrance": "Separate Sansome/Financial District route, reachable from the North Beach/Chinatown boundary; never relabel it Chinatown",
+      "anchor": "115 Sansome Street is listed on the company-managed profile, but that alone is not proof of occupied current offices.",
+      "confidence": "Listed address, occupancy UNVERIFIED. Keep the route anchor movable until corroborated.",
+      "sources": [
+        "https://uk.linkedin.com/company/perplexity-ai"
+      ]
+    },
+    {
+      "id": "office_anthropic",
+      "district": "SoMa / Howard Street corridor",
+      "hub": "soma",
+      "gym": "G06",
+      "access_after": "H16",
+      "entrance": "Howard Street office branch from the downtown transit hub",
+      "anchor": "2025 principal-place filing lists 500 Howard; newer reports concern expansion leases. Use the supported corridor, not an unsupported assertion of a particular current door.",
+      "confidence": "District supported; exact occupied release door remains research-gated.",
+      "sources": [
+        "https://search.sunbiz.org/Inquiry/CorporationSearch/GetDocument?aggregateId=forp-f24000001568-aa469358-d133-43d9-9fc6-3c7c00c42c1d&formatType=PDF&transactionId=f24000001568-2352ed70-b676-4832-86c6-008461d76534",
+        "https://therealdeal.com/san-francisco/2026/04/02/anthropic-leases-more-office-space-in-san-francisco/"
+      ]
+    },
+    {
+      "id": "office_openai",
+      "district": "Mission Bay / Third Street corridor",
+      "hub": "dogpatch",
+      "gym": "G07",
+      "access_after": "P04",
+      "entrance": "Clearly labeled Mission Bay branch north of the Dogpatch workshop route; return transit to Chinatown",
+      "anchor": "1455 Third Street is the registered office in the official privacy policy; a registered office alone is not current occupancy evidence.",
+      "confidence": "Primary registered-address evidence supports proposed district, not physical occupancy. Verify release-door before final map art.",
+      "sources": [
+        "https://openai.com/policies/privacy-policy/"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "R01",
+      "from": "outer_sunset",
+      "to": "soma",
+      "mode": "transit",
+      "description": "Judah Muni → South Park walk",
+      "story_gate": "O04",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R02",
+      "from": "soma",
+      "to": "mission",
+      "mode": "transit",
+      "description": "South Park → signed Market/Mission transit connector",
+      "story_gate": "O09",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R03",
+      "from": "mission",
+      "to": "dogpatch",
+      "mode": "transit",
+      "description": "Mission → Third Street workshop connector",
+      "story_gate": "P01",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R04",
+      "from": "dogpatch",
+      "to": "soma",
+      "mode": "transit",
+      "description": "Third Street return to South Park",
+      "story_gate": "H06",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R05",
+      "from": "soma",
+      "to": "castro",
+      "mode": "transit",
+      "description": "Market corridor → Castro",
+      "story_gate": "G08",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R06",
+      "from": "castro",
+      "to": "haight",
+      "mode": "walk",
+      "description": "Duboce / parkward connector, intermediate blocks compressed",
+      "story_gate": "C41",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R07",
+      "from": "haight",
+      "to": "inner_sunset",
+      "mode": "walk",
+      "description": "Park-edge / Irving connector",
+      "story_gate": "G02",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R08",
+      "from": "inner_sunset",
+      "to": "richmond",
+      "mode": "walk",
+      "description": "Golden Gate Park crossing",
+      "story_gate": "H02",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R09",
+      "from": "richmond",
+      "to": "tenderloin",
+      "mode": "transit",
+      "description": "Geary cross-town connector",
+      "story_gate": "P03",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R10",
+      "from": "tenderloin",
+      "to": "fillmore",
+      "mode": "walk",
+      "description": "Central Geary / Fillmore connector",
+      "story_gate": "H08",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R11",
+      "from": "fillmore",
+      "to": "japantown",
+      "mode": "walk",
+      "description": "Fillmore / Post connector",
+      "story_gate": "H09",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R12",
+      "from": "japantown",
+      "to": "presidio",
+      "mode": "transit",
+      "description": "Return from central office trip to signed Presidio arrival",
+      "story_gate": "G05",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R13",
+      "from": "presidio",
+      "to": "marina",
+      "mode": "walk",
+      "description": "Eastern Presidio → Marina connector",
+      "story_gate": "H12",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R14",
+      "from": "marina",
+      "to": "russian_hill",
+      "mode": "walk",
+      "description": "Chestnut / hill approach; intermediate blocks compressed",
+      "story_gate": "M31",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R15",
+      "from": "russian_hill",
+      "to": "north_beach",
+      "mode": "walk",
+      "description": "Stair / Columbus connector",
+      "story_gate": "H14",
+      "bidirectional": true,
+      "return_fare": 0
+    },
+    {
+      "id": "R16",
+      "from": "north_beach",
+      "to": "chinatown",
+      "mode": "walk",
+      "description": "Columbus / neighborhood boundary connector",
+      "story_gate": "P05",
+      "bidirectional": true,
+      "return_fare": 0
+    }
+  ],
+  "gyms": [
+    {
+      "id": "G01",
+      "badge_number": 1,
+      "company": "Cognition",
+      "leader": "Scott Wu",
+      "badge": "Build",
+      "ace_level": 8,
+      "theme": "Coordination",
+      "entry": "O08",
+      "exit": "O09",
+      "puzzle": [
+        "Read the team plan; optional Walden/Steven practice battles teach physical/special/status choices.",
+        "Stabilize blue INPUT, then green OUTPUT; wrong order explains and preserves state.",
+        "Immediate danger is contained before the leader readiness prompt."
+      ],
+      "battle": "Small complementary team; Reflect and varied coverage make switching and move categories useful. Preserve the implemented level-6/7/8 draft until an explicit balance revision.",
+      "counters": [
+        "Special attacks that bypass Reflect's physical reduction.",
+        "A mixed team with a safe answer to the water/grass/electric coverage.",
+        "Status, healing and a deliberately chosen switch rather than repeatedly tackling."
+      ],
+      "contribution": "Coordinate the independent recovery tasks; certify safe sequencing at a live relay.",
+      "reward": "Existing Build Badge and Reflect reward; retain bag-full reward pickup.",
+      "revisit": "Scott's incident log acknowledges all eight contributions; rematch tests several plans rather than one combo."
+    },
+    {
+      "id": "G08",
+      "badge_number": 2,
+      "company": "Notion",
+      "leader": "Ivan Zhao",
+      "badge": "Plan",
+      "ace_level": 14,
+      "theme": "Dependencies",
+      "entry": "P02",
+      "exit": "H04",
+      "puzzle": [
+        "Collect three field-note cards, each naming a prerequisite rather than a hidden keyword.",
+        "Place observation → isolation → repair in the correct order on a dependency board; wrong placement is undoable.",
+        "Route a helper to the visible exit once all dependencies are satisfied; no real account or typing required."
+      ],
+      "battle": "Three-monster team with clearly separated setup, support and finisher roles. The introductory board previews the dependency, rather than concealing a scripted unwinnable opening.",
+      "counters": [
+        "Pressure the setup role before the finisher benefits.",
+        "Use a status or disruption move to break the order.",
+        "Build a defensive answer that outlasts finite move/item resources."
+      ],
+      "contribution": "Order the recovery plan; each later repair gets a clear prerequisite and rollback point.",
+      "reward": "Plan Badge; modest supplies and one balanced move-disk slot chosen during balancing. Story itinerary is granted regardless of bag space.",
+      "revisit": "Ivan shows the original dependency board next to a tidy but genuinely varied city field log."
+    },
+    {
+      "id": "G02",
+      "badge_number": 3,
+      "company": "Midjourney",
+      "leader": "David Holz",
+      "badge": "Lens",
+      "ace_level": 20,
+      "theme": "Appearance versus measurement",
+      "entry": "H03",
+      "exit": "H02",
+      "puzzle": [
+        "See two beautiful habitat panels and a live condition marker.",
+        "Walk to the corresponding real sample plots; identify three discrepancies using visible clues, not color alone.",
+        "Choose the healthy route from independent evidence; a decoy loops back with a short hint."
+      ],
+      "battle": "Three-monster team demonstrates decoys, accuracy pressure or substitutes using ordinary supported mechanics. No arbitrary invisible target rule; accessibility cues duplicate visual evidence in text.",
+      "counters": [
+        "Reliable accuracy and attacks that answer the demonstrated decoy strategy.",
+        "Status or defensive play that reduces pressure while checking the opponent's plan.",
+        "A varied team that can take the shown hit and retaliate without relying on a single risky move."
+      ],
+      "contribution": "Validate that the recovery display matches a live habitat; a convincing picture cannot certify health.",
+      "reward": "Lens Badge; optional cosmetic postcard; balanced move-disk slot is contributor proposal, never a progression key.",
+      "revisit": "One display intentionally looks ordinary because it now reports an unremarkable real condition."
+    },
+    {
+      "id": "G05",
+      "badge_number": 4,
+      "company": "Mercor",
+      "leader": "Brendan Foody",
+      "badge": "Crew",
+      "ace_level": 26,
+      "theme": "Specialist roles",
+      "entry": "H10",
+      "exit": "H12",
+      "puzzle": [
+        "Meet three specialist stations with explicit strengths and limits.",
+        "Assign lab-provided helpers to observe, shelter and route tasks; do not demand that the player's party contain particular species.",
+        "Test the combined plan; a mismatch explains its consequence and allows reassignment."
+      ],
+      "battle": "Four-monster team covers complementary offensive and defensive roles. Staff teams foreshadow role changes so winning is not a hidden roster quiz.",
+      "counters": [
+        "Use pivoting and type coverage to prevent a single support role dominating.",
+        "Exploit the previewed slow role with a faster ordinary attacker.",
+        "Win through defensive sustain and limited-resource management rather than a required rare counter."
+      ],
+      "contribution": "Assign distinct recovery roles so no one companion is expected to handle every habitat.",
+      "reward": "Crew Badge; field-kit supply bundle with deferred claim if bag is full.",
+      "revisit": "Brendan's job board finally includes a task whose correct assignment is 'leave this habitat alone'."
+    },
+    {
+      "id": "G03",
+      "badge_number": 5,
+      "company": "Cursor",
+      "leader": "Michael Truell",
+      "badge": "Patch",
+      "ace_level": 32,
+      "theme": "Rollback",
+      "entry": "H15",
+      "exit": "G04",
+      "puzzle": [
+        "Observe a visible route fault in a contained simulation; no production habitat is at risk.",
+        "Apply one of three reversible patches and run a short test that exposes a side effect.",
+        "Restore the last safe state, then apply the minimal correction; display both the success and the rollback path."
+      ],
+      "battle": "Four-monster team invites adaptation: a telegraphed opening has a second approach. Use ordinary move choices and switches, not a boss that secretly reads the player's selected command.",
+      "counters": [
+        "Prepare a second damage type or attacker when the opening plan is checked.",
+        "Use a defensive/status turn to discover the telegraphed pattern safely.",
+        "Capitalize on setup turns rather than overcommitting into a predicted switch."
+      ],
+      "contribution": "Provide a reversible controller update and a way back if the recovery rehearsal fails.",
+      "reward": "Patch Badge; balanced recovery/disruption move-disk slot after review.",
+      "revisit": "The test suite includes the original bug as a named regression, with an original short joke."
+    },
+    {
+      "id": "G04",
+      "badge_number": 6,
+      "company": "Perplexity",
+      "leader": "Aravind Srinivas",
+      "badge": "Source",
+      "ace_level": 38,
+      "theme": "Independent evidence",
+      "entry": "G03",
+      "exit": "P05",
+      "puzzle": [
+        "Compare three claims: an original observation, a copy of it and a fresh independent measurement.",
+        "Follow short source trails to physical markers; duplicated wording is not counted as a second witness.",
+        "Open the archive route with two independent observations; all critical clues remain inspectable."
+      ],
+      "battle": "Four-monster team tests identifying a real pattern without treating one repeated turn as certainty. Preview abilities/roles through trainers; avoid random arbitrary success thresholds.",
+      "counters": [
+        "Check a telegraphed weakness with ordinary type coverage.",
+        "Use status or scouting defensively before committing.",
+        "Use a complementary second attacker when one plan is visibly countered."
+      ],
+      "contribution": "Authenticate independent field reports without publishing exact rare-habitat coordinates.",
+      "reward": "Source Badge; journal citation stamps are flavor, not a real browsing requirement.",
+      "revisit": "Aravind corrects a confidently repeated sentence in the archive and retains the correction."
+    },
+    {
+      "id": "G06",
+      "badge_number": 7,
+      "company": "Anthropic",
+      "leader": "Daniela Amodei",
+      "badge": "Limit",
+      "ace_level": 44,
+      "theme": "Bounded recovery",
+      "entry": "H16",
+      "exit": "P04",
+      "puzzle": [
+        "Contain a simulated overload inside a clearly marked boundary.",
+        "Set a finite retry budget and a safe stop condition using three readable switches.",
+        "Trigger a deliberate test failure, observe safe pause, then recover without erasing earlier work."
+      ],
+      "battle": "Five-monster defensive team uses finite protection and counterattack options. Differentiate from Dario's late-game specialist by making this gym about knowing when to stop a setup loop.",
+      "counters": [
+        "Taunt/disruption or another supported answer to repetitive setup, if obtainable by this stage.",
+        "Special/physical balance or an appropriate wall-breaking move.",
+        "Patience, switching and finite-resource pressure with a safe defensive core."
+      ],
+      "contribution": "Bound retries and protect recovering habitats while the controller changes hands.",
+      "reward": "Limit Badge; a modest recovery reward; required rehearsal access never depends on carrying the reward.",
+      "revisit": "Daniela's lab visibly keeps a stop switch within reach instead of hiding it behind a puzzle."
+    },
+    {
+      "id": "G07",
+      "badge_number": 8,
+      "company": "OpenAI",
+      "leader": "Tibo Sottiaux",
+      "badge": "Flow",
+      "ace_level": 50,
+      "theme": "Limited capacity",
+      "entry": "P04",
+      "exit": "F01",
+      "puzzle": [
+        "See four habitat queues and a fixed number of capacity tokens; tokens are lab puzzle objects, not money.",
+        "Give each recovering habitat a valid time window; a large queue cannot starve the smaller ones.",
+        "Run a schedule under an ordinary temporary capacity drop and recover without inventing infinite resources."
+      ],
+      "battle": "Five-monster team alternates pressure, support and setup within normal limits. Do not copy Sam's finale identity: this gym tests fair allocation across roles rather than a single scaling ace.",
+      "counters": [
+        "Fast pressure on the exposed role before the next scheduled switch.",
+        "Defensive coverage and recovery through the demonstrated rotation.",
+        "Disruption of a support role followed by ordinary type advantage."
+      ],
+      "contribution": "Schedule the eight-part recovery inside available capacity; no unlimited power-up is introduced.",
+      "reward": "Flow Badge; final readiness message and balanced move reward with safe deferred pickup.",
+      "revisit": "Tibo's wall display leaves capacity unused when the habitats do not need it; the label calls this intentional."
+    }
+  ],
+  "global_rules": {
+    "city": "San Francisco",
+    "adventure_hubs": 16,
+    "required_badges": 8,
+    "required_states_exclude": [
+      "drunk",
+      "high",
+      "date_success"
+    ],
+    "real_time_requirements": false,
+    "real_external_accounts_required": false,
+    "stable_ids_are_not_array_positions": true,
+    "source_of_map_coordinates": "Illustrative schematic, not GIS"
+  },
+  "nodes": [
+    {
+      "id": "O01",
+      "hub": "outer_sunset",
+      "title": "A paid delivery",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [],
+      "requires_any": [],
+      "action": "Read Roon's missing-sensor message and find Karpathy by Judah.",
+      "outcome": "A specific job and mentor location, not a chosen-one prophecy.",
+      "state_outputs": [
+        "event.O01.complete"
+      ],
+      "success_next": [
+        "O02",
+        "A01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O02",
+      "hub": "outer_sunset",
+      "title": "Choose a companion",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O01"
+      ],
+      "requires_any": [],
+      "action": "Choose one of three starters, receive supplies and learn where free healing is.",
+      "outcome": "A committed companion and safe beach access.",
+      "state_outputs": [
+        "event.O02.complete"
+      ],
+      "success_next": [
+        "O03"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O03",
+      "hub": "outer_sunset",
+      "title": "Recover the sensor",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O02"
+      ],
+      "requires_any": [],
+      "action": "Win or capture the guarding creature; fleeing or losing leaves the parcel available.",
+      "outcome": "The sensor shows an abnormal fog pulse.",
+      "state_outputs": [
+        "event.O03.complete"
+      ],
+      "success_next": [
+        "O04"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O04",
+      "hub": "outer_sunset",
+      "title": "Return to Roon",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O03"
+      ],
+      "requires_any": [],
+      "action": "Collect the promised 500 coins; hear that Scott can read the sensor.",
+      "outcome": "The courier has a SoMa delivery and free return transit.",
+      "state_outputs": [
+        "event.O04.complete"
+      ],
+      "success_next": [
+        "O05"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O05",
+      "hub": "soma",
+      "title": "Muni to South Park",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O04"
+      ],
+      "requires_any": [],
+      "action": "Accept Jonathan's ride and locate the park, clinic and Cognition.",
+      "outcome": "The first explicit cross-city journey establishes orientation and services.",
+      "state_outputs": [
+        "event.O05.complete"
+      ],
+      "success_next": [
+        "O06",
+        "A04",
+        "S01",
+        "S12"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O06",
+      "hub": "soma",
+      "title": "Deliver to Scott",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O05"
+      ],
+      "requires_any": [],
+      "action": "Give Scott the sensor and hear why the outside pulse is stressing habitats.",
+      "outcome": "The lab contains the problem; the player can safely assist with supervision.",
+      "state_outputs": [
+        "event.O06.complete"
+      ],
+      "success_next": [
+        "O07",
+        "S02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O07",
+      "hub": "soma",
+      "title": "Stabilize input",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O06"
+      ],
+      "requires_any": [],
+      "action": "Inspect and stabilize blue INPUT; practice battles remain optional.",
+      "outcome": "A stable input enables the output check.",
+      "state_outputs": [
+        "event.O07.complete"
+      ],
+      "success_next": [
+        "O08"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "O08",
+      "hub": "soma",
+      "title": "Restore output",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O07"
+      ],
+      "requires_any": [],
+      "action": "Stabilize green OUTPUT after INPUT and inspect the open gate.",
+      "outcome": "Immediate safety returns before the leader challenge.",
+      "state_outputs": [
+        "event.O08.complete"
+      ],
+      "success_next": [
+        "G01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G01",
+      "hub": "soma",
+      "title": "Cognition's Build Challenge",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O08"
+      ],
+      "requires_any": [],
+      "action": "Accept Scott's readiness prompt and win the leader battle.",
+      "outcome": "Build Badge certifies coordination; a loss preserves safe relays and allows retry.",
+      "state_outputs": [
+        "event.G01.complete",
+        "badge.1.earned"
+      ],
+      "success_next": [
+        "O09",
+        "A03"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 1,
+      "gym_company": "Cognition"
+    },
+    {
+      "id": "O09",
+      "hub": "soma",
+      "title": "Mission is the lead",
+      "path": "required",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "G01"
+      ],
+      "requires_any": [],
+      "action": "Read the signed Overclock trace in the incident log; hear the same lead from Scott.",
+      "outcome": "Mission destination is explicit and journaled; optional beacon is unnecessary.",
+      "state_outputs": [
+        "event.O09.complete"
+      ],
+      "success_next": [
+        "H05"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H05",
+      "hub": "mission",
+      "title": "Missing mural pigments",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "O09"
+      ],
+      "requires_any": [],
+      "action": "Follow pigment traces between a mural and three nearby public clues.",
+      "outcome": "The supposedly painted monster moves in a pattern that points to a demo alley.",
+      "state_outputs": [
+        "event.H05.complete"
+      ],
+      "success_next": [
+        "M51"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "DANIELLE: The paint moved. The pavement didn't.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "M51",
+      "hub": "mission",
+      "title": "A habitat that only looks healthy",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H05"
+      ],
+      "requires_any": [],
+      "action": "Compare the lush projection with the physical relay and a live field reading.",
+      "outcome": "The display replays a good condition while the real habitat is stressed.",
+      "state_outputs": [
+        "event.M51.complete"
+      ],
+      "success_next": [
+        "M52"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "M52",
+      "hub": "mission",
+      "title": "Make a safe way home",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "M51"
+      ],
+      "requires_any": [],
+      "action": "Clear a return path and calm the frightened companion instead of chasing it.",
+      "outcome": "A caretaker and creature reunite; the controller serial becomes available.",
+      "state_outputs": [
+        "event.M52.complete"
+      ],
+      "success_next": [
+        "P01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "P01",
+      "hub": "mission",
+      "title": "Roon's first rival test",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "M52"
+      ],
+      "requires_any": [],
+      "action": "Ask for useful evidence; battle Roon's level-11 ace team after a clear readiness choice.",
+      "outcome": "He shares a redacted Dogpatch trace while refusing to publish rare habitat sites.",
+      "state_outputs": [
+        "event.P01.complete"
+      ],
+      "success_next": [
+        "H06"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "ROON: I redacted the map. Unfortunately I also redacted the useful part.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H06",
+      "hub": "dogpatch",
+      "title": "The workshop coupler",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P01"
+      ],
+      "requires_any": [],
+      "action": "Route safe power through three workshop roles with Danielle's supervision.",
+      "outcome": "A repaired coupler reveals repurposed legitimate equipment and helps read reflected signals later.",
+      "state_outputs": [
+        "event.H06.complete"
+      ],
+      "success_next": [
+        "H07"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "DANIELLE: Give each helper one job it can actually finish.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H07",
+      "hub": "soma",
+      "title": "The demo escapes",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H06"
+      ],
+      "requires_any": [],
+      "action": "Return to SoMa; escort a demonstration creature using food and a cleared route.",
+      "outcome": "The copied conditions caused real behavior; the creature returns safely.",
+      "state_outputs": [
+        "event.H07.complete"
+      ],
+      "success_next": [
+        "P02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "P02",
+      "hub": "soma",
+      "title": "Launch Night is announced",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H07"
+      ],
+      "requires_any": [],
+      "action": "Interrupt one local demo safely and hear the fictional Overclock pitch.",
+      "outcome": "The scheduler promises simultaneous evolution; Marc's fictional contract values one uniform curve.",
+      "state_outputs": [
+        "event.P02.complete"
+      ],
+      "success_next": [
+        "G08",
+        "S10"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "BEFF (fictional): Nothing is stuck in its starter phase. That's the promise.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G08",
+      "hub": "soma",
+      "title": "Notion's Plan Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P02"
+      ],
+      "requires_any": [],
+      "action": "Order observation, isolation and repair dependencies, then win the leader battle.",
+      "outcome": "Plan Badge and a western field itinerary turn the investigation into achievable steps.",
+      "state_outputs": [
+        "event.G08.complete",
+        "badge.2.earned"
+      ],
+      "success_next": [
+        "H04"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 2,
+      "gym_company": "Notion"
+    },
+    {
+      "id": "H04",
+      "hub": "castro",
+      "title": "Three lighting needs",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G08"
+      ],
+      "requires_any": [],
+      "action": "Survey public lighting, stage equipment and a sheltered rest area with Dylan.",
+      "outcome": "Each circuit needs a different condition; a universal brightness fix is inadequate.",
+      "state_outputs": [
+        "event.H04.complete"
+      ],
+      "success_next": [
+        "C41"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "DYLAN: The stage needs light. That corner needs a break.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "C41",
+      "hub": "castro",
+      "title": "A useful celebration",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H04"
+      ],
+      "requires_any": [],
+      "action": "Restore the three circuits in a safe order and attend the short payoff scene.",
+      "outcome": "The event happens; its log proves the replay ignores day/night needs.",
+      "state_outputs": [
+        "event.C41.complete"
+      ],
+      "success_next": [
+        "H03"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H03",
+      "hub": "haight",
+      "title": "Three flyers, one show",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "C41"
+      ],
+      "requires_any": [],
+      "action": "Compare time-stamped flyers and witness accounts with Visakan, then find the performance.",
+      "outcome": "The acoustic trace establishes that the replay also flattens timing.",
+      "state_outputs": [
+        "event.H03.complete"
+      ],
+      "success_next": [
+        "G02",
+        "S11"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "VISAKAN: Three people invited you. Only one remembered the time.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G02",
+      "hub": "tenderloin",
+      "title": "Midjourney's Lens Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H03"
+      ],
+      "requires_any": [],
+      "action": "Use independent physical clues to reject visual decoys and win David's battle.",
+      "outcome": "Lens Badge certifies live-versus-staged observation; exact office anchor remains research-gated.",
+      "state_outputs": [
+        "event.G02.complete",
+        "badge.3.earned"
+      ],
+      "success_next": [
+        "H02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 3,
+      "gym_company": "Midjourney"
+    },
+    {
+      "id": "H02",
+      "hub": "inner_sunset",
+      "title": "The greenhouse disagrees",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G02"
+      ],
+      "requires_any": [],
+      "action": "Check soil/light before restoring three different beds with Karpathy.",
+      "outcome": "Healthy local variation becomes visible; a shaded refuge remains available for postgame.",
+      "state_outputs": [
+        "event.H02.complete"
+      ],
+      "success_next": [
+        "H11"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "KARPATHY: The model says dry. Your shoes say otherwise.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H11",
+      "hub": "richmond",
+      "title": "Archive and tide",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H02"
+      ],
+      "requires_any": [],
+      "action": "Follow archive clues to the Sutro pocket and compare three in-game tide markers.",
+      "outcome": "The periodic change cannot be represented by one constant forecast.",
+      "state_outputs": [
+        "event.H11.complete"
+      ],
+      "success_next": [
+        "P03"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "NAVAL: Wait long enough to notice what changed.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "P03",
+      "hub": "richmond",
+      "title": "The city is not one habitat",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H11"
+      ],
+      "requires_any": [],
+      "action": "Combine the greenhouse, light, sound and tide observations; glimpse a small creature in fog.",
+      "outcome": "Ground truth is variable; a moving second pulse is a living witness, not a master key.",
+      "state_outputs": [
+        "event.P03.complete"
+      ],
+      "success_next": [
+        "H08"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "COURIER: Different readings don't mean different problems.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H08",
+      "hub": "tenderloin",
+      "title": "A musician chose to stay",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P03"
+      ],
+      "requires_any": [],
+      "action": "Follow ordinary music/community clues; find the musician sheltering a creature and restore a rest interval.",
+      "outcome": "The musician is safe and has agency; the main clue is fully available sober.",
+      "state_outputs": [
+        "event.H08.complete"
+      ],
+      "success_next": [
+        "H09",
+        "S04"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "MUSICIAN CAST SLOT: I wasn't lost. I was giving it somewhere quiet.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H09",
+      "hub": "fillmore",
+      "title": "Listen before collecting",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H08"
+      ],
+      "requires_any": [],
+      "action": "Identify separated instruments by sound and complete a staggered rehearsal.",
+      "outcome": "A timestamped ensemble trace becomes a practical recovery test pattern.",
+      "state_outputs": [
+        "event.H09.complete"
+      ],
+      "success_next": [
+        "H10"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "ENSEMBLE CAST SLOT: A rest is part of the song.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H10",
+      "hub": "japantown",
+      "title": "Light the right spaces",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H09"
+      ],
+      "requires_any": [],
+      "action": "Distribute supplies between lantern displays and a deliberately quiet gallery.",
+      "outcome": "The common controller batch is identified; a refuge stays quiet rather than maximally lit.",
+      "state_outputs": [
+        "event.H10.complete"
+      ],
+      "success_next": [
+        "G05"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "FESTIVAL HOST CAST SLOT: That room is dark on purpose.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G05",
+      "hub": "soma",
+      "title": "Mercor's Crew Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H10"
+      ],
+      "requires_any": [],
+      "action": "Assign supplied specialist helpers, then beat Brendan's complementary team.",
+      "outcome": "Crew Badge certifies distinct recovery roles; no particular player-owned species is required.",
+      "state_outputs": [
+        "event.G05.complete",
+        "badge.4.earned"
+      ],
+      "success_next": [
+        "H12",
+        "R02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 4,
+      "gym_company": "Mercor"
+    },
+    {
+      "id": "H12",
+      "hub": "presidio",
+      "title": "Source or reflection?",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G05"
+      ],
+      "requires_any": [],
+      "action": "Use the repaired coupler to reject a reflected signal and find a sheltered observation point.",
+      "outcome": "The team protects sensitive habitat coordinates and adopts redacted field evidence.",
+      "state_outputs": [
+        "event.H12.complete"
+      ],
+      "success_next": [
+        "H13"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "ROON: We can share the observation without sharing its address.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H13",
+      "hub": "marina",
+      "title": "The missing quarter-zip",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H12"
+      ],
+      "requires_any": [],
+      "action": "Follow three finite bar clues: laundry tag, photo description and karaoke speaker.",
+      "outcome": "The jacket is a borrowed speaker cover, not evidence of a real person's alleged misconduct.",
+      "state_outputs": [
+        "event.H13.complete"
+      ],
+      "success_next": [
+        "M31",
+        "S03",
+        "S05"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "JONATHAN: I have three venues and one wearable definition of spontaneous.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "M31",
+      "hub": "marina",
+      "title": "The log in the pocket",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H13"
+      ],
+      "requires_any": [],
+      "action": "Recover the controller log after resolving the jacket joke; compare repeated acknowledgements.",
+      "outcome": "Retries were counted as growth. Drinking, trivia perfection and dating are not required.",
+      "state_outputs": [
+        "event.M31.complete"
+      ],
+      "success_next": [
+        "H14"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H14",
+      "hub": "russian_hill",
+      "title": "Wait for acknowledgement",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "M31"
+      ],
+      "requires_any": [],
+      "action": "Repair the wheel/brake/signal sequence under supervision.",
+      "outcome": "Cable-car service and a return shortcut open; repeated requests no longer masquerade as results.",
+      "state_outputs": [
+        "event.H14.complete"
+      ],
+      "success_next": [
+        "H15"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "SERVICE CAST SLOT: It sent the request. It never waited for the answer.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H15",
+      "hub": "north_beach",
+      "title": "The parrot's last line",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H14"
+      ],
+      "requires_any": [],
+      "action": "Order the notebook's observations, ignoring the parrot's unhelpful repetition, and verify at an overlook.",
+      "outcome": "A schedule of observations can be shared without revealing the rare creature's hiding place.",
+      "state_outputs": [
+        "event.H15.complete"
+      ],
+      "success_next": [
+        "G03"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "ROON: Repeating the last line is not the same as finding the useful one.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G03",
+      "hub": "north_beach",
+      "title": "Cursor's Patch Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H15"
+      ],
+      "requires_any": [],
+      "action": "Test, undo and correct a simulated fault; win the leader battle.",
+      "outcome": "Patch Badge supplies a reversible update protocol, not command-reading AI.",
+      "state_outputs": [
+        "event.G03.complete",
+        "badge.5.earned"
+      ],
+      "success_next": [
+        "G04"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 5,
+      "gym_company": "Cursor"
+    },
+    {
+      "id": "G04",
+      "hub": "chinatown",
+      "title": "Perplexity's Source Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G03"
+      ],
+      "requires_any": [],
+      "action": "Distinguish copies from independent observations; win the leader battle.",
+      "outcome": "Source Badge authenticates the redacted field reports.",
+      "state_outputs": [
+        "event.G04.complete",
+        "badge.6.earned"
+      ],
+      "success_next": [
+        "P05"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 6,
+      "gym_company": "Perplexity"
+    },
+    {
+      "id": "P05",
+      "hub": "north_beach",
+      "title": "Roon makes the evidence useful",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G04"
+      ],
+      "requires_any": [],
+      "action": "Hear how his old context-free demo trace was reused; win the level-39 rival test.",
+      "outcome": "Roon shares the method with repair teams while keeping habitat coordinates local.",
+      "state_outputs": [
+        "event.P05.complete"
+      ],
+      "success_next": [
+        "H16"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "ROON: Conditions, not coordinates. People can reproduce the observation.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "H16",
+      "hub": "chinatown",
+      "title": "A festival distribution fault",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P05"
+      ],
+      "requires_any": [],
+      "action": "Restore safe festival supplies and expose the controller/uplink behind the fault.",
+      "outcome": "The launch location is known; bounded retries and capacity remain necessary before switch-over.",
+      "state_outputs": [
+        "event.H16.complete"
+      ],
+      "success_next": [
+        "G06"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "FESTIVAL HOST CAST SLOT: We asked for working lanterns. We got a launch event.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G06",
+      "hub": "soma",
+      "title": "Anthropic's Limit Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H16"
+      ],
+      "requires_any": [],
+      "action": "Demonstrate safe pause/retry in a simulation and win the leader battle.",
+      "outcome": "Limit Badge protects recovering habitats; a real-world political role is not implied.",
+      "state_outputs": [
+        "event.G06.complete",
+        "badge.7.earned"
+      ],
+      "success_next": [
+        "P04"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 7,
+      "gym_company": "Anthropic"
+    },
+    {
+      "id": "P04",
+      "hub": "soma",
+      "title": "A rehearsal that may fail safely",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G06"
+      ],
+      "requires_any": [],
+      "action": "Combine seven certified contributions; run one deliberate contained failure and recover.",
+      "outcome": "The counterplan has a tested rollback point, but still needs a capacity schedule.",
+      "state_outputs": [
+        "event.P04.complete"
+      ],
+      "success_next": [
+        "G07"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "SCOTT: If the rehearsal fails, we learn here. Nobody outside this room pays for it.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "G07",
+      "hub": "dogpatch",
+      "title": "OpenAI's Flow Challenge",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P04"
+      ],
+      "requires_any": [],
+      "action": "Schedule fixed capacity fairly and win the leader battle.",
+      "outcome": "Flow Badge completes all eight certifications; no unlimited power source appears.",
+      "state_outputs": [
+        "event.G07.complete",
+        "badge.8.earned"
+      ],
+      "success_next": [
+        "F01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft",
+      "badge_number": 8,
+      "gym_company": "OpenAI"
+    },
+    {
+      "id": "F01",
+      "hub": "chinatown",
+      "title": "Choose when Launch Night begins",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G07"
+      ],
+      "requires_any": [],
+      "action": "Restock/heal/save; read the plan and confirm readiness before entering the uplink.",
+      "outcome": "The player controls entry time; no real-time deadline or missable festival.",
+      "state_outputs": [
+        "event.F01.complete"
+      ],
+      "success_next": [
+        "P06"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "P06",
+      "hub": "chinatown",
+      "title": "Beff's perfect reference",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "F01"
+      ],
+      "requires_any": [],
+      "action": "Complete three supervised isolations, protect Bayveil, then win the telegraphed level-51 confrontation.",
+      "outcome": "The forced-reference test stops; losing returns to staging with preparations intact.",
+      "state_outputs": [
+        "event.P06.complete"
+      ],
+      "success_next": [
+        "F02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "BEFF (fictional): It worked on the trace. Why won't it work here?",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "F02",
+      "hub": "chinatown",
+      "title": "Different readings, working city",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P06"
+      ],
+      "requires_any": [],
+      "action": "Release the false reference, confirm the eight-part recovery and show actual outcomes to Marc's fictional console.",
+      "outcome": "Central override is withdrawn, local support remains, Beff helps an exhausted companion and Bayveil leaves freely.",
+      "state_outputs": [
+        "event.F02.complete"
+      ],
+      "success_next": [
+        "P07"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "SCOTT: A stable system can have different readings.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "P07",
+      "hub": "chinatown",
+      "title": "A city afterward",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "F02"
+      ],
+      "requires_any": [],
+      "action": "Visit three short outcomes: a quiet refuge, a resumed performance and a genuinely variable public display.",
+      "outcome": "The crisis has one clear resolution; the league becomes the final main objective.",
+      "state_outputs": [
+        "event.P07.complete"
+      ],
+      "success_next": [
+        "L01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "ROON: The graph is less impressive. The city is doing better.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "L01",
+      "hub": "soma",
+      "title": "Ferry to Treasure Island",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P07"
+      ],
+      "requires_any": [],
+      "action": "Take the Ferry Building departure; use the arrival services and confirm gauntlet rules.",
+      "outcome": "A visible return ferry and pre-run clinic/storage remain available.",
+      "state_outputs": [
+        "event.L01.complete"
+      ],
+      "success_next": [
+        "E01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "E01",
+      "hub": "soma",
+      "title": "Ilya's prediction test",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "L01"
+      ],
+      "requires_any": [],
+      "action": "Defeat the first specialist's small, readable team; proposed ace 52.",
+      "outcome": "The next room opens; no hidden access to player commands.",
+      "state_outputs": [
+        "event.E01.complete"
+      ],
+      "success_next": [
+        "E02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "E02",
+      "hub": "soma",
+      "title": "Dario's safeguards test",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "E01"
+      ],
+      "requires_any": [],
+      "action": "Defeat finite shields and counterplay; proposed ace 53.",
+      "outcome": "The next room opens; carried healing items remain usable.",
+      "state_outputs": [
+        "event.E02.complete"
+      ],
+      "success_next": [
+        "E03"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "E03",
+      "hub": "soma",
+      "title": "Eliezer's containment test",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "E02"
+      ],
+      "requires_any": [],
+      "action": "Answer telegraphed traps with obtainable counters; proposed ace 54.",
+      "outcome": "The next room opens; loss resets the gauntlet, not campaign progress.",
+      "state_outputs": [
+        "event.E03.complete"
+      ],
+      "success_next": [
+        "E04"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "E04",
+      "hub": "soma",
+      "title": "Sarah's coherence test",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "E03"
+      ],
+      "requires_any": [],
+      "action": "Defeat complementary roles and combinations; proposed ace 55.",
+      "outcome": "Champion access opens.",
+      "state_outputs": [
+        "event.E04.complete"
+      ],
+      "success_next": [
+        "E05"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "E05",
+      "hub": "soma",
+      "title": "Sam's champion team",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "E04"
+      ],
+      "requires_any": [],
+      "action": "Manage ordinary visible setup boosts and finite resources; proposed ace 58.",
+      "outcome": "The player becomes champion; Sam remains distinct from the main villain.",
+      "state_outputs": [
+        "event.E05.complete"
+      ],
+      "success_next": [
+        "L02"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "SAM (fictional): Show me the team you built outside the demonstration.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "L02",
+      "hub": "outer_sunset",
+      "title": "The next delivery list",
+      "path": "required",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "E05"
+      ],
+      "requires_any": [],
+      "action": "Watch concise neighborhood callbacks, then return to the studio with control restored.",
+      "outcome": "Main story is complete; Bayveil recruitment, rematches and island exhibit remain optional.",
+      "state_outputs": [
+        "event.L02.complete"
+      ],
+      "success_next": [
+        "T01",
+        "T02",
+        "T03",
+        "B01"
+      ],
+      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
+      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "dialogue_seed": "PHONE: New delivery. Same city. Different forecast.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "A01",
+      "hub": "outer_sunset",
+      "title": "Window and postcard",
+      "path": "optional",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O01"
+      ],
+      "requires_any": [],
+      "action": "Observe fog outside, inspect the N-Judah postcard and optionally rest companions.",
+      "outcome": "Unlock beacon correction; keep the historical fact separate from relay fiction.",
+      "state_outputs": [
+        "event.A01.complete"
+      ],
+      "success_next": [
+        "A02"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "A02",
+      "hub": "outer_sunset",
+      "title": "Correct the cached forecast",
+      "path": "optional",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "A01"
+      ],
+      "requires_any": [],
+      "action": "Accept or decline correcting SUNSHINE FOREVER; retry a deferred capsule reward when the bag has space.",
+      "outcome": "A faint second pulse corroborates the main investigation without being required.",
+      "state_outputs": [
+        "event.A02.complete"
+      ],
+      "success_next": [
+        "A03"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "A03",
+      "hub": "outer_sunset",
+      "title": "The beacon after the badge",
+      "path": "optional",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "A02",
+        "G01"
+      ],
+      "requires_any": [],
+      "action": "Reinspect the corrected beacon after the first badge.",
+      "outcome": "The quieter pulse strengthens; it will pay off with Bayveil but never replaces the Mission clue.",
+      "state_outputs": [
+        "event.A03.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "A04",
+      "hub": "soma",
+      "title": "Seed Room notes",
+      "path": "optional",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O05"
+      ],
+      "requires_any": [],
+      "action": "Read state-dependent field/care notes; return to the main route at any time.",
+      "outcome": "Hints refer to the window, relays and berries; no new mandatory item.",
+      "state_outputs": [
+        "event.A04.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S01",
+      "hub": "soma",
+      "title": "No vowels on the bench",
+      "path": "optional",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O05"
+      ],
+      "requires_any": [],
+      "action": "Inspect the startup notebook and claim berries, with full-bag retry.",
+      "outcome": "One-time reward and original joke; optional held-item preparation.",
+      "state_outputs": [
+        "event.S01.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S02",
+      "hub": "soma",
+      "title": "Founder-mode coffee",
+      "path": "optional",
+      "implementation_status": "authored_script_exists_not_quality_approved",
+      "requires_all": [
+        "O06"
+      ],
+      "requires_any": [],
+      "action": "Inspect the shelf and claim a Potion, with full-bag retry.",
+      "outcome": "One-time practical reward; repeat text changes.",
+      "state_outputs": [
+        "event.S02.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S03",
+      "hub": "marina",
+      "title": "Drunk detective variant",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H13"
+      ],
+      "requires_any": [],
+      "action": "Choose a drink, then play alternate clue descriptions while navigation, battles and saving remain usable.",
+      "outcome": "Same jacket solution; a recovery/rest choice returns the character to sober. No mandatory clue is exclusive.",
+      "state_outputs": [
+        "event.S03.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S04",
+      "hub": "tenderloin",
+      "title": "High-state alternate route",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H08"
+      ],
+      "requires_any": [],
+      "action": "Opt into altered perception and follow an alternate description trail, with reduced visual effects available.",
+      "outcome": "An optional joke and small reward; musician resolution is already available sober. Rest/recovery clears state.",
+      "state_outputs": [
+        "event.S04.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S05",
+      "hub": "marina",
+      "title": "Jonathan's date scheduler",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H13"
+      ],
+      "requires_any": [],
+      "action": "Choose a venue/time preference and accept or decline a finite scheduling joke.",
+      "outcome": "One of three optional adult-date scenarios becomes available; no actual messaging or external scheduling.",
+      "state_outputs": [
+        "event.S05.complete"
+      ],
+      "success_next": [
+        "S06",
+        "S07",
+        "S08"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S06",
+      "hub": "marina",
+      "title": "The pitch-deck date",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "S05"
+      ],
+      "requires_any": [],
+      "action": "A fictional adult guest frames the date as a pitch; answer warmly, joke, or leave.",
+      "outcome": "Harmless callback/cosmetic reward; real-person guest casting is a contributor research slot, not fabricated biography.",
+      "state_outputs": [
+        "event.S06.complete"
+      ],
+      "success_next": [
+        "S09"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S07",
+      "hub": "marina",
+      "title": "The wearable date",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "S05"
+      ],
+      "requires_any": [],
+      "action": "A fictional guest keeps checking a dashboard; suggest a short walk, join the joke or end the date.",
+      "outcome": "A small bond/cosmetic callback; leaving is a complete outcome, not a failure.",
+      "state_outputs": [
+        "event.S07.complete"
+      ],
+      "success_next": [
+        "S09"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S08",
+      "hub": "marina",
+      "title": "The relationship org chart",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "S05"
+      ],
+      "requires_any": [],
+      "action": "Decline, simplify or indulge an absurd org-chart conversation.",
+      "outcome": "A concise original punchline and optional reward; no romance outcome gates progression.",
+      "state_outputs": [
+        "event.S08.complete"
+      ],
+      "success_next": [
+        "S09"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S09",
+      "hub": "marina",
+      "title": "The companion blurts it out",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [],
+      "requires_any": [
+        "S06",
+        "S07",
+        "S08"
+      ],
+      "action": "A companion reveals harmless invented in-game information from the date; choose how to respond.",
+      "outcome": "A callback based on an actual prior choice, not an allegation about anyone's private life.",
+      "state_outputs": [
+        "event.S09.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S10",
+      "hub": "mission",
+      "title": "Three referrals, zero external users",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "P02"
+      ],
+      "requires_any": [],
+      "action": "Nikita's fictional booth needs three in-game companion introductions; discover a finite shortcut or do the brief walk.",
+      "outcome": "A modest reward; no real account, link posting, invited users or persistent referral loop.",
+      "state_outputs": [
+        "event.S10.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S11",
+      "hub": "haight",
+      "title": "One more interview question",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "H03"
+      ],
+      "requires_any": [],
+      "action": "Dwarkesh's invented short interview branches once; exit is always offered and length is capped.",
+      "outcome": "Optional habitat lore and a later one-line callback.",
+      "state_outputs": [
+        "event.S11.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "S12",
+      "hub": "soma",
+      "title": "The invisible payment bridge",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "O05"
+      ],
+      "requires_any": [],
+      "action": "Patrick's shop note asks the player to trace an entirely in-game failed invoice between three ledgers.",
+      "outcome": "An optional service joke and small supply reward; no actual payment data is requested.",
+      "state_outputs": [
+        "event.S12.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "R02",
+      "hub": "soma",
+      "title": "Roon's optional midpoint rematch",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "G05"
+      ],
+      "requires_any": [],
+      "action": "Accept a clearly optional level-28-ace rivalry battle that demonstrates improved team coverage.",
+      "outcome": "Updated dialogue regardless of win/loss; no chapter, badge or habitat clue is withheld.",
+      "state_outputs": [
+        "event.R02.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "T01",
+      "hub": "soma",
+      "title": "Balaji's island exhibit",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "L02"
+      ],
+      "requires_any": [],
+      "action": "Visit the separate Treasure Island door; solve three policy-versus-habitat trials, battle, then choose a short response or leave.",
+      "outcome": "An optional challenge reward and thematic contrast; no second compulsory ending or outside-SF district.",
+      "state_outputs": [
+        "event.T01.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "T02",
+      "hub": "soma",
+      "title": "Eight gym rematches",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "L02"
+      ],
+      "requires_any": [],
+      "action": "Choose a leader from the travel menu and return for stronger complementary teams.",
+      "outcome": "Replayable battles with capped sensible rewards; eight individual rematch cards can be expanded by owners.",
+      "state_outputs": [
+        "event.T02.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "T03",
+      "hub": "outer_sunset",
+      "title": "The city remembers",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "L02"
+      ],
+      "requires_any": [],
+      "action": "Revisit each atlas callback, complete remaining side events and use repeatable sources for unchosen starters.",
+      "outcome": "Postgame remains available without resetting the campaign; exact catalog sources belong to monster content design.",
+      "state_outputs": [
+        "event.T03.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "B01",
+      "hub": "outer_sunset",
+      "title": "A redacted fog trail",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "L02"
+      ],
+      "requires_any": [],
+      "action": "Read a field note identifying conditions at three already repaired quiet sites, not published animal coordinates.",
+      "outcome": "Unlock Q01/Q02/Q03 in any order; no wall-clock wait.",
+      "state_outputs": [
+        "event.B01.complete"
+      ],
+      "success_next": [
+        "Q01",
+        "Q02",
+        "Q03"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "Q01",
+      "hub": "inner_sunset",
+      "title": "Quiet site: greenhouse",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "B01"
+      ],
+      "requires_any": [],
+      "action": "Check the shaded restored bed and leave its refuge intact.",
+      "outcome": "Record one of three observations without a new mandatory fetch item.",
+      "state_outputs": [
+        "event.Q01.complete"
+      ],
+      "success_next": [
+        "B02"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "Q02",
+      "hub": "richmond",
+      "title": "Quiet site: tide refuge",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "B01"
+      ],
+      "requires_any": [],
+      "action": "Inspect the restored tidal pocket using in-game markers.",
+      "outcome": "Record the second observation; no real tide schedule or random spawn.",
+      "state_outputs": [
+        "event.Q02.complete"
+      ],
+      "success_next": [
+        "B02"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "Q03",
+      "hub": "presidio",
+      "title": "Quiet site: woodland shelter",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "B01"
+      ],
+      "requires_any": [],
+      "action": "Observe the quiet shelter without following a reflected signal.",
+      "outcome": "Record the third observation; the three may be done in any order.",
+      "state_outputs": [
+        "event.Q03.complete"
+      ],
+      "success_next": [
+        "B02"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "B02",
+      "hub": "outer_sunset",
+      "title": "Meet Bayveil on its terms",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "Q01",
+        "Q02",
+        "Q03"
+      ],
+      "requires_any": [],
+      "action": "Follow the deterministic Ocean Beach fog trail to a small refuge.",
+      "outcome": "Bayveil reappears outside the crisis; the player may leave and return.",
+      "state_outputs": [
+        "event.B02.complete"
+      ],
+      "success_next": [
+        "B03"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "B03",
+      "hub": "outer_sunset",
+      "title": "Leave a way back",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "B02"
+      ],
+      "requires_any": [],
+      "action": "Clear a reversible path to the refuge and demonstrate a calm approach.",
+      "outcome": "Bayveil offers a retriable encounter; the player is not required to recruit it to preserve the ending.",
+      "state_outputs": [
+        "event.B03.complete"
+      ],
+      "success_next": [
+        "B04"
+      ],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    },
+    {
+      "id": "B04",
+      "hub": "outer_sunset",
+      "title": "Recruit Bayveil",
+      "path": "optional",
+      "implementation_status": "treatment_only",
+      "requires_all": [
+        "B03"
+      ],
+      "requires_any": [],
+      "action": "Battle and recruit; defeat/escape/whiteout returns to a known recovery/retry state. Party-full behavior uses ordinary storage.",
+      "outcome": "Legendary entry becomes obtainable; no trading, date, intoxication or time-limited event is required.",
+      "state_outputs": [
+        "event.B04.complete"
+      ],
+      "success_next": [],
+      "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
+      "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
+      "owner": null,
+      "review_status": "proposed_draft"
+    }
+  ]
+}
+
