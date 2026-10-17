@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "modules": [
+    {
+      "id": "gym_1",
+      "kind": "gym",
+      "world_id": "gym_1",
+      "area": "castro",
+      "theme": "caffeine",
+      "requires_badge": 0,
+      "success_anchor": "    setflag FLAG_BADGE01_GET",
+      "grants_badge": 1,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_ROXANNE_1",
+        "TRAINER_ROXANNE_2",
+        "TRAINER_ROXANNE_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x020",
+        "FLAG_UNUSED_0x021",
+        "FLAG_UNUSED_0x022"
+      ]
+    },
+    {
+      "id": "gym_2",
+      "kind": "gym",
+      "world_id": "gym_2",
+      "area": "outer_sunset",
+      "theme": "wellness",
+      "requires_badge": 1,
+      "success_anchor": "    setflag FLAG_BADGE02_GET",
+      "grants_badge": 2,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_BRAWLY_1",
+        "TRAINER_BRAWLY_2",
+        "TRAINER_BRAWLY_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x023",
+        "FLAG_UNUSED_0x024",
+        "FLAG_UNUSED_0x025"
+      ]
+    },
+    {
+      "id": "gym_3",
+      "kind": "gym",
+      "world_id": "gym_3",
+      "area": "marina",
+      "theme": "clout",
+      "requires_badge": 2,
+      "success_anchor": "    setflag FLAG_BADGE03_GET",
+      "grants_badge": 3,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_WATTSON_1",
+        "TRAINER_WATTSON_2",
+        "TRAINER_WATTSON_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x026",
+        "FLAG_UNUSED_0x027",
+        "FLAG_UNUSED_0x028"
+      ]
+    },
+    {
+      "id": "gym_4",
+      "kind": "gym",
+      "world_id": "gym_4",
+      "area": "twin_peaks",
+      "theme": "hardware",
+      "requires_badge": 3,
+      "success_anchor": "    setflag FLAG_BADGE04_GET",
+      "grants_badge": 4,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_FLANNERY_1",
+        "TRAINER_FLANNERY_2",
+        "TRAINER_FLANNERY_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x029",
+        "FLAG_UNUSED_0x02A",
+        "FLAG_UNUSED_0x02B"
+      ]
+    },
+    {
+      "id": "gym_5",
+      "kind": "gym",
+      "world_id": "gym_5",
+      "area": "noe_valley",
+      "theme": "open_source",
+      "requires_badge": 4,
+      "success_anchor": "    setflag FLAG_BADGE05_GET",
+      "grants_badge": 5,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_NORMAN_1",
+        "TRAINER_NORMAN_2",
+        "TRAINER_NORMAN_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x02C",
+        "FLAG_UNUSED_0x02D",
+        "FLAG_UNUSED_0x02E"
+      ]
+    },
+    {
+      "id": "gym_6",
+      "kind": "gym",
+      "world_id": "gym_6",
+      "area": "mission_bay",
+      "theme": "stealth",
+      "requires_badge": 5,
+      "success_anchor": "    setflag FLAG_BADGE06_GET",
+      "grants_badge": 6,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_WINONA_1",
+        "TRAINER_WINONA_2",
+        "TRAINER_WINONA_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x02F",
+        "FLAG_UNUSED_0x030",
+        "FLAG_UNUSED_0x031"
+      ]
+    },
+    {
+      "id": "gym_7",
+      "kind": "gym",
+      "world_id": "gym_7",
+      "area": "financial_district",
+      "theme": "investor",
+      "requires_badge": 6,
+      "success_anchor": "    setflag FLAG_BADGE07_GET",
+      "grants_badge": 7,
+      "requires_checkpoint": null,
+      "trainer_slots": [
+        "TRAINER_TATE_AND_LIZA_1",
+        "TRAINER_TATE_AND_LIZA_2",
+        "TRAINER_TATE_AND_LIZA_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x032",
+        "FLAG_UNUSED_0x033",
+        "FLAG_UNUSED_0x034"
+      ]
+    },
+    {
+      "id": "gym_8",
+      "kind": "gym",
+      "world_id": "gym_8",
+      "area": "north_beach",
+      "theme": "consumer",
+      "requires_badge": 7,
+      "success_anchor": "    setflag FLAG_BADGE08_GET",
+      "grants_badge": 8,
+      "requires_checkpoint": "VAR_UNUSED_0x40FC",
+      "trainer_slots": [
+        "TRAINER_JUAN_1",
+        "TRAINER_JUAN_2",
+        "TRAINER_JUAN_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x035",
+        "FLAG_UNUSED_0x036",
+        "FLAG_UNUSED_0x037"
+      ]
+    },
+    {
+      "id": "mission_potrero_rival",
+      "kind": "mission",
+      "world_id": "potrero_hill",
+      "area": "potrero_hill",
+      "requires_badge": 0,
+      "requires_checkpoint": null,
+      "grants_checkpoint": null,
+      "success_anchor": "    msgbox WB_potrero_hill_Text, MSGBOX_DEFAULT",
+      "trainer_slots": [
+        "TRAINER_CALVIN_1"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x038",
+        "FLAG_UNUSED_0x039",
+        "FLAG_UNUSED_0x03A"
+      ]
+    },
+    {
+      "id": "mission_meteorite",
+      "kind": "mission",
+      "world_id": "pacific_heights",
+      "area": "pacific_heights",
+      "requires_badge": 4,
+      "requires_checkpoint": null,
+      "grants_checkpoint": null,
+      "success_anchor": "    msgbox WB_pacific_heights_Text, MSGBOX_DEFAULT",
+      "trainer_slots": [
+        "TRAINER_SAWYER_1"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x03B",
+        "FLAG_UNUSED_0x03C",
+        "FLAG_UNUSED_0x03D"
+      ]
+    },
+    {
+      "id": "mission_stadium",
+      "kind": "mission",
+      "world_id": "giants_stadium",
+      "area": "giants_stadium",
+      "requires_badge": 0,
+      "requires_checkpoint": null,
+      "grants_checkpoint": null,
+      "success_anchor": "    msgbox WB_giants_stadium_Text, MSGBOX_DEFAULT",
+      "trainer_slots": [
+        "TRAINER_BILLY"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x03E",
+        "FLAG_UNUSED_0x03F",
+        "FLAG_UNUSED_0x040"
+      ]
+    },
+    {
+      "id": "mission_treasure_island",
+      "kind": "mission",
+      "world_id": "treasure_island",
+      "area": "treasure_island",
+      "requires_badge": 5,
+      "requires_checkpoint": null,
+      "grants_checkpoint": "VAR_UNUSED_0x40FA",
+      "success_anchor": "    setvar VAR_UNUSED_0x40FA, 1",
+      "trainer_slots": [
+        "TRAINER_GRUNT_AQUA_HIDEOUT_1"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x041",
+        "FLAG_UNUSED_0x042",
+        "FLAG_UNUSED_0x043"
+      ]
+    },
+    {
+      "id": "mission_sutro_tower",
+      "kind": "mission",
+      "world_id": "sutro_tower",
+      "area": "sutro_tower",
+      "requires_badge": 5,
+      "requires_checkpoint": "VAR_UNUSED_0x40FA",
+      "grants_checkpoint": "VAR_UNUSED_0x40FB",
+      "success_anchor": "    setvar VAR_UNUSED_0x40FB, 1",
+      "trainer_slots": [
+        "TRAINER_GRUNT_AQUA_HIDEOUT_2"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x044",
+        "FLAG_UNUSED_0x045",
+        "FLAG_UNUSED_0x046"
+      ]
+    },
+    {
+      "id": "mission_lands_end",
+      "kind": "mission",
+      "world_id": "lands_end",
+      "area": "lands_end",
+      "requires_badge": 5,
+      "requires_checkpoint": "VAR_UNUSED_0x40FB",
+      "grants_checkpoint": "VAR_UNUSED_0x40FC",
+      "success_anchor": "    setvar VAR_UNUSED_0x40FC, 1",
+      "trainer_slots": [
+        "TRAINER_GRUNT_AQUA_HIDEOUT_3"
+      ],
+      "flags": [
+        "FLAG_UNUSED_0x047",
+        "FLAG_UNUSED_0x048",
+        "FLAG_UNUSED_0x049"
+      ]
+    }
+  ]
+}
