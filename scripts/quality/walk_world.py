@@ -109,6 +109,9 @@ class Walker:
 
     def travel(self, destination):
         start = self.location()[0]
+        stage = max([0] + [n for n in range(1, 9) if self.badge(n)])
+        gates = {r['id']: r['requires_badge'] for r in self.manifest['routes']}
+        gates['league_route'] = 8
         pending, previous = deque([start]), {start: None}
         while pending and destination not in previous:
             node = pending.popleft()
@@ -118,6 +121,10 @@ class Walker:
             edges += [(p['target_id'], ('warp', (p['x'], p['y'])))
                       for p in plan['access_points'] if p['kind'] in ('gym_entry', 'gym_exit')]
             for target, action in edges:
+                # A locked connector can be approached for a negative test,
+                # but cannot serve as an intermediate cross-city shortcut.
+                if gates.get(target, 0) > stage and target != destination:
+                    continue
                 if target not in previous:
                     previous[target] = node, action; pending.append(target)
         if destination not in previous:
