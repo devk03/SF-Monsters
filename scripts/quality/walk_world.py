@@ -47,6 +47,8 @@ class Walker:
             for _ in range(7):
                 self.c.tap(1, 36)
             self.c.step(0, 100)
+            if self.location() != before:
+                return self.location()
         raise ValueError(f'Native movement blocked: {before} {direction}, wet={wet}')
 
     def path(self, plan, start, target):
@@ -74,11 +76,17 @@ class Walker:
     def go(self, target):
         identifier, start = self.location()
         plan = self.plans[identifier]
-        for direction in self.path(plan, start, target):
-            here = self.location()[1]
+        for _ in range(128):
+            current, here = self.location()
+            if current != identifier or here == target:
+                break
+            # Surf entry and Waterfall ascent move more than a walking step.
+            direction = self.path(plan, here, target)[0]
             dx, dy = DELTAS[direction]
             token = plan['rows'][here[1] + dy][here[0] + dx]
             self.walk(direction, wet=token in 'WV')
+        else:
+            raise ValueError('Native in-map navigation exceeded its step bound')
         self.c.step(0, 120)
         return self.location()
 
