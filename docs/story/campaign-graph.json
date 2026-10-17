@@ -932,7 +932,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "O02",
@@ -956,7 +957,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "O03",
@@ -980,7 +982,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "O04",
@@ -1004,7 +1007,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "O05",
@@ -1031,7 +1035,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "O06",
@@ -1056,7 +1061,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "O07",
@@ -1080,7 +1086,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "O08",
@@ -1104,7 +1111,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "G01",
@@ -1132,7 +1140,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 1,
-      "gym_company": "Cognition"
+      "gym_company": "Cognition",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "O09",
@@ -1156,7 +1165,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "H05",
@@ -1180,7 +1190,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "DANIELLE: The paint moved. The pavement didn't.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Mission"
     },
     {
       "id": "M51",
@@ -1204,7 +1215,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Mission"
     },
     {
       "id": "M52",
@@ -1228,7 +1240,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Mission"
     },
     {
       "id": "P01",
@@ -1252,7 +1265,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "ROON: I redacted the map. Unfortunately I also redacted the useful part.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Mission"
     },
     {
       "id": "H06",
@@ -1276,7 +1290,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "DANIELLE: Give each helper one job it can actually finish.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Dogpatch"
     },
     {
       "id": "H07",
@@ -1300,7 +1315,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "P02",
@@ -1313,7 +1329,7 @@
       ],
       "requires_any": [],
       "action": "Interrupt one local demo safely and hear the fictional Overclock pitch.",
-      "outcome": "The scheduler promises simultaneous evolution; Marc's fictional contract values one uniform curve.",
+      "outcome": "The scheduler promises simultaneous evolution. Marc's fictional safety lease automatically revokes central override after three independent signed distress reports and eight compatibility certificates establish a safe local recovery; copied acknowledgements have hidden the trigger.",
       "state_outputs": [
         "event.P02.complete"
       ],
@@ -1325,7 +1341,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "BEFF (fictional): Nothing is stuck in its starter phase. That's the promise.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "G08",
@@ -1352,7 +1369,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 2,
-      "gym_company": "Notion"
+      "gym_company": "Notion",
+      "scene_area": "Market Street / Monadnock block"
     },
     {
       "id": "H04",
@@ -1376,7 +1394,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "DYLAN: The stage needs light. That corner needs a break.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Castro"
     },
     {
       "id": "C41",
@@ -1400,7 +1419,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Castro"
     },
     {
       "id": "H03",
@@ -1425,7 +1445,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "VISAKAN: Three people invited you. Only one remembered the time.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Haight-Ashbury"
     },
     {
       "id": "G02",
@@ -1452,7 +1473,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 3,
-      "gym_company": "Midjourney"
+      "gym_company": "Midjourney",
+      "scene_area": "Central SF office connector — exact district provisional"
     },
     {
       "id": "H02",
@@ -1476,7 +1498,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "KARPATHY: The model says dry. Your shoes say otherwise.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Inner Sunset"
     },
     {
       "id": "H11",
@@ -1500,7 +1523,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "NAVAL: Wait long enough to notice what changed.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Richmond District"
     },
     {
       "id": "P03",
@@ -1518,13 +1542,15 @@
         "event.P03.complete"
       ],
       "success_next": [
-        "H08"
+        "H08",
+        "S04"
       ],
       "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "COURIER: Different readings don't mean different problems.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Richmond District"
     },
     {
       "id": "H08",
@@ -1542,14 +1568,14 @@
         "event.H08.complete"
       ],
       "success_next": [
-        "H09",
-        "S04"
+        "H09"
       ],
       "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "MUSICIAN CAST SLOT: I wasn't lost. I was giving it somewhere quiet.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Tenderloin"
     },
     {
       "id": "H09",
@@ -1573,7 +1599,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "ENSEMBLE CAST SLOT: A rest is part of the song.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Fillmore"
     },
     {
       "id": "H10",
@@ -1597,7 +1624,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "FESTIVAL HOST CAST SLOT: That room is dark on purpose.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Japantown"
     },
     {
       "id": "G05",
@@ -1625,7 +1653,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 4,
-      "gym_company": "Mercor"
+      "gym_company": "Mercor",
+      "scene_area": "Transbay / Fremont Street"
     },
     {
       "id": "H12",
@@ -1643,13 +1672,15 @@
         "event.H12.complete"
       ],
       "success_next": [
-        "H13"
+        "H13",
+        "S03"
       ],
       "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "ROON: We can share the observation without sharing its address.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Presidio"
     },
     {
       "id": "H13",
@@ -1668,14 +1699,14 @@
       ],
       "success_next": [
         "M31",
-        "S03",
         "S05"
       ],
       "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "JONATHAN: I have three venues and one wearable definition of spontaneous.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "M31",
@@ -1688,7 +1719,7 @@
       ],
       "requires_any": [],
       "action": "Recover the controller log after resolving the jacket joke; compare repeated acknowledgements.",
-      "outcome": "Retries were counted as growth. Drinking, trivia perfection and dating are not required.",
+      "outcome": "The jacket log contains the safety-lease clause and shows copied acknowledgements counted as independent reports. The player can now expose the missing trigger; drinking and dating remain irrelevant.",
       "state_outputs": [
         "event.M31.complete"
       ],
@@ -1699,7 +1730,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "H14",
@@ -1723,7 +1755,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "SERVICE CAST SLOT: It sent the request. It never waited for the answer.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Russian Hill"
     },
     {
       "id": "H15",
@@ -1747,7 +1780,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "ROON: Repeating the last line is not the same as finding the useful one.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "North Beach"
     },
     {
       "id": "G03",
@@ -1774,7 +1808,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 5,
-      "gym_company": "Cursor"
+      "gym_company": "Cursor",
+      "scene_area": "Bay Street / North Beach waterfront branch"
     },
     {
       "id": "G04",
@@ -1801,7 +1836,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 6,
-      "gym_company": "Perplexity"
+      "gym_company": "Perplexity",
+      "scene_area": "Financial District / Sansome — provisional occupancy"
     },
     {
       "id": "P05",
@@ -1825,7 +1861,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "ROON: Conditions, not coordinates. People can reproduce the observation.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "North Beach"
     },
     {
       "id": "H16",
@@ -1849,7 +1886,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "FESTIVAL HOST CAST SLOT: We asked for working lanterns. We got a launch event.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Chinatown"
     },
     {
       "id": "G06",
@@ -1876,7 +1914,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 7,
-      "gym_company": "Anthropic"
+      "gym_company": "Anthropic",
+      "scene_area": "SoMa / Howard Street corridor"
     },
     {
       "id": "P04",
@@ -1889,7 +1928,7 @@
       ],
       "requires_any": [],
       "action": "Combine seven certified contributions; run one deliberate contained failure and recover.",
-      "outcome": "The counterplan has a tested rollback point, but still needs a capacity schedule.",
+      "outcome": "The allies verify three independent distress reports, simulate the safety-lease trigger and recover safely after a contained failed rehearsal. Seven certificates are ready; the eighth must supply a capacity schedule.",
       "state_outputs": [
         "event.P04.complete"
       ],
@@ -1900,7 +1939,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "SCOTT: If the rehearsal fails, we learn here. Nobody outside this room pays for it.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "G07",
@@ -1927,7 +1967,8 @@
       "owner": null,
       "review_status": "proposed_draft",
       "badge_number": 8,
-      "gym_company": "OpenAI"
+      "gym_company": "OpenAI",
+      "scene_area": "Mission Bay / Third Street corridor"
     },
     {
       "id": "F01",
@@ -1951,7 +1992,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Chinatown"
     },
     {
       "id": "P06",
@@ -1975,7 +2017,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "BEFF (fictional): It worked on the trace. Why won't it work here?",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Chinatown"
     },
     {
       "id": "F02",
@@ -1987,8 +2030,8 @@
         "P06"
       ],
       "requires_any": [],
-      "action": "Release the false reference, confirm the eight-part recovery and show actual outcomes to Marc's fictional console.",
-      "outcome": "Central override is withdrawn, local support remains, Beff helps an exhausted companion and Bayveil leaves freely.",
+      "action": "Release the false reference and submit the independent reports plus all eight recovery certificates; the established safety lease revokes central override automatically.",
+      "outcome": "Marc's fictional console must relinquish override under its own contract; local support continues. Marc accepts the correction, Beff helps an exhausted companion and Bayveil leaves freely.",
       "state_outputs": [
         "event.F02.complete"
       ],
@@ -1999,7 +2042,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "SCOTT: A stable system can have different readings.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Chinatown"
     },
     {
       "id": "P07",
@@ -2023,7 +2067,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "ROON: The graph is less impressive. The city is doing better.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Chinatown"
     },
     {
       "id": "L01",
@@ -2047,7 +2092,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Ferry Building → Treasure Island"
     },
     {
       "id": "E01",
@@ -2062,16 +2108,18 @@
       "action": "Defeat the first specialist's small, readable team; proposed ace 52.",
       "outcome": "The next room opens; no hidden access to player commands.",
       "state_outputs": [
-        "event.E01.complete"
+        "attempt.elite.E01.cleared"
       ],
       "success_next": [
         "E02"
       ],
-      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
-      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "failure": "Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.",
+      "decline": "Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Treasure Island",
+      "completion_scope": "current_gauntlet_attempt"
     },
     {
       "id": "E02",
@@ -2086,16 +2134,18 @@
       "action": "Defeat finite shields and counterplay; proposed ace 53.",
       "outcome": "The next room opens; carried healing items remain usable.",
       "state_outputs": [
-        "event.E02.complete"
+        "attempt.elite.E02.cleared"
       ],
       "success_next": [
         "E03"
       ],
-      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
-      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "failure": "Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.",
+      "decline": "Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Treasure Island",
+      "completion_scope": "current_gauntlet_attempt"
     },
     {
       "id": "E03",
@@ -2110,16 +2160,18 @@
       "action": "Answer telegraphed traps with obtainable counters; proposed ace 54.",
       "outcome": "The next room opens; loss resets the gauntlet, not campaign progress.",
       "state_outputs": [
-        "event.E03.complete"
+        "attempt.elite.E03.cleared"
       ],
       "success_next": [
         "E04"
       ],
-      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
-      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "failure": "Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.",
+      "decline": "Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Treasure Island",
+      "completion_scope": "current_gauntlet_attempt"
     },
     {
       "id": "E04",
@@ -2134,16 +2186,18 @@
       "action": "Defeat complementary roles and combinations; proposed ace 55.",
       "outcome": "Champion access opens.",
       "state_outputs": [
-        "event.E04.complete"
+        "attempt.elite.E04.cleared"
       ],
       "success_next": [
         "E05"
       ],
-      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
-      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "failure": "Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.",
+      "decline": "Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.",
       "dialogue_seed": "Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Treasure Island",
+      "completion_scope": "current_gauntlet_attempt"
     },
     {
       "id": "E05",
@@ -2158,16 +2212,20 @@
       "action": "Manage ordinary visible setup boosts and finite resources; proposed ace 58.",
       "outcome": "The player becomes champion; Sam remains distinct from the main villain.",
       "state_outputs": [
-        "event.E05.complete"
+        "attempt.elite.E05.cleared",
+        "event.E05.complete",
+        "champion.earned"
       ],
       "success_next": [
         "L02"
       ],
-      "failure": "Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.",
-      "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
+      "failure": "Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.",
+      "decline": "Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.",
       "dialogue_seed": "SAM (fictional): Show me the team you built outside the demonstration.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Treasure Island",
+      "completion_scope": "permanent_champion"
     },
     {
       "id": "L02",
@@ -2194,7 +2252,8 @@
       "decline": "Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.",
       "dialogue_seed": "PHONE: New delivery. Same city. Different forecast.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "A01",
@@ -2217,7 +2276,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "A02",
@@ -2240,7 +2300,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "A03",
@@ -2262,7 +2323,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "A04",
@@ -2283,7 +2345,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "S01",
@@ -2304,7 +2367,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "S02",
@@ -2325,7 +2389,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "S03",
@@ -2334,10 +2399,10 @@
       "path": "optional",
       "implementation_status": "treatment_only",
       "requires_all": [
-        "H13"
+        "H12"
       ],
       "requires_any": [],
-      "action": "Choose a drink, then play alternate clue descriptions while navigation, battles and saving remain usable.",
+      "action": "On Marina arrival, choose a drink before or during the jacket investigation and follow alternate clue descriptions while controls and saving remain usable. After M31, use explicit revisit dialogue instead.",
       "outcome": "Same jacket solution; a recovery/rest choice returns the character to sober. No mandatory clue is exclusive.",
       "state_outputs": [
         "event.S03.complete"
@@ -2346,7 +2411,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "S04",
@@ -2355,10 +2421,10 @@
       "path": "optional",
       "implementation_status": "treatment_only",
       "requires_all": [
-        "H08"
+        "P03"
       ],
       "requires_any": [],
-      "action": "Opt into altered perception and follow an alternate description trail, with reduced visual effects available.",
+      "action": "On Tenderloin arrival, opt into an alternate perception trail before or during the musician investigation; keep an equally complete sober path. After H08, use explicit revisit dialogue instead.",
       "outcome": "An optional joke and small reward; musician resolution is already available sober. Rest/recovery clears state.",
       "state_outputs": [
         "event.S04.complete"
@@ -2367,7 +2433,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Tenderloin"
     },
     {
       "id": "S05",
@@ -2392,7 +2459,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "S06",
@@ -2415,7 +2483,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "S07",
@@ -2438,7 +2507,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "S08",
@@ -2461,7 +2531,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "S09",
@@ -2484,7 +2555,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Marina"
     },
     {
       "id": "S10",
@@ -2505,7 +2577,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Mission"
     },
     {
       "id": "S11",
@@ -2526,7 +2599,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Haight-Ashbury"
     },
     {
       "id": "S12",
@@ -2547,7 +2621,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "R02",
@@ -2568,7 +2643,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "T01",
@@ -2589,7 +2665,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Treasure Island"
     },
     {
       "id": "T02",
@@ -2610,7 +2687,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "SoMa / South Park"
     },
     {
       "id": "T03",
@@ -2631,7 +2709,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "B01",
@@ -2656,7 +2735,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "Q01",
@@ -2679,7 +2759,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Inner Sunset"
     },
     {
       "id": "Q02",
@@ -2702,7 +2783,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Richmond District"
     },
     {
       "id": "Q03",
@@ -2725,7 +2807,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Presidio"
     },
     {
       "id": "B02",
@@ -2750,7 +2833,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "B03",
@@ -2773,7 +2857,8 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     },
     {
       "id": "B04",
@@ -2794,8 +2879,35 @@
       "failure": "Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.",
       "decline": "Leave and continue the campaign; optional rewards and callbacks do not gate badges, ending or full collection.",
       "owner": null,
-      "review_status": "proposed_draft"
+      "review_status": "proposed_draft",
+      "scene_area": "Outer Sunset"
     }
-  ]
+  ],
+  "gauntlet_contract": {
+    "rooms": [
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05"
+    ],
+    "attempt_scoped_rooms": [
+      "E01",
+      "E02",
+      "E03",
+      "E04"
+    ],
+    "reset_attempt_on": [
+      "defeat",
+      "explicit_abandon"
+    ],
+    "ordinary_save_resumes_same_attempt": true,
+    "permanent_champion_requires": "E05",
+    "permanent_flags_preserved": [
+      "badges",
+      "campaign_quests"
+    ],
+    "items": "Standard baseline save/consumption rules, not restored by abandoning a run."
+  }
 }
 

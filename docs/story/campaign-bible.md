@@ -167,7 +167,11 @@ H07: a SoMa field-demo creature follows the copied conditions outside its enclos
 The player escorts it back with food and a cleared path; a direct chase fails safely.
 P02: a fictional Beff presentation reveals the pitch: everyone reaches their full
 potential on Launch Night. Marc's fictional infrastructure contract rewards an
-uninterrupted common growth curve. Neither considers a slow habitat a valid result.
+uninterrupted common growth curve. Neither considers a slow habitat a valid result. To obtain the local labs' consent,
+Marc's fictional contract includes a binding safety lease: three independent
+signed distress reports plus eight compatibility certificates automatically revoke
+central override when a safe local recovery is ready. Replayed acknowledgements
+have kept this condition from being recognized.
 The player isolates this demo locally; the central scheduler is still active.
 
 G08: Notion organizes the evidence into dependencies. Ivan's gym produces a field
@@ -257,7 +261,9 @@ solution follows a laundry tag, an original photo description and a karaoke
 speaker occupied by a mini monster. The jacket is found draped over the speaker;
 the owner had lent it as a cover. The bar mystery resolves before the serious
 log revelation, so the clue is earned without treating intoxication as insight.
-The log shows scheduled delivery retries being counted as healthy habitat changes.
+The log contains the safety-lease clause and shows scheduled delivery retries
+being counted as independent healthy habitat reports. The rule was visible at the
+demo; now the courier can prove why its trigger never fired.
 
 Drinking is optional; a drunk character can still navigate, battle and save.
 Jonathan's scheduling quest branches into weird dates. These events supply jokes,
@@ -306,7 +312,9 @@ G06: Daniela's Anthropic challenge teaches the bounded retry and safe pause.
 P04: the allies rehearse the counterplan in a contained lab. Scott coordinates;
 Ivan orders; David checks observation; Brendan assigns roles; Michael supplies
 rollback; Aravind verifies; Daniela bounds retry. One deliberate failed rehearsal
-shows a safe recovery rather than taking away progress.
+shows a safe recovery rather than taking away progress. The allies verify three
+independent distress reports and demonstrate that the safety lease revokes the
+simulated override when valid recovery certificates are present.
 G07: Tibo's OpenAI challenge schedules limited capacity across recovering habitats.
 Its badge supplies the eighth compatibility certification. It does not create a
 new unlimited power source. The player can restock and choose when to start the
@@ -327,9 +335,12 @@ hidden turns. Losing returns to the staging area and retains preparatory progres
 
 After victory, the false reference is released, not destroyed. Roon identifies the
 last stale packet; the player confirms the eight-part local recovery sequence.
-Marc's fictional funding console receives the actual field outcomes. Continuing
-the uniform launch would contradict even its own recovery constraints. He withdraws
-the central override. Beff shuts down the forced-evolution schedule and helps a
+The courier submits the independent distress reports and all eight compatibility
+certificates. Marc's fictional console automatically loses central override under
+the safety lease established at the first demo and tested in rehearsal. His choice
+now supplies characterization: he accepts the correction and supports local
+recovery instead of disputing the evidence. His change of heart is not the mechanism
+that saves the city. Beff shuts down the forced-evolution schedule and helps a
 small exhausted creature into a quiet enclosure. This is one concrete corrective
 action, not a speech that instantly earns universal forgiveness.
 
@@ -346,8 +357,11 @@ Building to a fictional championship venue on Treasure Island, both within SF.
 The player gets a full heal and storage/shop access before committing. The four
 specialists have no mid-run clinic; ordinary carried healing items work between
 and during battles under standard rules. Losing returns to the venue's recovery
-desk and resets the current gauntlet, while badges, quests, items already spent
-and normal save progress retain the standard game's behavior. Confirm on entry.
+desk and resets the current gauntlet's room-access flags, while badges, campaign
+quests and ordinary consumed-item/save behavior remain intact. Explicitly abandoning
+a committed run also clears its attempt progress. Saving and resuming normally
+continues the same attempt; it does not grant permanent room clears. Only winning
+E05 grants permanent champion completion. Confirm these rules on entry.
 
 E01 Ilya tests reading a small team's plan. E02 Dario tests protection and a
 prepared counterattack. E03 Eliezer tests escape/containment choices with clearly

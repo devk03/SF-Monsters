@@ -9,10 +9,14 @@ atlas still govern geography. Conditions name logical events, not actual save va
 Required nodes follow the causal spine below, while maps may permit earlier visits
 with state-dependent dialogue. Optional branches rejoin free play and do not appear
 in the required predecessor chain. Dialogue and team details remain assignable.
+Elite rooms E01–E04 are current-attempt progress, not permanent completion;
+ordinary saving resumes that run, while defeat or explicit abandonment clears it.
+Only winning E05 grants permanent champion completion.
 
 ## O01 — A paid delivery
 
-- **Path / location:** required; outer_sunset.
+- **Path / route parent:** required; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** new game / no all-condition.
 - **Player action:** Read Roon's missing-sensor message and find Karpathy by Judah.
@@ -25,7 +29,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O02 — Choose a companion
 
-- **Path / location:** required; outer_sunset.
+- **Path / route parent:** required; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O01.
 - **Player action:** Choose one of three starters, receive supplies and learn where free healing is.
@@ -38,7 +43,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O03 — Recover the sensor
 
-- **Path / location:** required; outer_sunset.
+- **Path / route parent:** required; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O02.
 - **Player action:** Win or capture the guarding creature; fleeing or losing leaves the parcel available.
@@ -51,7 +57,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O04 — Return to Roon
 
-- **Path / location:** required; outer_sunset.
+- **Path / route parent:** required; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O03.
 - **Player action:** Collect the promised 500 coins; hear that Scott can read the sensor.
@@ -64,7 +71,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O05 — Muni to South Park
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O04.
 - **Player action:** Accept Jonathan's ride and locate the park, clinic and Cognition.
@@ -77,7 +85,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O06 — Deliver to Scott
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O05.
 - **Player action:** Give Scott the sensor and hear why the outside pulse is stressing habitats.
@@ -90,7 +99,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O07 — Stabilize input
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O06.
 - **Player action:** Inspect and stabilize blue INPUT; practice battles remain optional.
@@ -103,7 +113,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O08 — Restore output
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O07.
 - **Player action:** Stabilize green OUTPUT after INPUT and inspect the open gate.
@@ -116,7 +127,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G01 — Cognition's Build Challenge
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O08.
 - **Player action:** Accept Scott's readiness prompt and win the leader battle.
@@ -129,7 +141,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## O09 — Mission is the lead
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** G01.
 - **Player action:** Read the signed Overclock trace in the incident log; hear the same lead from Scott.
@@ -142,7 +155,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H05 — Missing mural pigments
 
-- **Path / location:** required; mission.
+- **Path / route parent:** required; mission.
+- **Scene district / area:** Mission.
 - **Existing implementation:** treatment_only.
 - **Entry:** O09.
 - **Player action:** Follow pigment traces between a mural and three nearby public clues.
@@ -155,7 +169,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## M51 — A habitat that only looks healthy
 
-- **Path / location:** required; mission.
+- **Path / route parent:** required; mission.
+- **Scene district / area:** Mission.
 - **Existing implementation:** treatment_only.
 - **Entry:** H05.
 - **Player action:** Compare the lush projection with the physical relay and a live field reading.
@@ -168,7 +183,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## M52 — Make a safe way home
 
-- **Path / location:** required; mission.
+- **Path / route parent:** required; mission.
+- **Scene district / area:** Mission.
 - **Existing implementation:** treatment_only.
 - **Entry:** M51.
 - **Player action:** Clear a return path and calm the frightened companion instead of chasing it.
@@ -181,7 +197,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P01 — Roon's first rival test
 
-- **Path / location:** required; mission.
+- **Path / route parent:** required; mission.
+- **Scene district / area:** Mission.
 - **Existing implementation:** treatment_only.
 - **Entry:** M52.
 - **Player action:** Ask for useful evidence; battle Roon's level-11 ace team after a clear readiness choice.
@@ -194,7 +211,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H06 — The workshop coupler
 
-- **Path / location:** required; dogpatch.
+- **Path / route parent:** required; dogpatch.
+- **Scene district / area:** Dogpatch.
 - **Existing implementation:** treatment_only.
 - **Entry:** P01.
 - **Player action:** Route safe power through three workshop roles with Danielle's supervision.
@@ -207,7 +225,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H07 — The demo escapes
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** treatment_only.
 - **Entry:** H06.
 - **Player action:** Return to SoMa; escort a demonstration creature using food and a cleared route.
@@ -220,11 +239,12 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P02 — Launch Night is announced
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** treatment_only.
 - **Entry:** H07.
 - **Player action:** Interrupt one local demo safely and hear the fictional Overclock pitch.
-- **Outcome:** The scheduler promises simultaneous evolution; Marc's fictional contract values one uniform curve.
+- **Outcome:** The scheduler promises simultaneous evolution. Marc's fictional safety lease automatically revokes central override after three independent signed distress reports and eight compatibility certificates establish a safe local recovery; copied acknowledgements have hidden the trigger.
 - **Next / branch links:** G08, S10.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
@@ -233,7 +253,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G08 — Notion's Plan Challenge
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Market Street / Monadnock block.
 - **Existing implementation:** treatment_only.
 - **Entry:** P02.
 - **Player action:** Order observation, isolation and repair dependencies, then win the leader battle.
@@ -246,7 +267,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H04 — Three lighting needs
 
-- **Path / location:** required; castro.
+- **Path / route parent:** required; castro.
+- **Scene district / area:** Castro.
 - **Existing implementation:** treatment_only.
 - **Entry:** G08.
 - **Player action:** Survey public lighting, stage equipment and a sheltered rest area with Dylan.
@@ -259,7 +281,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## C41 — A useful celebration
 
-- **Path / location:** required; castro.
+- **Path / route parent:** required; castro.
+- **Scene district / area:** Castro.
 - **Existing implementation:** treatment_only.
 - **Entry:** H04.
 - **Player action:** Restore the three circuits in a safe order and attend the short payoff scene.
@@ -272,7 +295,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H03 — Three flyers, one show
 
-- **Path / location:** required; haight.
+- **Path / route parent:** required; haight.
+- **Scene district / area:** Haight-Ashbury.
 - **Existing implementation:** treatment_only.
 - **Entry:** C41.
 - **Player action:** Compare time-stamped flyers and witness accounts with Visakan, then find the performance.
@@ -285,7 +309,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G02 — Midjourney's Lens Challenge
 
-- **Path / location:** required; tenderloin.
+- **Path / route parent:** required; tenderloin.
+- **Scene district / area:** Central SF office connector — exact district provisional.
 - **Existing implementation:** treatment_only.
 - **Entry:** H03.
 - **Player action:** Use independent physical clues to reject visual decoys and win David's battle.
@@ -298,7 +323,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H02 — The greenhouse disagrees
 
-- **Path / location:** required; inner_sunset.
+- **Path / route parent:** required; inner_sunset.
+- **Scene district / area:** Inner Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** G02.
 - **Player action:** Check soil/light before restoring three different beds with Karpathy.
@@ -311,7 +337,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H11 — Archive and tide
 
-- **Path / location:** required; richmond.
+- **Path / route parent:** required; richmond.
+- **Scene district / area:** Richmond District.
 - **Existing implementation:** treatment_only.
 - **Entry:** H02.
 - **Player action:** Follow archive clues to the Sutro pocket and compare three in-game tide markers.
@@ -324,12 +351,13 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P03 — The city is not one habitat
 
-- **Path / location:** required; richmond.
+- **Path / route parent:** required; richmond.
+- **Scene district / area:** Richmond District.
 - **Existing implementation:** treatment_only.
 - **Entry:** H11.
 - **Player action:** Combine the greenhouse, light, sound and tide observations; glimpse a small creature in fog.
 - **Outcome:** Ground truth is variable; a moving second pulse is a living witness, not a master key.
-- **Next / branch links:** H08.
+- **Next / branch links:** H08, S04.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
 - **Dialogue seed:** COURIER: Different readings don't mean different problems.
@@ -337,12 +365,13 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H08 — A musician chose to stay
 
-- **Path / location:** required; tenderloin.
+- **Path / route parent:** required; tenderloin.
+- **Scene district / area:** Tenderloin.
 - **Existing implementation:** treatment_only.
 - **Entry:** P03.
 - **Player action:** Follow ordinary music/community clues; find the musician sheltering a creature and restore a rest interval.
 - **Outcome:** The musician is safe and has agency; the main clue is fully available sober.
-- **Next / branch links:** H09, S04.
+- **Next / branch links:** H09.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
 - **Dialogue seed:** MUSICIAN CAST SLOT: I wasn't lost. I was giving it somewhere quiet.
@@ -350,7 +379,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H09 — Listen before collecting
 
-- **Path / location:** required; fillmore.
+- **Path / route parent:** required; fillmore.
+- **Scene district / area:** Fillmore.
 - **Existing implementation:** treatment_only.
 - **Entry:** H08.
 - **Player action:** Identify separated instruments by sound and complete a staggered rehearsal.
@@ -363,7 +393,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H10 — Light the right spaces
 
-- **Path / location:** required; japantown.
+- **Path / route parent:** required; japantown.
+- **Scene district / area:** Japantown.
 - **Existing implementation:** treatment_only.
 - **Entry:** H09.
 - **Player action:** Distribute supplies between lantern displays and a deliberately quiet gallery.
@@ -376,7 +407,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G05 — Mercor's Crew Challenge
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Transbay / Fremont Street.
 - **Existing implementation:** treatment_only.
 - **Entry:** H10.
 - **Player action:** Assign supplied specialist helpers, then beat Brendan's complementary team.
@@ -389,12 +421,13 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H12 — Source or reflection?
 
-- **Path / location:** required; presidio.
+- **Path / route parent:** required; presidio.
+- **Scene district / area:** Presidio.
 - **Existing implementation:** treatment_only.
 - **Entry:** G05.
 - **Player action:** Use the repaired coupler to reject a reflected signal and find a sheltered observation point.
 - **Outcome:** The team protects sensitive habitat coordinates and adopts redacted field evidence.
-- **Next / branch links:** H13.
+- **Next / branch links:** H13, S03.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
 - **Dialogue seed:** ROON: We can share the observation without sharing its address.
@@ -402,12 +435,13 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H13 — The missing quarter-zip
 
-- **Path / location:** required; marina.
+- **Path / route parent:** required; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** H12.
 - **Player action:** Follow three finite bar clues: laundry tag, photo description and karaoke speaker.
 - **Outcome:** The jacket is a borrowed speaker cover, not evidence of a real person's alleged misconduct.
-- **Next / branch links:** M31, S03, S05.
+- **Next / branch links:** M31, S05.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
 - **Dialogue seed:** JONATHAN: I have three venues and one wearable definition of spontaneous.
@@ -415,11 +449,12 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## M31 — The log in the pocket
 
-- **Path / location:** required; marina.
+- **Path / route parent:** required; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** H13.
 - **Player action:** Recover the controller log after resolving the jacket joke; compare repeated acknowledgements.
-- **Outcome:** Retries were counted as growth. Drinking, trivia perfection and dating are not required.
+- **Outcome:** The jacket log contains the safety-lease clause and shows copied acknowledgements counted as independent reports. The player can now expose the missing trigger; drinking and dating remain irrelevant.
 - **Next / branch links:** H14.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
@@ -428,7 +463,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H14 — Wait for acknowledgement
 
-- **Path / location:** required; russian_hill.
+- **Path / route parent:** required; russian_hill.
+- **Scene district / area:** Russian Hill.
 - **Existing implementation:** treatment_only.
 - **Entry:** M31.
 - **Player action:** Repair the wheel/brake/signal sequence under supervision.
@@ -441,7 +477,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H15 — The parrot's last line
 
-- **Path / location:** required; north_beach.
+- **Path / route parent:** required; north_beach.
+- **Scene district / area:** North Beach.
 - **Existing implementation:** treatment_only.
 - **Entry:** H14.
 - **Player action:** Order the notebook's observations, ignoring the parrot's unhelpful repetition, and verify at an overlook.
@@ -454,7 +491,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G03 — Cursor's Patch Challenge
 
-- **Path / location:** required; north_beach.
+- **Path / route parent:** required; north_beach.
+- **Scene district / area:** Bay Street / North Beach waterfront branch.
 - **Existing implementation:** treatment_only.
 - **Entry:** H15.
 - **Player action:** Test, undo and correct a simulated fault; win the leader battle.
@@ -467,7 +505,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G04 — Perplexity's Source Challenge
 
-- **Path / location:** required; chinatown.
+- **Path / route parent:** required; chinatown.
+- **Scene district / area:** Financial District / Sansome — provisional occupancy.
 - **Existing implementation:** treatment_only.
 - **Entry:** G03.
 - **Player action:** Distinguish copies from independent observations; win the leader battle.
@@ -480,7 +519,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P05 — Roon makes the evidence useful
 
-- **Path / location:** required; north_beach.
+- **Path / route parent:** required; north_beach.
+- **Scene district / area:** North Beach.
 - **Existing implementation:** treatment_only.
 - **Entry:** G04.
 - **Player action:** Hear how his old context-free demo trace was reused; win the level-39 rival test.
@@ -493,7 +533,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## H16 — A festival distribution fault
 
-- **Path / location:** required; chinatown.
+- **Path / route parent:** required; chinatown.
+- **Scene district / area:** Chinatown.
 - **Existing implementation:** treatment_only.
 - **Entry:** P05.
 - **Player action:** Restore safe festival supplies and expose the controller/uplink behind the fault.
@@ -506,7 +547,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G06 — Anthropic's Limit Challenge
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / Howard Street corridor.
 - **Existing implementation:** treatment_only.
 - **Entry:** H16.
 - **Player action:** Demonstrate safe pause/retry in a simulation and win the leader battle.
@@ -519,11 +561,12 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P04 — A rehearsal that may fail safely
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** treatment_only.
 - **Entry:** G06.
 - **Player action:** Combine seven certified contributions; run one deliberate contained failure and recover.
-- **Outcome:** The counterplan has a tested rollback point, but still needs a capacity schedule.
+- **Outcome:** The allies verify three independent distress reports, simulate the safety-lease trigger and recover safely after a contained failed rehearsal. Seven certificates are ready; the eighth must supply a capacity schedule.
 - **Next / branch links:** G07.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
@@ -532,7 +575,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## G07 — OpenAI's Flow Challenge
 
-- **Path / location:** required; dogpatch.
+- **Path / route parent:** required; dogpatch.
+- **Scene district / area:** Mission Bay / Third Street corridor.
 - **Existing implementation:** treatment_only.
 - **Entry:** P04.
 - **Player action:** Schedule fixed capacity fairly and win the leader battle.
@@ -545,7 +589,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## F01 — Choose when Launch Night begins
 
-- **Path / location:** required; chinatown.
+- **Path / route parent:** required; chinatown.
+- **Scene district / area:** Chinatown.
 - **Existing implementation:** treatment_only.
 - **Entry:** G07.
 - **Player action:** Restock/heal/save; read the plan and confirm readiness before entering the uplink.
@@ -558,7 +603,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P06 — Beff's perfect reference
 
-- **Path / location:** required; chinatown.
+- **Path / route parent:** required; chinatown.
+- **Scene district / area:** Chinatown.
 - **Existing implementation:** treatment_only.
 - **Entry:** F01.
 - **Player action:** Complete three supervised isolations, protect Bayveil, then win the telegraphed level-51 confrontation.
@@ -571,11 +617,12 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## F02 — Different readings, working city
 
-- **Path / location:** required; chinatown.
+- **Path / route parent:** required; chinatown.
+- **Scene district / area:** Chinatown.
 - **Existing implementation:** treatment_only.
 - **Entry:** P06.
-- **Player action:** Release the false reference, confirm the eight-part recovery and show actual outcomes to Marc's fictional console.
-- **Outcome:** Central override is withdrawn, local support remains, Beff helps an exhausted companion and Bayveil leaves freely.
+- **Player action:** Release the false reference and submit the independent reports plus all eight recovery certificates; the established safety lease revokes central override automatically.
+- **Outcome:** Marc's fictional console must relinquish override under its own contract; local support continues. Marc accepts the correction, Beff helps an exhausted companion and Bayveil leaves freely.
 - **Next / branch links:** P07.
 - **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
 - **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
@@ -584,7 +631,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## P07 — A city afterward
 
-- **Path / location:** required; chinatown.
+- **Path / route parent:** required; chinatown.
+- **Scene district / area:** Chinatown.
 - **Existing implementation:** treatment_only.
 - **Entry:** F02.
 - **Player action:** Visit three short outcomes: a quiet refuge, a resumed performance and a genuinely variable public display.
@@ -597,7 +645,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## L01 — Ferry to Treasure Island
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Ferry Building → Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** P07.
 - **Player action:** Take the Ferry Building departure; use the arrival services and confirm gauntlet rules.
@@ -610,72 +659,78 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## E01 — Ilya's prediction test
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** L01.
 - **Player action:** Defeat the first specialist's small, readable team; proposed ace 52.
 - **Outcome:** The next room opens; no hidden access to player commands.
 - **Next / branch links:** E02.
-- **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
-- **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
+- **Loss / retry:** Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.
+- **Decline / leave:** Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.
 - **Dialogue seed:** Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.
 - **Writer / reviewer / approval:** unassigned / unassigned / proposed draft.
 
 ## E02 — Dario's safeguards test
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** E01.
 - **Player action:** Defeat finite shields and counterplay; proposed ace 53.
 - **Outcome:** The next room opens; carried healing items remain usable.
 - **Next / branch links:** E03.
-- **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
-- **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
+- **Loss / retry:** Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.
+- **Decline / leave:** Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.
 - **Dialogue seed:** Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.
 - **Writer / reviewer / approval:** unassigned / unassigned / proposed draft.
 
 ## E03 — Eliezer's containment test
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** E02.
 - **Player action:** Answer telegraphed traps with obtainable counters; proposed ace 54.
 - **Outcome:** The next room opens; loss resets the gauntlet, not campaign progress.
 - **Next / branch links:** E04.
-- **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
-- **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
+- **Loss / retry:** Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.
+- **Decline / leave:** Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.
 - **Dialogue seed:** Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.
 - **Writer / reviewer / approval:** unassigned / unassigned / proposed draft.
 
 ## E04 — Sarah's coherence test
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** E03.
 - **Player action:** Defeat complementary roles and combinations; proposed ace 55.
 - **Outcome:** Champion access opens.
 - **Next / branch links:** E05.
-- **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
-- **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
+- **Loss / retry:** Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.
+- **Decline / leave:** Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.
 - **Dialogue seed:** Use the three-beat treatment and this node's action/outcome; contributor supplies concise original dialogue without altering the contract.
 - **Writer / reviewer / approval:** unassigned / unassigned / proposed draft.
 
 ## E05 — Sam's champion team
 
-- **Path / location:** required; soma.
+- **Path / route parent:** required; soma.
+- **Scene district / area:** Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** E04.
 - **Player action:** Manage ordinary visible setup boosts and finite resources; proposed ace 58.
 - **Outcome:** The player becomes champion; Sam remains distinct from the main villain.
 - **Next / branch links:** L02.
-- **Loss / retry:** Keep completed preparations and required clues; return to the nearest known safe checkpoint, heal and retry. Battle-gauntlet losses reset the current gauntlet only under the stated item/save rules.
-- **Decline / leave:** Return to free play; the readiness/interaction remains available. No optional scene outcome is a required prerequisite.
+- **Loss / retry:** Defeat clears current gauntlet room-access/attempt flags and returns to the venue recovery desk. Badges and campaign quests remain; ordinary consumed items follow the baseline game's save behavior.
+- **Decline / leave:** Before commitment, leave freely. Abandoning a committed run clears its attempt progress; an ordinary save/resume preserves the same run. Permanent champion completion is granted only after E05.
 - **Dialogue seed:** SAM (fictional): Show me the team you built outside the demonstration.
 - **Writer / reviewer / approval:** unassigned / unassigned / proposed draft.
 
 ## L02 — The next delivery list
 
-- **Path / location:** required; outer_sunset.
+- **Path / route parent:** required; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** E05.
 - **Player action:** Watch concise neighborhood callbacks, then return to the studio with control restored.
@@ -688,7 +743,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## A01 — Window and postcard
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O01.
 - **Player action:** Observe fog outside, inspect the N-Judah postcard and optionally rest companions.
@@ -700,7 +756,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## A02 — Correct the cached forecast
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** A01.
 - **Player action:** Accept or decline correcting SUNSHINE FOREVER; retry a deferred capsule reward when the bag has space.
@@ -712,7 +769,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## A03 — The beacon after the badge
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** A02 + G01.
 - **Player action:** Reinspect the corrected beacon after the first badge.
@@ -724,7 +782,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## A04 — Seed Room notes
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O05.
 - **Player action:** Read state-dependent field/care notes; return to the main route at any time.
@@ -736,7 +795,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S01 — No vowels on the bench
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O05.
 - **Player action:** Inspect the startup notebook and claim berries, with full-bag retry.
@@ -748,7 +808,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S02 — Founder-mode coffee
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** authored_script_exists_not_quality_approved.
 - **Entry:** O06.
 - **Player action:** Inspect the shelf and claim a Potion, with full-bag retry.
@@ -760,10 +821,11 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S03 — Drunk detective variant
 
-- **Path / location:** optional; marina.
+- **Path / route parent:** optional; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
-- **Entry:** H13.
-- **Player action:** Choose a drink, then play alternate clue descriptions while navigation, battles and saving remain usable.
+- **Entry:** H12.
+- **Player action:** On Marina arrival, choose a drink before or during the jacket investigation and follow alternate clue descriptions while controls and saving remain usable. After M31, use explicit revisit dialogue instead.
 - **Outcome:** Same jacket solution; a recovery/rest choice returns the character to sober. No mandatory clue is exclusive.
 - **Next / branch links:** free play / end of this branch.
 - **Loss / retry:** Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.
@@ -772,10 +834,11 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S04 — High-state alternate route
 
-- **Path / location:** optional; tenderloin.
+- **Path / route parent:** optional; tenderloin.
+- **Scene district / area:** Tenderloin.
 - **Existing implementation:** treatment_only.
-- **Entry:** H08.
-- **Player action:** Opt into altered perception and follow an alternate description trail, with reduced visual effects available.
+- **Entry:** P03.
+- **Player action:** On Tenderloin arrival, opt into an alternate perception trail before or during the musician investigation; keep an equally complete sober path. After H08, use explicit revisit dialogue instead.
 - **Outcome:** An optional joke and small reward; musician resolution is already available sober. Rest/recovery clears state.
 - **Next / branch links:** free play / end of this branch.
 - **Loss / retry:** Return to free play and offer a finite retry or a complete declined outcome. No mandatory progress is removed.
@@ -784,7 +847,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S05 — Jonathan's date scheduler
 
-- **Path / location:** optional; marina.
+- **Path / route parent:** optional; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** H13.
 - **Player action:** Choose a venue/time preference and accept or decline a finite scheduling joke.
@@ -796,7 +860,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S06 — The pitch-deck date
 
-- **Path / location:** optional; marina.
+- **Path / route parent:** optional; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** S05.
 - **Player action:** A fictional adult guest frames the date as a pitch; answer warmly, joke, or leave.
@@ -808,7 +873,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S07 — The wearable date
 
-- **Path / location:** optional; marina.
+- **Path / route parent:** optional; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** S05.
 - **Player action:** A fictional guest keeps checking a dashboard; suggest a short walk, join the joke or end the date.
@@ -820,7 +886,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S08 — The relationship org chart
 
-- **Path / location:** optional; marina.
+- **Path / route parent:** optional; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** S05.
 - **Player action:** Decline, simplify or indulge an absurd org-chart conversation.
@@ -832,7 +899,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S09 — The companion blurts it out
 
-- **Path / location:** optional; marina.
+- **Path / route parent:** optional; marina.
+- **Scene district / area:** Marina.
 - **Existing implementation:** treatment_only.
 - **Entry:** new game / no all-condition; at least one of S06, S07, S08.
 - **Player action:** A companion reveals harmless invented in-game information from the date; choose how to respond.
@@ -844,7 +912,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S10 — Three referrals, zero external users
 
-- **Path / location:** optional; mission.
+- **Path / route parent:** optional; mission.
+- **Scene district / area:** Mission.
 - **Existing implementation:** treatment_only.
 - **Entry:** P02.
 - **Player action:** Nikita's fictional booth needs three in-game companion introductions; discover a finite shortcut or do the brief walk.
@@ -856,7 +925,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S11 — One more interview question
 
-- **Path / location:** optional; haight.
+- **Path / route parent:** optional; haight.
+- **Scene district / area:** Haight-Ashbury.
 - **Existing implementation:** treatment_only.
 - **Entry:** H03.
 - **Player action:** Dwarkesh's invented short interview branches once; exit is always offered and length is capped.
@@ -868,7 +938,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## S12 — The invisible payment bridge
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** treatment_only.
 - **Entry:** O05.
 - **Player action:** Patrick's shop note asks the player to trace an entirely in-game failed invoice between three ledgers.
@@ -880,7 +951,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## R02 — Roon's optional midpoint rematch
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** treatment_only.
 - **Entry:** G05.
 - **Player action:** Accept a clearly optional level-28-ace rivalry battle that demonstrates improved team coverage.
@@ -892,7 +964,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## T01 — Balaji's island exhibit
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** Treasure Island.
 - **Existing implementation:** treatment_only.
 - **Entry:** L02.
 - **Player action:** Visit the separate Treasure Island door; solve three policy-versus-habitat trials, battle, then choose a short response or leave.
@@ -904,7 +977,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## T02 — Eight gym rematches
 
-- **Path / location:** optional; soma.
+- **Path / route parent:** optional; soma.
+- **Scene district / area:** SoMa / South Park.
 - **Existing implementation:** treatment_only.
 - **Entry:** L02.
 - **Player action:** Choose a leader from the travel menu and return for stronger complementary teams.
@@ -916,7 +990,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## T03 — The city remembers
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** L02.
 - **Player action:** Revisit each atlas callback, complete remaining side events and use repeatable sources for unchosen starters.
@@ -928,7 +1003,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## B01 — A redacted fog trail
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** L02.
 - **Player action:** Read a field note identifying conditions at three already repaired quiet sites, not published animal coordinates.
@@ -940,7 +1016,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## Q01 — Quiet site: greenhouse
 
-- **Path / location:** optional; inner_sunset.
+- **Path / route parent:** optional; inner_sunset.
+- **Scene district / area:** Inner Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** B01.
 - **Player action:** Check the shaded restored bed and leave its refuge intact.
@@ -952,7 +1029,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## Q02 — Quiet site: tide refuge
 
-- **Path / location:** optional; richmond.
+- **Path / route parent:** optional; richmond.
+- **Scene district / area:** Richmond District.
 - **Existing implementation:** treatment_only.
 - **Entry:** B01.
 - **Player action:** Inspect the restored tidal pocket using in-game markers.
@@ -964,7 +1042,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## Q03 — Quiet site: woodland shelter
 
-- **Path / location:** optional; presidio.
+- **Path / route parent:** optional; presidio.
+- **Scene district / area:** Presidio.
 - **Existing implementation:** treatment_only.
 - **Entry:** B01.
 - **Player action:** Observe the quiet shelter without following a reflected signal.
@@ -976,7 +1055,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## B02 — Meet Bayveil on its terms
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** Q01 + Q02 + Q03.
 - **Player action:** Follow the deterministic Ocean Beach fog trail to a small refuge.
@@ -988,7 +1068,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## B03 — Leave a way back
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** B02.
 - **Player action:** Clear a reversible path to the refuge and demonstrate a calm approach.
@@ -1000,7 +1081,8 @@ in the required predecessor chain. Dialogue and team details remain assignable.
 
 ## B04 — Recruit Bayveil
 
-- **Path / location:** optional; outer_sunset.
+- **Path / route parent:** optional; outer_sunset.
+- **Scene district / area:** Outer Sunset.
 - **Existing implementation:** treatment_only.
 - **Entry:** B03.
 - **Player action:** Battle and recruit; defeat/escape/whiteout returns to a known recovery/retry state. Party-full behavior uses ordinary storage.

@@ -3,7 +3,7 @@
 Status: technical prototype shipped; Emerald quality parity is NOT achieved.
 Section 15 is the active goal and overrides the earlier prototype completion criteria.
 This file is the source of truth for scope, acceptance, and progress.
-Updated: October 15, 2026.
+Updated: October 16, 2026.
 Repository: https://github.com/devk03/SF-Monsters
 
 ## 1. Product
@@ -91,6 +91,11 @@ and provide a dedicated late-game quest. An unsuccessful encounter can be retrie
 
 ## 4. City map
 
+The [draft-2 map atlas](story/map-atlas.md) and [city schematic](story/city-map.svg)
+now specify a complete proposed first-visit route, office branches and return paths.
+The table below remains the original sixteen-hub inventory, not an approved route
+order. New story/map proposals require editorial review before implementation.
+
 Keep the ocean west, bay east, northwest parkland, and recognizable street/hill
 relationships. Compress distances and block counts for playability.
 Neighborhoods are town hubs; parks, beaches, tunnels, and stairways are routes/dungeons.
@@ -98,7 +103,7 @@ Campaign order is not a claim of literal neighborhood adjacency.
 
 | Order | Hub | Mini-adventure | Gym leader and concept |
 | --- | --- | --- | --- |
-| 1 | Outer Sunset | Select a starter and rescue a surf courier lost in an Ocean Beach fog bank | — |
+| 1 | Outer Sunset | Select a starter and recover Roon's damaged habitat sensor at Ocean Beach | — |
 | 2 | Inner Sunset | Restore a greenhouse and investigate Golden Gate Park machinery | — |
 | 3 | Haight-Ashbury | Follow conflicting concert flyers to a secret performance | — |
 | 4 | Castro | Restore the lights for a neighborhood celebration | — |
@@ -148,6 +153,14 @@ recurring NPC interactions, and at least one later revisit interaction.
 Provide accessible healing and storage services throughout the campaign.
 
 ## 5. Story
+
+The complete [campaign draft 2](story/campaign-bible.md), [79 event cards](story/event-cards.md)
+and [eight gym contributor briefs](story/gym-handoffs.md) expand the outline below.
+They supply proposed causal decisions and a definite ending, not implemented
+content or user-approved final dialogue. Start with [the story workshop](story/README.md).
+The earlier hub-numbered act list below is historical scaffolding; use draft 2's
+milestone acts when reviewing the proposed campaign rather than treating those
+numbers as a settled gameplay sequence.
 
 The player is an adult local courier. Roon has dropped a damaged prototype
 near Ocean Beach. Karpathy supplies a companion mini monster so the player can
