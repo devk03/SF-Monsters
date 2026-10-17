@@ -2,6 +2,13 @@
 
 A San Francisco creature RPG with public SF content and development tools.
 
+## Adventure map concept
+
+![San Francisco adventure map showing proposed story stops, gyms and return routes](docs/story/adventure-map-concept.png)
+
+User-supplied concept map for the story workshop. Locations, gym themes and route
+order are proposals; this image does not represent the current playable build.
+
 The main build is now an Emerald ROM hack. Players supply their own base
 ROM to the website for local patching. The pinned engine baseline reproduces
 Emerald exactly; the first SF content overlay is an unreviewed engine proof.
