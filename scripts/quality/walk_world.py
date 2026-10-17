@@ -31,6 +31,19 @@ class Walker:
 
     def walk(self, direction, *, wet=False):
         before = self.location()
+        plan = self.plans[before[0]]
+        dx, dy = DELTAS[direction]
+        nx, ny = before[1][0] + dx, before[1][1] + dy
+        waterfall = (0 <= nx < 32 and 0 <= ny < 24
+                     and plan['rows'][ny][nx] == 'V' and direction == 'up')
+        if waterfall:
+            # Interact while still below the fall; walking into it starts the
+            # stock forced descent and faces the player south again.
+            for _ in range(10):
+                self.c.tap(1, 60)
+            self.c.step(0, 180)
+            if self.location() != before:
+                return self.location()
         for attempt in range(3):
             for frame in range(48):
                 self.c.step(KEYS[direction], 1)
@@ -39,7 +52,11 @@ class Walker:
                     if self.location()[0] != before[0]:
                         self.c.step(0, 120)
                         self.transitions.append([before[0], self.location()[0]])
-                    return self.location()
+                    if self.location() != before:
+                        return self.location()
+                    # Walking onto a waterfall briefly changes the coordinate,
+                    # then slides back. It still needs the ordinary A prompt.
+                    break
             if not wet:
                 break
             self.c.step(0, 20)
@@ -122,8 +139,14 @@ class Walker:
 
     def interact(self):
         self.go((12, 10)); self.c.tap(64); self.c.tap(1, 60)
-        for _ in range(6):
-            self.c.tap(2, 30)
+        # Advance only while the native event script is active. Extra A presses
+        # after release would start the same NPC conversation again.
+        for _ in range(24):
+            if self.c.read(self.c.symbols['sGlobalScriptContextStatus'], 1)[0] == 2:
+                break
+            self.c.tap(1, 60)
+        else:
+            raise ValueError('Native checkpoint conversation did not release control')
 
     def badge(self, number):
         pointer, = struct.unpack('<I', self.c.read(self.c.symbols['gSaveBlock1Ptr'], 4))

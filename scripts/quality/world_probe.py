@@ -80,6 +80,7 @@ class Controller:
         self.command('battery ' + str(self.output / (name + '.sav')))
         (self.output / (name + '.json')).write_text(json.dumps({
             'rom_sha256': self.digest(), 'controller_only': True,
+            'game_code': 'BPEE',
             'mgba_revision': '26b7884bc25a5933960f3cdcd98bac1ae14d42e2',
             'position': self.position(), 'scope': 'native controller-derived state'}, indent=2))
         self.picture(name)
