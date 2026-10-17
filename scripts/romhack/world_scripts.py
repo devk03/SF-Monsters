@@ -31,8 +31,7 @@ def map_script(manifest, plan):
     if gym:
         n = gym['badge']
         if n > 1:
-            lines += [f'    checkflag FLAG_BADGE{n-1:02d}_GET',
-                      '    goto_if_unset ' + prefix + '_Locked']
+            lines += [f'    goto_if_unset FLAG_BADGE{n-1:02d}_GET, ' + prefix + '_Locked']
         if n == 8:
             lines += ['    compare VAR_UNUSED_0x40FC, 1',
                       '    goto_if_ne ' + prefix + '_Locked']
