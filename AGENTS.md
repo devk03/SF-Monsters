@@ -1,5 +1,9 @@
 # Project instructions
 
+For game development, read [DEVELOPMENT_AGENT.md](DEVELOPMENT_AGENT.md) before
+implementation. The current milestone is connected native world generation from
+the October 17 user plan; graphics polish and full gym/story production are deferred.
+
 Be very concise and always ask for permission on db migrations and none on read operations. Never drop our dbs without asking.
 
 NEVER run `rm` in any form. Do not ask for an exception; use a non-destructive alternative or have the user remove files manually.
