@@ -459,7 +459,81 @@
     "status": "approved blockout destination",
     "label": "Angel Island - League",
     "city": "Tiburon / Marin County",
-    "scope_exception": "User explicitly requested both islands on October 17; Angel Island is the sole outside-SF exception."
+    "scope_exception": "User explicitly requested both islands on October 17; Angel Island is the sole outside-SF exception.",
+    "blockout": {
+      "landing": [
+        13,
+        19,
+        19,
+        22
+      ],
+      "connection": [
+        15,
+        23,
+        17,
+        23
+      ],
+      "tunnel_path": [
+        [
+          16,
+          20
+        ],
+        [
+          8,
+          20
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          8
+        ],
+        [
+          16,
+          8
+        ]
+      ],
+      "rival_pocket": [
+        21,
+        12,
+        27,
+        16
+      ],
+      "summit": [
+        10,
+        5,
+        21,
+        11
+      ],
+      "sections": [
+        {
+          "id": "landing",
+          "x": 16,
+          "y": 21
+        },
+        {
+          "id": "victory_road_tunnels",
+          "x": 8,
+          "y": 17
+        },
+        {
+          "id": "final_rival_staging",
+          "x": 24,
+          "y": 14
+        },
+        {
+          "id": "summit_league_entry",
+          "x": 16,
+          "y": 8
+        }
+      ]
+    }
   },
   "story_waypoints": [
     "dogpatch",

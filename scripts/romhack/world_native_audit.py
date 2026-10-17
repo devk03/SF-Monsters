@@ -28,8 +28,17 @@ def audit_native(rom_path, elf_path, plans, engine):
     errors, tiles, connections, objects, coords = [], 0, 0, 0, 0
     for plan in plans:
         name = plan['engine_map']
+        group, number = ids[name]
+        group_ptr, = read(symbols['gMapGroups'] + group * 4, 'I')
+        header_ptr, = read(group_ptr + number * 4, 'I')
+        if header_ptr != symbols[name]:
+            errors.append(name + ': native group table selects a different header')
         layout, events, scripts, conn = read(symbols[name], '4I')
         width, height, border, blocks = read(layout, '4I')
+        primary, secondary = read(layout + 16, '2I')
+        if (primary, secondary) != tuple(symbols[plan['tilesets'][role]]
+                                         for role in ('primary', 'secondary')):
+            errors.append(name + ': compiled tileset pointers differ')
         if (width, height) != (len(plan['rows'][0]), len(plan['rows'])):
             errors.append(name + ': compiled dimensions differ')
         actual = read(blocks, str(width * height) + 'H')
@@ -51,9 +60,13 @@ def audit_native(rom_path, elf_path, plans, engine):
             objects += 1
         for i, event in enumerate(plan['coord_events']):
             x, y = read(coord_ptr + i * 16, '2h')
+            elevation, = read(coord_ptr + i * 16 + 4, 'B')
+            variable, value = read(coord_ptr + i * 16 + 6, '2H')
             script, = read(coord_ptr + i * 16 + 12, 'I')
             if (x, y, script) != (event['x'], event['y'], symbols[event['script']]):
                 errors.append(name + ': compiled coordinate trigger differs')
+            if (elevation, variable, value) != (event['elevation'], 0x4000, 0):
+                errors.append(name + ': native trigger elevation/condition differs')
             coords += 1
         expected_links = plan['connections'] or []
         count, pointer = read(conn, '2I') if conn else (0, 0)

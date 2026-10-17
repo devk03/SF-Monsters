@@ -89,4 +89,13 @@ def map_script(manifest, plan):
         lines += ['', prefix + '_Exit::',
                   f'    warp {native_id(area["engine_map"])}, 16, 10',
                   '    waitstate', '    end']
+    if identifier == manifest['league']['venue']:
+        for name, label in [('Landing', 'Angel Island landing'),
+                            ('Tunnels', 'Victory Road tunnel blockout'),
+                            ('Rival', 'Final rival staging reservation')]:
+            lines += ['', prefix + '_' + name + '::', '    lock', '    faceplayer',
+                      '    msgbox ' + prefix + '_' + name + 'Text, MSGBOX_DEFAULT',
+                      '    release', '    end']
+            messages += [text(prefix + '_' + name + 'Text', [label,
+                                                           'Geometry only. Scene deferred.'])]
     return '\n'.join(lines) + '\n\n' + '\n'.join(messages)

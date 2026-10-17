@@ -69,6 +69,23 @@ def access(kind, x, y, target=None, activation='walk'):
     return point
 
 
+def league_geometry(spec):
+    """Landing, tunnel switchbacks, rival pocket and summit remain one area."""
+    grid = [['#'] * 32 for _ in range(24)]
+    def carve(x0, y0, x1, y1):
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                grid[y][x] = '.'
+    carve(*spec['landing'])
+    carve(*spec['connection'])
+    points = spec['tunnel_path']
+    for (x0, y0), (x1, y1) in zip(points, points[1:]):
+        carve(min(x0, x1)-1, min(y0, y1)-1, max(x0, x1)+1, max(y0, y1)+1)
+    carve(*spec['rival_pocket'])
+    carve(*spec['summit'])
+    return [''.join(row) for row in grid]
+
+
 def coord(x, y, script):
     return {'type': 'trigger', 'x': x, 'y': y, 'elevation': 3,
             'var': 'VAR_TEMP_0', 'var_value': '0', 'script': script}
@@ -96,6 +113,8 @@ def generate(manifest):
         directions = [link['direction'] for link in links[identifier]]
         rows = geometry(width, height, directions, plaza=plaza,
                         wet=item.get('mode') if item.get('mode') != 'walk' else None)
+        if identifier == manifest['league']['venue']:
+            rows = league_geometry(manifest['league']['blockout'])
         label = item.get('label', identifier.replace('_', ' ').title())
         plan = {'world_id': identifier, 'engine_map': item['engine_map'],
                 'native_id': native_id(item['engine_map']), 'label': label,
@@ -113,6 +132,13 @@ def generate(manifest):
                                   'graphics': 'OBJ_EVENT_GFX_SCIENTIST_1',
                                   'script': 'WB_' + identifier + '_Info'})
             plan['access_points'].append(access('checkpoint', 12, 10, activation='interact'))
+        if identifier == manifest['league']['venue']:
+            plan['world_sections'] = manifest['league']['blockout']['sections']
+            for index, (x, y, section) in enumerate(
+                    [(14, 21, 'Landing'), (7, 17, 'Tunnels'), (26, 14, 'Rival')], 2):
+                plan['npcs'].append({'id': index, 'x': x, 'y': y,
+                                      'graphics': 'OBJ_EVENT_GFX_SCIENTIST_1',
+                                      'script': 'WB_angel_island_' + section})
         if identifier == manifest['start']['area']:
             plan['access_points'].append(access('spawn', manifest['start']['x'],
                                                 manifest['start']['y']))
