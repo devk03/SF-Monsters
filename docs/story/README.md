@@ -4,6 +4,12 @@ October 16, 2026. **Full campaign treatment ready for review.** This package fil
 in the larger plot, neighborhood adventures, map connections and gym contracts.
 It does not claim new playable maps, final dialogue, balanced teams or engine work.
 
+**Current goal:** make this package ready for the user's story/route review and
+individual gym assignments. **Pause point reached:** the full proposed treatment,
+map plan and handoff contracts are delivered and checked. Await the user's review
+before further rewrites or production; resume only on direct instruction. The
+long-term game remains incomplete. See [the canonical objective](../game-spec.md#151-objective-and-completion-rule).
+
 [Open the editable Google Doc](https://docs.google.com/document/d/19HqVQRvDKg-jYDJzzltUKqi8N54kZ9GDqmsmDQKYIcU/edit).
 Use the four new tabs first; the original question-led workshop remains intact.
 

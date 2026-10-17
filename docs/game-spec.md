@@ -643,12 +643,37 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-Current user-requested stop: **October 15, 2026, 5 AM America/Los_Angeles**
-(October 15, 12:00 UTC). This supersedes the prior 6 PM cutoff. Keep working through intermediate commits, fixes, reviews
-and deployments until that mark; do not treat a completed subtask as the end of
-the full goal. At the deadline stop new implementation/build/deployment work,
-record honest remaining gates, make the final coherent commit/push, and pause.
-A fixed-date one-time stop reminder is active; no indefinite monitor is authorized.
+**Current objective, revised October 16, 2026:** prepare a review-ready,
+coherent SF-only story and map design that the user can edit in the Google Doc
+and use to commission individual gyms/events. Cover all sixteen neighborhood
+adventures, their travel/return connections and revisit payoffs; give the rival,
+villains, legendary and championship one complete causal arc; and supply eight
+independently assignable gym briefs with fixed story inputs and outputs.
+
+Evidence for this milestone: the [story workshop](story/README.md), matching
+editable Google Docs tabs, the sixteen-hub atlas/schematic, eight gym contracts
+and the 79-node graph. Require no dangling references or unreachable scenes,
+a complete 52-node main path with all 27 optional nodes unavailable, matching
+badge dependencies, and explicit safe retries. Unverified office occupancy,
+proposed casting and untested balance stay labeled; filling them with invented
+facts is not completion. Drafted scenes are distinct from approved/implemented
+scenes. The original workshop and stable event IDs must remain preserved.
+
+**Current stop condition:** the user explicitly authorizes pausing when useful.
+Pause once this review-ready package is delivered and checked, before speculative
+rewrites or production work that depend on the user's plot/route decisions and
+contributor assignments. That point has been reached. Next action after a direct
+resume: incorporate the user's review, record approved narrative choices, then
+prepare the selected contributor packages. Do not contact contributors without
+explicit authorization. Native map construction, engine fixes, builds and
+deployment require a separately resumed implementation scope.
+
+The October 15 5 AM stop already executed and its reminder was deleted. The old
+6 PM/5 AM goal-card deadlines are historical, not active instructions. No new
+deadline, recurring work or background monitor is created by this revision.
+The available app goal tool can pause but cannot replace an unfinished goal's
+objective text; this canonical section supplies the revised working objective.
+Do not falsely complete the unfinished full-game goal to replace its card.
 
 Alignment requirement (explicitly requested October 14): check in with the
 **🧱 SFM Audit Monsters Alignment** chat (ID
@@ -666,7 +691,8 @@ ROM hack. The user explicitly accepts a public website that asks players to load
 their own Emerald ROM and applies the SF patch locally. This supersedes the
 standalone-homebrew/instant-play distribution approach for the main build.
 
-Deliver the complete SF Mini Monsters campaign on an Emerald-based GBA ROM and
+**Long-term product objective, retained for later implementation:** deliver the
+complete SF Mini Monsters campaign on an Emerald-based GBA ROM and
 the public WebAssembly website, with Emerald-tier audio, sprites, movement, maps,
 battles, monster depth, NPC events, interface, story, and balance. Every playable
 location remains inside San Francisco city limits. Keep source publicly forkable.
@@ -855,12 +881,13 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Current snapshot (October 15, 2026,07:30UTC; historical checkpoint details follow):
+Runtime snapshot (October 15, 2026,07:30UTC; current work priority and pause rule
+are in section 15.1; historical checkpoint details follow):
 
 | Item | Authoritative current status |
 | --- | --- |
-| Execution | Continue full-spec work through intermediate releases until October15,5AM Pacific. Only the user or that deadline stops work. Fixed-date stop reminder active. App goal card is active as confirmed October14,00:58 Pacific; this spec supplies the current exact deadline. |
-| Active stage | B: polish Sunset/South Park/Cognition before campaign expansion. Full section 15.1 scope stays required. |
+| Execution | Paused for user story/route review under the October16 instruction. Previous deadline executed; no stop reminder or recurring work remains active. |
+| Active stage | Story/map/contributor design draft delivered. User review precedes further narrative production; engine Stage B remains deferred until directly resumed. Full-game acceptance criteria remain required later. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.80-sunset-density-preview; target9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd; Site71. South Park21/Sunset9 buildings,11added across the two maps. Approved northern homes/curb props preserved; new Sunset homes have gray approaches. Density subset reviews pending; no numeric/full-domain approval. |
 | Latest local source build | Normal gated v80 fromf3a5049. All five Sunset resources now compile normally and verify ROM/ELF exactly; independent227/227. Sunset491used/512allocated tiles,231records; old401/194prefixes and General resources exact. South Park gates37/166/135/278 still pass. All36new solid old-save recoveries/pushes/escapes and9approach walks pass, plus apartment/Muni/cache and one C12→C13 save/cold reload. Dirty marker honest; no clean-checkout credit. |
