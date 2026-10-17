@@ -9336,3 +9336,19 @@ Story workshop — October 15–16, 2026 (documentation only):
 - Reconcile approved workshop decisions into this spec before implementation.
   No outreach, game implementation, build, deployment or recurring work was
   started. The game goal remains paused; no outstanding acceptance gate closed.
+
+
+Story/map drafting resumed — October 16, 2026:
+
+- The user requested a complete larger-story draft for the next contributor
+  workshop, with independently assignable gyms. This authorizes writing/map
+  planning and existing alignment-chat review, not contributor outreach or
+  resuming engine, build, deployment or recurring work.
+- Completion for this writing pass: a connected 16-hub SF campaign; eight gym
+  handoff contracts; resolved proposed rival, antagonist, legendary and ending
+  arcs; node prerequisites/outcomes/retries; map entrances/transit/return routes;
+  an editable Google Docs draft and matching repository story source. Validate
+  graph references/reachability, hub/gym coverage and no mandatory optional-state
+  branch. Factual location uncertainties stay explicit rather than fabricated.
+- New narrative choices are a review-ready proposal, not user-approved canon,
+  playable maps, a final dialogue script or closure of game acceptance gates.
