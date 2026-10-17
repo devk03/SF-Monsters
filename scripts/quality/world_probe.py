@@ -86,8 +86,15 @@ class Controller:
         self.picture(name)
 
     def close(self):
-        self.process.stdin.close()
-        self.process.wait(timeout=5)
+        try:
+            self.process.stdin.close()
+        except BrokenPipeError:
+            pass
+        try:
+            self.process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            self.process.terminate()
+            self.process.wait(timeout=5)
         self.stderr.close()
         (self.output / 'inputs.json').write_text(json.dumps(self.inputs))
         (self.output / 'observations.json').write_text(json.dumps(self.observations, indent=2))

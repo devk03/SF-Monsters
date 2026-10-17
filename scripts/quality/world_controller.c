@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     }
     char line[8192], command[32], path[4096];
     unsigned keys, frames, address, length, total = 0;
-    for(unsigned requests = 0; requests < 50000 && fgets(line, sizeof(line), stdin); ++requests)
+    for(unsigned requests = 0; requests < 250000 && fgets(line, sizeof(line), stdin); ++requests)
     {
         if(sscanf(line, "%31s", command) != 1) return 2;
         if(! strcmp(command, "step"))
