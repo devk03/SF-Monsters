@@ -9365,3 +9365,34 @@ Story/map drafting resumed — October 16, 2026:
   branch. Factual location uncertainties stay explicit rather than fabricated.
 - New narrative choices are a review-ready proposal, not user-approved canon,
   playable maps, a final dialogue script or closure of game acceptance gates.
+
+
+Larger-story writing milestone delivered — October 16, 2026:
+
+- [Start the story workshop](story/README.md). Complete proposed treatment covers
+  all sixteen hubs, eight independently assignable gym packages, Roon's arc,
+  Overclock's motivation and safety-lease consequence, Bayveil, one crisis ending,
+  the championship, and optional postgame. Existing opening remains Sunset →
+  SoMa → Cognition → Mission; the stale stranded-courier premise is corrected.
+- Source package includes campaign bible, map atlas, SVG city schematic, eight
+  gym briefs, 79 event cards and their JSON graph: 52 required/27 optional nodes,
+  sixteen reversible hub routes and eight separately labeled office pockets.
+  Every hub has entrances, services, a discovery and a specific revisit payoff.
+- Updated the existing Google Doc with four new tabs: Campaign draft 2, City map
+  & atlas, Eight gym assignments, and 79 event nodes. Original workshop content
+  is preserved. Native tables and embedded schematic accompany 322 checked node
+  links; source text prefixes match the four repository documents on readback.
+  Exported map and quick-reference table pages were visually inspected; private
+  QA exports remain under .tools, not in the repository or public game.
+- Local graph checks pass: unique/reachable references, dependency DAG, all-hub
+  coverage, eight matching badge contracts, no mandatory optional branch,
+  free return topology, crisis before league, any-order legendary observations,
+  pre-investigation intoxication variants and attempt-scoped Elite Four progress.
+  A bounded alignment-chat audit prompted three concrete narrative fixes. These
+  checks are editorial consistency evidence, not actual native playthroughs.
+- Writing milestone is ready for the user's workshop, not automatic approval of
+  every proposed decision. Final researched dialogue, contributor casting and
+  leader teams, detailed tile maps/collision and office-occupancy release gates
+  remain production tasks. No contributor outreach, engine work, build, deploy,
+  GitHub workflow or monitor was started. Broader game goal stays incomplete;
+  no quality/implementation acceptance gate was closed by this writing pass.
