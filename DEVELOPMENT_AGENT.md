@@ -6,6 +6,13 @@ completion gates and latest progress. The user explicitly resumed implementation
 beyond the prior blockout-review pause. Gym content remains contributor-owned;
 finish its site/approach while preserving the assigned entry/state contracts.
 
+Latest user instruction: keep going against the October18 continued-work goal in
+section15.1, agreed with the alignment chat. First improve the native SF Map,
+then district/route/interior identity and complete native/browser acceptance.
+Keep bounded alignment reviews about every30active minutes. The old paused goal
+card cannot be replaced while its browser-route/review gates remain unfinished;
+do not falsely close it or treat that UI limitation as a reason to stop work.
+
 Current checkpoint: v0.0.88 is published at `/world`; root v80 stays available.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,
 with warm/sage/slate paint, finished exposed edges, district planting and signs. Browser UI uses integer pixels,

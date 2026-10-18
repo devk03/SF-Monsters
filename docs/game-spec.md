@@ -652,6 +652,42 @@ section but its tool-controlled status remains paused; do not pretend it was
 rewritten or mark unfinished prior gates complete to replace it. This spec is the
 canonical expanded objective while implementation continues.
 
+**October 18 continued-work goal — agreed with the alignment chat.** Finish all
+18 approved destinations and 19 connectors as a coherent, navigable, lively
+non-gym world. Keep the compact 32×24 layouts,13useful service interiors and eight
+stable contributor gym sites. Work through the queue below without stopping at
+each routine commit or release; check with alignment about every30active minutes
+using bounded reviews, never a recurring monitor.
+
+1. Native SF Map: recognizable peninsula/bay and both islands, all18named places,
+   distinct selected/current markers, readable connections/traversal requirements,
+   accurate location binding outdoors/indoors/on routes/while Surfing, and safe
+   detail/close/reopen behavior without changing player state or Flash.
+2. District/route/interior identity: varied dense attached fronts with finished
+   ends, local plants/signs/furniture/landmarks, natural NPC dialogue and safe
+   movement, useful services, local activities and progression-sensitive revisits.
+   Keep the existing per-area density/resident/service requirements below.
+3. End-to-end acceptance: one final ROM passes deterministic source/linked audits,
+   58maps/76connections/16gymwarps/26roomwarps,13services,18activities, rejected
+   locked gates, safe returns and genuine ordinary Save/cold-Continue upgrades.
+   Require matching full native/WASM replay and a complete foreground browser
+   route with zero abandoned steps, crashes or audio underruns. Keep failed and
+   partial evidence; short smoke checks do not replace the complete route.
+4. Matched gameplay review: urban, park/coast and island presentation/readability
+   and world feel require explicit user acceptance. Counts, palette names and
+   source checks cannot grant that acceptance. Record each subset honestly.
+
+Preserve rootv80, module contracts, original plan, private ROM/save handling and
+manual-only GitHub Actions; make coherent frequent commits with[skip ci]. Final
+gym encounters, contributor missions, full roster/battle/audio/campaign parity
+remain separate. Pause dependent work only for a required user decision or a fully
+evidenced review-ready milestone; continue other approved tasks meanwhile.
+The goal tool refuses a replacement because the earlier goal remains unfinished
+and paused. Alignment confirms outstanding actual foreground-browser traversal
+and geometry/League review evidence. Do not mark that goal complete to create a
+new card. This section is the current agreed execution objective while those
+older gates remain open; no automatic-resume capability is claimed.
+
 **Current stage: published functional-world review candidate.** The 18 destinations
 are connected, populated and playable. User review of town/world quality is still
 pending; no town or full domain is marked accepted. Current public world preview:

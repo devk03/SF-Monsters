@@ -9,23 +9,23 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
 ## Current development goal: finish the compact SF world
 
-The v84 world preview has 18 compact destinations, 19 connectors, eight
+The v88 world preview has 18 compact destinations, 19 connectors, eight
 reserved gym rooms and 13 small service interiors. Urban areas use dense attached
 blocks, original SF landmark candidates, authored residents and safe walkers.
 Parks, coasts and both islands have distinct trails and scenery. An in-game SF
-map shows all destinations and their actual connections.
+map shows all destinations and their actual connections. The next pass improves
+its geography and readability, then continues district/route/interior finishing.
 
 All 18 local activities have passed native reward/revisit checks. The 58-map
 controller circuit, earlier land/Surf save upgrades and original-resource audits
 pass on their recorded draft builds. These are functional checks, not final town
-or art approval. The latest neighborhood candidate completed a full 110,450-frame
-native/WASM route with byte-identical guest RAM and a clean 30-second foreground
-browser movement sample. The final save-recovery revision passes those route
-checks too. The longer browser-session issue and human quality review remain open.
+or art approval. The latest v88 candidate completed a full104,863-frame native/WASM route with
+byte-identical guest RAM. Actual browser patch/import/cold Continue displays its
+new architecture and paint; earlier30-second smoke samples remain separate. The longer browser-session issue and human quality review remain open.
 See the [generation guide](docs/world/generation.md) and the current
 [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
 The existing root website preview stays v80. The separate `/world` exploration
-preview is live with the tested v84 cartridge, its own save slot and
+preview is live with the tested v88 cartridge, its own save slot and
 temporary access stamps. Final gym battles, contributor missions and human
 town-quality acceptance remain unfinished.
 
@@ -63,7 +63,7 @@ progression and exits stay with the core game. All slots remain unassigned.
 ## What is playable now
 
 The [world preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/world)
-is **v0.0.84**: all 18 destinations and their routes, residents, local activities,
+is **v0.0.88**: all 18 destinations and their routes, residents, local activities,
 small service interiors, city guide and eight reserved gym sites. The loan
 creature and gym access stamps are development tools. Final encounters, story
 missions, balance and human world-quality acceptance remain open.
