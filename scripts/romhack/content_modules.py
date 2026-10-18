@@ -7,7 +7,7 @@ from battle_content import trainer_record
 
 ROOT = Path(__file__).resolve().parents[2]
 MODULES = ROOT / 'romhack/modules'
-COMMANDS = set(('return msgbox compare compare_var_to_value goto call goto_if_eq '
+COMMANDS = set(('return sfmodule_return msgbox compare compare_var_to_value goto call goto_if_eq '
                 'goto_if_ne goto_if_lt goto_if_gt goto_if_le goto_if_ge goto_if_set '
                 'goto_if_unset setvar addvar subvar copyvar setflag clearflag checkflag '
                 'checktrainerflag trainerbattle_single trainerbattle_double '
@@ -37,6 +37,10 @@ def lint_script(source, contract):
     flags = set(contract['flags'])
     trainers = set(contract['trainer_slots'])
     scratch = {'VAR_RESULT', 'VAR_TEMP_1', 'VAR_TEMP_2', 'VAR_TEMP_3'}
+    if not re.search(r'(?m)^\s*sfmodule_return [01]\s*$', source):
+        raise ValueError('Module must explicitly finish through sfmodule_return 0 or 1')
+    if re.search(r'(?m)^\s*return\s*$', source) and not re.search(r'(?m)^\s*call ', source):
+        raise ValueError('Use sfmodule_return at module boundaries, not a bare native return')
     for raw in source.splitlines():
         line = raw.strip()
         if not line or line.startswith('@') or re.fullmatch(r'\w+:{1,2}', line):
@@ -52,6 +56,8 @@ def lint_script(source, contract):
         if re.search(r'[^A-Za-z0-9_, |+-]', args):
             raise ValueError('Use one native command per line; no directives or command separators')
         parts = [part.strip() for part in args.split(',')]
+        if command == 'sfmodule_return' and args not in ('0', '1'):
+            raise ValueError('Module return must explicitly choose cancel 0 or success 1')
         if command in ('setvar', 'addvar', 'subvar', 'copyvar') and parts[0] not in scratch:
             raise ValueError('Module cannot write shared story/save variables')
         if command in ('setflag', 'clearflag') and parts[0] not in flags:
@@ -59,6 +65,10 @@ def lint_script(source, contract):
         if command.startswith('trainerbattle') or command == 'checktrainerflag':
             if parts[0] not in trainers:
                 raise ValueError('Module uses an unassigned trainer slot')
+        if command in ('trainerbattle_single', 'trainerbattle_double'):
+            expected = 4 if command == 'trainerbattle_single' else 5
+            if len(parts) != expected or parts[-1] not in definitions:
+                raise ValueError('Module battles need an explicit local victory continuation')
         for reference in re.findall(r'\bSFMod_\w+', args):
             if reference not in definitions:
                 raise ValueError('Module references an external or missing label')
@@ -70,6 +80,9 @@ def lint_script(source, contract):
 
 def load_modules(manifest, directory=MODULES):
     directory = Path(directory)
+    for path in directory.rglob('*'):
+        if path.is_symlink() or path.suffix.lower() in ('.gba', '.sav', '.srm', '.state', '.elf', '.zip'):
+            raise ValueError('Packages cannot contain symlinks, cartridges, private saves or compiled ROM artifacts')
     catalog = json.loads((directory / 'contracts.json').read_text())
     if catalog['schema_version'] != 1:
         raise ValueError('Unsupported module contract version')
@@ -163,8 +176,15 @@ def script_with_module(source, module):
         return source
     c = module['contract']
     prefix = 'WB_' + c['world_id']
+    guards = ''
+    if c.get('requires_badge'):
+        guards += f'    goto_if_unset FLAG_BADGE{c["requires_badge"]:02d}_GET, {prefix}_ModuleDone\n'
+    if c.get('requires_checkpoint'):
+        guards += f'    compare {c["requires_checkpoint"]}, 1\n    goto_if_ne {prefix}_ModuleDone\n'
     hook = ('    setvar VAR_RESULT, 0\n'
-            '    call SFMod_' + c['id'] + '_Run\n'
+            '    goto SFMod_' + c['id'] + '_Run\n'
+            + prefix + '_ModuleReturn::\n'
+            + guards +
             '    compare VAR_RESULT, 1\n'
             '    goto_if_ne ' + prefix + '_ModuleDone\n'
             '    setflag ' + c['completion_flag'] + '\n')
@@ -181,5 +201,10 @@ def script_with_module(source, module):
     if c['kind'] == 'gym':
         source = source.replace('BLOCKOUT ACCESS STAMP.', 'Contributor gym complete.')
         source = source.replace('No leader battle is built yet.', 'Badge recorded. Exit stays open.')
-    source += '\n' + prefix + '_ModuleDone::\n    release\n    end\n\n' + module['script']
+    # Trainer scripts can replace their script continuation. Explicit jumps back
+    # to the core do not depend on retaining a native call stack across a battle.
+    authored = re.sub(r'(?m)^\s*sfmodule_return ([01])\s*$',
+                      lambda m: '    setvar VAR_RESULT, ' + m[1] + '\n    goto ' + prefix + '_ModuleReturn',
+                      module['script'])
+    source += '\n' + prefix + '_ModuleDone::\n    release\n    end\n\n' + authored
     return source

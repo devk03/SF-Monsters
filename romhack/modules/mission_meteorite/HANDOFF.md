@@ -13,8 +13,8 @@ No shared story reward is granted; track local success with your allocated flags
 
 Hook: the existing neighborhood scientist interaction in `pacific_heights`. Own the contained scene and optional local NPCs; keep the shared neighborhood layout and routes.
 
-Run entry: `SFMod_mission_meteorite_Run`. Return `VAR_RESULT = 1` only on success;
-return 0 on cancellation/unfinished work. Core prerequisites execute before this
+Run entry: `SFMod_mission_meteorite_Run`. Finish with `sfmodule_return 1` only on success;
+use `sfmodule_return 0` on cancellation/unfinished work. Core prerequisites execute before this
 entry. Core rewards, safe exits and badge/crisis state are outside your ownership.
 Your module must remain usable after a loss, ordinary Save and cold Continue.
 

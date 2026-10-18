@@ -1,5 +1,4 @@
-@ Contributor entry: return VAR_RESULT = 1 only after local success.
+@ Contributor entry: use sfmodule_return 1 only after local success.
 @ Draft stub declines completion; the unchanged blockout stamp is core-owned.
 SFMod_mission_sutro_tower_Run::
-    setvar VAR_RESULT, 0
-    return
+    sfmodule_return 0

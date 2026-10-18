@@ -42,7 +42,7 @@ class ModulesTest(unittest.TestCase):
         module = load_modules(self.manifest, self.packages)['gym_1']
         for flag in ('FLAG_BADGE01_GET', 'FLAG_UNUSED_0x40FC', module['contract']['completion_flag']):
             with self.subTest(flag=flag), self.assertRaises(ValueError):
-                lint_script('SFMod_gym_1_Run::\n    setflag '+flag+'\n    return\n', module['contract'])
+                lint_script('SFMod_gym_1_Run::\n    setflag '+flag+'\n    sfmodule_return 0\n', module['contract'])
 
     def test_script_cannot_write_shared_vars_jump_out_or_inject_directives(self):
         contract = load_modules(self.manifest, self.packages)['gym_1']['contract']
@@ -50,21 +50,37 @@ class ModulesTest(unittest.TestCase):
                         '.include "foreign.inc"', 'setvar VAR_RESULT, 1; end',
                         'setflag 0x867', 'call SFMod_gym_2_Run'):
             with self.subTest(command=command), self.assertRaises(ValueError):
-                lint_script('SFMod_gym_1_Run::\n    '+command+'\n    return\n', contract)
+                lint_script('SFMod_gym_1_Run::\n    '+command+'\n    sfmodule_return 0\n', contract)
 
     def test_private_puzzle_state_is_allowed(self):
         contract = load_modules(self.manifest, self.packages)['gym_1']['contract']
-        source = 'SFMod_gym_1_Run::\n    setflag '+contract['flags'][0]+'\n    setvar VAR_RESULT, 0\n    return\n'
+        source = 'SFMod_gym_1_Run::\n    setflag '+contract['flags'][0]+'\n    sfmodule_return 0\n'
         self.assertEqual(lint_script(source, contract), source)
+
+    def test_trainer_battle_must_explicitly_rejoin_the_module_after_victory(self):
+        contract = load_modules(self.manifest, self.packages)['gym_1']['contract']
+        source = ('SFMod_gym_1_Run::\n'
+                  '    trainerbattle_single TRAINER_ROXANNE_1, SFMod_gym_1_Intro, SFMod_gym_1_Defeat\n'
+                  'SFMod_gym_1_Won::\n    sfmodule_return 1\n'
+                  'SFMod_gym_1_Intro::\n    .string "Ready?$"\n'
+                  'SFMod_gym_1_Defeat::\n    .string "Done.$"\n')
+        with self.assertRaises(ValueError): lint_script(source, contract)
+        valid = source.replace('SFMod_gym_1_Defeat\n', 'SFMod_gym_1_Defeat, SFMod_gym_1_Won\n')
+        self.assertEqual(lint_script(valid, contract), valid)
 
     def test_enabled_module_gets_guarded_call_without_editing_neighbor_scripts(self):
         self.activate('gym_8')
         modules = load_modules(self.manifest, self.packages)
         plan = next(p for p in generate(self.manifest) if p['world_id']=='gym_8')
         script = script_with_module(map_script(self.manifest, plan), modules['gym_8'])
-        self.assertLess(script.index('compare VAR_UNUSED_0x40FC, 1'), script.index('call SFMod_gym_8_Run'))
-        self.assertLess(script.index('setvar VAR_RESULT, 0'), script.index('call SFMod_gym_8_Run'))
+        self.assertLess(script.index('compare VAR_UNUSED_0x40FC, 1'), script.index('goto SFMod_gym_8_Run'))
+        self.assertLess(script.index('setvar VAR_RESULT, 0'), script.index('goto SFMod_gym_8_Run'))
         self.assertLess(script.index('goto_if_ne WB_gym_8_ModuleDone'), script.index('setflag FLAG_BADGE08_GET'))
+        reward = script.split('WB_gym_8_ModuleReturn::', 1)[1]
+        # A contributor NPC can enter the script directly; core output still
+        # requires the incoming badge and crisis checkpoint on every path.
+        self.assertLess(reward.index('goto_if_unset FLAG_BADGE07_GET'), reward.index('setflag FLAG_BADGE08_GET'))
+        self.assertLess(reward.index('compare VAR_UNUSED_0x40FC, 1'), reward.index('setflag FLAG_BADGE08_GET'))
         for other in generate(self.manifest):
             if other['world_id']=='gym_8': continue
             self.assertNotIn('SFMod_gym_8_', map_script(self.manifest, other))

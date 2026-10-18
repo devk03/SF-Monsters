@@ -9,12 +9,12 @@ Treasure Island and Sutro Tower checkpoints are complete; Surf is available..
 
 ## Fixed output and interface
 
-Core sets `VAR_UNUSED_0x40FC = 1` only after your Run entry returns success.
+Core sets `VAR_UNUSED_0x40FC = 1` only after your Run entry signals success.
 
 Hook: the existing neighborhood scientist interaction in `lands_end`. Own the contained scene and optional local NPCs; keep the shared neighborhood layout and routes.
 
-Run entry: `SFMod_mission_lands_end_Run`. Return `VAR_RESULT = 1` only on success;
-return 0 on cancellation/unfinished work. Core prerequisites execute before this
+Run entry: `SFMod_mission_lands_end_Run`. Finish with `sfmodule_return 1` only on success;
+use `sfmodule_return 0` on cancellation/unfinished work. Core prerequisites execute before this
 entry. Core rewards, safe exits and badge/crisis state are outside your ownership.
 Your module must remain usable after a loss, ordinary Save and cold Continue.
 

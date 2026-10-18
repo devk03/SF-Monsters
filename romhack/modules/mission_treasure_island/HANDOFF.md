@@ -9,12 +9,12 @@ Surf access (badge 5) is available. This island has its own quest, separate from
 
 ## Fixed output and interface
 
-Core sets `VAR_UNUSED_0x40FA = 1` only after your Run entry returns success.
+Core sets `VAR_UNUSED_0x40FA = 1` only after your Run entry signals success.
 
 Hook: the existing neighborhood scientist interaction in `treasure_island`. Own the contained scene and optional local NPCs; keep the shared neighborhood layout and routes.
 
-Run entry: `SFMod_mission_treasure_island_Run`. Return `VAR_RESULT = 1` only on success;
-return 0 on cancellation/unfinished work. Core prerequisites execute before this
+Run entry: `SFMod_mission_treasure_island_Run`. Finish with `sfmodule_return 1` only on success;
+use `sfmodule_return 0` on cancellation/unfinished work. Core prerequisites execute before this
 entry. Core rewards, safe exits and badge/crisis state are outside your ownership.
 Your module must remain usable after a loss, ordinary Save and cold Continue.
 

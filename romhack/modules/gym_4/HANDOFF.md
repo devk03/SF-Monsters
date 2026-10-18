@@ -9,12 +9,12 @@ Badge 3 earned; player has reached Twin Peaks.
 
 ## Fixed output and interface
 
-Core grants badge 4 only after your Run entry returns success.
+Core grants badge 4 only after your Run entry signals success.
 
 Theme: hardware. Native room: Route127. Entry/arrival/exit remain the world interface: arrival (16,16), exit trigger (16,20), scientist (12,9), interaction standing tile (12,10).
 
-Run entry: `SFMod_gym_4_Run`. Return `VAR_RESULT = 1` only on success;
-return 0 on cancellation/unfinished work. Core prerequisites execute before this
+Run entry: `SFMod_gym_4_Run`. Finish with `sfmodule_return 1` only on success;
+use `sfmodule_return 0` on cancellation/unfinished work. Core prerequisites execute before this
 entry. Core rewards, safe exits and badge/crisis state are outside your ownership.
 Your module must remain usable after a loss, ordinary Save and cold Continue.
 
