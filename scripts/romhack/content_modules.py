@@ -80,6 +80,13 @@ def load_modules(manifest, directory=MODULES):
         if not re.fullmatch(r'(gym_[1-8]|mission_[a-z_]+)', identifier) or identifier in modules:
             raise ValueError('Module IDs must be valid and unique')
         target = contract['world_id']
+        if contract['kind'] not in ('gym', 'mission'):
+            raise ValueError('Unknown contributor module kind')
+        if contract['kind'] == 'gym':
+            gym = next((g for g in manifest['gyms'] if g['id'] == identifier), None)
+            if not gym or (target, contract['area'], contract['grants_badge'], contract['requires_badge']) != (
+                    gym['id'], gym['area'], gym['badge'], gym['badge'] - 1):
+                raise ValueError('Gym contract disagrees with the core world progression')
         if target not in valid_targets or target in targets:
             raise ValueError('Module hook must name one unique existing world target')
         targets.add(target)
@@ -93,6 +100,7 @@ def load_modules(manifest, directory=MODULES):
             raise ValueError('Module trainer slots overlap')
         trainers |= slots
         package = directory / identifier
+        package.resolve().relative_to(directory.resolve())
         meta = json.loads(local_file(package, 'module.json').read_text())
         if set(meta) != {'schema_version', 'id', 'status', 'owner', 'npcs', 'trainers'}:
             raise ValueError('Module metadata has missing or unsupported keys')

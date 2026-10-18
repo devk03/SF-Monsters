@@ -21,3 +21,11 @@ foundation:
 
 hack:
 	$(PYTHON) scripts/romhack/build_probe.py --backend $(HACK_BACKEND)
+
+.PHONY: world-check world-draft module-check
+world-check:
+	python3 scripts/romhack/check_module.py
+module-check:
+	python3 scripts/romhack/check_module.py --module "$(MODULE)"
+world-draft:
+	$(PYTHON) scripts/romhack/build_world.py

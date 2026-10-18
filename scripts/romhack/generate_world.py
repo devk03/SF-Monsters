@@ -157,14 +157,18 @@ def generate(manifest):
     return plans
 
 
-def write_world(manifest, directory):
+def write_world(manifest, directory, modules_root=None):
     from world_scripts import map_script
+    from content_modules import MODULES, load_modules, apply_module_layouts, script_with_module
     directory.mkdir(parents=True, exist_ok=True)
-    plans = generate(manifest)
+    modules = load_modules(manifest, modules_root or MODULES)
+    plans = apply_module_layouts(generate(manifest), modules)
+    by_world = {m['contract']['world_id']: m for m in modules.values()}
     for plan in plans:
         (directory / (plan['world_id'] + '.json')).write_text(
             json.dumps(plan, indent=2) + '\n')
-        (directory / plan['script']).write_text(map_script(manifest, plan))
+        (directory / plan['script']).write_text(script_with_module(
+            map_script(manifest, plan), by_world.get(plan['world_id'])))
     start = next(plan for plan in plans if plan['world_id'] == manifest['start']['area'])
     content = {'maps': ['world-blockout/' + plan['world_id'] + '.json' for plan in plans],
                'spawn': {'map': start['engine_map'], 'id': start['native_id'][4:],
@@ -173,6 +177,11 @@ def write_world(manifest, directory):
                                     'x': 16, 'y': 16} for name in
                                    ('HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F',
                                     'HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F')]}
+    teams = [team for module in modules.values() if module['meta']['status'] != 'stub'
+             for team in module['meta']['trainers']]
+    if teams:
+        (directory / 'module-battles.json').write_text(json.dumps({'trainers': teams}, indent=2) + '\n')
+        content['battle_content'] = 'world-blockout/module-battles.json'
     (directory / 'content.json').write_text(json.dumps(content, indent=2) + '\n')
     return plans, content
 
