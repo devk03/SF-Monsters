@@ -124,3 +124,11 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+# Game editions
+
+`/` and `/play` retain the v80 Sunset preview. `/world` is the separate
+18-destination exploration preview. Each patches a player-supplied Emerald ROM
+locally; only BPS patches are hosted. World saves use their own device namespace
+and identity and cannot be imported into v80. Final world gyms and contributor
+missions remain unfinished. See the main repository spec for acceptance evidence.
+
