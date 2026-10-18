@@ -18,9 +18,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x020",
-        "FLAG_UNUSED_0x021",
-        "FLAG_UNUSED_0x022"
-      ]
+        "FLAG_UNUSED_0x021"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x022"
     },
     {
       "id": "gym_2",
@@ -39,9 +39,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x023",
-        "FLAG_UNUSED_0x024",
-        "FLAG_UNUSED_0x025"
-      ]
+        "FLAG_UNUSED_0x024"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x025"
     },
     {
       "id": "gym_3",
@@ -60,9 +60,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x026",
-        "FLAG_UNUSED_0x027",
-        "FLAG_UNUSED_0x028"
-      ]
+        "FLAG_UNUSED_0x027"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x028"
     },
     {
       "id": "gym_4",
@@ -81,9 +81,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x029",
-        "FLAG_UNUSED_0x02A",
-        "FLAG_UNUSED_0x02B"
-      ]
+        "FLAG_UNUSED_0x02A"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x02B"
     },
     {
       "id": "gym_5",
@@ -102,9 +102,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x02C",
-        "FLAG_UNUSED_0x02D",
-        "FLAG_UNUSED_0x02E"
-      ]
+        "FLAG_UNUSED_0x02D"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x02E"
     },
     {
       "id": "gym_6",
@@ -123,9 +123,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x02F",
-        "FLAG_UNUSED_0x030",
-        "FLAG_UNUSED_0x031"
-      ]
+        "FLAG_UNUSED_0x030"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x031"
     },
     {
       "id": "gym_7",
@@ -144,9 +144,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x032",
-        "FLAG_UNUSED_0x033",
-        "FLAG_UNUSED_0x034"
-      ]
+        "FLAG_UNUSED_0x033"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x034"
     },
     {
       "id": "gym_8",
@@ -165,9 +165,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x035",
-        "FLAG_UNUSED_0x036",
-        "FLAG_UNUSED_0x037"
-      ]
+        "FLAG_UNUSED_0x036"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x037"
     },
     {
       "id": "mission_potrero_rival",
@@ -183,9 +183,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x038",
-        "FLAG_UNUSED_0x039",
-        "FLAG_UNUSED_0x03A"
-      ]
+        "FLAG_UNUSED_0x039"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x03A"
     },
     {
       "id": "mission_meteorite",
@@ -201,9 +201,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x03B",
-        "FLAG_UNUSED_0x03C",
-        "FLAG_UNUSED_0x03D"
-      ]
+        "FLAG_UNUSED_0x03C"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x03D"
     },
     {
       "id": "mission_stadium",
@@ -219,9 +219,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x03E",
-        "FLAG_UNUSED_0x03F",
-        "FLAG_UNUSED_0x040"
-      ]
+        "FLAG_UNUSED_0x03F"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x040"
     },
     {
       "id": "mission_treasure_island",
@@ -237,9 +237,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x041",
-        "FLAG_UNUSED_0x042",
-        "FLAG_UNUSED_0x043"
-      ]
+        "FLAG_UNUSED_0x042"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x043"
     },
     {
       "id": "mission_sutro_tower",
@@ -255,9 +255,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x044",
-        "FLAG_UNUSED_0x045",
-        "FLAG_UNUSED_0x046"
-      ]
+        "FLAG_UNUSED_0x045"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x046"
     },
     {
       "id": "mission_lands_end",
@@ -273,9 +273,9 @@
       ],
       "flags": [
         "FLAG_UNUSED_0x047",
-        "FLAG_UNUSED_0x048",
-        "FLAG_UNUSED_0x049"
-      ]
+        "FLAG_UNUSED_0x048"
+      ],
+      "completion_flag": "FLAG_UNUSED_0x049"
     }
   ]
 }

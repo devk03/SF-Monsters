@@ -37,15 +37,15 @@ Everything for one assignment belongs under `romhack/modules/<id>/`:
 Set status to `draft` to enable your content in private builds. A stub does not
 alter the tested world. `ready_for_review` requests review; it never means approved.
 The maintainer owns [contracts.json](romhack/modules/contracts.json): bindings,
-three persistent puzzle flags per package and unique native trainer slots.
+two persistent puzzle flags plus a core-owned completion flag per package and unique native trainer slots.
 Use scratch `VAR_TEMP_1..3` and `VAR_RESULT` for temporary work. Never write badge,
 crisis, starter, save-identity or other modules' state directly.
 
 Inside those boundaries, design your own dialogue, jokes, puzzle, trainer teams,
 NPC scenes and revisit behavior. Keep both GBA and web playable with standard GBA
 controls. The blockout loan monster is a traversal tool, not a final balance target.
-Do not invent final leaders/company assignments or overwrite the shared plot to
-fit your idea. Record unresolved casting/plot choices in the handoff for review.
+Propose your own leader/persona and casting for owner review; keep those proposals
+separate from confirmed participation. Preserve the shared plot. Record unresolved casting/plot choices in the handoff for review.
 
 Native single-battle teams use the existing JSON format in
 `scripts/romhack/battle_content.py`: assigned `id`, short uppercase `name`, `class`,

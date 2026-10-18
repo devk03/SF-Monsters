@@ -90,8 +90,8 @@ def load_modules(manifest, directory=MODULES):
         if target not in valid_targets or target in targets:
             raise ValueError('Module hook must name one unique existing world target')
         targets.add(target)
-        owned = set(contract['flags'])
-        if len(owned) != 3 or flags & owned or any(
+        owned = set(contract['flags']) | {contract['completion_flag']}
+        if len(contract['flags']) != 2 or contract['completion_flag'] in contract['flags'] or len(owned) != 3 or flags & owned or any(
                 not re.fullmatch(r'FLAG_UNUSED_0x0[234][0-9A-F]', f) for f in owned):
             raise ValueError('Module persistent flags must be unique reserved unused slots')
         flags |= owned
@@ -143,6 +143,8 @@ def apply_module_layouts(plans, modules):
             if len(rows) != 24 or any(not isinstance(r, str) or len(r) != 32 for r in rows):
                 raise ValueError('Contributor gym layout must remain 32 by 24')
             plan['rows'] = rows
+            plan['water_positions'] = [[x, y] for y, row in enumerate(rows)
+                                       for x, token in enumerate(row) if token in 'WV']
         for npc in module['meta']['npcs']:
             if set(npc) != {'id', 'x', 'y', 'graphics', 'script'} or npc['id'] != len(plan['npcs']) + 1:
                 raise ValueError('Append NPC IDs in native order after core objects')
@@ -161,9 +163,11 @@ def script_with_module(source, module):
         return source
     c = module['contract']
     prefix = 'WB_' + c['world_id']
-    hook = ('    call SFMod_' + c['id'] + '_Run\n'
+    hook = ('    setvar VAR_RESULT, 0\n'
+            '    call SFMod_' + c['id'] + '_Run\n'
             '    compare VAR_RESULT, 1\n'
-            '    goto_if_ne ' + prefix + '_ModuleDone\n')
+            '    goto_if_ne ' + prefix + '_ModuleDone\n'
+            '    setflag ' + c['completion_flag'] + '\n')
     anchor = c['success_anchor']
     if source.count(anchor) != 1:
         raise ValueError('Core-owned module hook changed; integrator must review')

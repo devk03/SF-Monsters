@@ -28,7 +28,9 @@ playtested against the eventual campaign teams; the current level-100 loan is QA
 
 ## Native allocation
 
-Persistent flags: `FLAG_UNUSED_0x029`, `FLAG_UNUSED_0x02A`, `FLAG_UNUSED_0x02B`.
+Persistent puzzle flags: `FLAG_UNUSED_0x029`, `FLAG_UNUSED_0x02A`.
+Core completion (read only): `FLAG_UNUSED_0x02B`. This is separate from
+old blockout access stamps; an existing badge never proves this new module was won.
 Scratch: `VAR_TEMP_1`, `VAR_TEMP_2`, `VAR_TEMP_3`, `VAR_RESULT`.
 Trainer slots: `TRAINER_FLANNERY_1`, `TRAINER_FLANNERY_2`, `TRAINER_FLANNERY_3`.
 Define teams in your module.json. Internal stock slot names do not prescribe the
