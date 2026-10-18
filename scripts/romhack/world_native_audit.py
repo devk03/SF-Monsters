@@ -36,7 +36,7 @@ def audit_native(rom_path, elf_path, plans, engine):
            for n, name in enumerate(groups[group])}
     native_to_name = {plan['native_id']: plan['engine_map'] for plan in plans}
     directions = {'down': 1, 'up': 2, 'left': 3, 'right': 4}
-    errors, tiles, connections, objects, coords = [], 0, 0, 0, 0
+    errors, tiles, connections, objects, coords, backgrounds = [], 0, 0, 0, 0, 0
     resources={}
     for plan in plans:
         name = plan['engine_map']
@@ -81,9 +81,9 @@ def audit_native(rom_path, elf_path, plans, engine):
             errors.append(name + ': compiled tile/collision/elevation differs')
         tiles += len(expected)
         counts = read(events, '4B')
-        if counts != (len(plan['npcs']), 0, len(plan['coord_events']), 0):
+        if counts != (len(plan['npcs']), 0, len(plan['coord_events']), len(plan.get('bg_events',[]))):
             errors.append(name + ': compiled event counts differ')
-        obj_ptr, _, coord_ptr, _ = read(events + 4, '4I')
+        obj_ptr, _, coord_ptr, bg_ptr = read(events + 4, '4I')
         for i, npc in enumerate(plan['npcs']):
             x, y = read(obj_ptr + i * 24 + 4, '2h')
             script, = read(obj_ptr + i * 24 + 16, 'I')
@@ -113,6 +113,12 @@ def audit_native(rom_path, elf_path, plans, engine):
             if (elevation, variable, value) != (event['elevation'], 0x4000, 0):
                 errors.append(name + ': native trigger elevation/condition differs')
             coords += 1
+        for i,event in enumerate(plan.get('bg_events',[])):
+            x,y,elevation,kind=read(bg_ptr+i*12,'2H2B')
+            script,=read(bg_ptr+i*12+8,'I')
+            if (x,y,elevation,kind,script)!=(event['x'],event['y'],0,0,symbols[event['script']]):
+                errors.append(name+': compiled local discovery binding differs')
+            backgrounds+=1
         expected_links = plan['connections'] or []
         count, pointer = read(conn, '2I') if conn else (0, 0)
         if count != len(expected_links):
@@ -129,5 +135,5 @@ def audit_native(rom_path, elf_path, plans, engine):
     return {'passed': not errors, 'errors': errors,
             'scenery_resources':list(resources.values()),
             'counts': {'maps': len(plans), 'tiles': tiles, 'connections': connections,
-                       'npcs': objects, 'coord_events': coords},
+                       'npcs': objects, 'coord_events': coords,'background_events':backgrounds},
             'scope': 'linked layout/event/connection integrity; not controller traversal'}

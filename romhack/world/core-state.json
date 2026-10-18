@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "save_magic": 22339,
+  "flags": [
+    {
+      "name": "FLAG_UNUSED_0x04A",
+      "value": 74,
+      "owner": "dogpatch",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x04B",
+      "value": 75,
+      "owner": "dogpatch",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x04C",
+      "value": 76,
+      "owner": "potrero_hill",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x04D",
+      "value": 77,
+      "owner": "potrero_hill",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x04E",
+      "value": 78,
+      "owner": "mission",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x04F",
+      "value": 79,
+      "owner": "castro",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x054",
+      "value": 84,
+      "owner": "castro",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x055",
+      "value": 85,
+      "owner": "outer_sunset",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x068",
+      "value": 104,
+      "owner": "outer_sunset",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x0E9",
+      "value": 233,
+      "owner": "golden_gate_park",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1AA",
+      "value": 426,
+      "owner": "marina",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1AB",
+      "value": 427,
+      "owner": "marina",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1DA",
+      "value": 474,
+      "owner": "pacific_heights",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1DE",
+      "value": 478,
+      "owner": "pacific_heights",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1DF",
+      "value": 479,
+      "owner": "twin_peaks",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1E0",
+      "value": 480,
+      "owner": "noe_valley",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1E1",
+      "value": 481,
+      "owner": "noe_valley",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1E2",
+      "value": 482,
+      "owner": "mission_bay",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x1E3",
+      "value": 483,
+      "owner": "giants_stadium",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x264",
+      "value": 612,
+      "owner": "financial_district",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x265",
+      "value": 613,
+      "owner": "financial_district",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x266",
+      "value": 614,
+      "owner": "north_beach",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x267",
+      "value": 615,
+      "owner": "treasure_island",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x268",
+      "value": 616,
+      "owner": "treasure_island",
+      "purpose": "local_favor_object_found"
+    },
+    {
+      "name": "FLAG_UNUSED_0x269",
+      "value": 617,
+      "owner": "sutro_tower",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x26A",
+      "value": 618,
+      "owner": "lands_end",
+      "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x26B",
+      "value": 619,
+      "owner": "angel_island",
+      "purpose": "local_discovery_complete"
+    }
+  ]
+}

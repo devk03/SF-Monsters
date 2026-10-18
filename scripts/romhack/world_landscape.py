@@ -68,6 +68,8 @@ def landscape(plans, manifest):
             fill(14,6,18,8,'paving');fill(20,4,27,8,'paving')
             stamp('bench',21,4);stamp('bench',25,4)
             landmarks=[('ridge_lookout',20,4)]
+        elif name=='angel_island':
+            stamp('rocks',18,6);landmarks=[('rocks',18,6)]
         if name in NATURE:
             # Furniture stays outside the central info/door approaches. Choose
             # only wholly free patches so a prop never cuts a trail in half.

@@ -785,6 +785,14 @@ reachable viewing points, including a chopped-windmill regression. Source world
 tests18/18; compiled-resource tests3/3. Updated all-map circuit passes on0f3cd0a7…
 with all76connections/16gymwarps/26roomwarps. Fresh browser evidence still pending.
 
+Local activity candidate (target74b96a62…): all18destinations now compile a
+visible-prop/landmark interaction. Nine resident favors require finding an object
+and returning to the resident; nine optional discoveries reward exploration.
+Twenty-seven explicitly reserved unused native flags keep completion persistent
+and separate from contributor state. Full-bag branches retain pending rewards.
+Compiled audit verifies all18background-script bindings. Native controller reward/
+repeat-protection coverage is running; do not infer acceptance from scripts.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

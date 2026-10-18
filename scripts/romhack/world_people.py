@@ -80,6 +80,10 @@ def scripts(plan):
     result = []
     for index, person in enumerate(plan.get('ambient_residents', [])):
         prefix = f'WBTown_{identifier}_{index}'
+        from world_discoveries import npc_script
+        local=npc_script(plan,index,prefix)
+        if local:
+            result+=local;continue
         result += [prefix+'::','    lock','    faceplayer']
         if person['revisit']:
             badge = REVISIT_BADGE[identifier]

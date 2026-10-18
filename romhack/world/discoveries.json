@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "scope": "Optional local moments; contributor missions and gym rewards remain separate.",
+  "areas": {
+    "dogpatch": {
+      "kind": "favor",
+      "object": [
+        26,
+        15
+      ],
+      "standing": [
+        26,
+        14
+      ],
+      "resident_index": 2,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x04A",
+      "request": "Could you check the bike rack for a little pump? I lent it out, and now everybody has a flat.",
+      "found": "You free the pump from a tangle of locks.",
+      "thanks": "There it is. Keep the repair kit. You did the annoying part.",
+      "look": "A bike pump is wedged behind the rack.",
+      "found_flag": "FLAG_UNUSED_0x04B"
+    },
+    "potrero_hill": {
+      "kind": "favor",
+      "object": [
+        13,
+        5
+      ],
+      "standing": [
+        12,
+        5
+      ],
+      "resident_index": 2,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x04C",
+      "request": "I dropped a route sketch by the streetlight. Can you check? My phone keeps suggesting more stairs.",
+      "found": "You straighten the folded route sketch.",
+      "thanks": "Perfect. Now I can get home without accidentally doing leg day twice.",
+      "look": "A folded sketch shows a very determined route around the steep streets.",
+      "found_flag": "FLAG_UNUSED_0x04D"
+    },
+    "mission": {
+      "kind": "observe",
+      "object": [
+        28,
+        8
+      ],
+      "standing": [
+        27,
+        8
+      ],
+      "resident_index": null,
+      "item": "ITEM_ANTIDOTE",
+      "done_flag": "FLAG_UNUSED_0x04E",
+      "request": null,
+      "found": "A planter holds a handwritten invitation: Bring something you made. Bad drawings count. A little care kit sits beside it.",
+      "thanks": "The invitation has fresh doodles in the margin. Someone drew the planter, too.",
+      "look": "The community invitation is still here.",
+      "found_flag": null
+    },
+    "castro": {
+      "kind": "favor",
+      "object": [
+        7,
+        9
+      ],
+      "standing": [
+        7,
+        10
+      ],
+      "resident_index": 2,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x04F",
+      "request": "Could you look by the bench for my film list? I spent an hour choosing one and then lost the whole list.",
+      "found": "You find a list with every film crossed out except one.",
+      "thanks": "Thank you. Apparently I chose a film last week. This is a personal breakthrough.",
+      "look": "A film list peeks out from beneath a cup.",
+      "found_flag": "FLAG_UNUSED_0x054"
+    },
+    "outer_sunset": {
+      "kind": "favor",
+      "object": [
+        7,
+        9
+      ],
+      "standing": [
+        7,
+        10
+      ],
+      "resident_index": 2,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x055",
+      "request": "Did you see a wax tin by the bench? Mine has a ridiculous cloud sticker. Hard to miss, in theory.",
+      "found": "The tin has the cloud sticker.",
+      "thanks": "Yep, that one. Keep the extra supply. I already have enough stuff in my pockets.",
+      "look": "A small tin with a cloud sticker sits under the bench.",
+      "found_flag": "FLAG_UNUSED_0x068"
+    },
+    "golden_gate_park": {
+      "kind": "observe",
+      "object": [
+        6,
+        5
+      ],
+      "standing": [
+        6,
+        6
+      ],
+      "resident_index": null,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x0E9",
+      "request": null,
+      "found": "The windmill once helped bring water to the park. A small trail kit rests beside a note: Take one if you need it.",
+      "thanks": "The note is weighted down with a stone. Someone has written Thank you underneath.",
+      "look": "A windmill rises above the garden path.",
+      "found_flag": null
+    },
+    "marina": {
+      "kind": "favor",
+      "object": [
+        2,
+        15
+      ],
+      "standing": [
+        3,
+        15
+      ],
+      "resident_index": 2,
+      "item": "ITEM_ANTIDOTE",
+      "done_flag": "FLAG_UNUSED_0x1AA",
+      "request": "I left a phone charger by the bin. Please tell me I put it beside the bin, not in it.",
+      "found": "The charger is neatly coiled beside the bin.",
+      "thanks": "Beside it! Incredible. A strong recovery from the rest of my evening.",
+      "look": "A coiled charger lies beside the bin.",
+      "found_flag": "FLAG_UNUSED_0x1AB"
+    },
+    "pacific_heights": {
+      "kind": "favor",
+      "object": [
+        28,
+        8
+      ],
+      "standing": [
+        27,
+        8
+      ],
+      "resident_index": 2,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x1DA",
+      "request": "My dog lost a little bell near that planter. Could you look? He keeps trying to pay you in sticks.",
+      "found": "You spot the bell caught between the planter and the wall.",
+      "thanks": "There it is. He has already forgotten losing it. Must be nice.",
+      "look": "Something small glints beside the planter.",
+      "found_flag": "FLAG_UNUSED_0x1DE"
+    },
+    "twin_peaks": {
+      "kind": "observe",
+      "object": [
+        21,
+        4
+      ],
+      "standing": [
+        21,
+        5
+      ],
+      "resident_index": null,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x1DF",
+      "request": null,
+      "found": "A lookout note says: If the view disappears, give it a minute. A sealed trail supply sits under the bench.",
+      "thanks": "For a moment, a gap opens in the fog. Then the city puts its blanket back on.",
+      "look": "The lookout bench faces the city.",
+      "found_flag": null
+    },
+    "noe_valley": {
+      "kind": "favor",
+      "object": [
+        26,
+        15
+      ],
+      "standing": [
+        26,
+        14
+      ],
+      "resident_index": 2,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x1E0",
+      "request": "Could you check the bike rack for a repair pouch? I keep lending it out and pretending I remember to whom.",
+      "found": "You unhook the repair pouch.",
+      "thanks": "Thanks. I am putting my name on it this time. Very advanced inventory system.",
+      "look": "A repair pouch hangs from the rack.",
+      "found_flag": "FLAG_UNUSED_0x1E1"
+    },
+    "mission_bay": {
+      "kind": "observe",
+      "object": [
+        7,
+        9
+      ],
+      "standing": [
+        7,
+        10
+      ],
+      "resident_index": null,
+      "item": "ITEM_ANTIDOTE",
+      "done_flag": "FLAG_UNUSED_0x1E2",
+      "request": null,
+      "found": "A lab lunch schedule has been repurposed as a neighborhood potluck list. A care kit is set aside for visitors.",
+      "thanks": "Someone has added actual vegetables to the potluck list. The neighborhood is evolving.",
+      "look": "A potluck list is clipped to the bench.",
+      "found_flag": null
+    },
+    "giants_stadium": {
+      "kind": "observe",
+      "object": [
+        16,
+        6
+      ],
+      "standing": [
+        16,
+        7
+      ],
+      "resident_index": null,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x1E3",
+      "request": null,
+      "found": "A fan has left a scorecard with a note: First game? Sit near someone who explains things kindly. A sealed supply is beside it.",
+      "thanks": "The scorecard has a careful little drawing of the bay in the margin.",
+      "look": "A scorecard is tucked near the gate.",
+      "found_flag": null
+    },
+    "financial_district": {
+      "kind": "favor",
+      "object": [
+        7,
+        9
+      ],
+      "standing": [
+        7,
+        10
+      ],
+      "resident_index": 2,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x264",
+      "request": "Can you check the bench for my lanyard? I took it off for one normal human lunch and immediately lost it.",
+      "found": "You find the lanyard beside an empty salad box.",
+      "thanks": "Thank you. I can enter a building again. Huge day for access control.",
+      "look": "A lanyard rests beside an empty lunch box.",
+      "found_flag": "FLAG_UNUSED_0x265"
+    },
+    "north_beach": {
+      "kind": "observe",
+      "object": [
+        7,
+        9
+      ],
+      "standing": [
+        7,
+        10
+      ],
+      "resident_index": null,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x266",
+      "request": null,
+      "found": "A reading list says: You do not have to finish the book to return to the cafe. A little care kit is beside the page.",
+      "thanks": "Someone has underlined one title and added: Talk to me about this one.",
+      "look": "A handwritten reading list is clipped to the bench.",
+      "found_flag": null
+    },
+    "treasure_island": {
+      "kind": "favor",
+      "object": [
+        16,
+        6
+      ],
+      "standing": [
+        16,
+        7
+      ],
+      "resident_index": 2,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x267",
+      "request": "Could you check the crane fence for my radio label? Without it, every station is called the windy one.",
+      "found": "You recover a handwritten radio label.",
+      "thanks": "Thanks. This one says less windy. We have a sophisticated naming system here.",
+      "look": "A radio label flutters beside a cable tie.",
+      "found_flag": "FLAG_UNUSED_0x268"
+    },
+    "sutro_tower": {
+      "kind": "observe",
+      "object": [
+        16,
+        5
+      ],
+      "standing": [
+        16,
+        6
+      ],
+      "resident_index": null,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x269",
+      "request": null,
+      "found": "The tower hums above the trail. A visitor has left a sealed supply and a note: Better reception up here. Same unread messages.",
+      "thanks": "The tower keeps humming. You decide the messages can wait another minute.",
+      "look": "A visitor note is weighted down near the tower base.",
+      "found_flag": null
+    },
+    "lands_end": {
+      "kind": "observe",
+      "object": [
+        22,
+        5
+      ],
+      "standing": [
+        22,
+        6
+      ],
+      "resident_index": null,
+      "item": "ITEM_POTION",
+      "done_flag": "FLAG_UNUSED_0x26A",
+      "request": null,
+      "found": "These foundations once held the Sutro Baths. A small trail kit sits beside a reminder to keep clear of the rough water.",
+      "thanks": "The ruins frame a little piece of ocean. It is louder than you expected.",
+      "look": "The old bath foundations continue toward the coast.",
+      "found_flag": null
+    },
+    "angel_island": {
+      "kind": "observe",
+      "object": [
+        18,
+        7
+      ],
+      "standing": [
+        18,
+        8
+      ],
+      "resident_index": null,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x26B",
+      "request": null,
+      "found": "A summit note says: You made it up here. Eat the snack before the serious part. A sealed supply is tucked under the stone.",
+      "thanks": "The note has a second line: Also, breathe. The summit is not going anywhere.",
+      "look": "A folded note is held down by a summit stone.",
+      "found_flag": null
+    }
+  }
+}

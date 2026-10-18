@@ -293,7 +293,14 @@ class _World:
             _need(type(event['elevation']) is int and event['elevation'] == cells[point][2],
                   'events', 'Coordinate trigger elevation differs from its walk tile')
             coords.add(point)
-        backgrounds = {position(event, identifier + ' background') for event in plan.get('bg_events', [])}
+        backgrounds = set()
+        for event in plan.get('bg_events',[]):
+            point=position(event,identifier+' background')
+            _need(point not in backgrounds|occupied|coords,'events','Background interactions overlap another event')
+            _need(event.get('type')=='sign' and event.get('elevation')==0
+                  and event.get('player_facing_dir')=='BG_EVENT_PLAYER_FACING_ANY'
+                  and bool(NAME.fullmatch(event.get('script',''))),'events','Unmodelled background interaction kind')
+            backgrounds.add(point)
         access = plan.get('access_points', [])
         _need(type(access) is list, 'access', 'Access points must be a list')
         for event in access:
