@@ -65,6 +65,8 @@ def main():
     if previous.exists():
         # Optional package teams must not leak into the next default build.
         for relative in json.loads(previous.read_text()):
+            if relative.startswith('data/layouts/sf_world/'):
+                continue  # Generated files have no base revision; preserve them.
             path = engine / relative
             path.resolve().relative_to(engine.resolve())
             path.write_bytes(subprocess.check_output(

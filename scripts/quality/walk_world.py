@@ -34,7 +34,7 @@ class Walker:
         plan = self.plans[before[0]]
         dx, dy = DELTAS[direction]
         nx, ny = before[1][0] + dx, before[1][1] + dy
-        waterfall = (0 <= nx < 32 and 0 <= ny < 24
+        waterfall = (0 <= nx < len(plan['rows'][0]) and 0 <= ny < len(plan['rows'])
                      and plan['rows'][ny][nx] == 'V' and direction == 'up')
         if waterfall:
             # Interact while still below the fall; walking into it starts the
@@ -85,7 +85,7 @@ class Walker:
                 return result[::-1]
             for direction, (dx, dy) in DELTAS.items():
                 nx, ny = point[0] + dx, point[1] + dy
-                if not (0 <= nx < 32 and 0 <= ny < 24):
+                if not (0 <= nx < len(plan['rows'][0]) and 0 <= ny < len(plan['rows'])):
                     continue
                 token = plan['rows'][ny][nx]
                 if not plan['legend'][token][1] and (nx, ny) not in blocked and (nx, ny) not in previous:

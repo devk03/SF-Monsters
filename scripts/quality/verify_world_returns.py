@@ -61,7 +61,8 @@ def main():
         c.checkpoint('returned')
         result = {'passed': True, 'rom_sha256': c.digest(), 'maps': len(w.seen),
                   'connections': sum(e['kind'] == 'port' for e in checked),
-                  'gym_warps': sum(e['kind'] == 'warp' for e in checked),
+                  'gym_warps': sum(e['kind']=='warp' and (e['from'].startswith('gym_') or e['to'].startswith('gym_')) for e in checked),
+                  'room_warps': sum(e['kind']=='warp' and (e['from'].endswith('_room') or e['to'].endswith('_room')) for e in checked),
                   'checked': checked, 'seen': sorted(w.seen)}
         (c.output / 'returns-result.json').write_text(json.dumps(result, indent=2))
         print(json.dumps({k: v for k, v in result.items() if k not in ('checked', 'seen')}))

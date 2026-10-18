@@ -118,6 +118,7 @@ def generate(manifest):
         label = item.get('label', identifier.replace('_', ' ').title())
         plan = {'world_id': identifier, 'engine_map': item['engine_map'],
                 'native_id': native_id(item['engine_map']), 'label': label,
+                'unique_layout': bool(manifest.get('town_finishing')),
                 'rows': rows, 'legend': LEGEND, 'border_tile': 11,
                 'tilesets': {'primary': manifest['native']['primary_tileset'],
                              'secondary': manifest['native']['secondary_tileset']},

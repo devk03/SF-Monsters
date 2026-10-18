@@ -156,6 +156,7 @@ class _World:
               'Generated map IDs differ from declared areas/routes/gyms')
         self.native = {}
         self.boards = {}
+        self.sizes = {}
         script_names = set()
         for identifier, plan in self.plans.items():
             _need(plan['engine_map'] == self.declared[identifier][1]['engine_map'], 'identity',
@@ -176,9 +177,10 @@ class _World:
               f'Two routes occupy {identifier}.{direction}')
         self.expected[identifier][direction] = target
 
-    def _position(self, event, label):
-        x = _integer(event['x'], 0, self.width - 1, label + ' x')
-        y = _integer(event['y'], 0, self.height - 1, label + ' y')
+    def _position(self, event, label, identifier=None):
+        width,height = self.sizes.get(identifier,(self.width,self.height))
+        x = _integer(event['x'], 0, width - 1, label + ' x')
+        y = _integer(event['y'], 0, height - 1, label + ' y')
         return x, y
 
     def _board(self, identifier, plan):
@@ -193,16 +195,20 @@ class _World:
             'primary': self.manifest['native']['primary_tileset'],
             'secondary': self.manifest['native']['secondary_tileset']},
             'terrain', 'Plan tilesets differ from the pinned terrain semantics')
+        width,height = self.rooms.get(identifier,{}).get('size',[32,24])
+        _need((width,height) in ((32,24),(16,11)), 'geometry', 'Unsupported outdoor/interior dimensions')
+        self.sizes[identifier]=(width,height)
+        def position(event,label): return self._position(event,label,identifier)
         rows, legend = plan['rows'], plan['legend']
-        _need(type(rows) is list and len(rows) == self.height
-              and all(type(row) is str and len(row) == self.width for row in rows),
+        _need(type(rows) is list and len(rows) == height
+              and all(type(row) is str and len(row) == width for row in rows),
               'geometry', f'{identifier}: rows must be 32x24')
         _need(type(legend) is dict and bool(legend), 'terrain', 'Missing terrain legend')
         for token, tile in legend.items():
             _need(type(token) is str and len(token) == 1 and type(tile) in (list, tuple)
                   and len(tile) == 3, 'terrain', 'Invalid terrain legend entry')
             _integer(tile[0], 0, 1023, 'metatile')
-            _need(tile[0] in (1, 11, WATER, WATERFALL) or (self.manifest.get('town_finishing') and 512 <= tile[0] < 614), 'terrain',
+            _need(tile[0] in (1, 11, WATER, WATERFALL) or (self.manifest.get('town_finishing') and 512 <= tile[0] < 638), 'terrain',
                   'Unmodelled native metatile behavior in blockout terrain')
             _need(type(tile[1]) is bool, 'terrain', 'Collision must be boolean')
             _integer(tile[2], 0, 15, 'elevation')
@@ -226,7 +232,7 @@ class _World:
                 if legend[token][0] in (WATER, WATERFALL):
                     wet.add((x, y))
         if 'water_positions' in plan:
-            positions = [self._position({'x': pair[0], 'y': pair[1]}, 'water position')
+            positions = [position({'x': pair[0], 'y': pair[1]}, 'water position')
                          for pair in plan['water_positions'] if len(pair) == 2]
             _need(len(positions) == len(plan['water_positions']) and len(set(positions)) == len(positions)
                   and set(positions) == wet, 'terrain', f'{identifier}: water positions differ from actual terrain')
@@ -235,7 +241,7 @@ class _World:
         occupied = set()
         local_ids = set()
         for index, event in enumerate(objects, 1):
-            point = self._position(event, identifier + ' NPC')
+            point = position(event, identifier + ' NPC')
             _need(point not in occupied, 'objects', f'{identifier}: overlapping NPCs')
             _need(not cells[point][1] and cells[point][0] not in (WATER, WATERFALL),
                   'objects', f'{identifier}: NPC stands on impassable terrain')
@@ -261,16 +267,16 @@ class _World:
                       'movement', 'Ambient movement can obstruct a required approach or solid tile')
         coords = set()
         for event in plan.get('coord_events', []):
-            point = self._position(event, identifier + ' trigger')
+            point = position(event, identifier + ' trigger')
             _need(point not in coords and not cells[point][1], 'events', 'Overlapping or blocked coordinate trigger')
             _need(type(event['elevation']) is int and event['elevation'] == cells[point][2],
                   'events', 'Coordinate trigger elevation differs from its walk tile')
             coords.add(point)
-        backgrounds = {self._position(event, identifier + ' background') for event in plan.get('bg_events', [])}
+        backgrounds = {position(event, identifier + ' background') for event in plan.get('bg_events', [])}
         access = plan.get('access_points', [])
         _need(type(access) is list, 'access', 'Access points must be a list')
         for event in access:
-            point = self._position(event, identifier + ' access')
+            point = position(event, identifier + ' access')
             _need(event['kind'] in ACCESS_KINDS and event['activation'] in ('walk', 'interact'),
                   'access', 'Unknown access kind or activation')
             if 'target_id' in event:
@@ -313,11 +319,12 @@ class _World:
             _need(actual == self.expected[identifier], 'connections',
                   f'{identifier}: native connections differ from declared reversible ports')
             self.boards[identifier]['connections'] = actual
+            width,height = self.sizes[identifier]
             allowed = {point for direction in actual
                        for point in _port_cells(direction, self.width, self.height)}
             for point, cell in self.boards[identifier]['cells'].items():
                 x, y = point
-                if x in (0, self.width-1) or y in (0, self.height-1):
+                if x in (0, width-1) or y in (0, height-1):
                     _need(cell[1] or point in allowed, 'ports',
                           f'{identifier}: unmodelled open border outside a declared lane')
         for identifier, board in self.boards.items():
@@ -388,14 +395,15 @@ class _World:
             if action[2] == 'walk':
                 return
         x, y = point
+        width,height = self.sizes[identifier]
         for xx, yy, side in [(x - 1, y, 'left'), (x + 1, y, 'right'),
                              (x, y - 1, 'up'), (x, y + 1, 'down')]:
             target, position = identifier, (xx, yy)
-            if not 0 <= xx < self.width or not 0 <= yy < self.height:
+            if not 0 <= xx < width or not 0 <= yy < height:
                 if local or side not in board['connections']:
                     continue
                 target = board['connections'][side]
-                position = (xx % self.width, yy % self.height)
+                position = (xx % width, yy % height)
                 # Native aligned edges are usable only through their authored lanes.
                 if point not in _port_cells(side, self.width, self.height):
                     continue
@@ -518,7 +526,7 @@ def audit(manifest, plans, core_only=False):
         _need(type(core_only) is bool, 'scope', 'core_only must be boolean')
         world = _World(manifest, plans)
         result['counts'] = {'areas': len(world.areas), 'routes': len(world.routes),
-                            'gyms': len(world.gyms), 'maps': len(world.plans)}
+                            'gyms': len(world.gyms), 'interiors':len(world.rooms), 'maps': len(world.plans)}
         result['stages'] = world.coverage()
         result['counts']['badge_stages'] = len(result['stages'])
         pending = manifest['league']['venue'] is None

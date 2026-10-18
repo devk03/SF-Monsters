@@ -20,7 +20,16 @@ static bool8 SFResumeTileIsSafe(s16 x, s16 y)
         if (events->warps[i].x == x && events->warps[i].y == y)
             return FALSE;
     for (i = 0; i < events->objectEventCount; i++)
-        if (events->objectEvents[i].x == x && events->objectEvents[i].y == y)
+    {
+        const struct ObjectEventTemplate *object = &events->objectEvents[i];
+        if (x >= object->x - object->movementRangeX
+            && x <= object->x + object->movementRangeX
+            && y >= object->y - object->movementRangeY
+            && y <= object->y + object->movementRangeY)
+            return FALSE;
+    }
+    for (i = 0; i < events->coordEventCount; i++)
+        if (events->coordEvents[i].x == x && events->coordEvents[i].y == y)
             return FALSE;
     return TRUE;
 }
@@ -30,7 +39,7 @@ static bool8 SFMapResumeWarpIfNeeded(void)
     s16 radius, dy, dx, x, y;
     s16 oldX = gSaveBlock1Ptr->pos.x;
     s16 oldY = gSaveBlock1Ptr->pos.y;
-    if (!SFMapUsesAuthoredLayout() || SFResumeTileIsWalkable(oldX, oldY))
+    if (!SFMapUsesAuthoredLayout() || SFResumeTileIsSafe(oldX, oldY))
         return FALSE;
     // A smaller authored layout may leave an older coordinate out of bounds.
     if (oldX < 0) oldX = 0;

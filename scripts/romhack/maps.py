@@ -161,6 +161,19 @@ def apply_maps(content, root, engine, original):
             if 'local_id' in event:
                 aliases[event['local_id']] = index
         layout = next(item for item in layouts['layouts'] if item['id'] == metadata['layout'])
+        if plan.get('unique_layout'):
+            # Native centers share their original layout. Each authored room
+            # needs its own table entry and backing files or the last room
+            # silently overwrites all earlier rooms using that stock layout.
+            layout = deepcopy(layout)
+            layout['id'] = 'LAYOUT_SF_WORLD_' + name.upper()
+            layout['name'] = 'SFWorld_' + name
+            folder = 'data/layouts/sf_world/' + name
+            layout['blockdata_filepath'] = folder + '/map.bin'
+            layout['border_filepath'] = folder + '/border.bin'
+            (engine / folder).mkdir(parents=True, exist_ok=True)
+            layouts['layouts'].append(layout)
+            metadata['layout'] = layout['id']
         layout.update(width=width, height=height)
         for role, tileset in plan.get('tilesets', {}).items():
             if role not in ['primary', 'secondary'] or not re.fullmatch(r'gTileset_[A-Za-z0-9]+', tileset):

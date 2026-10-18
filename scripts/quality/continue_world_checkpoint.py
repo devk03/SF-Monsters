@@ -34,7 +34,8 @@ def main():
         for direction in ('right', 'left', 'down', 'up'):
             dx, dy = DELTAS[direction]
             nx, ny = x + dx, y + dy
-            if 0 <= nx < 32 and 0 <= ny < 24 and plan['rows'][ny][nx] in '.W':
+            if (0 <= nx < len(plan['rows'][0]) and 0 <= ny < len(plan['rows'])
+                    and not plan['legend'][plan['rows'][ny][nx]][1]):
                 if any((npc['x'], npc['y']) == (nx, ny) for npc in plan['npcs']):
                     continue
                 w.walk(direction, wet=plan['rows'][ny][nx] == 'W')

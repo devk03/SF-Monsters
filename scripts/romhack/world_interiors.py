@@ -24,34 +24,35 @@ def add_rooms(plans, manifest):
         parent = by_id[room['area']]
         legend = deepcopy(parent['legend'])
         def token(tile): return chr(0x100+tile-512)
-        grid = [[token(613)]*32 for _ in range(24)]
+        grid = [[token(613)]*16 for _ in range(11)]
         def stamp(name,x,y):
             for dy,row in enumerate(kit['catalog'][name]['tiles']):
-                for dx,tile in enumerate(row): grid[y+dy][x+dx]=token(tile)
-        for y in range(8,19):
+                for dx,tile in enumerate(row): grid[y-6+dy][x-8+dx]=token(tile)
+        for y in range(8,16):
             for x in range(11,21): stamp('wood_floor',x,y)
         for x in range(10,22):
             stamp('wall_top',x,6);stamp('wall_low',x,7)
-            stamp('wall_side',x,19)
-        for y in range(8,20):
+            stamp('wall_bottom',x,16)
+        for y in range(8,17):
             stamp('wall_side',10,y);stamp('wall_side',21,y)
-        stamp('rug',15,14);stamp('threshold',16,19)
+        stamp('wall_span',10,6)
+        stamp('rug',15,12);stamp('threshold',16,15);stamp('door_frame',16,16)
         for name,x,y in PROPS[room['style']]: stamp(name,x,y)
         # Counter/furniture placement must leave both clerks reachable. The
         # validator checks the actual tiles and arrivals, not this recipe alone.
         residents = people[room['area']]['residents'][-2:]
-        npcs=[{'id':1,'x':13,'y':9,'graphics':'OBJ_EVENT_GFX_WOMAN_3',
+        npcs=[{'id':1,'x':5,'y':3,'graphics':'OBJ_EVENT_GFX_WOMAN_3',
                'script':'WBRoom_'+room['id']+'_Rest'},
-              {'id':2,'x':18,'y':9,'graphics':'OBJ_EVENT_GFX_MAN_2',
+              {'id':2,'x':10,'y':3,'graphics':'OBJ_EVENT_GFX_MAN_2',
                'script':'WBRoom_'+room['id']+'_Shop'}]
         result = {'world_id':room['id'],'engine_map':room['engine_map'],
                   'native_id':native_id(room['engine_map']),
-                  'label':room['label'],'rows':[''.join(row) for row in grid],
+                  'label':room['label'],'unique_layout':True,'rows':[''.join(row) for row in grid],
                   'legend':legend,'border_tile':613,'tilesets':deepcopy(parent['tilesets']),
                   'metadata':dict(parent['metadata'],music='MUS_VERDANTURF',weather='WEATHER_SUNNY'),
                   'connections':None,'npcs':npcs,'coord_events':[],
-                  'access_points':[{'kind':'checkpoint','x':13,'y':10,'activation':'interact'},
-                                   {'kind':'checkpoint','x':18,'y':10,'activation':'interact'}],'water_positions':[],'script':room['id']+'.inc',
+                  'access_points':[{'kind':'checkpoint','x':5,'y':4,'activation':'interact'},
+                                   {'kind':'checkpoint','x':10,'y':4,'activation':'interact'}],'water_positions':[],'script':room['id']+'.inc',
                   'room':room,'service_dialogue':residents}
         for plan,kind,point,target in (
                 (parent,'room_entry',room['entry'],room['id']),

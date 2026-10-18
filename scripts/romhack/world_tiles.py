@@ -109,6 +109,9 @@ def compile_kit(root=ROOT):
     colors = struct.unpack('<16H',palettes[9])
     darkest = min(range(1,16),key=lambda i:sum((colors[i]>>c*5)&31 for c in range(3)))
     card('void',bytes([darkest])*256,16,16,9,floor,9)
+    card('door_frame',crop(room,176,80,144,16,16),16,16,9,floor,9)
+    card('wall_bottom',crop(room,176,16,144,16,16),16,16,9,floor,9)
+    card('wall_span',crop(room,176,0,0,176,32),176,32,9,floor,9)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     return {'tiles': tiles, 'records': records, 'attributes': attributes,

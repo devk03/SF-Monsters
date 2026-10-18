@@ -1,5 +1,6 @@
 """Read linked cartridge tables independently of the world map encoder."""
 import json
+import re
 import struct
 import subprocess
 
@@ -20,6 +21,13 @@ def audit_native(rom_path, elf_path, plans, engine):
             raise ValueError('Compiled table points outside cartridge.')
         return struct.unpack_from('<' + fmt, rom, offset)
 
+    def constants(name):
+        source = (engine / 'include/constants' / name).read_text()
+        return {key:int(value,0) for key,value in re.findall(
+            r'^#define\s+(\w+)\s+(0x[0-9A-Fa-f]+|[0-9]+)\b',source,re.MULTILINE)}
+    motions = constants('event_object_movement.h')
+    graphics = constants('event_objects.h')
+    unique_layouts = set()
     groups = json.loads((engine / 'data/maps/map_groups.json').read_text())
     ids = {name: (g, n) for g, group in enumerate(groups['group_order'])
            for n, name in enumerate(groups[group])}
@@ -34,6 +42,10 @@ def audit_native(rom_path, elf_path, plans, engine):
         if header_ptr != symbols[name]:
             errors.append(name + ': native group table selects a different header')
         layout, events, scripts, conn = read(symbols[name], '4I')
+        if plan.get('unique_layout'):
+            if layout in unique_layouts:
+                errors.append(name + ': authored maps share a native layout')
+            unique_layouts.add(layout)
         width, height, border, blocks = read(layout, '4I')
         primary, secondary = read(layout + 16, '2I')
         if (primary, secondary) != tuple(symbols[plan['tilesets'][role]]
@@ -68,6 +80,13 @@ def audit_native(rom_path, elf_path, plans, engine):
             script, = read(obj_ptr + i * 24 + 16, 'I')
             if (x, y, script) != (npc['x'], npc['y'], symbols[npc['script']]):
                 errors.append(name + ': compiled NPC position/script differs')
+            elevation,movement,ranges = read(obj_ptr + i*24 + 8,'3B')
+            gfx, = read(obj_ptr + i*24 + 1,'B')
+            expected_motion = motions[npc.get('movement','MOVEMENT_TYPE_FACE_DOWN')]
+            expected_ranges = npc.get('range_x',0) | npc.get('range_y',0)<<4
+            if (gfx,movement,ranges,elevation) != (graphics[npc['graphics']],expected_motion,
+                    expected_ranges,plan['legend'][plan['rows'][npc['y']][npc['x']]][2]):
+                errors.append(name + ': compiled actor graphics/movement/envelope differs')
             objects += 1
         for i, event in enumerate(plan['coord_events']):
             x, y = read(coord_ptr + i * 16, '2h')

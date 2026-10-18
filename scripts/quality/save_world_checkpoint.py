@@ -40,7 +40,8 @@ def main():
         position = struct.unpack_from('<hhBB', save)
         if position != tuple(expected[k] for k in ('x', 'y', 'group', 'number')):
             raise ValueError('Native Flash position differs from the saved field position')
-        if struct.unpack_from('<HH', save, 0x158c) != (0x5742, 1):
+        identity = json.loads((ROOT / 'romhack/world/world.json').read_text())['native']
+        if struct.unpack_from('<HH', save, 0x158c) != (identity['save_magic'], identity['save_schema']):
             raise ValueError('Ordinary Save lost the blockout identity')
         result = {'passed': True, 'flash_counter': counter, 'position': expected,
                   'surfing': bool(avatar & 8), 'rom_sha256': c.digest(),
