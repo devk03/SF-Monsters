@@ -666,6 +666,18 @@
             "left",
             "right"
           ]
+        },
+        "workshop": {
+          "first": 685,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         }
       }
     },
@@ -1047,6 +1059,18 @@
         "cafe_lr": {
           "first": 676,
           "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup": {
+          "first": 684,
+          "width": 3,
           "height": 4,
           "blocked": true,
           "behavior": 0,
@@ -1649,6 +1673,182 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "shophouse": {
+          "first": 655,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup": {
+          "first": 663,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__sage": {
+          "first": 675,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__sage": {
+          "first": 687,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "cream__sage": {
+          "first": 695,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__sage": {
+          "first": 707,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "pair__sage": {
+          "first": 719,
+          "width": 4,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "shophouse__sage": {
+          "first": 735,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup__sage": {
+          "first": 743,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__slate": {
+          "first": 755,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__slate": {
+          "first": 767,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "cream__slate": {
+          "first": 775,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__slate": {
+          "first": 787,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "pair__slate": {
+          "first": 799,
+          "width": 4,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "shophouse__slate": {
+          "first": 815,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup__slate": {
+          "first": 823,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         }
       }
     },
@@ -2002,6 +2202,158 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "shophouse": {
+          "first": 643,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup": {
+          "first": 651,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__sage": {
+          "first": 663,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__sage": {
+          "first": 675,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "cream__sage": {
+          "first": 683,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__sage": {
+          "first": 695,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "shophouse__sage": {
+          "first": 707,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup__sage": {
+          "first": 715,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__slate": {
+          "first": 727,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__slate": {
+          "first": 739,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "cream__slate": {
+          "first": 747,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__slate": {
+          "first": 759,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "shophouse__slate": {
+          "first": 771,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup__slate": {
+          "first": 779,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         }
       }
     },
@@ -2417,6 +2769,710 @@
         },
         "cream_lr": {
           "first": 661,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__sage": {
+          "first": 673,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__sage": {
+          "first": 685,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__sage": {
+          "first": 693,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "pair__sage": {
+          "first": 705,
+          "width": 4,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "cream_lr__sage": {
+          "first": 721,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__slate": {
+          "first": 733,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__slate": {
+          "first": 745,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__slate": {
+          "first": 753,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "pair__slate": {
+          "first": 765,
+          "width": 4,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "cream_lr__slate": {
+          "first": 781,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        }
+      }
+    },
+    "mixed_use": {
+      "secondary": "gTileset_SFMixedUse",
+      "cards": {
+        "paving": {
+          "first": 512,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "asphalt": {
+          "first": 513,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "crossing": {
+          "first": 514,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "coral": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac": {
+          "first": 535,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "lamp": {
+          "first": 547,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "meter": {
+          "first": 549,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "hydrant": {
+          "first": 550,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin": {
+          "first": 551,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rack": {
+          "first": 552,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree": {
+          "first": 554,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench": {
+          "first": 558,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "recycling": {
+          "first": 560,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "grass": {
+          "first": 562,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_grass": {
+          "first": 563,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench_grass": {
+          "first": 567,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lamp_grass": {
+          "first": 569,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin_grass": {
+          "first": 571,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "mural": {
+          "first": 572,
+          "width": 4,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "surfboards": {
+          "first": 580,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bar_sign": {
+          "first": 584,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "book_box": {
+          "first": 586,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lookout_left": {
+          "first": 588,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lookout_steps": {
+          "first": 590,
+          "width": 1,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lookout_right": {
+          "first": 592,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "scenic_sea": {
+          "first": 594,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "seawall": {
+          "first": 595,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "edge_hedge": {
+          "first": 596,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 597,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 601,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 603,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 607,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 608,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 609,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 610,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_drain": {
+          "first": 611,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 612,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 616,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 620,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 621,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 622,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 623,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 624,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 625,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 626,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 627,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "cream_lr": {
+          "first": 629,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup": {
+          "first": 641,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "shophouse": {
+          "first": 653,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "workshop": {
+          "first": 661,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__sage": {
+          "first": 673,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__sage": {
+          "first": 685,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__sage": {
+          "first": 693,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "cream_lr__sage": {
+          "first": 705,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup__sage": {
+          "first": 717,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "shophouse__sage": {
+          "first": 729,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "workshop__sage": {
+          "first": 737,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "coral__slate": {
+          "first": 749,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe__slate": {
+          "first": 761,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac__slate": {
+          "first": 769,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "cream_lr__slate": {
+          "first": 781,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "walkup__slate": {
+          "first": 793,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "shophouse__slate": {
+          "first": 805,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
+        },
+        "workshop__slate": {
+          "first": 813,
           "width": 3,
           "height": 4,
           "blocked": true,

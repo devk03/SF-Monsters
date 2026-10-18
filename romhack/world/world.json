@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.87-neighborhood-world-draft",
+  "version": "0.0.88-neighborhood-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {
@@ -580,7 +580,7 @@
   },
   "town_finishing": {
     "revision": 5,
-    "status": "finished exposed facade ends and planted district streets; visual review open",
+    "status": "district architecture and mixed paint schemes; visual review open",
     "profiles": {
       "dogpatch": "industrial",
       "treasure_island": "industrial",
@@ -588,7 +588,10 @@
       "financial_district": "civic",
       "giants_stadium": "stadium",
       "castro": "culture",
-      "north_beach": "culture"
+      "north_beach": "culture",
+      "mission": "mixed_use",
+      "noe_valley": "mixed_use",
+      "potrero_hill": "mixed_use"
     }
   },
   "interiors": [

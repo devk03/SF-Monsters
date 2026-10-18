@@ -11,7 +11,7 @@ LAYER_COVERED = 0x1000
 PROFILES = {'residential':'gTileset_Petalburg','industrial':'gTileset_SFIndustrial',
             'civic':'gTileset_SFCivic','nature':'gTileset_SFNature',
             'culture':'gTileset_SFCulture','stadium':'gTileset_SFStadium',
-            'neighborhood':'gTileset_SFNeighborhood'}
+            'neighborhood':'gTileset_SFNeighborhood','mixed_use':'gTileset_SFMixedUse'}
 
 
 def checked(directory, name, receipt):
@@ -30,7 +30,8 @@ def compile_kit(root=ROOT, profile='residential'):
     styles = {'residential':{'coral','cafe','cream','lilac','pair'},
               'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
               'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'coral','cream','cafe','lilac'},
-              'neighborhood':{'coral','cafe','lilac','pair'}}
+              'neighborhood':{'coral','cafe','lilac','pair'},
+              'mixed_use':{'coral','cafe','lilac'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: (0,0)}
@@ -190,11 +191,12 @@ def compile_kit(root=ROOT, profile='residential'):
             raw=checked(directory,name+'.indices',receipt);w,h=data['size']
             background,bank=(grass,10) if profile=='nature' else (paving,7)
             card(name,raw,w,h,9,background,bank)
-    if profile=='neighborhood':
+    if profile in ('neighborhood','mixed_use'):
         directory=root/'assets/tiles/neighborhood-landmarks-v1'
         receipt=json.loads((directory/'conversion.json').read_text())
         palettes[11]=checked(directory,'neighborhood.gbapal',receipt)
         for name in ('mural','mansion','surfboards','bar_sign','book_box'):
+            if profile=='mixed_use' and name=='mansion':continue
             spec=next(c for c in receipt['cards'] if c['name']==name);w,h=spec['size']
             card(name,checked(directory,name+'.indices',receipt),w,h,11,paving,7)
         raw=checked(directory,'lookout.indices',receipt)
@@ -254,10 +256,10 @@ def compile_kit(root=ROOT, profile='residential'):
            'mansion':['left','right'],'stadium_gate':['left','right']}
     for name,closed in edges.items():
         if name in catalog:catalog[name]['closed_edges']=closed
-    if profile in ('industrial','civic','neighborhood'):
-        base,width,offset=('cream',48,80) if profile=='neighborhood' else ('cafe',32,48)
+    if profile in ('industrial','civic','neighborhood','mixed_use'):
+        base,width,offset=('cream',48,80) if profile in ('neighborhood','mixed_use') else ('cafe',32,48)
         raw=crop(houses,176,offset,0,width,64)
-        variants=(('lr',['left','right']),) if profile=='neighborhood' else (('l',['left']),('r',['right']),('lr',['left','right']))
+        variants=(('lr',['left','right']),) if profile in ('neighborhood','mixed_use') else (('l',['left']),('r',['right']),('lr',['left','right']))
         for suffix,closed in variants:
             pixels=bytearray(raw)
             for side in closed:
@@ -270,6 +272,30 @@ def compile_kit(root=ROOT, profile='residential'):
             name=base+'_'+suffix
             card(name,bytes(pixels),width,64,6,paving,7)
             catalog[name]['closed_edges']=closed
+    from world_architecture import fronts, paint_palette
+    for name,w,h,raw in fronts(profile):
+        card(name,raw,w,h,6,paving,7)
+        catalog[name]['closed_edges']=['left','right']
+    # Alternate paint uses free native palette banks and shares every 8x8 tile.
+    # It does not spend the sprite budget on recolored copies of the same art.
+    banks={'neighborhood':(9,12),'mixed_use':(9,12),
+           'culture':(11,12),'stadium':(11,12)}.get(profile,())
+    base_fronts=[(n,c) for n,c in catalog.items() if 'closed_edges' in c and
+                 any(w>>12==6 for row in c['tiles'] for t in row for w in records[t-FIRST_METATILE][4:])]
+    for scheme,bank in zip(('sage','slate'),banks):
+        if bank in palettes:raise ValueError('Building paint would overwrite a loaded palette')
+        palettes[bank]=paint_palette(palettes[6],scheme)
+        for name,base in base_fronts:
+            ids=[]
+            for row in base['tiles']:
+                out=[]
+                for tile in row:
+                    out.append(FIRST_METATILE+len(records))
+                    source=records[tile-FIRST_METATILE]
+                    records.append([(w&0xfff)|(bank<<12) if w>>12==6 else w for w in source])
+                    attributes.append(attributes[tile-FIRST_METATILE])
+                ids.append(out)
+            catalog[name+'__'+scheme]=dict(base,tiles=ids)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

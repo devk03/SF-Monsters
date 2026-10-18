@@ -683,6 +683,18 @@ file tools, optional desktop gamepad and clearer hierarchy. Screenshot review an
 keyboard interaction checks are required before publishing. Human town/art and
 full-game acceptance remain open; root v80 must remain unchanged.
 
+**October 18 revision: building forms and paint permutations.** The user requested
+less repeated architecture and more color combinations. Private v88 adds original
+native brick walkups/fire stairs, awning shops and industrial loft/loading fronts,
+with warm, sage and slate paint. Free secondary palette banks share graphic pixels;
+paving, glass and roof colors stay intact. A mixed-use kit supports Mission, Noe
+Valley and Potrero without replacing their landmarks or service/gym bindings.
+Street packing favors underused forms and avoids identical adjacent painted fronts.
+Source checks require four architectural families per urban district and all three
+paint families where native free banks are available. Industrial/civic kits retain
+existing distinct material palettes. Native builds and visual review are pending;
+public v87 remains available until the candidate passes same-ROM native/web QA.
+
 Published v87 — October 18, 2026:
 
 - Target `6786797c2a8e36527dc8d9130bc883b5b7209594c389806694557db05f364bc4`;

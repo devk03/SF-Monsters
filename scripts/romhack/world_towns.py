@@ -68,16 +68,16 @@ def furnish(plans, manifest):
         gym = next((g for g in manifest['gyms'] if g['area']==district),None)
         landmark = {'industrial':('crane',14,3),'civic':('highrise',15,2),
                     'culture':('theater',14,3),'stadium':('stadium_gate',13,3)}.get(profile)
-        if profile=='neighborhood':
+        if profile in ('neighborhood','mixed_use'):
             landmark={'mission':('mural',14,5),
                       'pacific_heights':('mansion',14,3)}.get(district)
         extras=[]
-        if profile=='neighborhood':
+        if profile in ('neighborhood','mixed_use'):
             extras={'outer_sunset':[('surfboards',18,8)],'marina':[('bar_sign',4,9)],
                     'noe_valley':[('book_box',18,8)],
                     'potrero_hill':[('lookout_left',15,4),('lookout_steps',16,4),
                                     ('lookout_right',17,4)]}.get(district,[])
-        gym_style='cream_lr' if profile=='neighborhood' else 'cream'
+        gym_style='cream_lr' if profile in ('neighborhood','mixed_use') else 'cream'
         centerpiece=landmark or ((gym_style,14,3) if gym else
                     ('pair',14,3) if not connector and district!='potrero_hill' else None)
         center_left,center_right=(15,17)
@@ -88,9 +88,11 @@ def furnish(plans, manifest):
         frontage_runs=[]
         planting_pockets=[]
         choices={
-            'industrial':('warehouse','brick','coral','cafe'),
-            'civic':('brick','cream','clinic','cafe'),
-            'stadium':('cafe','cream','coral','lilac'),
+            'industrial':('workshop','brick','warehouse','coral','cafe'),
+            'civic':('walkup','brick','cream','clinic','cafe'),
+            'stadium':('shophouse','walkup','cafe','cream','coral','lilac'),
+            'culture':('shophouse','coral','walkup','cafe','cream','lilac','pair'),
+            'mixed_use':('walkup','shophouse','coral','cafe','lilac','workshop','cream_lr'),
         }.get(profile,{
             'mission':('cafe','coral','lilac','cream','pair'),
             'marina':('cream','cafe','lilac','pair','coral'),
@@ -100,10 +102,16 @@ def furnish(plans, manifest):
             'potrero_hill':('coral','pair','cream','cafe'),
             'north_beach':('cafe','cream','coral','lilac'),
         }.get(district,('coral','cafe','cream','lilac','pair')))
-        if profile=='neighborhood':choices=tuple('cream_lr' if c=='cream' else c for c in choices)
+        if profile in ('neighborhood','mixed_use'):choices=tuple('cream_lr' if c=='cream' else c for c in choices)
         if profile in ('industrial','civic'):
             choices+=('cafe_l','cafe_r','cafe_lr')
-        def record(style,x,y):
+        def record(style,x,y,*,paint=False):
+            if paint and style+'__sage' in kit['catalog']:
+                scheme=('', '__sage', '__slate')[(x//2+y+sum(map(ord,district))+len(blocks))%3]
+                style+=scheme
+                # A repeated silhouette must change paint at a shared wall.
+                if any(b['style']==style and b['y']==y and b['x']+b['width']==x for b in blocks):
+                    style=style.split('__')[0]+('__slate' if scheme=='__sage' else '__sage')
             card=kit['catalog'][style]
             stamp(style,x,y)
             blocks.append({'style':style,'x':x,'y':y,
@@ -112,10 +120,14 @@ def furnish(plans, manifest):
         def attach(left,right,bottom,phase):
             # Exact-width packing gives shared walls, not randomly spaced houses.
             # Keep an explicit gap only if the native art cannot fill one tile.
-            def fit(remaining, index):
+            def family(style):
+                return style.split('__')[0].removesuffix('_lr').removesuffix('_l').removesuffix('_r')
+            def fit(remaining, index, picked=()):
                 if remaining==0:return []
-                for n in range(len(choices)):
-                    style=choices[(index+n)%len(choices)]
+                ordered=[choices[(index+n)%len(choices)] for n in range(len(choices))]
+                prior=[family(b['style']) for b in blocks]+list(picked)
+                ordered.sort(key=lambda c:prior.count(family(c))*2+(5 if picked and family(c)==picked[-1] else 0))
+                for n,style in enumerate(ordered):
                     spec=kit['catalog'][style];width=len(spec['tiles'][0])
                     height=len(spec['tiles'])
                     top=(17 if district=='outer_sunset' and left<5 else 16) if bottom==21 else bottom-height
@@ -133,7 +145,7 @@ def furnish(plans, manifest):
                     if width==remaining and not joined('right') and 'right' not in spec['closed_edges']:
                         continue
                     if width<=remaining:
-                        rest=fit(remaining-width,index+n+1)
+                        rest=fit(remaining-width,index+n+1,picked+(family(style),))
                         if rest is not None:return [style]+rest
                 return None
             packed=fit(right-left+1,phase)
@@ -149,7 +161,7 @@ def furnish(plans, manifest):
             for style in packed:
                 card=kit['catalog'][style]
                 top=south_top if bottom==21 else bottom-len(card['tiles'])
-                record(style,left,top)
+                record(style,left,top,paint=True)
                 left+=len(card['tiles'][0])
         north_spans=[(1,center_left-1),(center_right+1,30)]
         north_link=any(l['direction']=='up' for l in plan['connections'] or [])
