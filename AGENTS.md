@@ -4,7 +4,8 @@ For game development, read [DEVELOPMENT_AGENT.md](DEVELOPMENT_AGENT.md) before
 implementation. The current milestone is a cohesive shared world with independently
 assignable gym/mission packages. For module work, also read CONTRIBUTING.md and
 the assigned package's AGENTS.md and HANDOFF.md; use `.agents/skills/sf-module/SKILL.md`.
-World geometry is a tested blockout awaiting review; final content/art remain open.
+The user resumed work to finish all non-gym towns: compact dense streets, useful
+interiors, natural dialogue and safe activity. Preserve gym contracts and public v80.
 
 Be very concise and always ask for permission on db migrations and none on read operations. Never drop our dbs without asking.
 

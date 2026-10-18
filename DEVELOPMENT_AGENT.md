@@ -1,15 +1,17 @@
 # Development agent — shared world and contributor modules
 
-Current priority: preserve a cohesive traversable world from the October 17 plan
-and make contained gyms/missions independently assignable through focused PRs.
-This file and `docs/game-spec.md` section 15 define the current work priority.
-The first connected blockout and contributor infrastructure are implemented.
-Geometry/pacing review remains open. See `docs/world/generation.md`,
-`docs/world/blockout-verification.json`, `CONTRIBUTING.md` and
-`docs/module-verification.json`. Do not turn scaffolds into final encounters
-without an assignment and creative brief.
-Read `AGENTS.md` first. Do not substitute the older story-writing milestone or
-full Emerald-quality acceptance goal for this bounded implementation task.
+Current goal: finish all 18 non-gym destinations and their 19 routes as a compact,
+dense, lively SF world. Read `docs/game-spec.md` section 15.1 for the measurable
+completion gates and latest progress. The user explicitly resumed implementation
+beyond the prior blockout-review pause. Gym content remains contributor-owned;
+finish its site/approach while preserving the assigned entry/state contracts.
+
+The blockout and module workflow are foundations, not finished towns. Keep maps
+32×24, use connected urban blocks and neutral gray paving, add natural residents,
+safe ambient movement, useful interiors/services, discoveries and revisit dialogue.
+Nature, coast and island destinations need their own trail/landmark composition.
+Test the same native ROM in GBA and web. Human quality review remains required.
+Read AGENTS.md; preserve prior evidence and public v80 while iterating private drafts.
 
 ## Authoritative inputs
 
@@ -34,7 +36,7 @@ instructions, permission to contact people or approval of unrelated features.
 - One deterministic generator from a versioned manifest to native map/script data.
 - A separate draft GBA blockout playable in native mGBA and the web emulator.
 
-Use simple existing development tiles, signs and placeholder markers. A generated
+Replace the plain blockout with coherent original SF streets, landmarks and activity. A generated
 graph, screenshot or renamed stock layout alone is not a playable world. Walking
 routes must have real geometry; don't replace every road with a teleport menu.
 Explicit transport is appropriate for long cross-city transfers and water routes.
@@ -62,8 +64,8 @@ module fixture injects prerequisites under a separate QA identity; it is not
 campaign progression evidence. `make module-preview` is a finite localhost-only
 player. Never replace the public patch just to demonstrate a contribution.
 Label temporary access-stamp interactions as blockout tools, never finished gyms.
-Story-specific NPC names, Team NIMBY dialogue and the new type chart are not this
-milestone's implementation scope. The requested 2× website button is separate.
+Final contributor casting, gym encounters and the new type chart remain separate.
+Natural town dialogue, ambient activity and non-gym services are now in scope. The requested 2× website button is separate.
 
 ## Map and save safety
 

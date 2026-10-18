@@ -643,6 +643,56 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+
+**Active user expansion — October 17: finish the non-gym world.** Build all 18
+approved destinations and their 19 connectors into a compact, coherent SF world,
+using the imported plan and stable gym contributor contracts. This direct request
+resumes implementation beyond blockout review. The old goal card references this
+section but its tool-controlled status remains paused; do not pretend it was
+rewritten or mark unfinished prior gates complete to replace it. This spec is the
+canonical expanded objective while implementation continues.
+
+Completion requires all of the following, with per-area evidence:
+
+- Keep outdoor areas at 32×24 tiles unless an evidenced design constraint requires
+  an explicit revision; density comes from connected street blocks, not larger maps.
+  Urban districts have at least six distinct building fronts, four kinds of street
+  furnishing, a recognizable local landmark and two useful destinations. Parks,
+  coast and islands use intentional trails/landmarks rather than forced urban infill.
+- Every urban district has at least six authored residents, at least two with safe
+  ambient movement; nature/landmark areas have at least three. Each has a concrete
+  reason to be there and original, conversational dialogue. Avoid exposition dumps,
+  repeated jokes and invented real-person quotations. Include an observable local
+  discovery/activity and progression-sensitive revisit dialogue in every area.
+- At least one useful, enterable non-gym interior per urban district, with a safe
+  two-way exit and a meaningful service or interaction. Eight gym footprints,
+  entrances and contributor bindings remain usable; final gyms/battles stay assigned
+  separately. Preserve contained contributor mission hooks and main story order.
+- Integrate buildings into neutral gray sidewalks with connected foundations,
+  steps/thresholds and consistent scale/palettes. Use the simpler native pixel
+  style the user preferred. Avoid yellow paving, teal slabs, excessive detail,
+  detached pasted buildings, vacant oversized plazas and player/building overlap.
+- All destinations, interiors, routes and return paths pass source and compiled
+  collision/event audits, deterministic generation and native controller traversal.
+  Check every service/door, blocked traversal gate, ordinary save/cold Continue,
+  and safe recovery; moving NPCs cannot obstruct required one-tile approaches.
+- The same cartridge works in native GBA and the web runtime. Record complete
+  WASM traversal plus actual foreground browser play, with zero abandoned route
+  steps, crashes or audio underruns on the agreed desktop smoke route. Preserve
+  the existing long-browser-route issue until a fresh passing result replaces it.
+- Review matched gameplay clips for representative urban, park/coast and island
+  scenes; user approval remains required for art/readability/world feel. Functional
+  checks and counts alone do not establish absurdly high quality or Emerald parity.
+
+Keep current public v80 and its saves intact during development; version private
+world drafts and incompatible save identities honestly. Commit coherent changes
+roughly every 200–300 code lines where practical, push authorized source changes
+without automatic workflows, and record each area's real progress here. Continue
+independent work while reviews are pending. Pause only for a genuinely required
+user decision or completed review-ready world; never label unfinished towns ready.
+No contributor outreach, PR merging or database work is part of this goal.
+
+
 **Current objective, October 17: a cohesive shared world with assignable content modules.** Preserve and extend
 the user's new [editable plan](world/initial-world-plan.excalidraw) through
 [the world manifest](../romhack/world/world.json) and
