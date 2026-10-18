@@ -669,6 +669,16 @@ review contrasting industrial, mixed-use and residential districts in the actual
 native game. Counts and source checks establish coverage, not visual approval.
 Public v84 stays available while the next private candidate is developed.
 
+Private v85 street revision (in progress): native target4b426d87… compiles all58
+maps,76connections,169NPCs and18local discoveries. Thirteen urban districts now
+use longer attached rows, actual curb edges, four neutral sidewalk materials,
+district furniture clusters and smaller rear-garden passages. Service fronts are
+pinned to the existing5,8 entrance; source contracts independently reject holes
+in declared street walls and triggers beside the drawn doorway. A drawn-door
+offset regression and blocked-alley regression pass. Earlier v85 iterations passed
+ordinary completed/pending-save preservation; final-target traversal, cold Continue
+and visual review are still required. The user has not accepted the new art.
+
 **Latest checkpoint: private v84, targetc955f48d… (not town acceptance).** New
 neighborhood landmarks and adult cast appearances compile alongside return-path
 masks for all58maps. Continue now rejects free-but-sealed pockets as well as

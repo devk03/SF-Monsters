@@ -263,6 +263,12 @@ class _World:
                     solid=profile['cards'][block['style']]['blocked'] if 'style' in block else True
                     expected=(block['first_metatile']+dy*width+dx,solid,3)
                     _need(cells[point]==expected,'frontage','A furnishing or terrain stamp cuts through a building')
+        if plan.get('street_design'):
+            from world_street_contract import check_streets
+            try:
+                check_streets(plan,cells,frontage,profile)
+            except ValueError as error:
+                _need(False,'frontage',str(error))
         if 'water_positions' in plan:
             positions = [position({'x': pair[0], 'y': pair[1]}, 'water position')
                          for pair in plan['water_positions'] if len(pair) == 2]

@@ -15,7 +15,7 @@ def main():
         w=Walker(c,manifest)
         for area in manifest['areas']+[{'id':manifest['league']['venue']}]:
             identifier=area['id'];w.travel(identifier);plan=w.plans[identifier]
-            points=[(14,7)] if plan.get('town_blocks') and identifier not in ('golden_gate_park','lands_end','sutro_tower','angel_island') else []
+            points=[(14,8)] if plan.get('town_blocks') and identifier not in ('golden_gate_park','lands_end','sutro_tower','angel_island') else []
             points += [(p['x'],p['y']) for p in plan.get('scenic_viewpoints',[])]
             if not points:points=[(16,8)]
             for number,point in enumerate(dict.fromkeys(points)):

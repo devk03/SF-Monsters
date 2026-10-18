@@ -46,7 +46,7 @@ def compile_kit(root=ROOT, profile='residential'):
             result.append(FIRST_TILE + tile_ids[tile] | bank << 12)
         return result
 
-    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False):
+    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False, ground_width=16):
         if len(pixels) != width*height or width % 16 or height % 16 or max(pixels) > 15:
             raise ValueError('Native SF card dimensions/palette are invalid')
         ids = []
@@ -55,8 +55,9 @@ def compile_kit(root=ROOT, profile='residential'):
             for x in range(0, width, 16):
                 row.append(FIRST_METATILE + len(records))
                 piece=crop(pixels,width,x,y,16,16)
+                base=crop(ground,ground_width,x,y,16,16) if ground_width>16 else ground
                 records.append(words(piece,bank)+words(empty,bank) if floor
-                               else words(ground,ground_bank)+words(piece,bank))
+                               else words(base,ground_bank)+words(piece,bank))
                 attributes.append(LAYER_COVERED | behavior)
             ids.append(row)
         catalog[name] = {'tiles': ids, 'blocked': blocked}
@@ -231,6 +232,9 @@ def compile_kit(root=ROOT, profile='residential'):
         from world_surfaces import surfaces
         for name, w, h, pixels in surfaces():
             card(name,pixels,w,h,7,paving,7,False,floor=True)
+        pit=next(pixels for name,_,_,pixels in surfaces() if name=='tree_well')
+        raw,w,h=furniture['tree']
+        card('street_tree',raw,w,h,6,pit,7,ground_width=32)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

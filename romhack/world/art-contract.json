@@ -528,6 +528,14 @@
           "blocked": false,
           "behavior": 0,
           "layer": 1
+        },
+        "street_tree": {
+          "first": 647,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },
@@ -787,6 +795,14 @@
           "width": 2,
           "height": 2,
           "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 646,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
           "behavior": 0,
           "layer": 1
         }
@@ -1287,6 +1303,14 @@
           "blocked": false,
           "behavior": 0,
           "layer": 1
+        },
+        "street_tree": {
+          "first": 641,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },
@@ -1530,6 +1554,14 @@
           "width": 2,
           "height": 2,
           "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 605,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
           "behavior": 0,
           "layer": 1
         }
@@ -1855,6 +1887,14 @@
           "width": 2,
           "height": 2,
           "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 659,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
           "behavior": 0,
           "layer": 1
         }

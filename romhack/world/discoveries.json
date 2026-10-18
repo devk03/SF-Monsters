@@ -25,11 +25,11 @@
       "kind": "favor",
       "object": [
         13,
-        5
+        9
       ],
       "standing": [
-        12,
-        5
+        13,
+        10
       ],
       "resident_index": 2,
       "item": "ITEM_REPEL",
