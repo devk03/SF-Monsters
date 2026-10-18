@@ -731,7 +731,7 @@ paint families where native free banks are available. Industrial/civic kits reta
 existing distinct material palettes. The final v88 candidate passes native/web checks and is now published; human
 visual acceptance remains open.
 
-Private v89 native SF Map — October 18, 2026:
+Published v89 native SF Map — October 18, 2026:
 
 - Replaced the sparse graph with original peninsula/bay/island pixel artwork,
   separate current/selected markers, walk/water/locked legends and explicit
@@ -754,7 +754,7 @@ Private v89 native SF Map — October 18, 2026:
   route/WASM proof passes105,935frames with all294,912guest RAM bytes equal,
   SHAce13d4b0…. A separate103,732-frame replay of all19guide-route contexts also
   matches full guest RAM (SHA4aa40d8d…). Actual browser timing remains failed;
-  v88 remains public while publication is prepared. No human map/town/art
+  v89 is published as a functional preview. No human map/town/art
   acceptance is claimed.
 - The new finite native browser reference visits six maps: Noe Valley, its repair
   cafe/rest service, route10, Mission Bay, its cafe and gym6site, then returns.
@@ -766,6 +766,15 @@ Private v89 native SF Map — October 18, 2026:
   playback. Full receipt/audit/screenshot are retained in
   `town-v89-browser-loop/`; the browser acceptance gate stays open. Diagnose
   the stalled audio host and late main-thread task before retrying timing QA.
+
+- Actual website local-ROM patching, v88ordinary Save/import/cold Continue,
+  SF Map selection/details/Bback/Startclose and resumed field controls are
+  observed in `town-v89-browser-review/`. This short functional check does not
+  override the failed180second diagnostic. Website player/runtime/save UI and
+  rootv80 are unchanged. Only world BPS/manifest changed; no workflow ran.
+- Public patch:760,751bytes,SHA647b0c395e5ab6d84c0f2f134a0e85377aa5e8c229d3ef7cd6776a648077fdfd.
+  Site76/sourceaa1cdc3f… was packaged from the exact staged patch; archive audit
+  excludes private saves/states/commercial ROMs. Human review remains pending.
 
 Published v88 building variety — October 18, 2026:
 

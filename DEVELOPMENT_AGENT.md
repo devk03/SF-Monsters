@@ -13,11 +13,12 @@ Keep bounded alignment reviews about every30active minutes. The old paused goal
 card cannot be replaced while its browser-route/review gates remain unfinished;
 do not falsely close it or treat that UI limitation as a reason to stop work.
 
-Current checkpoint: v0.0.88 is published at `/world`; root v80 stays available.
+Current checkpoint: v0.0.89 is published at `/world`; root v80 stays available.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,
 with warm/sage/slate paint, finished exposed edges, district planting and signs. Browser UI uses integer pixels,
 grouped file tools and optional desktop controls. Read section 15.1 for evidence;
-human visual acceptance and native SF Map presentation remain open.
+native SF Map now has original peninsula/bay/island art and verified controls.
+Human visual acceptance and full foreground browser performance remain open.
 Latest feedback rejects repeated paving and sparse detached urban blocks. Rebuild
 street composition with longer attached frontages, actual curbs and distinct
 district materials/decoration. Review contrasting districts in native gameplay;

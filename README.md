@@ -19,7 +19,7 @@ its geography and readability, then continues district/route/interior finishing.
 All 18 local activities have passed native reward/revisit checks. The 58-map
 controller circuit, earlier land/Surf save upgrades and original-resource audits
 pass on their recorded draft builds. These are functional checks, not final town
-or art approval. The latest v88 candidate completed a full104,863-frame native/WASM route with
+or art approval. The latest v88 candidate completed a full105,935-frame native/WASM route with
 byte-identical guest RAM. Actual browser patch/import/cold Continue displays its
 new architecture and paint; earlier30-second smoke samples remain separate. The longer browser-session issue and human quality review remain open.
 See the [generation guide](docs/world/generation.md) and the current
@@ -63,7 +63,7 @@ progression and exits stay with the core game. All slots remain unassigned.
 ## What is playable now
 
 The [world preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/world)
-is **v0.0.88**: all 18 destinations and their routes, residents, local activities,
+is **v0.0.89**: all 18 destinations and their routes, residents, local activities,
 small service interiors, city guide and eight reserved gym sites. The loan
 creature and gym access stamps are development tools. Final encounters, story
 missions, balance and human world-quality acceptance remain open.
