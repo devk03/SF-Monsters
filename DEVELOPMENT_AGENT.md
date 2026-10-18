@@ -6,6 +6,14 @@ completion gates and latest progress. The user explicitly resumed implementation
 beyond the prior blockout-review pause. Gym content remains contributor-owned;
 finish its site/approach while preserving the assigned entry/state contracts.
 
+Current checkpoint: v0.0.84 is published at `/world`; root v80 stays available.
+The world is a functional review candidate, not human-approved finished towns.
+Read the latest section 15.1 evidence and review clips before further changes.
+All 58 maps and their native/WASM route pass; final visual acceptance remains open.
+During active implementation, check with the existing alignment chat about every
+30 minutes. Use bounded reviews, not recurring monitors; no review grants merge
+or deployment approval beyond the user's authorized scope.
+
 The blockout and module workflow are foundations, not finished towns. Keep maps
 32×24, use connected urban blocks and neutral gray paving, add natural residents,
 safe ambient movement, useful interiors/services, discoveries and revisit dialogue.

@@ -652,6 +652,13 @@ section but its tool-controlled status remains paused; do not pretend it was
 rewritten or mark unfinished prior gates complete to replace it. This spec is the
 canonical expanded objective while implementation continues.
 
+**Current stage: published functional-world review candidate.** The 18 destinations
+are connected, populated and playable. User review of town/world quality is still
+pending; no town or full domain is marked accepted. Current public world preview:
+https://sf-mini-monsters.devkunjadia03.chatgpt.site/world. Root v80 remains available.
+During active work, check with the existing alignment chat about every 30 minutes
+through bounded reviews; do not create recurring monitors for this cadence.
+
 **Latest checkpoint: private v84, targetc955f48d… (not town acceptance).** New
 neighborhood landmarks and adult cast appearances compile alongside return-path
 masks for all58maps. Continue now rejects free-but-sealed pockets as well as
@@ -934,10 +941,39 @@ commits are recorded separately with the frozen-input digest; the first
 unpublished provisional manifest is preserved under ignored storage. No build
 reproducibility is inferred from the staging-base commit alone.
 
-Next priorities: distinguish district compositions/landmarks, finish nature/coast
-and island environments, add local discoveries, exercise all doors/services and
-safe save/resume positions, then capture the complete same-ROM native/WASM route
-and foreground browser evidence. New collision is compiled into the map; no roof
+**Published October17,20:30SF — Site version73.** Separate `/world` serves
+0.0.84-world-preview, targetc955f48d…;704,773-byteBPS SHA54fef92f…. Site source
+b4bc3d62ead48509cbb773f22545a66d2ac88e80; successful deployment
+appgdep_6ad43d6a842c8191910c398d7a56aeb7. Actual published-page ZIP patching
+downloads the exact tested16MiB cartridge. No production save was imported or
+written during that smoke. Local Site UI additionally proves both cross-edition
+rejections, both valid older-save imports, world Continue/walking and unchanged
+v80download9b5e6bc4…. TypeScript, production build and eight release-gate
+regressions pass. The archive contains the unchanged v80patch, the new world
+patch and the original standalone prototype; no commercial ROM or private Save.
+An initial unpublished package included macOS sidecars. It was replaced with a
+clean package before deployment; saved version72 was never deployed. The public
+audience is preserved. GitHub About/homepage now describe and link the world.
+
+The final33.35sec native street, park, shore and island comparison clips use
+c955f48d…, the genuine private Emerald courtyard, identical1992-frame controller
+input and equal3×nearest scaling. Separate audio tracks and cartridge labels
+preserve scope. Paths: `.tools/benchmarks/town-v84-{urban,park,shore,island}-paired-review/comparison.mp4`.
+The additional `coast` clip shows the ruins detail. These are exterior subset
+reviews, not biome-equivalent reference scenes or full-domain acceptance. The
+18-town HTML review is also verified in the actual browser; scores remain blank.
+Public/runtime evidence: `.tools/benchmarks/town-v84-website-player-local/`.
+
+**Remaining acceptance:** user review and resulting world refinements. The older
+long-browser-session issue remains open, and short foreground checks do not
+establish physical-phone performance. Final gym battles, contributor missions,
+the complete story/cast/monster campaign and broader Emerald parity remain
+separate unfinished work. A reviewable published world does not close those gates.
+
+Next gate: review the current street, park, shore and island clips and18-town
+artifact, then apply the user's concrete feedback. Functional assembly checks
+are complete for this candidate; visual quality is not inferred from them.
+New collision is compiled into the map; no roof
 is painted over a walkable footprint. Resume safety now also avoids actor movement
 envelopes and coordinate triggers. These protections require runtime regression
 checks; source conformance alone is not an acceptance claim.

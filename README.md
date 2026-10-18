@@ -2,13 +2,14 @@
 
 An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
-[Play the current preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/) ·
+[Play the world preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/world) ·
+[v80 Sunset preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/) ·
 [Game spec and progress](docs/game-spec.md#15-active-emerald-parity-goal) ·
 [Development agent](DEVELOPMENT_AGENT.md) · [Build a gym or mission](CONTRIBUTING.md)
 
 ## Current development goal: finish the compact SF world
 
-The private v84 world draft has 18 compact destinations, 19 connectors, eight
+The v84 world preview has 18 compact destinations, 19 connectors, eight
 reserved gym rooms and 13 small service interiors. Urban areas use dense attached
 blocks, original SF landmark candidates, authored residents and safe walkers.
 Parks, coasts and both islands have distinct trails and scenery. An in-game SF
@@ -19,12 +20,12 @@ controller circuit, earlier land/Surf save upgrades and original-resource audits
 pass on their recorded draft builds. These are functional checks, not final town
 or art approval. The latest neighborhood candidate completed a full 110,450-frame
 native/WASM route with byte-identical guest RAM and a clean 30-second foreground
-browser movement sample. A further save-recovery fix is under final regression;
-the longer browser-session issue and human quality review remain open.
+browser movement sample. The final save-recovery revision passes those route
+checks too. The longer browser-session issue and human quality review remain open.
 See the [generation guide](docs/world/generation.md) and the current
 [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
-The existing website preview stays v80. A separate `/world` exploration preview
-is being prepared from the tested v84 cartridge, with its own save slot and
+The existing root website preview stays v80. The separate `/world` exploration
+preview is live with the tested v84 cartridge, its own save slot and
 temporary access stamps. Final gym battles, contributor missions and human
 town-quality acceptance remain unfinished.
 
@@ -61,14 +62,21 @@ progression and exits stay with the core game. All slots remain unassigned.
 
 ## What is playable now
 
-The public preview is **v0.0.80**: Outer Sunset, Muni to SoMa/South Park, clinic,
+The [world preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/world)
+is **v0.0.84**: all 18 destinations and their routes, residents, local activities,
+small service interiors, city guide and eight reserved gym sites. The loan
+creature and gym access stamps are development tools. Final encounters, story
+missions, balance and human world-quality acceptance remain open.
+
+The default root preview is **v0.0.80**: Outer Sunset, Muni to SoMa/South Park, clinic,
 courier apartment, Seed Room and the first Cognition gym draft, with eighteen
 original creature candidates and three starter evolution lines. It is unfinished;
 the new Dogpatch world and diagram's themed gyms are not yet implemented there.
 
 Players supply the supported Emerald .gba or ZIP. The website patches it locally;
 ROM bytes stay on the player's device. The resulting cartridge can be downloaded
-for a standard GBA emulator. [Download the SF patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps).
+for a standard GBA emulator. [World patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/world-patch/sf-mini-monsters.bps) ·
+[v80 patch](https://sf-mini-monsters.devkunjadia03.chatgpt.site/patch/sf-mini-monsters.bps).
 
 World generation uses a separate draft profile and save identity. Keep v80 saves
 backed up; do not assume a new starting map is a compatible continuation.
