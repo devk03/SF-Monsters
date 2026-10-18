@@ -305,8 +305,11 @@ class _World:
         script = plan['script']
         _need(type(script) is str and re.fullmatch(r'[A-Za-z0-9_-]+\.inc', script),
               'script', 'Script must be a local .inc filename')
+        landmarks = [position(event, identifier+' landmark') for event in plan.get('world_sections',[])]
+        _need(all(not cells[p][1] and p not in occupied and p not in coords for p in landmarks),
+              'landmark', 'Named world section is blocked by geometry, an actor or a trigger')
         return {'cells': cells, 'water': wet, 'occupied': occupied, 'coords': coords,
-                'access': access, 'connections': {}, 'warp_actions': {}}
+                'access': access, 'landmarks':landmarks, 'connections': {}, 'warp_actions': {}}
 
     def _connections(self):
         for identifier, plan in self.plans.items():
@@ -503,6 +506,8 @@ class _World:
         _need({identifier for identifier, _ in seen} == set(self.boards), 'reachability',
               'Generated route or gym map remains unreachable')
         for identifier, board in self.boards.items():
+            _need(all((identifier,p) in seen for p in board['landmarks']),
+                  'landmark', 'Named world section is unreachable')
             for point in board['access']:
                 _need(self._accessible(identifier, point, seen), 'access',
                       f'{identifier}: unreachable {point["kind"]} access position')

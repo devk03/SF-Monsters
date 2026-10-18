@@ -266,6 +266,13 @@ class WorldContractTests(unittest.TestCase):
         board['legend']['C']=[614,True,3]  # A wall cannot act as a counter.
         self.reject(m,p,'access')
 
+    def test_ambient_actor_cannot_occupy_a_named_world_section(self):
+        m,p=fixture()
+        p['angel_island']['world_sections']=[dict(id='lookout',x=25,y=16)]
+        self.reject(m,p,'landmark')
+        p['angel_island']['world_sections'][0].update(x=24,y=16)
+        self.assertTrue(run(m,p)['passed'])
+
     def test_malformed_inputs_return_errors_instead_of_claiming_success(self):
         m, p = fixture()
         for bad_manifest, bad_plans in [(None, []), ({}, []), (m, None), (m, [{}])]:

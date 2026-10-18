@@ -110,6 +110,22 @@ class ModulesTest(unittest.TestCase):
         path.symlink_to(preserved)
         with self.assertRaises(ValueError): load_modules(self.manifest,self.packages)
 
+    def test_core_actor_count_does_not_hide_reassigned_identity(self):
+        modules=load_modules(self.manifest,self.packages)
+        plans=generate(self.manifest)
+        plan=next(p for p in plans if p['world_id']=='potrero_hill')
+        plan['npcs'][0]['script']='WBTown_potrero_hill_0'
+        with self.assertRaises(ValueError):apply_module_layouts(plans,modules)
+
+    def test_module_cutscene_cannot_move_a_shared_world_actor(self):
+        contract=load_modules(self.manifest,self.packages)['gym_1']['contract']
+        source=('SFMod_gym_1_Run::\n    applymovement LOCALID_SF_ROUTE124_1, SFMod_gym_1_Walk\n'
+                '    sfmodule_return 0\nSFMod_gym_1_Walk::\n    walk_left\n    step_end\n')
+        own={'LOCALID_SF_ROUTE124_2'}
+        with self.assertRaises(ValueError):lint_script(source,contract,own)
+        valid=source.replace('LOCALID_SF_ROUTE124_1','LOCALID_SF_ROUTE124_2')
+        self.assertEqual(lint_script(valid,contract,own),valid)
+
     def test_pr_scope_rejects_shared_and_other_package_changes(self):
         self.assertEqual(check_scope('gym_1',['romhack/modules/gym_1/content.inc']),[])
         self.assertEqual(check_scope('gym_1',['romhack/world/world.json','romhack/modules/gym_2/module.json']),

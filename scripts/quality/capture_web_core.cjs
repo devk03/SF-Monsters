@@ -100,7 +100,7 @@ async function capture(options) {
   }
   fs.mkdirSync(output);
   const filename = extension => path.join(output,'capture.'+extension);
-  const audio = fs.openSync(filename('pcm'),'wx'), trace = fs.openSync(filename('csv'),'wx');
+  const audio = options.noPcm ? null : fs.openSync(filename('pcm'),'wx'), trace = fs.openSync(filename('csv'),'wx');
   const audioPointer = core._malloc(8192*4);
   let audioSamples=0, audioPeak=0, frames=0;
   function drain(record) {
@@ -109,7 +109,7 @@ async function capture(options) {
       if (!count) throw new Error('Audio queue could not drain.');
       if (record) {
         const bytes=Buffer.from(core.HEAPU8.subarray(audioPointer,audioPointer+count*4));
-        fs.writeSync(audio,bytes); audioSamples+=count;
+        if(audio!==null) fs.writeSync(audio,bytes); audioSamples+=count;
         for (let i=0;i<bytes.length;i+=2) audioPeak=Math.max(audioPeak,Math.abs(bytes.readInt16LE(i)));
       }
     }
@@ -137,7 +137,7 @@ async function capture(options) {
       }
     }
     if (gzip) {gzip.end(); await once(videoFile,'finish');}
-  } finally {fs.closeSync(audio); fs.closeSync(trace); core._free(audioPointer);}
+  } finally {if(audio!==null) fs.closeSync(audio); fs.closeSync(trace); core._free(audioPointer);}
   const statePointer=core._malloc(core._mgbawasm_state_size());
   try {
     if (!core._mgbawasm_state_save(statePointer)) throw new Error('Could not export the actual core state.');
@@ -148,7 +148,7 @@ async function capture(options) {
   const pixels=core._mgbawasm_video_ptr();
   fs.writeFileSync(filename('final.rgba'),Buffer.from(core.HEAPU8.subarray(pixels,pixels+240*160*4)));
   const metadata={frames,frequency:16777216,frame_cycles:280896,sample_rate:core._mgbawasm_sample_rate(),
-    audio_samples:audioSamples,audio_peak:audioPeak,width:240,height:160,rom_sha256:digest,game_code:'BPEE',
+    audio_samples:audioSamples,audio_peak:audioPeak,audio_pcm_recorded:!options.noPcm,width:240,height:160,rom_sha256:digest,game_code:'BPEE',
     runtime:'WebAssembly mGBA 0.10.5 core, Node controller harness',mgba_revision:REVISION,
     controller_only:true,trace_only:!options.video,input_sha256:hash(Buffer.from(input)),
     battery_input_sha256:battery?hash(battery):null,state_input_sha256:state?hash(state):null,
@@ -165,9 +165,10 @@ function argumentsFrom(argv) {
   const options={};
   for (let i=0;i<argv.length;i++) {
     if (argv[i]==='--video') {options.video=true;continue;}
+    if (argv[i]==='--no-pcm') {options.noPcm=true;continue;}
     const key=argv[i].replace(/^--/,'');
     if (!['rom','input','name','state','battery'].includes(key) || !argv[i+1] || options[key])
-      throw new Error('Use --rom PATH --input CSV --name NAME [--state PATH | --battery PATH] [--video].');
+      throw new Error('Use --rom PATH --input CSV --name NAME [--state PATH | --battery PATH] [--video] [--no-pcm].');
     options[key]=argv[++i];
   }
   if (!options.rom||!options.input||!options.name) throw new Error('ROM, input and a new output name are required.');

@@ -608,7 +608,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "potrero_hill_room",
@@ -635,7 +657,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "mission_room",
@@ -662,7 +706,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "castro_room",
@@ -689,7 +755,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "outer_sunset_room",
@@ -716,7 +804,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "marina_room",
@@ -743,7 +853,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "pacific_heights_room",
@@ -770,7 +902,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "noe_valley_room",
@@ -797,7 +951,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "mission_bay_room",
@@ -824,7 +1000,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "giants_stadium_room",
@@ -851,7 +1049,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "financial_district_room",
@@ -878,7 +1098,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "north_beach_room",
@@ -905,7 +1147,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     },
     {
       "id": "treasure_island_room",
@@ -932,7 +1196,29 @@
       "size": [
         16,
         11
-      ]
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     }
   ]
 }

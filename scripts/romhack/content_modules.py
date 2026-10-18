@@ -26,7 +26,7 @@ def local_file(directory, name):
     return path
 
 
-def lint_script(source, contract):
+def lint_script(source, contract, actors=None):
     """Catch namespace/state escapes; this is a contribution contract, not a sandbox."""
     prefix = 'SFMod_' + contract['id'] + '_'
     definitions = set(re.findall(r'(?m)^([A-Za-z_][A-Za-z0-9_]*):{1,2}\s*$', source))
@@ -62,6 +62,11 @@ def lint_script(source, contract):
             raise ValueError('Module cannot write shared story/save variables')
         if command in ('setflag', 'clearflag') and parts[0] not in flags:
             raise ValueError('Module cannot write another package or core flag')
+        if command in ('applymovement','waitmovement'):
+            allowed = set(actors or ()) | {'LOCALID_PLAYER'}
+            if command == 'waitmovement':allowed.add('0')
+            if parts[0] not in allowed:
+                raise ValueError('Module movement can control only its assigned NPCs or the player')
         if command.startswith('trainerbattle') or command == 'checktrainerflag':
             if parts[0] not in trainers:
                 raise ValueError('Module uses an unassigned trainer slot')
@@ -120,7 +125,9 @@ def load_modules(manifest, directory=MODULES):
         if meta['schema_version'] != 1 or meta['id'] != identifier or meta['status'] not in (
                 'stub', 'draft', 'ready_for_review'):
             raise ValueError('Module identity/status is invalid; approval is never self-declared')
-        script = lint_script(local_file(package, 'content.inc').read_text(), contract)
+        map_slot = next(r['engine_map'] for r in manifest['areas']+manifest['gyms'] if r['id']==target)
+        actors = {f'LOCALID_SF_{map_slot.upper()}_{npc["id"]}' for npc in meta['npcs']}
+        script = lint_script(local_file(package, 'content.inc').read_text(), contract, actors)
         for team in meta['trainers']:
             if team['id'] not in slots:
                 raise ValueError('Package edits an unassigned native team')
@@ -152,6 +159,9 @@ def apply_module_layouts(plans, modules):
         expected = module['contract'].get('core_npc_count')
         if expected is not None and len(plan['npcs']) != expected:
             raise ValueError('Core NPC allocation changed; revise the shared module contract')
+        binding = module['contract'].get('core_bindings')
+        if binding is not None and {str(n['id']):n['script'] for n in plan['npcs']} != binding:
+            raise ValueError('Core NPC identity binding changed; revise the module contract')
         if module['meta']['status'] == 'stub':
             continue
         if module['rows'] is not None:

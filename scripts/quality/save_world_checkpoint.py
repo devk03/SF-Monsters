@@ -11,10 +11,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--state', type=Path, required=True)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--rom',type=Path,help='Immutable matching cartridge for an upgrade fixture')
+    parser.add_argument('--elf',type=Path,help='Its matching immutable ELF')
     args = parser.parse_args()
+    if bool(args.rom) != bool(args.elf):parser.error('Provide --rom and --elf together')
     engine = ROOT / '.tools/pokeemerald-world-host'
     state = args.state.resolve()
-    c = Controller(engine / 'sf-world-blockout.gba', engine / 'sf-world-blockout.elf',
+    c = Controller(args.rom or engine / 'sf-world-blockout.gba', args.elf or engine / 'sf-world-blockout.elf',
                    ROOT / '.tools/benchmarks' / args.name, state=state,
                    battery=state.with_suffix('.sav'))
     try:
@@ -45,6 +48,7 @@ def main():
             raise ValueError('Ordinary Save lost the blockout identity')
         result = {'passed': True, 'flash_counter': counter, 'position': expected,
                   'surfing': bool(avatar & 8), 'rom_sha256': c.digest(),
+                  'save_magic':identity['save_magic'],'save_schema':identity['save_schema'],
                   'scope': 'ordinary native Save and checksums; cold Continue checked separately'}
         (c.output / 'save-result.json').write_text(json.dumps(result, indent=2))
         print(json.dumps(result))

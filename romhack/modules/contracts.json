@@ -21,7 +21,10 @@
         "FLAG_UNUSED_0x021"
       ],
       "completion_flag": "FLAG_UNUSED_0x022",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_1_Info"
+      }
     },
     {
       "id": "gym_2",
@@ -43,7 +46,10 @@
         "FLAG_UNUSED_0x024"
       ],
       "completion_flag": "FLAG_UNUSED_0x025",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_2_Info"
+      }
     },
     {
       "id": "gym_3",
@@ -65,7 +71,10 @@
         "FLAG_UNUSED_0x027"
       ],
       "completion_flag": "FLAG_UNUSED_0x028",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_3_Info"
+      }
     },
     {
       "id": "gym_4",
@@ -87,7 +96,10 @@
         "FLAG_UNUSED_0x02A"
       ],
       "completion_flag": "FLAG_UNUSED_0x02B",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_4_Info"
+      }
     },
     {
       "id": "gym_5",
@@ -109,7 +121,10 @@
         "FLAG_UNUSED_0x02D"
       ],
       "completion_flag": "FLAG_UNUSED_0x02E",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_5_Info"
+      }
     },
     {
       "id": "gym_6",
@@ -131,7 +146,10 @@
         "FLAG_UNUSED_0x030"
       ],
       "completion_flag": "FLAG_UNUSED_0x031",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_6_Info"
+      }
     },
     {
       "id": "gym_7",
@@ -153,7 +171,10 @@
         "FLAG_UNUSED_0x033"
       ],
       "completion_flag": "FLAG_UNUSED_0x034",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_7_Info"
+      }
     },
     {
       "id": "gym_8",
@@ -175,7 +196,10 @@
         "FLAG_UNUSED_0x036"
       ],
       "completion_flag": "FLAG_UNUSED_0x037",
-      "core_npc_count": 1
+      "core_npc_count": 1,
+      "core_bindings": {
+        "1": "WB_gym_8_Info"
+      }
     },
     {
       "id": "mission_potrero_rival",
@@ -194,7 +218,18 @@
         "FLAG_UNUSED_0x039"
       ],
       "completion_flag": "FLAG_UNUSED_0x03A",
-      "core_npc_count": 9
+      "core_npc_count": 9,
+      "core_bindings": {
+        "1": "WB_potrero_hill_Info",
+        "2": "WBTown_potrero_hill_0",
+        "3": "WBTown_potrero_hill_1",
+        "4": "WBTown_potrero_hill_2",
+        "5": "WBTown_potrero_hill_3",
+        "6": "WBTown_potrero_hill_4",
+        "7": "WBTown_potrero_hill_5",
+        "8": "WBTown_potrero_hill_6",
+        "9": "WBTown_potrero_hill_7"
+      }
     },
     {
       "id": "mission_meteorite",
@@ -213,7 +248,18 @@
         "FLAG_UNUSED_0x03C"
       ],
       "completion_flag": "FLAG_UNUSED_0x03D",
-      "core_npc_count": 9
+      "core_npc_count": 9,
+      "core_bindings": {
+        "1": "WB_pacific_heights_Info",
+        "2": "WBTown_pacific_heights_0",
+        "3": "WBTown_pacific_heights_1",
+        "4": "WBTown_pacific_heights_2",
+        "5": "WBTown_pacific_heights_3",
+        "6": "WBTown_pacific_heights_4",
+        "7": "WBTown_pacific_heights_5",
+        "8": "WBTown_pacific_heights_6",
+        "9": "WBTown_pacific_heights_7"
+      }
     },
     {
       "id": "mission_stadium",
@@ -232,7 +278,18 @@
         "FLAG_UNUSED_0x03F"
       ],
       "completion_flag": "FLAG_UNUSED_0x040",
-      "core_npc_count": 9
+      "core_npc_count": 9,
+      "core_bindings": {
+        "1": "WB_giants_stadium_Info",
+        "2": "WBTown_giants_stadium_0",
+        "3": "WBTown_giants_stadium_1",
+        "4": "WBTown_giants_stadium_2",
+        "5": "WBTown_giants_stadium_3",
+        "6": "WBTown_giants_stadium_4",
+        "7": "WBTown_giants_stadium_5",
+        "8": "WBTown_giants_stadium_6",
+        "9": "WBTown_giants_stadium_7"
+      }
     },
     {
       "id": "mission_treasure_island",
@@ -251,7 +308,18 @@
         "FLAG_UNUSED_0x042"
       ],
       "completion_flag": "FLAG_UNUSED_0x043",
-      "core_npc_count": 9
+      "core_npc_count": 9,
+      "core_bindings": {
+        "1": "WB_treasure_island_Info",
+        "2": "WBTown_treasure_island_0",
+        "3": "WBTown_treasure_island_1",
+        "4": "WBTown_treasure_island_2",
+        "5": "WBTown_treasure_island_3",
+        "6": "WBTown_treasure_island_4",
+        "7": "WBTown_treasure_island_5",
+        "8": "WBTown_treasure_island_6",
+        "9": "WBTown_treasure_island_7"
+      }
     },
     {
       "id": "mission_sutro_tower",
@@ -270,7 +338,12 @@
         "FLAG_UNUSED_0x045"
       ],
       "completion_flag": "FLAG_UNUSED_0x046",
-      "core_npc_count": 3
+      "core_npc_count": 3,
+      "core_bindings": {
+        "1": "WB_sutro_tower_Info",
+        "2": "WBTown_sutro_tower_0",
+        "3": "WBTown_sutro_tower_1"
+      }
     },
     {
       "id": "mission_lands_end",
@@ -289,7 +362,12 @@
         "FLAG_UNUSED_0x048"
       ],
       "completion_flag": "FLAG_UNUSED_0x049",
-      "core_npc_count": 3
+      "core_npc_count": 3,
+      "core_bindings": {
+        "1": "WB_lands_end_Info",
+        "2": "WBTown_lands_end_0",
+        "3": "WBTown_lands_end_1"
+      }
     }
   ]
 }

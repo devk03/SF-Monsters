@@ -736,6 +736,18 @@ No town has human quality approval and no public update has been deployed.
 | Lands End / Sutro Baths | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
 | Angel Island | Trail blockout + resident candidate | League reserved | Environment finishing still needed |
 
+Native finishing checkpoint (ROM 34514f39…, after the island actor fix):
+all 58 maps, 76 directional connections, 16 gym warps and 26 room warps pass a
+108,652-frame controller circuit. All 13 actual service rooms pass native counter
+conversation, shop cancellation and paired-door return checks. A real earlier
+Save at (10,14) cold-continues after a new actor occupies that tile, relocates to
+(10,13), visits all four island sections and returns to North Beach. Badges and
+reserved module flags remain exact, land mode is retained and Flash is unchanged.
+The first upgrade fixture used a still-free tile and was rejected; the corrected
+fixture uses the actual new actor position. Full WASM export is being rerun after
+fixing a capture-only optional-PCM cleanup error. Current source tests: 16 world,
+15 module. These results do not approve art, district identity or complete towns.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

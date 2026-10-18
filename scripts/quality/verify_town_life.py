@@ -35,11 +35,11 @@ def main():
             w.travel(room['id']);c.picture(room['area']+'-room')
             if w.location()[1] != tuple(room['arrival']):raise ValueError('Door arrival differs')
             # Talk across each actual native counter, not through a script call.
-            w.go((5,7));c.tap(64);c.tap(1,60);c.picture(room['area']+'-rest-dialogue')
+            w.go(tuple(room['services']['rest']['standing']));c.tap(64);c.tap(1,60);c.picture(room['area']+'-rest-dialogue')
             if c.read(c.symbols['sGlobalScriptContextStatus'],1)[0]==2:
                 raise ValueError('Rest counter did not reach its actor')
             close_dialogue(c)
-            w.go((10,7));c.tap(64);c.tap(1,60)
+            w.go(tuple(room['services']['shop']['standing']));c.tap(64);c.tap(1,60)
             if c.read(c.symbols['sGlobalScriptContextStatus'],1)[0]==2:
                 raise ValueError('Shop counter did not reach its actor')
             for _ in range(5):c.tap(1,60)

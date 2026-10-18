@@ -27,6 +27,7 @@ def audit_native(rom_path, elf_path, plans, engine):
             r'^#define\s+(\w+)\s+(0x[0-9A-Fa-f]+|[0-9]+)\b',source,re.MULTILINE)}
     motions = constants('event_object_movement.h')
     graphics = constants('event_objects.h')
+    flag_values = constants('flags.h')
     unique_layouts = set()
     groups = json.loads((engine / 'data/maps/map_groups.json').read_text())
     ids = {name: (g, n) for g, group in enumerate(groups['group_order'])
@@ -87,6 +88,12 @@ def audit_native(rom_path, elf_path, plans, engine):
             if (gfx,movement,ranges,elevation) != (graphics[npc['graphics']],expected_motion,
                     expected_ranges,plan['legend'][plan['rows'][npc['y']][npc['x']]][2]):
                 errors.append(name + ': compiled actor graphics/movement/envelope differs')
+            local_id, = read(obj_ptr + i*24,'B')
+            visibility, = read(obj_ptr + i*24 + 20,'H')
+            flag = npc.get('flag','0')
+            expected_flag = flag_values[flag] if flag in flag_values else int(str(flag),0)
+            if (local_id,visibility)!=(npc['id'],expected_flag):
+                errors.append(name + ': compiled actor identity/visibility differs')
             objects += 1
         for i, event in enumerate(plan['coord_events']):
             x, y = read(coord_ptr + i * 16, '2h')

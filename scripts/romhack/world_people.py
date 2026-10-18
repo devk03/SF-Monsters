@@ -44,6 +44,7 @@ def populate(plans, manifest):
         # Core count is stable before contributors receive their native IDs.
         used = {(n['x'],n['y']) for n in plan['npcs']}
         reserved = {(p['x'],p['y']) for p in plan['access_points']}
+        reserved |= {(p['x'],p['y']) for p in plan.get('world_sections',[])}
         for index, person in enumerate(residents):
             if identifier in URBAN:
                 x,y = POSITIONS[index]
