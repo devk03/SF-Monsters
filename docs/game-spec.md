@@ -759,6 +759,14 @@ residential interior kit even when the parent district changes. Original landmar
 atlas/native palette cards are candidates awaiting in-game placement and review.
 No later geometry inherits the v82 controller evidence automatically.
 
+Private v83 landscape candidate (e8adb178…): compact park loops, coastal ruin
+pocket, Sutro Tower, civic highrises, ballpark and theater motifs compile with
+unchanged graph/actor bindings. Actual controller tour visits all 18 destinations;
+ordinary earlier actor-occupied Save upgrade still relocates and exits safely.
+Rendered inspection caught an incorrect services palette binding and mechanical
+canopy repetition; these remain active corrections, not quality approval. Source
+17 world and15 module tests pass. No public update.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

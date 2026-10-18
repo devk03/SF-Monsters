@@ -50,7 +50,10 @@ def furnish(plans, manifest):
             'residential':((1,4,('coral','cafe','cream','lilac')),
                            (20,4,('lilac','cream','cafe','coral')),
                            (1,17,('pair','cream','coral')),(20,17,('cream','pair','lilac')))}
-        recipe = list(recipes[profile])
+        recipe = list(recipes.get(profile,recipes['residential']))
+        if profile == 'stadium':
+            recipe=[(1,4,('cream','cafe','cream')),(21,4,('cream','cafe','cream')),
+                    (1,17,('cafe','cream','cafe')),(21,17,('cream','cafe','cream'))]
         # Explicit neighborhood variants keep the shared door/road interface,
         # but avoid repeating the same four facades in the same order citywide.
         variants = {
@@ -72,11 +75,15 @@ def furnish(plans, manifest):
                 x+=width
         # Show a real, reserved gym facade at the existing stable trigger.
         gym = next((g for g in manifest['gyms'] if g['area']==plan['world_id']),None)
-        if gym: stamp('cream',15,3)
-        elif profile == 'industrial': stamp('coral',15,3)
-        elif profile == 'civic': stamp('sandstone',15,2)
+        landmark = None
+        if profile == 'industrial': landmark=('crane',14,3)
+        elif profile == 'civic': landmark=('highrise',15,2)
+        elif profile == 'culture': landmark=('theater',14,3)
+        elif profile == 'stadium': landmark=('stadium_gate',13,3)
+        if landmark: stamp(*landmark)
+        elif gym: stamp('cream',15,3)
         else: stamp('pair',14,3)
-        for name,x,y in [('lamp',13,5),('lamp',18,17),('meter',6,10),
+        for name,x,y in [('lamp',12 if profile=='stadium' else 13,5),('lamp',18,17),('meter',6,10),
                          ('hydrant',26,10),('bin',2,15),('rack',26,15),
                          ('bench',6,9),('tree',28,8)]:
             stamp(name,x,y)
@@ -92,4 +99,6 @@ def furnish(plans, manifest):
         plan['tilesets']['secondary']=PROFILES[profile]
         plan['town_blocks']=blocks
         plan['town_props']=['lamp','meter','hydrant','bin','rack','bench','tree']
+        if landmark:
+            plan['landmarks']=[{'name':landmark[0],'x':landmark[1],'y':landmark[2]}]
     return result

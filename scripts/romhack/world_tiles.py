@@ -9,7 +9,8 @@ FIRST_TILE = 512
 FIRST_METATILE = 512
 LAYER_COVERED = 0x1000
 PROFILES = {'residential':'gTileset_Petalburg','industrial':'gTileset_SFIndustrial',
-            'civic':'gTileset_SFCivic','nature':'gTileset_SFNature'}
+            'civic':'gTileset_SFCivic','nature':'gTileset_SFNature',
+            'culture':'gTileset_SFCulture','stadium':'gTileset_SFStadium'}
 
 
 def checked(directory, name, receipt):
@@ -26,7 +27,8 @@ def crop(pixels, width, x, y, w, h):
 def compile_kit(root=ROOT, profile='residential'):
     """Two native layers: opaque ground and original transparent architecture."""
     styles = {'residential':{'coral','cafe','cream','lilac','pair'},
-              'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set()}
+              'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
+              'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'cream','cafe'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: 0}
@@ -126,9 +128,11 @@ def compile_kit(root=ROOT, profile='residential'):
         directory=root/'assets/tiles/south-park-services-v3'
         receipt=json.loads((directory/'conversion.json').read_text())
         source=checked(directory,'buildings.indices',receipt)
+        service_palettes=checked(directory,'building-palettes.gbapal',receipt)
+        palettes[13]=service_palettes[:32] if profile=='industrial' else service_palettes[32:64]
         name='warehouse' if profile=='industrial' else 'clinic'
         offset=0 if profile=='industrial' else 8960
-        card(name,source[offset:offset+8960],112,80,6,paving,7)
+        card(name,source[offset:offset+8960],112,80,13,paving,7)
     if profile in ('industrial','civic'):
         directory=root/'assets/tiles/south-park-frontage-v1'
         receipt=json.loads((directory/'conversion.json').read_text())
@@ -138,7 +142,7 @@ def compile_kit(root=ROOT, profile='residential'):
             raw=checked(directory,name+'.indices',data)
             palettes[bank]=checked(directory,name+'.gbapal',data)
             w,h=data['size'];card(name,raw,w,h,bank,paving,7)
-    if profile == 'nature':
+    if profile != 'residential':
         directory=root/'assets/tiles/sunset-terrain'
         receipt=json.loads((directory/'conversion.json').read_text())
         grass_spec=(directory/'grass-native.json').read_bytes()
@@ -147,9 +151,23 @@ def compile_kit(root=ROOT, profile='residential'):
         grass=bytes(int(c,16) for row in json.loads(grass_spec)['cells']['0'] for c in row)
         palettes[10]=checked(directory,'terrain.gbapal',receipt)
         card('grass',empty,16,16,10,grass,10,False)
+        tree,w,h=furniture['tree']
+        card('grove',crop(tree,w,0,0,16,16),16,16,6,grass,10)
         for name in ('tree','bench','lamp','bin'):
             raw,w,h=furniture[name]
             card(name+'_grass',raw,w,h,6,grass,10)
+    landmarks={'industrial':('crane',),'civic':('highrise',),
+               'nature':('sutro_tower','windmill','conservatory','bath_ruins'),
+               'culture':('theater',),'stadium':('stadium_gate',)}
+    if profile in landmarks:
+        directory=root/'assets/tiles/sf-landmarks-v1'
+        receipt=json.loads((directory/'conversion.json').read_text())
+        palettes[9]=checked(directory,'landmarks.gbapal',receipt)
+        for name in landmarks[profile]:
+            data=next(item for item in receipt['cards'] if item['name']==name)
+            raw=checked(directory,name+'.indices',receipt);w,h=data['size']
+            background,bank=(grass,10) if profile=='nature' else (paving,7)
+            card(name,raw,w,h,9,background,bank)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     return {'tiles': tiles, 'records': records, 'attributes': attributes,

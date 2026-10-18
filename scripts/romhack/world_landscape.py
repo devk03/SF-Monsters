@@ -1,0 +1,82 @@
+"""Authored compact green spaces and connectors with the same stable route ports."""
+from copy import deepcopy
+from world_tiles import compile_kit, legend_for, PROFILES
+
+NATURE={'golden_gate_park','twin_peaks','sutro_tower','lands_end','angel_island'}
+
+
+def landscape(plans, manifest):
+    if not manifest.get('town_finishing'):return plans
+    result=deepcopy(plans);kit=compile_kit(profile='nature');cards=kit['catalog']
+    routes={r['id']:r for r in manifest['routes']}
+    for plan in result:
+        name=plan['world_id'];route=routes.get(name)
+        if name not in NATURE and (not route or route['mode']!='walk'):continue
+        old=plan['rows'];grid=[list(row) for row in old]
+        token=lambda name:chr(0x100+cards[name]['tiles'][0][0]-512)
+        def fill(x0,y0,x1,y1,name):
+            for y in range(max(1,y0),min(22,y1)+1):
+                for x in range(max(1,x0),min(30,x1)+1):grid[y][x]=token(name)
+        def stamp(name,x,y):
+            rows=cards[name]['tiles']
+            if any(not 0<y+dy<23 or not 0<x+dx<31 for dy,row in enumerate(rows) for dx,_ in enumerate(row)):
+                raise ValueError('Landscape card leaves its bounded map')
+            for dy,row in enumerate(rows):
+                for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
+        # Preserve the island's switchbacks and named section approaches. Other
+        # parks use a legible loop with short landmark pockets, not a huge plaza.
+        for y in range(1,23):
+            for x in range(1,31):
+                grid[y][x]=token('paving' if old[y][x]=='.' else 'grove')
+        if name in NATURE and name!='angel_island':
+            fill(1,1,30,22,'grove')
+            for link in plan['connections'] or []:
+                side=link['direction']
+                if side in ('left','right'):fill(1 if side=='left' else 15,11,17 if side=='left' else 30,13,'paving')
+                else:fill(15,1 if side=='up' else 11,17,13 if side=='up' else 22,'paving')
+            fill(5,6,26,8,'paving');fill(5,17,26,19,'paving')
+            fill(5,6,7,19,'paving');fill(24,6,26,19,'paving')
+            fill(10,8,18,11,'paving');fill(11,10,13,18,'paving')
+            # Small lawn pockets soften the trail without making walls invisible.
+            fill(8,14,11,16,'grass');fill(19,9,23,11,'grass')
+            fill(19,14,23,16,'grass');fill(9,20,13,21,'grass')
+        landmarks=[]
+        if name=='golden_gate_park':
+            stamp('windmill',5,2);stamp('conservatory',22,3)
+            landmarks=[('windmill',5,2),('conservatory',22,3)]
+        elif name=='sutro_tower':
+            stamp('sutro_tower',15,1);landmarks=[('sutro_tower',15,1)]
+        elif name=='lands_end':
+            stamp('bath_ruins',20,4);landmarks=[('bath_ruins',20,4)]
+            # The accessible coastal overlook is a compact clearing along the
+            # loop, with ruins above it; no fake walkable sea is painted here.
+            fill(20,6,27,9,'paving')
+        elif name=='twin_peaks':
+            # The reserved hardware gym sits above the central trail.
+            fill(14,6,18,8,'paving');fill(20,4,27,8,'paving')
+            stamp('bench',21,4);stamp('bench',25,4)
+            landmarks=[('ridge_lookout',20,4)]
+        if name in NATURE:
+            # Furniture stays outside the central info/door approaches. Choose
+            # only wholly free patches so a prop never cuts a trail in half.
+            for prop,x,y in [('bench',9,18),('bin',23,18),('lamp',18,9)]:
+                rows=cards[prop]['tiles']
+                points=[(x+dx,y+dy) for dy,row in enumerate(rows) for dx,_ in enumerate(row)]
+                if all(grid[yy][xx] in (token('paving'),token('grass')) for xx,yy in points):stamp(prop,x,y)
+        else:
+            # Dense bordering greenery frames the narrow connecting street;
+            # benches and lamps add a pause without bloating route dimensions.
+            for prop,x,y in [('bench',9,10),('lamp',21,9)]:
+                points=[(x+dx,y+dy) for dy,row in enumerate(cards[prop]['tiles']) for dx,_ in enumerate(row)]
+                if all(old[yy][xx]=='#' for xx,yy in points):stamp(prop,x,y)
+        # Native seam ports remain exactly three tiles wide and flush with the
+        # neighboring map. Seal every other edge, including decorative corners.
+        for link in plan['connections'] or []:
+            for delta in (-1,0,1):
+                x,y={'left':(0,12+delta),'right':(31,12+delta),
+                     'up':(16+delta,0),'down':(16+delta,23)}[link['direction']]
+                grid[y][x]=token('paving')
+        plan.update(rows=[''.join(row) for row in grid],legend=legend_for(kit),tile_profile='nature')
+        plan['tilesets']['secondary']=PROFILES['nature']
+        plan['landmarks']=[{'name':item,'x':x,'y':y} for item,x,y in landmarks]
+    return result

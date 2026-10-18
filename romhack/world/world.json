@@ -586,7 +586,9 @@
       "treasure_island": "industrial",
       "mission_bay": "civic",
       "financial_district": "civic",
-      "giants_stadium": "civic"
+      "giants_stadium": "stadium",
+      "castro": "culture",
+      "north_beach": "culture"
     }
   },
   "interiors": [

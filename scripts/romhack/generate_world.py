@@ -158,7 +158,8 @@ def generate(manifest):
     from world_towns import furnish
     from world_people import populate
     from world_interiors import add_rooms
-    return add_rooms(populate(furnish(plans, manifest), manifest), manifest)
+    from world_landscape import landscape
+    return add_rooms(populate(landscape(furnish(plans, manifest), manifest), manifest), manifest)
 
 
 def write_world(manifest, directory, modules_root=None):
