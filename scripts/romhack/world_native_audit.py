@@ -39,6 +39,17 @@ def audit_native(rom_path, elf_path, plans, engine):
         if (primary, secondary) != tuple(symbols[plan['tilesets'][role]]
                                          for role in ('primary', 'secondary')):
             errors.append(name + ': compiled tileset pointers differ')
+        # Original SF secondary cards have normal ground behavior and use the
+        # bottom/middle layers. Roof collision comes from the authored map;
+        # no custom card may secretly become a ledge, door or overhead bridge.
+        used = {tile for row in plan['rows'] for tile, _, _ in
+                (plan['legend'][token] for token in row) if tile >= 512}
+        if used:
+            attrs, = read(secondary + 16, 'I')
+            for tile in used:
+                behavior, = read(attrs + (tile-512)*2, 'H')
+                if behavior != 0x1000:
+                    errors.append(name + ': SF tile has unexpected behavior/layer')
         if (width, height) != (len(plan['rows'][0]), len(plan['rows'])):
             errors.append(name + ': compiled dimensions differ')
         actual = read(blocks, str(width * height) + 'H')

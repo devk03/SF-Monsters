@@ -1,5 +1,6 @@
 """Explicit private fresh-game test bench, never campaign progression evidence."""
 import json
+import re
 
 MAGIC = 0x4D51
 
@@ -50,8 +51,8 @@ def apply_playtest(directory, content, modules, identifier, scenario):
     path.write_text(source.replace(anchor, anchor + '\n'.join(init) + '\n', 1))
     # Returning to Dogpatch must retain the QA identity, not grant a second loan.
     path = directory / 'dogpatch.inc'
-    source = path.read_text().replace('VAR_UNUSED_0x40F8, 22338',
-                                      'VAR_UNUSED_0x40F8, ' + str(MAGIC))
+    source = re.sub(r'(VAR_UNUSED_0x40F8, )\d+',
+                    lambda m: m[1] + str(MAGIC), path.read_text())
     path.write_text(source)
     (directory / 'content.json').write_text(json.dumps(content, indent=2) + '\n')
     return {'kind': 'module-playtest', 'module': identifier, 'scenario': scenario,

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.81-world-blockout-draft",
+  "version": "0.0.82-town-finishing-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
-  "status": "active connected-world blockout; both islands approved October 17",
+  "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {
     "width": 32,
     "height": 24,
@@ -12,7 +12,7 @@
   "native": {
     "primary_tileset": "gTileset_General",
     "secondary_tileset": "gTileset_Petalburg",
-    "save_magic": 22338,
+    "save_magic": 22339,
     "save_schema": 1,
     "game_code": "BPEE",
     "file_name": "sf-world-blockout"
@@ -577,5 +577,9 @@
     "#": "wall",
     "W": "surf",
     "V": "waterfall"
+  },
+  "town_finishing": {
+    "revision": 1,
+    "status": "dense street candidate; population/interiors/landmarks in progress"
   }
 }

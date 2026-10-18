@@ -154,7 +154,8 @@ def generate(manifest):
         plan['water_positions'] = [[x, y] for y, row in enumerate(rows)
                                    for x, token in enumerate(row) if token in 'WV']
         plans.append(plan)
-    return plans
+    from world_towns import furnish
+    return furnish(plans, manifest)
 
 
 def write_world(manifest, directory, modules_root=None):

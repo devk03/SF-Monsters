@@ -69,7 +69,7 @@ class _World:
         _need(native['primary_tileset'] == 'gTileset_General'
               and native['secondary_tileset'] == 'gTileset_Petalburg', 'terrain',
               'Terrain semantics require the pinned General/Petalburg tilesets')
-        _need(type(native['save_magic']) is int and native['save_magic'] == 0x5742
+        _need(type(native['save_magic']) is int and native['save_magic'] == (0x5743 if manifest.get('town_finishing') else 0x5742)
               and type(native['save_schema']) is int and native['save_schema'] == 1,
               'identity', 'Blockout save identity must remain separate from v80')
         self.width, self.height = 32, 24
@@ -199,7 +199,7 @@ class _World:
             _need(type(token) is str and len(token) == 1 and type(tile) in (list, tuple)
                   and len(tile) == 3, 'terrain', 'Invalid terrain legend entry')
             _integer(tile[0], 0, 1023, 'metatile')
-            _need(tile[0] in (1, 11, WATER, WATERFALL), 'terrain',
+            _need(tile[0] in (1, 11, WATER, WATERFALL) or (self.manifest.get('town_finishing') and 512 <= tile[0] < 590), 'terrain',
                   'Unmodelled native metatile behavior in blockout terrain')
             _need(type(tile[1]) is bool, 'terrain', 'Collision must be boolean')
             _integer(tile[2], 0, 15, 'elevation')
@@ -211,7 +211,8 @@ class _World:
                 _need(tile[1] is False and tile[2] == 1, 'terrain',
                       'Native traversal water needs collision 0 and elevation 1')
             else:
-                _need(tile[2] == 3 and tile[1] is (tile[0] == 11), 'terrain',
+                solid = tile[0] == 11 or tile[0] >= 515
+                _need(tile[2] == 3 and tile[1] is solid, 'terrain',
                       'Development ground/walls must retain collision and elevation semantics')
         cells = {}
         wet = set()

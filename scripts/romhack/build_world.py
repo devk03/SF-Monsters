@@ -76,7 +76,11 @@ def main():
                 ['git', 'show', EMERALD_REVISION + ':' + path], cwd=engine, text=True)
         return cache[path]
 
-    ledger = apply_maps(content, ROOT, engine, original)
+    ledger = []
+    if manifest.get('town_finishing'):
+        from world_tiles import compile_kit, apply_kit
+        ledger += apply_kit(engine, original, compile_kit())
+    ledger += apply_maps(content, ROOT, engine, original)
     ledger += apply_battles(content, ROOT, engine, original)
     ledger += apply_engine_guards(ROOT, engine, original)
     guard = engine / 'src/sf_save_guard.h'
