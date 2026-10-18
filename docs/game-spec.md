@@ -731,6 +731,29 @@ paint families where native free banks are available. Industrial/civic kits reta
 existing distinct material palettes. The final v88 candidate passes native/web checks and is now published; human
 visual acceptance remains open.
 
+Private v89 native SF Map — October 18, 2026:
+
+- Replaced the sparse graph with original peninsula/bay/island pixel artwork,
+  separate current/selected markers, walk/water/locked legends and explicit
+  Surf/Falls requirements. Routes bind the current marker to their midpoint;
+  gym/service rooms bind to their actual district. A toggles details; B returns
+  from details to the map before closing. Start returns directly to gameplay.
+- Final candidate `7f524d0e9f970dab62654eae3d03fa7715a039b73023a9c218f26080279e04c9`
+  passes all18place selections and58native map contexts, including actual Surf,
+  both exit paths, reopening and resumed movement. Both palette buffers,
+  position/mode, party, money, inventory, core variables/flags and Flash remain
+  unchanged. A genuine v88 Noe Valley ordinary Save cold-continues safely.
+- Screenshot review caught the first candidate sharing palette14 with the menu
+  frame. Dedicated palette13 fixes that collision and is restored on exit.
+  An earlier single-process58context run hit the native driver's200,000-frame
+  bound, not a cartridge crash; three bounded groups now pass without changing
+  the driver or capture ABI. Failed evidence is retained privately.
+- Evidence: `.tools/benchmarks/town-v89-labeled-guide/` and
+  `town-v89-all-guide-contexts{,-places,-routes,-interiors}/`. Source, linked
+  resources, deterministic generation and patch roundtrip pass. The final full
+  route/WASM proof and actual browser review are still running or pending;
+  v88 remains public. No human map/town/art acceptance is claimed.
+
 Published v88 building variety — October 18, 2026:
 
 - Added original native brick walkups/fire stairs, awning shops and workshop/loft

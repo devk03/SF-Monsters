@@ -13,6 +13,7 @@ def apply_guide(root,engine,original,manifest,plans):
         if (any(c in value for c in '$"\\\n') or not value.isascii()
                 or len(value)+1>capacity):raise ValueError('Native guide field exceeds its encoded destination capacity')
         return '_("'+value+'")'
+    pixels={identifier:(20+x*174//100,34+y*82//100) for identifier,(x,y) in positions.items()}
     nodes=[]
     for area in areas:
         identifier=area['id'];x,y=positions[identifier]
@@ -22,28 +23,37 @@ def apply_guide(root,engine,original,manifest,plans):
             if identifier not in (route['from'],route['to']):continue
             other=route['to'] if identifier==route['from'] else route['from']
             label=next(a['label'] for a in areas if a['id']==other).split(' / ')[0]
-            connections.append(label+(' (water)' if route['mode']!='walk' else ''))
-        lines=textwrap.wrap('To: '+', '.join(connections),width=31,break_long_words=False)
+            connections.append(('Walk: ' if route['mode']=='walk' else 'Surf: ' if route['mode']=='surf' else 'Surf+Falls: ')+label)
+        lines=connections
+        if any(r['mode']!='walk' and identifier in (r['from'],r['to']) for r in routes):
+            lines.append('Surf: badge 5 / Falls: badge 8')
         if len(lines)>4:raise ValueError('City guide needs shorter connection labels')
         lines+=['']*(4-len(lines))
         flags=discoveries[identifier]
-        nodes.append('    {'+f'{10+x*180//100}, {38+y*58//100}, '+
+        nodes.append('    {'+f'{pixels[identifier][0]}, {pixels[identifier][1]}, '+
                      string(area['label'])+', '+string(people[identifier]['character'].capitalize(),60)+', '+
                      '{'+', '.join(map(string,lines))+'}, '+flags['done_flag']+', '+
                      (flags['found_flag'] or '0')+'}')
-    edges=['    {'+str(index[r['from']])+', '+str(index[r['to']])+', '+str(r['requires_badge'])+'}' for r in routes]
+    edges=['    {'+str(index[r['from']])+', '+str(index[r['to']])+', '+str(r['requires_badge'])+', '+str(int(r['mode']!='walk'))+'}' for r in routes]
     bindings=[]
     gyms={g['id']:g['area'] for g in manifest['gyms']};rooms={r['id']:r['area'] for r in manifest.get('interiors',[])}
     connectors={r['id']:r['from'] for r in routes}
+    route_index={r['id']:r for r in routes}
     for plan in plans:
         identifier=plan['world_id'];parent=gyms.get(identifier,rooms.get(identifier,connectors.get(identifier,identifier)))
-        bindings.append('    {MAP_GROUP('+plan['native_id']+'), MAP_NUM('+plan['native_id']+'), '+str(index[parent])+'}')
+        x,y=pixels[parent];kind=2 if identifier in gyms or identifier in rooms else 0
+        if identifier in route_index:
+            route=route_index[identifier];a,b=pixels[route['from']],pixels[route['to']]
+            x,y=(a[0]+b[0])//2,(a[1]+b[1])//2;kind=1
+        bindings.append('    {MAP_GROUP('+plan['native_id']+'), MAP_NUM('+plan['native_id']+'), '+
+                        ', '.join(map(str,(index[parent],x,y,kind)))+'}')
     header='// Generated from the authoritative world manifest and state reservations.\n'
     header+='static const struct SFGuidePlace sSFGuidePlaces[] = {\n'+',\n'.join(nodes)+'\n};\n'
     header+='static const struct SFGuideEdge sSFGuideEdges[] = {\n'+',\n'.join(edges)+'\n};\n'
-    header+='static const u8 sSFGuideBindings[][3] = {\n'+',\n'.join(bindings)+'\n};\n'
+    header+='static const u8 sSFGuideBindings[][6] = {\n'+',\n'.join(bindings)+'\n};\n'
     (engine/'src/sf_world_guide_data.h').write_text(header)
     shutil.copyfile(root/'romhack/engine/world_guide.h',engine/'src/sf_world_guide.h')
+    shutil.copyfile(root/'romhack/engine/world_guide_art.h',engine/'src/sf_world_guide_art.h')
     path='src/start_menu.c';source=original(path)
     changes=[('    MENU_ACTION_PYRAMID_BAG\n','    MENU_ACTION_PYRAMID_BAG,\n    MENU_ACTION_SF_GUIDE\n'),
              ('static bool8 StartMenuPokedexCallback(void);','static bool8 StartMenuSFGuideCallback(void);\nstatic const u8 sSFGuideLabel[];\nstatic bool8 StartMenuPokedexCallback(void);'),
@@ -62,4 +72,4 @@ def apply_guide(root,engine,original,manifest,plans):
         section=next(s for s in sections['map_sections'] if s['id']==manifest['city_guide']['native_sections'][area['id']])
         section['name']=area['label'].split(' / ')[0].replace(' / ','-').replace(': Victory Road + League','')
     (engine/sections_path).write_text(json.dumps(sections,indent=2)+'\n')
-    return [path,sections_path,'src/sf_world_guide.h','src/sf_world_guide_data.h']
+    return [path,sections_path,'src/sf_world_guide.h','src/sf_world_guide_data.h','src/sf_world_guide_art.h']

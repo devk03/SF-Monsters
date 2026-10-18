@@ -52,6 +52,7 @@ def main():
             after=bool(c.read(pointer+0x1270+n//8,1)[0]&(1<<(n%8)))
             if before!=after:raise ValueError('Completed/pending local activity did not survive ordinary Save/Continue')
         stable=read_large(pointer+0x560,0x2b0)+read_large(pointer+0x1270,0x12c)
+        palette_before=c.read(c.symbols['gPlttBufferUnfaded']+13*32,32)
         c.checkpoint('continued');c.tap(8,60)
         count=c.read(c.symbols['sNumStartMenuActions'],1)[0]
         actions=list(c.read(c.symbols['sCurrentStartMenuActions'],count));target=actions.index(13)
@@ -60,15 +61,23 @@ def main():
         c.tap(1,90)
         if c.read(c.symbols['sSFGuideWindow'],1)[0]==255:raise ValueError('SF map did not open')
         c.picture('city-map');selected=[]
+        current=c.read(c.symbols['sSFGuideCurrent'],1)
+        here=(c.read(c.symbols['sSFGuideHereX'],1),c.read(c.symbols['sSFGuideHereY'],1))
         for _ in range(18):
             c.tap(16,30);index=c.read(c.symbols['sSFGuideSelected'],1)[0]
             if index in selected:raise ValueError('SF map selection skipped or repeated a destination')
-            selected.append(index);c.tap(1,30)
+            selected.append(index)
+            if c.read(c.symbols['sSFGuideCurrent'],1)!=current or here!=(c.read(c.symbols['sSFGuideHereX'],1),c.read(c.symbols['sSFGuideHereY'],1)):
+                raise ValueError('Selecting a place moved the current-location marker')
+            c.tap(1,30)
             if c.read(c.symbols['sSFGuideDetails'],1)[0]!=1:raise ValueError('SF place details did not open')
-            c.picture(f'place-{index:02d}');c.tap(1,30)
+            c.picture(f'place-{index:02d}');c.tap(2,60)
+            if c.read(c.symbols['sSFGuideWindow'],1)[0]==255 or c.read(c.symbols['sSFGuideDetails'],1)[0]:
+                raise ValueError('B from details did not return to the city map')
         c.tap(2,60)
         if c.read(c.symbols['sSFGuideWindow'],1)[0]!=255:raise ValueError('B did not return from the guide')
         c.tap(2,60)
+        if c.read(c.symbols['gPlttBufferUnfaded']+13*32,32)!=palette_before:raise ValueError('SF map leaked its palette into the field')
         if c.position()!=expected['position']:raise ValueError('Reading the guide moved the player')
         if read_large(pointer+0x560,0x2b0)+read_large(pointer+0x1270,0x12c)!=stable:raise ValueError('Reading the guide changed inventory or flags')
         c.checkpoint('returned')
@@ -76,7 +85,7 @@ def main():
         result={'passed':True,'rom_sha256':c.digest(),'old_rom_sha256':expected['rom_sha256'],
                 'actor_templates_refreshed':len(plan['npcs']),'player_position_preserved':True,
                 'saved_local_flags_preserved':len(catalog['flags']),'guide_destinations':len(selected),
-                'inventory_flags_and_flash_unchanged':True,'scope':'native guide selection, details, return and older-save actor refresh; visual approval separate'}
+                'inventory_flags_and_flash_unchanged':True,'field_palette_restored':True,'current_marker_stable':True,'detail_back_returns_to_map':True,'scope':'native guide selection, details, return and older-save actor refresh; visual approval separate'}
         result.update(party_and_held_items_preserved=True,money_preserved=True,core_chapter_variables_preserved=True)
         (c.output/'guide-result.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
     finally:c.close()
