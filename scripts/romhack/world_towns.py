@@ -110,4 +110,8 @@ def furnish(plans, manifest):
         plan['town_props']=['lamp','meter','hydrant','bin','rack','bench','tree']
         if landmark:
             plan['landmarks']=[{'name':landmark[0],'x':landmark[1],'y':landmark[2]}]
+            style,x,y=landmark;card=kit['catalog'][style]
+            blocks.append({'style':style,'x':x,'y':y,'width':len(card['tiles'][0]),
+                           'height':len(card['tiles']),'first_metatile':card['tiles'][0][0]})
+            plan['scenic_viewpoints']=[{'x':16,'y':8,'name':style}]
     return result

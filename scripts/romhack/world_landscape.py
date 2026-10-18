@@ -106,4 +106,12 @@ def landscape(plans, manifest):
         plan['water_positions']=[[x,y] for y,row in enumerate(grid) for x,value in enumerate(row) if value in 'WV']
         plan['tilesets']['secondary']=PROFILES['nature']
         plan['landmarks']=[{'name':item,'x':x,'y':y} for item,x,y in landmarks]
+        plan['town_blocks']=[];plan['scenic_viewpoints']=[]
+        for item,x,y in landmarks:
+            if item not in cards:
+                plan['scenic_viewpoints'].append({'name':item,'x':x,'y':y+2});continue
+            card=cards[item];w,h=len(card['tiles'][0]),len(card['tiles'])
+            plan['town_blocks'].append({'style':item,'x':x,'y':y,'width':w,'height':h,
+                                       'first_metatile':card['tiles'][0][0]})
+            plan['scenic_viewpoints'].append({'name':item,'x':x+w//2,'y':y+h})
     return result

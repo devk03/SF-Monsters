@@ -103,6 +103,24 @@ def run(manifest, plans, **kwargs):
 
 
 class WorldContractTests(unittest.TestCase):
+    def test_landmark_pixels_and_viewing_approach_survive_furnishing(self):
+        m,p=fixture();m['town_finishing']={'revision':2};m['native']['save_magic']=0x5743
+        board=p['dogpatch'];board['tile_profile']='nature'
+        board['tilesets']['secondary']='gTileset_SFNature'
+        # Explicit authored windmill allocation; no map producer is called.
+        for dy in range(4):
+            for dx in range(3):
+                token=chr(0x100+dy*3+dx);board['legend'][token]=[574+dy*3+dx,True,3]
+                tile(board,3+dx,2+dy,token)
+        board['town_blocks']=[dict(style='windmill',x=3,y=2,width=3,height=4,first_metatile=574)]
+        board['scenic_viewpoints']=[dict(name='windmill',x=4,y=6)]
+        self.assertTrue(run(m,p)['passed'])
+        before=deepcopy(board)
+        board['legend']['g']=[531,True,3];tile(board,4,4,'g')
+        self.reject(m,p,'frontage') # Collision stays solid; the landmark is chopped.
+        p['dogpatch']=before;tile(before,4,6,'#')
+        self.reject(m,p,'landmark')
+
     def reject(self, manifest, plans, code=None):
         result = run(manifest, plans)
         self.assertFalse(result['passed'], result)

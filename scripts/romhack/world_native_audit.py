@@ -37,6 +37,7 @@ def audit_native(rom_path, elf_path, plans, engine):
     native_to_name = {plan['native_id']: plan['engine_map'] for plan in plans}
     directions = {'down': 1, 'up': 2, 'left': 3, 'right': 4}
     errors, tiles, connections, objects, coords = [], 0, 0, 0, 0
+    resources={}
     for plan in plans:
         name = plan['engine_map']
         group, number = ids[name]
@@ -60,6 +61,10 @@ def audit_native(rom_path, elf_path, plans, engine):
         used = {tile for row in plan['rows'] for tile, _, _ in
                 (plan['legend'][token] for token in row) if tile >= 512}
         if used:
+            profile=plan.get('tile_profile','residential')
+            if profile not in resources:
+                from world_resource_audit import audit_resources
+                resources[profile]=audit_resources(rom,read,secondary,profile,engine)
             attrs, = read(secondary + 16, 'I')
             for tile in used:
                 behavior, = read(attrs + (tile-512)*2, 'H')
@@ -122,6 +127,7 @@ def audit_native(rom_path, elf_path, plans, engine):
         if scripts != symbols[name + '_MapScripts']:
             errors.append(name + ': inherited stock map script active')
     return {'passed': not errors, 'errors': errors,
+            'scenery_resources':list(resources.values()),
             'counts': {'maps': len(plans), 'tiles': tiles, 'connections': connections,
                        'npcs': objects, 'coord_events': coords},
             'scope': 'linked layout/event/connection integrity; not controller traversal'}

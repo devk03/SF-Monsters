@@ -45,6 +45,7 @@ def populate(plans, manifest):
         used = {(n['x'],n['y']) for n in plan['npcs']}
         reserved = {(p['x'],p['y']) for p in plan['access_points']}
         reserved |= {(p['x'],p['y']) for p in plan.get('world_sections',[])}
+        reserved |= {(p['x'],p['y']) for p in plan.get('scenic_viewpoints',[])}
         for index, person in enumerate(residents):
             if identifier in URBAN:
                 x,y = POSITIONS[index]

@@ -776,6 +776,15 @@ A sanitizer-backed resolver fixture covers land/water, occupied tiles and falls.
 New foliage replaces quarter-tree fill; all palettes are bounded to the seven
 secondary banks actually loaded by Emerald (6..12). Actual art review remains open.
 
+Scenery integrity checkpoint: six active native profiles now pass independent
+whole-resource comparisons for graphics, all metatile records/attributes and
+palettes against normal compiler inputs. Loaded palette/tile ranges are bounded;
+a mutation regression rejects wrong linked graphics/palettes even with unchanged
+collision. Landmark footprints now receive exact card-coverage checks and safe
+reachable viewing points, including a chopped-windmill regression. Source world
+tests18/18; compiled-resource tests3/3. Updated all-map circuit passes on0f3cd0a7…
+with all76connections/16gymwarps/26roomwarps. Fresh browser evidence still pending.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

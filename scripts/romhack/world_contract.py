@@ -326,7 +326,8 @@ class _World:
         script = plan['script']
         _need(type(script) is str and re.fullmatch(r'[A-Za-z0-9_-]+\.inc', script),
               'script', 'Script must be a local .inc filename')
-        landmarks = [position(event, identifier+' landmark') for event in plan.get('world_sections',[])]
+        landmarks = [position(event, identifier+' landmark') for event in
+                     plan.get('world_sections',[])+plan.get('scenic_viewpoints',[])]
         _need(all(not cells[p][1] and p not in occupied and p not in coords for p in landmarks),
               'landmark', 'Named world section is blocked by geometry, an actor or a trigger')
         return {'cells': cells, 'water': wet, 'occupied': occupied, 'coords': coords,
