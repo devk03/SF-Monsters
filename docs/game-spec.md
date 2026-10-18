@@ -676,13 +676,37 @@ pixel art, dense attached frontage and safe walking/door approaches. Street sign
 should be readable in-game; scenery counts alone do not prove a convincing city.
 Six original native plant motifs and two sign motifs now fit the secondary tile
 budget alongside gray tactile curb ramps and inset drainage grates. Placement,
-native sign interactions and same-cartridge validation remain in progress.
+native sign interactions and same-cartridge validation are recorded below.
 Privatev86 targeta1569ce2… now compiles all58maps with44background interactions:
 18existing discoveries plus26readable wayfinding/shop signs. Thirteen urban
 districts each have mixed planting; original plants and signs have complete
 collision/art footprints. Independent contracts bind sign events to their visible
 fixtures and adjacent safe reading positions. Native linked resources and all
 source/module gates pass. Final interaction/traversal and visual review remain open.
+
+Final planted-street candidate: privatev86 target49eb4636…. Each urban district
+has five front-side planting accents using its authored three-motif combination,
+plus planting in narrow architectural pockets where present. There are26readable
+signs, each with a visible fixture, checked safe approach and native dialogue;
+wayfinding reflects actual route directions. Plant-diversity metadata must bind to
+complete drawn fixtures. All58maps/76connections/16gymwarps/26roomwarps pass, as do
+all26sign interactions and18local discoveries/reward replays. Ordinary v85 Marina
+and older pending-activity Saves preserve party/money/local flags/Flash. Earlier
+land/Surf recovery passes. An actual v85 Save atMarina17,8, now occupied by a new
+planter, safely recovers to16,8 and enters/returns from the service room while
+retaining party/money/flags/Flash. The complete104,863-frame WASM route matches all
+294,912native guest RAM bytes. Evidence: `.tools/benchmarks/town-v86-final-*`,
+`town-v86-visible-*`, and `town-v86-new-planter-continue/`.
+All18native area views are packaged in `town-v86-planted-world-review/index.html`;
+the user's previously open v84 review was replaced after verifying it had no
+unsaved feedback. Actual browser49eb4636… cold Continue displays the new street
+signs, plants and gray curb details. Its30sec foreground movement sample reports
+1791requested/executed/video frames,0discard/hidden/audio underruns,4input
+observations,0superseded inputs and final audio acknowledgement. Evidence:
+`town-v86-browser-smoke/observed-summary.json`. This short sample does not close
+long browser-route, mobile, physical-paint or guest input-consumption gates.
+Publicv84 and rootv80 remain unchanged. These are functional/coverage checks;
+human town/art acceptance and full-game quality gates remain open.
 
 Private v85 street revision: native target4b426d87… compiles all58
 maps,76connections,169NPCs and18local discoveries. Thirteen urban districts now

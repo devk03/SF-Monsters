@@ -74,7 +74,9 @@ class StreetContractTests(unittest.TestCase):
 
     def sign_fixture(self):
         p={'street_signs':[],'bg_events':[],'access_points':[],'town_blocks':[],
-           'street_details':[{'name':'shrub'},{'name':'succulent'}]}
+           'street_details':[{'name':'shrub','x':21,'y':8},{'name':'succulent','x':22,'y':8}]}
+        p['town_blocks']=[{'style':d['name'],'x':d['x'],'y':d['y'],'width':1,'height':1}
+                          for d in p['street_details']]
         for style,x,y,h in [('wayfinder',11,8,2),('shop_board',3,9,1)]:
             bottom=y+h-1;script='Read_'+style
             p['street_signs'].append({'style':style,'object':[x,bottom],
@@ -95,6 +97,11 @@ class StreetContractTests(unittest.TestCase):
         p['street_signs'][0]['object'][1]=10;p['street_signs'][0]['standing'][1]=11
         p['bg_events'][0]['y']=10;p['access_points'][0]['y']=11
         with self.assertRaisesRegex(ValueError,'visible fixture'):
+            check_details(p)
+
+    def test_removed_plant_cannot_survive_only_as_diversity_metadata(self):
+        p=self.sign_fixture();p['town_blocks']=p['town_blocks'][1:]
+        with self.assertRaisesRegex(ValueError,'no complete drawn fixture'):
             check_details(p)
 
 

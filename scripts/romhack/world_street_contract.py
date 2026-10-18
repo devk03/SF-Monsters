@@ -27,6 +27,10 @@ def check_details(plan):
                  and blocks[0]['y']<=obj[1]<blocks[0]['y']+blocks[0]['height'])):
             raise ValueError('Readable sign does not bind its visible fixture and safe approach')
     plants={'succulent','tuft','shrub','flower_box','lavender','daisies'}
+    drawn={(b['style'],b['x'],b['y']) for b in plan['town_blocks']}
+    if any((d['name'],d['x'],d['y']) not in drawn
+           for d in plan.get('street_details',[]) if d['name'] in plants):
+        raise ValueError('Plant motif metadata has no complete drawn fixture')
     if len({d['name'] for d in plan.get('street_details',[]) if d['name'] in plants})<2:
         raise ValueError('Urban planting needs more than one native plant motif')
 

@@ -206,7 +206,7 @@ def furnish(plans, manifest):
         if district in PLANTINGS:
             species=PLANTINGS[district]
             last=(18,15) if district in ('castro','noe_valley','giants_stadium','outer_sunset') else (30,15)
-            beds=[(3,8),(10,8),(22,8),last]
+            beds=[(3,8),(10,8),(17,8),(22,8),last]
             for index,(x,y) in enumerate(beds):
                 name=species[index%len(species)];record(name,x,y)
                 details.append({'name':name,'x':x,'y':y})
