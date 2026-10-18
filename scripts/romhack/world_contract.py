@@ -263,8 +263,9 @@ class _World:
                     solid=profile['cards'][block['style']]['blocked'] if 'style' in block else True
                     expected=(block['first_metatile']+dy*width+dx,solid,3)
                     _need(cells[point]==expected,'frontage','A furnishing or terrain stamp cuts through a building')
-        if plan.get('street_design'):
-            from world_street_contract import check_streets
+        from world_street_contract import check_streets, CENTERS
+        if (plan.get('street_design') or self.manifest.get('town_finishing',{}).get('revision',0)>=4
+                and identifier in CENTERS):
             try:
                 check_streets(plan,cells,frontage,profile)
             except ValueError as error:

@@ -669,15 +669,30 @@ review contrasting industrial, mixed-use and residential districts in the actual
 native game. Counts and source checks establish coverage, not visual approval.
 Public v84 stays available while the next private candidate is developed.
 
-Private v85 street revision (in progress): native target4b426d87… compiles all58
+Private v85 street revision: native target4b426d87… compiles all58
 maps,76connections,169NPCs and18local discoveries. Thirteen urban districts now
 use longer attached rows, actual curb edges, four neutral sidewalk materials,
 district furniture clusters and smaller rear-garden passages. Service fronts are
 pinned to the existing5,8 entrance; source contracts independently reject holes
 in declared street walls and triggers beside the drawn doorway. A drawn-door
-offset regression and blocked-alley regression pass. Earlier v85 iterations passed
-ordinary completed/pending-save preservation; final-target traversal, cold Continue
-and visual review are still required. The user has not accepted the new art.
+offset regression and blocked-alley regression pass. Final-target evidence under
+`.tools/benchmarks/town-v85-anchored-*`: all58maps/76connections/16gymwarps/
+26roomwarps; all13service rooms; all18discovery rewards/replays; ordinary earlier
+completed/pending Saves and earlier land/Surf recovery pass. The complete110,962-
+frame WASM replay matches all294,912guest RAM bytes, SHAcf49b034…. Native views
+cover all18areas. Urban front counts increased from10–14 to16–20; this is coverage,
+not visual approval. The first actual30sec browser sample loaded/continued/walked
+but reported29discarded frames and23,058audio underrun output frames. Keep this
+failed strict sample. Quiet retry:1792/1792frames,0discard/hidden/audio underruns,
+final audio acknowledgement and2input observations. This short sample does not
+close long-browser-route/mobile/input-consumption gates. Full observations are in
+`.tools/benchmarks/town-v85-browser-smoke/observed-summary.json`. Publicv84 is unchanged. A new
+18-town private review package is ready; the user has not accepted the new art.
+The follow-up alignment review also led to independent per-district frontage
+coverage (declared runs cannot shrink to hide missing buildings), mandatory urban
+street metadata and actual room/gym access-point binding to drawn doorway anchors.
+Nine hand-authored street-contract cases cover these regressions. Final visual
+acceptance remains open; this is a review checkpoint, not completion of the world.
 
 **Latest checkpoint: private v84, targetc955f48d… (not town acceptance).** New
 neighborhood landmarks and adult cast appearances compile alongside return-path
