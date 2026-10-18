@@ -120,3 +120,26 @@ remain private and ignored.
 Current acceptance results and remaining review gates belong in spec section 15.
 No blockout receipt approves the full story, graphics, soundtrack or battles.
 GitHub Actions remains manual-only; routine checks run locally.
+
+## Native town-service edge cases
+
+`build_world.py --service-fixture` builds an explicitly isolated QA cartridge,
+`sf-town-services-qa.gba`, with save identity0x5751. Its fresh Dogpatch setup
+injects a level5loan, access flags and10000extra money. The first core greeter
+interaction starts a level3Poochyena battle; use Tail Whip once, then Surf to win
+with actual injury. The next interaction fills the item pocket. These are QA
+controls, not contributor content or campaign/balance evidence.
+
+`verify_town_service_edges.py --state PATH --name NAME` accepts a matching
+controller-derived state after that Tail Whip turn. It completes the battle,
+checks healing across the real counter, purchases through native shop menus,
+fills30item slots, tests deferred favor/observation rewards, uses native Toss
+to free space, and checks retry/repeat quantities. It never writes guest RAM.
+Keep all fixture ROMs, states, batteries and captured evidence under `.tools`.
+Rebuild the default world afterward and verify its prior target hash returns;
+the QA loan, money, flags and bag setup must not leak into the normal world.
+
+`package_world_review.py --tour PATH --name NAME` packages a completed native
+18-destination scene tour into a private standalone HTML review. Its images and
+cartridge identity stay provenance-labelled; exported scores never approve a
+full domain automatically. It contains screenshots only, not a playable ROM.

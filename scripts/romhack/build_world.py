@@ -27,8 +27,11 @@ def main():
     parser.add_argument('--modules-root', type=Path, default=MODULES,
                         help='Use an isolated package copy for native QA')
     parser.add_argument('--playtest-module', help='Build an explicitly isolated fresh-game module fixture')
+    parser.add_argument('--service-fixture', action='store_true', help='Isolated native healing/shop/full-bag bench')
     parser.add_argument('--scenario', choices=['ready', 'locked', 'completed', 'weak-party'], default='ready')
     args = parser.parse_args()
+    if args.service_fixture and args.playtest_module:
+        parser.error('Choose either a module or town-service fixture')
     manifest = json.loads((ROOT / 'romhack/world/world.json').read_text())
     directory = ROOT / 'romhack/content/world-blockout'
     modules = load_modules(manifest, args.modules_root)
@@ -40,6 +43,9 @@ def main():
         plans, content = write_world(manifest, directory, args.modules_root)
         if args.playtest_module:
             fixture = apply_playtest(directory, content, modules, args.playtest_module, args.scenario)
+        if args.service_fixture:
+            from town_service_fixture import apply_fixture
+            fixture = apply_fixture(directory,content)
         return plans, content
     plans, content = produce()
     # This independent validator owns no map generation or packing code.
@@ -104,8 +110,8 @@ def main():
                                'src/sf_authored_maps.h', 'sf-host-build.json']:
         inputs['engine_overlay/' + relative] = (engine / relative).read_bytes()
     (engine / 'sf-world-overlay.json').write_text(json.dumps(ledger, indent=2) + '\n')
-    name = 'sf-module-playtest' if fixture else manifest['native']['file_name']
-    version = (f'0.0.81-module-playtest-{args.playtest_module}-{args.scenario}'
+    name = 'sf-town-services-qa' if args.service_fixture else 'sf-module-playtest' if fixture else manifest['native']['file_name']
+    version = ('0.0.84-town-service-qa' if args.service_fixture else f'0.0.81-module-playtest-{args.playtest_module}-{args.scenario}'
                if fixture else manifest['version'])
     inputs['build-mode.json'] = (json.dumps({'fixture': fixture}, sort_keys=True) + '\n').encode()
     host_make(engine, 'FILE_NAME=' + name, 'TITLE=' + ('SF MODULE QA' if fixture else 'SF WORLD TEST'),

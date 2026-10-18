@@ -891,6 +891,25 @@ The wet-to-all-land and wholly blocked cases are sanitizer boundary evidence,
 not ordinary production-save reproductions. Full current WASM regression and
 final scene review are running. No public release or human approval is inferred.
 
+The finalc955f48d… route also matches all294,912native/WASM RAM bytes across
+110,450frames (RAMSHAf29e01ad…). All18destination views are packaged for human
+review at `.tools/benchmarks/town-v84-world-review/index.html`, from the matching
+controller-only tour. Pending older Save/Continue retains27local flags, party,
+money, chapter variables and Flash. No town or quality domain has human approval.
+
+Separate town-service fixture5ce5efc1… uses identity0x5751 and injected setup;
+it is not campaign/balance evidence. Native battle damage leaves18/22HP, and
+the actual repair counter heals to22/22. Shop inputs buy one Repel for350
+(13000→12650) and98Antidotes for9800. With all30item slots occupied and reward
+stacks at99, both favor and observation rewards defer without completion.
+Native Bag/Toss frees exactly one space; both retries grant once, and repeats
+do not duplicate items. Evidence: `.tools/benchmarks/town-service-qa-edges-2/`.
+The first purchase probe checked money before the native thank-you callback;
+the final harness waits for that callback. The first battle probe duplicated
+an existing frame filename; the resulting immutable controller checkpoint was
+preserved and resumed. Neither failed probe is presented as an acceptance pass.
+Default-world rebuild and final foreground browser identity checks are next.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route
