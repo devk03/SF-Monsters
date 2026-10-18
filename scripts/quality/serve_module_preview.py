@@ -16,6 +16,7 @@ def main():
     parser.add_argument('--port', type=int, default=18771)
     parser.add_argument('--seconds', type=int, default=1800)
     parser.add_argument('--battery',type=Path,help='Optional private ordinary Save for cold Continue testing')
+    parser.add_argument('--review',type=Path,help='Matching private town-review HTML')
     args = parser.parse_args()
     if not 60 <= args.seconds <= 3600 or not 1024 <= args.port <= 65535:
         parser.error('Use a 60–3600 second finite session and a port in 1024..65535')
@@ -29,6 +30,11 @@ def main():
         parser.error('Cartridge has no verified private world/module build receipt')
     routes = {'/': (Path(__file__).with_name('module_preview.html').read_bytes(), 'text/html'),
               '/rom.gba': (rom, 'application/octet-stream')}
+    if args.review:
+        args.review.resolve().relative_to((ROOT/'.tools/benchmarks').resolve())
+        review=json.loads(args.review.with_name('review.json').read_text())
+        if review['rom_sha256']!=digest:parser.error('Town review belongs to a different cartridge')
+        routes['/review']=(args.review.read_bytes(),'text/html')
     if args.battery:
         args.battery.resolve().relative_to((ROOT/'.tools').resolve())
         battery=args.battery.read_bytes()
@@ -61,6 +67,7 @@ def main():
                 info = {'rom_sha256': digest, 'profile': receipt['profile'], 'fixture': receipt.get('fixture'),
                         'remaining_seconds': max(0, int(deadline-time.monotonic())),
                         'has_battery':bool(args.battery),
+                        'review_path':'/review' if args.review else None,
                         'public_progress_touched': False, 'persist': False}
                 self.reply(json.dumps(info).encode(), 'application/json')
             elif path in routes:

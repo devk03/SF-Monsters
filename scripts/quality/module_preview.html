@@ -7,6 +7,7 @@ pre{white-space:pre-wrap;font-size:12px}
 </style>
 <h1>SF Mini Monsters playtest</h1>
 <p id="description">Private local development build. Public saves and accounts stay separate.</p>
+<p id="review-link" hidden><a href="/review" target="_blank">Review all 18 town views</a></p>
 <button id="start">Start test</button><button id="pause" disabled>Pause</button>
 <button id="resume" disabled>Resume</button><button id="reset" disabled>Reset GBA</button>
 <button id="save" disabled>Download QA save</button><button id="finish" disabled>Finish test</button>
@@ -28,6 +29,7 @@ async function finish(){
 button('start').onclick=async()=>{try{
   button('start').disabled=true;
   const info=await(await fetch('/identity.json')).json();
+  document.querySelector('#review-link').hidden=!info.review_path;
   document.querySelector('#description').textContent=info.profile==='world-blockout'
     ? 'Private SF world draft. Towns, routes and local activities are playable; final gyms and contributor missions remain in progress.'
     : 'Private module fixture. Prerequisites are injected; this is not campaign progress.';
