@@ -35,9 +35,12 @@ const ROUTE = [
   { flag: 64, label: 'Earn the Build Badge' },
 ];
 export default function GamePlayer({ account, signInUrl, signOutUrl, variant = 'emerald' }: {
-  account: Account; signInUrl: string; signOutUrl: string; variant?: 'emerald' | 'prototype';
+  account: Account; signInUrl: string; signOutUrl: string; variant?: 'emerald' | 'prototype' | 'world';
 }) {
   const legacy = variant === 'prototype';
+  const world = variant === 'world';
+  const edition = world ? 'world' : 'emerald';
+  const fileStem = world ? 'sf-mini-monsters-world' : 'sf-mini-monsters';
   const canvas = useRef<HTMLCanvasElement>(null);
   const engine = useRef<Engine | null>(null);
   const importInput = useRef<HTMLInputElement>(null);
@@ -54,16 +57,16 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
   const [backupUrl, setBackupUrl] = useState<string | null>(null);
   useEffect(() => () => { if (backupUrl) URL.revokeObjectURL(backupUrl); }, [backupUrl]);
   const [retry, setRetry] = useState(0);
-  const storageKey = `sf-mini-monsters:${legacy ? 'v1' : 'emerald:v2'}:${account?.id ?? 'guest'}`;
+  const storageKey = `sf-mini-monsters:${legacy ? 'v1' : world ? 'world:v1' : 'emerald:v2'}:${account?.id ?? 'guest'}`;
   const validateBattery = useCallback((bytes: Uint8Array) => {
-    if (legacy) validateSave(bytes); else validateSfFlashSave(bytes);
-  }, [legacy]);
+    if (legacy) validateSave(bytes); else validateSfFlashSave(bytes, edition);
+  }, [legacy, edition]);
   const batteryProgress = useCallback((bytes: Uint8Array): Progress | null => {
     if (legacy) return readProgress(bytes);
-    try { validateSfFlashSave(bytes); } catch { return null; }
+    try { validateSfFlashSave(bytes, edition); } catch { return null; }
     const sequence = flashCounter(bytes);
     return sequence === null ? null : {sequence, flags: 0, caught: 0, coins: 0, map: 0, party: 0};
-  }, [legacy]);
+  }, [legacy, edition]);
   useEffect(() => {
     if (!romBytes) return;
     const url = URL.createObjectURL(new Blob([new Uint8Array(romBytes)]));
@@ -155,7 +158,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
       await loadRuntime();
       const selected = new Uint8Array(await file.arrayBuffer());
       const {bytes} = await window.sfMiniMonstersExtract!(selected);
-      const result = await patchLocalRom(bytes);
+      const result = await patchLocalRom(bytes, edition);
       persist(); setRomBytes(result.rom); setNotice('Emerald verified and SF patch applied locally.');
       setPaused(false);
     } catch (error) {
@@ -169,7 +172,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
     try {
       const bytes = engine.current!.exportBattery(); validateBattery(bytes);
       const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }));
-      const link = document.createElement('a'); link.href = url; link.download = 'sf-mini-monsters.sav';
+      const link = document.createElement('a'); link.href = url; link.download = `${fileStem}.sav`;
       link.hidden = true; document.body.appendChild(link); link.click(); link.remove();
       setBackupUrl(url);
       persist(); setNotice('Backup prepared. Use Download save if your browser did not start the download.');
@@ -213,7 +216,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
     </header>
     <div className="workbench">
       <section className="play-surface" aria-label="SF Mini Monsters game">
-        <div className="screen-label"><span>THE FOG SIGNAL</span><span>{legacy ? progress ? MAPS[progress.map] : 'OUTER SUNSET' : 'SUNSET PREVIEW'}</span></div>
+        <div className="screen-label"><span>{world ? 'SF WORLD PREVIEW' : 'THE FOG SIGNAL'}</span><span>{legacy ? progress ? MAPS[progress.map] : 'OUTER SUNSET' : world ? 'DOGPATCH START' : 'SUNSET PREVIEW'}</span></div>
         <div className="game-screen">
           <canvas ref={canvas} width={240} height={160} tabIndex={0} aria-label="GBA game screen. Arrow keys move, X confirms, Z goes back, Enter opens the menu." />
           {phase === 'waiting' && <div className="screen-overlay"><p>Bring your Emerald ROM.</p><button onClick={() => romInput.current?.click()}>Load .gba or ZIP</button><p>Patched here, on your device.</p></div>}
@@ -239,7 +242,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
           <input ref={importInput} type="file" accept=".sav" hidden onChange={event => void importSave(event.target.files?.[0])} />
           <input ref={romInput} type="file" accept=".gba,.zip" hidden onChange={event => void loadRom(event.target.files?.[0])} />
         </div>
-        <p className="save-notice" role="status">{notice}{backupUrl && <> <a href={backupUrl} download="sf-mini-monsters.sav">Download save</a></>}</p>
+        <p className="save-notice" role="status">{notice}{backupUrl && <> <a href={backupUrl} download={`${fileStem}.sav`}>Download save</a></>}</p>
         {help && <div className="help-panel">
           <p><strong>Move:</strong> arrow keys or D-pad. <strong>Confirm / talk:</strong> X or A.</p>
           <p><strong>Back:</strong> Z or B. <strong>Menu:</strong> Enter or Start.</p>
@@ -249,23 +252,24 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
         </div>}
       </section>
       <aside className="quest-sidebar">
-        <div className="chapter-label">{legacy ? 'CHAPTER 01' : 'CHAPTER 01 PREVIEW'}</div>
-        <h1>A courier.<br />A missing parcel.<br />Very normal fog.</h1>
-        <p className="next-quest">{legacy ? progress ? nextQuest(progress.flags) : 'Choose your companion, then find Roon’s prototype on Ocean Beach.' : 'Meet Karpathy by Judah, recover Roon’s sensor at Ocean Beach, then ride Muni to Cognition’s Build Challenge.'}</p>
+        <div className="chapter-label">{world ? 'WORLD EXPLORATION PREVIEW' : legacy ? 'CHAPTER 01' : 'CHAPTER 01 PREVIEW'}</div>
+        <h1>{world ? <>18 destinations.<br />One connected world.</> : <>A courier.<br />A missing parcel.<br />Very normal fog.</>}</h1>
+        <p className="next-quest">{world ? 'Start in Dogpatch. Meet the neighbors, follow the streets and open SF Map from the Start menu. Gym rooms grant temporary access stamps so you can explore the whole route.' : legacy ? progress ? nextQuest(progress.flags) : 'Choose your companion, then find Roon’s prototype on Ocean Beach.' : 'Meet Karpathy by Judah, recover Roon’s sensor at Ocean Beach, then ride Muni to Cognition’s Build Challenge.'}</p>
         {legacy && <ol className="quest-list">{ROUTE.map(step => <li key={step.flag} className={progress && progress.flags & step.flag ? 'done' : ''}>
           <span aria-hidden="true">{progress && progress.flags & step.flag ? '✓' : '·'}</span>{step.label}
         </li>)}</ol>}
         {legacy && <div className="field-stats"><div><strong>{progress ? countCaught(progress.caught) : 0}<small>/12</small></strong><span>mini monsters</span></div>
           <div><strong>{progress?.flags && progress.flags & 64 ? '01' : '00'}</strong><span>gym badges</span></div></div>}
-        <div className="delivery-note"><p>Outer Sunset → Muni → South Park</p><p>Every stop is in San Francisco.</p></div>
-        {(legacy || romUrl) && <a className="rom-link" href={legacy ? '/game/sf-mini-monsters.gba' : romUrl!} download="sf-mini-monsters.gba">Download GBA ROM</a>}
-        {!legacy && <a className="rom-link" href="/patch/sf-mini-monsters.bps" download>Download SF patch</a>}
+        <div className="delivery-note"><p>{world ? 'Compact streets · local favors · both islands' : 'Outer Sunset → Muni → South Park'}</p><p>{world ? 'San Francisco, plus the approved Angel Island League.' : 'Every stop is in San Francisco.'}</p></div>
+        {(legacy || romUrl) && <a className="rom-link" href={legacy ? '/game/sf-mini-monsters.gba' : romUrl!} download={`${fileStem}.gba`}>Download GBA ROM</a>}
+        {!legacy && <a className="rom-link" href={`${world ? '/world-patch' : '/patch'}/sf-mini-monsters.bps`} download>Download SF patch</a>}
         <a className="source-link" href="https://github.com/devk03/SF-Monsters" target="_blank" rel="noreferrer">Fork the game on GitHub</a>
         <p className="account-note">{account ? `Signed in as ${account.name}.` : 'Guest play is available. Sign in for a separate local save slot.'}</p>
-        <p className="edition-note">{legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Preview: the opening roster now has original art and cries—12 base creatures and six starter evolution stages. Explore Sunset, South Park and Cognition’s first gym. Pixel cleanup, cast, tiles, more music and the full 16-neighborhood campaign remain unfinished.'}</p>
+        <p className="edition-note">{world ? 'Development preview: 18 destinations, 19 connectors, 13 small service interiors and 18 local activities. The loan creature and access stamps are temporary tools. Final gym battles, contributor missions, campaign balance and quality review remain unfinished. World saves are separate from v80 saves.' : legacy ? 'Earlier prototype: two neighborhoods, one gym, twelve monsters.' : 'Preview: the opening roster now has original art and cries—12 base creatures and six starter evolution stages. Explore Sunset, South Park and Cognition’s first gym. Pixel cleanup, cast, tiles, more music and the full 16-neighborhood campaign remain unfinished.'}</p>
+        {!legacy && <a className="source-link" href={world ? '/' : '/world'}>{world ? 'Play the v80 Sunset preview' : 'Explore the new SF world preview'}</a>}
         {!legacy && <a className="source-link" href="/prototype">Play the earlier courier prototype</a>}
       </aside>
     </div>
-    <footer className="foot-line"><span>SF fan project · real public personas · fictional adventure</span><a href="/emulator/NOTICE.txt">Emulator credits</a></footer>
+    <footer className="foot-line"><span>{world ? 'SF world draft · original residents · contributor gyms in progress' : 'SF fan project · real public personas · fictional adventure'}</span><a href="/emulator/NOTICE.txt">Emulator credits</a></footer>
   </main>;
 }

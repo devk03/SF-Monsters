@@ -23,7 +23,10 @@ browser movement sample. A further save-recovery fix is under final regression;
 the longer browser-session issue and human quality review remain open.
 See the [generation guide](docs/world/generation.md) and the current
 [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
-The public website still serves v80; the world draft stays separate.
+The existing website preview stays v80. A separate `/world` exploration preview
+is being prepared from the tested v84 cartridge, with its own save slot and
+temporary access stamps. Final gym battles, contributor missions and human
+town-quality acceptance remain unfinished.
 
 The [editable Excalidraw plan](docs/world/initial-world-plan.excalidraw),
 [interpretation and open decisions](docs/world/plan-notes.md), and

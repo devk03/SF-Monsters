@@ -39,6 +39,7 @@ python3 tests/field_journal_test.py
 .tools/venv/bin/python tests/city_map_test.py
 python3 tests/map_resume_test.py
 python3 tests/world_resume_test.py
+python3 tests/world_preview_gate_test.py
 python3 tests/romhack_battles_test.py
 python3 tests/romhack_monsters_test.py
 .tools/venv/bin/python tests/creature_resources_test.py

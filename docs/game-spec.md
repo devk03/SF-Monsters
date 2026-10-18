@@ -908,7 +908,31 @@ The first purchase probe checked money before the native thank-you callback;
 the final harness waits for that callback. The first battle probe duplicated
 an existing frame filename; the resulting immutable controller checkpoint was
 preserved and resumed. Neither failed probe is presented as an acceptance pass.
-Default-world rebuild and final foreground browser identity checks are next.
+The default rebuild reproducesc955f48d… byte-for-byte, so QA setup does not leak.
+Final normal-world foreground browser cold Continue and a30sec movement sample
+pass with1792requested/executed/video frames,0discard/hidden ticks/coalesced
+inputs/audio underruns or drops, and acknowledged final audio counters. This
+does not close the older long-session issue. All18local activity and13service
+checks also pass on finalc955f48d…, not just the earlier neighborhood candidate.
+
+Separate `/world` website preview is prepared with patch0.0.84-world-preview;
+rootv80 patch/save identity stays intact. The player uses world:v1 device slots,
+accepts only5743/schema1world saves and rejects v80/QA identities. Actual local
+website QA loads the supplied ZIP, patches on-device, rejects a real5346v80Save,
+accepts an older5743worldSave and downloads the exactc955f48d… cartridge.
+Human approval remains0; development loans/access stamps and unfinished final
+gyms/missions are clearly labelled. Publication is not final town acceptance.
+
+Alignment identified two release-proof gaps before publication: a loose WASM
+gate and conflated build/staging provenance. The staging tool now links native
+session initial-state/battery hashes, exact complete controller trace and frame
+count to the WASM capture, and directly compares final RAM. Eight independent
+negative fixtures reject QA content/identity, smoke-only frame counts, wrong
+state/trace, non-boolean passes and mismatched raw RAM. The new native session
+receipt preserves110,450-frame circuit evidence. Build-base and staging-base
+commits are recorded separately with the frozen-input digest; the first
+unpublished provisional manifest is preserved under ignored storage. No build
+reproducibility is inferred from the staging-base commit alone.
 
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and

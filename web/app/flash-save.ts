@@ -47,7 +47,7 @@ export function flashCounter(bytes: Uint8Array): number | null {
 }
 
 /** SF identity is in native persistent vars F8/F9, inside SaveBlock1 sector 2. */
-export function validateSfFlashSave(bytes: Uint8Array): void {
+export function validateSfFlashSave(bytes: Uint8Array, edition: 'emerald' | 'world' = 'emerald'): void {
   validateFlashSave(bytes);
   const latest = latestSlot(bytes)!;
   for (let index = 0; index < 14; index++) {
@@ -56,7 +56,7 @@ export function validateSfFlashSave(bytes: Uint8Array): void {
     if (view.getUint16(4084, true) !== 2) continue;
     // SaveBlock1 vars start at 0x139c; sector 2 begins at its byte 0xf80.
     const marker = view.getUint16(0x60c, true), schema = view.getUint16(0x60e, true);
-    if (marker === 0x5346 && schema === 1) return;
+    if (marker === (edition === 'world' ? 0x5743 : 0x5346) && schema === 1) return;
     break;
   }
   throw new Error('This is not a supported SF Mini Monsters save. Your current progress was kept.');

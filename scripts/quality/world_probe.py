@@ -28,6 +28,13 @@ class Controller:
             identity = json.loads(Path(state).with_suffix('.json').read_text())
             if identity['rom_sha256'] != self.digest() or not identity['controller_only']:
                 raise ValueError('State has no matching controller-only provenance.')
+        (self.output/'session.json').write_text(json.dumps({
+            'rom_sha256':self.rom_hash,'elf_sha256':hashlib.sha256(Path(elf).read_bytes()).hexdigest(),
+            'controller_only':True,'mgba_revision':'26b7884bc25a5933960f3cdcd98bac1ae14d42e2',
+            'state_input_sha256':hashlib.sha256(Path(state).read_bytes()).hexdigest() if state else None,
+            'battery_input_sha256':hashlib.sha256(Path(battery).read_bytes()).hexdigest() if battery else None,
+            'driver_sha256':hashlib.sha256((ROOT/'.tools/world-controller').read_bytes()).hexdigest()
+        },indent=2)+'\n')
         self.stderr = (self.output / 'driver.stderr').open('wb')
         self.process = subprocess.Popen([str(ROOT / '.tools/world-controller'), str(rom),
                                          str(battery or '-'), str(state or '-')],

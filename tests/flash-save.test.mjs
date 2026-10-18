@@ -43,11 +43,11 @@ const wrapped = new Uint8Array(FLASH_SIZE + 7); wrapped.set(save, 7);
 assert.equal(flashCounter(wrapped.subarray(7)), 0, 'Typed-array offsets are respected');
 console.log('Flash slot checksums, rotation, recovery, wraparound and invalid-save rejection passed.');
 assert.throws(() => validateSfFlashSave(save), /not a supported SF/);
-function stampIdentity(slot, schema) {
+function stampIdentity(slot, schema, marker = 0x5346) {
   for (let index = 0; index < 14; index++) {
     const view = new DataView(save.buffer, (slot * 14 + index) * 4096, 4096);
     if (view.getUint16(4084, true) !== 2) continue;
-    view.setUint16(0x60c, 0x5346, true); view.setUint16(0x60e, schema, true);
+    view.setUint16(0x60c, marker, true); view.setUint16(0x60e, schema, true);
     let checksum = 0;
     for (let offset = 0; offset < 0xf80; offset += 4)
       checksum = (checksum + view.getUint32(offset, true)) >>> 0;
@@ -66,3 +66,13 @@ stampIdentity(0, 1); stampIdentity(1, 2);
 assert.throws(() => validateSfFlashSave(save), /not a supported SF/,
   'An equal counter in another slot must not hide the schema native will load');
 console.log('SF identity, unsupported schema and intact-slot recovery passed.');
+stampIdentity(1, 1, 0x5743);
+validateSfFlashSave(save, 'world');
+assert.throws(() => validateSfFlashSave(save), /not a supported SF/, 'World geography must not enter the v80 save slot');
+stampIdentity(1, 1, 0x5346);
+assert.throws(() => validateSfFlashSave(save, 'world'), /not a supported SF/, 'v80 saves must not enter the world slot');
+for (const magic of [0x5751, 0x4d51]) {
+  stampIdentity(1, 1, magic);
+  assert.throws(() => validateSfFlashSave(save, 'world'), /not a supported SF/, 'Injected QA saves must stay isolated');
+}
+console.log('World, v80 and injected QA save identities remain isolated.');
