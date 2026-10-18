@@ -100,7 +100,7 @@ def main():
     guard = engine / 'src/sf_save_guard.h'
     magic = fixture['save_magic'] if fixture else manifest['native']['save_magic']
     guard.write_text(guard.read_text().replace('0x5346', hex(magic)))
-    for relative in ledger + ['src/sf_save_guard.h', 'src/sf_map_resume.h',
+    for relative in ledger + ['src/sf_resume_masks.h', 'src/sf_save_guard.h', 'src/sf_map_resume.h',
                                'src/sf_authored_maps.h', 'sf-host-build.json']:
         inputs['engine_overlay/' + relative] = (engine / relative).read_bytes()
     (engine / 'sf-world-overlay.json').write_text(json.dumps(ledger, indent=2) + '\n')
@@ -111,7 +111,7 @@ def main():
     host_make(engine, 'FILE_NAME=' + name, 'TITLE=' + ('SF MODULE QA' if fixture else 'SF WORLD TEST'),
               'GAME_CODE=' + manifest['native']['game_code'])
     target, elf = engine / (name + '.gba'), engine / (name + '.elf')
-    native = audit_native(target, elf, plans, engine)
+    native = audit_native(target, elf, plans, engine, expect_resume_masks=True)
     if not native['passed']:
         raise ValueError(json.dumps(native, indent=2))
     output = ROOT / '.tools/romhack-drafts' / version / digest(target)

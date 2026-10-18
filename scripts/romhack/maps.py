@@ -127,6 +127,9 @@ def apply_maps(content, root, engine, original):
         plan['native_id'] = json.loads(original(f'data/maps/{plan["engine_map"]}/map.json'))['id']
         linked.append(plan)
     validate_links(linked)
+    if content.get('resume_masks'):
+        from world_resume import header
+        (engine / 'src/sf_resume_masks.h').write_text(header(linked))
     authored = '\n        || '.join(
         '(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(%s)\n'
         '         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(%s))'
@@ -134,6 +137,7 @@ def apply_maps(content, root, engine, original):
     (engine / 'src/sf_authored_maps.h').write_text(
         '#ifndef SF_AUTHORED_MAPS_H\n#define SF_AUTHORED_MAPS_H\n'
         '#include "constants/maps.h"\n'
+        + ('#define SF_WORLD_RESUME_MASKS 1\n' if content.get('resume_masks') else '') +
         'static inline bool8 SFMapUsesAuthoredLayout(void)\n{\n'
         '    return ' + authored + ';\n}\n#endif\n')
     points = content.get('recovery_points', [])

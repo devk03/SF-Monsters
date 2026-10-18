@@ -34,6 +34,7 @@ static const struct WarpEvent sWarps[] = {{1, 2}};
 static const struct MapEvents sEvents = {1, 1, 0, sObjects, sWarps, NULL};
 static const struct MapHeader gMapHeader = {&sLayout, &sEvents};
 static u8 sCollision[5][5], sBehavior[5][5];
+static bool8 sReturnable[5][5];
 static bool8 sSurfBadge;
 static bool8 FlagGet(int flag) { (void)flag;return sSurfBadge; }
 static bool8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8 value) {return value==1 || value==2;}
@@ -54,6 +55,7 @@ static void SetWarpDestination(int group, int num, int id, s16 x, s16 y)
 static void reset(void)
 {
     memset(sCollision, 0, sizeof(sCollision));
+    memset(sReturnable, TRUE, sizeof(sReturnable));
     memset(sBehavior, 0, sizeof(sBehavior));
     memset(sSave.objectEvents,0,sizeof(sSave.objectEvents));
     sSave.objectEvents[0]=(struct ObjectEvent){TRUE,TRUE,0};sSurfBadge=FALSE;
@@ -79,6 +81,11 @@ int main(void)
     assert(sWarpCalls == 1 && sWarpX == 3 && sWarpY == 2);
     assert(sWarpGroup == 1 && sWarpNum == 2 && sWarpId == WARP_ID_NONE);
     assert(sSave.pos.x == 2 && sSave.pos.y == 2 && sSave.money == 4000);
+    // The nearest free tile is a sealed pocket: recovery must keep an exit.
+    reset();sCollision[2][2]=3;sReturnable[2][3]=FALSE;
+    assert(SFMapResumeWarpIfNeeded() && sWarpX==2 && sWarpY==3);
+    reset();sReturnable[2][2]=FALSE;
+    assert(SFMapResumeWarpIfNeeded() && sWarpX==3 && sWarpY==2);
     reset();
     sCollision[2][2] = 3;
     sSave.location.mapGroup = 9;

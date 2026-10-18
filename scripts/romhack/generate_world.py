@@ -185,7 +185,8 @@ def write_world(manifest, directory, modules_root=None):
             map_script(manifest, plan), by_world.get(plan['world_id'])) +
             ambient_scripts(plan) + extra_scripts(plan, manifest) + local_scripts(plan))
     start = next(plan for plan in plans if plan['world_id'] == manifest['start']['area'])
-    content = {'maps': ['world-blockout/' + plan['world_id'] + '.json' for plan in plans],
+    content = {'resume_masks': True,
+               'maps': ['world-blockout/' + plan['world_id'] + '.json' for plan in plans],
                'spawn': {'map': start['engine_map'], 'id': start['native_id'][4:],
                          'x': manifest['start']['x'], 'y': manifest['start']['y']},
                'recovery_points': [{'id': name, 'map': start['native_id'],

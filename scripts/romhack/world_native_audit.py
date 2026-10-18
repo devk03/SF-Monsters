@@ -6,7 +6,7 @@ import subprocess
 from world_art_contract import load_profiles
 
 
-def audit_native(rom_path, elf_path, plans, engine):
+def audit_native(rom_path, elf_path, plans, engine, *, expect_resume_masks=False):
     rom = rom_path.read_bytes()
     symbols = {}
     for line in subprocess.check_output(
@@ -42,7 +42,9 @@ def audit_native(rom_path, elf_path, plans, engine):
     directions = {'down': 1, 'up': 2, 'left': 3, 'right': 4}
     errors, tiles, connections, objects, coords, backgrounds = [], 0, 0, 0, 0, 0
     resources={}
-    for plan in plans:
+    if expect_resume_masks and 'sSFResumeAreas' not in symbols:
+        errors.append('Missing compiled return-path masks')
+    for plan_index, plan in enumerate(plans):
         name = plan['engine_map']
         group, number = ids[name]
         group_ptr, = read(symbols['gMapGroups'] + group * 4, 'I')
@@ -96,6 +98,7 @@ def audit_native(rom_path, elf_path, plans, engine):
         if counts != (len(plan['npcs']), 0, len(plan['coord_events']), len(plan.get('bg_events',[]))):
             errors.append(name + ': compiled event counts differ')
         obj_ptr, _, coord_ptr, bg_ptr = read(events + 4, '4I')
+        actor_envelopes, trigger_positions, connection_sides = [], [], []
         for i, npc in enumerate(plan['npcs']):
             x, y = read(obj_ptr + i * 24 + 4, '2h')
             script, = read(obj_ptr + i * 24 + 16, 'I')
@@ -103,6 +106,7 @@ def audit_native(rom_path, elf_path, plans, engine):
                 errors.append(name + ': compiled NPC position/script differs')
             elevation,movement,ranges = read(obj_ptr + i*24 + 8,'3B')
             gfx, = read(obj_ptr + i*24 + 1,'B')
+            actor_envelopes.append((x, y, ranges & 15, ranges >> 4))
             expected_motion = motions[npc.get('movement','MOVEMENT_TYPE_FACE_DOWN')]
             expected_ranges = npc.get('range_x',0) | npc.get('range_y',0)<<4
             if (gfx,movement,ranges,elevation) != (graphics[npc['graphics']],expected_motion,
@@ -117,6 +121,7 @@ def audit_native(rom_path, elf_path, plans, engine):
             objects += 1
         for i, event in enumerate(plan['coord_events']):
             x, y = read(coord_ptr + i * 16, '2h')
+            trigger_positions.append((x, y))
             elevation, = read(coord_ptr + i * 16 + 4, 'B')
             variable, value = read(coord_ptr + i * 16 + 6, '2H')
             script, = read(coord_ptr + i * 16 + 12, 'I')
@@ -137,6 +142,7 @@ def audit_native(rom_path, elf_path, plans, engine):
             errors.append(name + ': compiled connection count differs')
         for i, link in enumerate(expected_links):
             direction, offset, group, number = read(pointer + i * 12, 'B3xi2B')
+            connection_sides.append(direction)
             target = native_to_name[link['map']]
             if (direction, offset, group, number) != (
                     directions[link['direction']], link['offset'], *ids[target]):
@@ -144,6 +150,13 @@ def audit_native(rom_path, elf_path, plans, engine):
             connections += 1
         if scripts != symbols[name + '_MapScripts']:
             errors.append(name + ': inherited stock map script active')
+        if 'sSFResumeAreas' in symbols:
+            from world_resume_audit import check_masks
+            exits = [(p['x'],p['y']) for p in plan['access_points']
+                     if p['kind'] in ('gym_exit','room_exit')]
+            errors.extend(name + ': ' + error for error in check_masks(
+                read, symbols['sSFResumeAreas'], plan_index, ids[name], width, height,
+                actual, actor_envelopes, trigger_positions, exits, connection_sides))
     return {'passed': not errors, 'errors': errors,
             'scenery_resources':list(resources.values()),
             'counts': {'maps': len(plans), 'tiles': tiles, 'connections': connections,

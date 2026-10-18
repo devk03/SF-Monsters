@@ -2,6 +2,16 @@
 // use the native same-map warp only when an updated layout occupies that tile.
 #include "sf_authored_maps.h"
 #include "constants/flags.h"
+#ifdef SF_WORLD_RESUME_MASKS
+#include "sf_resume_masks.h"
+#else
+static bool8 SFResumeCanReturn(s16 x, s16 y)
+{
+    (void)x;
+    (void)y;
+    return TRUE;
+}
+#endif
 
 static bool8 SFResumeTileIsWalkable(s16 x, s16 y)
 {
@@ -27,7 +37,7 @@ static bool8 SFResumeTileIsSafe(s16 x, s16 y, bool8 surfing)
 {
     u8 i;
     const struct MapEvents *events = gMapHeader.events;
-    if (!SFResumeTileIsWalkable(x, y))
+    if (!SFResumeTileIsWalkable(x, y) || !SFResumeCanReturn(x, y))
         return FALSE;
     // Updated scenery must not silently put a land save into Surf or bypass
     // its badge gate. Prefer the saved land/water mode and never spawn on a fall.

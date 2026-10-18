@@ -652,7 +652,14 @@ section but its tool-controlled status remains paused; do not pretend it was
 rewritten or mark unfinished prior gates complete to replace it. This spec is the
 canonical expanded objective while implementation continues.
 
-**Latest checkpoint: private v83, target3896784b… (not town acceptance).** All
+**Latest checkpoint: private v84, targete2f00057… (not town acceptance).** New
+neighborhood landmarks and adult cast appearances compile alongside return-path
+masks for all58maps. Continue now rejects free-but-sealed pockets as well as
+collision, actor envelopes and coordinate triggers. An independent audit derives
+the masks from linked map/event bytes at pre-Surf, Surf and Waterfall stages;
+the sanitizer regression checks nearest-tile recovery skips an isolated pocket.
+Updated cold-Continue and full-route native checks are running. Priorv83 evidence:
+all
 58maps/76connections/16gymwarps/26roomwarps pass the native circuit; all13service
 rooms pass counter/menu/return checks. The exact110,418-frame circuit also matches
 native IWRAM/EWRAM byte-for-byte in the public WASM core. All18local activities
@@ -846,6 +853,15 @@ Inspection caught a pale patch from quantizing transparent step ground into a
 cream color; the native kit now reserves exact neutral paving grays. Adult roles
 also receive adult sprites, and nearby greeters no longer duplicate the adjacent
 resident. These latest palette/appearance refinements await the next native build.
+
+Private v84targete2f00057… now includes those neutral-gray and adult-appearance
+fixes. Returnability is stored in small ROM bitsets, avoiding a large flood-fill
+queue on the GBA stack. Source masks account for full NPC movement envelopes,
+door triggers, room/gym exits and stage-dependent water; the linked-cartridge
+audit independently checks all three stages against actual compiled geometry.
+Productionv80 does not opt into this world-only table. Native sanitizer recovery,
+two independent small-geometry regressions,19world-contract cases and module
+validation pass. These checks do not establish human town acceptance.
 
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
