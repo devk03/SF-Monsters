@@ -65,6 +65,10 @@ def compile_kit(root=ROOT, profile='residential'):
     paving_info = json.loads((paving_dir / 'conversion.json').read_text())
     paving = checked(paving_dir, 'paving.indices', paving_info)
     palettes[7] = checked(paving_dir, 'paving.gbapal', paving_info)
+    if profile != 'residential':
+        from world_surfaces import concrete, stone_palette
+        paving = concrete()
+        palettes[7] = stone_palette(palettes[7])
     empty = bytes(256)
     card('paving', empty, 16, 16, 7, paving, 7, False)
     # Use existing original asphalt, not a yellow or teal ground replacement.
@@ -223,6 +227,10 @@ def compile_kit(root=ROOT, profile='residential'):
                for color in source_colors[1:]]
     hedge=bytes(remap[shrub[(y*2)*32+x*2]] for y in range(16) for x in range(16))
     card('edge_hedge',hedge,16,16,10,paving,7)
+    if profile not in ('residential', 'nature'):
+        from world_surfaces import surfaces
+        for name, w, h, pixels in surfaces():
+            card(name,pixels,w,h,7,paving,7,False,floor=True)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

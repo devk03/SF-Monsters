@@ -7,6 +7,10 @@ beyond the prior blockout-review pause. Gym content remains contributor-owned;
 finish its site/approach while preserving the assigned entry/state contracts.
 
 Current checkpoint: v0.0.84 is published at `/world`; root v80 stays available.
+Latest feedback rejects repeated paving and sparse detached urban blocks. Rebuild
+street composition with longer attached frontages, actual curbs and distinct
+district materials/decoration. Review contrasting districts in native gameplay;
+do not treat more props or a palette swap as acceptance.
 The world is a functional review candidate, not human-approved finished towns.
 Read the latest section 15.1 evidence and review clips before further changes.
 All 58 maps and their native/WASM route pass; final visual acceptance remains open.

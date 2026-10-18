@@ -659,6 +659,16 @@ https://sf-mini-monsters.devkunjadia03.chatgpt.site/world. Root v80 remains avai
 During active work, check with the existing alignment chat about every 30 minutes
 through bounded reviews; do not create recurring monitors for this cadence.
 
+**Latest user revision — October 17: rebuild urban street composition.** The
+18-town review exposed repeated square paving, sparse decoration and fragmented
+building clusters. The user rejected that visual direction. Replace open urban
+aprons with attached street walls, recognizable curb/sidewalk boundaries and
+district-specific materials and street uses. Keep the compact 32×24 geography,
+stable service/gym entries, local reward flags and older-save recovery. First
+review contrasting industrial, mixed-use and residential districts in the actual
+native game. Counts and source checks establish coverage, not visual approval.
+Public v84 stays available while the next private candidate is developed.
+
 **Latest checkpoint: private v84, targetc955f48d… (not town acceptance).** New
 neighborhood landmarks and adult cast appearances compile alongside return-path
 masks for all58maps. Continue now rejects free-but-sealed pockets as well as

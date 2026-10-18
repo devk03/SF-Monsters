@@ -464,6 +464,70 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "slab_walk": {
+          "first": 629,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 633,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 635,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 639,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 640,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 641,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 642,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 643,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },
@@ -659,6 +723,70 @@
           "width": 1,
           "height": 1,
           "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 628,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 632,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 634,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 638,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 639,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 640,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 641,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 642,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
           "behavior": 0,
           "layer": 1
         }
@@ -1095,6 +1223,70 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "slab_walk": {
+          "first": 623,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 627,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 629,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 633,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 634,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 635,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 636,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 637,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },
@@ -1274,6 +1466,70 @@
           "width": 1,
           "height": 1,
           "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 587,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 591,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 593,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 597,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 598,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 599,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 600,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 601,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
           "behavior": 0,
           "layer": 1
         }
@@ -1535,6 +1791,70 @@
           "width": 1,
           "height": 1,
           "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 641,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 645,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 647,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 651,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 652,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 653,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 654,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 655,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
           "behavior": 0,
           "layer": 1
         }
