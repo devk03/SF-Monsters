@@ -241,6 +241,21 @@ class _World:
                   'NPC local IDs must follow unique native event order')
             local_ids.add(event['id'])
             occupied.add(point)
+        protected = {(event['x'],event['y']) for event in plan.get('access_points', [])}
+        for event in objects:
+            rx, ry = event.get('range_x',0), event.get('range_y',0)
+            _integer(rx,0,1,'ambient movement x range')
+            _integer(ry,0,1,'ambient movement y range')
+            if rx or ry:
+                _need(event.get('movement') == 'MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT'
+                      and ry == 0, 'movement', 'Only bounded horizontal ambient movement is allocated')
+                point = (event['x'],event['y'])
+                envelope = {(point[0]+dx,point[1]+dy) for dx in range(-rx,rx+1)
+                            for dy in range(-ry,ry+1)}
+                _need(not envelope & (protected | (occupied-{point}))
+                      and all(p in cells and not cells[p][1]
+                              and cells[p][0] not in (WATER,WATERFALL) for p in envelope),
+                      'movement', 'Ambient movement can obstruct a required approach or solid tile')
         coords = set()
         for event in plan.get('coord_events', []):
             point = self._position(event, identifier + ' trigger')

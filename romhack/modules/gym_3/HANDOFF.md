@@ -28,6 +28,10 @@ playtested against the eventual campaign teams; the current level-100 loan is QA
 
 ## Native allocation
 
+Core NPC IDs 1–1 are reserved. Append your NPCs from ID 2;
+keep the combined active-object total at 15 or fewer. These allocations are
+stable for this finishing revision; changing them needs integrator review.
+
 Persistent puzzle flags: `FLAG_UNUSED_0x026`, `FLAG_UNUSED_0x027`.
 Core completion (read only): `FLAG_UNUSED_0x028`. This is separate from
 old blockout access stamps; an existing badge never proves this new module was won.

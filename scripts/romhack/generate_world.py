@@ -155,11 +155,13 @@ def generate(manifest):
                                    for x, token in enumerate(row) if token in 'WV']
         plans.append(plan)
     from world_towns import furnish
-    return furnish(plans, manifest)
+    from world_people import populate
+    return populate(furnish(plans, manifest), manifest)
 
 
 def write_world(manifest, directory, modules_root=None):
     from world_scripts import map_script
+    from world_people import scripts as ambient_scripts
     from content_modules import MODULES, load_modules, apply_module_layouts, script_with_module
     directory.mkdir(parents=True, exist_ok=True)
     modules = load_modules(manifest, modules_root or MODULES)
@@ -169,7 +171,8 @@ def write_world(manifest, directory, modules_root=None):
         (directory / (plan['world_id'] + '.json')).write_text(
             json.dumps(plan, indent=2) + '\n')
         (directory / plan['script']).write_text(script_with_module(
-            map_script(manifest, plan), by_world.get(plan['world_id'])))
+            map_script(manifest, plan), by_world.get(plan['world_id'])) +
+            ambient_scripts(plan))
     start = next(plan for plan in plans if plan['world_id'] == manifest['start']['area'])
     content = {'maps': ['world-blockout/' + plan['world_id'] + '.json' for plan in plans],
                'spawn': {'map': start['engine_map'], 'id': start['native_id'][4:],

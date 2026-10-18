@@ -61,7 +61,7 @@ def compile_kit(root=ROOT):
     street_info = json.loads((street_dir / 'conversion.json').read_text())
     source = checked(street_dir, 'tiles.indices', street_info)
     palettes[8] = checked(street_dir, 'street.gbapal', street_info)
-    asphalt = crop(source, 64, 0, 0, 16, 16)
+    asphalt = bytes(source[(y % 4)*64+x] for y in range(16) for x in range(16))
     crossing = crop(source, 64, 16, 16, 16, 16)
     card('asphalt', empty, 16, 16, 8, asphalt, 8, False)
     card('crossing', empty, 16, 16, 8, crossing, 8, False)

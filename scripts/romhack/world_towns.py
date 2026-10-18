@@ -37,8 +37,8 @@ def furnish(plans, manifest):
         # Four attached blocks, with pavement continuous under the original
         # foundations. Both street sides get doors, stoops and clear approaches.
         blocks = []
-        for left, top, styles in ((1,2,('coral','cafe','cream','lilac')),
-                                  (20,2,('lilac','cream','cafe','coral')),
+        for left, top, styles in ((1,4,('coral','cafe','cream','lilac')),
+                                  (20,4,('lilac','cream','cafe','coral')),
                                   (1,17,('pair','cream','coral')),
                                   (20,17,('cream','pair','lilac'))):
             x=left
@@ -50,6 +50,7 @@ def furnish(plans, manifest):
         # Show a real, reserved gym facade at the existing stable trigger.
         gym = next((g for g in manifest['gyms'] if g['area']==plan['world_id']),None)
         if gym: stamp('cream',15,3)
+        else: stamp('pair',14,3)
         for name,x,y in [('lamp',13,5),('lamp',18,17),('meter',6,10),
                          ('hydrant',26,10),('bin',2,15),('rack',26,15),
                          ('bench',6,7),('tree',28,7)]:

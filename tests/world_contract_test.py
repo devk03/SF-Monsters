@@ -228,6 +228,17 @@ class WorldContractTests(unittest.TestCase):
             m, p = fixture(); mutate(m, p)
             with self.subTest(mutation=mutations.index(mutate)): self.reject(m, p)
 
+    def test_ambient_wander_cannot_cover_a_required_arrival_or_wall(self):
+        m,p=fixture()
+        npc=dict(id=len(p['dogpatch']['npcs'])+1,x=15,y=16,movement='MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT',range_x=1)
+        p['dogpatch']['npcs'].append(npc)
+        # Dogpatch spawn is (16,16), inside this movement envelope.
+        self.reject(m,p,'movement')
+        npc.update(x=3,y=4)
+        self.assertTrue(run(m,p)['passed'])
+        tile(p['dogpatch'],4,4,'#')
+        self.reject(m,p,'movement')
+
     def test_malformed_inputs_return_errors_instead_of_claiming_success(self):
         m, p = fixture()
         for bad_manifest, bad_plans in [(None, []), ({}, []), (m, None), (m, [{}])]:

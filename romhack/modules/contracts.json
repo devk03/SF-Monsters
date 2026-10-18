@@ -20,7 +20,8 @@
         "FLAG_UNUSED_0x020",
         "FLAG_UNUSED_0x021"
       ],
-      "completion_flag": "FLAG_UNUSED_0x022"
+      "completion_flag": "FLAG_UNUSED_0x022",
+      "core_npc_count": 1
     },
     {
       "id": "gym_2",
@@ -41,7 +42,8 @@
         "FLAG_UNUSED_0x023",
         "FLAG_UNUSED_0x024"
       ],
-      "completion_flag": "FLAG_UNUSED_0x025"
+      "completion_flag": "FLAG_UNUSED_0x025",
+      "core_npc_count": 1
     },
     {
       "id": "gym_3",
@@ -62,7 +64,8 @@
         "FLAG_UNUSED_0x026",
         "FLAG_UNUSED_0x027"
       ],
-      "completion_flag": "FLAG_UNUSED_0x028"
+      "completion_flag": "FLAG_UNUSED_0x028",
+      "core_npc_count": 1
     },
     {
       "id": "gym_4",
@@ -83,7 +86,8 @@
         "FLAG_UNUSED_0x029",
         "FLAG_UNUSED_0x02A"
       ],
-      "completion_flag": "FLAG_UNUSED_0x02B"
+      "completion_flag": "FLAG_UNUSED_0x02B",
+      "core_npc_count": 1
     },
     {
       "id": "gym_5",
@@ -104,7 +108,8 @@
         "FLAG_UNUSED_0x02C",
         "FLAG_UNUSED_0x02D"
       ],
-      "completion_flag": "FLAG_UNUSED_0x02E"
+      "completion_flag": "FLAG_UNUSED_0x02E",
+      "core_npc_count": 1
     },
     {
       "id": "gym_6",
@@ -125,7 +130,8 @@
         "FLAG_UNUSED_0x02F",
         "FLAG_UNUSED_0x030"
       ],
-      "completion_flag": "FLAG_UNUSED_0x031"
+      "completion_flag": "FLAG_UNUSED_0x031",
+      "core_npc_count": 1
     },
     {
       "id": "gym_7",
@@ -146,7 +152,8 @@
         "FLAG_UNUSED_0x032",
         "FLAG_UNUSED_0x033"
       ],
-      "completion_flag": "FLAG_UNUSED_0x034"
+      "completion_flag": "FLAG_UNUSED_0x034",
+      "core_npc_count": 1
     },
     {
       "id": "gym_8",
@@ -167,7 +174,8 @@
         "FLAG_UNUSED_0x035",
         "FLAG_UNUSED_0x036"
       ],
-      "completion_flag": "FLAG_UNUSED_0x037"
+      "completion_flag": "FLAG_UNUSED_0x037",
+      "core_npc_count": 1
     },
     {
       "id": "mission_potrero_rival",
@@ -185,7 +193,8 @@
         "FLAG_UNUSED_0x038",
         "FLAG_UNUSED_0x039"
       ],
-      "completion_flag": "FLAG_UNUSED_0x03A"
+      "completion_flag": "FLAG_UNUSED_0x03A",
+      "core_npc_count": 9
     },
     {
       "id": "mission_meteorite",
@@ -203,7 +212,8 @@
         "FLAG_UNUSED_0x03B",
         "FLAG_UNUSED_0x03C"
       ],
-      "completion_flag": "FLAG_UNUSED_0x03D"
+      "completion_flag": "FLAG_UNUSED_0x03D",
+      "core_npc_count": 9
     },
     {
       "id": "mission_stadium",
@@ -221,7 +231,8 @@
         "FLAG_UNUSED_0x03E",
         "FLAG_UNUSED_0x03F"
       ],
-      "completion_flag": "FLAG_UNUSED_0x040"
+      "completion_flag": "FLAG_UNUSED_0x040",
+      "core_npc_count": 9
     },
     {
       "id": "mission_treasure_island",
@@ -239,7 +250,8 @@
         "FLAG_UNUSED_0x041",
         "FLAG_UNUSED_0x042"
       ],
-      "completion_flag": "FLAG_UNUSED_0x043"
+      "completion_flag": "FLAG_UNUSED_0x043",
+      "core_npc_count": 9
     },
     {
       "id": "mission_sutro_tower",
@@ -257,7 +269,8 @@
         "FLAG_UNUSED_0x044",
         "FLAG_UNUSED_0x045"
       ],
-      "completion_flag": "FLAG_UNUSED_0x046"
+      "completion_flag": "FLAG_UNUSED_0x046",
+      "core_npc_count": 3
     },
     {
       "id": "mission_lands_end",
@@ -275,7 +288,8 @@
         "FLAG_UNUSED_0x047",
         "FLAG_UNUSED_0x048"
       ],
-      "completion_flag": "FLAG_UNUSED_0x049"
+      "completion_flag": "FLAG_UNUSED_0x049",
+      "core_npc_count": 3
     }
   ]
 }

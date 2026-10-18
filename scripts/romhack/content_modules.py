@@ -148,9 +148,12 @@ def load_modules(manifest, directory=MODULES):
 def apply_module_layouts(plans, modules):
     result = deepcopy(plans)
     for module in modules.values():
+        plan = next(p for p in result if p['world_id'] == module['contract']['world_id'])
+        expected = module['contract'].get('core_npc_count')
+        if expected is not None and len(plan['npcs']) != expected:
+            raise ValueError('Core NPC allocation changed; revise the shared module contract')
         if module['meta']['status'] == 'stub':
             continue
-        plan = next(p for p in result if p['world_id'] == module['contract']['world_id'])
         if module['rows'] is not None:
             rows = module['rows']
             if len(rows) != 24 or any(not isinstance(r, str) or len(r) != 32 for r in rows):

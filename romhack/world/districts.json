@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "cast": "Original fictional ambient residents; contributor public-person casting remains separate.",
+  "areas": {
+    "dogpatch": {
+      "character": "industrial waterfront",
+      "landmark_brief": "A neighborhood repair counter",
+      "residents": [
+        {
+          "role": "Bike mechanic",
+          "dialogue": "Hold the brake for me? Thanks. People keep bringing these in with the same problem: hills.",
+          "revisit": "You made it back. Brake still works? That's my favorite kind of review."
+        },
+        {
+          "role": "Potter",
+          "dialogue": "I finally found a studio with a sink. It sounds like a small thing until you try carrying wet clay home.",
+          "revisit": null
+        },
+        {
+          "role": "Dog walker",
+          "dialogue": "These two know the route better than I do. We stop at every bakery, including the closed one.",
+          "revisit": null
+        },
+        {
+          "role": "Dock worker",
+          "dialogue": "I'm waiting for my brother. He said five minutes, so I've got time to eat.",
+          "revisit": null
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "Potrero is uphill from here. Bring a layer. Somehow that's still useful advice when it's sunny.",
+          "revisit": null
+        },
+        {
+          "role": "Cafe regular",
+          "dialogue": "I came in for coffee and ran into three people I owed messages to. Productive morning, unfortunately.",
+          "revisit": null
+        },
+        {
+          "role": "Repair host",
+          "dialogue": "You look like you've been walking awhile. Sit down; I can get your little team patched up.",
+          "revisit": null
+        },
+        {
+          "role": "Shopkeeper",
+          "dialogue": "Nothing fancy today. Just the stuff you wish you'd packed before you left home.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "potrero_hill": {
+      "character": "hilltop residential",
+      "landmark_brief": "A stair landing with a city view",
+      "residents": [
+        {
+          "role": "Grocery runner",
+          "dialogue": "I bought one more bag than I can carry. I do this every single week.",
+          "revisit": "You're still taking the stairs? All right, now I feel lazy."
+        },
+        {
+          "role": "Gardener",
+          "dialogue": "The sunny side gets tomatoes. The windy side gets whatever survives my optimism.",
+          "revisit": null
+        },
+        {
+          "role": "Delivery rider",
+          "dialogue": "That address is one block away. The hill has a different opinion.",
+          "revisit": null
+        },
+        {
+          "role": "Parent",
+          "dialogue": "We're supposed to be going home. Apparently every staircase has to be counted first.",
+          "revisit": null
+        },
+        {
+          "role": "Longtime neighbor",
+          "dialogue": "Take a second at the landing. Nobody ever looks back until they've already reached the top.",
+          "revisit": null
+        },
+        {
+          "role": "Photographer",
+          "dialogue": "I had the perfect light ten minutes ago. Now I'm calling it a scouting trip.",
+          "revisit": null
+        },
+        {
+          "role": "Community host",
+          "dialogue": "Come in and catch your breath. The kettle's already on.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "I put the heavy stuff by the register. People have enough hill left after they leave.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "mission": {
+      "character": "busy neighborhood commerce",
+      "landmark_brief": "A small mural courtyard",
+      "residents": [
+        {
+          "role": "Mural painter",
+          "dialogue": "Can you stand a little to the left? I'm checking whether that outline reads from the sidewalk.",
+          "revisit": "Oh, you came back. The wall's finished. The paint on my shoes is permanent."
+        },
+        {
+          "role": "Line cook",
+          "dialogue": "My break is twelve minutes. I'd love to explain the whole menu, but right now I'm just eating.",
+          "revisit": null
+        },
+        {
+          "role": "Record shopper",
+          "dialogue": "I found the record I came for. Now I need someone to stop me buying four more.",
+          "revisit": null
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "The courtyard is quieter than the street. I take my lunch back there when I can.",
+          "revisit": null
+        },
+        {
+          "role": "Cyclist",
+          "dialogue": "Somebody left a note on my bike saying 'nice bike.' Honestly, it made my day.",
+          "revisit": null
+        },
+        {
+          "role": "Poet",
+          "dialogue": "I'm reading tonight. To maybe six people, but they're six people who actually listen.",
+          "revisit": null
+        },
+        {
+          "role": "Community host",
+          "dialogue": "You can rest here. No, you don't have to buy something first.",
+          "revisit": null
+        },
+        {
+          "role": "Market clerk",
+          "dialogue": "The line moves fast if everybody decides before they reach me. Nobody decides.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "castro": {
+      "character": "colorful neighborhood main street",
+      "landmark_brief": "A neighborhood cinema corner",
+      "residents": [
+        {
+          "role": "Cinema usher",
+          "dialogue": "We start in ten minutes. That includes the person who is definitely still choosing snacks.",
+          "revisit": "You came back! Different movie tonight. Same argument about the best seat."
+        },
+        {
+          "role": "Dog owner",
+          "dialogue": "He acts like he owns this whole block. I'm just the person carrying the bags.",
+          "revisit": null
+        },
+        {
+          "role": "Bookshop browser",
+          "dialogue": "I asked for something short and left with a trilogy. The staff are very good at their jobs.",
+          "revisit": null
+        },
+        {
+          "role": "Cafe worker",
+          "dialogue": "Decaf is still coffee. I have this conversation more often than you'd think.",
+          "revisit": null
+        },
+        {
+          "role": "Costume maker",
+          "dialogue": "It's not for an event. I just wanted a jacket that made leaving the house feel worthwhile.",
+          "revisit": null
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "I keep meaning to move closer to work. Then I have a day like this and forget the whole idea.",
+          "revisit": null
+        },
+        {
+          "role": "Community host",
+          "dialogue": "Come sit for a minute. I'll take care of your team while you rest.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "Need supplies? Take your time. The person behind you is only here to talk to my dog.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "outer_sunset": {
+      "character": "foggy compact rowhouses",
+      "landmark_brief": "A surf-check corner",
+      "residents": [
+        {
+          "role": "Surfer",
+          "dialogue": "It looked better from my window. It always looks better from my window.",
+          "revisit": "Still checking the water. One of us should probably get in eventually."
+        },
+        {
+          "role": "Baker",
+          "dialogue": "I was here before sunrise. So when I say good morning at two, just let me have it.",
+          "revisit": null
+        },
+        {
+          "role": "Bus rider",
+          "dialogue": "I used to open the arrival app every ten seconds. Now I stare down the street. Personal growth.",
+          "revisit": null
+        },
+        {
+          "role": "Window gardener",
+          "dialogue": "The plants on this side get fog. The ones on the other side also get fog.",
+          "revisit": null
+        },
+        {
+          "role": "Parent",
+          "dialogue": "We packed sunscreen and two jackets. I've stopped trying to predict which one we'll need.",
+          "revisit": null
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "The cafe knows my order. I'm choosing to find that comforting rather than embarrassing.",
+          "revisit": null
+        },
+        {
+          "role": "Rest-stop host",
+          "dialogue": "Come warm up. Wet sleeves, tired team, whatever it is, you're welcome.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "Heading toward the park? Grab what you need now. It's a longer walk when you're hungry.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "marina": {
+      "character": "busy waterfront social blocks",
+      "landmark_brief": "A small bar and waterfront meeting spot",
+      "residents": [
+        {
+          "role": "Bartender",
+          "dialogue": "You can have water without explaining yourself. I promise that's the least interesting order I've heard.",
+          "revisit": "Back again? Your friends found you. They were standing outside the other bar."
+        },
+        {
+          "role": "Runner",
+          "dialogue": "I said this would be an easy run. Then my friend started talking about splits.",
+          "revisit": null
+        },
+        {
+          "role": "Dog sitter",
+          "dialogue": "I know all the dogs on this block and almost none of the people. It seems to be working.",
+          "revisit": null
+        },
+        {
+          "role": "Resident",
+          "dialogue": "They moved the meeting because the first meeting ran long. I'm going for a walk.",
+          "revisit": null
+        },
+        {
+          "role": "Friend waiting",
+          "dialogue": "She said 'leaving now.' I can see her apartment from here. The lights are still on.",
+          "revisit": null
+        },
+        {
+          "role": "Bar regular",
+          "dialogue": "We picked a bar so we could hear each other. Then we picked a different bar. Same problem.",
+          "revisit": null
+        },
+        {
+          "role": "Cafe host",
+          "dialogue": "Sit down, have some water. There's no rush to head back out.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "Forgot something for the waterfront? If it's a jacket, I can only offer sympathy.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "pacific_heights": {
+      "character": "quiet formal residential blocks",
+      "landmark_brief": "A tucked-away overlook",
+      "residents": [
+        {
+          "role": "Neighbor",
+          "dialogue": "The view is nice, but I mainly come up here because my phone gets quiet.",
+          "revisit": "You found the little overlook again. Please don't put it in a top-ten list."
+        },
+        {
+          "role": "House sitter",
+          "dialogue": "I got three pages of instructions for a cat that won't acknowledge I exist.",
+          "revisit": null
+        },
+        {
+          "role": "Painter",
+          "dialogue": "I'm trying to get that window color right. It changes every time a cloud goes over.",
+          "revisit": null
+        },
+        {
+          "role": "Care worker",
+          "dialogue": "I take this route home for the trees. It's a few minutes longer. I don't mind.",
+          "revisit": null
+        },
+        {
+          "role": "Student",
+          "dialogue": "Our assignment was one building. I picked one with about a thousand details. Great choice.",
+          "revisit": null
+        },
+        {
+          "role": "Delivery worker",
+          "dialogue": "The stairs are fine. It's people saying 'just a few stairs' that gets me.",
+          "revisit": null
+        },
+        {
+          "role": "Rest-stop host",
+          "dialogue": "There's a seat inside if you need a minute. Your team can rest too.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "I know this shop is small. Somehow people still lose each other in it.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "noe_valley": {
+      "character": "village-like shopfront blocks",
+      "landmark_brief": "A cafe repair table",
+      "residents": [
+        {
+          "role": "Open-source maintainer",
+          "dialogue": "I fixed the bug. Now I'm trying to write a comment that explains why it was a bug.",
+          "revisit": "The fix shipped. Someone immediately asked whether the old behavior could be an option."
+        },
+        {
+          "role": "Parent",
+          "dialogue": "The stroller has better suspension than my bike. I'm not sure how I got here.",
+          "revisit": null
+        },
+        {
+          "role": "Dog walker",
+          "dialogue": "We leave at the same time every day. He still reacts like this walk was his idea.",
+          "revisit": null
+        },
+        {
+          "role": "Cafe regular",
+          "dialogue": "It's a good table for working. It's a terrible table for pretending you aren't working.",
+          "revisit": null
+        },
+        {
+          "role": "Retired neighbor",
+          "dialogue": "I used to hurry through this block. Now I know which bench gets the afternoon sun.",
+          "revisit": null
+        },
+        {
+          "role": "Repair volunteer",
+          "dialogue": "Bring the broken thing in. Worst case, we learn why it's broken together.",
+          "revisit": null
+        },
+        {
+          "role": "Community host",
+          "dialogue": "You can rest here while we look after your team. The chairs don't match, but they're comfortable.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "Need a few supplies? I can help. Need directions? My neighbor will give you three versions.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "mission_bay": {
+      "character": "new waterfront blocks",
+      "landmark_brief": "A waterside lunch terrace",
+      "residents": [
+        {
+          "role": "Research worker",
+          "dialogue": "I can't talk about work. I can tell you the sandwich downstairs is worth talking about.",
+          "revisit": "The project finally has a name. Somehow I preferred when it didn't."
+        },
+        {
+          "role": "Nurse",
+          "dialogue": "I'm off shift. If you're asking where to get coffee, that I can help with.",
+          "revisit": null
+        },
+        {
+          "role": "Resident",
+          "dialogue": "My building has three apps and one front door. You can guess which one works reliably.",
+          "revisit": null
+        },
+        {
+          "role": "Kayaker",
+          "dialogue": "I'm checking the wind before I head out. Looking confident doesn't make the water calmer.",
+          "revisit": null
+        },
+        {
+          "role": "Student",
+          "dialogue": "We booked a study room and spent the first hour choosing what to study.",
+          "revisit": null
+        },
+        {
+          "role": "Construction worker",
+          "dialogue": "It changes fast around here. I still use the old corner as a landmark.",
+          "revisit": null
+        },
+        {
+          "role": "Rest-stop host",
+          "dialogue": "Long walk along the water? Come in. We have space for your team.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "Game day gets busy. The trick is to buy snacks before everybody else has the same idea.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "giants_stadium": {
+      "character": "stadium concourse",
+      "landmark_brief": "A ballpark gathering plaza",
+      "residents": [
+        {
+          "role": "Usher",
+          "dialogue": "Your ticket is fine. You're just walking toward the wrong entrance. Happens every game.",
+          "revisit": "Back for another one? I recognize the determined search for the snack stand."
+        },
+        {
+          "role": "Fan",
+          "dialogue": "I brought a jacket, a second jacket and completely unreasonable expectations.",
+          "revisit": null
+        },
+        {
+          "role": "Vendor",
+          "dialogue": "If you want to know what's good, ask the person eating. I'm paid to say all of it.",
+          "revisit": null
+        },
+        {
+          "role": "Parent",
+          "dialogue": "She doesn't care who wins. She wants to know whether the big screen can see her.",
+          "revisit": null
+        },
+        {
+          "role": "Radio listener",
+          "dialogue": "I'm listening while I watch. My friend says that's strange. My friend keeps asking me what happened.",
+          "revisit": null
+        },
+        {
+          "role": "Visitor",
+          "dialogue": "We came early to walk by the water. Now we're somehow late getting to our seats.",
+          "revisit": null
+        },
+        {
+          "role": "Guest-services host",
+          "dialogue": "Need a quiet minute? Come in here. We can help your team recover too.",
+          "revisit": null
+        },
+        {
+          "role": "Concourse clerk",
+          "dialogue": "Last chance before you find your seat. Unless you're the person who gets up every inning.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "financial_district": {
+      "character": "dense business streets",
+      "landmark_brief": "A pocket lunch plaza",
+      "residents": [
+        {
+          "role": "Office worker",
+          "dialogue": "I blocked off lunch on my calendar. Someone invited me to a lunch meeting.",
+          "revisit": "That meeting could have been a message. The message could have been nothing."
+        },
+        {
+          "role": "Security worker",
+          "dialogue": "Everyone asks if the lobby is open. During the day, yes. That's why the door is open.",
+          "revisit": null
+        },
+        {
+          "role": "Courier",
+          "dialogue": "I've got two stops left. Both say they're five minutes away. In opposite directions.",
+          "revisit": null
+        },
+        {
+          "role": "Cafe owner",
+          "dialogue": "There's an empty table inside. People keep assuming we're full because of the line.",
+          "revisit": null
+        },
+        {
+          "role": "Street musician",
+          "dialogue": "Requests are welcome. Knowing the song is a separate question.",
+          "revisit": null
+        },
+        {
+          "role": "Investor",
+          "dialogue": "I said I'd take a meeting outside for once. Now I can hear myself think. Weird feeling.",
+          "revisit": null
+        },
+        {
+          "role": "Rest-stop host",
+          "dialogue": "Come off the sidewalk for a minute. We'll get your team ready for the next stretch.",
+          "revisit": null
+        },
+        {
+          "role": "Shopkeeper",
+          "dialogue": "Lunch rush is over. You can actually see what's on the shelves now.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "north_beach": {
+      "character": "close cafe and bookshop blocks",
+      "landmark_brief": "A late-night cafe corner",
+      "residents": [
+        {
+          "role": "Bookshop worker",
+          "dialogue": "You can browse. Really. You don't have to apologize every time you pick something up.",
+          "revisit": "Did you finish that book? You can say no. I haven't finished mine either."
+        },
+        {
+          "role": "Cafe regular",
+          "dialogue": "I used to have a usual table. Then somebody else developed a usual table.",
+          "revisit": null
+        },
+        {
+          "role": "Cook",
+          "dialogue": "The dough decides when it's ready. I just explain the delay to everybody else.",
+          "revisit": null
+        },
+        {
+          "role": "Visitor",
+          "dialogue": "We followed the smell of coffee. It's the best navigation system we've tried today.",
+          "revisit": null
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "I can hear somebody practicing the same song every night. They're getting better.",
+          "revisit": null
+        },
+        {
+          "role": "Ferry rider",
+          "dialogue": "I'm early on purpose. Missing a boat feels much worse than missing a bus.",
+          "revisit": null
+        },
+        {
+          "role": "Cafe host",
+          "dialogue": "There's a quiet seat inside. Take a break before you head for the islands.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "If you're going across the water, check your bag now. Coming back for one item gets old fast.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "treasure_island": {
+      "character": "island neighborhood",
+      "landmark_brief": "A ferry-side community room",
+      "residents": [
+        {
+          "role": "Resident",
+          "dialogue": "Everybody asks about the view. It's lovely. I mostly want the bus to line up with my shift.",
+          "revisit": "You found us again. Come in if the wind picks up. It probably will."
+        },
+        {
+          "role": "Gardener",
+          "dialogue": "I put the little plants behind the big plants. That's the entire wind strategy.",
+          "revisit": null
+        },
+        {
+          "role": "Visitor",
+          "dialogue": "I took a hundred pictures and forgot to actually stand here for a minute.",
+          "revisit": null
+        },
+        {
+          "role": "Ferry worker",
+          "dialogue": "Give yourself time to get back. A nice view is not a boat schedule.",
+          "revisit": null
+        },
+        {
+          "role": "Artist",
+          "dialogue": "The space was what I needed. I didn't realize how much until I had it.",
+          "revisit": null
+        },
+        {
+          "role": "Parent",
+          "dialogue": "We're collecting interesting rocks. So far, every rock has qualified.",
+          "revisit": null
+        },
+        {
+          "role": "Community host",
+          "dialogue": "Come inside and warm up. We'll get your team sorted before you head out.",
+          "revisit": null
+        },
+        {
+          "role": "Market clerk",
+          "dialogue": "The things people forget are always small. The inconvenience is never small.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "golden_gate_park": {
+      "character": "park and garden trails",
+      "landmark_brief": "A sheltered park bench",
+      "residents": [
+        {
+          "role": "Gardener",
+          "dialogue": "That path gets quieter after the next turn. I take it when I've had enough advice from other gardeners.",
+          "revisit": "You're back. Nothing dramatic happened. That can be a pretty good day."
+        },
+        {
+          "role": "Runner",
+          "dialogue": "I came out for half an hour and forgot to turn around. The trees make that easy.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "twin_peaks": {
+      "character": "windy hill trails",
+      "landmark_brief": "A wind-sheltered lookout",
+      "residents": [
+        {
+          "role": "Walker",
+          "dialogue": "I brought a hat. The hill has custody of it now.",
+          "revisit": "Still no hat. Nice view, though."
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "I live close enough to see this place and still forget how windy it is up here.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "sutro_tower": {
+      "character": "wooded hill and signal station",
+      "landmark_brief": "A trail-side listening point",
+      "residents": [
+        {
+          "role": "Technician",
+          "dialogue": "If you hear a hum, that's normal. If I start running, then you can ask questions.",
+          "revisit": "The equipment is fine. The coffee machine is the emergency today."
+        },
+        {
+          "role": "Walker",
+          "dialogue": "I use the tower to figure out where I am. Standing this close has ruined my whole system.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "lands_end": {
+      "character": "coastal ruins and trails",
+      "landmark_brief": "A wind-sheltered coast stop",
+      "residents": [
+        {
+          "role": "Coastal walker",
+          "dialogue": "I'm waiting for the fog to lift. If it doesn't, I'll call the fog the point of the walk.",
+          "revisit": "Still fog. Still worth coming out."
+        },
+        {
+          "role": "Volunteer",
+          "dialogue": "Stay on the path, please. The good view doesn't need you to stand on the edge.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    },
+    "angel_island": {
+      "character": "island trails and league approach",
+      "landmark_brief": "A ferry landing shelter",
+      "residents": [
+        {
+          "role": "Ranger",
+          "dialogue": "Check your water before the climb. It sounds obvious until you're halfway up.",
+          "revisit": "You made it back down. Take a moment before you start telling the story."
+        },
+        {
+          "role": "Hiker",
+          "dialogue": "We said we'd stop at the next nice view. We've stopped six times.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending"
+    }
+  }
+}
