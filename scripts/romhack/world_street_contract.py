@@ -10,6 +10,27 @@ CENTERS={'dogpatch':(14,17),'potrero_hill':(15,17),'mission':(14,17),
          'north_beach':(14,18),'treasure_island':(14,17)}
 
 
+def check_details(plan):
+    signs=plan.get('street_signs',[])
+    if len(signs)!=2 or {s['style'] for s in signs}!={'wayfinder','shop_board'}:
+        raise ValueError('Urban district needs two readable street signs')
+    for sign in signs:
+        obj=tuple(sign['object']);standing=tuple(sign['standing'])
+        events=[e for e in plan.get('bg_events',[]) if e['script']==sign['script']]
+        accesses=[e for e in plan['access_points'] if e.get('name')==sign['style']]
+        blocks=[b for b in plan['town_blocks'] if b['style']==sign['style']]
+        if (len(events)!=1 or (events[0]['x'],events[0]['y'])!=obj or len(accesses)!=1
+                or (accesses[0]['x'],accesses[0]['y'])!=standing
+                or sum(abs(a-b) for a,b in zip(obj,standing))!=1
+                or len(blocks)!=1 or not
+                (blocks[0]['x']<=obj[0]<blocks[0]['x']+blocks[0]['width']
+                 and blocks[0]['y']<=obj[1]<blocks[0]['y']+blocks[0]['height'])):
+            raise ValueError('Readable sign does not bind its visible fixture and safe approach')
+    plants={'succulent','tuft','shrub','flower_box','lavender','daisies'}
+    if len({d['name'] for d in plan.get('street_details',[]) if d['name'] in plants})<2:
+        raise ValueError('Urban planting needs more than one native plant motif')
+
+
 def check_streets(plan, cells, frontage, profile):
     design=plan.get('street_design')
     if not design:

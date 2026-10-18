@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.85-neighborhood-world-draft",
+  "version": "0.0.86-neighborhood-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {
@@ -579,8 +579,8 @@
     "V": "waterfall"
   },
   "town_finishing": {
-    "revision": 4,
-    "status": "attached urban street walls and district sidewalk materials; visual review open",
+    "revision": 5,
+    "status": "district planting, readable signs and detailed curbs; visual review open",
     "profiles": {
       "dogpatch": "industrial",
       "treasure_island": "industrial",

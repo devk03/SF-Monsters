@@ -201,6 +201,25 @@ def furnish(plans, manifest):
         props=[('street_tree' if name=='tree' else name,x,y) for name,x,y in props]
         for name,x,y in props:
             stamp(name,x,y)
+        from world_botany import PLANTINGS
+        details=[]
+        if district in PLANTINGS:
+            species=PLANTINGS[district]
+            last=(18,15) if district in ('castro','noe_valley','giants_stadium','outer_sunset') else (30,15)
+            beds=[(3,8),(10,8),(22,8),last]
+            for index,(x,y) in enumerate(beds):
+                name=species[index%len(species)];record(name,x,y)
+                details.append({'name':name,'x':x,'y':y})
+            for pocket in planting_pockets:
+                name=species[0];x=pocket['x'];y=pocket['bottom']-1
+                record(name,x,y);details.append({'name':name,'x':x,'y':y})
+            # The street pole is read at its base; shop boards sit beside the
+            # service approach. Neither uses a walking trigger or reward flag.
+            board=(9,10) if coastal else (3,9)
+            for name,x,y in [('wayfinder',11,8),('shop_board',*board)]:
+                record(name,x,y);details.append({'name':name,'x':x,'y':y})
+            for x in (10,20,29):stamp('curb_drain',x,10)
+        plan['street_details']=details
         plan['street_design']={'sidewalk':material,'threshold':accent,'character':character,
             'frontage_runs':frontage_runs,'planting_pockets':planting_pockets,
             'service_doorway':doorway,'south_passage':{'left':passage[0],'right':passage[1],

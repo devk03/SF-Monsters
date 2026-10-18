@@ -677,6 +677,12 @@ should be readable in-game; scenery counts alone do not prove a convincing city.
 Six original native plant motifs and two sign motifs now fit the secondary tile
 budget alongside gray tactile curb ramps and inset drainage grates. Placement,
 native sign interactions and same-cartridge validation remain in progress.
+Privatev86 targeta1569ce2… now compiles all58maps with44background interactions:
+18existing discoveries plus26readable wayfinding/shop signs. Thirteen urban
+districts each have mixed planting; original plants and signs have complete
+collision/art footprints. Independent contracts bind sign events to their visible
+fixtures and adjacent safe reading positions. Native linked resources and all
+source/module gates pass. Final interaction/traversal and visual review remain open.
 
 Private v85 street revision: native target4b426d87… compiles all58
 maps,76connections,169NPCs and18local discoveries. Thirteen urban districts now

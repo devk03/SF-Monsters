@@ -165,7 +165,8 @@ def generate(manifest):
     from world_interiors import add_rooms
     from world_landscape import landscape
     from world_discoveries import place
-    return add_rooms(populate(place(landscape(furnish(plans, manifest), manifest), manifest), manifest), manifest)
+    from world_signs import add_signs
+    return add_signs(add_rooms(populate(place(landscape(furnish(plans, manifest), manifest), manifest), manifest), manifest), manifest)
 
 
 def write_world(manifest, directory, modules_root=None):
@@ -173,6 +174,7 @@ def write_world(manifest, directory, modules_root=None):
     from world_people import scripts as ambient_scripts
     from world_interiors import extra_scripts
     from world_discoveries import scripts as local_scripts
+    from world_signs import scripts as sign_scripts
     from content_modules import MODULES, load_modules, apply_module_layouts, script_with_module
     directory.mkdir(parents=True, exist_ok=True)
     modules = load_modules(manifest, modules_root or MODULES)
@@ -183,7 +185,7 @@ def write_world(manifest, directory, modules_root=None):
             json.dumps(plan, indent=2) + '\n')
         (directory / plan['script']).write_text(script_with_module(
             map_script(manifest, plan), by_world.get(plan['world_id'])) +
-            ambient_scripts(plan) + extra_scripts(plan, manifest) + local_scripts(plan))
+            ambient_scripts(plan) + extra_scripts(plan, manifest) + local_scripts(plan) + sign_scripts(plan))
     start = next(plan for plan in plans if plan['world_id'] == manifest['start']['area'])
     content = {'resume_masks': True,
                'maps': ['world-blockout/' + plan['world_id'] + '.json' for plan in plans],

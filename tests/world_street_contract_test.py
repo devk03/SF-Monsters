@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_street_contract import check_streets
+from world_street_contract import check_streets,check_details
 
 
 class StreetContractTests(unittest.TestCase):
@@ -71,6 +71,31 @@ class StreetContractTests(unittest.TestCase):
         p,cells,frontage,profile=self.fixture();p.pop('street_design')
         with self.assertRaisesRegex(ValueError,'missing its street design'):
             check_streets(p,cells,frontage,profile)
+
+    def sign_fixture(self):
+        p={'street_signs':[],'bg_events':[],'access_points':[],'town_blocks':[],
+           'street_details':[{'name':'shrub'},{'name':'succulent'}]}
+        for style,x,y,h in [('wayfinder',11,8,2),('shop_board',3,9,1)]:
+            bottom=y+h-1;script='Read_'+style
+            p['street_signs'].append({'style':style,'object':[x,bottom],
+                'standing':[x,bottom+1],'script':script})
+            p['bg_events'].append({'x':x,'y':bottom,'script':script})
+            p['access_points'].append({'name':style,'x':x,'y':bottom+1})
+            p['town_blocks'].append({'style':style,'x':x,'y':y,'width':1,'height':h})
+        return p
+
+    def test_signs_bind_visible_posts_and_actual_reading_positions(self):
+        p=self.sign_fixture();check_details(p)
+        p['bg_events'][0]['x']=12
+        with self.assertRaisesRegex(ValueError,'visible fixture'):
+            check_details(p)
+
+    def test_sign_event_outside_its_visible_fixture_is_rejected(self):
+        p=self.sign_fixture()
+        p['street_signs'][0]['object'][1]=10;p['street_signs'][0]['standing'][1]=11
+        p['bg_events'][0]['y']=10;p['access_points'][0]['y']=11
+        with self.assertRaisesRegex(ValueError,'visible fixture'):
+            check_details(p)
 
 
 if __name__=='__main__':unittest.main()

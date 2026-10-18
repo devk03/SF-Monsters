@@ -319,6 +319,10 @@ class _World:
                   and event.get('player_facing_dir')=='BG_EVENT_PLAYER_FACING_ANY'
                   and bool(NAME.fullmatch(event.get('script',''))),'events','Unmodelled background interaction kind')
             backgrounds.add(point)
+        if self.manifest.get('town_finishing',{}).get('revision',0)>=5 and identifier in CENTERS:
+            from world_street_contract import check_details
+            try:check_details(plan)
+            except ValueError as error:_need(False,'street_details',str(error))
         access = plan.get('access_points', [])
         _need(type(access) is list, 'access', 'Access points must be a list')
         for event in access:
