@@ -677,11 +677,44 @@ front uses one finished variant rather than keeping a redundant partial copy;
 all kits fit the 512-tile budget (largest 499). A regression rejects gaps,
 non-overlapping neighbors and short partial joins. Independent reconstruction
 checks retain original facade orientation under native reflected-tile reuse.
-Current candidate is private v87; final build/traversal evidence is pending.
+The validated v87 candidate is now published; evidence follows below.
 Website UI work is scoped to the world edition: integer-pixel display, grouped
 file tools, optional desktop gamepad and clearer hierarchy. Screenshot review and
 keyboard interaction checks are required before publishing. Human town/art and
 full-game acceptance remain open; root v80 must remain unchanged.
+
+Published v87 — October 18, 2026:
+
+- Target `6786797c2a8e36527dc8d9130bc883b5b7209594c389806694557db05f364bc4`;
+  patch SHA `243c9d82a862e05fe92282274ccfba69251045dcf09f8140c3feffd1658c2652`.
+  Native traversal passes all 58 maps, 76 connections, 16 gym warps and 26 room
+  warps. All 26 signs and 18 discoveries/reward replays pass. Actual older
+  completed/pending saves, newly blocked planter recovery and land/Surf recovery
+  preserve protected state and Flash. The full 104,863-frame WASM replay matches
+  all 294,912 guest RAM bytes (SHA `5e6a56a7…`). Local source, linked-resource,
+  reflected-pixel, street, patch-gate, save-isolation and TypeScript checks pass.
+- Screenshot critique found fractional pixel scaling, oversized desktop gamepad,
+  competing file actions, dense monospaced copy and weak information hierarchy.
+  World-only UI now uses integer scales and a 2× control, optional desktop pad,
+  44px controls, grouped Save & files, keyboard hints, shorter preview details,
+  quieter secondary links, sans body text and softer framing/press feedback.
+  Bounded alignment review caught partial-height joins and Enter leaking into
+  game Start; both were corrected. Narrow review caught a left-clipped file menu;
+  it now opens within the measured 480px layout. Enter toggles it with a loaded
+  emulator. Actual browser local patch/import/cold Continue displays v87 Marina.
+- Evidence: `.tools/benchmarks/town-v87-final-*`, `town-v87-edge-views-complete/`
+  and `world-v87-ui-review/`. Exposed ends/alleys were captured in Dogpatch,
+  Mission, Outer Sunset and Marina; all 18 destination views are also retained.
+  Screenshots include the old public UI, narrow menu failure/correction, actual
+  new gameplay and deployed UI. This does not establish phone or long browser
+  performance approval. The native SF Map remains a sparse schematic: weak city
+  silhouette, anonymous nodes and little landmark context need a separate pass.
+- Site version 74, source `da4de2c288800bf119f5523a0c3db742f4820d54`, deployment
+  `appgdep_6ad51870500c8191a5e00f0f13f99f5e` succeeded publicly. The bundle changes
+  only world UI/CSS and its BPS/manifest. Root v80 patch/emulator/save behavior is
+  unchanged. Full Emerald ROMs, saves and screenshots remain private; only the
+  existing original homebrew prototype cartridge is hosted. No GitHub workflow
+  was run. Human town/art approval and unfinished gym/campaign gates remain open.
 
 **Additional user revision: planted streets and signs.** Add visible neighborhood
 wayfinding and shop boards, bushes and distinct plant combinations per urban

@@ -6,11 +6,11 @@ completion gates and latest progress. The user explicitly resumed implementation
 beyond the prior blockout-review pause. Gym content remains contributor-owned;
 finish its site/approach while preserving the assigned entry/state contracts.
 
-Current checkpoint: v0.0.84 is published at `/world`; root v80 stays available.
-Private v86 adds six original plant motifs, district planting combinations,
-readable wayfinding/shop signs and detailed gray curb ramps/drainage. Read the
-latest section15.1 evidence; human visual acceptance remains open. Keep the
-updated review tab on the current cartridge, rather than the older v84 tour.
+Current checkpoint: v0.0.87 is published at `/world`; root v80 stays available.
+The world now has attached fronts with finished exposed edges, original district
+plants, readable signs and gray curb details. Browser UI uses integer pixels,
+grouped file tools and optional desktop controls. Read section 15.1 for evidence;
+human visual acceptance and native SF Map presentation remain open.
 Latest feedback rejects repeated paving and sparse detached urban blocks. Rebuild
 street composition with longer attached frontages, actual curbs and distinct
 district materials/decoration. Review contrasting districts in native gameplay;
