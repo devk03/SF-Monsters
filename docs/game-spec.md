@@ -744,9 +744,20 @@ Save at (10,14) cold-continues after a new actor occupies that tile, relocates t
 (10,13), visits all four island sections and returns to North Beach. Badges and
 reserved module flags remain exact, land mode is retained and Flash is unchanged.
 The first upgrade fixture used a still-free tile and was rejected; the corrected
-fixture uses the actual new actor position. Full WASM export is being rerun after
-fixing a capture-only optional-PCM cleanup error. Current source tests: 16 world,
-15 module. These results do not approve art, district identity or complete towns.
+fixture uses the actual new actor position. The complete 108,652-frame replay
+also passes in the public WebAssembly core: entire IWRAM/EWRAM matches native
+exactly (RAM SHA-256 c0cceb1c513a28a5293826c2e0ab9fa7c7bdd3773135cc3f2c2b0d46fcbe77d2).
+Evidence: `.tools/benchmarks/town-v82-all-returns-wasm-2/`. A capture-only optional
+PCM cleanup error was corrected before this passing export. Current source tests:
+17 world, 15 module. These results do not approve art, district identity or complete towns.
+
+Private v83 architecture checkpoint: industrial and civic secondary kits now
+compile through normal native inputs, including independent ROM collision/layer
+audits (target20a7f417…, 58maps/76connections/169objects). Residential variants
+retain the same room/gym approaches. All service rooms explicitly retain their
+residential interior kit even when the parent district changes. Original landmark
+atlas/native palette cards are candidates awaiting in-game placement and review.
+No later geometry inherits the v82 controller evidence automatically.
 
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and

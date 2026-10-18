@@ -193,7 +193,9 @@ class _World:
         _need(not set(plan.get('metadata', {})) & {
             'connections', 'object_events', 'warp_events', 'coord_events', 'bg_events', 'layout', 'id'},
             'metadata', 'Metadata may not replace validated native graph/event fields')
-        profile = self.art.get(plan.get('tile_profile','residential'),{})
+        profile_name = plan.get('tile_profile','residential')
+        _need(not self.art or profile_name in self.art,'terrain','Unknown native art profile')
+        profile = self.art.get(profile_name,{})
         secondary = profile.get('secondary',self.manifest['native']['secondary_tileset'])
         _need(plan.get('tilesets') == {
             'primary': self.manifest['native']['primary_tileset'],'secondary':secondary},

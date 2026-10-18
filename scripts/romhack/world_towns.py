@@ -1,6 +1,6 @@
 """Compact authored SF blocks, kept separate from contributor gym interiors."""
 from copy import deepcopy
-from world_tiles import compile_kit
+from world_tiles import compile_kit, legend_for, PROFILES
 
 URBAN = {'dogpatch', 'potrero_hill', 'mission', 'castro', 'outer_sunset',
          'marina', 'pacific_heights', 'noe_valley', 'mission_bay',
@@ -10,19 +10,18 @@ URBAN = {'dogpatch', 'potrero_hill', 'mission', 'castro', 'outer_sunset',
 def furnish(plans, manifest):
     if not manifest.get('town_finishing'):
         return plans
-    kit = compile_kit()
+    kits = {}
     result = deepcopy(plans)
     for plan in result:
         if plan['world_id'] not in URBAN:
             continue
+        profile = manifest['town_finishing'].get('profiles',{}).get(plan['world_id'],'residential')
+        if profile not in kits: kits[profile] = compile_kit(profile=profile)
+        kit = kits[profile]
         grid = [['#' if x in (0, 31) or y in (0, 23) else '.' for x in range(32)] for y in range(24)]
         # Each record has independently checked collision semantics. No roof
         # tile is placed over a walkable building footprint.
-        legend = deepcopy(plan['legend'])
-        for name, card in kit['catalog'].items():
-            for row in card['tiles']:
-                for tile in row:
-                    legend[chr(0x100 + tile-512)] = [tile, card['blocked'], 3]
+        legend = legend_for(kit)
         occupied = set()
         def stamp(name, left, top):
             card = kit['catalog'][name]
@@ -43,20 +42,39 @@ def furnish(plans, manifest):
         # Four attached blocks, with pavement continuous under the original
         # foundations. Both street sides get doors, stoops and clear approaches.
         blocks = []
-        for left, top, styles in ((1,4,('coral','cafe','cream','lilac')),
-                                  (20,4,('lilac','cream','cafe','coral')),
-                                  (1,17,('pair','cream','coral')),
-                                  (20,17,('cream','pair','lilac'))):
+        recipes = {
+            'industrial':((1,3,('warehouse','coral')),(20,3,('brick','coral','cafe','coral')),
+                          (1,16,('warehouse','coral')),(20,16,('brick','warehouse'))),
+            'civic':((1,3,('clinic','cafe')),(20,3,('sandstone','brick','cream')),
+                     (1,16,('brick','sandstone','cafe')),(20,16,('clinic','cafe'))),
+            'residential':((1,4,('coral','cafe','cream','lilac')),
+                           (20,4,('lilac','cream','cafe','coral')),
+                           (1,17,('pair','cream','coral')),(20,17,('cream','pair','lilac')))}
+        recipe = list(recipes[profile])
+        # Explicit neighborhood variants keep the shared door/road interface,
+        # but avoid repeating the same four facades in the same order citywide.
+        variants = {
+            'outer_sunset':(('pair','coral','cafe'),('pair','pair','cafe'),('pair','pair','cafe')),
+            'pacific_heights':(('cream','lilac','cream'),('lilac','cream','coral'),('cream','lilac','cream')),
+            'noe_valley':(('pair','lilac','cafe'),('cream','pair','coral'),('pair','cream','pair')),
+            'potrero_hill':(('coral','pair','cream'),('pair','cream','coral'),('cream','pair','lilac')),
+            'marina':(('cream','cream','cafe'),('lilac','cream','pair'),('cream','pair','coral'))}
+        if plan['world_id'] in variants:
+            for index,styles in zip((1,2,3),variants[plan['world_id']]):
+                left,top,_ = recipe[index];recipe[index]=(left,top,styles)
+        for left, top, styles in recipe:
             x=left
             for style in styles:
                 stamp(style,x,top)
                 width=len(kit['catalog'][style]['tiles'][0])
-                blocks.append({'style':style,'x':x,'y':top,'width':width,'height':4,
+                blocks.append({'style':style,'x':x,'y':top,'width':width,'height':len(kit['catalog'][style]['tiles']),
                                'first_metatile':kit['catalog'][style]['tiles'][0][0]})
                 x+=width
         # Show a real, reserved gym facade at the existing stable trigger.
         gym = next((g for g in manifest['gyms'] if g['area']==plan['world_id']),None)
         if gym: stamp('cream',15,3)
+        elif profile == 'industrial': stamp('coral',15,3)
+        elif profile == 'civic': stamp('sandstone',15,2)
         else: stamp('pair',14,3)
         for name,x,y in [('lamp',13,5),('lamp',18,17),('meter',6,10),
                          ('hydrant',26,10),('bin',2,15),('rack',26,15),
@@ -70,6 +88,8 @@ def furnish(plans, manifest):
                 grid[y][x]=ground
         plan['rows']=[''.join(row) for row in grid]
         plan['legend']=legend
+        plan['tile_profile']=profile
+        plan['tilesets']['secondary']=PROFILES[profile]
         plan['town_blocks']=blocks
         plan['town_props']=['lamp','meter','hydrant','bin','rack','bench','tree']
     return result

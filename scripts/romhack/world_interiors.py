@@ -1,6 +1,6 @@
 """Small useful neighborhood rooms with independently paired native door scripts."""
 from copy import deepcopy
-from world_tiles import compile_kit
+from world_tiles import compile_kit, legend_for, PROFILES
 from world_people import native_text, load_people
 
 PROPS = {
@@ -22,7 +22,7 @@ def add_rooms(plans, manifest):
     people = load_people()
     for room in manifest['interiors']:
         parent = by_id[room['area']]
-        legend = deepcopy(parent['legend'])
+        legend = legend_for(kit)
         def token(tile): return chr(0x100+tile-512)
         grid = [[token(613)]*16 for _ in range(11)]
         def stamp(name,x,y):
@@ -53,7 +53,8 @@ def add_rooms(plans, manifest):
         result = {'world_id':room['id'],'engine_map':room['engine_map'],
                   'native_id':native_id(room['engine_map']),
                   'label':room['label'],'unique_layout':True,'rows':[''.join(row) for row in grid],
-                  'legend':legend,'border_tile':613,'tilesets':deepcopy(parent['tilesets']),
+                  'legend':legend,'border_tile':613,'tile_profile':'residential',
+                  'tilesets':{'primary':manifest['native']['primary_tileset'],'secondary':PROFILES['residential']},
                   'metadata':dict(parent['metadata'],music='MUS_VERDANTURF',weather='WEATHER_SUNNY'),
                   'connections':None,'npcs':npcs,'coord_events':[],
                   'access_points':[{'kind':'checkpoint','x':tx,'y':ty,'activation':'interact','name':'rest_counter'},

@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "tool": "built-in imagegen",
+  "source_size": [
+    1774,
+    887
+  ],
+  "conversion": "measured alpha bounds; aspect-preserving BOX reduction; fixed RGB555 palette; no dithering",
+  "cards": [
+    {
+      "name": "sutro_tower",
+      "source_bounds": [
+        68,
+        20,
+        298,
+        466
+      ],
+      "size": [
+        48,
+        80
+      ],
+      "indices_sha256": "8c647589ce12486fd8ae539abe73f43655365c4d5f570c30f6e28f53328e27ed"
+    },
+    {
+      "name": "windmill",
+      "source_bounds": [
+        416,
+        107,
+        704,
+        460
+      ],
+      "size": [
+        48,
+        64
+      ],
+      "indices_sha256": "5ad20707a8981f1384172e032de0fe8afd9e8eefa34408ffa252c31b878fe06e"
+    },
+    {
+      "name": "conservatory",
+      "source_bounds": [
+        762,
+        170,
+        1217,
+        467
+      ],
+      "size": [
+        64,
+        48
+      ],
+      "indices_sha256": "bdde011439fc4ccda04d1491a6c4dd1400459d391b3a186af7ee1539957cbc6b"
+    },
+    {
+      "name": "bath_ruins",
+      "source_bounds": [
+        1266,
+        290,
+        1740,
+        476
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "indices_sha256": "fe85dd1ae845d727b84f6fa6cfe543ef38795a5cfa53cdd9dec25b42644a9ce3"
+    },
+    {
+      "name": "highrise",
+      "source_bounds": [
+        50,
+        510,
+        286,
+        858
+      ],
+      "size": [
+        48,
+        80
+      ],
+      "indices_sha256": "b1fd101239a53bee334326fae3073a5bad2299dd27946b5d82136f84938f266b"
+    },
+    {
+      "name": "crane",
+      "source_bounds": [
+        381,
+        521,
+        792,
+        849
+      ],
+      "size": [
+        64,
+        64
+      ],
+      "indices_sha256": "f7ea9b280de37bf0accd1201be898227977a37829dad334a5224f20edb0edeff"
+    },
+    {
+      "name": "stadium_gate",
+      "source_bounds": [
+        788,
+        563,
+        1250,
+        840
+      ],
+      "size": [
+        96,
+        64
+      ],
+      "indices_sha256": "ee2d9b10cb44689d4dc6bc9ed2782078f44b54197a343c9b8e5c025e4fcdd05c"
+    },
+    {
+      "name": "theater",
+      "source_bounds": [
+        1346,
+        572,
+        1758,
+        849
+      ],
+      "size": [
+        80,
+        64
+      ],
+      "indices_sha256": "8c31ac395927cd7220e238e80043d7dc5bab329b46077af5df151c4512dd705e"
+    }
+  ],
+  "files": {
+    "sutro_tower.indices": "8c647589ce12486fd8ae539abe73f43655365c4d5f570c30f6e28f53328e27ed",
+    "sutro_tower.png": "e1f98b0009b0060116a4e5f957fe0bcd85418b1b7c9a2cfcacac6b2b62f39436",
+    "windmill.indices": "5ad20707a8981f1384172e032de0fe8afd9e8eefa34408ffa252c31b878fe06e",
+    "windmill.png": "fafd3c716ee16158b72c24f14d73c15402ca6282a9ca03327aae782ebf2b04b3",
+    "conservatory.indices": "bdde011439fc4ccda04d1491a6c4dd1400459d391b3a186af7ee1539957cbc6b",
+    "conservatory.png": "f250c1df202b3e6d435c7e34a4f98910cb7e3906d17800e01b522166aca9715f",
+    "bath_ruins.indices": "fe85dd1ae845d727b84f6fa6cfe543ef38795a5cfa53cdd9dec25b42644a9ce3",
+    "bath_ruins.png": "038271e4b68c0b27a9db637234fe0af1726805c7a7bdca470e751ad9240931bc",
+    "highrise.indices": "b1fd101239a53bee334326fae3073a5bad2299dd27946b5d82136f84938f266b",
+    "highrise.png": "77a760fcd6b356256faccfe1f55c83c556b4e29ccb99ea3e3ebebcd139bafaa4",
+    "crane.indices": "f7ea9b280de37bf0accd1201be898227977a37829dad334a5224f20edb0edeff",
+    "crane.png": "904d4ca5a6225dff590f2e377be7b725de4ed85269798c32072effa3f184b1cd",
+    "stadium_gate.indices": "ee2d9b10cb44689d4dc6bc9ed2782078f44b54197a343c9b8e5c025e4fcdd05c",
+    "stadium_gate.png": "546eef97aed3e0798447eded4db13050177a2e945260a01423113e316c59b3a1",
+    "theater.indices": "8c31ac395927cd7220e238e80043d7dc5bab329b46077af5df151c4512dd705e",
+    "theater.png": "34ccce28310559fcabf592c458a70790b66792f209dec39407e9fc2fda0395bf",
+    "source.png": "7673966df677134008df9520854f6f9f6085acc4eeb95f2c79d035c73a9d510a",
+    "prompt.md": "d3fac6124e84f5a067f50681e822c0382bf6b734d6ec66ee233b9d10ac0986a6",
+    "landmarks.gbapal": "28e670ab101a9c148744a3d749ee47451363c49985da8d14e6350e17ae4b1d18",
+    "native-preview.png": "4daf84e83f9cdbe9ee2edee8799321c62aca209e0512814eca2b11224a799f7b"
+  }
+}
