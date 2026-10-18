@@ -59,7 +59,9 @@ Save/cold Continue evidence. Owner review may accept, request changes or reject.
 Passing checks and `ready_for_review` never grant merge or deployment approval.
 CODEOWNERS requests review; branch protection is a separate GitHub setting.
 
-The default all-stub build preserves the verified blockout ROM exactly. A fresh
+The b967 all-stub ROM remains a historical blockout reference. Core town
+finishing changes it legitimately; establish a new reviewed baseline before
+judging contributor-only changes against it. A fresh
 module fixture injects prerequisites under a separate QA identity; it is not
 campaign progression evidence. `make module-preview` is a finite localhost-only
 player. Never replace the public patch just to demonstrate a contribution.
@@ -100,8 +102,8 @@ Run meaningful local checks. GitHub Actions remains manual-only; use `[skip ci]`
 
 ## Pause and scope boundaries
 
-Pause dependent work for a required user decision or a review-ready evidenced
-blockout. Continue independent approved work while a decision is pending. Never
+Pause dependent work only for a required user decision or a fully evidenced,
+review-ready non-gym world. Do not stop at the old blockout checkpoint. Continue independent approved work while a decision is pending. Never
 mark the goal complete with an unresolved required venue or failed traversal gate.
 Both Treasure Island and Angel Island are approved. Angel Island is the sole
 outside-SF exception, containing Victory Road and the League; retain Treasure

@@ -6,7 +6,7 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 [Game spec and progress](docs/game-spec.md#15-active-emerald-parity-goal) ·
 [Development agent](DEVELOPMENT_AGENT.md) · [Build a gym or mission](CONTRIBUTING.md)
 
-## Current development goal: a shared world people can build in
+## Current development goal: finish the compact SF world
 
 We have generated a playable **world blockout** from the user's October 17 plan:
 all approved areas connected by real routes, safe entrances and exits, return
@@ -14,10 +14,12 @@ paths, water/traversal gates, a Dogpatch start and eight themed gym placeholders
 Simple development tiles are sufficient for this milestone. Polished graphics,
 audio, final dialogue and contributor-written gym battles come later.
 
-The private v81 draft now generates 45 maps: 18 destinations, 19 connectors and
-eight gym rooms. See the [generation guide](docs/world/generation.md) and
+The private v82 finishing draft now generates 58 maps: 18 destinations, 19
+connectors, eight reserved gym rooms and 13 small service interiors. Compact
+streets, authored residents and useful local stops are in progress. No town has
+final visual approval; nature/coast layouts and distinct landmarks remain open. See the [generation guide](docs/world/generation.md) and
 [blockout verification](docs/world/blockout-verification.json). The public link
-below still serves v80; the new world is a separate draft for map review.
+below still serves v80; the new world remains a separate development draft.
 
 The [editable Excalidraw plan](docs/world/initial-world-plan.excalidraw),
 [interpretation and open decisions](docs/world/plan-notes.md), and

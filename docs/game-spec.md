@@ -693,6 +693,57 @@ user decision or completed review-ready world; never label unfinished towns read
 No contributor outreach, PR merging or database work is part of this goal.
 
 
+**Town finishing progress — October 17, in progress (not acceptance).** The
+expanded private v82 world now compiles 58 distinct maps: 18 destinations, 19
+connectors, eight reserved gyms and 13 small service interiors. Outdoor maps stay
+32×24; interiors are 16×11. It includes 169 compiled objects and 42 coordinate
+transitions, retaining all 76 directed connections. The original SF kit fits
+456/512 resident tiles before later regional additions. Secondary behavior/layer,
+actor graphics/movement ranges and unique layout pointers are independently audited.
+
+There are 114 newly authored fictional ambient residents across the destinations,
+with natural short conversations and at least one progression-sensitive revisit
+per area. The 13 urban districts have two bounded walkers each. Existing mission
+and gym development markers remain separate scaffolds, not finished encounters.
+Core object-count contracts now reserve stable native IDs before contributors
+append their objects. The old b967 all-stub invariant is a historical blockout
+reference; a new core-finishing baseline must be reviewed before it replaces it.
+
+The first native service-room smoke proves entry, native counter conversations,
+shop cancellation and safe return. Injured-party healing/economy and full save
+coverage remain separate checks. Source checks plus 15 world and 13 module tests
+pass. Full updated native/WASM traversal and browser performance are still pending.
+No town has human quality approval and no public update has been deployed.
+
+| Destination | Current design stage | Useful interior | Acceptance |
+| --- | --- | --- | --- |
+| Dogpatch | Dense street/population candidate | Repair/rest stop | Native first-room smoke; visual review open |
+| Potrero Hill | Dense street/population candidate | Neighborhood library | Native full pass and visual review open |
+| Mission | Dense street/population candidate | Community studio | Native full pass and visual review open |
+| Castro | Dense street/population candidate | Cafe | Native full pass and visual review open |
+| Outer Sunset | Dense street/population candidate | Rest stop | Native full pass and visual review open |
+| Golden Gate Park / Richmond | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
+| Marina | Dense street/population candidate | Bar/rest stop | Native full pass and visual review open |
+| Pacific Heights | Dense street/population candidate | Neighbor's home | Native full pass and visual review open |
+| Twin Peaks | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
+| Noe Valley | Dense street/population candidate | Repair cafe | Native full pass and visual review open |
+| Mission Bay | Dense street/population candidate | Cafe | Native full pass and visual review open |
+| Giants stadium | Street/population candidate | Guest services | Concourse identity and visual review open |
+| Financial District | Street/population candidate | Cafe | Business district identity and review open |
+| North Beach / Jackson Square | Dense street/population candidate | Reading room | Native full pass and visual review open |
+| Treasure Island | Street/population candidate | Community room | Island-specific composition and review open |
+| Sutro Tower | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
+| Lands End / Sutro Baths | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
+| Angel Island | Trail blockout + resident candidate | League reserved | Environment finishing still needed |
+
+Next priorities: distinguish district compositions/landmarks, finish nature/coast
+and island environments, add local discoveries, exercise all doors/services and
+safe save/resume positions, then capture the complete same-ROM native/WASM route
+and foreground browser evidence. New collision is compiled into the map; no roof
+is painted over a walkable footprint. Resume safety now also avoids actor movement
+envelopes and coordinate triggers. These protections require runtime regression
+checks; source conformance alone is not an acceptance claim.
+
 **Current objective, October 17: a cohesive shared world with assignable content modules.** Preserve and extend
 the user's new [editable plan](world/initial-world-plan.excalidraw) through
 [the world manifest](../romhack/world/world.json) and

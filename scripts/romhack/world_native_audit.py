@@ -60,7 +60,7 @@ def audit_native(rom_path, elf_path, plans, engine):
             attrs, = read(secondary + 16, 'I')
             for tile in used:
                 behavior, = read(attrs + (tile-512)*2, 'H')
-                if behavior != 0x1000:
+                if behavior != (0x1080 if tile in (607,608) else 0x1000):
                     errors.append(name + ': SF tile has unexpected behavior/layer')
         if (width, height) != (len(plan['rows'][0]), len(plan['rows'])):
             errors.append(name + ': compiled dimensions differ')

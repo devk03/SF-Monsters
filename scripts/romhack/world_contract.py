@@ -293,8 +293,11 @@ class _World:
                             (point[0], point[1]-1), (point[0], point[1]+1)}
                 _need(not cells[point][1] and point not in occupied and point not in coords,
                       'access', f'{identifier}: interaction access position is not a safe standing tile')
-                _need(bool(adjacent & (occupied | backgrounds)), 'access',
-                      f'{identifier}: interaction position has no adjacent native object/background event')
+                x,y = point
+                across_counter = {(x+2*dx,y+2*dy) for dx,dy in ((-1,0),(1,0),(0,-1),(0,1))
+                                  if cells.get((x+dx,y+dy),(None,))[0] in (607,608)}
+                _need(bool(adjacent & (occupied | backgrounds) or across_counter & occupied), 'access',
+                      f'{identifier}: interaction position has no adjacent object or staffed native counter')
         _need(coords == {(point['x'], point['y']) for point in access
                           if point['activation'] == 'walk'
                           and point['kind'] not in ('arrival', 'spawn')},

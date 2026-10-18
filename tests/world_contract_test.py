@@ -258,6 +258,14 @@ class WorldContractTests(unittest.TestCase):
         tile(room,16,16,'#')
         self.reject(m,p,'arrival')
 
+    def test_service_counter_requires_a_real_two_tile_npc_interaction(self):
+        m,p=fixture();m['town_finishing']={'revision':1};m['native']['save_magic']=0x5743
+        board=p['dogpatch'];board['legend']['C']=[607,True,3]
+        tile(board,25,17,'C');board['access_points'][0]['y']=18
+        self.assertTrue(run(m,p)['passed'])
+        board['legend']['C']=[614,True,3]  # A wall cannot act as a counter.
+        self.reject(m,p,'access')
+
     def test_malformed_inputs_return_errors_instead_of_claiming_success(self):
         m, p = fixture()
         for bad_manifest, bad_plans in [(None, []), ({}, []), (m, None), (m, [{}])]:

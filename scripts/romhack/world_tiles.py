@@ -37,7 +37,7 @@ def compile_kit(root=ROOT):
             result.append(FIRST_TILE + tile_ids[tile] | bank << 12)
         return result
 
-    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True):
+    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0):
         if len(pixels) != width*height or width % 16 or height % 16 or max(pixels) > 15:
             raise ValueError('Native SF card dimensions/palette are invalid')
         ids = []
@@ -46,7 +46,7 @@ def compile_kit(root=ROOT):
             for x in range(0, width, 16):
                 row.append(FIRST_METATILE + len(records))
                 records.append(words(ground, ground_bank) + words(crop(pixels, width, x, y, 16, 16), bank))
-                attributes.append(LAYER_COVERED)
+                attributes.append(LAYER_COVERED | behavior)
             ids.append(row)
         catalog[name] = {'tiles': ids, 'blocked': blocked}
 
@@ -105,7 +105,7 @@ def compile_kit(root=ROOT):
             ('bed',32,48,32,32,True),('shelf',32,80,32,32,True),
             ('desk',128,64,32,16,True),('indoor_plant',128,96,16,32,True),
             ('wall_side',0,48,16,16,True),('threshold',80,144,16,16,False)]:
-        card(name,crop(room,176,x,y,w,h),w,h,9,floor,9,solid)
+        card(name,crop(room,176,x,y,w,h),w,h,9,floor,9,solid,0x80 if name=='desk' else 0)
     colors = struct.unpack('<16H',palettes[9])
     darkest = min(range(1,16),key=lambda i:sum((colors[i]>>c*5)&31 for c in range(3)))
     card('void',bytes([darkest])*256,16,16,9,floor,9)

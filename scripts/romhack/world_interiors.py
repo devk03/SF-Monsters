@@ -37,13 +37,15 @@ def add_rooms(plans, manifest):
             stamp('wall_side',10,y);stamp('wall_side',21,y)
         stamp('wall_span',10,6)
         stamp('rug',15,12);stamp('threshold',16,15);stamp('door_frame',16,16)
-        for name,x,y in PROPS[room['style']]: stamp(name,x,y)
+        for name,x,y in PROPS[room['style']]:
+            if name != 'desk': stamp(name,x,y)
+        stamp('desk',13,12);stamp('desk',18,12)
         # Counter/furniture placement must leave both clerks reachable. The
         # validator checks the actual tiles and arrivals, not this recipe alone.
         residents = people[room['area']]['residents'][-2:]
-        npcs=[{'id':1,'x':5,'y':3,'graphics':'OBJ_EVENT_GFX_WOMAN_3',
+        npcs=[{'id':1,'x':5,'y':5,'graphics':'OBJ_EVENT_GFX_WOMAN_3',
                'script':'WBRoom_'+room['id']+'_Rest'},
-              {'id':2,'x':10,'y':3,'graphics':'OBJ_EVENT_GFX_MAN_2',
+              {'id':2,'x':10,'y':5,'graphics':'OBJ_EVENT_GFX_MAN_2',
                'script':'WBRoom_'+room['id']+'_Shop'}]
         result = {'world_id':room['id'],'engine_map':room['engine_map'],
                   'native_id':native_id(room['engine_map']),
@@ -51,8 +53,8 @@ def add_rooms(plans, manifest):
                   'legend':legend,'border_tile':613,'tilesets':deepcopy(parent['tilesets']),
                   'metadata':dict(parent['metadata'],music='MUS_VERDANTURF',weather='WEATHER_SUNNY'),
                   'connections':None,'npcs':npcs,'coord_events':[],
-                  'access_points':[{'kind':'checkpoint','x':5,'y':4,'activation':'interact'},
-                                   {'kind':'checkpoint','x':10,'y':4,'activation':'interact'}],'water_positions':[],'script':room['id']+'.inc',
+                  'access_points':[{'kind':'checkpoint','x':5,'y':7,'activation':'interact'},
+                                   {'kind':'checkpoint','x':10,'y':7,'activation':'interact'}],'water_positions':[],'script':room['id']+'.inc',
                   'room':room,'service_dialogue':residents}
         for plan,kind,point,target in (
                 (parent,'room_entry',room['entry'],room['id']),
