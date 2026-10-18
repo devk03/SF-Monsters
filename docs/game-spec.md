@@ -751,8 +751,21 @@ Private v89 native SF Map — October 18, 2026:
 - Evidence: `.tools/benchmarks/town-v89-labeled-guide/` and
   `town-v89-all-guide-contexts{,-places,-routes,-interiors}/`. Source, linked
   resources, deterministic generation and patch roundtrip pass. The final full
-  route/WASM proof and actual browser review are still running or pending;
-  v88 remains public. No human map/town/art acceptance is claimed.
+  route/WASM proof passes105,935frames with all294,912guest RAM bytes equal,
+  SHAce13d4b0…. A separate103,732-frame replay of all19guide-route contexts also
+  matches full guest RAM (SHA4aa40d8d…). Actual browser timing remains failed;
+  v88 remains public while publication is prepared. No human map/town/art
+  acceptance is claimed.
+- The new finite native browser reference visits six maps: Noe Valley, its repair
+  cafe/rest service, route10, Mission Bay, its cafe and gym6site, then returns.
+  It records408rows/9,347frames/156.49seconds with expected scene checkpoints.
+  The unchanged actual browser harness measured180seconds but stopped after
+  44/408rows on83.35mslateness, discarded49frames, and never advanced its audio
+  clock or processed an audio quantum;11,742,768source frames were dropped.
+  Zero reported underruns in that frozen audio observation are not healthy
+  playback. Full receipt/audit/screenshot are retained in
+  `town-v89-browser-loop/`; the browser acceptance gate stays open. Diagnose
+  the stalled audio host and late main-thread task before retrying timing QA.
 
 Published v88 building variety — October 18, 2026:
 
