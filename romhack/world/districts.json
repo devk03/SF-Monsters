@@ -47,7 +47,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "You new around here? The repair counter is open. Potrero is west; the neighbors can help you find your feet."
     },
     "potrero_hill": {
       "character": "hilltop residential",
@@ -94,7 +95,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "Take a breather. Everybody does, even the people pretending they were not out of breath."
     },
     "mission": {
       "character": "busy neighborhood commerce",
@@ -141,7 +143,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The studio is open if you want to drop in. If you hear music from a doorway, you are probably allowed to be curious."
     },
     "castro": {
       "character": "colorful neighborhood main street",
@@ -188,7 +191,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "Coffee first, big plans second. The cafe is just behind that bench."
     },
     "outer_sunset": {
       "character": "foggy compact rowhouses",
@@ -235,7 +239,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "If the fog rolls in, stick to the main street. The homes all start looking like somebody you know lives there."
     },
     "marina": {
       "character": "busy waterfront social blocks",
@@ -282,7 +287,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The bar is open. My advice is to get a glass of water before your next excellent idea."
     },
     "pacific_heights": {
       "character": "quiet formal residential blocks",
@@ -329,7 +335,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "You can see half the city from the right corner. Finding the right corner is the local hobby."
     },
     "noe_valley": {
       "character": "village-like shopfront blocks",
@@ -376,7 +383,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "There is a repair cafe just up the block. It is a good excuse to sit down and talk to somebody."
     },
     "mission_bay": {
       "character": "new waterfront blocks",
@@ -423,7 +431,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The cafe is taking a break from being everybody's unofficial meeting room. At least for lunch."
     },
     "giants_stadium": {
       "character": "stadium concourse",
@@ -470,7 +479,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "First time here? Walk the concourse before you pick a spot. The bay is part of the show."
     },
     "financial_district": {
       "character": "dense business streets",
@@ -517,7 +527,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The offices get all the attention. The people on their lunch breaks are more interesting."
     },
     "north_beach": {
       "character": "close cafe and bookshop blocks",
@@ -564,7 +575,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The reading room is open. No, you do not need to buy a book to ask what somebody is reading."
     },
     "treasure_island": {
       "character": "island neighborhood",
@@ -611,7 +623,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "Good to see you made it across. The community room is open. Ask around before you head back."
     },
     "golden_gate_park": {
       "character": "park and garden trails",
@@ -628,7 +641,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The path makes a loop. Windmill on one side, conservatory on the other. You can take your time."
     },
     "twin_peaks": {
       "character": "windy hill trails",
@@ -645,7 +659,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "That is the ridge path. Walk a little farther before deciding the view is all fog."
     },
     "sutro_tower": {
       "character": "wooded hill and signal station",
@@ -662,7 +677,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The tower is a good place to listen. You will hear the wind first. Give the rest of it a moment."
     },
     "lands_end": {
       "character": "coastal ruins and trails",
@@ -679,7 +695,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "Stay on the trail near the ruins. The view is worth stopping for; the water is worth respecting."
     },
     "angel_island": {
       "character": "island trails and league approach",
@@ -696,7 +713,8 @@
           "revisit": null
         }
       ],
-      "status": "authored dialogue candidate; in-game review pending"
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "You made it to the upper trail. Take a minute. There is a longer walk behind you than it looks from here."
     }
   }
 }

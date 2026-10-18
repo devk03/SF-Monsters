@@ -20,6 +20,9 @@ def load_people():
     if data['schema_version'] != 1 or set(data['areas']) != set(REVISIT_BADGE):
         raise ValueError('Town dialogue must cover every approved destination')
     for identifier, area in data['areas'].items():
+        welcome=area.get('welcome')
+        if not isinstance(welcome,str) or not 8<=len(welcome)<=320 or any(c in welcome for c in '$"\\\n'):
+            raise ValueError('Neighborhood greeting needs bounded native text')
         expected = 8 if identifier in URBAN else 2
         if len(area['residents']) != expected:
             raise ValueError('Core resident allocation changed: ' + identifier)

@@ -793,6 +793,19 @@ and separate from contributor state. Full-bag branches retain pending rewards.
 Compiled audit verifies all18background-script bindings. Native controller reward/
 repeat-protection coverage is running; do not infer acceptance from scripts.
 
+Native guide and persistence checkpoint (targetbdb561e1…): the SF-only Start
+menu map selects all18destinations, shows actual adjacent areas and local favor
+status, and returns safely to the field. Native region-section names now use SF
+names for all58authored maps. Ordinary earlier Save/Continue preserves27completed
+local flags. A valid unchanged player tile now refreshes outdated actor templates
+through a native same-map load; six Angel Island templates match current content,
+without moving the player or changing inventory/flags/Flash. Evidence:
+`.tools/benchmarks/town-v83-city-guide-native-2/`. Core town greetings are now
+authored dialogue; gym/mission progression still includes explicitly unfinished
+scaffolding. The first guide observer exceeded its read-size bound and was fixed
+to use bounded read-only chunks; the corrected run passes. No human quality
+approval or foreground-browser claim is inferred from these native checks.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

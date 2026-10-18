@@ -69,7 +69,7 @@ def main():
     if previous.exists():
         # Optional package teams must not leak into the next default build.
         for relative in json.loads(previous.read_text()):
-            if relative.startswith(('data/layouts/sf_world/','data/tilesets/secondary/sf_world_')):
+            if relative.startswith(('data/layouts/sf_world/','data/tilesets/secondary/sf_world_','src/sf_world_guide')):
                 continue  # Generated files have no base revision; preserve them.
             path = engine / relative
             path.resolve().relative_to(engine.resolve())
@@ -95,6 +95,8 @@ def main():
     ledger += apply_maps(content, ROOT, engine, original)
     ledger += apply_battles(content, ROOT, engine, original)
     ledger += apply_engine_guards(ROOT, engine, original)
+    from world_guide import apply_guide
+    ledger += apply_guide(ROOT,engine,original,manifest,plans)
     guard = engine / 'src/sf_save_guard.h'
     magic = fixture['save_magic'] if fixture else manifest['native']['save_magic']
     guard.write_text(guard.read_text().replace('0x5346', hex(magic)))

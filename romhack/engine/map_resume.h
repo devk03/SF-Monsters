@@ -55,14 +55,43 @@ static bool8 SFResumeTileIsSafe(s16 x, s16 y, bool8 surfing)
     return TRUE;
 }
 
+static bool8 SFResumeActorsChanged(void)
+{
+    u8 i;
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        const struct ObjectEventTemplate *current = &gMapHeader.events->objectEvents[i];
+        const struct ObjectEventTemplate *saved = &gSaveBlock1Ptr->objectEventTemplates[i];
+        if (current->localId != saved->localId || current->graphicsId != saved->graphicsId
+            || current->x != saved->x || current->y != saved->y
+            || current->movementType != saved->movementType
+            || current->movementRangeX != saved->movementRangeX
+            || current->movementRangeY != saved->movementRangeY
+            || current->flagId != saved->flagId)
+            return TRUE;
+    }
+    for (; i < ARRAY_COUNT(gSaveBlock1Ptr->objectEventTemplates); i++)
+        if (gSaveBlock1Ptr->objectEventTemplates[i].localId != 0)
+            return TRUE;
+    return FALSE;
+}
+
 static bool8 SFMapResumeWarpIfNeeded(void)
 {
     s16 radius, dy, dx, x, y;
     s16 oldX = gSaveBlock1Ptr->pos.x;
     s16 oldY = gSaveBlock1Ptr->pos.y;
     bool8 surfing = SFResumeSavedSurfing() && FlagGet(FLAG_BADGE05_GET);
-    if (!SFMapUsesAuthoredLayout() || SFResumeTileIsSafe(oldX, oldY, surfing))
+    if (!SFMapUsesAuthoredLayout())
         return FALSE;
+    if (SFResumeTileIsSafe(oldX, oldY, surfing))
+    {
+        if (!SFResumeActorsChanged()) return FALSE;
+        // Keep a valid player coordinate while refreshing an older actor cache.
+        SetWarpDestination(gSaveBlock1Ptr->location.mapGroup,
+                           gSaveBlock1Ptr->location.mapNum,WARP_ID_NONE,oldX,oldY);
+        return TRUE;
+    }
     // A smaller authored layout may leave an older coordinate out of bounds.
     if (oldX < 0) oldX = 0;
     if (oldY < 0) oldY = 0;

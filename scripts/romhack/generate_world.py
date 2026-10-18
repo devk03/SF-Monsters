@@ -128,9 +128,14 @@ def generate(manifest):
                              'show_map_name': False, 'battle_scene': 'MAP_BATTLE_SCENE_NORMAL'},
                 'connections': links[identifier] or None, 'npcs': [],
                 'coord_events': [], 'access_points': [], 'script': identifier + '.inc'}
+        if manifest.get('city_guide'):
+            parent=item.get('area',item.get('from',identifier))
+            plan['metadata']['region_map_section']=manifest['city_guide']['native_sections'][parent]
         if plaza:
+            greeting_graphics=('OLD_MAN' if identifier in ('golden_gate_park','twin_peaks','lands_end')
+                               else 'WOMAN_3' if identifier in ('mission','marina','north_beach','angel_island') else 'MAN_2')
             plan['npcs'].append({'id': 1, 'x': 12, 'y': 9,
-                                  'graphics': 'OBJ_EVENT_GFX_SCIENTIST_1',
+                                  'graphics': 'OBJ_EVENT_GFX_'+(greeting_graphics if manifest.get('town_finishing') and not room else 'SCIENTIST_1'),
                                   'script': 'WB_' + identifier + '_Info'})
             plan['access_points'].append(access('checkpoint', 12, 10, activation='interact'))
         if identifier == manifest['league']['venue']:
@@ -138,7 +143,7 @@ def generate(manifest):
             for index, (x, y, section) in enumerate(
                     [(14, 21, 'Landing'), (7, 17, 'Tunnels'), (26, 14, 'Rival')], 2):
                 plan['npcs'].append({'id': index, 'x': x, 'y': y,
-                                      'graphics': 'OBJ_EVENT_GFX_SCIENTIST_1',
+                                      'graphics': 'OBJ_EVENT_GFX_'+({2:'MAN_1',3:'OLD_MAN',4:'WOMAN_2'}[index] if manifest.get('town_finishing') else 'SCIENTIST_1'),
                                       'script': 'WB_angel_island_' + section})
         if identifier == manifest['start']['area']:
             plan['access_points'].append(access('spawn', manifest['start']['x'],

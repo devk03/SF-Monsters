@@ -11,6 +11,10 @@ def map_script(manifest, plan):
     start = identifier == manifest['start']['area']
     gym = next((g for g in manifest['gyms'] if g['id'] == identifier), None)
     entry = next((g for g in manifest['gyms'] if g['area'] == identifier), None)
+    from world_people import load_people,native_text
+    area_people=load_people().get(identifier,{}) if manifest.get('town_finishing') else {}
+    greeting=area_people.get('welcome')
+    def spoken(label,value):return label+'::\n    .string "'+native_text(value)+'"\n'
     lines = [plan['engine_map'] + '_MapScripts::',
              '    map_script MAP_SCRIPT_ON_TRANSITION, ' + prefix + '_Load',
              '    .byte 0', '', prefix + '_Load::',
@@ -49,7 +53,7 @@ def map_script(manifest, plan):
     elif identifier == 'treasure_island':
         lines += ['    setvar VAR_UNUSED_0x40FA, 1',
                   '    msgbox ' + prefix + '_Text, MSGBOX_DEFAULT']
-        messages += [text(prefix + '_Text', ['Treasure Island checkpoint.',
+        messages += [spoken(prefix+'_Text',greeting) if greeting else text(prefix + '_Text', ['Treasure Island checkpoint.',
                                             'Next: Sutro Tower, then',
                                             'Lands End. Return paths stay open.'])]
     elif identifier in ('sutro_tower', 'lands_end'):
@@ -60,7 +64,7 @@ def map_script(manifest, plan):
                   '    msgbox ' + prefix + '_Text, MSGBOX_DEFAULT',
                   '    release', '    end', prefix + '_Wait::',
                   '    msgbox ' + prefix + '_WaitText, MSGBOX_DEFAULT']
-        messages += [text(prefix + '_Text', [plan['label'], 'Story checkpoint recorded.',
+        messages += [spoken(prefix+'_Text',greeting) if greeting else text(prefix + '_Text', [plan['label'], 'Story checkpoint recorded.',
                                             'Scene and quest remain placeholders.']),
                      text(prefix + '_WaitText', ['Visit the prior story checkpoint.',
                                                 'Treasure Island, Sutro Tower,',
@@ -75,7 +79,7 @@ def map_script(manifest, plan):
             row += word + ' '
         rows.append(row.rstrip())
         lines += ['    msgbox ' + prefix + '_Text, MSGBOX_DEFAULT']
-        messages += [text(prefix + '_Text', rows + ['WORLD BLOCKOUT - draft geometry.',
+        messages += [spoken(prefix+'_Text',greeting) if greeting else text(prefix + '_Text', rows + ['WORLD BLOCKOUT - draft geometry.',
                                                    'Routes and gym entries are live.'])]
     lines += ['    release', '    end']
     if entry:
@@ -96,6 +100,9 @@ def map_script(manifest, plan):
             lines += ['', prefix + '_' + name + '::', '    lock', '    faceplayer',
                       '    msgbox ' + prefix + '_' + name + 'Text, MSGBOX_DEFAULT',
                       '    release', '    end']
-            messages += [text(prefix + '_' + name + 'Text', [label,
-                                                           'Geometry only. Scene deferred.'])]
+            voices={'Landing':'The upper trail starts inland. Keep some water for the way back, too.',
+                    'Tunnels':'The path bends through here. You will come out near the far side of the ridge.',
+                    'Rival':'You look like you have been all over the city. The summit is just up the trail.'}
+            messages += [spoken(prefix+'_'+name+'Text',voices[name]) if greeting else
+                         text(prefix+'_'+name+'Text',[label,'Geometry only. Scene deferred.'])]
     return '\n'.join(lines) + '\n\n' + '\n'.join(messages)
