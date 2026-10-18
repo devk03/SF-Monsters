@@ -29,6 +29,10 @@ def audit_native(rom_path, elf_path, plans, engine):
     motions = constants('event_object_movement.h')
     graphics = constants('event_objects.h')
     flag_values = constants('flags.h')
+    section_data=json.loads((engine/'src/data/region_map/region_map_sections.json').read_text())['map_sections']
+    section_ids={entry['id']:i for i,entry in enumerate(section_data)}
+    charmap={char:int(value,16) for char,value in re.findall(r"^'(.)'\s*=\s*([0-9A-F]{2})\s*$",(engine/'charmap.txt').read_text(),re.M)}
+    locations=set()
     unique_layouts = set()
     art = load_profiles()
     groups = json.loads((engine / 'data/maps/map_groups.json').read_text())
@@ -46,6 +50,14 @@ def audit_native(rom_path, elf_path, plans, engine):
         if header_ptr != symbols[name]:
             errors.append(name + ': native group table selects a different header')
         layout, events, scripts, conn = read(symbols[name], '4I')
+        section=plan.get('metadata',{}).get('region_map_section')
+        if section:
+            expected_id=section_ids[section];actual_id,=read(header_ptr+20,'B')
+            if actual_id!=expected_id:errors.append(name+': native SF location section differs')
+            pointer,=read(symbols['gRegionMapEntries']+expected_id*8+4,'I')
+            expected=bytes(charmap[c] for c in section_data[expected_id]['name'])+bytes([255])
+            if bytes(read(pointer,str(len(expected))+'B'))!=expected:errors.append(name+': compiled SF place name differs')
+            locations.add(section)
         if plan.get('unique_layout'):
             if layout in unique_layouts:
                 errors.append(name + ': authored maps share a native layout')
@@ -135,5 +147,5 @@ def audit_native(rom_path, elf_path, plans, engine):
     return {'passed': not errors, 'errors': errors,
             'scenery_resources':list(resources.values()),
             'counts': {'maps': len(plans), 'tiles': tiles, 'connections': connections,
-                       'npcs': objects, 'coord_events': coords,'background_events':backgrounds},
+                       'npcs': objects, 'coord_events': coords,'background_events':backgrounds,'sf_locations':len(locations)},
             'scope': 'linked layout/event/connection integrity; not controller traversal'}

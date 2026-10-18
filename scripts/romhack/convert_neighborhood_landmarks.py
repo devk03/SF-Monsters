@@ -8,9 +8,9 @@ DIRECTORY=Path(__file__).resolve().parents[2]/'assets/tiles/neighborhood-landmar
 CARDS=[('mural',(20,255,500,555),(64,32)),('lookout',(520,260,1055,560),(48,32)),
        ('mansion',(1060,20,1536,580),(64,64)),('surfboards',(85,650,505,955),(32,32)),
        ('bar_sign',(690,665,855,985),(16,32)),('book_box',(1160,670,1385,990),(16,32))]
-COLORS=[(0,0,0),(5,7,10),(14,15,16),(23,24,22),(31,30,25),(29,15,9),
+COLORS=[(0,0,0),(5,7,10),(14,15,16),(23,23,23),(31,30,25),(29,15,9),
         (30,20,6),(25,7,5),(21,17,26),(5,12,18),(12,21,26),(8,15,7),
-        (17,21,10),(19,14,9),(31,26,10),(27,12,20)]
+        (17,21,10),(19,14,9),(31,26,10),(27,27,27)]
 
 
 def main():
@@ -24,6 +24,17 @@ def main():
             for x in range(cut.width):
                 color=cut.getpixel((x,y))
                 if color[3]>=128:raw[(top+y)*size[0]+left+x]=min(range(1,16),key=lambda i:sum((color[c]-rgb[i][c])**2 for c in range(3)))
+        if name=='bar_sign':
+            # Editable original 3x5 lettering replaces downsampled pseudo-text.
+            lettering=json.loads((DIRECTORY/'native-lettering.json').read_text())
+            x0,y0,x1,y1=lettering['clear_rect']
+            for y in range(y0,y1):
+                for x in range(x0,x1):raw[y*size[0]+x]=lettering['background_index']
+            ox,oy=lettering['origin']
+            for line,glyph in enumerate(lettering['glyphs']):
+                for y,row in enumerate(glyph):
+                    for x,value in enumerate(row):
+                        if value=='1':raw[(oy+line*lettering['line_step']+y)*size[0]+ox+x]=lettering['ink_index']
         (DIRECTORY/(name+'.indices')).write_bytes(raw)
         image=Image.new('P',size);image.putpalette([c for color in rgb for c in color]+[0]*720);image.putdata(raw)
         image.info['transparency']=0;image.save(DIRECTORY/(name+'.png'))
@@ -33,7 +44,7 @@ def main():
             p=DIRECTORY/(name+suffix);files[p.name]=hashlib.sha256(p.read_bytes()).hexdigest()
     (DIRECTORY/'neighborhood.gbapal').write_bytes(struct.pack('<16H',*(r|g<<5|b<<10 for r,g,b in COLORS)))
     preview.resize((1200,720),Image.Resampling.NEAREST).save(DIRECTORY/'native-preview.png')
-    for name in ('source.png','prompt.md','neighborhood.gbapal','native-preview.png'):
+    for name in ('source.png','prompt.md','native-lettering.json','neighborhood.gbapal','native-preview.png'):
         files[name]=hashlib.sha256((DIRECTORY/name).read_bytes()).hexdigest()
     (DIRECTORY/'conversion.json').write_text(json.dumps({'schema_version':1,'tool':'built-in imagegen',
         'method':'connected opaque silhouette; proportional native reduction; fixed15-color RGB555; alpha128; no dithering',

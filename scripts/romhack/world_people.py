@@ -6,7 +6,7 @@ from world_towns import URBAN
 
 ROOT = Path(__file__).resolve().parents[2]
 POSITIONS = [(8,8),(25,8),(8,15),(23,15),(3,21),(27,21),(10,9),(21,9)]
-GRAPHICS = ['MAN_1','WOMAN_1','BOY_1','WOMAN_2','OLD_MAN','GIRL_1','WOMAN_3','MAN_2']
+GRAPHICS = ['MAN_1','WOMAN_1','MAN_3','WOMAN_2','OLD_MAN','WOMAN_4','WOMAN_3','MAN_2']
 REVISIT_BADGE = {'dogpatch':1,'potrero_hill':1,'mission':1,'castro':1,
                  'outer_sunset':2,'golden_gate_park':2,'marina':3,
                  'pacific_heights':4,'twin_peaks':4,'noe_valley':5,

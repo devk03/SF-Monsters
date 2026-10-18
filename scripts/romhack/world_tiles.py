@@ -10,7 +10,8 @@ FIRST_METATILE = 512
 LAYER_COVERED = 0x1000
 PROFILES = {'residential':'gTileset_Petalburg','industrial':'gTileset_SFIndustrial',
             'civic':'gTileset_SFCivic','nature':'gTileset_SFNature',
-            'culture':'gTileset_SFCulture','stadium':'gTileset_SFStadium'}
+            'culture':'gTileset_SFCulture','stadium':'gTileset_SFStadium',
+            'neighborhood':'gTileset_SFNeighborhood'}
 
 
 def checked(directory, name, receipt):
@@ -28,7 +29,8 @@ def compile_kit(root=ROOT, profile='residential'):
     """Two native layers: opaque ground and original transparent architecture."""
     styles = {'residential':{'coral','cafe','cream','lilac','pair'},
               'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
-              'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'cream','cafe'}}
+              'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'cream','cafe'},
+              'neighborhood':{'coral','cafe','cream','lilac','pair'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: 0}
@@ -44,7 +46,7 @@ def compile_kit(root=ROOT, profile='residential'):
             result.append(FIRST_TILE + tile_ids[tile] | bank << 12)
         return result
 
-    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0):
+    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False):
         if len(pixels) != width*height or width % 16 or height % 16 or max(pixels) > 15:
             raise ValueError('Native SF card dimensions/palette are invalid')
         ids = []
@@ -52,7 +54,9 @@ def compile_kit(root=ROOT, profile='residential'):
             row = []
             for x in range(0, width, 16):
                 row.append(FIRST_METATILE + len(records))
-                records.append(words(ground, ground_bank) + words(crop(pixels, width, x, y, 16, 16), bank))
+                piece=crop(pixels,width,x,y,16,16)
+                records.append(words(piece,bank)+words(empty,bank) if floor
+                               else words(ground,ground_bank)+words(piece,bank))
                 attributes.append(LAYER_COVERED | behavior)
             ids.append(row)
         catalog[name] = {'tiles': ids, 'blocked': blocked}
@@ -175,6 +179,24 @@ def compile_kit(root=ROOT, profile='residential'):
             raw=checked(directory,name+'.indices',receipt);w,h=data['size']
             background,bank=(grass,10) if profile=='nature' else (paving,7)
             card(name,raw,w,h,9,background,bank)
+    if profile=='neighborhood':
+        directory=root/'assets/tiles/neighborhood-landmarks-v1'
+        receipt=json.loads((directory/'conversion.json').read_text())
+        palettes[11]=checked(directory,'neighborhood.gbapal',receipt)
+        for name in ('mural','mansion','surfboards','bar_sign','book_box'):
+            spec=next(c for c in receipt['cards'] if c['name']==name);w,h=spec['size']
+            card(name,checked(directory,name+'.indices',receipt),w,h,11,paving,7)
+        raw=checked(directory,'lookout.indices',receipt)
+        card('lookout_left',crop(raw,48,0,0,16,32),16,32,11,paving,7)
+        # A real traversable stair surface uses only the lower native ground
+        # layer; it cannot cover the walking sprite like an overhead facade.
+        source_colors=struct.unpack('<16H',palettes[7]);target=struct.unpack('<16H',palettes[11])
+        remap=[min(range(1,16),key=lambda j:sum((((color>>c*5)&31)-((target[j]>>c*5)&31))**2 for c in range(3))) for color in source_colors]
+        steps=crop(raw,48,16,0,16,32)
+        opaque=bytes(value or remap[paving[(y%16)*16+x]] for y in range(32) for x in range(16)
+                     for value in (steps[y*16+x],))
+        card('lookout_steps',opaque,16,32,11,paving,7,False,floor=True)
+        card('lookout_right',crop(raw,48,32,0,16,32),16,32,11,paving,7)
     # Scenic water is separated by an explicit solid seawall. Traversable bay
     # crossings still use the independently modelled native Surf/Waterfall cells.
     directory=root/'assets/tiles/sunset-terrain'

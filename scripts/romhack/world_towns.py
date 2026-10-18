@@ -18,7 +18,7 @@ def furnish(plans, manifest):
         connector = plan['world_id'] in streets
         if plan['world_id'] not in URBAN and not connector:
             continue
-        profile = manifest['town_finishing'].get('profiles',{}).get(plan['world_id'],'residential')
+        profile = manifest['town_finishing'].get('profiles',{}).get(plan['world_id'],'neighborhood')
         if profile not in kits: kits[profile] = compile_kit(profile=profile)
         kit = kits[profile]
         grid = [['#' if x in (0, 31) or y in (0, 23) else '.' for x in range(32)] for y in range(24)]
@@ -83,9 +83,17 @@ def furnish(plans, manifest):
         elif profile == 'civic': landmark=('highrise',15,2)
         elif profile == 'culture': landmark=('theater',14,3)
         elif profile == 'stadium': landmark=('stadium_gate',13,3)
+        if profile=='neighborhood':
+            landmark={'mission':('mural',14,5),'pacific_heights':('mansion',14,3)}.get(plan['world_id'])
+        extras=[]
+        if profile=='neighborhood':
+            extras={'outer_sunset':[('surfboards',18,5)],'marina':[('bar_sign',4,9)],
+                    'noe_valley':[('book_box',18,5)],
+                    'potrero_hill':[('lookout_left',15,4),('lookout_steps',16,4),('lookout_right',17,4)]}.get(plan['world_id'],[])
         if landmark: stamp(*landmark)
         elif gym: stamp('cream',15,3)
-        elif not connector: stamp('pair',14,3)
+        elif not connector and plan['world_id']!='potrero_hill': stamp('pair',14,3)
+        for item in extras:stamp(*item)
         coastal=plan['world_id']=='outer_sunset'
         if coastal:
             for y in range(9,17):
@@ -119,11 +127,16 @@ def furnish(plans, manifest):
         plan['tilesets']['secondary']=PROFILES[profile]
         plan['town_blocks']=blocks
         plan['town_props']=['lamp','meter','hydrant','bin','rack','bench','tree']
-        if landmark:
-            plan['landmarks']=[{'name':landmark[0],'x':landmark[1],'y':landmark[2]}]
-            style,x,y=landmark;card=kit['catalog'][style]
-            blocks.append({'style':style,'x':x,'y':y,'width':len(card['tiles'][0]),
-                           'height':len(card['tiles']),'first_metatile':card['tiles'][0][0]})
-            plan['scenic_viewpoints']=[{'x':16,'y':8,'name':style}]
-        if coastal:plan['scenic_viewpoints']=[{'x':5,'y':14,'name':'ocean_beach_overlook'}]
+        features=([landmark] if landmark else [])+extras
+        plan['landmarks']=[{'name':style,'x':x,'y':y} for style,x,y in features]
+        plan['scenic_viewpoints']=[]
+        for style,x,y in features:
+            card=kit['catalog'][style];w,h=len(card['tiles'][0]),len(card['tiles'])
+            blocks.append({'style':style,'x':x,'y':y,'width':w,'height':h,'first_metatile':card['tiles'][0][0]})
+            if style in ('lookout_left','lookout_right'):continue
+            if style=='lookout_steps':point=(16,5)
+            elif landmark and style==landmark[0]:point=(16,8)
+            else:point=(x+w//2,y+h)
+            plan['scenic_viewpoints'].append({'x':point[0],'y':point[1],'name':style})
+        if coastal:plan['scenic_viewpoints'].append({'x':5,'y':14,'name':'ocean_beach_overlook'})
     return result

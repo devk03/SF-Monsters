@@ -83,21 +83,22 @@
     }
   ],
   "files": {
-    "mural.indices": "f67703272a59ec65d83e5bb0baa426b661e6447465ed085346ded3fec3e80fa7",
-    "mural.png": "a243a3526e1d82050908a8474aeb2cc5a021252608e3d9202d8283be74a56979",
-    "lookout.indices": "25a378654c8abc51d199a94beb5ee28d078d2c491a7b517e0e897dfd604770d8",
-    "lookout.png": "7a6c1a0f177bf8eba21822a1644cd3bdf5d87295124f706155cab97b06fde482",
-    "mansion.indices": "1b8ad25f08e700e0d3674fdf9de878b51291478541053ca3239996f2533df052",
-    "mansion.png": "27ceca591b851a771e3694f4533d6d4fe6c5adb7c736a8d3060e57ec558d3033",
-    "surfboards.indices": "83a28f955c5ff0285e8f9840d655dcf8be4a942ebe9b599d95a5935b44fa3f91",
-    "surfboards.png": "9f6aba69fada2d0e08e8bbcead9c9b90f5df7746f76d433721ab2331349fcf95",
-    "bar_sign.indices": "493d181ff5ca1dc93b2cdc9ddf418bc9474fb9a6815d595e3f3a4e58150acbf9",
-    "bar_sign.png": "e41e2f083d0001ea7eebafcbbc7ee5e6562d7344d49e4c543b38135b47279ff0",
-    "book_box.indices": "ceb711287782b9f77a020a37c3aea6c2c8b1438a791545bf2662cb335fb31118",
-    "book_box.png": "8da62c84df3d611dedf4aa88ba636ae8157646aea9c9369450662a3bd5d37018",
+    "mural.indices": "d047f6bafc1851755d73ddfa790e9a7542670dbe7c6371ab8ba62dac8dafef3c",
+    "mural.png": "25e1a5daea99cefba3777d60b93cb9fa9edd4c0e43f6e97917a460d7a5b7e39a",
+    "lookout.indices": "f147cd2145a7772522b9152b1e00b36e2ce9747ad66c847798e77025bc95b9bf",
+    "lookout.png": "b9ee3cee498e4ee7ae070ace43881d3fdd011954d58b124d197e62dc5752c848",
+    "mansion.indices": "24f24f6d29aba4504292806ff3e644906e510e73aee4900d2586d47c36b748f4",
+    "mansion.png": "e3f1bddfb668d54e235b3881bf40f3779090375ace2133788b9a4eeaa5513daa",
+    "surfboards.indices": "5abb36456c94a81a165c3c62d635297b2f834588fc80b8020a78c257f57803be",
+    "surfboards.png": "ae842e48beddabb0675bd4a85db9577b0226861802ce5e1aa2a2c46cbbc098d0",
+    "bar_sign.indices": "9525d15702513405356388e62e71d0934f06652cf14a610b8e3d2f67cbcdfb64",
+    "bar_sign.png": "4cb99fe567747393ae2fa3098abfcb17250136a0ce5804de66407adcd8344e28",
+    "book_box.indices": "165d654a74ac803979a5f438cd36164c4e7d5ca04ff033a1c9f5ae8530de3ced",
+    "book_box.png": "2e8dbe431aad59e77fd018e27531b8a84e224a07b72614b1505c12d33a05ec9d",
     "source.png": "8a4ac4fc90f641b6d6ffbc6c1b763ca6aacd620ba570f95a47bbc2dd78e0c2a0",
     "prompt.md": "b8e918f710e688e888f793aec9fee04556fb5686dc680fd256c8cd799ea09e84",
-    "neighborhood.gbapal": "02f2e190913097dc35be87c0cccf55851cd20facb869a2e08593c53843ca00a4",
-    "native-preview.png": "5b0889f264c7824e08abc4375837f0005d7275ca35637b7a64a7b1830406e471"
+    "native-lettering.json": "90091810960eaf5db49391e3402a7b41e9054c0d92f3fb7b452e1be62ddfc83d",
+    "neighborhood.gbapal": "0c20ca92ed306f1b64f955f1994e19dfd441dcfe2660804b18646c6ee33c369f",
+    "native-preview.png": "580793734875a180de499e1a1931a257e7b40d83c6757126cdc4c56863ff0056"
   }
 }

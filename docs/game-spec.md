@@ -830,6 +830,23 @@ Surf also passes B-return, START-exit, reopening and resumed movement. Native
 coast inspection found the reused shoreline cell too grassy and the reduced
 hedge too gray; original curb shading and palette refinement remain in progress.
 
+Private v84 neighborhood candidate1609f56a… adds a bounded432-tile outdoor
+kit: Mission mural, Potrero lookout with traversable lower-layer steps, Pacific
+Heights mansion, Sunset surfboards, Marina BAR sign and Noe book box. Original
+shared house fronts remain intact; service-room art stays in its separate kit.
+All58maps/76connections/169actors/42triggers/18discoveries compile, and all18
+SF location labels now receive linked-name and parent-section checks. Earlier
+ordinary Save/Continue still preserves player position, local flags, party bytes,
+money, core chapter variables and Flash. Full new-geometry traversal and rendered
+placement review are running; earlier v83 clip approval is not inferred.
+
+The v84rendered tour reaches the Potrero steps with the character visibly above
+the floor, and all58maps/76connections/16gymwarps/26roomwarps pass on1609f56a….
+Inspection caught a pale patch from quantizing transparent step ground into a
+cream color; the native kit now reserves exact neutral paving grays. Adult roles
+also receive adult sprites, and nearby greeters no longer duplicate the adjacent
+resident. These latest palette/appearance refinements await the next native build.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

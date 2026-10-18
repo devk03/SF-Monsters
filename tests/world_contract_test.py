@@ -103,6 +103,19 @@ def run(manifest, plans, **kwargs):
 
 
 class WorldContractTests(unittest.TestCase):
+    def test_native_place_labels_keep_their_approved_sf_parent(self):
+        m,p=fixture()
+        areas=['dogpatch','north_beach','treasure_island','sutro_tower','lands_end','angel_island']
+        sections={name:'MAPSEC_'+name.upper() for name in areas}
+        m['city_guide']={'native_sections':sections}
+        parents={'road_one':'dogpatch','road_two':'dogpatch','channel_one':'north_beach',
+                 'channel_two':'sutro_tower','league_route':'north_beach'}
+        parents.update({'gym_'+str(n):'dogpatch' for n in range(1,9)})
+        for name,board in p.items():board['metadata']={'region_map_section':sections[parents.get(name,name)]}
+        self.assertTrue(run(m,p)['passed'])
+        p['treasure_island']['metadata']['region_map_section']=sections['dogpatch']
+        self.reject(m,p,'geography')
+
     def test_landmark_pixels_and_viewing_approach_survive_furnishing(self):
         m,p=fixture();m['town_finishing']={'revision':2};m['native']['save_magic']=0x5743
         board=p['dogpatch'];board['tile_profile']='nature'

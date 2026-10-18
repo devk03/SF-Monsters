@@ -193,6 +193,16 @@ class _World:
         _need(not set(plan.get('metadata', {})) & {
             'connections', 'object_events', 'warp_events', 'coord_events', 'bg_events', 'layout', 'id'},
             'metadata', 'Metadata may not replace validated native graph/event fields')
+        if self.manifest.get('city_guide'):
+            sections=self.manifest['city_guide']['native_sections']
+            _need(set(sections)==set(self.areas) and len(set(sections.values()))==len(sections)
+                  and all(re.fullmatch(r'MAPSEC_[A-Z0-9_]+',v) for v in sections.values()),
+                  'geography','SF location sections must cover unique approved destinations')
+            parent=(self.gyms[identifier]['area'] if identifier in self.gyms else
+                    self.rooms[identifier]['area'] if identifier in self.rooms else
+                    self.routes[identifier]['from'] if identifier in self.routes else identifier)
+            _need(plan.get('metadata',{}).get('region_map_section')==sections[parent],
+                  'geography','Native location label has the wrong SF parent')
         profile_name = plan.get('tile_profile','residential')
         _need(not self.art or profile_name in self.art,'terrain','Unknown native art profile')
         profile = self.art.get(profile_name,{})
@@ -250,7 +260,8 @@ class _World:
                     point=(x0+dx,y0+dy)
                     _need(point not in frontage and point in cells, 'frontage','Architectural footprints overlap or leave the map')
                     frontage.add(point)
-                    expected=(block['first_metatile']+dy*width+dx,True,3)
+                    solid=profile['cards'][block['style']]['blocked'] if 'style' in block else True
+                    expected=(block['first_metatile']+dy*width+dx,solid,3)
                     _need(cells[point]==expected,'frontage','A furnishing or terrain stamp cuts through a building')
         if 'water_positions' in plan:
             positions = [position({'x': pair[0], 'y': pair[1]}, 'water position')

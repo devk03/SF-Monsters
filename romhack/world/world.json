@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.83-district-world-draft",
+  "version": "0.0.84-neighborhood-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {
@@ -579,8 +579,8 @@
     "V": "waterfall"
   },
   "town_finishing": {
-    "revision": 2,
-    "status": "district architecture and landscapes in progress",
+    "revision": 3,
+    "status": "distinct compact neighborhood landmarks and town life; visual review open",
     "profiles": {
       "dogpatch": "industrial",
       "treasure_island": "industrial",
@@ -596,7 +596,7 @@
       "id": "dogpatch_room",
       "area": "dogpatch",
       "engine_map": "PetalburgCity_PokemonCenter_1F",
-      "label": "Dogpatch - local stop",
+      "label": "Dogpatch - Repair Counter",
       "style": "workshop",
       "entry": [
         5,
@@ -645,7 +645,7 @@
       "id": "potrero_hill_room",
       "area": "potrero_hill",
       "engine_map": "RustboroCity_PokemonCenter_1F",
-      "label": "Potrero Hill - local stop",
+      "label": "Potrero Hill - Neighborhood Library",
       "style": "library",
       "entry": [
         5,
@@ -694,7 +694,7 @@
       "id": "mission_room",
       "area": "mission",
       "engine_map": "SlateportCity_PokemonCenter_1F",
-      "label": "Mission - local stop",
+      "label": "Mission - Community Studio",
       "style": "studio",
       "entry": [
         5,
@@ -743,7 +743,7 @@
       "id": "castro_room",
       "area": "castro",
       "engine_map": "MauvilleCity_PokemonCenter_1F",
-      "label": "Castro - local stop",
+      "label": "Castro - Corner Cafe",
       "style": "cafe",
       "entry": [
         5,
@@ -792,7 +792,7 @@
       "id": "outer_sunset_room",
       "area": "outer_sunset",
       "engine_map": "LavaridgeTown_PokemonCenter_1F",
-      "label": "Outer Sunset - local stop",
+      "label": "Outer Sunset - Rest Stop",
       "style": "rest",
       "entry": [
         5,
@@ -841,7 +841,7 @@
       "id": "marina_room",
       "area": "marina",
       "engine_map": "VerdanturfTown_PokemonCenter_1F",
-      "label": "Marina - local stop",
+      "label": "Marina - Corner Bar",
       "style": "bar",
       "entry": [
         5,
@@ -890,7 +890,7 @@
       "id": "pacific_heights_room",
       "area": "pacific_heights",
       "engine_map": "DewfordTown_PokemonCenter_1F",
-      "label": "Pacific Heights - local stop",
+      "label": "Pacific Heights - Neighbor's Home",
       "style": "home",
       "entry": [
         5,
@@ -939,7 +939,7 @@
       "id": "noe_valley_room",
       "area": "noe_valley",
       "engine_map": "FortreeCity_PokemonCenter_1F",
-      "label": "Noe Valley - local stop",
+      "label": "Noe Valley - Repair Cafe",
       "style": "workshop",
       "entry": [
         5,
@@ -988,7 +988,7 @@
       "id": "mission_bay_room",
       "area": "mission_bay",
       "engine_map": "LilycoveCity_PokemonCenter_1F",
-      "label": "Mission Bay - local stop",
+      "label": "Mission Bay - Neighborhood Cafe",
       "style": "cafe",
       "entry": [
         5,
@@ -1037,7 +1037,7 @@
       "id": "giants_stadium_room",
       "area": "giants_stadium",
       "engine_map": "MossdeepCity_PokemonCenter_1F",
-      "label": "Giants Stadium - local stop",
+      "label": "Giants Stadium - Guest Services",
       "style": "rest",
       "entry": [
         5,
@@ -1086,7 +1086,7 @@
       "id": "financial_district_room",
       "area": "financial_district",
       "engine_map": "SootopolisCity_PokemonCenter_1F",
-      "label": "Financial District - local stop",
+      "label": "Financial District - Corner Cafe",
       "style": "cafe",
       "entry": [
         5,
@@ -1135,7 +1135,7 @@
       "id": "north_beach_room",
       "area": "north_beach",
       "engine_map": "EverGrandeCity_PokemonCenter_1F",
-      "label": "North Beach - local stop",
+      "label": "North Beach - Reading Room",
       "style": "library",
       "entry": [
         5,
@@ -1184,7 +1184,7 @@
       "id": "treasure_island_room",
       "area": "treasure_island",
       "engine_map": "OldaleTown_PokemonCenter_1F",
-      "label": "Treasure Island - local stop",
+      "label": "Treasure Island - Community Room",
       "style": "home",
       "entry": [
         5,

@@ -9,6 +9,8 @@ not claims about a particular real mansion, mural or business.
 aspect ratio, reduces to the recorded native frame and quantizes to one original
 RGB555 palette with fifteen visible colors plus transparency, without dithering.
 Native PNGs, indices, palette, enlarged preview and SHA-256 receipt stay together.
+`native-lettering.json` supplies original editable3x5BARlettering after reduction,
+replacing illegible resampled marks while retaining the generated sign silhouette.
 The candidates still need actual in-game scale, collision and human review.
 
 Intended roles: Mission mural; Potrero lookout; Pacific Heights mansion;
