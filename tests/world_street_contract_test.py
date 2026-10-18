@@ -3,10 +3,27 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_street_contract import check_streets,check_details
+from world_street_contract import check_streets,check_details,check_edges
 
 
 class StreetContractTests(unittest.TestCase):
+    def test_middle_facade_can_only_end_at_an_attached_building(self):
+        profile={'cards':{'front':{'closed_edges':['left']},
+                          'complete':{'closed_edges':['left','right']}}}
+        front={'style':'front','x':1,'y':4,'width':3,'height':4}
+        other={'style':'complete','x':4,'y':4,'width':2,'height':4}
+        plan={'world_id':'hand_block','town_blocks':[front,other]}
+        check_edges(plan,profile)
+        other['x']=5
+        with self.assertRaisesRegex(ValueError,'unfinished right end'):
+            check_edges(plan,profile)
+        other['x']=4;other['y']=5;other['height']=2
+        with self.assertRaisesRegex(ValueError,'unfinished right end'):
+            check_edges(plan,profile)
+        other['y']=10
+        with self.assertRaisesRegex(ValueError,'unfinished right end'):
+            check_edges(plan,profile)
+
     def fixture(self):
         cells={(x,y):(512,False,3) for x in range(32) for y in range(24)}
         frontage={(x,7) for x in list(range(1,14))+list(range(18,31))}

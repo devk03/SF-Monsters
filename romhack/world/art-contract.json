@@ -34,7 +34,10 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
         },
         "cafe": {
           "first": 527,
@@ -42,7 +45,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "cream": {
           "first": 535,
@@ -50,7 +54,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "lilac": {
           "first": 547,
@@ -58,7 +63,10 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
         },
         "pair": {
           "first": 559,
@@ -66,7 +74,11 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "lamp": {
           "first": 575,
@@ -303,7 +315,10 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
         },
         "cafe": {
           "first": 527,
@@ -311,7 +326,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "lamp": {
           "first": 535,
@@ -383,7 +399,11 @@
           "height": 5,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "brick": {
           "first": 585,
@@ -391,7 +411,11 @@
           "height": 5,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "grass": {
           "first": 600,
@@ -608,6 +632,40 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "cafe_l": {
+          "first": 661,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe_r": {
+          "first": 669,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "cafe_lr": {
+          "first": 677,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         }
       }
     },
@@ -644,7 +702,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "cream": {
           "first": 523,
@@ -652,7 +711,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "lamp": {
           "first": 535,
@@ -724,7 +784,11 @@
           "height": 5,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "brick": {
           "first": 585,
@@ -732,7 +796,11 @@
           "height": 5,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "grass": {
           "first": 600,
@@ -780,7 +848,11 @@
           "height": 5,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "scenic_sea": {
           "first": 625,
@@ -949,6 +1021,40 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "cafe_l": {
+          "first": 660,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe_r": {
+          "first": 668,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
+        },
+        "cafe_lr": {
+          "first": 676,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         }
       }
     },
@@ -1214,7 +1320,10 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
         },
         "cafe": {
           "first": 527,
@@ -1222,7 +1331,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "cream": {
           "first": 535,
@@ -1230,7 +1340,8 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
         "lilac": {
           "first": 547,
@@ -1238,7 +1349,10 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
         },
         "pair": {
           "first": 559,
@@ -1246,7 +1360,11 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "lamp": {
           "first": 575,
@@ -1358,7 +1476,11 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "scenic_sea": {
           "first": 620,
@@ -1557,24 +1679,48 @@
           "behavior": 0,
           "layer": 1
         },
-        "cafe": {
+        "coral": {
           "first": 515,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "cream": {
-          "first": 523,
           "width": 3,
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
+        },
+        "cafe": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "cream": {
+          "first": 535,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": []
+        },
+        "lilac": {
+          "first": 547,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
         },
         "lamp": {
-          "first": 535,
+          "first": 559,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -1582,7 +1728,7 @@
           "layer": 1
         },
         "meter": {
-          "first": 537,
+          "first": 561,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1590,7 +1736,7 @@
           "layer": 1
         },
         "hydrant": {
-          "first": 538,
+          "first": 562,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1598,7 +1744,7 @@
           "layer": 1
         },
         "bin": {
-          "first": 539,
+          "first": 563,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1606,7 +1752,7 @@
           "layer": 1
         },
         "rack": {
-          "first": 540,
+          "first": 564,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1614,7 +1760,7 @@
           "layer": 1
         },
         "tree": {
-          "first": 542,
+          "first": 566,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -1622,7 +1768,7 @@
           "layer": 1
         },
         "bench": {
-          "first": 546,
+          "first": 570,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1630,7 +1776,7 @@
           "layer": 1
         },
         "recycling": {
-          "first": 548,
+          "first": 572,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1638,7 +1784,7 @@
           "layer": 1
         },
         "grass": {
-          "first": 550,
+          "first": 574,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1646,7 +1792,7 @@
           "layer": 1
         },
         "tree_grass": {
-          "first": 551,
+          "first": 575,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -1654,7 +1800,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 555,
+          "first": 579,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1662,7 +1808,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 557,
+          "first": 581,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -1670,7 +1816,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 559,
+          "first": 583,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1678,15 +1824,19 @@
           "layer": 1
         },
         "stadium_gate": {
-          "first": 560,
+          "first": 584,
           "width": 6,
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "scenic_sea": {
-          "first": 584,
+          "first": 608,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1694,7 +1844,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 585,
+          "first": 609,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1702,94 +1852,6 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 586,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "slab_walk": {
-          "first": 587,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "brick_walk": {
-          "first": 591,
-          "width": 2,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "stone_walk": {
-          "first": 593,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "dark_walk": {
-          "first": 597,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_north": {
-          "first": 598,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_south": {
-          "first": 599,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_cut": {
-          "first": 600,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_drain": {
-          "first": 601,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_well": {
-          "first": 602,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "street_tree": {
-          "first": 606,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "succulent": {
           "first": 610,
           "width": 1,
           "height": 1,
@@ -1797,8 +1859,96 @@
           "behavior": 0,
           "layer": 1
         },
-        "tuft": {
+        "slab_walk": {
           "first": 611,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 615,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 617,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 621,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 622,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 623,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 624,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_drain": {
+          "first": 625,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 626,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 630,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 634,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 635,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1806,7 +1956,7 @@
           "layer": 1
         },
         "shrub": {
-          "first": 612,
+          "first": 636,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1814,7 +1964,7 @@
           "layer": 1
         },
         "flower_box": {
-          "first": 613,
+          "first": 637,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1822,7 +1972,7 @@
           "layer": 1
         },
         "lavender": {
-          "first": 614,
+          "first": 638,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1830,7 +1980,7 @@
           "layer": 1
         },
         "daisies": {
-          "first": 615,
+          "first": 639,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1838,7 +1988,7 @@
           "layer": 1
         },
         "shop_board": {
-          "first": 616,
+          "first": 640,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1846,7 +1996,7 @@
           "layer": 1
         },
         "wayfinder": {
-          "first": 617,
+          "first": 641,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -1888,7 +2038,10 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ]
         },
         "cafe": {
           "first": 527,
@@ -1896,34 +2049,34 @@
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": []
         },
-        "cream": {
+        "lilac": {
           "first": 535,
           "width": 3,
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
-        },
-        "lilac": {
-          "first": 547,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ]
         },
         "pair": {
-          "first": 559,
+          "first": 547,
           "width": 4,
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "lamp": {
-          "first": 575,
+          "first": 563,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -1931,7 +2084,7 @@
           "layer": 1
         },
         "meter": {
-          "first": 577,
+          "first": 565,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1939,7 +2092,7 @@
           "layer": 1
         },
         "hydrant": {
-          "first": 578,
+          "first": 566,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1947,7 +2100,7 @@
           "layer": 1
         },
         "bin": {
-          "first": 579,
+          "first": 567,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1955,7 +2108,7 @@
           "layer": 1
         },
         "rack": {
-          "first": 580,
+          "first": 568,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1963,7 +2116,7 @@
           "layer": 1
         },
         "tree": {
-          "first": 582,
+          "first": 570,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -1971,7 +2124,7 @@
           "layer": 1
         },
         "bench": {
-          "first": 586,
+          "first": 574,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1979,7 +2132,7 @@
           "layer": 1
         },
         "recycling": {
-          "first": 588,
+          "first": 576,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1987,7 +2140,7 @@
           "layer": 1
         },
         "grass": {
-          "first": 590,
+          "first": 578,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1995,7 +2148,7 @@
           "layer": 1
         },
         "tree_grass": {
-          "first": 591,
+          "first": 579,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -2003,7 +2156,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 595,
+          "first": 583,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -2011,7 +2164,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 597,
+          "first": 585,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -2019,7 +2172,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 599,
+          "first": 587,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2027,7 +2180,7 @@
           "layer": 1
         },
         "mural": {
-          "first": 600,
+          "first": 588,
           "width": 4,
           "height": 2,
           "blocked": true,
@@ -2035,15 +2188,19 @@
           "layer": 1
         },
         "mansion": {
-          "first": 608,
+          "first": 596,
           "width": 4,
           "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         },
         "surfboards": {
-          "first": 624,
+          "first": 612,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -2051,7 +2208,7 @@
           "layer": 1
         },
         "bar_sign": {
-          "first": 628,
+          "first": 616,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -2059,7 +2216,7 @@
           "layer": 1
         },
         "book_box": {
-          "first": 630,
+          "first": 618,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -2067,7 +2224,7 @@
           "layer": 1
         },
         "lookout_left": {
-          "first": 632,
+          "first": 620,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -2075,7 +2232,7 @@
           "layer": 1
         },
         "lookout_steps": {
-          "first": 634,
+          "first": 622,
           "width": 1,
           "height": 2,
           "blocked": false,
@@ -2083,7 +2240,7 @@
           "layer": 1
         },
         "lookout_right": {
-          "first": 636,
+          "first": 624,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -2091,7 +2248,7 @@
           "layer": 1
         },
         "scenic_sea": {
-          "first": 638,
+          "first": 626,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2099,7 +2256,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 639,
+          "first": 627,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2107,7 +2264,7 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 640,
+          "first": 628,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2115,7 +2272,7 @@
           "layer": 1
         },
         "slab_walk": {
-          "first": 641,
+          "first": 629,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -2123,7 +2280,7 @@
           "layer": 1
         },
         "brick_walk": {
-          "first": 645,
+          "first": 633,
           "width": 2,
           "height": 1,
           "blocked": false,
@@ -2131,7 +2288,7 @@
           "layer": 1
         },
         "stone_walk": {
-          "first": 647,
+          "first": 635,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -2139,7 +2296,7 @@
           "layer": 1
         },
         "dark_walk": {
-          "first": 651,
+          "first": 639,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -2147,7 +2304,7 @@
           "layer": 1
         },
         "curb_north": {
-          "first": 652,
+          "first": 640,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -2155,7 +2312,7 @@
           "layer": 1
         },
         "curb_south": {
-          "first": 653,
+          "first": 641,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -2163,7 +2320,7 @@
           "layer": 1
         },
         "curb_cut": {
-          "first": 654,
+          "first": 642,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -2171,7 +2328,7 @@
           "layer": 1
         },
         "curb_drain": {
-          "first": 655,
+          "first": 643,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -2179,7 +2336,7 @@
           "layer": 1
         },
         "tree_well": {
-          "first": 656,
+          "first": 644,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -2187,7 +2344,7 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 660,
+          "first": 648,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -2195,7 +2352,7 @@
           "layer": 1
         },
         "succulent": {
-          "first": 664,
+          "first": 652,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2203,7 +2360,7 @@
           "layer": 1
         },
         "tuft": {
-          "first": 665,
+          "first": 653,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2211,7 +2368,7 @@
           "layer": 1
         },
         "shrub": {
-          "first": 666,
+          "first": 654,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2219,7 +2376,7 @@
           "layer": 1
         },
         "flower_box": {
-          "first": 667,
+          "first": 655,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2227,7 +2384,7 @@
           "layer": 1
         },
         "lavender": {
-          "first": 668,
+          "first": 656,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2235,7 +2392,7 @@
           "layer": 1
         },
         "daisies": {
-          "first": 669,
+          "first": 657,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2243,7 +2400,7 @@
           "layer": 1
         },
         "shop_board": {
-          "first": 670,
+          "first": 658,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -2251,12 +2408,24 @@
           "layer": 1
         },
         "wayfinder": {
-          "first": 671,
+          "first": 659,
           "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "cream_lr": {
+          "first": 661,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ]
         }
       }
     }

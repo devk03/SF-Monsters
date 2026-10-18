@@ -669,6 +669,20 @@ review contrasting industrial, mixed-use and residential districts in the actual
 native game. Counts and source checks establish coverage, not visual approval.
 Public v84 stays available while the next private candidate is developed.
 
+**October 18 revision: finish exposed façades and audit the player UI.** A
+shared-wall crop may only meet architecture that covers its full vertical edge;
+an alley, short mural or map boundary needs finished outer trim. The native
+packer and independent street contract now enforce this. The neighborhood cream
+front uses one finished variant rather than keeping a redundant partial copy;
+all kits fit the 512-tile budget (largest 499). A regression rejects gaps,
+non-overlapping neighbors and short partial joins. Independent reconstruction
+checks retain original facade orientation under native reflected-tile reuse.
+Current candidate is private v87; final build/traversal evidence is pending.
+Website UI work is scoped to the world edition: integer-pixel display, grouped
+file tools, optional desktop gamepad and clearer hierarchy. Screenshot review and
+keyboard interaction checks are required before publishing. Human town/art and
+full-game acceptance remain open; root v80 must remain unchanged.
+
 **Additional user revision: planted streets and signs.** Add visible neighborhood
 wayfinding and shop boards, bushes and distinct plant combinations per urban
 district, and richer sidewalk details. Preserve neutral paving, simple native

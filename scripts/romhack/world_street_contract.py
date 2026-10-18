@@ -10,6 +10,21 @@ CENTERS={'dogpatch':(14,17),'potrero_hill':(15,17),'mission':(14,17),
          'north_beach':(14,18),'treasure_island':(14,17)}
 
 
+def check_edges(plan,profile):
+    blocks=[b for b in plan.get('town_blocks',[]) if
+            'closed_edges' in profile['cards'].get(b.get('style'),{}) or b.get('style')=='mural']
+    for block in blocks:
+        spec=profile['cards'][block['style']]
+        if 'closed_edges' not in spec:continue
+        for side in ('left','right'):
+            edge=block['x'] if side=='left' else block['x']+block['width']
+            joined=any(other is not block and
+                       (other['x']+other['width'] if side=='left' else other['x'])==edge
+                       and other['y']<=block['y'] and other['y']+other['height']>=block['y']+block['height'] for other in blocks)
+            if not joined and side not in spec['closed_edges']:
+                raise ValueError(f"{plan['world_id']}: unfinished {side} end of {block['style']} at {block['x']},{block['y']}")
+
+
 def check_details(plan):
     signs=plan.get('street_signs',[])
     if len(signs)!=2 or {s['style'] for s in signs}!={'wayfinder','shop_board'}:
@@ -89,7 +104,7 @@ def check_streets(plan, cells, frontage, profile):
             raise ValueError('Drawn service doorway differs from the actual room entry')
     for entry in plan.get('access_points',[]):
         if entry['kind']!='gym_entry':continue
-        offsets={'cream':2,'highrise':1,'theater':2}
+        offsets={'cream':2,'cream_lr':2,'highrise':1,'theater':2}
         matches=[b for b in plan['town_blocks'] if b['style'] in offsets
                  and b['x']+offsets[b['style']]==entry['x']
                  and b['y']+b['height']==entry['y']]

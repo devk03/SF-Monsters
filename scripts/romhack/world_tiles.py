@@ -29,11 +29,11 @@ def compile_kit(root=ROOT, profile='residential'):
     """Two native layers: opaque ground and original transparent architecture."""
     styles = {'residential':{'coral','cafe','cream','lilac','pair'},
               'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
-              'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'cream','cafe'},
-              'neighborhood':{'coral','cafe','cream','lilac','pair'}}
+              'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'coral','cream','cafe','lilac'},
+              'neighborhood':{'coral','cafe','lilac','pair'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
-    tile_ids = {tiles[0]: 0}
+    tile_ids = {tiles[0]: (0,0)}
     records, attributes, catalog = [], [], {}
     palettes = {}
 
@@ -42,8 +42,14 @@ def compile_kit(root=ROOT, profile='residential'):
         for y, x in ((0, 0), (0, 8), (8, 0), (8, 8)):
             tile = crop(pixels, 16, x, y, 8, 8)
             if tile not in tile_ids:
-                tile_ids[tile] = len(tiles); tiles.append(tile)
-            result.append(FIRST_TILE + tile_ids[tile] | bank << 12)
+                index=len(tiles);tiles.append(tile)
+                for flags in (0,0x400,0x800,0xc00):
+                    flipped=bytes(tile[(7-dy if flags&0x800 else dy)*8+
+                                       (7-dx if flags&0x400 else dx)]
+                                  for dy in range(8) for dx in range(8))
+                    tile_ids.setdefault(flipped,(index,flags))
+            index,flags=tile_ids[tile]
+            result.append(FIRST_TILE + index | flags | bank << 12)
         return result
 
     def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False, ground_width=16):
@@ -239,6 +245,31 @@ def compile_kit(root=ROOT, profile='residential'):
         palettes[7]=palette(palettes[7])
         for name,w,h,pixels in cards():
             card(name,pixels,w,h,7,paving,7)
+    # A crop from the middle of the connected frontage atlas is a shared-wall
+    # facade. Exposed ends must use complete outer art or a finished variant.
+    edges={'coral':['left'],'cafe':[],'cream':[],'lilac':['right'],
+           'pair':['left','right'],'warehouse':['left','right'],
+           'clinic':['left','right'],'brick':['left','right'],
+           'highrise':['left','right'],'theater':['left','right'],
+           'mansion':['left','right'],'stadium_gate':['left','right']}
+    for name,closed in edges.items():
+        if name in catalog:catalog[name]['closed_edges']=closed
+    if profile in ('industrial','civic','neighborhood'):
+        base,width,offset=('cream',48,80) if profile=='neighborhood' else ('cafe',32,48)
+        raw=crop(houses,176,offset,0,width,64)
+        variants=(('lr',['left','right']),) if profile=='neighborhood' else (('l',['left']),('r',['right']),('lr',['left','right']))
+        for suffix,closed in variants:
+            pixels=bytearray(raw)
+            for side in closed:
+                outer,inner=(0,1) if side=='left' else (width-1,width-2)
+                for y in range(64):
+                    band=range(0,8) if side=='left' else range(width-8,width)
+                    if any(raw[y*width+x] for x in band):
+                        pixels[y*width+outer]=1
+                        pixels[y*width+inner]=5 if y<12 else 6 if y<60 else 13
+            name=base+'_'+suffix
+            card(name,bytes(pixels),width,64,6,paving,7)
+            catalog[name]['closed_edges']=closed
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
@@ -312,7 +343,8 @@ def describe(kit):
     return {'secondary':PROFILES[kit['profile']], 'cards':{
         name:{'first':card['tiles'][0][0],'width':len(card['tiles'][0]),
               'height':len(card['tiles']),'blocked':card['blocked'],
-              'behavior':kit['attributes'][card['tiles'][0][0]-512]&255,'layer':1}
+              'behavior':kit['attributes'][card['tiles'][0][0]-512]&255,'layer':1,
+              **({'closed_edges':card['closed_edges']} if 'closed_edges' in card else {})}
         for name,card in kit['catalog'].items()}}
 
 

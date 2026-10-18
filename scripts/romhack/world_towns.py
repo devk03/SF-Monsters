@@ -77,7 +77,8 @@ def furnish(plans, manifest):
                     'noe_valley':[('book_box',18,8)],
                     'potrero_hill':[('lookout_left',15,4),('lookout_steps',16,4),
                                     ('lookout_right',17,4)]}.get(district,[])
-        centerpiece=landmark or (('cream',14,3) if gym else
+        gym_style='cream_lr' if profile=='neighborhood' else 'cream'
+        centerpiece=landmark or ((gym_style,14,3) if gym else
                     ('pair',14,3) if not connector and district!='potrero_hill' else None)
         center_left,center_right=(15,17)
         if centerpiece:
@@ -89,16 +90,19 @@ def furnish(plans, manifest):
         choices={
             'industrial':('warehouse','brick','coral','cafe'),
             'civic':('brick','cream','clinic','cafe'),
-            'stadium':('cafe','cream'),
+            'stadium':('cafe','cream','coral','lilac'),
         }.get(profile,{
             'mission':('cafe','coral','lilac','cream','pair'),
-            'marina':('cream','cafe','lilac','pair'),
+            'marina':('cream','cafe','lilac','pair','coral'),
             'pacific_heights':('cream','lilac','pair','coral','cafe'),
-            'noe_valley':('pair','cafe','cream','lilac'),
-            'outer_sunset':('pair','coral','cafe','cream'),
+            'noe_valley':('pair','cafe','cream','lilac','coral'),
+            'outer_sunset':('pair','coral','cafe','cream','lilac'),
             'potrero_hill':('coral','pair','cream','cafe'),
             'north_beach':('cafe','cream','coral','lilac'),
         }.get(district,('coral','cafe','cream','lilac','pair')))
+        if profile=='neighborhood':choices=tuple('cream_lr' if c=='cream' else c for c in choices)
+        if profile in ('industrial','civic'):
+            choices+=('cafe_l','cafe_r','cafe_lr')
         def record(style,x,y):
             card=kit['catalog'][style]
             stamp(style,x,y)
@@ -112,7 +116,22 @@ def furnish(plans, manifest):
                 if remaining==0:return []
                 for n in range(len(choices)):
                     style=choices[(index+n)%len(choices)]
-                    width=len(kit['catalog'][style]['tiles'][0])
+                    spec=kit['catalog'][style];width=len(spec['tiles'][0])
+                    height=len(spec['tiles'])
+                    top=(17 if district=='outer_sunset' and left<5 else 16) if bottom==21 else bottom-height
+                    neighbors=list(blocks)
+                    if centerpiece and ('closed_edges' in kit['catalog'][centerpiece[0]] or centerpiece[0]=='mural'):
+                        name,x,y=centerpiece;c=kit['catalog'][name]
+                        neighbors.append({'x':x,'y':y,'width':len(c['tiles'][0]),'height':len(c['tiles'])})
+                    def joined(side):
+                        edge=left if side=='left' else right+1
+                        return any((b['x']+b['width'] if side=='left' else b['x'])==edge
+                                   and b['y']<=top and b['y']+b['height']>=top+height
+                                   for b in neighbors)
+                    if remaining==right-left+1 and not joined('left') and 'left' not in spec['closed_edges']:
+                        continue
+                    if width==remaining and not joined('right') and 'right' not in spec['closed_edges']:
+                        continue
                     if width<=remaining:
                         rest=fit(remaining-width,index+n+1)
                         if rest is not None:return [style]+rest
