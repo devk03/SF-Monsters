@@ -5,6 +5,7 @@ from world_tiles import compile_kit, legend_for, PROFILES
 URBAN = {'dogpatch', 'potrero_hill', 'mission', 'castro', 'outer_sunset',
          'marina', 'pacific_heights', 'noe_valley', 'mission_bay',
          'giants_stadium', 'financial_district', 'north_beach', 'treasure_island'}
+GREEN_ROUTES = {'route_05','route_06','route_14','route_15'}
 
 
 def furnish(plans, manifest):
@@ -12,8 +13,10 @@ def furnish(plans, manifest):
         return plans
     kits = {}
     result = deepcopy(plans)
+    streets = {r['id'] for r in manifest['routes'] if r['mode']=='walk' and r['id'] not in GREEN_ROUTES}
     for plan in result:
-        if plan['world_id'] not in URBAN:
+        connector = plan['world_id'] in streets
+        if plan['world_id'] not in URBAN and not connector:
             continue
         profile = manifest['town_finishing'].get('profiles',{}).get(plan['world_id'],'residential')
         if profile not in kits: kits[profile] = compile_kit(profile=profile)
@@ -45,8 +48,8 @@ def furnish(plans, manifest):
         recipes = {
             'industrial':((1,3,('warehouse','coral')),(20,3,('brick','coral','cafe','coral')),
                           (1,16,('warehouse','coral')),(20,16,('brick','warehouse'))),
-            'civic':((1,3,('clinic','cafe')),(20,3,('sandstone','brick','cream')),
-                     (1,16,('brick','sandstone','cafe')),(20,16,('clinic','cafe'))),
+            'civic':((1,3,('clinic','cafe')),(20,3,('brick','brick','cream')),
+                     (1,16,('brick','cream','cafe')),(20,16,('clinic','cafe'))),
             'residential':((1,4,('coral','cafe','cream','lilac')),
                            (20,4,('lilac','cream','cafe','coral')),
                            (1,17,('pair','cream','coral')),(20,17,('cream','pair','lilac')))}
@@ -82,7 +85,13 @@ def furnish(plans, manifest):
         elif profile == 'stadium': landmark=('stadium_gate',13,3)
         if landmark: stamp(*landmark)
         elif gym: stamp('cream',15,3)
-        else: stamp('pair',14,3)
+        elif not connector: stamp('pair',14,3)
+        if connector:
+            for link in plan['connections'] or []:
+                if link['direction'] in ('up','down'):
+                    for y in range(1 if link['direction']=='up' else 12,13 if link['direction']=='up' else 23):
+                        for x in range(15,18):stamp('asphalt',x,y)
+            plan['route_setting']='city street'
         for name,x,y in [('lamp',12 if profile=='stadium' else 13,5),('lamp',18,17),('meter',6,10),
                          ('hydrant',26,10),('bin',2,15),('rack',26,15),
                          ('bench',6,9),('tree',28,8)]:

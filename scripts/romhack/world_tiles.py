@@ -129,14 +129,14 @@ def compile_kit(root=ROOT, profile='residential'):
         receipt=json.loads((directory/'conversion.json').read_text())
         source=checked(directory,'buildings.indices',receipt)
         service_palettes=checked(directory,'building-palettes.gbapal',receipt)
-        palettes[13]=service_palettes[:32] if profile=='industrial' else service_palettes[32:64]
+        palettes[12]=service_palettes[:32] if profile=='industrial' else service_palettes[32:64]
         name='warehouse' if profile=='industrial' else 'clinic'
         offset=0 if profile=='industrial' else 8960
-        card(name,source[offset:offset+8960],112,80,13,paving,7)
+        card(name,source[offset:offset+8960],112,80,12,paving,7)
     if profile in ('industrial','civic'):
         directory=root/'assets/tiles/south-park-frontage-v1'
         receipt=json.loads((directory/'conversion.json').read_text())
-        names=('brick',) if profile=='industrial' else ('brick','sandstone')
+        names=('brick',)
         for bank,name in enumerate(names,11):
             data=next(item for item in receipt['cards'] if item['name']==name)
             raw=checked(directory,name+'.indices',data)
@@ -151,8 +151,15 @@ def compile_kit(root=ROOT, profile='residential'):
         grass=bytes(int(c,16) for row in json.loads(grass_spec)['cells']['0'] for c in row)
         palettes[10]=checked(directory,'terrain.gbapal',receipt)
         card('grass',empty,16,16,10,grass,10,False)
-        tree,w,h=furniture['tree']
-        card('grove',crop(tree,w,0,0,16,16),16,16,6,grass,10)
+        if profile=='nature':
+            directory=root/'assets/tiles/sf-foliage-v1'
+            receipt=json.loads((directory/'conversion.json').read_text())
+            palettes[11]=checked(directory,'foliage.gbapal',receipt)
+            shrub=checked(directory,'shrub.indices',receipt)
+            card('grove',crop(shrub,32,8,8,16,16),16,16,11,grass,10)
+            for name in ('cypress','pine','shrub','rocks'):
+                spec=next(item for item in receipt['cards'] if item['name']==name)
+                w,h=spec['size'];card(name,checked(directory,name+'.indices',receipt),w,h,11,grass,10)
         for name in ('tree','bench','lamp','bin'):
             raw,w,h=furniture[name]
             card(name+'_grass',raw,w,h,6,grass,10)
@@ -170,6 +177,8 @@ def compile_kit(root=ROOT, profile='residential'):
             card(name,raw,w,h,9,background,bank)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
+    if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
+        raise ValueError('A secondary palette falls outside the seven native loaded banks')
     return {'tiles': tiles, 'records': records, 'attributes': attributes,
             'palettes': palettes, 'catalog': catalog, 'profile':profile}
 

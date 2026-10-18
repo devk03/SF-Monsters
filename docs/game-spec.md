@@ -767,6 +767,15 @@ Rendered inspection caught an incorrect services palette binding and mechanical
 canopy repetition; these remain active corrections, not quality approval. Source
 17 world and15 module tests pass. No public update.
 
+Private widened-bay save checkpoint (target0f3cd0a7…): real earlier walking
+Save at route17(8,12), now water, cold-resumes safely on the pier at(5,12) and
+rejects Surf before badge5. A real earlier Surf Save at(16,12) preserves its
+position/mode and can leave the channel. Both retain all checked badge/module
+bits and byte-identical Flash. Evidence: `.tools/benchmarks/town-v83-bay-upgrade-*`.
+A sanitizer-backed resolver fixture covers land/water, occupied tiles and falls.
+New foliage replaces quarter-tree fill; all palettes are bounded to the seven
+secondary banks actually loaded by Emerald (6..12). Actual art review remains open.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "tool": "built-in imagegen",
+  "conversion": "connected silhouette; proportional BOX reduction; nearest RGB555 color; alpha128; no dithering",
+  "cards": [
+    {
+      "name": "cypress",
+      "source_bounds": [
+        0,
+        0,
+        595,
+        724
+      ],
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "pine",
+      "source_bounds": [
+        600,
+        0,
+        1080,
+        724
+      ],
+      "size": [
+        32,
+        48
+      ]
+    },
+    {
+      "name": "shrub",
+      "source_bounds": [
+        1090,
+        0,
+        1640,
+        724
+      ],
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "rocks",
+      "source_bounds": [
+        1650,
+        0,
+        2172,
+        724
+      ],
+      "size": [
+        32,
+        32
+      ]
+    }
+  ],
+  "files": {
+    "cypress.indices": "d2ca045a8bb34c215a7728fedc85df43ce365b96666f6b3fa55205f5dfafc8a8",
+    "cypress.png": "d0a6f35b16d9f55e5c7aa97f7c82a9ffbcbbea9d609aac8e48b9d9f1207d7747",
+    "pine.indices": "409a2dc59828854eabcc6ad75d67896fc865179b42d44c13aff73ed86abf3766",
+    "pine.png": "b9a36159e6c21ac16577c06fda187b17c405655979296b0e95cd066e75cbced1",
+    "shrub.indices": "b35449355ab6b6f6475c21ccaede7fe12423f050c7bdef983696dac29c1348cb",
+    "shrub.png": "928cb28cc809e925736660992e82c8d4473c381a8dec15a77e4ea317e3b09e53",
+    "rocks.indices": "81631aeda5888f09d98b0d4de3bc64da4c9164f7d5ef44d76864169252f1e370",
+    "rocks.png": "5fe061757391c53597141259f5e863e5c7de8c91670a57167e664fa9db3a040e",
+    "source.png": "8fe83f5dee168c38884a2c9afc8fcd6034c932be3ba18d9c897adc8e68de144b",
+    "prompt.md": "6cc2d18c0161f7bad1af37626f8022bc9599832bfff1e8fa8cee8d219fc1436d",
+    "foliage.gbapal": "bce56ad351f780ca319752d1f18b3437fc4c520feca82862599644bd063646d2",
+    "native-preview.png": "283083edb0cb92bd3ad88bbc1c6a02149f18587f142416c023034f58f254c69e"
+  }
+}

@@ -377,16 +377,8 @@
           "behavior": 0,
           "layer": 1
         },
-        "grove": {
-          "first": 601,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
         "tree_grass": {
-          "first": 602,
+          "first": 601,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -394,7 +386,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 606,
+          "first": 605,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -402,7 +394,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 608,
+          "first": 607,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -410,7 +402,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 610,
+          "first": 609,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -418,7 +410,7 @@
           "layer": 1
         },
         "crane": {
-          "first": 611,
+          "first": 610,
           "width": 4,
           "height": 4,
           "blocked": true,
@@ -550,32 +542,16 @@
           "behavior": 0,
           "layer": 1
         },
-        "sandstone": {
-          "first": 600,
-          "width": 3,
-          "height": 5,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
         "grass": {
-          "first": 615,
+          "first": 600,
           "width": 1,
           "height": 1,
           "blocked": false,
           "behavior": 0,
           "layer": 1
         },
-        "grove": {
-          "first": 616,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
         "tree_grass": {
-          "first": 617,
+          "first": 601,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -583,7 +559,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 621,
+          "first": 605,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -591,7 +567,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 623,
+          "first": 607,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -599,7 +575,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 625,
+          "first": 609,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -607,7 +583,7 @@
           "layer": 1
         },
         "highrise": {
-          "first": 626,
+          "first": 610,
           "width": 3,
           "height": 5,
           "blocked": true,
@@ -723,7 +699,7 @@
           "behavior": 0,
           "layer": 1
         },
-        "tree_grass": {
+        "cypress": {
           "first": 532,
           "width": 2,
           "height": 2,
@@ -731,8 +707,40 @@
           "behavior": 0,
           "layer": 1
         },
-        "bench_grass": {
+        "pine": {
           "first": 536,
+          "width": 2,
+          "height": 3,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 542,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rocks": {
+          "first": 546,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_grass": {
+          "first": 550,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench_grass": {
+          "first": 554,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -740,7 +748,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 538,
+          "first": 556,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -748,7 +756,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 540,
+          "first": 558,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -756,7 +764,7 @@
           "layer": 1
         },
         "sutro_tower": {
-          "first": 541,
+          "first": 559,
           "width": 3,
           "height": 5,
           "blocked": true,
@@ -764,7 +772,7 @@
           "layer": 1
         },
         "windmill": {
-          "first": 556,
+          "first": 574,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -772,7 +780,7 @@
           "layer": 1
         },
         "conservatory": {
-          "first": 568,
+          "first": 586,
           "width": 4,
           "height": 3,
           "blocked": true,
@@ -780,7 +788,7 @@
           "layer": 1
         },
         "bath_ruins": {
-          "first": 580,
+          "first": 598,
           "width": 4,
           "height": 2,
           "blocked": true,
@@ -928,16 +936,8 @@
           "behavior": 0,
           "layer": 1
         },
-        "grove": {
-          "first": 591,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
         "tree_grass": {
-          "first": 592,
+          "first": 591,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -945,7 +945,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 596,
+          "first": 595,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -953,7 +953,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 598,
+          "first": 597,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -961,7 +961,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 600,
+          "first": 599,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -969,7 +969,7 @@
           "layer": 1
         },
         "theater": {
-          "first": 601,
+          "first": 600,
           "width": 5,
           "height": 4,
           "blocked": true,
@@ -1093,16 +1093,8 @@
           "behavior": 0,
           "layer": 1
         },
-        "grove": {
-          "first": 551,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
         "tree_grass": {
-          "first": 552,
+          "first": 551,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -1110,7 +1102,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 556,
+          "first": 555,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -1118,7 +1110,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 558,
+          "first": 557,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -1126,7 +1118,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 560,
+          "first": 559,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1134,7 +1126,7 @@
           "layer": 1
         },
         "stadium_gate": {
-          "first": 561,
+          "first": 560,
           "width": 6,
           "height": 4,
           "blocked": true,

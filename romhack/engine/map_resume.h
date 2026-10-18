@@ -1,6 +1,7 @@
 // Authored SF layouts replace cached scenery. Preserve valid saved positions;
 // use the native same-map warp only when an updated layout occupies that tile.
 #include "sf_authored_maps.h"
+#include "constants/flags.h"
 
 static bool8 SFResumeTileIsWalkable(s16 x, s16 y)
 {
@@ -10,12 +11,32 @@ static bool8 SFResumeTileIsWalkable(s16 x, s16 y)
     return MapGridGetCollisionAt(x + MAP_OFFSET, y + MAP_OFFSET) == 0;
 }
 
-static bool8 SFResumeTileIsSafe(s16 x, s16 y)
+static bool8 SFResumeSavedSurfing(void)
+{
+    u8 i;
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        const struct ObjectEvent *object = &gSaveBlock1Ptr->objectEvents[i];
+        if (object->active && object->isPlayer)
+            return MetatileBehavior_IsSurfableWaterOrUnderwater(object->currentMetatileBehavior);
+    }
+    return FALSE;
+}
+
+static bool8 SFResumeTileIsSafe(s16 x, s16 y, bool8 surfing)
 {
     u8 i;
     const struct MapEvents *events = gMapHeader.events;
     if (!SFResumeTileIsWalkable(x, y))
         return FALSE;
+    // Updated scenery must not silently put a land save into Surf or bypass
+    // its badge gate. Prefer the saved land/water mode and never spawn on a fall.
+    {
+        u8 behavior = MapGridGetMetatileBehaviorAt(x + MAP_OFFSET, y + MAP_OFFSET);
+        if (MetatileBehavior_IsSurfableWaterOrUnderwater(behavior) != surfing
+            || MetatileBehavior_IsWaterfall(behavior))
+            return FALSE;
+    }
     for (i = 0; i < events->warpCount; i++)
         if (events->warps[i].x == x && events->warps[i].y == y)
             return FALSE;
@@ -39,7 +60,8 @@ static bool8 SFMapResumeWarpIfNeeded(void)
     s16 radius, dy, dx, x, y;
     s16 oldX = gSaveBlock1Ptr->pos.x;
     s16 oldY = gSaveBlock1Ptr->pos.y;
-    if (!SFMapUsesAuthoredLayout() || SFResumeTileIsSafe(oldX, oldY))
+    bool8 surfing = SFResumeSavedSurfing() && FlagGet(FLAG_BADGE05_GET);
+    if (!SFMapUsesAuthoredLayout() || SFResumeTileIsSafe(oldX, oldY, surfing))
         return FALSE;
     // A smaller authored layout may leave an older coordinate out of bounds.
     if (oldX < 0) oldX = 0;
@@ -55,10 +77,10 @@ static bool8 SFMapResumeWarpIfNeeded(void)
             dx = radius - (dy < 0 ? -dy : dy);
             y = oldY + dy;
             x = oldX - dx;
-            if (!SFResumeTileIsSafe(x, y))
+            if (!SFResumeTileIsSafe(x, y, surfing))
             {
                 x = oldX + dx;
-                if (!SFResumeTileIsSafe(x, y))
+                if (!SFResumeTileIsSafe(x, y, surfing))
                     continue;
             }
             SetWarpDestination(gSaveBlock1Ptr->location.mapGroup,

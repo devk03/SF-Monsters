@@ -15,6 +15,8 @@ static bool8 SFMapUsesAuthoredLayout(void) {
         && gSaveBlock1Ptr->location.mapNum == 2;
 }
 ''')
+    (folder / 'constants').mkdir()
+    (folder / 'constants/flags.h').write_text('#define FLAG_BADGE05_GET 0x86B\n')
     subprocess.run(['clang', '-std=c11', '-Wall', '-Wextra', '-Werror',
                     '-fsanitize=address,undefined', '-I' + str(folder),
                     str(root / 'tests/map_resume_test.c'), '-o', str(folder / 'test')],

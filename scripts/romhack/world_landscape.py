@@ -8,10 +8,13 @@ NATURE={'golden_gate_park','twin_peaks','sutro_tower','lands_end','angel_island'
 def landscape(plans, manifest):
     if not manifest.get('town_finishing'):return plans
     result=deepcopy(plans);kit=compile_kit(profile='nature');cards=kit['catalog']
-    routes={r['id']:r for r in manifest['routes']}
+    from generate_world import records
+    from world_towns import GREEN_ROUTES
+    routes={r['id']:r for r in records(manifest)[1]}
     for plan in result:
         name=plan['world_id'];route=routes.get(name)
-        if name not in NATURE and (not route or route['mode']!='walk'):continue
+        if name not in NATURE and not route:continue
+        if route and route['mode']=='walk' and name not in GREEN_ROUTES:continue
         old=plan['rows'];grid=[list(row) for row in old]
         token=lambda name:chr(0x100+cards[name]['tiles'][0][0]-512)
         def fill(x0,y0,x1,y1,name):
@@ -28,6 +31,15 @@ def landscape(plans, manifest):
         for y in range(1,23):
             for x in range(1,31):
                 grid[y][x]=token('paving' if old[y][x]=='.' else 'grove')
+        if route and route['mode']!='walk':
+            # A real bay crossing, with short dry piers and no walkable bypass.
+            for y in range(1,23):
+                for x in range(1,31):grid[y][x]='V' if route['mode']=='waterfall' and y==12 else 'W'
+            for link in plan['connections'] or []:
+                side=link['direction']
+                bounds={'left':(1,11,5,13),'right':(26,11,30,13),
+                        'up':(15,1,17,4),'down':(15,19,17,22)}[side]
+                fill(*bounds,'paving')
         if name in NATURE and name!='angel_island':
             fill(1,1,30,22,'grove')
             for link in plan['connections'] or []:
@@ -69,6 +81,19 @@ def landscape(plans, manifest):
             for prop,x,y in [('bench',9,10),('lamp',21,9)]:
                 points=[(x+dx,y+dy) for dy,row in enumerate(cards[prop]['tiles']) for dx,_ in enumerate(row)]
                 if all(old[yy][xx]=='#' for xx,yy in points):stamp(prop,x,y)
+        # Larger complete silhouettes break up the small canopy fill. Native
+        # footprints remain solid and only replace wholly blocked grove cells.
+        for y in range(1,21,3):
+            for x in range(1,29,3):
+                prop='pine' if (x//3+y//3)%2 else 'cypress'
+                rows=cards[prop]['tiles']
+                points=[(x+dx,y+dy) for dy,row in enumerate(rows) for dx,_ in enumerate(row)]
+                if all(0<yy<23 and 0<xx<31 and grid[yy][xx]==token('grove') for xx,yy in points):stamp(prop,x,y)
+        # Sealed map boundaries use the same forest fill as the interior, not
+        # arbitrary stock building fragments. Connected seams reopen below.
+        for y in range(24):
+            for x in range(32):
+                if x in (0,31) or y in (0,23):grid[y][x]=token('grove')
         # Native seam ports remain exactly three tiles wide and flush with the
         # neighboring map. Seal every other edge, including decorative corners.
         for link in plan['connections'] or []:
@@ -77,6 +102,8 @@ def landscape(plans, manifest):
                      'up':(16+delta,0),'down':(16+delta,23)}[link['direction']]
                 grid[y][x]=token('paving')
         plan.update(rows=[''.join(row) for row in grid],legend=legend_for(kit),tile_profile='nature')
+        plan['border_tile']=cards['grove']['tiles'][0][0]
+        plan['water_positions']=[[x,y] for y,row in enumerate(grid) for x,value in enumerate(row) if value in 'WV']
         plan['tilesets']['secondary']=PROFILES['nature']
         plan['landmarks']=[{'name':item,'x':x,'y':y} for item,x,y in landmarks]
     return result
