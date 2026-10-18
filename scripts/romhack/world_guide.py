@@ -9,8 +9,9 @@ def apply_guide(root,engine,original,manifest,plans):
     positions=manifest['city_guide']['positions'];people=load_people()
     discoveries=json.loads((root/'romhack/world/discoveries.json').read_text())['areas']
     if set(positions)!=set(index):raise ValueError('The city map must include every approved destination')
-    def string(value):
-        if any(c in value for c in '$"\\\n') or len(value)>100:raise ValueError('Unsafe native guide text')
+    def string(value,capacity=40):
+        if (any(c in value for c in '$"\\\n') or not value.isascii()
+                or len(value)+1>capacity):raise ValueError('Native guide field exceeds its encoded destination capacity')
         return '_("'+value+'")'
     nodes=[]
     for area in areas:
@@ -27,7 +28,7 @@ def apply_guide(root,engine,original,manifest,plans):
         lines+=['']*(4-len(lines))
         flags=discoveries[identifier]
         nodes.append('    {'+f'{10+x*180//100}, {38+y*58//100}, '+
-                     string(area['label'])+', '+string(people[identifier]['character'].capitalize())+', '+
+                     string(area['label'])+', '+string(people[identifier]['character'].capitalize(),60)+', '+
                      '{'+', '.join(map(string,lines))+'}, '+flags['done_flag']+', '+
                      (flags['found_flag'] or '0')+'}')
     edges=['    {'+str(index[r['from']])+', '+str(index[r['to']])+', '+str(r['requires_badge'])+'}' for r in routes]

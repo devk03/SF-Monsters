@@ -20,7 +20,7 @@ def verify(state, name, stage):
             w.travel('league_route'); w.go((16, 13))
             direction, blocked_badge = 'up', 8
         else:
-            w.travel('route_17'); w.go((14, 12))
+            w.travel('route_17'); w.go((5, 12))
             direction, blocked_badge = 'right', 5
         if w.badge(blocked_badge):
             raise ValueError('Negative test checkpoint already has the tested badge')

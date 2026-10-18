@@ -20,7 +20,11 @@ Read AGENTS.md; preserve prior evidence and public v80 while iterating private d
    element IDs, arrow bindings, annotations and embedded image.
 3. `docs/world/plan-notes.md`: interpretation, decisions and unresolved conflicts.
 4. `romhack/world/world.json`: editable area/route/gym/traversal manifest.
-5. Generated native layouts/scripts and independent validation evidence.
+5. `romhack/world/art-contract.json`, `districts.json`, `discoveries.json` and
+   `core-state.json`: original art allocation, dialogue, local activities and
+   their explicit persistent-state reservations. `world.json` also owns SF guide
+   positions and native SF location labels.
+6. Generated native layouts/scripts and independent validation evidence.
 
 The previous `docs/story/` treatment and `v0.0.80` Sunset/Cognition opening are
 historical development baselines. Do not silently force their route onto the
@@ -79,6 +83,12 @@ Natural town dialogue, ambient activity and non-gym services are now in scope. T
   `.tools`; Git/public hosting receive original source and approved patches only.
 - Every arrival must be in bounds, walkable and outside a blocking NPC/trigger.
 - Paired exits and return paths must remain usable after gates change.
+- Continue must retain land/Surf mode, refresh changed actor templates even on
+  a still-valid player tile, and preserve party, money, core chapter variables,
+  contributor flags and pending local rewards. A source/collision check is not
+  sufficient proof of an update; use actual earlier ordinary Saves.
+- Compare complete linked art resources with normal compiler inputs. Preserve
+  full landmark footprints and reachable viewing/interaction approaches.
 - Connection margins, map/layout uniqueness and native object limits must pass.
 - Preserve the user's diagram; new annotations need revision history.
 

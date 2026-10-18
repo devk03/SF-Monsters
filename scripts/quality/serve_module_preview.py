@@ -15,6 +15,7 @@ def main():
     parser.add_argument('--rom', type=Path, default=ROOT / '.tools/pokeemerald-world-host/sf-module-playtest.gba')
     parser.add_argument('--port', type=int, default=18771)
     parser.add_argument('--seconds', type=int, default=1800)
+    parser.add_argument('--battery',type=Path,help='Optional private ordinary Save for cold Continue testing')
     args = parser.parse_args()
     if not 60 <= args.seconds <= 3600 or not 1024 <= args.port <= 65535:
         parser.error('Use a 60–3600 second finite session and a port in 1024..65535')
@@ -28,6 +29,11 @@ def main():
         parser.error('Cartridge has no verified private world/module build receipt')
     routes = {'/': (Path(__file__).with_name('module_preview.html').read_bytes(), 'text/html'),
               '/rom.gba': (rom, 'application/octet-stream')}
+    if args.battery:
+        args.battery.resolve().relative_to((ROOT/'.tools').resolve())
+        battery=args.battery.read_bytes()
+        if len(battery)!=131072:parser.error('Private world Continue needs 128 KiB Flash')
+        routes['/battery.sav']=(battery,'application/octet-stream')
     runtime = ROOT / 'web/public/emulator'
     for path in runtime.iterdir():
         if path.is_file() and not path.is_symlink() and path.suffix in ('.js', '.wasm', '.json', '.txt'):
@@ -54,6 +60,7 @@ def main():
             if path == '/identity.json':
                 info = {'rom_sha256': digest, 'profile': receipt['profile'], 'fixture': receipt.get('fixture'),
                         'remaining_seconds': max(0, int(deadline-time.monotonic())),
+                        'has_battery':bool(args.battery),
                         'public_progress_touched': False, 'persist': False}
                 self.reply(json.dumps(info).encode(), 'application/json')
             elif path in routes:

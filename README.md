@@ -8,18 +8,20 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
 ## Current development goal: finish the compact SF world
 
-We have generated a playable **world blockout** from the user's October 17 plan:
-all approved areas connected by real routes, safe entrances and exits, return
-paths, water/traversal gates, a Dogpatch start and eight themed gym placeholders.
-Simple development tiles are sufficient for this milestone. Polished graphics,
-audio, final dialogue and contributor-written gym battles come later.
+The private v83 world draft has 18 compact destinations, 19 connectors, eight
+reserved gym rooms and 13 small service interiors. Urban areas use dense attached
+blocks, original SF landmark candidates, authored residents and safe walkers.
+Parks, coasts and both islands have distinct trails and scenery. An in-game SF
+map shows all destinations and their actual connections.
 
-The private v82 finishing draft now generates 58 maps: 18 destinations, 19
-connectors, eight reserved gym rooms and 13 small service interiors. Compact
-streets, authored residents and useful local stops are in progress. No town has
-final visual approval; nature/coast layouts and distinct landmarks remain open. See the [generation guide](docs/world/generation.md) and
-[blockout verification](docs/world/blockout-verification.json). The public link
-below still serves v80; the new world remains a separate development draft.
+All 18 local activities have passed native reward/revisit checks. The 58-map
+controller circuit, earlier land/Surf save upgrades and original-resource audits
+pass on their recorded draft builds. These are functional checks, not final town
+or art approval. Updated coastline, full same-ROM WASM coverage and strict browser
+input/performance checks remain in progress; human quality review is still open.
+See the [generation guide](docs/world/generation.md) and the current
+[spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
+The public website still serves v80; the world draft stays separate.
 
 The [editable Excalidraw plan](docs/world/initial-world-plan.excalidraw),
 [interpretation and open decisions](docs/world/plan-notes.md), and

@@ -15,7 +15,7 @@ struct Coords { s16 x, y; };
 struct WarpData { int mapGroup, mapNum; };
 struct ObjectEvent { bool8 active, isPlayer; u8 currentMetatileBehavior; };
 struct MapLayout { int width, height; };
-struct ObjectEventTemplate { s16 x, y; u8 movementRangeX, movementRangeY, localId, graphicsId, movementType; int flagId; };
+struct ObjectEventTemplate { s16 x, y; u8 movementRangeX, movementRangeY, localId, graphicsId, movementType; int flagId; u8 elevation, trainerType, trainerRange_berryTreeId, kind; };
 struct SaveBlock { struct Coords pos; struct WarpData location; int money; struct ObjectEvent objectEvents[16]; struct ObjectEventTemplate objectEventTemplates[64]; };
 struct CoordEvent { s16 x, y; };
 struct WarpEvent { s16 x, y; };
@@ -29,7 +29,7 @@ struct MapHeader { const struct MapLayout *mapLayout; const struct MapEvents *ev
 static struct SaveBlock sSave;
 static struct SaveBlock *gSaveBlock1Ptr = &sSave;
 static const struct MapLayout sLayout = {5, 5};
-static const struct ObjectEventTemplate sObjects[] = {{2, 1, 0, 0, 1, 7, 0, 0}};
+static const struct ObjectEventTemplate sObjects[] = {{2, 1, 0, 0, 1, 7, 0, 0, 3, 0, 0, 0}};
 static const struct WarpEvent sWarps[] = {{1, 2}};
 static const struct MapEvents sEvents = {1, 1, 0, sObjects, sWarps, NULL};
 static const struct MapHeader gMapHeader = {&sLayout, &sEvents};
@@ -98,6 +98,12 @@ int main(void)
     assert(sSave.objectEventTemplates[0].graphicsId==9); // The resolver never mutates saved data.
     reset();sSave.objectEventTemplates[1].localId=2;
     assert(SFMapResumeWarpIfNeeded() && sWarpX==2 && sWarpY==2);
+    reset();sSave.objectEventTemplates[0].trainerType=1;
+    assert(SFMapResumeWarpIfNeeded());
+    reset();sSave.objectEventTemplates[0].trainerRange_berryTreeId=3;
+    assert(SFMapResumeWarpIfNeeded());
+    reset();sSave.objectEventTemplates[0].elevation=1;
+    assert(SFMapResumeWarpIfNeeded());
     // A newly flooded old land tile cannot grant Surf, with or without a badge.
     reset();sBehavior[2][2]=1;
     assert(SFMapResumeWarpIfNeeded() && sBehavior[sWarpY][sWarpX]==0);

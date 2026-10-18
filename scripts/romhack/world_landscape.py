@@ -30,7 +30,12 @@ def landscape(plans, manifest):
         # parks use a legible loop with short landmark pockets, not a huge plaza.
         for y in range(1,23):
             for x in range(1,31):
-                grid[y][x]=token('paving' if old[y][x]=='.' else 'grove')
+                grid[y][x]=token(('grass' if name=='angel_island' else 'paving') if old[y][x]=='.' else 'grove')
+        if name=='angel_island':
+            points=manifest['league']['blockout']['tunnel_path']
+            for (x0,y0),(x1,y1) in zip(points,points[1:]):
+                fill(min(x0,x1)-1,min(y0,y1)-1,max(x0,x1)+1,max(y0,y1)+1,'paving')
+            fill(15,20,17,22,'paving');fill(14,6,18,9,'paving')
         if route and route['mode']!='walk':
             # A real bay crossing, with short dry piers and no walkable bypass.
             for y in range(1,23):
@@ -69,20 +74,29 @@ def landscape(plans, manifest):
             stamp('bench',21,4);stamp('bench',25,4)
             landmarks=[('ridge_lookout',20,4)]
         elif name=='angel_island':
-            stamp('rocks',18,6);landmarks=[('rocks',18,6)]
+            stamp('conservatory',14,3);stamp('rocks',18,6)
+            landmarks=[('conservatory',14,3),('rocks',18,6)]
         if name in NATURE:
             # Furniture stays outside the central info/door approaches. Choose
             # only wholly free patches so a prop never cuts a trail in half.
             for prop,x,y in [('bench',9,18),('bin',23,18),('lamp',18,9)]:
                 rows=cards[prop]['tiles']
                 points=[(x+dx,y+dy) for dy,row in enumerate(rows) for dx,_ in enumerate(row)]
-                if all(grid[yy][xx] in (token('paving'),token('grass')) for xx,yy in points):stamp(prop,x,y)
+                if all(grid[yy][xx] in (token('paving'),token('grass')) for xx,yy in points):
+                    stamp(prop+'_grass' if all(grid[yy][xx]==token('grass') for xx,yy in points) else prop,x,y)
         else:
             # Dense bordering greenery frames the narrow connecting street;
             # benches and lamps add a pause without bloating route dimensions.
             for prop,x,y in [('bench',9,10),('lamp',21,9)]:
                 points=[(x+dx,y+dy) for dy,row in enumerate(cards[prop]['tiles']) for dx,_ in enumerate(row)]
                 if all(old[yy][xx]=='#' for xx,yy in points):stamp(prop,x,y)
+        if name in ('lands_end','angel_island'):
+            for y in range(1,23):
+                for x in (1,2,3):grid[y][x]=token('scenic_sea')
+                grid[y][4]=token('seawall')
+                if name=='angel_island':
+                    for x in (28,29,30):grid[y][x]=token('scenic_sea')
+                    grid[y][27]=token('seawall')
         # Larger complete silhouettes break up the small canopy fill. Native
         # footprints remain solid and only replace wholly blocked grove cells.
         for y in range(1,21,3):
@@ -95,7 +109,9 @@ def landscape(plans, manifest):
         # arbitrary stock building fragments. Connected seams reopen below.
         for y in range(24):
             for x in range(32):
-                if x in (0,31) or y in (0,23):grid[y][x]=token('grove')
+                if x in (0,31) or y in (0,23):
+                    sea=(name in ('lands_end','angel_island') and x==0) or (name=='angel_island' and x==31)
+                    grid[y][x]=token('scenic_sea' if sea else 'grove')
         # Native seam ports remain exactly three tiles wide and flush with the
         # neighboring map. Seal every other edge, including decorative corners.
         for link in plan['connections'] or []:

@@ -86,6 +86,11 @@ def furnish(plans, manifest):
         if landmark: stamp(*landmark)
         elif gym: stamp('cream',15,3)
         elif not connector: stamp('pair',14,3)
+        coastal=plan['world_id']=='outer_sunset'
+        if coastal:
+            for y in range(9,17):
+                for x in range(4):stamp('scenic_sea',x,y)
+                stamp('seawall',4,y)
         if connector:
             for link in plan['connections'] or []:
                 if link['direction'] in ('up','down'):
@@ -93,10 +98,15 @@ def furnish(plans, manifest):
                         for x in range(15,18):stamp('asphalt',x,y)
             plan['route_setting']='city street'
         for name,x,y in [('lamp',12 if profile=='stadium' else 13,5),('lamp',18,17),('meter',6,10),
-                         ('hydrant',26,10),('bin',2,15),('rack',26,15),
+                         ('hydrant',26,10),('bin',6 if coastal else 2,15),('rack',26,15),
                          ('bench',6,9),('tree',28,8)]:
             stamp(name,x,y)
         # Preserve the exact three-tile inter-map connection interface.
+        hedge=chr(0x100+kit['catalog']['edge_hedge']['tiles'][0][0]-512)
+        for y in range(24):
+            for x in range(32):
+                if x in (0,31) or y in (0,23):
+                    if not(coastal and x==0 and 9<=y<=16):grid[y][x]=hedge
         for link in plan['connections'] or []:
             for d in (-1,0,1):
                 x,y={'left':(0,12+d),'right':(31,12+d),
@@ -104,6 +114,7 @@ def furnish(plans, manifest):
                 grid[y][x]=ground
         plan['rows']=[''.join(row) for row in grid]
         plan['legend']=legend
+        plan['border_tile']=kit['catalog']['edge_hedge']['tiles'][0][0]
         plan['tile_profile']=profile
         plan['tilesets']['secondary']=PROFILES[profile]
         plan['town_blocks']=blocks
@@ -114,4 +125,5 @@ def furnish(plans, manifest):
             blocks.append({'style':style,'x':x,'y':y,'width':len(card['tiles'][0]),
                            'height':len(card['tiles']),'first_metatile':card['tiles'][0][0]})
             plan['scenic_viewpoints']=[{'x':16,'y':8,'name':style}]
+        if coastal:plan['scenic_viewpoints']=[{'x':5,'y':14,'name':'ocean_beach_overlook'}]
     return result

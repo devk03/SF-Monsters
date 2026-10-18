@@ -652,6 +652,19 @@ section but its tool-controlled status remains paused; do not pretend it was
 rewritten or mark unfinished prior gates complete to replace it. This spec is the
 canonical expanded objective while implementation continues.
 
+**Latest checkpoint: private v83, target3896784b… (not town acceptance).** All
+58maps/76connections/16gymwarps/26roomwarps pass the native circuit; all13service
+rooms pass counter/menu/return checks. The exact110,418-frame circuit also matches
+native IWRAM/EWRAM byte-for-byte in the public WASM core. All18local activities
+passed reward/revisit checks on74b96a62…; current coastline/guide refinements remain
+separate native checkpoints. Completed and pending older Saves retain local flags,
+party bytes, money, core chapter variables and Flash while refreshing actors.
+Actual browserbdb561e1… cold Continue/walking/bag/SF-guide smoke works. Its30sec
+probe reports1792/1792frames,0discard/0audio underruns/0hidden ticks, but4rapid
+input observations coalesced. It does not close strict input/long-route gates.
+Two33sec street/park comparison clips are awaiting human subset review. Publicv80
+is unchanged; no town or full quality domain has final human approval.
+
 Completion requires all of the following, with per-area evidence:
 
 - Keep outdoor areas at 32×24 tiles unless an evidenced design constraint requires
@@ -1168,10 +1181,12 @@ progress toward final parity. Do not lower a target to fit the existing code.
 
 ### 15.6 Baseline and current state
 
-Runtime snapshot (October 15, 2026,07:30UTC; current work priority and pause rule
-are in section 15.1; historical checkpoint details follow):
+Historical production snapshot (October15,2026). This table records an older
+checkpoint; the active expanded world objective and current progress are in
+section15.1. Its old pause and scope restrictions do not override the latest
+direct user request.
 
-| Item | Authoritative current status |
+| Item | Recorded status at that checkpoint |
 | --- | --- |
 | Execution | October17 world blockout ready for user geometry review; goal paused at this review checkpoint. Both islands implemented. Foreground long-route performance remains open; no scheduled deadline or recurring monitor. |
 | Active stage | Connected world blockout plus contributor infrastructure: eight gym/six mission packages, repo skill, local checks and private GBA/web playtests. All assignments and final content remain open; full-game acceptance remains required. |

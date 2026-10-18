@@ -175,6 +175,23 @@ def compile_kit(root=ROOT, profile='residential'):
             raw=checked(directory,name+'.indices',receipt);w,h=data['size']
             background,bank=(grass,10) if profile=='nature' else (paving,7)
             card(name,raw,w,h,9,background,bank)
+    # Scenic water is separated by an explicit solid seawall. Traversable bay
+    # crossings still use the independently modelled native Surf/Waterfall cells.
+    directory=root/'assets/tiles/sunset-terrain'
+    receipt=json.loads((directory/'conversion.json').read_text())
+    coast=checked(directory,'tiles.indices',receipt)
+    palettes[10]=checked(directory,'terrain.gbapal',receipt)
+    for name,index in (('scenic_sea',2),('seawall',6)):
+        card(name,coast[index*256:(index+1)*256],16,16,10,paving,7)
+    directory=root/'assets/tiles/sf-foliage-v1'
+    receipt=json.loads((directory/'conversion.json').read_text())
+    shrub=checked(directory,'shrub.indices',receipt)
+    source_colors=struct.unpack('<16H',checked(directory,'foliage.gbapal',receipt))
+    target_colors=struct.unpack('<16H',palettes[6])
+    remap=[0]+[min(range(1,16),key=lambda j:sum((((color>>c*5)&31)-((target_colors[j]>>c*5)&31))**2 for c in range(3)))
+               for color in source_colors[1:]]
+    hedge=bytes(remap[shrub[(y*2)*32+x*2]] for y in range(16) for x in range(16))
+    card('edge_hedge',hedge,16,16,6,paving,7)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

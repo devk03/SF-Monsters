@@ -5,12 +5,12 @@ body{font:16px system-ui;margin:24px;max-width:850px;background:#f4f4f4;color:#2
 button{padding:10px;margin:4px}canvas{display:block;width:min(720px,100%);height:auto;image-rendering:pixelated;background:#202020}
 pre{white-space:pre-wrap;font-size:12px}
 </style>
-<h1>SF module playtest</h1>
-<p>Private local development build. Fixture prerequisites are injected; this is not campaign progress.
-No public game saves or accounts are used. Start a new game from the GBA title menu.</p>
+<h1>SF Mini Monsters playtest</h1>
+<p id="description">Private local development build. Public saves and accounts stay separate.</p>
 <button id="start">Start test</button><button id="pause" disabled>Pause</button>
 <button id="resume" disabled>Resume</button><button id="reset" disabled>Reset GBA</button>
 <button id="save" disabled>Download QA save</button><button id="finish" disabled>Finish test</button>
+<button id="diagnostics" disabled>Check 30 seconds of foreground play</button>
 <p>Arrows move. X is A, Z is B, Enter is Start. Use the ordinary in-game Save before downloading Flash.</p>
 <p id="status" role="status">Ready. The local server has a finite lifetime.</p>
 <canvas width="240" height="160" tabindex="0" aria-label="GBA module game screen"></canvas>
@@ -28,6 +28,9 @@ async function finish(){
 button('start').onclick=async()=>{try{
   button('start').disabled=true;
   const info=await(await fetch('/identity.json')).json();
+  document.querySelector('#description').textContent=info.profile==='world-blockout'
+    ? 'Private SF world draft. Towns, routes and local activities are playable; final gyms and contributor missions remain in progress.'
+    : 'Private module fixture. Prerequisites are injected; this is not campaign progress.';
   document.querySelector('#identity').textContent=JSON.stringify(info,null,2);
   const rom=new Uint8Array(await(await fetch('/rom.gba')).arrayBuffer());
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',rom)),x=>x.toString(16).padStart(2,'0')).join('');
@@ -36,10 +39,11 @@ button('start').onclick=async()=>{try{
   game=await load({canvasEl:canvas,assets:{rom},persist:null,
     storageNamespace:'sf-module-qa-'+hash,options:{gamepads:false,volume:.2}});
   if(finished){game.destroy();return;}
+  if(info.has_battery)game.importBattery(new Uint8Array(await(await fetch('/battery.sav')).arrayBuffer()));
   game.start();canvas.focus();
-  for(const id of ['pause','resume','reset','save','finish'])button(id).disabled=false;
+  for(const id of ['pause','resume','reset','save','finish','diagnostics'])button(id).disabled=false;
   timer=setTimeout(()=>void finish(),Math.max(0,info.remaining_seconds*1000-1000));
-  status.textContent='Playing verified private build. Start a NEW GAME for the assigned test scenario.';
+  status.textContent=info.has_battery?'Playing private build. Choose Continue to test the ordinary Save.':'Playing private build. Start a new game.';
 }catch(error){status.textContent='Test failed: '+error.message;button('finish').disabled=false;}};
 button('pause').onclick=()=>{game.pause();status.textContent='Paused.';};
 button('resume').onclick=()=>{game.resume();canvas.focus();status.textContent='Playing.';};
@@ -51,5 +55,14 @@ button('save').onclick=()=>{try{
   status.textContent='QA Flash downloaded. Keep it separate from world/v80 saves.';
 }catch(error){status.textContent=error.message;}};
 button('finish').onclick=()=>void finish();
+button('diagnostics').onclick=async()=>{try{
+  button('diagnostics').disabled=true;
+  status.textContent='Checking 30 seconds of foreground play. Keep this tab visible and move normally.';
+  canvas.focus();
+  const result=await game.startDiagnostics({durationMs:30000});
+  document.querySelector('#identity').textContent=JSON.stringify(result,null,2);
+  status.textContent='Foreground check complete. Review the report below.';
+}catch(error){status.textContent='Foreground check failed: '+error.message;}
+finally{button('diagnostics').disabled=false;}};
 window.addEventListener('pagehide',()=>{clearTimeout(timer);game?.destroy();});
 </script></html>

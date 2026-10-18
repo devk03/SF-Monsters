@@ -63,10 +63,14 @@ static bool8 SFResumeActorsChanged(void)
         const struct ObjectEventTemplate *current = &gMapHeader.events->objectEvents[i];
         const struct ObjectEventTemplate *saved = &gSaveBlock1Ptr->objectEventTemplates[i];
         if (current->localId != saved->localId || current->graphicsId != saved->graphicsId
+            || current->kind != saved->kind
             || current->x != saved->x || current->y != saved->y
             || current->movementType != saved->movementType
             || current->movementRangeX != saved->movementRangeX
             || current->movementRangeY != saved->movementRangeY
+            || current->elevation != saved->elevation
+            || current->trainerType != saved->trainerType
+            || current->trainerRange_berryTreeId != saved->trainerRange_berryTreeId
             || current->flagId != saved->flagId)
             return TRUE;
     }
