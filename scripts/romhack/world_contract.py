@@ -11,7 +11,7 @@ import re
 PORTS = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
 WATER = 368
 WATERFALL = 179
-ACCESS_KINDS = {'spawn', 'gym_entry', 'gym_exit', 'checkpoint', 'arrival'}
+ACCESS_KINDS = {'spawn', 'gym_entry', 'gym_exit', 'checkpoint', 'arrival', 'room_entry', 'room_exit'}
 NAME = re.compile(r'[A-Za-z_][A-Za-z0-9_]*\Z')
 
 
@@ -95,6 +95,7 @@ class _World:
         self.areas = _unique(areas, 'id', 'area')
         self.routes = _unique(routes, 'id', 'route')
         self.gyms = _unique(manifest['gyms'], 'id', 'gym')
+        self.rooms = _unique(manifest.get('interiors', []), 'id', 'interior')
         _need(bool(self.areas), 'manifest', 'No world areas declared')
         _need(len(self.gyms) == 8, 'gyms', 'Exactly eight gym slots are required')
         _need({gym['badge'] for gym in self.gyms.values()} == set(range(1, 9))
@@ -103,7 +104,7 @@ class _World:
         self.by_badge = {gym['badge']: gym for gym in self.gyms.values()}
         self.declared = {}
         slots = set()
-        for kind, records in [('area', self.areas), ('route', self.routes), ('gym', self.gyms)]:
+        for kind, records in [('area', self.areas), ('route', self.routes), ('gym', self.gyms), ('interior', self.rooms)]:
             for identifier, record in records.items():
                 _need(identifier not in self.declared, 'duplicate', f'Reused world ID: {identifier}')
                 slot = record['engine_map']
@@ -114,6 +115,8 @@ class _World:
         for area in self.areas.values():
             _need(area['city'] == 'San Francisco' or area['id'] == self.league_id, 'scope',
                   f'Unapproved outside-SF area: {area["id"]}')
+        for room in self.rooms.values():
+            _need(room['area'] in self.areas, 'reference', 'Interior parent is absent')
         for gym in self.gyms.values():
             _need(gym['area'] in self.areas, 'reference', f'Dangling gym area: {gym["id"]}')
         self.start = manifest['start']
@@ -199,7 +202,7 @@ class _World:
             _need(type(token) is str and len(token) == 1 and type(tile) in (list, tuple)
                   and len(tile) == 3, 'terrain', 'Invalid terrain legend entry')
             _integer(tile[0], 0, 1023, 'metatile')
-            _need(tile[0] in (1, 11, WATER, WATERFALL) or (self.manifest.get('town_finishing') and 512 <= tile[0] < 590), 'terrain',
+            _need(tile[0] in (1, 11, WATER, WATERFALL) or (self.manifest.get('town_finishing') and 512 <= tile[0] < 614), 'terrain',
                   'Unmodelled native metatile behavior in blockout terrain')
             _need(type(tile[1]) is bool, 'terrain', 'Collision must be boolean')
             _integer(tile[2], 0, 15, 'elevation')
@@ -211,7 +214,7 @@ class _World:
                 _need(tile[1] is False and tile[2] == 1, 'terrain',
                       'Native traversal water needs collision 0 and elevation 1')
             else:
-                solid = tile[0] == 11 or tile[0] >= 515
+                solid = tile[0] == 11 or tile[0] >= 515 and tile[0] not in (*range(590,597),612)
                 _need(tile[2] == 3 and tile[1] is solid, 'terrain',
                       'Development ground/walls must retain collision and elevation semantics')
         cells = {}
@@ -339,17 +342,20 @@ class _World:
     def _access_links(self):
         for identifier, board in self.boards.items():
             for point in board['access']:
-                if point['kind'] not in ('gym_entry', 'gym_exit'):
+                if point['kind'] not in ('gym_entry', 'gym_exit', 'room_entry', 'room_exit'):
                     continue
                 target = point.get('target_id')
                 _need(target in self.boards, 'reference', 'Missing gym access target')
-                if point['kind'] == 'gym_entry':
-                    _need(target in self.gyms and self.gyms[target]['area'] == identifier,
+                entry_kind = 'gym_entry' if point['kind'].startswith('gym_') else 'room_entry'
+                exit_kind = 'gym_exit' if entry_kind == 'gym_entry' else 'room_exit'
+                slots = self.gyms if entry_kind == 'gym_entry' else self.rooms
+                if point['kind'] == entry_kind:
+                    _need(target in slots and slots[target]['area'] == identifier,
                           'gyms', 'Gym entrance does not match its manifest parent')
                 else:
-                    _need(identifier in self.gyms and self.gyms[identifier]['area'] == target,
+                    _need(identifier in slots and slots[identifier]['area'] == target,
                           'gyms', 'Gym exit does not return to its manifest parent')
-                kind = 'gym_exit' if point['kind'] == 'gym_entry' else 'gym_entry'
+                kind = exit_kind if point['kind'] == entry_kind else entry_kind
                 _need(any(other['kind'] == kind and other.get('target_id') == identifier
                           for other in self.boards[target]['access']),
                       'return', f'{identifier}->{target}: missing gym return access')
@@ -444,7 +450,7 @@ class _World:
                     continue
                 landed = self._flood(identifier, (point['x'], point['y']), 8, local=True)
                 exits = ports or [(other['x'], other['y']) for other in board['access']
-                                  if other['kind'] == 'gym_exit']
+                                  if other['kind'] in ('gym_exit','room_exit')]
                 _need(bool(exits) and all((identifier, cell) in landed for cell in exits),
                       'return', f'{identifier}: safe-looking arrival is stranded from its return paths')
             if identifier in self.routes:

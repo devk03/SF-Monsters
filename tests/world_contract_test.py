@@ -239,6 +239,25 @@ class WorldContractTests(unittest.TestCase):
         tile(p['dogpatch'],4,4,'#')
         self.reject(m,p,'movement')
 
+    def test_small_service_room_requires_its_own_safe_reciprocal_door(self):
+        m,p=fixture()
+        m['interiors']=[dict(id='warming_room',area='dogpatch',engine_map='RoomOne')]
+        room=deepcopy(p['gym_1'])
+        room.update(world_id='warming_room',engine_map='RoomOne',native_id='MAP_WARMING_ROOM',
+                    script='warming_room.inc')
+        room['access_points'][1].update(kind='arrival',target_id='dogpatch')
+        room['access_points'][2].update(kind='room_exit',target_id='dogpatch')
+        p['warming_room']=room
+        p['dogpatch']['access_points'] += [dict(kind='room_entry',x=20,y=7,activation='walk',target_id='warming_room'),
+                                          dict(kind='arrival',x=20,y=9,activation='walk',target_id='warming_room')]
+        p['dogpatch']['coord_events'].append(dict(x=20,y=7,elevation=3))
+        self.assertTrue(run(m,p)['passed'])
+        room['access_points'][2]['target_id']='north_beach'
+        self.reject(m,p)
+        room['access_points'][2]['target_id']='dogpatch'
+        tile(room,16,16,'#')
+        self.reject(m,p,'arrival')
+
     def test_malformed_inputs_return_errors_instead_of_claiming_success(self):
         m, p = fixture()
         for bad_manifest, bad_plans in [(None, []), ({}, []), (m, None), (m, [{}])]:

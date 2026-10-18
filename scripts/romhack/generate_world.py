@@ -11,7 +11,7 @@ LEGEND = {'.': [1, False, 3], '#': [11, True, 3],
 
 
 def native_id(name):
-    return 'MAP_' + re.sub(r'(?<=[a-z0-9])(?=[A-Z])', '_', name).upper()
+    return 'MAP_' + re.sub(r'(?<=[a-z])(?=[A-Z])', '_', name).upper()
 
 
 def records(manifest):
@@ -156,12 +156,14 @@ def generate(manifest):
         plans.append(plan)
     from world_towns import furnish
     from world_people import populate
-    return populate(furnish(plans, manifest), manifest)
+    from world_interiors import add_rooms
+    return add_rooms(populate(furnish(plans, manifest), manifest), manifest)
 
 
 def write_world(manifest, directory, modules_root=None):
     from world_scripts import map_script
     from world_people import scripts as ambient_scripts
+    from world_interiors import extra_scripts
     from content_modules import MODULES, load_modules, apply_module_layouts, script_with_module
     directory.mkdir(parents=True, exist_ok=True)
     modules = load_modules(manifest, modules_root or MODULES)
@@ -172,7 +174,7 @@ def write_world(manifest, directory, modules_root=None):
             json.dumps(plan, indent=2) + '\n')
         (directory / plan['script']).write_text(script_with_module(
             map_script(manifest, plan), by_world.get(plan['world_id'])) +
-            ambient_scripts(plan))
+            ambient_scripts(plan) + extra_scripts(plan, manifest))
     start = next(plan for plan in plans if plan['world_id'] == manifest['start']['area'])
     content = {'maps': ['world-blockout/' + plan['world_id'] + '.json' for plan in plans],
                'spawn': {'map': start['engine_map'], 'id': start['native_id'][4:],

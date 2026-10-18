@@ -581,5 +581,306 @@
   "town_finishing": {
     "revision": 1,
     "status": "dense street candidate; population/interiors/landmarks in progress"
-  }
+  },
+  "interiors": [
+    {
+      "id": "dogpatch_room",
+      "area": "dogpatch",
+      "engine_map": "PetalburgCity_PokemonCenter_1F",
+      "label": "Dogpatch - local stop",
+      "style": "workshop",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "potrero_hill_room",
+      "area": "potrero_hill",
+      "engine_map": "RustboroCity_PokemonCenter_1F",
+      "label": "Potrero Hill - local stop",
+      "style": "library",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "mission_room",
+      "area": "mission",
+      "engine_map": "SlateportCity_PokemonCenter_1F",
+      "label": "Mission - local stop",
+      "style": "studio",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "castro_room",
+      "area": "castro",
+      "engine_map": "MauvilleCity_PokemonCenter_1F",
+      "label": "Castro - local stop",
+      "style": "cafe",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "outer_sunset_room",
+      "area": "outer_sunset",
+      "engine_map": "LavaridgeTown_PokemonCenter_1F",
+      "label": "Outer Sunset - local stop",
+      "style": "rest",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "marina_room",
+      "area": "marina",
+      "engine_map": "VerdanturfTown_PokemonCenter_1F",
+      "label": "Marina - local stop",
+      "style": "bar",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "pacific_heights_room",
+      "area": "pacific_heights",
+      "engine_map": "DewfordTown_PokemonCenter_1F",
+      "label": "Pacific Heights - local stop",
+      "style": "home",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "noe_valley_room",
+      "area": "noe_valley",
+      "engine_map": "FortreeCity_PokemonCenter_1F",
+      "label": "Noe Valley - local stop",
+      "style": "workshop",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "mission_bay_room",
+      "area": "mission_bay",
+      "engine_map": "LilycoveCity_PokemonCenter_1F",
+      "label": "Mission Bay - local stop",
+      "style": "cafe",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "giants_stadium_room",
+      "area": "giants_stadium",
+      "engine_map": "MossdeepCity_PokemonCenter_1F",
+      "label": "Giants Stadium - local stop",
+      "style": "rest",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "financial_district_room",
+      "area": "financial_district",
+      "engine_map": "SootopolisCity_PokemonCenter_1F",
+      "label": "Financial District - local stop",
+      "style": "cafe",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "north_beach_room",
+      "area": "north_beach",
+      "engine_map": "EverGrandeCity_PokemonCenter_1F",
+      "label": "North Beach - local stop",
+      "style": "library",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    },
+    {
+      "id": "treasure_island_room",
+      "area": "treasure_island",
+      "engine_map": "OldaleTown_PokemonCenter_1F",
+      "label": "Treasure Island - local stop",
+      "style": "home",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        16,
+        17
+      ],
+      "exit": [
+        16,
+        19
+      ]
+    }
+  ]
 }

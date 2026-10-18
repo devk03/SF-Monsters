@@ -5,7 +5,7 @@ from pathlib import Path
 from world_towns import URBAN
 
 ROOT = Path(__file__).resolve().parents[2]
-POSITIONS = [(4,8),(25,8),(8,15),(23,15),(3,21),(27,21),(10,9),(21,9)]
+POSITIONS = [(8,8),(25,8),(8,15),(23,15),(3,21),(27,21),(10,9),(21,9)]
 GRAPHICS = ['MAN_1','WOMAN_1','BOY_1','WOMAN_2','OLD_MAN','GIRL_1','WOMAN_3','MAN_2']
 REVISIT_BADGE = {'dogpatch':1,'potrero_hill':1,'mission':1,'castro':1,
                  'outer_sunset':2,'golden_gate_park':2,'marina':3,
@@ -83,9 +83,9 @@ def scripts(plan):
             badge = REVISIT_BADGE[identifier]
             result += [f'    goto_if_set FLAG_BADGE{badge:02d}_GET, {prefix}_Revisit']
         result += [f'    msgbox {prefix}_Text, MSGBOX_DEFAULT',prefix+'_Service::']
-        if identifier in URBAN and index == 6:
+        if plan.get('indoor_service') and index == 6:
             result += ['    special HealPlayerParty','    playfanfare MUS_HEAL','    waitfanfare']
-        if identifier in URBAN and index == 7:
+        if plan.get('indoor_service') and index == 7:
             result += [f'    pokemart {prefix}_Items']
         result += ['    release','    end',prefix+'_Text::',
                    '    .string "'+native_text(person['dialogue'])+'"']
@@ -93,7 +93,7 @@ def scripts(plan):
             result += [prefix+'_Revisit::',f'    msgbox {prefix}_Later, MSGBOX_DEFAULT',
                        f'    goto {prefix}_Service',prefix+'_Later::',
                        '    .string "'+native_text(person['revisit'])+'"']
-        if identifier in URBAN and index == 7:
+        if plan.get('indoor_service') and index == 7:
             result += ['    .align 2',prefix+'_Items::','    .2byte ITEM_POTION',
                        '    .2byte ITEM_ANTIDOTE','    .2byte ITEM_REPEL','    pokemartlistend']
     return '\n'.join(result)+'\n'

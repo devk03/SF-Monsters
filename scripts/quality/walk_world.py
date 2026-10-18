@@ -69,7 +69,9 @@ class Walker:
         raise ValueError(f'Native movement blocked: {before} {direction}, wet={wet}')
 
     def path(self, plan, start, target):
-        blocked = {(n['x'], n['y']) for n in plan['npcs']}
+        blocked = {(n['x']+dx,n['y']+dy) for n in plan['npcs']
+                   for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)
+                   for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
         blocked |= {(e['x'], e['y']) for e in plan['coord_events']
                     if (e['x'], e['y']) != target}
         pending, previous = deque([start]), {start: None}
@@ -119,7 +121,7 @@ class Walker:
             edges = [(self.native[l['map']], ('port', l['direction']))
                      for l in plan['connections'] or []]
             edges += [(p['target_id'], ('warp', (p['x'], p['y'])))
-                      for p in plan['access_points'] if p['kind'] in ('gym_entry', 'gym_exit')]
+                      for p in plan['access_points'] if p['kind'] in ('gym_entry', 'gym_exit', 'room_entry', 'room_exit')]
             for target, action in edges:
                 # A locked connector can be approached for a negative test,
                 # but cannot serve as an intermediate cross-city shortcut.

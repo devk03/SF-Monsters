@@ -13,7 +13,7 @@ def circuit(plans, native, start):
                              for l in plan['connections'] or []]
         edges[identifier] += [(p['target_id'], 'warp', (p['x'], p['y']))
                               for p in plan['access_points']
-                              if p['kind'] in ('gym_entry', 'gym_exit')]
+                              if p['kind'] in ('gym_entry', 'gym_exit', 'room_entry', 'room_exit')]
     total = sum(map(len, edges.values()))
     stack, result = [(start, None)], []
     while stack:
@@ -56,7 +56,7 @@ def main():
                 raise ValueError('Native edge landed in the wrong destination')
             checked.append({'from': owner, 'to': target, 'kind': kind,
                             'position': c.position()})
-        if w.location()[0] != start or len(w.seen) != 45:
+        if w.location()[0] != start or len(w.seen) != len(w.plans):
             raise ValueError('Circuit did not return safely after visiting every map')
         c.checkpoint('returned')
         result = {'passed': True, 'rom_sha256': c.digest(), 'maps': len(w.seen),

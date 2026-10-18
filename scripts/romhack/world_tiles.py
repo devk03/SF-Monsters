@@ -84,6 +84,31 @@ def compile_kit(root=ROOT):
             raise ValueError('Original furniture changed: ' + name)
         w, h = item['size']
         card(name, raw, w, h, 6, paving, 7)
+    # Decode the existing original apartment's indexed native cards. This is
+    # palette-preserving tile compilation, not a resampled room backdrop.
+    room_dir = root / 'assets/tiles/courier-apartment'
+    room_info = json.loads((room_dir / 'conversion.json').read_text())
+    raw = checked(room_dir, 'tiles.4bpp', room_info)
+    original_palettes = checked(room_dir, 'palettes.gbapal', room_info)
+    palettes[9] = original_palettes[192:224]
+    room = bytearray(176*160)
+    for y in range(160):
+        for x in range(176):
+            index = ((y//16)*11+x//16)*4+(y%16//8)*2+x%16//8
+            value = raw[index*32+(y%8)*4+x%8//2]
+            room[y*176+x] = value >> ((x%2)*4) & 15
+    floor = crop(room,176,80,32,16,16)
+    card('wood_floor', empty,16,16,9,floor,9,False)
+    for name,x,y,w,h,solid in [
+            ('rug',72,80,48,32,False),
+            ('wall_top',64,0,16,16,True),('wall_low',64,16,16,16,True),
+            ('bed',32,48,32,32,True),('shelf',32,80,32,32,True),
+            ('desk',128,64,32,16,True),('indoor_plant',128,96,16,32,True),
+            ('wall_side',0,48,16,16,True),('threshold',80,144,16,16,False)]:
+        card(name,crop(room,176,x,y,w,h),w,h,9,floor,9,solid)
+    colors = struct.unpack('<16H',palettes[9])
+    darkest = min(range(1,16),key=lambda i:sum((colors[i]>>c*5)&31 for c in range(3)))
+    card('void',bytes([darkest])*256,16,16,9,floor,9)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     return {'tiles': tiles, 'records': records, 'attributes': attributes,
