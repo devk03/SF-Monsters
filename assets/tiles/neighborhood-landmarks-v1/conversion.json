@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "tool": "built-in imagegen",
+  "method": "connected opaque silhouette; proportional native reduction; fixed15-color RGB555; alpha128; no dithering",
+  "cards": [
+    {
+      "name": "mural",
+      "source_bounds": [
+        20,
+        255,
+        500,
+        555
+      ],
+      "size": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "lookout",
+      "source_bounds": [
+        520,
+        260,
+        1055,
+        560
+      ],
+      "size": [
+        48,
+        32
+      ]
+    },
+    {
+      "name": "mansion",
+      "source_bounds": [
+        1060,
+        20,
+        1536,
+        580
+      ],
+      "size": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "surfboards",
+      "source_bounds": [
+        85,
+        650,
+        505,
+        955
+      ],
+      "size": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "bar_sign",
+      "source_bounds": [
+        690,
+        665,
+        855,
+        985
+      ],
+      "size": [
+        16,
+        32
+      ]
+    },
+    {
+      "name": "book_box",
+      "source_bounds": [
+        1160,
+        670,
+        1385,
+        990
+      ],
+      "size": [
+        16,
+        32
+      ]
+    }
+  ],
+  "files": {
+    "mural.indices": "f67703272a59ec65d83e5bb0baa426b661e6447465ed085346ded3fec3e80fa7",
+    "mural.png": "a243a3526e1d82050908a8474aeb2cc5a021252608e3d9202d8283be74a56979",
+    "lookout.indices": "25a378654c8abc51d199a94beb5ee28d078d2c491a7b517e0e897dfd604770d8",
+    "lookout.png": "7a6c1a0f177bf8eba21822a1644cd3bdf5d87295124f706155cab97b06fde482",
+    "mansion.indices": "1b8ad25f08e700e0d3674fdf9de878b51291478541053ca3239996f2533df052",
+    "mansion.png": "27ceca591b851a771e3694f4533d6d4fe6c5adb7c736a8d3060e57ec558d3033",
+    "surfboards.indices": "83a28f955c5ff0285e8f9840d655dcf8be4a942ebe9b599d95a5935b44fa3f91",
+    "surfboards.png": "9f6aba69fada2d0e08e8bbcead9c9b90f5df7746f76d433721ab2331349fcf95",
+    "bar_sign.indices": "493d181ff5ca1dc93b2cdc9ddf418bc9474fb9a6815d595e3f3a4e58150acbf9",
+    "bar_sign.png": "e41e2f083d0001ea7eebafcbbc7ee5e6562d7344d49e4c543b38135b47279ff0",
+    "book_box.indices": "ceb711287782b9f77a020a37c3aea6c2c8b1438a791545bf2662cb335fb31118",
+    "book_box.png": "8da62c84df3d611dedf4aa88ba636ae8157646aea9c9369450662a3bd5d37018",
+    "source.png": "8a4ac4fc90f641b6d6ffbc6c1b763ca6aacd620ba570f95a47bbc2dd78e0c2a0",
+    "prompt.md": "b8e918f710e688e888f793aec9fee04556fb5686dc680fd256c8cd799ea09e84",
+    "neighborhood.gbapal": "02f2e190913097dc35be87c0cccf55851cd20facb869a2e08593c53843ca00a4",
+    "native-preview.png": "5b0889f264c7824e08abc4375837f0005d7275ca35637b7a64a7b1830406e471"
+  }
+}

@@ -181,17 +181,26 @@ def compile_kit(root=ROOT, profile='residential'):
     receipt=json.loads((directory/'conversion.json').read_text())
     coast=checked(directory,'tiles.indices',receipt)
     palettes[10]=checked(directory,'terrain.gbapal',receipt)
-    for name,index in (('scenic_sea',2),('seawall',6)):
-        card(name,coast[index*256:(index+1)*256],16,16,10,paving,7)
+    card('scenic_sea',coast[2*256:3*256],16,16,10,paving,7)
+    street_colors=struct.unpack('<16H',palettes[8])
+    def gray(value):
+        return min(range(1,16),key=lambda i:sum((((street_colors[i]>>c*5)&31)-value)**2 for c in range(3)))
+    dark,shade,light,stone=map(gray,(9,15,27,22))
+    # Original native stone curb: a shaded seaward face, clear cap and sparse
+    # joints. The barrier must look solid rather than like walkable grass.
+    wall=bytes(dark if x==0 or y==15 or (y==7 and x<4) else shade if x<4
+               else light if x==4 or y==0 else shade if (x==10 and y<7) or (x==7 and y>7) else stone
+               for y in range(16) for x in range(16))
+    card('seawall',wall,16,16,8,paving,7)
     directory=root/'assets/tiles/sf-foliage-v1'
     receipt=json.loads((directory/'conversion.json').read_text())
     shrub=checked(directory,'shrub.indices',receipt)
     source_colors=struct.unpack('<16H',checked(directory,'foliage.gbapal',receipt))
-    target_colors=struct.unpack('<16H',palettes[6])
+    target_colors=struct.unpack('<16H',palettes[10])
     remap=[0]+[min(range(1,16),key=lambda j:sum((((color>>c*5)&31)-((target_colors[j]>>c*5)&31))**2 for c in range(3)))
                for color in source_colors[1:]]
     hedge=bytes(remap[shrub[(y*2)*32+x*2]] for y in range(16) for x in range(16))
-    card('edge_hedge',hedge,16,16,6,paving,7)
+    card('edge_hedge',hedge,16,16,10,paving,7)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

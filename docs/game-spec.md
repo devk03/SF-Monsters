@@ -819,6 +819,17 @@ scaffolding. The first guide observer exceeded its read-size bound and was fixed
 to use bounded read-only chunks; the corrected run passes. No human quality
 approval or foreground-browser claim is inferred from these native checks.
 
+Fresh native progression on3896784b… earns all8development access stamps,
+visits the island/tower/coast chain and reaches allfourAngel Island sections.
+The subsequent optional all-route tour reached the controller's200,000-frame
+limit on its final homeward leg; that is a harness bound, not a claimed game
+crash. Its earned League checkpoint is being continued in a separate bounded
+run. Actual pre-stamp5Surf and pre-stamp8Waterfall/final-stamp-without-crisis
+checks pass. Native SF-guide use in a service interior, reserved gym and active
+Surf also passes B-return, START-exit, reopening and resumed movement. Native
+coast inspection found the reused shoreline cell too grassy and the reduced
+hedge too gray; original curb shading and palette refinement remain in progress.
+
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and
 safe save/resume positions, then capture the complete same-ROM native/WASM route
