@@ -3,8 +3,10 @@ from copy import deepcopy
 import importlib.util
 from pathlib import Path
 import unittest
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'scripts/romhack'))
 SPEC = importlib.util.spec_from_file_location('world_contract', ROOT/'scripts/romhack/world_contract.py')
 contract = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(contract)
@@ -272,6 +274,18 @@ class WorldContractTests(unittest.TestCase):
         self.reject(m,p,'landmark')
         p['angel_island']['world_sections'][0].update(x=24,y=16)
         self.assertTrue(run(m,p)['passed'])
+
+    def test_props_cannot_cut_into_an_attached_building_even_if_collision_stays_solid(self):
+        m,p=fixture();m['town_finishing']={'revision':1};m['native']['save_magic']=0x5743
+        board=p['dogpatch']
+        for dy in range(4):
+            for dx in range(3):
+                index=515+dy*3+dx;token=chr(index)
+                board['legend'][token]=[index,True,3];tile(board,2+dx,2+dy,token)
+        board['town_blocks']=[dict(x=2,y=2,width=3,height=4,first_metatile=515)]
+        self.assertTrue(run(m,p)['passed'])
+        board['legend']['L']=[575,True,3];tile(board,3,5,'L')
+        self.reject(m,p,'frontage')
 
     def test_malformed_inputs_return_errors_instead_of_claiming_success(self):
         m, p = fixture()

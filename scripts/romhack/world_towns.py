@@ -23,7 +23,13 @@ def furnish(plans, manifest):
             for row in card['tiles']:
                 for tile in row:
                     legend[chr(0x100 + tile-512)] = [tile, card['blocked'], 3]
+        occupied = set()
         def stamp(name, left, top):
+            card = kit['catalog'][name]
+            cells = {(left+x,top+y) for y,row in enumerate(card['tiles']) for x,_ in enumerate(row)}
+            if card['blocked']:
+                if cells & occupied:raise ValueError('Street furnishing overlaps an architectural footprint')
+                occupied.update(cells)
             for dy, row in enumerate(kit['catalog'][name]['tiles']):
                 for dx, tile in enumerate(row):
                     grid[top+dy][left+dx] = chr(0x100 + tile-512)
@@ -45,7 +51,8 @@ def furnish(plans, manifest):
             for style in styles:
                 stamp(style,x,top)
                 width=len(kit['catalog'][style]['tiles'][0])
-                blocks.append({'style':style,'x':x,'y':top,'width':width,'height':4})
+                blocks.append({'style':style,'x':x,'y':top,'width':width,'height':4,
+                               'first_metatile':kit['catalog'][style]['tiles'][0][0]})
                 x+=width
         # Show a real, reserved gym facade at the existing stable trigger.
         gym = next((g for g in manifest['gyms'] if g['area']==plan['world_id']),None)
@@ -53,7 +60,7 @@ def furnish(plans, manifest):
         else: stamp('pair',14,3)
         for name,x,y in [('lamp',13,5),('lamp',18,17),('meter',6,10),
                          ('hydrant',26,10),('bin',2,15),('rack',26,15),
-                         ('bench',6,7),('tree',28,7)]:
+                         ('bench',6,9),('tree',28,8)]:
             stamp(name,x,y)
         # Preserve the exact three-tile inter-map connection interface.
         for link in plan['connections'] or []:

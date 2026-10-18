@@ -6,6 +6,7 @@ traversal abilities even though their native collision bits are clear.
 """
 from collections import deque
 import re
+from world_art_contract import load_profiles
 
 
 PORTS = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
@@ -73,6 +74,7 @@ class _World:
               and type(native['save_schema']) is int and native['save_schema'] == 1,
               'identity', 'Blockout save identity must remain separate from v80')
         self.width, self.height = 32, 24
+        self.art = load_profiles() if manifest.get('town_finishing') else {}
         areas, routes = list(manifest['areas']), list(manifest['routes'])
         self.league = manifest['league']
         self.league_id = self.league.get('venue')
@@ -191,10 +193,12 @@ class _World:
         _need(not set(plan.get('metadata', {})) & {
             'connections', 'object_events', 'warp_events', 'coord_events', 'bg_events', 'layout', 'id'},
             'metadata', 'Metadata may not replace validated native graph/event fields')
+        profile = self.art.get(plan.get('tile_profile','residential'),{})
+        secondary = profile.get('secondary',self.manifest['native']['secondary_tileset'])
         _need(plan.get('tilesets') == {
-            'primary': self.manifest['native']['primary_tileset'],
-            'secondary': self.manifest['native']['secondary_tileset']},
-            'terrain', 'Plan tilesets differ from the pinned terrain semantics')
+            'primary': self.manifest['native']['primary_tileset'],'secondary':secondary},
+            'terrain', 'Plan tilesets differ from the declared native art profile')
+        approved = profile.get('metatiles',{})
         width,height = self.rooms.get(identifier,{}).get('size',[32,24])
         _need((width,height) in ((32,24),(16,11)), 'geometry', 'Unsupported outdoor/interior dimensions')
         self.sizes[identifier]=(width,height)
@@ -208,7 +212,7 @@ class _World:
             _need(type(token) is str and len(token) == 1 and type(tile) in (list, tuple)
                   and len(tile) == 3, 'terrain', 'Invalid terrain legend entry')
             _integer(tile[0], 0, 1023, 'metatile')
-            _need(tile[0] in (1, 11, WATER, WATERFALL) or (self.manifest.get('town_finishing') and 512 <= tile[0] < 638), 'terrain',
+            _need(tile[0] in (1, 11, WATER, WATERFALL) or tile[0] in approved, 'terrain',
                   'Unmodelled native metatile behavior in blockout terrain')
             _need(type(tile[1]) is bool, 'terrain', 'Collision must be boolean')
             _integer(tile[2], 0, 15, 'elevation')
@@ -220,7 +224,7 @@ class _World:
                 _need(tile[1] is False and tile[2] == 1, 'terrain',
                       'Native traversal water needs collision 0 and elevation 1')
             else:
-                solid = tile[0] == 11 or tile[0] >= 515 and tile[0] not in (*range(590,597),612)
+                solid = approved[tile[0]][0] if tile[0] in approved else tile[0] == 11
                 _need(tile[2] == 3 and tile[1] is solid, 'terrain',
                       'Development ground/walls must retain collision and elevation semantics')
         cells = {}
@@ -231,6 +235,21 @@ class _World:
                 cells[x, y] = tuple(legend[token])
                 if legend[token][0] in (WATER, WATERFALL):
                     wet.add((x, y))
+        frontage = set()
+        for block in plan.get('town_blocks',[]):
+            x0,y0=block['x'],block['y'];width,height=block['width'],block['height']
+            if 'style' in block:
+                spec = profile.get('cards',{}).get(block['style'],{})
+                _need((spec.get('first'),spec.get('width'),spec.get('height')) ==
+                      (block['first_metatile'],width,height),'frontage','Building allocation disagrees with the art contract')
+            _integer(width,1,11,'frontage width');_integer(height,1,5,'frontage height')
+            for dy in range(height):
+                for dx in range(width):
+                    point=(x0+dx,y0+dy)
+                    _need(point not in frontage and point in cells, 'frontage','Architectural footprints overlap or leave the map')
+                    frontage.add(point)
+                    expected=(block['first_metatile']+dy*width+dx,True,3)
+                    _need(cells[point]==expected,'frontage','A furnishing or terrain stamp cuts through a building')
         if 'water_positions' in plan:
             positions = [position({'x': pair[0], 'y': pair[1]}, 'water position')
                          for pair in plan['water_positions'] if len(pair) == 2]
@@ -295,7 +314,7 @@ class _World:
                       'access', f'{identifier}: interaction access position is not a safe standing tile')
                 x,y = point
                 across_counter = {(x+2*dx,y+2*dy) for dx,dy in ((-1,0),(1,0),(0,-1),(0,1))
-                                  if cells.get((x+dx,y+dy),(None,))[0] in (607,608)}
+                                  if approved.get(cells.get((x+dx,y+dy),(None,))[0],(False,0))[1] == 0x1080}
                 _need(bool(adjacent & (occupied | backgrounds) or across_counter & occupied), 'access',
                       f'{identifier}: interaction position has no adjacent object or staffed native counter')
         _need(coords == {(point['x'], point['y']) for point in access

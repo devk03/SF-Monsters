@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[2]
 FIRST_TILE = 512
 FIRST_METATILE = 512
 LAYER_COVERED = 0x1000
+PROFILES = {'residential':'gTileset_Petalburg','industrial':'gTileset_SFIndustrial',
+            'civic':'gTileset_SFCivic','nature':'gTileset_SFNature'}
 
 
 def checked(directory, name, receipt):
@@ -21,8 +23,11 @@ def crop(pixels, width, x, y, w, h):
     return bytes(pixels[(y+dy)*width+x+dx] for dy in range(h) for dx in range(w))
 
 
-def compile_kit(root=ROOT):
+def compile_kit(root=ROOT, profile='residential'):
     """Two native layers: opaque ground and original transparent architecture."""
+    styles = {'residential':{'coral','cafe','cream','lilac','pair'},
+              'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set()}
+    if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: 0}
     records, attributes, catalog = [], [], {}
@@ -72,56 +77,92 @@ def compile_kit(root=ROOT):
     # Shared attached fronts keep roofs, walls and stoops together at native scale.
     for name, x, width in [('coral', 0, 48), ('cafe', 48, 32),
                             ('cream', 80, 48), ('lilac', 128, 48)]:
-        card(name, crop(houses, 176, x, 0, width, 64), width, 64, 6, paving, 7)
+        if name in styles[profile]:
+            card(name, crop(houses, 176, x, 0, width, 64), width, 64, 6, paving, 7)
     pair_dir = root / 'assets/tiles/compact-townhouses-v1'
     pair_info = json.loads((pair_dir / 'conversion.json').read_text())
-    card('pair', checked(pair_dir, 'pair.indices', pair_info), 64, 64, 6, paving, 7)
+    if 'pair' in styles[profile]:
+        card('pair', checked(pair_dir, 'pair.indices', pair_info), 64, 64, 6, paving, 7)
     furniture_dir = root / 'assets/tiles/city-furniture-v1'
     furniture_info = json.loads((furniture_dir / 'conversion.json').read_text())
+    furniture = {}
     for item in furniture_info['cards']:
         name = item['name']; raw = (furniture_dir / (name + '.indices')).read_bytes()
         if hashlib.sha256(raw).hexdigest() != item['indices_sha256']:
             raise ValueError('Original furniture changed: ' + name)
         w, h = item['size']
+        furniture[name]=(raw,w,h)
         card(name, raw, w, h, 6, paving, 7)
-    # Decode the existing original apartment's indexed native cards. This is
-    # palette-preserving tile compilation, not a resampled room backdrop.
-    room_dir = root / 'assets/tiles/courier-apartment'
-    room_info = json.loads((room_dir / 'conversion.json').read_text())
-    raw = checked(room_dir, 'tiles.4bpp', room_info)
-    original_palettes = checked(room_dir, 'palettes.gbapal', room_info)
-    palettes[9] = original_palettes[192:224]
-    room = bytearray(176*160)
-    for y in range(160):
-        for x in range(176):
-            index = ((y//16)*11+x//16)*4+(y%16//8)*2+x%16//8
-            value = raw[index*32+(y%8)*4+x%8//2]
-            room[y*176+x] = value >> ((x%2)*4) & 15
-    floor = crop(room,176,80,32,16,16)
-    card('wood_floor', empty,16,16,9,floor,9,False)
-    for name,x,y,w,h,solid in [
-            ('rug',72,80,48,32,False),
-            ('wall_top',64,0,16,16,True),('wall_low',64,16,16,16,True),
-            ('bed',32,48,32,32,True),('shelf',32,80,32,32,True),
-            ('desk',128,64,32,16,True),('indoor_plant',128,96,16,32,True),
-            ('wall_side',0,48,16,16,True),('threshold',80,144,16,16,False)]:
-        card(name,crop(room,176,x,y,w,h),w,h,9,floor,9,solid,0x80 if name=='desk' else 0)
-    colors = struct.unpack('<16H',palettes[9])
-    darkest = min(range(1,16),key=lambda i:sum((colors[i]>>c*5)&31 for c in range(3)))
-    card('void',bytes([darkest])*256,16,16,9,floor,9)
-    card('door_frame',crop(room,176,80,144,16,16),16,16,9,floor,9)
-    card('wall_bottom',crop(room,176,16,144,16,16),16,16,9,floor,9)
-    card('wall_span',crop(room,176,0,0,176,32),176,32,9,floor,9)
+    if profile == 'residential':
+        # Decode the existing original apartment's indexed native cards. This is
+        # palette-preserving tile compilation, not a resampled room backdrop.
+        room_dir = root / 'assets/tiles/courier-apartment'
+        room_info = json.loads((room_dir / 'conversion.json').read_text())
+        raw = checked(room_dir, 'tiles.4bpp', room_info)
+        original_palettes = checked(room_dir, 'palettes.gbapal', room_info)
+        palettes[9] = original_palettes[192:224]
+        room = bytearray(176*160)
+        for y in range(160):
+            for x in range(176):
+                index = ((y//16)*11+x//16)*4+(y%16//8)*2+x%16//8
+                value = raw[index*32+(y%8)*4+x%8//2]
+                room[y*176+x] = value >> ((x%2)*4) & 15
+        floor = crop(room,176,80,32,16,16)
+        card('wood_floor', empty,16,16,9,floor,9,False)
+        for name,x,y,w,h,solid in [
+                ('rug',72,80,48,32,False),
+                ('wall_top',64,0,16,16,True),('wall_low',64,16,16,16,True),
+                ('bed',32,48,32,32,True),('shelf',32,80,32,32,True),
+                ('desk',128,64,32,16,True),('indoor_plant',128,96,16,32,True),
+                ('wall_side',0,48,16,16,True),('threshold',80,144,16,16,False)]:
+            card(name,crop(room,176,x,y,w,h),w,h,9,floor,9,solid,0x80 if name=='desk' else 0)
+        colors = struct.unpack('<16H',palettes[9])
+        darkest = min(range(1,16),key=lambda i:sum((colors[i]>>c*5)&31 for c in range(3)))
+        card('void',bytes([darkest])*256,16,16,9,floor,9)
+        card('door_frame',crop(room,176,80,144,16,16),16,16,9,floor,9)
+        card('wall_bottom',crop(room,176,16,144,16,16),16,16,9,floor,9)
+        card('wall_span',crop(room,176,0,0,176,32),176,32,9,floor,9)
+    if profile in ('industrial','civic'):
+        directory=root/'assets/tiles/south-park-services-v3'
+        receipt=json.loads((directory/'conversion.json').read_text())
+        source=checked(directory,'buildings.indices',receipt)
+        name='warehouse' if profile=='industrial' else 'clinic'
+        offset=0 if profile=='industrial' else 8960
+        card(name,source[offset:offset+8960],112,80,6,paving,7)
+    if profile in ('industrial','civic'):
+        directory=root/'assets/tiles/south-park-frontage-v1'
+        receipt=json.loads((directory/'conversion.json').read_text())
+        names=('brick',) if profile=='industrial' else ('brick','sandstone')
+        for bank,name in enumerate(names,11):
+            data=next(item for item in receipt['cards'] if item['name']==name)
+            raw=checked(directory,name+'.indices',data)
+            palettes[bank]=checked(directory,name+'.gbapal',data)
+            w,h=data['size'];card(name,raw,w,h,bank,paving,7)
+    if profile == 'nature':
+        directory=root/'assets/tiles/sunset-terrain'
+        receipt=json.loads((directory/'conversion.json').read_text())
+        grass_spec=(directory/'grass-native.json').read_bytes()
+        if hashlib.sha256(grass_spec).hexdigest()!=receipt['native_grass_sha256']:
+            raise ValueError('Authored sage grass changed without its receipt')
+        grass=bytes(int(c,16) for row in json.loads(grass_spec)['cells']['0'] for c in row)
+        palettes[10]=checked(directory,'terrain.gbapal',receipt)
+        card('grass',empty,16,16,10,grass,10,False)
+        for name in ('tree','bench','lamp','bin'):
+            raw,w,h=furniture[name]
+            card(name+'_grass',raw,w,h,6,grass,10)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     return {'tiles': tiles, 'records': records, 'attributes': attributes,
-            'palettes': palettes, 'catalog': catalog}
+            'palettes': palettes, 'catalog': catalog, 'profile':profile}
 
 
 def apply_kit(engine, original, kit):
     """Normal compile inputs, never unverified post-link cartridge replacements."""
     from PIL import Image
-    directory = 'data/tilesets/secondary/petalburg/'
+    profile = kit.get('profile','residential')
+    directory = ('data/tilesets/secondary/petalburg/' if profile=='residential'
+                 else 'data/tilesets/secondary/sf_world_'+profile+'/')
+    (engine / directory).mkdir(parents=True,exist_ok=True)
     files = []
     pixels = bytearray(128*256)
     for index, tile in enumerate(kit['tiles']):
@@ -135,6 +176,27 @@ def apply_kit(engine, original, kit):
     for name, data in [('metatiles.bin', b''.join(struct.pack('<8H', *r) for r in kit['records'])),
                        ('metatile_attributes.bin', struct.pack('<'+'H'*len(kit['attributes']), *kit['attributes']))]:
         (engine / directory / name).write_bytes(data); files.append(directory + name)
+    if profile != 'residential':
+        relative=directory+'palettes.gbapal'
+        (engine/relative).write_bytes(b''.join(kit['palettes'].get(bank,bytes(32)) for bank in range(16)))
+        files.append(relative)
+        suffix=PROFILES[profile].removeprefix('gTileset_')
+        for path,text in [
+            ('src/data/tilesets/graphics.h',
+             f'\nconst u32 gTilesetTiles_{suffix}[] = INCGFX_U32("{directory}tiles.png", ".4bpp.lz", "-num_tiles 512 -Wnum_tiles");\n'
+             f'const u16 gTilesetPalettes_{suffix}[] = INCBIN_U16("{directory}palettes.gbapal");\n'),
+            ('src/data/tilesets/metatiles.h',
+             f'\nconst u16 gMetatiles_{suffix}[] = INCBIN_U16("{directory}metatiles.bin");\n'
+             f'const u16 gMetatileAttributes_{suffix}[] = INCBIN_U16("{directory}metatile_attributes.bin");\n'),
+            ('src/data/tilesets/headers.h',
+             f'\nconst struct Tileset {PROFILES[profile]} = {{ .isCompressed=TRUE, .isSecondary=TRUE,\n'
+             f' .tiles=gTilesetTiles_{suffix}, .palettes=(const u16 (*)[16])gTilesetPalettes_{suffix},\n'
+             f' .metatiles=gMetatiles_{suffix}, .metatileAttributes=gMetatileAttributes_{suffix}, .callback=NULL }};\n')]:
+            existing=(engine/path).read_text()
+            if ('const struct Tileset '+PROFILES[profile]+' =') in existing:
+                raise ValueError('Restore native headers before applying an art profile')
+            (engine/path).write_text(existing+text);files.append(path)
+        return files
     for bank, raw in kit['palettes'].items():
         colors = [tuple(((w >> c*5) & 31)*255//31 for c in range(3)) for w in struct.unpack('<16H', raw)]
         relative = directory + f'palettes/{bank:02d}.pal'
@@ -153,3 +215,19 @@ def apply_kit(engine, original, kit):
     (engine / path).write_text(source.replace('.callback = InitTilesetAnim_Petalburg,', '.callback = NULL,', 1))
     files.append(path)
     return files
+
+
+def describe(kit):
+    return {'secondary':PROFILES[kit['profile']], 'cards':{
+        name:{'first':card['tiles'][0][0],'width':len(card['tiles'][0]),
+              'height':len(card['tiles']),'blocked':card['blocked'],
+              'behavior':kit['attributes'][card['tiles'][0][0]-512]&255,'layer':1}
+        for name,card in kit['catalog'].items()}}
+
+
+def legend_for(kit):
+    legend={'.':[1,False,3],'#':[11,True,3],'W':[368,False,1],'V':[179,False,1]}
+    for card in kit['catalog'].values():
+        for row in card['tiles']:
+            for tile in row:legend[chr(0x100+tile-512)]=[tile,card['blocked'],3]
+    return legend

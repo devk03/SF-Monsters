@@ -49,6 +49,8 @@ def main():
         raise ValueError(json.dumps(contract, indent=2))
     before = {p.name: digest(p) for p in directory.iterdir() if p.is_file()}
     inputs = {'world.json': (ROOT / 'romhack/world/world.json').read_bytes()}
+    for name in ('art-contract.json','districts.json'):
+        inputs[name] = (ROOT/'romhack/world'/name).read_bytes()
     inputs.update({'generated/' + p.name: p.read_bytes() for p in directory.iterdir()
                    if p.is_file() and (p.name == 'content.json' or p.stem in
                                       {plan['world_id'] for plan in plans}
@@ -65,7 +67,7 @@ def main():
     if previous.exists():
         # Optional package teams must not leak into the next default build.
         for relative in json.loads(previous.read_text()):
-            if relative.startswith('data/layouts/sf_world/'):
+            if relative.startswith(('data/layouts/sf_world/','data/tilesets/secondary/sf_world_')):
                 continue  # Generated files have no base revision; preserve them.
             path = engine / relative
             path.resolve().relative_to(engine.resolve())
@@ -80,8 +82,14 @@ def main():
 
     ledger = []
     if manifest.get('town_finishing'):
-        from world_tiles import compile_kit, apply_kit
-        ledger += apply_kit(engine, original, compile_kit())
+        from world_tiles import compile_kit, apply_kit, describe
+        profiles = {'residential'} | {p.get('tile_profile','residential') for p in plans}
+        declared = json.loads((ROOT/'romhack/world/art-contract.json').read_text())['profiles']
+        for profile in ['residential']+sorted(profiles-{'residential'}):
+            kit = compile_kit(profile=profile)
+            if describe(kit) != declared[profile]:
+                raise ValueError('Review the changed native art allocation contract before building')
+            ledger += apply_kit(engine, original, kit)
     ledger += apply_maps(content, ROOT, engine, original)
     ledger += apply_battles(content, ROOT, engine, original)
     ledger += apply_engine_guards(ROOT, engine, original)

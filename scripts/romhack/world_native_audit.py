@@ -3,6 +3,7 @@ import json
 import re
 import struct
 import subprocess
+from world_art_contract import load_profiles
 
 
 def audit_native(rom_path, elf_path, plans, engine):
@@ -29,6 +30,7 @@ def audit_native(rom_path, elf_path, plans, engine):
     graphics = constants('event_objects.h')
     flag_values = constants('flags.h')
     unique_layouts = set()
+    art = load_profiles()
     groups = json.loads((engine / 'data/maps/map_groups.json').read_text())
     ids = {name: (g, n) for g, group in enumerate(groups['group_order'])
            for n, name in enumerate(groups[group])}
@@ -61,7 +63,8 @@ def audit_native(rom_path, elf_path, plans, engine):
             attrs, = read(secondary + 16, 'I')
             for tile in used:
                 behavior, = read(attrs + (tile-512)*2, 'H')
-                if behavior != (0x1080 if tile in (607,608) else 0x1000):
+                expected = art[plan.get('tile_profile','residential')]['metatiles'][tile][1]
+                if behavior != expected:
                     errors.append(name + ': SF tile has unexpected behavior/layer')
         if (width, height) != (len(plan['rows'][0]), len(plan['rows'])):
             errors.append(name + ': compiled dimensions differ')
