@@ -20,6 +20,11 @@ static bool8 SFMapUsesAuthoredLayout(void) {
 static bool8 SFResumeCanReturn(s16 x, s16 y) {
     return x >= 0 && y >= 0 && x < 5 && y < 5 && sReturnable[y][x];
 }
+static bool8 SFResumeFallback(void) {
+    ResetInitialPlayerAvatarState();
+    SetWarpDestination(1, 3, WARP_ID_NONE, 1, 1);
+    return TRUE;
+}
 ''')
     (folder / 'constants').mkdir()
     (folder / 'constants/flags.h').write_text('#define FLAG_BADGE05_GET 0x86B\n')

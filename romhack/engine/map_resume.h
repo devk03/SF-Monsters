@@ -11,6 +11,10 @@ static bool8 SFResumeCanReturn(s16 x, s16 y)
     (void)y;
     return TRUE;
 }
+static bool8 SFResumeFallback(void)
+{
+    return FALSE;
+}
 #endif
 
 static bool8 SFResumeTileIsWalkable(s16 x, s16 y)
@@ -93,6 +97,7 @@ static bool8 SFResumeActorsChanged(void)
 static bool8 SFMapResumeWarpIfNeeded(void)
 {
     s16 radius, dy, dx, x, y;
+    u8 pass;
     s16 oldX = gSaveBlock1Ptr->pos.x;
     s16 oldY = gSaveBlock1Ptr->pos.y;
     bool8 surfing = SFResumeSavedSurfing() && FlagGet(FLAG_BADGE05_GET);
@@ -111,7 +116,9 @@ static bool8 SFMapResumeWarpIfNeeded(void)
     if (oldY < 0) oldY = 0;
     if (oldX >= gMapHeader.mapLayout->width) oldX = gMapHeader.mapLayout->width - 1;
     if (oldY >= gMapHeader.mapLayout->height) oldY = gMapHeader.mapLayout->height - 1;
-    // Manhattan rings prefer nearby tiles. Avoid door warps and NPC anchors.
+    // Preserve Surf whenever possible. If its entire safe water area was
+    // removed, recover onto reachable dry ground and use native on-foot setup.
+    for (pass = 0; pass < (surfing ? 2 : 1); pass++)
     for (radius = 0; radius <= gMapHeader.mapLayout->width
                                    + gMapHeader.mapLayout->height; radius++)
     {
@@ -120,17 +127,20 @@ static bool8 SFMapResumeWarpIfNeeded(void)
             dx = radius - (dy < 0 ? -dy : dy);
             y = oldY + dy;
             x = oldX - dx;
-            if (!SFResumeTileIsSafe(x, y, surfing))
+            if (!SFResumeTileIsSafe(x, y, surfing && pass == 0))
             {
                 x = oldX + dx;
-                if (!SFResumeTileIsSafe(x, y, surfing))
+                if (!SFResumeTileIsSafe(x, y, surfing && pass == 0))
                     continue;
             }
+            if (surfing && pass != 0)
+                ResetInitialPlayerAvatarState();
             SetWarpDestination(gSaveBlock1Ptr->location.mapGroup,
                                gSaveBlock1Ptr->location.mapNum,
                                WARP_ID_NONE, x, y);
             return TRUE;
         }
     }
-    return FALSE;
+    // No reachable tile remains: world drafts have a validated dry landing.
+    return SFResumeFallback();
 }

@@ -41,6 +41,8 @@ static bool8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8 value) {return valu
 static bool8 MetatileBehavior_IsWaterfall(u8 value) {return value==2;}
 static u8 MapGridGetMetatileBehaviorAt(s16 x,s16 y) {return sBehavior[y-MAP_OFFSET][x-MAP_OFFSET];}
 static int sWarpCalls, sWarpGroup, sWarpNum, sWarpId, sWarpX, sWarpY;
+static int sFootResets;
+static void ResetInitialPlayerAvatarState(void) {sFootResets++;}
 static u8 MapGridGetCollisionAt(s16 x, s16 y)
 {
     return sCollision[y - MAP_OFFSET][x - MAP_OFFSET];
@@ -65,6 +67,7 @@ static void reset(void)
     sSave.location = (struct WarpData){1, 2};
     sSave.money = 4000;
     sWarpCalls = 0;
+    sFootResets = 0;
 }
 int main(void)
 {
@@ -98,7 +101,8 @@ int main(void)
     assert(SFMapResumeWarpIfNeeded() && sWarpX == 4 && sWarpY == 4);
     reset();
     memset(sCollision, 3, sizeof(sCollision));
-    assert(!SFMapResumeWarpIfNeeded() && sWarpCalls == 0);
+    assert(SFMapResumeWarpIfNeeded() && sWarpCalls == 1);
+    assert(sWarpGroup==1 && sWarpNum==3 && sFootResets==1);
     // A valid old player tile still needs new actor templates, not ghost NPCs.
     reset();sSave.objectEventTemplates[0].graphicsId=9;
     assert(SFMapResumeWarpIfNeeded() && sWarpX==2 && sWarpY==2);
@@ -126,5 +130,9 @@ int main(void)
     reset();sSave.objectEvents[0].currentMetatileBehavior=1;sSurfBadge=TRUE;
     sBehavior[2][2]=2;sBehavior[3][2]=1;
     assert(SFMapResumeWarpIfNeeded() && sWarpX==2 && sWarpY==3);
+    // Entire wet area removed: land safely without granting a water tile.
+    reset();sSave.objectEvents[0].currentMetatileBehavior=1;sSurfBadge=TRUE;
+    assert(SFMapResumeWarpIfNeeded() && sWarpX==2 && sWarpY==2 && sFootResets==1);
+    assert(sSave.objectEvents[0].currentMetatileBehavior==1); // no saved-data mutation
     return 0;
 }

@@ -8,7 +8,7 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
 ## Current development goal: finish the compact SF world
 
-The private v83 world draft has 18 compact destinations, 19 connectors, eight
+The private v84 world draft has 18 compact destinations, 19 connectors, eight
 reserved gym rooms and 13 small service interiors. Urban areas use dense attached
 blocks, original SF landmark candidates, authored residents and safe walkers.
 Parks, coasts and both islands have distinct trails and scenery. An in-game SF
@@ -17,8 +17,10 @@ map shows all destinations and their actual connections.
 All 18 local activities have passed native reward/revisit checks. The 58-map
 controller circuit, earlier land/Surf save upgrades and original-resource audits
 pass on their recorded draft builds. These are functional checks, not final town
-or art approval. Updated coastline, full same-ROM WASM coverage and strict browser
-input/performance checks remain in progress; human quality review is still open.
+or art approval. The latest neighborhood candidate completed a full 110,450-frame
+native/WASM route with byte-identical guest RAM and a clean 30-second foreground
+browser movement sample. A further save-recovery fix is under final regression;
+the longer browser-session issue and human quality review remain open.
 See the [generation guide](docs/world/generation.md) and the current
 [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
 The public website still serves v80; the world draft stays separate.

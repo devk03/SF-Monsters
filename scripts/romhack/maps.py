@@ -129,7 +129,7 @@ def apply_maps(content, root, engine, original):
     validate_links(linked)
     if content.get('resume_masks'):
         from world_resume import header
-        (engine / 'src/sf_resume_masks.h').write_text(header(linked))
+        (engine / 'src/sf_resume_masks.h').write_text(header(linked, content['spawn']))
     authored = '\n        || '.join(
         '(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(%s)\n'
         '         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(%s))'

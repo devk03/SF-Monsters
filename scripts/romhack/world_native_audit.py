@@ -69,6 +69,13 @@ def audit_native(rom_path, elf_path, plans, engine, *, expect_resume_masks=False
         if (primary, secondary) != tuple(symbols[plan['tilesets'][role]]
                                          for role in ('primary', 'secondary')):
             errors.append(name + ': compiled tileset pointers differ')
+        # Mask traversal assumes the pinned General ocean/fall behaviors. Check
+        # the linked primary attributes instead of inferring water from IDs alone.
+        primary_attrs, = read(primary + 16, 'I')
+        for tile, behavior in ((368, 0x15), (179, 0x13)):
+            attribute, = read(primary_attrs + tile * 2, 'H')
+            if attribute & 0xFF != behavior:
+                errors.append(name + ': compiled water behavior invalidates traversal masks')
         # Original SF secondary cards have normal ground behavior and use the
         # bottom/middle layers. Roof collision comes from the authored map;
         # no custom card may secretly become a ledge, door or overhead bridge.

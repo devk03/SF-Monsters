@@ -652,13 +652,14 @@ section but its tool-controlled status remains paused; do not pretend it was
 rewritten or mark unfinished prior gates complete to replace it. This spec is the
 canonical expanded objective while implementation continues.
 
-**Latest checkpoint: private v84, targete2f00057… (not town acceptance).** New
+**Latest checkpoint: private v84, targetc955f48d… (not town acceptance).** New
 neighborhood landmarks and adult cast appearances compile alongside return-path
 masks for all58maps. Continue now rejects free-but-sealed pockets as well as
 collision, actor envelopes and coordinate triggers. An independent audit derives
 the masks from linked map/event bytes at pre-Surf, Surf and Waterfall stages;
 the sanitizer regression checks nearest-tile recovery skips an isolated pocket.
-Updated cold-Continue and full-route native checks are running. Priorv83 evidence:
+Updated cold-Continue, water recovery and all58map native returns pass; latest
+same-ROM WASM regression is running. Priorv83 evidence:
 all
 58maps/76connections/16gymwarps/26roomwarps pass the native circuit; all13service
 rooms pass counter/menu/return checks. The exact110,418-frame circuit also matches
@@ -737,24 +738,24 @@ No town has human quality approval and no public update has been deployed.
 
 | Destination | Current design stage | Useful interior | Acceptance |
 | --- | --- | --- | --- |
-| Dogpatch | Dense street/population candidate | Repair/rest stop | Native first-room smoke; visual review open |
+| Dogpatch | Industrial blocks, crane and local favor | Repair/rest stop | Native circuit/service/activity pass; visual review open |
 | Potrero Hill | Dense street/population candidate | Neighborhood library | Native full pass and visual review open |
 | Mission | Dense street/population candidate | Community studio | Native full pass and visual review open |
 | Castro | Dense street/population candidate | Cafe | Native full pass and visual review open |
 | Outer Sunset | Dense street/population candidate | Rest stop | Native full pass and visual review open |
-| Golden Gate Park / Richmond | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
+| Golden Gate Park / Richmond | Conservatory, windmill and trail loop | Outdoor setting | Native circuit/activity pass; visual review open |
 | Marina | Dense street/population candidate | Bar/rest stop | Native full pass and visual review open |
 | Pacific Heights | Dense street/population candidate | Neighbor's home | Native full pass and visual review open |
-| Twin Peaks | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
+| Twin Peaks | Hill trail, lookout and gym approach | Outdoor setting | Native circuit/activity pass; visual review open |
 | Noe Valley | Dense street/population candidate | Repair cafe | Native full pass and visual review open |
 | Mission Bay | Dense street/population candidate | Cafe | Native full pass and visual review open |
-| Giants stadium | Street/population candidate | Guest services | Concourse identity and visual review open |
-| Financial District | Street/population candidate | Cafe | Business district identity and review open |
+| Giants stadium | Ballpark gate and concourse candidate | Guest services | Native circuit/service/activity pass; visual review open |
+| Financial District | High-rise civic street candidate | Cafe | Native circuit/service/activity pass; visual review open |
 | North Beach / Jackson Square | Dense street/population candidate | Reading room | Native full pass and visual review open |
-| Treasure Island | Street/population candidate | Community room | Island-specific composition and review open |
-| Sutro Tower | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
-| Lands End / Sutro Baths | Blockout terrain + resident candidate | Outdoor setting | Environment finishing still needed |
-| Angel Island | Trail blockout + resident candidate | League reserved | Environment finishing still needed |
+| Treasure Island | Coastal industrial street candidate | Community room | Native circuit/service/activity pass; visual review open |
+| Sutro Tower | Original tower, trails and greenery | Outdoor setting | Native circuit/activity pass; visual review open |
+| Lands End / Sutro Baths | Ruins, seawall and coast trail | Outdoor setting | Native circuit/activity pass; visual review open |
+| Angel Island | Landing, green trails and reserved pavilion | League reserved | Native circuit/activity pass; visual review open |
 
 Native finishing checkpoint (ROM 34514f39…, after the island actor fix):
 all 58 maps, 76 directional connections, 16 gym warps and 26 room warps pass a
@@ -862,6 +863,33 @@ audit independently checks all three stages against actual compiled geometry.
 Productionv80 does not opt into this world-only table. Native sanitizer recovery,
 two independent small-geometry regressions,19world-contract cases and module
 validation pass. These checks do not establish human town acceptance.
+
+Targete2f00057… completed all58maps/76connections/16gymwarps/26roomwarps,
+all13service-room counter/return checks and all18local reward/revisit cases.
+Its exact110,450-frame native route matches all294,912IWRAM/EWRAM bytes in
+WASM (RAMSHA0b9dd08e…). Actual foreground browser cold Continue, walking,
+SF-guide details and START-return work. The30sec movement sample reports
+1792requested/executed/video frames,2160visible/0hidden ticks,6input observations,
+0superseded inputs,0discarded frames,0audio underruns/drops and acknowledged final
+audio counters. This is a short sample, not a fresh long-session qualification.
+Evidence: `.tools/benchmarks/town-v84-{masks-all-returns,all-returns-wasm,
+all-services,all-discoveries,browser-30s,gray-neighborhood-scenes}`. Original
+source was pushed at2c3d78f without Actions. Human town/domain approval stays0.
+
+Alignment found the previous no-candidate branch could resume an unsafe old
+coordinate. The next source revision preserves valid Surf first, then explicitly
+lands on reachable dry ground if no safe water remains; if the entire map lacks
+a safe candidate, it uses the validated ungated Dogpatch landing. Native sanitizer
+cases cover wet-to-all-land and wholly blocked maps without saved-data mutation.
+Compiled primary ocean/fall behaviors are now checked as mask assumptions.
+Exit seeds still rely on independently validated source bindings plus the actual
+native all-door/return circuit; mask comparison alone does not prove exit scripts.
+These final recovery changes compile in targetc955f48d…. Earlier completed
+Save/Continue, land/Surf upgrades and all58native-map returns pass. Source masks
+also reject an emergency landing on water, a trigger or a disconnected pocket.
+The wet-to-all-land and wholly blocked cases are sanitizer boundary evidence,
+not ordinary production-save reproductions. Full current WASM regression and
+final scene review are running. No public release or human approval is inferred.
 
 Next priorities: distinguish district compositions/landmarks, finish nature/coast
 and island environments, add local discoveries, exercise all doors/services and

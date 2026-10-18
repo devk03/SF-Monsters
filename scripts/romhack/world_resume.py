@@ -39,7 +39,13 @@ def return_mask(plan, stage):
     return bytes(result)
 
 
-def header(plans):
+def header(plans, spawn):
+    start = next(plan for plan in plans if plan['engine_map'] == spawn['map'])
+    bit = spawn['y'] * len(start['rows'][0]) + spawn['x']
+    if not (return_mask(start, 0)[bit // 8] & 1 << (bit % 8)):
+        raise ValueError('Emergency Continue landing needs an ungated path to an exit')
+    if any((p['x'],p['y']) == (spawn['x'],spawn['y']) for p in start['coord_events']):
+        raise ValueError('Emergency Continue landing cannot be a coordinate trigger')
     lines = ['// Generated from authored collision, movement envelopes and exits.',
              'struct SFResumeArea { u8 group, number, width, height; const u8 *masks[3]; };']
     for index, plan in enumerate(plans):
@@ -62,5 +68,10 @@ def header(plans):
               '        if (x < 0 || y < 0 || x >= area->width || y >= area->height) return FALSE;',
               '        bit = y * area->width + x;',
               '        return (area->masks[stage][bit / 8] >> (bit % 8)) & 1;',
-              '    }', '    return FALSE;', '}', '']
+              '    }', '    return FALSE;', '}',
+              'static bool8 SFResumeFallback(void)', '{',
+              '    ResetInitialPlayerAvatarState();',
+              f'    SetWarpDestination(MAP_GROUP({start["native_id"]}), MAP_NUM({start["native_id"]}),',
+              f'                       WARP_ID_NONE, {spawn["x"]}, {spawn["y"]});',
+              '    return TRUE;', '}', '']
     return '\n'.join(lines)

@@ -3,7 +3,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_resume import return_mask
+from world_resume import return_mask, header
 
 
 class ReturnPaths(unittest.TestCase):
@@ -26,6 +26,14 @@ class ReturnPaths(unittest.TestCase):
         self.assertEqual(return_mask(plan,0),bytes([1]))
         self.assertEqual(return_mask(plan,5),bytes([3]))
         self.assertEqual(return_mask(plan,8),bytes([7]))
+
+    def test_emergency_landing_cannot_be_water_or_a_sealed_pocket(self):
+        plan=dict(engine_map='Town',native_id='MAP_TOWN',rows=['.W#.'],
+                  legend={'.':[1,False,3],'W':[368,False,1],'#':[11,True,3]},
+                  npcs=[],connections=[],coord_events=[dict(x=0,y=0)],
+                  access_points=[dict(kind='room_exit',x=0,y=0)])
+        for x in (1,3):
+            with self.assertRaises(ValueError):header([plan],dict(map='Town',x=x,y=0))
 
 
 if __name__=='__main__':unittest.main()
