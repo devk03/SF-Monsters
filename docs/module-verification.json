@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-17",
+  "milestone": "shared-world contributor infrastructure; assignments and content approval pending",
+  "contract_version": 1,
+  "gyms": 8,
+  "missions": 6,
+  "assigned_owners": 0,
+  "default_world": {
+    "rom_sha256": "b967e6cd18500f68d72a21eb90414a29b1716a15b9743f6b7f0752bc63fe759a",
+    "all_stub_rom_unchanged": true,
+    "restored_after_active_team_build": true,
+    "pinned_patch_encoder_bootstrap_tested": true,
+    "patch_roundtrip": "byte-identical",
+    "maps": 45,
+    "connections": 76,
+    "coord_events": 16
+  },
+  "local_checks": {
+    "module_regression_tests": 13,
+    "world_regression_tests": 12,
+    "repo_skill_validation": "passed",
+    "automatic_github_workflows": false
+  },
+  "example": {
+    "module": "gym_1",
+    "status": "ignored QA copy; canonical package stays stub",
+    "rom_sha256": "5e9c6341c99ff4a6950afb4882e8f744c91f19659b3b6b7fba0e31d1550c7080",
+    "native_fresh_game_first_battle_won": true,
+    "badge_granted": true,
+    "separate_completion_flag_set": true,
+    "safe_exit": {
+      "world": "castro",
+      "x": 16,
+      "y": 10
+    },
+    "wasm_replay": {
+      "frames": 4394,
+      "starts_from": "native controller-derived arrival checkpoint",
+      "whole_iwram_ewram_equal_to_native_exit": true,
+      "ram_sha256": "88cac220f52571c127d3cfadbe117dea58d9d4a5989e6eb6543d035f4f9df736"
+    },
+    "unaligned_cold_replay_ram_equal": false,
+    "browser_smoke": [
+      "verified ROM hash",
+      "cold boot",
+      "NEW GAME keyboard input",
+      "Pause",
+      "Resume",
+      "Finish stops server"
+    ],
+    "fixture": true,
+    "campaign_evidence": false
+  },
+  "private_evidence": [
+    ".tools/benchmarks/module-example-native-v3/result.json",
+    ".tools/benchmarks/module-example-native-v3/inputs.json",
+    ".tools/benchmarks/module-example-wasm-from-arrival/capture.json",
+    ".tools/module-final-world-build.log",
+    ".tools/module-fresh-encoder-build.log"
+  ],
+  "remaining_gates": [
+    "Owner assignment and creative briefs for actual encounters",
+    "Per-contribution cancel, loss/retry, revisit, Save/cold Continue and native/browser QA",
+    "Extra rooms, custom art/audio and engine support need separate integration allocations",
+    "User world geometry/pacing review and existing long foreground browser-route performance gate",
+    "Final campaign dialogue, casting research, rosters, balance, art/audio and full quality approval"
+  ],
+  "public_build_changed": false,
+  "public_version": "0.0.80-sunset-density-preview",
+  "merge_approval": false,
+  "branch_protection_configured_by_this_work": false
+}

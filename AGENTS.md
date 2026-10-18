@@ -1,8 +1,10 @@
 # Project instructions
 
 For game development, read [DEVELOPMENT_AGENT.md](DEVELOPMENT_AGENT.md) before
-implementation. The current milestone is connected native world generation from
-the October 17 user plan; graphics polish and full gym/story production are deferred.
+implementation. The current milestone is a cohesive shared world with independently
+assignable gym/mission packages. For module work, also read CONTRIBUTING.md and
+the assigned package's AGENTS.md and HANDOFF.md; use `.agents/skills/sf-module/SKILL.md`.
+World geometry is a tested blockout awaiting review; final content/art remain open.
 
 Be very concise and always ask for permission on db migrations and none on read operations. Never drop our dbs without asking.
 

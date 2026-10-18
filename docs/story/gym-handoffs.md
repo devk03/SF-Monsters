@@ -1,5 +1,10 @@
 # Eight independently assignable gym packages
 
+**Historical October 16 proposal.** The October 17 Dogpatch world plan supersedes
+this document's gym order/casting/room assumptions. For actual contributor work,
+use [the current module index](../../romhack/modules/README.md) and each package's
+HANDOFF.md. Preserve this older proposal for workshop reference only.
+
 October 16, 2026. Contributor-ready **draft contracts**, not assigned collaborators,
 completed gyms or approved teams. Each assignment is optional for a contributor;
 all eight badges remain mandatory in the proposed campaign. Existing company/leader

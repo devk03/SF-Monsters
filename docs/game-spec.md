@@ -643,7 +643,7 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**Current objective, October 17: connected native world generation.** Implement
+**Current objective, October 17: a cohesive shared world with assignable content modules.** Preserve and extend
 the user's new [editable plan](world/initial-world-plan.excalidraw) through
 [the world manifest](../romhack/world/world.json) and
 [DEVELOPMENT_AGENT.md](../DEVELOPMENT_AGENT.md). Start in Dogpatch; connect all
@@ -676,8 +676,9 @@ exception to the earlier SF-only rule. The core manifest reserves nineteen route
 maps and eight separate gym rooms. These are blockout slots, not finished scenes.
 Pause dependent work for the required decision, or at a fully evidenced blockout
 review. There is no reinstated historical 5 AM/6 PM deadline or recurring monitor.
-The app goal is newly active for this milestone; the broader product gates below
-remain required later. Use local checks, frequent coherent commits and manual-only
+The app world-generation goal is paused at its geometry review checkpoint; the
+user separately authorized the contributor infrastructure described below. The
+broader product gates remain required later. Use local checks, frequent coherent commits and manual-only
 GitHub Actions. Do not contact contributors or merge PRs without authorization.
 
 **World blockout implementation checkpoint, October 17.** The new plan, agent
@@ -718,6 +719,45 @@ performance acceptance. Graphics/audio, final story scenes, leader battles and
 campaign balance remain deferred. No new public deployment has occurred. The
 world-generation goal can pause here for review without claiming full-game or
 Emerald-quality completion; subsequent work must continue from these exact gaps.
+
+**Contributor model clarification and implementation, October 17.** The shared
+world must support people independently owning gyms and contained missions,
+following a repo-local skill/handoff and submitting focused PRs for owner acceptance,
+revision or rejection. Shared geography, route connections, badge order, story
+prerequisites, traversal unlocks, save identity and safe exits remain core-owned.
+The maintainer confirms assignments; no real person has been assigned or contacted.
+
+[CONTRIBUTING.md](../CONTRIBUTING.md), the [module index](../romhack/modules/README.md)
+and the [sf-module skill](../.agents/skills/sf-module/SKILL.md) now provide that workflow.
+Eight gym and six mission packages each include AGENTS.md, HANDOFF.md, native
+script entry, trainer allocation and two puzzle flags. A separate completion flag
+is core-owned; old blockout badge stamps never prove a new encounter was won.
+Authors finish through an explicit success/cancel interface. Core guards check
+prerequisites before granting fixed rewards, including direct module NPC entry.
+Local checks reject cross-package/global state edits, invalid geometry and PR
+scope violations. They are contract checks, not a security sandbox or merge approval.
+CODEOWNERS requests owner review; this work does not configure branch protection.
+
+Private fresh-game fixtures support ready, locked, completed and weak-party
+scenarios without an owner's checkpoint. They use a separate QA save identity;
+the finite localhost GBA/WASM player has no production save persistence. Exact
+commands and an actual native battle example are in [the example guide](module-example.md).
+The example won its first battle, granted badge/completion and returned safely
+to Castro. A 4,394-frame WASM replay from its controller-derived arrival checkpoint
+matched the entire native IWRAM/EWRAM at exit. An unaligned cold replay did not
+match RAM and is not equivalent evidence. Actual browser boot, new-game input,
+pause/resume and early shutdown passed; full module browser playthroughs remain
+per-contribution checks. See [the scoped verification receipt](module-verification.json).
+
+All 13 module and 12 world regression tests and skill validation pass. After the
+active example, the normal all-stub world rebuild remains exactly b967e6cd…;
+no trainer overlay leaked into it. Missing-encoder bootstrap and byte-identical
+BPS roundtrip also passed. Canonical packages remain unassigned stubs. Final
+creative content, custom asset/room integrations, per-module cancel/loss/revisit/
+save evidence, world review and the existing long browser performance gate remain
+open. No public deployment, automatic workflow, contributor outreach or PR merge
+occurred. The app world goal remains paused for review; this checkpoint does not
+claim full campaign completion or Emerald-quality acceptance.
 
 **Historical story-writing milestone, October 16 (superseded priority):** prepare a review-ready,
 coherent SF-only story and map design that the user can edit in the Google Doc
@@ -963,7 +1003,7 @@ are in section 15.1; historical checkpoint details follow):
 | Item | Authoritative current status |
 | --- | --- |
 | Execution | October17 world blockout ready for user geometry review; goal paused at this review checkpoint. Both islands implemented. Foreground long-route performance remains open; no scheduled deadline or recurring monitor. |
-| Active stage | Native connected world blockout from new Excalidraw/manifest; simple tiles, routes, gates and gym stubs. Story v2 remains a historical draft; full-game acceptance criteria remain required later. |
+| Active stage | Connected world blockout plus contributor infrastructure: eight gym/six mission packages, repo skill, local checks and private GBA/web playtests. All assignments and final content remain open; full-game acceptance remains required. |
 | Human-approved full domains | 0/11. Title-art, courier-walking and doorway subset reviews are pending. |
 | Public build | 0.0.80-sunset-density-preview; target9b5e6bc4fa5658ec686ab95cc3b1108feef0875393503c7adb5d210aaa0d1edd; Site71. South Park21/Sunset9 buildings,11added across the two maps. Approved northern homes/curb props preserved; new Sunset homes have gray approaches. Density subset reviews pending; no numeric/full-domain approval. |
 | Latest local source build | Normal gated v80 fromf3a5049. All five Sunset resources now compile normally and verify ROM/ELF exactly; independent227/227. Sunset491used/512allocated tiles,231records; old401/194prefixes and General resources exact. South Park gates37/166/135/278 still pass. All36new solid old-save recoveries/pushes/escapes and9approach walks pass, plus apartment/Muni/cache and one C12→C13 save/cold reload. Dirty marker honest; no clean-checkout credit. |

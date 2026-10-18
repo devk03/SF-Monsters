@@ -1,10 +1,13 @@
-# Development agent — connected world blockout
+# Development agent — shared world and contributor modules
 
-Current goal: generate a traversable world from the user's October 17 plan.
+Current priority: preserve a cohesive traversable world from the October 17 plan
+and make contained gyms/missions independently assignable through focused PRs.
 This file and `docs/game-spec.md` section 15 define the current work priority.
-The first connected blockout is implemented; review its geometry before starting
-art or contributor gym content. See `docs/world/generation.md` and the verification
-receipt in `docs/world/blockout-verification.json`.
+The first connected blockout and contributor infrastructure are implemented.
+Geometry/pacing review remains open. See `docs/world/generation.md`,
+`docs/world/blockout-verification.json`, `CONTRIBUTING.md` and
+`docs/module-verification.json`. Do not turn scaffolds into final encounters
+without an assignment and creative brief.
 Read `AGENTS.md` first. Do not substitute the older story-writing milestone or
 full Emerald-quality acceptance goal for this bounded implementation task.
 
@@ -36,11 +39,29 @@ graph, screenshot or renamed stock layout alone is not a playable world. Walking
 routes must have real geometry; don't replace every road with a teleport menu.
 Explicit transport is appropriate for long cross-city transfers and water routes.
 
-## Contributor boundaries
+## Contributor workflow and boundaries
 
-Gym owners will later supply puzzle presentation, trainers, battles, dialogue,
-art and audio. Reserve stable gym IDs and entry/exit/state contracts now. Label
-any temporary access-stamp interactions as blockout tools, never finished gyms.
+The shared world owns geography, routes, badge order, story prerequisites,
+traversal unlocks, save identity and safe exits. Contributors own contained
+encounters. Eight gyms and six missions are scaffolded under `romhack/modules/`;
+all owners are unassigned. The maintainer confirms each assignment. Each package
+has an AGENTS.md, HANDOFF.md, native script and team metadata. Use the repo-local
+`sf-module` skill to turn an assigned human's creative direction into that package.
+
+Contracts reserve entry/exit/state/trainer bindings. Supported edits include local
+dialogue, puzzles, trainer teams, NPCs and gym room geometry. Extra rooms, custom
+tile/audio allocations and engine extensions require a separate integration change.
+Keep author PRs inside one assigned package. Run local module/world checks and
+native/web playtests; include cancellation, loss/retry, success, revisit, exit and
+Save/cold Continue evidence. Owner review may accept, request changes or reject.
+Passing checks and `ready_for_review` never grant merge or deployment approval.
+CODEOWNERS requests review; branch protection is a separate GitHub setting.
+
+The default all-stub build preserves the verified blockout ROM exactly. A fresh
+module fixture injects prerequisites under a separate QA identity; it is not
+campaign progression evidence. `make module-preview` is a finite localhost-only
+player. Never replace the public patch just to demonstrate a contribution.
+Label temporary access-stamp interactions as blockout tools, never finished gyms.
 Story-specific NPC names, Team NIMBY dialogue and the new type chart are not this
 milestone's implementation scope. The requested 2× website button is separate.
 

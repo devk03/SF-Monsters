@@ -46,6 +46,7 @@ call stack surviving a native battle. Use `sfmodule_return 0` to decline/cancel.
 Use native `return` only in an internal subroutine with a matching local call.
 
 The core clears the result before entry, checks existing world prerequisites,
+rechecks them before granting any output (including direct contributor NPC entry),
 and records the module's separate completion flag before its fixed output. Old
 blockout badge stamps do not mark this new content complete. A revisit can read
 the allocated completion flag or trainer flag; authors must define their revisit

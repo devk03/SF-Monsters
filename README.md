@@ -4,11 +4,11 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
 [Play the current preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/) ·
 [Game spec and progress](docs/game-spec.md#15-active-emerald-parity-goal) ·
-[Development agent](DEVELOPMENT_AGENT.md)
+[Development agent](DEVELOPMENT_AGENT.md) · [Build a gym or mission](CONTRIBUTING.md)
 
-## Current development goal: a connected world
+## Current development goal: a shared world people can build in
 
-We are generating a playable **world blockout** from the user's October 17 plan:
+We have generated a playable **world blockout** from the user's October 17 plan:
 all approved areas connected by real routes, safe entrances and exits, return
 paths, water/traversal gates, a Dogpatch start and eight themed gym placeholders.
 Simple development tiles are sufficient for this milestone. Polished graphics,
@@ -43,9 +43,12 @@ sole exception to the SF-city-limits rule.
 | 7 | Investor | Financial District |
 | 8 | Consumer Agents | North Beach / Jackson Square |
 
-Contributors can later own individual gyms and story events. Stable entrances,
-outputs and IDs will let those packages fit the same world. No contributor has
-been assigned or contacted by the planning tools.
+Contributors can own individual gyms and story events through focused PRs. The
+[module index](romhack/modules/README.md) contains eight gym and six mission
+packages, each with a handoff, agent instructions, reserved state and local tests.
+The [repo-local skill](.agents/skills/sf-module/SKILL.md) guides an agent through
+implementation, private GBA/web playtests and owner review. Shared routes,
+progression and exits stay with the core game. All slots remain unassigned.
 
 ## What is playable now
 
