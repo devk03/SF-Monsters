@@ -7,7 +7,7 @@ import uuid
 import argparse
 from pathlib import Path
 
-from bootstrap import EMERALD_REVISION
+from bootstrap import EMERALD_REVISION, checkout, preserve_cleanup
 from generate_world import ROOT, write_world
 from host_toolchain import prepare_host, host_make
 from maps import apply_maps
@@ -110,6 +110,12 @@ def main():
     base = ROOT / '.tools/romhack-baseline/emerald-matching.gba'
     patch = run / 'candidate.bps'
     encoder = ROOT / '.tools/flips-macos'
+    if not encoder.exists():
+        flips = ROOT / '.tools/flips'
+        checkout(flips, 'https://github.com/Alcaro/Flips.git',
+                 'ff216a75df0987047a67d7923567dc4482ce07ac')
+        preserve_cleanup(flips)
+        host_make(flips, 'TARGET=cli', 'CFLAGS=-O2', 'FNAME_cli=' + str(encoder))
     subprocess.run([str(encoder), '--create', '--bps', '--exact', str(base),
                     str(target), str(patch)], check=True, timeout=300)
     roundtrip = run / 'roundtrip.gba'

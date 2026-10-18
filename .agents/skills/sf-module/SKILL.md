@@ -18,13 +18,15 @@ integration change when a requested idea needs more room, assets or engine suppo
 Turn the human's idea into that package's dialogue, puzzle, supported trainer teams
 and revisit behavior. Use `SFMod_<id>_` labels, allocated persistent flags and trainer
 slots, and documented temporary variables. Enable private work with `status: draft`.
-Return VAR_RESULT 1 only after local success and 0 on cancellation; the core owns
+Finish with `sfmodule_return 1` only after local success and `sfmodule_return 0` on cancellation; the core owns
 the final badge/story output. Preserve loss/retry and a usable exit at every stage.
 Treat casting and story decisions marked unresolved in the handoff as decisions
 to record or clarify, not facts to invent. Credit original assets and research.
 
 Run `make module-check MODULE=<id>` and `make world-check`, then the private native
-build and actual native/web play. Use the example linked from CONTRIBUTING.md for
+build and actual native/web play. `make module-playtest MODULE=<id> SCENARIO=ready`
+creates a fresh-game fixture without a private save; `make module-preview` serves
+it on localhost for a finite session. Use the example linked from CONTRIBUTING.md for
 native battle team data. Record commands, evidence and missing gates in HANDOFF.md.
 Do not describe source validation as runtime approval.
 

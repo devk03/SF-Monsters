@@ -27,8 +27,8 @@ Everything for one assignment belongs under `romhack/modules/<id>/`:
 
 - `HANDOFF.md`: setting, story inputs/outputs, creative freedom, decisions and QA.
 - `module.json`: `stub`, `draft` or `ready_for_review`; optional native NPCs/teams.
-- `content.inc`: native script entry `SFMod_<id>_Run`. Return `VAR_RESULT = 1`
-  only on success; return 0 on cancellation or unfinished work. Core guards run
+- `content.inc`: native script entry `SFMod_<id>_Run`. Finish with `sfmodule_return 1`
+  only on success; use `sfmodule_return 0` on cancellation or unfinished work. Core guards run
   before this entry and core awards run only after success.
 - Optional `layout.json`: gym room rows, exactly 32 columns by 24 rows, using the
   existing legend. The assigned entrance, exit, scientist/checkpoint approach and
@@ -61,12 +61,22 @@ extension to the shared contract. They are not supported by silently adding file
 make module-check MODULE=gym_1
 make world-check
 make world-draft
+make module-playtest MODULE=gym_1 SCENARIO=ready
+make module-preview
 ```
 
 The first two use Python's standard library and do not need ROM bytes. The private
 native build needs the [existing native toolchain setup](romhack/README.md).
+With system build tools installed, append `PYTHON=python3` to native make commands
+if you do not have the project's optional Python venv. No owner's private cache or
+save is required: pinned sources/compiler/patch encoder are bootstrapped locally.
 It compiles the same cartridge for native mGBA and the web WASM emulator, without
 deploying. Full ROMs, saves and build outputs stay in ignored `.tools/`.
+The module playtest starts a new game in your assigned area/room with ready,
+locked, completed or weak-party state. These are fixtures with a separate save
+identity, not campaign progress. `make module-preview` serves that verified ROM
+only on localhost, with no account/persistent production saves, for at most 30
+minutes. Finish the test to stop it early.
 
 Before the PR, fetch your chosen upstream base and check the entire diff:
 

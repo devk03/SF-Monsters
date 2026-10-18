@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>SF module playtest</title>
+<style>
+body{font:16px system-ui;margin:24px;max-width:850px;background:#f4f4f4;color:#202020}
+button{padding:10px;margin:4px}canvas{display:block;width:min(720px,100%);height:auto;image-rendering:pixelated;background:#202020}
+pre{white-space:pre-wrap;font-size:12px}
+</style>
+<h1>SF module playtest</h1>
+<p>Private local development build. Fixture prerequisites are injected; this is not campaign progress.
+No public game saves or accounts are used. Start a new game from the GBA title menu.</p>
+<button id="start">Start test</button><button id="pause" disabled>Pause</button>
+<button id="resume" disabled>Resume</button><button id="reset" disabled>Reset GBA</button>
+<button id="save" disabled>Download QA save</button><button id="finish" disabled>Finish test</button>
+<p>Arrows move. X is A, Z is B, Enter is Start. Use the ordinary in-game Save before downloading Flash.</p>
+<p id="status" role="status">Ready. The local server has a finite lifetime.</p>
+<canvas width="240" height="160" tabindex="0" aria-label="GBA module game screen"></canvas>
+<pre id="identity"></pre>
+<script type="module">
+const status=document.querySelector('#status'),canvas=document.querySelector('canvas');
+let game,timer,finished=false;
+const button=id=>document.querySelector('#'+id);
+async function finish(){
+  if(finished)return;finished=true;clearTimeout(timer);game?.destroy();
+  for(const node of document.querySelectorAll('button'))node.disabled=true;
+  status.textContent='Test finished. Emulator stopped; public progress was untouched.';
+  await fetch('/finish',{method:'POST'}).catch(()=>{});
+}
+button('start').onclick=async()=>{try{
+  button('start').disabled=true;
+  const info=await(await fetch('/identity.json')).json();
+  document.querySelector('#identity').textContent=JSON.stringify(info,null,2);
+  const rom=new Uint8Array(await(await fetch('/rom.gba')).arrayBuffer());
+  const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',rom)),x=>x.toString(16).padStart(2,'0')).join('');
+  if(hash!==info.rom_sha256)throw Error('ROM identity differs');
+  const {load}=await import('/emulator/mgba.sdk.js');
+  game=await load({canvasEl:canvas,assets:{rom},persist:null,
+    storageNamespace:'sf-module-qa-'+hash,options:{gamepads:false,volume:.2}});
+  if(finished){game.destroy();return;}
+  game.start();canvas.focus();
+  for(const id of ['pause','resume','reset','save','finish'])button(id).disabled=false;
+  timer=setTimeout(()=>void finish(),Math.max(0,info.remaining_seconds*1000-1000));
+  status.textContent='Playing verified private build. Start a NEW GAME for the assigned test scenario.';
+}catch(error){status.textContent='Test failed: '+error.message;button('finish').disabled=false;}};
+button('pause').onclick=()=>{game.pause();status.textContent='Paused.';};
+button('resume').onclick=()=>{game.resume();canvas.focus();status.textContent='Playing.';};
+button('reset').onclick=()=>{game.reset();canvas.focus();status.textContent='GBA reset. QA Flash remains in this session.';};
+button('save').onclick=()=>{try{
+  const bytes=game.exportBattery(),url=URL.createObjectURL(new Blob([bytes]));
+  const link=document.createElement('a');link.href=url;link.download='sf-module-qa.sav';link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status.textContent='QA Flash downloaded. Keep it separate from world/v80 saves.';
+}catch(error){status.textContent=error.message;}};
+button('finish').onclick=()=>void finish();
+window.addEventListener('pagehide',()=>{clearTimeout(timer);game?.destroy();});
+</script></html>

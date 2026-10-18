@@ -22,7 +22,7 @@ foundation:
 hack:
 	$(PYTHON) scripts/romhack/build_probe.py --backend $(HACK_BACKEND)
 
-.PHONY: world-check world-draft module-check module-playtest
+.PHONY: world-check world-draft module-check module-playtest module-preview
 world-check:
 	python3 scripts/romhack/check_module.py
 module-check:
@@ -32,3 +32,5 @@ world-draft:
 SCENARIO ?= ready
 module-playtest:
 	$(PYTHON) scripts/romhack/build_world.py --playtest-module "$(MODULE)" --scenario "$(SCENARIO)"
+module-preview:
+	python3 scripts/quality/serve_module_preview.py
