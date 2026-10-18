@@ -692,8 +692,39 @@ Valley and Potrero without replacing their landmarks or service/gym bindings.
 Street packing favors underused forms and avoids identical adjacent painted fronts.
 Source checks require four architectural families per urban district and all three
 paint families where native free banks are available. Industrial/civic kits retain
-existing distinct material palettes. Native builds and visual review are pending;
-public v87 remains available until the candidate passes same-ROM native/web QA.
+existing distinct material palettes. The final v88 candidate passes native/web checks and is now published; human
+visual acceptance remains open.
+
+Published v88 building variety — October 18, 2026:
+
+- Added original native brick walkups/fire stairs, awning shops and workshop/loft
+  fronts. All 13 urban districts draw at least four architectural families. Nine
+  districts mix warm, sage and slate paint using spare native palette banks;
+  industrial/civic districts retain their distinct existing material palettes.
+  New palettes share graphics tiles and preserve paving, roof and glass colors.
+  Packing favors underused forms; painted adjacent fronts cannot be identical.
+  Source tests verify actual main-wall hue changes, not only named variants or
+  trim. All kits remain within the 512-tile budget (maximum508); fixed service,
+  gym, landmark and save contracts remain intact.
+- The first candidate `ec4f32eb…` passed its native loop but alignment review found
+  workshop walls stayed gray and alternate walkup brick looked too similar. This
+  was corrected before publication; first-candidate evidence remains private.
+  Final target `2e463cc455613e0a35f851ec426004da8e7a45ba0a27b183a88807c185aa6d08`,
+  BPS SHA `ac090ce3f90c16c4aaf6fadbfd5c9801e920f46fe901f1411eaeb7f19456036b`.
+- Final native proof:58maps/76connections/16gymwarps/26roomwarps,26signs and18local
+  activities/replay protection pass. Earlier completed/pending Saves, changed
+  planter recovery and land/Surf recovery preserve protected state and Flash.
+  Full104,863-frame WASM replay matches all294,912guest RAM bytes, SHA633bb0e5….
+  All18native area views and four districts' exposed ends/alleys are captured.
+  Actual browser local patch/import/cold Continue displays the new Noe Valley
+  paint and workshop. This is functional/visual evidence, not long browser,
+  phone, art-domain or full-game quality approval.
+- Evidence: `.tools/benchmarks/town-v88-final-*`, `town-v88-browser-review/`, and
+  `town-v88-variety-review/index.html`. Site75/source763ed6dc… deployment
+  `appgdep_6ad537d6ce908191af3ebc862c6a62bd` succeeded publicly. Only the world
+  BPS/manifest changed on the website; rootv80 and the player UI/emulator/save
+  behavior remain unchanged. No GitHub workflow ran. Native SF Map presentation,
+  human town/art approval and contributor gym/campaign gates remain open.
 
 Published v87 — October 18, 2026:
 
