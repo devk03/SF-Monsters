@@ -521,8 +521,16 @@
           "behavior": 0,
           "layer": 1
         },
-        "tree_well": {
+        "curb_drain": {
           "first": 643,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 644,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -530,8 +538,72 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 647,
+          "first": 648,
           "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 652,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 653,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 654,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 655,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 656,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 657,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 658,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 659,
+          "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
@@ -790,8 +862,16 @@
           "behavior": 0,
           "layer": 1
         },
-        "tree_well": {
+        "curb_drain": {
           "first": 642,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 643,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -799,8 +879,72 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 646,
+          "first": 647,
           "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 651,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 652,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 653,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 654,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 655,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 656,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 657,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 658,
+          "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
@@ -1296,8 +1440,16 @@
           "behavior": 0,
           "layer": 1
         },
-        "tree_well": {
+        "curb_drain": {
           "first": 637,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 638,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -1305,8 +1457,72 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 641,
+          "first": 642,
           "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 646,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 647,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 648,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 649,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 650,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 651,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 652,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 653,
+          "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
@@ -1549,8 +1765,16 @@
           "behavior": 0,
           "layer": 1
         },
-        "tree_well": {
+        "curb_drain": {
           "first": 601,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 602,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -1558,8 +1782,72 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 605,
+          "first": 606,
           "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 610,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 611,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 612,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 613,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 614,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 615,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 616,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 617,
+          "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
@@ -1882,8 +2170,16 @@
           "behavior": 0,
           "layer": 1
         },
-        "tree_well": {
+        "curb_drain": {
           "first": 655,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 656,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -1891,8 +2187,72 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 659,
+          "first": 660,
           "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 664,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 665,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 666,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 667,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 668,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 669,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 670,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 671,
+          "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,

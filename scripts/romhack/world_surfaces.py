@@ -42,7 +42,13 @@ def surfaces():
             7 if y < 2 else 5 if y < 4 else 8 if y == 4
             else 3 if y == 5 or x == 15 else 1)),
         ('curb_cut', 16, 16, image(16, 16, lambda x, y:
-            3 if y in (9, 12) and 2 <= x <= 13 else 1)),
+            4 if y in (8,11,14) and x in (3,6,9,12)
+            else 8 if y in (7,10,13) and x in (3,6,9,12) else 1)),
+        ('curb_drain', 16, 16, image(16, 16, lambda x, y:
+            7 if 2<=x<=13 and 10<=y<=14 and (x%3==0 or y in (10,14))
+            else 6 if 2<=x<=13 and 10<=y<=14
+            else 7 if y>=14 else 5 if y>=11 else 8 if y==8
+            else 3 if y>=9 or x==15 else 1)),
         ('tree_well', 32, 32, image(32, 32, lambda x, y:
             1 if x < 3 or x > 28 or y < 3 or y > 28
             else 8 if x == 3 or y == 3 else 7 if x == 28 or y == 28

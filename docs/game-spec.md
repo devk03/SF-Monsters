@@ -669,6 +669,15 @@ review contrasting industrial, mixed-use and residential districts in the actual
 native game. Counts and source checks establish coverage, not visual approval.
 Public v84 stays available while the next private candidate is developed.
 
+**Additional user revision: planted streets and signs.** Add visible neighborhood
+wayfinding and shop boards, bushes and distinct plant combinations per urban
+district, and richer sidewalk details. Preserve neutral paving, simple native
+pixel art, dense attached frontage and safe walking/door approaches. Street signs
+should be readable in-game; scenery counts alone do not prove a convincing city.
+Six original native plant motifs and two sign motifs now fit the secondary tile
+budget alongside gray tactile curb ramps and inset drainage grates. Placement,
+native sign interactions and same-cartridge validation remain in progress.
+
 Private v85 street revision: native target4b426d87… compiles all58
 maps,76connections,169NPCs and18local discoveries. Thirteen urban districts now
 use longer attached rows, actual curb edges, four neutral sidewalk materials,

@@ -235,6 +235,10 @@ def compile_kit(root=ROOT, profile='residential'):
         pit=next(pixels for name,_,_,pixels in surfaces() if name=='tree_well')
         raw,w,h=furniture['tree']
         card('street_tree',raw,w,h,6,pit,7,ground_width=32)
+        from world_botany import cards, palette
+        palettes[7]=palette(palettes[7])
+        for name,w,h,pixels in cards():
+            card(name,pixels,w,h,7,paving,7)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
