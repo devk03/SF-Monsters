@@ -6,9 +6,9 @@ def paint_palette(original, scheme):
     colors=list(struct.unpack('<16H',original))
     paints={
         'sage':{5:(29,28,24),6:(18,19,16),7:(18,23,17),8:(10,15,11),
-                9:(16,11,9),10:(25,28,23),11:(15,20,22)},
+                9:(14,18,14),10:(25,28,23),11:(15,20,22)},
         'slate':{5:(28,28,27),6:(17,18,20),7:(17,21,25),8:(9,12,17),
-                 9:(17,10,9),10:(23,25,28),11:(20,22,19)},
+                 9:(13,17,22),10:(23,25,28),11:(20,22,19)},
     }
     for i,rgb in paints[scheme].items():colors[i]=sum(v<<(c*5) for c,v in enumerate(rgb))
     return struct.pack('<16H',*colors)
@@ -33,7 +33,7 @@ def fronts(profile):
             box(x-1,y+h,x+w,y+h,5)
         # A continuous outside pier finishes either exposed end. Shared trim,
         # glass and roof shades keep the new forms in the existing street kit.
-        wall=9 if name=='walkup' else 10 if name=='shophouse' else 12
+        wall=9 if name=='walkup' else 10 if name=='shophouse' else 10
         box(1,5,width-2,59,wall);box(0,5,0,61,1);box(width-1,5,width-1,61,1)
         box(1,5,2,58,6);box(width-3,5,width-2,58,6)
         box(0,3,width-1,5,1);box(1,3,width-2,3,5)

@@ -6,6 +6,8 @@ sys.path.insert(0,str(ROOT/'scripts/romhack'))
 from world_tiles import compile_kit
 from generate_world import generate
 from world_towns import URBAN
+from world_architecture import fronts,paint_palette
+import struct
 
 
 class BuildingVarietyTests(unittest.TestCase):
@@ -24,6 +26,15 @@ class BuildingVarietyTests(unittest.TestCase):
                         bank=banks.pop();self.assertIn(bank,(9,11,12))
                         self.assertEqual(kit['palettes'][bank][2:10],kit['palettes'][6][2:10], 'roof and glass')
                         self.assertNotEqual(kit['palettes'][bank],kit['palettes'][6])
+
+    def test_new_fronts_have_green_and_blue_walls_not_just_different_trim(self):
+        palette=compile_kit(profile='mixed_use')['palettes'][6]
+        for name,width,_,pixels in fronts('mixed_use'):
+            wall=pixels[8*width+3]
+            for scheme,dominant in (('sage',1),('slate',2)):
+                color=struct.unpack('<16H',paint_palette(palette,scheme))[wall]
+                rgb=[(color>>shift)&31 for shift in (0,5,10)]
+                self.assertGreater(rgb[dominant],max(v for i,v in enumerate(rgb) if i!=dominant),(name,scheme))
 
     def test_each_urban_district_draws_multiple_forms_and_the_new_paints(self):
         manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
