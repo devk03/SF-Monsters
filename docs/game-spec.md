@@ -731,6 +731,27 @@ paint families where native free banks are available. Industrial/civic kits reta
 existing distinct material palettes. The final v88 candidate passes native/web checks and is now published; human
 visual acceptance remains open.
 
+Private v90 service-room identity — October 18, 2026:
+
+- Alignment identified identical room compositions and district dialogue reused
+  for clerks. `romhack/world/interior-details.json` now authors all13rooms:
+  Dogpatch repair benches/tool storage, Noe repair-and-coffee seating, library
+  reading furniture, studio tables, Marina bar seating, Sunset beds, stadium
+  waiting benches/information and island community seating. Bed-free guest
+  services now differs from the coastal rest stop. Each venue has explicit,
+  natural healing/supply lines. Shared prices, healing and contributor state
+  remain unchanged; no persistent flags or actor IDs were added.
+- Original native tables, chairs, benches, tool and information fixtures extend
+  the room kit to492/512tiles. Fixed16x11bounds, door/arrival/counter coordinates
+  and counter behavior stay intact. Furniture cannot overlap fixed interaction
+  approaches or escape the floor; the independent world geometry audit passes.
+  Interior details are included in frozen build inputs.
+- Candidate83808b46… passes58linked maps/76connections/169NPCs, deterministic
+  generation, original resource audits and BPS roundtrip. An actual v88ordinary
+  Save retains party/money/local state and all18guide selections. Native room
+  services/Save cycles, visual review and final native/WASM circuit are in
+  progress; v89 remains public. No human room/art acceptance is claimed.
+
 Published v89 native SF Map — October 18, 2026:
 
 - Replaced the sparse graph with original peninsula/bay/island pixel artwork,

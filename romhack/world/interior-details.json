@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "scope": "Original shared-world service rooms. Props use local16x11coordinates; contributor gyms are separate.",
+  "rooms": {
+    "dogpatch_room": {
+      "props": [["tool_board",3,2],["desk",3,4],["shelf",11,2],["waiting_bench",3,8]],
+      "rug": null,
+      "rest": "Long walk? Park your team here. I'll patch them up while you take a seat.",
+      "shop": "I keep the small supplies by the counter. Turns out a repair shop gets a lot of scraped knees."
+    },
+    "potrero_hill_room": {
+      "props": [["shelf",3,2],["shelf",11,2],["round_table",7,4],["waiting_bench",3,8],["information_board",12,4]],
+      "rug": [6,7],
+      "rest": "You can put your bag down. We'll look after your team while you find a quiet chair.",
+      "shop": "The books are free to borrow. These travel supplies aren't, sadly. I asked."
+    },
+    "mission_room": {
+      "props": [["desk",3,3],["round_table",7,3],["indoor_plant",12,3],["information_board",3,7]],
+      "rug": null,
+      "rest": "Come in. You don't need a class booked to rest here. Let me help your team first.",
+      "shop": "The travel supplies are on this side. The paint is on the other. Please don't mix them up."
+    },
+    "castro_room": {
+      "props": [["round_table",3,3],["round_table",10,3],["room_chair",4,4],["room_chair",11,4],["indoor_plant",3,7]],
+      "rug": [6,7],
+      "rest": "Grab a seat. Your team can rest here, and I'll bring some water. No purchase needed.",
+      "shop": "Need supplies for the next stretch? I have the basics. The good gossip is free."
+    },
+    "outer_sunset_room": {
+      "props": [["bed",3,2],["bed",11,2],["waiting_bench",3,8],["indoor_plant",12,7]],
+      "rug": [6,7],
+      "rest": "Take a breather out of the wind. I'll get your team ready before you head back to the beach.",
+      "shop": "Check your bag before you go. I have supplies, but the dry socks are all mine."
+    },
+    "marina_room": {
+      "props": [["desk",3,3],["desk",5,3],["desk",7,3],["room_chair",4,4],["room_chair",7,4],["information_board",11,2]],
+      "rug": null,
+      "rest": "Water first. Sit down and I'll take care of your team. Your group can survive without you for a minute.",
+      "shop": "Travel supplies? Yep, this counter. The bar tab is somebody else's problem."
+    },
+    "pacific_heights_room": {
+      "props": [["bed",3,2],["shelf",11,2],["round_table",7,4],["indoor_plant",12,7]],
+      "rug": [6,7],
+      "rest": "Come in, you've done enough stairs. Your team can rest here before you tackle the next hill.",
+      "shop": "I keep a few supplies for neighbors passing through. Yes, you count. You've already climbed the stairs."
+    },
+    "noe_valley_room": {
+      "props": [["tool_board",3,2],["round_table",7,3],["room_chair",7,4],["shelf",11,2],["indoor_plant",3,7]],
+      "rug": [6,7],
+      "rest": "Put your team by the repair bench. I'll patch them up. You can take the chair with the least wobble.",
+      "shop": "Need a few supplies? I've got those. If you need a whole new plan, the coffee table is over there."
+    },
+    "mission_bay_room": {
+      "props": [["round_table",3,2],["round_table",10,3],["room_chair",4,3],["room_chair",11,4],["information_board",3,7]],
+      "rug": null,
+      "rest": "Coming from the waterfront? Have a seat. I'll get your team rested before the next stretch.",
+      "shop": "I keep basic supplies beside the coffee counter. Easy to forget them when you're watching the water."
+    },
+    "giants_stadium_room": {
+      "props": [["waiting_bench",3,3],["waiting_bench",9,3],["information_board",7,2],["indoor_plant",3,7],["indoor_plant",12,7]],
+      "rug": null,
+      "rest": "You found guest services. Rest your team here; you don't need to wait for the seventh inning.",
+      "shop": "Need supplies before heading back out? I've got the basics. Souvenir prices are at the other counter."
+    },
+    "financial_district_room": {
+      "props": [["round_table",3,3],["round_table",10,2],["room_chair",4,4],["room_chair",11,3],["indoor_plant",12,7]],
+      "rug": [6,7],
+      "rest": "You can sit here without opening a laptop. Let me get your team rested while you take a break.",
+      "shop": "Supplies for the next stretch? Straightforward prices. I promise there isn't a subscription."
+    },
+    "north_beach_room": {
+      "props": [["shelf",3,2],["shelf",11,2],["round_table",7,3],["room_chair",7,4],["waiting_bench",3,8]],
+      "rug": [6,7],
+      "rest": "There's a quiet seat here. Rest your team before you head for the islands. The book can wait.",
+      "shop": "Check your supplies before you cross the water. Coming back for one item gets old fast."
+    },
+    "treasure_island_room": {
+      "props": [["waiting_bench",3,3],["round_table",10,3],["information_board",7,2],["shelf",3,7],["indoor_plant",12,7]],
+      "rug": [6,7],
+      "rest": "Made it across? Put your bag down. I'll help your team while you warm up inside.",
+      "shop": "Take a look before your next crossing. These are travel supplies; the lost umbrellas aren't for sale."
+    }
+  }
+}

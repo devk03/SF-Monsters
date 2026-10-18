@@ -55,7 +55,7 @@ def main():
         raise ValueError(json.dumps(contract, indent=2))
     before = {p.name: digest(p) for p in directory.iterdir() if p.is_file()}
     inputs = {'world.json': (ROOT / 'romhack/world/world.json').read_bytes()}
-    for name in ('art-contract.json','districts.json','discoveries.json','core-state.json'):
+    for name in ('art-contract.json','districts.json','discoveries.json','core-state.json','interior-details.json'):
         inputs[name] = (ROOT/'romhack/world'/name).read_bytes()
     inputs.update({'generated/' + p.name: p.read_bytes() for p in directory.iterdir()
                    if p.is_file() and (p.name == 'content.json' or p.stem in

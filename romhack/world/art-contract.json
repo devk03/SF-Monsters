@@ -256,8 +256,48 @@
           "behavior": 0,
           "layer": 1
         },
-        "scenic_sea": {
+        "round_table": {
           "first": 638,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "waiting_bench": {
+          "first": 640,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tool_board": {
+          "first": 642,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "information_board": {
+          "first": 644,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "room_chair": {
+          "first": 646,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "scenic_sea": {
+          "first": 647,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -265,7 +305,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 639,
+          "first": 648,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -273,7 +313,7 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 640,
+          "first": 649,
           "width": 1,
           "height": 1,
           "blocked": true,

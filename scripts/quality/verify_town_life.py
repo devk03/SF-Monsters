@@ -19,6 +19,8 @@ def main():
     parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
     parser.add_argument('--only',help='One room ID for a bounded first smoke')
+    parser.add_argument('--room-checkpoints', action='store_true',
+                        help='Preserve each service-room field state for ordinary Save/cold-Continue QA')
     args=parser.parse_args()
     manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
     engine=ROOT/'.tools/pokeemerald-world-host'
@@ -47,6 +49,8 @@ def main():
             for _ in range(8):c.tap(2,60)
             if c.read(c.symbols['sGlobalScriptContextStatus'],1)[0]!=2:
                 raise ValueError('Shop cancellation left the field script active')
+            if args.room_checkpoints:
+                c.checkpoint(room['id'])
             w.travel(room['area'])
             if w.location()[1] != tuple(room['outside_arrival']):raise ValueError('Door return differs')
             checked.append({'area':room['area'],'room':room['id'],'rest_counter_released':True,

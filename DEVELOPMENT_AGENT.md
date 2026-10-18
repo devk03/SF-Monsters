@@ -44,7 +44,7 @@ Read AGENTS.md; preserve prior evidence and public v80 while iterating private d
    element IDs, arrow bindings, annotations and embedded image.
 3. `docs/world/plan-notes.md`: interpretation, decisions and unresolved conflicts.
 4. `romhack/world/world.json`: editable area/route/gym/traversal manifest.
-5. `romhack/world/art-contract.json`, `districts.json`, `discoveries.json` and
+5. `romhack/world/art-contract.json`, `districts.json`, `interior-details.json`, `discoveries.json` and
    `core-state.json`: original art allocation, dialogue, local activities and
    their explicit persistent-state reservations. `world.json` also owns SF guide
    positions and native SF location labels.

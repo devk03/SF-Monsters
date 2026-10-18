@@ -1,16 +1,21 @@
 """Small useful neighborhood rooms with independently paired native door scripts."""
-from copy import deepcopy
+import json
+from pathlib import Path
 from world_tiles import compile_kit, legend_for, PROFILES
-from world_people import native_text, load_people
+from world_people import native_text
 
-PROPS = {
- 'workshop':[('desk',11,12),('shelf',19,7),('rack',11,15)],
- 'library':[('shelf',11,8),('shelf',19,8),('desk',15,12)],
- 'studio':[('desk',11,11),('desk',18,11),('indoor_plant',20,8)],
- 'cafe':[('desk',11,11),('desk',18,11),('shelf',19,7)],
- 'rest':[('bed',11,8),('bed',19,8),('indoor_plant',20,14)],
- 'bar':[('desk',11,11),('desk',13,11),('desk',18,11),('shelf',19,7)],
- 'home':[('bed',11,8),('shelf',19,7),('indoor_plant',20,14)]}
+def load_details(manifest):
+    path = Path(__file__).resolve().parents[2] / 'romhack/world/interior-details.json'
+    data = json.loads(path.read_text())
+    if data['schema_version'] != 1 or set(data['rooms']) != {r['id'] for r in manifest['interiors']}:
+        raise ValueError('Interior details must cover exactly the authored service rooms')
+    for detail in data['rooms'].values():
+        for field in ('rest', 'shop'):
+            value = detail[field]
+            if not isinstance(value, str) or not 8 <= len(value) <= 320 or any(c in value for c in '$"\\\n'):
+                raise ValueError('Service dialogue needs bounded plain native text')
+            native_text(value)
+    return data['rooms']
 
 
 def add_rooms(plans, manifest):
@@ -19,12 +24,13 @@ def add_rooms(plans, manifest):
     from generate_world import native_id
     kit = compile_kit()
     by_id = {p['world_id']:p for p in plans}
-    people = load_people()
+    details = load_details(manifest)
     for room in manifest['interiors']:
         parent = by_id[room['area']]
         legend = legend_for(kit)
         def token(tile): return chr(0x100+tile-512)
-        grid = [[token(613)]*16 for _ in range(11)]
+        detail = details[room['id']]
+        grid = [[token(kit['catalog']['void']['tiles'][0][0])]*16 for _ in range(11)]
         def stamp(name,x,y):
             for dy,row in enumerate(kit['catalog'][name]['tiles']):
                 for dx,tile in enumerate(row): grid[y-6+dy][x-8+dx]=token(tile)
@@ -36,14 +42,27 @@ def add_rooms(plans, manifest):
         for y in range(8,17):
             stamp('wall_side',10,y);stamp('wall_side',21,y)
         stamp('wall_span',10,6)
-        stamp('rug',15,12);stamp('threshold',16,15);stamp('door_frame',16,16)
-        for name,x,y in PROPS[room['style']]:
-            if name != 'desk': stamp(name,x,y)
+        if detail['rug']:
+            x,y = detail['rug'];stamp('rug',x+8,y+6)
+        stamp('threshold',16,15);stamp('door_frame',16,16)
+        protected = {tuple(room[k]) for k in ('arrival','exit')}
+        for service in room['services'].values():
+            x,y=service['actor']
+            protected |= {(x,y),(x,y+1),(x+1,y+1),tuple(service['standing'])}
+        occupied = set()
+        for name,x,y in detail['props']:
+            card = kit['catalog'][name]
+            cells = {(x+dx,y+dy) for dy,row in enumerate(card['tiles']) for dx,_ in enumerate(row)}
+            if (not card['blocked'] or not cells or cells & (protected | occupied)
+                    or any(not 3<=xx<=12 or not 2<=yy<=9 for xx,yy in cells)):
+                raise ValueError('Room furniture blocks a fixed service/door or leaves the floor: '+room['id'])
+            occupied |= cells
+            stamp(name,x+8,y+6)
         for service in room['services'].values():
             x,y=service['actor'];stamp('desk',x+8,y+7)
         # Counter/furniture placement must leave both clerks reachable. The
         # validator checks the actual tiles and arrivals, not this recipe alone.
-        residents = people[room['area']]['residents'][-2:]
+        residents = [{'dialogue':detail[field]} for field in ('rest','shop')]
         rx,ry=room['services']['rest']['actor'];sx,sy=room['services']['shop']['actor']
         tx,ty=room['services']['rest']['standing'];ux,uy=room['services']['shop']['standing']
         npcs=[{'id':1,'x':rx,'y':ry,'graphics':'OBJ_EVENT_GFX_WOMAN_3',
