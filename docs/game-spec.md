@@ -808,6 +808,27 @@ Publishedv91 SF launch and2×speed — October18:
   does not prove browser scene completion. New2×audio diagnostics are also
   separate from the passing API/worklet/actual-cartridge tests.
 
+**New blocking world-rendering finding — October18.** The full-circuit final
+native screenshot and matching WASM frame both show incorrect architecture at
+Noe's boundary0,12. Walk-only diagnostic reaches14,12with clean streets; earlier
+clean-room views therefore do not close the boundary gate. Foreign connection
+margin IDs, copied old map-view IDs and retained BG entries are interpreted under
+different secondary profile allocations. Independent alignment source review
+confirms this mechanism. Pixel equality between two corrupt renderers is not
+quality acceptance. Keep native connections; verify immediately on both sides,
+then walk fully inward without rooms/menus/warps/Continue, plus same-profile and
+real water cases. A bounded private alignment implementation/proof is assigned;
+no experimental fix is authorized for public deployment without matching QA.
+Evidence:`town-v91-seam-diagnosis/{boundary,center,center-after-room}.png`.
+
+The253second held-key Chrome run dispatched452/452rows with1.48ms maximum
+lateness and no source drops, but recorded26,428audio-underrun output frames.
+The receipt is valid data, not a passing route/audio result. Guest endpoint and
+corrupt boundary screenshots remain retained separately. Evidence:
+`town-v91-held-chrome-route/report-eb32d60d54b2489b9d240b012a6a2d8b.json`.
+The longer browser gate stays open; the public functional preview is not a
+finished-world or full Emerald-parity release.
+
 - Alignment identified identical room compositions and district dialogue reused
   for clerks. `romhack/world/interior-details.json` now authors all13rooms:
   Dogpatch repair benches/tool storage, Noe repair-and-coffee seating, library

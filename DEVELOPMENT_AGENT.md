@@ -18,6 +18,13 @@ separate. Keep rootv80 runtime/save bytes intact; verify native old-Save loading
 browser return visits, speed/audio behavior and ordinary Save/import safety.
 
 Current checkpoint: v0.0.91 is published at `/world`; root v80 stays available.
+Priority blocker: connected-map boundaries can interpret foreign secondary-kit
+IDs as corrupt architecture. Read the new section15.1 finding and seam screenshots.
+Native/WASM RAM equality alone missed this visible defect. Keep real routes;
+validate both boundary directions and walking inward without room/menu reloads.
+The alignment chat owns a bounded private seam-fix prototype; coordinate before
+editing its world_seams.py or build_world.py integration. Publicv91 stays live
+until an experimentally fixed ROM passes matching safety/render checks.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,
 with warm/sage/slate paint, finished exposed edges, district planting and signs. Browser UI uses integer pixels,
 grouped file tools and optional desktop controls. Read section 15.1 for evidence;
