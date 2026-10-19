@@ -38,8 +38,14 @@ def main():
                 or large(pointer+0x1270,0x12c)!=old[0x1270:0x139c]):
             raise ValueError('Scenery recovery changed party, money or saved flags')
         restored=c.position();c.checkpoint('recovered')
-        room=next(r['id'] for r in w.manifest['interiors'] if r['area']==identifier)
-        w.travel(room);w.travel(identifier);c.checkpoint('safe-return')
+        if plan.get('room'):
+            # New room furniture can occupy a tile from an earlier indoor Save.
+            # Prove its fixed exit still reaches the district and the return door.
+            w.travel(plan['room']['area']);w.travel(identifier)
+        else:
+            room=next(r['id'] for r in w.manifest['interiors'] if r['area']==identifier)
+            w.travel(room);w.travel(identifier)
+        c.checkpoint('safe-return')
         if (c.output/'safe-return.sav').read_bytes()!=battery:
             raise ValueError('Scenery recovery or safe return rewrote Flash')
         result=dict(passed=True,rom_sha256=c.digest(),old_rom_sha256=expected['rom_sha256'],

@@ -748,9 +748,17 @@ Private v90 service-room identity — October 18, 2026:
   Interior details are included in frozen build inputs.
 - Candidate83808b46… passes58linked maps/76connections/169NPCs, deterministic
   generation, original resource audits and BPS roundtrip. An actual v88ordinary
-  Save retains party/money/local state and all18guide selections. Native room
-  services/Save cycles, visual review and final native/WASM circuit are in
-  progress; v89 remains public. No human room/art acceptance is claimed.
+  Save retains party/money/local state and all18guide selections. All13native
+  rooms pass both services, shop cancellation and fixed paired exits. Every
+  room also passes an ordinary in-room Save/coldContinue, protected party/money/
+  core/local state and native guide controls. A genuine v89Save at Noe room3,2,
+  now occupied by the tool board, safely relocates to3,3 and proves the room
+  exit/return while preserving party/money/flags/Flash. The complete58map native
+  circuit passes76connections/16gymwarps/26roomwarps. Centered native views and
+  matching full WASM replay remain in progress; v89 stays public. No human
+  room/art acceptance is claimed. Evidence: `town-v90-room-services/`,
+  `town-v90-all-room-save-cycles/`, `town-v90-room-furniture-recovery/` and
+  `town-v90-final-returns/`.
 
 Published v89 native SF Map — October 18, 2026:
 
