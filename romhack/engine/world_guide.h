@@ -59,8 +59,8 @@ static bool8 SFGuideDraw(void)
     u8 i;
     const struct SFGuidePlace *place=&sSFGuidePlaces[sSFGuideSelected];
     LoadPalette(sSFGuidePalette,BG_PLTT_ID(13),sizeof(sSFGuidePalette));
-    FillWindowPixelBuffer(sSFGuideWindow,PIXEL_FILL(2));
     DrawStdWindowFrame(sSFGuideWindow,FALSE);
+    FillWindowPixelBuffer(sSFGuideWindow,PIXEL_FILL(2));
     SFGuideAt(sSFGuideTitle,8,1,sSFGuidePanelInk);
     SFGuideAt(sSFGuideRegion,165,1,sSFGuidePanelInk);
     if (sSFGuideDetails)

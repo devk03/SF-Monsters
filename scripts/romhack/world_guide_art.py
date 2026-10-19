@@ -13,8 +13,8 @@ PALETTE = [
 ]
 COAST = [(28, 37), (38, 31), (48, 31), (60, 34), (72, 31),
          (84, 32), (98, 29), (112, 28), (128, 32), (142, 36),
-         (151, 44), (155, 55), (157, 72), (164, 85), (160, 100),
-         (155, 119), (39, 119), (34, 109), (30, 92), (31, 73), (28, 56)]
+         (151, 44), (150, 55), (149, 72), (140, 82), (147, 94),
+         (151, 119), (39, 119), (34, 109), (30, 92), (31, 73), (28, 56)]
 ANGEL = [(161, 26), (166, 21), (177, 20), (187, 25), (188, 30),
          (181, 35), (166, 34)]
 TREASURE = [(163, 58), (177, 54), (185, 56), (190, 64), (185, 71),
@@ -54,6 +54,7 @@ def terrain():
                     image.putpixel((x, y), 6)
             elif any(land.getpixel((x + dx, y + dy)) for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1))):
                 image.putpixel((x, y), 5)
+    coast = image.copy()
     # Western ridges and parks: stepped contour patches, with deliberate shapes.
     relief = [([(34, 41), (43, 35), (64, 37), (78, 43), (70, 49), (41, 48)], 8),
               ([(37, 41), (45, 37), (61, 39), (70, 43), (65, 46), (42, 46)], 7),
@@ -77,6 +78,11 @@ def terrain():
     polygon([(166, 26), (171, 23), (178, 23), (183, 27), (179, 31), (168, 30)], 7)
     polygon([(168, 60), (177, 58), (183, 61), (184, 65), (177, 68), (167, 65)], 7)
     polygon([(171, 61), (177, 60), (180, 63), (177, 66), (171, 65)], 6)
+    # Interior relief cannot paint outside the shoreline or erase its sand lip.
+    for x in range(224):
+        for y in range(104):
+            if not land.getpixel((x, y)) or coast.getpixel((x, y)) == 9:
+                image.putpixel((x, y), coast.getpixel((x, y)))
     # Marin shore beyond the strait is background geography, never a destination.
     polygon([(24, 16), (75, 16), (73, 20), (63, 23), (49, 21), (37, 24), (26, 21)], 8)
     polygon([(27, 16), (69, 16), (66, 19), (53, 18), (39, 21), (29, 19)], 7)

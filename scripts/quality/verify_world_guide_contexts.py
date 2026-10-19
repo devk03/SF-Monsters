@@ -25,7 +25,8 @@ def main():
     engine=ROOT/'.tools/pokeemerald-world-host'
     manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
     areas=[a['id'] for a in manifest['areas']]+[manifest['league']['venue']]
-    pixels={key:(20+point[0]*174//100,34+point[1]*82//100) for key,point in manifest['city_guide']['positions'].items()}
+    pixels={key:(round((20+point[0]*174/100)/4)*4,round((24+point[1]*92/100)/4)*4)
+            for key,point in manifest['city_guide']['positions'].items()}
     interiors={x['id']:x['area'] for x in manifest['gyms']+manifest['interiors']}
     routes={r['id']:r for r in manifest['routes']}
     routes['league_route']={'from':manifest['league']['from_area'],'to':manifest['league']['venue']}
@@ -58,7 +59,18 @@ def main():
             parent=interiors.get(owner,owner);kind=2 if owner in interiors else 0
             if owner in routes:
                 route=routes[owner];parent=route['from'];a,b=pixels[parent],pixels[route['to']]
-                here=((a[0]+b[0])//2,(a[1]+b[1])//2);kind=1
+                # Read the compiled route's authored chart vertices, then derive
+                # its half-distance independently of the producer's midpoint.
+                edge_id=list(routes).index(owner);edge=c.read(c.symbols['sSFGuideEdges']+edge_id*17,17)
+                points=[tuple(edge[5+n*2:7+n*2]) for n in range(edge[4])]
+                lengths=[abs(x-u)+abs(y-v) for (x,y),(u,v) in zip(points,points[1:])]
+                remaining=sum(lengths)//2
+                for (x,y),(u,v),length in zip(points,points[1:],lengths):
+                    if remaining<=length:
+                        here=(x+(remaining if u>x else -remaining if u<x else 0),
+                              y+(remaining if v>y else -remaining if v<y else 0));break
+                    remaining-=length
+                kind=1
             else:here=pixels[parent]
             open_map()
             expected=(areas.index(parent),here[0],here[1],kind)
