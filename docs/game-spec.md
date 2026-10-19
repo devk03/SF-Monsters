@@ -829,6 +829,17 @@ corrupt boundary screenshots remain retained separately. Evidence:
 The longer browser gate stays open; the public functional preview is not a
 finished-world or full Emerald-parity release.
 
+The separate final public-world-SDK2×Chrome observation passes120seconds:
+14,334actual video frames, advancing120second audio clock, playback started,
+zero hidden/discarded/mismatched ticks, pending input, source drops, warmup or
+underrun output frames. Identity explicitly recordsworld_playback_speed2and
+the exact production world.sdk.js bytes; unchanged worklet consumes accelerated
+source PCM. This stationary2×audio/pipeline result does not replace the failed
+longer moving route or establish physical speaker timing. Receipt and independent
+audit:`town-v91-world-2x-audio/report-8ee298e5b7874793a793bb86b19ae99a`.
+Native freshSave/Continue, normal-speed parity, paused toggle/reset/import, actual
+browser movement and cached-return launch evidence remain scoped as above.
+
 - Alignment identified identical room compositions and district dialogue reused
   for clerks. `romhack/world/interior-details.json` now authors all13rooms:
   Dogpatch repair benches/tool storage, Noe repair-and-coffee seating, library
