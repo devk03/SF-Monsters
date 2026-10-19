@@ -17,7 +17,7 @@ Continue/New Adventure entry and a world-only2×speed toggle. Display scaling is
 separate. Keep rootv80 runtime/save bytes intact; verify native old-Save loading,
 browser return visits, speed/audio behavior and ordinary Save/import safety.
 
-Current checkpoint: v0.0.89 is published at `/world`; root v80 stays available.
+Current checkpoint: v0.0.91 is published at `/world`; root v80 stays available.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,
 with warm/sage/slate paint, finished exposed edges, district planting and signs. Browser UI uses integer pixels,
 grouped file tools and optional desktop controls. Read section 15.1 for evidence;

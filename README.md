@@ -9,25 +9,30 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
 ## Current development goal: finish the compact SF world
 
-The v88 world preview has 18 compact destinations, 19 connectors, eight
-reserved gym rooms and 13 small service interiors. Urban areas use dense attached
-blocks, original SF landmark candidates, authored residents and safe walkers.
-Parks, coasts and both islands have distinct trails and scenery. An in-game SF
-map shows all destinations and their actual connections. The next pass improves
-its geography and readability, then continues district/route/interior finishing.
+The v91 world preview has 18 compact destinations, 19 connectors, eight
+reserved gym rooms and 13 service interiors. Urban areas use attached blocks,
+varied original building forms/paint, local signs/plants and authored residents.
+Parks, coasts and both islands have distinct trails and scenery. The native SF
+Map shows your current location, destinations, connections and traversal gates.
 
-All 18 local activities have passed native reward/revisit checks. The 58-map
-controller circuit, earlier land/Surf save upgrades and original-resource audits
-pass on their recorded draft builds. These are functional checks, not final town
-or art approval. The latest v88 candidate completed a full105,935-frame native/WASM route with
-byte-identical guest RAM. Actual browser patch/import/cold Continue displays its
-new architecture and paint; earlier30-second smoke samples remain separate. The longer browser-session issue and human quality review remain open.
-See the [generation guide](docs/world/generation.md) and the current
+The cartridge starts at **NEW SF ADVENTURE / CONTINUE SF WORLD**. On the website,
+select your USA/Europe Emerald ROM once; it stays on your device. The browser
+remembers the verified original and applies the latest SF patch on return visits.
+**Save & files → Forget remembered ROM** removes that local copy while keeping
+saves. **2× speed** accelerates gameplay and sound; **2× display** changes size.
+New visits default to normal speed. Download the locally patched GBA cartridge
+for your emulator; public hosting distributes the patch, not the commercial ROM.
+
+The v91 native circuit covers all58maps,76connections,16gymwarps and26roomwarps.
+Its105,935-frame WASM replay has byte-identical guest RAM. All13room services,
+ordinary in-room Save/coldContinue cycles and genuine earlier-save recovery pass.
+All18local activities passed their prior native reward/revisit checks; current
+browser route completion and human town/art approval remain separate open gates.
+See the [generation guide](docs/world/generation.md) and current
 [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
-The existing root website preview stays v80. The separate `/world` exploration
-preview is live with the tested v88 cartridge, its own save slot and
-temporary access stamps. Final gym battles, contributor missions and human
-town-quality acceptance remain unfinished.
+The root website keeps the v80 Sunset preview and its independent save slot.
+Gym encounters, contributor missions and full Emerald-quality acceptance remain
+unfinished; current gym access stamps and loan creature are development tools.
 
 The [editable Excalidraw plan](docs/world/initial-world-plan.excalidraw),
 [interpretation and open decisions](docs/world/plan-notes.md), and
