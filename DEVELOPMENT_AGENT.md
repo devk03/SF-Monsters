@@ -17,18 +17,19 @@ Continue/New Adventure entry and a world-only2×speed toggle. Display scaling is
 separate. Keep rootv80 runtime/save bytes intact; verify native old-Save loading,
 browser return visits, speed/audio behavior and ordinary Save/import safety.
 
-Current checkpoint: v0.0.91 is published at `/world`; root v80 stays available.
+Current checkpoint: v0.0.92 is published at `/world`; root v80 stays available.
 Priority blocker: connected-map boundaries can interpret foreign secondary-kit
 IDs as corrupt architecture. Read the new section15.1 finding and seam screenshots.
 Native/WASM RAM equality alone missed this visible defect. Keep real routes;
 validate both boundary directions and walking inward without room/menu reloads.
 The alignment chat owns a bounded private seam-fix prototype; coordinate before
-editing its world_seams.py or build_world.py integration. Publicv91 stays live
+editing its world_seams.py or build_world.py integration. Publicv92 stays live
 until an experimentally fixed ROM passes matching safety/render checks.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,
 with warm/sage/slate paint, finished exposed edges, district planting and signs. Browser UI uses integer pixels,
 grouped file tools and optional desktop controls. Read section 15.1 for evidence;
-native SF Map now has original peninsula/bay/island art and verified controls.
+native SF Map now has original shaded region relief, broad gold/blue corridors,
+red gym/blue town markers and compact panels;58native contexts preserve state.
 Human visual acceptance and full foreground browser performance remain open.
 Latest feedback rejects repeated paving and sparse detached urban blocks. Rebuild
 street composition with longer attached frontages, actual curbs and distinct

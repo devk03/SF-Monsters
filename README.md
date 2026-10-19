@@ -9,11 +9,12 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 
 ## Current development goal: finish the compact SF world
 
-The v91 world preview has 18 compact destinations, 19 connectors, eight
+The v92 world preview has 18 compact destinations, 19 connectors, eight
 reserved gym rooms and 13 service interiors. Urban areas use attached blocks,
 varied original building forms/paint, local signs/plants and authored residents.
 Parks, coasts and both islands have distinct trails and scenery. The native SF
-Map shows your current location, destinations, connections and traversal gates.
+Map uses shaded coast/hill relief, broad land/water corridors and distinct town/
+gym markers, showing your current location, destinations and traversal gates.
 
 The cartridge starts at **NEW SF ADVENTURE / CONTINUE SF WORLD**. On the website,
 select your USA/Europe Emerald ROM once; it stays on your device. The browser
@@ -23,7 +24,7 @@ saves. **2× speed** accelerates gameplay and sound; **2× display** changes siz
 New visits default to normal speed. Download the locally patched GBA cartridge
 for your emulator; public hosting distributes the patch, not the commercial ROM.
 
-The v91 native circuit covers all58maps,76connections,16gymwarps and26roomwarps.
+The v92 native circuit covers all58maps,76connections,16gymwarps and26roomwarps.
 Its105,935-frame WASM replay has byte-identical guest RAM. All13room services,
 ordinary in-room Save/coldContinue cycles and genuine earlier-save recovery pass.
 All18local activities passed their prior native reward/revisit checks; current

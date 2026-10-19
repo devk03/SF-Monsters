@@ -719,6 +719,33 @@ candidate0bea4b51… is experimental and never staged; default-off atlas mode is
 frozen separately. This map candidate keeps the known connected-street boundary
 defect visible as an unfinished gate, not a claimed repair.
 
+**Publishedv92 region map — October18.** Final dd062821a33f7903c0acaf7a57db07c428f77b186fe3a65f38b46ce4a7578c64
+passes all58native guide contexts in three bounded groups:18places,19routes,
+21interiors, including activeSurf, details/back/Start/reopen, resumed movement,
+both palette13buffers and protected party/money/inventory/flags/Flash. An initial
+context probe assumed17byte C records; the native compiler pads them to20bytes.
+Reading actual symbol size fixes that QA expectation; the failed receipt stays
+retained. No capture ABI or native behavior was changed to pass it.
+
+The full105,935-frame58map/76connection/16gymwarp/26roomwarp replay matches all
+294,912guest RAM bytes, SHAd4deb464…. Original4bpp packing/path geometry tests,
+19world contracts, three resource audits and eight preview gates pass. Browser
+locally re-patches a remembered original ROM, imports actualv88Save, opens the
+new map, selects MissionBay, opens its details, returns withB, closes withStart
+and resumes movement with correct field colors. A development-server hot reload
+interrupted the first detail attempt; the completed new session is documented
+separately rather than credited as an uninterrupted route. Evidence:
+`town-v92-region-refined/browser-map-open.jpg`, `browser-back-to-map.jpg`,
+`browser-field-return.jpg` and`town-v92-guide-contexts-native/`.
+
+Public`/world` now serves0.0.92-world-preview, BPS768,250bytes. Site78/source
+316c4634b9a0d451a9d4a8c35e5749d43e04cea6, successful deployment
+appgdep_6ad57420d06c8191a42e5361c60ff29a. Archive excludes commercial ROMs/saves/
+states; rootv80 and the2×runtime remain unchanged. Frozen build mode explicitly
+hasconnection_atlasfalse; the separate boundary repair remains experimental.
+This is a reviewed-by-agent functional map redesign, not user approval of map/
+town/Emerald-parity quality. All unfinished world/browser/campaign gates remain.
+
 Preserve rootv80, module contracts, original plan, private ROM/save handling and
 manual-only GitHub Actions; make coherent frequent commits with[skip ci]. Final
 gym encounters, contributor missions, full roster/battle/audio/campaign parity
