@@ -663,6 +663,14 @@ using bounded reviews, never a recurring monitor.
    distinct selected/current markers, readable connections/traversal requirements,
    accurate location binding outdoors/indoors/on routes/while Surfing, and safe
    detail/close/reopen behavior without changing player state or Flash.
+   Latest user rejection: v91's flat network diagram is far below Emerald's
+   region-map presentation. Rebuild the native map with original shaded terrain,
+   coastal/park/hill contours, broad orthogonal land/water corridors, distinct
+   town/gym markers and selected/current indicators. Replace the oversized legend
+   with compact header/location/control panels. Keep the actual19edge topology,
+   both islands, safe map/details exits and protected Save/palette state. Inspect
+   actual240×160frames before publication; neither source checks nor similarity
+   claims grant user acceptance.
 2. District/route/interior identity: varied dense attached fronts with finished
    ends, local plants/signs/furniture/landmarks, natural NPC dialogue and safe
    movement, useful services, local activities and progression-sensitive revisits.

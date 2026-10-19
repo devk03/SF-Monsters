@@ -5,6 +5,8 @@ from world_people import load_people
 
 def apply_guide(root,engine,original,manifest,plans):
     from generate_world import records,native_id
+    from world_guide_layout import chart_positions,route_path,path_midpoint
+    from world_guide_art import compile_art
     areas,routes=records(manifest);index={area['id']:i for i,area in enumerate(areas)}
     positions=manifest['city_guide']['positions'];people=load_people()
     discoveries=json.loads((root/'romhack/world/discoveries.json').read_text())['areas']
@@ -13,7 +15,8 @@ def apply_guide(root,engine,original,manifest,plans):
         if (any(c in value for c in '$"\\\n') or not value.isascii()
                 or len(value)+1>capacity):raise ValueError('Native guide field exceeds its encoded destination capacity')
         return '_("'+value+'")'
-    pixels={identifier:(20+x*174//100,34+y*82//100) for identifier,(x,y) in positions.items()}
+    pixels=chart_positions(manifest)
+    gyms_by_area={gym['area']:gym['badge'] for gym in manifest['gyms']}
     nodes=[]
     for area in areas:
         identifier=area['id'];x,y=positions[identifier]
@@ -32,9 +35,14 @@ def apply_guide(root,engine,original,manifest,plans):
         flags=discoveries[identifier]
         nodes.append('    {'+f'{pixels[identifier][0]}, {pixels[identifier][1]}, '+
                      string(area['label'])+', '+string(people[identifier]['character'].capitalize(),60)+', '+
-                     '{'+', '.join(map(string,lines))+'}, '+flags['done_flag']+', '+
+                     '{'+', '.join(map(string,lines))+'}, '+str(gyms_by_area.get(identifier,0))+', '+flags['done_flag']+', '+
                      (flags['found_flag'] or '0')+'}')
-    edges=['    {'+str(index[r['from']])+', '+str(index[r['to']])+', '+str(r['requires_badge'])+', '+str(int(r['mode']!='walk'))+'}' for r in routes]
+    edges=[]
+    for route in routes:
+        points=route_path(route,pixels)
+        edges.append('    {'+', '.join(map(str,(index[route['from']],index[route['to']],
+                     route['requires_badge'],int(route['mode']!='walk'),len(points))))+', {'+
+                     ', '.join('{'+str(x)+', '+str(y)+'}' for x,y in points)+'}}')
     bindings=[]
     gyms={g['id']:g['area'] for g in manifest['gyms']};rooms={r['id']:r['area'] for r in manifest.get('interiors',[])}
     connectors={r['id']:r['from'] for r in routes}
@@ -43,8 +51,8 @@ def apply_guide(root,engine,original,manifest,plans):
         identifier=plan['world_id'];parent=gyms.get(identifier,rooms.get(identifier,connectors.get(identifier,identifier)))
         x,y=pixels[parent];kind=2 if identifier in gyms or identifier in rooms else 0
         if identifier in route_index:
-            route=route_index[identifier];a,b=pixels[route['from']],pixels[route['to']]
-            x,y=(a[0]+b[0])//2,(a[1]+b[1])//2;kind=1
+            route=route_index[identifier]
+            x,y=path_midpoint(route_path(route,pixels));kind=1
         bindings.append('    {MAP_GROUP('+plan['native_id']+'), MAP_NUM('+plan['native_id']+'), '+
                         ', '.join(map(str,(index[parent],x,y,kind)))+'}')
     header='// Generated from the authoritative world manifest and state reservations.\n'
@@ -52,6 +60,7 @@ def apply_guide(root,engine,original,manifest,plans):
     header+='static const struct SFGuideEdge sSFGuideEdges[] = {\n'+',\n'.join(edges)+'\n};\n'
     header+='static const u8 sSFGuideBindings[][6] = {\n'+',\n'.join(bindings)+'\n};\n'
     (engine/'src/sf_world_guide_data.h').write_text(header)
+    (engine/'src/sf_world_guide_pixels.h').write_text(compile_art())
     shutil.copyfile(root/'romhack/engine/world_guide.h',engine/'src/sf_world_guide.h')
     shutil.copyfile(root/'romhack/engine/world_guide_art.h',engine/'src/sf_world_guide_art.h')
     path='src/start_menu.c';source=original(path)
@@ -72,4 +81,4 @@ def apply_guide(root,engine,original,manifest,plans):
         section=next(s for s in sections['map_sections'] if s['id']==manifest['city_guide']['native_sections'][area['id']])
         section['name']=area['label'].split(' / ')[0].replace(' / ','-').replace(': Victory Road + League','')
     (engine/sections_path).write_text(json.dumps(sections,indent=2)+'\n')
-    return [path,sections_path,'src/sf_world_guide.h','src/sf_world_guide_data.h','src/sf_world_guide_art.h']
+    return [path,sections_path,'src/sf_world_guide.h','src/sf_world_guide_data.h','src/sf_world_guide_art.h','src/sf_world_guide_pixels.h']
