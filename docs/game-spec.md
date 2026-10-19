@@ -696,6 +696,29 @@ matching accelerated audio consumption. Rootv80 runtime and saves stay unchanged
 Verify switching while playing/paused, reset/import and actual browser frame/audio
 behavior; no speed or launch change closes unfinished town/route acceptance.
 
+**October18 native region-map rebuild — private candidate.** The user explicitly
+rejected the v91 diagram's presentation. The replacement uses original authored
+16color coastal relief, western park/hill contours, small island silhouettes,
+water bands, broad orthogonal gold/blue corridors, red gym/blue town markers,
+selected brackets and a separate current-player cap. Compact navy header/name/
+controls panels replace the large legend and floating water labels. All18places
+and19real world connections remain; path-midpoint location bindings now follow
+the drawn corridor rather than an off-route diagonal average. The504tile window
+and palette13save/restore remain unchanged. New image source reads no reference
+pixels; local Emerald art was inspected privately for visual comparison only.
+
+First screenshot critique caught the standard window frame overwriting the
+header background, hiding white text. Drawing the background after the frame
+fixes contrast. The Mission Bay water approach now follows its shoreline instead
+of crossing deeper inland. Candidate dd062821… passes actualv88Save Continue,
+18native selections, details/back/Start/field/palette/protected-state checks and
+the58map/76connection/16gymwarp/26roomwarp circuit. Matching WASM and all58guide
+contexts are running; no new map or town quality approval is claimed. Evidence:
+`town-v92-region-refined/`, `town-v92-region-returns/`. The early combined atlas
+candidate0bea4b51… is experimental and never staged; default-off atlas mode is
+frozen separately. This map candidate keeps the known connected-street boundary
+defect visible as an unfinished gate, not a claimed repair.
+
 Preserve rootv80, module contracts, original plan, private ROM/save handling and
 manual-only GitHub Actions; make coherent frequent commits with[skip ci]. Final
 gym encounters, contributor missions, full roster/battle/audio/campaign parity
