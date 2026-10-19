@@ -12,6 +12,10 @@ then district/route/interior identity and complete native/browser acceptance.
 Keep bounded alignment reviews about every30active minutes. The old paused goal
 card cannot be replaced while its browser-route/review gates remain unfinished;
 do not falsely close it or treat that UI limitation as a reason to stop work.
+Latest launch requests also add locally remembered original ROMs, a native SF
+Continue/New Adventure entry and a world-only2×speed toggle. Display scaling is
+separate. Keep rootv80 runtime/save bytes intact; verify native old-Save loading,
+browser return visits, speed/audio behavior and ordinary Save/import safety.
 
 Current checkpoint: v0.0.89 is published at `/world`; root v80 stays available.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,

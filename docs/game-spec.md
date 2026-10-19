@@ -744,6 +744,33 @@ visual acceptance remains open.
 
 Private v90 service-room identity — October 18, 2026:
 
+- Finalv90 Chrome180second observation dispatched410/410rows with4.82ms maximum
+  lateness,10,751actual video frames, advancing audio and zero recorded drops,
+  underruns or discarded frames. Guest traversal nevertheless diverged: endpoint
+  was SF Map/Mission Bay instead of Noe Valley. Input dispatch success does not
+  establish route completion. The existing SDK70ms minimum key hold differs from
+  native one-frame steering; investigate with a matching held-key reference.
+  Keep the failed receipt/screenshots in`town-v90-chrome-loop/`; gate stays open.
+
+Privatev91 launch/speed candidate — October18:
+
+- Native SF Continue/New Adventure menu replaces the stock attract sequence,
+  retaining normal save pointers/counters/loader/defaults and native naming flow.
+  Actual fresh-game controller input reaches Dogpatch; an actualv88Save passes
+  coldContinue plus all18guide selections, protected party/money/27local flags
+  and unchanged Flash. Target79299037… passes the58map/76connection/16gymwarp/
+  26roomwarp native circuit. Final matchingWASM and launch/browser checks continue.
+- World-only SDK derivative has1×default and2×guest/audio rate, preserving original
+  rootv80 runtime. Five API tests pass, including the actualv91cartridge at equal
+  guest frames, identical video/battery and unchanged state at toggle. Playback
+  sound speeds up including pitch; pitch-preserving time stretch is not claimed.
+- Player now has separate2×display/2×speed controls and locally remembers the
+  verified original ROM using browser CacheStorage. Return visits fetch/verify
+  the latest world manifest/patch; no ROM is uploaded. Removing the remembered
+  ROM preserves saves and the running game. Local storage roundtrip/failure tests
+  and TypeScript checks pass. Actual website reload/audio QA and publication are
+  pending; publicv89 remains unchanged at this checkpoint.
+
 - Alignment identified identical room compositions and district dialogue reused
   for clerks. `romhack/world/interior-details.json` now authors all13rooms:
   Dogpatch repair benches/tool storage, Noe repair-and-coffee seating, library

@@ -103,6 +103,8 @@ def main():
     ledger += apply_engine_guards(ROOT, engine, original)
     from world_guide import apply_guide
     ledger += apply_guide(ROOT,engine,original,manifest,plans)
+    from world_boot import apply_world_boot
+    ledger += apply_world_boot(engine, original)
     guard = engine / 'src/sf_save_guard.h'
     magic = fixture['save_magic'] if fixture else manifest['native']['save_magic']
     guard.write_text(guard.read_text().replace('0x5346', hex(magic)))
