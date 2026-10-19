@@ -8,9 +8,30 @@ import hashlib
 import json
 from pathlib import Path
 
-from walk_world import Walker
+from walk_world import Walker, KEYS
 from world_probe import Controller, ROOT
 from verify_town_life import close_dialogue
+
+
+class BrowserWalker(Walker):
+    """Use real held keys compatible with the SDK's70ms minimum key hold.
+
+    The standard native walker can release a direction after one frame as soon
+    as a coordinate changes. Such a pulse is stretched by normal browser input,
+    so it is not an equivalent replay. Keep this recorder's taps at8frames.
+    """
+    def walk(self, direction, *, wet=False):
+        if wet:
+            raise ValueError('This browser reference supports dry street walking only')
+        before = self.location()
+        for _ in range(4):
+            self.c.tap(KEYS[direction], 45)
+            if self.location() != before:
+                if self.location()[0] != before[0]:
+                    self.c.step(0, 120)
+                    self.transitions.append([before[0], self.location()[0]])
+                return self.location()
+        raise ValueError(f'Browser held-key movement blocked: {before} {direction}')
 
 
 def main():
@@ -59,7 +80,7 @@ def main():
             raise ValueError('Start did not restore the field')
 
     try:
-        w = Walker(c, manifest)
+        w = BrowserWalker(c, manifest)
         if w.location()[0] != 'noe_valley':
             raise ValueError('Use a matching Noe Valley native checkpoint')
         origin = w.location()
@@ -67,7 +88,7 @@ def main():
         w.travel('noe_valley_room')
         scene('repair-cafe')
         w.go((5, 7))
-        c.step(64, 1)
+        c.step(64, 8)
         c.step(0, 12)
         c.tap(1, 60)
         if byte('sGlobalScriptContextStatus') == 2:
@@ -109,6 +130,7 @@ def main():
               'rows': len(rows), 'frames': frames, 'seconds': seconds,
               'maps': sorted(w.seen), 'scenes': scenes,
               'browser_completion_proven': False,
+              'minimum_key_hold_frames': 8,
               'scope': 'Native reference for a bounded town/service/map browser loop; '
                        'full58-map native/WASM coverage and browser acceptance are separate'}
     (c.output / 'route-result.json').write_text(json.dumps(result, indent=2) + '\n')

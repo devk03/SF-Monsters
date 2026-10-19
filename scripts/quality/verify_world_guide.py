@@ -2,6 +2,7 @@
 import argparse,json,struct,sys
 from pathlib import Path
 from world_probe import Controller,ROOT
+from world_cold_continue import cold_continue
 from walk_world import Walker
 sys.path.insert(0,str(ROOT/'scripts/romhack'))
 from world_discoveries import load
@@ -18,9 +19,7 @@ def main():
     old_key,=struct.unpack_from('<I',sections[0],0xac)
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',ROOT/'.tools/benchmarks'/args.name,battery=args.saved/'saved.sav')
     try:
-        c.step(0,180);c.tap(8,90);c.tap(8,90)
-        for _ in range(4):c.tap(1,90)
-        c.step(0,180);w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
+        cold_continue(c);w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
         if c.position()!=expected['position']:raise ValueError('Actor refresh moved a still-valid saved player position')
         identifier,point=w.location();plan=w.plans[identifier]
         pointer,=struct.unpack('<I',c.read(c.symbols['gSaveBlock1Ptr'],4))

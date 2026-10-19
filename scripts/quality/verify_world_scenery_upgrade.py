@@ -2,6 +2,7 @@
 import argparse,json,struct
 from pathlib import Path
 from world_probe import Controller,ROOT
+from world_cold_continue import cold_continue
 from walk_world import Walker
 from flash_audit import unpack_slot
 
@@ -20,9 +21,7 @@ def main():
     def large(address,size):
         return b''.join(c.read(address+i,min(256,size-i)) for i in range(0,size,256))
     try:
-        c.step(0,180);c.tap(8,90);c.tap(8,90)
-        for _ in range(4):c.tap(1,90)
-        c.step(0,180);w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
+        cold_continue(c);w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
         identifier,point=w.location();plan=w.plans[identifier]
         previous=expected['position'];old_point=(previous['x'],previous['y'])
         if ((c.position()['group'],c.position()['number'])!=(previous['group'],previous['number'])

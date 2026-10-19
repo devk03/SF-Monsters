@@ -180,8 +180,8 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
           if (saved) {
             const bytes = decodeSave(saved); validateBattery(bytes);
             instance!.importBattery(bytes); setProgress(batteryProgress(bytes));
-            setNotice(legacy ? 'Your game is ready to continue. Press A.' : 'Save restored. Press Start at the title screen, then choose Continue.');
-          } else setNotice(legacy ? 'Press A to begin. Saves stay on this device.' : 'Press Start, then choose New Game. Save from the in-game menu before downloading a backup.');
+            setNotice(legacy ? 'Your game is ready to continue. Press A.' : world ? 'Save restored. Press X or A on CONTINUE SF WORLD. Click the game or press a key to enable sound.' : 'Save restored. Press Start at the title screen, then choose Continue.');
+          } else setNotice(legacy ? 'Press A to begin. Saves stay on this device.' : world ? 'Press X or A on NEW SF ADVENTURE. Save with Enter → Save once in the city.' : 'Press Start, then choose New Game. Save from the in-game menu before downloading a backup.');
         } catch { setNotice('The device save could not be restored. Import a valid backup or start a new delivery.'); }
         instance!.start(); setPhase('ready');
       } catch (error) {
@@ -256,7 +256,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
       setBackupUrl(null);
       localStorage.setItem(storageKey, encodeSave(bytes));
       lastSequence.current = -1; setProgress(batteryProgress(bytes));
-      setNotice(legacy ? 'Backup restored. Press A to continue your delivery.' : 'Backup restored. Press Start at the title screen, then choose Continue.');
+      setNotice(legacy ? 'Backup restored. Press A to continue your delivery.' : world ? 'Backup restored. Press X or A on CONTINUE SF WORLD.' : 'Backup restored. Press Start at the title screen, then choose Continue.');
       if (paused) { engine.current.resume(); setPaused(false); }
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Could not import the save. Your progress was kept.'); }
     if (importInput.current) importInput.current.value = '';

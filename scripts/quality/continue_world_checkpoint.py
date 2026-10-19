@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 from world_probe import Controller, ROOT
+from world_cold_continue import cold_continue
 from walk_world import Walker, DELTAS
 
 
@@ -21,10 +22,7 @@ def main():
     try:
         if expected['rom_sha256'] != c.digest():
             raise ValueError('Cold Continue receipt belongs to a different ROM')
-        c.step(0, 180); c.tap(8, 90); c.tap(8, 90)
-        for _ in range(4):
-            c.tap(1, 90)
-        c.step(0, 180)
+        cold_continue(c)
         if c.position() != expected['position']:
             raise ValueError('Cold native Continue changed the saved position')
         if bool(c.read(c.symbols['gPlayerAvatar'], 1)[0] & 8) != expected['surfing']:

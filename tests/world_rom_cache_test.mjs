@@ -21,6 +21,23 @@ assert.equal(await forgetWorldRom(), true);
 assert.equal(await readWorldRom(), null);
 assert.equal(await entries.get('/unrelated').text(), 'keep');
 
+// Forget must win even if a preceding large CacheStorage write is still pending.
+let finishWrite, writeStarted;
+const started = new Promise(resolve => { writeStarted = resolve; });
+const blocked = new Promise(resolve => { finishWrite = resolve; });
+globalThis.caches = {open: async () => ({
+  match: async key => entries.get(key)?.clone(),
+  put: async (key, value) => { writeStarted(); await blocked; entries.set(key, value); },
+  delete: async key => entries.delete(key),
+})};
+const writing = rememberWorldRom(original);
+await started;
+const forgetting = forgetWorldRom();
+finishWrite();
+assert.equal(await writing, true);
+assert.equal(await forgetting, true);
+assert.equal(await readWorldRom(), null, 'A delayed write must not resurrect a forgotten ROM');
+
 globalThis.caches = {open: async () => { throw new DOMException('Quota exceeded', 'QuotaExceededError'); }};
 assert.equal(await readWorldRom(), null);
 assert.equal(await rememberWorldRom(original), false);

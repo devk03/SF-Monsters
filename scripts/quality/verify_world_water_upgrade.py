@@ -2,6 +2,7 @@
 import argparse,json,struct
 from pathlib import Path
 from world_probe import Controller,ROOT
+from world_cold_continue import cold_continue
 from walk_world import Walker
 from flash_audit import unpack_slot
 
@@ -18,9 +19,7 @@ def check(saved,name,surfing):
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',
                  ROOT/'.tools/benchmarks'/name,battery=saved/'saved.sav')
     try:
-        c.step(0,180);c.tap(8,90);c.tap(8,90)
-        for _ in range(4):c.tap(1,90)
-        c.step(0,180);w=Walker(c,manifest);identifier,point=w.location();plan=w.plans[identifier]
+        cold_continue(c);w=Walker(c,manifest);identifier,point=w.location();plan=w.plans[identifier]
         old_point=tuple(expected['position'][k] for k in ('x','y'))
         if identifier!='route_17' or plan['rows'][old_point[1]][old_point[0]]!='W':
             raise ValueError('Fixture no longer covers the actual old shore/new bay geometry')
