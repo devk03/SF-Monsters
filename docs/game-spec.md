@@ -747,7 +747,10 @@ Private v90 service-room identity — October 18, 2026:
   and its threshold crop resembled a closed door panel on the floor. A second
   private candidate uses continuous plaster, capped corners, small windows and
   an explicit bottom opening;506/512tiles. These corrective visuals require
-  fresh matching native checks before publication. Fixed16x11bounds, door/arrival/counter coordinates
+  fresh matching native checks before publication. A bounded alignment review
+  also flagged identical computer desks; service-only wood counters now keep
+  the same32x16collision and counter behavior0x80, with no laptops. The kit
+  uses510/512tiles; finalnative services/Savecycles must validate this candidate. Fixed16x11bounds, door/arrival/counter coordinates
   and counter behavior stay intact. Furniture cannot overlap fixed interaction
   approaches or escape the floor; the independent world geometry audit passes.
   Interior details are included in frozen build inputs.

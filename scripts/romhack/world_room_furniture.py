@@ -51,6 +51,15 @@ def cards():
     rect(3, 12, 2, 4, 14); rect(11, 12, 2, 4, 14)
     yield 'room_chair', 16, 16, bytes(pixels)
 
+    pixels, rect = canvas(16, 16)
+    rect(0, 3, 16, 11, 12); rect(1, 4, 15, 2, 3)
+    rect(1, 6, 15, 6, 5); rect(2, 7, 13, 4, 9)
+    rect(3, 8, 12, 2, 5); rect(0, 13, 16, 2, 9)
+    rect(5, 1, 3, 3, 1); rect(8, 2, 1, 1, 4)
+    half = bytes(pixels)
+    yield 'service_counter', 32, 16, bytes(
+        half[y*16+(x if x<16 else 31-x)] for y in range(16) for x in range(32))
+
     # Continuous plaster, skirting and capped corners replace the old wide
     # apartment strip, whose right edge cut through a picture frame.
     pixels, rect = canvas(16, 32)

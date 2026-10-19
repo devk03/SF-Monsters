@@ -296,15 +296,15 @@
           "behavior": 0,
           "layer": 1
         },
-        "room_wall": {
+        "service_counter": {
           "first": 647,
-          "width": 1,
-          "height": 2,
+          "width": 2,
+          "height": 1,
           "blocked": true,
-          "behavior": 0,
+          "behavior": 128,
           "layer": 1
         },
-        "room_wall_left": {
+        "room_wall": {
           "first": 649,
           "width": 1,
           "height": 2,
@@ -312,7 +312,7 @@
           "behavior": 0,
           "layer": 1
         },
-        "room_wall_right": {
+        "room_wall_left": {
           "first": 651,
           "width": 1,
           "height": 2,
@@ -320,7 +320,7 @@
           "behavior": 0,
           "layer": 1
         },
-        "room_window": {
+        "room_wall_right": {
           "first": 653,
           "width": 1,
           "height": 2,
@@ -328,23 +328,15 @@
           "behavior": 0,
           "layer": 1
         },
-        "room_door_open": {
+        "room_window": {
           "first": 655,
           "width": 1,
-          "height": 1,
+          "height": 2,
           "blocked": true,
           "behavior": 0,
           "layer": 1
         },
-        "scenic_sea": {
-          "first": 656,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "seawall": {
+        "room_door_open": {
           "first": 657,
           "width": 1,
           "height": 1,
@@ -352,8 +344,24 @@
           "behavior": 0,
           "layer": 1
         },
-        "edge_hedge": {
+        "scenic_sea": {
           "first": 658,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "seawall": {
+          "first": 659,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "edge_hedge": {
+          "first": 660,
           "width": 1,
           "height": 1,
           "blocked": true,

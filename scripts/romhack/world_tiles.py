@@ -142,7 +142,7 @@ def compile_kit(root=ROOT, profile='residential'):
         card('wall_span',crop(room,176,0,0,176,32),176,32,9,floor,9)
         from world_room_furniture import cards as room_furniture
         for name,w,h,pixels in room_furniture():
-            card(name,pixels,w,h,9,floor,9)
+            card(name,pixels,w,h,9,floor,9,True,0x80 if name=='service_counter' else 0)
     if profile in ('industrial','civic'):
         directory=root/'assets/tiles/south-park-services-v3'
         receipt=json.loads((directory/'conversion.json').read_text())

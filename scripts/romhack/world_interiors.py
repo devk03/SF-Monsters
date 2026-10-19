@@ -59,7 +59,7 @@ def add_rooms(plans, manifest):
             occupied |= cells
             stamp(name,x+8,y+6)
         for service in room['services'].values():
-            x,y=service['actor'];stamp('desk',x+8,y+7)
+            x,y=service['actor'];stamp('service_counter',x+8,y+7)
         # Counter/furniture placement must leave both clerks reachable. The
         # validator checks the actual tiles and arrivals, not this recipe alone.
         residents = [{'dialogue':detail[field]} for field in ('rest','shop')]
