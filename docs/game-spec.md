@@ -771,6 +771,43 @@ Privatev91 launch/speed candidate — October18:
   and TypeScript checks pass. Actual website reload/audio QA and publication are
   pending; publicv89 remains unchanged at this checkpoint.
 
+Publishedv91 SF launch and2×speed — October18:
+
+- Public`/world` now serves0.0.91-world-preview, target79299037ca9568a404940b55199e0a125898cbb3a76f5a0f79aae4cdb58fd85b,
+  BPS777,905bytes. Site77/source20dda6081cc1d0b1be06c6b1dc87600a9dec9392,
+  successful deployment appgdep_6ad568b9aeec81919d1b12203a4671c9. Packaging
+  audit excludes commercial ROMs, saves and states. Rootv80patch/runtime/core/
+  worklet bytes remain unchanged; Actions stays manual-only.
+- Actual browser ZIP selection verifies/patches locally. A return visit remembers
+  the original ROM and automatically loads the new SF native menu. Browser1×/2×
+  control, paused toggle/resume, olderSFSave import/Continue and actual Noe street
+  movement pass;2× reports119.9emulated frames/sec. This is functional browser
+  evidence, not a full route/audio or visual-quality acceptance. Screenshots:
+  `town-v91-newgame-probe/browser-auto-menu.jpg` and`browser-2x-world.jpg`.
+- A bounded alignment review caught a pending CacheStorage write racing Forget;
+  serialized operations and a delayed-write regression now preserve removal.
+  World instructions useX/AonSFContinue/NewAdventure instead of the removed
+  title-screen Start instruction. NativeBack andOptions both return toSFmenu.
+- Fresh native naming flow reaches Dogpatch16,16, then ordinarySave counter1
+  cold-continues and moves with unchanged Flash. All13final room rest/shop/exit
+  checks and ordinary in-room Save/Continue cycles pass. The first new-room
+  probe failed because historical timed boot inputs sent surplusAinto a clerk
+  conversation. The read-only native helper now waits for real menu/field
+  readiness and pressesAonce; retained failed receipt is not a cartridge pass.
+  Fresh13room cycles pass under`town-v91-sf-room-save-cycles-fixed/`.
+- Full105,935-frame native/WASM replay matches all294,912guest RAM bytes,
+  SHA9c746a4f…. Actual v89blocked-room Save recovers3,2→3,3 and proves exit/
+  return with protected party/money/flags/Flash. Actual older land/SurfSaves
+  retain mode and safely exit; prebadgeSurfandstage7Falls/final-stamp locks pass.
+  Evidence prefixes:`town-v91-sf-boot-{guide,returns,wasm,services}`,
+  `town-v91-{native-boot,new-adventure-save,new-adventure-continue,room-recovery,
+  water-land,water-surf,falls-locked}`. Human quality approval remains0towns.
+- The corrected held-key reference uses8frame directional presses rather than
+  one-frame pulses; it visits six maps and returns natively in251.22seconds.
+  A separate real foreground browser run remains required; this native reference
+  does not prove browser scene completion. New2×audio diagnostics are also
+  separate from the passing API/worklet/actual-cartridge tests.
+
 - Alignment identified identical room compositions and district dialogue reused
   for clerks. `romhack/world/interior-details.json` now authors all13rooms:
   Dogpatch repair benches/tool storage, Noe repair-and-coffee seating, library

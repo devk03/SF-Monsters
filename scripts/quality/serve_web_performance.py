@@ -107,6 +107,16 @@ def report_byte_limit(identity):
 def snapshot(args):
     runtime_directory, report_schema = runtime_config(args)
     page, private_page = page_source(args)
+    world_speed = getattr(args, 'world_speed', None)
+    if world_speed is not None:
+        if world_speed not in (1, 2) or private_page or args.private_runtime is not None or args.input:
+            raise ValueError('World speed probe uses the published runtime without a route/private override')
+        for before, after in (
+                (b"import('/emulator/mgba.sdk.js')", b"import('/emulator/world.sdk.js')"),
+                (b'game.importBattery(battery);', f'game.setSpeed({world_speed});game.importBattery(battery);'.encode())):
+            if page.count(before) != 1:
+                raise ValueError('World speed diagnostic page anchor changed')
+            page = page.replace(before, after, 1)
     rom = args.rom.read_bytes()
     state = args.state.read_bytes()
     battery_path, metadata_path = args.state.with_suffix('.sav'), args.state.with_suffix('.json')
@@ -181,6 +191,7 @@ def snapshot(args):
         'private_runtime_override': getattr(args, 'private_runtime', None) is not None,
         'private_page_override': private_page,
         'controlled_stall_ms': 200 if controlled_stall else None,
+        'world_playback_speed': world_speed,
         'public_progress_touched': False, 'server_limit_seconds': args.seconds,
         'provenance_scope': 'Controller-only capture metadata and matching native state header; companion Flash hashed separately',
     }
@@ -296,6 +307,7 @@ def main():
     parser.add_argument('--private-page', type=Path, help='Explicit experimental HTML under .tools; requires private runtime/schema2.')
     parser.add_argument('--report-schema', type=int, choices=[1, 2], default=1)
     parser.add_argument('--controlled-stall', action='store_true', help='Expose one local200ms stress action during measurement.')
+    parser.add_argument('--world-speed', type=int, choices=[1, 2], help='Measure the public world SDK at an explicit speed; no controller route.')
     args = parser.parse_args()
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,43}', args.name):
         parser.error('Use a fresh lowercase benchmark name of at most 44 characters')
