@@ -112,6 +112,7 @@ def main():
     if args.connection_atlas:
         from world_seams import apply_seams
         ledger += apply_seams(engine, plans)
+        inputs['connection-atlas.json'] = (engine/'sf-world-seams.json').read_bytes()
     guard = engine / 'src/sf_save_guard.h'
     magic = fixture['save_magic'] if fixture else manifest['native']['save_magic']
     guard.write_text(guard.read_text().replace('0x5346', hex(magic)))
@@ -168,6 +169,7 @@ def main():
         if not dest.exists():
             shutil.copy2(source, dest)
     receipt = {'version': version, 'profile': 'module-playtest' if fixture else manifest['profile'],
+               'experimental_connection_atlas':args.connection_atlas,
                'fixture': fixture,
                'target_sha256': digest(target), 'base_sha256': digest(base),
                'patch_sha256': digest(patch), 'patch_roundtrip': 'byte-identical',

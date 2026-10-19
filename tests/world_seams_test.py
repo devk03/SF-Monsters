@@ -30,9 +30,11 @@ class SeamTests(unittest.TestCase):
     def setUpClass(cls):
         cls.plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
         cls.kits={p:compile_kit(profile=p) for p in {m.get('tile_profile','residential') for m in cls.plans}}
-        cls.reserved=set(range(16))|{166,211}|set(range(432,512))
+        cls.reserved=set(range(16))|{20,166,211}|set(range(432,512))
         cls.banks={1,2,4,5}
-        cls.atlases=make_atlases(cls.plans,cls.kits,cls.reserved,cls.banks)
+        cls.locks={3:{1:0x7fff,2:0x6b5a,3:0x5ef7,4:0x5294,13:0x2d70}}
+        cls.primary_banks={1:{0,2},11:{0,1,5},179:{0,4},368:{0,4}}
+        cls.atlases=make_atlases(cls.plans,cls.kits,cls.reserved,cls.banks,cls.locks,cls.primary_banks)
 
     def test_every_foreign_margin_quad_keeps_exact_colors_alpha_handedness_and_behavior(self):
         native={p['native_id']:p for p in self.plans}
@@ -63,7 +65,10 @@ class SeamTests(unittest.TestCase):
     def test_extension_allocations_cannot_overwrite_terrain_animation_doors_or_ui_palettes(self):
         for atlas in self.atlases:
             self.assertFalse(set(atlas['tile_slots']) & self.reserved)
-            self.assertFalse(set(atlas['palettes']) & (self.banks|{14,15}))
+            self.assertFalse(set(atlas['palettes']) & (set(atlas['reserved_palettes'])|{14,15}))
+            if 3 in atlas['palettes']:
+                colors=struct.unpack('<16H',atlas['palettes'][3])
+                for index,color in self.locks[3].items():self.assertEqual(colors[index],color)
             self.assertLessEqual(atlas['first']+len(atlas['records']),1024)
             self.assertEqual(len(set(atlas['tile_slots'])),len(atlas['tiles']))
 

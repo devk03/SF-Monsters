@@ -24,11 +24,15 @@ def primary_reservations(plans, engine):
            if p['legend'][t][0] < 512}
     # General water/sand/land-edge/waterfall/flower animations and the native
     # door scratch region live at432..511. Keep that entire range unavailable.
-    tiles, banks = set(range(16)) | set(range(432,512)), set()
-    bank_zero_tiles = set()
+    # The NORMAL renderer also draws implicit background word0x3014: tile20,
+    # palette3. It is not listed in any metatile record and must be reserved too.
+    tiles, banks = set(range(16)) | {20} | set(range(432,512)), set()
+    bank_zero_tiles = set();bank_usage={}
     for identifier in ids:
+        bank_usage[identifier]=set()
         for word in struct.unpack_from('<8H', raw, identifier*16):
             tiles.add(word & 1023); banks.add(word >> 12)
+            bank_usage[identifier].add(word >> 12)
             if word >> 12 == 0:bank_zero_tiles.add(word & 1023)
     # Stock world terrain only addresses transparent tile0 through bank0.
     # Its backdrop color is retained; the other15 entries can hold seam colors.
@@ -36,10 +40,15 @@ def primary_reservations(plans, engine):
     image=Image.open(engine/'data/tilesets/primary/general/tiles.png')
     if bank_zero_tiles == {0} and all(image.getpixel((x,y))==0 for y in range(8) for x in range(8)):
         banks.discard(0)
-    return tiles, banks
+    partial={}
+    rows=(engine/'data/tilesets/primary/general/palettes/03.pal').read_text().splitlines()[3:]
+    colors=[sum((v>>3)<<(5*j) for j,v in enumerate(map(int,row.split()))) for row in rows]
+    indices={image.getpixel((4*8+x,8+y)) for y in range(8) for x in range(8)}
+    partial[3]={index:colors[index] for index in indices}
+    return tiles, banks, partial, bank_usage
 
 
-def make_atlases(plans, kits, reserved_tiles, reserved_banks):
+def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None, primary_banks=None):
     by_native = {p['native_id']:p for p in plans}
     pool = [i for i in range(432) if i not in reserved_tiles]
     result = []
@@ -48,8 +57,19 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks):
             continue
         kit = kits[plan['tile_profile']]
         palettes = dict(kit['palettes'])
-        free_banks = [i for i in range(14) if i not in reserved_banks and i not in palettes]
+        active_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]<512}
+        for link in plan['connections']:
+            other=by_native[link['map']]
+            active_ids|={other['legend'][other['rows'][y][x]][0] for x,y in margin_points(other,link['direction'])
+                         if other['legend'][other['rows'][y][x]][0]<512}
+        active_banks=set(reserved_banks) if primary_banks is None else set().union(*(primary_banks[i] for i in active_ids))
+        if 0 not in reserved_banks:active_banks.discard(0)
+        free_banks = [i for i in range(14) if i not in active_banks and i not in palettes]
         packed_palettes = {}
+        for bank,entries in (palette_locks or {}).items():
+            if bank in free_banks:
+                free_banks.remove(bank);packed_palettes[bank]=[0]+[None]*15
+                for index,color in entries.items():packed_palettes[bank][index]=color
         lookup = {}
         def register(tile, identifier):
             for flags in (0,0x400,0x800,0xc00):
@@ -112,6 +132,11 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks):
                 mapping[metatile-512] = record_ids[key]
             neighbors.append({'native_id':other['native_id'],'mapping':mapping,'used':sorted(used)})
         result.append({'world_id':plan['world_id'],'native_id':plan['native_id'],
+                       'profile':plan['tile_profile'],
+                       'reserved_palettes':sorted(active_banks),
+                       'secondary_graphics':b''.join(bytes(tile[y*8+x] | tile[y*8+x+1]<<4
+                                                       for y in range(8) for x in range(0,8,2))
+                                                  for tile in kit['tiles'])+bytes((512-len(kit['tiles']))*32),
                        'first':512+len(kit['records']),'records':records,'attributes':attributes,
                        'tiles':extra_tiles,'tile_slots':pool[:len(extra_tiles)],
                        'palettes':{b:struct.pack('<16H',*(v if v is not None else 0 for v in values))
@@ -135,11 +160,15 @@ struct SFSeamAtlas {
     const u16 *records,*attributes,*tileSlots,*paletteSlots,*palettes;
     const u8 *graphics;
     const struct SFSeamNeighbor *neighbors;
+    const u8 *secondaryGraphics;
 };
 ''']
-    entries = []
+    entries = [];bases={}
     for i,a in enumerate(atlases):
         prefix = f'sSFSeam{i}'
+        if a['profile'] not in bases:
+            bases[a['profile']]='sSFSeamBase'+str(len(bases))
+            out.append(c_array(bases[a['profile']],'u8 ALIGNED(4)',a['secondary_graphics']))
         raw = bytes(v for tile in a['tiles'] for row in range(8) for x in range(0,8,2)
                     for v in [tile[row*8+x] | tile[row*8+x+1] << 4])
         out += [c_array(prefix+'Graphics','u8 ALIGNED(4)',raw),
@@ -157,7 +186,7 @@ struct SFSeamAtlas {
                    ','.join(neighbors or ['{0,0,NULL}'])+'};\n')
         entries.append('{MAP_GROUP('+a['native_id']+'),MAP_NUM('+a['native_id']+'),'+
                        ','.join(map(str,(len(a['neighbors']),len(a['palettes']),a['first'],len(a['records']),len(a['tiles']))))+','+
-                       ','.join(prefix+n for n in ('Records','Attributes','Tiles','PaletteSlots','Palettes','Graphics','Neighbors'))+'}')
+                       ','.join(prefix+n for n in ('Records','Attributes','Tiles','PaletteSlots','Palettes','Graphics','Neighbors'))+','+bases[a['profile']]+'}')
     out.append('static const struct SFSeamAtlas sSFSeamAtlases[] = {\n'+',\n'.join(entries)+'\n};\n')
     out.append(RUNTIME)
     return ''.join(out)
@@ -166,6 +195,8 @@ struct SFSeamAtlas {
 RUNTIME = r'''
 EWRAM_DATA static const struct SFSeamAtlas *sSFSeamCurrent = NULL;
 EWRAM_DATA static bool8 sSFSeamRedraw = FALSE;
+EWRAM_DATA static bool8 sSFSeamTransition = FALSE;
+static void LoadTilesetPalette(struct Tileset const *tileset,u16 destOffset,u16 size);
 static void SFSeamSelect(void)
 {
     u16 i;
@@ -206,7 +237,7 @@ bool8 SFSeamTakeRedraw(void)
 static void SFSeamLoadGraphics(void)
 {
     u16 start,end;
-    if (!sSFSeamCurrent) return;
+    if (!sSFSeamCurrent || sSFSeamTransition) return;
     for (start=0;start<sSFSeamCurrent->tileCount;start=end)
     {
         for (end=start+1;end<sSFSeamCurrent->tileCount
@@ -214,12 +245,36 @@ static void SFSeamLoadGraphics(void)
         LoadBgTiles(2,sSFSeamCurrent->graphics+start*32,(end-start)*32,sSFSeamCurrent->tileSlots[start]);
     }
 }
+static void SFSeamLoadSecondary(void)
+{
+    // The stock heap-decompression task takes several frames. Its old tiles
+    // cannot be paired with new records/palettes during those frames. A frozen
+    // raw copy queues the complete secondary bank for the same next VBlank.
+    if (!sSFSeamTransition) LoadBgTiles(2,sSFSeamCurrent->secondaryGraphics,16384,512);
+}
 static void SFSeamLoadPalettes(void)
 {
     u16 i;
-    if (!sSFSeamCurrent) return;
+    if (!sSFSeamCurrent || sSFSeamTransition) return;
     for (i=0;i<sSFSeamCurrent->paletteCount;i++)
         LoadPalette(sSFSeamCurrent->palettes+i*16+1,BG_PLTT_ID(sSFSeamCurrent->paletteSlots[i])+1,30);
+}
+void SFSeamCommit(void)
+{
+    u16 ime;
+    if (!sSFSeamTransition || !sSFSeamCurrent) return;
+    // Queue the entire scene only after its camera offsets and buffers are ready.
+    // Otherwise VBlank can interrupt the map-loading code between texture and
+    // tilemap updates, briefly rendering old records against new graphics.
+    ime=REG_IME;REG_IME=0;
+    sSFSeamTransition=FALSE;
+    SFSeamLoadSecondary();SFSeamLoadGraphics();
+    LoadTilesetPalette(gMapHeader.mapLayout->primaryTileset,BG_PLTT_ID(0),NUM_PALS_IN_PRIMARY*PLTT_SIZE_4BPP);
+    LoadTilesetPalette(gMapHeader.mapLayout->secondaryTileset,BG_PLTT_ID(NUM_PALS_IN_PRIMARY),
+                      (NUM_PALS_TOTAL-NUM_PALS_IN_PRIMARY)*PLTT_SIZE_4BPP);
+    SFSeamLoadPalettes();
+    DoScheduledBgTilemapCopiesToVram();
+    REG_IME=ime;
 }
 '''
 
@@ -227,8 +282,10 @@ static void SFSeamLoadPalettes(void)
 def apply_seams(engine, plans):
     from world_tiles import compile_kit
     kits = {p:compile_kit(profile=p) for p in {m.get('tile_profile','residential') for m in plans}}
-    reserved_tiles,reserved_banks = primary_reservations(plans,engine)
-    atlases = make_atlases(plans,kits,reserved_tiles,reserved_banks)
+    reserved_tiles,reserved_banks,palette_locks,bank_usage = primary_reservations(plans,engine)
+    atlases = make_atlases(plans,kits,reserved_tiles,reserved_banks,palette_locks,bank_usage)
+    if any(p['connections'] and p['metadata']['weather']!='WEATHER_SUNNY' for p in plans):
+        raise ValueError('Review weather-aware seam palette commit before adding other authored weather')
     (engine/'src/sf_world_seams.h').write_text(header(atlases))
     path = engine/'src/fieldmap.c'
     source = path.read_text()
@@ -246,14 +303,16 @@ def apply_seams(engine, plans):
         ('        MoveMapViewToBackup(direction);',
          '        if (sSFSeamCurrent) {ClearSavedMapView();sSFSeamRedraw=TRUE;}\n'
          '        else MoveMapViewToBackup(direction);'),
+        ('        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);',
+         '        sSFSeamTransition=sSFSeamCurrent!=NULL;\n        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);'),
         ('\n    CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);',
-         '\n    CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);\n    SFSeamLoadGraphics();'),
+         '\n    if (sSFSeamCurrent) SFSeamLoadSecondary();\n    else CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);\n    SFSeamLoadGraphics();'),
         ('\n    CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);',
-         '\n    CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);\n    SFSeamLoadGraphics();'),
+         '\n    if (sSFSeamCurrent) SFSeamLoadSecondary();\n    else CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);\n    SFSeamLoadGraphics();'),
         ('\n        CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);',
-         '\n        CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);\n        SFSeamLoadGraphics();'),
+         '\n        if (sSFSeamCurrent) SFSeamLoadSecondary();\n        else CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);\n        SFSeamLoadGraphics();'),
         ('    LoadTilesetPalette(mapLayout->secondaryTileset, BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);',
-         '    LoadTilesetPalette(mapLayout->secondaryTileset, BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);\n    SFSeamLoadPalettes();'),
+         '    if (!sSFSeamTransition)\n        LoadTilesetPalette(mapLayout->secondaryTileset, BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);\n    SFSeamLoadPalettes();'),
     ]
     for before,after in patches:
         if source.count(before)!=1:raise ValueError('Pinned seam anchor changed: '+before)
@@ -261,10 +320,29 @@ def apply_seams(engine, plans):
     path.write_text(source)
     path=engine/'src/field_camera.c';source=path.read_text()
     source=source.replace('EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback',
-        'const u16 *SFSeamMetatile(u16 id);\nbool8 SFSeamTakeRedraw(void);\n\nEWRAM_DATA bool8 gUnusedBikeCameraAheadPanback',1)
+        'const u16 *SFSeamMetatile(u16 id);\nbool8 SFSeamTakeRedraw(void);\nvoid SFSeamCommit(void);\n\nEWRAM_DATA bool8 gUnusedBikeCameraAheadPanback',1)
+    before='void CameraUpdate(void)\n{'
+    helper='''// Keep the exiting partial row/column during the connection step.
+// The logical tile anchor advances before its pixel scroll catches up.
+static void SFSeamRedrawView(int dx,int dy)
+{
+    u8 x=sFieldCameraOffset.xTileOffset,y=sFieldCameraOffset.yTileOffset;
+    if (dx>0) sFieldCameraOffset.xTileOffset=(x+30)%32;
+    if (dy>0) sFieldCameraOffset.yTileOffset=(y+30)%32;
+    DrawWholeMapViewInternal(gSaveBlock1Ptr->pos.x-(dx>0),gSaveBlock1Ptr->pos.y-(dy>0),gMapHeader.mapLayout);
+    sFieldCameraOffset.xTileOffset=x;sFieldCameraOffset.yTileOffset=y;
+    sFieldCameraOffset.copyBGToVRAM=TRUE;
+}
+
+'''
+    if source.count(before)!=1:raise ValueError('Pinned seam camera-update declaration changed')
+    source=source.replace(before,helper+before,1)
     before='        RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);'
     if source.count(before)!=1:raise ValueError('Pinned seam camera anchor changed')
-    source=source.replace(before,'        if (SFSeamTakeRedraw()) DrawWholeMapView();\n        else '+before.strip(),1)
+    source=source.replace(before,'        if (SFSeamTakeRedraw()) SFSeamRedrawView(deltaX,deltaY);\n        else '+before.strip(),1)
+    before='    gTotalCameraPixelOffsetY -= movementSpeedY;'
+    if source.count(before)!=1:raise ValueError('Pinned seam pixel-offset commit anchor changed')
+    source=source.replace(before,before+'\n    SFSeamCommit();',1)
     before='    DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * NUM_TILES_PER_METATILE, offset);'
     after='''    {
         const u16 *seam=SFSeamMetatile(MapGridGetMetatileIdAt(x,y));
@@ -274,8 +352,11 @@ def apply_seams(engine, plans):
     path.write_text(source.replace(before,after,1))
     summary = {'atlases':len(atlases),'reserved_primary_tiles':sorted(reserved_tiles),
                'reserved_primary_palettes':sorted(reserved_banks),
+               'reserved_primary_palette_entries':palette_locks,
+               'primary_palette_banks_by_metatile':{i:sorted(b) for i,b in bank_usage.items()},
                'maps':[{'id':a['world_id'],'extra_tiles':len(a['tiles']),
-                        'extra_metatiles':len(a['records']),'palette_slots':list(a['palettes'])}
+                        'extra_metatiles':len(a['records']),'palette_slots':list(a['palettes']),
+                        'reserved_primary_palettes':a['reserved_palettes']}
                        for a in atlases]}
     (engine/'sf-world-seams.json').write_text(json.dumps(summary,indent=2)+'\n')
     return ['src/fieldmap.c','src/field_camera.c','src/sf_world_seams.h']

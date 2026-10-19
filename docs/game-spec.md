@@ -696,6 +696,41 @@ matching accelerated audio consumption. Rootv80 runtime and saves stay unchanged
 Verify switching while playing/paused, reset/import and actual browser frame/audio
 behavior; no speed or launch change closes unfinished town/route acceptance.
 
+**October18 private connection-rendering repair — not published.** Real native
+screenshots exposed corruption at cross-profile connections despite native/WASM
+agreement. Foreign numeric tile IDs, cached map-view cells and retained viewport
+records were being interpreted under a different secondary kit. A private opt-in
+connection atlas retains exact neighboring art, colors, collision and behavior;
+it reserves primary terrain/animation/door graphics, skips incompatible cached
+views and redraws the whole visible viewport including partial edge tiles. Frame
+inspection also exposed a graphics/tilemap transfer gap: the repaired candidate
+queues a complete scene transaction only after its camera offsets are ready.
+
+- Private target `a421b0f8b768be4172b9c9f43e3da070f7886179f5a68e395bb1e0d0c3ce1876`
+  passes compiled58-map audits and exact BPS roundtrip. Atlas capacity tops out
+  at406of413spare primary graphics slots, including reservation of the renderer's
+  implicit background tile20/palette3colors; no fake boundary buildings, warps,
+  footprints, source art or contributor bindings replace the real connections.
+- Frozen native verifier receipts cover38walk-only trial pairs, all76directed
+  connections and37outdoor maps, with228edge/inward stages. Six further pairs
+  inspect192animation frames across allfour directions and both sides. Native
+  Surf/Waterfall use, reserved primary terrain/water colors, live map buffers,
+  exact linked-art/VRAM colors and visible tilemaps pass. Ordinary v88cold Continue
+  retains all600party bytes before walking; later native walking friendship
+  increases are explicitly bounded while other protected state and Flash remain
+  checked. A separate guide check restores both palette13buffers and field art.
+- Evidence: `.tools/benchmarks/town-seam-reserved-all-{0,8,16,24,32}/`,
+  `town-seam-reserved-transient/`, `town-seam-reserved-water/` and
+  `town-seam-reserved-guide/`. Earlier failing graphics/timing candidates and the
+  controller frame-limit attempt remain preserved. See
+  [connection atlas design and limits](world/connection-atlas.md).
+- `--connection-atlas` defaults off; build receipts record the experimental flag,
+  generated overlays and reservations. Publicv92 and standard-host QA remain
+  untouched by this private experiment. Maintainer integration review, full58-map
+  room/gym/service/save regressions on the integrated ROM, matching native/WASM,
+  actual browser traversal/performance and human visual acceptance remain open.
+  This closes no full-world quality gate.
+
 **October18 native region-map rebuild — private candidate.** The user explicitly
 rejected the v91 diagram's presentation. The replacement uses original authored
 16color coastal relief, western park/hill contours, small island silhouettes,
