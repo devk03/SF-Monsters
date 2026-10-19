@@ -1,0 +1,84 @@
+"""Independent RGB555 reconstruction protects real art across profile boundaries."""
+import json
+import struct
+import sys
+import unittest
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'scripts/romhack'))
+from generate_world import generate
+from world_tiles import compile_kit
+from world_seams import make_atlases,margin_points
+
+
+def quadrant(word,tiles,palettes):
+    raw=tiles[word & 1023]
+    colors=struct.unpack('<16H',palettes[word >> 12])
+    result=[]
+    for y in range(8):
+        for x in range(8):
+            sx=7-x if word & 0x400 else x
+            sy=7-y if word & 0x800 else y
+            index=raw[sy*8+sx]
+            result.append(colors[index] if index else None)
+    return result
+
+
+class SeamTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        cls.kits={p:compile_kit(profile=p) for p in {m.get('tile_profile','residential') for m in cls.plans}}
+        cls.reserved=set(range(16))|{166,211}|set(range(432,512))
+        cls.banks={1,2,4,5}
+        cls.atlases=make_atlases(cls.plans,cls.kits,cls.reserved,cls.banks)
+
+    def test_every_foreign_margin_quad_keeps_exact_colors_alpha_handedness_and_behavior(self):
+        native={p['native_id']:p for p in self.plans}
+        for atlas in self.atlases:
+            plan=next(p for p in self.plans if p['world_id']==atlas['world_id'])
+            host=self.kits[plan['tile_profile']]
+            actual_tiles={512+i:t for i,t in enumerate(host['tiles'])}
+            actual_tiles.update(zip(atlas['tile_slots'],atlas['tiles']))
+            actual_palettes=dict(host['palettes'],**{})
+            actual_palettes.update(atlas['palettes'])
+            for neighbor in atlas['neighbors']:
+                foreign=self.kits[native[neighbor['native_id']]['tile_profile']]
+                source_tiles={512+i:t for i,t in enumerate(foreign['tiles'])}
+                for identifier in neighbor['used']:
+                    if identifier<512:continue
+                    mapped=neighbor['mapping'][identifier-512]
+                    if mapped<atlas['first']:
+                        words=host['records'][mapped-512];attribute=host['attributes'][mapped-512]
+                    else:
+                        words=atlas['records'][mapped-atlas['first']];attribute=atlas['attributes'][mapped-atlas['first']]
+                    expected=foreign['records'][identifier-512]
+                    self.assertEqual(attribute,foreign['attributes'][identifier-512])
+                    for a,b in zip(words,expected):
+                        self.assertEqual(quadrant(a,actual_tiles,actual_palettes),
+                                         quadrant(b,source_tiles,foreign['palettes']),
+                                         (atlas['world_id'],neighbor['native_id'],identifier))
+
+    def test_extension_allocations_cannot_overwrite_terrain_animation_doors_or_ui_palettes(self):
+        for atlas in self.atlases:
+            self.assertFalse(set(atlas['tile_slots']) & self.reserved)
+            self.assertFalse(set(atlas['palettes']) & (self.banks|{14,15}))
+            self.assertLessEqual(atlas['first']+len(atlas['records']),1024)
+            self.assertEqual(len(set(atlas['tile_slots'])),len(atlas['tiles']))
+
+    def test_exhausted_graphics_and_palette_capacity_fail_instead_of_substituting_art(self):
+        with self.assertRaisesRegex(ValueError,'graphics slots'):
+            make_atlases(self.plans,self.kits,set(range(512)),self.banks)
+        with self.assertRaisesRegex(ValueError,'palette colors'):
+            make_atlases(self.plans,self.kits,self.reserved,set(range(16)))
+
+    def test_native_east_margin_has_eight_columns_other_sides_have_seven(self):
+        p={'rows':['.'*32]*24}
+        self.assertEqual(set(margin_points(p,'left')),{(x,y) for x in range(25,32) for y in range(24)})
+        self.assertEqual(set(margin_points(p,'right')),{(x,y) for x in range(8) for y in range(24)})
+        self.assertEqual(len(margin_points(p,'up')),32*7)
+        self.assertEqual(len(margin_points(p,'down')),32*7)
+
+
+if __name__=='__main__':unittest.main()
