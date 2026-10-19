@@ -30,6 +30,12 @@ def main():
     interiors={x['id']:x['area'] for x in manifest['gyms']+manifest['interiors']}
     routes={r['id']:r for r in manifest['routes']}
     routes['league_route']={'from':manifest['league']['from_area'],'to':manifest['league']['venue']}
+    symbol_rows=subprocess.check_output(['arm-none-eabi-nm','-S','--defined-only',
+        str(engine/'sf-world-blockout.elf')],text=True).splitlines()
+    edge_bytes=next(int(row.split()[1],16) for row in symbol_rows if row.split()[-1]=='sSFGuideEdges')
+    if edge_bytes%len(routes) or edge_bytes//len(routes)<17:
+        raise ValueError('Compiled region route table has an unsupported native stride')
+    edge_stride=edge_bytes//len(routes)
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',ROOT/'.tools/benchmarks'/args.name,
                  state=state,battery=state.with_suffix('.sav'));checked=[]
     def byte(symbol):return c.read(c.symbols[symbol],1)[0]
@@ -61,8 +67,10 @@ def main():
                 route=routes[owner];parent=route['from'];a,b=pixels[parent],pixels[route['to']]
                 # Read the compiled route's authored chart vertices, then derive
                 # its half-distance independently of the producer's midpoint.
-                edge_id=list(routes).index(owner);edge=c.read(c.symbols['sSFGuideEdges']+edge_id*17,17)
+                edge_id=list(routes).index(owner);edge=c.read(c.symbols['sSFGuideEdges']+edge_id*edge_stride,17)
                 points=[tuple(edge[5+n*2:7+n*2]) for n in range(edge[4])]
+                if not 2<=edge[4]<=6 or points[0]!=a or points[-1]!=b:
+                    raise ValueError('Compiled region corridor endpoints differ from its world connection')
                 lengths=[abs(x-u)+abs(y-v) for (x,y),(u,v) in zip(points,points[1:])]
                 remaining=sum(lengths)//2
                 for (x,y),(u,v),length in zip(points,points[1:],lengths):
