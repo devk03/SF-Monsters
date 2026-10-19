@@ -677,6 +677,17 @@ using bounded reviews, never a recurring monitor.
    and world feel require explicit user acceptance. Counts, palette names and
    source checks cannot grant that acceptance. Record each subset honestly.
 
+**October18 launch/speed additions.** The world website should remember a user's
+verified original Emerald ROM locally and apply the latest verified SF patch on
+return visits. First visits still select their own ROM; no commercial ROM is
+hosted or uploaded. Forgetting the remembered ROM preserves ordinary saves.
+The native cartridge must clearly enter SF Continue/New Adventure rather than
+the stock Emerald attract sequence, retaining native Save/loading/naming safety.
+Add a world-only2×speed toggle, distinct from display size, with1×default and
+matching accelerated audio consumption. Rootv80 runtime and saves stay unchanged.
+Verify switching while playing/paused, reset/import and actual browser frame/audio
+behavior; no speed or launch change closes unfinished town/route acceptance.
+
 Preserve rootv80, module contracts, original plan, private ROM/save handling and
 manual-only GitHub Actions; make coherent frequent commits with[skip ci]. Final
 gym encounters, contributor missions, full roster/battle/audio/campaign parity

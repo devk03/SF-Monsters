@@ -13,14 +13,14 @@ async function sha256(bytes: Uint8Array): Promise<string> {
 /** All ROM bytes stay in the browser. Only our manifest and patch are fetched. */
 export async function patchLocalRom(base: Uint8Array, edition: 'emerald' | 'world' = 'emerald'): Promise<{rom: Uint8Array; version: string}> {
   const directory = edition === 'world' ? '/world-patch' : '/patch';
-  const response = await fetch(`${directory}/manifest.json`);
+  const response = await fetch(`${directory}/manifest.json`, edition === 'world' ? {cache: 'no-store'} : undefined);
   if (!response.ok) throw new Error('The SF patch is unavailable. Try again.');
   const manifest = await response.json() as PatchManifest;
   if (edition === 'world' && (manifest.profile !== 'world-preview' || manifest.save_magic !== 0x5743 || manifest.save_schema !== 1 || manifest.fixture !== null))
     throw new Error('This is not a supported world preview patch. Your current game was kept.');
   if (base.length !== manifest.base_bytes || await sha256(base) !== manifest.base_sha256)
     throw new Error('Use the USA/Europe Emerald .gba ROM specified for this patch. The selected file was kept unchanged.');
-  const patchResponse = await fetch(`${directory}/sf-mini-monsters.bps`);
+  const patchResponse = await fetch(`${directory}/sf-mini-monsters.bps`, edition === 'world' ? {cache: 'no-store'} : undefined);
   if (!patchResponse.ok) throw new Error('The SF patch could not be downloaded.');
   const patch = new Uint8Array(await patchResponse.arrayBuffer());
   if (await sha256(patch) !== manifest.patch_sha256) throw new Error('Patch integrity check failed. Refresh and try again.');

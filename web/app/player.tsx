@@ -3,28 +3,38 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { countCaught, decodeSave, encodeSave, nextQuest, readProgress, validateSave, type Progress } from './save-format';
 import {flashCounter, validateSfFlashSave} from './flash-save';
 import {patchLocalRom} from './rom-loader';
+import {forgetWorldRom, readWorldRom, rememberWorldRom} from './world-rom-cache';
 
 type Engine = {
   start(): void; pause(): void; resume(): void; destroy(): void;
+  setSpeed?(value: 1 | 2): number;
   exportBattery(): Uint8Array; importBattery(bytes: Uint8Array): void;
   config: { write(key: string, value: number | boolean): boolean };
 };
 type Account = { id: string; name: string } | null;
 declare global { interface Window {
   sfMiniMonstersLoad?: (config: unknown) => Promise<Engine>;
+  sfWorldMonstersLoad?: (config: unknown) => Promise<Engine>;
+  sfWorldMonstersExtract?: (bytes: Uint8Array) => Promise<{bytes: Uint8Array}>;
   sfMiniMonstersExtract?: (bytes: Uint8Array) => Promise<{bytes: Uint8Array}>;
 } }
 let runtimeLoader: Promise<void> | null = null;
-function loadRuntime(): Promise<void> {
-  if (runtimeLoader) return runtimeLoader;
-  runtimeLoader = new Promise((resolve, reject) => {
+let worldRuntimeLoader: Promise<void> | null = null;
+function loadRuntime(world = false): Promise<void> {
+  const current = world ? worldRuntimeLoader : runtimeLoader;
+  if (current) return current;
+  const pending = new Promise<void>((resolve, reject) => {
     const script = document.createElement('script');
-    script.type = 'module'; script.src = '/emulator/entry.js';
+    script.type = 'module'; script.src = world ? '/emulator/world-entry.js' : '/emulator/entry.js';
     script.onload = () => resolve();
-    script.onerror = () => { runtimeLoader = null; reject(new Error('The emulator could not be loaded. Try again.')); };
+    script.onerror = () => {
+      if (world) worldRuntimeLoader = null; else runtimeLoader = null;
+      script.remove(); reject(new Error('The emulator could not be loaded. Try again.'));
+    };
     document.head.appendChild(script);
   });
-  return runtimeLoader;
+  if (world) worldRuntimeLoader = pending; else runtimeLoader = pending;
+  return pending;
 }
 const MAPS = ['Outer Sunset', 'SoMa / South Park', 'Cognition Lab'];
 const ROUTE = [
@@ -65,11 +75,37 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(false);
   const mutedRef = useRef(false);
+  const [speed, setSpeed] = useState<1 | 2>(1);
+  const speedRef = useRef<1 | 2>(1);
+  const romRequest = useRef(0);
+  const [rememberedRom, setRememberedRom] = useState(false);
   const [help, setHelp] = useState(false);
   const [backupUrl, setBackupUrl] = useState<string | null>(null);
   useEffect(() => () => { if (backupUrl) URL.revokeObjectURL(backupUrl); }, [backupUrl]);
   const [retry, setRetry] = useState(0);
   const storageKey = `sf-mini-monsters:${legacy ? 'v1' : world ? 'world:v1' : 'emerald:v2'}:${account?.id ?? 'guest'}`;
+  useEffect(() => {
+    if (!world) return;
+    const request = ++romRequest.current;
+    let disposed = false;
+    const restore = async () => {
+      const base = await readWorldRom();
+      if (disposed || request !== romRequest.current || !base) return;
+      setRememberedRom(true); setPhase('verifying');
+      try {
+        const result = await patchLocalRom(base, 'world');
+        if (disposed || request !== romRequest.current) return;
+        setRomBytes(result.rom); setPaused(false);
+        setNotice(`Loading ${result.version} from your remembered ROM. Click the game or press a key to enable sound.`);
+      } catch (error) {
+        if (disposed || request !== romRequest.current) return;
+        setPhase('waiting');
+        setNotice(error instanceof Error ? error.message : 'Select your Emerald ROM again to play.');
+      }
+    };
+    void restore();
+    return () => { disposed = true; };
+  }, [world]);
   const validateBattery = useCallback((bytes: Uint8Array) => {
     if (legacy) validateSave(bytes); else validateSfFlashSave(bytes, edition);
   }, [legacy, edition]);
@@ -119,7 +155,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
     const initialize = async () => {
       setPhase('loading');
       try {
-        await loadRuntime();
+        await loadRuntime(world);
         let rom = romBytes;
         if (legacy) {
           const response = await fetch('/game/sf-mini-monsters.gba');
@@ -127,7 +163,8 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
           rom = new Uint8Array(await response.arrayBuffer());
         }
         lastSequence.current = -1;
-        instance = await window.sfMiniMonstersLoad!({ canvasEl: canvas.current, assets: { rom },
+        const load = world ? window.sfWorldMonstersLoad! : window.sfMiniMonstersLoad!;
+        instance = await load({ canvasEl: canvas.current, assets: { rom },
           jsUrl: '/emulator/mgba.js', wasmUrl: '/emulator/mgba.wasm', persist: null,
           onEvent: (event: {type: string; fps?: number}) => {
             if (event.type === 'frame' && Number.isFinite(event.fps) && canvas.current) {
@@ -137,6 +174,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
           storageNamespace: storageKey, options: { system: 'gba', idleOptimization: 'ignore', volume: mutedRef.current ? 0 : 0.35, logLevel: 'error' } });
         if (disposed) { instance?.destroy(); return; }
         engine.current = instance;
+        if (world) instance!.setSpeed!(speedRef.current);
         try {
           const saved = localStorage.getItem(storageKey);
           if (saved) {
@@ -160,25 +198,43 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
       instance?.destroy(); engine.current = null;
       window.removeEventListener('pagehide', onHide); window.removeEventListener('blur', releaseKeys);
     };
-  }, [storageKey, retry, persist, releaseKeys, legacy, romBytes, validateBattery, batteryProgress]);
+  }, [storageKey, retry, persist, releaseKeys, legacy, world, romBytes, validateBattery, batteryProgress]);
   const loadRom = async (file?: File) => {
     if (!file) return;
+    const request = ++romRequest.current;
     const wasRunning = !!engine.current;
     releaseKeys(); engine.current?.pause(); setPhase('verifying');
     try {
       if (file.size > 24 * 1024 * 1024) throw new Error('Select an Emerald .gba ROM or its ZIP archive.');
-      await loadRuntime();
+      await loadRuntime(world);
       const selected = new Uint8Array(await file.arrayBuffer());
-      const {bytes} = await window.sfMiniMonstersExtract!(selected);
+      const extract = world ? window.sfWorldMonstersExtract! : window.sfMiniMonstersExtract!;
+      const {bytes} = await extract(selected);
       const result = await patchLocalRom(bytes, edition);
+      if (request !== romRequest.current) return;
       persist(); setRomBytes(result.rom); setNotice('Emerald verified and SF patch applied locally.');
       setPaused(false);
+      if (world) {
+        const remembered = await rememberWorldRom(bytes);
+        if (request === romRequest.current) {
+          setRememberedRom(remembered);
+          if (!remembered) setNotice('Game loaded. Browser storage is unavailable; select your ROM again next visit.');
+        }
+      }
     } catch (error) {
+      if (request !== romRequest.current) return;
       setNotice(error instanceof Error ? error.message : 'The selected ROM could not be opened.');
       setPhase(wasRunning ? 'ready' : 'waiting');
       if (wasRunning && !paused) engine.current?.resume();
     }
     if (romInput.current) romInput.current.value = '';
+  };
+  const forgetRom = async () => {
+    ++romRequest.current;
+    if (await forgetWorldRom()) {
+      setRememberedRom(false);
+      setNotice('Remembered ROM removed. Your current game and saves are kept. Select a ROM on your next visit.');
+    } else setNotice('The browser could not remove the remembered ROM. Your game and saves were kept.');
   };
   const backup = () => {
     try {
@@ -209,6 +265,15 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
     releaseKeys(); persist();
     if (paused) engine.current?.resume(); else engine.current?.pause();
     setPaused(!paused); canvas.current?.focus({ preventScroll: true });
+  };
+  const toggleSpeed = () => {
+    if (!engine.current?.setSpeed) return;
+    try {
+      const next = speedRef.current === 1 ? 2 : 1;
+      engine.current.setSpeed(next);
+      speedRef.current = next; setSpeed(next);
+      canvas.current?.focus({ preventScroll: true });
+    } catch { setNotice('Speed could not be changed. Your game was kept.'); }
   };
   const control = (label: string, code: string, className = '') => <button type="button" className={`game-key ${className}`}
     disabled={phase !== 'ready' || paused} aria-label={label} key={code}
@@ -253,11 +318,13 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
           <button onClick={() => { const value = !muted; setMuted(value); mutedRef.current = value; engine.current?.config.write('volume', value ? 0 : 0.35); }} disabled={phase !== 'ready'}>{muted ? 'Sound on' : 'Mute'}</button>
           {world && <button onClick={() => setHelp(!help)} aria-expanded={help}>Controls</button>}
           {world && <button onClick={() => setCompactDisplay(!compactDisplay)} aria-pressed={compactDisplay}>2× display</button>}
+          {world && <button onClick={toggleSpeed} disabled={phase !== 'ready'} aria-pressed={speed === 2}>2× speed</button>}
           {world ? <details className="file-tools"><summary>Save &amp; files</summary><div>
             <p>Use Start → Save in the game first. World saves stay separate from the Sunset preview.</p>
             <button onClick={backup} disabled={phase !== 'ready'}>Download save</button>
             <button onClick={() => importInput.current?.click()} disabled={phase !== 'ready'}>Import world save</button>
             <button onClick={() => romInput.current?.click()} disabled={phase === 'verifying' || phase === 'loading'}>Choose another ROM</button>
+            {rememberedRom && <button onClick={() => void forgetRom()} disabled={phase === 'verifying' || phase === 'loading'}>Forget remembered ROM</button>}
             {romUrl && <a href={romUrl} download={`${fileStem}.gba`}>Download patched GBA</a>}
           </div></details> : <>
             <button onClick={backup} disabled={phase !== 'ready'}>Save backup</button>
@@ -292,6 +359,7 @@ export default function GamePlayer({ account, signInUrl, signOutUrl, variant = '
         <details className="preview-details"><summary>About this preview</summary>
           <p>Neighborhoods, local favors and service interiors are playable. Gym battles and contributor story missions are still being built. Gym rooms currently grant temporary access stamps; the loan creature is a development tool.</p>
           <p>Play as a guest. Signing in gives you a separate save slot on this device. Your ROM stays in your browser.</p>
+          <p>Your verified ROM is remembered on this device so future visits load the latest SF patch automatically. Remove it through Save &amp; files → Forget remembered ROM. Saves are kept separately.</p>
           <a href="/">Sunset preview</a><a href="/prototype">Earlier courier prototype</a>
         </details>
       </aside> : <aside className="quest-sidebar">
