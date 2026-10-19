@@ -768,6 +768,22 @@ Private v90 service-room identity — October 18, 2026:
   `town-v90-all-room-save-cycles/`, `town-v90-room-furniture-recovery/` and
   `town-v90-final-returns/`.
 
+- Separate host diagnosis: a10second sample of the exact publicv89 ROM/core in
+  Chrome processed3,752audio quanta with playback started,10.0053seconds of
+  advancing audio clock and zero drops/underruns/discarded frames. The frozen
+  in-app-browser receipt remains failed. This isolates a host-specific observation,
+  not a proven root cause or a complete route pass. Evidence:
+  `town-v89-chrome-audio-probe/`. Final-ROM foreground route QA moves to Chrome
+  with the same strict timing/audio checks; no runtime or thresholds were changed.
+
+- Final room candidate `abb7871cc4b5177c4c274bc6e703643d99810f37786323b35e04db8c829e00bb`
+  passes the fresh58map native circuit, all13final-counter service/exit checks,
+  all13ordinary in-room Save/coldContinue cycles and actual v89blocked-room Save
+  recovery. The new reusable `verify_world_room_save_cycles.py` composes existing
+  native probes with a30minute total bound, matching-ROM enforcement and retained
+  partial logs; it does not grant quality approval. Centered final-room views are
+  in `town-v90-counters-room-views/`; full WASM/town tour/browser checks continue.
+
 Published v89 native SF Map — October 18, 2026:
 
 - Replaced the sparse graph with original peninsula/bay/island pixel artwork,
