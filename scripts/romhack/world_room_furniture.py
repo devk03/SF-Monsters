@@ -50,3 +50,29 @@ def cards():
     rect(2, 8, 12, 4, 12); rect(3, 8, 10, 2, 5)
     rect(3, 12, 2, 4, 14); rect(11, 12, 2, 4, 14)
     yield 'room_chair', 16, 16, bytes(pixels)
+
+    # Continuous plaster, skirting and capped corners replace the old wide
+    # apartment strip, whose right edge cut through a picture frame.
+    pixels, rect = canvas(16, 32)
+    rect(0, 0, 16, 32, 1); rect(0, 0, 16, 1, 14)
+    rect(0, 1, 16, 2, 11); rect(0, 3, 16, 1, 2)
+    rect(0, 28, 16, 1, 4); rect(0, 29, 16, 2, 11)
+    rect(0, 31, 16, 1, 14)
+    plain = bytes(pixels)
+    yield 'room_wall', 16, 32, plain
+    rect(0, 0, 4, 32, 15); rect(4, 0, 1, 32, 14)
+    rect(5, 0, 1, 32, 4)
+    yield 'room_wall_left', 16, 32, bytes(pixels)
+    yield 'room_wall_right', 16, 32, bytes(pixels[y*16+15-x] for y in range(32) for x in range(16))
+
+    pixels[:] = plain
+    rect(2, 6, 12, 19, 4); rect(3, 6, 10, 18, 14)
+    rect(4, 7, 8, 16, 11); rect(4, 7, 1, 5, 2)
+    rect(8, 7, 1, 16, 1); rect(4, 15, 8, 1, 1)
+    rect(1, 24, 14, 2, 2); rect(2, 26, 12, 1, 4)
+    yield 'room_window', 16, 32, bytes(pixels)
+
+    pixels, rect = canvas(16, 16)
+    rect(0, 0, 16, 16, 15); rect(0, 0, 2, 16, 11)
+    rect(14, 0, 2, 16, 11)
+    yield 'room_door_open', 16, 16, bytes(pixels)

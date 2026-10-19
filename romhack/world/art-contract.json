@@ -296,8 +296,48 @@
           "behavior": 0,
           "layer": 1
         },
-        "scenic_sea": {
+        "room_wall": {
           "first": 647,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "room_wall_left": {
+          "first": 649,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "room_wall_right": {
+          "first": 651,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "room_window": {
+          "first": 653,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "room_door_open": {
+          "first": 655,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "scenic_sea": {
+          "first": 656,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -305,7 +345,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 648,
+          "first": 657,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -313,7 +353,7 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 649,
+          "first": 658,
           "width": 1,
           "height": 1,
           "blocked": true,

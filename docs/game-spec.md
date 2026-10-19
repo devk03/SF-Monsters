@@ -742,7 +742,12 @@ Private v90 service-room identity — October 18, 2026:
   natural healing/supply lines. Shared prices, healing and contributor state
   remain unchanged; no persistent flags or actor IDs were added.
 - Original native tables, chairs, benches, tool and information fixtures extend
-  the room kit to492/512tiles. Fixed16x11bounds, door/arrival/counter coordinates
+  the first room kit to492/512tiles. Centered screenshot critique then found
+  the inherited wide apartment wall cut through its right-hand picture frame,
+  and its threshold crop resembled a closed door panel on the floor. A second
+  private candidate uses continuous plaster, capped corners, small windows and
+  an explicit bottom opening;506/512tiles. These corrective visuals require
+  fresh matching native checks before publication. Fixed16x11bounds, door/arrival/counter coordinates
   and counter behavior stay intact. Furniture cannot overlap fixed interaction
   approaches or escape the floor; the independent world geometry audit passes.
   Interior details are included in frozen build inputs.

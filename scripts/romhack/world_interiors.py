@@ -37,14 +37,14 @@ def add_rooms(plans, manifest):
         for y in range(8,16):
             for x in range(11,21): stamp('wood_floor',x,y)
         for x in range(10,22):
-            stamp('wall_top',x,6);stamp('wall_low',x,7)
-            stamp('wall_bottom',x,16)
+            stamp('room_wall',x,6);stamp('wall_bottom',x,16)
         for y in range(8,17):
             stamp('wall_side',10,y);stamp('wall_side',21,y)
-        stamp('wall_span',10,6)
+        stamp('room_wall_left',10,6);stamp('room_wall_right',21,6)
+        stamp('room_window',12,6);stamp('room_window',18,6)
         if detail['rug']:
             x,y = detail['rug'];stamp('rug',x+8,y+6)
-        stamp('threshold',16,15);stamp('door_frame',16,16)
+        stamp('wood_floor',16,15);stamp('room_door_open',16,16)
         protected = {tuple(room[k]) for k in ('arrival','exit')}
         for service in room['services'].values():
             x,y=service['actor']
