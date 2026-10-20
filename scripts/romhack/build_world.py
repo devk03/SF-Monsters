@@ -26,8 +26,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, default=ROOT/'.tools/pokeemerald-world-host',
                         help='Isolated private native-host checkout for independent experiments')
-    parser.add_argument('--connection-atlas', action='store_true',
-                        help='Private faithful cross-profile connection rendering experiment')
+    parser.add_argument('--connection-atlas', action=argparse.BooleanOptionalAction, default=True,
+                        help='Faithful cross-profile connection rendering (enabled by default)')
     parser.add_argument('--modules-root', type=Path, default=MODULES,
                         help='Use an isolated package copy for native QA')
     parser.add_argument('--playtest-module', help='Build an explicitly isolated fresh-game module fixture')

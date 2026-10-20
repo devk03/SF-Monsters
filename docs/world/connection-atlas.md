@@ -1,7 +1,8 @@
 # Private connection rendering experiment
 
-Status: opt-in native experiment, not published or human-approved. Normal builds
-leave it disabled. Public v92 remains the separate map-only release.
+Status: integrated into the private v93 candidate at the user's request. Normal
+world builds now enable it. Public v92 remains live pending crossing screenshots
+and review; v93 is not published or human-approved.
 
 ## Problem and implementation
 
@@ -54,11 +55,12 @@ restricted to the authored sunny-weather maps; other weather requires review.
   --engine .tools/pokeemerald-seam-host --connection-atlas
 ```
 
-`--connection-atlas` defaults off. The build freezes its boolean in
+`--connection-atlas` defaults on; `--no-connection-atlas` retains explicit baseline builds. The build freezes its boolean in
 `build-mode.json`, records `experimental_connection_atlas` in the receipt, and
 freezes the generated engine header plus `connection-atlas.json` capacity and
 reservation evidence. A different `--engine` keeps ordinary engine QA isolated.
-Do not stage this experiment as a normal preview without a separate review.
+The retained `experimental_connection_atlas` receipt records atlas use.
+Publication requires the integrated regression evidence and screenshot review.
 
 Validated private target:
 `a421b0f8b768be4172b9c9f43e3da070f7886179f5a68e395bb1e0d0c3ce1876`.
