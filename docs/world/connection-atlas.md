@@ -124,9 +124,10 @@ reservation audit identified the implicit NORMAL-layer background tile20 and
 palette3 entries. Its evidence is retained separately. None of these earlier
 candidates is the final accepted experiment or a world-quality acceptance receipt.
 
-Remaining gates include maintainer review, integration with the selected release,
-the full58-map room/gym/service/save regressions on that integrated ROM, matching
-native/WASM replay, actual browser play/performance and human visual acceptance.
+At the prototype checkpoint, remaining gates included integration with the selected
+release, full58-map room/gym/service/save regressions, matching native/WASM replay,
+actual browser play/performance and human visual acceptance. Integration results
+follow below.
 No full-world quality or browser traversal gate is closed by this experiment.
 
 ## Integrated v93 checks — October19

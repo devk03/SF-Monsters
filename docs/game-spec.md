@@ -728,6 +728,19 @@ The integrated standard-host target remains byte-identical to the final private
   no runtime/thresholds were relaxed. Browser performance remains an open gate.
   Browser snapshot export/restore preserves exact guest RAM and Flash. Emulator
   and audio are stopped. Screenshots are under `town-v93-crossing-browser/`.
+- `town-v93-all-activities`: all18actual activity rewards, quantities, flags and
+  duplicate-reward rejection pass, starting from an earlier ordinary v82Save
+  with uncompleted activities and controller-earned access stamps. Separate
+  `town-v93-locked-surf`/`town-v93-locked-waterfall` checks reject early Surf,
+  Waterfall and the final access stamp before its crisis prerequisites. Actual
+  ROM-backed1x/2xspeed tests pass5of5; browser timing remains separate.
+  Supplemental failed setup probes remain preserved: the completedv88Save is
+  unsuitable for fresh rewards; v82's obsolete player tile relocates safely and
+  cannot satisfy a still-valid-position guide assertion; an oldv81Save does not
+  reach the expected Continue menu. The access-stamp setup earns all8stamps and
+  freezes stamp8 before its optional extra world lap hits the200,000frame harness
+  ceiling at199,991completed frames. None substitutes for the complete passing
+  105,935frame return circuit or is claimed as an additional complete lap.
 - Local contracts19/resource audits3/preview gates8 and seam tests4(normal and
   optimized) pass. Web production build passes. Publicv92 remains live and
   publication awaits crossing screenshot review. Full town/map quality remains
