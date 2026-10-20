@@ -128,3 +128,23 @@ Remaining gates include maintainer review, integration with the selected release
 the full58-map room/gym/service/save regressions on that integrated ROM, matching
 native/WASM replay, actual browser play/performance and human visual acceptance.
 No full-world quality or browser traversal gate is closed by this experiment.
+
+## Integrated v93 checks — October19
+
+The standard-host default build produces the identical a421b0f8… ROM. The full
+58-map native circuit and its105,935-frame WASM replay pass with zero differences
+in294,912guest RAM bytes. All58guide contexts,13service rooms and13ordinary
+in-room Save/cold Continue cycles pass. Six new paired crossing trials verify
+192animation frames on the integrated host. The patch is staged locally asv93.
+
+Actual Chrome world-SDK1x play crosses NoeValley↔route09 both ways and inward,
+opens SFMap/details, returns throughB/Start and resumes walking with intact art.
+Two120second foreground timing checks remain failures:1,399/3,239audio underrun
+frames and2/4discarded video frames, respectively. Both retain advancing audio
+clocks, actual playback and final audio acknowledgements. The second has a150ms
+animation-frame gap despite maximum core cost7.3ms; cause is not established.
+Do not describe visible rendering success as a clean browser-performance pass.
+
+Screenshots and both raw/audited reports: `.tools/benchmarks/town-v93-crossing-browser/`.
+Native/WASM summary: `.tools/benchmarks/town-v93-integration-summary/native-wasm.json`.
+Publicv92 remains live pending screenshot review and browser-performance resolution.

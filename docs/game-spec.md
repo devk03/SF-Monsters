@@ -720,9 +720,14 @@ The integrated standard-host target remains byte-identical to the final private
 - The first120second Chrome world-SDK1x session visually crosses NoeValley↔route09
   both ways and inward, then opens SFMap/details, returns withB/Start and resumes
   movement. It records1,399audio underrun frames and2discarded video frames;
-  this is retained as a performance failure, not a clean browser pass. A bounded
-  repeat is running after the full WASM replay finished. No runtime/thresholds
-  were relaxed. Browser screenshots are under `town-v93-crossing-browser/`.
+  this is retained as a performance failure, not a clean browser pass. The second
+  bounded120second run records3,239underrun frames/4discarded video frames with
+  a150ms animation-frame gap; maximum actual core run cost is7.3ms. Both sessions
+  stay foreground with advancing audio clocks, playback started, final audio ACK
+  and0dropped source frames. The cause of the host scheduling gaps is unproven;
+  no runtime/thresholds were relaxed. Browser performance remains an open gate.
+  Browser snapshot export/restore preserves exact guest RAM and Flash. Emulator
+  and audio are stopped. Screenshots are under `town-v93-crossing-browser/`.
 - Local contracts19/resource audits3/preview gates8 and seam tests4(normal and
   optimized) pass. Web production build passes. Publicv92 remains live and
   publication awaits crossing screenshot review. Full town/map quality remains
