@@ -22,9 +22,11 @@ Priority blocker: connected-map boundaries can interpret foreign secondary-kit
 IDs as corrupt architecture. Read the new section15.1 finding and seam screenshots.
 Native/WASM RAM equality alone missed this visible defect. Keep real routes;
 validate both boundary directions and walking inward without room/menu reloads.
-The alignment chat owns a bounded private seam-fix prototype; coordinate before
-editing its world_seams.py or build_world.py integration. Publicv92 stays live
-until an experimentally fixed ROM passes matching safety/render checks.
+The seam fix is now integrated in the private v93 candidate at the user's
+request. Its standard-host ROM is byte-identical to the fully inspected seam
+prototype. Full58-map native/WASM and room Save regressions pass; see section15.1.
+Publicv92 stays live pending completed browser checks and the requested crossing
+screenshot review before publication.
 The world now mixes original walkups, awning shops, lofts and Victorian fronts,
 with warm/sage/slate paint, finished exposed edges, district planting and signs. Browser UI uses integer pixels,
 grouped file tools and optional desktop controls. Read section 15.1 for evidence;

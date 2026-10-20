@@ -696,6 +696,38 @@ matching accelerated audio consumption. Rootv80 runtime and saves stay unchanged
 Verify switching while playing/paused, reset/import and actual browser frame/audio
 behavior; no speed or launch change closes unfinished town/route acceptance.
 
+**October19 seam integration — v93 staged locally, not published.** The user
+requested integration, the full58-map native/WASM/browser checks and crossing
+screenshots before publication. Normal world builds now enable the faithful
+connection atlas; explicit `--no-connection-atlas` retains baseline experiments.
+The integrated standard-host target remains byte-identical to the final private
+`a421b0f8…` candidate, with exact BPS roundtrip and58compiled maps.
+
+- `town-v93-integrated-returns`:58maps/76connections/16gymwarps/26roomwarps.
+  `town-v93-full-wasm` replays the same initial state, Flash and105,935controller
+  frames; all294,912guest RAM bytes match, SHA35bf6e2e… .
+- `town-v93-integrated-continue`: actualv88ordinary Save retains party/held items,
+  money, inventory, local flags, chapter variables and field palette. All18guide
+  selections/details/back controls pass. `town-v93-guide-contexts` passes all58
+  native contexts, including both palette13buffers and activeSurf.
+- `town-v93-integrated-services` and `town-v93-room-saves`: all13service rooms,
+  actual counter/shop cancellation, paired exits and ordinary in-room Save/cold
+  Continue pass. `town-v93-signs` checks all26actual sign interactions.
+- `town-v93-transient`: six walk-only paired trials/192animation frames pass
+  again on the integrated host, preserving protected state and Flash. Earlier
+  all76directed-connection/37outdoor receipts remain applicable to the identical
+  ROM. No source art, connection geometry or contributor contract changed.
+- The first120second Chrome world-SDK1x session visually crosses NoeValley↔route09
+  both ways and inward, then opens SFMap/details, returns withB/Start and resumes
+  movement. It records1,399audio underrun frames and2discarded video frames;
+  this is retained as a performance failure, not a clean browser pass. A bounded
+  repeat is running after the full WASM replay finished. No runtime/thresholds
+  were relaxed. Browser screenshots are under `town-v93-crossing-browser/`.
+- Local contracts19/resource audits3/preview gates8 and seam tests4(normal and
+  optimized) pass. Web production build passes. Publicv92 remains live and
+  publication awaits crossing screenshot review. Full town/map quality remains
+  unapproved.
+
 **October18 private connection-rendering repair — not published.** Real native
 screenshots exposed corruption at cross-profile connections despite native/WASM
 agreement. Foreign numeric tile IDs, cached map-view cells and retained viewport
