@@ -1,0 +1,11 @@
+{
+  "tool": "built-in imagegen",
+  "source_sha256": "926c1e1c091bbd4e927fa181665a83087c925a8dd75273d7dfa33083807daad1",
+  "native_sha256": "3dcfd4e9567ba311f98f0d5cafded5a3975e7f2d1806e42d2a9814ae0f9428b1",
+  "size": [
+    224,
+    112
+  ],
+  "conversion": "BOX native reduction; curated RGB555 palette; nearest color without dithering",
+  "human_quality_approval": "pending"
+}
