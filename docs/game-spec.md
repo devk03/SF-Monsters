@@ -643,6 +643,38 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+
+**October22 crosswalk correction — privatev97.** The user rejected the three
+fence-like rows in the street crossing. The world compiler was repeating a
+cropped atlas pattern with a horizontal edge every16pixels. Replace it with five
+continuous north/south continental paint bars, using neutral white in an unused
+street-palette slot. Keep the original asphalt, curbs, seawalls and collision.
+
+- The packed-pixel regression fails onv96's repeated combs and passes for all six
+  urban profiles after the repair; all60local world tests pass.
+- Native deterministic build/linked audits pass for all58maps. Target:
+  `6f537fc399f02ca046a6aba475fcf159bebba551ed01e11452ca739c6ca2fd3e`.
+  Card allocations remain unchanged and graphics stay within native budgets.
+- `town-v97-crosswalk-continue`: genuine earlier Save loads with position, party,
+  held items, money, inventory, flags, chapter state and Flash preserved. All18
+  guide selections/details/returns pass.
+- `town-v97-crosswalk-walk`: ordinary controller movement crosses the Noe Valley
+  street in both directions. Live VRAM/palette/full-viewport checks pass at four
+  positions; native screenshots show continuous stripes. Flash stays unchanged.
+- Its998frame WASM replay matches all294,912guest-RAM bytes and every final RGB
+  pixel. Native capture alpha0 versus web alpha255 is an output-format difference,
+  explicitly retained in the receipt. This short replay is not a full browser
+  route/performance test.
+- Independent comparison to3729340 finds all451noncrossing art cards unchanged;
+  the complete residential kit is byte-identical. Rootv80 assets are untouched.
+
+I missed the obvious fence pattern in the previous screenshot review; passing
+resource counts and traversal did not excuse that visual defect. Inspect the
+whole frame and repeated floor joins before reporting an art improvement. This
+fix remains private: publicv92 and the existing browser audio/long-route/human
+review gates are unchanged. No GitHub workflow or recurring monitor was started.
+
+
 **October21 neighborhood refinement.** The user requires seven or eight genuinely
 different building types per urban neighborhood, with coordinated paint variants,
 clear sidewalks and much richer local detail. Count structural forms separately

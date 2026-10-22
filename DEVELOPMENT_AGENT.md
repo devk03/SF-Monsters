@@ -22,6 +22,9 @@ separate. Keep rootv80 runtime/save bytes intact; verify native old-Save loading
 browser return visits, speed/audio behavior and ordinary Save/import safety.
 
 Current checkpoint: v0.0.92 is published at `/world`; root v80 stays available.
+Private v97 fixes the repeated fence-like crosswalk tiles with continuous white
+paint bars. Actual native movement/rendering and a matching short WASM replay
+pass; this does not close the existing browser audio or long-route gates.
 Private v96 adds eight ordinary facade choices per urban district, coordinated
 material/paint variation and connected sidewalks checked against NPC movement.
 Read `docs/world/neighborhood-art.md` and section15.1 evidence before continuing.

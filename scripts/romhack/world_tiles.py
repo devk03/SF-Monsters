@@ -86,6 +86,14 @@ def compile_kit(root=ROOT, profile='residential'):
     palettes[8] = checked(street_dir, 'street.gbapal', street_info)
     asphalt = bytes(source[(y % 4)*64+x] for y in range(16) for x in range(16))
     crossing = crop(source, 64, 16, 16, 16, 16)
+    if profile!='residential':
+        from world_surfaces import crossing_paint
+        crossing=crossing_paint(asphalt)
+        # Slot3 duplicated slot2 and is absent from asphalt. Preserve the
+        # existing curb/seawall shades while adding neutral off-white paint.
+        colors=list(struct.unpack('<16H',palettes[8]))
+        colors[3]=28 | 28<<5 | 27<<10
+        palettes[8]=struct.pack('<16H',*colors)
     card('asphalt', empty, 16, 16, 8, asphalt, 8, False)
     card('crossing', empty, 16, 16, 8, crossing, 8, False)
     house_dir = root / 'assets/tiles/connected-frontage-v3'
@@ -217,7 +225,8 @@ def compile_kit(root=ROOT, profile='residential'):
     card('scenic_sea',coast[2*256:3*256],16,16,10,paving,7)
     street_colors=struct.unpack('<16H',palettes[8])
     def gray(value):
-        return min(range(1,16),key=lambda i:sum((((street_colors[i]>>c*5)&31)-value)**2 for c in range(3)))
+        return min((i for i in range(1,16) if i!=3),
+                   key=lambda i:sum((((street_colors[i]>>c*5)&31)-value)**2 for c in range(3)))
     dark,shade,light,stone=map(gray,(9,15,27,22))
     # Original native stone curb: a shaded seaward face, clear cap and sparse
     # joints. The barrier must look solid rather than like walkable grass.

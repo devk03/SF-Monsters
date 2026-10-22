@@ -20,6 +20,14 @@ def concrete():
                  for y in range(16) for x in range(16))
 
 
+def crossing_paint(asphalt):
+    """North/south continental bars; no horizontal edge repeats per map row."""
+    if len(asphalt)!=256 or 3 in asphalt:
+        raise ValueError('Crossing paint needs a reserved neutral color slot')
+    return bytes(3 if 5<=x<=10 else asphalt[y*16+x]
+                 for y in range(16) for x in range(16))
+
+
 def surfaces():
     def image(width, height, pixel):
         return bytes(pixel(x, y) for y in range(height) for x in range(width))
