@@ -2129,28 +2129,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__sage": {
-          "first": 727,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream__sage": {
-          "first": 735,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "bay_house"
-        },
         "walkup__sage": {
-          "first": 747,
+          "first": 727,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2163,7 +2143,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__sage": {
-          "first": 759,
+          "first": 739,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -2176,7 +2156,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__sage": {
-          "first": 767,
+          "first": 747,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2189,7 +2169,7 @@
           "architecture_type": "workshop"
         },
         "gable__sage": {
-          "first": 779,
+          "first": 759,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2202,7 +2182,7 @@
           "architecture_type": "gable"
         },
         "deco__sage": {
-          "first": 791,
+          "first": 771,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2215,7 +2195,7 @@
           "architecture_type": "deco"
         },
         "flats__sage": {
-          "first": 803,
+          "first": 783,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -2228,7 +2208,7 @@
           "architecture_type": "flats"
         },
         "arcade__sage": {
-          "first": 811,
+          "first": 791,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2241,7 +2221,7 @@
           "architecture_type": "arcade"
         },
         "duplex__sage": {
-          "first": 823,
+          "first": 803,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2254,7 +2234,7 @@
           "architecture_type": "duplex"
         },
         "coral__slate": {
-          "first": 835,
+          "first": 815,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2265,28 +2245,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__slate": {
-          "first": 847,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream__slate": {
-          "first": 855,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "bay_house"
-        },
         "walkup__slate": {
-          "first": 867,
+          "first": 827,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2299,7 +2259,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__slate": {
-          "first": 879,
+          "first": 839,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -2312,7 +2272,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__slate": {
-          "first": 887,
+          "first": 847,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2325,7 +2285,7 @@
           "architecture_type": "workshop"
         },
         "gable__slate": {
-          "first": 899,
+          "first": 859,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2338,7 +2298,7 @@
           "architecture_type": "gable"
         },
         "deco__slate": {
-          "first": 911,
+          "first": 871,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2351,7 +2311,7 @@
           "architecture_type": "deco"
         },
         "flats__slate": {
-          "first": 923,
+          "first": 883,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -2364,7 +2324,7 @@
           "architecture_type": "flats"
         },
         "arcade__slate": {
-          "first": 931,
+          "first": 891,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2377,7 +2337,7 @@
           "architecture_type": "arcade"
         },
         "duplex__slate": {
-          "first": 943,
+          "first": 903,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2851,28 +2811,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__sage": {
-          "first": 731,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream__sage": {
-          "first": 739,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "bay_house"
-        },
         "walkup__sage": {
-          "first": 751,
+          "first": 731,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2885,7 +2825,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__sage": {
-          "first": 763,
+          "first": 743,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -2898,7 +2838,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__sage": {
-          "first": 771,
+          "first": 751,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2911,7 +2851,7 @@
           "architecture_type": "workshop"
         },
         "gable__sage": {
-          "first": 783,
+          "first": 763,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2924,7 +2864,7 @@
           "architecture_type": "gable"
         },
         "deco__sage": {
-          "first": 795,
+          "first": 775,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2937,7 +2877,7 @@
           "architecture_type": "deco"
         },
         "flats__sage": {
-          "first": 807,
+          "first": 787,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -2950,7 +2890,7 @@
           "architecture_type": "flats"
         },
         "arcade__sage": {
-          "first": 815,
+          "first": 795,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2963,7 +2903,7 @@
           "architecture_type": "arcade"
         },
         "duplex__sage": {
-          "first": 827,
+          "first": 807,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2976,7 +2916,7 @@
           "architecture_type": "duplex"
         },
         "coral__slate": {
-          "first": 839,
+          "first": 819,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -2987,28 +2927,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__slate": {
-          "first": 851,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream__slate": {
-          "first": 859,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "bay_house"
-        },
         "walkup__slate": {
-          "first": 871,
+          "first": 831,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3021,7 +2941,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__slate": {
-          "first": 883,
+          "first": 843,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3034,7 +2954,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__slate": {
-          "first": 891,
+          "first": 851,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3047,7 +2967,7 @@
           "architecture_type": "workshop"
         },
         "gable__slate": {
-          "first": 903,
+          "first": 863,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3060,7 +2980,7 @@
           "architecture_type": "gable"
         },
         "deco__slate": {
-          "first": 915,
+          "first": 875,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3073,7 +2993,7 @@
           "architecture_type": "deco"
         },
         "flats__slate": {
-          "first": 927,
+          "first": 887,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3086,7 +3006,7 @@
           "architecture_type": "flats"
         },
         "arcade__slate": {
-          "first": 935,
+          "first": 895,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3099,7 +3019,7 @@
           "architecture_type": "arcade"
         },
         "duplex__slate": {
-          "first": 947,
+          "first": 907,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3592,31 +3512,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__sage": {
-          "first": 729,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream_lr__sage": {
-          "first": 737,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ],
-          "architecture_type": "bay_house"
-        },
         "walkup__sage": {
-          "first": 749,
+          "first": 729,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3629,7 +3526,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__sage": {
-          "first": 761,
+          "first": 741,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3642,7 +3539,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__sage": {
-          "first": 769,
+          "first": 749,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3655,7 +3552,7 @@
           "architecture_type": "workshop"
         },
         "gable__sage": {
-          "first": 781,
+          "first": 761,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3668,7 +3565,7 @@
           "architecture_type": "gable"
         },
         "deco__sage": {
-          "first": 793,
+          "first": 773,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3681,7 +3578,7 @@
           "architecture_type": "deco"
         },
         "flats__sage": {
-          "first": 805,
+          "first": 785,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3694,7 +3591,7 @@
           "architecture_type": "flats"
         },
         "arcade__sage": {
-          "first": 813,
+          "first": 793,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3707,7 +3604,7 @@
           "architecture_type": "arcade"
         },
         "duplex__sage": {
-          "first": 825,
+          "first": 805,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3720,7 +3617,7 @@
           "architecture_type": "duplex"
         },
         "coral__slate": {
-          "first": 837,
+          "first": 817,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3731,31 +3628,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__slate": {
-          "first": 849,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream_lr__slate": {
-          "first": 857,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ],
-          "architecture_type": "bay_house"
-        },
         "walkup__slate": {
-          "first": 869,
+          "first": 829,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3768,7 +3642,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__slate": {
-          "first": 881,
+          "first": 841,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3781,7 +3655,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__slate": {
-          "first": 889,
+          "first": 849,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3794,7 +3668,7 @@
           "architecture_type": "workshop"
         },
         "gable__slate": {
-          "first": 901,
+          "first": 861,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3807,7 +3681,7 @@
           "architecture_type": "gable"
         },
         "deco__slate": {
-          "first": 913,
+          "first": 873,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3820,7 +3694,7 @@
           "architecture_type": "deco"
         },
         "flats__slate": {
-          "first": 925,
+          "first": 885,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3833,7 +3707,7 @@
           "architecture_type": "flats"
         },
         "arcade__slate": {
-          "first": 933,
+          "first": 893,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -3846,7 +3720,7 @@
           "architecture_type": "arcade"
         },
         "duplex__slate": {
-          "first": 945,
+          "first": 905,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4366,31 +4240,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__sage": {
-          "first": 729,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream_lr__sage": {
-          "first": 737,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ],
-          "architecture_type": "bay_house"
-        },
         "walkup__sage": {
-          "first": 749,
+          "first": 729,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4403,7 +4254,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__sage": {
-          "first": 761,
+          "first": 741,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -4416,7 +4267,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__sage": {
-          "first": 769,
+          "first": 749,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4429,7 +4280,7 @@
           "architecture_type": "workshop"
         },
         "gable__sage": {
-          "first": 781,
+          "first": 761,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4442,7 +4293,7 @@
           "architecture_type": "gable"
         },
         "deco__sage": {
-          "first": 793,
+          "first": 773,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4455,7 +4306,7 @@
           "architecture_type": "deco"
         },
         "flats__sage": {
-          "first": 805,
+          "first": 785,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -4468,7 +4319,7 @@
           "architecture_type": "flats"
         },
         "arcade__sage": {
-          "first": 813,
+          "first": 793,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4481,7 +4332,7 @@
           "architecture_type": "arcade"
         },
         "duplex__sage": {
-          "first": 825,
+          "first": 805,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4494,7 +4345,7 @@
           "architecture_type": "duplex"
         },
         "coral__slate": {
-          "first": 837,
+          "first": 817,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4505,31 +4356,8 @@
           ],
           "architecture_type": "bay_house"
         },
-        "cafe__slate": {
-          "first": 849,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [],
-          "architecture_type": "corner_shop"
-        },
-        "cream_lr__slate": {
-          "first": 857,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ],
-          "architecture_type": "bay_house"
-        },
         "walkup__slate": {
-          "first": 869,
+          "first": 829,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4542,7 +4370,7 @@
           "architecture_type": "walkup"
         },
         "shophouse__slate": {
-          "first": 881,
+          "first": 841,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -4555,7 +4383,7 @@
           "architecture_type": "shophouse"
         },
         "workshop__slate": {
-          "first": 889,
+          "first": 849,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4568,7 +4396,7 @@
           "architecture_type": "workshop"
         },
         "gable__slate": {
-          "first": 901,
+          "first": 861,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4581,7 +4409,7 @@
           "architecture_type": "gable"
         },
         "deco__slate": {
-          "first": 913,
+          "first": 873,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4594,7 +4422,7 @@
           "architecture_type": "deco"
         },
         "flats__slate": {
-          "first": 925,
+          "first": 885,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -4607,7 +4435,7 @@
           "architecture_type": "flats"
         },
         "arcade__slate": {
-          "first": 933,
+          "first": 893,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -4620,7 +4448,7 @@
           "architecture_type": "arcade"
         },
         "duplex__slate": {
-          "first": 945,
+          "first": 905,
           "width": 3,
           "height": 4,
           "blocked": true,

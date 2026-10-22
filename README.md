@@ -31,6 +31,10 @@ All18local activities passed their prior native reward/revisit checks; current
 browser route completion and human town/art approval remain separate open gates.
 See the [generation guide](docs/world/generation.md) and current
 [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
+Private neighborhood refinement now enforces eight structural building types per
+urban district, coordinated paint variants and connected pedestrian sidewalks.
+See the [neighborhood art contract](docs/world/neighborhood-art.md); this candidate
+is not yet the public patch.
 The root website keeps the v80 Sunset preview and its independent save slot.
 Gym encounters, contributor missions and full Emerald-quality acceptance remain
 unfinished; current gym access stamps and loan creature are development tools.
@@ -69,7 +73,7 @@ progression and exits stay with the core game. All slots remain unassigned.
 ## What is playable now
 
 The [world preview](https://sf-mini-monsters.devkunjadia03.chatgpt.site/world)
-is **v0.0.89**: all 18 destinations and their routes, residents, local activities,
+is **v0.0.92**: all 18 destinations and their routes, residents, local activities,
 small service interiors, city guide and eight reserved gym sites. The loan
 creature and gym access stamps are development tools. Final encounters, story
 missions, balance and human world-quality acceptance remain open.

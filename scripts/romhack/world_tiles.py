@@ -92,6 +92,8 @@ def compile_kit(root=ROOT, profile='residential'):
     info = json.loads((house_dir / 'conversion.json').read_text())
     houses = checked(house_dir, 'block.indices', info)
     palettes[6] = checked(house_dir, 'block.gbapal', info)
+    from world_architecture import district_palette
+    palettes[6] = district_palette(palettes[6],profile)
     # Shared attached fronts keep roofs, walls and stoops together at native scale.
     for name, x, width in [('coral', 0, 48), ('cafe', 48, 32),
                             ('cream', 80, 48), ('lilac', 128, 48)]:
@@ -275,7 +277,7 @@ def compile_kit(root=ROOT, profile='residential'):
             card(name,bytes(pixels),width,64,6,paving,7)
             catalog[name]['closed_edges']=closed
             catalog[name]['architecture_type']=families[base]
-    from world_architecture import fronts, paint_palette
+    from world_architecture import fronts, paint_palette, FORMS
     for name,w,h,raw in fronts(profile):
         card(name,raw,w,h,6,paving,7)
         catalog[name]['closed_edges']=['left','right']
@@ -285,7 +287,9 @@ def compile_kit(root=ROOT, profile='residential'):
     banks={'neighborhood':(9,12),'mixed_use':(9,12),
            'culture':(11,12),'stadium':(11,12),
            'industrial':(11,),'civic':(11,)}.get(profile,())
-    base_fronts=[(n,c) for n,c in catalog.items() if 'closed_edges' in c and
+    # Service and reserved-gym fronts only draw their base paint. Avoid
+    # allocating unused recolor records at the expense of connection margins.
+    base_fronts=[(n,c) for n,c in catalog.items() if n in (*FORMS,'coral') and 'closed_edges' in c and
                  any(w>>12==6 for row in c['tiles'] for t in row for w in records[t-FIRST_METATILE][4:])]
     for scheme,bank in zip(('sage','slate'),banks):
         if bank in palettes:raise ValueError('Building paint would overwrite a loaded palette')

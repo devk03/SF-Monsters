@@ -73,7 +73,7 @@ def furnish(plans, manifest):
                       'pacific_heights':('mansion',14,3)}.get(district)
         extras=[]
         if profile in ('neighborhood','mixed_use'):
-            extras={'outer_sunset':[('surfboards',18,8)],'marina':[('bar_sign',4,9)],
+            extras={'outer_sunset':[('surfboards',18,8)],'marina':[('bar_sign',4,13)],
                     'noe_valley':[('book_box',18,8)],
                     'potrero_hill':[('lookout_left',15,4),('lookout_steps',16,4),
                                     ('lookout_right',17,4)]}.get(district,[])
@@ -102,10 +102,20 @@ def furnish(plans, manifest):
             'pacific_heights':('gable','flats','duplex','walkup','deco','coral','shophouse','arcade'),
             'noe_valley':('duplex','gable','shophouse','flats','walkup','arcade','deco','coral'),
         }.get(district,FORMS))
+        paint_cycles={
+            'outer_sunset':('', '__slate', '', '__slate', '__sage'),
+            'marina':('__slate', '', '__slate', '__sage', ''),
+            'pacific_heights':('', '', '__slate', '__sage', ''),
+            'noe_valley':('__sage', '', '__sage', '', '__slate'),
+            'mission':('', '__sage', '', '__slate', ''),
+            'potrero_hill':('', '__slate', '', '__sage', ''),
+            'north_beach':('', '', '__sage', '__slate', ''),
+        }
         def record(style,x,y,*,paint=False):
             if paint and style+'__sage' in kit['catalog']:
                 schemes=('', '__sage', '__slate') if style+'__slate' in kit['catalog'] else ('','__sage')
-                scheme=schemes[(x//2+y+sum(map(ord,district))+len(blocks))%len(schemes)]
+                cycle=paint_cycles.get(district,schemes)
+                scheme=cycle[(x//2+y+sum(map(ord,district))+len(blocks))%len(cycle)]
                 style+=scheme
                 # A repeated silhouette must change paint at a shared wall.
                 if any(b['style']==style and b['y']==y and b['x']+b['width']==x for b in blocks):
@@ -207,7 +217,7 @@ def furnish(plans, manifest):
             plan['route_setting']='city street'
         # Trees sit in contained wells. Utilities follow the curb; furniture
         # gathers beside shops and destinations instead of filling random gaps.
-        props=[('lamp',13,8),('lamp',18,8),('meter',6,10),('hydrant',26,10),
+        props=[('lamp',13,8),('lamp',18,8),('meter',7,14),('hydrant',26,10),
                ('bin',6 if coastal else 2,15),('rack',26,15),('bench',6,9),('tree',28,8)]
         if district in ('outer_sunset','noe_valley'):
             props.remove(('lamp',18,8))
@@ -223,18 +233,28 @@ def furnish(plans, manifest):
             'north_beach':[('bench',19,9),('tree',1,8),('meter',23,10),('bin',29,15)],
             'mission_bay':[('tree',1,8),('tree',19,8),('tree',20,14),('lamp',10,14)],
             'financial_district':[('tree',1,8),('tree',19,8),('bench',19,15),('lamp',10,14),('rack',23,10)],
-            'giants_stadium':[('rack',22,10),('recycling',29,15),('bench',19,15),('lamp',10,14)],
+            'giants_stadium':[('rack',22,13),('recycling',29,15),('bench',19,15),('lamp',10,14)],
             'treasure_island':[('recycling',9,15),('bin',29,15),('lamp',24,14)],
         }
         props+=treatments.get(district,[('tree',19,8),('meter',23,10)])
         props=[('street_tree' if name=='tree' else name,x,y) for name,x,y in props]
+        # South furniture sits along the curb, leaving the inner sidewalk
+        # continuous. Tall canopies may project one tile over the road edge.
+        def curb_position(name,x,y):
+            # These fixtures are local-activity objects, with stable approaches.
+            if (district in ('dogpatch','noe_valley') and name=='rack' and x==26
+                    or district=='marina' and name=='bin' and x==2):return y
+            return 13 if y==14 and len(kit['catalog'][name]['tiles'])==2 else 14 if y==15 else y
+        props=[(n,x,curb_position(n,x,y)) for n,x,y in props]
+        if profile=='industrial':
+            props=[('recycling' if n=='bench' and x==6 else n,x,y) for n,x,y in props]
         for name,x,y in props:
             stamp(name,x,y)
         from world_botany import PLANTINGS
         details=[]
         if district in PLANTINGS:
             species=PLANTINGS[district]
-            last=(18,15) if district in ('castro','noe_valley','giants_stadium','outer_sunset') else (30,15)
+            last=(18,14) if district in ('castro','noe_valley','giants_stadium','outer_sunset') else (30,14)
             beds=[(3,8),(10,8),(17,8),(22,8),last]
             for index,(x,y) in enumerate(beds):
                 name=species[index%len(species)];record(name,x,y)
@@ -244,7 +264,7 @@ def furnish(plans, manifest):
                 record(name,x,y);details.append({'name':name,'x':x,'y':y})
             # The street pole is read at its base; shop boards sit beside the
             # service approach. Neither uses a walking trigger or reward flag.
-            board=(9,10) if coastal else (3,9)
+            board=(9,9) if coastal else (3,9)
             for name,x,y in [('wayfinder',11,8),('shop_board',*board)]:
                 record(name,x,y);details.append({'name':name,'x':x,'y':y})
             for x in (10,20,29):stamp('curb_drain',x,10)

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.95-neighborhood-world-draft",
+  "version": "0.0.96-neighborhood-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {

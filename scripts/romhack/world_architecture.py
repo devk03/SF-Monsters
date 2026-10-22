@@ -2,6 +2,20 @@
 import struct
 
 
+def district_palette(original, profile):
+    """Material families share roof/glass colors but have different wall paint."""
+    colors=list(struct.unpack('<16H',original))
+    materials={
+        'industrial':{7:(22,11,9),10:(23,21,17)},
+        'civic':{7:(24,25,26),10:(28,28,26)},
+        'culture':{7:(27,16,14),10:(29,25,18)},
+        'stadium':{7:(24,13,10),10:(28,24,18)},
+    }
+    for index,rgb in materials.get(profile,{}).items():
+        colors[index]=sum(v<<(c*5) for c,v in enumerate(rgb))
+    return struct.pack('<16H',*colors)
+
+
 def paint_palette(original, scheme):
     colors=list(struct.unpack('<16H',original))
     paints={

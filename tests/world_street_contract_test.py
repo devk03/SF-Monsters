@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_street_contract import check_streets,check_details,check_edges,check_variety
+from world_street_contract import check_streets,check_details,check_edges,check_variety,check_sidewalks
 
 
 class StreetContractTests(unittest.TestCase):
@@ -35,6 +35,20 @@ class StreetContractTests(unittest.TestCase):
         plan['town_blocks'] += [{'style':'bay_house__slate'},{'style':'bay_house_lr'}]
         with self.assertRaisesRegex(ValueError,'eight structural'):
             check_variety(plan,{'cards':cards})
+
+    def test_curb_furniture_cannot_force_pedestrians_into_the_road(self):
+        cells={(x,y):(512,False,3) for x in range(32) for y in range(24)}
+        plan={'world_id':'hand_block','npcs':[],'coord_events':[]}
+        check_sidewalks(plan,cells)
+        # A tree well and bench seal a column across the north sidewalk.
+        for y in (8,9,10):cells[6,y]=(513,True,3)
+        with self.assertRaisesRegex(ValueError,'road detour'):
+            check_sidewalks(plan,cells)
+        cells[6,10]=(512,False,3);check_sidewalks(plan,cells)
+        # A walking NPC must not turn that last opening into a trap.
+        plan['npcs']=[dict(x=7,y=10,range_x=1,range_y=0)]
+        with self.assertRaisesRegex(ValueError,'road detour'):
+            check_sidewalks(plan,cells)
 
     def fixture(self):
         cells={(x,y):(512,False,3) for x in range(32) for y in range(24)}

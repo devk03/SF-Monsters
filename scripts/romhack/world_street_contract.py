@@ -132,3 +132,23 @@ def check_variety(plan, profile):
     if len(families)<8:
         raise ValueError(f"{plan['world_id']}: fewer than eight structural building types")
     return families
+
+
+def check_sidewalks(plan, cells):
+    """A pedestrian can cross each sidewalk without stepping into the road."""
+    from collections import deque
+    occupied={(n['x']+dx,n['y']+dy) for n in plan['npcs']
+              for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)
+              for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
+    occupied|={(e['x'],e['y']) for e in plan['coord_events']}
+    left=5 if plan['world_id']=='outer_sunset' else 1
+    for top,bottom in ((8,10),(14,15)):
+        free={(x,y) for y in range(top,bottom+1) for x in range(left,31)
+              if not cells[x,y][1] and (x,y) not in occupied}
+        pending=deque(p for p in free if p[0]==left);seen=set(pending)
+        while pending:
+            x,y=pending.popleft()
+            for point in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                if point in free and point not in seen:seen.add(point);pending.append(point)
+        if not any(x==30 for x,y in seen):
+            raise ValueError(f"{plan['world_id']}: sidewalk {top}..{bottom} forces a road detour")

@@ -666,6 +666,19 @@ check passes with party/items/money/flags/Flash intact. Screenshots show clearer
 stoops and window recesses but this is a private art candidate, not user approval.
 Complete traversal, updated seam inspection and browser/release checks remain.
 
+Private v96 refinement: contact-sheet critique found the eight forms still looked
+too alike across districts. Industrial/civic/cultural/stadium wall materials now
+differ; residential districts have different warm/sage/slate balances and varied
+resident sprite ordering. Actor IDs and dialogue/quest ownership remain stable.
+A new independent sidewalk gate caught real bench/meter/tree bottlenecks. Curb
+placement and south resident anchors now leave continuous pedestrian routes on
+both sidewalks in every urban map, accounting for full ambient movement ranges.
+Activity fixtures remain in place; the Sunset shop board moves to a readable
+position above its approach. All59local world checks pass. An initial seam budget
+failure was fixed by removing unused service/gym recolor records rather than
+reducing architecture or disabling connection rendering. Native v96 checks and
+review are in progress. See `docs/world/neighborhood-art.md` for the durable brief.
+
 **Active user expansion — October 17: finish the non-gym world.** Build all 18
 approved destinations and their 19 connectors into a compact, coherent SF world,
 using the imported plan and stable gym contributor contracts. This direct request

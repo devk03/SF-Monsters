@@ -41,7 +41,6 @@ def add_signs(plans,manifest):
             if style not in texts:continue
             x,y=detail['x'],detail['y']
             if style=='wayfinder':obj=(x,y+1);standing=(x,y+2)
-            elif identifier=='outer_sunset':obj=(x,y);standing=(x,y-1)
             else:obj=(x,y);standing=(x,y+1)
             label='WBStreet_'+identifier+'_'+style
             sign={'style':style,'object':list(obj),'standing':list(standing),

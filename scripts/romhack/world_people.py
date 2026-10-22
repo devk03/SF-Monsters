@@ -5,7 +5,7 @@ from pathlib import Path
 from world_towns import URBAN
 
 ROOT = Path(__file__).resolve().parents[2]
-POSITIONS = [(8,8),(25,8),(8,15),(23,15),(3,21),(27,21),(10,9),(21,9)]
+POSITIONS = [(8,8),(25,8),(8,14),(23,14),(3,21),(27,21),(10,9),(21,9)]
 GRAPHICS = ['MAN_1','WOMAN_1','MAN_3','WOMAN_2','OLD_MAN','WOMAN_4','WOMAN_3','MAN_2']
 REVISIT_BADGE = {'dogpatch':1,'potrero_hill':1,'mission':1,'castro':1,
                  'outer_sunset':2,'golden_gate_park':2,'marina':3,
@@ -49,6 +49,10 @@ def populate(plans, manifest):
         reserved = {(p['x'],p['y']) for p in plan['access_points']}
         reserved |= {(p['x'],p['y']) for p in plan.get('world_sections',[])}
         reserved |= {(p['x'],p['y']) for p in plan.get('scenic_viewpoints',[])}
+        # Different districts do not restage the identical eight people in
+        # the same order. Actor IDs and dialogue ownership remain stable; curb
+        # anchors keep the inner pedestrian lane open.
+        roster=list(areas).index(identifier)
         for index, person in enumerate(residents):
             if identifier in URBAN:
                 x,y = POSITIONS[index]
@@ -61,7 +65,7 @@ def populate(plans, manifest):
                 x,y = min(candidates,key=lambda p:abs(p[0]-(10+index*11))+abs(p[1]-17))
             used.add((x,y))
             npc = {'id':len(plan['npcs'])+1,'x':x,'y':y,
-                   'graphics':'OBJ_EVENT_GFX_'+GRAPHICS[index],
+                   'graphics':'OBJ_EVENT_GFX_'+GRAPHICS[(index+roster)%len(GRAPHICS)],
                    'script':f'WBTown_{identifier}_{index}', 'role':person['role']}
             if identifier in URBAN and index < 2:
                 npc.update(movement='MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT',range_x=1,range_y=0)
