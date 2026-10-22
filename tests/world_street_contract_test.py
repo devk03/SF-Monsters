@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_street_contract import check_streets,check_details,check_edges
+from world_street_contract import check_streets,check_details,check_edges,check_variety
 
 
 class StreetContractTests(unittest.TestCase):
@@ -23,6 +23,18 @@ class StreetContractTests(unittest.TestCase):
         other['y']=10
         with self.assertRaisesRegex(ValueError,'unfinished right end'):
             check_edges(plan,profile)
+
+    def test_paint_and_edge_caps_do_not_count_as_architectural_variety(self):
+        names=('bay_house','walkup','shop','loft','gable','deco','arcade','duplex')
+        cards={name:{'architecture_type':name} for name in names}
+        plan={'world_id':'hand_block','town_blocks':[{'style':name} for name in names]}
+        self.assertEqual(len(check_variety(plan,{'cards':cards})),8)
+        for alias in ('bay_house__sage','bay_house__slate','bay_house_lr'):
+            cards[alias]={'architecture_type':'bay_house'}
+        plan['town_blocks'][-1]={'style':'bay_house__sage'}
+        plan['town_blocks'] += [{'style':'bay_house__slate'},{'style':'bay_house_lr'}]
+        with self.assertRaisesRegex(ValueError,'eight structural'):
+            check_variety(plan,{'cards':cards})
 
     def fixture(self):
         cells={(x,y):(512,False,3) for x in range(32) for y in range(24)}

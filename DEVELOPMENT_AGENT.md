@@ -6,7 +6,11 @@ completion gates and latest progress. The user explicitly resumed implementation
 beyond the prior blockout-review pause. Gym content remains contributor-owned;
 finish its site/approach while preserving the assigned entry/state contracts.
 
-Latest user instruction: keep going against the October18 continued-work goal in
+Latest user instruction: refine each neighborhood with at least eight structural
+building types, coordinated paint variants, clear sidewalks and dense detailed
+streets. Paint and exposed-edge aliases do not count as different architecture.
+Use the native variety gate; inspect real gameplay as well as allocation counts.
+Keep going against the October18 continued-work goal in
 section15.1, agreed with the alignment chat. First improve the native SF Map,
 then district/route/interior identity and complete native/browser acceptance.
 Keep bounded alignment reviews about every30active minutes. The old paused goal

@@ -37,7 +37,8 @@
           "layer": 1,
           "closed_edges": [
             "left"
-          ]
+          ],
+          "architecture_type": "bay_house"
         },
         "cafe": {
           "first": 527,
@@ -46,7 +47,8 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": []
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
         },
         "cream": {
           "first": 535,
@@ -55,7 +57,8 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": []
+          "closed_edges": [],
+          "architecture_type": "bay_house"
         },
         "lilac": {
           "first": 547,
@@ -66,7 +69,8 @@
           "layer": 1,
           "closed_edges": [
             "right"
-          ]
+          ],
+          "architecture_type": "bay_house"
         },
         "pair": {
           "first": 559,
@@ -78,7 +82,8 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "paired_townhouse"
         },
         "lamp": {
           "first": 575,
@@ -397,28 +402,8 @@
           "behavior": 0,
           "layer": 1
         },
-        "coral": {
-          "first": 515,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe": {
-          "first": 527,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
         "lamp": {
-          "first": 535,
+          "first": 515,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -426,7 +411,7 @@
           "layer": 1
         },
         "meter": {
-          "first": 537,
+          "first": 517,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -434,7 +419,7 @@
           "layer": 1
         },
         "hydrant": {
-          "first": 538,
+          "first": 518,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -442,7 +427,7 @@
           "layer": 1
         },
         "bin": {
-          "first": 539,
+          "first": 519,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -450,7 +435,7 @@
           "layer": 1
         },
         "rack": {
-          "first": 540,
+          "first": 520,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -458,7 +443,7 @@
           "layer": 1
         },
         "tree": {
-          "first": 542,
+          "first": 522,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -466,7 +451,7 @@
           "layer": 1
         },
         "bench": {
-          "first": 546,
+          "first": 526,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -474,7 +459,7 @@
           "layer": 1
         },
         "recycling": {
-          "first": 548,
+          "first": 528,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -482,7 +467,7 @@
           "layer": 1
         },
         "warehouse": {
-          "first": 550,
+          "first": 530,
           "width": 7,
           "height": 5,
           "blocked": true,
@@ -491,22 +476,11 @@
           "closed_edges": [
             "left",
             "right"
-          ]
-        },
-        "brick": {
-          "first": 585,
-          "width": 3,
-          "height": 5,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
+          ],
+          "architecture_type": "warehouse"
         },
         "grass": {
-          "first": 600,
+          "first": 565,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -514,7 +488,7 @@
           "layer": 1
         },
         "tree_grass": {
-          "first": 601,
+          "first": 566,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -522,7 +496,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 605,
+          "first": 570,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -530,7 +504,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 607,
+          "first": 572,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -538,7 +512,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 609,
+          "first": 574,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -546,7 +520,7 @@
           "layer": 1
         },
         "crane": {
-          "first": 610,
+          "first": 575,
           "width": 4,
           "height": 4,
           "blocked": true,
@@ -554,7 +528,7 @@
           "layer": 1
         },
         "scenic_sea": {
-          "first": 626,
+          "first": 591,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -562,7 +536,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 627,
+          "first": 592,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -570,7 +544,7 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 628,
+          "first": 593,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -578,7 +552,7 @@
           "layer": 1
         },
         "slab_walk": {
-          "first": 629,
+          "first": 594,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -586,7 +560,7 @@
           "layer": 1
         },
         "brick_walk": {
-          "first": 633,
+          "first": 598,
           "width": 2,
           "height": 1,
           "blocked": false,
@@ -594,7 +568,7 @@
           "layer": 1
         },
         "stone_walk": {
-          "first": 635,
+          "first": 600,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -602,7 +576,7 @@
           "layer": 1
         },
         "dark_walk": {
-          "first": 639,
+          "first": 604,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -610,7 +584,7 @@
           "layer": 1
         },
         "curb_north": {
-          "first": 640,
+          "first": 605,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -618,7 +592,7 @@
           "layer": 1
         },
         "curb_south": {
-          "first": 641,
+          "first": 606,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -626,7 +600,7 @@
           "layer": 1
         },
         "curb_cut": {
-          "first": 642,
+          "first": 607,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -634,7 +608,7 @@
           "layer": 1
         },
         "curb_drain": {
-          "first": 643,
+          "first": 608,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -642,7 +616,7 @@
           "layer": 1
         },
         "tree_well": {
-          "first": 644,
+          "first": 609,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -650,7 +624,7 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 648,
+          "first": 613,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -658,7 +632,7 @@
           "layer": 1
         },
         "succulent": {
-          "first": 652,
+          "first": 617,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -666,7 +640,7 @@
           "layer": 1
         },
         "tuft": {
-          "first": 653,
+          "first": 618,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -674,7 +648,7 @@
           "layer": 1
         },
         "shrub": {
-          "first": 654,
+          "first": 619,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -682,7 +656,7 @@
           "layer": 1
         },
         "flower_box": {
-          "first": 655,
+          "first": 620,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -690,7 +664,7 @@
           "layer": 1
         },
         "lavender": {
-          "first": 656,
+          "first": 621,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -698,7 +672,7 @@
           "layer": 1
         },
         "daisies": {
-          "first": 657,
+          "first": 622,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -706,7 +680,7 @@
           "layer": 1
         },
         "shop_board": {
-          "first": 658,
+          "first": 623,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -714,49 +688,15 @@
           "layer": 1
         },
         "wayfinder": {
-          "first": 659,
+          "first": 624,
           "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
           "layer": 1
         },
-        "cafe_l": {
-          "first": 661,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe_r": {
-          "first": 669,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "cafe_lr": {
-          "first": 677,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "workshop": {
-          "first": 685,
+        "walkup": {
+          "first": 626,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -765,7 +705,203 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse": {
+          "first": 638,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop": {
+          "first": 646,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
+          "first": 658,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco": {
+          "first": 670,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats": {
+          "first": 682,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade": {
+          "first": 690,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex": {
+          "first": 702,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "walkup__sage": {
+          "first": 714,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__sage": {
+          "first": 726,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__sage": {
+          "first": 734,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__sage": {
+          "first": 746,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__sage": {
+          "first": 758,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__sage": {
+          "first": 770,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__sage": {
+          "first": 778,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 790,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
         }
       }
     },
@@ -796,26 +932,8 @@
           "behavior": 0,
           "layer": 1
         },
-        "cafe": {
-          "first": 515,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "cream": {
-          "first": 523,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
         "lamp": {
-          "first": 535,
+          "first": 515,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -823,7 +941,7 @@
           "layer": 1
         },
         "meter": {
-          "first": 537,
+          "first": 517,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -831,7 +949,7 @@
           "layer": 1
         },
         "hydrant": {
-          "first": 538,
+          "first": 518,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -839,7 +957,7 @@
           "layer": 1
         },
         "bin": {
-          "first": 539,
+          "first": 519,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -847,7 +965,7 @@
           "layer": 1
         },
         "rack": {
-          "first": 540,
+          "first": 520,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -855,7 +973,7 @@
           "layer": 1
         },
         "tree": {
-          "first": 542,
+          "first": 522,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -863,7 +981,7 @@
           "layer": 1
         },
         "bench": {
-          "first": 546,
+          "first": 526,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -871,7 +989,7 @@
           "layer": 1
         },
         "recycling": {
-          "first": 548,
+          "first": 528,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -879,7 +997,7 @@
           "layer": 1
         },
         "clinic": {
-          "first": 550,
+          "first": 530,
           "width": 7,
           "height": 5,
           "blocked": true,
@@ -888,22 +1006,11 @@
           "closed_edges": [
             "left",
             "right"
-          ]
-        },
-        "brick": {
-          "first": 585,
-          "width": 3,
-          "height": 5,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
+          ],
+          "architecture_type": "clinic"
         },
         "grass": {
-          "first": 600,
+          "first": 565,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -911,7 +1018,7 @@
           "layer": 1
         },
         "tree_grass": {
-          "first": 601,
+          "first": 566,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -919,7 +1026,7 @@
           "layer": 1
         },
         "bench_grass": {
-          "first": 605,
+          "first": 570,
           "width": 2,
           "height": 1,
           "blocked": true,
@@ -927,7 +1034,7 @@
           "layer": 1
         },
         "lamp_grass": {
-          "first": 607,
+          "first": 572,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -935,7 +1042,7 @@
           "layer": 1
         },
         "bin_grass": {
-          "first": 609,
+          "first": 574,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -943,7 +1050,7 @@
           "layer": 1
         },
         "highrise": {
-          "first": 610,
+          "first": 575,
           "width": 3,
           "height": 5,
           "blocked": true,
@@ -952,10 +1059,11 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "office_tower"
         },
         "scenic_sea": {
-          "first": 625,
+          "first": 590,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -963,7 +1071,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 626,
+          "first": 591,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -971,7 +1079,7 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 627,
+          "first": 592,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -979,7 +1087,7 @@
           "layer": 1
         },
         "slab_walk": {
-          "first": 628,
+          "first": 593,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -987,7 +1095,7 @@
           "layer": 1
         },
         "brick_walk": {
-          "first": 632,
+          "first": 597,
           "width": 2,
           "height": 1,
           "blocked": false,
@@ -995,7 +1103,7 @@
           "layer": 1
         },
         "stone_walk": {
-          "first": 634,
+          "first": 599,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -1003,7 +1111,7 @@
           "layer": 1
         },
         "dark_walk": {
-          "first": 638,
+          "first": 603,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1011,7 +1119,7 @@
           "layer": 1
         },
         "curb_north": {
-          "first": 639,
+          "first": 604,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1019,7 +1127,7 @@
           "layer": 1
         },
         "curb_south": {
-          "first": 640,
+          "first": 605,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1027,7 +1135,7 @@
           "layer": 1
         },
         "curb_cut": {
-          "first": 641,
+          "first": 606,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1035,7 +1143,7 @@
           "layer": 1
         },
         "curb_drain": {
-          "first": 642,
+          "first": 607,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -1043,7 +1151,7 @@
           "layer": 1
         },
         "tree_well": {
-          "first": 643,
+          "first": 608,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -1051,7 +1159,7 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 647,
+          "first": 612,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -1059,7 +1167,7 @@
           "layer": 1
         },
         "succulent": {
-          "first": 651,
+          "first": 616,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1067,7 +1175,7 @@
           "layer": 1
         },
         "tuft": {
-          "first": 652,
+          "first": 617,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1075,7 +1183,7 @@
           "layer": 1
         },
         "shrub": {
-          "first": 653,
+          "first": 618,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1083,7 +1191,7 @@
           "layer": 1
         },
         "flower_box": {
-          "first": 654,
+          "first": 619,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1091,7 +1199,7 @@
           "layer": 1
         },
         "lavender": {
-          "first": 655,
+          "first": 620,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1099,7 +1207,7 @@
           "layer": 1
         },
         "daisies": {
-          "first": 656,
+          "first": 621,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1107,7 +1215,7 @@
           "layer": 1
         },
         "shop_board": {
-          "first": 657,
+          "first": 622,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -1115,49 +1223,15 @@
           "layer": 1
         },
         "wayfinder": {
-          "first": 658,
+          "first": 623,
           "width": 1,
           "height": 2,
           "blocked": true,
           "behavior": 0,
           "layer": 1
         },
-        "cafe_l": {
-          "first": 660,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe_r": {
-          "first": 668,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "cafe_lr": {
-          "first": 676,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
         "walkup": {
-          "first": 684,
+          "first": 625,
           "width": 3,
           "height": 4,
           "blocked": true,
@@ -1166,7 +1240,203 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse": {
+          "first": 637,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop": {
+          "first": 645,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
+          "first": 657,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco": {
+          "first": 669,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats": {
+          "first": 681,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade": {
+          "first": 689,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex": {
+          "first": 701,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "walkup__sage": {
+          "first": 713,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__sage": {
+          "first": 725,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__sage": {
+          "first": 733,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__sage": {
+          "first": 745,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__sage": {
+          "first": 757,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__sage": {
+          "first": 769,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__sage": {
+          "first": 777,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 789,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
         }
       }
     },
@@ -1435,7 +1705,8 @@
           "layer": 1,
           "closed_edges": [
             "left"
-          ]
+          ],
+          "architecture_type": "bay_house"
         },
         "cafe": {
           "first": 527,
@@ -1444,7 +1715,8 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": []
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
         },
         "cream": {
           "first": 535,
@@ -1453,1589 +1725,8 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": []
-        },
-        "lilac": {
-          "first": 547,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "pair": {
-          "first": 559,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "lamp": {
-          "first": 575,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "meter": {
-          "first": 577,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "hydrant": {
-          "first": 578,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bin": {
-          "first": 579,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "rack": {
-          "first": 580,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree": {
-          "first": 582,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bench": {
-          "first": 586,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "recycling": {
-          "first": 588,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "grass": {
-          "first": 590,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_grass": {
-          "first": 591,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bench_grass": {
-          "first": 595,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lamp_grass": {
-          "first": 597,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bin_grass": {
-          "first": 599,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "theater": {
-          "first": 600,
-          "width": 5,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "scenic_sea": {
-          "first": 620,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "seawall": {
-          "first": 621,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "edge_hedge": {
-          "first": 622,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "slab_walk": {
-          "first": 623,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "brick_walk": {
-          "first": 627,
-          "width": 2,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "stone_walk": {
-          "first": 629,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "dark_walk": {
-          "first": 633,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_north": {
-          "first": 634,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_south": {
-          "first": 635,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_cut": {
-          "first": 636,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_drain": {
-          "first": 637,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_well": {
-          "first": 638,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "street_tree": {
-          "first": 642,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "succulent": {
-          "first": 646,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tuft": {
-          "first": 647,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shrub": {
-          "first": 648,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "flower_box": {
-          "first": 649,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lavender": {
-          "first": 650,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "daisies": {
-          "first": 651,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shop_board": {
-          "first": 652,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "wayfinder": {
-          "first": 653,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shophouse": {
-          "first": 655,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "walkup": {
-          "first": 663,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "coral__sage": {
-          "first": 675,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe__sage": {
-          "first": 687,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "cream__sage": {
-          "first": 695,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac__sage": {
-          "first": 707,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "pair__sage": {
-          "first": 719,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "shophouse__sage": {
-          "first": 735,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "walkup__sage": {
-          "first": 743,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "coral__slate": {
-          "first": 755,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe__slate": {
-          "first": 767,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "cream__slate": {
-          "first": 775,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac__slate": {
-          "first": 787,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "pair__slate": {
-          "first": 799,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "shophouse__slate": {
-          "first": 815,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "walkup__slate": {
-          "first": 823,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        }
-      }
-    },
-    "stadium": {
-      "secondary": "gTileset_SFStadium",
-      "cards": {
-        "paving": {
-          "first": 512,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "asphalt": {
-          "first": 513,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "crossing": {
-          "first": 514,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "coral": {
-          "first": 515,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe": {
-          "first": 527,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "cream": {
-          "first": 535,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac": {
-          "first": 547,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "lamp": {
-          "first": 559,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "meter": {
-          "first": 561,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "hydrant": {
-          "first": 562,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bin": {
-          "first": 563,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "rack": {
-          "first": 564,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree": {
-          "first": 566,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bench": {
-          "first": 570,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "recycling": {
-          "first": 572,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "grass": {
-          "first": 574,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_grass": {
-          "first": 575,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bench_grass": {
-          "first": 579,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lamp_grass": {
-          "first": 581,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bin_grass": {
-          "first": 583,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "stadium_gate": {
-          "first": 584,
-          "width": 6,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "scenic_sea": {
-          "first": 608,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "seawall": {
-          "first": 609,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "edge_hedge": {
-          "first": 610,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "slab_walk": {
-          "first": 611,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "brick_walk": {
-          "first": 615,
-          "width": 2,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "stone_walk": {
-          "first": 617,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "dark_walk": {
-          "first": 621,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_north": {
-          "first": 622,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_south": {
-          "first": 623,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_cut": {
-          "first": 624,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_drain": {
-          "first": 625,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_well": {
-          "first": 626,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "street_tree": {
-          "first": 630,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "succulent": {
-          "first": 634,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tuft": {
-          "first": 635,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shrub": {
-          "first": 636,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "flower_box": {
-          "first": 637,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lavender": {
-          "first": 638,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "daisies": {
-          "first": 639,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shop_board": {
-          "first": 640,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "wayfinder": {
-          "first": 641,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shophouse": {
-          "first": 643,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "walkup": {
-          "first": 651,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "coral__sage": {
-          "first": 663,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe__sage": {
-          "first": 675,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "cream__sage": {
-          "first": 683,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac__sage": {
-          "first": 695,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "shophouse__sage": {
-          "first": 707,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "walkup__sage": {
-          "first": 715,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "coral__slate": {
-          "first": 727,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe__slate": {
-          "first": 739,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "cream__slate": {
-          "first": 747,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac__slate": {
-          "first": 759,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "shophouse__slate": {
-          "first": 771,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "walkup__slate": {
-          "first": 779,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        }
-      }
-    },
-    "neighborhood": {
-      "secondary": "gTileset_SFNeighborhood",
-      "cards": {
-        "paving": {
-          "first": 512,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "asphalt": {
-          "first": 513,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "crossing": {
-          "first": 514,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "coral": {
-          "first": 515,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe": {
-          "first": 527,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac": {
-          "first": 535,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "pair": {
-          "first": 547,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "lamp": {
-          "first": 563,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "meter": {
-          "first": 565,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "hydrant": {
-          "first": 566,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bin": {
-          "first": 567,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "rack": {
-          "first": 568,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree": {
-          "first": 570,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bench": {
-          "first": 574,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "recycling": {
-          "first": 576,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "grass": {
-          "first": 578,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_grass": {
-          "first": 579,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bench_grass": {
-          "first": 583,
-          "width": 2,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lamp_grass": {
-          "first": 585,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bin_grass": {
-          "first": 587,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "mural": {
-          "first": 588,
-          "width": 4,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "mansion": {
-          "first": 596,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "surfboards": {
-          "first": 612,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bar_sign": {
-          "first": 616,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "book_box": {
-          "first": 618,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lookout_left": {
-          "first": 620,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lookout_steps": {
-          "first": 622,
-          "width": 1,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lookout_right": {
-          "first": 624,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "scenic_sea": {
-          "first": 626,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "seawall": {
-          "first": 627,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "edge_hedge": {
-          "first": 628,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "slab_walk": {
-          "first": 629,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "brick_walk": {
-          "first": 633,
-          "width": 2,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "stone_walk": {
-          "first": 635,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "dark_walk": {
-          "first": 639,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_north": {
-          "first": 640,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_south": {
-          "first": 641,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_cut": {
-          "first": 642,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "curb_drain": {
-          "first": 643,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tree_well": {
-          "first": 644,
-          "width": 2,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "street_tree": {
-          "first": 648,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "succulent": {
-          "first": 652,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "tuft": {
-          "first": 653,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shrub": {
-          "first": 654,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "flower_box": {
-          "first": 655,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lavender": {
-          "first": 656,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "daisies": {
-          "first": 657,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "shop_board": {
-          "first": 658,
-          "width": 1,
-          "height": 1,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "wayfinder": {
-          "first": 659,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "cream_lr": {
-          "first": 661,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "coral__sage": {
-          "first": 673,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe__sage": {
-          "first": 685,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac__sage": {
-          "first": 693,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "pair__sage": {
-          "first": 705,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "cream_lr__sage": {
-          "first": 721,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "coral__slate": {
-          "first": 733,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe__slate": {
-          "first": 745,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac__slate": {
-          "first": 753,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
-        },
-        "pair__slate": {
-          "first": 765,
-          "width": 4,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        },
-        "cream_lr__slate": {
-          "first": 781,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
-        }
-      }
-    },
-    "mixed_use": {
-      "secondary": "gTileset_SFMixedUse",
-      "cards": {
-        "paving": {
-          "first": 512,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "asphalt": {
-          "first": 513,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "crossing": {
-          "first": 514,
-          "width": 1,
-          "height": 1,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "coral": {
-          "first": 515,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left"
-          ]
-        },
-        "cafe": {
-          "first": 527,
-          "width": 2,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": []
-        },
-        "lilac": {
-          "first": 535,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "right"
-          ]
+          "closed_edges": [],
+          "architecture_type": "bay_house"
         },
         "lamp": {
           "first": 547,
@@ -3141,64 +1832,21 @@
           "behavior": 0,
           "layer": 1
         },
-        "mural": {
+        "theater": {
           "first": 572,
-          "width": 4,
-          "height": 2,
+          "width": 5,
+          "height": 4,
           "blocked": true,
           "behavior": 0,
-          "layer": 1
-        },
-        "surfboards": {
-          "first": 580,
-          "width": 2,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "bar_sign": {
-          "first": 584,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "book_box": {
-          "first": 586,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lookout_left": {
-          "first": 588,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lookout_steps": {
-          "first": 590,
-          "width": 1,
-          "height": 2,
-          "blocked": false,
-          "behavior": 0,
-          "layer": 1
-        },
-        "lookout_right": {
-          "first": 592,
-          "width": 1,
-          "height": 2,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "theater"
         },
         "scenic_sea": {
-          "first": 594,
+          "first": 592,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3206,7 +1854,7 @@
           "layer": 1
         },
         "seawall": {
-          "first": 595,
+          "first": 593,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3214,7 +1862,7 @@
           "layer": 1
         },
         "edge_hedge": {
-          "first": 596,
+          "first": 594,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3222,7 +1870,7 @@
           "layer": 1
         },
         "slab_walk": {
-          "first": 597,
+          "first": 595,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -3230,7 +1878,7 @@
           "layer": 1
         },
         "brick_walk": {
-          "first": 601,
+          "first": 599,
           "width": 2,
           "height": 1,
           "blocked": false,
@@ -3238,7 +1886,7 @@
           "layer": 1
         },
         "stone_walk": {
-          "first": 603,
+          "first": 601,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -3246,7 +1894,7 @@
           "layer": 1
         },
         "dark_walk": {
-          "first": 607,
+          "first": 605,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -3254,7 +1902,7 @@
           "layer": 1
         },
         "curb_north": {
-          "first": 608,
+          "first": 606,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -3262,7 +1910,7 @@
           "layer": 1
         },
         "curb_south": {
-          "first": 609,
+          "first": 607,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -3270,7 +1918,7 @@
           "layer": 1
         },
         "curb_cut": {
-          "first": 610,
+          "first": 608,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -3278,7 +1926,7 @@
           "layer": 1
         },
         "curb_drain": {
-          "first": 611,
+          "first": 609,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -3286,7 +1934,7 @@
           "layer": 1
         },
         "tree_well": {
-          "first": 612,
+          "first": 610,
           "width": 2,
           "height": 2,
           "blocked": false,
@@ -3294,7 +1942,7 @@
           "layer": 1
         },
         "street_tree": {
-          "first": 616,
+          "first": 614,
           "width": 2,
           "height": 2,
           "blocked": true,
@@ -3302,7 +1950,7 @@
           "layer": 1
         },
         "succulent": {
-          "first": 620,
+          "first": 618,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3310,7 +1958,7 @@
           "layer": 1
         },
         "tuft": {
-          "first": 621,
+          "first": 619,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3318,7 +1966,7 @@
           "layer": 1
         },
         "shrub": {
-          "first": 622,
+          "first": 620,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3326,7 +1974,7 @@
           "layer": 1
         },
         "flower_box": {
-          "first": 623,
+          "first": 621,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3334,7 +1982,7 @@
           "layer": 1
         },
         "lavender": {
-          "first": 624,
+          "first": 622,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3342,7 +1990,7 @@
           "layer": 1
         },
         "daisies": {
-          "first": 625,
+          "first": 623,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3350,7 +1998,7 @@
           "layer": 1
         },
         "shop_board": {
-          "first": 626,
+          "first": 624,
           "width": 1,
           "height": 1,
           "blocked": true,
@@ -3358,7 +2006,1457 @@
           "layer": 1
         },
         "wayfinder": {
+          "first": 625,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "walkup": {
           "first": 627,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse": {
+          "first": 639,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop": {
+          "first": 647,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
+          "first": 659,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco": {
+          "first": 671,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats": {
+          "first": 683,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade": {
+          "first": 691,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex": {
+          "first": 703,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__sage": {
+          "first": 715,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__sage": {
+          "first": 727,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream__sage": {
+          "first": 735,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "bay_house"
+        },
+        "walkup__sage": {
+          "first": 747,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__sage": {
+          "first": 759,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__sage": {
+          "first": 767,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__sage": {
+          "first": 779,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__sage": {
+          "first": 791,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__sage": {
+          "first": 803,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__sage": {
+          "first": 811,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 823,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__slate": {
+          "first": 835,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__slate": {
+          "first": 847,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream__slate": {
+          "first": 855,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "bay_house"
+        },
+        "walkup__slate": {
+          "first": 867,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__slate": {
+          "first": 879,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__slate": {
+          "first": 887,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__slate": {
+          "first": 899,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__slate": {
+          "first": 911,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__slate": {
+          "first": 923,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__slate": {
+          "first": 931,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__slate": {
+          "first": 943,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        }
+      }
+    },
+    "stadium": {
+      "secondary": "gTileset_SFStadium",
+      "cards": {
+        "paving": {
+          "first": 512,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "asphalt": {
+          "first": 513,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "crossing": {
+          "first": 514,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "coral": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream": {
+          "first": 535,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "bay_house"
+        },
+        "lamp": {
+          "first": 547,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "meter": {
+          "first": 549,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "hydrant": {
+          "first": 550,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin": {
+          "first": 551,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rack": {
+          "first": 552,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree": {
+          "first": 554,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench": {
+          "first": 558,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "recycling": {
+          "first": 560,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "grass": {
+          "first": 562,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_grass": {
+          "first": 563,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench_grass": {
+          "first": 567,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lamp_grass": {
+          "first": 569,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin_grass": {
+          "first": 571,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stadium_gate": {
+          "first": 572,
+          "width": 6,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "stadium_gate"
+        },
+        "scenic_sea": {
+          "first": 596,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "seawall": {
+          "first": 597,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "edge_hedge": {
+          "first": 598,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 599,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 603,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 605,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 609,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 610,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 611,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 612,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_drain": {
+          "first": 613,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 614,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 618,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 622,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 623,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 624,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 625,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 626,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 627,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 628,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 629,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "walkup": {
+          "first": 631,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse": {
+          "first": 643,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop": {
+          "first": 651,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
+          "first": 663,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco": {
+          "first": 675,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats": {
+          "first": 687,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade": {
+          "first": 695,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex": {
+          "first": 707,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__sage": {
+          "first": 719,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__sage": {
+          "first": 731,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream__sage": {
+          "first": 739,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "bay_house"
+        },
+        "walkup__sage": {
+          "first": 751,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__sage": {
+          "first": 763,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__sage": {
+          "first": 771,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__sage": {
+          "first": 783,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__sage": {
+          "first": 795,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__sage": {
+          "first": 807,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__sage": {
+          "first": 815,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 827,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__slate": {
+          "first": 839,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__slate": {
+          "first": 851,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream__slate": {
+          "first": 859,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "bay_house"
+        },
+        "walkup__slate": {
+          "first": 871,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__slate": {
+          "first": 883,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__slate": {
+          "first": 891,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__slate": {
+          "first": 903,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__slate": {
+          "first": 915,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__slate": {
+          "first": 927,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__slate": {
+          "first": 935,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__slate": {
+          "first": 947,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        }
+      }
+    },
+    "neighborhood": {
+      "secondary": "gTileset_SFNeighborhood",
+      "cards": {
+        "paving": {
+          "first": 512,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "asphalt": {
+          "first": 513,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "crossing": {
+          "first": 514,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "coral": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "lamp": {
+          "first": 535,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "meter": {
+          "first": 537,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "hydrant": {
+          "first": 538,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin": {
+          "first": 539,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rack": {
+          "first": 540,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree": {
+          "first": 542,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench": {
+          "first": 546,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "recycling": {
+          "first": 548,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "grass": {
+          "first": 550,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_grass": {
+          "first": 551,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench_grass": {
+          "first": 555,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lamp_grass": {
+          "first": 557,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin_grass": {
+          "first": 559,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "mansion": {
+          "first": 560,
+          "width": 4,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "mansion"
+        },
+        "surfboards": {
+          "first": 576,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bar_sign": {
+          "first": 580,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "scenic_sea": {
+          "first": 582,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "seawall": {
+          "first": 583,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "edge_hedge": {
+          "first": 584,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 585,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 589,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 591,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 595,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 596,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 597,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 598,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_drain": {
+          "first": 599,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 600,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 604,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 608,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 609,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 610,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 611,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 612,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 613,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 614,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 615,
           "width": 1,
           "height": 2,
           "blocked": true,
@@ -3366,6 +3464,19 @@
           "layer": 1
         },
         "cream_lr": {
+          "first": 617,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "walkup": {
           "first": 629,
           "width": 3,
           "height": 4,
@@ -3375,22 +3486,11 @@
           "closed_edges": [
             "left",
             "right"
-          ]
-        },
-        "walkup": {
-          "first": 641,
-          "width": 3,
-          "height": 4,
-          "blocked": true,
-          "behavior": 0,
-          "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
+          ],
+          "architecture_type": "walkup"
         },
         "shophouse": {
-          "first": 653,
+          "first": 641,
           "width": 2,
           "height": 4,
           "blocked": true,
@@ -3399,9 +3499,23 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "shophouse"
         },
         "workshop": {
+          "first": 649,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
           "first": 661,
           "width": 3,
           "height": 4,
@@ -3411,9 +3525,10 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "gable"
         },
-        "coral__sage": {
+        "deco": {
           "first": 673,
           "width": 3,
           "height": 4,
@@ -3421,19 +3536,25 @@
           "behavior": 0,
           "layer": 1,
           "closed_edges": [
-            "left"
-          ]
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
         },
-        "cafe__sage": {
+        "flats": {
           "first": 685,
           "width": 2,
           "height": 4,
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": []
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
         },
-        "lilac__sage": {
+        "arcade": {
           "first": 693,
           "width": 3,
           "height": 4,
@@ -3441,10 +3562,12 @@
           "behavior": 0,
           "layer": 1,
           "closed_edges": [
+            "left",
             "right"
-          ]
+          ],
+          "architecture_type": "arcade"
         },
-        "cream_lr__sage": {
+        "duplex": {
           "first": 705,
           "width": 3,
           "height": 4,
@@ -3454,9 +3577,10 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "duplex"
         },
-        "walkup__sage": {
+        "coral__sage": {
           "first": 717,
           "width": 3,
           "height": 4,
@@ -3464,23 +3588,21 @@
           "behavior": 0,
           "layer": 1,
           "closed_edges": [
-            "left",
-            "right"
-          ]
+            "left"
+          ],
+          "architecture_type": "bay_house"
         },
-        "shophouse__sage": {
+        "cafe__sage": {
           "first": 729,
           "width": 2,
           "height": 4,
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": [
-            "left",
-            "right"
-          ]
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
         },
-        "workshop__sage": {
+        "cream_lr__sage": {
           "first": 737,
           "width": 3,
           "height": 4,
@@ -3490,9 +3612,10 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "bay_house"
         },
-        "coral__slate": {
+        "walkup__sage": {
           "first": 749,
           "width": 3,
           "height": 4,
@@ -3500,19 +3623,25 @@
           "behavior": 0,
           "layer": 1,
           "closed_edges": [
-            "left"
-          ]
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
         },
-        "cafe__slate": {
+        "shophouse__sage": {
           "first": 761,
           "width": 2,
           "height": 4,
           "blocked": true,
           "behavior": 0,
           "layer": 1,
-          "closed_edges": []
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
         },
-        "lilac__slate": {
+        "workshop__sage": {
           "first": 769,
           "width": 3,
           "height": 4,
@@ -3520,10 +3649,12 @@
           "behavior": 0,
           "layer": 1,
           "closed_edges": [
+            "left",
             "right"
-          ]
+          ],
+          "architecture_type": "workshop"
         },
-        "cream_lr__slate": {
+        "gable__sage": {
           "first": 781,
           "width": 3,
           "height": 4,
@@ -3533,9 +3664,10 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "gable"
         },
-        "walkup__slate": {
+        "deco__sage": {
           "first": 793,
           "width": 3,
           "height": 4,
@@ -3545,9 +3677,10 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "deco"
         },
-        "shophouse__slate": {
+        "flats__sage": {
           "first": 805,
           "width": 2,
           "height": 4,
@@ -3557,9 +3690,10 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "flats"
         },
-        "workshop__slate": {
+        "arcade__sage": {
           "first": 813,
           "width": 3,
           "height": 4,
@@ -3569,7 +3703,934 @@
           "closed_edges": [
             "left",
             "right"
-          ]
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 825,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__slate": {
+          "first": 837,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__slate": {
+          "first": 849,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream_lr__slate": {
+          "first": 857,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "walkup__slate": {
+          "first": 869,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__slate": {
+          "first": 881,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__slate": {
+          "first": 889,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__slate": {
+          "first": 901,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__slate": {
+          "first": 913,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__slate": {
+          "first": 925,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__slate": {
+          "first": 933,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__slate": {
+          "first": 945,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        }
+      }
+    },
+    "mixed_use": {
+      "secondary": "gTileset_SFMixedUse",
+      "cards": {
+        "paving": {
+          "first": 512,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "asphalt": {
+          "first": 513,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "crossing": {
+          "first": 514,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "coral": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "lamp": {
+          "first": 535,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "meter": {
+          "first": 537,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "hydrant": {
+          "first": 538,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin": {
+          "first": 539,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rack": {
+          "first": 540,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree": {
+          "first": 542,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench": {
+          "first": 546,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "recycling": {
+          "first": 548,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "grass": {
+          "first": 550,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_grass": {
+          "first": 551,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench_grass": {
+          "first": 555,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lamp_grass": {
+          "first": 557,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin_grass": {
+          "first": 559,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "mural": {
+          "first": 560,
+          "width": 4,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "surfboards": {
+          "first": 568,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bar_sign": {
+          "first": 572,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "book_box": {
+          "first": 574,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lookout_left": {
+          "first": 576,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lookout_steps": {
+          "first": 578,
+          "width": 1,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lookout_right": {
+          "first": 580,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "scenic_sea": {
+          "first": 582,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "seawall": {
+          "first": 583,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "edge_hedge": {
+          "first": 584,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 585,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 589,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 591,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 595,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 596,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 597,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 598,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_drain": {
+          "first": 599,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 600,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 604,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 608,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 609,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 610,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 611,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 612,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 613,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 614,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 615,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "cream_lr": {
+          "first": 617,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "walkup": {
+          "first": 629,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse": {
+          "first": 641,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop": {
+          "first": 649,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
+          "first": 661,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco": {
+          "first": 673,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats": {
+          "first": 685,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade": {
+          "first": 693,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex": {
+          "first": 705,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__sage": {
+          "first": 717,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__sage": {
+          "first": 729,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream_lr__sage": {
+          "first": 737,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "walkup__sage": {
+          "first": 749,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__sage": {
+          "first": 761,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__sage": {
+          "first": 769,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__sage": {
+          "first": 781,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__sage": {
+          "first": 793,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__sage": {
+          "first": 805,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__sage": {
+          "first": 813,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 825,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__slate": {
+          "first": 837,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe__slate": {
+          "first": 849,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "cream_lr__slate": {
+          "first": 857,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "walkup__slate": {
+          "first": 869,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__slate": {
+          "first": 881,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__slate": {
+          "first": 889,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__slate": {
+          "first": 901,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__slate": {
+          "first": 913,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__slate": {
+          "first": 925,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__slate": {
+          "first": 933,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__slate": {
+          "first": 945,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
         }
       }
     }

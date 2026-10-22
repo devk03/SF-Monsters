@@ -272,6 +272,10 @@ class _World:
                 check_streets(plan,cells,frontage,profile)
             except ValueError as error:
                 _need(False,'frontage',str(error))
+        if self.manifest.get('town_finishing',{}).get('revision',0)>=6 and identifier in CENTERS:
+            from world_street_contract import check_variety
+            try:check_variety(plan,profile)
+            except ValueError as error:_need(False,'frontage',str(error))
         if 'water_positions' in plan:
             positions = [position({'x': pair[0], 'y': pair[1]}, 'water position')
                          for pair in plan['water_positions'] if len(pair) == 2]

@@ -29,9 +29,9 @@ def compile_kit(root=ROOT, profile='residential'):
     """Two native layers: opaque ground and original transparent architecture."""
     styles = {'residential':{'coral','cafe','cream','lilac','pair'},
               'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
-              'culture':{'coral','cafe','cream','lilac','pair'},'stadium':{'coral','cream','cafe','lilac'},
-              'neighborhood':{'coral','cafe','lilac','pair'},
-              'mixed_use':{'coral','cafe','lilac'}}
+              'culture':{'coral','cafe','cream'},'stadium':{'coral','cream','cafe'},
+              'neighborhood':{'coral','cafe'},
+              'mixed_use':{'coral','cafe'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: (0,0)}
@@ -95,7 +95,7 @@ def compile_kit(root=ROOT, profile='residential'):
     # Shared attached fronts keep roofs, walls and stoops together at native scale.
     for name, x, width in [('coral', 0, 48), ('cafe', 48, 32),
                             ('cream', 80, 48), ('lilac', 128, 48)]:
-        if name in styles[profile]:
+        if name in styles[profile] and not (profile in ('industrial','civic') and name in ('coral','cafe','cream')):
             card(name, crop(houses, 176, x, 0, width, 64), width, 64, 6, paving, 7)
     pair_dir = root / 'assets/tiles/compact-townhouses-v1'
     pair_info = json.loads((pair_dir / 'conversion.json').read_text())
@@ -152,15 +152,6 @@ def compile_kit(root=ROOT, profile='residential'):
         name='warehouse' if profile=='industrial' else 'clinic'
         offset=0 if profile=='industrial' else 8960
         card(name,source[offset:offset+8960],112,80,12,paving,7)
-    if profile in ('industrial','civic'):
-        directory=root/'assets/tiles/south-park-frontage-v1'
-        receipt=json.loads((directory/'conversion.json').read_text())
-        names=('brick',)
-        for bank,name in enumerate(names,11):
-            data=next(item for item in receipt['cards'] if item['name']==name)
-            raw=checked(directory,name+'.indices',data)
-            palettes[bank]=checked(directory,name+'.gbapal',data)
-            w,h=data['size'];card(name,raw,w,h,bank,paving,7)
     if profile != 'residential':
         directory=root/'assets/tiles/sunset-terrain'
         receipt=json.loads((directory/'conversion.json').read_text())
@@ -200,19 +191,21 @@ def compile_kit(root=ROOT, profile='residential'):
         palettes[11]=checked(directory,'neighborhood.gbapal',receipt)
         for name in ('mural','mansion','surfboards','bar_sign','book_box'):
             if profile=='mixed_use' and name=='mansion':continue
+            if profile=='neighborhood' and name in ('mural','book_box'):continue
             spec=next(c for c in receipt['cards'] if c['name']==name);w,h=spec['size']
             card(name,checked(directory,name+'.indices',receipt),w,h,11,paving,7)
-        raw=checked(directory,'lookout.indices',receipt)
-        card('lookout_left',crop(raw,48,0,0,16,32),16,32,11,paving,7)
-        # A real traversable stair surface uses only the lower native ground
-        # layer; it cannot cover the walking sprite like an overhead facade.
-        source_colors=struct.unpack('<16H',palettes[7]);target=struct.unpack('<16H',palettes[11])
-        remap=[min(range(1,16),key=lambda j:sum((((color>>c*5)&31)-((target[j]>>c*5)&31))**2 for c in range(3))) for color in source_colors]
-        steps=crop(raw,48,16,0,16,32)
-        opaque=bytes(value or remap[paving[(y%16)*16+x]] for y in range(32) for x in range(16)
-                     for value in (steps[y*16+x],))
-        card('lookout_steps',opaque,16,32,11,paving,7,False,floor=True)
-        card('lookout_right',crop(raw,48,32,0,16,32),16,32,11,paving,7)
+        if profile=='mixed_use':
+            raw=checked(directory,'lookout.indices',receipt)
+            card('lookout_left',crop(raw,48,0,0,16,32),16,32,11,paving,7)
+            # A real traversable stair surface uses only the lower native ground
+            # layer; it cannot cover the walking sprite like an overhead facade.
+            source_colors=struct.unpack('<16H',palettes[7]);target=struct.unpack('<16H',palettes[11])
+            remap=[min(range(1,16),key=lambda j:sum((((color>>c*5)&31)-((target[j]>>c*5)&31))**2 for c in range(3))) for color in source_colors]
+            steps=crop(raw,48,16,0,16,32)
+            opaque=bytes(value or remap[paving[(y%16)*16+x]] for y in range(32) for x in range(16)
+                         for value in (steps[y*16+x],))
+            card('lookout_steps',opaque,16,32,11,paving,7,False,floor=True)
+            card('lookout_right',crop(raw,48,32,0,16,32),16,32,11,paving,7)
     # Scenic water is separated by an explicit solid seawall. Traversable bay
     # crossings still use the independently modelled native Surf/Waterfall cells.
     directory=root/'assets/tiles/sunset-terrain'
@@ -257,9 +250,15 @@ def compile_kit(root=ROOT, profile='residential'):
            'clinic':['left','right'],'brick':['left','right'],
            'highrise':['left','right'],'theater':['left','right'],
            'mansion':['left','right'],'stadium_gate':['left','right']}
+    families={'coral':'bay_house','cream':'bay_house','lilac':'bay_house',
+              'pair':'paired_townhouse','cafe':'corner_shop',
+              'warehouse':'warehouse','clinic':'clinic','highrise':'office_tower',
+              'theater':'theater','mansion':'mansion','stadium_gate':'stadium_gate'}
     for name,closed in edges.items():
-        if name in catalog:catalog[name]['closed_edges']=closed
-    if profile in ('industrial','civic','neighborhood','mixed_use'):
+        if name in catalog:
+            catalog[name]['closed_edges']=closed
+            if name in families:catalog[name]['architecture_type']=families[name]
+    if profile in ('neighborhood','mixed_use'):
         base,width,offset=('cream',48,80) if profile in ('neighborhood','mixed_use') else ('cafe',32,48)
         raw=crop(houses,176,offset,0,width,64)
         variants=(('lr',['left','right']),) if profile in ('neighborhood','mixed_use') else (('l',['left']),('r',['right']),('lr',['left','right']))
@@ -275,14 +274,17 @@ def compile_kit(root=ROOT, profile='residential'):
             name=base+'_'+suffix
             card(name,bytes(pixels),width,64,6,paving,7)
             catalog[name]['closed_edges']=closed
+            catalog[name]['architecture_type']=families[base]
     from world_architecture import fronts, paint_palette
     for name,w,h,raw in fronts(profile):
         card(name,raw,w,h,6,paving,7)
         catalog[name]['closed_edges']=['left','right']
+        catalog[name]['architecture_type']=name
     # Alternate paint uses free native palette banks and shares every 8x8 tile.
     # It does not spend the sprite budget on recolored copies of the same art.
     banks={'neighborhood':(9,12),'mixed_use':(9,12),
-           'culture':(11,12),'stadium':(11,12)}.get(profile,())
+           'culture':(11,12),'stadium':(11,12),
+           'industrial':(11,),'civic':(11,)}.get(profile,())
     base_fronts=[(n,c) for n,c in catalog.items() if 'closed_edges' in c and
                  any(w>>12==6 for row in c['tiles'] for t in row for w in records[t-FIRST_METATILE][4:])]
     for scheme,bank in zip(('sage','slate'),banks):
@@ -373,7 +375,8 @@ def describe(kit):
         name:{'first':card['tiles'][0][0],'width':len(card['tiles'][0]),
               'height':len(card['tiles']),'blocked':card['blocked'],
               'behavior':kit['attributes'][card['tiles'][0][0]-512]&255,'layer':1,
-              **({'closed_edges':card['closed_edges']} if 'closed_edges' in card else {})}
+              **({'closed_edges':card['closed_edges']} if 'closed_edges' in card else {}),
+              **({'architecture_type':card['architecture_type']} if 'architecture_type' in card else {})}
         for name,card in kit['catalog'].items()}}
 
 

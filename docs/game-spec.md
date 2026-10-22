@@ -655,6 +655,17 @@ build exposed invalid generated palette syntax, now corrected. Continue district
 work without replacing the public patch with an unverified combined candidate.
 
 
+Private v95 first pass: eight authored native architectural forms and profile-safe
+paint variants now pack into all13urban destinations without enlarging maps.
+Residential districts also retain the original Victorian bay front; district
+selection emphasizes cottages/duplexes, commercial arcades or workshop forms.
+Structural-family metadata prevents repaint/end-cap aliases inflating counts.
+The GBA secondary kits remain below512tiles/512records each; no sprite budget
+is used for recolors. All58local world checks pass. First native old-Save/guide
+check passes with party/items/money/flags/Flash intact. Screenshots show clearer
+stoops and window recesses but this is a private art candidate, not user approval.
+Complete traversal, updated seam inspection and browser/release checks remain.
+
 **Active user expansion — October 17: finish the non-gym world.** Build all 18
 approved destinations and their 19 connectors into a compact, coherent SF world,
 using the imported plan and stable gym contributor contracts. This direct request

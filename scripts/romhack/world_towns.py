@@ -79,7 +79,7 @@ def furnish(plans, manifest):
                                     ('lookout_right',17,4)]}.get(district,[])
         gym_style='cream_lr' if profile in ('neighborhood','mixed_use') else 'cream'
         centerpiece=landmark or ((gym_style,14,3) if gym else
-                    ('pair',14,3) if not connector and district!='potrero_hill' else None)
+                    ('duplex',14,3) if not connector and district!='potrero_hill' else None)
         center_left,center_right=(15,17)
         if centerpiece:
             center_left=centerpiece[1]
@@ -87,31 +87,29 @@ def furnish(plans, manifest):
         blocks=[]
         frontage_runs=[]
         planting_pockets=[]
-        choices={
-            'industrial':('workshop','brick','warehouse','coral','cafe'),
-            'civic':('walkup','brick','cream','clinic','cafe'),
-            'stadium':('shophouse','walkup','cafe','cream','coral','lilac'),
-            'culture':('shophouse','coral','walkup','cafe','cream','lilac','pair'),
-            'mixed_use':('walkup','shophouse','coral','cafe','lilac','workshop','cream_lr'),
-        }.get(profile,{
-            'mission':('cafe','coral','lilac','cream','pair'),
-            'marina':('cream','cafe','lilac','pair','coral'),
-            'pacific_heights':('cream','lilac','pair','coral','cafe'),
-            'noe_valley':('pair','cafe','cream','lilac','coral'),
-            'outer_sunset':('pair','coral','cafe','cream','lilac'),
-            'potrero_hill':('coral','pair','cream','cafe'),
-            'north_beach':('cafe','cream','coral','lilac'),
-        }.get(district,('coral','cafe','cream','lilac','pair')))
-        if profile in ('neighborhood','mixed_use'):choices=tuple('cream_lr' if c=='cream' else c for c in choices)
-        if profile in ('industrial','civic'):
-            choices+=('cafe_l','cafe_r','cafe_lr')
+        # Each district packs actual structural forms. Paint does not count as
+        # another building type, and every form has complete exposed end piers.
+        from world_architecture import FORMS
+        favorite={
+            'industrial':('workshop','walkup','arcade','deco','duplex','flats','shophouse','gable'),
+            'civic':('deco','arcade','walkup','workshop','flats','duplex','shophouse','gable'),
+            'culture':('shophouse','arcade','walkup','gable','flats','duplex','deco','coral'),
+            'stadium':('arcade','workshop','shophouse','walkup','deco','flats','duplex','gable'),
+        }
+        choices=favorite.get(profile,{
+            'outer_sunset':('gable','duplex','coral','shophouse','walkup','arcade','deco','flats'),
+            'marina':('flats','deco','duplex','shophouse','arcade','gable','walkup','coral'),
+            'pacific_heights':('gable','flats','duplex','walkup','deco','coral','shophouse','arcade'),
+            'noe_valley':('duplex','gable','shophouse','flats','walkup','arcade','deco','coral'),
+        }.get(district,FORMS))
         def record(style,x,y,*,paint=False):
             if paint and style+'__sage' in kit['catalog']:
-                scheme=('', '__sage', '__slate')[(x//2+y+sum(map(ord,district))+len(blocks))%3]
+                schemes=('', '__sage', '__slate') if style+'__slate' in kit['catalog'] else ('','__sage')
+                scheme=schemes[(x//2+y+sum(map(ord,district))+len(blocks))%len(schemes)]
                 style+=scheme
                 # A repeated silhouette must change paint at a shared wall.
                 if any(b['style']==style and b['y']==y and b['x']+b['width']==x for b in blocks):
-                    style=style.split('__')[0]+('__slate' if scheme=='__sage' else '__sage')
+                    style=style.split('__')[0]+schemes[(schemes.index(scheme)+1)%len(schemes)]
             card=kit['catalog'][style]
             stamp(style,x,y)
             blocks.append({'style':style,'x':x,'y':y,

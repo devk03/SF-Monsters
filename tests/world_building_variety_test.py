@@ -12,7 +12,7 @@ import struct
 
 class BuildingVarietyTests(unittest.TestCase):
     def test_paint_changes_facades_without_recoloring_paving_or_replacing_pixels(self):
-        for profile in ('neighborhood','mixed_use','culture','stadium'):
+        for profile in ('neighborhood','mixed_use','culture','stadium','industrial','civic'):
             kit=compile_kit(profile=profile)
             for name,card in kit['catalog'].items():
                 if '__' not in name:continue
@@ -30,11 +30,12 @@ class BuildingVarietyTests(unittest.TestCase):
     def test_new_fronts_have_green_and_blue_walls_not_just_different_trim(self):
         palette=compile_kit(profile='mixed_use')['palettes'][6]
         for name,width,_,pixels in fronts('mixed_use'):
-            wall=pixels[8*width+3]
             for scheme,dominant in (('sage',1),('slate',2)):
-                color=struct.unpack('<16H',paint_palette(palette,scheme))[wall]
-                rgb=[(color>>shift)&31 for shift in (0,5,10)]
-                self.assertGreater(rgb[dominant],max(v for i,v in enumerate(rgb) if i!=dominant),(name,scheme))
+                colors=struct.unpack('<16H',paint_palette(palette,scheme))
+                visible=[colors[p] for p in pixels if p]
+                colored=sum(((c>>(dominant*5))&31)>max((c>>(i*5))&31
+                    for i in range(3) if i!=dominant) for c in visible)
+                self.assertGreater(colored,len(visible)//4,(name,scheme,'painted wall area'))
 
     def test_each_urban_district_draws_multiple_forms_and_the_new_paints(self):
         manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
@@ -45,10 +46,14 @@ class BuildingVarietyTests(unittest.TestCase):
             if profile not in kits:kits[profile]=compile_kit(profile=profile)
             catalog=kits[profile]['catalog']
             blocks=[b for b in plan['town_blocks'] if 'closed_edges' in catalog[b['style']]]
-            forms={b['style'].split('__')[0].removesuffix('_lr').removesuffix('_l').removesuffix('_r') for b in blocks}
+            forms={catalog[b['style']]['architecture_type'] for b in blocks}
             with self.subTest(area=plan['world_id']):
-                self.assertGreaterEqual(len(forms),4)
-                if profile not in ('industrial','civic'):
+                self.assertGreaterEqual(len(forms),8)
+                self.assertLessEqual(len(kits[profile]['tiles']),512)
+                self.assertLessEqual(len(kits[profile]['records']),512)
+                if profile in ('industrial','civic'):
+                    self.assertTrue(any('__sage' in b['style'] for b in blocks))
+                else:
                     paints={b['style'].split('__')[1] if '__' in b['style'] else 'warm' for b in blocks}
                     self.assertEqual(paints,{'warm','sage','slate'})
                     for block in blocks:

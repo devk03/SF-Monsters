@@ -121,3 +121,14 @@ def check_streets(plan, cells, frontage, profile):
         raise ValueError('Street wall opening has no named destination')
     if any(cells[x,y][1] for x in range(left,right+1) for y in range(16,23)):
         raise ValueError('Street passage is blocked before its destination')
+
+
+def check_variety(plan, profile):
+    """Paint and edge-cap aliases cannot inflate structural variety counts."""
+    cards=profile['cards']
+    families={cards[b['style']]['architecture_type']
+              for b in plan.get('town_blocks',[])
+              if cards.get(b['style'],{}).get('architecture_type')}
+    if len(families)<8:
+        raise ValueError(f"{plan['world_id']}: fewer than eight structural building types")
+    return families
