@@ -22,6 +22,13 @@ separate. Keep rootv80 runtime/save bytes intact; verify native old-Save loading
 browser return visits, speed/audio behavior and ordinary Save/import safety.
 
 Current checkpoint: v0.0.92 is published at `/world`; root v80 stays available.
+Private v96 adds eight ordinary facade choices per urban district, coordinated
+material/paint variation and connected sidewalks checked against NPC movement.
+Read `docs/world/neighborhood-art.md` and section15.1 evidence before continuing.
+Native58-map traversal, WASM RAM replay,26signs and18activities pass. A30second
+Chrome smoke still has613audio-underrun frames; full browser route and human
+visual acceptance remain open. Keep publicv92 intact while refining the candidate.
+Shared street composition and all five nature destinations still need detail.
 Priority blocker: connected-map boundaries can interpret foreign secondary-kit
 IDs as corrupt architecture. Read the new section15.1 finding and seam screenshots.
 Native/WASM RAM equality alone missed this visible defect. Keep real routes;

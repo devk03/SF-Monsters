@@ -677,7 +677,60 @@ Activity fixtures remain in place; the Sunset shop board moves to a readable
 position above its approach. All59local world checks pass. An initial seam budget
 failure was fixed by removing unused service/gym recolor records rather than
 reducing architecture or disabling connection rendering. Native v96 checks and
-review are in progress. See `docs/world/neighborhood-art.md` for the durable brief.
+review are recorded below. See `docs/world/neighborhood-art.md` for the durable brief.
+
+**Private v96 verification — October21.** Target
+`aa2a275851fcda8319e2d3ff69c4fc40089137d53270635a183d8d8e8a8465ee`;
+no publication. Publicv92 and rootv80 remain unchanged.
+
+- `town-v96-neighborhood-guide`: ordinaryv88Save loads without changing its valid
+  player position, party/held items, money, inventory,27local flags, chapter state
+  or Flash; all9current actor templates refresh. All18guide controls pass.
+- `town-v96-neighborhood-returns`:58maps,76connections,16gymwarps,26roomwarps.
+  `town-v96-neighborhood-wasm` replays105,227frames from the same initial state;
+  all294,912guest-RAM bytes match, SHA
+  `8da38822eb4ab4232e2640b61bbe5e00b33b1b0b395af4704fbe5112f1f1eaa6`.
+- `town-v96-neighborhood-guide-contexts`: all58place/route/interior contexts;
+  palette, player state, Surf and ordinary Flash remain safe.
+- `town-v96-neighborhood-seams`: six paired transient trials/192animation frames
+  verify live margins, native VRAM, inward walking and protected state. All37
+  compiled connection atlases fit; peak foreign graphics345spare-primary tiles.
+- `town-v96-neighborhood-signs`: all26actual interactions pass, including the
+  moved Sunset board and safe reading position[9,10].
+- `town-v96-neighborhood-streets`: actual controller tour of all18destinations,
+  with both ends/sides of urban blocks captured. A standalone local review and
+  contact sheet are under `town-v96-neighborhood-review` and the tour directory.
+- `town-v96-legacy-water-{land,surf}`: genuinev82Saves retain traversal mode and
+  badge/module flags; obsolete dry shore[8,12]recovers to[5,12], valid Surf stays
+  put, pre-badge Surf remains locked and Flash stays byte-identical. The generic
+  valid-position guide fixture was first applied incorrectly to this obsolete
+  dry shore and failed; the dedicated geometry-upgrade check is the proper gate.
+- All8development access stamps were controller-earned from that earlier Save.
+  The supplemental post-stamp route sweep hit the frozen200k-frame driver cap;
+  retain its failed/partial log. Do not treat it as completed coverage or raise
+  the cap. Its matching stamp8checkpoint starts the separate activity run.
+  `town-v96-neighborhood-activities` then passes all18actual rewards, quantities,
+  ownership flags and duplicate-reward rejection. Full-bag retry code is unchanged.
+- The new continuous-sidewalk gate proves a pedestrian path, not a uniform
+  two-tile width or access to every possible viewing tile. The eight-type gate
+  counts actual structural families; special service/landmark families may add
+  to that count. All13urban districts actually place eight ordinary form choices.
+- Chrome private-player Continue, movement and screenshots work. Its30second
+  foreground diagnostic runs1,792frames/about59.7fps with zero discarded frames,
+  but records613audio-underrun output frames. Preserve the failure report under
+  `town-v96-neighborhood-review/browser-foreground.json`; do not replace it with
+  the earlier zero-underrunv95smoke. The complete foreground browser route remains
+  unpassed, and this candidate is not deployed.
+
+Visual critique: recesses, roofs, material/paint balance and uncluttered walking
+lanes improve the prior repeated fronts. The shared street template and common
+window modules still need finer neighborhood-specific composition. The five
+nature destinations need their own landscape detail pass. No town or full quality
+domain is approved by these tests; requested subset feedback and human matched
+reviews remain open. Alignment's bounded read-only review found no blocking
+regression and correctly retained the sidewalk/count limits above. No recurring
+monitor or GitHub workflow was started; local preview sessions end within30minutes.
+
 
 **Active user expansion — October 17: finish the non-gym world.** Build all 18
 approved destinations and their 19 connectors into a compact, coherent SF world,
