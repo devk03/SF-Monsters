@@ -3,38 +3,62 @@
 #include "palette.h"
 #include "sf_world_guide_pixels.h"
 
-static void SFGuideRouteSegment(u8 x,u8 y,u8 toX,u8 toY,u8 border,u8 fill)
+static void SFGuideRouteSegment(u8 x0,u8 y0,u8 x1,u8 y1,u8 color,u8 width,bool8 dashed)
 {
-    u8 left=x<toX?x:toX,top=y<toY?y:toY;
-    u8 width=x<toX?toX-x+1:x-toX+1,height=y<toY?toY-y+1:y-toY+1;
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(border),left-2,top-2,width+4,height+4);
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(fill),left-1,top-1,width+2,height+2);
+    s16 x=x0,y=y0,dx=x1>x0?x1-x0:x0-x1,dy=y1>y0?y1-y0:y0-y1;
+    s16 sx=x0<x1?1:-1,sy=y0<y1?1:-1,error=dx-dy,e2;
+    u16 n=0;
+    for (;;)
+    {
+        if (!dashed || n%5<2)
+            FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(color),x-width/2,y-width/2,width,width);
+        if (x==x1 && y==y1) break;
+        e2=error*2;
+        if (e2>-dy) {error-=dy;x+=sx;}
+        if (e2<dx) {error+=dx;y+=sy;}
+        n++;
+    }
 }
 
 static void SFGuideRoute(const struct SFGuideEdge *edge)
 {
     u8 n;
     bool8 locked=edge->badge && !FlagGet(FLAG_BADGE01_GET+edge->badge-1);
-    u8 border=edge->water?12:10,fill=edge->water?(locked?4:13):11;
     for (n=1;n<edge->count;n++)
-        SFGuideRouteSegment(edge->points[n-1][0],edge->points[n-1][1],
-                            edge->points[n][0],edge->points[n][1],border,fill);
+    {
+        u8 x=edge->points[n-1][0],y=edge->points[n-1][1];
+        u8 toX=edge->points[n][0],toY=edge->points[n][1];
+        if (edge->water)
+            SFGuideRouteSegment(x,y,toX,toY,locked?5:13,2,TRUE);
+        else
+        {
+            SFGuideRouteSegment(x,y,toX,toY,10,3,FALSE);
+            SFGuideRouteSegment(x,y,toX,toY,11,1,FALSE);
+        }
+    }
 }
 
 static void SFGuideTown(u8 x,u8 y,bool8 gym)
 {
-    // Nine-by-seven native marker with a dark rim, pale bevel and colored core.
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),x-3,y-3,7,7);
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),x-4,y-2,9,5);
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(1),x-3,y-2,7,5);
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(gym?14:4),x-2,y-1,5,3);
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(15),x-2,y-1,2,1);
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(gym?10:12),x+2,y,1,2);
+    if (gym)
+    {
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),x-3,y-3,7,7);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),x-4,y-2,9,5);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(1),x-3,y-2,7,5);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(14),x-2,y-1,5,3);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(15),x-2,y-1,2,1);
+    }
+    else
+    {
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),x-2,y-2,5,5);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(1),x-1,y-1,3,3);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(5),x,y,1,1);
+    }
 }
 
 static void SFGuideCursor(u8 x,u8 y)
 {
-    u8 left=x-7,right=x+5,top=y-5,bottom=y+3;
+    u8 left=x-6,right=x+4,top=y-5,bottom=y+3;
     FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),left-1,top-1,4,4);
     FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),right,top-1,4,4);
     FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),left-1,bottom,4,4);

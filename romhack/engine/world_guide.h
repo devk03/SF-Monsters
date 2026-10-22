@@ -23,8 +23,7 @@ EWRAM_DATA static u16 sSFGuideSavedPalette[16];
 EWRAM_DATA static bool8 sSFGuideDetails = FALSE;
 static const u8 sSFGuideLabel[] = _("SF MAP");
 static const u8 sSFGuideTitle[] = _("SAN FRANCISCO");
-static const u8 sSFGuideRegion[] = _("REGION MAP");
-static const u8 sSFGuideHelp[] = _("ARROWS: PLACE  A: INFO  B: BACK");
+static const u8 sSFGuideRegion[] = _("A INFO  B BACK");
 
 static const u8 sSFGuideFinished[] = _("Local discovery: complete");
 static const u8 sSFGuideFound[] = _("Local favor: return to your neighbor");
@@ -47,9 +46,8 @@ static void SFGuideText(const u8 *text,u8 y) {SFGuideAt(text,8,y,sSFGuideInk);}
 static void SFGuideLabels(void)
 {
     const struct SFGuidePlace *place=&sSFGuidePlaces[sSFGuideSelected];
-    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),0,120,224,24);
-    SFGuideAt(place->name,8,120,sSFGuidePanelInk);
-    SFGuideAt(sSFGuideHelp,8,132,sSFGuidePanelInk);
+    FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(2),0,128,224,16);
+    SFGuideAt(place->name,8,130,sSFGuidePanelInk);
     if (!sSFGuideDetails) SFGuideMapArt();
     CopyWindowToVram(sSFGuideWindow,COPYWIN_FULL);
 }
@@ -62,10 +60,10 @@ static bool8 SFGuideDraw(void)
     DrawStdWindowFrame(sSFGuideWindow,FALSE);
     FillWindowPixelBuffer(sSFGuideWindow,PIXEL_FILL(2));
     SFGuideAt(sSFGuideTitle,8,1,sSFGuidePanelInk);
-    SFGuideAt(sSFGuideRegion,165,1,sSFGuidePanelInk);
+    SFGuideAt(sSFGuideRegion,155,1,sSFGuidePanelInk);
     if (sSFGuideDetails)
     {
-        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(1),0,16,224,104);
+        FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(1),0,16,224,112);
         SFGuideText(place->character,22);
         for (i=0;i<4;i++) SFGuideText(place->routes[i],46+i*13);
         SFGuideText(FlagGet(place->doneFlag)?sSFGuideFinished:

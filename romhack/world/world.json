@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.93-neighborhood-world-draft",
+  "version": "0.0.94-neighborhood-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {
@@ -1234,79 +1234,79 @@
     }
   ],
   "city_guide": {
-    "projection": "Schematic positions from the user-approved adventure map; connectors compress streets.",
+    "projection": "Original SF regional relief at224x112; normalized positions are region-scale approximations, not street addresses.",
     "positions": {
       "dogpatch": [
-        69,
-        85
+        64,
+        90
       ],
       "potrero_hill": [
-        55,
-        73
-      ],
-      "mission": [
-        43,
-        75
-      ],
-      "castro": [
-        31,
-        67
-      ],
-      "outer_sunset": [
-        10,
-        55
-      ],
-      "golden_gate_park": [
-        20,
-        37
-      ],
-      "marina": [
-        37,
-        14
-      ],
-      "pacific_heights": [
-        47,
-        24
-      ],
-      "twin_peaks": [
-        24,
-        82
-      ],
-      "noe_valley": [
-        41,
-        87
-      ],
-      "mission_bay": [
-        65,
-        62
-      ],
-      "giants_stadium": [
-        70,
-        50
-      ],
-      "financial_district": [
-        70,
-        35
-      ],
-      "north_beach": [
-        70,
-        17
-      ],
-      "treasure_island": [
-        88,
-        43
-      ],
-      "lands_end": [
-        7,
-        15
-      ],
-      "sutro_tower": [
-        10,
+        56,
         84
       ],
+      "mission": [
+        49,
+        78
+      ],
+      "castro": [
+        39,
+        76
+      ],
+      "outer_sunset": [
+        17,
+        72
+      ],
+      "golden_gate_park": [
+        30,
+        55
+      ],
+      "marina": [
+        42,
+        27
+      ],
+      "pacific_heights": [
+        45,
+        38
+      ],
+      "twin_peaks": [
+        36,
+        85
+      ],
+      "noe_valley": [
+        45,
+        90
+      ],
+      "mission_bay": [
+        62,
+        75
+      ],
+      "giants_stadium": [
+        63,
+        65
+      ],
+      "financial_district": [
+        59,
+        43
+      ],
+      "north_beach": [
+        55,
+        32
+      ],
+      "treasure_island": [
+        87,
+        53
+      ],
+      "lands_end": [
+        16,
+        44
+      ],
+      "sutro_tower": [
+        26,
+        85
+      ],
       "angel_island": [
-        88,
-        4
+        79,
+        18
       ]
     },
     "native_sections": {

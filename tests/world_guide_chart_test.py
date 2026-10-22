@@ -43,7 +43,7 @@ class NativeChartTest(unittest.TestCase):
             self.assertGreaterEqual(x - 8, 0)
             self.assertLessEqual(x + 8, 223)
             self.assertGreaterEqual(y - 11, 16)
-            self.assertLessEqual(y + 6, 119)
+            self.assertLessEqual(y + 6, 127)
         for route in routes:
             points = route_path(route, positions)
             self.assertEqual(points[0], positions[route['from']])

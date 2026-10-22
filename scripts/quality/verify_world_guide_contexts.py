@@ -25,7 +25,7 @@ def main():
     engine=ROOT/'.tools/pokeemerald-world-host'
     manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
     areas=[a['id'] for a in manifest['areas']]+[manifest['league']['venue']]
-    pixels={key:(round((20+point[0]*174/100)/4)*4,round((24+point[1]*92/100)/4)*4)
+    pixels={key:(round(point[0]*224/100),16+round(point[1]*112/100))
             for key,point in manifest['city_guide']['positions'].items()}
     interiors={x['id']:x['area'] for x in manifest['gyms']+manifest['interiors']}
     routes={r['id']:r for r in manifest['routes']}
@@ -71,12 +71,14 @@ def main():
                 points=[tuple(edge[5+n*2:7+n*2]) for n in range(edge[4])]
                 if not 2<=edge[4]<=6 or points[0]!=a or points[-1]!=b:
                     raise ValueError('Compiled region corridor endpoints differ from its world connection')
-                lengths=[abs(x-u)+abs(y-v) for (x,y),(u,v) in zip(points,points[1:])]
+                lengths=[max(abs(x-u),abs(y-v)) for (x,y),(u,v) in zip(points,points[1:])]
                 remaining=sum(lengths)//2
                 for (x,y),(u,v),length in zip(points,points[1:],lengths):
                     if remaining<=length:
-                        here=(x+(remaining if u>x else -remaining if u<x else 0),
-                              y+(remaining if v>y else -remaining if v<y else 0));break
+                        def interpolate(start,end):
+                            delta=end-start
+                            return start+((remaining*abs(delta)+length//2)//length)*(1 if delta>=0 else -1)
+                        here=(interpolate(x,u),interpolate(y,v));break
                     remaining-=length
                 kind=1
             else:here=pixels[parent]

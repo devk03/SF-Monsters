@@ -1,43 +1,41 @@
-"""Native region-map chart coordinates; never alters playable geography."""
+"""Region-scale SF positions and short chart paths; playable maps are unchanged."""
 
-# Deliberate orthogonal corridors, including the long Pacific Heights return.
-# Endpoints come from the authoritative place positions, not a second node list.
+# Curated bends follow the peninsula and the bay instead of drawing subway boxes.
 BENDS = {
-    'route_01': [(140, 92)], 'route_02': [], 'route_03': [(96, 84)],
-    'route_04': [(36, 84)], 'route_05': [(36, 60)],
-    'route_06': [(56, 44), (84, 44)], 'route_07': [(100, 36)],
-    'route_08': [(112, 48), (112, 64), (60, 64)],
-    'route_09': [(76, 100), (76, 104)],
-    'route_10': [(132, 104)], 'route_11': [(140, 80)],
-    'route_12': [], 'route_13': [], 'route_14': [],
-    'route_15': [], 'route_16': [(20, 60), (20, 36)],
-    'route_17': [(172, 40)], 'route_18': [(184, 64), (184, 88), (144, 88), (144, 80)],
-    'league_route': [(156, 40), (156, 28)],
+    'route_01': [(134,115)], 'route_02': [], 'route_03': [],
+    'route_04': [(68,95),(52,95)], 'route_05': [(40,85),(48,78)],
+    'route_06': [(77,66),(88,57)], 'route_07': [],
+    'route_08': [(83,78),(79,94)], 'route_09': [],
+    'route_10': [(115,122),(132,116)], 'route_11': [],
+    'route_12': [(137,76)], 'route_13': [], 'route_14': [],
+    'route_15': [(44,108)], 'route_16': [(45,78),(29,72)],
+    'route_17': [(144,53),(171,62)], 'route_18': [(181,89),(161,100)],
+    'league_route': [(147,39)],
 }
 
 
 def chart_positions(manifest):
-    return {key: (round((20 + x * 174 / 100) / 4) * 4,
-                  round((24 + y * 92 / 100) / 4) * 4)
-            for key, (x, y) in manifest['city_guide']['positions'].items()}
+    return {key:(round(x*224/100),16+round(y*112/100))
+            for key,(x,y) in manifest['city_guide']['positions'].items()}
 
 
 def route_path(route, positions):
-    points = [positions[route['from']], *BENDS[route['id']], positions[route['to']]]
-    points = [p for n, p in enumerate(points) if not n or p != points[n - 1]]
-    if len(points) > 6 or any(a[0] != b[0] and a[1] != b[1] for a, b in zip(points, points[1:])):
-        raise ValueError('Region-map route must use at most six orthogonal chart points')
-    if any(not 5 <= x <= 218 or not 20 <= y <= 114 for x, y in points):
-        raise ValueError('Region-map corridor overlaps the interface frame')
+    points = [positions[route['from']],*BENDS[route['id']],positions[route['to']]]
+    points = [p for n,p in enumerate(points) if not n or p != points[n-1]]
+    if not 2 <= len(points) <= 6 or any(not 5<=x<=218 or not 24<=y<=123 for x,y in points):
+        raise ValueError('Region-map route escapes its native chart or vertex budget')
     return points
 
 
 def path_midpoint(points):
-    lengths = [abs(a[0] - b[0]) + abs(a[1] - b[1]) for a, b in zip(points, points[1:])]
-    distance = sum(lengths) // 2
-    for a, b, length in zip(points, points[1:], lengths):
+    # Chebyshev length matches the native integer line rasterizer's pixel steps.
+    lengths = [max(abs(a[0]-b[0]),abs(a[1]-b[1])) for a,b in zip(points,points[1:])]
+    distance = sum(lengths)//2
+    for a,b,length in zip(points,points[1:],lengths):
         if distance <= length:
-            return (a[0] + (distance if b[0] > a[0] else -distance if b[0] < a[0] else 0),
-                    a[1] + (distance if b[1] > a[1] else -distance if b[1] < a[1] else 0))
+            def part(start,end):
+                delta = end-start
+                return start + ((distance*abs(delta)+length//2)//length)*(1 if delta>=0 else -1)
+            return part(a[0],b[0]),part(a[1],b[1])
         distance -= length
     return points[-1]

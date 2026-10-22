@@ -41,7 +41,7 @@ def tiled_bytes(image):
 
 def compile_art():
     raw = tiled_bytes(terrain())
-    palette = ', '.join('RGB' + str(color).replace(' ', '') for color in PALETTE)
+    palette = ', '.join(hex(sum(v << (5*c) for c, v in enumerate(color))) for color in PALETTE)
     rows = ['    ' + ','.join(hex(v) for v in raw[n:n + 24]) for n in range(0, len(raw), 24)]
     return ('// Original SF region relief; generated from world_guide_art.py.\n'
             'static const u16 sSFGuidePalette[16] = {' + palette + '};\n'

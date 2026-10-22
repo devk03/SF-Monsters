@@ -643,6 +643,17 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October21 neighborhood refinement.** The user requires seven or eight genuinely
+different building types per urban neighborhood, with coordinated paint variants,
+clear sidewalks and much richer local detail. Count structural forms separately
+from paint. Keep compact attached blocks, complete exposed ends, readable entries
+and unobstructed walking routes. Inspect native gameplay before claiming visual
+improvement; source counts are not quality approval. Nature destinations retain
+park/coastal character rather than receiving eight arbitrary urban buildings.
+The private v94 region-map revision remains unapproved and unpublished; its first
+build exposed invalid generated palette syntax, now corrected. Continue district
+work without replacing the public patch with an unverified combined candidate.
+
 
 **Active user expansion — October 17: finish the non-gym world.** Build all 18
 approved destinations and their 19 connectors into a compact, coherent SF world,
