@@ -643,6 +643,28 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 all-town visual review packet — private v97.** The user requested
+images of every current town and nature destination for critique. Captured a fresh
+controller-only tour of all18 destinations against the v97 SHA below, then decoded
+each complete32x24 background from live native VRAM/palettes and compiled cells.
+Each snapshot passes its live render-context audit. Full backgrounds omit actors;
+adjacent genuine gameplay images show residents and camera scale.
+
+- Private artifacts: `output/pdf/sf-world-review-v97.pdf` (25pages) and
+  `output/review/sf-world-review-v97.html` (self-contained gallery with per-town
+  notes and JSON export). Source/regeneration instructions live in
+  `scripts/quality/world-review.md`; captured pixels and exports stay ignored.
+- The packet covers13urban and5nature destinations, including Golden Gate Park,
+  Twin Peaks, Sutro Tower, Lands End and Angel Island. Presidio Heights and the
+  Presidio have no current playable maps; mark them missing, never substitute
+  Pacific Heights. Richmond is currently combined with Golden Gate Park.
+- Honest visual finding: urban landmarks/paint vary, but all13street compositions
+  still repeat two frontage rows. Nature maps share overly paved loops and
+  rectangular planting. Island shores and urban landmark massing need work.
+- The user's "so far this is alr much better" accepts the current direction only.
+  It does not close individual-town, art-domain, browser-audio or long-route gates.
+  No map changes, game build, deployment or GitHub workflow were needed here.
+
 
 **October22 crosswalk correction — privatev97.** The user rejected the three
 fence-like rows in the street crossing. The world compiler was repeating a

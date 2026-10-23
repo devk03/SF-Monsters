@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SF Mini Monsters - world critique</title>
+<style>
+:root{color-scheme:light;--ink:#24342e;--muted:#65736c;--line:#d5d9d2;--paper:#f5f4ef}
+*{box-sizing:border-box}html{scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}
+a{color:#285b49}header,main{max-width:1320px;margin:auto;padding:32px}small{font-size:12px;font-weight:650;letter-spacing:.08em;color:var(--muted)}
+h1{font-size:clamp(30px,5vw,56px);line-height:1.08;letter-spacing:-.04em;margin:20px 0}h2{font-size:28px;line-height:1.15;margin:8px 0}h3{font-size:16px;margin:0 0 8px}p{max-width:850px}.muted,figcaption{color:var(--muted)}
+.notice{border-left:3px solid #a76744;padding:8px 16px;background:#fff8ec;max-width:950px}
+.toolbar{position:sticky;top:0;z-index:2;background:rgba(245,244,239,.97);border-block:1px solid var(--line);padding:12px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button,.button{font:inherit;font-size:14px;padding:9px 14px;border:1px solid var(--line);background:white;color:var(--ink);border-radius:4px;cursor:pointer;text-decoration:none}
+button[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--ink)}button:hover,a.button:hover{border-color:var(--ink)}:focus-visible{outline:3px solid #b8844e;outline-offset:3px}
+#status{font-size:13px;color:var(--muted);margin-left:auto}.index{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:0 0 48px}
+.index a{display:block;text-decoration:none;border:1px solid var(--line);background:white}.index img{width:100%;display:block;image-rendering:pixelated}.index span{display:block;padding:10px 12px;font-weight:650;font-size:14px}
+section{background:white;border:1px solid var(--line);padding:24px;margin:0 0 36px;scroll-margin-top:88px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.section-title>a{font-size:13px}
+.map-pair{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(240px,1fr);gap:28px}figure{margin:0}.map{display:block;width:100%;image-rendering:pixelated}figcaption{font-size:12px;margin-top:8px}.assessment p{font-size:14px;margin:0 0 20px}
+details{border-block:1px solid var(--line);margin:24px 0;padding:14px 0}summary{cursor:pointer;font-weight:650}.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.photos img{display:block;width:100%;image-rendering:pixelated}
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}label{font-size:13px;font-weight:650}textarea{display:block;width:100%;font:15px/1.5 system-ui;padding:10px;margin-top:8px;border:1px solid #aeb9b0;border-radius:3px;resize:vertical;background:#fdfdfb;color:var(--ink)}
+.missing{border:2px dashed #ba9074;background:#fffaf3}.missing .notes{max-width:1000px}footer{padding-block:16px;color:var(--muted);font-size:13px}[hidden]{display:none!important}
+@media(max-width:800px){header,main{padding:20px}.index{grid-template-columns:repeat(2,minmax(0,1fr))}.map-pair,.notes{grid-template-columns:1fr}.toolbar{position:static;padding:12px 20px}#status{margin:0;width:100%}section{padding:16px}.section-title{align-items:flex-start}h2{font-size:24px}}
+@media print{.toolbar,.notes,summary,.section-title>a{display:none}.index{display:none}section{break-inside:avoid}details:not([open]){display:none}header,main{padding:12px}}
+</style>
+<header id="top"><small>SF MINI MONSTERS / PRIVATE WORLD REVIEW / v97</small>
+<h1>Every place.<br>The current build.</h1>
+<p>All 18 destinations, with full maps and actual GBA views. These are the existing maps, including the rough parts. The full maps show background layers without people; open the in-game views to judge actors and camera scale.</p>
+<p><strong>Do they look different?</strong> Landmarks, building mixes and paint do vary. Most urban areas still share a two-row street template. Several nature areas share an overly paved loop. Neither group is finished.</p>
+<p class="notice"><strong>Presidio Heights is not built.</strong> There is no separate Presidio map either. Pacific Heights is a different current destination. A missing-area card below lets you record what you want there.</p>
+<p class="muted">Notes stay in this browser when local storage is available. Download feedback to keep or share a copy. Nothing is submitted and no quality approval is inferred.</p></header>
+<div class="toolbar" role="group" aria-label="Review controls">
+<button data-filter="all" aria-pressed="true">All 18</button><button data-filter="urban" aria-pressed="false">Urban 13</button><button data-filter="nature" aria-pressed="false">Nature 5</button>
+<a class="button" href="#presidio_heights">Presidio Heights - missing</a><a class="button" href="@@PDF@@">Open PDF</a><button id="export">Download feedback</button><span id="status" role="status">Ready to review</span></div>
+<main><nav class="index" aria-label="Town index">@@INDEX@@</nav>@@CARDS@@
+<section id="presidio_heights" class="missing"><small>REQUESTED / NOT IMPLEMENTED</small><h2>Presidio Heights</h2>
+<p>No map exists to critique yet. Record the landmarks, landscape and connections you want rather than reviewing a substitute image.</p>
+<div class="notes"><label>What should make it recognizable?<textarea data-note="works" rows="4"></textarea></label><label>What should it connect to?<textarea data-note="wrong" rows="4"></textarea></label><label>What should we build first?<textarea data-note="change" rows="4"></textarea></label></div></section>
+<footer>Private v97. Public game remains v92. This is a visual critique packet; browser audio and full-route acceptance are still open. Maps come from matching native VRAM/palettes and compiled geometry; photos come from the controller-only tour.</footer></main>
+<script>
+const metadata=@@METADATA@@;
+const storageKey='sf-world-review-'+metadata.rom_sha256;
+const status=document.querySelector('#status');
+const sections=[...document.querySelectorAll('section')];
+let notes={};
+try{notes=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{status.textContent='Local saving unavailable. Download feedback before closing.'}
+function collect(){return Object.fromEntries(sections.map(s=>[s.id,Object.fromEntries([...s.querySelectorAll('textarea')].map(t=>[t.dataset.note,t.value]))]))}
+for(const section of sections)for(const field of section.querySelectorAll('textarea')){
+ field.value=notes[section.id]?.[field.dataset.note]||'';
+ field.addEventListener('input',()=>{try{localStorage.setItem(storageKey,JSON.stringify(collect()));status.textContent='Notes saved on this device'}catch{status.textContent='Download feedback to keep these notes'}});
+}
+function filter(value){
+ for(const node of document.querySelectorAll('[data-category]'))node.hidden=value!=='all'&&node.dataset.category!==value;
+ for(const button of document.querySelectorAll('[data-filter]'))button.setAttribute('aria-pressed',String(button.dataset.filter===value));
+}
+for(const button of document.querySelectorAll('[data-filter]'))button.onclick=()=>filter(button.dataset.filter);
+for(const link of document.querySelectorAll('a[href^="#"]'))link.addEventListener('click',()=>{const target=document.querySelector(link.getAttribute('href'));if(target?.hidden)filter('all')});
+document.querySelector('#export').onclick=()=>{
+ const payload={...metadata,scope:'Visual town critique only',reviewed_at:new Date().toISOString(),notes:collect()};
+ const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
+ const link=document.createElement('a');link.href=url;link.download='sf-world-v97-feedback.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ status.textContent='Feedback downloaded. Nothing was sent anywhere.';
+};
+</script></html>
