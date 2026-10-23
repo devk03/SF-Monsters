@@ -19,3 +19,6 @@ dist/
 __pycache__/
 /romhack/content/world-blockout/
 !web/public/game/sf-mini-monsters.gba
+# Private review exports can contain base-ROM pixels.
+/output/pdf/
+/output/review/
