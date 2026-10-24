@@ -4,7 +4,7 @@ from world_district_layouts import raster_path
 
 # Each reserve has a different sequence of enclosed meadow destinations.
 GLADES={
- 'golden_gate_park':((44,20,6,4),(66,40,7,5),(32,49,5,4)),
+ 'golden_gate_park':((44,20,6,4),(64,42,8,6),(32,49,5,4)),
  'twin_peaks':((45,18,6,4),(65,35,6,4),(38,48,5,4)),
  'sutro_tower':((40,18,4,4),(68,43,5,4),(82,18,3,3)),
  'lands_end':((12,36,4,3),(63,40,5,4),(31,48,4,3)),
@@ -34,7 +34,10 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     legacy_keep={(x,y) for y in range(24) for x in range(32)
                  if grid[y][x] not in grasslike
                  and not(plan['world_id']=='angel_island' and x>=27)}
-    protected=occupied|sea|shore|legacy_keep
+    from world_park_water import pond_cells,draw_pond
+    pond=pond_cells(plan['world_id'])
+    if pond & (occupied|lanes|legacy_keep):raise ValueError('Park pond overlaps a protected binding or trail')
+    protected=occupied|sea|shore|legacy_keep|pond
     for event in plan.get('coord_events',[])+plan.get('bg_events',[]):
         point=(event['x'],event['y'])
         nearest=min(lanes,key=lambda p:(abs(p[0]-point[0])+abs(p[1]-point[1]),p[1],p[0]))
@@ -50,6 +53,7 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x800+tile)
     from world_forest_edges import finish_forest
     finish_forest(grid,legend,clear|protected,grass)
+    draw_pond(plan,grid)
     from world_park_stops import add_park_stops
     add_park_stops(plan,grid,cards,GLADES[plan['world_id']],lanes,protected)
     # Small coherent flower groups identify meadow edges without a tiled lawn.

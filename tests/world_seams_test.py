@@ -32,11 +32,15 @@ class SeamTests(unittest.TestCase):
         cls.plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
         cls.kits={p:compile_kit(profile=p) for p in {m.get('tile_profile','residential') for m in cls.plans}}
         cls.reserved=set(range(16))|{20,166,211}|set(range(432,512))
-        cls.banks={1,2,4,5}
+        cls.banks={0,1,2,4,5}
         cls.locks={3:{1:0x7fff,2:0x6b5a,3:0x5ef7,4:0x5294,13:0x2d70}}
         cls.primary_banks={1:{0,2},11:{0,1,5},179:{0,4},368:{0,4}}
         # Pinned General woodland/tall-grass references now occur on the maps.
         cls.primary_banks.update({tile:{0,2} for tile in (4,13,0x1d4,0x1d5,0x1dc,0x1dd,0x1e4,0x1e5)})
+        cls.primary_banks[2]={0,2,3}
+        cls.primary_banks[0xa1]={0,1}
+        cls.primary_banks.update({n:{0,1,3} for n in (0xb0,0xb1,0xb2,0xb8,0xba,0xc2)})
+        cls.reserved.update({108,109,110,111,124,127,140,143,159,174,175,270,286})
         cls.primary_banks[3]={0,1}
         cls.reserved.update({309,310,325,326})
         cls.primary_banks.update({tile:{0,2} for tile in WORN_IDS})

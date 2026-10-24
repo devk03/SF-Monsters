@@ -72,5 +72,16 @@ class GreenRouteTests(unittest.TestCase):
                        for y in range(4,20) for x in range(4,28))
             self.assertGreater(forest,30,'Legacy filler must integrate with the native reserve forest')
 
+    def test_park_pond_is_scenery_with_a_walkable_native_bank(self):
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        park=next(p for p in plans if p['world_id']=='golden_gate_park')
+        pond=park['scenic_pond']
+        for x,y in pond['water']:
+            _,blocked,elevation=park['legend'][park['rows'][y][x]]
+            self.assertTrue(blocked);self.assertEqual(elevation,3)
+        for x,y in pond['south_bank']:
+            self.assertEqual(park['legend'][park['rows'][y][x]],[2,False,3])
+        self.assertIn(0xa1,{park['legend'][park['rows'][y][x]][0] for x,y in pond['water']})
+
 
 if __name__=='__main__':unittest.main()

@@ -643,6 +643,24 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 native park water.** Candidatev111adds one irregular pond to Golden
+Gate Park using native General reflective-water/cliff-bank/grass-bank metatiles.
+The original Surf-facing code requires an elevation mismatch; this scenic pond
+uses solid collision at ordinary land elevation3, separate from real bay routes.
+No new engine hook or extracted art is introduced. Pond geometry is protected
+before forest placement and branch furniture, and the southern native grass bank
+remains walkable. A dedicated native controller verifier must attempt walking/A
+at all8bank cells, check no Surf/script opens and confirm protected state/Flash.
+Five source woodland/park regressions and five connected-art tests pass.
+Target`6f848c9344c1f2c030d2c388072c7f0b14202a41ff989ef0313b2b758d81b21f`
+passes compiled73maps/106connections/85sign events, BPS round-trip, earlier ordinary
+Save protected-state Continue and the full native circuit. All8bank cells block
+walking and A offers no Surf/field script; party/inventory/money/flags/Flash remain
+unchanged. Independent live rendering and native full-background extraction pass
+in`park-pond-v111-bank-test`. Inspected actual gameplay and full park map: native
+water and stepped cliff/grass edges connect correctly; the former northwest
+checkerboard is gone. Website-core renewal remains for the final combined draft. This is a physical landscape addition, not closure of nature quality.
+
 **October23 integrated park branches.** Candidatev110rebuilds the remaining
 northwest hedge/pine filler as the same finished native forest used across each
 reserve. Actual landmarks, furniture, event coordinates and their approaches

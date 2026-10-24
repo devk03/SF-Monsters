@@ -2,7 +2,7 @@
 STOPS={
  'golden_gate_park':(
   ('Garden court','Sit for a bit. Nobody needs a photo of you having a relaxing time.','bench_grass'),
-  ('Meadow rest','You can take the long way home. That is allowed.','bench_grass'),
+  ('Pond rest','You can take the long way home. That is allowed.','bench_grass'),
   ('Windmill trail rest','Water break. Checking your step count is optional.','bin_grass')),
  'twin_peaks':(
   ('North lookout','The climb was real. The urgent email can wait.','rocks'),
