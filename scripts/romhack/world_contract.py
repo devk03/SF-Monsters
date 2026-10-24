@@ -81,7 +81,8 @@ class _World:
                   'geometry', 'Destination geometry requires width and height')
             ew, eh = expanded['width'], expanded['height']
             _need(type(ew) is int and type(eh) is int and 32 <= ew <= 128
-                  and 24 <= eh <= 128 and ew * eh >= 6144,
+                  and 24 <= eh <= 128 and ew * eh >= 6144
+                  and (ew+15)*(eh+14) <= 10240,
                   'geometry', 'Expanded destinations require at least6144tiles')
             self.destination_size = (ew, eh)
         self.art = load_profiles() if manifest.get('town_finishing') else {}

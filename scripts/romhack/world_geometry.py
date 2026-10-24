@@ -25,7 +25,8 @@ def dimensions(manifest, identifier):
         width, height = spec['width'], spec['height']
         if (type(width) is not int or type(height) is not int
                 or width < 32 or height < 24
-                or width * height < MIN_DESTINATION_AREA):
+                or width * height < MIN_DESTINATION_AREA
+                or (width+15)*(height+14)>10240):
             raise ValueError('Destination geometry must provide at least6144 tiles')
         return width, height
     return manifest['geometry']['width'], manifest['geometry']['height']
