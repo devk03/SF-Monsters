@@ -65,6 +65,9 @@ def audit_native(rom_path, elf_path, plans, engine, *, expect_resume_masks=False
                 errors.append(name + ': authored maps share a native layout')
             unique_layouts.add(layout)
         width, height, border, blocks = read(layout, '4I')
+        if 'border_tile' in plan:
+            expected=tuple(t|0x3c00 for t in plan.get('border_metatiles',[plan['border_tile']]*4))
+            if read(border,'4H')!=expected:errors.append(name+': compiled border differs from authored terrain')
         primary, secondary = read(layout + 16, '2I')
         if (primary, secondary) != tuple(symbols[plan['tilesets'][role]]
                                          for role in ('primary', 'secondary')):

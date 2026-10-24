@@ -2,6 +2,10 @@
 from world_routes import physical_routes
 
 LINES = {
+ 'route_05':('The ocean is behind you. The park starts where the wind finally gives you a break.','I like this clearing. There is enough room to stop without standing in everybody else\'s way.'),
+ 'route_06':('You can hear the city again past the next bend. I am in no hurry.','I packed a picnic and forgot the blanket. This bench has saved the afternoon.'),
+ 'route_14':('The trees hide the tower until you turn that corner. Then suddenly it is the whole sky.','My friend calls every path here a shortcut. We always get home at the same time.'),
+ 'route_15':('The fog comes through this gap first. You get a few seconds of warning.','There is a little clearing off the main trail. A good place to give your team a rest.'),
  'route_01_mid': ('The freight trains get right of way. My coffee has accepted this.','Head uphill for Potrero. If you can still finish a sentence, you have not reached the steep bit.'),
  'route_02_mid': ('I take these stairs to avoid the hill. Yes, I hear myself.','The Mission is past the next landing. You will smell lunch before you see it.'),
  'route_03_mid': ('Please leave the mural wall alone. That blank patch is spoken for.','I came out for one errand. Somehow I have a burrito and a secondhand lamp.'),
@@ -21,7 +25,7 @@ LINES = {
 
 
 def populate_routes(plans,manifest):
-    sections={r['id']:r for r in physical_routes(manifest['routes']) if r.get('parent_route')}
+    sections={r['id']:r for r in physical_routes(manifest['routes']) if r.get('parent_route') or r['id'] in ('route_05','route_06','route_14','route_15')}
     for plan in plans:
         identifier=plan['world_id']
         if identifier not in sections:continue
@@ -30,7 +34,7 @@ def populate_routes(plans,manifest):
         for index,line in enumerate(LINES[identifier]):
             tx,ty=((9,9),(24,15))[index]
             candidates=[(x,y) for y in range(3,len(rows)-3) for x in range(3,len(rows[0])-3)
-                if (x,y) not in used and all(not legend[rows[yy][xx]][1]
+                if (x,y) not in used and all(not legend[rows[yy][xx]][1] and legend[rows[yy][xx]][0]!=13
                     for xx,yy in ((x,y),(x-1,y),(x+1,y),(x,y-1),(x,y+1)))]
             if not candidates:raise ValueError(identifier+': route resident has no safe stopping point')
             x,y=min(candidates,key=lambda p:(abs(p[0]-tx)+abs(p[1]-ty),p[1],p[0]))

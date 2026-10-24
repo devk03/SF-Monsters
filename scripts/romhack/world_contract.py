@@ -12,6 +12,7 @@ from world_art_contract import load_profiles
 PORTS = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
 WATER = 368
 WATERFALL = 179
+NATIVE_SCENERY={4:False,13:False,0x1d4:True,0x1d5:True,0x1dc:True,0x1dd:True}
 ACCESS_KINDS = {'spawn', 'gym_entry', 'gym_exit', 'checkpoint', 'arrival', 'room_entry', 'room_exit'}
 NAME = re.compile(r'[A-Za-z_][A-Za-z0-9_]*\Z')
 
@@ -257,7 +258,7 @@ class _World:
             _need(type(token) is str and len(token) == 1 and type(tile) in (list, tuple)
                   and len(tile) == 3, 'terrain', 'Invalid terrain legend entry')
             _integer(tile[0], 0, 1023, 'metatile')
-            _need(tile[0] in (1, 11, WATER, WATERFALL) or tile[0] in approved, 'terrain',
+            _need(tile[0] in (1, 11, WATER, WATERFALL) or tile[0] in approved or tile[0] in NATIVE_SCENERY, 'terrain',
                   'Unmodelled native metatile behavior in blockout terrain')
             _need(type(tile[1]) is bool, 'terrain', 'Collision must be boolean')
             _integer(tile[2], 0, 15, 'elevation')
@@ -269,7 +270,7 @@ class _World:
                 _need(tile[1] is False and tile[2] == 1, 'terrain',
                       'Native traversal water needs collision 0 and elevation 1')
             else:
-                solid = approved[tile[0]][0] if tile[0] in approved else tile[0] == 11
+                solid = approved[tile[0]][0] if tile[0] in approved else NATIVE_SCENERY.get(tile[0],tile[0] == 11)
                 _need(tile[2] == 3 and tile[1] is solid, 'terrain',
                       'Development ground/walls must retain collision and elevation semantics')
         cells = {}

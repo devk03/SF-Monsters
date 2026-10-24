@@ -651,6 +651,23 @@ Original layouts use shaped tree masses, clearings, encounter patches and local
 side pockets rather than a paved avenue through an evenly decorated field.
 `scripts/quality/review_woodland_routes.py` captures actual gameplay/full native
 backgrounds with live rendering audits. Reference/game pixels stay under.tools.
+Privatev105rewrites11woodland route maps with distinct grass circulation,
+native General forest clusters, shaped side clearings, optional tall-grass
+pockets and original animated field flowers. Complete2x2tree footprints replace
+the alternating species grid; explicit four-metatile native borders prevent the
+old forest fill from reappearing outside the map. Mandatory paths remain dry,
+connected and clear of encounter patches. Deterministic circulation QA avoids
+optional grass battles rather than dismissing them; encounter behavior remains
+a separate unverified gate. Four core woodland connectors gain8conversations.
+All73source maps pass; compiled73map/106connection/207actor/70sign audit and BPS
+round-trip pass for target
+`688d8f2158a3967346a25041107a40143357c4d975f767b7297a5f85b497d222`.
+The first woodland atlas unit run had outdated synthetic primary reservations;
+the updated fixture pins the added native forest references and all5seam tests
+pass. The distinct-shape/native-ground/whole-tree regression also passes.
+The three routes from the user's screenshot pass actual native travel and live
+render audits onv104; equivalent v105captures with richer encounter shoulders
+and flowers are running. Do not count source checks as visual approval.
 
 **October23 grass/empty-space correction.** The user rejects the muted sage ground
 and unprogrammed empty space. Privatev102references original General grass

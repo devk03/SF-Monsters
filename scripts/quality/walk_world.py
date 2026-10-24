@@ -88,6 +88,10 @@ class Walker:
                    for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
         blocked |= {(e['x'], e['y']) for e in plan['coord_events']
                     if (e['x'], e['y']) != target}
+        # Deterministic circulation QA takes the authored safe path. Optional
+        # tall-grass battles are tested separately, not dismissed by the driver.
+        blocked |= {(x,y) for y,row in enumerate(plan['rows']) for x,t in enumerate(row)
+                    if plan['legend'][t][0]==13 and (x,y)!=target}
         pending, previous = deque([start]), {start: None}
         while pending:
             point = pending.popleft()

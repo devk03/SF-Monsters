@@ -34,6 +34,9 @@ class SeamTests(unittest.TestCase):
         cls.banks={1,2,4,5}
         cls.locks={3:{1:0x7fff,2:0x6b5a,3:0x5ef7,4:0x5294,13:0x2d70}}
         cls.primary_banks={1:{0,2},11:{0,1,5},179:{0,4},368:{0,4}}
+        # Pinned General woodland/tall-grass references now occur on the maps.
+        cls.primary_banks.update({tile:{0,2} for tile in (4,13,0x1d4,0x1d5,0x1dc,0x1dd)})
+        cls.reserved.update({25,41,204,205,384,385,400,401,416,417,418,419,420,421})
         cls.atlases=make_atlases(cls.plans,cls.kits,cls.reserved,cls.banks,cls.locks,cls.primary_banks)
 
     def test_every_foreign_margin_quad_keeps_exact_colors_alpha_handedness_and_behavior(self):

@@ -132,4 +132,7 @@ def landscape(plans, manifest):
             plan['town_blocks'].append({'style':item,'x':x,'y':y,'width':w,'height':h,
                                        'first_metatile':card['tiles'][0][0]})
             plan['scenic_viewpoints'].append({'name':item,'x':x+w//2,'y':y+h})
+        if route and route['mode']=='walk':
+            from world_green_routes import furnish_green_route
+            furnish_green_route(plan,kit)
     return result

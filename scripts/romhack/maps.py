@@ -191,7 +191,10 @@ def apply_maps(content, root, engine, original):
             if type(tile) is not int or not 0 <= tile < 1024:
                 raise ValueError('Border metatile must fit the native map word.')
             border_path = layout['border_filepath']
-            (engine / border_path).write_bytes(struct.pack('<4H', *([tile | 0x3c00] * 4)))
+            tiles=plan.get('border_metatiles',[tile]*4)
+            if not isinstance(tiles,list) or len(tiles)!=4 or any(type(t) is not int or not 0<=t<1024 for t in tiles):
+                raise ValueError('Native border requires four valid metatile IDs')
+            (engine / border_path).write_bytes(struct.pack('<4H', *(t|0x3c00 for t in tiles)))
             restored.append(border_path)
         for field in ['warp_events', 'coord_events', 'bg_events']:
             metadata[field] = plan.get(field, [])
