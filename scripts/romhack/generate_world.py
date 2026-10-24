@@ -184,6 +184,8 @@ def generate(manifest):
     from world_expansion import expand
     plans = furnish(plans, manifest)
     plans = landscape(plans, manifest)
+    from world_route_people import populate_routes
+    plans = populate_routes(plans,manifest)
     plans = place(plans, manifest)
     plans = populate(plans, manifest)
     plans = add_rooms(plans, manifest)

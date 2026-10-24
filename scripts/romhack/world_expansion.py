@@ -139,6 +139,27 @@ def expand(plans, manifest):
                 x,y={'left':(0,height//2+delta),'right':(width-1,height//2+delta),
                      'up':(width//2+delta,0),'down':(width//2+delta,height-1)}[side]
                 grid[y][x]=token('paving' if nature else material,x,y)
+        # Keep local IDs and scripts stable while letting the expanded district
+        # feel inhabited beyond its original service block. Reserve every real
+        # interaction approach and the complete horizontal wandering envelope.
+        reserved={(p['x'],p['y']) for p in plan['access_points']}
+        reserved|={(p['x'],p['y']) for p in plan['coord_events']}
+        residents=[n for n in plan['npcs'] if n['script'].startswith('WBTown_')]
+        anchors=[(42,14),(80,30),(54,48),(24,48),(74,52),(38,32),(82,14),(48,34)]
+        for index,npc in enumerate(residents):
+            others={(n['x']+dx,n['y']) for n in plan['npcs'] if n is not npc
+                    for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)}
+            rx=npc.get('range_x',0)
+            candidates=[]
+            for x,y in walks-lanes:
+                envelope={(x+dx,y) for dx in range(-rx,rx+1)}
+                if x<32 and y<24 or envelope & (others|reserved):continue
+                if all(0<xx<width-1 and 0<yy<height-1
+                       and not plan['legend'][grid[yy][xx]][1] for xx,yy in envelope):
+                    candidates.append((x,y))
+            if not candidates:raise ValueError(name+': no safe expanded resident position')
+            tx,ty=anchors[index%len(anchors)]
+            npc['x'],npc['y']=min(candidates,key=lambda p:(abs(p[0]-tx)+abs(p[1]-ty),p[1],p[0]))
         plan['rows']=[''.join(row) for row in grid]
         plan['water_positions']=[[x,y] for y,row in enumerate(grid) for x,value in enumerate(row) if value in 'WV']
         plan['expanded_design']={'size':[width,height],'circulation':STREETS[name],

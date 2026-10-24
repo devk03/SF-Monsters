@@ -660,6 +660,16 @@ block's wide paving to lawn/narrow approaches. Source73-map validation passes.
 Native navigation now derives edge coordinates from each map's dimensions.
 Restoring the pinned mGBA core is in progress; newer CMake needs an explicit
 minimum compatibility policy. No gameplay/saves/WASM acceptance is claimed yet.
+Native fresh boot/menu/options and Dogpatch spawn pass for target
+`123737f9f15e9ac25d253623f713c917d875d72c22d5c1498556abf5c95a359a`.
+Controller traversal earns all8stamps, resolves the3crisis stops and reaches
+Angel Island. The subsequent route sweep exhausts the old200000frame harness
+budget; preserve that failure, do not classify it as a game crash or full-route
+pass. The driver now permits900000frames/750000requests while retaining the
+host's30minute deadline. Complete the route sweep from an earned checkpoint.
+Next source candidate spreads existing residents across new blocks while
+preserving IDs/scripts and adds30original conversations to the15intermediate
+routes. All73source maps still pass; compiled/native proof must be renewed.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

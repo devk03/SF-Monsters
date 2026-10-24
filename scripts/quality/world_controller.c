@@ -47,13 +47,13 @@ int main(int argc, char** argv)
     }
     char line[8192], command[32], path[4096];
     unsigned keys, frames, address, length, total = 0;
-    for(unsigned requests = 0; requests < 250000 && fgets(line, sizeof(line), stdin); ++requests)
+    for(unsigned requests = 0; requests < 750000 && fgets(line, sizeof(line), stdin); ++requests)
     {
         if(sscanf(line, "%31s", command) != 1) return 2;
         if(! strcmp(command, "step"))
         {
             if(sscanf(line, "%*s %u %u", &keys, &frames) != 2 || keys > 1023 ||
-               ! frames || frames > 36000 || total + frames > 200000) return 2;
+               ! frames || frames > 36000 || total + frames > 900000) return 2;
             core->setKeys(core, keys);
             for(unsigned i = 0; i < frames; ++i) core->runFrame(core);
             total += frames; printf("ok %u\n", total);

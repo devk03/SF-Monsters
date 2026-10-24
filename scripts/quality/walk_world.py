@@ -95,7 +95,7 @@ class Walker:
     def go(self, target):
         identifier, start = self.location()
         plan = self.plans[identifier]
-        for _ in range(128):
+        for _ in range(4*(len(plan['rows'])+len(plan['rows'][0]))):
             current, here = self.location()
             if current != identifier or here == target:
                 break
