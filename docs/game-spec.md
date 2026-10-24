@@ -652,6 +652,14 @@ contract passes all9badge stages and return paths. Route sections carry their
 own SF labels and urban/green settings; guide bindings retain the parent journey.
 New encounters, stopping points, distinctive scenery and native traversal remain
 required; added map count alone is not acceptance. The existing deadline holds.
+The73-map native build passes145136cell checks and106connections, with BPS
+round-trip; target`0f310eda1a5d4fe987875edfff27ad7c458ff07a32ec63bc834b31c6a528cd86`.
+Subsequent unbuilt refinement adds urban interior frontage (Dogpatch146drawn
+blocks versus93in the first expansion) and converts the retained nature service
+block's wide paving to lawn/narrow approaches. Source73-map validation passes.
+Native navigation now derives edge coordinates from each map's dimensions.
+Restoring the pinned mGBA core is in progress; newer CMake needs an explicit
+minimum compatibility policy. No gameplay/saves/WASM acceptance is claimed yet.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

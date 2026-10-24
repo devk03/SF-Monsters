@@ -31,6 +31,7 @@ def host_setup():
     if not cmake:
         raise ValueError('Host capture needs CMake; the project venv is supported.')
     subprocess.run([cmake, '-S', str(SOURCE), '-B', str(HOST_BUILD),
+        '-DCMAKE_POLICY_VERSION_MINIMUM=3.5',
         '-DLIBMGBA_ONLY=ON', '-DENABLE_SCRIPTING=OFF', '-DUSE_FFMPEG=OFF',
         '-DUSE_LIBZIP=OFF', '-DUSE_LZMA=OFF', '-DUSE_PNG=OFF', '-DUSE_ZLIB=OFF',
         '-DUSE_SQLITE3=OFF', '-DBUILD_GL=OFF', '-DBUILD_GLES2=OFF', '-DBUILD_GLES3=OFF',

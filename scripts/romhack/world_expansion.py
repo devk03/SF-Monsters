@@ -1,7 +1,7 @@
 """Expand destinations around authored circulation and stable service bindings."""
 from copy import deepcopy
 from world_geometry import dimensions, destination_ids
-from world_district_layouts import STREETS, circulation
+from world_district_layouts import STREETS, circulation, raster_path
 from world_tiles import compile_kit
 from world_architecture import FORMS
 from world_landscape import NATURE
@@ -43,6 +43,24 @@ def expand(plans, manifest):
         for y,row in enumerate(old):
             for x,value in enumerate(row):
                 grid[y][x] = token('paving' if nature else material,x,y) if x==31 or y==23 else value
+        if nature:
+            # Retain every object/landmark binding, but replace the old broad
+            # concrete loop with lawn and narrow approaches to its real stops.
+            paved=token('paving')
+            for y in range(1,24):
+                for x in range(1,32):
+                    if grid[y][x]==paved:grid[y][x]=token('grass',x,y)
+            protected=[(p['x'],p['y']) for p in plan['access_points']]
+            protected += [(n['x'],n['y']) for n in plan['npcs']]
+            protected += [(p['x'],p['y']) for p in plan.get('scenic_viewpoints',[])]
+            approaches=set()
+            for point in protected:
+                approaches |= raster_path([point,(point[0],12),(32,12)])
+            solid={(b['x']+dx,b['y']+dy) for b in plan['town_blocks']
+                   for dy in range(b['height']) for dx in range(b['width'])}
+            for x,y in approaches:
+                if 0<x<32 and 0<y<24 and (x,y) not in solid and grid[y][x] in (token('grass'),paved):
+                    grid[y][x]=paved
         occupied = {(x,y) for b in plan['town_blocks'] for y in range(b['y'],b['y']+b['height'])
                     for x in range(b['x'],b['x']+b['width'])}
         def stamp(style,x,y):
@@ -87,6 +105,11 @@ def expand(plans, manifest):
                     if y0==y1:
                         bands.add((min(x0,x1),max(x0,x1),y0-7))
                         bands.add((min(x0,x1),max(x0,x1),y0+5))
+            # Residential side lanes occupy block interiors instead of leaving
+            # entire green rectangles between the principal street walls.
+            phase=sum(map(ord,name))%4
+            for top in range(25+phase,height-5,8):
+                bands.add((2,width-2,top))
             index = 0
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):
                 x = max(1,left)

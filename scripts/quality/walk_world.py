@@ -139,8 +139,10 @@ class Walker:
             if kind == 'warp':
                 self.go(action)
             else:
-                point = {'left': (0, 12), 'right': (31, 12),
-                         'up': (16, 0), 'down': (16, 23)}[action]
+                current=self.plans[self.location()[0]]
+                width,height=len(current['rows'][0]),len(current['rows'])
+                point = {'left': (0, height//2), 'right': (width-1, height//2),
+                         'up': (width//2, 0), 'down': (width//2, height-1)}[action]
                 self.go(point); self.walk(action)
             if self.location()[0] != target:
                 raise ValueError(f'Native transition missed {target}: {self.location()}')

@@ -254,8 +254,13 @@ def main():
             friends=list(audit.friendships);steps=audit.steps
             stages.append(audit.check(w,f'{number}-source-center'))
             link=next(l for l in w.plans[owner]['connections'] if l['direction']==direction)
-            target=w.native[link['map']];entry=PORTS[OPPOSITE[direction]]
-            w.go(PORTS[direction]);c.step(0,60);stages.append(audit.check(w,f'{number}-source-edge'))
+            target=w.native[link['map']]
+            def port_for(identifier,side):
+                rows=w.plans[identifier]['rows'];width,height=len(rows[0]),len(rows)
+                return {'left':(0,height//2),'right':(width-1,height//2),
+                        'up':(width//2,0),'down':(width//2,height-1)}[side]
+            entry=port_for(target,OPPOSITE[direction])
+            w.go(port_for(owner,direction));c.step(0,60);stages.append(audit.check(w,f'{number}-source-edge'))
             cross(c,w,audit,direction,target,f'{number}-forward',stages,args.group=='transient')
             if w.location()[0]!=target:raise ValueError('Connection did not reach authored target')
             stages.append(audit.check(w,f'{number}-destination-edge'))
