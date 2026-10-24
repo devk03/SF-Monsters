@@ -169,7 +169,14 @@ def generate(manifest):
     from world_landscape import landscape
     from world_discoveries import place
     from world_signs import add_signs
-    return add_signs(add_rooms(populate(place(landscape(furnish(plans, manifest), manifest), manifest), manifest), manifest), manifest)
+    from world_expansion import expand
+    plans = furnish(plans, manifest)
+    plans = landscape(plans, manifest)
+    plans = place(plans, manifest)
+    plans = populate(plans, manifest)
+    plans = add_rooms(plans, manifest)
+    plans = add_signs(plans, manifest)
+    return expand(plans, manifest)
 
 
 def write_world(manifest, directory, modules_root=None):

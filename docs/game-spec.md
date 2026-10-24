@@ -669,6 +669,18 @@ At the start of this implementation the private `.tools` directory was absent.
 The supplied Emerald ZIP remains in Downloads. Native toolchain/captures must
 be restored before build, old-Save and GBA/WASM claims can be re-established.
 
+Privatev98candidate now enables96x64for all18destinations. The expansion pass
+places connected multi-block frontages around18distinct authored circulation
+networks, with grass trail shoulders and irregular nature clearings. Existing
+service/gym/NPC bindings remain in the northwest service block for this first
+integration; that retained block and the new districts still require visual
+composition review, including textures, attached ends and population spread.
+All58source maps pass independent geometry/reachability across9badge stages.
+Native source confirms10240map-buffer cells;96x64uses8658including15x14margins.
+The pinned native toolchain has been restored and reproduces the Emerald base.
+The first expanded native build is running; compiled/native/WASM/save evidence
+and refreshed captures remain pending. Publicv92/rootv80are unchanged.
+
 **October23 all-town visual review packet — private v97.** The user requested
 images of every current town and nature destination for critique. Captured a fresh
 controller-only tour of all18 destinations against the v97 SHA below, then decoded
