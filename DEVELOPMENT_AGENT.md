@@ -1,5 +1,8 @@
 # Development agent — shared world and contributor modules
 
+Status: paused at the user-requested October 23, 2026, 11:20 PM Pacific cutoff.
+Read docs/game-spec.md section 15.1 before resuming; visual acceptance remains open.
+
 Latest private refinement is v115: native General grass/forest on11woodland
 routes and five expanded reserves, district-specific frontage rhythms, 26 planted
 cut-through courts and bent park approaches. All 73 maps pass the native circuit

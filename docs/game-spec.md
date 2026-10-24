@@ -644,6 +644,20 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**Paused at the user deadline — October 23, 2026, 11:20 PM Pacific
+(October 24, 06:20 UTC).** Four-hour work window ended. No further implementation,
+build or deployment is started. Private v115 evidence, original-map study,
+all-18 review packet and remaining acceptance gates are recorded below. All
+26 constrained court round trips now pass; the alignment peer acknowledged the
+closed mechanical evidence gap. The goal is paused, not complete. Public v92 /
+root v80 remain unchanged; routine checks were local and Actions remains manual.
+Source and evidence documentation were pushed through a339a94 before this final
+stop record. No ongoing preview server or recurring monitor was started for the
+handoff. Resume from the remaining composition and human-review gates below;
+do not reinterpret technical traversal success as Emerald-level visual approval.
+
+
+
 **Original-map composition study and next priorities.** Private original references
 were rendered for Route 101/102/104, Petalburg Woods, Route 112/114/119 and Fortree
 City under `.tools/benchmarks/emerald-{route,relief}-composition-study`.
