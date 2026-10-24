@@ -41,6 +41,9 @@ def main():
             # New room furniture can occupy a tile from an earlier indoor Save.
             # Prove its fixed exit still reaches the district and the return door.
             w.travel(plan['room']['area']);w.travel(identifier)
+        elif plan.get('green_route_design'):
+            neighbor=w.native[plan['connections'][0]['map']]
+            w.travel(neighbor);w.travel(identifier)
         else:
             room=next(r['id'] for r in w.manifest['interiors'] if r['area']==identifier)
             w.travel(room);w.travel(identifier)
@@ -48,7 +51,9 @@ def main():
         if (c.output/'safe-return.sav').read_bytes()!=battery:
             raise ValueError('Scenery recovery or safe return rewrote Flash')
         result=dict(passed=True,rom_sha256=c.digest(),old_rom_sha256=expected['rom_sha256'],
-                    old_position=previous,recovered_position=restored,room_return_proven=True,
+                    old_position=previous,recovered_position=restored,
+                    room_return_proven=not bool(plan.get('green_route_design')),
+                    route_return_proven=bool(plan.get('green_route_design')),
                     party_money_flags_flash_preserved=True,scope='actual ordinary Save on newly blocked ground')
         (c.output/'scenery-upgrade-result.json').write_text(json.dumps(result,indent=2)+'\n')
         print(json.dumps(result))

@@ -668,6 +668,13 @@ pass. The distinct-shape/native-ground/whole-tree regression also passes.
 The three routes from the user's screenshot pass actual native travel and live
 render audits onv104; equivalent v105captures with richer encounter shoulders
 and flowers are running. Do not count source checks as visual approval.
+The v105Coastal Cypress/Route15/Sutro Ridge captures now pass actual native travel
+and full live render audits in`woodland-v105-native-review`. An actual ordinary
+v102Save made on route15_mid at16,8now faces a newly solid native tree; v105cold
+Continue recovers to16,7and proves the neighboring route return. Party, money,
+saved flags and Flash are preserved. Route recovery is reported separately from
+room recovery. Updated maps are genuine native backgrounds; actors are visible
+in the adjacent gameplay captures. Whole-worldv105native/WASM remains pending.
 
 **October23 grass/empty-space correction.** The user rejects the muted sage ground
 and unprogrammed empty space. Privatev102references original General grass
