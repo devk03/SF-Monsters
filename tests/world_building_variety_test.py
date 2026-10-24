@@ -101,5 +101,18 @@ class BuildingVarietyTests(unittest.TestCase):
                             and other['y']==block['y'] and other['x']+other['width']==block['x'] for other in blocks),
                             'Identical adjoining facade stamps')
 
+    def test_authored_parcels_keep_clear_frontage_and_readable_notices(self):
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        for identifier,left,right,rows in [('dogpatch',50,58,(21,22,29,30)),('mission',42,56,(21,22,29,30))]:
+            p=next(p for p in plans if p['world_id']==identifier)
+            self.assertIn('authored_parcel',p)
+            for y in rows:
+                for x in range(left,right+1):
+                    self.assertFalse(p['legend'][p['rows'][y][x]][1],(identifier,x,y,'frontage approach blocked'))
+            notice=p['parcel_notices'][0];x,y=notice['object'];sx,sy=notice['standing']
+            self.assertTrue(p['legend'][p['rows'][y][x]][1])
+            self.assertFalse(p['legend'][p['rows'][sy][sx]][1])
+            self.assertTrue(any(e['script']==notice['script'] and (e['x'],e['y'])==(x,y) for e in p['bg_events']))
+
 
 if __name__=='__main__':unittest.main()

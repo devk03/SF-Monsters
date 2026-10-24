@@ -11,7 +11,10 @@ def main():
     parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
     parser.add_argument('--park-stops',action='store_true',help='Read the 15 expanded reserve stops instead of the original 26 street signs')
-    args=parser.parse_args();state=args.state.resolve()
+    parser.add_argument('--parcel-notices',action='store_true',help='Read the two authored urban parcel notices')
+    args=parser.parse_args()
+    if args.park_stops and args.parcel_notices:parser.error('Choose one sign subset')
+    state=args.state.resolve()
     engine=ROOT/'.tools/pokeemerald-world-host'
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',
                  ROOT/'.tools/benchmarks'/args.name,state=state,battery=state.with_suffix('.sav'))
@@ -25,7 +28,7 @@ def main():
     try:
         w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
         for identifier,plan in w.plans.items():
-            signs=plan.get('park_stops' if args.park_stops else 'street_signs',[])
+            signs=plan.get('park_stops' if args.park_stops else 'parcel_notices' if args.parcel_notices else 'street_signs',[])
             if not signs:continue
             w.travel(identifier)
             for sign in signs:
@@ -43,7 +46,7 @@ def main():
                 checked.append({'area':identifier,'style':sign['style'],'safe_return':list(standing),
                                 'party_money_inventory_flags_unchanged':True})
             print(identifier,flush=True)
-        expected=15 if args.park_stops else 26
+        expected=15 if args.park_stops else 2 if args.parcel_notices else 26
         if len(checked)!=expected:raise ValueError('Not all '+str(expected)+' intended signs were exercised')
         c.checkpoint('read-all-signs')
         if (c.output/'read-all-signs.sav').read_bytes()!=state.with_suffix('.sav').read_bytes():

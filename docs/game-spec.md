@@ -643,6 +643,18 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 authored urban parcels.** Candidatev112reserves actual parcels before
+generic frontage filling. Dogpatch gains an attached workshop/loading court with
+a two-tile entry, loading apron, recycling and a readable notice. Mission gains
+a shorter mural wall between capped shopfronts, a furnished community strip and
+readable mural notice. Existing adjacent tree/lamp and the original discovery
+bindings remain; actual attachment caps are recomputed after placement. The
+existing mechanic/painter NPCs move toward these courts with IDs, movement range
+and scripts preserved. All73source maps pass. Six building-variety/density and
+15street-contract tests are running; native notices/movement/rendering, earlier
+Save and combined native/WASM renewal remain required. These two authored parcels
+address repetition; the other districts are not thereby human-approved.
+
 **October23 native park water.** Candidatev111adds one irregular pond to Golden
 Gate Park using native General reflective-water/cliff-bank/grass-bank metatiles.
 The original Surf-facing code requires an elevation mismatch; this scenic pond

@@ -85,13 +85,16 @@ def expand(plans, manifest):
                     grid[y][x]=paved
         occupied = {(x,y) for b in plan['town_blocks'] for y in range(b['y'],b['y']+b['height'])
                     for x in range(b['x'],b['x']+b['width'])}
+        from world_parcels import reserved_cells,furnish_parcel
+        parcel_cells=reserved_cells(name) if not nature else set()
         front_approaches=set()
-        def stamp(style,x,y,*,shoulder=False):
+        def stamp(style,x,y,*,shoulder=False,parcel=False):
             card = cards[style]
             cells = {(x+dx,y+dy) for dy,row in enumerate(card['tiles']) for dx,_ in enumerate(row)}
             if (cells & occupied or any(xx<1 or yy<1 or xx>=width-1 or yy>=height-1
                                        or xx<32 and yy<24 for xx,yy in cells)):
                 return False
+            if not parcel and cells & parcel_cells:return False
             if cells & (sea|shore):return False
             if cells & front_approaches:return False
             if cells & (lanes if shoulder else walks):
@@ -189,6 +192,7 @@ def expand(plans, manifest):
                     plan['access_points'].append(dict(kind='checkpoint',name='district_wayfinder',
                         activation='interact',x=x,y=y))
                     break
+        if not nature:furnish_parcel(plan,grid,cards,stamp,token)
         # Match real party-wall art to the final neighboring footprints. An end
         # cap is drawn only where the building actually exposes that side.
         architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]
@@ -241,6 +245,9 @@ def expand(plans, manifest):
         residents=[n for n in plan['npcs'] if n['script'].startswith('WBTown_')]
         anchors=[(42,14),(80,30),(54,48),(24,48),(74,52),(38,32),(82,14),(48,34)]
         resident_space=walks-lanes
+        if plan.get('parcel_resident_anchor'):
+            anchors[0]=tuple(plan['parcel_resident_anchor'])
+            resident_space|=parcel_cells
         if nature:
             meadows=plan['native_park_design']['meadows']
             anchors=[(cx+2,cy+1) for cx,cy,_,_ in meadows]
