@@ -643,6 +643,16 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 large reserve follow-through.** Candidatev106replaces expanded
+checkerboard pine/cypress fill on all five nature destinations with complete
+native General forest masses, native grass trails and distinct meadow/flower
+clearings. Landmarks and the original service quarter remain reserved; the old
+white approach paint becomes grass without changing its collision. Native canopy
+borders replace the old grove border. All73source maps pass reachability and
+badge-stage checks. Native compilation, live rendering and full traversal remain
+pending; this is not visual acceptance. The20:46alignment request is bounded to
+20minutes and asks for read-only woodland composition critique.
+
 **October23 woodland composition correction.** The user rejects the repeated
 round/pine checkerboard and straight white strips. Studied actual original
 Route101/102/104and Petalburg Woods from the pinned private reference source;

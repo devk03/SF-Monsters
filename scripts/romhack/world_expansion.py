@@ -109,24 +109,8 @@ def expand(plans, manifest):
                 height=len(card['tiles']),first_metatile=card['tiles'][0][0]))
             return True
         if nature:
-            # Small irregular lawns alternate with complete tree silhouettes.
-            # Paths remain three tiles wide; their shoulders are grass, not a
-            # giant concrete apron copied from the old compact park loop.
-            for cx,cy,radius in [(44,20,6),(68,42,7),(30,48,5),(82,14,4)]:
-                for y in range(cy-radius,cy+radius+1):
-                    for x in range(cx-radius,cx+radius+1):
-                        if (x-cx)**2+(y-cy)**2<radius**2+(x%3)-1 and not(x<32 and y<24):
-                            grid[y][x]=token('grass',x,y)
-            # Restore trail paint through lawns after their irregular borders.
-            for x,y in lanes:
-                if not(x<32 and y<24):grid[y][x]=token('paving',x,y)
-            for y in range(2,height-4,3):
-                for x in range(2,width-4,3):
-                    style = 'pine' if (x//3+y//3+len(name))%3 else 'cypress'
-                    footprint = cards[style]['tiles']
-                    if all(grid[y+dy][x+dx]==token('grove',x+dx,y+dy)
-                           for dy,row in enumerate(footprint) for dx,_ in enumerate(row)):
-                        stamp(style,x,y)
+            from world_native_parks import native_park
+            native_park(plan,grid,lanes,walks,occupied,sea,shore,token)
         else:
             # Continuous frontage along each authored east/west street. A gap
             # is retained at every real intersection and pedestrian shoulder.
@@ -229,12 +213,13 @@ def expand(plans, manifest):
         edge = 'grove' if nature else 'edge_hedge'
         for y in range(height):
             for x in range(width):
-                if x in (0,width-1) or y in (0,height-1):grid[y][x]=token(edge,x,y)
+                if x in (0,width-1) or y in (0,height-1):
+                    grid[y][x]=chr(0x800+((0x1d4,0x1d5),(0x1dc,0x1dd))[y%2][x%2]) if nature else token(edge,x,y)
         for side in directions:
             for delta in (-1,0,1):
                 x,y={'left':(0,height//2+delta),'right':(width-1,height//2+delta),
                      'up':(width//2+delta,0),'down':(width//2+delta,height-1)}[side]
-                grid[y][x]=token('paving' if nature else material,x,y)
+                grid[y][x]=token('grass' if nature else material,x,y)
         # Scenic water stays solid: traversal still occurs only through the
         # declared Surf connectors. Landward seawalls and actual piers make
         # these full districts read as coast/islands rather than hedge boxes.

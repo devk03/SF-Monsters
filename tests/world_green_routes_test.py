@@ -25,5 +25,21 @@ class GreenRouteTests(unittest.TestCase):
                         if any(tile in trees for tile in footprint):
                             self.assertEqual(footprint,[0x1d4,0x1d5,0x1dc,0x1dd],'Do not cut partial tree silhouettes')
 
+    def test_expanded_reserves_keep_complete_native_canopies(self):
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        parks=[p for p in plans if p.get('native_park_design')]
+        self.assertEqual(len(parks),5)
+        for p in parks:
+            trees={0x1d4,0x1d5,0x1dc,0x1dd}
+            self.assertEqual(p['border_metatiles'],[0x1d4,0x1d5,0x1dc,0x1dd])
+            count=0
+            for y in range(2,62,2):
+                for x in range(2,94,2):
+                    if x<32 and y<24:continue
+                    cells=[p['legend'][p['rows'][y+dy][x+dx]][0] for dy in (0,1) for dx in (0,1)]
+                    if any(t in trees for t in cells):
+                        self.assertEqual(cells,[0x1d4,0x1d5,0x1dc,0x1dd]);count+=1
+            self.assertGreater(count,100)
+
 
 if __name__=='__main__':unittest.main()
