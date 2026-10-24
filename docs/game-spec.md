@@ -663,7 +663,10 @@ rendered in full, checked as a contact sheet and inspected at full-page scale;
 all pages carry the right version. The offline gallery contains18maps with no
 unresolved placeholders; browser interaction remains unverified. Private outputs:
 `output/pdf/sf-world-review-v109.pdf` and`output/review/sf-world-review-v109.html`.
-Website-core replay is running. Next design work should
+Website-core replay now passes232386frames with0of294912RAM bytes different
+(hash`cf4e4dc89f302179c408fcfdc60194efbfd717679e4de5580bf26529edf7891e`).
+This is deterministic website-core state evidence, not foreground browser
+audio/timing acceptance. Next design work should
 replace the remaining small legacy park filler and give expanded reserve
 clearings meaningful landscape destinations; formal urban frontage bands still
 need district parcels. No public deployment or human visual approval is claimed.
@@ -673,7 +676,7 @@ legacy park filler without moving bindings; add meaningful branch destinations;
 differentiate summit/coastal terrain; reduce cross-shaped port approaches and
 accidental tree remnants. Repeated pale rectangles draw attention without purpose
 and should be removed or placed only as part of a designed local destination.
-Next alignment check by21:40Pacific while active. Goal remains active until23:20. 
+Next alignment check by21:40Pacific while active. Goal remains active until23:20.
 
 **October23 native trail finish.** The original Route102study also shows soft
 worn-grass patches with finished terrain edges. Candidatev108references the
