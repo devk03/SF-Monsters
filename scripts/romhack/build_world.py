@@ -97,6 +97,13 @@ def main():
         from world_tiles import compile_kit, apply_kit, describe
         profiles = {'residential'} | {p.get('tile_profile','residential') for p in plans}
         declared = json.loads((ROOT/'romhack/world/art-contract.json').read_text())['profiles']
+        # A failed first overlay can precede its ledger. Recreate these shared
+        # compiler inputs from the pinned base rather than appending duplicate
+        # declarations left by an interrupted art/seam allocation attempt.
+        for relative in ('src/data/tilesets/graphics.h',
+                         'src/data/tilesets/metatiles.h',
+                         'src/data/tilesets/headers.h'):
+            (engine/relative).write_text(original(relative))
         for profile in ['residential']+sorted(profiles-{'residential'}):
             kit = compile_kit(profile=profile)
             if describe(kit) != declared[profile]:

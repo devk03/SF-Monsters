@@ -4,13 +4,22 @@ import struct
 from pathlib import Path
 
 
-def margin_points(plan, direction):
+def margin_points(plan, direction, source=None, offset=0):
     width, height = len(plan['rows'][0]), len(plan['rows'])
-    return [(x, y) for y in range(height) for x in range(width)
+    points = [(x, y) for y in range(height) for x in range(width)
             if (direction == 'left' and x >= width - 7)
             or (direction == 'right' and x < 8)
             or (direction == 'up' and y >= height - 7)
             or (direction == 'down' and y < 7)]
+    if source is None:
+        return points
+    # Mirror fieldmap.c's clipped copy into the source map's padded buffer.
+    # A small connector cannot display an entire96-tile neighbor edge. Loading
+    # off-buffer artwork wastes scarce native metatile/palette allocations.
+    vertical = direction in ('left','right')
+    span = len(source['rows']) if vertical else len(source['rows'][0])
+    extra = 7 if vertical else 8
+    return [(x,y) for x,y in points if -7 <= (y if vertical else x)+offset < span+extra]
 
 
 def flip(tile, flags):
@@ -60,7 +69,7 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
         active_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]<512}
         for link in plan['connections']:
             other=by_native[link['map']]
-            active_ids|={other['legend'][other['rows'][y][x]][0] for x,y in margin_points(other,link['direction'])
+            active_ids|={other['legend'][other['rows'][y][x]][0] for x,y in margin_points(other,link['direction'],plan,link['offset'])
                          if other['legend'][other['rows'][y][x]][0]<512}
         active_banks=set(reserved_banks) if primary_banks is None else set().union(*(primary_banks[i] for i in active_ids))
         if 0 not in reserved_banks:active_banks.discard(0)
@@ -109,7 +118,7 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
                 continue
             foreign = kits[other['tile_profile']]
             used = {other['legend'][other['rows'][y][x]][0]
-                    for x,y in margin_points(other,link['direction'])}
+                    for x,y in margin_points(other,link['direction'],plan,link['offset'])}
             mapping = list(range(512,1024))
             for metatile in sorted(used):
                 if metatile < 512:continue  # Native water/falls/ground remain untouched.

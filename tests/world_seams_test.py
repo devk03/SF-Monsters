@@ -85,5 +85,18 @@ class SeamTests(unittest.TestCase):
         self.assertEqual(len(margin_points(p,'up')),32*7)
         self.assertEqual(len(margin_points(p,'down')),32*7)
 
+    def test_small_connector_imports_only_native_clipped_large_town_window(self):
+        town={'rows':['.'*96]*64}
+        route={'rows':['.'*32]*24}
+        # fieldmap.c: x=offset+7=-25, x2=25; source padded width=47.
+        # Thus horizontal edges copy town columns25..71, not all96columns.
+        for direction,ys in [('up',range(57,64)),('down',range(7))]:
+            self.assertEqual(set(margin_points(town,direction,route,-32)),
+                             {(x,y) for x in range(25,72) for y in ys})
+        # Vertical copies use the source padded height38, starting town row13.
+        for direction,xs in [('left',range(89,96)),('right',range(8))]:
+            self.assertEqual(set(margin_points(town,direction,route,-20)),
+                             {(x,y) for x in xs for y in range(13,51)})
+
 
 if __name__=='__main__':unittest.main()

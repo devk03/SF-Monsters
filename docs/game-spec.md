@@ -681,6 +681,18 @@ The pinned native toolchain has been restored and reproduces the Emerald base.
 The first expanded native build is running; compiled/native/WASM/save evidence
 and refreshed captures remain pending. Publicv92/rootv80are unchanged.
 
+First expanded native cartridge now builds and passes compiled58-map audit:
+SHA256`7e404a8de370be5b70b055c4e9faaa62aaa171ee3ed5d8aa1f53ea2976695cb0`.
+All133616mapcells,76connections,169NPCs and18native labels are checked; BPS
+round-trip passes. Small-map seam imports now mirror the native clipped buffer
+instead of importing an entire96-tile neighbor edge. Five seam regression tests
+pass, including exact foreign pixels and mixed-size clipping. Failed first-build
+header residue is recovered from pinned source before retrying art declarations.
+Authored full-map previews under`expanded-v98-authored` show the remaining visual
+problems clearly: sparse new urban interiors, a visibly retained northwest
+legacy block, repeated tree placement and overly broad bare paths. These are
+candidate previews, not gameplay captures or accepted art. Continue refinement.
+
 **October23 all-town visual review packet — private v97.** The user requested
 images of every current town and nature destination for critique. Captured a fresh
 controller-only tour of all18 destinations against the v97 SHA below, then decoded
