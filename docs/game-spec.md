@@ -643,6 +643,19 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 native trail finish.** The original Route102study also shows soft
+worn-grass patches with finished terrain edges. Candidatev108references the
+native nine-piece General worn-ground terrain, placing small complete patches
+on existing free trails without replacing trees, flowers, benches or approaches.
+All16woodland/reserve maps receive a bounded patch. No native bitmap/palette is
+committed. Independent geometry passes all73maps; two woodland/rest-stop and
+five connected-art allocation regressions pass. Full native build/render renewal
+is required. v106website-core full-circuit replay passes234090frames with0of
+294912RAM bytes different; this does not grant browser audio/timing acceptance.
+v107also passes its73map/106connection/16gym-warp/26room-warp native circuit.
+The refreshed review generator preserves96x64map aspect and version labels;
+new packet generation waits for matching captures, not old images relabeled.
+
 **October23 large reserve follow-through.** Candidatev106replaces expanded
 checkerboard pine/cypress fill on all five nature destinations with complete
 native General forest masses, native grass trails and distinct meadow/flower

@@ -20,10 +20,10 @@ details{border-block:1px solid var(--line);margin:24px 0;padding:14px 0}summary{
 @media(max-width:800px){header,main{padding:20px}.index{grid-template-columns:repeat(2,minmax(0,1fr))}.map-pair,.notes{grid-template-columns:1fr}.toolbar{position:static;padding:12px 20px}#status{margin:0;width:100%}section{padding:16px}.section-title{align-items:flex-start}h2{font-size:24px}}
 @media print{.toolbar,.notes,summary,.section-title>a{display:none}.index{display:none}section{break-inside:avoid}details:not([open]){display:none}header,main{padding:12px}}
 </style>
-<header id="top"><small>SF MINI MONSTERS / PRIVATE WORLD REVIEW / v97</small>
+<header id="top"><small>SF MINI MONSTERS / PRIVATE WORLD REVIEW / @@VERSION@@</small>
 <h1>Every place.<br>The current build.</h1>
 <p>All 18 destinations, with full maps and actual GBA views. These are the existing maps, including the rough parts. The full maps show background layers without people; open the in-game views to judge actors and camera scale.</p>
-<p><strong>Do they look different?</strong> Landmarks, building mixes and paint do vary. Most urban areas still share a two-row street template. Several nature areas share an overly paved loop. Neither group is finished.</p>
+<p><strong>Do they look different?</strong> Distinct circulation, larger districts and native forest terrain are implemented. Frontage repetition, useful destinations and topography still need review. These are actual native captures, not finished-world approval.</p>
 <p class="notice"><strong>Presidio Heights is not built.</strong> There is no separate Presidio map either. Pacific Heights is a different current destination. A missing-area card below lets you record what you want there.</p>
 <p class="muted">Notes stay in this browser when local storage is available. Download feedback to keep or share a copy. Nothing is submitted and no quality approval is inferred.</p></header>
 <div class="toolbar" role="group" aria-label="Review controls">
@@ -33,7 +33,7 @@ details{border-block:1px solid var(--line);margin:24px 0;padding:14px 0}summary{
 <section id="presidio_heights" class="missing"><small>REQUESTED / NOT IMPLEMENTED</small><h2>Presidio Heights</h2>
 <p>No map exists to critique yet. Record the landmarks, landscape and connections you want rather than reviewing a substitute image.</p>
 <div class="notes"><label>What should make it recognizable?<textarea data-note="works" rows="4"></textarea></label><label>What should it connect to?<textarea data-note="wrong" rows="4"></textarea></label><label>What should we build first?<textarea data-note="change" rows="4"></textarea></label></div></section>
-<footer>Private v97. Public game remains v92. This is a visual critique packet; browser audio and full-route acceptance are still open. Maps come from matching native VRAM/palettes and compiled geometry; photos come from the controller-only tour.</footer></main>
+<footer>Private @@VERSION@@. Public game remains v92. This is a visual critique packet; browser audio and full-route acceptance are still open. Maps come from matching native VRAM/palettes and compiled geometry; photos come from the controller-only tour.</footer></main>
 <script>
 const metadata=@@METADATA@@;
 const storageKey='sf-world-review-'+metadata.rom_sha256;
@@ -55,7 +55,7 @@ for(const link of document.querySelectorAll('a[href^="#"]'))link.addEventListene
 document.querySelector('#export').onclick=()=>{
  const payload={...metadata,scope:'Visual town critique only',reviewed_at:new Date().toISOString(),notes:collect()};
  const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
- const link=document.createElement('a');link.href=url;link.download='sf-world-v97-feedback.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const link=document.createElement('a');link.href=url;link.download='sf-world-@@VERSION@@-feedback.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  status.textContent='Feedback downloaded. Nothing was sent anywhere.';
 };
 </script></html>

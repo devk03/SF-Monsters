@@ -20,8 +20,9 @@ def image_uri(path):
 
 
 def make_pdf(data, output, review_date):
+    version=data['version'].split('-')[0].replace('0.0.','v')
     c = canvas.Canvas(str(output), pagesize=(792, 612), pageCompression=1)
-    c.setTitle('SF Mini Monsters - all-town review - v97')
+    c.setTitle('SF Mini Monsters - all-town review - '+version)
     c.setAuthor('SF Mini Monsters development review')
     page = 0
 
@@ -44,11 +45,13 @@ def make_pdf(data, output, review_date):
         text(title, 28, 580, 19, bold=True)
         text(subtitle, 28, 560, 9, MUTED)
         c.setStrokeColor(HexColor(LINE)); c.line(28, 26, 764, 26)
-        text('SF MINI MONSTERS / PRIVATE v97 / '+review_date, 28, 13, 7, MUTED)
+        text('SF MINI MONSTERS / PRIVATE '+version+' / '+review_date, 28, 13, 7, MUTED)
         text(str(page)+' / 25', 734, 13, 7, MUTED)
 
     def picture(path, x, y, w, h):
-        c.drawImage(ImageReader(str(path)), x, y, width=w, height=h)
+        iw,ih=Image.open(path).size
+        scale=min(w/iw,h/ih)
+        c.drawImage(ImageReader(str(path)),x+(w-iw*scale)/2,y+(h-ih*scale)/2,width=iw*scale,height=ih*scale)
 
     def contacts(areas, title, key, missing=False):
         begin(title, 'Full backgrounds at a glance. Click a town to jump to its detailed page.', key)
@@ -69,11 +72,11 @@ def make_pdf(data, output, review_date):
     begin('The SF world, as built.', 'A complete visual review of the current private cartridge - not a concept-art proposal.', 'cover')
     text('18 places to critique', 28, 501, 30, bold=True)
     y = paragraph('Every current destination has a full map and actual GBA views. The full maps show the background, without people; the gameplay images show the actors and camera scale.', 28, 451, 270, 12, 18)
-    y = paragraph('Do the towns look different? Some landmarks and paint schemes do. Their layouts still repeat too much. The five nature destinations are visibly less finished.', 28, y-20, 270, 12, 18)
+    y = paragraph('Do the towns look different? The expanded districts now have different circulation and native forest terrain. Repeated frontage bands, sparse destinations and unfinished topography still need critique.', 28, y-20, 270, 12, 18)
     paragraph('Presidio Heights is not implemented. Pacific Heights is a different current destination. Neither is silently substituted for the other here.', 28, y-20, 270, 11, 16, '#99533b')
-    guide = ROOT/'.tools/benchmarks/town-v97-crosswalk-continue/city-map.png'
+    guide = Path(data['areas'][0]['map'])
     picture(guide, 328, 190, 436, 291)
-    text('Current native region guide', 328, 173, 9, MUTED)
+    text('Actual expanded Dogpatch background', 328, 173, 9, MUTED)
     text('13 URBAN AREAS   /   5 NATURE AREAS   /   8 RESERVED GYM SITES', 28, 99, 11, bold=True)
     paragraph('Start with the contact sheets. Then mark each detailed page: what works, what feels wrong, and the one change that would most improve its identity. Use the companion offline gallery to save and export typed feedback.', 28, 72, 736, 10, 14)
     c.showPage()
@@ -83,7 +86,7 @@ def make_pdf(data, output, review_date):
     for area in data['areas']:
         badge = ' / Gym '+str(area['gym'])+' site' if area['gym'] else ''
         begin(f"{area['order']:02d}  {area['label']}",
-              area['category'].title()+' / 32 x 24 tiles / '+str(area['residents'])+' current actors'+badge,
+              area['category'].title()+' / '+' x '.join(map(str,area['dimensions']))+' tiles / '+str(area['residents'])+' current actors'+badge,
               'area_'+area['id'])
         picture(area['map'], 28, 168, 512, 384)
         text('ACTUAL GBA VIEWS', 560, 550, 7, MUTED, True)
@@ -111,10 +114,10 @@ def make_pdf(data, output, review_date):
     c.showPage()
     begin('Critique priorities', 'These are development observations, not user approval or a quality score.', 'priorities')
     priorities = [
-        ('Street composition', 'All 13 urban destinations use the same broad east-west street and two frontage rows. Design distinctive intersections, block shapes and local gathering spaces.'),
-        ('Nature and topography', 'Golden Gate Park and the ridge/coastal maps reuse a broad loop with too much hard paving. Add shaped trails, clearings, water, slopes and less mechanical forest edges.'),
+        ('Street composition', 'Districts have distinct multi-block circulation, but many housing bands still repeat mechanically. Compose purposeful parcels, entrances and local gathering spaces.'),
+        ('Nature and topography', 'Native forest and grass replace the invented checkerboard. Review trail widths, canopy edges, useful clearings, missing lakes and readable ridge topography.'),
         ('Building massing', 'Paint and window variations help, but Mission Bay, Financial District and the ballpark need stronger architectural differences and bigger landmark roles.'),
-        ('Waterfront identity', 'Treasure Island does not yet read clearly as an island. Shores, piers and open-water views need deliberate composition.'),
+        ('Waterfront identity', 'Coast and island boundaries now include sea and piers. Their shore transitions, views and destination placement still need deliberate composition.'),
         ('Missing geography', 'Presidio Heights and the Presidio have no current playable maps. Their placement and scope need to be added explicitly before implementation.'),
         ('Keep improved basics', 'Keep neutral sidewalks, continuous crosswalk paint, complete facade edges, dense frontage and visible pedestrian paths. The user liked this direction; that is not whole-town approval.'),
     ]
@@ -122,7 +125,7 @@ def make_pdf(data, output, review_date):
     for title, body in priorities:
         text(title, 28, y, 13, bold=True)
         y = paragraph(body, 230, y, 525, 11, 15)-24
-    paragraph('This packet uses private v97. The public website remains v92. Browser audio and full foreground-route acceptance are still open. Full maps are extracted from native VRAM/palettes and compiled geometry; gameplay views come from a matching controller-only tour.', 28, 86, 736, 9, 13, MUTED)
+    paragraph('This packet uses private ' + version + '. The public website remains v92. Browser audio and full foreground-route acceptance are still open. Full maps are extracted from native VRAM/palettes and compiled geometry; gameplay views come from a matching controller-only tour.', 28, 86, 736, 9, 13, MUTED)
     c.showPage()
     if page != 25: raise ValueError('Unexpected PDF page count')
     c.save()
@@ -138,12 +141,12 @@ def make_gallery(data, output, pdf_name):
         notes = ''.join(f'<label>{label}<textarea data-note="{key}" rows="3"></textarea></label>' for key,label in [('works','What works?'),('wrong','What feels wrong?'),('change','What should change first?')])
         cards.append(f'''<section id="{identifier}" data-category="{area['category']}">
 <div class="section-title"><div><small>{area['category'].upper()} / {area['order']:02d}</small><h2>{name}</h2></div><a href="#top">Back to index</a></div>
-<div class="map-pair"><figure><img class="map" src="{image_uri(area['map'])}" alt="Full current map of {name}"><figcaption>Full native background / 32 x 24 tiles. People are visible in the gameplay views.</figcaption></figure>
+<div class="map-pair"><figure><img class="map" src="{image_uri(area['map'])}" alt="Full current map of {name}"><figcaption>Full native background / {area['dimensions'][0]} x {area['dimensions'][1]} tiles. People are visible in the gameplay views.</figcaption></figure>
 <div class="assessment"><h3>Current critique</h3><p>{esc(area['critique'])}</p><p class="muted">{esc(area['character'].capitalize())}</p><h3>Connections</h3><p class="muted">{esc('; '.join(area['connections']))}</p></div></div>
 <details><summary>Actual in-game views ({len(area['views'])})</summary><div class="photos">{photos}</div></details><div class="notes">{notes}</div></section>''')
     template = Path(__file__).with_name('world_review_template.html').read_text()
     metadata = json.dumps({'version':data['version'],'rom_sha256':data['rom_sha256']}).replace('<','\\u003c')
-    output.write_text(template.replace('@@INDEX@@',''.join(index)).replace('@@CARDS@@',''.join(cards)).replace('@@METADATA@@',metadata).replace('@@PDF@@',pdf_name))
+    output.write_text(template.replace('@@INDEX@@',''.join(index)).replace('@@CARDS@@',''.join(cards)).replace('@@METADATA@@',metadata).replace('@@PDF@@',pdf_name).replace('@@VERSION@@',data['version']))
 
 
 def main():
@@ -154,9 +157,10 @@ def main():
     data = json.loads(args.data.read_text())
     folder = ROOT/'output'; (folder/'pdf').mkdir(parents=True, exist_ok=True)
     (folder/'review').mkdir(parents=True, exist_ok=True)
-    pdf = folder/'pdf/sf-world-review-v97.pdf'
+    version=data['version'].split('-')[0].replace('0.0.','v')
+    pdf = folder/'pdf'/('sf-world-review-'+version+'.pdf')
     make_pdf(data, pdf, args.review_date)
-    gallery = folder/'review/sf-world-review-v97.html'
+    gallery = folder/'review'/('sf-world-review-'+version+'.html')
     make_gallery(data, gallery, '../pdf/'+pdf.name)
     for category in ('urban', 'nature'):
         areas = [a for a in data['areas'] if a['category']==category]
@@ -165,7 +169,7 @@ def main():
         draw = ImageDraw.Draw(sheet)
         for i, area in enumerate(areas):
             x, y = i%3*width, i//3*height
-            image = Image.open(area['map']).resize((256,192), Image.Resampling.NEAREST)
+            image = Image.open(area['map']).resize((256,round(256*area['dimensions'][1]/area['dimensions'][0])), Image.Resampling.NEAREST)
             sheet.paste(image, (x,y+22))
             draw.text((x+4,y+5), area['label'], fill=INK)
         sheet.save(folder/'review'/f'{category}-overview.png')

@@ -12,7 +12,8 @@ from world_art_contract import load_profiles
 PORTS = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
 WATER = 368
 WATERFALL = 179
-NATIVE_SCENERY={4:False,13:False,0x1d4:True,0x1d5:True,0x1dc:True,0x1dd:True}
+from world_trail_ground import WORN_IDS
+NATIVE_SCENERY={**{n:False for n in WORN_IDS},4:False,13:False,0x1d4:True,0x1d5:True,0x1dc:True,0x1dd:True}
 ACCESS_KINDS = {'spawn', 'gym_entry', 'gym_exit', 'checkpoint', 'arrival', 'room_entry', 'room_exit'}
 NAME = re.compile(r'[A-Za-z_][A-Za-z0-9_]*\Z')
 

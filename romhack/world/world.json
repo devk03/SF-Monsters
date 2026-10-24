@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.107-woodland-rest-stops-world-draft",
+  "version": "0.0.108-native-trail-ground-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {

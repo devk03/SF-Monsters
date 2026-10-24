@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/romhack'))
 from generate_world import generate
+from world_trail_ground import WORN_IDS
 
 
 class GreenRouteTests(unittest.TestCase):
@@ -17,7 +18,7 @@ class GreenRouteTests(unittest.TestCase):
             with self.subTest(route=plan['world_id']):
                 rows,legend=plan['rows'],plan['legend']
                 ground={legend[t][0] for row in rows for t in row if not legend[t][1]}
-                self.assertTrue({1,13}<=ground<={1,4,13},'Native grass/flowers replace the white corridor')
+                self.assertTrue({1,13}<=ground<=({1,4,13}|WORN_IDS),'Native grass/flowers replace the white corridor')
                 self.assertEqual(plan['border_metatiles'],[0x1d4,0x1d5,0x1dc,0x1dd])
                 self.assertEqual(len(plan['town_blocks']),1,'Each branch retains its intended rest stop')
                 self.assertLess(len(plan['encounter_positions']),20,'Encounter grass is a patch, not a perimeter outline')

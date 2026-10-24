@@ -48,6 +48,8 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token):
         for dx,dy in ((-2,-1),(-1,-1),(-2,0),(2,1),(3,1)):
             x,y=cx+dx,cy+dy
             if grid[y][x]==grass and (x,y) not in lanes:grid[y][x]=flower
+    from world_trail_ground import worn_patch
+    plan['worn_trail_patch']=worn_patch(grid,legend,grass,(48,32),protected)
     # Native border follows the same canopy; exact ports are reopened below.
     plan['border_metatiles']=[tile for row in TREES for tile in row]
     plan['native_park_design']={'meadows':[list(g) for g in GLADES[plan['world_id']]],

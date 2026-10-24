@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/romhack'))
 from generate_world import generate
 from world_tiles import compile_kit
+from world_trail_ground import WORN_IDS
 from world_seams import make_atlases,margin_points
 
 
@@ -36,6 +37,8 @@ class SeamTests(unittest.TestCase):
         cls.primary_banks={1:{0,2},11:{0,1,5},179:{0,4},368:{0,4}}
         # Pinned General woodland/tall-grass references now occur on the maps.
         cls.primary_banks.update({tile:{0,2} for tile in (4,13,0x1d4,0x1d5,0x1dc,0x1dd)})
+        cls.primary_banks.update({tile:{0,2} for tile in WORN_IDS})
+        cls.reserved.update({249,250,265,266,281,282,297,298})
         cls.reserved.update({25,41,204,205,384,385,400,401,416,417,418,419,420,421})
         cls.atlases=make_atlases(cls.plans,cls.kits,cls.reserved,cls.banks,cls.locks,cls.primary_banks)
 
