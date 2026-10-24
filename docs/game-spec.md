@@ -730,6 +730,16 @@ sidewalk area so the inner curb strip remains clear. All73source maps pass.
 The new signs repeat useful district directions and local notices, with no new
 persistent state. This candidate must receive its own compiled/native/Save and
 visual evidence; counts alone are not proof of coherent city decoration.
+The v100compiled73-map audit and BPS round-trip pass for target
+`3cf82a12ffa84136db6e69e01dd6c7a777c3789142bce3463a6d770ca1ded929`;
+15street-contract and4facade tests pass. Publicv92/rootv80remain unchanged.
+
+Private v101 extends whole-district shore masks across Outer Sunset, Lands End,
+Treasure Island and Angel Island. Original service bindings remain, new buildings
+avoid the shore reservation, and route lanes form explicit piers through solid
+scenic water. Surf still occurs only on the existing badge-gated connectors.
+The old compact Angel Island east shore is removed where it is now inland.
+All73source maps still pass; new compiled/native/render/Save evidence is pending.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

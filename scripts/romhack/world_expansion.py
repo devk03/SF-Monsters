@@ -31,6 +31,8 @@ def expand(plans, manifest):
         grid = [[token(ground,x,y) for x in range(width)] for y in range(height)]
         directions = [link['direction'] for link in plan['connections'] or []]
         lanes = circulation(name,(width,height),directions)
+        from world_coast import shoreline
+        sea,shore=shoreline(name,width,height,lanes)
         walks = {(x+dx,y+dy) for x,y in lanes for dx in range(-2,3)
                  for dy in range(-2,3) if 0<x+dx<width-1 and 0<y+dy<height-1}
         material = DISTRICTS.get(name,('slab_walk',))[0]
@@ -89,6 +91,7 @@ def expand(plans, manifest):
             if (cells & occupied or any(xx<1 or yy<1 or xx>=width-1 or yy>=height-1
                                        or xx<32 and yy<24 for xx,yy in cells)):
                 return False
+            if cells & (sea|shore):return False
             if cells & (lanes if shoulder else walks):
                 return False
             for dy,row in enumerate(card['tiles']):
@@ -177,6 +180,7 @@ def expand(plans, manifest):
             for index,(tx,ty) in enumerate(((44,30),(76,48))):
                 for x,y in sorted(walks-lanes,key=lambda p:(abs(p[0]-tx)+abs(p[1]-ty),p[1],p[0])):
                     if x<32 and y<26:continue
+                    if (x,y) in sea|shore:continue
                     if (x,y) in occupied:continue
                     if not stamp('wayfinder',x,y-2,shoulder=True):continue
                     label=f'WBStreet_{name}_expanded_{index}'
@@ -218,6 +222,19 @@ def expand(plans, manifest):
                 x,y={'left':(0,height//2+delta),'right':(width-1,height//2+delta),
                      'up':(width//2+delta,0),'down':(width//2+delta,height-1)}[side]
                 grid[y][x]=token('paving' if nature else material,x,y)
+        # Scenic water stays solid: traversal still occurs only through the
+        # declared Surf connectors. Landward seawalls and actual piers make
+        # these full districts read as coast/islands rather than hedge boxes.
+        for x,y in sea:grid[y][x]=token('scenic_sea',x,y)
+        for x,y in shore:
+            if (x,y) not in occupied:grid[y][x]=token('seawall',x,y)
+        if name=='angel_island':
+            # The former compact map's east shore is now inland. Remove only
+            # those obsolete sea/wall cells, retaining landmarks and actors.
+            for y in range(1,23):
+                for x in range(27,32):
+                    if (x,y) not in occupied and grid[y][x] in (token('scenic_sea'),token('seawall')):
+                        grid[y][x]=token('grass',x,y)
         # Keep local IDs and scripts stable while letting the expanded district
         # feel inhabited beyond its original service block. Reserve every real
         # interaction approach and the complete horizontal wandering envelope.
