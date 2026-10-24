@@ -717,6 +717,19 @@ Compiled73-map/106connection audit and BPS round-trip pass for target
 The large art-contract diff is generated allocation metadata, not hand-authored
 gameplay code. Native Save/render/route and matching WASM proof must be renewed
 for this exact art candidate; v98evidence does not automatically approvev99.
+For target42c1a34b, cold Continue of the earlier real Save passes with exact
+position/party/held items/money/inventory/chapter/Flash and the same documented
+native TV bit exception. Its uninterrupted18destination capture tour and full
+73map/106connection/16gym/26room native circuit pass; exact WASM replay is running.
+
+**Private v100 street dressing candidate.** Expanded urban blocks add576district
+fixtures/plants, curbs/crosswalks and26readable wayfinders. Existing signs retain
+their exact visible-object/standing-tile binding even when the same fixture is
+used elsewhere. Furniture stays outside road cells; residents use the outer
+sidewalk area so the inner curb strip remains clear. All73source maps pass.
+The new signs repeat useful district directions and local notices, with no new
+persistent state. This candidate must receive its own compiled/native/Save and
+visual evidence; counts alone are not proof of coherent city decoration.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

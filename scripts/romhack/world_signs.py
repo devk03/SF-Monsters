@@ -57,7 +57,7 @@ def add_signs(plans,manifest):
 
 def scripts(plan):
     result=[]
-    for sign in plan.get('street_signs',[]):
+    for sign in plan.get('street_signs',[])+plan.get('extra_street_signs',[]):
         label=sign['script']
         result += [label+'::','    lockall',f'    msgbox {label}_Text, MSGBOX_DEFAULT',
                    '    releaseall','    end',label+'_Text::',

@@ -33,7 +33,8 @@ def check_details(plan):
         obj=tuple(sign['object']);standing=tuple(sign['standing'])
         events=[e for e in plan.get('bg_events',[]) if e['script']==sign['script']]
         accesses=[e for e in plan['access_points'] if e.get('name')==sign['style']]
-        blocks=[b for b in plan['town_blocks'] if b['style']==sign['style']]
+        blocks=[b for b in plan['town_blocks'] if b['style']==sign['style']
+                and b['x']<=obj[0]<b['x']+b['width'] and b['y']<=obj[1]<b['y']+b['height']]
         if (len(events)!=1 or (events[0]['x'],events[0]['y'])!=obj or len(accesses)!=1
                 or (accesses[0]['x'],accesses[0]['y'])!=standing
                 or sum(abs(a-b) for a,b in zip(obj,standing))!=1

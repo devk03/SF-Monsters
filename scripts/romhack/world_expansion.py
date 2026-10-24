@@ -38,6 +38,26 @@ def expand(plans, manifest):
             grid[y][x] = token('grass' if nature else material,x,y)
         for x,y in lanes:
             grid[y][x] = token('paving' if nature else 'asphalt',x,y)
+        if not nature:
+            for x,y in walks-lanes:
+                if (x,y+1) in lanes and (x,y-1) not in lanes:
+                    grid[y][x]=token('curb_north',x,y)
+                elif (x,y-1) in lanes and (x,y+1) not in lanes:
+                    grid[y][x]=token('curb_south',x,y)
+            horizontals=[];verticals=[]
+            for line in STREETS[name]:
+                for (x0,y0),(x1,y1) in zip(line,line[1:]):
+                    if y0==y1:horizontals.append((min(x0,x1),max(x0,x1),y0))
+                    if x0==x1:verticals.append((x0,min(y0,y1),max(y0,y1)))
+            crossings={(x,y) for left,right,y in horizontals for x,top,bottom in verticals
+                       if left<=x<=right and top<=y<=bottom}
+            for cx,cy in crossings:
+                for y in range(cy-1,cy+2):
+                    for x in range(cx-1,cx+2):
+                        if (x,y) in lanes:grid[y][x]=token('crossing',x,y)
+                for y in (cy-2,cy+2):
+                    for x in range(cx-1,cx+2):
+                        if (x,y) in walks-lanes:grid[y][x]=token('curb_cut',x,y)
         # Existing service/gym bindings remain in the northwest block. Its old
         # east/south boundary becomes an internal walkway, never a hidden wall.
         for y,row in enumerate(old):
@@ -63,13 +83,13 @@ def expand(plans, manifest):
                     grid[y][x]=paved
         occupied = {(x,y) for b in plan['town_blocks'] for y in range(b['y'],b['y']+b['height'])
                     for x in range(b['x'],b['x']+b['width'])}
-        def stamp(style,x,y):
+        def stamp(style,x,y,*,shoulder=False):
             card = cards[style]
             cells = {(x+dx,y+dy) for dy,row in enumerate(card['tiles']) for dx,_ in enumerate(row)}
             if (cells & occupied or any(xx<1 or yy<1 or xx>=width-1 or yy>=height-1
                                        or xx<32 and yy<24 for xx,yy in cells)):
                 return False
-            if cells & walks:
+            if cells & (lanes if shoulder else walks):
                 return False
             for dy,row in enumerate(card['tiles']):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
@@ -129,6 +149,45 @@ def expand(plans, manifest):
                         index += 1
                     else:
                         x += 1
+            # Fixtures follow the outside sidewalk edge, leaving the inner
+            # curb strip clear. No tree, pole or bench may occupy road cells.
+            from world_botany import PLANTINGS
+            species=PLANTINGS[name]
+            motifs={'industrial':('lamp','recycling','rack','street_tree'),
+                    'civic':('lamp','street_tree','bench','bin'),
+                    'culture':('street_tree','lamp','bench','street_tree'),
+                    'stadium':('rack','lamp','street_tree','bin')}.get(profile,
+                    ('street_tree','lamp','bench','street_tree'))
+            fixtures=[]
+            for left,right,y in horizontals:
+                for x in range(left+6,right-3,11):
+                    fixtures.extend([(x,y-4),(x+4,y+3)])
+            for x,top,bottom in verticals:
+                for y in range(top+7,bottom-3,13):
+                    fixtures.extend([(x-4,y),(x+3,y+4)])
+            for index,(x,y) in enumerate(dict.fromkeys(fixtures)):
+                style=motifs[(index+len(name))%len(motifs)]
+                if stamp(style,x,y,shoulder=True):
+                    plan.setdefault('expanded_details',[]).append({'name':style,'x':x,'y':y})
+                plant=species[index%len(species)]
+                if stamp(plant,x+3,y,shoulder=True):
+                    plan.setdefault('expanded_details',[]).append({'name':plant,'x':x+3,'y':y})
+            # Additional readable directions belong where the new blocks meet,
+            # with a free standing tile and no persistent-state reservation.
+            for index,(tx,ty) in enumerate(((44,30),(76,48))):
+                for x,y in sorted(walks-lanes,key=lambda p:(abs(p[0]-tx)+abs(p[1]-ty),p[1],p[0])):
+                    if x<32 and y<26:continue
+                    if (x,y) in occupied:continue
+                    if not stamp('wayfinder',x,y-2,shoulder=True):continue
+                    label=f'WBStreet_{name}_expanded_{index}'
+                    original=next(s['text'] for s in plan['street_signs'] if s['style']==('wayfinder' if index==0 else 'shop_board'))
+                    text=original if index==0 else original+' Neighborhood services are in the northwest block.'
+                    plan.setdefault('extra_street_signs',[]).append(dict(script=label,text=text))
+                    plan.setdefault('bg_events',[]).append(dict(type='sign',x=x,y=y-1,elevation=0,
+                        player_facing_dir='BG_EVENT_PLAYER_FACING_ANY',script=label))
+                    plan['access_points'].append(dict(kind='checkpoint',name='district_wayfinder',
+                        activation='interact',x=x,y=y))
+                    break
         # Match real party-wall art to the final neighboring footprints. An end
         # cap is drawn only where the building actually exposes that side.
         architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]
@@ -174,6 +233,7 @@ def expand(plans, manifest):
             for x,y in walks-lanes:
                 envelope={(x+dx,y) for dx in range(-rx,rx+1)}
                 if x<32 and y<24 or envelope & (others|reserved):continue
+                if not nature and any((x+dx,y+dy) in lanes for dx,dy in ((-1,0),(1,0),(0,-1),(0,1))):continue
                 if all(0<xx<width-1 and 0<yy<height-1
                        and not plan['legend'][grid[yy][xx]][1] for xx,yy in envelope):
                     candidates.append((x,y))
