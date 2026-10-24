@@ -15,7 +15,7 @@ def native_id(name):
     return 'MAP_' + re.sub(r'(?<=[a-z])(?=[A-Z])', '_', name).upper()
 
 
-def records(manifest):
+def records(manifest, *, physical=True):
     areas = [dict(area) for area in manifest['areas']]
     routes = [dict(route) for route in manifest['routes']]
     league = manifest['league']
@@ -26,6 +26,9 @@ def records(manifest):
                        'from': league['from_area'], 'from_port': league['from_port'],
                        'to': league['venue'], 'to_port': 'down', 'mode': 'waterfall',
                        'requires_badge': 8, 'bidirectional': True})
+    if physical:
+        from world_routes import physical_routes
+        routes = physical_routes(routes)
     return areas, routes
 
 
@@ -106,6 +109,11 @@ def generate(manifest):
             links[route['id']].append({'map': native_id(nodes[area]['engine_map']),
                                       'direction': OPPOSITE[direction], 'offset': connection_offset(
                                           direction, dimensions(manifest, route['id']), dimensions(manifest, area))})
+    for identifier, connections in links.items():
+        unique = []
+        for connection in connections:
+            if connection not in unique:unique.append(connection)
+        links[identifier] = unique
     plans = []
     gym_by_area = {gym['area']: gym for gym in manifest['gyms']}
     area_ids = {area['id'] for area in areas}
@@ -133,7 +141,11 @@ def generate(manifest):
                 'coord_events': [], 'access_points': [], 'script': identifier + '.inc'}
         if manifest.get('city_guide'):
             parent=item.get('area',item.get('from',identifier))
+            while parent not in manifest['city_guide']['native_sections']:
+                parent=nodes[parent]['from']
             plan['metadata']['region_map_section']=manifest['city_guide']['native_sections'][parent]
+        if item.get('parent_route'):
+            plan['parent_route']=item['parent_route']
         if plaza:
             greeting_graphics=('OLD_MAN' if identifier in ('golden_gate_park','twin_peaks','lands_end')
                                else 'WOMAN_5' if identifier in ('mission','marina','north_beach','angel_island') else 'MAN_5')

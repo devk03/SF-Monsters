@@ -106,7 +106,20 @@ class _World:
                            'to': self.league_id, 'to_port': 'down', 'mode': 'waterfall',
                            'requires_badge': 8, 'bidirectional': True})
         self.areas = _unique(areas, 'id', 'area')
-        self.routes = _unique(routes, 'id', 'route')
+        physical = []
+        for route in routes:
+            base = dict(route)
+            sections = base.pop('intermediate_sections', [])
+            physical.append(base)
+            prior = base
+            for section in sections:
+                _need(route['mode']=='walk', 'terrain', 'Intermediate sections currently require walking routes')
+                added = dict(section, mode=route['mode'],requires_badge=route['requires_badge'],
+                             bidirectional=True,to=route['to'],to_port=route['to_port'],
+                             from_port=PORTS[route['to_port']])
+                added['from']=prior['id'];prior['to']=added['id']
+                physical.append(added);prior=added
+        self.routes = _unique(physical, 'id', 'route')
         self.gyms = _unique(manifest['gyms'], 'id', 'gym')
         self.rooms = _unique(manifest.get('interiors', []), 'id', 'interior')
         _need(bool(self.areas), 'manifest', 'No world areas declared')
@@ -148,7 +161,9 @@ class _World:
         self.expected = {identifier: {} for identifier in self.declared}
         for route in self.routes.values():
             source, target = route['from'], route['to']
-            _need(source in self.areas and target in self.areas and source != target,
+            _need(source in self.declared and target in self.declared and source != target
+                  and self.declared[source][0] in ('area','route')
+                  and self.declared[target][0] in ('area','route'),
                   'reference', f'Dangling or self route: {route["id"]}')
             _need(route['from_port'] in PORTS and route['to_port'] in PORTS,
                   'direction', f'Invalid route port: {route["id"]}')
@@ -186,7 +201,7 @@ class _World:
         self._access_links()
 
     def _expect(self, identifier, direction, target):
-        _need(direction not in self.expected[identifier], 'ports',
+        _need(direction not in self.expected[identifier] or self.expected[identifier][direction]==target, 'ports',
               f'Two routes occupy {identifier}.{direction}')
         self.expected[identifier][direction] = target
 
@@ -212,6 +227,10 @@ class _World:
             parent=(self.gyms[identifier]['area'] if identifier in self.gyms else
                     self.rooms[identifier]['area'] if identifier in self.rooms else
                     self.routes[identifier]['from'] if identifier in self.routes else identifier)
+            visited=set()
+            while parent not in sections:
+                _need(parent in self.routes and parent not in visited,'geography','Route label has no destination parent')
+                visited.add(parent);parent=self.routes[parent]['from']
             _need(plan.get('metadata',{}).get('region_map_section')==sections[parent],
                   'geography','Native location label has the wrong SF parent')
         profile_name = plan.get('tile_profile','residential')
@@ -517,11 +536,11 @@ class _World:
         while changed:
             changed = False
             for route in self.routes.values():
-                if route['requires_badge'] <= stage and (route['from'] in seen or route['to'] in seen):
+                if route['requires_badge'] <= stage and (route['from'] in seen or route['to'] in seen or route['id'] in seen):
                     previous = len(seen)
-                    seen.update((route['from'], route['to']))
+                    seen.update((route['id'],route['from'], route['to']))
                     changed |= len(seen) != previous
-        return seen
+        return seen & set(self.areas)
 
     def coverage(self):
         start = self._position(self.start, 'new-game spawn')

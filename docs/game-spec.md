@@ -643,6 +643,16 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 additional intermediate routes.** The user requests more explorable
+space between towns within the active four-hour redesign. Add15authored
+intermediate sections, one per land journey, preserving the coarse story/guide
+order and all badge prerequisites. This expands19route maps to34and58total maps
+to73, while keeping18destinations,8gyms and13interiors. The source geometry
+contract passes all9badge stages and return paths. Route sections carry their
+own SF labels and urban/green settings; guide bindings retain the parent journey.
+New encounters, stopping points, distinctive scenery and native traversal remain
+required; added map count alone is not acceptance. The existing deadline holds.
+
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.
 The user rejects repeated flat-line towns and requests eight times the area.

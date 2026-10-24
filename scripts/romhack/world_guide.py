@@ -7,7 +7,7 @@ def apply_guide(root,engine,original,manifest,plans):
     from generate_world import records,native_id
     from world_guide_layout import chart_positions,route_path,path_midpoint
     from world_guide_art import compile_art
-    areas,routes=records(manifest);index={area['id']:i for i,area in enumerate(areas)}
+    areas,routes=records(manifest,physical=False);index={area['id']:i for i,area in enumerate(areas)}
     positions=manifest['city_guide']['positions'];people=load_people()
     discoveries=json.loads((root/'romhack/world/discoveries.json').read_text())['areas']
     if set(positions)!=set(index):raise ValueError('The city map must include every approved destination')
@@ -48,10 +48,11 @@ def apply_guide(root,engine,original,manifest,plans):
     connectors={r['id']:r['from'] for r in routes}
     route_index={r['id']:r for r in routes}
     for plan in plans:
-        identifier=plan['world_id'];parent=gyms.get(identifier,rooms.get(identifier,connectors.get(identifier,identifier)))
+        identifier=plan['world_id'];route_id=plan.get('parent_route',identifier)
+        parent=gyms.get(identifier,rooms.get(identifier,connectors.get(route_id,identifier)))
         x,y=pixels[parent];kind=2 if identifier in gyms or identifier in rooms else 0
-        if identifier in route_index:
-            route=route_index[identifier]
+        if route_id in route_index:
+            route=route_index[route_id]
             x,y=path_midpoint(route_path(route,pixels));kind=1
         bindings.append('    {MAP_GROUP('+plan['native_id']+'), MAP_NUM('+plan['native_id']+'), '+
                         ', '.join(map(str,(index[parent],x,y,kind)))+'}')

@@ -13,7 +13,9 @@ def furnish(plans, manifest):
         return plans
     kits = {}
     result = deepcopy(plans)
-    streets = {r['id'] for r in manifest['routes'] if r['mode']=='walk' and r['id'] not in GREEN_ROUTES}
+    from generate_world import records
+    streets = {r['id'] for r in records(manifest)[1] if r['mode']=='walk'
+               and r['id'] not in GREEN_ROUTES and r.get('setting')!='green'}
     for plan in result:
         connector = plan['world_id'] in streets
         if plan['world_id'] not in URBAN and not connector:

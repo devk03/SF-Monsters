@@ -14,7 +14,7 @@ def landscape(plans, manifest):
     for plan in result:
         name=plan['world_id'];route=routes.get(name)
         if name not in NATURE and not route:continue
-        if route and route['mode']=='walk' and name not in GREEN_ROUTES:continue
+        if route and route['mode']=='walk' and name not in GREEN_ROUTES and route.get('setting')!='green':continue
         old=plan['rows'];grid=[list(row) for row in old]
         token=lambda name:chr(0x100+cards[name]['tiles'][0][0]-512)
         def fill(x0,y0,x1,y1,name):

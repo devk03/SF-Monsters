@@ -177,7 +177,15 @@
       "requires_badge": 0,
       "engine_map": "Route105",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_01_mid",
+          "engine_map": "Route132",
+          "label": "Rail Yard Walk",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_02",
@@ -189,7 +197,15 @@
       "requires_badge": 0,
       "engine_map": "Route106",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_02_mid",
+          "engine_map": "Route133",
+          "label": "Potrero Stair Gardens",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_03",
@@ -201,7 +217,15 @@
       "requires_badge": 0,
       "engine_map": "Route107",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_03_mid",
+          "engine_map": "Route134",
+          "label": "Mission Mural Alleys",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_04",
@@ -213,7 +237,15 @@
       "requires_badge": 0,
       "engine_map": "Route108",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_04_mid",
+          "engine_map": "Route104_MrBrineysHouse",
+          "label": "Market Street Link",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_05",
@@ -225,7 +257,15 @@
       "requires_badge": 0,
       "engine_map": "Route109",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_05_mid",
+          "engine_map": "Route104_PrettyPetalFlowerShop",
+          "label": "Ocean Beach Dunes",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_06",
@@ -237,7 +277,15 @@
       "requires_badge": 0,
       "engine_map": "Route110",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_06_mid",
+          "engine_map": "Route111_WinstrateFamilysHouse",
+          "label": "Richmond Greenway",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_07",
@@ -249,7 +297,15 @@
       "requires_badge": 0,
       "engine_map": "Route111",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_07_mid",
+          "engine_map": "Route111_OldLadysRestStop",
+          "label": "Marina Steps",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_08",
@@ -261,7 +317,15 @@
       "requires_badge": 0,
       "engine_map": "Route112",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_08_mid",
+          "engine_map": "Route112_CableCarStation",
+          "label": "Western Hills Trail",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_09",
@@ -273,7 +337,15 @@
       "requires_badge": 0,
       "engine_map": "Route113",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_09_mid",
+          "engine_map": "Route114_FossilManiacsHouse",
+          "label": "Twin Peaks Descent",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_10",
@@ -285,7 +357,15 @@
       "requires_badge": 0,
       "engine_map": "Route114",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_10_mid",
+          "engine_map": "Route114_FossilManiacsTunnel",
+          "label": "Valley Greenway",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_11",
@@ -297,7 +377,15 @@
       "requires_badge": 0,
       "engine_map": "Route115",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_11_mid",
+          "engine_map": "Route114_LanettesHouse",
+          "label": "Channel Creek Walk",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_12",
@@ -309,7 +397,15 @@
       "requires_badge": 0,
       "engine_map": "Route116",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_12_mid",
+          "engine_map": "Route116_TunnelersRestHouse",
+          "label": "Embarcadero Walk",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_13",
@@ -321,7 +417,15 @@
       "requires_badge": 0,
       "engine_map": "Route117",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_13_mid",
+          "engine_map": "Route117_PokemonDayCare",
+          "label": "Jackson Square Passage",
+          "setting": "urban"
+        }
+      ]
     },
     {
       "id": "route_14",
@@ -333,7 +437,15 @@
       "requires_badge": 0,
       "engine_map": "Route118",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_14_mid",
+          "engine_map": "Route121_SafariZoneEntrance",
+          "label": "Coastal Cypress Trail",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_15",
@@ -345,7 +457,15 @@
       "requires_badge": 0,
       "engine_map": "Route119",
       "bidirectional": true,
-      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+      "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency.",
+      "intermediate_sections": [
+        {
+          "id": "route_15_mid",
+          "engine_map": "SafariZone_Northwest",
+          "label": "Sutro Ridge Trail",
+          "setting": "green"
+        }
+      ]
     },
     {
       "id": "route_16",
