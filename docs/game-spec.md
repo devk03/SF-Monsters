@@ -643,6 +643,18 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 circulation composition.** Candidatev115adds two planted pedestrian
+cut-through courts per urban district (26total), reserved before generic frontage
+placement so whole buildings receive proper end caps rather than being clipped.
+Each links a clear passage to a small planted/readable court. No original service,
+gym or discovery binding moves. All five nature destinations now have authored
+bent port approaches joining their winding trails, replacing the universal central
+cross. Exact native edge ports and offsets remain fixed. All73source maps, eight
+building and five woodland regressions pass before the added cut-through case;
+the new owning regression/native notices/complete traversal/render renewal remain
+required. This is aligned geometric refinement after the22:22bounded peer critique,
+not a change to the deadline or completion standard.
+
 **October23 district frontage identity.** Candidatev114gives all13urban districts
 individual form rhythms and coordinated paint distributions using the existing
 eight structural forms and existing palettes. Industrial districts emphasize

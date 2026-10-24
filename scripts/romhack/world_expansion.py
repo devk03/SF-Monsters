@@ -87,14 +87,16 @@ def expand(plans, manifest):
                     for x in range(b['x'],b['x']+b['width'])}
         from world_parcels import reserved_cells,furnish_parcel
         parcel_cells=reserved_cells(name) if not nature else set()
+        passage_cells=set()
         front_approaches=set()
-        def stamp(style,x,y,*,shoulder=False,parcel=False):
+        def stamp(style,x,y,*,shoulder=False,parcel=False,passage=False):
             card = cards[style]
             cells = {(x+dx,y+dy) for dy,row in enumerate(card['tiles']) for dx,_ in enumerate(row)}
             if (cells & occupied or any(xx<1 or yy<1 or xx>=width-1 or yy>=height-1
                                        or xx<32 and yy<24 for xx,yy in cells)):
                 return False
             if not parcel and cells & parcel_cells:return False
+            if not passage and cells & passage_cells:return False
             if cells & (sea|shore):return False
             if cells & front_approaches:return False
             if cells & (lanes if shoulder else walks):
@@ -133,6 +135,10 @@ def expand(plans, manifest):
             # use rather than decorating a giant empty lawn with random props.
             for top in range(5+phase,height-6,7):
                 bands.add((2,width-2,top))
+            from world_pedestrian_courts import propose,furnish
+            courts=propose(name,bands,width,height,occupied|parcel_cells|sea|shore,walks,lanes)
+            passage_cells=set().union(*(p['cells'] for p in courts)) if courts else set()
+            furnish(plan,grid,courts,stamp,token,material)
             index = 0
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):
                 x = max(1,left)

@@ -12,8 +12,9 @@ def main():
     parser.add_argument('--name',required=True)
     parser.add_argument('--park-stops',action='store_true',help='Read the 15 expanded reserve stops instead of the original 26 street signs')
     parser.add_argument('--parcel-notices',action='store_true',help='Read the two authored urban parcel notices')
+    parser.add_argument('--court-notices',action='store_true',help='Read all 26 planted pedestrian court notices')
     args=parser.parse_args()
-    if args.park_stops and args.parcel_notices:parser.error('Choose one sign subset')
+    if sum((args.park_stops,args.parcel_notices,args.court_notices))>1:parser.error('Choose one sign subset')
     state=args.state.resolve()
     engine=ROOT/'.tools/pokeemerald-world-host'
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',
@@ -28,7 +29,7 @@ def main():
     try:
         w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
         for identifier,plan in w.plans.items():
-            signs=plan.get('park_stops' if args.park_stops else 'parcel_notices' if args.parcel_notices else 'street_signs',[])
+            signs=plan.get('park_stops' if args.park_stops else 'parcel_notices' if args.parcel_notices else 'court_notices' if args.court_notices else 'street_signs',[])
             if not signs:continue
             w.travel(identifier)
             for sign in signs:

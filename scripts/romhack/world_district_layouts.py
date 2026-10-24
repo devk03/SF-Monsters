@@ -45,6 +45,20 @@ STREETS = {
 }
 
 
+PARK_PORTS={
+ 'golden_gate_park':{'down':[(48,63),(50,58),(42,50)],
+                    'up':[(48,0),(52,6),(66,10),(78,12)],
+                    'left':[(0,32),(8,30),(16,32)]},
+ 'twin_peaks':{'up':[(48,0),(52,5),(60,12)],
+               'right':[(95,32),(88,34),(80,40),(82,52)],
+               'left':[(0,32),(10,34),(18,42),(26,38)]},
+ 'sutro_tower':{'right':[(95,32),(90,35),(84,48)],
+                'left':[(0,32),(10,30),(20,32),(30,32)]},
+ 'lands_end':{'right':[(95,32),(90,29),(84,38)]},
+ 'angel_island':{'down':[(48,63),(40,59),(20,58)]},
+}
+
+
 def raster_path(points, radius=1):
     """Connected integer line raster with a walkable native-width corridor."""
     result = set()
@@ -65,6 +79,10 @@ def circulation(identifier, size, directions):
         raise ValueError('Authored district circulation currently requires96x64')
     lines = STREETS[identifier]
     cells = set().union(*(raster_path(line) for line in lines))
+    if identifier in PARK_PORTS:
+        cells|=raster_path([(16,12),(32,12),lines[0][1]])
+        for side in directions:cells|=raster_path(PARK_PORTS[identifier][side])
+        return {(x,y) for x,y in cells if 0<=x<width and 0<=y<height}
     # Route spurs meet a shared central junction without moving stable services.
     junction = (48,32)
     cells |= raster_path([(16,12),(32,12),(32,32),junction])

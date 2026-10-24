@@ -127,5 +127,18 @@ class BuildingVarietyTests(unittest.TestCase):
                            if catalog[b['style']].get('architecture_type') in FORMS)
             self.assertGreater(sum(counts[n] for n in preferred)/sum(counts.values()),minimum,identifier)
 
+    def test_every_urban_district_has_two_usable_planted_cut_throughs(self):
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        for p in plans:
+            if p['world_id'] not in URBAN:continue
+            self.assertEqual(len(p['pedestrian_courts']),2,p['world_id'])
+            for court,notice in zip(p['pedestrian_courts'],p['court_notices']):
+                x,top=court['x'],court['top']
+                for y in range(top-3,top+6):
+                    self.assertFalse(p['legend'][p['rows'][y][x+1]][1],(p['world_id'],x+1,y))
+                ox,oy=notice['object']
+                self.assertTrue(p['legend'][p['rows'][oy][ox]][1])
+                self.assertTrue(any(e['script']==notice['script'] for e in p['bg_events']))
+
 
 if __name__=='__main__':unittest.main()
