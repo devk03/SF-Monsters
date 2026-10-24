@@ -670,6 +670,16 @@ host's30minute deadline. Complete the route sweep from an earned checkpoint.
 Next source candidate spreads existing residents across new blocks while
 preserving IDs/scripts and adds30original conversations to the15intermediate
 routes. All73source maps still pass; compiled/native proof must be renewed.
+Resident candidate target
+`3caebf7d0ed437266b565571a91c40a259e26e41feb4c09707591f04de5c59a9`
+passes compiled73-map/106connection audit with199actors and BPS round-trip.
+An actual earlier ordinary Save from target123737cold-loads at exactly its saved
+position, allows ordinary movement and leaves Flash unchanged. Party/held items,
+party count, decrypted money/inventory, chapter state and all flags except the
+reported native TV refresh bit0x891match. The pinned engine's
+`UpdateTVScreensOnMap` sets that bit on load; preserve it as an explicit exception,
+not a blanket flag waiver. The updated18destination controller tour now includes
+three viewpoints in each expanded district beyond its original service block.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

@@ -32,6 +32,20 @@ def main():
                         points.append(candidate);break
                     else:raise ValueError('No reachable street review viewpoint')
             points += [(p['x'],p['y']) for p in plan.get('scenic_viewpoints',[])]
+            if plan.get('expanded_design'):
+                blocked={(n['x']+dx,n['y']+dy) for n in plan['npcs']
+                    for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)
+                    for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
+                blocked|={(e['x'],e['y']) for e in plan['coord_events']}
+                free=[(x,y) for y,row in enumerate(plan['rows']) for x,t in enumerate(row)
+                      if not plan['legend'][t][1] and (x,y) not in blocked
+                      and 2<=x<len(row)-2 and 2<=y<len(plan['rows'])-2]
+                for target in ((44,28),(76,42),(40,52)):
+                    for candidate in sorted(free,key=lambda p:(abs(p[0]-target[0])+abs(p[1]-target[1]),p[1],p[0])):
+                        try:w.path(plan,w.location()[1],candidate)
+                        except ValueError:continue
+                        points.append(candidate);break
+                    else:raise ValueError('Expanded district has no reachable review viewpoint')
             if not points:points=[(16,8)]
             for number,point in enumerate(dict.fromkeys(points)):
                 w.go(point);c.step(0,120);c.checkpoint(identifier+f'-{number}')
