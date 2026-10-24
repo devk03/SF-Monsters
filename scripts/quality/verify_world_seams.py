@@ -153,14 +153,20 @@ class RenderAudit:
             self.graphics[secondary_graphics]=decode_lz(self.rom[secondary_graphics-0x08000000:secondary_graphics-0x08000000+32768])
         if vram[16384:32768]!=self.graphics[secondary_graphics]:raise ValueError(owner+': active secondary graphics differ from linked art')
         margin_cells=0
-        for link in plan['connections'] or []:
+        margin_checks=[];owners={}
+        for number,link in enumerate(plan['connections'] or []):
             foreign=w.plans[w.native[link['map']]];other=self.layout(foreign);d=link['direction']
-            if link['offset']!=0:raise ValueError('Verifier needs an explicit offset contract')
-            if d=='left':points=[(x,y,x+other['width']-7,y-7) for y in range(7,7+other['height']) for x in range(7)]
-            elif d=='right':points=[(x+layout['width']+7,y,x,y-7) for y in range(7,7+other['height']) for x in range(8)]
-            elif d=='up':points=[(x,y,x-7,y+other['height']-7) for x in range(7,7+other['width']) for y in range(7)]
-            else:points=[(x,y+layout['height']+7,x-7,y) for x in range(7,7+other['width']) for y in range(7)]
+            offset=link['offset']
+            if d=='left':points=[(x,sy+offset+7,x+other['width']-7,sy) for sy in range(other['height']) for x in range(7)]
+            elif d=='right':points=[(x+layout['width']+7,sy+offset+7,x,sy) for sy in range(other['height']) for x in range(8)]
+            elif d=='up':points=[(sx+offset+7,y,sx,y+other['height']-7) for sx in range(other['width']) for y in range(7)]
+            else:points=[(sx+offset+7,y+layout['height']+7,sx,y) for sx in range(other['width']) for y in range(7)]
+            points=[p for p in points if 0<=p[0]<width and 0<=p[1]<height]
+            margin_checks.append((number,foreign,other,points))
+            for x,y,_,_ in points:owners[x,y]=number
+        for number,foreign,other,points in margin_checks:
             for x,y,sx,sy in points:
+                if owners[x,y]!=number:continue  # Later native connection copies own shared buffer corners.
                 expected=other['cells'][sy*other['width']+sx];actual=cells[y*width+x]
                 if expected&~1023!=actual&~1023:raise ValueError('Connection changed collision/elevation')
                 identifier=expected&1023

@@ -8,6 +8,7 @@ from walk_world import Walker
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
+    parser.add_argument('--only-area',help='Capture one destination after a verified interrupted tour')
     parser.add_argument('--street-views',action='store_true',help='Inspect both sides and ends of each urban block')
     args=parser.parse_args();state=args.state.resolve()
     engine=ROOT/'.tools/pokeemerald-world-host';manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
@@ -16,6 +17,7 @@ def main():
     try:
         w=Walker(c,manifest)
         for area in manifest['areas']+[{'id':manifest['league']['venue']}]:
+            if args.only_area and area['id']!=args.only_area:continue
             identifier=area['id'];w.travel(identifier);plan=w.plans[identifier]
             points=[(14,8)] if plan.get('town_blocks') and identifier not in ('golden_gate_park','lands_end','sutro_tower','angel_island') else []
             if args.street_views and plan.get('street_design'):

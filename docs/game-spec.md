@@ -686,6 +686,19 @@ The controller now recognizes that exact active script/return stack and sends
 ordinary A input before retrying. Replaying the same genuine blocked state
 successfully walks left to48,42and records the acknowledged prompt. An arbitrary
 blocked movement still fails. The full18-town tour is rerunning with this fix.
+The resumed native return circuit passes all73maps/106connections/16gymwarps/
+26roomwarps for target3caebf7d. The18destination visual captures are split across
+the interrupted17destination tour and its resumed Angel Island session; do not
+present that composition as one uninterrupted tour. All18checkpoint-based full
+maps now pass the independent live VRAM/palette/viewport/margin audit, including
+centered offsets and native copy clipping. `expanded-v98-native-full-maps-offset-aware`
+holds the private maps and honest critique metadata. A new reproducible
+`scripts/quality/replay_world_wasm.mjs` is replaying the actual complete circuit's
+16272input rows/230134guest frames against the pinned website core; its final
+294912byte RAM comparison is pending. This is not browser audio/performance QA.
+Alignment's bounded review recommends shared real edge modules and explicit
+metatile matrices before any graphics overflow. Existing primary terrain,
+animation, door and implicit-background reservations must remain protected.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

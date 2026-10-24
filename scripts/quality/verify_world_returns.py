@@ -47,8 +47,9 @@ def main():
             if w.location()[0] != owner:
                 raise ValueError('Native circuit diverged before the next edge')
             if kind == 'port':
-                w.go({'left': (0, 12), 'right': (31, 12),
-                      'up': (16, 0), 'down': (16, 23)}[action])
+                rows=w.plans[owner]['rows'];width,height=len(rows[0]),len(rows)
+                w.go({'left': (0, height//2), 'right': (width-1, height//2),
+                      'up': (width//2, 0), 'down': (width//2, height-1)}[action])
                 w.walk(action)
             else:
                 w.go(action)
