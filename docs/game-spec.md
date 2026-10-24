@@ -643,6 +643,44 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+
+**October 23 final evidence renewal (private v115).** The target SHA is
+`1e9b7fa2b02ba0d9dac776237279a3a2c2057ae96ee3943d2fa68d66024ac132`.
+All 18 destinations are 96×64, with 34 physical intermediate routes (19 coarse
+connections), eight gym shells and 13 service interiors: 73 maps total. Native
+controller traversal passes all 106 directed connections, 16 gym warps and 26 room
+warps. Matching website-core replay passes 243960 frames with zero differences
+across 294912 RAM bytes; final hash is
+`963c538a1e4cacf6e13640bcd011761eab53b90efdb48728e56805e03eb1ce2e`.
+Evidence: `.tools/benchmarks/courts-v115-73map-circuit/returns-result.json` and
+`courts-v115-73map-wasm/wasm-result.json` under the same benchmark directory.
+All 18 native gameplay tours and full-map live rendering audits pass. All 26
+court notices and eight pond banks pass native interaction/state checks. Earlier
+ordinary Save/Continue, recovery from newly blocked Dogpatch frontage, and recovery
+from newly planted park forest pass with protected state preserved; ordinary
+Continue allows the documented native TV flag 0x891 exception. The module contract
+check passes. These are technical checks, not visual acceptance.
+
+The refreshed private review packet is `output/pdf/sf-world-review-v115.pdf`
+(25 pages) and `output/review/sf-world-review-v115.html` (all 18 maps with adjacent
+actual gameplay). All PDF pages were rendered and inspected as a contact sheet,
+with selected full-size pages checked. Featured gameplay is selected from actual
+checkpoint coordinates. Actor-free full-map backgrounds are labeled. Presidio /
+Presidio Heights remain missing rather than being mislabeled as Pacific Heights.
+Public v92 and root v80 assets are unchanged; no deployment or Actions run occurred.
+The foreground browser sample below remains v113, not v115; v115 has matching
+website-core replay but no renewed foreground/mobile/audio acceptance.
+
+Remaining acceptance gates: human approval of town and nature composition,
+less repetitive forest masses and lawn clearings, more authored district parcels
+and convincing downtown streets, richer court activity, Presidio scope resolution,
+long-route foreground/audio latency and mobile checks, and the larger story,
+contributor gym content and campaign quality gates. No full art domain or town is
+marked accepted. The alignment peer found no blocking regression but identified
+an additional court traversal evidence gap; its supplemental audit is tracked
+separately below. The four-hour stop remains October 23 at 11:20 PM Pacific.
+
+
 **October23 circulation composition.** Candidatev115adds two planted pedestrian
 cut-through courts per urban district (26total), reserved before generic frontage
 placement so whole buildings receive proper end caps rather than being clipped.

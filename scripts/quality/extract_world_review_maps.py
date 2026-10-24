@@ -36,15 +36,15 @@ CRITIQUE = {
 }
 NATURE = {'golden_gate_park', 'twin_peaks', 'sutro_tower', 'lands_end', 'angel_island'}
 EXPANDED_CRITIQUE = {
- 'dogpatch':'The connected warehouse blocks are larger, but the waterfront and rail-yard spaces need stronger composition. Side streets still need curbs and activity.',
+ 'dogpatch':'Workshop rows, a loading court and planted cut-throughs add industrial identity. The waterfront, rail-yard composition and remaining long frontage bands still need refinement.',
  'potrero_hill':'The stepped street network differs from the grid. It still needs visible grade changes and more deliberate overlooks.',
- 'mission':'Multiple blocks now support a neighborhood. More mural courts, alleys and local gathering spaces should break the repeated frontage rhythm.',
+ 'mission':'A mural/community court, attached shops and planted passages break the housing rhythm. More deliberate corner spaces and richer district-scale composition remain open.',
  'castro':'The branching streets help. The theater needs a stronger plaza, with lighting and signage connecting it to the rest of the district.',
  'outer_sunset':'The long parallel streets fit the district better. Ocean frontage, dune edges and smaller garden lots need a dedicated pass.',
- 'golden_gate_park':'Winding trails and lawns replace much of the old concrete loop. Tree placement, lake scenery and destination clearings still need more organic composition.',
+ 'golden_gate_park':'Native forest, an irregular pond and furnished branch stops replace the hedge maze. Trail and clearing composition still needs human review; Richmond is not a separate town.',
  'marina':'The larger connected blocks need a more recognizable bar corridor and a better transition to waterfront open space.',
  'pacific_heights':'The offset streets distinguish the layout. Formal gardens, slopes and a stronger mansion approach remain underdeveloped.',
- 'twin_peaks':'The trail network is larger, but two recognizable summits and exposed ridge terrain are still missing.',
+ 'twin_peaks':'Two rocky lookout groups have distinct approaches. They are not yet convincing elevated summits; terrain height and open ridge composition remain unfinished.',
  'noe_valley':'Interior housing rows add density. Smaller civic pockets and planted pedestrian lanes should make it feel less mechanical.',
  'mission_bay':'The circulation is distinct, but historic low-rise fronts still dominate. Modern lab massing and the creek edge need much more work.',
  'giants_stadium':'The larger loop needs the ballpark to occupy a meaningful part of the map, with a fan plaza and waterfront approaches.',
@@ -149,11 +149,22 @@ def main():
             path = output/(identifier+'-full-map.png')
             image.resize((image.width*2, image.height*2), Image.Resampling.NEAREST).save(path)
             routes = [w.plans[w.native[link['map']]]['label'] for link in plan['connections'] or []]
-            views = sorted(folder.glob(identifier+'-[0-9]*.png'))
+            views = sorted(folder.glob(identifier+'-[0-9]*.png'),key=lambda p:int(p.stem.rsplit('-',1)[1]))
+            preferred={'golden_gate_park':'Pond rest','twin_peaks':'South lookout','sutro_tower':'Fog break',
+                       'lands_end':'Coastal lookout','angel_island':'Landing view'}
+            if plan.get('parcel_notices'):target=plan['parcel_notices'][0]['standing']
+            elif identifier in preferred:
+                point=next(p for p in plan['scenic_viewpoints'] if p['name']==preferred[identifier]);target=(point['x'],point['y'])
+            elif plan.get('pedestrian_courts'):target=plan['pedestrian_courts'][0]['rest']
+            else:target=(76,42)
+            def distance(path):
+                position=json.loads(path.with_suffix('.json').read_text())['position']
+                return abs(position['x']-target[0])+abs(position['y']-target[1])
+            featured=[str(views[0]),str(min(views,key=distance))]
             result.append(dict(id=identifier, label=area['label'], order=number,
                 category='nature' if identifier in NATURE else 'urban', map=str(path),
                 map_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
-                views=[str(p) for p in views], character=districts[identifier]['character'],
+                views=[str(p) for p in views],featured_views=featured, character=districts[identifier]['character'],
                 critique=(EXPANDED_CRITIQUE if plan.get('expanded_design') else CRITIQUE)[identifier], connections=routes,
                 landmarks=[p['name'] for p in plan.get('landmarks', [])],
                 gym=next((g['badge'] for g in manifest['gyms'] if g['area']==identifier), None),

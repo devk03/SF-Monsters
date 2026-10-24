@@ -72,7 +72,7 @@ def make_pdf(data, output, review_date):
     begin('The SF world, as built.', 'A complete visual review of the current private cartridge - not a concept-art proposal.', 'cover')
     text('18 places to critique', 28, 501, 30, bold=True)
     y = paragraph('Every current destination has a full map and actual GBA views. The full maps show the background, without people; the gameplay images show the actors and camera scale.', 28, 451, 270, 12, 18)
-    y = paragraph('Do the towns look different? The expanded districts now have different circulation and native forest terrain. Repeated frontage bands, sparse destinations and unfinished topography still need critique.', 28, y-20, 270, 12, 18)
+    y = paragraph('Do the towns look different? Circulation, frontage mixes and native terrain now vary. Remaining gaps include landmark massing, neighborhood-specific parcels and believable elevation.', 28, y-20, 270, 12, 18)
     paragraph('Presidio Heights is not implemented. Pacific Heights is a different current destination. Neither is silently substituted for the other here.', 28, y-20, 270, 11, 16, '#99533b')
     guide = Path(data['areas'][0]['map'])
     picture(guide, 328, 190, 436, 291)
@@ -91,7 +91,7 @@ def make_pdf(data, output, review_date):
         picture(area['map'], 28, 168, 512, 384)
         text('ACTUAL GBA VIEWS', 560, 550, 7, MUTED, True)
         views = area['views']
-        selected = [views[0], views[min(3, len(views)-1)]] if area['category']=='urban' else [views[0], views[-1]]
+        selected = area.get('featured_views') or [views[0],views[-1]]
         for i, path in enumerate(selected):
             picture(path, 560, 402-i*148, 204, 136)
         paragraph('Background map at left. People, animation and camera scale are represented by the actual gameplay captures above.', 560, 227, 204, 8, 11, MUTED)
@@ -115,7 +115,7 @@ def make_pdf(data, output, review_date):
     begin('Critique priorities', 'These are development observations, not user approval or a quality score.', 'priorities')
     priorities = [
         ('Street composition', 'Districts have distinct multi-block circulation, but many housing bands still repeat mechanically. Compose purposeful parcels, entrances and local gathering spaces.'),
-        ('Nature and topography', 'Native forest and grass replace the invented checkerboard. Review trail widths, canopy edges, useful clearings, missing lakes and readable ridge topography.'),
+        ('Nature and topography', 'Native forest and grass replace the invented checkerboard. Review trail widths, canopy edges, useful clearings, open ridges and believable terrain height.'),
         ('Building massing', 'Paint and window variations help, but Mission Bay, Financial District and the ballpark need stronger architectural differences and bigger landmark roles.'),
         ('Waterfront identity', 'Coast and island boundaries now include sea and piers. Their shore transitions, views and destination placement still need deliberate composition.'),
         ('Missing geography', 'Presidio Heights and the Presidio have no current playable maps. Their placement and scope need to be added explicitly before implementation.'),

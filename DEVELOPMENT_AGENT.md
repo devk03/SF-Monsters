@@ -1,7 +1,9 @@
 # Development agent — shared world and contributor modules
 
-Latest private refinement is v109: native General grass/forest on11woodland
-routes and five expanded reserves. Do not restore alternating pine/round-tree
+Latest private refinement is v115: native General grass/forest on11woodland
+routes and five expanded reserves, district-specific frontage rhythms, 26 planted
+cut-through courts and bent park approaches. All 73 maps pass the native circuit
+and matching website-core replay. Review packet: output/pdf/sf-world-review-v115.pdf. Do not restore alternating pine/round-tree
 checkerboards, broad white corridors or perimeter encounter-grass outlines.
 Preserve complete canopies with exposed native trunk/base rows, reachable side rest stops, landmark approaches and
 small native terrain-edge accents. Read section15.1for current exact evidence;
@@ -13,7 +15,8 @@ distinct multi-block streets or organic nature layouts. The old32x24size rule
 below is superseded. Preserve gym bindings, routes and save safety; provide
 native full-map/gameplay evidence. Read the latest section15.1 first.
 
-Current goal: finish all 18 non-gym destinations and their 19 routes as a compact,
+Current goal: finish all 18 non-gym destinations and their 34 physical routes
+(19 coarse connections) as a compact,
 dense, lively SF world. Read `docs/game-spec.md` section 15.1 for the measurable
 completion gates and latest progress. The user explicitly resumed implementation
 beyond the prior blockout-review pause. Gym content remains contributor-owned;
