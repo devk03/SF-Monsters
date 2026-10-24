@@ -109,6 +109,13 @@ def main():
             if describe(kit) != declared[profile]:
                 raise ValueError('Review the changed native art allocation contract before building')
             ledger += apply_kit(engine, original, kit)
+    # World drafts retain the authored SF avatar; terrain experiments must not
+    # silently fall back to the base game's protagonist.
+    from courier_art import apply_courier, ASSET
+    ledger += apply_courier(ROOT, engine, original)
+    for path in (ROOT / ASSET).iterdir():
+        if path.is_file():
+            inputs['authored-avatar/' + path.name] = path.read_bytes()
     ledger += apply_maps(content, ROOT, engine, original)
     ledger += apply_battles(content, ROOT, engine, original)
     ledger += apply_engine_guards(ROOT, engine, original)
@@ -137,6 +144,8 @@ def main():
     native = audit_native(target, elf, plans, engine, expect_resume_masks=True)
     if not native['passed']:
         raise ValueError(json.dumps(native, indent=2))
+    from world_courier_audit import audit_courier
+    courier = audit_courier(ROOT, target, elf)
     output = ROOT / '.tools/romhack-drafts' / version / digest(target)
     output.mkdir(parents=True, exist_ok=True)
     run = output / 'receipts' / uuid.uuid4().hex
@@ -184,7 +193,7 @@ def main():
                'game_code': manifest['native']['game_code'],
                'emerald_revision': EMERALD_REVISION,
                'deterministic_generation': True, 'source_contract': contract,
-               'compiled_maps': native, 'controller_traversal': 'pending',
+               'compiled_maps': native, 'authored_courier': courier, 'controller_traversal': 'pending',
                'web_traversal': 'pending', 'published': False,
                'frozen_inputs': {name: hashlib.sha256(data).hexdigest()
                                  for name, data in inputs.items()},

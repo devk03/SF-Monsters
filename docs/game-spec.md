@@ -644,6 +644,35 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**October 24 targeted user-resumed correction — SF avatar in world drafts.**
+The user reported the reverted player sprite. Investigation found that
+`build_world.py` bypassed the production courier overlay entirely: the v115 world
+used base Emerald player graphics. This was a build regression, not an intentional
+art decision. Private v116 applies the existing authored SF courier to both player
+choices, preserves its dedicated palette and freezes avatar source/conversion
+inputs in each build receipt. Copying overlay PNGs now refreshes their timestamps,
+so incremental conversion cannot reuse newer cached base-game graphics.
+
+A linked-ROM audit checks both walk/run resources and normal-view palette tags
+and bytes, and rejects the earlier v115 ROM on BrendanNormal. It caught the stale
+conversion on the first attempted v116 build; after the copy fix the audit and
+73-map compiled budget/contract checks pass. Target SHA:
+`280a71e1adc364444f65d9630eaf80a6268b6fa9f77202c2f3dd04b2f2165e7a`.
+An ordinary v115 Save cold-Continues with unchanged position, protected party,
+inventory, money, flags, chapter and Flash. Actual native walking captures are
+under `.tools/benchmarks/courier-v116-walk-poses`; matching 196-frame website-core
+replay has zero differences across 294912 RAM bytes (final hash
+`161a37687ed91b7809b98e0d171865cea67f80489aafce9266a09706f20ac084`).
+The Continue capture is under
+`courier-v116-ordinary-continue`. This correction does not claim custom bike/Surf
+art, battle presentation, all-map renewed traversal or foreground browser approval.
+The v115 review book remains historical and shows the pre-fix avatar. Public
+v92/root v80 remain unchanged; no workflow or deployment was run. The earlier
+four-hour session remains stopped; this is the new targeted correction requested
+by the user, with the larger composition/quality gates still open.
+
+
+
 **Paused at the user deadline — October 23, 2026, 11:20 PM Pacific
 (October 24, 06:20 UTC).** Four-hour work window ended. No further implementation,
 build or deployment is started. Private v115 evidence, original-map study,

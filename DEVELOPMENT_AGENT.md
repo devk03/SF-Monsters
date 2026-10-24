@@ -1,6 +1,9 @@
 # Development agent — shared world and contributor modules
 
-Status: paused at the user-requested October 23, 2026, 11:20 PM Pacific cutoff.
+Status: the October 23 four-hour session paused at 11:20 PM Pacific.
+October 24 user resumed a targeted avatar regression fix: private v116 now includes
+the authored SF courier with a compiled-byte audit. See section 15.1; the v115 PDF
+is historical and still depicts the pre-fix avatar.
 Read docs/game-spec.md section 15.1 before resuming; visual acceptance remains open.
 
 Latest private refinement is v115: native General grass/forest on11woodland

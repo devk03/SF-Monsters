@@ -135,9 +135,11 @@ def apply_courier(root, emerald, original):
     for person in ('brendan', 'may'):
         for mode, name in (('walk', 'walking'), ('run', 'running')):
             path = f'graphics/object_events/pics/people/{person}/{name}.png'
-            shutil.copy2(directory / (mode + '.png'), emerald / path); restored.append(path)
+            # Refresh the overlay timestamp so incremental graphics dependencies
+            # cannot reuse the newer cached base-game conversion.
+            shutil.copyfile(directory / (mode + '.png'), emerald / path); restored.append(path)
     palette_path = emerald / 'graphics/object_events/palettes/sf_courier.gbapal'
-    shutil.copy2(directory / 'courier.gbapal', palette_path)
+    shutil.copyfile(directory / 'courier.gbapal', palette_path)
     gfx = 'src/data/object_events/object_event_graphics.h'
     header = 'include/graphics.h'
     info = 'src/data/object_events/object_event_graphics_info.h'
