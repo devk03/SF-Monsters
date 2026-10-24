@@ -294,7 +294,8 @@ class _World:
                     _need(point not in frontage and point in cells, 'frontage','Architectural footprints overlap or leave the map')
                     frontage.add(point)
                     solid=profile['cards'][block['style']]['blocked'] if 'style' in block else True
-                    expected=(block['first_metatile']+dy*width+dx,solid,3)
+                    matrix=profile['cards'][block['style']].get('cells') if 'style' in block else None
+                    expected=((matrix[dy][dx] if matrix else block['first_metatile']+dy*width+dx),solid,3)
                     _need(cells[point]==expected,'frontage','A furnishing or terrain stamp cuts through a building')
         from world_street_contract import check_streets, check_edges, CENTERS
         try:check_edges(plan,profile)

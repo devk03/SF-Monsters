@@ -699,6 +699,24 @@ holds the private maps and honest critique metadata. A new reproducible
 Alignment's bounded review recommends shared real edge modules and explicit
 metatile matrices before any graphics overflow. Existing primary terrain,
 animation, door and implicit-background reservations must remain protected.
+The v98circuit WASM replay completes230134frames with0different bytes across
+294912guest-RAM bytes. Native/WASM RAM SHA256:
+`1f08bc88ef34dd5aa6414cf7ca3298d133257a1531fdf55afa3cd4e6aac9fa2f`.
+
+**Private v99 attached facade candidate.** Shared original pixel modules preserve
+all8structural forms and warm/sage/slate paint while adding actual left-only,
+middle, right-only and isolated party-wall pixels. Final neighboring footprints
+select the appropriate variant. Pixel/record reuse keeps native graphics within
+budget (mixed-use493/512tiles;423/512metatiles); no primary overflow or weakened
+reservation was needed. The art contract now records explicit cell matrices for
+shared metatile allocations. Independent source checks retain each cell's exact
+collision/behavior and reject incompatible aliases. Four facade tests and5seam
+tests pass, including real edge-only pixel changes and exact foreign colors.
+Compiled73-map/106connection audit and BPS round-trip pass for target
+`42c1a34b64cdb936ff3c331e022400363f153f3118eaa89415e63c49af4d2028`.
+The large art-contract diff is generated allocation metadata, not hand-authored
+gameplay code. Native Save/render/route and matching WASM proof must be renewed
+for this exact art candidate; v98evidence does not automatically approvev99.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.

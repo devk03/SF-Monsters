@@ -53,21 +53,24 @@ def compile_kit(root=ROOT, profile='residential'):
             result.append(FIRST_TILE + index | flags | bank << 12)
         return result
 
-    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False, ground_width=16):
+    def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False, ground_width=16, deduplicate=False):
         if len(pixels) != width*height or width % 16 or height % 16 or max(pixels) > 15:
             raise ValueError('Native SF card dimensions/palette are invalid')
         ids = []
         for y in range(0, height, 16):
             row = []
             for x in range(0, width, 16):
-                row.append(FIRST_METATILE + len(records))
                 piece=crop(pixels,width,x,y,16,16)
                 base=crop(ground,ground_width,x,y,16,16) if ground_width>16 else ground
-                records.append(words(piece,bank)+words(empty,bank) if floor
-                               else words(base,ground_bank)+words(piece,bank))
-                attributes.append(LAYER_COVERED | behavior)
+                record=words(piece,bank)+words(empty,bank) if floor else words(base,ground_bank)+words(piece,bank)
+                attribute=LAYER_COVERED | behavior
+                prior=next((i for i,(r,a) in enumerate(zip(records,attributes)) if r==record and a==attribute),None) if deduplicate else None
+                if prior is None:
+                    prior=len(records);records.append(record);attributes.append(attribute)
+                row.append(FIRST_METATILE+prior)
             ids.append(row)
         catalog[name] = {'tiles': ids, 'blocked': blocked}
+        if deduplicate:catalog[name]['explicit_cells']=True
 
     paving_dir = root / 'assets/tiles/south-park-paving-v1'
     paving_info = json.loads((paving_dir / 'conversion.json').read_text())
@@ -286,11 +289,20 @@ def compile_kit(root=ROOT, profile='residential'):
             card(name,bytes(pixels),width,64,6,paving,7)
             catalog[name]['closed_edges']=closed
             catalog[name]['architecture_type']=families[base]
-    from world_architecture import fronts, paint_palette, FORMS
+    from world_architecture import paint_palette, FORMS
+    from world_facade_modules import fronts,facade
     for name,w,h,raw in fronts(profile):
         card(name,raw,w,h,6,paving,7)
         catalog[name]['closed_edges']=['left','right']
         catalog[name]['architecture_type']=name
+    for name in FORMS:
+        if name not in catalog:continue
+        for suffix,closed in [('l',['left']),('m',[]),('r',['right'])]:
+            w,h,raw=facade(name,closed)
+            variant=name+'_'+suffix
+            card(variant,raw,w,h,6,paving,7,deduplicate=True)
+            catalog[variant]['closed_edges']=closed
+            catalog[variant]['architecture_type']=name
     # Alternate paint uses free native palette banks and shares every 8x8 tile.
     # It does not spend the sprite budget on recolored copies of the same art.
     banks={'neighborhood':(9,12),'mixed_use':(9,12),
@@ -298,7 +310,7 @@ def compile_kit(root=ROOT, profile='residential'):
            'industrial':(11,),'civic':(11,)}.get(profile,())
     # Service and reserved-gym fronts only draw their base paint. Avoid
     # allocating unused recolor records at the expense of connection margins.
-    base_fronts=[(n,c) for n,c in catalog.items() if n in (*FORMS,'coral') and 'closed_edges' in c and
+    base_fronts=[(n,c) for n,c in catalog.items() if (n in (*FORMS,'coral') or n.rsplit('_',1)[0] in FORMS) and 'closed_edges' in c and
                  any(w>>12==6 for row in c['tiles'] for t in row for w in records[t-FIRST_METATILE][4:])]
     for scheme,bank in zip(('sage','slate'),banks):
         if bank in palettes:raise ValueError('Building paint would overwrite a loaded palette')
@@ -308,12 +320,14 @@ def compile_kit(root=ROOT, profile='residential'):
             for row in base['tiles']:
                 out=[]
                 for tile in row:
-                    out.append(FIRST_METATILE+len(records))
                     source=records[tile-FIRST_METATILE]
-                    records.append([(w&0xfff)|(bank<<12) if w>>12==6 else w for w in source])
-                    attributes.append(attributes[tile-FIRST_METATILE])
+                    changed=[(w&0xfff)|(bank<<12) if w>>12==6 else w for w in source]
+                    attribute=attributes[tile-FIRST_METATILE]
+                    prior=next((i for i,(r,a) in enumerate(zip(records,attributes)) if r==changed and a==attribute),None)
+                    if prior is None:prior=len(records);records.append(changed);attributes.append(attribute)
+                    out.append(FIRST_METATILE+prior)
                 ids.append(out)
-            catalog[name+'__'+scheme]=dict(base,tiles=ids)
+            catalog[name+'__'+scheme]=dict(base,tiles=ids,explicit_cells=True)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
@@ -388,6 +402,7 @@ def describe(kit):
         name:{'first':card['tiles'][0][0],'width':len(card['tiles'][0]),
               'height':len(card['tiles']),'blocked':card['blocked'],
               'behavior':kit['attributes'][card['tiles'][0][0]-512]&255,'layer':1,
+              **({'cells':card['tiles']} if card.get('explicit_cells') else {}),
               **({'closed_edges':card['closed_edges']} if 'closed_edges' in card else {}),
               **({'architecture_type':card['architecture_type']} if 'architecture_type' in card else {})}
         for name,card in kit['catalog'].items()}}

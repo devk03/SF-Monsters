@@ -11,6 +11,22 @@ import struct
 
 
 class BuildingVarietyTests(unittest.TestCase):
+    def test_attachment_variants_change_only_real_party_wall_pixels(self):
+        from world_facade_modules import facade
+        from world_architecture import FORMS
+        for name in FORMS:
+            w,h,isolated=facade(name)
+            _,_,middle=facade(name,())
+            _,_,left=facade(name,('left',))
+            _,_,right=facade(name,('right',))
+            with self.subTest(form=name):
+                self.assertEqual(len({isolated,middle,left,right}),4)
+                for y in range(h):
+                    for x in range(2,w-2):
+                        at=y*w+x
+                        self.assertEqual((middle[at],left[at],right[at]),(isolated[at],)*3)
+                self.assertEqual(middle[62*w:],isolated[62*w:],'foundation remains continuous')
+
     def test_paint_changes_facades_without_recoloring_paving_or_replacing_pixels(self):
         for profile in ('neighborhood','mixed_use','culture','stadium','industrial','civic'):
             kit=compile_kit(profile=profile)

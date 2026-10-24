@@ -129,6 +129,26 @@ def expand(plans, manifest):
                         index += 1
                     else:
                         x += 1
+        # Match real party-wall art to the final neighboring footprints. An end
+        # cap is drawn only where the building actually exposes that side.
+        architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]
+        for block in architecture:
+            family=cards[block['style']].get('architecture_type')
+            if family not in FORMS:continue
+            def joined(side):
+                edge=block['x'] if side=='left' else block['x']+block['width']
+                return any(other is not block and
+                    (other['x']+other['width'] if side=='left' else other['x'])==edge
+                    and other['y']<=block['y'] and other['y']+other['height']>=block['y']+block['height']
+                    for other in architecture)
+            left,right=joined('left'),joined('right')
+            suffix='_m' if left and right else '_r' if left else '_l' if right else ''
+            paint='__'+block['style'].split('__')[1] if '__' in block['style'] else ''
+            style=family+suffix+paint
+            card=cards[style]
+            for dy,row in enumerate(card['tiles']):
+                for dx,tile in enumerate(row):grid[block['y']+dy][block['x']+dx]=chr(0x100+tile-512)
+            block['style']=style;block['first_metatile']=card['tiles'][0][0]
         # Seal the true enlarged edge, then reopen only declared route lanes.
         edge = 'grove' if nature else 'edge_hedge'
         for y in range(height):
