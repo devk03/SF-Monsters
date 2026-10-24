@@ -643,6 +643,15 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 woodland composition correction.** The user rejects the repeated
+round/pine checkerboard and straight white strips. Studied actual original
+Route101/102/104and Petalburg Woods from the pinned private reference source;
+`scripts/quality/study_native_routes.py` reproduces those private reference views.
+Original layouts use shaped tree masses, clearings, encounter patches and local
+side pockets rather than a paved avenue through an evenly decorated field.
+`scripts/quality/review_woodland_routes.py` captures actual gameplay/full native
+backgrounds with live rendering audits. Reference/game pixels stay under.tools.
+
 **October23 grass/empty-space correction.** The user rejects the muted sage ground
 and unprogrammed empty space. Privatev102references original General grass
 metatile1graphics/palette directly beneath every grass-ground SF composite.
