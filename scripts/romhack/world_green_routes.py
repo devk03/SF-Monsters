@@ -93,9 +93,6 @@ def furnish_green_route(plan,kit):
     for dy,row in enumerate(bench):
         for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
     blocks=[dict(style='bench_grass',x=x,y=y,width=len(bench[0]),height=len(bench),first_metatile=bench[0][0])]
-    from world_trail_ground import worn_patch
-    worn=worn_patch(grid,legend,'.',line[-2],rest[2])
-    plan['worn_trail_patch']=worn
     plan.update(rows=[''.join(row) for row in grid],legend=legend,water_positions=[],
                 town_blocks=blocks,scenic_viewpoints=[],route_setting='woodland grass trail',
                 encounter_positions=encounters,

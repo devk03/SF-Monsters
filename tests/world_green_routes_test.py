@@ -35,7 +35,6 @@ class GreenRouteTests(unittest.TestCase):
             rows,legend=p['rows'],p['legend'];bases=0
             for y in range(2,len(rows)-4,2):
                 for x in range(2,len(rows[0])-2,2):
-                    if p.get('native_park_design') and x<32 and y<24:continue
                     top=[legend[rows[y][x+dx]][0] for dx in (0,1)]
                     below=[legend[rows[y+2][x+dx]][0] for dx in (0,1)]
                     if top==[0x1d4,0x1d5] and below!=top:
@@ -53,11 +52,25 @@ class GreenRouteTests(unittest.TestCase):
             count=0
             for y in range(2,62,2):
                 for x in range(2,94,2):
-                    if x<32 and y<24:continue
                     cells=[p['legend'][p['rows'][y+dy][x+dx]][0] for dy in (0,1) for dx in (0,1)]
                     if any(t in trees for t in cells):
                         self.assertEqual(cells,[0x1d4,0x1d5,0x1dc,0x1dd]);count+=1
             self.assertGreater(count,100)
+
+    def test_park_branches_have_readable_furnished_stops_and_integrated_forest(self):
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        parks=[p for p in plans if p.get('native_park_design')]
+        for p in parks:
+            self.assertEqual(len(p['park_stops']),3)
+            for stop in p['park_stops']:
+                x,y=stop['object'];sx,sy=stop['standing']
+                self.assertEqual(p['legend'][p['rows'][y][x]],[3,True,3])
+                self.assertFalse(p['legend'][p['rows'][sy][sx]][1])
+                self.assertIn('fixture',stop)
+                self.assertTrue(any(e['x']==x and e['y']==y and e['script']==stop['script'] for e in p['bg_events']))
+            forest=sum(p['legend'][p['rows'][y][x]][0] in {0x1d4,0x1d5,0x1dc,0x1dd,0x1e4,0x1e5}
+                       for y in range(4,20) for x in range(4,28))
+            self.assertGreater(forest,30,'Legacy filler must integrate with the native reserve forest')
 
 
 if __name__=='__main__':unittest.main()

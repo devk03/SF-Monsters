@@ -643,6 +643,23 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 integrated park branches.** Candidatev110rebuilds the remaining
+northwest hedge/pine filler as the same finished native forest used across each
+reserve. Actual landmarks, furniture, event coordinates and their approaches
+remain protected; the old rectangular filler layout is not a binding. Universal
+pale rectangle accents are removed from all11woodland routes and five reserves.
+Each reserve gains3furnished/readable branch stops (15total), with original text,
+native signposts and reachable approaches. Lands End/Angel Island receive coastal
+view clearings near the shore; existing residents move toward their first two
+clearing destinations with IDs/scripts preserved. No persistent flags or gym
+contracts change. All73source maps and four woodland/park plus five connected-art
+regressions pass. Tests now include the rebuilt old quarters, finished tree bases,
+readable stop geometry and real furniture. Native build, actual15sign interactions,
+earlier Save recovery, complete traversal and refreshed captures remain required.
+Previous goal turn was progress: commits through423d755, actual complete native
+and WASM evidence and the reviewed25pagev109packet changed authoritative state.
+Current work follows the21:10alignment critique, not a narrowed completion goal.
+
 **October23 forest silhouette correction.** Closer original metatile study found
 that the two-row canopy alone omits Emerald's exposed lower trunk/base row.
 Candidatev109finishes forest fronts with native General1e4/1e5. Connected tree

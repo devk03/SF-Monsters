@@ -110,7 +110,7 @@ def expand(plans, manifest):
             return True
         if nature:
             from world_native_parks import native_park
-            native_park(plan,grid,lanes,walks,occupied,sea,shore,token)
+            native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,approaches)
         else:
             # Continuous frontage along each authored east/west street. A gap
             # is retained at every real intersection and pedestrian shoulder.
@@ -240,12 +240,19 @@ def expand(plans, manifest):
         reserved|={(p['x'],p['y']) for p in plan['coord_events']}
         residents=[n for n in plan['npcs'] if n['script'].startswith('WBTown_')]
         anchors=[(42,14),(80,30),(54,48),(24,48),(74,52),(38,32),(82,14),(48,34)]
+        resident_space=walks-lanes
+        if nature:
+            meadows=plan['native_park_design']['meadows']
+            anchors=[(cx+2,cy+1) for cx,cy,_,_ in meadows]
+            resident_space={(x,y) for cx,cy,rx,ry in meadows
+                for y in range(cy-ry,cy+ry+1) for x in range(cx-rx,cx+rx+1)
+                if (x-cx)**2*ry**2+(y-cy)**2*rx**2<=rx**2*ry**2}
         for index,npc in enumerate(residents):
             others={(n['x']+dx,n['y']) for n in plan['npcs'] if n is not npc
                     for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)}
             rx=npc.get('range_x',0)
             candidates=[]
-            for x,y in walks-lanes:
+            for x,y in resident_space:
                 envelope={(x+dx,y) for dx in range(-rx,rx+1)}
                 if x<32 and y<24 or envelope & (others|reserved):continue
                 if not nature and any((x+dx,y+dy) in lanes for dx,dy in ((-1,0),(1,0),(0,-1),(0,1))):continue

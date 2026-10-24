@@ -10,6 +10,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
+    parser.add_argument('--park-stops',action='store_true',help='Read the 15 expanded reserve stops instead of the original 26 street signs')
     args=parser.parse_args();state=args.state.resolve()
     engine=ROOT/'.tools/pokeemerald-world-host'
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',
@@ -24,9 +25,10 @@ def main():
     try:
         w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
         for identifier,plan in w.plans.items():
-            if not plan.get('street_signs'):continue
+            signs=plan.get('park_stops' if args.park_stops else 'street_signs',[])
+            if not signs:continue
             w.travel(identifier)
-            for sign in plan['street_signs']:
+            for sign in signs:
                 standing=tuple(sign['standing']);obj=tuple(sign['object'])
                 w.go(standing);before=snapshot()
                 delta=(obj[0]-standing[0],obj[1]-standing[1])
@@ -41,7 +43,8 @@ def main():
                 checked.append({'area':identifier,'style':sign['style'],'safe_return':list(standing),
                                 'party_money_inventory_flags_unchanged':True})
             print(identifier,flush=True)
-        if len(checked)!=26:raise ValueError('Not all 26 street/shop signs were exercised')
+        expected=15 if args.park_stops else 26
+        if len(checked)!=expected:raise ValueError('Not all '+str(expected)+' intended signs were exercised')
         c.checkpoint('read-all-signs')
         if (c.output/'read-all-signs.sav').read_bytes()!=state.with_suffix('.sav').read_bytes():
             raise ValueError('Reading street signs rewrote ordinary Flash')
