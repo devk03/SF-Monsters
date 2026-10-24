@@ -654,8 +654,20 @@ view clearings near the shore; existing residents move toward their first two
 clearing destinations with IDs/scripts preserved. No persistent flags or gym
 contracts change. All73source maps and four woodland/park plus five connected-art
 regressions pass. Tests now include the rebuilt old quarters, finished tree bases,
-readable stop geometry and real furniture. Native build, actual15sign interactions,
-earlier Save recovery, complete traversal and refreshed captures remain required.
+readable stop geometry and real furniture. Target`d9bcb4f71d627afe2d1a4fa40218f39d4f63f5d499c0d236a46bddf1ed94730b`
+passes compiled73maps/106connections/85sign events, BPS round-trip and the full
+native circuit. All15stop signs are read with actual controls; party, inventory,
+money, flags and Flash remain unchanged. All five changed nature maps have native
+tours and full-map live rendering audits. Genuine v109Save at park12,6now faces
+a new tree; cold Continue recovers to11,6and proves the route exit/return with
+party/money/flags/Flash preserved. Ordinary protected-state Continue also passes.
+Website-core replay passes232340frames with0of294912RAM bytes different
+(hash`8b66053bf3a10bebe84497630a445c8cdee41c09b335207b2dbbc7b0654aaae0`).
+This is not browser audio/timing or human visual approval. Subset capture tools
+explicitly label selected destinations; final all18captures must match the final
+candidate. Studied actual original Route112/114/119and Fortree City privately for
+relief/river composition. The next terrain pass needs distinctive landscape
+forms, rather than simply more signs or universally dense forest.
 Previous goal turn was progress: commits through423d755, actual complete native
 and WASM evidence and the reviewed25pagev109packet changed authoritative state.
 Current work follows the21:10alignment critique, not a narrowed completion goal.

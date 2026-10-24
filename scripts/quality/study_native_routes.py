@@ -45,11 +45,12 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine',type=Path,default=ROOT/'.tools/pokeemerald')
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--maps',default='Route101,Route102,Route104,PetalburgWoods',help='Original reference layouts to study')
     args=parser.parse_args();output=args.output.resolve();output.relative_to(ROOT/'.tools/benchmarks')
     output.mkdir(parents=True,exist_ok=False)
     layouts=json.loads((args.engine/'data/layouts/layouts.json').read_text())['layouts']
     result=[]
-    for name in ('Route101','Route102','Route104','PetalburgWoods'):
+    for name in args.maps.split(','):
         layout=next(l for l in layouts if l['name']==name+'_Layout')
         image,counts=render(args.engine,layout);image.save(output/(name+'.png'))
         result.append(dict(name=name,width=layout['width'],height=layout['height'],

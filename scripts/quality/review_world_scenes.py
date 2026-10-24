@@ -9,15 +9,21 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
     parser.add_argument('--only-area',help='Capture one destination after a verified interrupted tour')
+    parser.add_argument('--areas',help='Capture an explicit comma-separated destination subset')
     parser.add_argument('--street-views',action='store_true',help='Inspect both sides and ends of each urban block')
-    args=parser.parse_args();state=args.state.resolve()
+    args=parser.parse_args()
+    if args.only_area and args.areas:parser.error('Choose one destination selector')
+    selected=set(args.areas.split(',')) if args.areas else ({args.only_area} if args.only_area else None)
+    state=args.state.resolve()
     engine=ROOT/'.tools/pokeemerald-world-host';manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
+    allowed={a['id'] for a in manifest['areas']}|{manifest['league']['venue']}
+    if selected and not selected<=allowed:raise ValueError('Unknown destination selection')
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',ROOT/'.tools/benchmarks'/args.name,
                  state=state,battery=state.with_suffix('.sav'));visited=[]
     try:
         w=Walker(c,manifest)
         for area in manifest['areas']+[{'id':manifest['league']['venue']}]:
-            if args.only_area and area['id']!=args.only_area:continue
+            if selected and area['id'] not in selected:continue
             identifier=area['id'];w.travel(identifier);plan=w.plans[identifier]
             points=[(14,8)] if plan.get('town_blocks') and identifier not in ('golden_gate_park','lands_end','sutro_tower','angel_island') else []
             if args.street_views and plan.get('street_design'):
@@ -54,7 +60,7 @@ def main():
             visited.append(identifier);print(identifier,flush=True)
         c.checkpoint('tour-end')
         (c.output/'scene-tour.json').write_text(json.dumps({'rom_sha256':c.digest(),'controller_only':True,
-            'areas':visited,'scope':'native placement/viewpoint tour, not human art approval'},indent=2))
+            'areas':visited,'scope':('selected destination' if selected else 'all destination')+' native placement/viewpoint tour, not human art approval'},indent=2))
     finally:c.close()
 
 

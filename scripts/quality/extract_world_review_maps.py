@@ -100,6 +100,7 @@ def background(audit, plan):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--tour', type=Path, required=True)
+    parser.add_argument('--areas',help='Audit an explicit destination subset captured in its own matching tour')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--supplementary-tour',type=Path,action='append',default=[])
     parser.add_argument('--checkpoint-tour',action='store_true',
@@ -112,6 +113,10 @@ def main():
     manifest = json.loads((ROOT/'romhack/world/world.json').read_text())
     evidence = json.loads((tour/('session.json' if args.checkpoint_tour else 'scene-tour.json')).read_text())
     areas = manifest['areas'] + [dict(id=manifest['league']['venue'], label=manifest['league']['label'])]
+    if args.areas:
+        selected=set(args.areas.split(','))
+        if not selected<={a['id'] for a in areas}:raise ValueError('Unknown destination selection')
+        areas=[a for a in areas if a['id'] in selected]
     if (not args.checkpoint_tour and evidence['areas'] != [a['id'] for a in areas]) or not evidence['controller_only']:
         raise ValueError('A complete controller-only town tour is required')
     districts = json.loads((ROOT/'romhack/world/districts.json').read_text())['areas']
@@ -159,7 +164,7 @@ def main():
     receipt = dict(version=manifest['version'], rom_sha256=digest, areas=result,
         full_map_scope='Live native GBA background tiles/palettes and compiled map geometry; actors and animation are shown in the adjacent gameplay views.',
         missing=['Presidio Heights', 'Presidio'], public_version='0.0.92', human_approval='pending',
-        evidence_scope='Native checkpoint composition, with live render audits; not an uninterrupted route claim' if args.checkpoint_tour else 'Complete controller-only destination tour')
+        evidence_scope='Native checkpoint composition, with live render audits; not an uninterrupted route claim' if args.checkpoint_tour else ('Complete controller-only selected destination tour' if args.areas else 'Complete controller-only destination tour'))
     (output/'maps.json').write_text(json.dumps(receipt, indent=2)+'\n')
 
 
