@@ -13,7 +13,7 @@ PORTS = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
 WATER = 368
 WATERFALL = 179
 from world_trail_ground import WORN_IDS
-NATIVE_SCENERY={**{n:False for n in WORN_IDS},4:False,13:False,0x1d4:True,0x1d5:True,0x1dc:True,0x1dd:True}
+NATIVE_SCENERY={**{n:False for n in WORN_IDS},4:False,13:False,0x1d4:True,0x1d5:True,0x1dc:True,0x1dd:True,0x1e4:True,0x1e5:True}
 ACCESS_KINDS = {'spawn', 'gym_entry', 'gym_exit', 'checkpoint', 'arrival', 'room_entry', 'room_exit'}
 NAME = re.compile(r'[A-Za-z_][A-Za-z0-9_]*\Z')
 

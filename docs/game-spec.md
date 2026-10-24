@@ -643,6 +643,17 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 forest silhouette correction.** Closer original metatile study found
+that the two-row canopy alone omits Emerald's exposed lower trunk/base row.
+Candidatev109finishes forest fronts with native General1e4/1e5. Connected tree
+rows overlap naturally; a canopy pair is removed where its base would block an
+authored trail, meadow, prop or coastline. Protected paths stay unchanged. A
+regression checks actual generated exposed fronts, not merely two-row canopy
+matrices. Native terrain studies remain private under.tools. v108all18full-map
+live render audits,73map native circuit and232406frame website-core replay pass
+with0RAM differences. Its review packet is an intermediate retained artifact;
+matching v109capture/review renewal is required before calling it the latest.
+
 **October23 native trail finish.** The original Route102study also shows soft
 worn-grass patches with finished terrain edges. Candidatev108references the
 native nine-piece General worn-ground terrain, placing small complete patches

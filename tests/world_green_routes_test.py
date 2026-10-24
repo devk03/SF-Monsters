@@ -28,6 +28,21 @@ class GreenRouteTests(unittest.TestCase):
                         if any(tile in trees for tile in footprint):
                             self.assertEqual(footprint,[0x1d4,0x1d5,0x1dc,0x1dd],'Do not cut partial tree silhouettes')
 
+    def test_exposed_forest_fronts_include_native_trunk_bases(self):
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        for p in plans:
+            if not (p.get('green_route_design') or p.get('native_park_design')):continue
+            rows,legend=p['rows'],p['legend'];bases=0
+            for y in range(2,len(rows)-4,2):
+                for x in range(2,len(rows[0])-2,2):
+                    if p.get('native_park_design') and x<32 and y<24:continue
+                    top=[legend[rows[y][x+dx]][0] for dx in (0,1)]
+                    below=[legend[rows[y+2][x+dx]][0] for dx in (0,1)]
+                    if top==[0x1d4,0x1d5] and below!=top:
+                        self.assertEqual(below,[0x1e4,0x1e5],p['world_id']+': exposed canopy needs its actual lower edge')
+                        bases+=1
+            self.assertGreater(bases,0)
+
     def test_expanded_reserves_keep_complete_native_canopies(self):
         plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
         parks=[p for p in plans if p.get('native_park_design')]

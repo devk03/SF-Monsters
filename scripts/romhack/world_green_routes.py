@@ -51,6 +51,8 @@ def furnish_green_route(plan,kit):
             if footprint & clear:continue
             for dy,row in enumerate(TREES):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x800+tile)
+    from world_forest_edges import finish_forest
+    finish_forest(grid,legend,clear,'.')
     # Reserve the rest stop before encounter planting. It must fit wholly
     # inside a reachable side clearing, with an unobstructed approach below it.
     bench=kit['catalog']['bench_grass']['tiles']

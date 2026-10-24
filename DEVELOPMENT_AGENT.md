@@ -1,5 +1,12 @@
 # Development agent — shared world and contributor modules
 
+Latest private refinement is v109: native General grass/forest on11woodland
+routes and five expanded reserves. Do not restore alternating pine/round-tree
+checkerboards, broad white corridors or perimeter encounter-grass outlines.
+Preserve complete canopies with exposed native trunk/base rows, reachable side rest stops, landmark approaches and
+small native terrain-edge accents. Read section15.1for current exact evidence;
+publicv92is unchanged and the four-hour deadline remains11:20PM Pacific.
+
 October23 superseding goal: four-hour redesign ending11:20PM Pacific.
 Expand every destination to at least6144tiles (eight times current area), with
 distinct multi-block streets or organic nature layouts. The old32x24size rule

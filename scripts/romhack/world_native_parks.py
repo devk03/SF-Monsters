@@ -43,6 +43,8 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token):
             if any(xx<32 and yy<24 for xx,yy in cells):continue
             for dy,row in enumerate(TREES):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x800+tile)
+    from world_forest_edges import finish_forest
+    finish_forest(grid,legend,clear|protected,grass)
     # Small coherent flower groups identify meadow edges without a tiled lawn.
     for cx,cy,rx,ry in GLADES[plan['world_id']]:
         for dx,dy in ((-2,-1),(-1,-1),(-2,0),(2,1),(3,1)):
