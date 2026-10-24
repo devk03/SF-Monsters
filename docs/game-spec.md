@@ -644,6 +644,37 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**October 24 composed-block candidate — private v117.** The user rejected the
+scene quality and asked why it cannot match Emerald. The limitation is authored
+composition and art consistency, not the engine. An initial North Beach cafe /
+bookshop block now uses the more detailed original bay-house/shop artwork with
+an actual finished right edge, quiet 16-pixel paving joints, brick perimeter,
+tree wells, a lamp, seating, readable notice and a nearby existing resident.
+The existing eight modular forms remain elsewhere; this subset does not approve
+their detail level or the surrounding repeated frontage bands. Generic buildings
+can no longer reserve doorway approaches inside an authored parcel.
+
+Final target `4ed472794cdac2e87d18e6ecc0028206f9f46d685d1eb831424251916b347b92`
+passes deterministic source generation, all 73 compiled map/connection budgets,
+linked authored courier verification and BPS roundtrip. The culture kit uses
+479/512 graphics tiles and 434/512 metatiles; new cards are appended without
+moving old card IDs. Nine building-variety/density/frontage/court tests pass,
+including the North Beach two-row unobstructed frontage and actual notice binding.
+Ordinary v115 Save cold-Continue preserves position, party, inventory, money,
+flags, chapter and Flash. Native interaction passes all three authored parcel
+notices with protected state and Flash unchanged. Actual native captures are
+`.tools/benchmarks/north-beach-v117-final-frontage/{frontage,forecourt}.png`.
+Matching 832-frame website-core replay has zero differences across 294912 RAM
+bytes, final hash `8dc36e293a0f2ce112853b187f403ae8cfd51bb393fb593f14a922c9e072b654`.
+
+This is one block's candidate, not Emerald parity, full-map traversal renewal or
+foreground browser approval. Oversized empty lawns, repetitive modular frontage,
+flat topography, sparse activity and whole-town composition remain open. The
+public site is unchanged; no deployment or Actions run occurred. The earlier
+four-hour goal remains paused; this is the user's new targeted refinement work.
+
+
+
 **October 24 targeted user-resumed correction — SF avatar in world drafts.**
 The user reported the reverted player sprite. Investigation found that
 `build_world.py` bypassed the production courier overlay entirely: the v115 world

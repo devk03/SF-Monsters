@@ -106,6 +106,7 @@ def expand(plans, manifest):
                 base=y+len(card['tiles'])
                 frontage={(xx,yy) for xx in range(x,x+len(card['tiles'][0])) for yy in (base,base+1)}
                 if frontage & (occupied|sea|shore) or base+1>=height-1:return False
+                if not parcel and frontage & parcel_cells:return False
             for dy,row in enumerate(card['tiles']):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
             occupied.update(cells)

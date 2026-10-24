@@ -333,6 +333,20 @@ def compile_kit(root=ROOT, profile='residential'):
                     out.append(FIRST_METATILE+prior)
                 ids.append(out)
             catalog[name+'__'+scheme]=dict(base,tiles=ids,explicit_cells=True)
+    if profile == 'culture':
+        # Append the finished bay-house end without moving existing card IDs.
+        pixels=bytearray(crop(houses,176,80,0,48,64))
+        for y in range(64):
+            pixels[y*48+47]=2 if y<4 else 1 if y<62 else 13
+            pixels[y*48+46]=5 if y<12 else 6 if y<60 else 13
+        card('cream_r',bytes(pixels),48,64,6,paving,7)
+        catalog['cream_r']['closed_edges']=['right']
+        catalog['cream_r']['architecture_type']='bay_house'
+        # A quiet 16px sidewalk joint, smaller than a player's silhouette.
+        # Keep the authored forecourt from reading as oversized concrete slabs.
+        quiet = bytes(3 if x == 15 or y == 15 else 1
+                      for y in range(16) for x in range(16))
+        card('court_walk',quiet,16,16,7,paving,7,False,floor=True)
     if len(tiles) > 512 or len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

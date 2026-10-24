@@ -1,5 +1,5 @@
 """Authored district parcels interrupt the generic frontage bands with local use."""
-RECTS={'dogpatch':(50,17,62,30),'mission':(42,17,58,28)}
+RECTS={'dogpatch':(50,17,62,30),'mission':(42,17,58,28),'north_beach':(72,17,81,27)}
 
 
 def reserved_cells(identifier):
@@ -28,7 +28,7 @@ def furnish_parcel(plan,grid,cards,stamp,token):
             text='Workshop court. Deliveries use the side passage. Please leave enough room for an actual bicycle, not just the idea of one.')
         plan['parcel_resident_anchor']=[60,27]
         title='Workshop and loading court'
-    else:
+    elif identifier=='mission':
         # A shorter mural wall makes a real break in the roofline. Tall neighbors
         # receive finished exposed caps through the normal attachment pass.
         for style,x,y in [('shophouse',42,17),('arcade',44,17),('mural',47,19),
@@ -42,6 +42,24 @@ def furnish_parcel(plan,grid,cards,stamp,token):
             text='Community wall. Ask at the studio before adding paint. The bench is for sitting, not storing your entire project.')
         plan['parcel_resident_anchor']=[52,23]
         title='Mural and community court'
+    else:
+        # One composed cafe/bookshop frontage, not another repeated housing band.
+        # Original bay-house/shop cards have continuous party walls. The final
+        # cream house supplies the finished right edge; the coral card owns left.
+        for style,x,y in [('coral',72,17),('cafe',75,17),
+                          ('cream_r',77,17)]:put(style,x,y)
+        for y in range(21,28):
+            for x in range(72,82):
+                grid[y][x]=token('brick_walk' if x in (72,73,80,81) or y==27 else 'court_walk',x,y)
+        put('lamp',72,25);put('shop_board',78,23)
+        put('street_tree',72,23);put('street_tree',80,23)
+        put('street_tree',80,19)
+        put('flower_box',75,23);put('bench',76,24)
+        notice=dict(style='parcel_notice',object=[78,23],standing=[78,24],
+            text='Cafe and bookshop court. Used books outside until the fog rolls in. Please return the chair you borrowed from next door.')
+        plan['parcel_resident_anchor']=[77,25]
+        title='Cafe and bookshop forecourt'
+        plan.setdefault('scenic_viewpoints',[]).append(dict(name='Cafe frontage at walking scale',x=77,y=22))
     label='WBParcel_'+identifier
     notice['script']=label
     plan.setdefault('extra_street_signs',[]).append(notice)

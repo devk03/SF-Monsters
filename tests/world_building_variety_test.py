@@ -103,7 +103,7 @@ class BuildingVarietyTests(unittest.TestCase):
 
     def test_authored_parcels_keep_clear_frontage_and_readable_notices(self):
         plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
-        for identifier,left,right,rows in [('dogpatch',50,58,(21,22,29,30)),('mission',42,56,(21,22,29,30))]:
+        for identifier,left,right,rows in [('dogpatch',50,58,(21,22,29,30)),('mission',42,56,(21,22,29,30)),('north_beach',72,81,(21,22))]:
             p=next(p for p in plans if p['world_id']==identifier)
             self.assertIn('authored_parcel',p)
             for y in rows:

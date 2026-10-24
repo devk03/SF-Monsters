@@ -11,7 +11,7 @@ def main():
     parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
     parser.add_argument('--park-stops',action='store_true',help='Read the 15 expanded reserve stops instead of the original 26 street signs')
-    parser.add_argument('--parcel-notices',action='store_true',help='Read the two authored urban parcel notices')
+    parser.add_argument('--parcel-notices',action='store_true',help='Read the authored urban parcel notices')
     parser.add_argument('--court-notices',action='store_true',help='Read all 26 planted pedestrian court notices')
     args=parser.parse_args()
     if sum((args.park_stops,args.parcel_notices,args.court_notices))>1:parser.error('Choose one sign subset')
@@ -47,7 +47,7 @@ def main():
                 checked.append({'area':identifier,'style':sign['style'],'safe_return':list(standing),
                                 'party_money_inventory_flags_unchanged':True})
             print(identifier,flush=True)
-        expected=15 if args.park_stops else 2 if args.parcel_notices else 26
+        expected=15 if args.park_stops else 3 if args.parcel_notices else 26
         if len(checked)!=expected:raise ValueError('Not all '+str(expected)+' intended signs were exercised')
         c.checkpoint('read-all-signs')
         if (c.output/'read-all-signs.sav').read_bytes()!=state.with_suffix('.sav').read_bytes():

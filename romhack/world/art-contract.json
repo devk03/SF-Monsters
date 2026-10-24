@@ -8496,6 +8496,26 @@
             "right"
           ],
           "architecture_type": "duplex"
+        },
+        "cream_r": {
+          "first": 933,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "court_walk": {
+          "first": 945,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },

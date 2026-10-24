@@ -4,6 +4,8 @@ Status: the October 23 four-hour session paused at 11:20 PM Pacific.
 October 24 user resumed a targeted avatar regression fix: private v116 now includes
 the authored SF courier with a compiled-byte audit. See section 15.1; the v115 PDF
 is historical and still depicts the pre-fix avatar.
+Private v117 adds a composed North Beach cafe/bookshop forecourt as a single-block
+candidate. Do not spread it as an approved design: the user has not accepted it.
 Read docs/game-spec.md section 15.1 before resuming; visual acceptance remains open.
 
 Latest private refinement is v115: native General grass/forest on11woodland
