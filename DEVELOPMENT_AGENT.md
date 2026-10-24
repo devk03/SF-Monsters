@@ -1,5 +1,11 @@
 # Development agent — shared world and contributor modules
 
+October23 superseding goal: four-hour redesign ending11:20PM Pacific.
+Expand every destination to at least6144tiles (eight times current area), with
+distinct multi-block streets or organic nature layouts. The old32x24size rule
+below is superseded. Preserve gym bindings, routes and save safety; provide
+native full-map/gameplay evidence. Read the latest section15.1 first.
+
 Current goal: finish all 18 non-gym destinations and their 19 routes as a compact,
 dense, lively SF world. Read `docs/game-spec.md` section 15.1 for the measurable
 completion gates and latest progress. The user explicitly resumed implementation

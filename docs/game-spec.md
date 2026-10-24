@@ -643,6 +643,22 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 superseding four-hour world redesign.** Active goal ends11:20PM
+America/Los_Angeles October23; safely record unfinished gates and pause then.
+The user rejects repeated flat-line towns and requests eight times the area.
+Target each of18destinations at6144tiles or more (current768), not eight times
+both axes. Replace the common two-row street with district-specific multi-block
+geometry; nature maps need organic trails, clearings, slopes and coastlines.
+Preserve eight structural urban building types, consistent texture density and
+left-end/middle/right-end attached variants with complete exposed edges.
+Compatible base-game terrain may be reused inside the local ROM/patch pipeline;
+do not commit extracted proprietary art or full ROMs. Preserve gym contracts,
+route gates, old-save recovery and publicv80/v92. Verification requires native
+budgets, deterministic generation, safe doors/connections, cold Continue,
+native/WASM traversal and all18full maps/gameplay views for human critique.
+This explicitly supersedes the prior32x24map constraint. More area alone does
+not establish quality; visual acceptance remains the user's decision.
+
 **October23 all-town visual review packet — private v97.** The user requested
 images of every current town and nature destination for critique. Captured a fresh
 controller-only tour of all18 destinations against the v97 SHA below, then decoded
