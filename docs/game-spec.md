@@ -644,6 +644,15 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**v117 alignment visual critique (subset only).** The peer found no obvious
+clipping/overlap in the captured forecourt and recognized more coherent attached
+facades, but did not grant acceptance. Remaining issues: cafe/bookshop identity
+still reads residential; paving/border contrast competes with architecture; the
+bench/planter/notice/resident arrangement feels staged and should be grouped to
+one side of a clear entry approach. The neighboring flat green modular building
+still exposes the wider style mismatch. Keep these as next visual work rather
+than interpreting the native checks as a quality score.
+
 **October 24 composed-block candidate — private v117.** The user rejected the
 scene quality and asked why it cannot match Emerald. The limitation is authored
 composition and art consistency, not the engine. An initial North Beach cafe /
