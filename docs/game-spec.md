@@ -644,6 +644,30 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**Original-map composition study and next priorities.** Private original references
+were rendered for Route 101/102/104, Petalburg Woods, Route 112/114/119 and Fortree
+City under `.tools/benchmarks/emerald-{route,relief}-composition-study`.
+Route 104 shows why native tiles alone are insufficient: irregular forest edges
+frame separate beach, dock, house, bridge and grass-patch destinations; coherent
+sand paths connect them, and fences/water/cliffs establish clear boundaries.
+Our updated native forest/grass removes the invented alternating-species pattern,
+but broad lawns and repeated forest rows remain weaker. Next composition work
+should author purposeful subareas and irregular enclosing silhouettes, tighten
+unused clearings, and add terrain transitions consistent with each district.
+Do not return to a universal white corridor, alternating decorative tree lattice,
+or randomly scatter props to substitute for a designed destination.
+
+**October 23 supplemental court traversal — passed.**
+`.tools/benchmarks/courts-v115-through-walks-semantic/courts-result.json`
+records all 26 entry-to-court-and-return walks across 13 urban districts, confined
+to each reserved three-tile-wide footprint with NPC movement envelopes excluded.
+Party encrypted-data checksums validate; all party fields are preserved except
+normal friendship increases bounded by actual native walking steps. Inventory,
+money, flags, chapter, party count and ordinary Flash remain unchanged. The first
+raw-byte comparator failed on checksum/friendship bytes; it was replaced with the
+existing semantic seam audit rather than altering gameplay. This closes the
+peer's mechanical passage evidence gap, not human composition acceptance.
+
 **October 23 final evidence renewal (private v115).** The target SHA is
 `1e9b7fa2b02ba0d9dac776237279a3a2c2057ae96ee3943d2fa68d66024ac132`.
 All 18 destinations are 96×64, with 34 physical intermediate routes (19 coarse
