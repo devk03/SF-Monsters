@@ -11,6 +11,30 @@ import struct
 
 
 class BuildingVarietyTests(unittest.TestCase):
+    def test_large_urban_blocks_do_not_leave_ten_by_ten_empty_lawns(self):
+        manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
+        for plan in generate(manifest):
+            if plan['world_id'] not in URBAN:continue
+            kit=compile_kit(profile=plan['tile_profile'])
+            grass=chr(0x100+kit['catalog']['grass']['tiles'][0][0]-512)
+            rows=plan['rows']
+            for y in range(len(rows)-9):
+                for x in range(len(rows[0])-9):
+                    self.assertFalse(all(row[x:x+10]==grass*10 for row in rows[y:y+10]),
+                                     (plan['world_id'],x,y,'unprogrammed10x10lawn'))
+
+    def test_grass_references_original_general_terrain_and_palette(self):
+        for profile in ('neighborhood','mixed_use','industrial','civic','culture','stadium','nature'):
+            kit=compile_kit(profile=profile)
+            grass=kit['catalog']['grass']['tiles'][0][0]
+            self.assertEqual(kit['records'][grass-512][:4],[0x2002,0x2003,0x2003,0x2002])
+            self.assertFalse(kit['catalog']['grass']['blocked'])
+            for card in kit['catalog'].values():
+                for row in card['tiles']:
+                    for tile in row:
+                        native=[word for word in kit['records'][tile-512] if word&1023<512]
+                        self.assertTrue(all(word in (0x2002,0x2003) for word in native))
+
     def test_attachment_variants_change_only_real_party_wall_pixels(self):
         from world_facade_modules import facade
         from world_architecture import FORMS

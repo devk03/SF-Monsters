@@ -85,6 +85,7 @@ def expand(plans, manifest):
                     grid[y][x]=paved
         occupied = {(x,y) for b in plan['town_blocks'] for y in range(b['y'],b['y']+b['height'])
                     for x in range(b['x'],b['x']+b['width'])}
+        front_approaches=set()
         def stamp(style,x,y,*,shoulder=False):
             card = cards[style]
             cells = {(x+dx,y+dy) for dy,row in enumerate(card['tiles']) for dx,_ in enumerate(row)}
@@ -92,11 +93,18 @@ def expand(plans, manifest):
                                        or xx<32 and yy<24 for xx,yy in cells)):
                 return False
             if cells & (sea|shore):return False
+            if cells & front_approaches:return False
             if cells & (lanes if shoulder else walks):
                 return False
+            frontage=set()
+            if card.get('architecture_type'):
+                base=y+len(card['tiles'])
+                frontage={(xx,yy) for xx in range(x,x+len(card['tiles'][0])) for yy in (base,base+1)}
+                if frontage & (occupied|sea|shore) or base+1>=height-1:return False
             for dy,row in enumerate(card['tiles']):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
             occupied.update(cells)
+            front_approaches.update(frontage)
             plan['town_blocks'].append(dict(style=style,x=x,y=y,width=len(card['tiles'][0]),
                 height=len(card['tiles']),first_metatile=card['tiles'][0][0]))
             return True
@@ -132,6 +140,11 @@ def expand(plans, manifest):
             # entire green rectangles between the principal street walls.
             phase=sum(map(ord,name))%4
             for top in range(25+phase,height-5,8):
+                bands.add((2,width-2,top))
+            # Fill the unprogrammed block interiors with small housing courts.
+            # Keep two real walking tiles below every frontage; this adds land
+            # use rather than decorating a giant empty lawn with random props.
+            for top in range(5+phase,height-6,7):
                 bands.add((2,width-2,top))
             index = 0
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):

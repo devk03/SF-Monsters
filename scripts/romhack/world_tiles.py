@@ -62,7 +62,12 @@ def compile_kit(root=ROOT, profile='residential'):
             for x in range(0, width, 16):
                 piece=crop(pixels,width,x,y,16,16)
                 base=crop(ground,ground_width,x,y,16,16) if ground_width>16 else ground
-                record=words(piece,bank)+words(empty,bank) if floor else words(base,ground_bank)+words(piece,bank)
+                # Reference General's native grass metatile directly. Its
+                # graphics/palette stay in the player-supplied Emerald base;
+                # no extracted bitmap or palette is distributed in this repo.
+                native_grass=[0x2002,0x2003,0x2003,0x2002]
+                lower=native_grass if ground_bank==10 and profile!='residential' else words(base,ground_bank)
+                record=words(piece,bank)+words(empty,bank) if floor else lower+words(piece,bank)
                 attribute=LAYER_COVERED | behavior
                 prior=next((i for i,(r,a) in enumerate(zip(records,attributes)) if r==record and a==attribute),None) if deduplicate else None
                 if prior is None:
@@ -333,7 +338,8 @@ def compile_kit(root=ROOT, profile='residential'):
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
         raise ValueError('A secondary palette falls outside the seven native loaded banks')
     return {'tiles': tiles, 'records': records, 'attributes': attributes,
-            'palettes': palettes, 'catalog': catalog, 'profile':profile}
+            'palettes': palettes, 'catalog': catalog, 'profile':profile,
+            'uses_native_grass':profile!='residential'}
 
 
 def apply_kit(engine, original, kit):

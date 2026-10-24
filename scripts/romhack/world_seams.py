@@ -31,6 +31,7 @@ def primary_reservations(plans, engine):
     raw = (engine/'data/tilesets/primary/general/metatiles.bin').read_bytes()
     ids = {p['legend'][t][0] for p in plans for row in p['rows'] for t in row
            if p['legend'][t][0] < 512}
+    ids.add(1)  # General grass can also be referenced beneath SF composite art.
     # General water/sand/land-edge/waterfall/flower animations and the native
     # door scratch region live at432..511. Keep that entire range unavailable.
     # The NORMAL renderer also draws implicit background word0x3014: tile20,
@@ -67,8 +68,10 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
         kit = kits[plan['tile_profile']]
         palettes = dict(kit['palettes'])
         active_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]<512}
+        if kit.get('uses_native_grass'):active_ids.add(1)
         for link in plan['connections']:
             other=by_native[link['map']]
+            if kits[other['tile_profile']].get('uses_native_grass'):active_ids.add(1)
             active_ids|={other['legend'][other['rows'][y][x]][0] for x,y in margin_points(other,link['direction'],plan,link['offset'])
                          if other['legend'][other['rows'][y][x]][0]<512}
         active_banks=set(reserved_banks) if primary_banks is None else set().union(*(primary_banks[i] for i in active_ids))
@@ -124,6 +127,8 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
                 if metatile < 512:continue  # Native water/falls/ground remain untouched.
                 words = []
                 for word in foreign['records'][metatile-512]:
+                    if word&1023<512:
+                        words.append(word);continue  # Pinned General grass is shared unchanged.
                     pixels,bank = paint(foreign['tiles'][(word & 1023)-512],foreign['palettes'][word >> 12])
                     if pixels not in lookup:
                         if len(extra_tiles) >= len(pool):

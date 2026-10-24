@@ -643,6 +643,27 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 grass/empty-space correction.** The user rejects the muted sage ground
+and unprogrammed empty space. Privatev102references original General grass
+metatile1graphics/palette directly beneath every grass-ground SF composite.
+No extracted Emerald bitmap or palette is committed. Primary grass graphics and
+palette remain reserved during foreign seam allocation; the independent resource
+audit permits only exact approved native lower-layer words. New housing courts
+reserve2walking tiles below each frontage. All13urban maps have0uninterrupted
+10x10grass windows; all73source maps retain badge/door/route reachability. This
+metric alone does not establish quality. Native build, grass-color screenshots
+and updated full-map review remain required. The existing four-hour deadline holds.
+Target`8a79bd4b3fdc1ca35488843350e54cab751e148e1570fc6968a3a2a26c3d273c`
+passes compiled73-map/106connection audit, BPS round-trip and earlier ordinary
+Save cold Continue with exact protected state and unchanged Flash. Five seam,
+three linked-resource and six variety/grass/density tests pass. The first resource
+test invocation lacked Pillow in system Python; the bundled runtime rerun passes.
+Actual native Dogpatch captures under`native-grass-v102-dogpatch` confirm the
+original Emerald grass color/texture and denser attached courts. These are local
+candidate images, not public deployment or human visual acceptance. The20:16
+alignment check requests a bounded critique of those actual views and remaining
+empty-space composition; next alignment check by20:46Pacific while active.
+
 **October23 additional intermediate routes.** The user requests more explorable
 space between towns within the active four-hour redesign. Add15authored
 intermediate sections, one per land journey, preserving the coarse story/guide

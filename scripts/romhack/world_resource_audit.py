@@ -27,7 +27,11 @@ def audit_resources(rom,read,secondary,profile,engine):
         resources.append((name,source,actual))
     source=resources[1][1]
     if len(source)%16:raise ValueError('Native metatile records are incomplete')
-    for word in struct.unpack('<'+'H'*(len(source)//2),source):
+    for index,word in enumerate(struct.unpack('<'+'H'*(len(source)//2),source)):
+        if word&1023<512:
+            if profile=='residential' or index%8>=4 or word!=[0x2002,0x2003,0x2003,0x2002][index%8]:
+                raise ValueError('SF record references unapproved primary terrain')
+            continue
         if not 512<=word&1023<1024 or not 6<=word>>12<=12:
             raise ValueError('SF record addresses an unloaded native tile/palette bank')
     if profile=='residential':

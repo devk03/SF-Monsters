@@ -58,6 +58,9 @@ class SeamTests(unittest.TestCase):
                     expected=foreign['records'][identifier-512]
                     self.assertEqual(attribute,foreign['attributes'][identifier-512])
                     for a,b in zip(words,expected):
+                        if b&1023<512:
+                            self.assertEqual(a,b,'Native General grass words remain exact')
+                            continue
                         self.assertEqual(quadrant(a,actual_tiles,actual_palettes),
                                          quadrant(b,source_tiles,foreign['palettes']),
                                          (atlas['world_id'],neighbor['native_id'],identifier))

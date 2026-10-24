@@ -100,6 +100,8 @@ class RenderAudit:
         return self.unpack(records+index*16,'8H'),self.unpack(attrs+index*2,'H')[0],graphics,palettes
 
     def source_pixels(self,word,graphics,palettes):
+        if word&1023<512:
+            graphics,palettes=self.unpack(self.c.symbols['gTileset_General']+4,'2I')
         if graphics not in self.graphics:
             self.graphics[graphics]=decode_lz(self.rom[graphics-0x08000000:graphics-0x08000000+32768])
         data=self.graphics[graphics];tile=word&1023
