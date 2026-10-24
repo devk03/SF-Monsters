@@ -30,12 +30,12 @@ def furnish_green_route(plan,kit):
     for link in plan['connections'] or []:
         side=link['direction']
         edge={'left':(0,12),'right':(31,12),'up':(16,0),'down':(16,23)}[side]
-        nearest=min(line,key=lambda p:abs(p[0]-edge[0])+abs(p[1]-edge[1]))
+        nearest=min(main,key=lambda p:(abs(p[0]-edge[0])+abs(p[1]-edge[1]),p[1],p[0]))
         elbow=(nearest[0],edge[1]) if side in ('left','right') else (edge[0],nearest[1])
         main|=raster_path([edge,elbow,nearest]);ports.append(side)
     px,py=pocket
     nearest=min(line,key=lambda p:abs(p[0]-px)+abs(p[1]-py))
-    branch=raster_path([nearest,(px,nearest[1]),pocket])
+    branch=raster_path([nearest,(px,nearest[1]),pocket],radius=0)
     glade={(x,y) for y in range(py-3,py+4) for x in range(px-4,px+5)
            if (x-px)**2/16+(y-py)**2/9<=1}
     clear=main|branch|glade
@@ -51,22 +51,26 @@ def furnish_green_route(plan,kit):
             if footprint & clear:continue
             for dy,row in enumerate(TREES):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x800+tile)
-    # Encounter patches live in the side clearing, never across the mandatory
-    # through-path or its branch. Whole trees, not chopped canopy pieces, bound it.
+    # Reserve the rest stop before encounter planting. It must fit wholly
+    # inside a reachable side clearing, with an unobstructed approach below it.
+    bench=kit['catalog']['bench_grass']['tiles']
+    rest=None
+    for x,y in sorted(glade,key=lambda p:(abs(p[0]-px)+abs(p[1]-(py+1)),p[1],p[0])):
+        cells={(x+dx,y+dy) for dy,row in enumerate(bench) for dx,_ in enumerate(row)}
+        approach={(xx,y+len(bench)) for xx in range(x,x+len(bench[0]))}
+        if cells & (main|branch):continue
+        if not cells|approach<=glade:continue
+        if any(not 1<xx<width-2 or not 1<yy<height-2 or grid[yy][xx]!='.' for xx,yy in cells|approach):continue
+        rest=(x,y,cells|approach);break
+    if rest is None:raise ValueError(name+': side clearing has no complete rest stop')
+    # Compact asymmetric patches, not an outline following every canopy edge.
     encounters=[]
     for x,y in sorted(glade):
         if not 1<x<width-2 or not 1<y<height-2:continue
-        if (x,y) in main|branch:continue
+        if (x,y) in main|branch|rest[2]:continue
+        if x>px or y>py or (x-px)**2+(y-py)**2>10:continue
         if grid[y][x]=='.':
             grid[y][x]='G';encounters.append([x,y])
-    # Canopy rounding creates small walkable shoulders. Use coherent encounter
-    # patches there instead of leaving the whole interior as an empty lawn.
-    for y in range(3,height-3):
-        for x in range(3,width-3):
-            if grid[y][x]!='.' or (x,y) in main|branch:continue
-            if any(grid[yy][xx] not in ('.','G','F') for xx,yy in
-                   ((x-2,y),(x+2,y),(x,y-2),(x,y+2))):
-                grid[y][x]='G';encounters.append([x,y])
     for cx,cy in ((line[1][0]-2,line[1][1]-1),(line[-2][0]+2,line[-2][1]+1)):
         for dx,dy in ((0,0),(1,0),(0,1)):
             x,y=cx+dx,cy+dy
@@ -83,16 +87,10 @@ def furnish_green_route(plan,kit):
             grid[y][x]='.'
     # One quiet rest stop belongs to the optional clearing. It does not turn
     # the whole route into a concrete plaza or block the through-path.
-    blocks=[]
-    for x,y in sorted(glade,key=lambda p:(abs(p[0]-px)+abs(p[1]-(py+2)),p[1],p[0])):
-        rows=kit['catalog']['bench_grass']['tiles']
-        cells={(x+dx,y+dy) for dy,row in enumerate(rows) for dx,_ in enumerate(row)}
-        if any(not 1<xx<width-2 or not 1<yy<height-2 or grid[yy][xx]!='.' for xx,yy in cells):continue
-        if cells & (main|branch):continue
-        for dy,row in enumerate(rows):
-            for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
-        blocks.append(dict(style='bench_grass',x=x,y=y,width=len(rows[0]),height=len(rows),first_metatile=rows[0][0]))
-        break
+    x,y,_=rest
+    for dy,row in enumerate(bench):
+        for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x100+tile-512)
+    blocks=[dict(style='bench_grass',x=x,y=y,width=len(bench[0]),height=len(bench),first_metatile=bench[0][0])]
     plan.update(rows=[''.join(row) for row in grid],legend=legend,water_positions=[],
                 town_blocks=blocks,scenic_viewpoints=[],route_setting='woodland grass trail',
                 encounter_positions=encounters,

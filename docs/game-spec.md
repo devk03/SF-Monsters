@@ -684,7 +684,19 @@ v102Save made on route15_mid at16,8now faces a newly solid native tree; v105cold
 Continue recovers to16,7and proves the neighboring route return. Party, money,
 saved flags and Flash are preserved. Route recovery is reported separately from
 room recovery. Updated maps are genuine native backgrounds; actors are visible
-in the adjacent gameplay captures. Whole-worldv105native/WASM remains pending.
+in the adjacent gameplay captures. Whole-worldv105native/WASM was superseded byv106.
+
+Privatev106compiles73maps/106connections and passes the complete native circuit,
+all18destination capture tour and earlier ordinary Save cold Continue with exact
+protected state/Flash. Target`4643ced6a163d0bb6c70f0f001bc0096f348fa135656c5f54deb324b9752a253`.
+Its website-core replay is running. Read-only alignment critique found oversized
+merged clearings, grass outlines and an impossible rest-bench placement.
+Candidatev107reserves every woodland bench/approach before grass planting,
+replaces perimeter grass with compact asymmetric patches and shortens port
+spurs to the closest authored path point. Expanded reserve paths now clear only
+their actual three-tile lanes, with connected narrow branches into meadows,
+rather than clearing the full seven-tile shoulder. Source tests pass; renewed
+native builds/captures remain required.
 
 **October23 grass/empty-space correction.** The user rejects the muted sage ground
 and unprogrammed empty space. Privatev102references original General grass

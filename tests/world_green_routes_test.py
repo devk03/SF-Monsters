@@ -19,6 +19,8 @@ class GreenRouteTests(unittest.TestCase):
                 ground={legend[t][0] for row in rows for t in row if not legend[t][1]}
                 self.assertTrue({1,13}<=ground<={1,4,13},'Native grass/flowers replace the white corridor')
                 self.assertEqual(plan['border_metatiles'],[0x1d4,0x1d5,0x1dc,0x1dd])
+                self.assertEqual(len(plan['town_blocks']),1,'Each branch retains its intended rest stop')
+                self.assertLess(len(plan['encounter_positions']),20,'Encounter grass is a patch, not a perimeter outline')
                 for y in range(2,22,2):
                     for x in range(2,30,2):
                         footprint=[legend[rows[y+dy][x+dx]][0] for dy in (0,1) for dx in (0,1)]

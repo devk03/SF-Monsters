@@ -1,5 +1,6 @@
 """Native forest masses around authored park circulation and stable landmarks."""
 from world_green_routes import TREES
+from world_district_layouts import raster_path
 
 # Each reserve has a different sequence of enclosed meadow destinations.
 GLADES={
@@ -19,8 +20,10 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token):
         for identifier in row:legend[chr(0x800+identifier)]=[identifier,True,3]
     flower=chr(0x804);legend[flower]=[4,False,3]
     grass=token('grass')
-    clear=set(walks)
+    clear=set(lanes)
     for cx,cy,rx,ry in GLADES[plan['world_id']]:
+        nearest=min(lanes,key=lambda p:(abs(p[0]-cx)+abs(p[1]-cy),p[1],p[0]))
+        clear|=raster_path([(cx,cy),nearest],radius=0)
         clear|={(x,y) for y in range(cy-ry,cy+ry+1) for x in range(cx-rx,cx+rx+1)
                 if (x-cx)**2*ry**2+(y-cy)**2*rx**2<=rx**2*ry**2}
     # The original service quarter is kept intact during this expansion pass.
