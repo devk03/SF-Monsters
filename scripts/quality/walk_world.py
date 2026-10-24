@@ -66,6 +66,20 @@ class Walker:
             self.c.step(0, 100)
             if self.location() != before:
                 return self.location()
+        # Long real walks can expire the ordinary Repel counter. Acknowledge
+        # only that exact native script, never an arbitrary blocked encounter.
+        context=self.c.symbols.get('sGlobalScriptContext')
+        start=self.c.symbols.get('EventScript_RepelWoreOff')
+        end=self.c.symbols.get('Text_RepelWoreOff')
+        if context and start and end:
+            raw=self.c.read(context,92)
+            depth,mode=raw[0],raw[1]
+            pointers=[struct.unpack_from('<I',raw,8)[0]]
+            pointers += list(struct.unpack_from('<'+str(min(depth,20))+'I',raw,12)) if depth else []
+            if mode and any(start<=p<end for p in pointers):
+                self.c.observations.append({'native_prompt':'Repel expired','position':self.c.position()})
+                self.c.tap(1,90)
+                return self.walk(direction,wet=wet)
         raise ValueError(f'Native movement blocked: {before} {direction}, wet={wet}')
 
     def path(self, plan, start, target):

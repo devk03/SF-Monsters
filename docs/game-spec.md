@@ -680,6 +680,12 @@ reported native TV refresh bit0x891match. The pinned engine's
 `UpdateTVScreensOnMap` sets that bit on load; preserve it as an explicit exception,
 not a blanket flag waiver. The updated18destination controller tour now includes
 three viewpoints in each expanded district beyond its original service block.
+The first tour stops in Dogpatch at49,42: actual screenshot shows native
+"REPEL's effect wore off...", not a collision defect. Preserve the stopped run.
+The controller now recognizes that exact active script/return stack and sends
+ordinary A input before retrying. Replaying the same genuine blocked state
+successfully walks left to48,42and records the acknowledged prompt. An arbitrary
+blocked movement still fails. The full18-town tour is rerunning with this fix.
 
 **October23 superseding four-hour world redesign.** Active goal ends11:20PM
 America/Los_Angeles October23; safely record unfinished gates and pause then.
