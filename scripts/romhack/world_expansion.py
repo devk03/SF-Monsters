@@ -218,7 +218,13 @@ def expand(plans, manifest):
         for y in range(height):
             for x in range(width):
                 if x in (0,width-1) or y in (0,height-1):
-                    grid[y][x]=chr(0x800+((0x1d4,0x1d5),(0x1dc,0x1dd))[y%2][x%2]) if nature else token(edge,x,y)
+                    if not nature:grid[y][x]=token(edge,x,y)
+                    elif not plan['legend'][grid[y][x]][1]:
+                        # Keep complete tree silhouettes already generated at
+                        # the edge. Seal leftover half-width shoulders with
+                        # native opaque foliage, not a chopped canopy row.
+                        leaf=chr(0x800+198);plan['legend'][leaf]=[198,True,3]
+                        grid[y][x]=leaf
         for side in directions:
             for delta in (-1,0,1):
                 x,y={'left':(0,height//2+delta),'right':(width-1,height//2+delta),

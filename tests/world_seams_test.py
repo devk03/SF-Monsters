@@ -37,6 +37,10 @@ class SeamTests(unittest.TestCase):
         cls.primary_banks={1:{0,2},11:{0,1,5},179:{0,4},368:{0,4}}
         # Pinned General woodland/tall-grass references now occur on the maps.
         cls.primary_banks.update({tile:{0,2} for tile in (4,13,0x1d4,0x1d5,0x1dc,0x1dd,0x1e4,0x1e5)})
+        cls.primary_banks[198]={2}
+        cls.primary_banks[14]={2}
+        cls.primary_banks[22]={0,2}
+        cls.reserved.update({22,30})
         cls.primary_banks[2]={0,2,3}
         cls.primary_banks[0xa1]={0,1}
         cls.primary_banks.update({n:{0,1,3} for n in (0xb0,0xb1,0xb2,0xb8,0xba,0xc2)})

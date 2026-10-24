@@ -16,7 +16,8 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     """Keep complete trees and small meadows; never paint over service objects."""
     width,height=len(grid[0]),len(grid)
     legend=plan['legend']
-    for row in TREES:
+    forest=((14,14),(22,22)) if plan['world_id']=='sutro_tower' else TREES
+    for row in forest:
         for identifier in row:legend[chr(0x800+identifier)]=[identifier,True,3]
     flower=chr(0x804);legend[flower]=[4,False,3]
     grass=token('grass')
@@ -38,6 +39,9 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     pond=pond_cells(plan['world_id'])
     if pond & (occupied|lanes|legacy_keep):raise ValueError('Park pond overlaps a protected binding or trail')
     protected=occupied|sea|shore|legacy_keep|pond
+    from world_park_relief import outcrops,draw_outcrops
+    relief=outcrops(plan['world_id'],cards,lanes|legacy_approaches,protected)
+    protected|=set().union(*(g['cells'] for g in relief)) if relief else set()
     for event in plan.get('coord_events',[])+plan.get('bg_events',[]):
         point=(event['x'],event['y'])
         nearest=min(lanes,key=lambda p:(abs(p[0]-point[0])+abs(p[1]-point[1]),p[1],p[0]))
@@ -49,10 +53,11 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
         for x in range(0,width,2):
             cells={(x+dx,y+dy) for dy in (0,1) for dx in (0,1)}
             if cells & (clear|protected):continue
-            for dy,row in enumerate(TREES):
+            for dy,row in enumerate(forest):
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x800+tile)
     from world_forest_edges import finish_forest
-    finish_forest(grid,legend,clear|protected,grass)
+    if forest==TREES:finish_forest(grid,legend,clear|protected,grass)
+    draw_outcrops(plan,grid,cards,relief)
     draw_pond(plan,grid)
     from world_park_stops import add_park_stops
     add_park_stops(plan,grid,cards,GLADES[plan['world_id']],lanes,protected)
@@ -62,6 +67,6 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
             x,y=cx+dx,cy+dy
             if grid[y][x]==grass and (x,y) not in lanes:grid[y][x]=flower
     # Native border follows the same canopy; exact ports are reopened below.
-    plan['border_metatiles']=[tile for row in TREES for tile in row]
+    plan['border_metatiles']=[tile for row in forest for tile in row]
     plan['native_park_design']={'meadows':[list(g) for g in GLADES[plan['world_id']]],
-                               'native_forest':True,'legacy_bindings_preserved':True,'legacy_filler_rebuilt':True}
+                               'native_forest':True,'forest_style':'narrow' if forest!=TREES else 'large_round','legacy_bindings_preserved':True,'legacy_filler_rebuilt':True}

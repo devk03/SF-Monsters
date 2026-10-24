@@ -5,7 +5,7 @@ STOPS={
   ('Pond rest','You can take the long way home. That is allowed.','bench_grass'),
   ('Windmill trail rest','Water break. Checking your step count is optional.','bin_grass')),
  'twin_peaks':(
-  ('North lookout','The climb was real. The urgent email can wait.','rocks'),
+  ('North lookout','The climb was real. The urgent email can wait.','bench_grass'),
   ('South lookout','Different view. Same wind. Hold onto your hat.','bench_grass'),
   ('Ridge shelter','Catch your breath before deciding the next hill looks easy.','rocks')),
  'sutro_tower':(
@@ -27,8 +27,10 @@ def add_park_stops(plan,grid,cards,glades,lanes,protected):
     width,height=len(grid[0]),len(grid);legend=plan['legend']
     sign=chr(0x803);legend[sign]=[3,True,3]
     stops=[]
-    for index,((cx,cy,_,_),(title,text,prop)) in enumerate(zip(glades,STOPS[plan['world_id']])):
-        candidates=sorted(((x,y) for y in range(cy-2,cy+3) for x in range(cx-3,cx+3)),
+    for index,((cx,cy,rx,ry),(title,text,prop)) in enumerate(zip(glades,STOPS[plan['world_id']])):
+        glade={(x,y) for y in range(cy-ry,cy+ry+1) for x in range(cx-rx,cx+rx+1)
+               if (x-cx)**2*ry**2+(y-cy)**2*rx**2<=rx**2*ry**2}
+        candidates=sorted(glade,
                           key=lambda p:(abs(p[0]-(cx-2))+abs(p[1]-(cy-1)),p[1],p[0]))
         for x,y in candidates:
             if not(1<x<width-2 and 1<y<height-2):continue
@@ -56,6 +58,6 @@ def add_park_stops(plan,grid,cards,glades,lanes,protected):
                 for dx,tile in enumerate(row):grid[py+dy][px+dx]=chr(0x100+tile-512)
             plan['town_blocks'].append(dict(style=prop,x=px,y=py,width=len(rows[0]),height=len(rows),first_metatile=rows[0][0]))
             protected|=cells|approach;record['fixture']=dict(style=prop,x=px,y=py);placed=True;break
-        if not placed:raise ValueError(plan['world_id']+': rest fixture cannot fit its clearing')
+        if not placed:raise ValueError(plan['world_id']+': '+title+' fixture cannot fit its clearing')
         plan.setdefault('scenic_viewpoints',[]).append(dict(name=title,x=x,y=y+1))
     plan['park_stops']=stops

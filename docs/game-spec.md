@@ -643,6 +643,19 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 landscape silhouette variety.** Candidatev113uses the original
+noninteractive General narrow-tree14/22silhouette in Sutro's woods; the secret-base
+pine tiles are deliberately not used. Twin Peaks gains two separate three-rock
+outcrop groupings framing its lookouts. Mandatory trails and bindings remain
+clear. Park furniture searches the actual meadow shape rather than only its
+central rectangle. Generated complete forest edges are retained at boundaries;
+native opaque foliage seals leftover unused shoulders instead of overwriting a
+complete tree with a clipped canopy row. Five woodland/park and five connected-art
+regressions pass, including narrow-tree footprints and source edge reachability.
+Native build, scenery/notice interactions, live capture, cold Continue and combined
+traversal renewal remain required. These outcrops do not prove full hilltopography
+or human acceptance of the nature domain. Deadline and broader objective hold.
+
 **October23 authored urban parcels.** Candidatev112reserves actual parcels before
 generic frontage filling. Dogpatch gains an attached workshop/loading court with
 a two-tile entry, loading apron, recycling and a readable notice. Mission gains
@@ -650,9 +663,16 @@ a shorter mural wall between capped shopfronts, a furnished community strip and
 readable mural notice. Existing adjacent tree/lamp and the original discovery
 bindings remain; actual attachment caps are recomputed after placement. The
 existing mechanic/painter NPCs move toward these courts with IDs, movement range
-and scripts preserved. All73source maps pass. Six building-variety/density and
-15street-contract tests are running; native notices/movement/rendering, earlier
-Save and combined native/WASM renewal remain required. These two authored parcels
+and scripts preserved. All73source maps pass. Seven building-variety/density/frontage tests and15street-contract tests pass.
+Target`298d2e1c70307bbbbe4a394df7ec75e6ece43406004361ee6a5eaffd71722459`
+passes compiled73maps/106connections/87sign events, BPS round-trip, ordinary earlier
+Save Continue and the complete native circuit. Both notices work through actual
+controls with protected state/Flash unchanged; both changed districts pass full-map
+live rendering audits and native viewpoint visits. Genuine v111Save at50,28now
+lies inside a new workshop wall; v112cold Continue recovers49,28then proves an
+interior exit/return, preserving party/money/flags/Flash. Actual Mission capture
+shows the mural, capped taller neighbors, planting, seating and painter together.
+Final combined website-core/all18capture renewal remains required. These two authored parcels
 address repetition; the other districts are not thereby human-approved.
 
 **October23 native park water.** Candidatev111adds one irregular pond to Golden

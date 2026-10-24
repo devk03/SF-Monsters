@@ -33,6 +33,12 @@ class GreenRouteTests(unittest.TestCase):
         for p in plans:
             if not (p.get('green_route_design') or p.get('native_park_design')):continue
             rows,legend=p['rows'],p['legend'];bases=0
+            if p['world_id']=='sutro_tower':
+                self.assertEqual(p['border_metatiles'],[14,14,22,22])
+                for y in range(2,len(rows)-2,2):
+                    for x in range(2,len(rows[0])-2):
+                        if legend[rows[y][x]][0]==14:self.assertEqual(legend[rows[y+1][x]][0],22)
+                continue
             for y in range(2,len(rows)-4,2):
                 for x in range(2,len(rows[0])-2,2):
                     top=[legend[rows[y][x+dx]][0] for dx in (0,1)]
@@ -47,14 +53,15 @@ class GreenRouteTests(unittest.TestCase):
         parks=[p for p in plans if p.get('native_park_design')]
         self.assertEqual(len(parks),5)
         for p in parks:
-            trees={0x1d4,0x1d5,0x1dc,0x1dd}
-            self.assertEqual(p['border_metatiles'],[0x1d4,0x1d5,0x1dc,0x1dd])
+            expected=[14,14,22,22] if p['world_id']=='sutro_tower' else [0x1d4,0x1d5,0x1dc,0x1dd]
+            trees=set(expected)
+            self.assertEqual(p['border_metatiles'],expected)
             count=0
             for y in range(2,62,2):
                 for x in range(2,94,2):
                     cells=[p['legend'][p['rows'][y+dy][x+dx]][0] for dy in (0,1) for dx in (0,1)]
                     if any(t in trees for t in cells):
-                        self.assertEqual(cells,[0x1d4,0x1d5,0x1dc,0x1dd]);count+=1
+                        self.assertEqual(cells,expected);count+=1
             self.assertGreater(count,100)
 
     def test_park_branches_have_readable_furnished_stops_and_integrated_forest(self):
@@ -68,7 +75,7 @@ class GreenRouteTests(unittest.TestCase):
                 self.assertFalse(p['legend'][p['rows'][sy][sx]][1])
                 self.assertIn('fixture',stop)
                 self.assertTrue(any(e['x']==x and e['y']==y and e['script']==stop['script'] for e in p['bg_events']))
-            forest=sum(p['legend'][p['rows'][y][x]][0] in {0x1d4,0x1d5,0x1dc,0x1dd,0x1e4,0x1e5}
+            forest=sum(p['legend'][p['rows'][y][x]][0] in {14,22,0x1d4,0x1d5,0x1dc,0x1dd,0x1e4,0x1e5}
                        for y in range(4,20) for x in range(4,28))
             self.assertGreater(forest,30,'Legacy filler must integrate with the native reserve forest')
 
