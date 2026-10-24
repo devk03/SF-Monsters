@@ -659,6 +659,16 @@ native/WASM traversal and all18full maps/gameplay views for human critique.
 This explicitly supersedes the prior32x24map constraint. More area alone does
 not establish quality; visual acceptance remains the user's decision.
 
+Expansion foundation: `world_geometry.py` defines96x64destination sizing and
+centered mixed-size seam translation. The independent source contract now checks
+per-map dimensions, reciprocal centered offsets and local border traversal;
+the generator derives matching connection offsets. Existing19world-contract
+tests pass. Destination expansion is not enabled until authored layouts and
+native budgets are ready; no enlarged-town gameplay is claimed.
+At the start of this implementation the private `.tools` directory was absent.
+The supplied Emerald ZIP remains in Downloads. Native toolchain/captures must
+be restored before build, old-Save and GBA/WASM claims can be re-established.
+
 **October23 all-town visual review packet — private v97.** The user requested
 images of every current town and nature destination for critique. Captured a fresh
 controller-only tour of all18 destinations against the v97 SHA below, then decoded

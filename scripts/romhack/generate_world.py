@@ -3,6 +3,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from world_geometry import dimensions, connection_offset
 
 ROOT = Path(__file__).resolve().parents[2]
 OPPOSITE = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
@@ -100,9 +101,11 @@ def generate(manifest):
         for end in ('from', 'to'):
             area, direction = route[end], route[end + '_port']
             links[area].append({'map': native_id(route['engine_map']),
-                                'direction': direction, 'offset': 0})
+                                'direction': direction, 'offset': connection_offset(
+                                    direction, dimensions(manifest, area), dimensions(manifest, route['id']))})
             links[route['id']].append({'map': native_id(nodes[area]['engine_map']),
-                                      'direction': OPPOSITE[direction], 'offset': 0})
+                                      'direction': OPPOSITE[direction], 'offset': connection_offset(
+                                          direction, dimensions(manifest, route['id']), dimensions(manifest, area))})
     plans = []
     gym_by_area = {gym['area']: gym for gym in manifest['gyms']}
     area_ids = {area['id'] for area in areas}

@@ -74,6 +74,16 @@ class _World:
               and type(native['save_schema']) is int and native['save_schema'] == 1,
               'identity', 'Blockout save identity must remain separate from v80')
         self.width, self.height = 32, 24
+        expanded = manifest.get('destination_geometry')
+        self.destination_size = (self.width, self.height)
+        if expanded is not None:
+            _need(type(expanded) is dict and set(expanded) == {'width', 'height'},
+                  'geometry', 'Destination geometry requires width and height')
+            ew, eh = expanded['width'], expanded['height']
+            _need(type(ew) is int and type(eh) is int and 32 <= ew <= 128
+                  and 24 <= eh <= 128 and ew * eh >= 6144,
+                  'geometry', 'Expanded destinations require at least6144tiles')
+            self.destination_size = (ew, eh)
         self.art = load_profiles() if manifest.get('town_finishing') else {}
         areas, routes = list(manifest['areas']), list(manifest['routes'])
         self.league = manifest['league']
@@ -211,14 +221,17 @@ class _World:
             'primary': self.manifest['native']['primary_tileset'],'secondary':secondary},
             'terrain', 'Plan tilesets differ from the declared native art profile')
         approved = profile.get('metatiles',{})
-        width,height = self.rooms.get(identifier,{}).get('size',[32,24])
-        _need((width,height) in ((32,24),(16,11)), 'geometry', 'Unsupported outdoor/interior dimensions')
+        default_size = self.destination_size if identifier in self.areas else (32,24)
+        width,height = self.rooms.get(identifier,{}).get('size',default_size)
+        _need((width,height) == default_size or identifier in self.rooms
+              and (width,height) in ((32,24),(16,11)),
+              'geometry', 'Unsupported outdoor/interior dimensions')
         self.sizes[identifier]=(width,height)
         def position(event,label): return self._position(event,label,identifier)
         rows, legend = plan['rows'], plan['legend']
         _need(type(rows) is list and len(rows) == height
               and all(type(row) is str and len(row) == width for row in rows),
-              'geometry', f'{identifier}: rows must be 32x24')
+              'geometry', f'{identifier}: rows must be {width}x{height}')
         _need(type(legend) is dict and bool(legend), 'terrain', 'Missing terrain legend')
         for token, tile in legend.items():
             _need(type(token) is str and len(token) == 1 and type(tile) in (list, tuple)
@@ -376,17 +389,21 @@ class _World:
             for link in plan.get('connections') or []:
                 _need(type(link) is dict and link['direction'] in PORTS, 'direction',
                       f'{identifier}: invalid native connection direction')
-                _need(type(link['offset']) is int and link['offset'] == 0, 'ports', 'Only aligned offset-0 ports are supported')
+                _need(type(link['offset']) is int, 'ports', 'Connection offset must be an integer')
                 direction = link['direction']
                 _need(direction not in actual, 'ports', f'{identifier}: duplicate connection direction')
                 _need(link['map'] in self.native, 'reference', f'{identifier}: dangling native connection')
+                target_size = self.sizes[self.native[link['map']]]
+                axis = 0 if direction in ('up','down') else 1
+                _need(link['offset'] == self.sizes[identifier][axis]//2-target_size[axis]//2,
+                      'ports', f'{identifier}: connection does not align centered three-tile ports')
                 actual[direction] = self.native[link['map']]
             _need(actual == self.expected[identifier], 'connections',
                   f'{identifier}: native connections differ from declared reversible ports')
             self.boards[identifier]['connections'] = actual
             width,height = self.sizes[identifier]
             allowed = {point for direction in actual
-                       for point in _port_cells(direction, self.width, self.height)}
+                       for point in _port_cells(direction, width, height)}
             for point, cell in self.boards[identifier]['cells'].items():
                 x, y = point
                 if x in (0, width-1) or y in (0, height-1):
@@ -396,8 +413,8 @@ class _World:
             for direction, target in board['connections'].items():
                 _need(self.boards[target]['connections'].get(PORTS[direction]) == identifier,
                       'return', f'{identifier}: missing reciprocal return')
-                left = _port_cells(direction, self.width, self.height)
-                right = _port_cells(PORTS[direction], self.width, self.height)
+                left = _port_cells(direction, *self.sizes[identifier])
+                right = _port_cells(PORTS[direction], *self.sizes[target])
                 for a, b in zip(left, right):
                     _need(self._passable(identifier, a, 8) and self._passable(target, b, 8)
                           and a not in board['coords'] and b not in self.boards[target]['coords'],
@@ -468,10 +485,11 @@ class _World:
                 if local or side not in board['connections']:
                     continue
                 target = board['connections'][side]
-                position = (xx % width, yy % height)
+                source_ports = _port_cells(side, width, height)
                 # Native aligned edges are usable only through their authored lanes.
-                if point not in _port_cells(side, self.width, self.height):
+                if point not in source_ports:
                     continue
+                position = _port_cells(PORTS[side], *self.sizes[target])[source_ports.index(point)]
             if self._passable(target, position, stage):
                 yield target, position
 
@@ -513,7 +531,7 @@ class _World:
                   for point in initial['access']), 'arrival', 'Missing matching spawn access point')
         # Local checks catch a severed route even if an external world loop reaches both ends.
         for identifier, board in self.boards.items():
-            ports = [point for side in board['connections'] for point in _port_cells(side, self.width, self.height)]
+            ports = [point for side in board['connections'] for point in _port_cells(side, *self.sizes[identifier])]
             if ports:
                 local = self._flood(identifier, ports[0], 8, local=True)
                 _need(all((identifier, point) in local for point in ports), 'passage',
@@ -530,9 +548,9 @@ class _World:
                 route = self.routes[identifier]
                 if route['requires_badge']:
                     _need(bool(board['water']), 'terrain', f'{identifier}: traversal gate lost all water')
-                    origin = _port_cells(PORTS[route['from_port']], self.width, self.height)[1]
+                    origin = _port_cells(PORTS[route['from_port']], *self.sizes[identifier])[1]
                     before = self._flood(identifier, origin, route['requires_badge'] - 1, local=True)
-                    far = _port_cells(PORTS[route['to_port']], self.width, self.height)
+                    far = _port_cells(PORTS[route['to_port']], *self.sizes[identifier])
                     _need(not any((identifier, point) in before for point in far), 'gate_bypass',
                           f'{identifier}: dry passage bypasses required badge')
                 if route['mode'] == 'waterfall':
