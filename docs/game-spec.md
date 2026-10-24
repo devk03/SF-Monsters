@@ -653,6 +653,27 @@ matrices. Native terrain studies remain private under.tools. v108all18full-map
 live render audits,73map native circuit and232406frame website-core replay pass
 with0RAM differences. Its review packet is an intermediate retained artifact;
 matching v109capture/review renewal is required before calling it the latest.
+v109target`3bac2fb3b77240ed61ae5ab716539436731e76f1fe18d69d0b1bdb63f2ba1ca2`
+passes compiled73maps/106connections, BPS round-trip, the full native circuit,
+all three screenshot-route live rendering audits and both earlier Save tests
+(ordinary protected state/Flash and actual newly blocked route recovery).
+Native forest-base capture shows finished lower silhouettes. All18destination
+visits and full-map live rendering audits pass. The refreshed25pagev109PDF was
+rendered in full, checked as a contact sheet and inspected at full-page scale;
+all pages carry the right version. The offline gallery contains18maps with no
+unresolved placeholders; browser interaction remains unverified. Private outputs:
+`output/pdf/sf-world-review-v109.pdf` and`output/review/sf-world-review-v109.html`.
+Website-core replay is running. Next design work should
+replace the remaining small legacy park filler and give expanded reserve
+clearings meaningful landscape destinations; formal urban frontage bands still
+need district parcels. No public deployment or human visual approval is claimed.
+The21:10bounded alignment review confirms exposed bases/rest benches improve
+the routes. Its next priorities match full-map inspection: integrate northwest
+legacy park filler without moving bindings; add meaningful branch destinations;
+differentiate summit/coastal terrain; reduce cross-shaped port approaches and
+accidental tree remnants. Repeated pale rectangles draw attention without purpose
+and should be removed or placed only as part of a designed local destination.
+Next alignment check by21:40Pacific while active. Goal remains active until23:20. 
 
 **October23 native trail finish.** The original Route102study also shows soft
 worn-grass patches with finished terrain edges. Candidatev108references the
