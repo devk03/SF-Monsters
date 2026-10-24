@@ -137,10 +137,8 @@ def expand(plans, manifest):
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):
                 x = max(1,left)
                 while x<min(width-1,right):
-                    style = FORMS[(index+len(name))%len(FORMS)]
-                    paints = [style,style+'__sage',style+'__slate']
-                    style = paints[(index//len(FORMS))%3]
-                    if style not in cards:style=paints[0]
+                    from world_frontage_identity import frontage
+                    style=frontage(name,index,x,top,cards)
                     w = len(cards[style]['tiles'][0])
                     if x+w<=right and stamp(style,x,top):
                         # A neutral threshold strip belongs to each street wall.

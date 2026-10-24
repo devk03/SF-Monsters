@@ -114,5 +114,18 @@ class BuildingVarietyTests(unittest.TestCase):
             self.assertFalse(p['legend'][p['rows'][sy][sx]][1])
             self.assertTrue(any(e['script']==notice['script'] and (e['x'],e['y'])==(x,y) for e in p['bg_events']))
 
+    def test_district_frontage_mixes_express_industry_downtown_and_homes(self):
+        from collections import Counter
+        from world_architecture import FORMS
+        plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+        for identifier,preferred,minimum in [('dogpatch',{'workshop'},.2),
+                ('financial_district',{'deco','flats'},.35),
+                ('outer_sunset',{'walkup','duplex','gable'},.5)]:
+            p=next(p for p in plans if p['world_id']==identifier)
+            catalog=compile_kit(profile=p['tile_profile'])['catalog']
+            counts=Counter(catalog[b['style']].get('architecture_type') for b in p['town_blocks']
+                           if catalog[b['style']].get('architecture_type') in FORMS)
+            self.assertGreater(sum(counts[n] for n in preferred)/sum(counts.values()),minimum,identifier)
+
 
 if __name__=='__main__':unittest.main()

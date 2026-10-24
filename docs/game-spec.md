@@ -643,6 +643,29 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October23 district frontage identity.** Candidatev114gives all13urban districts
+individual form rhythms and coordinated paint distributions using the existing
+eight structural forms and existing palettes. Industrial districts emphasize
+workshops; downtown emphasizes deco/flats; the Sunset emphasizes walkups, duplexes
+and gables. This replaces uniform eight-form cycling and broad paint stripes,
+without allocating new graphics. All73source maps and eight building-variety,
+density, frontage and district-mix regressions pass. Native build, all18capture,
+old-Save and combined native/WASM renewal remain required. This changes the whole
+urban composition; it does not claim the remaining districts have authored parcels
+or that downtown already has a convincing office canyon.
+
+v113combined target`3baac6422c44da81cb17abf557707aff35c60afa4c6231fc68cbe8842964cc26`
+passes all73native circuit, all18native tours/full-map live render audits, all15
+park-stop interactions and all8pond banks. Website-core232340frame replay has0of
+294912RAM bytes different (hash`285b1e8e3983b598eb9e3c75b505ae80851d4a5433af53302b5d971cbb7ad3a2`).
+A finite15minute localhost-only preview was manually finished. Actual browser
+Continue/walking/gym-exit-to-city were observed. Its uninterrupted30second visible
+sample reports1791video frames/0hidden ticks,0final audio underrun output frames,
+19dropped source frames, and acknowledged final audio telemetry. Queue depth was
+31351.85source frames versus2622prefill target; latency/long-route/mobile and human
+audio acceptance remain open. Do not turn this short private preview sample into
+public-site or complete browser acceptance. Publicv92/rootv80remain unchanged.
+
 **October23 landscape silhouette variety.** Candidatev113uses the original
 noninteractive General narrow-tree14/22silhouette in Sutro's woods; the secret-base
 pine tiles are deliberately not used. Twin Peaks gains two separate three-rock
