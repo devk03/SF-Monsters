@@ -1,4 +1,4 @@
-"""Unwired Twin Peaks landform prototype; existing terrain and bindings only.
+"""Twin Peaks landform candidate; existing terrain and bindings only.
 
 Grass middle70/71/72 is supported by Route117/123 and MtPyre native stacks;
 88/8A are sand-backed alternatives. Integration prerequisites are recorded below.
@@ -180,7 +180,7 @@ def furnish(plan, grid, draft, token):
         elevation=3, new_art_allocations=0, new_flags=0, new_warps=0,
         limitations=['Ordinary elevation3; no new height/progression mechanics',
                      'Lower residential/urban-edge concept area remains absent'],
-        visual_acceptance='unwired source prototype; native review pending')
+        visual_acceptance='native review pending')
     plan.setdefault('scenic_viewpoints', []).extend([
         dict(name='Exposed north summit', x=45, y=18),
         dict(name='Summit saddle', x=54, y=30),

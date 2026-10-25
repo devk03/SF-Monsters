@@ -17,6 +17,13 @@ neither has visual acceptance. Next composition priority: two exposed Twin Peaks
 summits instead of continuous woodland. Public v92 is intact. Read section 15.1
 for exact evidence; keep long browser/mobile and human visual gates open.
 
+NEW BLOCKER: v124's office-battery phase exposes a real transient mixed scene
+on Route10 -> Noe return. The identical sequence also fails on immutable v123.
+Earlier passes do not prove atomic scene updates for every phase. Active v124
+engine is frozen for the alignment chat's read-only/isolated investigation.
+Source v125 wires exposed Twin Peaks summits and protects General72's four extra
+graphics slots; 81 source tests pass, native build/review pending. Do not publish.
+
 Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
 contains a second, much wider set for all 19 areas. V1 is preserved for comparison.
 These are concept images; native dimensions and contracts are unchanged.

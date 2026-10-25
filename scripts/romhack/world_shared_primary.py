@@ -9,12 +9,12 @@ allocates foreign seams after all live own-art slots are reserved.
 
 REQUIRED_METATILES = frozenset((1,2,3,4,11,13,14,22,161,176,177,178,179,184,186,
     194,198,368,464,465,466,468,469,472,473,474,476,477,480,481,482,484,485,
-    0x68,0x69,0x6a,0x6b,0x6c,0x70,0x71,0x73,0x78,0x79,0x7a,0x7b,0xaf,0xcf,0xc8,0xc9,0xca,0xd0,0xd2,0xd8,0xd9,0xda,0x124))
+    0x68,0x69,0x6a,0x6b,0x6c,0x70,0x71,0x72,0x73,0x78,0x79,0x7a,0x7b,0xaf,0xcf,0xc8,0xc9,0xca,0xd0,0xd2,0xd8,0xd9,0xda,0x124))
 FIXED_RESERVED = frozenset(range(16)) | {20} | frozenset(range(432,512))
 # Only slot IDs and a hash of pinned General records are distributed here,
 # never extracted reference graphics. apply_seams rechecks actual native uses.
-PINNED_GENERAL_HASH = '5e5cbc0a0ed95ccd01153b802cc08a1d7a3b3a5da83830ad7c30223f73f6e81f'
-PINNED_RESERVED = FIXED_RESERVED | frozenset((16, 17, 22, 25, 30, 32, 33, 41, 65, 66, 67, 68, 70, 71, 72, 73, 80, 81, 82, 83, 84, 85, 86, 96, 97, 98, 99, 102, 108, 109, 110, 111, 112, 113, 114, 115, 118, 124, 127, 128, 129, 130, 131, 132, 133, 134, 140, 143, 144, 145, 146, 147, 148, 149, 150, 151, 159, 166, 174, 175, 184, 185, 204, 205, 211, 249, 250, 253, 254, 264, 265, 266, 269, 270, 280, 281, 282, 285, 286, 297, 298, 301, 302, 309, 310, 325, 326, 384, 385, 400, 401, 416, 417, 418, 419, 420, 421))
+PINNED_GENERAL_HASH = 'ea8d123548ac5ceb12fe2c454bf6d6da1ff487e667769012b43f194b3a23d2f2'
+PINNED_RESERVED = FIXED_RESERVED | frozenset((16, 17, 22, 25, 30, 32, 33, 41, 65, 66, 67, 68, 70, 71, 72, 73, 80, 81, 82, 83, 84, 85, 86, 96, 97, 98, 99, 100, 101, 102, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 124, 127, 128, 129, 130, 131, 132, 133, 134, 140, 143, 144, 145, 146, 147, 148, 149, 150, 151, 159, 166, 174, 175, 184, 185, 204, 205, 211, 249, 250, 253, 254, 264, 265, 266, 269, 270, 280, 281, 282, 285, 286, 297, 298, 301, 302, 309, 310, 325, 326, 384, 385, 400, 401, 416, 417, 418, 419, 420, 421))
 
 
 def validate_general(raw):

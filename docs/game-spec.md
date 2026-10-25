@@ -643,6 +643,37 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**New v124 transient blocker — do not publish.** The broader commercial source
+builds as SHA `5861f476744627cbce684849e27ece15b787765b33d8a675469c980927480ecf`,
+receipt `ed16b611e54f47b3a48553420c0457cc`, and earlier office Save recovery passes.
+However, the stricter urban animation-frame run with the prior office battery
+fails on trial1 reverse entry from Route10 into Noe Valley, frame3: stale viewport
+words at `(0,2)` on BG2. The screenshot shows a real mixed scene. Evidence:
+`.tools/benchmarks/concept-v124-civic-seams/`. The six prior v123 trials used a
+different battery/frame phase; their success is not universal atomicity proof.
+Keep the independent audit unchanged. An immutable-v123 same-battery A/B run and
+alignment-chat pending-DMA diagnosis are in progress. Public v80/v92 stay intact.
+
+The same prior-office battery/urban0-1sequence reproduces the identical failure
+on immutable v123 at Noe `(0,2)` BG2. Broader office art did not introduce it;
+the earlier32-bit transfer fix is incomplete across frame phases. Evidence:
+`.tools/benchmarks/concept-v123-office-phase-transient/`. The refreshed private
+26-page v123 all-town PDF/gallery now label this release blocker explicitly;
+they remain visual critique artifacts, not a claim that the runtime is clean.
+
+**v125 source summit integration — native review pending.** Twin Peaks now
+reserves two exposed summit envelopes and a connecting saddle before forest
+packing, replacing its generic two-row ledges with offset three-row cliff/stair
+stacks. The middle `70/71/72` grass-backed family is supported by original native
+map usage; sand-backed `88/8A` would create visible seams and is not used. General
+metatile72 and graphics100/101/116/117 are now protected from own-art/seam reuse,
+with independently checked native record hash, collision classifications and
+reservation fixture. All81world source tests pass. Gym, routes, signs, resident
+positions and stop footprints remain stable. No new art IDs, flags or warps are
+allocated. The concept's lower residential base is still absent. Do not count
+this as native rendering or whole-map visual acceptance; active engine v124 is
+frozen while the alignment chat diagnoses the phase-dependent crossing blocker.
+
 **October 24 resumed source refinement — private v123, native checks pending.**
 The user explicitly renewed the keep-going instruction. The active scope remains
 translation of all19 expanded concepts; the historical deadline is superseded.

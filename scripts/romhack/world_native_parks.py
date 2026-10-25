@@ -46,8 +46,11 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
         point=(event['x'],event['y'])
         nearest=min(lanes,key=lambda p:(abs(p[0]-point[0])+abs(p[1]-point[1]),p[1],p[0]))
         clear|=raster_path([point,nearest])
+    from world_twin_summits import prepare as prepare_summits, furnish as furnish_summits
+    summits=prepare_summits(plan,lanes,protected)
+    if summits:clear|=summits['clear']
     from world_concept_terraces import compose, draw as draw_terraces
-    terraces=compose(plan['world_id'],GLADES[plan['world_id']],lanes,protected,clear)
+    terraces=[] if summits else compose(plan['world_id'],GLADES[plan['world_id']],lanes,protected,clear)
     for y in range(height):
         for x in range(width):
             if (x,y) not in protected:grid[y][x]=grass
@@ -72,6 +75,7 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
         if 0<=x<width and 0<=y<height and grid[y][x]==grass:
             grid[y][x]=sand
     draw_outcrops(plan,grid,cards,relief)
+    if summits:furnish_summits(plan,grid,summits,token)
     draw_terraces(plan,grid,terraces)
     draw_pond(plan,grid)
     from world_park_stops import add_park_stops
