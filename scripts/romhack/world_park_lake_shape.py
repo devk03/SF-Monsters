@@ -1,8 +1,8 @@
-"""Unwired Golden Gate Park lake candidate using existing General shoreline.
+"""Golden Gate Park lake geometry using existing General shoreline.
 
-Replace world_park_water's pond_cells/draw_pond imports only after review. Reserve
-pond_cells BEFORE forest packing, then call draw_pond(plan, grid, cards, lanes)
-where the old pond was drawn, BEFORE park stops. Never run both pond painters.
+Reserve pond_cells BEFORE forest packing, then call
+draw_pond(plan, grid, cards, lanes) BEFORE park stops. This replaces the former
+rectangular painter; never run both pond painters.
 
 Original Route104 and FarawayIsland_Interior use staggered C8/CA/D8/DA corners
 with D1 between them. These native diagonal joins also form the inward bends;
@@ -10,7 +10,8 @@ there is no separate low-bank concave tile. A1 has D1's eight graphics words
 and is already protected. Their behavior attributes differ (1010 vs1016);
 retain A1 to preserve the existing scenic pond's behavior. Do not mix the tall C0/C2
 cliff banks into this low shoreline. No new art, native IDs, VRAM slots, flags,
-warps or HM behavior are required. Native build/gameplay review is still pending.
+warps or HM behavior are required. Version-specific native evidence and
+remaining visual gates are recorded in docs/game-spec.md section15.1.
 """
 
 ORIGIN = (58, 35)

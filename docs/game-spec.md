@@ -652,7 +652,10 @@ native rendering checks, no unintended Surf, unchanged protected state/Flash
 and the existing Pond rest conversation available. Matching website-core replay
 of that actual6017-frame walk has zero differences across294912RAM bytes.
 An actual earlier ordinary Save cold-recovers and leaves/reenters safely too.
-The77-map native circuit is running; no new browser/full-world visual approval.
+The complete77-map native circuit passes114connections,16gym and28service-room
+warps. All four park boundary pairs pass both directions with137audited stages,
+protected state/Flash intact and guide palette restoration checked. No new
+browser/full-world visual approval. Evidence: `.tools/benchmarks/concept-v128-park-transient-seams/`.
 Evidence: `.tools/benchmarks/concept-v128-{lake-scenes,lake-native-review,lake-bank-walk,lake-wasm,summit-upgrade}/`.
 
 Only existing protected low-bank General tiles are used. The old rectangular
