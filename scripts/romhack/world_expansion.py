@@ -219,6 +219,9 @@ def expand(plans, manifest):
             furnish_ground(plan,grid,stamp,token)
             from world_presidio import landscape as presidio_landscape
             presidio_landscape(plan,grid,lanes,walks,occupied,token)
+            from world_marina_venues import prepare as prepare_venues, furnish as furnish_venues
+            venue_draft=prepare_venues(plan,grid,cards,lanes,walks,occupied,sea,shore)
+            furnish_venues(plan,grid,cards,token,occupied,venue_draft)
         # Match real party-wall art to the final neighboring footprints. An end
         # cap is drawn only where the building actually exposes that side.
         architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]
