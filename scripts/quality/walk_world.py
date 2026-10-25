@@ -13,9 +13,9 @@ DELTAS = {'right': (1, 0), 'left': (-1, 0), 'up': (0, -1), 'down': (0, 1)}
 
 
 class Walker:
-    def __init__(self, controller, manifest):
+    def __init__(self, controller, manifest, *, plans=None):
         self.c, self.manifest = controller, manifest
-        self.plans = {p['world_id']: p for p in generate(manifest)}
+        self.plans = {p['world_id']: p for p in (generate(manifest) if plans is None else plans)}
         groups = json.loads((ROOT / '.tools/pokeemerald-world-host/data/maps/map_groups.json').read_text())
         self.ids = {(g, n): name for g, group in enumerate(groups['group_order'])
                     for n, name in enumerate(groups[group])}

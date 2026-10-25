@@ -278,11 +278,24 @@ def main():
     parser.add_argument('--name',required=True);parser.add_argument('--group',choices=['urban','nature','water','all','transient'],default='urban')
     parser.add_argument('--start-trial',type=int,default=0);parser.add_argument('--trial-count',type=int,default=8)
     parser.add_argument('--check-menu',action='store_true',help='Separate post-trial palette13 restoration check')
+    parser.add_argument('--frozen-inputs',type=Path,help='Immutable build-receipt inputs directory with world.json and generated plans')
+    parser.add_argument('--transient-frames',action='store_true',help='Audit all16crossing frames even for other trial groups')
     args=parser.parse_args();engine=args.engine.resolve()
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',ROOT/'.tools/benchmarks'/args.name,battery=args.battery)
     dependencies=[Path(__file__)]+[Path(__file__).parent/n for n in
         ('world_probe.py','world_cold_continue.py','walk_world.py','check_creature_resources.py','flash_audit.py')]
-    dependencies.append(ROOT/'romhack/world/world.json')
+    manifest_path=ROOT/'romhack/world/world.json'
+    plans=None
+    if args.frozen_inputs:
+        manifest_path=args.frozen_inputs/'world.json'
+        generated=args.frozen_inputs/'generated'
+        content=json.loads((generated/'content.json').read_text())
+        paths=[generated/Path(name).name for name in content['maps']]
+        plans=[json.loads(path.read_text()) for path in paths]
+        dependencies.extend([generated/'content.json']+paths)
+    manifest=json.loads(manifest_path.read_text())
+    dependencies.append(manifest_path)
+    transient=args.group=='transient' or args.transient_frames
     frozen={}
     for source in dependencies:
         data=source.read_bytes();destination=c.output/'dependencies'/source.name
@@ -290,7 +303,7 @@ def main():
         frozen[source.name]=hashlib.sha256(data).hexdigest()
     stages=[]
     try:
-        cold_continue(c);w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()));audit=RenderAudit(c)
+        cold_continue(c);w=Walker(c,manifest,plans=plans);audit=RenderAudit(c)
         flash=args.battery.read_bytes();_,sections=max(s for n in (0,1) if(s:=unpack_slot(flash,n)))
         saved=b''.join(sections[n] for n in range(1,5))
         if audit.read(c.symbols['gPlayerParty'],600)!=saved[0x238:0x490]:
@@ -320,14 +333,14 @@ def main():
                         'up':(width//2,0),'down':(width//2,height-1)}[side]
             entry=port_for(target,OPPOSITE[direction])
             w.go(port_for(owner,direction));c.step(0,60);stages.append(audit.check(w,f'{number}-source-edge'))
-            cross(c,w,audit,direction,target,f'{number}-forward',stages,args.group=='transient')
+            cross(c,w,audit,direction,target,f'{number}-forward',stages,transient)
             if w.location()[0]!=target:raise ValueError('Connection did not reach authored target')
             stages.append(audit.check(w,f'{number}-destination-edge'))
             inward=center(w,target)
             w.go(inward);c.step(0,60);stages.append(audit.check(w,f'{number}-destination-inward'))
             if target in ('route_17','route_18','league_route') and not stages[-1]['surf']:
                 raise ValueError('Water crossing did not exercise genuine Surf')
-            w.go(entry);cross(c,w,audit,OPPOSITE[direction],owner,f'{number}-reverse',stages,args.group=='transient')
+            w.go(entry);cross(c,w,audit,OPPOSITE[direction],owner,f'{number}-reverse',stages,transient)
             stages.append(audit.check(w,f'{number}-reverse-edge'))
             if w.location()[0]!=owner:raise ValueError('Reverse connection returned to wrong map')
             w.go(center(w,owner));c.step(0,60);stages.append(audit.check(w,f'{number}-reverse-inward'))
@@ -356,7 +369,8 @@ def main():
         c.checkpoint('walk-only-returned')
         if (c.output/'walk-only-returned.sav').read_bytes()!=args.battery.read_bytes():raise ValueError('Seam traversal rewrote Flash')
         result={'passed':True,'rom_sha256':c.digest(),'group':args.group,'walk_only_trials':len(selected),
-                'frozen_dependencies':frozen,
+                'frozen_dependencies':frozen,'transient_frames':transient,
+                'frozen_build_inputs':str(args.frozen_inputs.resolve()) if args.frozen_inputs else None,
                 'start_trial':args.start_trial,'total_group_trials':total,
                 'stages':stages,'flash_unchanged':True,'protected_state_unchanged':True,
                 'separate_guide_palette_check':args.check_menu,
