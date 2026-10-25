@@ -1,13 +1,13 @@
 """Twin Peaks landform candidate; existing terrain and bindings only.
 
 Grass middle70/71/72 is supported by Route117/123 and MtPyre native stacks;
-88/8A are sand-backed alternatives. Integration prerequisites are recorded below.
+88/8A are sand-backed alternatives. Shared guards pin their native allocations.
 Prepare AFTER native outcrop/protected-cell planning but BEFORE forest packing;
 union draft['clear'] into the forest's clear set. Replace the generic Twin Peaks
 terraces, not other parks' terraces. Furnish AFTER outcrop drawing and BEFORE
 park-stop/flower finishing. All land stays elevation3; this is visual relief,
-not a new elevation gate. The lower residential base in the concept remains
-out of scope; this does not complete the whole-map translation. Native
+not a new elevation gate. This module does not build the concept's lower
+residential base; the whole-map translation remains unfinished. Native
 gameplay/visual approval remains pending.
 """
 

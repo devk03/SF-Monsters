@@ -8,6 +8,7 @@ from walk_world import Walker
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--state',required=True,type=Path)
     parser.add_argument('--name',required=True)
+    parser.add_argument('--engine',type=Path,default=ROOT/'.tools/pokeemerald-world-host')
     parser.add_argument('--only-area',help='Capture one destination after a verified interrupted tour')
     parser.add_argument('--areas',help='Capture an explicit comma-separated destination subset')
     parser.add_argument('--street-views',action='store_true',help='Inspect both sides and ends of each urban block')
@@ -15,7 +16,7 @@ def main():
     if args.only_area and args.areas:parser.error('Choose one destination selector')
     selected=set(args.areas.split(',')) if args.areas else ({args.only_area} if args.only_area else None)
     state=args.state.resolve()
-    engine=ROOT/'.tools/pokeemerald-world-host';manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
+    engine=args.engine.resolve();manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
     allowed={a['id'] for a in manifest['areas']}|{manifest['league']['venue']}
     if selected and not selected<=allowed:raise ValueError('Unknown destination selection')
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',ROOT/'.tools/benchmarks'/args.name,

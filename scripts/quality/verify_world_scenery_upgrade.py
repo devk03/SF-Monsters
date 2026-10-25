@@ -10,12 +10,13 @@ from flash_audit import unpack_slot
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--saved',required=True,type=Path);parser.add_argument('--name',required=True)
+    parser.add_argument('--engine',type=Path,default=ROOT/'.tools/pokeemerald-world-host')
     args=parser.parse_args();saved=args.saved.resolve()
     expected=json.loads((saved/'save-result.json').read_text())
     battery=(saved/'saved.sav').read_bytes()
     _,sections=max(slot for n in (0,1) if (slot:=unpack_slot(battery,n)))
     old=b''.join(sections[n] for n in range(1,5))
-    engine=ROOT/'.tools/pokeemerald-world-host'
+    engine=args.engine.resolve()
     c=Controller(engine/'sf-world-blockout.gba',engine/'sf-world-blockout.elf',
                  ROOT/'.tools/benchmarks'/args.name,battery=saved/'saved.sav')
     def large(address,size):

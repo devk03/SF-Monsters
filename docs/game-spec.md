@@ -674,6 +674,26 @@ allocated. The concept's lower residential base is still absent. Do not count
 this as native rendering or whole-map visual acceptance; active engine v124 is
 frozen while the alignment chat diagnoses the phase-dependent crossing blocker.
 
+The isolated v125 native build now passes deterministic generation, compiled
+resources and patch roundtrip: SHA
+`dad5180da3111d0adcee24fb5a77e2b0af366f391713d99d6138a082af95d294`, receipt
+`674e14bb689c4f8090de91867b4d77c9`. Its engine is
+`.tools/pokeemerald-summits-v125-host`; the active v124 failure engine was not
+modified. Quality scene capture, full-map extraction and scenery-upgrade tools
+now accept `--engine` while retaining cartridge/state provenance checks.
+
+Actual Twin Peaks gameplay and full-map live rendering pass in that isolated
+engine. All four longer stairs are explicitly walked down and back up with native
+controls, without rewriting Flash. A real v123 ordinary Save at `(41,22)` recovers
+to clear ground `(41,21)` beside the new cliff and proves a route out and back;
+complete party, money, inventory, flags and chapter preservation pass. Earlier
+office Save recovery also passes. Evidence is under
+`.tools/benchmarks/concept-v125-{summit-scenes,summit-native-review,stair-walks,summit-upgrade}/`.
+The taller cliff faces are visible, but still form separate horizontal rock rims;
+the full hill silhouettes and lower residential edge remain unresolved. Native
+placement/terrain validation does not close visual acceptance or the separately
+reproduced phase-dependent scene-transfer blocker.
+
 **October 24 resumed source refinement — private v123, native checks pending.**
 The user explicitly renewed the keep-going instruction. The active scope remains
 translation of all19 expanded concepts; the historical deadline is superseded.

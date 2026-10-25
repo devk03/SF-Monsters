@@ -104,6 +104,7 @@ def main():
     parser.add_argument('--tour', type=Path, required=True)
     parser.add_argument('--areas',help='Audit an explicit destination subset captured in its own matching tour')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--engine',type=Path,default=ROOT/'.tools/pokeemerald-world-host')
     parser.add_argument('--supplementary-tour',type=Path,action='append',default=[])
     parser.add_argument('--checkpoint-tour',action='store_true',
                         help='Audit saved native checkpoints from an interrupted tour; no uninterrupted-route claim')
@@ -124,7 +125,7 @@ def main():
     districts = json.loads((ROOT/'romhack/world/districts.json').read_text())['areas']
     concept_root=ROOT/'output/imagegen/neighborhood-ideals-v2-expanded'
     references={item['id'].replace('-','_'):item for item in json.loads((concept_root/'prompts.json').read_text())['images']}
-    engine = ROOT/'.tools/pokeemerald-world-host'
+    engine = args.engine.resolve()
     digest = hashlib.sha256((engine/'sf-world-blockout.gba').read_bytes()).hexdigest()
     if digest != evidence['rom_sha256']:
         raise ValueError('Tour and native cartridge differ')

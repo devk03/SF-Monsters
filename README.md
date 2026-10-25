@@ -24,6 +24,9 @@ All-town activity checks are in progress. The preceding v122 also passes a
 matching WASM replay, six animation-frame crossing trials, all 77 city-guide
 contexts and a short local browser smoke. These checks do not grant visual approval
 or full browser/mobile acceptance. The published patch has not been replaced.
+Another ordinary-Save frame phase reproduces a transient mixed scene on both
+v123 and v124. The private candidate remains blocked from release while that
+scene-transfer defect is fixed; see the current spec checkpoint.
 
 ## Published preview
 
