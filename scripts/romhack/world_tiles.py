@@ -349,6 +349,14 @@ def compile_kit(root=ROOT, profile='residential'):
         quiet = bytes(3 if x == 15 or y == 15 else 1
                       for y in range(16) for x in range(16))
         card('court_walk',quiet,16,16,7,paving,7,False,floor=True)
+    if profile=='civic':
+        # Reuse complete roof/foundation rows and repeat the existing window
+        # storey. Height changes consume no extra graphics or metatile IDs.
+        base=catalog['highrise']
+        for name,repeats in [('highrise_medium',2),('highrise_tall',4)]:
+            catalog[name]=dict(base,tiles=[list(r) for r in
+                (base['tiles'][:2]+base['tiles'][2:3]*repeats+base['tiles'][3:])],
+                explicit_cells=True)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

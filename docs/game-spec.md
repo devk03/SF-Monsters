@@ -643,6 +643,19 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v122 source massing pass — not yet a new native ROM.** Dogpatch now reserves
+larger western warehouses and a working yard; Treasure Island has a warehouse /
+ferry-workshop yard. These reuse existing complete 7x5 warehouse and crane cards,
+replacing some small-house rows without new graphics. Financial District uses
+6- and 8-row office variants assembled from existing roof, window-storey and
+foundation rows. The variants use explicit metatile matrices and add no graphics
+or metatile IDs. Source card/footprint bounds now permit height8, while full
+matrix, collision, in-bounds and approach checks remain mandatory. All81world
+source tests and the independent77-map contract pass. Native appearance, changed
+Save recovery, boundary budgets in a linked build and actual views remain open.
+The active private native ROM is still v121; the alignment chat is testing its
+one-frame BG3 transfer defect using immutable v121 inputs in an isolated engine.
+
 **v121 visual review and transition blocker.** All 57 connected pairs pass settled
 native VRAM/viewport checks in both directions and inward walking: 342 audited
 stages, unchanged protected state and Flash. However, the stricter animation-frame

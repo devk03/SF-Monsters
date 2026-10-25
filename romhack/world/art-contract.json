@@ -5213,6 +5213,106 @@
             "right"
           ],
           "architecture_type": "duplex"
+        },
+        "highrise_medium": {
+          "first": 575,
+          "width": 3,
+          "height": 6,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              575,
+              576,
+              577
+            ],
+            [
+              578,
+              579,
+              580
+            ],
+            [
+              581,
+              582,
+              583
+            ],
+            [
+              581,
+              582,
+              583
+            ],
+            [
+              584,
+              585,
+              586
+            ],
+            [
+              587,
+              588,
+              589
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "office_tower"
+        },
+        "highrise_tall": {
+          "first": 575,
+          "width": 3,
+          "height": 8,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              575,
+              576,
+              577
+            ],
+            [
+              578,
+              579,
+              580
+            ],
+            [
+              581,
+              582,
+              583
+            ],
+            [
+              581,
+              582,
+              583
+            ],
+            [
+              581,
+              582,
+              583
+            ],
+            [
+              581,
+              582,
+              583
+            ],
+            [
+              584,
+              585,
+              586
+            ],
+            [
+              587,
+              588,
+              589
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "office_tower"
         }
       }
     },

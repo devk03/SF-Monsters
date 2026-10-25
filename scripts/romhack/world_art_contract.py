@@ -16,7 +16,7 @@ def load_profiles():
         cells={}
         for card in profile['cards'].values():
             first,w,h=card['first'],card['width'],card['height']
-            if (any(type(n) is not int for n in (first,w,h)) or not 1<=w<=11 or not 1<=h<=5
+            if (any(type(n) is not int for n in (first,w,h)) or not 1<=w<=11 or not 1<=h<=8
                     or first<512 or first>=1024 or type(card['blocked']) is not bool
                     or card['behavior'] not in (0,0x80) or card['layer']!=1):
                 raise ValueError('Invalid SF card extent/behavior')
