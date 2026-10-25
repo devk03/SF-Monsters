@@ -111,7 +111,7 @@ class BuildingVarietyTests(unittest.TestCase):
 
     def test_authored_parcels_keep_clear_frontage_and_readable_notices(self):
         plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
-        for identifier,left,right,rows in [('dogpatch',50,58,(21,22,29,30)),('mission',42,56,(21,22,29,30)),('north_beach',72,81,(21,22))]:
+        for identifier,left,right,rows in [('mission',42,56,(21,22,29,30)),('north_beach',72,81,(21,22))]:
             p=next(p for p in plans if p['world_id']==identifier)
             self.assertIn('authored_parcel',p)
             for y in rows:
@@ -138,7 +138,7 @@ class BuildingVarietyTests(unittest.TestCase):
     def test_every_urban_district_has_two_usable_planted_cut_throughs(self):
         plans=generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
         for p in plans:
-            if p['world_id'] not in URBAN:continue
+            if p['world_id'] not in URBAN or p['world_id']=='dogpatch':continue
             self.assertEqual(len(p['pedestrian_courts']),2,p['world_id'])
             for court,notice in zip(p['pedestrian_courts'],p['court_notices']):
                 x,top=court['x'],court['top']
@@ -147,6 +147,40 @@ class BuildingVarietyTests(unittest.TestCase):
                 ox,oy=notice['object']
                 self.assertTrue(p['legend'][p['rows'][oy][ox]][1])
                 self.assertTrue(any(e['script']==notice['script'] for e in p['bg_events']))
+
+    def test_authored_dogpatch_has_safe_sites_and_real_timber_docks(self):
+        # The user rejected the shared courtyard/frontage template. Dogpatch's
+        # authored blocks may replace it, while real routes/notices remain safe.
+        from collections import deque
+        p=next(p for p in generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
+               if p['world_id']=='dogpatch')
+        self.assertFalse(p['authored_dogpatch']['generic_frontage_packing'])
+        self.assertEqual(p['connections'],[dict(map='MAP_ROUTE105',direction='left',offset=20)])
+        self.assertTrue(any(a['kind']=='room_entry' and (a['x'],a['y'])==(5,8) for a in p['access_points']))
+        actors={(n['x']+dx,n['y']+dy) for n in p['npcs']
+                for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)
+                for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
+        free={(x,y) for y,row in enumerate(p['rows']) for x,c in enumerate(row)
+              if not p['legend'][c][1] and (x,y) not in actors}
+        seen={(16,16)};pending=deque(seen)
+        while pending:
+            x,y=pending.popleft()
+            for q in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                if q in free and q not in seen:seen.add(q);pending.append(q)
+        for point in ((0,32),(5,8),(26,14),(91,22),(90,42),(66,59)):
+            self.assertIn(point,seen)
+        for a in p['access_points']:
+            self.assertIn((a['x'],a['y']),seen)
+        event_scripts={e['script'] for e in p['bg_events']}
+        self.assertTrue({'WBParcel_dogpatch','WBPlace_dogpatch',
+                         'WBCourt_dogpatch_0','WBCourt_dogpatch_1'}<=event_scripts)
+        catalog=compile_kit(profile='industrial')['catalog']
+        deck={n for row in catalog['dock_deck']['tiles'] for n in row}
+        for x,y in ((84,21),(91,22),(84,41),(90,42)):
+            self.assertIn(p['legend'][p['rows'][y][x]][0],deck)
+        # Piling ends are visibly solid; no asphalt extension masquerades as pier.
+        for x,y in ((93,21),(93,22),(92,41),(92,42)):
+            self.assertTrue(p['legend'][p['rows'][y][x]][1])
 
 
 if __name__=='__main__':unittest.main()

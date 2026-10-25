@@ -643,6 +643,46 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**User quality correction — towns remain substantially below the requested bar.**
+The v136functional proofs do not rebut the user's rejection of town composition.
+Stop using tiny paving/prop fixes as the main progress measure. The next pilot
+is a complete authored Dogpatch district against its expanded concept, reviewed
+as a full map and continuous player-scale walk before extending its approach.
+
+**v137 whole Dogpatch candidate — compiled, actual review underway.**
+ROM SHA `5feab56406b6967ae957446f286e89697ff81a09e9ae3755fe27e7b38004e2af`,
+receipt `8468d3d441a2406bb41cd5b4daa81993`. A dedicated composer bypasses
+Dogpatch's generic frontage bands/courts. It authors mixed-use blocks, deeper
+original factory roof/body masses, two working yards, a continuous quay, two
+bounded timber piers and one planted waterfront rest. Complete party-wall/end
+variants follow actual final neighbors. New native art adds two deep-factory
+finishes and explicit timber deck/piling cards; industrial allocation is484
+records,512secondary graphics and245own-primary graphics. Actual build/palette/
+foreign-margin budgets and BPS checks pass. Other districts retain their layout.
+
+Outside-core residents move to their actual uses, preserving IDs/scripts/order,
+favor/reward logic, flags/chapter and all module bindings. The NW service core,
+entry5,8/return5,9, spawn16,16, info12,9, discovery26,15/26,14 and actual
+MAP_ROUTE105/left/offset20connection remain. New notice sites retain the six
+outside-core script identities; source/event/standing metadata are generated
+from those authored sites together. No new state/warp/encounter allocation.
+
+All91world tests pass. Two older tests required the obsolete shared Dogpatch
+parcel coordinates and identical two-cut-through template; they were updated
+for the user's explicitly requested redesign while retaining all other towns'
+checks. Replacement checks cover real service/route/discovery access, notice
+scripts, reachable timber decks and solid visible piling ends. An actual earlier
+ordinary Save on still-valid53,41cold-Continues with protected state/Flash intact.
+Newly blocked Save recovery, moved actor-template proof, actual whole-map/scenes,
+west crossing, room return and matched WASM remain pending. No quality/human
+approval, full browser acceptance or public promotion is claimed.
+
+The source flood protects every newly authored legal standing cell from one
+real spawn. A pre-existing unreachable core pocket at12,8behind fixed Info NPC
+is unchanged; it is not used to excuse new isolated ground. The exact inherited
+core and old-Save behavior still require their own native checks.
+
+
 **v136 connected visible trails — native and complete WASM verified.**
 ROM SHA `9f668c791d551c6d767ead0f28e9a37eb181d11af4cdb528e2c7defa91e18461`,
 receipt `12b4bae00fe54ef4a88774a34a6a5b77`. Diagonal one-cell native-earth

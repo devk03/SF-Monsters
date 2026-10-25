@@ -395,6 +395,16 @@ def compile_kit(root=ROOT, profile='residential'):
             card(name,raw,w,h,bank,paving,7,deduplicate=name.endswith('_sage'))
             catalog[name]['closed_edges']=['left','right']
             catalog[name]['architecture_type']='industrial_factory'
+    if profile=='industrial':
+        from world_industrial_factory import factory_block,dock_surfaces
+        w,h,raw=factory_block()
+        for name,bank in (('factory_block',12),('factory_block_sage',11)):
+            card(name,raw,w,h,bank,paving,7,deduplicate=True)
+            catalog[name]['closed_edges']=['left','right']
+            catalog[name]['architecture_type']='industrial_factory_block'
+        deck,rail=dock_surfaces()
+        card('dock_deck',deck,16,16,12,paving,7,False,floor=True)
+        card('dock_rail',rail,16,16,12,paving,7,True)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

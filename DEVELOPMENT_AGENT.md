@@ -43,6 +43,19 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 
 ## Current checkpoint and next work
 
+The user again rejected overall town quality. Prioritize ONE complete Dogpatch
+rebuild against its expanded concept before spreading another small fix across
+towns. Functional counts/tests do not establish acceptable composition. Current
+private v137 bypasses generic frontage/court packing for authored attached blocks,
+deeper factory roof masses, loading yards, a continuous quay and actual timber
+piers. Outside-core resident positions follow their roles; IDs/scripts/order,
+service/discovery/state and the real west route remain fixed. It compiles and
+passes91source tests; old ordinary Save Continue passes. Actual whole-map/walking
+review, newly blocked Save recovery and further native/WASM checks are underway.
+Do not call it a good or finished town before inspecting it against the concept.
+Road/yard scale, density and variety at player scale determine the next iteration.
+The north-summit pilot is deferred behind this whole-town priority.
+
 Latest compiled candidate is v136 (`0.0.136-connected-trails-world-draft`).
 Visible diagonal dirt trails across the five parks now share edges instead of
 meeting only at corners. The western Twin hill link uses the same rule. A

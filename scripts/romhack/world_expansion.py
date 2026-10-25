@@ -22,6 +22,11 @@ def expand(plans, manifest):
         if profile not in kits:
             kits[profile] = compile_kit(profile=profile)
         cards = kits[profile]['catalog']
+        if name=='dogpatch':
+            from world_dogpatch_district import compose
+            authored=compose(plan,cards)
+            plan.clear();plan.update(authored)
+            continue
         old = plan['rows']
         def token(style,x=0,y=0):
             tiles = cards[style]['tiles']

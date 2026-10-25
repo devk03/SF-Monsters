@@ -79,3 +79,39 @@ def factory():
     # Shallow concrete loading thresholds connect physically to the sidewalk.
     box(10,74,47,75,3);box(55,74,91,75,3);box(96,74,104,75,3)
     return width,height,bytes(pixels)
+
+
+def factory_block():
+    """A deep roof/body mass, not stacked miniature facade strips."""
+    width,height=112,112
+    pixels=bytearray(width*height)
+    def box(x0,y0,x1,y1,color):
+        for y in range(y0,y1+1):
+            for x in range(x0,x1+1):pixels[y*width+x]=color
+    box(4,7,107,63,1);box(6,9,105,61,2)
+    # Quiet zinc roof planes with complete parapet caps and two low vents.
+    for y in (10,28,46):
+        box(7,y,104,y,3);box(7,y+1,104,y+1,1)
+    for x in (26,54,82):box(x,12,x,60,1)
+    for x,y in ((19,18),(75,39)):
+        box(x+2,y+3,x+15,y+10,1);box(x,y,x+12,y+7,13)
+        box(x,y,x+12,y+1,3);box(x+1,y+3,x+11,y+3,1)
+    box(3,59,108,62,1);box(4,59,107,59,3)
+    # Retain the existing native-pixel clerestory/loading facade at full size.
+    _,_,front=factory()
+    for y in range(31,80):
+        pixels[(y+32)*width:(y+33)*width]=front[y*width:(y+1)*width]
+    return width,height,bytes(pixels)
+
+
+def dock_surfaces():
+    """Original timber deck/piling art in the existing warehouse palette."""
+    deck=bytes(9 if y%5==4 else 10 if y%5==0 else
+               1 if (x,y) in ((2,2),(13,7),(2,12)) else 6
+               for y in range(16) for x in range(16))
+    rail=bytearray(deck)
+    for y in range(16):
+        for x in range(16):
+            if y in (3,4,5):rail[y*16+x]=9 if y==5 else 10
+            if x in (2,3,12,13) and 1<=y<=11:rail[y*16+x]=9
+    return deck,bytes(rail)
