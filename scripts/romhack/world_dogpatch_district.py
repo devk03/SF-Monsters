@@ -24,10 +24,10 @@ ROWS = (
 BUILDINGS = (
     ('corner_walkup',38,1),('corner_walkup_sage',53,18),
     ('corner_walkup',2,53),
-    ('factory_block',58,2),('factory_block_sage',66,2),
-    ('factory_block_sage',58,18),('workshop',66,19),('workshop__sage',69,19),
-    ('factory_block',2,35),('factory_sage',11,35),('factory',20,35),
-    ('factory',38,35),('factory_sage',46,35),('factory_block_sage',59,35),
+    ('native_loft',58,3),('workshop',70,5),
+    ('native_loft',58,18),('workshop',67,19),('workshop__sage',70,19),
+    ('native_loft',2,35),('factory_sage',11,35),('factory',20,35),
+    ('factory',38,35),('factory_sage',46,35),('native_loft',59,36),
     ('garage_hall',22,44),('garage_hall',59,44),('workshop',66,44),
 )
 # Scripts, local IDs and resident order are stable, positions follow actual use.

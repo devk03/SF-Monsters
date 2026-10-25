@@ -61,6 +61,10 @@ def main():
     args = parser.parse_args()
     if args.service_fixture and args.playtest_module:
         parser.error('Choose either a module or town-service fixture')
+    # Native-derived cards read immutable base resources during generation.
+    # Prepare that prerequisite before produce(), including on a fresh clone.
+    from bootstrap import EMERALD
+    checkout(EMERALD, 'https://github.com/pret/pokeemerald.git', EMERALD_REVISION)
     manifest = json.loads((ROOT / 'romhack/world/world.json').read_text())
     directory = ROOT / 'romhack/content/world-blockout'
     modules = load_modules(manifest, args.modules_root)

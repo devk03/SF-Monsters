@@ -643,6 +643,51 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v140 broad native loft — technical subset, visual refinement still required.**
+Version `0.0.140-dogpatch-native-loft-world-draft`, ROM SHA
+`079885cfd8aa1d2e67103ed87264269f259d83e5106225043653cf221c3fcb26`,
+receipt `4e9f42685b4746b98a47482d4ba3c6b8`. The user again rejects town quality.
+Four Dogpatch masses now use a9x6 Rustboro Flat1 parapet silhouette, with original
+SF palette mappings, neutral roof and closed timber door. The recipe reads
+hash-checked pristine Git blobs from the pinned local source; no extracted
+native bitmap/palette or source collision/warp/script is distributed. All four
+scenic buildings are solid; these are lofts, not functional new loading halls.
+Both redundant deep factory aliases are retired. Initial additive import failed
+the faithful seam allocator; final464records/512secondary/250own-primary compiles
+with guards intact. Existing services, actors, routes and progression stay bound.
+All92world tests, deterministic build/resource audits and BPS roundtrip pass.
+
+Actual ordinary139Save at5,9 cold-Continues unchanged. Another139ordinary Save
+in the formerly open gap65,6 safely resumes at67,6 after the wider building
+occupies that ground. Party, money, decoded inventory, flags/chapter and Flash
+are preserved; Repair Counter return passes. Read-only native checks verify all
+15current saved actor templates/scripts even though actor positions/count match
+139; two vertical walkers move within bounds, six notices and11static resident
+conversations work. All36frontage cells accept controller approaches and refuse
+upward wall pushes, including closed scenic doors. Actual west boundary passes
+both directions, inward walking, transient render and separate guide-palette
+checks. Evidence under `.tools/benchmarks/concept-v140-`:
+`valid-save-continue`, `loft-blocked-save-upgrade`, `dogpatch-loft-walk`,
+`loft-frontages`, `dogpatch-transient-seam`, `dogpatch-scenes` and
+`dogpatch-native-review`. Source139fixtures are ordinary controller Saves, not
+RAM injections. These proofs do not cover every side/corner of every building.
+
+Matching61161-frame local website-core replay has zero differences across
+294912RAM bytes, final SHA
+`b7283738ef2a649c40cb31ce8dd0e96ae42a08a8d3111b32a5753233f65859b2`;
+evidence `concept-v140-dogpatch-loft-wasm`. Full14077-map/57-boundary-pair,
+browser/audio/mobile and human art acceptance remain OPEN. Publicv80/v92 remain
+unchanged. This pilot does not satisfy the world goal or approve a town.
+
+Self-review and bounded alignment review of the actual full map/court agree:
+four identical golden fronts are conspicuous; small arched openings, dense
+masonry and roof hatch conflict with the larger simplified existing fronts.
+Parallel frontage bands, broad unexplained aprons and near-empty quay still
+miss the concept. Next: quieter coherent materials, genuinely distinct canopy/
+workshop forms and working blocks that explain their streets/courts. Preserve
+the useful broad roof/body scale; do not respond with more narrow paint aliases.
+Review note: `.tools/native-loft-v140/alignment-review.md`. Goal remains active.
+
 **v139 Dogpatch street activity — native subset verified, quality still open.**
 ROM SHA `8a88439c138291178542deb6536886a9207ddca6420976a55f004825345887f3`,
 receipt `556587a6f80941ba9e811372fc92afb6`. Six provisional fictional background

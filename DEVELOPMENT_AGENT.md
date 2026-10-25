@@ -46,6 +46,20 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 The user again rejected overall town quality. Prioritize ONE complete Dogpatch
 rebuild against its expanded concept before spreading another small fix across
 towns. Counts/tests are functional evidence, not acceptable composition.
+Private v140 replaces four Dogpatch masses with a build-only native-derived
+Rustboro parapet loft and retires both deep-factory aliases. The additive first
+attempt failed seam capacity and was rejected; final464records/512secondary/
+250own-primary fits without relaxing guards. Actual native full-map/player
+captures,36front wall pushes, unchanged-position139Save, newly blocked139Save
+65,6→67,6, actor/dialogue/room checks and west transient crossing pass. All92tests
+and matching61161-frame local WASM replay pass. See15.1 for exact identity.
+Self/alignment review still rejects four golden clones, mismatched texture,
+parallel facade strips and broad unexplained paved yards. Keep broad building
+depth, quiet its materials and compose cohesive working blocks; do not roll this
+out as finished town art. Full140world/browser/human gates remain open.
+Native-derived card generation now requires the pinned local Emerald source
+checkout. `build_world.py` prepares it before generation; standalone source
+checks need that same bootstrap prerequisite. No fake/blank fallback is allowed.
 Current private v139 adds six provisional background people to the authored
 Dogpatch pilot: courier, coffee break, quay walker, deck hand, garden neighbor,
 and studio assistant. Native15-template refresh from an older nine-person Save,
