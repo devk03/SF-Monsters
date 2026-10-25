@@ -1,5 +1,9 @@
 # Development agent — shared world and contributor modules
 
+Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
+contains a second, much wider set for all 19 areas. V1 is preserved for comparison.
+These are concept images; native dimensions and contracts are unchanged.
+
 Ideal concepts: output/imagegen/neighborhood-ideals-v1/README.md contains all 18
 campaign destinations plus a Presidio bonus, generated independently of current
 maps. They are unapproved art-direction studies, not native-ready assets. Read

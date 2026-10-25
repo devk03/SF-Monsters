@@ -1,4 +1,5 @@
 """Build the review gallery for original generated neighborhood concepts."""
+import argparse
 import html
 import json
 from pathlib import Path
@@ -9,7 +10,12 @@ NATURE = {'golden-gate-park', 'twin-peaks', 'lands-end', 'sutro-tower', 'angel-i
 
 
 def main():
-    manifest = json.loads((DIRECTORY / 'prompts.json').read_text())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--directory', type=Path, default=DIRECTORY)
+    directory = parser.parse_args().directory.resolve()
+    directory.relative_to(ROOT / 'output/imagegen')
+    manifest = json.loads((directory / 'prompts.json').read_text())
+    expanded = manifest.get('edition') == 'expanded'
     rows = manifest['images']
     cards, links = [], []
     readme = ['# Ideal SF neighborhood concepts', '',
@@ -17,8 +23,12 @@ def main():
               '**Design concepts, not implementation screenshots or ready-to-use GBA assets.** These explore architecture, landmarks, street composition and planting. Perspective, detail and geography need review before conversion.', '',
               '[Offline review gallery with notes](index.html) · [Exact generation prompts and image hashes](prompts.json)', '',
               'Click any image to inspect it at full size. The gallery keeps notes locally where browser storage is available; export them to share.', '']
+    if expanded:
+        readme[0] = '# Expanded ideal SF neighborhood maps'
+        readme[2] = 'All 18 campaign destinations plus Presidio / Presidio Heights, redesigned as much larger district maps. Generated with the built-in image_gen tool. More connected blocks, side streets and destination clusters; longer branching routes in nature areas.'
+        readme[6] += ' · [Original concept collection](../neighborhood-ideals-v1/README.md)'
     for number, row in enumerate(rows, 1):
-        if not (DIRECTORY / row['file']).is_file():
+        if not (directory / row['file']).is_file():
             raise ValueError('Missing generated concept: ' + row['file'])
         name = html.escape(row['name'].title())
         filename = html.escape(row['file'], quote=True)
@@ -26,14 +36,17 @@ def main():
         brief = row['brief'].split('. ')[0].rstrip('.') + '.'
         label = 'Bonus geography' if row.get('bonus') else f'Campaign destination {number:02d}'
         category = 'nature' if row['id'] in NATURE else 'urban'
+        comparison = (f'<p><a href="../neighborhood-ideals-v1/{filename}" target="_blank" rel="noopener">Compare with the original concept</a></p>' if expanded else '')
         links.append(f'<a href="#{identifier}">{name}</a>')
         cards.append(f'''<article id="{identifier}" data-category="{category}">
 <header><span class="eyebrow">{label} · CONCEPT</span><h2>{name}</h2></header>
 <a class="art" href="{filename}" target="_blank" rel="noopener" aria-label="Open {name} at full size"><img src="{filename}" width="1536" height="1024" loading="lazy" alt="Ideal {name} neighborhood concept, generated from scratch"></a>
 <div class="body"><p>{html.escape(brief)}</p><label for="note-{identifier}">Keep / change</label><textarea id="note-{identifier}" data-note="{identifier}" rows="3" placeholder="Which ideas should shape the game?"></textarea>
-<details><summary>Generation prompt</summary><p class="prompt">{html.escape(row['prompt'])}</p></details></div></article>''')
+{comparison}<details><summary>Generation prompt</summary><p class="prompt">{html.escape(row['prompt'])}</p></details></div></article>''')
         readme.extend([f'## {number:02d}. {row["name"].title()}' + (' — bonus concept' if row.get('bonus') else ''), '',
                        f'![Ideal {row["name"].title()} concept]({row["file"]})', '', brief, ''])
+        if expanded:
+            readme.extend([f'[Compare with the original concept](../neighborhood-ideals-v1/{row["file"]})', ''])
     page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SF neighborhood concepts</title><style>
 :root{color-scheme:light;font-family:system-ui,-apple-system,sans-serif;color:#25342e;background:#f4f3ee}*{box-sizing:border-box}body{margin:0}main{max-width:1440px;margin:auto;padding:40px 24px 64px}.intro{max-width:850px}.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5e7166}h1{font-size:clamp(28px,4vw,46px);line-height:1.1;letter-spacing:-.035em;margin:12px 0 16px}h2{font-size:21px;margin:7px 0 0}p{line-height:1.6}.intro p{color:#58665d}.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:26px 0}button,select{font:inherit;padding:10px 14px;border:1px solid #c7cfc7;border-radius:5px;background:#fff;color:inherit;cursor:pointer}button{background:#284b3b;color:#fff;border-color:#284b3b}button:focus-visible,select:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #c68138;outline-offset:3px}.help{font-size:12px;color:#657269}.jump{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 30px;padding:15px 0;border-block:1px solid #d4dad1}.jump a{color:#46644f;font-size:12px;text-decoration:none}.jump a:hover{text-decoration:underline}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}article{background:white;border:1px solid #d5dcd3;border-radius:6px;overflow:hidden;scroll-margin-top:20px}article header{padding:20px}.art{display:block;background:#d9e2dc;line-height:0}.art img{display:block;width:100%;height:auto}.body{padding:0 20px 20px}.body>p{font-size:13px;color:#536456}.body label{font-size:12px;font-weight:600;display:block;margin:16px 0 7px}textarea{display:block;width:100%;resize:vertical;border:1px solid #c9d1c7;border-radius:4px;padding:10px;font:14px/1.5 system-ui;background:#fdfdfa;color:#263c2d}details{margin-top:16px;font-size:12px;color:#607266}summary{cursor:pointer}.prompt{font-size:12px;white-space:pre-wrap}.bottom{font-size:12px;color:#637267;margin-top:28px}a{color:#2d6547}[hidden]{display:none!important}@media(max-width:760px){main{padding:26px 14px 40px}.grid{grid-template-columns:1fr;gap:18px}article header{padding:16px}.body{padding:0 16px 16px}.tools>*{max-width:100%}.help{flex-basis:100%}}@media print{.tools,.jump,details,.bottom{display:none}.grid{display:block}main{padding:0}article{break-inside:avoid;page-break-after:always;margin:0;border:0}textarea{height:70px}.intro{page-break-after:always}}
@@ -47,9 +60,15 @@ document.querySelector('#filter').addEventListener('change',event=>{for(const ca
 for(const link of document.querySelectorAll('.jump a'))link.addEventListener('click',()=>{document.querySelector('#filter').value='all';for(const card of document.querySelectorAll('article'))card.hidden=false});
 document.querySelector('#export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({collection:'sf-neighborhood-ideals-v1',exported_at:new Date().toISOString(),notes},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='sf-neighborhood-concept-notes.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
 </script></html>'''
-    (DIRECTORY / 'index.html').write_text(page.replace('@@LINKS@@', ''.join(links)).replace('@@CARDS@@', ''.join(cards)))
-    (DIRECTORY / 'README.md').write_text('\n'.join(readme) + '\n')
-    print(f'Built gallery and README for {len(rows)} concepts in {DIRECTORY}')
+    if expanded:
+        page = page.replace('SF neighborhood concepts', 'Expanded SF neighborhood maps')
+        page = page.replace('18 campaign destinations + a Presidio bonus. Ideal designs generated from scratch, independent of the current game maps.', '19 larger district maps. More connected blocks, side streets and destination clusters; longer branching trails in nature areas.')
+        page = page.replace('sf-neighborhood-ideals-v1', 'sf-neighborhood-ideals-v2-expanded')
+        page = page.replace('sf-neighborhood-concept-notes.json', 'sf-expanded-neighborhood-map-notes.json')
+        page = page.replace('.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}', '.grid{display:grid;grid-template-columns:1fr;gap:32px}')
+    (directory / 'index.html').write_text(page.replace('@@LINKS@@', ''.join(links)).replace('@@CARDS@@', ''.join(cards)))
+    (directory / 'README.md').write_text('\n'.join(readme) + '\n')
+    print(f'Built gallery and README for {len(rows)} concepts in {directory}')
 
 
 if __name__ == '__main__':

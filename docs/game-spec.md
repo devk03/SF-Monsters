@@ -644,6 +644,34 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**October 24 expanded ideal-map collection — v2 concept art only.** The user
+asked for a bigger map image for every neighborhood. Generated all 19 areas again
+with the built-in image_gen tool into
+`output/imagegen/neighborhood-ideals-v2-expanded/`. The brief targets roughly
+five times the conceptual land area: 10–14 urban blocks with many smaller
+buildings, multiple destination clusters, and 6–8 connected subareas in nature
+maps. This is a visual scale target, not measured native-map geometry or verified
+building/connection counts. All 18 campaign areas and the separate Presidio /
+Presidio Heights bonus have individual expanded images and exact prompts.
+The first Mission draft incorrectly invented a waterfront and was regenerated
+as an inland district; only the corrected version is in the final collection.
+
+All 19 PNGs were verified readable and recorded with dimensions/SHA256 hashes.
+The full-width HTML gallery includes per-area original-concept links, separate
+review-note storage and JSON export. Generate it with
+`python3 scripts/quality/build_neighborhood_concept_gallery.py --directory output/imagegen/neighborhood-ideals-v2-expanded`.
+The original v1 gallery and README regenerate byte-identically and its images
+are preserved. The expanded desktop gallery was inspected in the browser;
+private screenshot: `.tools/benchmarks/neighborhood-ideal-concepts-v2-expanded/gallery-desktop.png`.
+A localhost-only preview has a ten-minute hard cap and is stopped after QA.
+
+These expanded images do not change the current ROM, town dimensions, route
+contracts, current public game or any acceptance gate. Detail, perspective,
+geography and actual traversal must be adapted and verified before implementation.
+No native build, game deployment or GitHub workflow was run for this request.
+
+
+
 **October 24 ideal neighborhood image concepts — generated, not accepted.**
 At the user's request, generated all 18 campaign destinations from first
 principles with the built-in image_gen tool, without supplying current-game
