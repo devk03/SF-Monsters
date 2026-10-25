@@ -46,6 +46,8 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
         point=(event['x'],event['y'])
         nearest=min(lanes,key=lambda p:(abs(p[0]-point[0])+abs(p[1]-point[1]),p[1],p[0]))
         clear|=raster_path([point,nearest])
+    from world_concept_terraces import compose, draw as draw_terraces
+    terraces=compose(plan['world_id'],GLADES[plan['world_id']],lanes,protected,clear)
     for y in range(height):
         for x in range(width):
             if (x,y) not in protected:grid[y][x]=grass
@@ -58,6 +60,7 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     from world_forest_edges import finish_forest
     if forest==TREES:finish_forest(grid,legend,clear|protected,grass)
     draw_outcrops(plan,grid,cards,relief)
+    draw_terraces(plan,grid,terraces)
     draw_pond(plan,grid)
     from world_park_stops import add_park_stops
     add_park_stops(plan,grid,cards,GLADES[plan['world_id']],lanes,protected)

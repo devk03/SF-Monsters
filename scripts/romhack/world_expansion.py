@@ -126,6 +126,7 @@ def expand(plans, manifest):
                     if y0==y1:
                         bands.add((min(x0,x1),max(x0,x1),y0-7))
                         bands.add((min(x0,x1),max(x0,x1),y0+5))
+            road_frontages=set(bands)
             # Residential side lanes occupy block interiors instead of leaving
             # entire green rectangles between the principal street walls.
             phase=sum(map(ord,name))%4
@@ -143,7 +144,7 @@ def expand(plans, manifest):
             from world_concept_blocks import frontage_bands, mark_composition
             authored = frontage_bands(name)
             if authored is not None:
-                bands = authored
+                bands = authored|road_frontages
                 mark_composition(plan)
             index = 0
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):

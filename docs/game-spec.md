@@ -643,6 +643,20 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Concept translation v119 — source composition, native review pending.**
+All thirteen urban districts now have individually sized finite block envelopes,
+retaining their actual street frontages and two clear walking rows below houses.
+Deep plots use short internal mews instead of vacant lawns. District shore masks
+now include Marina, Mission Bay, the ballpark and the Financial District; Dogpatch
+retains its two working piers. Twin Peaks, Sutro, Lands End and Angel Island have
+native cliff/stair candidates at selected clearings. These are ordinary walking
+stairs, not new HM gates. Nine existing density/variety/frontage/court tests pass.
+This is source-level progress only: the new composition has not yet been built,
+walked or visually accepted. The active private native ROM remains v118.
+The alignment chat is integrating a richer eight-family SF facade prototype;
+shared-primary tile and seam budgets must pass before adopting it. Presidio is
+still absent from the native world and remains explicitly outstanding.
+
 
 **Concept translation checkpoint v118 — functional Dogpatch draft, visual gap open.**
 Private target `10073ce757cd66b2b2bdf8fb4b16b409e241cb3d3cc389ebcfd3400b62a89820`
