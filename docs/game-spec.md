@@ -643,6 +643,58 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v139 Dogpatch street activity — native subset verified, quality still open.**
+ROM SHA `8a88439c138291178542deb6536886a9207ddca6420976a55f004825345887f3`,
+receipt `556587a6f80941ba9e811372fc92afb6`. Six provisional fictional background
+people now occupy the street corner, coffee bench, quay, loading pier, garden
+and studio approach. Their dialogue describes those actual places. No public
+figure quotes/casting or new story/reward/state allocation is claimed.
+
+The district has15NPCs, within the existing15object reserve, leaving the player
+slot intact. First nine source IDs/scripts/coordinates and all map geometry,
+props, events, collision/elevation and all10linked art profiles match final138.
+Proof: `.tools/dogpatch-street-life-v139/preservation.json`. The compiler's old
+horizontal-only source rule initially refused vertical wander; it now admits
+exactly one bounded axis, preserving wall/required-arrival overlap guards and
+rejecting unreviewed two-axis movement. Independent hand-authored contract cases
+cover safe vertical motion, a wall, spawn obstruction and dual-axis rejection.
+All92world tests and actual compilation/budget/BPS checks pass.
+
+A real138ordinary Save with nine resident templates cold-Continues into139at the
+same position, preserving party, inventory, money, flags/chapter and Flash. Native
+read-only inspection proves all15templates have their current IDs, coordinates
+and script pointers. Two new vertical walkers actually move: courier37,17to37,16
+and quay walker80,24through80,25to80,26, always within their allocated bounds.
+Actual native review also passes11field renders, six notices,11static resident
+conversations and Repair Counter return. Four roaming residents are excluded
+from the static conversation count; only the two new vertical walkers have new
+explicit motion observations. Evidence:
+`.tools/benchmarks/concept-v139-{nine-resident-save-continue,dogpatch-life-walk}/`.
+Matching61161-frame local website-core replay passes, zero differences across
+294912RAM bytes; final RAM SHA
+`17a9186393820a7b7f51f9fe83c2e22d3ccd927e9827c6c91dd418206cfd1e1d`.
+Evidence: `concept-v139-dogpatch-life-wasm/`. Full139world/browser and human
+art acceptance remain unproven. Publicv80/v92 are unchanged.
+
+**Next art direction — inherited native typologies, not more facade-count claims.**
+Read-only inspection of original local Emerald maps identifies a broad Rustboro
+parapet block9x6 and Mauville recessed-canopy front7x4 as useful next silhouettes.
+Their source record/graphic/bank costs are NOT a proven fit in the current498-
+record profile. Use build-only native resource recipes and original SF material/
+signage edits; do not commit extracted pixels/palettes or import source warps.
+A possible first replacement retires the now-redundant deep-sage factory alias
+and replaces one mass with a broad native-derived loft/warehouse. Measure exact
+record, own/foreign graphic and palette costs, then inspect actual native views.
+Study: `.tools/native-building-typology-study.md`. No native building import has
+been implemented or visually accepted yet. A read-only targeted retirement of
+`factory_block_sage` leaves471records (41free), versus498currently, with the same
+252own-primary graphics. All three live uses must be redesigned before removing
+that alias; this is not a valid current layout or a proven native import budget.
+Capacity/placement notes: `.tools/dogpatch-street-life-v139/native-import-capacity.json`
+and `.tools/dogpatch-next-native-import.md`. Whole-block composition, repetitive
+fronts, oversized paving and all other district quality gates remain open.
+
+
 **v138 Dogpatch composition revision — private native subset candidate.**
 Final ROM SHA `dedb3377fb8cc4fec19aa1eda59861583f7576c4b4d7600589d9e34a48f2eca2`,
 receipt `a5c829c5af9c43acba47dfd13c2e5673`. A self-review of actual137native

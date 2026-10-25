@@ -346,8 +346,9 @@ class _World:
             _integer(rx,0,1,'ambient movement x range')
             _integer(ry,0,1,'ambient movement y range')
             if rx or ry:
-                _need(event.get('movement') == 'MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT'
-                      and ry == 0, 'movement', 'Only bounded horizontal ambient movement is allocated')
+                _need((rx == 1 and ry == 0 and event.get('movement') == 'MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT')
+                      or (rx == 0 and ry == 1 and event.get('movement') == 'MOVEMENT_TYPE_WANDER_UP_AND_DOWN'),
+                      'movement', 'Only bounded single-axis ambient movement is allocated')
                 point = (event['x'],event['y'])
                 envelope = {(point[0]+dx,point[1]+dy) for dx in range(-rx,rx+1)
                             for dy in range(-ry,ry+1)}

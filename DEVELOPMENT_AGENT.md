@@ -46,6 +46,16 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 The user again rejected overall town quality. Prioritize ONE complete Dogpatch
 rebuild against its expanded concept before spreading another small fix across
 towns. Counts/tests are functional evidence, not acceptable composition.
+Current private v139 adds six provisional background people to the authored
+Dogpatch pilot: courier, coffee break, quay walker, deck hand, garden neighbor,
+and studio assistant. Native15-template refresh from an older nine-person Save,
+bounded vertical movement for two walkers, six notices,11static conversations
+and service return pass. All92world tests pass; source guards retain wall,
+arrival, max15object and single-axis bounds. Matching61161-frame local website-core replay passes with zero294912RAM
+differences. Full139world/browser and human art gates remain open.
+All v138geometry/art/state bindings and the original nine residents are unchanged.
+This does not establish a finished or visually approved town.
+
 Current private v138 (final SHA/receipt in15.1) bypasses generic frontage/courts
 for authored blocks, L-shaped corners, deeper original roofs, defined loading
 yards, a continuous quay and actual timber piers. The first137 draft remained
@@ -68,7 +78,7 @@ record art budget needs deliberate room for new typologies; a read-only exact
 record dedup study saves only9records, not a solved capacity problem.
 The north-summit pilot is deferred.
 
-Latest compiled candidate is v136 (`0.0.136-connected-trails-world-draft`).
+Last complete full-world validation checkpoint is v136 (`0.0.136-connected-trails-world-draft`).
 Visible diagonal dirt trails across the five parks now share edges instead of
 meeting only at corners. The western Twin hill link uses the same rule. A
 regression test fails on frozen135's broken visible path and passes on136.
@@ -82,7 +92,7 @@ also passes, zero differences across294912RAM bytes. No136browser repeat or
 human visual acceptance is claimed. V135 below retains
 its completed exact-version evidence.
 
-Latest private cartridge is v135 (`0.0.135-ridge-approaches-world-draft`):77maps,
+Historical private subset is v135 (`0.0.135-ridge-approaches-world-draft`):77maps,
 19destinations,36physical routes,114directed connections,8gym sites,14service
 interiors and222NPCs. Derive future counts from actual manifests/proof, not these
 numbers or obsolete release gates. Exact hashes/receipts are in §15.1.

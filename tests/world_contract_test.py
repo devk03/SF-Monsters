@@ -272,6 +272,18 @@ class WorldContractTests(unittest.TestCase):
         tile(p['dogpatch'],4,4,'#')
         self.reject(m,p,'movement')
 
+    def test_vertical_ambient_wander_retains_wall_arrival_and_single_axis_guards(self):
+        m,p=fixture()
+        npc=dict(id=len(p['dogpatch']['npcs'])+1,x=3,y=4,
+                 movement='MOVEMENT_TYPE_WANDER_UP_AND_DOWN',range_x=0,range_y=1)
+        p['dogpatch']['npcs'].append(npc)
+        self.assertTrue(run(m,p)['passed'])
+        tile(p['dogpatch'],3,5,'#');self.reject(m,p,'movement')
+        tile(p['dogpatch'],3,5,'.');npc.update(x=16,y=15)
+        self.reject(m,p,'movement')  # Cannot wander through spawn16,16.
+        npc.update(x=3,y=4,range_x=1)
+        self.reject(m,p,'movement')  # No unreviewed two-axis roaming.
+
     def test_small_service_room_requires_its_own_safe_reciprocal_door(self):
         m,p=fixture()
         m['interiors']=[dict(id='warming_room',area='dogpatch',engine_map='RoomOne')]

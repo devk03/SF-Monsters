@@ -32,6 +32,20 @@ BUILDINGS = (
 )
 # Scripts, local IDs and resident order are stable, positions follow actual use.
 RESIDENTS = ((55,27),(69,26),(65,57),(81,45),(25,60),(51,23),(39,42),(56,10))
+AMBIENT = (
+    (37,16,'Courier','OBJ_EVENT_GFX_MAN_2',0,1,
+     "I'm picking up, not delivering. They still handed me three bags."),
+    (43,10,'Coffee break','OBJ_EVENT_GFX_WOMAN_4',0,0,
+     "I said I'd be back in five minutes. That was before I found this bench."),
+    (80,25,'Quay walker','OBJ_EVENT_GFX_WOMAN_1',0,1,
+     "The wind's fine until you try to unfold a receipt."),
+    (90,21,'Deck hand','OBJ_EVENT_GFX_MAN_5',0,0,
+     "Other pier for the pickup. This one's for loading. Happens all day."),
+    (68,58,'Garden neighbor','OBJ_EVENT_GFX_WOMAN_2',0,0,
+     "We water these in shifts. Everyone remembers their shift after it rains."),
+    (52,29,'Studio assistant','OBJ_EVENT_GFX_MAN_3',0,0,
+     "If you're here for the ceramics, go round the side. The big door's stuck again."),
+)
 VIEWS = ((35,32,'West entry'),(47,10,'Mixed-use street'),
          (56,26,'Studio service aisle'),(18,43,'West loading yard'),
          (56,42,'Main working court'),(79,29,'Quay approach'),
@@ -94,6 +108,13 @@ def compose(source,cards):
     residents=[n for n in p['npcs'] if n['script'].startswith('WBTown_')]
     if len(residents)!=len(RESIDENTS):raise ValueError('Dogpatch resident contract changed')
     for npc,(x,y) in zip(residents,RESIDENTS):npc.update(x=x,y=y)
+    for index,(x,y,role,graphics,rx,ry,dialogue) in enumerate(AMBIENT):
+        label='WBAmbient_dogpatch_'+str(index)
+        movement=('MOVEMENT_TYPE_WANDER_UP_AND_DOWN' if ry else
+                  'MOVEMENT_TYPE_FACE_DOWN')
+        p['npcs'].append(dict(id=len(p['npcs'])+1,x=x,y=y,role=role,
+            graphics=graphics,script=label,movement=movement,range_x=rx,range_y=ry))
+        p.setdefault('extra_street_signs',[]).append(dict(script=label,text=dialogue,npc=True))
     actors={(n['x']+dx,n['y']+dy) for n in p['npcs']
             for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)
             for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
