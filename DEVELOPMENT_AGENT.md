@@ -7,8 +7,13 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v128: 19 destinations /77maps. The organic
-park lake has real native views/full-map rendering,21bank/link-cell checks,
+Latest private native candidate is v129: Marina has eleven whole venue fronts,
+two harbor approaches and eight props. Actual views/full-map,11front collision
+pushes, bar-door return, earlier bench-position Save recovery and all three
+boundary pairs/99stages pass. The matching13900-frame website-core replay
+passes with zero RAM differences.
+
+The shared world retains19destinations /77maps. The v128 organic park lake has real native views/full-map rendering,21bank/link-cell checks,
 Pond rest interaction and matching6017-frame website-core replay. The full
 77-map native circuit passes114connections,16gym and28service-room warps.
 Earlier ordinary Save recovery passes. All four park boundary pairs pass both
@@ -20,12 +25,12 @@ All57boundary pairs passed both directions (1910stages); the full77-map native
 circuit and253679-frame website-core replay passed. Existing actors, events,
 routes and park stops are preserved; no old passable tile becomes blocked.
 All86world source tests pass. These results are version-specific; browser checks
-were not repeated for v127/v128 and visual acceptance remains open.
+were not repeated for v127–v129 and visual acceptance remains open.
 
 Keep the v126 whole-scene fresh-VBlank gate and independent render audit intact.
 Read section15.1 for exact receipts. Publicv80/v92 remain intact. The alignment
-chat is developing an unwired Marina venue-corridor prototype; integrate only
-after reviewing its whole-facade and protected-binding checks.
+chat is investigating the park's northern Richmond housing edge.
+The existing resource probe is feasibility only, not native/profile integration.
 
 Keep the goal active. Next composition work: Twin Peaks still has oversized slab
 paving, rigid forest edges and incomplete hill masses; Potrero rock rims read as

@@ -1,4 +1,4 @@
-"""Unwired Marina venue corridor, replacing complete existing facade stamps.
+"""Marina venue corridor, replacing complete existing facade stamps.
 
 Two-phase integration in world_expansion AFTER ordinary packing/ground finishing
 and BEFORE final architecture attachment and resident placement:
@@ -12,7 +12,8 @@ revalidates it and commits only after all footprints/approaches pass.
 Frozen v126 receipt c7037d17b1a041c29696d1d6e7cb6447 supplies the old footprints.
 No new art/profile/ID/palette, resident, flag, service or warp is introduced.
 Cafe/bar facades are scenery; the actual Corner Bar entry remains at5,8.
-Native gameplay and human visual acceptance remain pending.
+Version-specific native evidence and remaining visual gates are recorded in
+docs/game-spec.md section15.1.
 """
 from copy import deepcopy
 

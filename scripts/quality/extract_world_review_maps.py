@@ -44,7 +44,7 @@ EXPANDED_CRITIQUE = {
  'castro':'The branching streets help. The theater needs a stronger plaza, with lighting and signage connecting it to the rest of the district.',
  'outer_sunset':'The long parallel streets fit the district better. Ocean frontage, dune edges and smaller garden lots need a dedicated pass.',
  'golden_gate_park':'Native forest, a two-lobed joined-bank lake, worn trails and furnished branch stops replace the hedge maze. Garden/conservatory composition and forest-edge variety need work; Richmond housing remains absent.',
- 'marina':'The larger connected blocks need a more recognizable bar corridor and a better transition to waterfront open space.',
+ 'marina':'An attached cafe/bar corridor now has two harbor approaches and furnished pockets. Repeat awnings, broad road surfaces and thin waterfront space remain; boats, docks, palms, patios and distinct clubhouse architecture are absent.',
  'pacific_heights':'The offset streets distinguish the layout. Formal gardens, slopes and a stronger mansion approach remain underdeveloped.',
  'twin_peaks':'Two stair-stack outlooks, saddle trails and17attached lower homes add ridge identity. Rock rims still fail to form convincing hill masses; oversized paving and rigid forest borders need refinement.',
  'noe_valley':'Interior housing rows add density. Smaller civic pockets and planted pedestrian lanes should make it feel less mechanical.',

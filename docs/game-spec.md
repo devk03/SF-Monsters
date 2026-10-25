@@ -643,20 +643,40 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**v129 Marina venue source candidate — native verification pending.** Replaces
-exactly11whole generic north-row facade stamps inside `(52,4)..(89,8)` with
-attached cafe/awning/shop groups, a central harbor passage and an eastern rest
-pocket using eight existing props. Existing front sidewalks stay open; no
-partial facade is cut away. The replacement runs after ordinary packing, before
-final attachment, so later frontage index/paint choices do not shift. A read-only
-prepare/revalidation step refuses missing/partial stamps, unexpected occupancy,
-road/shore/event/NPC overlap, incompatible art or blocked returns before writing
-any map cells. Existing Corner Bar services remain at the original door; new
-facades are scenery. No art, palette, profile, state flag, resident or warp added.
-All86world source tests pass. The alignment prototype independently preserves
-frozen/live outside-envelope cells and all bindings; gameplay remains unverified.
-A genuine v128 ordinary Save at `(85,4)` is ready to test the new bench's blocked
-position recovery. Publicv80/v92 remain unchanged; human visual acceptance open.
+**v129 compiled Marina venue corridor — native subset verified; goal active.**
+ROM SHA `ef21818c853069dbd204bb0e9f319892a7a37ad89aa1cfcc31d0543a4dd16131`,
+receipt `edb17d3bd7ca4b0aa116002b9406527b`. Eleven complete north-row facades
+are replaced with attached cafe/awning/shop groups, a central harbor passage
+and an eastern rest pocket using eight existing props. Actual controller views
+and a full live-native background map verify the new corridor. All three Marina
+boundary pairs pass both directions:99audited animation-frame/native-art stages,
+protected state/Flash intact and guide palette restoration checked. All11venue
+front pushes block correctly; eight harbor/frontage/rest approaches and the
+existing Corner Bar door roundtrip pass. A genuine v128 ordinary Save on the
+new bench at `(85,4)` cold-recovers to `(84,4)`, preserving party/count, decoded
+inventory, money, flags, chapter and Flash, with a safe room return. Matching
+13900-frame corridor/door website-core replay passes with zero differences
+across294912RAM bytes; no new browser approval. Evidence:
+`.tools/benchmarks/concept-v129-marina-wasm/`.
+Evidence: `.tools/benchmarks/concept-v129-{marina-scenes,marina-native-review,marina-upgrade,marina-transient-seams,marina-corridor-walk-v3}/`.
+The first two private corridor capture attempts failed on harness filename and
+duplicate-write errors. Those artifacts remain preserved; neither required a
+cartridge change or weaker audit. The corrected third attempt passes.
+
+Replacement runs after ordinary packing, before final attachment, preserving
+later frontage choices and existing sidewalks/bar/gym/discovery/NPC bindings.
+The read-only prepare/revalidation transaction refuses partial/missing stamps,
+unexpected occupancy, road/shore/event/NPC overlap, incompatible art and blocked
+returns before writing. No art/profile/palette/state flag/resident/warp added.
+All86world tests pass. The source prototype independently preserves outside-
+envelope cells/bindings and exercises12atomic refusals. New facade doors are
+scenery; the original Corner Bar supplies services. Native self-critique: venue
+frontage and harbor access read more clearly, but repeat awnings, large empty
+road surfaces and the thin waterfront strip still limit the concept match.
+Boats, docks, palms, patios and a distinct clubhouse remain absent. Human visual
+acceptance and complete-world/browser release gates remain open. Publicv80/v92
+are unchanged. The alignment chat is investigating a northern Richmond housing
+edge for the park; the resource-feasibility probe is not production integration.
 
 **v128 compiled organic lake — native subset verified; full world gates open.**
 ROM SHA `7c5da87f38747d3908c189c0cb762132160a71015692ca487863abff47997c4e`,
