@@ -643,23 +643,45 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**v130 Richmond park-edge source candidate — native verification pending.**
-Golden Gate Park alone now uses the dedicated `park_edge` profile. Three short
-staggered groups at `(80,4)`, `(82,12)` and `(84,20)` contain12attached facades
-covering all eight structural forms with base/sage paint. The348-cell reservation
-is prepared before forest packing; complete surviving canopies retain native
-bases. Only60frontage cells, a narrow eastern spine and two park links are
-surfaced; the rest remains grass. Original route cells are kept verbatim by
-the painter. Two ordinary residents stand outside frontage/route clearances,
-with reachable speaking positions and original dialogue. Existing park glades,
-landmarks, lake, info/discovery and route bindings are protected. No flags/HM/
-services/warps are added; facade doors remain scenery. The complete candidate
-is checked for occupancy, art, bounds and reachable returns before mutation.
-All87world tests pass; ground/paint tests also now explicitly cover both hybrid
-profiles. Native allocation, views, conversations, boundary transitions and Save
-checks are still pending. Read-only alignment planning lives in the ignored
-`.tools/park-richmond-layout-alignment.md`; implementation is in
-`scripts/romhack/world_park_richmond.py`.
+**v130 compiled Richmond park edge — native subset verified; full goal active.**
+ROM SHA `fcf47d8dd34500d1fdbdd1903f0c33c769752439f6e2b7f61da0ba0d97ad14c2`,
+receipt `ab7ecca53df84473b9f4cd2a77055428`. Golden Gate Park's dedicated
+`park_edge` kit compiles and passes linked resource/primary/palette/patch checks.
+Actual gameplay and a full live-native background map show the three staggered
+Richmond groups:12attached facades, all eight forms, sage/base paint and two
+residents. Every one of60frontage cells is walked; all12home fronts block entry;
+both residents speak/release normally and both park links return to Garden court.
+Protected party/count, decoded inventory, money, flags, chapter and Flash stay
+unchanged (ordinary native walking friendship is excluded from walk comparisons).
+All four park boundary pairs pass BOTH directions with135audited stages and
+guide palette restoration. A genuine v128 Save at Pond rest cold-Continues at
+exactly `(50,42)`, retaining protected contents and safe control. No TV flag changed.
+The full77-map native circuit passes114connections,16gym and28service-room
+warps. Matching27935-frame Richmond walkthrough replay has zero differences
+across294912RAM bytes; complete-circuit replay is running. Fresh all19-town
+captures/review packet are in progress; no browser or human visual approval.
+Evidence: `.tools/benchmarks/concept-v130-{park-profile-continue,richmond-scenes,richmond-native-review,richmond-walk,richmond-wasm,park-transient-seams,native-circuit}/`.
+
+The348-cell clear reservation is prepared before forest packing. Only60frontage
+cells, a narrow east spine and short park links are surfaced; grass remains
+between groups. Complete surviving canopies retain native bases. Existing route
+cells are excluded from the Richmond painter, with old glades, landmarks, lake,
+info/discovery and actor bindings protected. No flag/HM/service/warp added;
+new facade doors are scenery. All87world tests and all9focused variety/ground/
+paint tests pass, covering the hybrid profiles explicitly. Native self-critique:
+the housing edge is now real, but the park still has oversized/repetitive forest
+masses, underscaled landmarks and limited garden design. Richmond's groups are
+simple mews, not the concept's full urban street scene. Human approval remains
+open. Independent read-only alignment review found no blocking source issue: all1066
+original lane cells retain resolved graphics/behavior/collision/elevation, and
+old events/NPCs/stops/lake/landmarks match frozenv128. There are32intentional
+forest-collar changes outside the348-cell reservation: sixteen exposed native
+base cells above the homes and sixteen cleared former forest fragments along
+the south/east skirts. They are bounded changes, not zero outside changes.
+Actual upper-base and southeast-collar views pass independent native rendering
+and were visually inspected; complete silhouettes remain, though tree rhythm
+is still too mechanical. Evidence: `.tools/benchmarks/concept-v130-richmond-forest-collar/`
+and ignored `.tools/park-richmond-source-alignment.md`. Publicv80/v92 intact.
 
 **Park/Richmond art allocation — source declaration; native review pending.**
 `park_edge` combines all eight original facade forms, finished attachment variants

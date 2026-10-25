@@ -7,30 +7,28 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v129: Marina has eleven whole venue fronts,
-two harbor approaches and eight props. Actual views/full-map,11front collision
-pushes, bar-door return, earlier bench-position Save recovery and all three
-boundary pairs/99stages pass. The matching13900-frame website-core replay
-passes with zero RAM differences.
+Latest private native candidate is v130:19destinations /77maps /222NPCs. The
+park's Richmond edge has12attached homes/shops (all eight forms), two residents,
+two park links and complete native forest skirts. All60frontage walks,12wall
+pushes, conversations, old park Save Continue and all four park boundary pairs
+(135stages) pass. Native full-map/views and forest-collar captures were inspected.
+All87world tests and targeted9ground/paint/variety tests pass. The full77-map
+native circuit passes; matching27935-frame local website-core replay passes.
+Full-circuit replay and fresh all19-town review captures are running.
 
-The shared world retains19destinations /77maps. The v128 organic park lake has real native views/full-map rendering,21bank/link-cell checks,
-Pond rest interaction and matching6017-frame website-core replay. The full
-77-map native circuit passes114connections,16gym and28service-room warps.
-Earlier ordinary Save recovery passes. All four park boundary pairs pass both
-directions with animation-frame/native-art audits and guide palette restoration.
+Read section15.1 for exact receipts and limitations. Independent source review
+preserves all1066old lane cells and old event/actor/stop/landmark/lake bindings.
+Its32intentional forest-collar changes outside the348clear mask are documented;
+do not claim zero outside changes. The new houses remain scenery, with no new
+flag/HM/warp/service. No town has human visual acceptance.
 
-V127 added17attached Twin Peaks homes and two residents: both conversations,
-17facade pushes, native views/full-map rendering and prior Save recovery pass.
-All57boundary pairs passed both directions (1910stages); the full77-map native
-circuit and253679-frame website-core replay passed. Existing actors, events,
-routes and park stops are preserved; no old passable tile becomes blocked.
-All86world source tests pass. These results are version-specific; browser checks
-were not repeated for v127–v129 and visual acceptance remains open.
-
+V129's Marina corridor retains its bar door and passed native collision/walking,
+Save recovery, three boundary pairs and13900-frame website-core replay. V128's
+organic lake and v127's Twin housing also retain their versioned evidence.
 Keep the v126 whole-scene fresh-VBlank gate and independent render audit intact.
-Read section15.1 for exact receipts. Publicv80/v92 remain intact. The alignment
-chat is investigating the park's northern Richmond housing edge.
-The existing resource probe is feasibility only, not native/profile integration.
+Publicv80/v92 remain intact. Browser checks were not repeated for v127–v130.
+The alignment chat is planning a Dogpatch industrial block as a read-only task;
+parent owns implementation. Preserve current source during v130 evidence capture.
 
 Keep the goal active. Next composition work: Twin Peaks still has oversized slab
 paving, rigid forest edges and incomplete hill masses; Potrero rock rims read as
