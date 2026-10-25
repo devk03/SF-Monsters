@@ -22,11 +22,10 @@ ROWS = (
     (38,55,('workshop','walkup__sage','arcade','duplex','deco__sage','gable')),
 )
 BUILDINGS = (
-    ('corner_walkup',38,1),('corner_walkup_sage',53,18),
-    ('corner_walkup',2,53),
-    ('native_loft',58,3),('workshop',70,5),
-    ('native_loft',58,18),('workshop',67,19),('workshop__sage',70,19),
-    ('native_loft',2,35),('factory_sage',11,35),('factory',20,35),
+    ('walkup',38,3),('walkup__sage',53,20),('walkup',2,55),
+    ('native_studio',58,5),('workshop',66,5),('workshop__sage',69,5),
+    ('native_loft',58,18),('workshop',67,20),('workshop__sage',70,20),
+    ('native_studio',2,37),('factory_sage',11,35),('factory',20,35),
     ('factory',38,35),('factory_sage',46,35),('native_loft',59,36),
     ('garage_hall',22,44),('garage_hall',59,44),('workshop',66,44),
 )

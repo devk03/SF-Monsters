@@ -1,4 +1,4 @@
-"""Compile the original SF street kit into one bounded native secondary tileset."""
+"""Compile SF art and build-only native silhouettes into a bounded native kit."""
 import hashlib
 import json
 import struct
@@ -397,21 +397,20 @@ def compile_kit(root=ROOT, profile='residential'):
             catalog[name]['architecture_type']='industrial_factory'
     if profile=='industrial':
         from world_industrial_factory import dock_surfaces
-        from world_industrial_factory import deep_walkup
-        w,h,raw=deep_walkup()
-        for name,bank in (('corner_walkup',6),('corner_walkup_sage',11)):
-            card(name,raw,w,h,bank,paving,7,deduplicate=True)
-            catalog[name]['closed_edges']=['left','right']
-            catalog[name]['architecture_type']='urban_corner_block'
         deck,rail=dock_surfaces()
         card('dock_deck',deck,16,16,12,paving,7,False,floor=True)
         card('dock_rail',rail,16,16,12,paving,7,True)
-        from world_native_loft import loft
+        from world_native_loft import loft,canopy
         w,h,raw=loft(root)
         card('native_loft',raw,w,h,12,paving,7,deduplicate=True)
         catalog['native_loft'].update(closed_edges=['left','right'],
             architecture_type='industrial_parapet_loft',
             provenance='Pinned Emerald Rustboro Flat1 silhouette; SF materials/closed shutter')
+        w,h,raw=canopy(root)
+        card('native_studio',raw,w,h,12,paving,7,deduplicate=True)
+        catalog['native_studio'].update(closed_edges=['left','right'],
+            architecture_type='industrial_recessed_studio',
+            provenance='Pinned Emerald Mauville canopy; original SF materials/sign/closed shutter')
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

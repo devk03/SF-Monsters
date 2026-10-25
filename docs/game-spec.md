@@ -643,6 +643,65 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v141 recessed studios and quieter loft materials — private world candidate.**
+Version `0.0.141-dogpatch-studio-masonry-world-draft`, ROM SHA
+`3e500b1ff2a46dcc28da7115c33f80d75857af8266de6e4808a6ba8037ad67c6`,
+receipt `21dbb28ef90f484194a7418ddf65f63a`. Two of140's four identical lofts
+are replaced by7x4 recessed-canopy studios; the remaining lofts use muted gray
+masonry/roof material mappings. The canopy is reconstructed from pinned Mauville
+source graphics/layers at build time, with original SF colors, WORKS nameplate
+and closed shutter. Exact native grass dependencies are excluded in favor of
+SF paving; the primary recessed shadow is retained. Source gaming signage,
+warps, collision and scripts are not imported. Full native pixels stay private.
+The scenic closed shutter is not a new service entrance.
+
+First freight section `route_01` shares Dogpatch's industrial kit and crane;
+the following rail section and Potrero are unchanged. The earlier additive
+canopy attempts failed faithful-seam allocation. Retiring the artificial deep
+corner roof aliases alone did not solve it. Final source keeps those three
+walkup bodies, aligns studio-side shop foundations, and compiles the industrial
+entry transition without relaxing guards:468records/512secondary/272own-primary.
+All92world tests, deterministic native build/resource audits and BPS roundtrip
+pass. Frozen-plan comparison changes Dogpatch rows/blocks and route_01 scenery;
+Treasure Island has only unused legend changes. Actors, service/route bindings
+and progression are unchanged. See `.tools/native-canopy-v141/frozen-plan-diff.json`.
+
+Actual140ordinary Save on new studio-side building68,7 resumes safely at68,9
+with Repair Counter return. Another on the freight section's new crane14,3
+resumes at14,7, then walks out and back. The upgrade verifier now supports urban
+routes without an interior instead of assuming every such map has a room.
+Ordinary140Save5,9 resumes unchanged; original139Save65,6 stays at that reopened
+alley and moves to65,7. Party, money, decoded inventory, flags/chapter and Flash
+remain protected. Native actor templates/scripts, two vertical walkers, six
+notices,11static conversations and service return pass. All32frontage cells
+across both lofts and studios have actual controller approaches/wall pushes.
+Evidence: `.tools/benchmarks/concept-v141-{valid-save-continue,
+studio-solid-save-upgrade,freight-solid-save-upgrade,reopened-alley-save-continue,
+dogpatch-studio-walk,studio-frontages,dogpatch-scenes,dogpatch-native-review}/`.
+These checks do not establish every side/corner or visual approval.
+
+The full native77-map circuit passes114directed connections,16gym warps and
+28service-room warps (`concept-v141-full-world`). Matching local61131-frame
+website-core replay passes with zero differences across294912RAM bytes, SHA
+`b5faa724202663f9a06b5f7ba38ff479cd46d400079af0fc308dbd81f1728ad0`
+(`concept-v141-dogpatch-studio-wasm`). Complete252708-frame matching website-core
+replay also passes, zero differences across294912RAM bytes, final SHA
+`70dd2c0b1f29fb256e4bbee675abb39f9fdab6c83ed37455caad7f699c646d8d`
+(`concept-v141-full-world-wasm`). All57boundary pairs pass actual walking in
+both directions, inward steps, transient rendering and separate guide-palette
+checks, preserving protected state/Flash (`concept-v141-all-transient-seams`).
+Browser/audio/mobile, publication and human visual acceptance remain OPEN.
+Publicv80/v92 stay unchanged; all19destination quality requirements remain in scope.
+
+Actual full-map/player self-review and bounded alignment review find a useful
+new canopy shape and reduced gold/clone contrast, but persistent horizontal
+frontage bands, broad blank paving and a quay disconnected from working uses.
+Next redesign the whole main working block38..72,35..47 into enclosing work
+masses, one loading mouth and a smaller purposeful court related to the east
+street; settle geometry before fixtures/people. No count or passing check
+approves town art. `.tools/native-canopy-v141/alignment-review.md` records the
+review. Goal remains active, with no restored obsolete deadline.
+
 **v140 broad native loft — technical subset, visual refinement still required.**
 Version `0.0.140-dogpatch-native-loft-world-draft`, ROM SHA
 `079885cfd8aa1d2e67103ed87264269f259d83e5106225043653cf221c3fcb26`,

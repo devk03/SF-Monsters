@@ -46,6 +46,22 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 The user again rejected overall town quality. Prioritize ONE complete Dogpatch
 rebuild against its expanded concept before spreading another small fix across
 towns. Counts/tests are functional evidence, not acceptable composition.
+Private v141 replaces two of140's repeated lofts with a native-derived recessed
+studio canopy, original WORKS sign/closed shutter and existing SF colors. The two
+remaining lofts have muted gray masonry/roof materials. First freight section
+route_01 now shares the industrial profile; the following rail walk/Potrero stay
+unchanged. Old deep-corner roof aliases are retired, bodies remain walkups.
+All92tests/build/resource/BPS checks pass at468records/512secondary/272own-primary.
+Actual town views,32front wall pushes, resident/notice/room checks, four prior
+Save cases and complete77-map native circuit pass. Local61131-frame WASM replay
+passes. Complete252708-frame matching WASM and all57transient boundary-pair
+checks also pass;15.1 owns exact identity/evidence. No browser/public/human
+approval is claimed.
+Actual full-map/alignment review still finds parallel strips and oversized yards.
+Next author the WHOLE main work block38..72,35..47: enclosing factory/studio
+masses, a deliberate south loading mouth and smaller purposeful court related
+to the east/quay street. Decide geometry before adding props or people. Keep
+all19destinations and the broader world goal in scope; this remains a pilot.
 Private v140 replaces four Dogpatch masses with a build-only native-derived
 Rustboro parapet loft and retires both deep-factory aliases. The additive first
 attempt failed seam capacity and was rejected; final464records/512secondary/
@@ -92,7 +108,7 @@ record art budget needs deliberate room for new typologies; a read-only exact
 record dedup study saves only9records, not a solved capacity problem.
 The north-summit pilot is deferred.
 
-Last complete full-world validation checkpoint is v136 (`0.0.136-connected-trails-world-draft`).
+Previous complete full-world validation checkpoint is v136 (`0.0.136-connected-trails-world-draft`).
 Visible diagonal dirt trails across the five parks now share edges instead of
 meeting only at corners. The western Twin hill link uses the same rule. A
 regression test fails on frozen135's broken visible path and passes on136.
