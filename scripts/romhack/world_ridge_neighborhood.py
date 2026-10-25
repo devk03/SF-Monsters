@@ -56,9 +56,20 @@ def furnish(plan,grid,draft,token,cards,occupied):
     patches={};solid=set();fronts=set();keep=draft['protected']|draft['lanes']
     def floor(cells,style):
         for x,y in cells-keep:patches[x,y]=token(style,x,y)
-    floor(rectangle(6,52,24,54),'stone_walk')
-    floor(rectangle(38,60,90,61),'slab_walk')
-    floor(draft['paths'],'stone_walk')
+    # Keep the forest reservation walkable, but do not pave its entire width.
+    # Narrow pedestrian links emerge through grass verges; the residential
+    # fronts have a distinct sidewalk/curb above a single quiet road row.
+    # These are existing lower-layer surfaces, not new solids or allocations.
+    links=set().union(*(raster_path(line,radius=0) for line in LINKS))
+    floor(links,'stone_walk')
+    for left,right,sidewalk in ((6,24,52),(38,90,60)):
+        floor(rectangle(left,sidewalk,right,sidewalk),
+              'curb_north')
+        floor(rectangle(left,sidewalk+1,right,sidewalk+1),'asphalt')
+    # Pedestrian curb cuts connect each hill approach without a repeated ramp
+    # pattern along every house. The native collision/elevation stays unchanged.
+    for x,y in ((24,52),(54,60),(72,60)):
+        floor({(x,y)},'curb_cut')
     blocks=list(draft['blocks'])
     for block in blocks:
         x,y,w,h=(block[k] for k in ('x','y','width','height'))
@@ -68,7 +79,9 @@ def furnish(plan,grid,draft,token,cards,occupied):
             for dx,tile in enumerate(row):patches[x+dx,y+dy]=chr(0x100+tile-512)
         solid|=cells
         approach=rectangle(x,y+h,x+w-1,y+h+1)
-        fronts|=approach;floor(approach,'slab_walk')
+        fronts|=approach
+        # The first frontage row is the sidewalk; the second is the street.
+        # Avoid repainting either over the deliberately connected curb above.
     # Small useful places face the homes; the original park stops remain above.
     for style,x,y in (('street_tree',22,48),('bench',22,54),('flower_box',22,52)):
         card=cards[style];w,h=len(card['tiles'][0]),len(card['tiles'])
@@ -114,4 +127,5 @@ def furnish(plan,grid,draft,token,cards,occupied):
         dict(name='Eastern ridge homes',x=86,y=61)])
     plan['ridge_neighborhood']=dict(homes=len(draft['blocks']),neighbors=len(NEIGHBORS),
         bounds=[list(r) for r in RECTS],existing_trails_preserved=True,
+        street_materials='narrow stone links, grass verges, curb and asphalt',
         visual_acceptance='native review pending')

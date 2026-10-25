@@ -643,6 +643,31 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v133 Twin Peaks street-material candidate — native subset verified.**
+ROM SHA `c45ef68879ee42124ba7eefbd70006ddbce075f1dc9edcf5ba0e95c800c2bfc7`,
+receipt `226f70e63aa14153a293462f3aa7e3f7`. Oversized residential slab strips now
+have a distinct curb/sidewalk above a narrow asphalt row; hill connectors have
+narrow stone cores with grass shoulders. Independent serialized-plan comparison
+finds215changed floor cells, zero collision/elevation changes, and no changes to
+other maps, buildings, actors, scripts, events or route bindings. All87world
+source tests, native budgets and BPS roundtrip pass. Actual17house collision
+pushes,94unoccupied frontage walks, two resident conversations and return to the
+original landmark pass; protected state/Flash remain unchanged. All three Twin
+boundary pairs pass both directions; ordinary v127Twin and v132Dogpatch Saves
+cold-Continue with party/inventory/money/flags/chapter/Flash intact. Matching
+local website-core replay is pending. Actual scenes/full native map are retained
+under `.tools/benchmarks/concept-v133-ridge-{scenes,native-review,street-walk-v2,transient-seams}/`.
+
+Visual self-review: at player scale the curb/street edge is clearer, but the
+western diagonal stone link produces detached white squares; fix that next.
+Road ends, summit masses, rigid tree borders and larger concept translation
+remain incomplete. This is not human acceptance, full-world/browser repetition
+or a public release. The first private walking harness incorrectly expected a
+Twin service interior; it stopped after frontage/dialogue checks. Twin has no
+such room. Corrected v2 verifies the real original landmark instead; the failed
+harness/log is preserved and no nonexistent room roundtrip is claimed.
+
+
 **v132 selective factory — compiled and native/browser subset verified.**
 ROM SHA `397cf8bb6e35a566fc8995f5f0dcf82210a7c722de367f290ac31bbc4bc5bae0`,
 receipt `0f02720930ff40b59357d14b16d053d2`. Original code-authored112x80
