@@ -644,6 +644,25 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**Concept translation checkpoint v118 — functional Dogpatch draft, visual gap open.**
+Private target `10073ce757cd66b2b2bdf8fb4b16b409e241cb3d3cc389ebcfd3400b62a89820`
+adds Dogpatch block envelopes, east quay/two actual piers and a workshop service
+lane, plus shared roof/window/door detail changes across urban kits. All 73 source
+maps and compiled budgets pass; nine variety/frontage/court checks pass. An actual
+v115 ordinary Save cold-Continues with protected party, inventory, money, flags,
+chapter and Flash preserved. Native controller tour reaches Dogpatch services,
+workshop court, service lane and both piers; its full-map live rendering audit
+passes. Evidence under `.tools/benchmarks/concept-v118-dogpatch-{tour,full-map}`.
+
+Visual inspection rejects this as a finished concept match: code-native fronts
+are still too flat, some plots are set back too far from streets, and unprogrammed
+green setbacks still dominate. Keep this measured intermediate checkpoint; no
+human quality approval, full edge circuit, changed-shore Save recovery or release
+is claimed. Next work aligns street-wall placement and prototypes richer shared
+SF facade modules without exceeding native allocations. Public game unchanged.
+
+
+
 **October 24 active implementation request — match the expanded concepts.**
 The user explicitly asked to make each corresponding in-game neighborhood look
 as close as practical to the generated concepts. The expanded v2 maps are now

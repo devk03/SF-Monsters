@@ -16,21 +16,35 @@ def facade(name, closed=('left','right')):
             for x in range(max(0,x0),min(width,x1+1)):pixels[y*width+x]=color
     def window(left,top,*,tall=False,arch=False):
         bottom=top+(23 if tall else 11)
+        # Recessed sash, lit outer frame and a shadowed right reveal. These
+        # shared pixel modules give every form the same level of detail.
+        box(left-1,top-1,left+10,bottom+1,6)
         box(left,top,left+9,bottom,1)
         box(left+1,top+1,left+8,bottom-1,4)
         box(left+2,top+1,left+2,top+3,3)
         box(left,top+5,left+9,top+5,2)
+        box(left-1,top-1,left+10,top-1,5)
+        box(left-1,top,left-1,bottom,5)
+        box(left+9,top+1,left+9,bottom,8)
         box(left-1,bottom+1,left+10,bottom+1,5)
         if arch:
             box(left,top,left,top+2,wall);box(left+9,top,left+9,top+2,wall)
             box(left+1,top,left+8,top,5)
     def door(left):
+        box(left-1,47,left+10,61,6)
         box(left,48,left+9,61,1);box(left+1,49,left+8,60,8)
         box(left+2,49,left+7,54,4);box(left+7,56,left+7,56,5)
+        box(left+2,57,left+5,59,2)
+        box(left+1,49,left+1,60,5)
         box(left-1,47,left+10,47,5);box(left-1,62,left+10,62,12)
-    box(0,8,width-1,61,wall)
-    box(0,2,width-1,7,2);box(0,2,width-1,2,3)
-    box(0,6,width-1,7,1);box(0,8,width-1,8,5)
+    box(0,12,width-1,61,wall)
+    # A real roof plane and layered projecting cornice replace the thin flat
+    # roof stripe. The same modules join continuously across party walls.
+    box(0,1,width-1,11,2);box(0,1,width-1,1,1)
+    box(1,2,width-2,2,3);box(1,9,width-2,9,6)
+    box(0,10,width-1,10,1);box(0,11,width-1,12,5)
+    box(0,13,width-1,14,6);box(0,15,width-1,15,8)
+    box(4,2,11,6,1);box(5,2,10,4,6);box(5,2,10,2,3)
     box(0,30,width-1,31,6);box(0,30,width-1,30,5)
     box(0,45,width-1,46,6)
     box(0,60,width-1,61,13);box(0,62,width-1,63,1)
@@ -62,6 +76,7 @@ def facade(name, closed=('left','right')):
         for x in columns:window(x,16)
         box(0,33,width-1,37,6);box(0,33,width-1,33,5)
         for x in range(0,width,8):box(x,34,x+3,37,10)
+        box(0,38,width-1,38,2)
         window(3,48);door(19)
     elif name=='duplex':
         for x in columns:window(x,16)

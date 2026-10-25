@@ -140,6 +140,11 @@ def expand(plans, manifest):
             courts=propose(name,bands,width,height,occupied|parcel_cells|sea|shore,walks,lanes)
             passage_cells=set().union(*(p['cells'] for p in courts)) if courts else set()
             furnish(plan,grid,courts,stamp,token,material)
+            from world_concept_blocks import frontage_bands, mark_composition
+            authored = frontage_bands(name)
+            if authored is not None:
+                bands = authored
+                mark_composition(plan)
             index = 0
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):
                 x = max(1,left)
@@ -198,6 +203,9 @@ def expand(plans, manifest):
                         activation='interact',x=x,y=y))
                     break
         if not nature:furnish_parcel(plan,grid,cards,stamp,token)
+        if not nature:
+            from world_concept_blocks import furnish_ground
+            furnish_ground(plan,grid,stamp,token)
         # Match real party-wall art to the final neighboring footprints. An end
         # cap is drawn only where the building actually exposes that side.
         architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]

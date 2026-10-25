@@ -3,6 +3,9 @@
 
 def shoreline(identifier,width,height,lanes):
     def water(x,y):
+        if identifier=='dogpatch':
+            # The outer east street is a quay, with two real dead-end piers.
+            return x>=82+(1 if 18<=y<=26 or 38<=y<=46 else 0)
         if identifier=='lands_end':return x<6+(y//9)%3
         if identifier=='angel_island':return x<5+(y//11)%2 or x>=width-5-(y//13)%2
         if identifier=='outer_sunset':
