@@ -81,6 +81,9 @@ def main():
         for relative in json.loads(previous.read_text()):
             if relative.startswith(('data/layouts/sf_world/','data/tilesets/secondary/sf_world_','src/sf_world_guide','src/sf_world_seams')):
                 continue  # Generated files have no base revision; preserve them.
+            if relative in ('data/tilesets/secondary/petalburg/primary-slots.bin',
+                            'data/tilesets/secondary/petalburg/primary-art.4bpp'):
+                continue  # New generated overflow inputs, also absent upstream.
             path = engine / relative
             path.resolve().relative_to(engine.resolve())
             path.write_bytes(subprocess.check_output(

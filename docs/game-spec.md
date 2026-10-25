@@ -643,6 +643,31 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Native v121 checkpoint — real build, Save recovery and full route replay.**
+Private ROM SHA `e5191df5b4715b9a41a9df817842dc6d9ef90bc34809e0cc0d0df424ca718692`,
+receipt `b62d47f8b562495a928de620ec315086`, builds 77 maps and 19 destinations.
+Deterministic regeneration, compiled resources and BPS roundtrip pass. All 81
+world source tests pass. Native compilation exposed two integration bugs missed
+by source tests: zero-length overflow INCBINs and restoration of generated
+Petalburg overflow files absent upstream. Both are fixed; count-zero profiles use
+harmless C sentinels without transferring invented graphics.
+
+An actual v117 ordinary Save at Dogpatch `(90,54)` now cold-Continues onto safe
+ground `(80,54)` after the old tile becomes sea. Party, money, saved flags and
+Flash remain intact; service-room exit/return passes. Native controller circuit
+visits every map: 114 connections, 16 gym warps and 28 service-room warps pass.
+The identical 254333-frame route replays in the website's pinned WASM core with
+zero differences across 294912 guest RAM bytes. This is not foreground browser
+timing/audio acceptance. Evidence is under `.tools/benchmarks/concept-v121-*`.
+
+All nineteen destinations have matching native gameplay captures and full-map
+live rendering audits. The richer original facades now run in the cartridge.
+Full bidirectional boundary/VRAM stress checks are still running; a private
+26-page review PDF and concept/native gallery are generated but visual layout QA
+is pending. No human approval, Emerald parity or release is claimed. Landmarks,
+remaining long frontage runs, topography and green setbacks need further work.
+Public v80/v92 and GitHub's manual-only Actions configuration remain unchanged.
+
 **Continuing against the concept references.** The user explicitly said to keep
 the goal going; the expired October23 cutoff is not a renewed stop instruction.
 The goal card is active. District implementation locations and open visual gaps

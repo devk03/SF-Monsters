@@ -390,12 +390,17 @@ def apply_kit(engine, original, kit):
         (engine/relative).write_bytes(b''.join(kit['palettes'].get(bank,bytes(32)) for bank in range(16)))
         files.append(relative)
         suffix=PROFILES[profile].removeprefix('gTileset_')
+        # agbcc rejects an INCBIN of a zero-length file. The count remains zero
+        # for profiles without overflow art; harmless C sentinels keep their
+        # symbols valid without transferring an invented tile or slot.
+        slots=(f'INCBIN_U16("{directory}primary-slots.bin")' if primary else '{0}')
+        graphics=(f'INCBIN_U8("{directory}primary-art.4bpp")' if primary else '{0}')
         for path,text in [
             ('src/data/tilesets/graphics.h',
              f'\nconst u32 gTilesetTiles_{suffix}[] = INCGFX_U32("{directory}tiles.png", ".4bpp.lz", "-num_tiles 512 -Wnum_tiles");\n'
              f'const u16 gSFPrimaryCount_{suffix} = {len(primary)};\n'
-             f'const u16 gSFPrimarySlots_{suffix}[] = INCBIN_U16("{directory}primary-slots.bin");\n'
-             f'const u8 ALIGNED(4) gSFPrimaryGraphics_{suffix}[] = INCBIN_U8("{directory}primary-art.4bpp");\n'
+             f'const u16 gSFPrimarySlots_{suffix}[] = {slots};\n'
+             f'const u8 ALIGNED(4) gSFPrimaryGraphics_{suffix}[] = {graphics};\n'
              f'const u16 gTilesetPalettes_{suffix}[] = INCBIN_U16("{directory}palettes.gbapal");\n'),
             ('src/data/tilesets/metatiles.h',
              f'\nconst u16 gMetatiles_{suffix}[] = INCBIN_U16("{directory}metatiles.bin");\n'

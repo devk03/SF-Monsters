@@ -158,9 +158,10 @@ def expand(plans, manifest):
                     if x+w<=right and stamp(style,x,top):
                         # A neutral threshold strip belongs to each street wall.
                         bottom = top+len(cards[style]['tiles'])
-                        for xx in range(x,x+w):
-                            if 0<bottom<height-1 and (xx,bottom) not in occupied:
-                                grid[bottom][xx]=token(material,xx,bottom)
+                        for yy in (bottom,bottom+1):
+                            for xx in range(x,x+w):
+                                if 0<yy<height-1 and (xx,yy) not in occupied|lanes:
+                                    grid[yy][xx]=token(material,xx,yy)
                         x += w
                         index += 1
                     else:
