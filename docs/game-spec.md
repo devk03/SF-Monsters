@@ -644,6 +644,34 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**October 24 ideal neighborhood image concepts — generated, not accepted.**
+At the user's request, generated all 18 campaign destinations from first
+principles with the built-in image_gen tool, without supplying current-game
+screenshots. Added a separate Presidio / Presidio Heights bonus concept because
+that geography had been requested earlier; it is not an approved new campaign
+slot or a substitute for Pacific Heights. Each district has a separate image
+and prompt, with urban/nature-specific architecture, planting and circulation.
+The existing ROM and map layout were not changed for this task.
+
+All 19 original PNGs, exact prompts, dimensions and SHA256 hashes are saved in
+`output/imagegen/neighborhood-ideals-v1/`. `README.md` displays every image;
+`index.html` supplies full-size links, district navigation, filters and local
+review notes with JSON export. Rebuild the gallery with
+`python3 scripts/quality/build_neighborhood_concept_gallery.py`.
+All PNGs were verified readable; the actual desktop gallery was visually
+inspected. The review screenshot is private under
+`.tools/benchmarks/neighborhood-ideal-concepts-v1/gallery-desktop.png`.
+A localhost preview has a ten-minute cap and is stopped after QA.
+
+These are aspirational art-direction images, not current gameplay, exact
+geography, validated collision maps or GBA-ready tile sheets. Some generated
+perspective and detail exceed the intended native art scale and need deliberate
+adaptation. No image grants human quality acceptance; collect per-district
+feedback before treating any design as an implementation template. No game
+build, public game deployment or Actions run occurred for this concept task.
+
+
+
 **v117 alignment visual critique (subset only).** The peer found no obvious
 clipping/overlap in the captured forecourt and recognized more coherent attached
 facades, but did not grant acceptance. Remaining issues: cafe/bookshop identity

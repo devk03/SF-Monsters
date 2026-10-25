@@ -1,5 +1,10 @@
 # Development agent — shared world and contributor modules
 
+Ideal concepts: output/imagegen/neighborhood-ideals-v1/README.md contains all 18
+campaign destinations plus a Presidio bonus, generated independently of current
+maps. They are unapproved art-direction studies, not native-ready assets. Read
+section 15.1 and collect user critique before using one as a map template.
+
 Status: the October 23 four-hour session paused at 11:20 PM Pacific.
 October 24 user resumed a targeted avatar regression fix: private v116 now includes
 the authored SF courier with a compiled-byte audit. See section 15.1; the v115 PDF
