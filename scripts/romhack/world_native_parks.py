@@ -4,7 +4,7 @@ from world_district_layouts import raster_path
 
 # Each reserve has a different sequence of enclosed meadow destinations.
 GLADES={
- 'golden_gate_park':((44,20,6,4),(64,42,8,6),(32,49,5,4)),
+ 'golden_gate_park':((44,20,6,4),(52,42,4,4),(32,49,5,4)),
  'twin_peaks':((45,18,6,4),(65,35,6,4),(38,48,5,4)),
  'sutro_tower':((40,18,4,4),(68,43,5,4),(82,18,3,3)),
  'lands_end':((12,36,4,3),(63,40,5,4),(31,48,4,3)),

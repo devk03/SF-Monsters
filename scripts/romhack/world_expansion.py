@@ -87,6 +87,8 @@ def expand(plans, manifest):
                     for x in range(b['x'],b['x']+b['width'])}
         from world_parcels import reserved_cells,furnish_parcel
         parcel_cells=reserved_cells(name) if not nature else set()
+        from world_concept_places import reserved_cells as place_cells, furnish as furnish_place
+        if not nature:parcel_cells|=place_cells(name)
         passage_cells=set()
         front_approaches=set()
         def stamp(style,x,y,*,shoulder=False,parcel=False,passage=False):
@@ -204,6 +206,7 @@ def expand(plans, manifest):
                         activation='interact',x=x,y=y))
                     break
         if not nature:furnish_parcel(plan,grid,cards,stamp,token)
+        if not nature:furnish_place(plan,grid,cards,stamp,token,lanes)
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)

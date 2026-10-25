@@ -643,6 +643,19 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Concept landmarks v121 — source checks, integration in progress.**
+The ballpark now reserves a playable field and sand infield with a fan walk;
+Financial District and Mission Bay reserve small tower/lunch courts; the Mission
+has a planted community garden crossing. These parcels precede residential
+packing and preserve existing street lanes. Their notices have checked standing
+tiles. Golden Gate Park's pond expands to 18x9 water cells with native joined
+shoreline corners, replacing the abruptly cut southern edge; its rest clearing
+moves to the west shore. Five existing woodland/pond checks pass, and the
+independent 77-map source contract passes. No actual native appearance or path
+traversal is claimed for these additions yet. Rich-facade integration is changing
+the kit's legitimate primary-tile/paint-bank usage; three older variety assertions
+are currently failing and must be resolved without losing their visual intent.
+
 **Presidio source integration v120 — nineteen destinations, native checks open.**
 Presidio / Presidio Heights now has a separate 96x64 hybrid campus/residential
 layout, complete native forest groups, attached housing, visitor service room,
