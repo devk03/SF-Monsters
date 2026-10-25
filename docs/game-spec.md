@@ -643,6 +643,70 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v138 Dogpatch composition revision — private native subset candidate.**
+Final ROM SHA `dedb3377fb8cc4fec19aa1eda59861583f7576c4b4d7600589d9e34a48f2eca2`,
+receipt `a5c829c5af9c43acba47dfd13c2e5673`. A self-review of actual137native
+views rejected its remaining long facade bands. The revised composer introduces
+L-shaped mixed-use blocks, stepped deep-roof corner buildings, a break aligned
+with the core's southern passage, deeper industrial masses, explicit working
+yards and timber docks. The pier's outside-map border now continues water,
+instead of repeating hedges over the bay. Road material is restored through
+intersections and across the lower pedestrian crossing, preventing curb/paving
+bands from cutting the driveable street into disconnected segments.
+
+Native original art/resources:498industrial metatiles,512secondary graphics,
+252own-primary graphics, existing palette banks only. Actual compile/atlas/BPS
+checks and all91world tests pass. A real136ordinary Save at59,39inside a newly
+placed factory recovers to58,39and returns from Repair Counter, preserving party,
+decoded inventory, money, flags, chapter and Flash. A still-valid132Save at53,41
+restores the same position with normal controls and protected state/Flash intact.
+The west route passes both directions/inward and35transient render-audit stages,
+with guide-palette restoration. Actual final-SHA scenes/full native map are in
+`.tools/benchmarks/concept-v138b-{authored-dogpatch-scenes,dogpatch-native-review}/`.
+Save/boundary evidence: `concept-v138b-{new-building-save-upgrade,valid-actor-save-continue,dogpatch-transient-seam}/`.
+
+Actual native Save-template inspection confirms all nine source IDs, script
+pointers and newly authored actor coordinates refresh after a still-valid old
+Save. The corrected local walking review passes eleven field render audits, all
+six new notice conversations, seven static resident conversations and the real
+Repair Counter roundtrip. Two wandering residents retain their complete safe
+roaming envelopes; no conversation from them is claimed by this static subset.
+Evidence: `concept-v138b-dogpatch-native-walk-v4/`. The first private helper
+variants chose a tree footprint as a view and assumed every resident must be
+approached from below; the latter is false at the southern seawall. Those logs
+are preserved as harness errors. The corrected proof uses actual reachable
+cardinal standing positions. Matching48405-frame local website-core replay passes, zero differences across
+294912RAM bytes; final RAM SHA
+`2eed66172d609d992491f34885a89fc90865eeb45020de1db366fb744ee21132`.
+Evidence: `concept-v138b-dogpatch-wasm/`. This is the complete local review trace,
+not a full77-map or browser acceptance claim.
+Do not transfer137or earlier138cartridge results to the final SHA.
+Earlier138build/failed-study logs are preserved under their own hashes/paths;
+the unpublished private version label is shared, so exact SHA/receipt controls
+all evidence. No full-world/browser acceptance or public promotion is claimed.
+
+Visual self-critique remains substantive: there are still repetitive narrow
+fronts, oversized hard-paved spaces, insufficient everyday street activity and
+weak corner/roof variety against the ideal. The town is NOT good enough merely
+because the function checks pass. Continue whole-district refinement before
+using it as another neighborhood's template. Human art approval remains open.
+
+Next art direction must distinguish actual typologies/footprints, not count eight
+small facade/window permutations as adequate variety. More everyday pedestrian
+activity is also needed: Dogpatch still has nine authored characters across the
+expanded district. A read-only resource study compares identical rendering words
+for all named cards: blanket exact metatile-record dedup would reduce498to489,
+with unchanged pixels/palettes. Only9records are saved; it does not solve capacity
+for several genuinely new building types. No production compiler change was made
+from that study (`.tools/dogpatch-whole-v138/metatile-capacity.json`).
+
+The first road regression check exposed an actual broken material path under
+the promenade; its correction exposed negative-index paint wrapping beyond
+the left edge. The single-source flood rejected that candidate before writing
+native output; explicit bounds clipping fixes it. The independent road-material
+check now passes alongside notice/dock/service checks; it does not grade art.
+
+
 **User quality correction — towns remain substantially below the requested bar.**
 The v136functional proofs do not rebut the user's rejection of town composition.
 Stop using tiny paving/prop fixes as the main progress measure. The next pilot

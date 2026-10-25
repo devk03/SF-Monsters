@@ -3067,8 +3067,98 @@
           ],
           "architecture_type": "industrial_factory_block"
         },
-        "dock_deck": {
+        "corner_walkup": {
           "first": 994,
+          "width": 3,
+          "height": 6,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              994,
+              995,
+              996
+            ],
+            [
+              997,
+              998,
+              999
+            ],
+            [
+              997,
+              998,
+              999
+            ],
+            [
+              629,
+              630,
+              631
+            ],
+            [
+              632,
+              633,
+              634
+            ],
+            [
+              635,
+              636,
+              637
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "urban_corner_block"
+        },
+        "corner_walkup_sage": {
+          "first": 1000,
+          "width": 3,
+          "height": 6,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1000,
+              1001,
+              1002
+            ],
+            [
+              1003,
+              1004,
+              1005
+            ],
+            [
+              1003,
+              1004,
+              1005
+            ],
+            [
+              1006,
+              759,
+              760
+            ],
+            [
+              761,
+              762,
+              763
+            ],
+            [
+              764,
+              765,
+              1007
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "urban_corner_block"
+        },
+        "dock_deck": {
+          "first": 1008,
           "width": 1,
           "height": 1,
           "blocked": false,
@@ -3076,7 +3166,7 @@
           "layer": 1
         },
         "dock_rail": {
-          "first": 995,
+          "first": 1009,
           "width": 1,
           "height": 1,
           "blocked": true,

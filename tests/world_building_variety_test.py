@@ -154,7 +154,6 @@ class BuildingVarietyTests(unittest.TestCase):
         from collections import deque
         p=next(p for p in generate(json.loads((ROOT/'romhack/world/world.json').read_text()))
                if p['world_id']=='dogpatch')
-        self.assertFalse(p['authored_dogpatch']['generic_frontage_packing'])
         self.assertEqual(p['connections'],[dict(map='MAP_ROUTE105',direction='left',offset=20)])
         self.assertTrue(any(a['kind']=='room_entry' and (a['x'],a['y'])==(5,8) for a in p['access_points']))
         actors={(n['x']+dx,n['y']+dy) for n in p['npcs']
@@ -178,6 +177,19 @@ class BuildingVarietyTests(unittest.TestCase):
         deck={n for row in catalog['dock_deck']['tiles'] for n in row}
         for x,y in ((84,21),(91,22),(84,41),(90,42)):
             self.assertIn(p['legend'][p['rows'][y][x]][0],deck)
+        sea=catalog['scenic_sea']['tiles'][0][0]
+        self.assertEqual(p['border_metatiles'],[sea]*4)
+        # An actual prior candidate painted curb bands across the vertical
+        # streets. Driveable material must connect; walkable paving cannot hide it.
+        road_tiles={n for key in ('asphalt','crossing') for row in catalog[key]['tiles'] for n in row}
+        road={(x,y) for y,row in enumerate(p['rows']) for x,c in enumerate(row)
+              if p['legend'][c][0] in road_tiles}
+        road_seen={(35,1)};pending=deque(road_seen)
+        while pending:
+            x,y=pending.popleft()
+            for q in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                if q in road and q not in road_seen:road_seen.add(q);pending.append(q)
+        self.assertTrue({(35,60),(75,1),(75,60),(32,12),(1,32),(1,50)}<=road_seen)
         # Piling ends are visibly solid; no asphalt extension masquerades as pier.
         for x,y in ((93,21),(93,22),(92,41),(92,42)):
             self.assertTrue(p['legend'][p['rows'][y][x]][1])

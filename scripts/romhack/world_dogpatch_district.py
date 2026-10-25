@@ -9,25 +9,29 @@ from world_district_layouts import raster_path
 from world_architecture import FORMS
 
 ROWS = (
-    (38,1,('workshop','walkup__sage','duplex','deco__sage','gable','arcade')),
-    (38,6,('flats','shophouse__sage','workshop','walkup__sage','duplex','deco','flats__sage')),
-    (38,18,('arcade','workshop__sage','deco','walkup__sage','duplex','gable')),
-    (38,25,('shophouse','flats__sage','arcade','workshop','duplex__sage')),
-    (2,25,('workshop','walkup__sage','duplex','deco','gable__sage','arcade','workshop','walkup','duplex','workshop')),
+    (41,1,('workshop','walkup__sage','duplex','deco__sage','gable')),
+    (44,6,('workshop','walkup__sage','duplex','deco')),
+    (38,18,('arcade','workshop__sage','deco','walkup__sage','duplex')),
+    (38,25,('arcade','workshop','duplex__sage','deco')),
+    (2,25,('workshop','walkup__sage','duplex','deco')),
+    (20,25,('gable__sage','arcade','workshop','walkup')),
     (2,44,('workshop','workshop__sage','arcade','walkup','duplex','deco')),
     (38,44,('workshop','flats__sage','shophouse','workshop__sage','deco')),
-    (2,55,('walkup','duplex__sage','deco','arcade__sage','gable','workshop','walkup__sage','duplex','deco__sage','gable')),
+    (5,55,('duplex__sage','deco','arcade__sage')),
+    (20,55,('walkup__sage','duplex','deco__sage','gable')),
     (38,55,('workshop','walkup__sage','arcade','duplex','deco__sage','gable')),
 )
 BUILDINGS = (
-    ('factory_block',58,2),('factory_sage',66,3),
+    ('corner_walkup',38,1),('corner_walkup_sage',53,18),
+    ('corner_walkup',2,53),
+    ('factory_block',58,2),('factory_block_sage',66,2),
     ('factory_block_sage',58,18),('workshop',66,19),('workshop__sage',69,19),
     ('factory_block',2,35),('factory_sage',11,35),('factory',20,35),
     ('factory',38,35),('factory_sage',46,35),('factory_block_sage',59,35),
     ('garage_hall',22,44),('garage_hall',59,44),('workshop',66,44),
 )
 # Scripts, local IDs and resident order are stable, positions follow actual use.
-RESIDENTS = ((55,23),(69,26),(65,57),(81,45),(25,60),(51,23),(39,42),(56,10))
+RESIDENTS = ((55,27),(69,26),(65,57),(81,45),(25,60),(51,23),(39,42),(56,10))
 VIEWS = ((35,32,'West entry'),(47,10,'Mixed-use street'),
          (56,26,'Studio service aisle'),(18,43,'West loading yard'),
          (56,42,'Main working court'),(79,29,'Quay approach'),
@@ -52,7 +56,8 @@ def compose(source,cards):
     blocks=list(p['town_blocks']);occupied=set().union(*(rect(b['x'],b['y'],b['width'],b['height']) for b in blocks))
     roads=set()
     def fill(cells,style):
-        for x,y in cells-core:grid[y][x]=token(style,x,y)
+        for x,y in cells-core:
+            if 0<=x<width and 0<=y<height:grid[y][x]=token(style,x,y)
     def road(line):
         cells=raster_path(line,radius=1);roads.update(cells)
         fill(cells,'asphalt')
@@ -63,6 +68,9 @@ def compose(source,cards):
     lines=(((35,1),(35,60)),((75,1),(75,60)),((32,12),(75,12)),
            ((0,32),(75,32)),((0,50),(75,50)))
     for line in lines:road(line)
+    # Curb bands must stop at intersections, never stripe across a through road.
+    fill(roads,'asphalt')
+    for x in (35,75):fill(rect(x-1,31,3,3),'crossing')
     # Hard work courts are contained between actual buildings. Green is one
     # deliberate public pocket, not a collar around every pasted facade.
     fill(rect(10,40,20,8),'dark_walk');fill(rect(38,40,35,8),'dark_walk')
@@ -77,6 +85,10 @@ def compose(source,cards):
     for x,y,w,h in ((84,20,10,4),(84,40,9,4)):
         fill(rect(x,y,w,h),'dock_deck')
         fill(rect(83,y,1,h),'dock_deck')
+    # Rest/promenade surfacing must not erase the actual road beneath it.
+    fill(roads,'asphalt')
+    for x in (35,75):fill(rect(x-1,31,3,3),'crossing')
+    fill(rect(74,59,3,1),'crossing')
     # Actors are placed before scenery so every footprint respects the complete
     # roaming envelope and interaction standing cell, not just the actor pixel.
     residents=[n for n in p['npcs'] if n['script'].startswith('WBTown_')]
@@ -110,6 +122,8 @@ def compose(source,cards):
     # waterfront rest. Two clear quay columns remain continuous beside docks.
     for style,x,y in (
         ('lamp',33,17),('rack',39,15),('street_tree',54,15),
+        ('street_tree',41,7),('bench',41,9),('flower_box',43,9),
+        ('street_tree',50,25),('flower_box',52,27),
         ('recycling',12,42),('rack',28,42),('bin',52,41),
         ('lamp',73,35),('lamp',77,54),('crane',79,15),('crane',79,35),
         ('bench',59,56),('street_tree',70,55),('flower_box',60,59),
@@ -166,4 +180,6 @@ def compose(source,cards):
              scenic_viewpoints=[dict(name=n,x=x,y=y) for x,y,n in VIEWS]+p.get('scenic_viewpoints',[]),
              expanded_design=dict(size=[96,64],circulation=[list(line) for line in lines],legacy_service_block=[0,0,31,23],status='whole-district authored candidate; native/human review pending'),
              authored_dogpatch=dict(revision=1,land_use=['mixed-use blocks','studio aisle','working yards','quay','timber piers','one planted rest'],generic_frontage_packing=False,new_flags=0,new_warps=0))
+    p['border_tile']=cards['scenic_sea']['tiles'][0][0]
+    p['border_metatiles']=[p['border_tile']]*4
     return p

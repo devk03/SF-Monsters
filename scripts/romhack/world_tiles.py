@@ -402,6 +402,12 @@ def compile_kit(root=ROOT, profile='residential'):
             card(name,raw,w,h,bank,paving,7,deduplicate=True)
             catalog[name]['closed_edges']=['left','right']
             catalog[name]['architecture_type']='industrial_factory_block'
+        from world_industrial_factory import deep_walkup
+        w,h,raw=deep_walkup()
+        for name,bank in (('corner_walkup',6),('corner_walkup_sage',11)):
+            card(name,raw,w,h,bank,paving,7,deduplicate=True)
+            catalog[name]['closed_edges']=['left','right']
+            catalog[name]['architecture_type']='urban_corner_block'
         deck,rail=dock_surfaces()
         card('dock_deck',deck,16,16,12,paving,7,False,floor=True)
         card('dock_rail',rail,16,16,12,paving,7,True)

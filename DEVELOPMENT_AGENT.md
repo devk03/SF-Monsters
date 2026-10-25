@@ -45,16 +45,28 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 
 The user again rejected overall town quality. Prioritize ONE complete Dogpatch
 rebuild against its expanded concept before spreading another small fix across
-towns. Functional counts/tests do not establish acceptable composition. Current
-private v137 bypasses generic frontage/court packing for authored attached blocks,
-deeper factory roof masses, loading yards, a continuous quay and actual timber
-piers. Outside-core resident positions follow their roles; IDs/scripts/order,
-service/discovery/state and the real west route remain fixed. It compiles and
-passes91source tests; old ordinary Save Continue passes. Actual whole-map/walking
-review, newly blocked Save recovery and further native/WASM checks are underway.
-Do not call it a good or finished town before inspecting it against the concept.
-Road/yard scale, density and variety at player scale determine the next iteration.
-The north-summit pilot is deferred behind this whole-town priority.
+towns. Counts/tests are functional evidence, not acceptable composition.
+Current private v138 (final SHA/receipt in15.1) bypasses generic frontage/courts
+for authored blocks, L-shaped corners, deeper original roofs, defined loading
+yards, a continuous quay and actual timber piers. The first137 draft remained
+too striped; self-review rejected that aspect. V138 also fixes curb bands across
+through streets and bushes repeating beyond the pier over water.
+
+Native whole-map/player views and west crossing are verified; a real136Save
+inside a new building cold-Continues safely nearby and returns from Repair
+Counter, with protected state/Flash intact. An older still-valid132Save also
+restores normally. All91world tests pass. Actual source actor-cache refresh,
+six notices, seven static resident conversations and service return pass; the
+matching48405-frame local website-core replay passes with zero differences
+across294912RAM bytes. No138full-world/browser acceptance
+or public promotion is claimed. The district STILL has too many repetitive
+fronts, broad paved spaces and thin street life; keep refining it, do not roll
+this draft out as an approved template. Next priorities: genuinely different
+building footprints/silhouettes and more everyday pedestrian activity. Eight
+minor facade variants do not satisfy the intended art variety. The native498-
+record art budget needs deliberate room for new typologies; a read-only exact
+record dedup study saves only9records, not a solved capacity problem.
+The north-summit pilot is deferred.
 
 Latest compiled candidate is v136 (`0.0.136-connected-trails-world-draft`).
 Visible diagonal dirt trails across the five parks now share edges instead of

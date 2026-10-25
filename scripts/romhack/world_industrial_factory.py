@@ -115,3 +115,19 @@ def dock_surfaces():
             if y in (3,4,5):rail[y*16+x]=9 if y==5 else 10
             if x in (2,3,12,13) and 1<=y<=11:rail[y*16+x]=9
     return deck,bytes(rail)
+
+
+def deep_walkup():
+    """A narrow corner building with a real rear roof plane, native pixels."""
+    from world_rich_facades import facade
+    w,h,front=facade('walkup')
+    pixels=bytearray(w*96)
+    for y in range(4,48):
+        for x in range(3,w-3):
+            pixels[y*w+x]=1 if x in (3,w-4) or y==4 else 3 if y==5 else 2
+    for y in (19,35):
+        for x in range(5,w-5):pixels[y*w+x]=1
+    for y in range(9,15):
+        for x in range(31,39):pixels[y*w+x]=3 if y==9 else 13
+    pixels[48*w:]=front[16*w:]
+    return w,96,bytes(pixels)
