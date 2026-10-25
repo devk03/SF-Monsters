@@ -643,6 +643,41 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Native v122 checkpoint — transition fix and current-world verification.**
+Private SHA `10f363e3fce6c43dfed90fe372e9313022c2a57685e01ad14f64cc343877dbd8`,
+receipt `d2726addffeb4fc2bd337eb385d950fc`, includes larger industrial yards,
+varied office heights and the VBlank transfer fix. The old defect was real:
+16-bit graphics transfers could leave a 2048-byte BG3 map request pending while
+new graphics, palette and scroll had committed. Aligned 32-bit scene transfers
+fix that overflow. The combined v122 candidate passes six bidirectional transient
+trials /203live stages and map-menu palette return; protected state and Flash
+remain unchanged. Two additional largest-atlas trials passed separately on the
+isolated immutable-v121-layout fix candidate. Full settled edge coverage on the
+latest geometry remains to be renewed; do not substitute the older v121 result.
+
+The v122 native circuit passes all77maps,114connections,16gym and28service-room
+warps. Its matching254333-frameWASM replay has zero differences across294912RAM
+bytes. All19destinations have actual gameplay and full-map live render captures.
+The native guide is checked in all77contexts (19places/36physical routes/22rooms):
+correct marker, details browsing, return controls, Surf mode, palettes and state
+pass. Its former58-map hardcoded QA counts and intermediate-route classification
+were corrected; the actual fifth Golden Gate Park detail line was inspected.
+
+The loopback browser boots the actual v122 cartridge, cold-Continues the earlier
+ordinary office Save and accepts held game controls. A valid uninterrupted30-second
+foreground smoke reports1792executed/video frames, zero discarded guest frames,
+zero audio underrun/dropped-source frames, and an acknowledged final audio snapshot.
+It submits about30renders/second in this IAB host; this does not prove60Hzphysical
+paint, long foreground-route acceptance, mobile performance or the public ROM-upload
+flow. Evidence: `.tools/benchmarks/concept-v122-browser/`. The finite local server
+and emulator were explicitly finished. Human quality acceptance remains open.
+
+Native visual critique: industrial massing is larger, but the existing warehouse
+asset still resembles a broad brick house. The repeated tapered tower row creates
+unconvincing tiered shafts. Correct the body repetition before treating the taller
+office variant as a finished landmark. Potrero retaining courts remain an unwired
+source prototype pending integration and native review; Presidio campus work continues.
+
 **v122 source massing pass — not yet a new native ROM.** Dogpatch now reserves
 larger western warehouses and a working yard; Treasure Island has a warehouse /
 ferry-workshop yard. These reuse existing complete 7x5 warehouse and crane cards,

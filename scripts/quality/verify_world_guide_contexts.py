@@ -1,4 +1,4 @@
-"""Check native city-map location, backing palette and controls in all58maps."""
+"""Check native city-map location, backing palette and controls in every map."""
 import argparse,json,struct,subprocess,sys
 from pathlib import Path
 from world_probe import Controller,ROOT
@@ -10,6 +10,10 @@ def main():
     parser.add_argument('--state',required=True,type=Path);parser.add_argument('--name',required=True)
     parser.add_argument('--group',choices=('places','routes','interiors'))
     args=parser.parse_args();state=args.state.resolve()
+    manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
+    expected_maps=(len(manifest['areas'])+bool(manifest['league']['venue'])
+        +sum(1+len(r.get('intermediate_sections',[])) for r in manifest['routes'])
+        +1+len(manifest['gyms'])+len(manifest['interiors']))
     if args.group is None:
         groups=[]
         for group in ('places','routes','interiors'):
@@ -17,10 +21,10 @@ def main():
             subprocess.run([sys.executable,__file__,'--state',str(state),'--name',name,'--group',group],check=True)
             groups.append(json.loads((ROOT/'.tools/benchmarks'/name/'guide-contexts.json').read_text()))
         contexts=[c for result in groups for c in result['contexts']]
-        if len(contexts)!=58 or len({c['map'] for c in contexts})!=58 or len({r['rom_sha256'] for r in groups})!=1:
-            raise ValueError('Bounded guide groups do not cover exactly58maps on one cartridge')
+        if len(contexts)!=expected_maps or len({c['map'] for c in contexts})!=expected_maps or len({r['rom_sha256'] for r in groups})!=1:
+            raise ValueError('Bounded guide groups do not cover every declared map on one cartridge')
         output=ROOT/'.tools/benchmarks'/args.name;output.mkdir(exist_ok=False)
-        result=dict(passed=True,rom_sha256=groups[0]['rom_sha256'],maps=58,groups=[args.name+'-'+g for g in ('places','routes','interiors')],contexts=contexts,scope='Three bounded native guide-context groups; browser performance/visual acceptance separate')
+        result=dict(passed=True,rom_sha256=groups[0]['rom_sha256'],maps=expected_maps,groups=[args.name+'-'+g for g in ('places','routes','interiors')],contexts=contexts,scope='Three bounded native guide-context groups; browser performance/visual acceptance separate')
         (output/'guide-contexts.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k!='contexts'}));return
     engine=ROOT/'.tools/pokeemerald-world-host'
     manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
@@ -30,6 +34,9 @@ def main():
     interiors={x['id']:x['area'] for x in manifest['gyms']+manifest['interiors']}
     routes={r['id']:r for r in manifest['routes']}
     routes['league_route']={'from':manifest['league']['from_area'],'to':manifest['league']['venue']}
+    route_parents={key:key for key in routes}
+    route_parents.update({section['id']:r['id'] for r in manifest['routes']
+                          for section in r.get('intermediate_sections',[])})
     symbol_rows=subprocess.check_output(['arm-none-eabi-nm','-S','--defined-only',
         str(engine/'sf-world-blockout.elf')],text=True).splitlines()
     edge_bytes=next(int(row.split()[1],16) for row in symbol_rows if row.split()[-1]=='sSFGuideEdges')
@@ -55,7 +62,7 @@ def main():
     try:
         w=Walker(c,manifest)
         for owner in w.plans:
-            group='interiors' if owner in interiors else 'routes' if owner in routes else 'places'
+            group='interiors' if owner in interiors else 'routes' if owner in route_parents else 'places'
             if group!=args.group:continue
             w.travel(owner)
             if owner=='route_17':w.go((16,12))
@@ -63,11 +70,12 @@ def main():
             mode=byte('gPlayerAvatar')&8
             if owner=='route_17' and not mode:raise ValueError('Active-Surf context was accidentally dry')
             parent=interiors.get(owner,owner);kind=2 if owner in interiors else 0
-            if owner in routes:
-                route=routes[owner];parent=route['from'];a,b=pixels[parent],pixels[route['to']]
+            if owner in route_parents:
+                route_key=route_parents[owner]
+                route=routes[route_key];parent=route['from'];a,b=pixels[parent],pixels[route['to']]
                 # Read the compiled route's authored chart vertices, then derive
                 # its half-distance independently of the producer's midpoint.
-                edge_id=list(routes).index(owner);edge=c.read(c.symbols['sSFGuideEdges']+edge_id*edge_stride,17)
+                edge_id=list(routes).index(route_key);edge=c.read(c.symbols['sSFGuideEdges']+edge_id*edge_stride,17)
                 points=[tuple(edge[5+n*2:7+n*2]) for n in range(edge[4])]
                 if not 2<=edge[4]<=6 or points[0]!=a or points[-1]!=b:
                     raise ValueError('Compiled region corridor endpoints differ from its world connection')
@@ -87,6 +95,10 @@ def main():
             actual=tuple(byte(n) for n in ('sSFGuideCurrent','sSFGuideHereX','sSFGuideHereY','sSFGuideContext'))
             if actual!=expected or byte('sSFGuideSelected')!=expected[0]:raise ValueError(f'Wrong native current location: {owner}: {actual}, expected {expected}')
             c.picture('map-'+owner)
+            if owner in areas:
+                c.tap(1,30)
+                if not byte('sSFGuideDetails'):raise ValueError('Place details did not open')
+                c.picture('place-details-'+owner);c.tap(2,30)
             c.tap(16,30);c.tap(1,30)
             if not byte('sSFGuideDetails'):raise ValueError('A did not open place details')
             c.tap(2,60)
@@ -104,7 +116,7 @@ def main():
             events={(e['x'],e['y']) for e in plan['coord_events']}
             for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
                 target=point[0]+dx,point[1]+dy
-                if not 1<=target[0]<=30 or not 1<=target[1]<=22 or target in events:continue
+                if not 1<=target[0]<len(plan['rows'][0])-1 or not 1<=target[1]<len(plan['rows'])-1 or target in events:continue
                 if bool(plan['rows'][target[1]][target[0]] in ('W','V'))!=bool(mode):continue
                 try:path=w.path(plan,point,target)
                 except ValueError:continue
@@ -115,7 +127,8 @@ def main():
             else:raise ValueError('No adjacent movement-resume check point')
             checked.append({'map':owner,'place':parent,'marker':list(here),'kind':kind,'movement_resumed':True,'surf_mode_preserved':bool(mode)})
             print(owner,flush=True)
-        if len(checked)!={'places':18,'routes':19,'interiors':21}[args.group]:raise ValueError('Guide group coverage is incomplete')
+        expected_group={'places':len(areas),'routes':len(route_parents),'interiors':len(interiors)}[args.group]
+        if len(checked)!=expected_group:raise ValueError('Guide group coverage is incomplete')
         c.checkpoint('guide-context-returned')
         if (c.output/'guide-context-returned.sav').read_bytes()!=state.with_suffix('.sav').read_bytes():
             raise ValueError('Reading the city map rewrote ordinary Flash')

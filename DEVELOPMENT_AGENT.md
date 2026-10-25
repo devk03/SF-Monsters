@@ -7,10 +7,13 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v121:19destinations/77maps, richer SF facades,
-old-shore Save recovery, complete native connection/room circuit and matching
-WASM replay pass. All19full maps have live render audits. Full boundary stress,
-foreground browser and human visual acceptance remain open; publicv92 is intact.
+Latest private native candidate is v122:19destinations/77maps, larger industrial
+yards, richer facades and a fixed one-frame BG3 transfer defect. Native circuit,
+six transient boundary trials, all77guide contexts, WASM replay and a short local
+foreground browser smoke pass. All19full maps have live render audits. Renew full
+edge coverage after geometry changes; long browser/mobile and human visual gates
+remain open. Refine the tiered office shafts and inspect Potrero relief natively.
+Publicv92 is intact.
 
 Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
 contains a second, much wider set for all 19 areas. V1 is preserved for comparison.

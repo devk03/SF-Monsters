@@ -32,10 +32,15 @@ def main():
         sb2,=struct.unpack('<I',c.read(c.symbols['gSaveBlock2Ptr'],4))
         key,=struct.unpack('<I',c.read(sb2+0xac,4));old_key,=struct.unpack_from('<I',sections[0],0xac)
         money,=struct.unpack('<I',c.read(pointer+0x490,4));old_money,=struct.unpack_from('<I',old,0x490)
+        def inventory(raw,cipher):
+            return [(item,quantity^(cipher&65535)) for item,quantity in struct.iter_unpack('<HH',raw)]
         if ((money^key)!=(old_money^old_key)
                 or large(c.symbols['gPlayerParty'],600)!=old[0x238:0x490]
+                or c.read(c.symbols['gPlayerPartyCount'],1)!=old[0x234:0x235]
+                or inventory(large(pointer+0x560,0x2e8),key)!=inventory(old[0x560:0x848],old_key)
+                or large(pointer+0x139c+0xf8*2,10)!=old[0x139c+0xf8*2:0x139c+0xfd*2]
                 or large(pointer+0x1270,0x12c)!=old[0x1270:0x139c]):
-            raise ValueError('Scenery recovery changed party, money or saved flags')
+            raise ValueError('Scenery recovery changed party, money, inventory, chapter or saved flags')
         restored=c.position();c.checkpoint('recovered')
         if plan.get('room'):
             # New room furniture can occupy a tile from an earlier indoor Save.
@@ -55,6 +60,7 @@ def main():
                     room_return_proven=not bool(plan.get('green_route_design') or plan.get('native_park_design')),
                     route_return_proven=bool(plan.get('green_route_design') or plan.get('native_park_design')),
                     party_money_flags_flash_preserved=True,scope='actual ordinary Save on newly blocked ground')
+        result['party_money_inventory_flags_chapter_flash_preserved']=True
         (c.output/'scenery-upgrade-result.json').write_text(json.dumps(result,indent=2)+'\n')
         print(json.dumps(result))
     finally:c.close()
