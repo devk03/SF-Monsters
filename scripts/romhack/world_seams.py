@@ -207,6 +207,7 @@ def c_array(name, kind, values, width=16):
 
 def header(atlases):
     out = ['// Generated faithful connection margins. Primary terrain/animation slots are reserved.\n',
+           '#include "dma3.h"\n',
            'const u16 gSFSeamLookupVersion = 2;\n',
            '''struct SFSeamNeighbor { u8 group,num; const u16 *mapping; };
 struct SFSeamAtlas {
@@ -296,12 +297,15 @@ bool8 SFSeamTakeRedraw(void)
 static void SFSeamLoadGraphics(void)
 {
     u16 start,end;
+    // All generated art is word-aligned. LoadBgTiles queues16-bit DMA, which
+    // can exhaust VBlank before the final BG3 tilemap request. Queue32-bit
+    // copies so art and all three tilemaps finish in the same VBlank.
     if (!sSFSeamCurrent || sSFSeamTransition) return;
     for (start=0;start<sSFSeamCurrent->tileCount;start=end)
     {
         for (end=start+1;end<sSFSeamCurrent->tileCount
              && sSFSeamCurrent->tileSlots[end]==sSFSeamCurrent->tileSlots[end-1]+1;end++);
-        LoadBgTiles(2,sSFSeamCurrent->graphics+start*32,(end-start)*32,sSFSeamCurrent->tileSlots[start]);
+        RequestDma3Copy(sSFSeamCurrent->graphics+start*32,(u8 *)BG_CHAR_ADDR(0)+sSFSeamCurrent->tileSlots[start]*32,(end-start)*32,1);
     }
 }
 static void SFSeamLoadSecondary(void)
@@ -309,7 +313,7 @@ static void SFSeamLoadSecondary(void)
     // The stock heap-decompression task takes several frames. Its old tiles
     // cannot be paired with new records/palettes during those frames. A frozen
     // raw copy queues the complete secondary bank for the same next VBlank.
-    if (!sSFSeamTransition) LoadBgTiles(2,sSFSeamCurrent->secondaryGraphics,16384,512);
+    if (!sSFSeamTransition) RequestDma3Copy(sSFSeamCurrent->secondaryGraphics,(u8 *)BG_CHAR_ADDR(0)+16384,16384,1);
 }
 static void SFSeamLoadPalettes(void)
 {
