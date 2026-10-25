@@ -643,7 +643,25 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**Park/Richmond art profile staged — not wired to a map or native-reviewed.**
+**v130 Richmond park-edge source candidate — native verification pending.**
+Golden Gate Park alone now uses the dedicated `park_edge` profile. Three short
+staggered groups at `(80,4)`, `(82,12)` and `(84,20)` contain12attached facades
+covering all eight structural forms with base/sage paint. The348-cell reservation
+is prepared before forest packing; complete surviving canopies retain native
+bases. Only60frontage cells, a narrow eastern spine and two park links are
+surfaced; the rest remains grass. Original route cells are kept verbatim by
+the painter. Two ordinary residents stand outside frontage/route clearances,
+with reachable speaking positions and original dialogue. Existing park glades,
+landmarks, lake, info/discovery and route bindings are protected. No flags/HM/
+services/warps are added; facade doors remain scenery. The complete candidate
+is checked for occupancy, art, bounds and reachable returns before mutation.
+All87world tests pass; ground/paint tests also now explicitly cover both hybrid
+profiles. Native allocation, views, conversations, boundary transitions and Save
+checks are still pending. Read-only alignment planning lives in the ignored
+`.tools/park-richmond-layout-alignment.md`; implementation is in
+`scripts/romhack/world_park_richmond.py`.
+
+**Park/Richmond art allocation — source declaration; native review pending.**
 `park_edge` combines all eight original facade forms, finished attachment variants
 and sage paint with native-grass-backed foliage plus the existing windmill and
 conservatory. Only those two park landmarks are included; unrelated tower/ruins

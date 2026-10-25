@@ -3,7 +3,7 @@ import json,sys,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/romhack'))
-from world_tiles import compile_kit
+from world_tiles import compile_kit,PROFILES
 from generate_world import generate
 from world_towns import URBAN
 from world_architecture import fronts,paint_palette
@@ -24,7 +24,7 @@ class BuildingVarietyTests(unittest.TestCase):
                                      (plan['world_id'],x,y,'unprogrammed10x10lawn'))
 
     def test_grass_references_original_general_terrain_and_palette(self):
-        for profile in ('neighborhood','mixed_use','industrial','civic','culture','stadium','nature'):
+        for profile in PROFILES.keys()-{'residential'}:
             kit=compile_kit(profile=profile)
             grass=kit['catalog']['grass']['tiles'][0][0]
             self.assertEqual(kit['records'][grass-512][:4],[0x2002,0x2003,0x2003,0x2002])
@@ -55,7 +55,7 @@ class BuildingVarietyTests(unittest.TestCase):
                 self.assertEqual(middle[62*w:],isolated[62*w:],'foundation remains continuous')
 
     def test_paint_changes_facades_without_recoloring_paving_or_replacing_pixels(self):
-        for profile in ('neighborhood','mixed_use','culture','stadium','industrial','civic'):
+        for profile in ('neighborhood','mixed_use','culture','stadium','industrial','civic','ridge_town','park_edge'):
             kit=compile_kit(profile=profile)
             for name,card in kit['catalog'].items():
                 if '__' not in name:continue

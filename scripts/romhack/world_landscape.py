@@ -15,7 +15,7 @@ def landscape(plans, manifest):
         name=plan['world_id'];route=routes.get(name)
         if name not in NATURE and not route:continue
         if route and route['mode']=='walk' and name not in GREEN_ROUTES and route.get('setting')!='green':continue
-        profile='ridge_town' if name=='twin_peaks' else 'nature'
+        profile={'twin_peaks':'ridge_town','golden_gate_park':'park_edge'}.get(name,'nature')
         if profile not in kits:kits[profile]=compile_kit(profile=profile)
         kit=kits[profile];cards=kit['catalog']
         old=plan['rows'];grid=[list(row) for row in old]
