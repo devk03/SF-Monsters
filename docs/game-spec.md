@@ -643,6 +643,27 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v127 compiled residential base — native subset verified, full gates open.**
+ROM SHA `9e1379a363f9019567428b2057fcb79afc5753673335bf265c6c26c8b80b9239`,
+receipt `04fee61056714280b6b018567dec57ad`. The first build exposed a missing
+independent audit mapping for the new ridge profile; adding its explicit symbol
+suffix and a corruption-refusal test fixed the audit, without weakening it.
+All seven resource-audit tests pass. Compilation, linked resources and patch
+roundtrip pass. Actual controller travel captured Twin Peaks viewpoints and a
+complete live-native background map. Both new residents start/release ordinary
+face-player dialogue with protected party/count, decoded inventory, money,
+flags and chapter unchanged. All17new home-front pushes block correctly; Flash
+is unchanged. A real earlier ordinary Save on `(41,22)` cold-recovers to `(41,21)`
+and safely leaves/reenters through a route, preserving protected contents.
+Evidence: `.tools/benchmarks/concept-v127-{ridge-scenes,ridge-native-review,neighbor-collision,summit-upgrade}/`.
+
+Visual self-critique: the attached homes add an actual residential base, but the
+large slab paving, rigid tree borders and disconnected rock-rim silhouettes
+still fall short of the expanded reference. Human acceptance remains open.
+The all-boundary animation-frame audit is running; matching full-circuit/WASM
+and browser verification have not yet been repeated for this cartridge.
+No public deployment, full ROM publication or workflow run occurred.
+
 **v127 residential-base source candidate — not yet native-reviewed.** Twin Peaks
 now uses a hybrid kit with all eight original structural forms, sage/slate paint,
 native grass and the original foliage/rock cards. It fits475metatiles and uses

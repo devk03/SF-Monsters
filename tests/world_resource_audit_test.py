@@ -44,12 +44,12 @@ class WorldResourceTests(unittest.TestCase):
         (self.directory/'metatiles.bin').write_bytes(raw);self.rom[0x6200:0x6210]=raw
         with self.assertRaisesRegex(ValueError,'unloaded'):self.audit()
 
-    def own_primary(self):
-        self.profile='mixed_use'
-        self.directory=self.directory.rename(self.directory.with_name('sf_world_mixed_use'))
-        self.symbols={'gSFPrimaryCount_SFMixedUse':0x08000120,
-                      'gSFPrimarySlots_SFMixedUse':0x08000122,
-                      'gSFPrimaryGraphics_SFMixedUse':0x08000140}
+    def own_primary(self,profile='mixed_use',suffix='SFMixedUse'):
+        self.profile=profile
+        self.directory=self.directory.rename(self.directory.with_name('sf_world_'+profile))
+        self.symbols={'gSFPrimaryCount_'+suffix:0x08000120,
+                      'gSFPrimarySlots_'+suffix:0x08000122,
+                      'gSFPrimaryGraphics_'+suffix:0x08000140}
         struct.pack_into('<HH',self.rom,0x120,1,18)
         raw=bytes([0x21])*32
         self.rom[0x140:0x160]=raw
@@ -74,6 +74,12 @@ class WorldResourceTests(unittest.TestCase):
         (self.directory/'metatiles.bin').write_bytes(record)
         self.rom[0x6200:0x6210]=record
         with self.assertRaisesRegex(ValueError,'unloaded own-primary'):self.audit()
+
+    def test_hybrid_ridge_profile_checks_its_own_linked_primary_symbols(self):
+        self.own_primary('ridge_town','SFRidgeTown')
+        self.assertEqual(self.audit()['profile'],'ridge_town')
+        self.rom[0x140]^=1
+        with self.assertRaisesRegex(ValueError,'compiled primary-art differs'):self.audit()
 
 
 class LiveSourceArtTests(unittest.TestCase):

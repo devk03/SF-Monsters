@@ -37,7 +37,8 @@ def audit_resources(rom,read,secondary,profile,engine,symbols=None):
         from world_shared_primary import PINNED_RESERVED
         if set(slots)&PINNED_RESERVED or any(not 0<=s<432 for s in slots):raise ValueError('Own-primary art overwrites protected native slots')
         suffix={'industrial':'SFIndustrial','civic':'SFCivic','neighborhood':'SFNeighborhood',
-                'mixed_use':'SFMixedUse','culture':'SFCulture','stadium':'SFStadium'}[profile]
+                'mixed_use':'SFMixedUse','culture':'SFCulture','stadium':'SFStadium',
+                'ridge_town':'SFRidgeTown'}[profile]
         count,=read(symbols['gSFPrimaryCount_'+suffix],'H')
         if count!=len(slots):raise ValueError('Compiled own-primary count differs')
         resources.extend([('primary-slots',slots_raw,bytes(read(symbols['gSFPrimarySlots_'+suffix],str(len(slots_raw))+'B'))),
