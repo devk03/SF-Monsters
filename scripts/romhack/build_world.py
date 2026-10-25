@@ -22,6 +22,31 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def freeze_artifacts(target, elf, output, run):
+    """Preserve the first cartridge pair and receipt-specific debug variants.
+
+    Separate checkouts can produce identical ROMs with different ELF debug
+    paths. Each receipt must identify its own ELF instead of replacing the
+    first build's evidence or treating debug-byte variation as a ROM mismatch.
+    """
+    canonical_rom, canonical_elf = output/'target.gba', output/'target.elf'
+    if canonical_rom.exists() and canonical_rom.read_bytes() != target.read_bytes():
+        raise ValueError('Existing private cartridge differs; preserve and inspect.')
+    if not canonical_rom.exists():
+        shutil.copy2(target, canonical_rom)
+    if not canonical_elf.exists():
+        shutil.copy2(elf, canonical_elf)
+    destination = canonical_elf
+    if canonical_elf.read_bytes() != elf.read_bytes():
+        destination = run/'target.elf'
+        if destination.exists() and destination.read_bytes() != elf.read_bytes():
+            raise ValueError('Existing receipt ELF differs; preserve and inspect.')
+        if not destination.exists():
+            shutil.copy2(elf, destination)
+    return {'path': str(destination.relative_to(output)),
+            'sha256': digest(destination), 'canonical_sha256': digest(canonical_elf)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, default=ROOT/'.tools/pokeemerald-world-host',
@@ -183,16 +208,12 @@ def main():
         raise ValueError('Frozen patch differs; preserve existing evidence.')
     if not canonical_patch.exists():
         shutil.copy2(patch, canonical_patch)
-    for source, destination in ((target, 'target.gba'), (elf, 'target.elf')):
-        dest = output / destination
-        if dest.exists() and dest.read_bytes() != source.read_bytes():
-            raise ValueError('Existing private evidence differs; preserve and inspect.')
-        if not dest.exists():
-            shutil.copy2(source, dest)
+    native_elf = freeze_artifacts(target, elf, output, run)
     receipt = {'version': version, 'profile': 'module-playtest' if fixture else manifest['profile'],
                'experimental_connection_atlas':args.connection_atlas,
                'fixture': fixture,
                'target_sha256': digest(target), 'base_sha256': digest(base),
+               'native_elf': native_elf,
                'patch_sha256': digest(patch), 'patch_roundtrip': 'byte-identical',
                'save_magic': magic, 'save_schema': 1,
                'game_code': manifest['native']['game_code'],

@@ -17,16 +17,14 @@ work improves real street blocks, landmarks, hill terrain, nature trails and
 building massing. Follow the [district translation ledger](docs/world/concept-translation.md)
 and [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
 
-Private v123 adds Potrero stair courts, a Presidio hall/common and corrected office
-body repetition. Its complete native map/room circuit, earlier-Save recovery,
-all 57 connected pairs, six animation-frame trials and matching WASM replay pass.
-All-town activity checks are in progress. The preceding v122 also passes a
-matching WASM replay, six animation-frame crossing trials, all 77 city-guide
-contexts and a short local browser smoke. These checks do not grant visual approval
-or full browser/mobile acceptance. The published patch has not been replaced.
-Another ordinary-Save frame phase reproduces a transient mixed scene on both
-v123 and v124. The private candidate remains blocked from release while that
-scene-transfer defect is fixed; see the current spec checkpoint.
+Private v126 adds Potrero stair courts, a Presidio hall/common, broader office
+blocks and exposed Twin Peaks stairways. It fixes a reproduced crossing glitch
+by transferring the complete field scene together. All 57 connected pairs pass
+animation-frame checks in both directions; the full native circuit, matching
+WASM replay and a short foreground browser crossing/audio test also pass.
+Earlier ordinary Saves recover safely from newly occupied ground. These checks
+do not grant visual approval or full browser/mobile acceptance. District density,
+landmarks and terrain composition still need work; the published patch is intact.
 
 ## Published preview
 

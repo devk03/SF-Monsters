@@ -643,6 +643,49 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Combined native v126 checkpoint — reproduced transition defect fixed in the
+current test corpus; world goal still active.** SHA
+`740497683d8279241a2d1ad1ad8ca5d367e0d72bd0a431e5269fa6765e2c6f64`, receipt
+`c7037d17b1a041c29696d1d6e7cb6447`, combines the summit/native-allocation changes
+with the whole-scene fresh-VBlank gate. Deterministic generation, linked native
+resources and patch roundtrip pass. The complete77-map native circuit covers
+114connections,16gym and28service-room warps. Matching website-core replay runs
+253679frames with zero differences across294912RAM bytes.
+
+All57connected pairs now pass the stronger animation-frame audit in BOTH
+directions:1910verified stages, with protected state/Flash unchanged and guide
+palette restoration checked. The exact formerly failing office-phase sequence
+also passes separately (2pairs/66stages), as do six shore-phase pairs/199stages.
+Evidence: `.tools/benchmarks/concept-v126-{all-transient-seams,exact-phase-regression,shore-phase-transient}/`.
+No independent audit was weakened. New graphics are held with the old coherent
+scene until all field layers can transfer at a fresh edge.
+
+An actual ordinary Save made at Route10's left edge cold-Continues in the browser.
+Held keys visibly cross into Noe Valley and back/re-enter during a valid30-second
+foreground diagnostic.1792guest/video frames execute and1792canvas submissions
+occur, with zero discarded frames/hidden ticks. The acknowledged final audio
+snapshot reports zero underrun-output or dropped-source frames across1323008output
+frames at44100Hz. Capture/report hashes and limitations are recorded under
+`.tools/benchmarks/concept-v126-browser/`. This is a short local1xsmoke, not full
+foreground-route, physical-paint, mobile,2xspeed or public-upload acceptance.
+The emulator and finite server were explicitly finished. Publicv80/v92 are intact.
+The19-destination native capture tour and matching full-map live audits are
+complete. A refreshed26-page review PDF and linked-image concept/native gallery
+are under `.tools/benchmarks/concept-v126-review-packet/`; rendered cover, Twin
+Peaks, Financial District and priorities pages were inspected. First-legal
+menu/room lifecycle cases from the alignment chat are finishing.
+Visual quality, density, landmarks and the concept translations remain open.
+
+The default `.tools/pokeemerald-world-host` now produces the exact same v126
+cartridge as the isolated engine. Their315489defined symbol records also match.
+The first default rebuild exposed a packaging guard that rejected differing ELF
+debug bytes from another checkout despite the identical ROM. The builder now
+preserves the first canonical pair and freezes any different matching-build ELF
+inside its own receipt, recording its path/hash. It still refuses a changed
+cartridge or replacement of a receipt's existing ELF. Four focused regression
+tests pass, and the default rebuild/patch roundtrip completes under receipt
+`5d330273462f4105b58b4e501d10cfde`. Earlier evidence was not overwritten.
+
 **Fresh-VBlank fix adopted in source; combined v126 verification pending.**
 Alignment commit `6000e3b` holds the entire field graphics transaction when a
 new scene reaches a late VBlank interrupt, then commits it at the next fresh

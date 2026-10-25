@@ -7,22 +7,22 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v123: 19 destinations / 77 maps, Potrero stair
-courts, a Presidio hall/common and corrected office body repetition. The native
-map/room circuit, two earlier-Save recovery cases and four changed-district live
-render audits pass. All57boundary pairs/342settled stages, six transient trials
-and matching259762-frameWASM replay also pass. All-town activity checks are
-running. Potrero still reads as small rock barriers, and the campus is flat/sparse;
-neither has visual acceptance. Next composition priority: two exposed Twin Peaks
-summits instead of continuous woodland. Public v92 is intact. Read section 15.1
-for exact evidence; keep long browser/mobile and human visual gates open.
+Latest private native candidate is v126: 19 destinations / 77 maps, Potrero stair
+courts, a Presidio hall/common, broader offices and exposed Twin Peaks stairways.
+The reproduced late-interrupt crossing defect is fixed with whole-scene deferral.
+All 57 boundary pairs pass animation-frame audits in both directions (1,910
+verified stages); exact office and shore phases also pass. The full native circuit,
+matching 253,679-frame WASM replay and a short foreground browser crossing/audio
+test pass. All 19 current full maps and gameplay captures are available for review.
+The default world-host cartridge is byte-identical to the isolated tested ROM.
+Read section 15.1 for receipts and limits. Public v80/v92 remain intact.
 
-NEW BLOCKER: v124's office-battery phase exposes a real transient mixed scene
-on Route10 -> Noe return. The identical sequence also fails on immutable v123.
-Earlier passes do not prove atomic scene updates for every phase. Active v124
-engine is frozen for the alignment chat's read-only/isolated investigation.
-Source v125 wires exposed Twin Peaks summits and protects General72's four extra
-graphics slots; 81 source tests pass, native build/review pending. Do not publish.
+Keep the goal active. Next composition work: Twin Peaks still lacks its residential
+base and convincing hill masses; Potrero rock rims read as barriers; Presidio is
+flat/sparse. Refine the other districts against their own expanded concepts too.
+No town has human visual acceptance. Long browser/mobile, public-upload and full
+world quality gates remain open. Coordinate bounded reviews with the alignment
+chat about every 30 active minutes; do not turn test passes into visual approval.
 
 Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
 contains a second, much wider set for all 19 areas. V1 is preserved for comparison.

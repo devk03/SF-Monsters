@@ -34,8 +34,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--state', required=True, type=Path)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--engine',type=Path,default=ROOT/'.tools/pokeemerald-world-host')
     args = parser.parse_args()
-    engine, state = ROOT / '.tools/pokeemerald-world-host', args.state.resolve()
+    engine, state = args.engine.resolve(), args.state.resolve()
     c = Controller(engine / 'sf-world-blockout.gba', engine / 'sf-world-blockout.elf',
                    ROOT / '.tools/benchmarks' / args.name, state=state,
                    battery=state.with_suffix('.sav'))
