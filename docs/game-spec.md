@@ -643,6 +643,21 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Fresh-VBlank fix adopted in source; combined v126 verification pending.**
+Alignment commit `6000e3b` holds the entire field graphics transaction when a
+new scene reaches a late VBlank interrupt, then commits it at the next fresh
+edge. It gates the field callback (including OAM, palette and scroll), buffered
+GPU writes and DMA together; sound, counters and interrupt bookkeeping continue.
+The generated `main.c` hook is included in the overlay restoration ledger.
+Instruction tracing proved the previous commit released interrupts at line189,
+then DMA stopped at227 with only24320bytes counted: a late IRQ, not the40KiBcap.
+The isolated fix passes16bidirectional trials/532verified stages across office
+and shore Saves, the exact failing sequence, guide returns and both largest-atlas
+approaches. No independent render audit was weakened. Candidate evidence is
+`.tools/seam-v124-fresh-vblank-source-receipt.json`. These results use frozen v124
+geometry; the combined summit/native-allocation candidate still needs its own
+native, WASM and browser checks before this blocker can be considered resolved.
+
 **New v124 transient blocker — do not publish.** The broader commercial source
 builds as SHA `5861f476744627cbce684849e27ece15b787765b33d8a675469c980927480ecf`,
 receipt `ed16b611e54f47b3a48553420c0457cc`, and earlier office Save recovery passes.
