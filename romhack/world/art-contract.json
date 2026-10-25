@@ -2837,6 +2837,79 @@
             "right"
           ],
           "architecture_type": "garage_hall"
+        },
+        "factory": {
+          "first": 870,
+          "width": 7,
+          "height": 5,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "industrial_factory"
+        },
+        "factory_sage": {
+          "first": 905,
+          "width": 7,
+          "height": 5,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              905,
+              906,
+              907,
+              908,
+              909,
+              910,
+              911
+            ],
+            [
+              912,
+              913,
+              914,
+              915,
+              916,
+              917,
+              918
+            ],
+            [
+              919,
+              920,
+              921,
+              922,
+              923,
+              924,
+              925
+            ],
+            [
+              926,
+              927,
+              928,
+              929,
+              930,
+              931,
+              932
+            ],
+            [
+              933,
+              934,
+              935,
+              936,
+              937,
+              938,
+              939
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "industrial_factory"
         }
       }
     },

@@ -384,6 +384,17 @@ def compile_kit(root=ROOT, profile='residential'):
         catalog['campus_hall']=dict(tiles=[list(a+b+c) for a,b,c in zip(*wings)],
             blocked=True,closed_edges=['left','right'],architecture_type='campus_hall',
             explicit_cells=True)
+    if profile=='industrial':
+        # A distinct scenery card leaves the original Repair Counter front
+        # and its fixed central doorway intact. Existing loaded sage paint
+        # provides a second factory finish without another graphics palette.
+        from world_industrial_factory import factory
+        w,h,raw=factory()
+        if (w,h)!=(112,80):raise ValueError('Factory must keep its declared7x5 footprint')
+        for name,bank in (('factory',12),('factory_sage',11)):
+            card(name,raw,w,h,bank,paving,7,deduplicate=name.endswith('_sage'))
+            catalog[name]['closed_edges']=['left','right']
+            catalog[name]['architecture_type']='industrial_factory'
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

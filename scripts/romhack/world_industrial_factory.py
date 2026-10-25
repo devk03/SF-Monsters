@@ -64,14 +64,18 @@ def factory():
     box(13,51,44,72,13)
     for y in range(52,72,4):box(13,y,44,y,12)
     box(13,51,14,71,3);box(13,72,44,73,1)
-    # Open loading bay, a modest timber crate and a separate personnel door.
+    # A half-closed loading shutter and cargo block the scenic opening. The
+    # separate closed personnel door is not a new service/warp affordance.
     box(54,50,92,73,8);box(56,50,90,73,1)
-    box(58,52,88,71,4);box(58,52,88,55,1)
+    box(58,52,88,71,1);box(58,52,88,58,13)
+    box(58,53,88,53,12);box(58,57,88,57,12);box(58,59,88,60,1)
     box(60,60,74,72,9);box(61,61,73,71,6)
-    box(61,61,73,62,10);box(61,65,73,65,9)
-    box(64,61,64,71,9);box(70,61,70,71,9)
+    box(61,61,73,62,10);box(74,62,76,73,9)
+    for step in range(11):dot(62+step,61+step,9)
+    box(60,72,76,73,9);box(61,72,74,72,10)
     box(95,50,105,73,8);box(97,51,103,73,1)
-    box(98,53,102,70,4);box(98,53,98,61,3);dot(102,65,5)
+    box(98,53,102,71,13);box(98,53,102,58,4)
+    box(98,53,98,57,3);dot(102,65,5)
     # Shallow concrete loading thresholds connect physically to the sidewalk.
     box(10,74,47,75,3);box(55,74,91,75,3);box(96,74,104,75,3)
     return width,height,bytes(pixels)

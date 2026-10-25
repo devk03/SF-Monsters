@@ -33,9 +33,9 @@ def furnish(plan,grid,cards,stamp,token,lanes):
                 if (x,y) not in lanes:grid[y][x]=token(style,x,y)
     if identifier=='dogpatch':
         for a,b,c,d in EXTRA_RECTS[identifier]:paint('slab_walk',a,b,c,d)
-        put('warehouse',4,24);put('warehouse',4,37)
+        put('factory_sage',4,24);put('factory',4,37)
         paint('slab_walk',left,top,right,bottom)
-        put('warehouse',20,37);put('warehouse',30,37);put('crane',38,36)
+        put('factory_sage',20,37);put('factory',30,37);put('crane',38,36)
         paint('dark_walk',20,44,42,44)
         put('bench',20,45);put('recycling',27,45);put('rack',35,45)
         title='Working warehouse yard';point=(26,43)

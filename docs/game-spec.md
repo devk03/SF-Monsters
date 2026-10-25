@@ -643,6 +643,24 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v132 selective factory source candidate — native verification pending.**
+Original code-authored112x80industrial art now supplies a sawtooth roof,
+clerestory band, broad shutters, braced cargo crate and a closed personnel door.
+The loading opening has a partly lowered shutter and grounded cargo. New
+`factory` / `factory_sage` scenery cards use already loaded brick/sage palettes,
+with identical graphics for both finishes. Five working plots use them: `(4,24)`,
+`(4,37)`, `(20,37)`, `(30,37)` and `(50,36)`. The original `warehouse` service
+front at `(2,3)` is retained, preserving Repair Counter's central `(5,8)` entry.
+This avoids relocating a service door to match a newly drawn side entrance.
+All prior industrial catalog cards,358record/attribute prefix,512secondary
+pixels,111own-primary graphics and palette bytes are unchanged. Only the two
+factory cards/resources are appended:428metatile records and201safe own-primary
+graphics. Native and foreign-boundary budgets still need actual compilation.
+All87world source tests pass. No collision footprint, event/NPC/route, state,
+flag, warp or new service changes are intended; human visual acceptance remains
+open. Source art is private-previewed, not a native gameplay claim. The broader
+Dogpatch concept's drydock/ship/rail and deeper industrial staging remain open.
+
 **v131 compiled Dogpatch working block — native subset verified.** ROM SHA
 `7f1d2f8c4bc1250e8c85d60d50e3b3985bf370b27bfbfcb05a8071f1bbf530b9`, receipt
 `121c6019653340a79513c4265e14d9f1`. Actual views/full native map verify the
