@@ -14,7 +14,10 @@ pushes, conversations, old park Save Continue and all four park boundary pairs
 (135stages) pass. Native full-map/views and forest-collar captures were inspected.
 All87world tests and targeted9ground/paint/variety tests pass. The full77-map
 native circuit passes; matching27935-frame local website-core replay passes.
-Full-circuit replay and fresh all19-town review captures are running.
+The matching255549-frame complete-circuit replay also passes. Fresh all19-town
+gameplay captures and live-native full maps are complete; the v130 review packet
+is rendered and visually inspected:26pages, all19destinations, actual
+backgrounds/gameplay. See section15.1 for the private PDF/gallery and exact hash.
 
 Read section15.1 for exact receipts and limitations. Independent source review
 preserves all1066old lane cells and old event/actor/stop/landmark/lake bindings.
@@ -28,7 +31,8 @@ organic lake and v127's Twin housing also retain their versioned evidence.
 Keep the v126 whole-scene fresh-VBlank gate and independent render audit intact.
 Publicv80/v92 remain intact. Browser checks were not repeated for v127–v130.
 The alignment chat is planning a Dogpatch industrial block as a read-only task;
-parent owns implementation. Preserve current source during v130 evidence capture.
+parent owns implementation. V130 evidence capture is complete and frozen in its
+receipts; new source work may proceed without relabeling those captures.
 
 Keep the goal active. Next composition work: Twin Peaks still has oversized slab
 paving, rigid forest edges and incomplete hill masses; Potrero rock rims read as

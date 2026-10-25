@@ -658,8 +658,20 @@ guide palette restoration. A genuine v128 Save at Pond rest cold-Continues at
 exactly `(50,42)`, retaining protected contents and safe control. No TV flag changed.
 The full77-map native circuit passes114connections,16gym and28service-room
 warps. Matching27935-frame Richmond walkthrough replay has zero differences
-across294912RAM bytes; complete-circuit replay is running. Fresh all19-town
-captures/review packet are in progress; no browser or human visual approval.
+across294912RAM bytes. Matching full255549-frame circuit replay also passes
+with zero differences across294912RAM bytes. Fresh all19-town gameplay captures
+and live-native full maps are complete. The26-page v130 PDF and offline gallery
+are generated and visually inspected after rendering all26pages. No browser or
+human game-art approval. Private review:
+`.tools/benchmarks/concept-v130-review-packet/pdf/sf-world-review-v130.pdf`
+(SHA `2376a0d210f22554f36bac93298825c36d456e4b3e7725a0cea1b0c517613c08`),
+with companion `review/sf-world-review-v130.html` and adjacent linked assets.
+All-page contact sheet and enlarged current-district/priorities pages were
+inspected. The final spacing pass preserves the first PDF/render archive. The
+gallery uses actual native/concept pairs and was not browser-retested; no
+full foreground-route/mobile/public-ROM-upload acceptance is inferred. Native
+images and PDFs stay ignored/private. Current state remains87source tests,
+77maps,19destinations and222NPCs, with eight gym contracts unchanged.
 Evidence: `.tools/benchmarks/concept-v130-{park-profile-continue,richmond-scenes,richmond-native-review,richmond-walk,richmond-wasm,park-transient-seams,native-circuit}/`.
 
 The348-cell clear reservation is prepared before forest packing. Only60frontage
@@ -683,7 +695,7 @@ and were visually inspected; complete silhouettes remain, though tree rhythm
 is still too mechanical. Evidence: `.tools/benchmarks/concept-v130-richmond-forest-collar/`
 and ignored `.tools/park-richmond-source-alignment.md`. Publicv80/v92 intact.
 
-**Park/Richmond art allocation — source declaration; native review pending.**
+**Park/Richmond art allocation provenance.**
 `park_edge` combines all eight original facade forms, finished attachment variants
 and sage paint with native-grass-backed foliage plus the existing windmill and
 conservatory. Only those two park landmarks are included; unrelated tower/ruins
@@ -691,8 +703,8 @@ art remains in the ordinary nature profile. Landmarks keep palette9; house paint
 uses12. Source allocation is375metatiles,512secondary graphics plus124safe
 own-primary slots. The explicit independent compiled-resource symbol mapping
 and a corruption-refusal test are included from the start. Existing profiles
-are unchanged. This is preparation for the concept's missing Richmond edge,
-not a claim of native allocation or completed neighborhood composition.
+are unchanged. The v130 native checks above prove its current compilation/rendering; this
+allocation alone does not prove completed neighborhood composition.
 
 **v129 compiled Marina venue corridor — native subset verified; goal active.**
 ROM SHA `ef21818c853069dbd204bb0e9f319892a7a37ad89aa1cfcc31d0543a4dd16131`,
