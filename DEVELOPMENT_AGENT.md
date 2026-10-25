@@ -62,9 +62,11 @@ numbers or obsolete release gates. Exact hashes/receipts are in §15.1.
   no collision/elevation or other-map/actor/event/house/route changes; all10linked
   scenery profiles equal v132. Matching40632-frame local website-core replay
   passes with zero differences across294912RAM bytes. The complete77-map native
-  circuit passes; its matching full-world website-core replay is still running.
+  circuit and matching253087-frame full-world website-core replay pass, with
+  zero differences across294912RAM bytes.
 - Road terminal treatment and convincing raised summit masses remain unfinished.
-  The alignment chat is studying one bounded north-summit landform. Other
+  The alignment chat supplied a north-summit landform study; verify its actual
+  port geometry, corner reachability and allocation cost before implementation. Other
   districts still need close concept translation; no town has human art approval.
 
 The v130 all19-town review PDF/gallery is a historical snapshot, not v135 art.

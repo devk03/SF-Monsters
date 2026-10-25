@@ -672,10 +672,32 @@ matching40632-frame local website-core replay passes, zero differences across
 294912RAM bytes; final RAM SHA
 `f2579477b518948a2c207ef62fb663ab5d9676f21d85f942ca49b4dc87210c06`.
 The complete77-map native circuit passes:114connections,16gym warps and28room
-warps. Its matching full-world website-core replay is running, not yet claimed.
+warps. Matching253087-frame full-world website-core replay passes, with zero
+differences across294912RAM bytes and final RAM SHA
+`b296028ffb9e3ff31c27ac8b11ddcb8a92831359fadc9fb46c672ab830fb208b`.
+Evidence: `concept-v135-native-circuit/` and `concept-v135-wasm-circuit/`.
 Evidence: `.tools/benchmarks/concept-v135-ridge-{approach-walk,scenes,native-review,transient-seams}/`,
 `concept-v135-prior-ridge-save-continue/`, `concept-v135-linked-art-equality.json`,
 and `.tools/twin-street-v135/preservation.json`.
+
+A separately captured visible30-second Chrome QA-harness smoke on v135 reports
+1792requested/executed/video frames and1792render submissions, no hidden,
+discarded or mismatch frames, zero pause/reset invalidations, and an acknowledged
+final audio snapshot with zero underrun/dropped-source frames. Parent independently
+read the raw report and actual screenshot. Evidence:
+`.tools/benchmarks/concept-v135-browser-seam-review/`. This finite smoke does not
+supersede v132's41underrun observation or close full foreground-route, mobile,
+public upload/cache/return-visit, musical quality or human acceptance gates.
+The owned emulator/audio/server and browser tab were closed. No source mutation,
+build, deployment, commit or extra WASM process came from that secondary check.
+
+North-summit study is in `.tools/twin-landmass-alignment.md`: one joined grassy
+plateau rather than disconnected rock bars. Implementation is NOT started.
+Parent identified two facts to resolve first: use Twin's actual left approach
+`(0,32) -> (10,34) -> (18,42) -> (26,38)`, and prevent isolated walkable BE/BF
+corners from stranding a prior ordinary Save. The suggested native joins add10
+primary graphic reservations (safe pool314to304); no allocation success is
+claimed before actual compilation, exact whole-map reachability and native proof.
 
 Alignment's actual-v133 review supports the connected quiet lane, identifies
 the now-fixed blocked-looking curb mouth and white diagonal, and retains road
