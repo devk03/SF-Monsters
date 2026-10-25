@@ -643,7 +643,7 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**v136 connected visible trails — compiled candidate, native verification underway.**
+**v136 connected visible trails — native and complete WASM verified.**
 ROM SHA `9f668c791d551c6d767ead0f28e9a37eb181d11af4cdb528e2c7defa91e18461`,
 receipt `12b4bae00fe54ef4a88774a34a6a5b77`. Diagonal one-cell native-earth
 rasters previously touched only at corners, appearing as stepping-stone islands.
@@ -667,12 +667,31 @@ Proof: `.tools/trail-v136/preservation.json`.
 An actual earlier v127ordinary Save on `(30,50)` cold-Continues to the same
 position on136, preserving party, inventory, money, flags, chapter and Flash;
 normal controls work. Evidence: `concept-v136-old-trail-save-continue/`.
-Native five-park scene/trail/15rest-stop checks and the full77-map circuit are
-running. Do not transfer135's complete native/WASM/browser passes to136. No
+Native gameplay captures and full live backgrounds cover all five parks.
+Actual render audits of15joined-trail samples and all15rest-stop conversations
+pass with protected state/Flash unchanged. The full77-map native circuit passes
+114connections,16gym warps and28room warps. Matching252986-frame complete136WASM
+replay passes with zero differences across294912RAM bytes; final RAM SHA
+`b549205e5b3f25b974f05f0c08e8576d7d5c2f56eccaa18ba0efe57d2430b3e6`.
+No136browser repeat is claimed; retain135's separately versioned smoke evidence.
+Evidence: `concept-v136-connected-trail-{scenes,walk}/`,
+`concept-v136-nature-native-review/`, `concept-v136-native-circuit/` and
+`concept-v136-wasm-circuit/`. No
 human art acceptance or deployment is claimed. Road terminals, summit masses
 and all other district translation gaps remain open. The user will reconnect
 the owning Sites account; this is intent, not confirmation that access works.
 
+
+Next-landmass capacity study is read-only: recomputing current136scene atlases
+with the ten proposed extra General reservations fits all55atlases and introduces
+no palette banks. Profile counts/resources remain bounded. It uses CURRENT
+geometry, not the proposed plateau, and does not establish a137build, native
+corner semantics, final margins, reachability or Save safety. Production pins,
+source, engine and map rows were not changed. Evidence:
+`.tools/twin-landmass-capacity-study.json` and parent critique
+`.tools/twin-landmass-parent-review.md`. The first private study expected every
+interior to declare a profile; corrected v2 uses the compiler's residential
+default. The failed private log is preserved, not treated as a native failure.
 
 Developer-guide maintenance: `DEVELOPMENT_AGENT.md` now has one current objective,
 checkpoint and safety/validation policy. The previous285-line guide is preserved
@@ -809,8 +828,9 @@ The checkout currently stages v93, so a blanket deployment is unsafe for that
 preservation promise. The connected Sites account finds neither the recorded
 project nor any owned/editable sites; reconnection was requested. No replacement
 project, deployment, credential request, database operation or CI run occurred.
-An optional isolated latest-world launcher is being prepared locally, with
-separate saves/runtime/ROM cache and proof-derived staging; it is not published.
+An optional isolated latest-world launcher is scoped locally, with separate
+saves/runtime/ROM cache and proof-derived staging. Planning/read-only review is
+complete; no separate launcher has been implemented, staged or published.
 The full world goal stays active while that external access issue is unresolved.
 
 **v131 compiled Dogpatch working block — native subset verified.** ROM SHA

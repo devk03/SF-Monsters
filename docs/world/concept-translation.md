@@ -36,6 +36,13 @@ Every row is an implementation candidate. None has human visual acceptance.
 | [Angel Island](../../output/imagegen/neighborhood-ideals-v2-expanded/angel-island.png) | Island coasts, switchbacks, landing/rest stops, native cliff/stair candidates and protected League approach. | Distinct ferry landing and actual summit/League architecture; the existing League landmark is a placeholder. |
 | [Presidio / Presidio Heights](../../output/imagegen/neighborhood-ideals-v2-expanded/presidio.png) | Wooded campus/residential hybrid, hall/common `(44,1)`, visitor notice, pedestrian connector, local discovery, eight residents and two optional greenways. | The hall/common is reachable and inspected in native v123, but remains flat/sparse; stair gardens, overlooks and a stronger campus setting need work. |
 
+Shared nature pass v136: all five park destinations now have edge-connected
+native-earth cores inside their existing grass verges. Actual views/full native
+maps and15rest-stop interactions pass;475floor cells change, with all collision,
+elevation, actors, events and art allocations preserved. This fixes diagonal
+stepping-stone gaps; it does not solve schematic forest masses, thin cliff bars,
+landmark scale or full concept matching. See §15.1 for exact-version replay gates.
+
 ## Evidence required for each district
 
 1. Deterministic source generation; independent collision, frontage, NPC and

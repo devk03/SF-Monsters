@@ -51,8 +51,10 @@ All90world tests pass. Independent frozen-plan comparison finds475new native
 trail cells only: GP113, Twin123, Sutro77, Lands End78, Angel84. Collision,
 elevation, all events/actors/buildings/routes and all10linked art profiles are
 unchanged. An actual earlier ordinary Save cold-Continues safely on changed
-terrain. Native five-park views/sign interactions and full-world traversal are
-running; do not claim those or136WASM/browser acceptance yet. V135 below retains
+terrain. Native views/full maps of all five parks, all15rest-stop interactions
+and the full77-map circuit pass. Matching252986-frame complete136WASM replay
+also passes, zero differences across294912RAM bytes. No136browser repeat or
+human visual acceptance is claimed. V135 below retains
 its completed exact-version evidence.
 
 Latest private cartridge is v135 (`0.0.135-ridge-approaches-world-draft`):77maps,
