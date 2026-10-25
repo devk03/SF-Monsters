@@ -35,7 +35,7 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     legacy_keep={(x,y) for y in range(24) for x in range(32)
                  if grid[y][x] not in grasslike
                  and not(plan['world_id']=='angel_island' and x>=27)}
-    from world_park_water import pond_cells,draw_pond
+    from world_park_lake_shape import pond_cells,draw_pond
     pond=pond_cells(plan['world_id'])
     if pond & (occupied|lanes|legacy_keep):raise ValueError('Park pond overlaps a protected binding or trail')
     protected=occupied|sea|shore|legacy_keep|pond
@@ -83,7 +83,7 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
         furnish_homes(plan,grid,homes,token,cards,occupied)
         protected|=homes['clear']
     draw_terraces(plan,grid,terraces)
-    draw_pond(plan,grid)
+    draw_pond(plan,grid,cards,lanes)
     from world_park_stops import add_park_stops
     add_park_stops(plan,grid,cards,GLADES[plan['world_id']],lanes,protected)
     # Small coherent flower groups identify meadow edges without a tiled lawn.

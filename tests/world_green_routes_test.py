@@ -87,8 +87,22 @@ class GreenRouteTests(unittest.TestCase):
             _,blocked,elevation=park['legend'][park['rows'][y][x]]
             self.assertTrue(blocked);self.assertEqual(elevation,3)
         for x,y in pond['south_bank']:
-            self.assertEqual(park['legend'][park['rows'][y][x]],[2,False,3])
+            self.assertEqual(park['legend'][park['rows'][y][x]],[1,False,3])
         self.assertIn(0xa1,{park['legend'][park['rows'][y][x]][0] for x,y in pond['water']})
+        # A cove separates the northern lobes, while the complete water body
+        # stays connected. This rejects the former rectangular pond.
+        water={tuple(point) for point in pond['water']}
+        north=min(y for x,y in water)
+        edge=sorted(x for x,y in water if y==north)
+        self.assertTrue(any(x not in edge for x in range(min(edge),max(edge)+1)))
+        seen={next(iter(water))};pending=list(seen)
+        while pending:
+            x,y=pending.pop()
+            for point in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                if point in water and point not in seen:seen.add(point);pending.append(point)
+        self.assertEqual(seen,water)
+        self.assertEqual({tuple(p) for p in pond['south_bank']},{(x,44) for x in range(58,76)})
+
 
 
 if __name__=='__main__':unittest.main()

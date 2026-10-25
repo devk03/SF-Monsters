@@ -643,6 +643,18 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v128 organic-lake source candidate — not yet built.** Integrated the alignment
+chat's two-lobed Golden Gate Park pond with a north-bank cove, using only existing
+protected low-bank General tiles. It replaces the old rectangular painter; both
+painters never run together. All old south-bank walking cells remain open on
+native grass, with a short link to Pond rest. Water stays solid at ordinary
+land elevation3; no Surf/HM, flags, warps, palettes or art allocation changes.
+All86world tests pass, including connected water and a northern-cove regression
+that rejects the old rectangle. The prototype separately checks original-map
+bank joins and atomic refusal of binding/tree/trail conflicts. Source checks
+are not a native rendering or visual acceptance claim. Build after the frozen
+v127 controller audits finish; preserve its receipt/plans for reproducibility.
+
 **v127 compiled residential base — native subset verified, full gates open.**
 ROM SHA `9e1379a363f9019567428b2057fcb79afc5753673335bf265c6c26c8b80b9239`,
 receipt `04fee61056714280b6b018567dec57ad`. The first build exposed a missing
@@ -660,8 +672,11 @@ Evidence: `.tools/benchmarks/concept-v127-{ridge-scenes,ridge-native-review,neig
 Visual self-critique: the attached homes add an actual residential base, but the
 large slab paving, rigid tree borders and disconnected rock-rim silhouettes
 still fall short of the expanded reference. Human acceptance remains open.
-The all-boundary animation-frame audit is running; matching full-circuit/WASM
-and browser verification have not yet been repeated for this cartridge.
+The complete77-map native circuit passes114connections,16gym and28service-room
+warps. All86world source tests pass. Frozen-plan comparison also confirms no
+old passable cell becomes blocked, with existing actors/events/park stops and
+connections unchanged. The all-boundary animation-frame audit and matching
+WASM replay are running; browser checks have not been repeated for this cartridge.
 No public deployment, full ROM publication or workflow run occurred.
 
 **v127 residential-base source candidate — not yet native-reviewed.** Twin Peaks

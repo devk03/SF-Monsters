@@ -7,19 +7,24 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v126: 19 destinations / 77 maps, Potrero stair
-courts, a Presidio hall/common, broader offices and exposed Twin Peaks stairways.
-The reproduced late-interrupt crossing defect is fixed with whole-scene deferral.
-All 57 boundary pairs pass animation-frame audits in both directions (1,910
-verified stages); exact office and shore phases also pass. The full native circuit,
-matching 253,679-frame WASM replay and a short foreground browser crossing/audio
-test pass. All 19 current full maps and gameplay captures are available for review.
-The default world-host cartridge is byte-identical to the isolated tested ROM.
-Read section 15.1 for receipts and limits. Public v80/v92 remain intact.
+Latest private native candidate is v127: 19 destinations /77maps, with17attached
+Twin Peaks homes and two ordinary residents below the summit trails. Native
+views, full-map rendering, both conversations,17facade collision pushes and
+prior ordinary Save recovery pass. All86world source tests pass. Full v127
+boundary/circuit/replay checks are pending; do not inherit v126 evidence as proof
+of the new cartridge. Existing Twin actors, events, routes and park stops match
+the frozen v126 bindings, and no old passable cell becomes blocked by the homes.
 
-Keep the goal active. Next composition work: Twin Peaks still lacks its residential
-base and convincing hill masses; Potrero rock rims read as barriers; Presidio is
-flat/sparse. Refine the other districts against their own expanded concepts too.
+The prior v126 crossing fix passed all57boundary pairs, the full native circuit,
+matching WASM replay and short browser smoke. Keep its whole-scene fresh-VBlank
+gate and independent render audit intact. Read section15.1 for exact receipts.
+Publicv80/v92 remain intact. The unwired lake-shape module is a source prototype;
+review and verify its native integration separately before treating it as done.
+
+Keep the goal active. Next composition work: Twin Peaks still has oversized slab
+paving, rigid forest edges and incomplete hill masses; Potrero rock rims read as
+barriers; Presidio is flat/sparse. Refine other districts against their own
+expanded concepts too.
 No town has human visual acceptance. Long browser/mobile, public-upload and full
 world quality gates remain open. Coordinate bounded reviews with the alignment
 chat about every 30 active minutes; do not turn test passes into visual approval.
