@@ -68,10 +68,9 @@ def furnish(plan,grid,cards,stamp,token,lanes):
         obj=(76,44);standing=(76,45)
     elif identifier in ('financial_district','mission_bay'):
         paint('stone_walk',left,top,right,bottom)
-        towers=(40,44,50,54) if identifier=='financial_district' else (64,68,72)
+        towers=(('office_wide',40),('highrise_tall',50),('highrise_medium',54)) if identifier=='financial_district' else (('lab_wide',64),('highrise',72))
         height=8 if identifier=='financial_district' else 5
-        for index,x in enumerate(towers):
-            style=('highrise_tall' if index in (0,2) else 'highrise_medium') if height==8 else 'highrise'
+        for style,x in towers:
             put(style,x,top+height-len(cards[style]['tiles']))
         paint('slab_walk',left,top+height,right,top+height+1)
         for x in (left,right-1):put('street_tree',x,top+height+2)

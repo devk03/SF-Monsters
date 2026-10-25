@@ -684,6 +684,16 @@ differences across294912RAM bytes. Evidence directories are
 This renews boundary coverage on the current geometry; it does not approve the
 art or close long foreground browser/mobile gates.
 
+The matching v123 capture tour and full-map live audits now cover all19areas.
+All19local favors/discoveries also pass native reward quantity, owned-flag and
+repeat-reward checks, including the new Presidio activity. The driver now chooses
+a reachable adjacent speaking position instead of assuming every resident can be
+approached from the north. Original failure and corrected run are retained as
+`concept-v123-all-discoveries` and `concept-v123-all-discoveries-v2`. This validates
+normal-capacity activity behavior; it is not a new full-bag retry acceptance run.
+The current source refinement now explores broader office/lab blocks and Twin
+Peaks summit composition. Neither is part of the frozen v123 native evidence.
+
 **Native v122 checkpoint — transition fix and current-world verification.**
 Private SHA `10f363e3fce6c43dfed90fe372e9313022c2a57685e01ad14f64cc343877dbd8`,
 receipt `d2726addffeb4fc2bd337eb385d950fc`, includes larger industrial yards,

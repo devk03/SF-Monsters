@@ -5313,6 +5313,106 @@
             "right"
           ],
           "architecture_type": "office_tower"
+        },
+        "office_wide": {
+          "first": 578,
+          "width": 5,
+          "height": 6,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              578,
+              579,
+              579,
+              579,
+              580
+            ],
+            [
+              581,
+              582,
+              582,
+              582,
+              583
+            ],
+            [
+              584,
+              585,
+              585,
+              585,
+              586
+            ],
+            [
+              584,
+              585,
+              585,
+              585,
+              586
+            ],
+            [
+              584,
+              585,
+              585,
+              585,
+              586
+            ],
+            [
+              587,
+              588,
+              588,
+              588,
+              589
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "office_tower"
+        },
+        "lab_wide": {
+          "first": 578,
+          "width": 5,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              578,
+              579,
+              579,
+              579,
+              580
+            ],
+            [
+              581,
+              582,
+              582,
+              582,
+              583
+            ],
+            [
+              584,
+              585,
+              585,
+              585,
+              586
+            ],
+            [
+              587,
+              588,
+              588,
+              588,
+              589
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "office_tower"
         }
       }
     },

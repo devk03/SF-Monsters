@@ -357,6 +357,12 @@ def compile_kit(root=ROOT, profile='residential'):
             catalog[name]=dict(base,tiles=[list(r) for r in
                 (base['tiles'][:3]+base['tiles'][3:4]*repeats+base['tiles'][4:])],
                 explicit_cells=True)
+        # Broader commercial blocks keep finished outer edges but omit the
+        # tower's narrow antenna. Only the middle window column repeats.
+        for name,repeats in [('office_wide',3),('lab_wide',1)]:
+            rows=base['tiles'][1:3]+base['tiles'][3:4]*repeats+base['tiles'][4:]
+            catalog[name]=dict(base,tiles=[[row[0],row[1],row[1],row[1],row[2]]
+                                          for row in rows],explicit_cells=True)
     if profile=='mixed_use':
         # A broad campus hall reuses finished outer wings and a continuous
         # central gable. Its scale changes without allocating another atlas.
