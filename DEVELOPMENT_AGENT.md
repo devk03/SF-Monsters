@@ -1,5 +1,13 @@
 # Development agent — shared world and contributor modules
 
+ACTIVE USER REQUEST — October 24: translate every corresponding expanded v2
+concept into playable native neighborhoods as closely as practical. The user
+authorized using the concepts as implementation references; previous statements
+requiring approval before using them are superseded. This does not grant visual
+acceptance of any resulting map. Preserve route/gym/save contracts, compare real
+gameplay to the reference, and record per-district progress in section 15.1.
+The prior four-hour cutoff is historical, not a new implementation deadline.
+
 Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
 contains a second, much wider set for all 19 areas. V1 is preserved for comparison.
 These are concept images; native dimensions and contracts are unchanged.

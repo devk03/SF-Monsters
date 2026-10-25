@@ -644,6 +644,45 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 ### 15.1 Objective and completion rule
 
 
+**October 24 active implementation request — match the expanded concepts.**
+The user explicitly asked to make each corresponding in-game neighborhood look
+as close as practical to the generated concepts. The expanded v2 maps are now
+authorized design references, with v1 available for close architectural detail.
+This supersedes earlier instructions to wait for approval before using a concept
+as a template. It does not claim implementation or whole-domain visual acceptance.
+The expired October 23 four-hour cutoff does not impose a new deadline.
+
+Work against `output/imagegen/neighborhood-ideals-v2-expanded/prompts.json` and
+its matching PNGs. Translate district-specific circulation, building massing,
+landmarks, planted boundaries and purposeful destinations into native GBA tiles;
+do not paste the image as an unwalkable background or preserve generic filler
+rows merely to satisfy counts. Urban maps retain at least eight structural forms,
+real attached edges and fine neutral sidewalks. Nature maps need distinct trail
+systems and meaningful terrain transitions. Preserve authored courier art,
+contributor gym/mission ownership, existing entrances, reserved flags and save
+identity. Native map-buffer and graphics budgets remain hard limits; a large
+concept can be expressed through connected sections when necessary.
+
+Progress gates per district: (1) reference features mapped to specific source
+geometry/art, (2) deterministic connected source layout with safe NPC envelopes,
+(3) compiled native budget/render verification, (4) real gameplay/full-map images
+beside the reference, (5) human review remains pending until explicitly given.
+Global gates include earlier ordinary Save recovery, all affected edge/door
+returns, matching website-core replay and foreground browser checks before public
+release. All nineteen references are in scope, including adding the Presidio /
+Presidio Heights area without replacing Pacific Heights or adding a ninth gym.
+Implementations are private candidates until their actual release gates pass;
+public v80/v92 remain available and Actions stays manual-only.
+
+Initial audit: repeated modular fronts and generic lawn/band packing dominate
+many towns; Dogpatch/Marina/Mission Bay lack coherent coastal massing. Native
+art profiles have 21–61 graphics slots free (512 total), so improve shared roof /
+window modules and district layout rather than importing a full illustration.
+Start with a live Dogpatch proof, then carry the proven architecture and distinct
+geometry through the remaining destinations. No district is marked complete yet.
+
+
+
 **October 24 expanded ideal-map collection — v2 concept art only.** The user
 asked for a bigger map image for every neighborhood. Generated all 19 areas again
 with the built-in image_gen tool into
