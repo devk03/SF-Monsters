@@ -643,6 +643,12 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+Developer-guide maintenance: `DEVELOPMENT_AGENT.md` now has one current objective,
+checkpoint and safety/validation policy. The previous285-line guide is preserved
+in `docs/world/history/development-agent-2026-10-25-pre-consolidation.md`; obsolete
+deadlines,32x24rules and paused/blockout statuses are historical. No gameplay or
+acceptance requirement was closed by this documentation cleanup.
+
 **v135 Twin Peaks path/actor approach — native subset verified.**
 ROM SHA `498ef4fe546d6b6bec6174b17940036a0e51743ba70b12554c557c09613289fe`,
 receipt `1a64921a75c54a7da43dd4e1b49710dc`. Western diagonal beyondx25 now
@@ -655,7 +661,9 @@ all17front pushes block, both conversations and return to the original landmark
 pass with protected state/Flash unchanged. All three Twin boundary pairs pass
 both directions with101audited stages and guide-palette restoration. An ordinary
 v127Twin Save cold-Continues with party, inventory, money, flags, chapter and
-Flash intact. All87source tests, compiled native budgets and BPS roundtrip pass.
+Flash intact. A second genuine v127Save on changed stone `(30,50)` also restores
+the same position and normal controls on the new earth path, without state or
+Flash changes (`concept-v135-old-stone-save-continue/`). All87source tests, compiled native budgets and BPS roundtrip pass.
 
 Independent serialized-plan comparison versus v132 finds222floor changes only:
 no collision/elevation, other-map, house/prop, NPC, event, route or summit changes.
@@ -663,7 +671,8 @@ All10actual linked scenery-resource profiles are byte-identical to v132. The
 matching40632-frame local website-core replay passes, zero differences across
 294912RAM bytes; final RAM SHA
 `f2579477b518948a2c207ef62fb663ab5d9676f21d85f942ca49b4dc87210c06`.
-The full native circuit is running, not yet claimed.
+The complete77-map native circuit passes:114connections,16gym warps and28room
+warps. Its matching full-world website-core replay is running, not yet claimed.
 Evidence: `.tools/benchmarks/concept-v135-ridge-{approach-walk,scenes,native-review,transient-seams}/`,
 `concept-v135-prior-ridge-save-continue/`, `concept-v135-linked-art-equality.json`,
 and `.tools/twin-street-v135/preservation.json`.
