@@ -6,7 +6,7 @@ struct SFGuidePlace {
     u8 x, y;
     u8 name[40];
     u8 character[60];
-    u8 routes[4][40];
+    u8 routes[5][40];
     u8 gym;
     u16 doneFlag, foundFlag;
 };
@@ -65,7 +65,7 @@ static bool8 SFGuideDraw(void)
     {
         FillWindowPixelRect(sSFGuideWindow,PIXEL_FILL(1),0,16,224,112);
         SFGuideText(place->character,22);
-        for (i=0;i<4;i++) SFGuideText(place->routes[i],46+i*13);
+        for (i=0;i<ARRAY_COUNT(place->routes);i++) SFGuideText(place->routes[i],44+i*11);
         SFGuideText(FlagGet(place->doneFlag)?sSFGuideFinished:
             (place->foundFlag && FlagGet(place->foundFlag)?sSFGuideFound:sSFGuideExplore),104);
     }

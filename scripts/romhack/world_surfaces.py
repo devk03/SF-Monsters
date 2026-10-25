@@ -67,6 +67,7 @@ def surfaces():
 # A neighborhood specifies materials and street use, not just a tint over the
 # same checkerboard. The material strip is confined to the actual sidewalk.
 DISTRICTS = {
+ 'presidio':('stone_walk','brick_walk','wooded campus lanes and officers housing'),
     'dogpatch': ('slab_walk', 'dark_walk', 'workshop frontage and loading edge'),
     'potrero_hill': ('slab_walk', 'stone_walk', 'hill homes and stair landing'),
     'mission': ('brick_walk', 'dark_walk', 'continuous shops and mural walk'),

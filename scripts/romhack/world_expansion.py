@@ -207,6 +207,8 @@ def expand(plans, manifest):
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)
+            from world_presidio import landscape as presidio_landscape
+            presidio_landscape(plan,grid,lanes,walks,occupied,token)
         # Match real party-wall art to the final neighboring footprints. An end
         # cap is drawn only where the building actually exposes that side.
         architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]

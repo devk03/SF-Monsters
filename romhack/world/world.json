@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "profile": "world-blockout",
-  "version": "0.0.119-concept-terrain-world-draft",
+  "version": "0.0.120-presidio-concept-world-draft",
   "source": "docs/world/initial-world-plan.excalidraw",
   "status": "active non-gym world finishing; towns remain unapproved",
   "geometry": {
@@ -162,6 +162,15 @@
       "engine_map": "Route103",
       "tags": [
         "legendary_crisis_placeholder"
+      ],
+      "city": "San Francisco"
+    },
+    {
+      "id": "presidio",
+      "label": "Presidio / Presidio Heights",
+      "engine_map": "Route123_BerryMastersHouse",
+      "tags": [
+        "optional_exploration"
       ],
       "city": "San Francisco"
     }
@@ -502,6 +511,34 @@
       "engine_map": "Route122",
       "bidirectional": true,
       "notes": "Compressed corridor with actual traversable geometry; no claim of literal block adjacency."
+    },
+    {
+      "id": "route_19",
+      "label": "Presidio Greenway",
+      "from": "golden_gate_park",
+      "from_port": "right",
+      "to": "presidio",
+      "to_port": "left",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route124_DivingTreasureHuntersHouse",
+      "bidirectional": true,
+      "setting": "green",
+      "notes": "Optional compressed walking connection; no change to badge order or gym ownership."
+    },
+    {
+      "id": "route_20",
+      "label": "Lyon Steps Walk",
+      "from": "presidio",
+      "from_port": "right",
+      "to": "marina",
+      "to_port": "up",
+      "mode": "walk",
+      "requires_badge": 0,
+      "engine_map": "Route119_WeatherInstitute_1F",
+      "bidirectional": true,
+      "setting": "green",
+      "notes": "Optional compressed walking connection; no change to badge order or gym ownership."
     }
   ],
   "gyms": [
@@ -715,7 +752,8 @@
       "north_beach": "culture",
       "mission": "mixed_use",
       "noe_valley": "mixed_use",
-      "potrero_hill": "mixed_use"
+      "potrero_hill": "mixed_use",
+      "presidio": "mixed_use"
     }
   },
   "interiors": [
@@ -1355,6 +1393,55 @@
           ]
         }
       }
+    },
+    {
+      "id": "presidio_room",
+      "area": "presidio",
+      "engine_map": "Route119_WeatherInstitute_2F",
+      "label": "Presidio - Visitor Desk",
+      "style": "library",
+      "entry": [
+        5,
+        8
+      ],
+      "outside_arrival": [
+        5,
+        9
+      ],
+      "arrival": [
+        8,
+        8
+      ],
+      "exit": [
+        8,
+        9
+      ],
+      "size": [
+        16,
+        11
+      ],
+      "services": {
+        "rest": {
+          "actor": [
+            5,
+            5
+          ],
+          "standing": [
+            5,
+            7
+          ]
+        },
+        "shop": {
+          "actor": [
+            10,
+            5
+          ],
+          "standing": [
+            10,
+            7
+          ]
+        }
+      }
     }
   ],
   "city_guide": {
@@ -1431,6 +1518,10 @@
       "angel_island": [
         79,
         18
+      ],
+      "presidio": [
+        30,
+        29
       ]
     },
     "native_sections": {
@@ -1451,7 +1542,8 @@
       "treasure_island": "MAPSEC_ROUTE_101",
       "sutro_tower": "MAPSEC_ROUTE_102",
       "lands_end": "MAPSEC_ROUTE_103",
-      "angel_island": "MAPSEC_ROUTE_104"
+      "angel_island": "MAPSEC_ROUTE_104",
+      "presidio": "MAPSEC_ROUTE_126"
     }
   }
 }

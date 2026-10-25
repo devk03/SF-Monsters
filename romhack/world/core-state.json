@@ -163,6 +163,12 @@
       "value": 619,
       "owner": "angel_island",
       "purpose": "local_discovery_complete"
+    },
+    {
+      "name": "FLAG_UNUSED_0x26C",
+      "value": 620,
+      "owner": "presidio",
+      "purpose": "local_discovery_complete"
     }
   ]
 }

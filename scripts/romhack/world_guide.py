@@ -30,8 +30,8 @@ def apply_guide(root,engine,original,manifest,plans):
         lines=connections
         if any(r['mode']!='walk' and identifier in (r['from'],r['to']) for r in routes):
             lines.append('Surf: badge 5 / Falls: badge 8')
-        if len(lines)>4:raise ValueError('City guide needs shorter connection labels')
-        lines+=['']*(4-len(lines))
+        if len(lines)>5:raise ValueError('City guide needs shorter connection labels')
+        lines+=['']*(5-len(lines))
         flags=discoveries[identifier]
         nodes.append('    {'+f'{pixels[identifier][0]}, {pixels[identifier][1]}, '+
                      string(area['label'])+', '+string(people[identifier]['character'].capitalize(),60)+', '+

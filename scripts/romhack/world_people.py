@@ -12,7 +12,7 @@ REVISIT_BADGE = {'dogpatch':1,'potrero_hill':1,'mission':1,'castro':1,
                  'pacific_heights':4,'twin_peaks':4,'noe_valley':5,
                  'mission_bay':6,'giants_stadium':6,'financial_district':7,
                  'north_beach':8,'treasure_island':5,'sutro_tower':5,
-                 'lands_end':8,'angel_island':8}
+                 'lands_end':8,'angel_island':8,'presidio':2}
 
 
 def load_people():

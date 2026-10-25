@@ -643,6 +643,22 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Presidio source integration v120 — nineteen destinations, native checks open.**
+Presidio / Presidio Heights now has a separate 96x64 hybrid campus/residential
+layout, complete native forest groups, attached housing, visitor service room,
+eight ambient residents, signs and one bounded local discovery. Two optional
+walking greenways connect Golden Gate Park and the Marina without altering badge
+order, existing map IDs or contributor reservations. Its new local completion
+flag is pinned unused slot `FLAG_UNUSED_0x26C`; existing state bindings remain.
+The independent source contract passes 77 maps, 19 areas, 36 physical connectors,
+8 gyms and 14 service rooms across nine badge stages. Nine variety/frontage/court
+tests pass. The native guide allows a fifth connection/hint line for the park
+junction; its actual rendered layout still needs inspection. Three chart packing
+tests pass with the coarse route graph (not its intermediate physical sections).
+No new native ROM, old-Save compatibility, browser replay or visual acceptance
+is claimed yet. The seam test's pinned terrain fixture also needs the newly used
+cliff/stair reservations; the alignment chat owns that integration.
+
 **Concept translation v119 — source composition, native review pending.**
 All thirteen urban districts now have individually sized finite block envelopes,
 retaining their actual street frontages and two clear walking rows below houses.

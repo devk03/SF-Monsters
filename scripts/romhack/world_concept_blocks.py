@@ -5,6 +5,12 @@ around a shared back court. Stable northwest services remain outside this pass.
 """
 
 BLOCKS = {
+    'presidio': [
+        (35,1,53,8,'western officers housing'), (59,1,74,8,'forest-edge residences'),
+        (39,17,47,20,'visitor-center neighborhood'), (53,17,65,20,'campus workshops'),
+        (38,40,55,46,'southern campus homes'), (62,40,72,46,'eastern garden homes'),
+        (30,55,42,61,'southwestern homes'), (50,55,70,61,'south campus shops'),
+    ],
     'dogpatch': [
         (34,1,42,9,'rail-side lofts'), (50,1,62,9,'workshop roofs'),
         (69,1,79,9,'quay stores'), (37,17,42,28,'narrow repair lane'),

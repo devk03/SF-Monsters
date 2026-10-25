@@ -72,6 +72,7 @@ def cards():
 # Distinct combinations and planting rhythms, not a claim that each species is
 # exclusive to one real neighborhood. Quiet ground remains the walking surface.
 PLANTINGS={
+ 'presidio':('shrub','lavender','tuft'),
     'dogpatch':('succulent','tuft','shrub'),
     'potrero_hill':('lavender','succulent','daisies'),
     'mission':('flower_box','succulent','tuft'),

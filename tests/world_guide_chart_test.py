@@ -33,11 +33,11 @@ class NativeChartTest(unittest.TestCase):
 
     def test_all_actual_routes_and_marker_extents_fit_the_native_chart(self):
         manifest = json.loads((ROOT / 'romhack/world/world.json').read_text())
-        places, routes = records(manifest)
+        places, routes = records(manifest, physical=False)
         positions = chart_positions(manifest)
         self.assertEqual(set(positions), {a['id'] for a in places})
-        self.assertEqual(len(set(positions.values())), 18)
-        self.assertEqual(len(routes), 19)
+        self.assertEqual(len(set(positions.values())), 19)
+        self.assertEqual(len(routes), 21)
         for x, y in positions.values():
             # Selected corners, the current-player cap and bottom name panel.
             self.assertGreaterEqual(x - 8, 0)

@@ -79,6 +79,12 @@
       "rug": [6,7],
       "rest": "Made it across? Put your bag down. I'll help your team while you warm up inside.",
       "shop": "Take a look before your next crossing. These are travel supplies; the lost umbrellas aren't for sale."
+    },
+    "presidio_room": {
+      "props": [["shelf",3,2],["shelf",11,2],["information_board",12,4],["waiting_bench",3,8]],
+      "rug": [6,7],
+      "rest": "Take a seat. We can look after your team while you work out which trail you meant to take.",
+      "shop": "Water and travel supplies are here. The map is free. The hill is included."
     }
   }
 }

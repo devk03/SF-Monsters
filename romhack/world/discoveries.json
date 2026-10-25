@@ -343,6 +343,25 @@
       "thanks": "The note has a second line: Also, breathe. The summit is not going anywhere.",
       "look": "A folded note is held down by a summit stone.",
       "found_flag": null
+    },
+    "presidio": {
+      "kind": "observe",
+      "object": [
+        18,
+        9
+      ],
+      "standing": [
+        18,
+        10
+      ],
+      "resident_index": null,
+      "item": "ITEM_REPEL",
+      "done_flag": "FLAG_UNUSED_0x26C",
+      "request": null,
+      "found": "A trail map is tied to the post beside a spare sealed supply. A note says: Take one if you need it. Tell someone which loop you are taking.",
+      "thanks": "Someone has circled the visitor desk and written: Start here if your phone is dead.",
+      "look": "The trail map shows the campus loop and the wooded paths beyond it.",
+      "found_flag": null
     }
   }
 }

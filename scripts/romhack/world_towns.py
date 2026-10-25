@@ -4,7 +4,7 @@ from world_tiles import compile_kit, legend_for, PROFILES
 
 URBAN = {'dogpatch', 'potrero_hill', 'mission', 'castro', 'outer_sunset',
          'marina', 'pacific_heights', 'noe_valley', 'mission_bay',
-         'giants_stadium', 'financial_district', 'north_beach', 'treasure_island'}
+         'giants_stadium', 'financial_district', 'north_beach', 'treasure_island', 'presidio'}
 GREEN_ROUTES = {'route_05','route_06','route_14','route_15'}
 
 

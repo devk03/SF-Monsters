@@ -715,6 +715,54 @@
       ],
       "status": "authored dialogue candidate; in-game review pending",
       "welcome": "You made it to the upper trail. Take a minute. There is a longer walk behind you than it looks from here."
+    },
+    "presidio": {
+      "character": "wooded campus lanes and quiet residential streets",
+      "landmark_brief": "Visitor court, officers housing and wooded overlooks",
+      "residents": [
+        {
+          "role": "Trail runner",
+          "dialogue": "I was going to do one short loop. Then I took the path that looked nicer.",
+          "revisit": "I have stopped calling it a short loop."
+        },
+        {
+          "role": "Gardener",
+          "dialogue": "The plants do not care how expensive the house next door is. I find that reassuring.",
+          "revisit": null
+        },
+        {
+          "role": "Dog walker",
+          "dialogue": "He knows which paths have the good smells. I just carry the water.",
+          "revisit": null
+        },
+        {
+          "role": "Visitor volunteer",
+          "dialogue": "The wooded loop comes back to the campus. Take water anyway. People always think that means it is flat.",
+          "revisit": null
+        },
+        {
+          "role": "Neighbor",
+          "dialogue": "We used to meet by the big tree. There are several big trees. It took us a while to improve that system.",
+          "revisit": null
+        },
+        {
+          "role": "Cyclist",
+          "dialogue": "I came up the hill to avoid traffic. This was an ambitious trade.",
+          "revisit": null
+        },
+        {
+          "role": "Desk host",
+          "dialogue": "You can rest here. You do not have to buy anything or explain why you are tired.",
+          "revisit": null
+        },
+        {
+          "role": "Corner clerk",
+          "dialogue": "The bus stop is closer than the next overlook. That information has saved a few friendships.",
+          "revisit": null
+        }
+      ],
+      "status": "authored dialogue candidate; in-game review pending",
+      "welcome": "The visitor desk is up the block. The forest loop returns here, but the hill does not get smaller on the way back."
     }
   }
 }

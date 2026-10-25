@@ -2,6 +2,7 @@
 from world_people import native_text
 
 NOTICES={
+    'presidio':'Visitor desk. Water, maps and a place to rest. Please leave muddy shoes on the mat.',
     'dogpatch':'Repair counter open. Please bring the broken thing, not just a photo of it.',
     'potrero_hill':'Neighborhood library. Quiet voices. Dramatic sighs after the hill are fine.',
     'mission':'Community studio. Make something. It does not have to become a company.',

@@ -1,5 +1,6 @@
 """District-specific ordinary frontage rhythm and coordinated house paint."""
 FORMS={
+ 'presidio':('gable','duplex','walkup','gable','flats','duplex','workshop','arcade','deco','shophouse','walkup','gable'),
  'dogpatch':('workshop','flats','workshop','arcade','workshop','shophouse','flats','workshop','walkup','gable','deco','duplex','workshop','arcade','flats','shophouse'),
  'potrero_hill':('gable','walkup','duplex','gable','flats','walkup','duplex','shophouse','workshop','deco','arcade','walkup'),
  'mission':('shophouse','arcade','walkup','duplex','shophouse','workshop','arcade','walkup','flats','gable','deco','duplex'),
@@ -15,6 +16,7 @@ FORMS={
  'treasure_island':('workshop','flats','arcade','workshop','shophouse','flats','deco','workshop','walkup','gable','duplex','arcade'),
 }
 PAINT={
+ 'presidio':(1,0,2,1,0),
  'dogpatch':(0,0,0,1),'potrero_hill':(0,2,1,0,1),
  'mission':(0,1,0,2,1),'castro':(0,1,2,0,2),
  'outer_sunset':(0,1,0,2,0),'marina':(0,0,1,0,2),

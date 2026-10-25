@@ -25,6 +25,7 @@ def propose(identifier,bands,width,height,unavailable,walks,lanes):
 
 
 NOTES={
+ 'presidio':'A sheltered campus passage. Leave the trail mud outside the visitor desk, please.',
  'dogpatch':'Someone from the workshops waters these before opening up. Please leave the passage clear.',
  'potrero_hill':'A small level spot. Enjoy it before the next hill.',
  'mission':'Neighbors planted this corner. Please leave the pots where they are.',
