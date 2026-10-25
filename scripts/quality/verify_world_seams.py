@@ -47,7 +47,7 @@ def cross(c,w,audit,direction,target,name,stages,transient):
 
 class RenderAudit:
     def __init__(self,c):
-        self.c=c;self.rom=c.rom.read_bytes();self.graphics={}
+        self.c=c;self.rom=c.rom.read_bytes();self.graphics={};self.own_graphics={}
 
     def read(self,address,size):
         if 0x08000000<=address<0x08000000+len(self.rom):
@@ -101,12 +101,32 @@ class RenderAudit:
 
     def source_pixels(self,word,graphics,palettes):
         if word&1023<512:
+            if word>>12>=6:
+                own=self.primary_art(graphics)
+                if word&1023 not in own:raise ValueError('Linked SF record references unloaded own-primary art')
+                return self.pixels(word,own[word&1023],self.read(palettes+(word>>12)*32,32))
             graphics,palettes=self.unpack(self.c.symbols['gTileset_General']+4,'2I')
         if graphics not in self.graphics:
             self.graphics[graphics]=decode_lz(self.rom[graphics-0x08000000:graphics-0x08000000+32768])
         data=self.graphics[graphics];tile=word&1023
         offset=(tile-512 if tile>=512 else tile)*32
         return self.pixels(word,data[offset:offset+32],self.read(palettes+(word>>12)*32,32))
+
+    def primary_art(self,graphics):
+        if graphics not in self.own_graphics:
+            result={}
+            for name,address in self.c.symbols.items():
+                if not name.startswith('gSFPrimaryCount_'):continue
+                suffix=name.removeprefix('gSFPrimaryCount_')
+                source,=self.unpack(self.c.symbols['gTileset_'+suffix]+4,'I')
+                if source!=graphics:continue
+                count,=self.unpack(address,'H')
+                slots=self.unpack(self.c.symbols['gSFPrimarySlots_'+suffix],str(count)+'H')
+                raw=self.read(self.c.symbols['gSFPrimaryGraphics_'+suffix],count*32)
+                if len(set(slots))!=count:raise ValueError('Linked own-primary slots overlap')
+                result={slot:raw[i*32:(i+1)*32] for i,slot in enumerate(slots)}
+            self.own_graphics[graphics]=result
+        return self.own_graphics[graphics]
 
     @staticmethod
     def pixels(word,raw,palette):
@@ -130,13 +150,22 @@ class RenderAudit:
         atlas=self.unpack(c.symbols['sSFSeamCurrent'],'I')[0] if 'sSFSeamCurrent' in c.symbols else 0
         first,count=self.unpack(atlas+4,'2H') if atlas else (1024,0)
         records,attributes=self.unpack(atlas+12,'2I') if atlas else (0,0)
+        version=self.c.symbols.get('gSFSeamLookupVersion')
+        if atlas and version:
+            if self.unpack(version,'H')[0]!=2:raise ValueError('Unsupported seam lookup ABI')
+            lookup_pointer=self.unpack(atlas+44,'I')[0]
+            lookup=self.unpack(lookup_pointer,'1024H')
+        else:
+            lookup=tuple(i-first+1 if first<=i<first+count else 0 for i in range(1024))
+        if any(index>count for index in lookup):raise ValueError('Invalid seam record lookup')
         def active(identifier):
-            if first<=identifier<first+count:
-                return self.unpack(records+(identifier-first)*16,'8H'),self.unpack(attributes+(identifier-first)*2,'H')[0]
+            if lookup[identifier]:
+                index=lookup[identifier]-1
+                return self.unpack(records+index*16,'8H'),self.unpack(attributes+index*2,'H')[0]
             r,a,_,_=self.original_record(layout,identifier);return r,a
         vram=self.read(0x06000000,32768)
         palettes=self.read(c.symbols['gPlttBufferUnfaded'],512)
-        primary_ids={b&1023 for b in cells if b&1023<512}
+        primary_ids={b&1023 for b in cells if b&1023<512 and not lookup[b&1023]}
         primary_graphics,primary_palettes=self.unpack(layout['primary']+4,'2I')
         fallback=0x3014
         if self.pixels(fallback,vram[20*32:21*32],palettes[3*32:4*32])!=self.source_pixels(fallback,primary_graphics,primary_palettes):
@@ -151,9 +180,25 @@ class RenderAudit:
                 elif palettes[bank*32+2:bank*32+32]!=self.read(original_palettes+bank*32+2,30):
                     raise ValueError('Connection atlas overwrote native water/Waterfall colors')
         secondary_graphics,=self.unpack(layout['secondary']+4,'I')
+        own=self.primary_art(secondary_graphics)
+        required_own={word&1023 for identifier in set(cell&1023 for cell in layout['cells'])
+                      if identifier>=512 for word in self.original_record(layout,identifier)[0]
+                      if word&1023<512 and word>>12>=6}
+        if not required_own<=own.keys():raise ValueError('Linked own map references unloaded primary art')
+        for slot in required_own:
+            raw=own[slot]
+            if vram[slot*32:(slot+1)*32]!=raw:raise ValueError(owner+': own-primary facade graphics not loaded')
         if secondary_graphics not in self.graphics:
             self.graphics[secondary_graphics]=decode_lz(self.rom[secondary_graphics-0x08000000:secondary_graphics-0x08000000+32768])
-        if vram[16384:32768]!=self.graphics[secondary_graphics]:raise ValueError(owner+': active secondary graphics differ from linked art')
+        # Compare every authored graphic/color. Unused secondary slots may hold
+        # foreign margins; the margin audit below independently verifies those.
+        for identifier in set(cell&1023 for cell in layout['cells']):
+            if identifier<512:continue
+            words,_,graphics,original_palettes=self.original_record(layout,identifier)
+            for word in words:
+                slot=word&1023;bank=word>>12
+                if self.pixels(word,vram[slot*32:(slot+1)*32],palettes[bank*32:(bank+1)*32])!=self.source_pixels(word,graphics,original_palettes):
+                    raise ValueError(owner+': authored SF graphics/colors differ from linked art')
         margin_cells=0
         margin_checks=[];owners={}
         for number,link in enumerate(plan['connections'] or []):

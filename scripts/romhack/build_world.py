@@ -123,6 +123,8 @@ def main():
     ledger += apply_guide(ROOT,engine,original,manifest,plans)
     from world_boot import apply_world_boot
     ledger += apply_world_boot(engine, original)
+    if manifest.get('town_finishing') and not args.connection_atlas and any(compile_kit(profile=p).get('primary_tiles') for p in {m.get('tile_profile','residential') for m in plans}):
+        raise ValueError('Shared SF primary art requires the connection atlas loader')
     if args.connection_atlas:
         from world_seams import apply_seams
         ledger += apply_seams(engine, plans)

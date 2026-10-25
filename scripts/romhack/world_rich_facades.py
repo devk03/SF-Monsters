@@ -1,4 +1,4 @@
-"""Private SF facade candidate; no active kit or engine integration.
+"""Original SF facade modules for the shared world art compiler.
 
 Pixels come from our original connected-frontage-v3 atlas and authored modules,
 never an Emerald reference. Index0 is transparent; use that atlas's RGB555
@@ -96,16 +96,17 @@ def facade(name, closed=('left', 'right')):
         # Two projecting bays use the same original full-height bay module.
         patch(0, 0, 24, 64, 0, 0)
         patch(0, 0, 24, 64, 24, 0)
-        box(22, 12, 25, 60, 6)
+        box(22, 12, 25, 60, 7)
         box(23, 12, 23, 58, 5)
         entry(8); entry(32)
     elif name == 'shophouse':
         patch(48, 0, 32, 64, 0, 0)
-        box(1, 33, 30, 38, 1)
-        box(2, 34, 29, 36, 5)
+        box(1, 31, 30, 33, 7)
+        box(1, 34, 30, 38, 1)
+        box(2, 34, 29, 36, 10)
         # Striped awning has a top plane, hanging valance and underside shadow.
         for x in range(0, 32, 4):
-            box(x, 38, x+3, 42, 7 if x % 8 else 5)
+            box(x, 38, x+3, 42, 7 if x % 8 else 10)
             box(x, 43, x+3, 44 if x % 8 else 43, 8 if x % 8 else 6)
         box(0, 45, 31, 46, 1)
         window(4, 49, 9, 9); entry(18)
@@ -116,6 +117,10 @@ def facade(name, closed=('left', 'right')):
         patch(112, 0, 16, 64, 16, 0)
         box(17, 40, 31, 44, 6); box(17, 40, 31, 40, 5)
         entry(18)
+        # Paint the original plaster panels; keep roof, stone belt and glass.
+        for y in range(16,59):
+            for x in range(2,30):
+                if p[y*width+x]==5:p[y*width+x]=10
     elif name == 'gable':
         box(0, 0, 47, 16, 0)
         for y in range(2, 18):
@@ -138,9 +143,9 @@ def facade(name, closed=('left', 'right')):
             box(x+10, 5, x+14, 10, 4)
             window(x+4, 19, 8, 13)
             box(x+8, 19, x+8, 31, 2)
-        box(0, 36, 47, 39, 6); box(0, 36, 47, 36, 5)
+        box(0, 36, 47, 39, 9); box(0, 36, 47, 36, 5)
         box(3, 41, 29, 61, 1); box(5, 43, 27, 59, 2)
-        for y in range(45, 60, 3): box(5, y, 27, y, 13)
+        for y in range(45, 60, 3): box(5, y, 27, y, 8)
         box(3, 41, 29, 42, 6); entry(32)
     elif name == 'deco':
         box(0, 12, 47, 59, 10)
@@ -156,7 +161,7 @@ def facade(name, closed=('left', 'right')):
         box(0, 13, 47, 59, 10)
         for x in (4, 20, 36): window(x, 18, 8, 12)
         box(0, 35, 47, 40, 6); box(0, 35, 47, 35, 5)
-        box(2, 36, 45, 38, 1)
+        box(2, 36, 45, 38, 9)
         for x in (4, 20, 36):
             window(x, 47, 8, 11)
             box(x-2, 44, x+9, 46, 6)
@@ -164,6 +169,13 @@ def facade(name, closed=('left', 'right')):
             box(x, 44, x+7, 46, 4)
         entry(17)
 
+    if name in ('gable','deco','arcade','workshop'):
+        # Shared deep sash modules align to16px cells. Distinct roof, entry,
+        # loading door/arches and central ribs retain the structural identity.
+        # This also leaves enough native metatile IDs for the actual margins.
+        for x in (0,32):
+            box(x,16,x+15,31,7)
+            window(x+4,18,8,12)
     # Start each edge with continuous wall/roof/foundation pixels. Add a full
     # finished pier only at exposed ends; middle variants truly lose the pier.
     for side in ('left', 'right'):
@@ -234,7 +246,7 @@ def preview(directory):
         for y in range(0,h,16):
             for x in range(0,w,16):
                 cells.add(bytes(pixels[(y+dy)*w+x+dx] for dy in range(16) for dx in range(16)))
-    report = dict(status='private pixel prototype; no integration or visual approval',
+    report = dict(status='private source-art preview; native rendering and visual approval remain separate',
                   base_tiles=len(tile_inventory(fronts('mixed_use'))),
                   all_attachment_tiles=len(tile_inventory(fronts('mixed_use', variants=True))),
                   facade_cell_patterns=len(cells),

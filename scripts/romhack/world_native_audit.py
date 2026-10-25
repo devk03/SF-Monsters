@@ -88,7 +88,7 @@ def audit_native(rom_path, elf_path, plans, engine, *, expect_resume_masks=False
             profile=plan.get('tile_profile','residential')
             if profile not in resources:
                 from world_resource_audit import audit_resources
-                resources[profile]=audit_resources(rom,read,secondary,profile,engine)
+                resources[profile]=audit_resources(rom,read,secondary,profile,engine,symbols)
             attrs, = read(secondary + 16, 'I')
             for tile in used:
                 behavior, = read(attrs + (tile-512)*2, 'H')

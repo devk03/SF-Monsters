@@ -2,6 +2,7 @@
 import json
 import struct
 from pathlib import Path
+from world_shared_primary import REQUIRED_METATILES, validate_general
 
 
 def margin_points(plan, direction, source=None, offset=0):
@@ -29,9 +30,12 @@ def flip(tile, flags):
 
 def primary_reservations(plans, engine):
     raw = (engine/'data/tilesets/primary/general/metatiles.bin').read_bytes()
+    validate_general(raw)
     ids = {p['legend'][t][0] for p in plans for row in p['rows'] for t in row
            if p['legend'][t][0] < 512}
+    ids.update(p.get('border_tile',11) for p in plans if p.get('border_tile',11)<512)
     ids.add(1)  # General grass can also be referenced beneath SF composite art.
+    ids.update(REQUIRED_METATILES)
     # General water/sand/land-edge/waterfall/flower animations and the native
     # door scratch region live at432..511. Keep that entire range unavailable.
     # The NORMAL renderer also draws implicit background word0x3014: tile20,
@@ -60,18 +64,41 @@ def primary_reservations(plans, engine):
 
 def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None, primary_banks=None):
     by_native = {p['native_id']:p for p in plans}
-    pool = [i for i in range(432) if i not in reserved_tiles]
+    native_metatiles=REQUIRED_METATILES|{p['legend'][t][0] for p in plans for row in p['rows'] for t in row
+                                      if p['legend'][t][0]<512}
+    native_metatiles|={p.get('border_tile',11) for p in plans if p.get('border_tile',11)<512}
     result = []
     for plan in plans:
-        if not plan['connections']:
-            continue
-        kit = kits[plan['tile_profile']]
-        palettes = dict(kit['palettes'])
-        active_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]<512}
-        if kit.get('uses_native_grass'):active_ids.add(1)
-        for link in plan['connections']:
+        kit = kits[plan.get('tile_profile','residential')]
+        own_all=kit.get('primary_tiles',{})
+        own_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]>=512}
+        if plan.get('border_tile',11)>=512:own_ids.add(plan['border_tile'])
+        for link in plan['connections'] or []:
             other=by_native[link['map']]
-            if kits[other['tile_profile']].get('uses_native_grass'):active_ids.add(1)
+            if other.get('tile_profile','residential')==plan.get('tile_profile','residential'):
+                own_ids|={other['legend'][other['rows'][y][x]][0]
+                          for x,y in margin_points(other,link['direction'],plan,link['offset'])
+                          if other['legend'][other['rows'][y][x]][0]>=512}
+        slots={word&1023 for identifier in own_ids for word in kit['records'][identifier-512]
+               if word&1023<512 and word>>12>=6}
+        if not slots<=own_all.keys():raise ValueError('Own map references unloaded SF primary art')
+        own={slot:own_all[slot] for slot in sorted(slots)}
+        if not plan['connections'] and not own:continue
+        if set(own)&reserved_tiles:raise ValueError(plan['world_id']+': own SF art overwrites native primary graphics')
+        used_secondary={word&1023 for identifier in own_ids for word in kit['records'][identifier-512]
+                        if word&1023>=512}
+        # A route only renders a subset of its district kit. Reuse secondary
+        # slots absent from BOTH its layout and same-profile connection margins.
+        pool=[i for i in range(432) if i not in reserved_tiles and i not in own]
+        pool += [i for i in range(512,1024) if i not in used_secondary and i not in reserved_tiles]
+        used_own_banks={word>>12 for identifier in own_ids for word in kit['records'][identifier-512]}
+        palettes = {bank:raw for bank,raw in kit['palettes'].items() if bank in used_own_banks}
+        active_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]<512}
+        if plan.get('border_tile',11)<512:active_ids.add(plan.get('border_tile',11))
+        if kit.get('uses_native_grass'):active_ids.add(1)
+        for link in plan['connections'] or []:
+            other=by_native[link['map']]
+            if kits[other.get('tile_profile','residential')].get('uses_native_grass'):active_ids.add(1)
             active_ids|={other['legend'][other['rows'][y][x]][0] for x,y in margin_points(other,link['direction'],plan,link['offset'])
                          if other['legend'][other['rows'][y][x]][0]<512}
         active_banks=set(reserved_banks) if primary_banks is None else set().union(*(primary_banks[i] for i in active_ids))
@@ -86,9 +113,17 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
         def register(tile, identifier):
             for flags in (0,0x400,0x800,0xc00):
                 lookup.setdefault(flip(tile,flags),(identifier,flags))
-        for i, tile in enumerate(kit['tiles']):register(tile,512+i)
+        for i, tile in enumerate(kit['tiles']):
+            if 512+i in used_secondary:register(tile,512+i)
+        for slot,tile in own.items():register(tile,slot)
         extra_tiles = []
         records, attributes = [], []
+        assigned_ids=[]
+        # Foreign margin records may use otherwise-unused primary metatile IDs.
+        # Graphics slots and metatile IDs are independent hardware resources.
+        # Preserve every authored/required General ID, including border IDs.
+        free_ids=list(range(512+len(kit['records']),1024))+[
+            i for i in range(1,512) if i not in native_metatiles]
         record_ids = {(tuple(r),a):512+i for i,(r,a) in enumerate(zip(kit['records'],kit['attributes']))}
         def paint(pixels, palette):
             if not any(pixels):return pixels,6
@@ -109,17 +144,17 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
             elif free_banks:
                 bank=free_banks.pop(0);packed_palettes[bank]=[0]+[None]*15
             else:
-                raise ValueError(f"{plan['world_id']}: faithful seam exceeds unused palette colors")
+                raise ValueError(f"{plan['world_id']}: faithful seam exceeds unused palette colors; active={sorted(active_banks)}, packed={[(b,v.count(None)) for b,v in packed_palettes.items()]}, needed={sorted(needed)}")
             values=packed_palettes[bank]
             for color in sorted(needed-set(values[1:])):values[values.index(None)]=color
             mapping={i:values.index(colors[i],1) for i in set(pixels) if i}
             return bytes(mapping[p] if p else 0 for p in pixels),bank
         neighbors = []
-        for link in plan['connections']:
+        for link in plan['connections'] or []:
             other = by_native[link['map']]
-            if other['tile_profile'] == plan['tile_profile']:
+            if other.get('tile_profile','residential') == plan.get('tile_profile','residential'):
                 continue
-            foreign = kits[other['tile_profile']]
+            foreign = kits[other.get('tile_profile','residential')]
             used = {other['legend'][other['rows'][y][x]][0]
                     for x,y in margin_points(other,link['direction'],plan,link['offset'])}
             mapping = list(range(512,1024))
@@ -127,9 +162,12 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
                 if metatile < 512:continue  # Native water/falls/ground remain untouched.
                 words = []
                 for word in foreign['records'][metatile-512]:
-                    if word&1023<512:
+                    if word&1023<512 and word>>12<6:
                         words.append(word);continue  # Pinned General grass is shared unchanged.
-                    pixels,bank = paint(foreign['tiles'][(word & 1023)-512],foreign['palettes'][word >> 12])
+                    slot=word&1023
+                    raw=foreign['tiles'][slot-512] if slot>=512 else foreign.get('primary_tiles',{}).get(slot)
+                    if raw is None:raise ValueError('Foreign SF art references an unloaded primary graphic')
+                    pixels,bank = paint(raw,foreign['palettes'][word >> 12])
                     if pixels not in lookup:
                         if len(extra_tiles) >= len(pool):
                             raise ValueError(f"{plan['world_id']}: faithful seam exceeds free primary graphics slots")
@@ -139,20 +177,22 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
                 attribute = foreign['attributes'][metatile-512]
                 key = tuple(words),attribute
                 if key not in record_ids:
-                    if len(kit['records'])+len(records) >= 512:
-                        raise ValueError(f"{plan['world_id']}: faithful seam exceeds secondary metatile IDs")
-                    record_ids[key] = 512+len(kit['records'])+len(records)
+                    if len(records)>=len(free_ids):raise ValueError('Faithful seam exhausts safe metatile IDs')
+                    record_ids[key] = free_ids[len(records)]
+                    assigned_ids.append(record_ids[key])
                     records.append(words);attributes.append(attribute)
                 mapping[metatile-512] = record_ids[key]
             neighbors.append({'native_id':other['native_id'],'mapping':mapping,'used':sorted(used)})
         result.append({'world_id':plan['world_id'],'native_id':plan['native_id'],
-                       'profile':plan['tile_profile'],
+                       'profile':plan.get('tile_profile','residential'),
                        'reserved_palettes':sorted(active_banks),
                        'secondary_graphics':b''.join(bytes(tile[y*8+x] | tile[y*8+x+1]<<4
                                                        for y in range(8) for x in range(0,8,2))
                                                   for tile in kit['tiles'])+bytes((512-len(kit['tiles']))*32),
                        'first':512+len(kit['records']),'records':records,'attributes':attributes,
-                       'tiles':extra_tiles,'tile_slots':pool[:len(extra_tiles)],
+                       'record_ids':assigned_ids,
+                       'own_primary_slots':list(own),'foreign_tile_count':len(extra_tiles),
+                       'tiles':list(own.values())+extra_tiles,'tile_slots':list(own)+pool[:len(extra_tiles)],
                        'palettes':{b:struct.pack('<16H',*(v if v is not None else 0 for v in values))
                                    for b,values in packed_palettes.items()},'neighbors':neighbors})
     return result
@@ -167,6 +207,7 @@ def c_array(name, kind, values, width=16):
 
 def header(atlases):
     out = ['// Generated faithful connection margins. Primary terrain/animation slots are reserved.\n',
+           'const u16 gSFSeamLookupVersion = 2;\n',
            '''struct SFSeamNeighbor { u8 group,num; const u16 *mapping; };
 struct SFSeamAtlas {
     u8 group,num,neighborCount,paletteCount;
@@ -175,6 +216,7 @@ struct SFSeamAtlas {
     const u8 *graphics;
     const struct SFSeamNeighbor *neighbors;
     const u8 *secondaryGraphics;
+    const u16 *recordLookup;
 };
 ''']
     entries = [];bases={}
@@ -191,6 +233,9 @@ struct SFSeamAtlas {
                 c_array(prefix+'Attributes','u16',a['attributes']),
                 c_array(prefix+'PaletteSlots','u16',a['palettes']),
                 c_array(prefix+'Palettes','u16',(v for p in a['palettes'].values() for v in struct.unpack('<16H',p)))]
+        lookup=[0]*1024
+        for index,identifier in enumerate(a['record_ids']):lookup[identifier]=index+1
+        out.append(c_array(prefix+'Lookup','u16',lookup))
         neighbors = []
         for j,n in enumerate(a['neighbors']):
             name = prefix+f'Map{j}'
@@ -200,7 +245,7 @@ struct SFSeamAtlas {
                    ','.join(neighbors or ['{0,0,NULL}'])+'};\n')
         entries.append('{MAP_GROUP('+a['native_id']+'),MAP_NUM('+a['native_id']+'),'+
                        ','.join(map(str,(len(a['neighbors']),len(a['palettes']),a['first'],len(a['records']),len(a['tiles']))))+','+
-                       ','.join(prefix+n for n in ('Records','Attributes','Tiles','PaletteSlots','Palettes','Graphics','Neighbors'))+','+bases[a['profile']]+'}')
+                       ','.join(prefix+n for n in ('Records','Attributes','Tiles','PaletteSlots','Palettes','Graphics','Neighbors'))+','+bases[a['profile']]+','+prefix+'Lookup}')
     out.append('static const struct SFSeamAtlas sSFSeamAtlases[] = {\n'+',\n'.join(entries)+'\n};\n')
     out.append(RUNTIME)
     return ''.join(out)
@@ -234,13 +279,13 @@ static u16 SFSeamTranslate(const struct MapHeader *other,u16 block)
 }
 const u16 *SFSeamMetatile(u16 id)
 {
-    if (sSFSeamCurrent && id>=sSFSeamCurrent->first && id-sSFSeamCurrent->first<sSFSeamCurrent->count)
-        return sSFSeamCurrent->records+(id-sSFSeamCurrent->first)*8;
+    if (sSFSeamCurrent && id<1024 && sSFSeamCurrent->recordLookup[id])
+        return sSFSeamCurrent->records+(sSFSeamCurrent->recordLookup[id]-1)*8;
     return NULL;
 }
 static u16 SFSeamAttribute(u16 id)
 {
-    return sSFSeamCurrent->attributes[id-sSFSeamCurrent->first];
+    return sSFSeamCurrent->attributes[sSFSeamCurrent->recordLookup[id]-1];
 }
 bool8 SFSeamTakeRedraw(void)
 {
@@ -369,6 +414,9 @@ static void SFSeamRedrawView(int dx,int dy)
                'reserved_primary_palette_entries':palette_locks,
                'primary_palette_banks_by_metatile':{i:sorted(b) for i,b in bank_usage.items()},
                'maps':[{'id':a['world_id'],'extra_tiles':len(a['tiles']),
+                        'own_primary_slots':a['own_primary_slots'],
+                        'foreign_tiles':a['foreign_tile_count'],
+                        'tile_slots':a['tile_slots'],'record_ids':a['record_ids'],
                         'extra_metatiles':len(a['records']),'palette_slots':list(a['palettes']),
                         'reserved_primary_palettes':a['reserved_palettes']}
                        for a in atlases]}

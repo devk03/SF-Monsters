@@ -32,11 +32,14 @@ class BuildingVarietyTests(unittest.TestCase):
             for card in kit['catalog'].values():
                 for row in card['tiles']:
                     for tile in row:
-                        native=[word for word in kit['records'][tile-512] if word&1023<512]
+                        native=[word for word in kit['records'][tile-512] if word&1023<512 and word>>12<6]
                         self.assertTrue(all(word in (0x2002,0x2003) for word in native))
+                        for word in kit['records'][tile-512]:
+                            if word&1023<512 and word>>12>=6:
+                                self.assertIn(word&1023,kit['primary_tiles'])
 
     def test_attachment_variants_change_only_real_party_wall_pixels(self):
-        from world_facade_modules import facade
+        from world_rich_facades import facade
         from world_architecture import FORMS
         for name in FORMS:
             w,h,isolated=facade(name)
@@ -62,10 +65,15 @@ class BuildingVarietyTests(unittest.TestCase):
                         newwords=kit['records'][tile-512];oldwords=kit['records'][old-512]
                         self.assertEqual(newwords[:4],oldwords[:4],(profile,name,'paving'))
                         self.assertEqual([w&0xfff for w in newwords],[w&0xfff for w in oldwords])
-                        banks={w>>12 for w in newwords[4:]};self.assertEqual(len(banks),1)
-                        bank=banks.pop();self.assertIn(bank,(9,11,12))
-                        self.assertEqual(kit['palettes'][bank][2:10],kit['palettes'][6][2:10], 'roof and glass')
-                        self.assertNotEqual(kit['palettes'][bank],kit['palettes'][6])
+                        scheme=name.split('__')[1]
+                        wanted=struct.unpack('<16H',paint_palette(kit['palettes'][6],scheme))
+                        for newword,oldword in zip(newwords[4:],oldwords[4:]):
+                            slot=oldword&1023
+                            pixels=kit['tiles'][slot-512] if slot>=512 else kit['primary_tiles'][slot]
+                            colors=struct.unpack('<16H',kit['palettes'][newword>>12])
+                            self.assertEqual([colors[p] if p else None for p in pixels],
+                                             [wanted[p] if p else None for p in pixels],(profile,name,slot))
+
 
     def test_new_fronts_have_green_and_blue_walls_not_just_different_trim(self):
         palette=compile_kit(profile='mixed_use')['palettes'][6]

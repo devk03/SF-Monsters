@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image
 
 
-def audit_resources(rom,read,secondary,profile,engine):
+def audit_resources(rom,read,secondary,profile,engine,symbols=None):
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'quality'))
     from check_creature_resources import decode_lz
     directory=engine/'data/tilesets/secondary'/('petalburg' if profile=='residential' else 'sf_world_'+profile)
@@ -27,8 +27,27 @@ def audit_resources(rom,read,secondary,profile,engine):
         resources.append((name,source,actual))
     source=resources[1][1]
     if len(source)%16:raise ValueError('Native metatile records are incomplete')
+    own={}
+    slots_path=directory/'primary-slots.bin'
+    if slots_path.exists() and slots_path.stat().st_size:
+        slots_raw=slots_path.read_bytes();raw=(directory/'primary-art.4bpp').read_bytes()
+        slots=struct.unpack('<'+'H'*(len(slots_raw)//2),slots_raw)
+        if len(set(slots))!=len(slots) or len(raw)!=32*len(slots):raise ValueError('Invalid own-primary source resources')
+        if symbols is None:raise ValueError('Own-primary audit needs linked resource symbols')
+        from world_shared_primary import PINNED_RESERVED
+        if set(slots)&PINNED_RESERVED or any(not 0<=s<432 for s in slots):raise ValueError('Own-primary art overwrites protected native slots')
+        suffix={'industrial':'SFIndustrial','civic':'SFCivic','neighborhood':'SFNeighborhood',
+                'mixed_use':'SFMixedUse','culture':'SFCulture','stadium':'SFStadium'}[profile]
+        count,=read(symbols['gSFPrimaryCount_'+suffix],'H')
+        if count!=len(slots):raise ValueError('Compiled own-primary count differs')
+        resources.extend([('primary-slots',slots_raw,bytes(read(symbols['gSFPrimarySlots_'+suffix],str(len(slots_raw))+'B'))),
+                          ('primary-art',raw,bytes(read(symbols['gSFPrimaryGraphics_'+suffix],str(len(raw))+'B')))])
+        own=dict(zip(slots,(raw[i*32:(i+1)*32] for i in range(len(slots)))))
     for index,word in enumerate(struct.unpack('<'+'H'*(len(source)//2),source)):
         if word&1023<512:
+            if word>>12>=6:
+                if word&1023 not in own or word>>12>12:raise ValueError('SF record addresses unloaded own-primary graphics')
+                continue
             if profile=='residential' or index%8>=4 or word!=[0x2002,0x2003,0x2003,0x2002][index%8]:
                 raise ValueError('SF record references unapproved primary terrain')
             continue

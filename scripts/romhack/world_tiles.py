@@ -50,7 +50,7 @@ def compile_kit(root=ROOT, profile='residential'):
                                   for dy in range(8) for dx in range(8))
                     tile_ids.setdefault(flipped,(index,flags))
             index,flags=tile_ids[tile]
-            result.append(FIRST_TILE + index | flags | bank << 12)
+            result.append(0x10000000 | index << 16 | flags | bank << 12)
         return result
 
     def card(name, pixels, width, height, bank, ground, ground_bank, blocked=True, behavior=0, floor=False, ground_width=16, deduplicate=False):
@@ -295,9 +295,9 @@ def compile_kit(root=ROOT, profile='residential'):
             catalog[name]['closed_edges']=closed
             catalog[name]['architecture_type']=families[base]
     from world_architecture import paint_palette, FORMS
-    from world_facade_modules import fronts,facade
+    from world_rich_facades import fronts,facade
     for name,w,h,raw in fronts(profile):
-        card(name,raw,w,h,6,paving,7)
+        card(name,raw,w,h,6,paving,7,deduplicate=True)
         catalog[name]['closed_edges']=['left','right']
         catalog[name]['architecture_type']=name
     for name in FORMS:
@@ -316,7 +316,7 @@ def compile_kit(root=ROOT, profile='residential'):
     # Service and reserved-gym fronts only draw their base paint. Avoid
     # allocating unused recolor records at the expense of connection margins.
     base_fronts=[(n,c) for n,c in catalog.items() if (n in (*FORMS,'coral') or n.rsplit('_',1)[0] in FORMS) and 'closed_edges' in c and
-                 any(w>>12==6 for row in c['tiles'] for t in row for w in records[t-FIRST_METATILE][4:])]
+                 any((w>>12)&15==6 for row in c['tiles'] for t in row for w in records[t-FIRST_METATILE][4:])]
     for scheme,bank in zip(('sage','slate'),banks):
         if bank in palettes:raise ValueError('Building paint would overwrite a loaded palette')
         palettes[bank]=paint_palette(palettes[6],scheme)
@@ -326,7 +326,9 @@ def compile_kit(root=ROOT, profile='residential'):
                 out=[]
                 for tile in row:
                     source=records[tile-FIRST_METATILE]
-                    changed=[(w&0xfff)|(bank<<12) if w>>12==6 else w for w in source]
+                    changed=[(w&~0xf000)|(bank<<12) if (w>>12)&15==6 and any(
+                        palettes[6][v*2:v*2+2]!=palettes[bank][v*2:v*2+2]
+                        for v in set(tiles[(w>>16)&0xfff])) else w for w in source]
                     attribute=attributes[tile-FIRST_METATILE]
                     prior=next((i for i,(r,a) in enumerate(zip(records,attributes)) if r==changed and a==attribute),None)
                     if prior is None:prior=len(records);records.append(changed);attributes.append(attribute)
@@ -347,11 +349,13 @@ def compile_kit(root=ROOT, profile='residential'):
         quiet = bytes(3 if x == 15 or y == 15 else 1
                       for y in range(16) for x in range(16))
         card('court_walk',quiet,16,16,7,paving,7,False,floor=True)
-    if len(tiles) > 512 or len(records) > 512:
+    if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
         raise ValueError('A secondary palette falls outside the seven native loaded banks')
-    return {'tiles': tiles, 'records': records, 'attributes': attributes,
+    from world_shared_primary import pack_graphics
+    tiles, primary_tiles, records = pack_graphics(tiles,records)
+    return {'tiles': tiles, 'primary_tiles':primary_tiles, 'records': records, 'attributes': attributes,
             'palettes': palettes, 'catalog': catalog, 'profile':profile,
             'uses_native_grass':profile!='residential'}
 
@@ -376,6 +380,11 @@ def apply_kit(engine, original, kit):
     for name, data in [('metatiles.bin', b''.join(struct.pack('<8H', *r) for r in kit['records'])),
                        ('metatile_attributes.bin', struct.pack('<'+'H'*len(kit['attributes']), *kit['attributes']))]:
         (engine / directory / name).write_bytes(data); files.append(directory + name)
+    primary=kit.get('primary_tiles',{})
+    for name,data in [('primary-slots.bin',struct.pack('<'+'H'*len(primary),*primary)),
+                      ('primary-art.4bpp',bytes(v for tile in primary.values() for y in range(8)
+                                               for x in range(0,8,2) for v in [tile[y*8+x]|tile[y*8+x+1]<<4]))]:
+        (engine/directory/name).write_bytes(data);files.append(directory+name)
     if profile != 'residential':
         relative=directory+'palettes.gbapal'
         (engine/relative).write_bytes(b''.join(kit['palettes'].get(bank,bytes(32)) for bank in range(16)))
@@ -384,6 +393,9 @@ def apply_kit(engine, original, kit):
         for path,text in [
             ('src/data/tilesets/graphics.h',
              f'\nconst u32 gTilesetTiles_{suffix}[] = INCGFX_U32("{directory}tiles.png", ".4bpp.lz", "-num_tiles 512 -Wnum_tiles");\n'
+             f'const u16 gSFPrimaryCount_{suffix} = {len(primary)};\n'
+             f'const u16 gSFPrimarySlots_{suffix}[] = INCBIN_U16("{directory}primary-slots.bin");\n'
+             f'const u8 ALIGNED(4) gSFPrimaryGraphics_{suffix}[] = INCBIN_U8("{directory}primary-art.4bpp");\n'
              f'const u16 gTilesetPalettes_{suffix}[] = INCBIN_U16("{directory}palettes.gbapal");\n'),
             ('src/data/tilesets/metatiles.h',
              f'\nconst u16 gMetatiles_{suffix}[] = INCBIN_U16("{directory}metatiles.bin");\n'

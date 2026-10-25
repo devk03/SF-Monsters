@@ -1,16 +1,52 @@
-"""Pure prototype planner for own-art/foreign-seam shared primary VRAM slots.
+"""Safe original SF art allocation in reusable native primary VRAM slots.
 
 No engine mutations and no fallback over reservations. Caller supplies the
 actual General metatile records and ALL existing seam slots. Output graphics
 use indexed4bpp pixels; their metatile words retain the caller's palette bank.
-Parent integration must load these slots on every applicable map entry and
-allocate future seams from the returned remaining_pool (one allocator only).
+The connection atlas loads these slots on every applicable map entry and
+allocates foreign seams after all live own-art slots are reserved.
 """
 
 REQUIRED_METATILES = frozenset((1,2,3,4,11,13,14,22,161,176,177,178,179,184,186,
     194,198,368,464,465,466,468,469,472,473,474,476,477,480,481,482,484,485,
-    0x68,0x69,0x6a,0x6b,0x6c,0x70,0x71,0x73,0x78,0x79,0x7b,0xaf,0xcf))
+    0x68,0x69,0x6a,0x6b,0x6c,0x70,0x71,0x73,0x78,0x79,0x7a,0x7b,0xaf,0xcf,0xc8,0xc9,0xca,0xd0,0xd2,0xd8,0xd9,0xda,0x124))
 FIXED_RESERVED = frozenset(range(16)) | {20} | frozenset(range(432,512))
+# Only slot IDs and a hash of pinned General records are distributed here,
+# never extracted reference graphics. apply_seams rechecks actual native uses.
+PINNED_GENERAL_HASH = '5e5cbc0a0ed95ccd01153b802cc08a1d7a3b3a5da83830ad7c30223f73f6e81f'
+PINNED_RESERVED = FIXED_RESERVED | frozenset((16, 17, 22, 25, 30, 32, 33, 41, 65, 66, 67, 68, 70, 71, 72, 73, 80, 81, 82, 83, 84, 85, 86, 96, 97, 98, 99, 102, 108, 109, 110, 111, 112, 113, 114, 115, 118, 124, 127, 128, 129, 130, 131, 132, 133, 134, 140, 143, 144, 145, 146, 147, 148, 149, 150, 151, 159, 166, 174, 175, 184, 185, 204, 205, 211, 249, 250, 253, 254, 264, 265, 266, 269, 270, 280, 281, 282, 285, 286, 297, 298, 301, 302, 309, 310, 325, 326, 384, 385, 400, 401, 416, 417, 418, 419, 420, 421))
+
+
+def validate_general(raw):
+    import hashlib
+    if hashlib.sha256(b''.join(raw[i*16:i*16+16] for i in sorted(REQUIRED_METATILES))).hexdigest() != PINNED_GENERAL_HASH:
+        raise ValueError('Pinned General terrain reservation records changed')
+
+
+def pack_graphics(tiles, records):
+    """Resolve compiler-only graphic handles before any16bit packing.
+
+    Stable profile-owned overflow slots precede per-map foreign seam allocation.
+    All slots are independently checked against actual terrain during building.
+    """
+    pool = sorted(set(range(432))-PINNED_RESERVED)
+    overflow = max(0,len(tiles)-512)
+    if overflow > len(pool):
+        raise ValueError('Own SF art exceeds secondary plus safe primary graphics')
+    primary = dict(zip(pool,tiles[512:]))
+    resolved = []
+    for record in records:
+        row = []
+        for word in record:
+            if word & 0x10000000:
+                index = (word >> 16) & 0xfff
+                if index >= len(tiles):raise ValueError('Invalid logical SF graphic')
+                slot = 512+index if index<512 else pool[index-512]
+                word = slot | (word & 0xfc00)
+            if not 0 <= word <= 0xffff:raise ValueError('Unresolved SF graphic handle')
+            row.append(word)
+        resolved.append(row)
+    return tiles[:512],primary,resolved
 
 
 def validate_tile(tile):
