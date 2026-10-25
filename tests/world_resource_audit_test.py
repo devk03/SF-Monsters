@@ -81,6 +81,12 @@ class WorldResourceTests(unittest.TestCase):
         self.rom[0x140]^=1
         with self.assertRaisesRegex(ValueError,'compiled primary-art differs'):self.audit()
 
+    def test_park_housing_profile_checks_its_own_linked_primary_symbols(self):
+        self.own_primary('park_edge','SFParkEdge')
+        self.assertEqual(self.audit()['profile'],'park_edge')
+        self.rom[0x140]^=1
+        with self.assertRaisesRegex(ValueError,'compiled primary-art differs'):self.audit()
+
 
 class LiveSourceArtTests(unittest.TestCase):
     def test_independent_render_audit_decodes_primary_art_with_palette_and_flips(self):

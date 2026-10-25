@@ -643,6 +643,17 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Park/Richmond art profile staged — not wired to a map or native-reviewed.**
+`park_edge` combines all eight original facade forms, finished attachment variants
+and sage paint with native-grass-backed foliage plus the existing windmill and
+conservatory. Only those two park landmarks are included; unrelated tower/ruins
+art remains in the ordinary nature profile. Landmarks keep palette9; house paint
+uses12. Source allocation is375metatiles,512secondary graphics plus124safe
+own-primary slots. The explicit independent compiled-resource symbol mapping
+and a corruption-refusal test are included from the start. Existing profiles
+are unchanged. This is preparation for the concept's missing Richmond edge,
+not a claim of native allocation or completed neighborhood composition.
+
 **v129 compiled Marina venue corridor — native subset verified; goal active.**
 ROM SHA `ef21818c853069dbd204bb0e9f319892a7a37ad89aa1cfcc31d0543a4dd16131`,
 receipt `edb17d3bd7ca4b0aa116002b9406527b`. Eleven complete north-row facades

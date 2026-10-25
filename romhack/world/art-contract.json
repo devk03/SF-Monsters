@@ -23579,6 +23579,2507 @@
           "architecture_type": "duplex"
         }
       }
+    },
+    "park_edge": {
+      "secondary": "gTileset_SFParkEdge",
+      "cards": {
+        "paving": {
+          "first": 512,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "asphalt": {
+          "first": 513,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "crossing": {
+          "first": 514,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "coral": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "cafe": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "closed_edges": [],
+          "architecture_type": "corner_shop"
+        },
+        "lamp": {
+          "first": 535,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "meter": {
+          "first": 537,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "hydrant": {
+          "first": 538,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin": {
+          "first": 539,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rack": {
+          "first": 540,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree": {
+          "first": 542,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench": {
+          "first": 546,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "recycling": {
+          "first": 548,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "grass": {
+          "first": 550,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "grove": {
+          "first": 551,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "cypress": {
+          "first": 552,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "pine": {
+          "first": 556,
+          "width": 2,
+          "height": 3,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shrub": {
+          "first": 631,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "rocks": {
+          "first": 566,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_grass": {
+          "first": 570,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bench_grass": {
+          "first": 574,
+          "width": 2,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lamp_grass": {
+          "first": 576,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "bin_grass": {
+          "first": 578,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "windmill": {
+          "first": 579,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "conservatory": {
+          "first": 591,
+          "width": 4,
+          "height": 3,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "scenic_sea": {
+          "first": 603,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "seawall": {
+          "first": 604,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "edge_hedge": {
+          "first": 605,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "slab_walk": {
+          "first": 606,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "brick_walk": {
+          "first": 610,
+          "width": 2,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "stone_walk": {
+          "first": 612,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "dark_walk": {
+          "first": 616,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_north": {
+          "first": 617,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_south": {
+          "first": 618,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_cut": {
+          "first": 619,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "curb_drain": {
+          "first": 620,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tree_well": {
+          "first": 621,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
+        },
+        "street_tree": {
+          "first": 625,
+          "width": 2,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "succulent": {
+          "first": 629,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "tuft": {
+          "first": 630,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "flower_box": {
+          "first": 632,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "lavender": {
+          "first": 633,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "daisies": {
+          "first": 634,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "shop_board": {
+          "first": 635,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "wayfinder": {
+          "first": 636,
+          "width": 1,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "walkup": {
+          "first": 638,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              638,
+              639,
+              640
+            ],
+            [
+              641,
+              642,
+              643
+            ],
+            [
+              644,
+              645,
+              646
+            ],
+            [
+              647,
+              525,
+              648
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse": {
+          "first": 649,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              649,
+              650
+            ],
+            [
+              651,
+              652
+            ],
+            [
+              653,
+              654
+            ],
+            [
+              655,
+              656
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop": {
+          "first": 657,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              657,
+              658,
+              659
+            ],
+            [
+              660,
+              661,
+              662
+            ],
+            [
+              663,
+              664,
+              665
+            ],
+            [
+              666,
+              667,
+              668
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable": {
+          "first": 669,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              669,
+              670,
+              671
+            ],
+            [
+              660,
+              672,
+              662
+            ],
+            [
+              673,
+              674,
+              675
+            ],
+            [
+              676,
+              677,
+              668
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco": {
+          "first": 678,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              678,
+              679,
+              680
+            ],
+            [
+              660,
+              681,
+              662
+            ],
+            [
+              682,
+              683,
+              684
+            ],
+            [
+              685,
+              686,
+              687
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats": {
+          "first": 688,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              688,
+              689
+            ],
+            [
+              690,
+              691
+            ],
+            [
+              692,
+              693
+            ],
+            [
+              694,
+              695
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade": {
+          "first": 696,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              696,
+              697,
+              698
+            ],
+            [
+              660,
+              699,
+              662
+            ],
+            [
+              700,
+              701,
+              702
+            ],
+            [
+              703,
+              686,
+              704
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex": {
+          "first": 638,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              638,
+              705,
+              706
+            ],
+            [
+              641,
+              707,
+              708
+            ],
+            [
+              709,
+              710,
+              711
+            ],
+            [
+              712,
+              713,
+              714
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "walkup_l": {
+          "first": 638,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              638,
+              639,
+              715
+            ],
+            [
+              641,
+              642,
+              716
+            ],
+            [
+              644,
+              645,
+              717
+            ],
+            [
+              647,
+              525,
+              718
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "walkup"
+        },
+        "walkup_m": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              515,
+              639,
+              715
+            ],
+            [
+              719,
+              642,
+              716
+            ],
+            [
+              720,
+              645,
+              717
+            ],
+            [
+              721,
+              525,
+              718
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "walkup"
+        },
+        "walkup_r": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              515,
+              639,
+              640
+            ],
+            [
+              719,
+              642,
+              643
+            ],
+            [
+              720,
+              645,
+              646
+            ],
+            [
+              721,
+              525,
+              648
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse_l": {
+          "first": 649,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              649,
+              528
+            ],
+            [
+              651,
+              722
+            ],
+            [
+              653,
+              723
+            ],
+            [
+              655,
+              724
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "shophouse_m": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              527,
+              528
+            ],
+            [
+              725,
+              722
+            ],
+            [
+              726,
+              723
+            ],
+            [
+              727,
+              724
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "shophouse"
+        },
+        "shophouse_r": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              527,
+              650
+            ],
+            [
+              725,
+              652
+            ],
+            [
+              726,
+              654
+            ],
+            [
+              727,
+              656
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop_l": {
+          "first": 657,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              657,
+              658,
+              658
+            ],
+            [
+              660,
+              661,
+              728
+            ],
+            [
+              663,
+              664,
+              729
+            ],
+            [
+              666,
+              667,
+              730
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "workshop"
+        },
+        "workshop_m": {
+          "first": 658,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              658,
+              658,
+              658
+            ],
+            [
+              731,
+              661,
+              728
+            ],
+            [
+              732,
+              664,
+              729
+            ],
+            [
+              733,
+              667,
+              730
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "workshop"
+        },
+        "workshop_r": {
+          "first": 658,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              658,
+              658,
+              659
+            ],
+            [
+              731,
+              661,
+              662
+            ],
+            [
+              732,
+              664,
+              665
+            ],
+            [
+              733,
+              667,
+              668
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable_l": {
+          "first": 669,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              669,
+              670,
+              734
+            ],
+            [
+              660,
+              672,
+              728
+            ],
+            [
+              673,
+              674,
+              735
+            ],
+            [
+              676,
+              677,
+              730
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "gable"
+        },
+        "gable_m": {
+          "first": 736,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              736,
+              670,
+              734
+            ],
+            [
+              731,
+              672,
+              728
+            ],
+            [
+              737,
+              674,
+              735
+            ],
+            [
+              738,
+              677,
+              730
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "gable"
+        },
+        "gable_r": {
+          "first": 736,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              736,
+              670,
+              671
+            ],
+            [
+              731,
+              672,
+              662
+            ],
+            [
+              737,
+              674,
+              675
+            ],
+            [
+              738,
+              677,
+              668
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco_l": {
+          "first": 678,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              678,
+              679,
+              739
+            ],
+            [
+              660,
+              681,
+              728
+            ],
+            [
+              682,
+              683,
+              740
+            ],
+            [
+              685,
+              686,
+              741
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "deco"
+        },
+        "deco_m": {
+          "first": 742,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              742,
+              679,
+              739
+            ],
+            [
+              731,
+              681,
+              728
+            ],
+            [
+              743,
+              683,
+              740
+            ],
+            [
+              744,
+              686,
+              741
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "deco"
+        },
+        "deco_r": {
+          "first": 742,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              742,
+              679,
+              680
+            ],
+            [
+              731,
+              681,
+              662
+            ],
+            [
+              743,
+              683,
+              684
+            ],
+            [
+              744,
+              686,
+              687
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats_l": {
+          "first": 688,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              688,
+              745
+            ],
+            [
+              690,
+              746
+            ],
+            [
+              692,
+              747
+            ],
+            [
+              694,
+              748
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "flats"
+        },
+        "flats_m": {
+          "first": 749,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              749,
+              745
+            ],
+            [
+              750,
+              746
+            ],
+            [
+              751,
+              747
+            ],
+            [
+              752,
+              748
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "flats"
+        },
+        "flats_r": {
+          "first": 749,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              749,
+              689
+            ],
+            [
+              750,
+              691
+            ],
+            [
+              751,
+              693
+            ],
+            [
+              752,
+              695
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade_l": {
+          "first": 696,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              696,
+              697,
+              697
+            ],
+            [
+              660,
+              699,
+              728
+            ],
+            [
+              700,
+              701,
+              753
+            ],
+            [
+              703,
+              686,
+              754
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "arcade"
+        },
+        "arcade_m": {
+          "first": 697,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              697,
+              697,
+              697
+            ],
+            [
+              731,
+              699,
+              728
+            ],
+            [
+              755,
+              701,
+              753
+            ],
+            [
+              756,
+              686,
+              754
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "arcade"
+        },
+        "arcade_r": {
+          "first": 697,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              697,
+              697,
+              698
+            ],
+            [
+              731,
+              699,
+              662
+            ],
+            [
+              755,
+              701,
+              702
+            ],
+            [
+              756,
+              686,
+              704
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex_l": {
+          "first": 638,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              638,
+              705,
+              757
+            ],
+            [
+              641,
+              707,
+              758
+            ],
+            [
+              709,
+              710,
+              759
+            ],
+            [
+              712,
+              713,
+              760
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "duplex"
+        },
+        "duplex_m": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              515,
+              705,
+              757
+            ],
+            [
+              719,
+              707,
+              758
+            ],
+            [
+              761,
+              710,
+              759
+            ],
+            [
+              762,
+              713,
+              760
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "duplex"
+        },
+        "duplex_r": {
+          "first": 515,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              515,
+              705,
+              706
+            ],
+            [
+              719,
+              707,
+              708
+            ],
+            [
+              761,
+              710,
+              711
+            ],
+            [
+              762,
+              713,
+              714
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "coral__sage": {
+          "first": 763,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              763,
+              516,
+              764
+            ],
+            [
+              765,
+              766,
+              767
+            ],
+            [
+              768,
+              769,
+              770
+            ],
+            [
+              771,
+              772,
+              773
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "bay_house"
+        },
+        "walkup__sage": {
+          "first": 774,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              774,
+              775,
+              776
+            ],
+            [
+              777,
+              778,
+              779
+            ],
+            [
+              780,
+              781,
+              782
+            ],
+            [
+              783,
+              772,
+              784
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse__sage": {
+          "first": 649,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              649,
+              650
+            ],
+            [
+              785,
+              786
+            ],
+            [
+              787,
+              788
+            ],
+            [
+              789,
+              656
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop__sage": {
+          "first": 790,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              790,
+              791,
+              792
+            ],
+            [
+              793,
+              794,
+              795
+            ],
+            [
+              796,
+              797,
+              798
+            ],
+            [
+              799,
+              800,
+              801
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable__sage": {
+          "first": 669,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              669,
+              802,
+              671
+            ],
+            [
+              793,
+              803,
+              795
+            ],
+            [
+              804,
+              805,
+              806
+            ],
+            [
+              807,
+              808,
+              801
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco__sage": {
+          "first": 809,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              809,
+              810,
+              811
+            ],
+            [
+              793,
+              812,
+              795
+            ],
+            [
+              813,
+              814,
+              815
+            ],
+            [
+              816,
+              817,
+              818
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats__sage": {
+          "first": 688,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              688,
+              689
+            ],
+            [
+              819,
+              820
+            ],
+            [
+              821,
+              822
+            ],
+            [
+              823,
+              824
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade__sage": {
+          "first": 825,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              825,
+              826,
+              827
+            ],
+            [
+              793,
+              828,
+              795
+            ],
+            [
+              829,
+              830,
+              831
+            ],
+            [
+              832,
+              817,
+              833
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex__sage": {
+          "first": 774,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              774,
+              834,
+              835
+            ],
+            [
+              777,
+              836,
+              837
+            ],
+            [
+              838,
+              839,
+              840
+            ],
+            [
+              841,
+              842,
+              843
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "duplex"
+        },
+        "walkup_l__sage": {
+          "first": 774,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              774,
+              775,
+              844
+            ],
+            [
+              777,
+              778,
+              845
+            ],
+            [
+              780,
+              781,
+              846
+            ],
+            [
+              783,
+              772,
+              847
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "walkup"
+        },
+        "walkup_m__sage": {
+          "first": 763,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              763,
+              775,
+              844
+            ],
+            [
+              848,
+              778,
+              845
+            ],
+            [
+              849,
+              781,
+              846
+            ],
+            [
+              850,
+              772,
+              847
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "walkup"
+        },
+        "walkup_r__sage": {
+          "first": 763,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              763,
+              775,
+              776
+            ],
+            [
+              848,
+              778,
+              779
+            ],
+            [
+              849,
+              781,
+              782
+            ],
+            [
+              850,
+              772,
+              784
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "walkup"
+        },
+        "shophouse_l__sage": {
+          "first": 649,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              649,
+              528
+            ],
+            [
+              785,
+              851
+            ],
+            [
+              787,
+              852
+            ],
+            [
+              789,
+              724
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "shophouse_m__sage": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              527,
+              528
+            ],
+            [
+              853,
+              851
+            ],
+            [
+              854,
+              852
+            ],
+            [
+              855,
+              724
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "shophouse"
+        },
+        "shophouse_r__sage": {
+          "first": 527,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              527,
+              650
+            ],
+            [
+              853,
+              786
+            ],
+            [
+              854,
+              788
+            ],
+            [
+              855,
+              656
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "shophouse"
+        },
+        "workshop_l__sage": {
+          "first": 790,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              790,
+              791,
+              791
+            ],
+            [
+              793,
+              794,
+              856
+            ],
+            [
+              796,
+              797,
+              857
+            ],
+            [
+              799,
+              800,
+              858
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "workshop"
+        },
+        "workshop_m__sage": {
+          "first": 791,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              791,
+              791,
+              791
+            ],
+            [
+              859,
+              794,
+              856
+            ],
+            [
+              860,
+              797,
+              857
+            ],
+            [
+              861,
+              800,
+              858
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "workshop"
+        },
+        "workshop_r__sage": {
+          "first": 791,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              791,
+              791,
+              792
+            ],
+            [
+              859,
+              794,
+              795
+            ],
+            [
+              860,
+              797,
+              798
+            ],
+            [
+              861,
+              800,
+              801
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "workshop"
+        },
+        "gable_l__sage": {
+          "first": 669,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              669,
+              802,
+              734
+            ],
+            [
+              793,
+              803,
+              856
+            ],
+            [
+              804,
+              805,
+              862
+            ],
+            [
+              807,
+              808,
+              858
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "gable"
+        },
+        "gable_m__sage": {
+          "first": 736,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              736,
+              802,
+              734
+            ],
+            [
+              859,
+              803,
+              856
+            ],
+            [
+              863,
+              805,
+              862
+            ],
+            [
+              864,
+              808,
+              858
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "gable"
+        },
+        "gable_r__sage": {
+          "first": 736,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              736,
+              802,
+              671
+            ],
+            [
+              859,
+              803,
+              795
+            ],
+            [
+              863,
+              805,
+              806
+            ],
+            [
+              864,
+              808,
+              801
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "gable"
+        },
+        "deco_l__sage": {
+          "first": 809,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              809,
+              810,
+              865
+            ],
+            [
+              793,
+              812,
+              856
+            ],
+            [
+              813,
+              814,
+              866
+            ],
+            [
+              816,
+              817,
+              867
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "deco"
+        },
+        "deco_m__sage": {
+          "first": 868,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              868,
+              810,
+              865
+            ],
+            [
+              859,
+              812,
+              856
+            ],
+            [
+              869,
+              814,
+              866
+            ],
+            [
+              870,
+              817,
+              867
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "deco"
+        },
+        "deco_r__sage": {
+          "first": 868,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              868,
+              810,
+              811
+            ],
+            [
+              859,
+              812,
+              795
+            ],
+            [
+              869,
+              814,
+              815
+            ],
+            [
+              870,
+              817,
+              818
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "deco"
+        },
+        "flats_l__sage": {
+          "first": 688,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              688,
+              745
+            ],
+            [
+              819,
+              871
+            ],
+            [
+              821,
+              872
+            ],
+            [
+              823,
+              873
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "flats"
+        },
+        "flats_m__sage": {
+          "first": 749,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              749,
+              745
+            ],
+            [
+              874,
+              871
+            ],
+            [
+              875,
+              872
+            ],
+            [
+              876,
+              873
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "flats"
+        },
+        "flats_r__sage": {
+          "first": 749,
+          "width": 2,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              749,
+              689
+            ],
+            [
+              874,
+              820
+            ],
+            [
+              875,
+              822
+            ],
+            [
+              876,
+              824
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "flats"
+        },
+        "arcade_l__sage": {
+          "first": 825,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              825,
+              826,
+              826
+            ],
+            [
+              793,
+              828,
+              856
+            ],
+            [
+              829,
+              830,
+              877
+            ],
+            [
+              832,
+              817,
+              878
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "arcade"
+        },
+        "arcade_m__sage": {
+          "first": 826,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              826,
+              826,
+              826
+            ],
+            [
+              859,
+              828,
+              856
+            ],
+            [
+              879,
+              830,
+              877
+            ],
+            [
+              880,
+              817,
+              878
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "arcade"
+        },
+        "arcade_r__sage": {
+          "first": 826,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              826,
+              826,
+              827
+            ],
+            [
+              859,
+              828,
+              795
+            ],
+            [
+              879,
+              830,
+              831
+            ],
+            [
+              880,
+              817,
+              833
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "arcade"
+        },
+        "duplex_l__sage": {
+          "first": 774,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              774,
+              834,
+              881
+            ],
+            [
+              777,
+              836,
+              882
+            ],
+            [
+              838,
+              839,
+              883
+            ],
+            [
+              841,
+              842,
+              884
+            ]
+          ],
+          "closed_edges": [
+            "left"
+          ],
+          "architecture_type": "duplex"
+        },
+        "duplex_m__sage": {
+          "first": 763,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              763,
+              834,
+              881
+            ],
+            [
+              848,
+              836,
+              882
+            ],
+            [
+              885,
+              839,
+              883
+            ],
+            [
+              886,
+              842,
+              884
+            ]
+          ],
+          "closed_edges": [],
+          "architecture_type": "duplex"
+        },
+        "duplex_r__sage": {
+          "first": 763,
+          "width": 3,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              763,
+              834,
+              835
+            ],
+            [
+              848,
+              836,
+              837
+            ],
+            [
+              885,
+              839,
+              840
+            ],
+            [
+              886,
+              842,
+              843
+            ]
+          ],
+          "closed_edges": [
+            "right"
+          ],
+          "architecture_type": "duplex"
+        }
+      }
     }
   }
 }

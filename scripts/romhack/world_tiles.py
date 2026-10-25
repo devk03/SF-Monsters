@@ -12,7 +12,7 @@ PROFILES = {'residential':'gTileset_Petalburg','industrial':'gTileset_SFIndustri
             'civic':'gTileset_SFCivic','nature':'gTileset_SFNature',
             'culture':'gTileset_SFCulture','stadium':'gTileset_SFStadium',
             'neighborhood':'gTileset_SFNeighborhood','mixed_use':'gTileset_SFMixedUse',
-            'ridge_town':'gTileset_SFRidgeTown'}
+            'ridge_town':'gTileset_SFRidgeTown','park_edge':'gTileset_SFParkEdge'}
 
 
 def checked(directory, name, receipt):
@@ -32,7 +32,8 @@ def compile_kit(root=ROOT, profile='residential'):
               'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
               'culture':{'coral','cafe','cream'},'stadium':{'coral','cream','cafe'},
               'neighborhood':{'coral','cafe'},
-              'mixed_use':{'coral','cafe'},'ridge_town':{'coral','cafe'}}
+              'mixed_use':{'coral','cafe'},'ridge_town':{'coral','cafe'},
+              'park_edge':{'coral','cafe'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: (0,0)}
@@ -180,7 +181,7 @@ def compile_kit(root=ROOT, profile='residential'):
         grass=bytes(int(c,16) for row in json.loads(grass_spec)['cells']['0'] for c in row)
         palettes[10]=checked(directory,'terrain.gbapal',receipt)
         card('grass',empty,16,16,10,grass,10,False)
-        if profile in ('nature','ridge_town'):
+        if profile in ('nature','ridge_town','park_edge'):
             directory=root/'assets/tiles/sf-foliage-v1'
             receipt=json.loads((directory/'conversion.json').read_text())
             palettes[11]=checked(directory,'foliage.gbapal',receipt)
@@ -194,6 +195,7 @@ def compile_kit(root=ROOT, profile='residential'):
             card(name+'_grass',raw,w,h,6,grass,10)
     landmarks={'industrial':('crane',),'civic':('highrise',),
                'nature':('sutro_tower','windmill','conservatory','bath_ruins'),
+               'park_edge':('windmill','conservatory'),
                'culture':('theater',),'stadium':('stadium_gate',)}
     if profile in landmarks:
         directory=root/'assets/tiles/sf-landmarks-v1'
@@ -202,7 +204,7 @@ def compile_kit(root=ROOT, profile='residential'):
         for name in landmarks[profile]:
             data=next(item for item in receipt['cards'] if item['name']==name)
             raw=checked(directory,name+'.indices',receipt);w,h=data['size']
-            background,bank=(grass,10) if profile=='nature' else (paving,7)
+            background,bank=(grass,10) if profile in ('nature','park_edge') else (paving,7)
             card(name,raw,w,h,9,background,bank)
     if profile in ('neighborhood','mixed_use'):
         directory=root/'assets/tiles/neighborhood-landmarks-v1'
@@ -311,7 +313,7 @@ def compile_kit(root=ROOT, profile='residential'):
             catalog[variant]['architecture_type']=name
     # Alternate paint uses free native palette banks and shares every 8x8 tile.
     # It does not spend the sprite budget on recolored copies of the same art.
-    banks={'neighborhood':(9,12),'mixed_use':(9,12),'ridge_town':(9,12),
+    banks={'neighborhood':(9,12),'mixed_use':(9,12),'ridge_town':(9,12),'park_edge':(12,),
            'culture':(11,12),'stadium':(11,12),
            'industrial':(11,),'civic':(11,)}.get(profile,())
     # Service and reserved-gym fronts only draw their base paint. Avoid
