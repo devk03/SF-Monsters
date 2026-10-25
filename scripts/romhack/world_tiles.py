@@ -355,8 +355,15 @@ def compile_kit(root=ROOT, profile='residential'):
         base=catalog['highrise']
         for name,repeats in [('highrise_medium',2),('highrise_tall',4)]:
             catalog[name]=dict(base,tiles=[list(r) for r in
-                (base['tiles'][:2]+base['tiles'][2:3]*repeats+base['tiles'][3:])],
+                (base['tiles'][:3]+base['tiles'][3:4]*repeats+base['tiles'][4:])],
                 explicit_cells=True)
+    if profile=='mixed_use':
+        # A broad campus hall reuses finished outer wings and a continuous
+        # central gable. Its scale changes without allocating another atlas.
+        wings=[catalog[n]['tiles'] for n in ('flats_l','gable_m','flats_r')]
+        catalog['campus_hall']=dict(tiles=[list(a+b+c) for a,b,c in zip(*wings)],
+            blocked=True,closed_edges=['left','right'],architecture_type='campus_hall',
+            explicit_cells=True)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

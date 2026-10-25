@@ -1,4 +1,4 @@
-"""Unwired Potrero Hill relief candidate using reserved General terrain only.
+"""Potrero Hill relief candidate using reserved General terrain only.
 
 Call reserved_cells BEFORE packing buildings, frontage, courts and furniture.
 Call furnish AFTER those passes, with the same lane/sidewalk/occupied sets.
@@ -44,7 +44,7 @@ def _bindings(plan):
             result |= _rectangle(x - 1, y - 1, x + 1, y + 1)
     for npc in plan.get('npcs', []):
         x, y = npc['x'], npc['y']
-        rx, ry = npc.get('movement_range_x', 0), npc.get('movement_range_y', 0)
+        rx, ry = npc.get('range_x', 0), npc.get('range_y', 0)
         result |= _rectangle(x - rx - 1, y - ry - 1, x + rx + 1, y + ry + 1)
     return result
 
@@ -167,4 +167,4 @@ def furnish(plan, grid, lanes, walks, occupied, token, cards):
     occupied.update(tuple(p) for r in records for p in r['solid'])
     plan.setdefault('scenic_viewpoints', []).extend(viewpoints)
     plan['town_relief'] = dict(terraces=records, native_metatiles=[0x68,0x69,0x6a,0x78,0x79,0x7a,0xaf,0xcf],
-                               elevation=3, visual_acceptance='unwired source prototype; native review pending')
+                               elevation=3, visual_acceptance='native review pending')

@@ -89,6 +89,10 @@ def expand(plans, manifest):
         parcel_cells=reserved_cells(name) if not nature else set()
         from world_concept_places import reserved_cells as place_cells, furnish as furnish_place
         if not nature:parcel_cells|=place_cells(name)
+        from world_town_relief import reserved_cells as relief_cells, furnish as furnish_relief
+        if not nature:parcel_cells|=relief_cells(name)
+        from world_presidio_campus import reserved_cells as campus_cells, furnish as furnish_campus
+        if not nature:parcel_cells|=campus_cells(name)
         passage_cells=set()
         front_approaches=set()
         def stamp(style,x,y,*,shoulder=False,parcel=False,passage=False):
@@ -208,6 +212,8 @@ def expand(plans, manifest):
                     break
         if not nature:furnish_parcel(plan,grid,cards,stamp,token)
         if not nature:furnish_place(plan,grid,cards,stamp,token,lanes)
+        if not nature:furnish_relief(plan,grid,lanes,walks,occupied,token,cards)
+        if not nature:furnish_campus(plan,grid,lanes,walks,occupied,token,cards)
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)

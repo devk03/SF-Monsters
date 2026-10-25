@@ -7,7 +7,24 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 [Game spec and progress](docs/game-spec.md#15-active-emerald-parity-goal) ·
 [Development agent](DEVELOPMENT_AGENT.md) · [Build a gym or mission](CONTRIBUTING.md)
 
-## Current development goal: finish the compact SF world
+## Current development goal: translate the expanded neighborhood concepts
+
+The [expanded concept collection](output/imagegen/neighborhood-ideals-v2-expanded/README.md)
+is the design reference for all19areas, including a separate Presidio / Presidio
+Heights destination. The private world now has96×64tile destinations and77maps:
+19places,36physical connectors,8reserved gyms and14service rooms. The current
+work improves real street blocks, landmarks, hill terrain, nature trails and
+building massing. Follow the [district translation ledger](docs/world/concept-translation.md)
+and [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
+
+Private v122 passes the complete native connection/room circuit, matching WASM
+replay, six animation-frame crossing trials, all77city-guide contexts and a short
+local browser smoke. Earlier ordinary Saves recover from newly occupied shore,
+warehouse and office tiles. These checks do not grant visual approval or full
+browser/mobile acceptance. The next source refinement adds Potrero terraces and
+a more deliberate campus composition; it has not replaced the published patch.
+
+## Published preview
 
 The v92 world preview has 18 compact destinations, 19 connectors, eight
 reserved gym rooms and 13 service interiors. Urban areas use attached blocks,

@@ -1,4 +1,4 @@
-"""Unwired Presidio hall/common candidate with no new art or door/state IDs.
+"""Presidio hall/common candidate with no new art or door/state IDs.
 
 Reserve the plot and two-tile connector BEFORE frontage/furniture packing.
 Furnish AFTER packing, before final attachment and resident/forest passes.
@@ -134,4 +134,4 @@ def furnish(plan, grid, lanes, walks, occupied, token, cards):
         forecourt=list(FORECOURT), connector=list(CONNECTOR),
         notice=dict(object=list(NOTICE['object']), standing=list(NOTICE['standing']), script=NOTICE['script']),
         visitor_service_entry=[5, 8], new_art_allocations=0, new_flags=0, new_warps=0,
-        visual_acceptance='unwired source prototype; native review pending')
+        visual_acceptance='native review pending')

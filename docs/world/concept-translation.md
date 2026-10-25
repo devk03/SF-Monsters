@@ -60,7 +60,9 @@ Every row is an implementation candidate. None has human visual acceptance.
 - `world_concept_places.py`: reserved field, garden, office and research courts.
 - `world_native_parks.py`, `world_concept_terraces.py`, `world_park_water.py`:
   complete native forest groups, ridge/stair candidates and joined pond banks.
-- `world_presidio.py`: campus/residential transition and protected native forest.
+- `world_town_relief.py`: Potrero retaining courts, stairs and safe street landings.
+- `world_presidio_campus.py`, `world_presidio.py`: reserved hall/common, visitor
+  notice and campus/residential transition into protected native forest.
 - `world_rich_facades.py`, `world_shared_primary.py`: richer original SF facade
   candidate and explicit native allocation planning; integration is in progress.
 

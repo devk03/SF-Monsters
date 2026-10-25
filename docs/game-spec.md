@@ -643,6 +643,18 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October 24 resumed source refinement — private v123, native checks pending.**
+The user explicitly renewed the keep-going instruction. The active scope remains
+translation of all19 expanded concepts; the historical deadline is superseded.
+Potrero now reserves two retaining courts before housing placement, with native
+stairs, benches and street landings. NPC protection uses the actual roaming-range
+fields. Presidio reserves a broad hall/common and pedestrian connector before
+packing, furnishes them before the forest pass, and adds a readable notice to the
+existing visitor service. The hall reuses complete capped wings and central gable;
+no new art IDs, doors or persistent flags are allocated. Taller offices now repeat
+their straight window body rather than the tapered upper row. These are source
+candidates, not visual acceptance. Build, native views and traversal must follow.
+
 **Native v122 checkpoint — transition fix and current-world verification.**
 Private SHA `10f363e3fce6c43dfed90fe372e9313022c2a57685e01ad14f64cc343877dbd8`,
 receipt `d2726addffeb4fc2bd337eb385d950fc`, includes larger industrial yards,
