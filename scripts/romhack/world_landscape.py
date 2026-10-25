@@ -7,7 +7,7 @@ NATURE={'golden_gate_park','twin_peaks','sutro_tower','lands_end','angel_island'
 
 def landscape(plans, manifest):
     if not manifest.get('town_finishing'):return plans
-    result=deepcopy(plans);kit=compile_kit(profile='nature');cards=kit['catalog']
+    result=deepcopy(plans);kits={'nature':compile_kit(profile='nature')}
     from generate_world import records
     from world_towns import GREEN_ROUTES
     routes={r['id']:r for r in records(manifest)[1]}
@@ -15,6 +15,9 @@ def landscape(plans, manifest):
         name=plan['world_id'];route=routes.get(name)
         if name not in NATURE and not route:continue
         if route and route['mode']=='walk' and name not in GREEN_ROUTES and route.get('setting')!='green':continue
+        profile='ridge_town' if name=='twin_peaks' else 'nature'
+        if profile not in kits:kits[profile]=compile_kit(profile=profile)
+        kit=kits[profile];cards=kit['catalog']
         old=plan['rows'];grid=[list(row) for row in old]
         token=lambda name:chr(0x100+cards[name]['tiles'][0][0]-512)
         def fill(x0,y0,x1,y1,name):
@@ -119,10 +122,10 @@ def landscape(plans, manifest):
                 x,y={'left':(0,12+delta),'right':(31,12+delta),
                      'up':(16+delta,0),'down':(16+delta,23)}[link['direction']]
                 grid[y][x]=token('paving')
-        plan.update(rows=[''.join(row) for row in grid],legend=legend_for(kit),tile_profile='nature')
+        plan.update(rows=[''.join(row) for row in grid],legend=legend_for(kit),tile_profile=profile)
         plan['border_tile']=cards['grove']['tiles'][0][0]
         plan['water_positions']=[[x,y] for y,row in enumerate(grid) for x,value in enumerate(row) if value in 'WV']
-        plan['tilesets']['secondary']=PROFILES['nature']
+        plan['tilesets']['secondary']=PROFILES[profile]
         plan['landmarks']=[{'name':item,'x':x,'y':y} for item,x,y in landmarks]
         plan['town_blocks']=[];plan['scenic_viewpoints']=[]
         for item,x,y in landmarks:

@@ -643,6 +643,19 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v127 residential-base source candidate — not yet native-reviewed.** Twin Peaks
+now uses a hybrid kit with all eight original structural forms, sage/slate paint,
+native grass and the original foliage/rock cards. It fits475metatiles and uses
+58safe primary-graphics slots beyond the secondary bank. Before forest packing,
+the generator reserves a western court and three lower attached housing groups:
+17homes, connected forecourts, a planted rest corner and two residents with
+original dialogue. Existing park trails, gym bindings, summit stairs and existing
+actors stay in place. New residents face the player using ordinary native script
+commands; no state flags, HM gates or warps are added. All85world source tests
+pass. The art contract's new profile is mechanical allocation metadata; native
+compilation, actual views, activity/Save checks and boundary loading still need
+to follow before judging this as a visual improvement. Publicv80/v92 stay intact.
+
 **Combined native v126 checkpoint — reproduced transition defect fixed in the
 current test corpus; world goal still active.** SHA
 `740497683d8279241a2d1ad1ad8ca5d367e0d72bd0a431e5269fa6765e2c6f64`, receipt
@@ -675,6 +688,18 @@ are under `.tools/benchmarks/concept-v126-review-packet/`; rendered cover, Twin
 Peaks, Financial District and priorities pages were inspected. First-legal
 menu/room lifecycle cases from the alignment chat are finishing.
 Visual quality, density, landmarks and the concept translations remain open.
+
+The alignment chat's bounded v126 lifecycle follow-up passes12cases (Start
+offsets0..5 under office/shore phases),210independent render stages,12SFMap/palette13
+returns and12Repair Cafe round trips. Two simultaneous Start+direction cases open
+the source menu and cancel safely. Destination scenes appear within16frames;
+the first native Start task appears at20, after eligible tile-center at19, with
+the scene latch already clear. Party/count, money, flags, chapter, decoded bag
+and Flash remain unchanged. Room warps normally rekey encrypted bag bytes; the
+ignored harness was corrected to compare decoded contents and retained its raw
+comparison failure. No source/runtime audit was relaxed, no starvation reproduced.
+These finite cases cover one crossing/room family, not every IRQ schedule.
+Evidence: `.tools/benchmarks/v126-menu-room-lifecycle-summary.json`.
 
 The default `.tools/pokeemerald-world-host` now produces the exact same v126
 cartridge as the isolated engine. Their315489defined symbol records also match.

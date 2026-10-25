@@ -11,7 +11,8 @@ LAYER_COVERED = 0x1000
 PROFILES = {'residential':'gTileset_Petalburg','industrial':'gTileset_SFIndustrial',
             'civic':'gTileset_SFCivic','nature':'gTileset_SFNature',
             'culture':'gTileset_SFCulture','stadium':'gTileset_SFStadium',
-            'neighborhood':'gTileset_SFNeighborhood','mixed_use':'gTileset_SFMixedUse'}
+            'neighborhood':'gTileset_SFNeighborhood','mixed_use':'gTileset_SFMixedUse',
+            'ridge_town':'gTileset_SFRidgeTown'}
 
 
 def checked(directory, name, receipt):
@@ -31,7 +32,7 @@ def compile_kit(root=ROOT, profile='residential'):
               'industrial':{'coral','cafe'},'civic':{'cream','cafe'},'nature':set(),
               'culture':{'coral','cafe','cream'},'stadium':{'coral','cream','cafe'},
               'neighborhood':{'coral','cafe'},
-              'mixed_use':{'coral','cafe'}}
+              'mixed_use':{'coral','cafe'},'ridge_town':{'coral','cafe'}}
     if profile not in styles:raise ValueError('Unknown SF art profile')
     tiles = [bytes(64)]
     tile_ids = {tiles[0]: (0,0)}
@@ -179,7 +180,7 @@ def compile_kit(root=ROOT, profile='residential'):
         grass=bytes(int(c,16) for row in json.loads(grass_spec)['cells']['0'] for c in row)
         palettes[10]=checked(directory,'terrain.gbapal',receipt)
         card('grass',empty,16,16,10,grass,10,False)
-        if profile=='nature':
+        if profile in ('nature','ridge_town'):
             directory=root/'assets/tiles/sf-foliage-v1'
             receipt=json.loads((directory/'conversion.json').read_text())
             palettes[11]=checked(directory,'foliage.gbapal',receipt)
@@ -310,7 +311,7 @@ def compile_kit(root=ROOT, profile='residential'):
             catalog[variant]['architecture_type']=name
     # Alternate paint uses free native palette banks and shares every 8x8 tile.
     # It does not spend the sprite budget on recolored copies of the same art.
-    banks={'neighborhood':(9,12),'mixed_use':(9,12),
+    banks={'neighborhood':(9,12),'mixed_use':(9,12),'ridge_town':(9,12),
            'culture':(11,12),'stadium':(11,12),
            'industrial':(11,),'civic':(11,)}.get(profile,())
     # Service and reserved-gym fronts only draw their base paint. Avoid

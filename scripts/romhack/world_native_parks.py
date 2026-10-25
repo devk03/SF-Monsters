@@ -49,6 +49,9 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     from world_twin_summits import prepare as prepare_summits, furnish as furnish_summits
     summits=prepare_summits(plan,lanes,protected)
     if summits:clear|=summits['clear']
+    from world_ridge_neighborhood import prepare as prepare_homes, furnish as furnish_homes
+    homes=prepare_homes(plan,lanes,protected|(summits['protected'] if summits else set()),cards)
+    if homes:clear|=homes['clear']
     from world_concept_terraces import compose, draw as draw_terraces
     terraces=[] if summits else compose(plan['world_id'],GLADES[plan['world_id']],lanes,protected,clear)
     for y in range(height):
@@ -76,6 +79,9 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
             grid[y][x]=sand
     draw_outcrops(plan,grid,cards,relief)
     if summits:furnish_summits(plan,grid,summits,token)
+    if homes:
+        furnish_homes(plan,grid,homes,token,cards,occupied)
+        protected|=homes['clear']
     draw_terraces(plan,grid,terraces)
     draw_pond(plan,grid)
     from world_park_stops import add_park_stops

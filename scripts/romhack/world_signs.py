@@ -60,7 +60,9 @@ def scripts(plan):
     result=[]
     for sign in plan.get('street_signs',[])+plan.get('extra_street_signs',[]):
         label=sign['script']
-        result += [label+'::','    lockall',f'    msgbox {label}_Text, MSGBOX_DEFAULT',
-                   '    releaseall','    end',label+'_Text::',
+        result += [label+'::','    lock' if sign.get('npc') else '    lockall']
+        if sign.get('npc'):result.append('    faceplayer')
+        result += [f'    msgbox {label}_Text, MSGBOX_DEFAULT',
+                   '    release' if sign.get('npc') else '    releaseall','    end',label+'_Text::',
                    '    .string "'+native_text(sign['text'])+'"']
     return '\n'.join(result)+'\n' if result else ''
