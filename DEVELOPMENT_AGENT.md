@@ -7,13 +7,15 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v122:19destinations/77maps, larger industrial
-yards, richer facades and a fixed one-frame BG3 transfer defect. Native circuit,
-six transient boundary trials, all77guide contexts, WASM replay and a short local
-foreground browser smoke pass. All19full maps have live render audits. Renew full
-edge coverage after geometry changes; long browser/mobile and human visual gates
-remain open. Refine the tiered office shafts and inspect Potrero relief natively.
-Publicv92 is intact.
+Latest private native candidate is v123: 19 destinations / 77 maps, Potrero stair
+courts, a Presidio hall/common and corrected office body repetition. The native
+map/room circuit, two earlier-Save recovery cases and four changed-district live
+render audits pass. All57boundary pairs/342settled stages, six transient trials
+and matching259762-frameWASM replay also pass. All-town activity checks are
+running. Potrero still reads as small rock barriers, and the campus is flat/sparse;
+neither has visual acceptance. Next composition priority: two exposed Twin Peaks
+summits instead of continuous woodland. Public v92 is intact. Read section 15.1
+for exact evidence; keep long browser/mobile and human visual gates open.
 
 Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
 contains a second, much wider set for all 19 areas. V1 is preserved for comparison.

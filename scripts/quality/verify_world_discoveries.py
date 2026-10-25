@@ -42,7 +42,16 @@ def main():
             w.travel(area);before=quantity(spec['item']);prior={n:flag(n) for n in values}
             if spec['kind']=='favor':
                 npc=next(n for n in w.plans[area]['npcs'] if n['script']==f'WBTown_{area}_{spec["resident_index"]}')
-                standing=(npc['x'],npc['y']-1)
+                # Expanded streets can put a resident beside a wall. Choose a
+                # real reachable adjacent approach, not an assumed north tile.
+                if npc.get('range_x',0) or npc.get('range_y',0):
+                    raise ValueError('Favor-owner fixture requires a stationary resident')
+                for dx,dy in ((0,-1),(-1,0),(1,0),(0,1)):
+                    standing=(npc['x']+dx,npc['y']+dy)
+                    try:w.path(w.plans[area],w.location()[1],standing)
+                    except ValueError:continue
+                    break
+                else:raise ValueError('Favor owner has no reachable adjacent approach: '+area)
                 interact(standing,(npc['x'],npc['y']))
                 if flag(spec['done_flag']) or quantity(spec['item'])!=before:raise ValueError('Request granted an early reward')
             interact(spec['standing'],spec['object'])

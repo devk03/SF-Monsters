@@ -10,19 +10,20 @@ An open-source San Francisco creature RPG and Emerald ROM hack for GBA and web.
 ## Current development goal: translate the expanded neighborhood concepts
 
 The [expanded concept collection](output/imagegen/neighborhood-ideals-v2-expanded/README.md)
-is the design reference for all19areas, including a separate Presidio / Presidio
-Heights destination. The private world now has96×64tile destinations and77maps:
-19places,36physical connectors,8reserved gyms and14service rooms. The current
+is the design reference for all 19 areas, including a separate Presidio / Presidio
+Heights destination. The private world now has 96×64 tile destinations and 77 maps:
+19 places, 36 physical connectors, 8 reserved gyms and 14 service rooms. The current
 work improves real street blocks, landmarks, hill terrain, nature trails and
 building massing. Follow the [district translation ledger](docs/world/concept-translation.md)
 and [spec checkpoints](docs/game-spec.md#151-objective-and-completion-rule).
 
-Private v122 passes the complete native connection/room circuit, matching WASM
-replay, six animation-frame crossing trials, all77city-guide contexts and a short
-local browser smoke. Earlier ordinary Saves recover from newly occupied shore,
-warehouse and office tiles. These checks do not grant visual approval or full
-browser/mobile acceptance. The next source refinement adds Potrero terraces and
-a more deliberate campus composition; it has not replaced the published patch.
+Private v123 adds Potrero stair courts, a Presidio hall/common and corrected office
+body repetition. Its complete native map/room circuit, earlier-Save recovery,
+all 57 connected pairs, six animation-frame trials and matching WASM replay pass.
+All-town activity checks are in progress. The preceding v122 also passes a
+matching WASM replay, six animation-frame crossing trials, all 77 city-guide
+contexts and a short local browser smoke. These checks do not grant visual approval
+or full browser/mobile acceptance. The published patch has not been replaced.
 
 ## Published preview
 

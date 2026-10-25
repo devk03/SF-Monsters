@@ -655,6 +655,35 @@ no new art IDs, doors or persistent flags are allocated. Taller offices now repe
 their straight window body rather than the tapered upper row. These are source
 candidates, not visual acceptance. Build, native views and traversal must follow.
 
+Native v123 now builds successfully: SHA
+`62e9fbcb66653d6807a475e4030ffa153f27e48aa594272630a534b7aeb21683`, receipt
+`4cf057175a594971bf2568f347f9187f`. All81source tests, deterministic generation,
+compiled resources and patch roundtrip pass. Its complete native circuit visits
+all77maps/114connections/16gym/28service-room warps. Actual earlier office and
+Potrero ordinary Saves recover from newly blocked ground; complete party, bag,
+money, flags, chapter and Flash preservation pass. Potrero fixture was saved
+normally on immutable v122 at `(63,21)`, then recovered on v123 at `(63,20)`.
+
+Four changed destinations have controller-driven captures and full-map live
+render audits under `.tools/benchmarks/concept-v123-changed-native-review/`.
+Inspected Potrero courts have usable stairs but still resemble small rock barriers;
+they do not yet convey the concept's hillside massing. The Presidio hall/common
+is visible and reachable but still flat/sparse. Its new notice opens, dismisses
+and returns through the pedestrian connector without rewriting Flash. The first
+private notice harness tried walking before all text pages closed; the corrected
+run uses the existing script-status dismissal helper. This was a harness error,
+not evidence of blocked map geometry. Wider boundary, transient, all-town and
+matching WASM checks are in progress. Publicv80/v92 remain unchanged.
+
+The v123 verification has now advanced: all57connected pairs pass342settled
+live render stages (both directions plus inward walks), and six transient
+crossing trials pass202stages plus guide-palette return. Protected state and
+Flash stay unchanged. Matching website-core replay passes259762frames with zero
+differences across294912RAM bytes. Evidence directories are
+`.tools/benchmarks/concept-v123-{all-seams,transient-seams,wasm-circuit}/`.
+This renews boundary coverage on the current geometry; it does not approve the
+art or close long foreground browser/mobile gates.
+
 **Native v122 checkpoint — transition fix and current-world verification.**
 Private SHA `10f363e3fce6c43dfed90fe372e9313022c2a57685e01ad14f64cc343877dbd8`,
 receipt `d2726addffeb4fc2bd337eb385d950fc`, includes larger industrial yards,
