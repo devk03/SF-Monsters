@@ -643,23 +643,52 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**v132 selective factory source candidate — native verification pending.**
-Original code-authored112x80industrial art now supplies a sawtooth roof,
-clerestory band, broad shutters, braced cargo crate and a closed personnel door.
-The loading opening has a partly lowered shutter and grounded cargo. New
-`factory` / `factory_sage` scenery cards use already loaded brick/sage palettes,
-with identical graphics for both finishes. Five working plots use them: `(4,24)`,
-`(4,37)`, `(20,37)`, `(30,37)` and `(50,36)`. The original `warehouse` service
-front at `(2,3)` is retained, preserving Repair Counter's central `(5,8)` entry.
-This avoids relocating a service door to match a newly drawn side entrance.
-All prior industrial catalog cards,358record/attribute prefix,512secondary
-pixels,111own-primary graphics and palette bytes are unchanged. Only the two
-factory cards/resources are appended:428metatile records and201safe own-primary
-graphics. Native and foreign-boundary budgets still need actual compilation.
-All87world source tests pass. No collision footprint, event/NPC/route, state,
-flag, warp or new service changes are intended; human visual acceptance remains
-open. Source art is private-previewed, not a native gameplay claim. The broader
-Dogpatch concept's drydock/ship/rail and deeper industrial staging remain open.
+**v132 selective factory — compiled and native/browser subset verified.**
+ROM SHA `397cf8bb6e35a566fc8995f5f0dcf82210a7c722de367f290ac31bbc4bc5bae0`,
+receipt `0f02720930ff40b59357d14b16d053d2`. Original code-authored112x80
+industrial art supplies sawtooth roofs, clerestory windows, WORKS sign, broad
+shutters, a braced cargo crate and closed personnel door. Five scenery plots
+use brick/sage variants: `(4,24)`, `(4,37)`, `(20,37)`, `(30,37)`, `(50,36)`.
+The original warehouse service front at `(2,3)` and Repair Counter entry `(5,8)`
+remain unchanged. Actual linked-ROM checks preserve all358old industrial
+records/attributes,512secondary pixels,111own-primary graphics and palette
+bytes; all nine other scenery profiles are also byte-identical to v131.
+New industrial totals:428records,512secondary graphics,201own-primary graphics.
+All87world source tests, native budgets and BPS roundtrip pass.
+
+Actual controller proof walks31unoccupied frontage cells, blocks15accessible
+front pushes, talks to the retained Dog walker, reads the court notice, walks
+the full planted cut-through and returns from Repair Counter. A genuine v130
+Save on newly occupied `(50,36)` cold-Continues safely at `(50,35)`; party,
+decoded inventory, money, flags, chapter and Flash are preserved. All57boundary
+pairs pass BOTH directions with1908audited stages and guide-palette restoration.
+The full77-map circuit covers114connections,16gym warps and28room warps.
+Matching full252669-frame website-core replay has zero differences across
+294912RAM bytes; final RAM SHA
+`25eeacccb9ab310443e9434ea24d1c3093db96c954a8984b420dc3ba41e00286`.
+The separate22162-frame factory replay also passes; it is not substituted for
+the complete-world proof.
+
+A visible30-second browser diagnostic executes1791/1791requested video frames,
+1784render submissions, no hidden/discarded/mismatched frames; run p99=1.885ms.
+Its acknowledged final audio report records41underrun output frames and zero
+dropped source frames. Audio acceptance remains OPEN; no cause is established.
+This QA harness proves neither public upload/cache/return-visit flow, mobile,
+2x speed nor full foreground-world traversal. Actual browser captures/report:
+`.tools/benchmarks/concept-v132-browser/`; native/world evidence:
+`.tools/benchmarks/concept-v132-{factory-scenes,factory-walk,factory-save-upgrade,all-transient-seams,native-circuit,wasm-circuit,factory-wasm}/`.
+Linked preservation proof: `concept-v132-linked-service-art-preservation.json`.
+No event/NPC/route/state/flag/warp/service contract changed. Human visual
+acceptance and broader drydock/ship/rail/industrial-depth work remain open.
+
+Publication preparation is separate: preserve rootv80 and public `/world`v92.
+The checkout currently stages v93, so a blanket deployment is unsafe for that
+preservation promise. The connected Sites account finds neither the recorded
+project nor any owned/editable sites; reconnection was requested. No replacement
+project, deployment, credential request, database operation or CI run occurred.
+An optional isolated latest-world launcher is being prepared locally, with
+separate saves/runtime/ROM cache and proof-derived staging; it is not published.
+The full world goal stays active while that external access issue is unresolved.
 
 **v131 compiled Dogpatch working block — native subset verified.** ROM SHA
 `7f1d2f8c4bc1250e8c85d60d50e3b3985bf370b27bfbfcb05a8071f1bbf530b9`, receipt

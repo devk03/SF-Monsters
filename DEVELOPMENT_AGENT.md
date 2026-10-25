@@ -7,14 +7,21 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
-Latest private native candidate is v131: Dogpatch's working block now has a
-warehouse, workshop and broad garage hall beside its retained planted court.
-Native31frontage walks/15accessible wall pushes, Dog walker/court/service-room
-interactions, old-Save recovery and the left boundary pair pass. Matching22162-
-frame website-core replay passes. All other linked scenery resources are byte-
-identical to v130; source preservation and14atomic refusal checks pass.
-The warehouse art still reads too much like a house. An unused original factory
-pixel prototype is in world_industrial_factory.py; integrate/review it separately.
+Latest private native candidate is v132: five Dogpatch working plots now use
+original sawtooth-roof factory fronts. Repair Counter's original door remains.
+All prior industrial art prefixes and all nine other linked scenery profiles
+are byte-identical. All87world source tests pass; actual compilation succeeds.
+Native31frontage walks/15accessible wall pushes, court/resident/service-room
+interactions and ordinary old-Save recovery pass. All57boundary pairs pass in
+both directions with1908audited stages. The full77-map native circuit and
+matching252669-frame website-core replay pass (294912RAM bytes, zero differences).
+A real30-second browser run executes1791requested frames, but records41audio-
+underrun output frames. Audio acceptance stays OPEN. Full foreground-route,
+mobile, public upload/return-visit and human art acceptance remain open.
+Publicv80/v92 are unchanged. The Sites connection cannot access the existing
+project; an account-reconnection question is pending. Continue world refinement
+and local draft preparation; do not replace the project or blindly deploy the
+checkout's v93 world-patch over protected publicv92. Latest evidence is in15.1.
 
 Latest private native candidate is v130:19destinations /77maps /222NPCs. The
 park's Richmond edge has12attached homes/shops (all eight forms), two residents,
@@ -39,7 +46,7 @@ Save recovery, three boundary pairs and13900-frame website-core replay. V128's
 organic lake and v127's Twin housing also retain their versioned evidence.
 Keep the v126 whole-scene fresh-VBlank gate and independent render audit intact.
 Publicv80/v92 remain intact. Browser checks were not repeated for v127–v130.
-The alignment chat is planning a Dogpatch industrial block as a read-only task;
+The alignment chat supplied read-only factory and isolated-publication reviews;
 parent owns implementation. V130 evidence capture is complete and frozen in its
 receipts; new source work may proceed without relabeling those captures.
 
