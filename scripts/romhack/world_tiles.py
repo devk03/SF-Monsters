@@ -366,6 +366,17 @@ def compile_kit(root=ROOT, profile='residential'):
             rows=base['tiles'][1:3]+base['tiles'][3:4]*repeats+base['tiles'][4:]
             catalog[name]=dict(base,tiles=[[row[0],row[1],row[1],row[1],row[2]]
                                           for row in rows],explicit_cells=True)
+    if profile=='industrial':
+        # Complete adjoining workshop bays form one broad garage hall. Share
+        # normal records/graphics, retaining actual outer caps and foundations.
+        left,right=(catalog[n]['tiles'] for n in ('workshop_l','workshop_r'))
+        if (len(left)!=4 or len(right)!=4 or any(len(r)!=3 for r in left+right)
+                or catalog['workshop_l']['closed_edges']!=['left']
+                or catalog['workshop_r']['closed_edges']!=['right']):
+            raise ValueError('Garage hall requires two complete3x4 workshop bays')
+        catalog['garage_hall']=dict(tiles=[list(a+b) for a,b in zip(left,right)],
+            blocked=True,closed_edges=['left','right'],architecture_type='garage_hall',
+            explicit_cells=True)
     if profile=='mixed_use':
         # A broad campus hall reuses finished outer wings and a continuous
         # central gable. Its scale changes without allocating another atlas.

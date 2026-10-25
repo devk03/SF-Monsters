@@ -2790,6 +2790,53 @@
             "right"
           ],
           "architecture_type": "duplex"
+        },
+        "garage_hall": {
+          "first": 646,
+          "width": 6,
+          "height": 4,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              646,
+              647,
+              647,
+              647,
+              647,
+              648
+            ],
+            [
+              649,
+              650,
+              720,
+              723,
+              650,
+              651
+            ],
+            [
+              652,
+              653,
+              721,
+              724,
+              653,
+              654
+            ],
+            [
+              655,
+              656,
+              722,
+              725,
+              656,
+              657
+            ]
+          ],
+          "closed_edges": [
+            "left",
+            "right"
+          ],
+          "architecture_type": "garage_hall"
         }
       }
     },

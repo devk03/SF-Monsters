@@ -643,6 +643,28 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v131 Dogpatch works source candidate — native verification pending.** A75-cell
+whole-stamp transaction replaces six ordinary fronts and one complete unbound
+shrub with an existing7x5warehouse, workshop and6x4two-bay garage hall. The
+existing right-lower workshop remains. Planted court `(57,39)..(59,47)`, its
+notice/standing cell, all routes/walks/shores and old actor anchors are protected.
+The Dog walker at `(54,47)` stays; its open interaction at `(54,48)` is checked
+instead of requiring walking through the occupied actor. Late prepare/furnish
+replacement preserves unrelated frontage indices. Partial/missing/unexpected
+stamps, occupancy/binding drift, incompatible art/caps and blocked returns are
+refused before mutation. New views cover the warehouse, hall, street and passage.
+
+The garage alias uses two complete existing workshop bays with a unique
+`garage_hall` architecture identity, so the final three-column facade pass cannot
+truncate it. Source compiler comparison against the prior HEAD proves all prior
+cards, graphics, records, attributes and palettes identical:358records,512secondary
+graphics and111own-primary slots. The only catalog addition is the alias. All87
+world tests pass. A genuine v130 Save at `(50,36)` is ready to test the newly
+occupied warehouse tile. No new art, flag, warp, actor or service is introduced.
+Native build/gameplay, source alignment review, boundary and Save checks remain
+pending. The ornate existing warehouse and garage bays do not solve the concept's
+large sawtooth factory/drydock/rail/ship asset gaps. No human visual approval.
+
 **v130 compiled Richmond park edge — native subset verified; full goal active.**
 ROM SHA `fcf47d8dd34500d1fdbdd1903f0c33c769752439f6e2b7f61da0ba0d97ad14c2`,
 receipt `ab7ecca53df84473b9f4cd2a77055428`. Golden Gate Park's dedicated

@@ -222,6 +222,9 @@ def expand(plans, manifest):
             from world_marina_venues import prepare as prepare_venues, furnish as furnish_venues
             venue_draft=prepare_venues(plan,grid,cards,lanes,walks,occupied,sea,shore)
             furnish_venues(plan,grid,cards,token,occupied,venue_draft)
+            from world_dogpatch_works import prepare as prepare_works, furnish as furnish_works
+            works_draft=prepare_works(plan,grid,cards,lanes,walks,occupied,sea,shore)
+            furnish_works(plan,grid,cards,token,occupied,works_draft)
         # Match real party-wall art to the final neighboring footprints. An end
         # cap is drawn only where the building actually exposes that side.
         architecture=[b for b in plan['town_blocks'] if cards[b['style']].get('architecture_type')]
