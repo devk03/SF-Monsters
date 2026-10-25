@@ -59,6 +59,18 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
                 for dx,tile in enumerate(row):grid[y+dy][x+dx]=chr(0x800+tile)
     from world_forest_edges import finish_forest
     if forest==TREES:finish_forest(grid,legend,clear|protected,grass)
+    # Readable one-tile worn paths run inside the wider walkable verge. Keep
+    # the meadow grass and complete forest edges; do not turn all clear ground
+    # into a broad pale corridor. General124 is native ordinary sand terrain.
+    from world_district_layouts import STREETS,PARK_PORTS
+    sand=chr(0x800+0x124);legend[sand]=[0x124,False,3]
+    lines=list(STREETS[plan['world_id']])
+    lines += [PARK_PORTS[plan['world_id']][link['direction']]
+              for link in plan['connections'] or []]
+    trail=set().union(*(raster_path(line,radius=0) for line in lines))
+    for x,y in trail-protected:
+        if 0<=x<width and 0<=y<height and grid[y][x]==grass:
+            grid[y][x]=sand
     draw_outcrops(plan,grid,cards,relief)
     draw_terraces(plan,grid,terraces)
     draw_pond(plan,grid)
@@ -72,4 +84,5 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     # Native border follows the same canopy; exact ports are reopened below.
     plan['border_metatiles']=[tile for row in forest for tile in row]
     plan['native_park_design']={'meadows':[list(g) for g in GLADES[plan['world_id']]],
-                               'native_forest':True,'forest_style':'narrow' if forest!=TREES else 'large_round','legacy_bindings_preserved':True,'legacy_filler_rebuilt':True}
+                               'native_forest':True,'trail_surface':'native sand inside grass verge',
+                               'forest_style':'narrow' if forest!=TREES else 'large_round','legacy_bindings_preserved':True,'legacy_filler_rebuilt':True}

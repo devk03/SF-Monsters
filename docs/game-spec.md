@@ -643,6 +643,17 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Continuing against the concept references.** The user explicitly said to keep
+the goal going; the expired October23 cutoff is not a renewed stop instruction.
+The goal card is active. District implementation locations and open visual gaps
+are recorded in [the translation ledger](world/concept-translation.md). No row is
+approved. A private source contact sheet was inspected for all nineteen areas:
+layouts now differ, but long frontage runs, green setbacks and weak landmark
+scale remain visible. This preview is not a native gameplay/rendering proof.
+Park candidates now add one-tile native worn paths inside their wider walkable
+grass verge; five woodland/pond checks pass. Rich-facade integration and native
+release checks continue with the existing alignment chat.
+
 **Concept landmarks v121 — source checks, integration in progress.**
 The ballpark now reserves a playable field and sand infield with a fan walk;
 Financial District and Mission Bay reserve small tower/lunch courts; the Mission

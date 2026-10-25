@@ -11,6 +11,9 @@ The prior four-hour cutoff is historical, not a new implementation deadline.
 Larger ideal maps: output/imagegen/neighborhood-ideals-v2-expanded/README.md
 contains a second, much wider set for all 19 areas. V1 is preserved for comparison.
 These are concept images; native dimensions and contracts are unchanged.
+District-specific implementation locations and remaining visual gaps are tracked
+in docs/world/concept-translation.md; source completion is separate from native
+rendering, traversal, save recovery and human visual acceptance.
 
 Ideal concepts: output/imagegen/neighborhood-ideals-v1/README.md contains all 18
 campaign destinations plus a Presidio bonus, generated independently of current
