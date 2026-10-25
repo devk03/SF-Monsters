@@ -256,6 +256,16 @@ RUNTIME = r'''
 EWRAM_DATA static const struct SFSeamAtlas *sSFSeamCurrent = NULL;
 EWRAM_DATA static bool8 sSFSeamRedraw = FALSE;
 EWRAM_DATA static bool8 sSFSeamTransition = FALSE;
+EWRAM_DATA static bool8 sSFSeamPendingVBlank = FALSE;
+bool8 SFSeamDeferVBlank(void)
+{
+    if (!sSFSeamPendingVBlank) return FALSE;
+    // IME may be restored after the original VBlank edge. Hold ALL field
+    // graphics until a fresh edge; transferring only part mixes map scenes.
+    if (REG_VCOUNT != 160) return TRUE;
+    sSFSeamPendingVBlank=FALSE;
+    return FALSE;
+}
 static void LoadTilesetPalette(struct Tileset const *tileset,u16 destOffset,u16 size);
 static void SFSeamSelect(void)
 {
@@ -337,9 +347,28 @@ void SFSeamCommit(void)
                       (NUM_PALS_TOTAL-NUM_PALS_IN_PRIMARY)*PLTT_SIZE_4BPP);
     SFSeamLoadPalettes();
     DoScheduledBgTilemapCopiesToVram();
+    sSFSeamPendingVBlank=TRUE;
     REG_IME=ime;
 }
 '''
+
+
+def patch_vblank(source):
+    """Gate field graphics as one transaction; retain sound/IRQ bookkeeping."""
+    patches = [
+        ('#include "global.h"', '#include "global.h"\nbool8 SFSeamDeferVBlank(void);'),
+        ('static void VBlankIntr(void)\n{',
+         'static void VBlankIntr(void)\n{\n    bool8 deferGraphics=SFSeamDeferVBlank();'),
+        ('    if (gMain.vblankCallback)\n        gMain.vblankCallback();',
+         '    if (!deferGraphics && gMain.vblankCallback)\n        gMain.vblankCallback();'),
+        ('    CopyBufferedValuesToGpuRegs();\n    ProcessDma3Requests();',
+         '    if (!deferGraphics)\n    {\n        CopyBufferedValuesToGpuRegs();\n        ProcessDma3Requests();\n    }'),
+    ]
+    for before, after in patches:
+        if source.count(before) != 1:
+            raise ValueError('Pinned atomic VBlank anchor changed: ' + before)
+        source = source.replace(before, after, 1)
+    return source
 
 
 def apply_seams(engine, plans):
@@ -425,4 +454,6 @@ static void SFSeamRedrawView(int dx,int dy)
                         'reserved_primary_palettes':a['reserved_palettes']}
                        for a in atlases]}
     (engine/'sf-world-seams.json').write_text(json.dumps(summary,indent=2)+'\n')
-    return ['src/fieldmap.c','src/field_camera.c','src/sf_world_seams.h']
+    path=engine/'src/main.c'
+    path.write_text(patch_vblank(path.read_text()))
+    return ['src/fieldmap.c','src/field_camera.c','src/sf_world_seams.h','src/main.c']
