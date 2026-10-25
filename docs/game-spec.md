@@ -643,6 +643,40 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v135 Twin Peaks path/actor approach — native subset verified.**
+ROM SHA `498ef4fe546d6b6bec6174b17940036a0e51743ba70b12554c557c09613289fe`,
+receipt `1a64921a75c54a7da43dd4e1b49710dc`. Western diagonal beyondx25 now
+uses native General124 worn earth; lower vertical links retain stone. The
+Homeowner remains `(54,60)`, standing interaction `(54,61)`, while the marked
+passage is now `(55,60)` with elbow `(55,59)`. Actual controller movement goes
+straight through that mouth beside the actor. Native views/full map confirm the
+white stepping-stone defect is gone. All94unoccupied house-front cells walk,
+all17front pushes block, both conversations and return to the original landmark
+pass with protected state/Flash unchanged. All three Twin boundary pairs pass
+both directions with101audited stages and guide-palette restoration. An ordinary
+v127Twin Save cold-Continues with party, inventory, money, flags, chapter and
+Flash intact. All87source tests, compiled native budgets and BPS roundtrip pass.
+
+Independent serialized-plan comparison versus v132 finds222floor changes only:
+no collision/elevation, other-map, house/prop, NPC, event, route or summit changes.
+All10actual linked scenery-resource profiles are byte-identical to v132. The
+matching40632-frame local website-core replay passes, zero differences across
+294912RAM bytes; final RAM SHA
+`f2579477b518948a2c207ef62fb663ab5d9676f21d85f942ca49b4dc87210c06`.
+The full native circuit is running, not yet claimed.
+Evidence: `.tools/benchmarks/concept-v135-ridge-{approach-walk,scenes,native-review,transient-seams}/`,
+`concept-v135-prior-ridge-save-continue/`, `concept-v135-linked-art-equality.json`,
+and `.tools/twin-street-v135/preservation.json`.
+
+Alignment's actual-v133 review supports the connected quiet lane, identifies
+the now-fixed blocked-looking curb mouth and white diagonal, and retains road
+terminal and summit-mass defects as open work. Its earlier v130 pedestrian-mews
+alternative was not applied wholesale. V134 is an intermediate compiled path
+candidate; v135 also fixes the actor-mouth affordance. No human art approval,
+full browser/audio/mobile acceptance or public promotion is claimed. Publicv80
+and `/world`v92 remain intact; the Sites account-access question is pending.
+
+
 **v133 Twin Peaks street-material candidate — native subset verified.**
 ROM SHA `c45ef68879ee42124ba7eefbd70006ddbce075f1dc9edcf5ba0e95c800c2bfc7`,
 receipt `226f70e63aa14153a293462f3aa7e3f7`. Oversized residential slab strips now
@@ -655,7 +689,9 @@ pushes,94unoccupied frontage walks, two resident conversations and return to the
 original landmark pass; protected state/Flash remain unchanged. All three Twin
 boundary pairs pass both directions; ordinary v127Twin and v132Dogpatch Saves
 cold-Continue with party/inventory/money/flags/chapter/Flash intact. Matching
-local website-core replay is pending. Actual scenes/full native map are retained
+76645-frame local website-core replay passes with zero differences across
+294912RAM bytes. Its final RAM SHA is
+`e2d799dea45fba4e6ce8f91b48716989009cdeca9debd3f36a0dab9af4eb9281`. Actual scenes/full native map are retained
 under `.tools/benchmarks/concept-v133-ridge-{scenes,native-review,street-walk-v2,transient-seams}/`.
 
 Visual self-review: at player scale the curb/street edge is clearer, but the

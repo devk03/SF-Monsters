@@ -62,13 +62,22 @@ def furnish(plan,grid,draft,token,cards,occupied):
     # These are existing lower-layer surfaces, not new solids or allocations.
     links=set().union(*(raster_path(line,radius=0) for line in LINKS))
     floor(links,'stone_walk')
+    # Beyond the short western street, use the same native worn surface as
+    # the hillside. Diagonal concrete cells looked like detached paving stones.
+    native_trail=chr(0x800+0x124)
+    if plan['legend'].get(native_trail)!=[0x124,False,3]:
+        raise ValueError('Ridge footpath requires the declared native sand tile')
+    west_trail=raster_path(LINKS[0],radius=0)-rectangle(6,52,25,54)
+    for point in west_trail-keep:patches[point]=native_trail
     for left,right,sidewalk in ((6,24,52),(38,90,60)):
         floor(rectangle(left,sidewalk,right,sidewalk),
               'curb_north')
         floor(rectangle(left,sidewalk+1,right,sidewalk+1),'asphalt')
     # Pedestrian curb cuts connect each hill approach without a repeated ramp
     # pattern along every house. The native collision/elevation stays unchanged.
-    for x,y in ((24,52),(54,60),(72,60)):
+    # Keep the homeowner at54,60: the actual walking mouth is beside them.
+    floor({(55,59)},'stone_walk')
+    for x,y in ((24,52),(55,60),(72,60)):
         floor({(x,y)},'curb_cut')
     blocks=list(draft['blocks'])
     for block in blocks:

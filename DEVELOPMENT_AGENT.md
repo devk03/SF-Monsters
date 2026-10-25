@@ -7,6 +7,23 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
+Latest private native candidate is v135: Twin Peaks'17homes now front a quiet
+shared lane with a distinct curb/sidewalk, grass shoulders and narrow hill links.
+The western diagonal uses native worn earth; the marked lower hill mouth now
+passes beside the stationary Homeowner rather than under them. Actual native
+views/full map inspected;94frontage walks,17wall pushes, both conversations,
+the marked mouth and original landmark return pass. All three Twin boundary
+pairs pass both directions with101audited stages. All87source tests pass;
+independent comparison finds222floor-cell changes only, no collision/elevation
+or other-map/actor/event/building/route changes. All10linked scenery profiles
+are byte-identical to v132. Prior v127Twin ordinary Save cold Continue passes.
+Matching40632-frame local website-core replay passes with zero294912RAM
+differences. The full-world proof is still running; do not claim it.
+V133's76645-frame local website-core replay passes; its old white diagonal was
+visually rejected in self-review, not approved. V134 was an intermediate build.
+Road ends, raised summit massing and the full concept match remain open. The
+alignment chat is studying a bounded north-summit landform; parent owns edits.
+
 Latest private native candidate is v132: five Dogpatch working plots now use
 original sawtooth-roof factory fronts. Repair Counter's original door remains.
 All prior industrial art prefixes and all nine other linked scenery profiles
