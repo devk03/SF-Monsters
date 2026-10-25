@@ -643,17 +643,27 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**v128 organic-lake source candidate — not yet built.** Integrated the alignment
-chat's two-lobed Golden Gate Park pond with a north-bank cove, using only existing
-protected low-bank General tiles. It replaces the old rectangular painter; both
-painters never run together. All old south-bank walking cells remain open on
-native grass, with a short link to Pond rest. Water stays solid at ordinary
-land elevation3; no Surf/HM, flags, warps, palettes or art allocation changes.
-All86world tests pass, including connected water and a northern-cove regression
-that rejects the old rectangle. The prototype separately checks original-map
-bank joins and atomic refusal of binding/tree/trail conflicts. Source checks
-are not a native rendering or visual acceptance claim. Build after the frozen
-v127 controller audits finish; preserve its receipt/plans for reproducibility.
+**v128 compiled organic lake — native subset verified; full world gates open.**
+ROM SHA `7c5da87f38747d3908c189c0cb762132160a71015692ca487863abff47997c4e`,
+receipt `d88a70b7b39d497a8e0a24c2ff141d2f`. The two-lobed Golden Gate Park lake
+and north-bank cove now render in real native gameplay and a full live-native
+background map. All21south-bank/link cells are traversed, with independent
+native rendering checks, no unintended Surf, unchanged protected state/Flash
+and the existing Pond rest conversation available. Matching website-core replay
+of that actual6017-frame walk has zero differences across294912RAM bytes.
+An actual earlier ordinary Save cold-recovers and leaves/reenters safely too.
+The77-map native circuit is running; no new browser/full-world visual approval.
+Evidence: `.tools/benchmarks/concept-v128-{lake-scenes,lake-native-review,lake-bank-walk,lake-wasm,summit-upgrade}/`.
+
+Only existing protected low-bank General tiles are used. The old rectangular
+painter is replaced, never run alongside the new painter. South-bank walking
+cells use native grass; water stays solid at ordinary land elevation3. No
+Surf/HM, flags, warps, palettes or art allocation changes. All86world tests pass,
+including connected water and a northern-cove regression rejecting the former
+rectangle. The prototype also checks original-map bank joins and atomic refusal
+of binding/tree/trail conflicts. The broader park still has repetitive forest
+edges, underdeveloped gardens/conservatory staging and no distinct Richmond
+housing edge. This is a lake improvement, not a completed concept translation.
 
 **v127 compiled residential base — native subset verified, full gates open.**
 ROM SHA `9e1379a363f9019567428b2057fcb79afc5753673335bf265c6c26c8b80b9239`,
@@ -675,8 +685,11 @@ still fall short of the expanded reference. Human acceptance remains open.
 The complete77-map native circuit passes114connections,16gym and28service-room
 warps. All86world source tests pass. Frozen-plan comparison also confirms no
 old passable cell becomes blocked, with existing actors/events/park stops and
-connections unchanged. The all-boundary animation-frame audit and matching
-WASM replay are running; browser checks have not been repeated for this cartridge.
+connections unchanged. All57boundary pairs pass both directions with1910independently audited stages,
+protected state/Flash intact and guide palette restoration checked. Matching
+253679-frame website-core replay has zero differences across294912RAM bytes.
+Browser checks have not been repeated for this cartridge. Evidence:
+`.tools/benchmarks/concept-v127-{all-transient-seams,native-circuit,wasm-circuit}/`.
 No public deployment, full ROM publication or workflow run occurred.
 
 **v127 residential-base source candidate — not yet native-reviewed.** Twin Peaks

@@ -10,16 +10,18 @@ The prior four-hour cutoff is historical, not a new implementation deadline.
 Latest private native candidate is v127: 19 destinations /77maps, with17attached
 Twin Peaks homes and two ordinary residents below the summit trails. Native
 views, full-map rendering, both conversations,17facade collision pushes and
-prior ordinary Save recovery pass. All86world source tests pass. Full v127
-boundary/circuit/replay checks are pending; do not inherit v126 evidence as proof
-of the new cartridge. Existing Twin actors, events, routes and park stops match
+prior ordinary Save recovery pass. All86world source tests pass. All57v127boundary pairs pass both directions (1910stages), as do the77-map
+native circuit and253679-frame website-core replay. Browser checks were not
+repeated; native/replay passes do not grant visual approval. Existing Twin actors, events, routes and park stops match
 the frozen v126 bindings, and no old passable cell becomes blocked by the homes.
 
 The prior v126 crossing fix passed all57boundary pairs, the full native circuit,
 matching WASM replay and short browser smoke. Keep its whole-scene fresh-VBlank
 gate and independent render audit intact. Read section15.1 for exact receipts.
-Publicv80/v92 remain intact. The unwired lake-shape module is a source prototype;
-review and verify its native integration separately before treating it as done.
+Publicv80/v92 remain intact. Newer v128 integrates the two-lobed park lake: native views, full-map rendering,
+21bank/link-cell checks, Pond rest and matching6017-frame WASM replay pass.
+The full native circuit is running. Read section15.1 for exact evidence and
+remaining gates; no concept translation is complete from a lake change alone.
 
 Keep the goal active. Next composition work: Twin Peaks still has oversized slab
 paving, rigid forest edges and incomplete hill masses; Potrero rock rims read as
