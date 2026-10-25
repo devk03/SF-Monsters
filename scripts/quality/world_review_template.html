@@ -14,6 +14,9 @@ button[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--i
 .index a{display:block;text-decoration:none;border:1px solid var(--line);background:white}.index img{width:100%;display:block;image-rendering:pixelated}.index span{display:block;padding:10px 12px;font-weight:650;font-size:14px}
 section{background:white;border:1px solid var(--line);padding:24px;margin:0 0 36px;scroll-margin-top:88px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.section-title>a{font-size:13px}
 .map-pair{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(240px,1fr);gap:28px}figure{margin:0}.map{display:block;width:100%;image-rendering:pixelated}figcaption{font-size:12px;margin-top:8px}.assessment p{font-size:14px;margin:0 0 20px}
+.reference-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-bottom:24px}.reference-pair img{cursor:zoom-in}
+dialog{width:96vw;max-width:96vw;height:94vh;max-height:94vh;overflow:auto;border:1px solid var(--line);padding:16px;background:white}dialog::backdrop{background:#17221dcc}dialog form{position:sticky;top:0;z-index:1;margin:0 0 12px}dialog img{display:block;max-width:none;image-rendering:pixelated}
+@media(max-width:800px){.reference-pair{grid-template-columns:1fr}}
 details{border-block:1px solid var(--line);margin:24px 0;padding:14px 0}summary{cursor:pointer;font-weight:650}.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.photos img{display:block;width:100%;image-rendering:pixelated}
 .notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}label{font-size:13px;font-weight:650}textarea{display:block;width:100%;font:15px/1.5 system-ui;padding:10px;margin-top:8px;border:1px solid #aeb9b0;border-radius:3px;resize:vertical;background:#fdfdfb;color:var(--ink)}
 .missing{border:2px dashed #ba9074;background:#fffaf3}.missing .notes{max-width:1000px}footer{padding-block:16px;color:var(--muted);font-size:13px}[hidden]{display:none!important}
@@ -22,19 +25,27 @@ details{border-block:1px solid var(--line);margin:24px 0;padding:14px 0}summary{
 </style>
 <header id="top"><small>SF MINI MONSTERS / PRIVATE WORLD REVIEW / @@VERSION@@</small>
 <h1>Every place.<br>The current build.</h1>
-<p>All 18 destinations, with full maps and actual GBA views. These are the existing maps, including the rough parts. The full maps show background layers without people; open the in-game views to judge actors and camera scale.</p>
+<p>All @@COUNT@@ destinations, with full maps and actual GBA views. These are the existing maps, including the rough parts. The full maps show background layers without people; open the in-game views to judge actors and camera scale.</p>
 <p><strong>Do they look different?</strong> Distinct circulation, larger districts and native forest terrain are implemented. Frontage repetition, useful destinations and topography still need review. These are actual native captures, not finished-world approval.</p>
-<p class="notice"><strong>Presidio Heights is not built.</strong> There is no separate Presidio map either. Pacific Heights is a different current destination. A missing-area card below lets you record what you want there.</p>
+<p class="notice">@@PRESIDIO_NOTICE@@</p>
+<p class="notice">@@RUNTIME_NOTE@@</p>
 <p class="muted">Notes stay in this browser when local storage is available. Download feedback to keep or share a copy. Nothing is submitted and no quality approval is inferred.</p></header>
 <div class="toolbar" role="group" aria-label="Review controls">
-<button data-filter="all" aria-pressed="true">All 18</button><button data-filter="urban" aria-pressed="false">Urban 13</button><button data-filter="nature" aria-pressed="false">Nature 5</button>
-<a class="button" href="#presidio_heights">Presidio Heights - missing</a><a class="button" href="@@PDF@@">Open PDF</a><button id="export">Download feedback</button><span id="status" role="status">Ready to review</span></div>
+<button data-filter="all" aria-pressed="true">All @@COUNT@@</button><button data-filter="urban" aria-pressed="false">Urban @@URBAN@@</button><button data-filter="nature" aria-pressed="false">Nature / campus @@NATURE@@</button>
+@@PRESIDIO_LINK@@<a class="button" href="@@PDF@@">Open PDF</a><button id="export">Download feedback</button><span id="status" role="status">Ready to review</span></div>
 <main><nav class="index" aria-label="Town index">@@INDEX@@</nav>@@CARDS@@
 <section id="presidio_heights" class="missing"><small>REQUESTED / NOT IMPLEMENTED</small><h2>Presidio Heights</h2>
 <p>No map exists to critique yet. Record the landmarks, landscape and connections you want rather than reviewing a substitute image.</p>
 <div class="notes"><label>What should make it recognizable?<textarea data-note="works" rows="4"></textarea></label><label>What should it connect to?<textarea data-note="wrong" rows="4"></textarea></label><label>What should we build first?<textarea data-note="change" rows="4"></textarea></label></div></section>
 <footer>Private @@VERSION@@. Public game remains v92. This is a visual critique packet; browser audio and full-route acceptance are still open. Maps come from matching native VRAM/palettes and compiled geometry; photos come from the controller-only tour.</footer></main>
+<dialog id="image-viewer" aria-label="Full resolution map"><form method="dialog"><button>Close full map</button></form><img alt=""></dialog>
 <script>
+const viewer=document.querySelector('#image-viewer');
+for(const image of document.querySelectorAll('.map')){
+ image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-label','Open full size: '+image.alt);
+ const open=()=>{const full=viewer.querySelector('img');full.src=image.src;full.alt=image.alt;viewer.showModal()};
+ image.addEventListener('click',open);image.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open()}});
+}
 const metadata=@@METADATA@@;
 const storageKey='sf-world-review-'+metadata.rom_sha256;
 const status=document.querySelector('#status');

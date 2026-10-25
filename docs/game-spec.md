@@ -643,6 +643,28 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v121 visual review and transition blocker.** All 57 connected pairs pass settled
+native VRAM/viewport checks in both directions and inward walking: 342 audited
+stages, unchanged protected state and Flash. However, the stricter animation-frame
+trial fails on reverse entry into Noe Valley: stale viewport words at `(14,2)` on
+BG3. This is a real release blocker; do not weaken the independent audit or call
+the world visually clean because settled crossings pass. The alignment chat is
+investigating the scene/transfer timing in an isolated engine. Current public
+game remains unchanged.
+
+A private 26-page all-town PDF and linked-image concept/native comparison gallery
+now cover all19areas, including Presidio. Actual full backgrounds and gameplay
+captures are labeled separately from generated concepts. The gallery's full-size
+map dialog opens/closes in the browser; a desktop comparison screenshot is saved.
+PDF cover, nature sheet and Presidio detail were visually inspected; an outdated
+missing-Presidio statement on the priorities page was found and corrected. Runtime
+blocker notes are included. Native captures stay ignored under `.tools`.
+Repeatable generation: `scripts/quality/extract_world_review_maps.py` accepts the
+matching all-town tour; `scripts/quality/build_world_review_book.py --data ...
+--review-date ... --output-root .tools/benchmarks/concept-v121-review-packet
+--linked-images --runtime-note ...` builds the packet. The local-only preview
+has a ten-minute automatic shutdown. No GitHub workflow or deployment was run.
+
 **Native v121 checkpoint — real build, Save recovery and full route replay.**
 Private ROM SHA `e5191df5b4715b9a41a9df817842dc6d9ef90bc34809e0cc0d0df424ca718692`,
 receipt `b62d47f8b562495a928de620ec315086`, builds 77 maps and 19 destinations.

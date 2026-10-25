@@ -19,6 +19,12 @@ def center(w,identifier):
     if identifier=='angel_island':
         p=next(p for p in w.plans[identifier]['world_sections'] if p['id']=='summit_league_entry')
         return p['x'],p['y']
+    plan=w.plans[identifier]
+    if plan.get('green_route_design'):
+        # Authored woodland routes need not pass through the old blank-map
+        # center. Observe inward travel on their actual main trail instead.
+        spine=plan['green_route_design']['spine']
+        return tuple(min(spine,key=lambda p:(abs(p[0]-16)+abs(p[1]-12),p[1],p[0])))
     return (16,8) if identifier=='league_route' else (16,12)
 
 

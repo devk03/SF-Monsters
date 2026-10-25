@@ -15,6 +15,7 @@ from verify_world_seams import RenderAudit
 
 
 CRITIQUE = {
+    'presidio': 'New wooded campus and residential transition; landmark, stair-garden and overlook composition still need review.',
     'dogpatch': 'The warehouse and crane distinguish it, but the street still needs a convincing working-waterfront composition.',
     'potrero_hill': 'The stair overlook helps. Most of the street remains flat; the hill and changes in grade barely read.',
     'mission': 'The mural and shop mix help, but the same straight residential block dominates. Alleys and community spaces need stronger placement.',
@@ -34,21 +35,22 @@ CRITIQUE = {
     'lands_end': 'The sea and bath ruins are distinct. The forest loop and straight coastal boundary need more cliff and cove variation.',
     'angel_island': 'The switchbacks differ from the park loop. Summit scenery and the reused conservatory/League placeholder remain unfinished.',
 }
-NATURE = {'golden_gate_park', 'twin_peaks', 'sutro_tower', 'lands_end', 'angel_island'}
+NATURE = {'golden_gate_park', 'twin_peaks', 'sutro_tower', 'lands_end', 'angel_island', 'presidio'}
 EXPANDED_CRITIQUE = {
+ 'presidio':'The separate campus/residential hybrid has forest edges, a visitor desk and two optional walking links. It still needs a stronger campus landmark, stair gardens and purposeful overlooks.',
  'dogpatch':'Workshop rows, a loading court and planted cut-throughs add industrial identity. The waterfront, rail-yard composition and remaining long frontage bands still need refinement.',
  'potrero_hill':'The stepped street network differs from the grid. It still needs visible grade changes and more deliberate overlooks.',
  'mission':'A mural/community court, attached shops and planted passages break the housing rhythm. More deliberate corner spaces and richer district-scale composition remain open.',
  'castro':'The branching streets help. The theater needs a stronger plaza, with lighting and signage connecting it to the rest of the district.',
  'outer_sunset':'The long parallel streets fit the district better. Ocean frontage, dune edges and smaller garden lots need a dedicated pass.',
- 'golden_gate_park':'Native forest, an irregular pond and furnished branch stops replace the hedge maze. Trail and clearing composition still needs human review; Richmond is not a separate town.',
+ 'golden_gate_park':'Native forest, a larger pond with joined banks, worn trails and furnished branch stops replace the hedge maze. The pond remains rectilinear and garden composition needs work; Richmond is not a separate town.',
  'marina':'The larger connected blocks need a more recognizable bar corridor and a better transition to waterfront open space.',
  'pacific_heights':'The offset streets distinguish the layout. Formal gardens, slopes and a stronger mansion approach remain underdeveloped.',
  'twin_peaks':'Two rocky lookout groups have distinct approaches. They are not yet convincing elevated summits; terrain height and open ridge composition remain unfinished.',
  'noe_valley':'Interior housing rows add density. Smaller civic pockets and planted pedestrian lanes should make it feel less mechanical.',
- 'mission_bay':'The circulation is distinct, but historic low-rise fronts still dominate. Modern lab massing and the creek edge need much more work.',
- 'giants_stadium':'The larger loop needs the ballpark to occupy a meaningful part of the map, with a fan plaza and waterfront approaches.',
- 'financial_district':'The new grid is connected, but the architecture does not yet create an office canyon. Building heights and public plazas need more variation.',
+ 'mission_bay':'A research tower court and eastern/southern water edge add campus identity. Modern lab massing and a convincing creek transition still need work.',
+ 'giants_stadium':'A playable field, sand infield and fan walk give the ballpark a footprint. A full stadium shell, bleachers and stronger fan-plaza composition remain absent.',
+ 'financial_district':'The office/lunch court adds a tower cluster and useful public space. Repeated small towers still fall short of a varied office canyon.',
  'north_beach':'The branching blocks offer better exploration. The bookshop/cafe identity and small alleys should shape more of the map.',
  'treasure_island':'The new loop has room to explore. A convincing shoreline, piers and open-water views are still essential.',
  'sutro_tower':'The larger winding trails need ridge-specific vegetation, tower approaches and lookout clearings rather than repeated forest fill.',
@@ -120,6 +122,8 @@ def main():
     if (not args.checkpoint_tour and evidence['areas'] != [a['id'] for a in areas]) or not evidence['controller_only']:
         raise ValueError('A complete controller-only town tour is required')
     districts = json.loads((ROOT/'romhack/world/districts.json').read_text())['areas']
+    concept_root=ROOT/'output/imagegen/neighborhood-ideals-v2-expanded'
+    references={item['id'].replace('-','_'):item for item in json.loads((concept_root/'prompts.json').read_text())['images']}
     engine = ROOT/'.tools/pokeemerald-world-host'
     digest = hashlib.sha256((engine/'sf-world-blockout.gba').read_bytes()).hexdigest()
     if digest != evidence['rom_sha256']:
@@ -161,6 +165,9 @@ def main():
                 position=json.loads(path.with_suffix('.json').read_text())['position']
                 return abs(position['x']-target[0])+abs(position['y']-target[1])
             featured=[str(views[0]),str(min(views,key=distance))]
+            reference=references[identifier];concept=concept_root/reference['file']
+            if hashlib.sha256(concept.read_bytes()).hexdigest()!=reference['sha256']:
+                raise ValueError('Expanded reference image changed: '+identifier)
             result.append(dict(id=identifier, label=area['label'], order=number,
                 category='nature' if identifier in NATURE else 'urban', map=str(path),
                 map_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -168,13 +175,14 @@ def main():
                 critique=(EXPANDED_CRITIQUE if plan.get('expanded_design') else CRITIQUE)[identifier], connections=routes,
                 landmarks=[p['name'] for p in plan.get('landmarks', [])],
                 gym=next((g['badge'] for g in manifest['gyms'] if g['area']==identifier), None),
-                residents=len(plan['npcs']), dimensions=[image.width//16, image.height//16]))
+                residents=len(plan['npcs']), dimensions=[image.width//16, image.height//16],
+                concept_reference=str(concept),concept_sha256=reference['sha256']))
             print(identifier, flush=True)
         finally:
             c.close()
     receipt = dict(version=manifest['version'], rom_sha256=digest, areas=result,
         full_map_scope='Live native GBA background tiles/palettes and compiled map geometry; actors and animation are shown in the adjacent gameplay views.',
-        missing=['Presidio Heights', 'Presidio'], public_version='0.0.92', human_approval='pending',
+        missing=[] if any(a['id']=='presidio' for a in result) else ['Presidio Heights', 'Presidio'], public_version='0.0.92', human_approval='pending',
         evidence_scope='Native checkpoint composition, with live render audits; not an uninterrupted route claim' if args.checkpoint_tour else ('Complete controller-only selected destination tour' if args.areas else 'Complete controller-only destination tour'))
     (output/'maps.json').write_text(json.dumps(receipt, indent=2)+'\n')
 
