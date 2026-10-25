@@ -63,17 +63,36 @@ PARK_PORTS={
 }
 
 
+def _line_samples(points):
+    """The existing integer center samples, including segment endpoints."""
+    for (x0,y0),(x1,y1) in zip(points,points[1:]):
+        count=max(abs(x1-x0),abs(y1-y0))
+        for step in range(count+1):
+            yield (round(x0+(x1-x0)*step/max(1,count)),
+                   round(y0+(y1-y0)*step/max(1,count)))
+
+
 def raster_path(points, radius=1):
     """Connected integer line raster with a walkable native-width corridor."""
-    result = set()
-    for (x0,y0),(x1,y1) in zip(points,points[1:]):
-        count = max(abs(x1-x0),abs(y1-y0))
-        for step in range(count+1):
-            x = round(x0+(x1-x0)*step/max(1,count))
-            y = round(y0+(y1-y0)*step/max(1,count))
-            for dy in range(-radius,radius+1):
-                for dx in range(-radius,radius+1):
-                    result.add((x+dx,y+dy))
+    return {(x+dx,y+dy) for x,y in _line_samples(points)
+            for dy in range(-radius,radius+1) for dx in range(-radius,radius+1)}
+
+
+def worn_path(points):
+    """An edge-connected visible trail inside the existing walking corridor.
+
+    A diagonal one-cell raster touches only at corners, making worn earth look
+    like disconnected stepping stones. Add one cardinal elbow per diagonal
+    step, not a broad square brush. Choose the same elbow in either direction.
+    This changes the painted core, never the route's reserved/passable width.
+    """
+    result=set();previous=None
+    for x,y in _line_samples(points):
+        if previous is not None:
+            px,py=previous
+            if x!=px and y!=py:
+                result.add(min(((x,py),(px,y)),key=lambda p:(p[1],p[0])))
+        result.add((x,y));previous=(x,y)
     return result
 
 

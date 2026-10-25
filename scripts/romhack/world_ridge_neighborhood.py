@@ -3,7 +3,7 @@
 Reserve before forest packing, furnish after summit drawing. Existing trails,
 objects, gym bindings and summit stairs retain their coordinates and surfaces.
 """
-from world_district_layouts import raster_path
+from world_district_layouts import raster_path,worn_path
 
 LOTS = (
     (8,48,('shophouse','walkup__sage','flats','duplex__slate','deco')),
@@ -67,7 +67,7 @@ def furnish(plan,grid,draft,token,cards,occupied):
     native_trail=chr(0x800+0x124)
     if plan['legend'].get(native_trail)!=[0x124,False,3]:
         raise ValueError('Ridge footpath requires the declared native sand tile')
-    west_trail=raster_path(LINKS[0],radius=0)-rectangle(6,52,25,54)
+    west_trail=worn_path(LINKS[0])-rectangle(6,52,25,54)
     for point in west_trail-keep:patches[point]=native_trail
     for left,right,sidewalk in ((6,24,52),(38,90,60)):
         floor(rectangle(left,sidewalk,right,sidewalk),

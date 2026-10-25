@@ -1,6 +1,6 @@
 """Native forest masses around authored park circulation and stable landmarks."""
 from world_green_routes import TREES
-from world_district_layouts import raster_path
+from world_district_layouts import raster_path,worn_path
 
 # Each reserve has a different sequence of enclosed meadow destinations.
 GLADES={
@@ -76,7 +76,7 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     lines=list(STREETS[plan['world_id']])
     lines += [PARK_PORTS[plan['world_id']][link['direction']]
               for link in plan['connections'] or []]
-    trail=set().union(*(raster_path(line,radius=0) for line in lines))
+    trail=set().union(*(worn_path(line) for line in lines))
     for x,y in trail-protected:
         if 0<=x<width and 0<=y<height and grid[y][x]==grass:
             grid[y][x]=sand
@@ -100,5 +100,5 @@ def native_park(plan,grid,lanes,walks,occupied,sea,shore,token,cards,legacy_appr
     # Native border follows the same canopy; exact ports are reopened below.
     plan['border_metatiles']=[tile for row in forest for tile in row]
     plan['native_park_design']={'meadows':[list(g) for g in GLADES[plan['world_id']]],
-                               'native_forest':True,'trail_surface':'native sand inside grass verge',
+                               'native_forest':True,'trail_surface':'edge-connected native sand inside grass verge',
                                'forest_style':'narrow' if forest!=TREES else 'large_round','legacy_bindings_preserved':True,'legacy_filler_rebuilt':True}

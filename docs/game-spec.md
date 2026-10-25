@@ -643,6 +643,37 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**v136 connected visible trails — compiled candidate, native verification underway.**
+ROM SHA `9f668c791d551c6d767ead0f28e9a37eb181d11af4cdb528e2c7defa91e18461`,
+receipt `12b4bae00fe54ef4a88774a34a6a5b77`. Diagonal one-cell native-earth
+rasters previously touched only at corners, appearing as stepping-stone islands.
+The visible core now adds one cardinal elbow per diagonal step, with the same
+shape in either travel direction and no wider walking reservation. Straight
+segments are unchanged. The west Twin hill link uses the same edge-connected
+core; lower concrete pedestrian links remain as before.
+
+Three focused regression checks cover edge connectivity within the old corridor,
+straight-width preservation and the actual Twin hillside dirt segment `(60,12)`
+to `(80,24)` without treating walkable grass as a visible bridge. That final
+check fails on frozen135 (only one of21dirt cells reachable from the start) and
+passes on136. All90world source tests and actual native allocation/BPS checks
+pass. Frozen-plan comparison finds475native-earth floor changes: Golden Gate
+Park113, Twin123, Sutro77, Lands End78, Angel84. All collision/elevation words,
+other map fields except the trail description, actors, complete cards, scripts,
+events, routes and all10linked scenery profiles are unchanged. No new graphics,
+palettes, metatile allocations, progression/state or encounters are introduced.
+Proof: `.tools/trail-v136/preservation.json`.
+
+An actual earlier v127ordinary Save on `(30,50)` cold-Continues to the same
+position on136, preserving party, inventory, money, flags, chapter and Flash;
+normal controls work. Evidence: `concept-v136-old-trail-save-continue/`.
+Native five-park scene/trail/15rest-stop checks and the full77-map circuit are
+running. Do not transfer135's complete native/WASM/browser passes to136. No
+human art acceptance or deployment is claimed. Road terminals, summit masses
+and all other district translation gaps remain open. The user will reconnect
+the owning Sites account; this is intent, not confirmation that access works.
+
+
 Developer-guide maintenance: `DEVELOPMENT_AGENT.md` now has one current objective,
 checkpoint and safety/validation policy. The previous285-line guide is preserved
 in `docs/world/history/development-agent-2026-10-25-pre-consolidation.md`; obsolete

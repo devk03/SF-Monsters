@@ -43,6 +43,18 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 
 ## Current checkpoint and next work
 
+Latest compiled candidate is v136 (`0.0.136-connected-trails-world-draft`).
+Visible diagonal dirt trails across the five parks now share edges instead of
+meeting only at corners. The western Twin hill link uses the same rule. A
+regression test fails on frozen135's broken visible path and passes on136.
+All90world tests pass. Independent frozen-plan comparison finds475new native
+trail cells only: GP113, Twin123, Sutro77, Lands End78, Angel84. Collision,
+elevation, all events/actors/buildings/routes and all10linked art profiles are
+unchanged. An actual earlier ordinary Save cold-Continues safely on changed
+terrain. Native five-park views/sign interactions and full-world traversal are
+running; do not claim those or136WASM/browser acceptance yet. V135 below retains
+its completed exact-version evidence.
+
 Latest private cartridge is v135 (`0.0.135-ridge-approaches-world-draft`):77maps,
 19destinations,36physical routes,114directed connections,8gym sites,14service
 interiors and222NPCs. Derive future counts from actual manifests/proof, not these
