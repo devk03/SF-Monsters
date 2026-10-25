@@ -7,6 +7,15 @@ requiring approval before using them are superseded. This does not grant visual
 acceptance of any resulting map. Preserve route/gym/save contracts, compare real
 gameplay to the reference, and record per-district progress in section 15.1.
 The prior four-hour cutoff is historical, not a new implementation deadline.
+Latest private native candidate is v131: Dogpatch's working block now has a
+warehouse, workshop and broad garage hall beside its retained planted court.
+Native31frontage walks/15accessible wall pushes, Dog walker/court/service-room
+interactions, old-Save recovery and the left boundary pair pass. Matching22162-
+frame website-core replay passes. All other linked scenery resources are byte-
+identical to v130; source preservation and14atomic refusal checks pass.
+The warehouse art still reads too much like a house. An unused original factory
+pixel prototype is in world_industrial_factory.py; integrate/review it separately.
+
 Latest private native candidate is v130:19destinations /77maps /222NPCs. The
 park's Richmond edge has12attached homes/shops (all eight forms), two residents,
 two park links and complete native forest skirts. All60frontage walks,12wall

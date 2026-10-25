@@ -643,27 +643,40 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
-**v131 Dogpatch works source candidate — native verification pending.** A75-cell
-whole-stamp transaction replaces six ordinary fronts and one complete unbound
-shrub with an existing7x5warehouse, workshop and6x4two-bay garage hall. The
-existing right-lower workshop remains. Planted court `(57,39)..(59,47)`, its
-notice/standing cell, all routes/walks/shores and old actor anchors are protected.
-The Dog walker at `(54,47)` stays; its open interaction at `(54,48)` is checked
-instead of requiring walking through the occupied actor. Late prepare/furnish
-replacement preserves unrelated frontage indices. Partial/missing/unexpected
-stamps, occupancy/binding drift, incompatible art/caps and blocked returns are
-refused before mutation. New views cover the warehouse, hall, street and passage.
+**v131 compiled Dogpatch working block — native subset verified.** ROM SHA
+`7f1d2f8c4bc1250e8c85d60d50e3b3985bf370b27bfbfcb05a8071f1bbf530b9`, receipt
+`121c6019653340a79513c4265e14d9f1`. Actual views/full native map verify the
+warehouse/workshop/two-bay garage replacement beside the retained planted court.
+All31unoccupied frontage cells are walked and15accessible front pushes block;
+the Dog walker's occupied anchor is retained, with interaction from `(54,48)`.
+The court notice and full planted cut-through remain usable; Repair Counter
+roundtrip passes. Protected party/count, decoded bag, money, flags, chapter and
+Flash remain intact (ordinary walking friendship excluded). A genuine v130Save
+on newly occupied `(50,36)` recovers to `(50,35)` and safely returns from the
+service room. The sole Dogpatch/Route01 boundary passes both directions with
+35audited stages and guide palette restoration. Matching22162-frame website-
+core replay has zero differences across294912RAM bytes. No full-world circuit
+or browser repeat is claimed for this local edit; v130 retains its full evidence.
+Evidence: `.tools/benchmarks/concept-v131-{dogpatch-scenes,dogpatch-native-review,dogpatch-warehouse-upgrade,dogpatch-transient-seam,dogpatch-works-walk,dogpatch-works-wasm}/`.
 
-The garage alias uses two complete existing workshop bays with a unique
-`garage_hall` architecture identity, so the final three-column facade pass cannot
-truncate it. Source compiler comparison against the prior HEAD proves all prior
-cards, graphics, records, attributes and palettes identical:358records,512secondary
-graphics and111own-primary slots. The only catalog addition is the alias. All87
-world tests pass. A genuine v130 Save at `(50,36)` is ready to test the newly
-occupied warehouse tile. No new art, flag, warp, actor or service is introduced.
-Native build/gameplay, source alignment review, boundary and Save checks remain
-pending. The ornate existing warehouse and garage bays do not solve the concept's
-large sawtooth factory/drydock/rail/ship asset gaps. No human visual approval.
+Independent source review proves all outside75cells/blocks/occupancy, all nine
+NPCs, events, access/discovery/room/spawn/topology/scripts and entire planted
+court unchanged. Zero changes on924lanes/2051walk-mask cells; all prior outside
+walkable destinations and frontage/interaction returns remain reachable.
+Fourteen atomic refusals preserve complete plan/grid/occupancy snapshots. The
+pure6x4garage alias uses full capped workshop bays; prior source graphics/cards/
+records/palettes remain identical. Independently audited linked-ROM resource
+hashes match v130 across all10profiles:358industrial records,512secondary graphics
+and111own-primary slots. All87world source tests pass. New building faces remain
+scenery, with no added flag/warp/actor/service or new art in this cartridge.
+
+Visual self-critique: massing and garage rhythm improve the block, but the ornate
+warehouse still reads as a Victorian/civic building. An unused original native-
+pixel factory prototype now exists in `world_industrial_factory.py`, using the
+same112x80extent and existing warehouse palette: sawtooth roof, clerestory band,
+loading bays and crate. It is not yet integrated or native-verified; source art
+preview is private. Proper factory/rail/drydock/ship identity remains incomplete.
+Human visual acceptance remains open; publicv80/v92 are intact.
 
 **v130 compiled Richmond park edge — native subset verified; full goal active.**
 ROM SHA `fcf47d8dd34500d1fdbdd1903f0c33c769752439f6e2b7f61da0ba0d97ad14c2`,
