@@ -21,6 +21,7 @@ BLOCKS = {
         (50,54,62,61,'south workshops'), (69,54,78,61,'pier neighborhood'),
     ],
     'potrero_hill': [
+        (4,24,27,27,'west hillside homes above the main street'),
         (82,18,92,22,'east stair landing homes'),
         (82,43,92,47,'lower east terrace homes'),
         (34,1,43,9,'upper hill homes'), (46,2,54,20,'stair-side flats'),

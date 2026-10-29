@@ -782,6 +782,33 @@ and deliberate overlook, plus irregular vegetation and legible trails. These
 are open visual requirements, not human approval. Full-world continuous native
 and WASM circuits, browser behavior and public release remain unverified.
 
+**Private Potrero Hill v146b candidate.** Eight adjoining mixed-color building
+fronts now fill the formerly empty west-central street block; both exposed
+ends have the existing finished end variants, and the sidewalk remains
+reachable. The candidate has ROM SHA-256
+`dc9d1606929da48a70b6f98acd518ff230c59334395c63d6c81783fa10362066` and
+receipt `4a649048d6b5449d903f89d0550ac234`. An initial v146a inadvertently
+changed later frontage selection; v146b keeps that block's selection independent.
+Compared with v145, the 96 newly solid cells all belong to the new block, with
+none elsewhere in Potrero. Two actual v142b ordinary Saves inside its west and
+east footprint cold-recovered to safe positions, retained party, money,
+inventory, flags, chapter and Flash, and completed room returns. All 109 world
+tests and an additional post-fix targeted regression pass; the native build and
+BPS round-trip pass. Both Potrero route boundaries passed corrected transient
+frame and menu checks, and a 19,108-frame controller tour matched the website
+WASM core. Private native maps and gameplay closeups are in
+`.tools/benchmarks/potrero-v146b-native-map/` and
+`.tools/benchmarks/potrero-v146b-frontage-closeups/`.
+
+A fresh independent reviewer scored layout2, density2, joins2, planting1,
+identity1 and readability3 out of4. The previously empty block is denser, but
+its eastern green bays repeat and its end meets the grass abruptly; the town
+still has empty lawn, disjoint sidewalks, flat repeated rows and weak hillside
+identity. Next iterations need an explicitly finished corner and varied end
+unit, linked garden and street paths, a coherent terraced hill with actual
+lookouts, and more street activity. This is not human approval, full-world
+continuous testing, browser validation or public release.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

@@ -159,6 +159,11 @@ def expand(plans, manifest):
                 mark_composition(plan)
             index = 0
             for left,right,top in sorted(bands,key=lambda b:(b[2],b[0])):
+                # This infill is a new independent block. Its eight buildings
+                # must not advance the established selection rhythm for every
+                # later Potrero street or change unrelated saved positions.
+                independent = name=='potrero_hill' and (left,right,top)==(4,28,24)
+                previous_index = index
                 x = max(1,left)
                 while x<min(width-1,right):
                     from world_frontage_identity import frontage
@@ -175,6 +180,7 @@ def expand(plans, manifest):
                         index += 1
                     else:
                         x += 1
+                if independent:index = previous_index
             # Fixtures follow the outside sidewalk edge, leaving the inner
             # curb strip clear. No tree, pole or bench may occupy road cells.
             from world_botany import PLANTINGS
