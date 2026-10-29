@@ -240,6 +240,9 @@ def expand(plans, manifest):
             if name=='potrero_hill':
                 from world_potrero_wall_join import furnish as join_potrero_wall
                 join_potrero_wall(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
+            if name=='outer_sunset':
+                from world_outer_sunset_join import furnish as join_sunset_wall
+                join_sunset_wall(plan,grid,cards,lanes,walks,occupied,sea,shore,passage_cells)
             from world_presidio import landscape as presidio_landscape
             presidio_landscape(plan,grid,lanes,walks,occupied,token)
             from world_marina_venues import prepare as prepare_venues, furnish as furnish_venues

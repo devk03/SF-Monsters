@@ -1361,6 +1361,27 @@ source-only negative evidence under `.tools/twin-asymmetric-source-fit/` and
 `.tools/twin-original-contour/`; a whole-landform replacement with clear
 landings remains necessary.
 
+**Outer Sunset v185 attached center block, in progress.** Two original
+fronts now bridge the former court gaps in the central rows; the court notice
+moves beside its existing bench, retaining its script and text. The protected
+bus rider remains in place. A fail-closed post-packing transaction validates
+original stamps, reservations, actors, bindings and reachable ground. Only
+41 generated metatile cells changed, all in Outer Sunset. The native build/BPS
+round trip, 116 existing world tests plus the targeted join test, two v184
+ordinary Saves on newly occupied cells, six native wall pushes, all 26 court
+walks and notice interactions, and all three local route seams with transient
+frames/menu passed. A 7,930-frame walk replayed in the pinned website WASM core
+with zero differing RAM bytes; browser audio/timing are not established. ROM
+SHA-256 `67a3dde24db4e662e04a68cd4304589dfde8c94acb7c2ea39759b1aba8b68041`;
+private native views and map are in `.tools/benchmarks/outer-sunset-v185-scenes/`
+and `outer-sunset-v185-native-map/`.
+
+A fresh independent reviewer found the two joined fronts and relocated gathering
+point a clear incremental improvement, with an abrupt garage-to-gable transition.
+The coastline is still a flat strip and broad empty paving, repetitive façades,
+limited coastal planting and sparse activity remain. This is not completion or
+human visual approval of the town.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
