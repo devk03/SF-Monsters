@@ -951,6 +951,24 @@ are absent. Empty lots, huge pavement, repetitive houses and sparse activity
 also remain. This is not user approval; matching WASM traversal, full-world and
 public release checks remain open.
 
+**Private Outer Sunset v156 candidate.** Two original neighborhood-profile
+water cards replace the dark speckled water beside the new beach with blue
+water and a pale foam edge. The existing palette is reused; the water remains
+solid. ROM SHA-256 `1870d351a71b49eb0da74f8f7c86054f7eee7952a337b8c1be1c5dda520275b7`,
+receipt `dc95d8af9c944933b6c97778ca1b8f6c`. Native build, BPS round-trip and
+all 111 world tests pass. A v154 coastal Save cold-continued with position,
+movement, party, money, inventory, flags, chapter and Flash preserved. The
+Outer Sunset north connection and reverse passed native 16-frame transition
+and menu-return checks. Actual screenshots and full map are private in
+`.tools/benchmarks/sunset-v156-scenes/` and `sunset-v156-native-map/`.
+
+A fresh reviewer scored layout2, density1.5, joins1.5, planting1, identity2
+and readability3 out of4. Water color and a visible surf edge improve, but
+the dash pattern repeats visibly, foam is a hard narrow line, the shoreline is
+stair-stepped, and the upper-left dark-water patch remains inconsistent. Dunes,
+planting, beach activity, denser blocks and natural transitions are still open.
+This is not user approval; broader seam, WASM and public release checks remain.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

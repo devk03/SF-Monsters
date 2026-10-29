@@ -16974,6 +16974,22 @@
             "right"
           ],
           "architecture_type": "duplex"
+        },
+        "sunset_ocean": {
+          "first": 1002,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "sunset_surf": {
+          "first": 1003,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },

@@ -441,6 +441,17 @@ def compile_kit(root=ROOT, profile='residential'):
                  16,16,8,paving,7)
         card('baths_walk',promenade((7,5,1,2)),32,32,7,paving,7,
              blocked=False,floor=True)
+    if profile=='neighborhood':
+        # Original low-resolution water uses the existing landmark palette;
+        # reserve foam for the seaward side of Outer Sunset's beach only.
+        ocean=bytearray([10]*256)
+        for y,x0,x1 in ((2,2,7),(6,9,13),(10,1,5),(14,8,12)):
+            for x in range(x0,x1+1):ocean[y*16+x]=9
+        foam=bytearray(ocean)
+        for y in range(16):
+            for x in range(13+(y//4)%2,16):foam[y*16+x]=4 if y%5 else 3
+        card('sunset_ocean',bytes(ocean),16,16,11,paving,7,floor=True)
+        card('sunset_surf',bytes(foam),16,16,11,paving,7,floor=True)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

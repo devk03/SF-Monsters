@@ -284,6 +284,9 @@ def expand(plans, manifest):
             # Native sand is land, while the existing scenic water remains solid.
             # Keep route lanes, fixtures and the legacy service block unchanged.
             sand=chr(0x800+0x124);plan['legend'][sand]=[0x124,False,3]
+            for x,y in sea:
+                if y>=24:
+                    grid[y][x]=token('sunset_surf' if (x+1,y) not in sea else 'sunset_ocean')
             for y in range(24,height-1):
                 for x in range(1,12+(y//6)%2):
                     if (x,y) in sea|lanes|occupied:continue
