@@ -67,3 +67,20 @@ def destination_restoration(destination_native, destination_owned, native_tiles)
     """
     native=set(destination_native)
     return restoration(native,native,destination_owned,native_tiles)
+
+
+def borrowed_restoration(destination_native, destination_owned, native_tiles,
+                         potentially_overwritten, borrowed_slots):
+    """Limit restoration to a proven set of borrowable native slots.
+
+    Every destination-native slot that any scene can overwrite must belong to
+    borrowed_slots. The caller must include own AND foreign seam allocations
+    in potentially_overwritten, across the entire world. Animation and DMA
+    timing are outside this pure planner's scope.
+    """
+    native, overwritten, borrowed = map(set, (destination_native, potentially_overwritten, borrowed_slots))
+    if any(type(slot) is not int or not 0 <= slot < 512 for slot in overwritten):
+        raise ValueError('Expected primary graphics slots in range 0..511')
+    if (native & overwritten) - borrowed:
+        raise ValueError('A destination-native slot can be overwritten outside the borrowed set')
+    return restoration(borrowed,native,destination_owned,native_tiles)

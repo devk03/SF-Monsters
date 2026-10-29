@@ -4,11 +4,22 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_primary_restore import restoration,visible_native_slots,destination_restoration
+from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration
 import struct
 
 
 class PrimaryRestorationTests(unittest.TestCase):
+    def test_borrowed_plan_rejects_untracked_older_map_writes(self):
+        original={7:bytes([2])*64,11:bytes([3])*64}
+        plan=borrowed_restoration({7,11},{20},original,{7,30},{7})
+        self.assertEqual([slot for slot,_ in plan],[7])
+        with self.assertRaisesRegex(ValueError,'outside the borrowed set'):
+            borrowed_restoration({7,11},{20},original,{7,11},{7})
+        with self.assertRaisesRegex(ValueError,'collide'):
+            borrowed_restoration({7,11},{11},original,{7},{7})
+        with self.assertRaisesRegex(ValueError,'range'):
+            borrowed_restoration({7},{20},original,{512},{7})
+
     def test_restore_does_not_assume_only_previous_scene_can_be_dirty(self):
         original={7:bytes([2])*64,11:bytes([3])*64}
         scene={7:bytes([9])*64,11:original[11]}  # Map A overwrote slot7.

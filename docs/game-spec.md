@@ -659,6 +659,11 @@ map data, the conservative visible-native plan reaches71tiles/24contiguous runs
 (2272bytes) for Twin Peaks. This is an input estimate, not a DMA/VBlank test;
 animation slots, transition timing, linked art and real browser/native checks
 still require engineering and verification before integration.
+An alternative bounded plan restores only explicitly borrowed native slots;
+it rejects a destination if any world-owned or foreign seam write could
+overwrite a visible native slot outside that set. The caller must prove and
+supply that complete write union. Synthetic tests cover older-map writes and
+collisions; the planner is not yet part of the engine or a VBlank measurement.
 The prototype now derives destination-visible native slots from actual map
 cells, all border metatiles, clipped connection margins, implicit field
 background, and native graphics referenced by composite cards. Synthetic tests
