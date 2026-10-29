@@ -4,11 +4,38 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration,relocate_owned_records,relocate_atlas
+from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration,relocate_owned_records,relocate_atlas,relocate_visible_borrows
 import struct
 
 
 class PrimaryRestorationTests(unittest.TestCase):
+    def test_native_cliff_visible_on_route_relocates_both_maps(self):
+        # The route sees a borrowed cliff only through the neighboring map's
+        # edge. Both scenes own an SF tile in that slot and must preserve it.
+        legend={'.':[512,False,3], 'n':[2,True,3]}
+        route={'world_id':'route','native_id':'ROUTE','tile_profile':'ridge',
+               'rows':['........']*8,'legend':legend,'border_tile':1,
+               'connections':[{'map':'TOWN','direction':'right','offset':0}]}
+        town={'world_id':'town','native_id':'TOWN','tile_profile':'ridge',
+              'rows':['n.......']+['........']*7,'legend':legend,'border_tile':1,
+              'connections':[{'map':'ROUTE','direction':'left','offset':0}]}
+        pixels=bytes([7])*64
+        kit={'records':[[0x604c]*8], 'attributes':[0x1000]}
+        def atlas(name):
+            return {'world_id':name,'records':[],'record_ids':[],'attributes':[],
+                    'tiles':[pixels],'tile_slots':[76],'own_primary_slots':[76]}
+        records=b''.join(struct.pack('<8H',*([slot]*8)) for slot in (0,20,76))
+        original=[atlas('route'),atlas('town')]
+        revised,demands=relocate_visible_borrows([route,town],{'ridge':kit},original,records,{76})
+        self.assertEqual(demands,{'route':[76],'town':[76]})
+        for a in revised:
+            self.assertNotIn(76,a['tile_slots'])
+            self.assertEqual(a['records'][0][0]&0xfc00,0x6000)
+            self.assertEqual(a['tiles'][0],pixels)
+        self.assertEqual(original[0]['tile_slots'],[76])
+        with self.assertRaisesRegex(ValueError,'no seam atlas'):
+            relocate_visible_borrows([route,town],{'ridge':kit},original[:1],records,{76})
+
     def test_atlas_relocates_shared_tile_and_adds_own_override(self):
         pixels=bytes([3])*64
         kit={'records':[[0x604c]*8], 'attributes':[0x1000]}

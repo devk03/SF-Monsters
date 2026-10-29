@@ -680,6 +680,19 @@ This is still a no-new-terrain
 experiment: native consumers in connected margins need per-destination
 relocation, and browser, VBlank phase and full-continuous-history tests remain.
 
+The private terrain allocator now computes native demand for every map and its
+clipped connection margins, relocates colliding owned and foreign graphics on
+each consumer, and generates map-specific restore requests. It refuses
+consumers without an atlas or conflicting allocations. An in-memory real-map
+experiment placing General74/75/89/BE/BF at the Twin north edge identified both
+Twin Peaks and Route 08 Mid as consumers; their changed quadrants preserve exact
+RGB555 pixels. Synthetic tests also verify a route whose only demand is its
+neighbor's edge. All 106 world tests pass and the no-new-terrain native build
+remains byte-identical to the previous scoped candidate (`cb4233d2…`). The
+cliff placements in this experiment are test fixtures, not a playable map or
+evidence of a real native transition with the new terrain. Full-frame native
+and WASM tests, save safety and independent visual review remain required.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

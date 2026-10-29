@@ -11,6 +11,7 @@ from generate_world import generate
 from world_tiles import compile_kit
 from world_trail_ground import WORN_IDS
 from world_seams import make_atlases,margin_points
+from world_primary_restore import relocate_visible_borrows
 
 
 def quadrant(word,tiles,palettes):
@@ -37,6 +38,43 @@ class SeamTests(unittest.TestCase):
         cls.locks={int(k):{int(i):v for i,v in entries.items()} for k,entries in fixture['palette_locks'].items()}
         cls.primary_banks={int(k):set(v) for k,v in fixture['primary_banks'].items()}
         cls.atlases=make_atlases(cls.plans,cls.kits,cls.reserved,cls.banks,cls.locks,cls.primary_banks)
+
+    def test_borrowed_cliffs_preserve_art_on_twin_and_connected_route(self):
+        # Real General records in Twin's north edge are also rendered by the
+        # connected route. Check both actual atlas allocations and all changed
+        # indexed pixels, rather than merely checking the destination town.
+        from copy import deepcopy
+        plans=deepcopy(self.plans)
+        twin=next(p for p in plans if p['world_id']=='twin_peaks')
+        extra=(0x74,0x75,0x89,0xbe,0xbf)
+        row=list(twin['rows'][0])
+        for offset,identifier in enumerate(extra):
+            char=chr(0x3000+offset);twin['legend'][char]=[identifier,True,3]
+            row[40+offset]=char
+        twin['rows'][0]=''.join(row)
+        raw=(ROOT/'.tools/pokeemerald-world-host/data/tilesets/primary/general/metatiles.bin').read_bytes()
+        banks=dict(self.primary_banks)
+        banks.update({i:{w>>12 for w in struct.unpack_from('<8H',raw,i*16)} for i in extra})
+        before=make_atlases(plans,self.kits,self.reserved,self.banks,self.locks,banks)
+        borrowed={76,77,78,79,92,93,94,95,107,123}
+        after,demands=relocate_visible_borrows(plans,self.kits,before,raw,borrowed)
+        self.assertEqual(set(demands),{'twin_peaks','route_08_mid'})
+        for old,new in zip(before,after):
+            if old['world_id'] not in demands:continue
+            self.assertFalse(set(new['tile_slots']) & set(demands[old['world_id']]))
+            kit=self.kits[old['profile']]
+            oldtiles={512+i:t for i,t in enumerate(kit['tiles'])};oldtiles.update(zip(old['tile_slots'],old['tiles']))
+            newtiles={512+i:t for i,t in enumerate(kit['tiles'])};newtiles.update(zip(new['tile_slots'],new['tiles']))
+            palettes=dict(kit['palettes']);palettes.update(old['palettes'])
+            for identifier in new['record_ids']:
+                if identifier in old['record_ids']:
+                    original=old['records'][old['record_ids'].index(identifier)]
+                else:
+                    original=kit['records'][identifier-512]
+                changed=new['records'][new['record_ids'].index(identifier)]
+                for a,b in zip(original,changed):
+                    if a==b:continue
+                    self.assertEqual(quadrant(a,oldtiles,palettes),quadrant(b,newtiles,palettes))
 
     def test_every_foreign_margin_quad_keeps_exact_colors_alpha_handedness_and_behavior(self):
         native={p['native_id']:p for p in self.plans}

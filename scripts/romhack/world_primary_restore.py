@@ -162,3 +162,49 @@ def relocate_atlas(atlas, kit, own_ids, native_slots):
     result['tiles']=[all_graphics[i] for i in result['tile_slots']]
     result['own_primary_slots']=[i for i in atlas['own_primary_slots'] if i not in plan['mapping']]
     return result,plan['mapping']
+
+
+def relocate_visible_borrows(plans, kits, atlases, general_records, borrowed, forced=None):
+    """Relocate owned and seam graphics on every native consumer.
+
+    Native demand includes clipped connection margins, so a route can need
+    restoration even when its own cells never reference the borrowed tile.
+    Refuse consumers without an atlas: their entry/transition loading has not
+    been proved safe for this experimental path.
+    """
+    from world_seams import margin_points
+    borrowed=set(borrowed)
+    if any(type(i) is not int or not 16 <= i < 432 for i in borrowed):
+        raise ValueError('Borrowed slots must be non-animation primary graphics')
+    by_native={p['native_id']:p for p in plans}
+    if len(by_native)!=len(plans):raise ValueError('Duplicate native map identity')
+    by_world={a['world_id']:a for a in atlases}
+    if len(by_world)!=len(atlases):raise ValueError('Duplicate atlas identity')
+    forced=forced or {}
+    if set(forced)-{p['world_id'] for p in plans}:
+        raise ValueError('Forced native demand references an unknown map')
+    if any(set(slots)-borrowed for slots in forced.values()):
+        raise ValueError('Forced native demand exceeds borrowed graphics')
+    demands={}
+    replacements={}
+    for plan in plans:
+        demand=(visible_native_slots(plan,by_native,kits,general_records)&borrowed) | set(forced.get(plan['world_id'],()))
+        if not demand:continue
+        name=plan['world_id']; demands[name]=sorted(demand)
+        if name not in by_world:
+            raise ValueError(name+': borrowed native consumer has no seam atlas')
+        kit=kits[plan.get('tile_profile','residential')]
+        own_ids={plan['legend'][t][0] for row in plan['rows'] for t in row
+                 if plan['legend'][t][0]>=512}
+        own_ids.update(i for i in plan.get('border_metatiles',[plan.get('border_tile',11)]) if i>=512)
+        for link in plan.get('connections') or []:
+            other=by_native[link['map']]
+            if other.get('tile_profile','residential')==plan.get('tile_profile','residential'):
+                own_ids.update(other['legend'][other['rows'][y][x]][0]
+                    for x,y in margin_points(other,link['direction'],plan,link['offset'])
+                    if other['legend'][other['rows'][y][x]][0]>=512)
+        revised,_=relocate_atlas(by_world[name],kit,own_ids,demand)
+        if set(revised['tile_slots']) & demand:
+            raise ValueError(name+': native demand still collides with atlas graphics')
+        replacements[name]=revised
+    return [replacements.get(a['world_id'],a) for a in atlases],demands

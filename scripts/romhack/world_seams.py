@@ -205,7 +205,7 @@ def c_array(name, kind, values, width=16):
         for i in range(0,len(values),width))+'};\n'
 
 
-def header(atlases, borrowed_tiles=None):
+def header(atlases, borrowed_tiles=None, borrowed_demands=None):
     out = ['// Generated faithful connection margins. Primary terrain/animation slots are reserved.\n',
            '#include "dma3.h"\n',
            'const u16 gSFSeamLookupVersion = 2;\n',
@@ -254,23 +254,27 @@ struct SFSeamAtlas {
         raw = bytes(v for slot in slots for row in range(8) for x in range(0,8,2)
                     for v in [borrowed_tiles[slot][row*8+x] | borrowed_tiles[slot][row*8+x+1] << 4])
         out.append(c_array('sSFSeamBorrowedNative','u8 ALIGNED(4)',raw))
-        calls = []
-        start = 0
-        while start < len(slots):
-            end = start + 1
-            while end < len(slots) and slots[end] == slots[end-1]+1:
-                end += 1
-            calls.append(f'    RequestDma3Copy(sSFSeamBorrowedNative+{start*32},(u8 *)BG_CHAR_ADDR(0)+{slots[start]*32},{(end-start)*32},1);')
-            start = end
+        guarded = []
+        by_world={a['world_id']:a for a in atlases}
+        for name,needed in sorted((borrowed_demands or {}).items()):
+            atlas=by_world[name]
+            indices=[i for i,slot in enumerate(slots) if slot in needed]
+            if set(needed)-set(slots):raise ValueError('Missing borrowed native pixels')
+            calls=[];start=0
+            while start<len(indices):
+                end=start+1
+                while (end<len(indices) and indices[end]==indices[end-1]+1
+                       and slots[indices[end]]==slots[indices[end-1]]+1):end+=1
+                index=indices[start]
+                calls.append(f'        RequestDma3Copy(sSFSeamBorrowedNative+{index*32},(u8 *)BG_CHAR_ADDR(0)+{slots[index]*32},{(end-start)*32},1);')
+                start=end
+            native=atlas['native_id']
+            guarded.append('    if (sSFSeamCurrent->group==MAP_GROUP('+native+') && '
+                           'sSFSeamCurrent->num==MAP_NUM('+native+'))\n    {\n'+
+                           '\n'.join(calls)+'\n    }')
+        guarded='\n'.join(guarded)
         anchor = '    if (!sSFSeamCurrent || sSFSeamTransition) return;\n    for (start=0;'
         if runtime.count(anchor) != 1: raise ValueError('Borrowed native graphics anchor changed')
-        # This prototype restores on Twin only. Other scenes currently use no
-        # native borrowed slots and may own them; globally restoring those
-        # slots can transiently clobber their graphics. Future native margin
-        # consumers require independently validated per-map allocation.
-        guarded = ('    if (sSFSeamCurrent->group==MAP_GROUP(MAP_PACIFIDLOG_TOWN) && '
-                   'sSFSeamCurrent->num==MAP_NUM(MAP_PACIFIDLOG_TOWN))\n    {\n' +
-                   '\n'.join('    '+call for call in calls) + '\n    }')
         runtime = runtime.replace(anchor, anchor.split('\n')[0]+'\n'+guarded+'\n    for (start=0;', 1)
     out.append(runtime)
     return ''.join(out)
@@ -399,40 +403,29 @@ def apply_seams(engine, plans, prototype_borrowed_primary=False):
     from world_tiles import compile_kit
     kits = {p:compile_kit(profile=p) for p in {m.get('tile_profile','residential') for m in plans}}
     reserved_tiles,reserved_banks,palette_locks,bank_usage = primary_reservations(plans,engine)
-    atlases = make_atlases(plans,kits,reserved_tiles,reserved_banks,palette_locks,bank_usage)
+    borrowed = {76,77,78,79,92,93,94,95,107,123} if prototype_borrowed_primary else set()
+    from world_shared_primary import PINNED_RESERVED
+    if borrowed & PINNED_RESERVED:raise ValueError('Experimental borrow overlaps pinned native graphics')
+    atlases = make_atlases(plans,kits,reserved_tiles-borrowed,reserved_banks,palette_locks,bank_usage)
     borrowed_tiles = None
+    borrowed_demands = {}
     if prototype_borrowed_primary:
-        from world_primary_restore import relocate_atlas, visible_native_slots
+        from world_primary_restore import relocate_visible_borrows
         from world_native_loft import checked_blobs, HASHES
         from PIL import Image
-        import io
-        borrowed = {76,77,78,79,92,93,94,95,107,123}
-        by_native = {p['native_id']:p for p in plans}
+        import hashlib,io
         general = (engine/'data/tilesets/primary/general/metatiles.bin').read_bytes()
-        for plan in plans:
-            if visible_native_slots(plan,by_native,kits,general) & borrowed:
-                raise ValueError(plan['world_id']+': experimental borrowed slot already used by native terrain')
-        plan = next(p for p in plans if p['world_id']=='twin_peaks')
-        kit = kits[plan.get('tile_profile','residential')]
-        own_ids = {plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]>=512}
-        own_ids.update(i for i in plan.get('border_metatiles',[plan.get('border_tile',11)]) if i>=512)
-        for link in plan['connections'] or []:
-            other=by_native[link['map']]
-            if other.get('tile_profile','residential')==plan.get('tile_profile','residential'):
-                own_ids.update(other['legend'][other['rows'][y][x]][0]
-                    for x,y in margin_points(other,link['direction'],plan,link['offset'])
-                    if other['legend'][other['rows'][y][x]][0]>=512)
-        index = next(i for i,a in enumerate(atlases) if a['world_id']=='twin_peaks')
-        atlases[index], mapping = relocate_atlas(atlases[index],kit,own_ids,borrowed)
-        if set(atlases[index]['tile_slots']) & borrowed:
-            raise ValueError('Twin Peaks atlas still overwrites borrowed native graphics')
+        if hashlib.sha256(general).hexdigest() != '17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910':
+            raise ValueError('Experimental General metatile data is not the pinned native resource')
+        atlases,borrowed_demands=relocate_visible_borrows(
+            plans,kits,atlases,general,borrowed,forced={'twin_peaks':borrowed})
         name='data/tilesets/primary/general/tiles.png'
         image=Image.open(io.BytesIO(checked_blobs(Path(__file__).resolve().parents[2],{name:HASHES[name]})[name]))
         borrowed_tiles={slot:bytes(image.getpixel(((slot%16)*8+x,(slot//16)*8+y))
                           for y in range(8) for x in range(8)) for slot in borrowed}
     if any(p['connections'] and p['metadata']['weather']!='WEATHER_SUNNY' for p in plans):
         raise ValueError('Review weather-aware seam palette commit before adding other authored weather')
-    (engine/'src/sf_world_seams.h').write_text(header(atlases,borrowed_tiles))
+    (engine/'src/sf_world_seams.h').write_text(header(atlases,borrowed_tiles,borrowed_demands))
     path = engine/'src/fieldmap.c'
     source = path.read_text()
     patches = [
@@ -496,7 +489,7 @@ static void SFSeamRedrawView(int dx,int dy)
     }'''
     if source.count(before)!=1:raise ValueError('Pinned seam metatile draw anchor changed')
     path.write_text(source.replace(before,after,1))
-    summary = {'atlases':len(atlases),'reserved_primary_tiles':sorted(reserved_tiles),
+    summary = {'borrowed_native_demands':borrowed_demands, 'atlases':len(atlases),'reserved_primary_tiles':sorted(reserved_tiles),
                'reserved_primary_palettes':sorted(reserved_banks),
                'reserved_primary_palette_entries':palette_locks,
                'primary_palette_banks_by_metatile':{i:sorted(b) for i,b in bank_usage.items()},
