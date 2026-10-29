@@ -428,6 +428,8 @@ def compile_kit(root=ROOT, profile='residential'):
         receipt=json.loads((directory/'conversion.json').read_text())
         card('mission_sun_mural',checked(directory,'mural.indices',receipt),
              64,32,11,paving,7)
+        from world_mural_wall import wall
+        card('mission_mural_backdrop',wall(),64,32,11,paving,7,deduplicate=True)
     if profile=='nature':
         from world_baths_art import basin_rim, promenade
         for side in ('north','south','west','east','nw','ne','sw','se'):

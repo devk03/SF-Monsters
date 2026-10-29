@@ -20637,6 +20637,28 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "mission_mural_backdrop": {
+          "first": 1010,
+          "width": 4,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1010,
+              1011,
+              1012,
+              1013
+            ],
+            [
+              1014,
+              1015,
+              1016,
+              1017
+            ]
+          ]
         }
       }
     },

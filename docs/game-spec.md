@@ -857,6 +857,27 @@ a continuous wall/street edge, useful locally distinctive spaces and dense
 varied greenery. These scores do not establish human approval; full-world
 native/WASM, browser and public release gates remain open.
 
+**Private Mission v149 candidate.** Original masonry now fills the formerly
+empty space above the sun mural and reaches the neighboring façades. The art
+uses the existing palette and a deduplicated eight-cell card; mixed-use has
+506 of512 metatile records and158 primary graphics, so future additions must
+respect the remaining capacity. ROM SHA-256
+`a567e657ad6f6109de7ad95225820146bd7bb0b6447f798bd991bc96ae636702`,
+receipt `1bda210bfbc540f3855b099841f49b31`. All 110 world tests, native build
+and BPS round-trip pass. Two actual v148 ordinary Saves inside the new wall
+recovered safely with party, money, inventory, flags, chapter and Flash
+preserved and room returns. Both Mission boundaries passed corrected
+transient/menu checks; a 20,300-frame native tour exactly matched the website
+WASM core. Actual private captures are `.tools/benchmarks/mission-v149-scenes/`
+and `mission-v149-native-map/`.
+
+A fresh independent reviewer scored layout2, density2, joins2, planting1,
+identity2, readability3 out of4. The wall fills the earlier grass gap, but
+its side joins are still hard seams and its top cap does not read as finished.
+Large lawns, detached frontages and repetitive landscaping also remain. These
+are open design defects, not human approval; full-world native/WASM, browser
+and public-release gates remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

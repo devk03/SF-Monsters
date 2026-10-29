@@ -94,8 +94,9 @@ def furnish(plan,grid,cards,stamp,token,lanes):
         obj=(79,44);standing=(79,45)
         note='Neighbors share this garden. The gate stays open. Please ask before picking anything; someone has been waiting for those tomatoes.'
         # A second original mural anchors the formerly empty west street.
-        # Adjacent shops stay separate from the low, complete-ended wall.
+        # Brick backing fills the open strip between both adjacent shops.
         for style,x,y in [('shophouse__slate',4,24),('arcade__sage',6,24),
+                          ('mission_mural_backdrop',9,24),
                           ('mission_sun_mural',9,26),('shophouse',13,24)]:
             put(style,x,y)
         paint('brick_walk',4,28,14,29)

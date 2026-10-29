@@ -21,6 +21,7 @@ class MissionMuralTests(unittest.TestCase):
                   if p['world_id']=='mission')
         blocks={(b['style'],b['x'],b['y']) for b in plan['town_blocks']}
         self.assertIn(('mission_sun_mural',9,26),blocks)
+        self.assertIn(('mission_mural_backdrop',9,24),blocks)
         self.assertTrue(any(style.startswith('shophouse') and x==4 and y==24 for style,x,y in blocks))
         self.assertTrue(any(style.startswith('shophouse') and x==13 and y==24 for style,x,y in blocks))
         rows,legend=plan['rows'],plan['legend'];start=(5,9);seen={start};queue=deque([start])
@@ -31,4 +32,9 @@ class MissionMuralTests(unittest.TestCase):
                 if 0<=ny<len(rows) and 0<=nx<len(rows[ny]) and (nx,ny) not in seen and not legend[rows[ny][nx]][1]:
                     seen.add((nx,ny));queue.append((nx,ny))
         for point in ((10,29),(48,21),(79,45)):self.assertIn(point,seen)
+        # The backing connects the wall vertically to the painting, and the
+        # existing walkway in front remains passable to both neighboring shops.
+        for y in range(24,28):
+            for x in range(9,13):self.assertTrue(legend[rows[y][x]][1])
+        for x in range(4,15):self.assertIn((x,29),seen)
 
