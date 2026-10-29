@@ -279,6 +279,16 @@ def expand(plans, manifest):
         for x,y in sea:grid[y][x]=token('scenic_sea',x,y)
         for x,y in shore:
             if (x,y) not in occupied:grid[y][x]=token('seawall',x,y)
+        if name=='outer_sunset':
+            # A narrow walkable beach replaces the inland-facing concrete wall.
+            # Native sand is land, while the existing scenic water remains solid.
+            # Keep route lanes, fixtures and the legacy service block unchanged.
+            sand=chr(0x800+0x124);plan['legend'][sand]=[0x124,False,3]
+            for y in range(24,height-1):
+                for x in range(1,12+(y//6)%2):
+                    if (x,y) in sea|lanes|occupied:continue
+                    if (x,y) in shore or grid[y][x]==token('grass',x,y):
+                        grid[y][x]=sand
         if name=='angel_island':
             # The former compact map's east shore is now inland. Remove only
             # those obsolete sea/wall cells, retaining landmarks and actors.

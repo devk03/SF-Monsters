@@ -932,6 +932,25 @@ little activity and a generic theater plaza are still substantial defects.
 This is not human acceptance; matching WASM traversal, full-world and public
 release checks remain outstanding.
 
+**Private Outer Sunset v155 candidate.** The southern western seawall is now
+partly replaced by a walkable strip of native sand; the ocean remains solid and
+the declared route lanes are retained. An ordinary v154 Save on the coastal
+strip continued with its position, movement, party, money, inventory, flags,
+chapter and Flash preserved. Native build and BPS round-trip pass. ROM SHA-256
+`567b893bb2eea41c7409396a615121490ce872a2b0f016b063e9b2151b0b6ec4`, receipt
+`b8472c08ec8749608744fd82572d8265`; all 111 world tests pass. The new beach test checks
+walkable access from the local arrival and the blocked ocean; the sand assertion
+would fail on the frozen v154 plan. Actual screenshots and native full map are
+private in `.tools/benchmarks/sunset-v155-scenes/` and `sunset-v155-native-map/`.
+
+A fresh reviewer compared current and v154 actual views with the ideal, scoring
+layout2, density2, joins1, planting1, identity2 and readability3 out of4. The
+strip reads more like a beach, but the dark ocean and sharp sand edge lack surf,
+the transition to the remaining seawall is abrupt, and dunes and coastal plants
+are absent. Empty lots, huge pavement, repetitive houses and sparse activity
+also remain. This is not user approval; matching WASM traversal, full-world and
+public release checks remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
