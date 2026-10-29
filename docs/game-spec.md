@@ -1405,6 +1405,32 @@ planter, but tufts are sparse and repeated, the coastline remains straight and
 hard-edged, and the town still needs coherent dense blocks and coastal identity.
 This is not visual approval of the town.
 
+**Outer Sunset v187 beach edge, private draft.** Narrow grass strips beside
+Ocean Beach and part of its southern edge become walkable sand with five
+additional sand-backed dune tufts. Streets, water and collision stay intact;
+protected actors, bindings and routes are checked before changing cells. The
+native build and BPS round trip, 119 world tests, and an older ordinary Save
+cold Continue passed. A 7,353-frame native walk replayed in the pinned website
+WASM core with zero differing RAM bytes. ROM SHA-256
+`f79b8d5f8887121adc4f4c3c2cc65c3e455b25b76c346d008ba6e58a2be99d83`;
+actual native full map and player views are under
+`.tools/benchmarks/outer-sunset-v187-native-map/` and
+`outer-sunset-v187-scenes-retry/`. A fresh reviewer recommends retaining this
+small improvement, but flags the square southern edge, straight sparse shore,
+repeated houses and large lawns. Full-world v187 traversal, browser behavior
+and human visual approval remain open; public releases are unchanged.
+
+**FiDi v186 fresh baseline.** The actual full native map and 12 player views
+are in `.tools/benchmarks/fidi-v186-fresh-map/` and `fidi-v186-fresh-scenes/`.
+An independent review finds mostly residential rows and lawns, four similar
+isolated towers, and little of the dense varied skyline in the expanded ideal.
+An original four-building source study at `.tools/fidi-depth-block-study/`
+is not integrated: its shallow planes and repetitive bases remain inadequate,
+and its estimated 124 additional 8px graphics are not a compiled seam budget.
+The alignment review proposes an attached five-building east block with varied
+heights, materials and bases as a next experiment; geometry and resource fit
+are unverified. Approximately 30 distinct downtown designs remain outstanding.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds

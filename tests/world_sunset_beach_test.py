@@ -34,6 +34,14 @@ class SunsetBeachTests(unittest.TestCase):
         for point in ((12,32),(13,33)):
             self.assertIn(point,seen)
             self.assertEqual(legend[rows[point[1]][point[0]]][0],0x124)
+        from world_sunset_beach_edge import STRIP, SOUTH, PLANTS
+        plants = {(x,y) for _,x,y in PLANTS}
+        for x,y in STRIP | SOUTH:
+            self.assertIn((x,y),seen)
+            self.assertFalse(legend[rows[y][x]][1])
+            if (x,y) not in plants:
+                self.assertEqual(legend[rows[y][x]][0],0x124)
+        self.assertEqual(len(plan['sunset_beach_edge']['plantings']),len(PLANTS))
 
 
 
