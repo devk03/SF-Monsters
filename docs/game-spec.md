@@ -1495,6 +1495,57 @@ ROM SHA-256 `c4e6f582002abbfe6002f0c70cb1db704c5087fadea33ab0e58f36423283f6c6`.
 Those images are implementation evidence, not completed independent reviews
 or human acceptance; the maps omit actors.
 
+Two fresh independent reviewers then inspected the v191 full background map,
+arrival and two named views for each of the 19 destinations against its ideal.
+Highest-priority redesigns are coherent Twin Peaks summit masses and saddle;
+Golden Gate Park's forest, lake and landmark clearings; Dogpatch's industrial
+blocks and waterfront; FiDi's dense, varied office streets; a real ballpark
+shell; Mission Bay's labs and waterfront; and a coast-connected Lands End Baths.
+Potrero, Mission, Castro, Outer Sunset, Marina, Pacific Heights, Noe Valley,
+North Beach and Presidio also retain major layout and identity gaps. Preserve
+Angel Island's forest and the character of Sutro Tower and Treasure Island.
+North Beach's reviewed v191 images predate its v192 frontage change. Each
+capture set is triage evidence, not a complete tour of every street, human
+visual approval or permission to call a district finished.
+
+**Deep-block and stadium feasibility studies.** The v192 industrial kit has
+493/512 secondary records and 310 own primary graphics. Its three consumers
+are Dogpatch, Treasure Island and Route 01. An additive deep factory exceeded
+both record and safe graphic budgets. Unrendered records account for only four
+exclusive 8px graphics; a compiler-only replacement of the existing loft with
+the factory fits 500 records and 307 own primary graphics, but would replace
+both live lofts with the same factory and has not passed native/margin checks.
+The no-new-art roof composite at `.tools/dogpatch-deep-factory-study/` has
+broken joins and was rejected. Preserve variety and design a coherent shared
+art replacement before treating this as a usable block.
+
+A no-new-graphics deep-wing trial reuses the existing hall roof and replaces
+one shallow factory while preserving both lofts. Its isolated native build,
+BPS round trip, real v192 Save recovery at `(20,40)` and 6,395-frame matching
+web-core replay pass. ROM SHA-256
+`e633df287de1220c22871002638d244ea1cf04e51420e05342563e42235e9835`;
+private scenes and full map are under `.tools/dogpatch-wing-isolated/.tools/benchmarks/`.
+A fresh reviewer rejects integration: the complete deeper wing duplicates the
+hall and replaces a distinct factory, while the yard stays empty and detached.
+Design a distinct deep facade and connected working yard; this trial has no
+full-world seam, browser or human approval.
+
+A source-only ballpark grandstand study at `.tools/stadium-shell-study/`
+preserves the field and approach in an actor-aware flood check, but covers 63
+previously walkable tiles. It uses a thin bar rather than an enclosing stadium,
+and existing benches land behind it; it was rejected. The stadium kit already
+uses 490/512 records, so a real shell, concourse and fixture relocation need
+explicit compiled resource, old-Save and player-scale checks.
+
+A Twin Peaks source-only geometry study at `.tools/twin-two-summit-geometry/`
+tested twin envelopes and an outside bypass on v191. Its hypothetical flood
+preserves previously reachable cells only after clearing complete trees and
+old cliff components, but it intersects 21 existing lanes and still reads as
+ring-shaped pens rather than connected relief. A synthetic borrowed-primary
+allocation probe passed source atlas construction; it is not a compiled or
+live seam test. This sketch is not integrated. Reauthor actual routes, whole
+forest/cliff replacements, elevation and joined terrain before a native trial.
+
 **North Beach v192 central block, private draft.** Four new facades close
 both central frontage gaps and a fifth existing shop is moved as a complete
 stamp. The reading notice moves to `(44,41)`, with standing position `(45,41)`.
@@ -1507,8 +1558,10 @@ matched the web core with zero RAM differences. ROM SHA-256
 private full map and views are in `.tools/benchmarks/north-beach-v192-native-map/`
 and `north-beach-v192-scenes/`. A fresh reviewer recommends retaining the
 connected walls, but finds the reading nook unplanned, the rows shallow and
-repetitive, and lawns and empty pavement excessive. Full-world v192, browser
-and human visual approval remain open.
+repetitive, and lawns and empty pavement excessive. All 57 unique boundary
+pairs passed in one continuous native v192 run, both directions with
+transient-frame and menu checks (`.tools/benchmarks/world-v192-all-seams/`).
+Browser and human visual approval remain open.
 
 **Castro v191 central block, private draft.** New facades close gaps in both
 central street walls; the court notice moves to `(44,41)`, with standing point
