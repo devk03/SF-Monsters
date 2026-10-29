@@ -1332,6 +1332,35 @@ symmetric rectangle and empty top resemble a raised lawn rather than a summit.
 It remains an unintegrated construction study; a connected asymmetric contour,
 credible ascent and actual native proof are still needed.
 
+**Potrero v184 lower street-wall join, in progress.** A fail-closed
+whole-stamp transaction replaces two offset houses with three attached fronts,
+joining the existing x24–51 wall and preserving its bench and two sidewalk
+rows. It changes 38 generated metatile cells, all in Potrero; an interrupted
+grass tile was paved. Native build/BPS round trip, 115 existing world tests and
+the two targeted Potrero frontage tests passed. Two v182 ordinary Saves on
+newly occupied ground recovered with party, money, inventory, flags, chapter,
+Flash and room return preserved. Six native wall pushes blocked; both Potrero
+route seams passed transient-frame/menu checks. A 9,820-frame controller walk
+replayed in the website WASM core with zero differing RAM bytes; browser audio
+and timing remain unverified. ROM SHA-256
+`a87f0efe77655e05265f819477ad4613c6bb4c4646a302dd8fbe699385b03707`;
+private native map/player views are in `.tools/benchmarks/potrero-v184-native-map/`
+and `potrero-v184-scenes/`.
+
+A fresh independent reviewer recommended keeping the join as incremental:
+the wall now reads continuously and the sidewalk gap is fixed, but large flat
+lawns, isolated repeated rows, oversized roads and missing terraced hill and
+waterfront character remain. Whole-town art, routing and human approval remain
+open.
+
+**Twin Peaks source-fit follow-up.** A private irregular Mt Pyre source-fit
+study overlapped 28 protected lookout/bench cells and had cut edges. An
+original-contour source study had unfinished ends, conflicted with old pink
+cliffs and placed its stair against a blocked rock. Both are unintegrated,
+source-only negative evidence under `.tools/twin-asymmetric-source-fit/` and
+`.tools/twin-original-contour/`; a whole-landform replacement with clear
+landings remains necessary.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds

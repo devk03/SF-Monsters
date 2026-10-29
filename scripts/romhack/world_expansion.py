@@ -237,6 +237,9 @@ def expand(plans, manifest):
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)
+            if name=='potrero_hill':
+                from world_potrero_wall_join import furnish as join_potrero_wall
+                join_potrero_wall(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
             from world_presidio import landscape as presidio_landscape
             presidio_landscape(plan,grid,lanes,walks,occupied,token)
             from world_marina_venues import prepare as prepare_venues, furnish as furnish_venues

@@ -12,6 +12,23 @@ from world_tiles import compile_kit
 
 
 class PotreroFrontageTests(unittest.TestCase):
+    def test_lower_join_has_finished_ends_and_a_continuous_sidewalk(self):
+        manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
+        plan=next(p for p in generate(manifest) if p['world_id']=='potrero_hill')
+        catalog=compile_kit(profile=plan['tile_profile'])['catalog']
+        wall=sorted((b for b in plan['town_blocks'] if b['y']==38 and 24<=b['x']<=51),key=lambda b:b['x'])
+        self.assertEqual((wall[0]['x'],wall[-1]['x']+wall[-1]['width']),(24,52))
+        for a,b in zip(wall,wall[1:]):self.assertEqual(a['x']+a['width'],b['x'])
+        self.assertIn('left',catalog[wall[0]['style']]['closed_edges'])
+        self.assertIn('right',catalog[wall[-1]['style']]['closed_edges'])
+        self.assertTrue(any(b['style']=='bench' and (b['x'],b['y'])==(52,42) for b in plan['town_blocks']))
+        grass=catalog['grass']['tiles'][0][0]
+        for y in (42,43):
+            for x in range(24,52):
+                entry=plan['legend'][plan['rows'][y][x]]
+                self.assertFalse(entry[1],(x,y))
+                self.assertNotEqual(entry[0],grass,(x,y))
+
     def test_joined_hill_fronts_have_a_walkable_street_and_real_ends(self):
         manifest=json.loads((ROOT/'romhack/world/world.json').read_text())
         plan=next(p for p in generate(manifest) if p['world_id']=='potrero_hill')
