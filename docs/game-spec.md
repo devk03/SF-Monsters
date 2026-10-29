@@ -733,6 +733,31 @@ prompt requested simple orthogonal low-resolution ruins with stone partitions,
 walkable paths and coastal rocks; the resulting images are reference studies,
 not playable assets or evidence of native tile/palette capacity.
 
+**Private Lands End v144 candidate.** The generated map now has two different
+solid scenic basins with original joined stone rims, existing ruined masonry and
+rock, a walkable courtyard and a route toward the shore. The design remains a
+rough working candidate, not quality approval or a published site change. ROM
+SHA-256 `395b8cabd3b5f988b9f71b0360ed9ebc2969917c97c3ac96e237d397bc2bd983`,
+receipt `3abcc92099654cd09b35b4f9f5576041`. All 108 world tests, source contract,
+native build and BPS round-trip pass. Existing v142b Lands End ordinary Save
+cold-continued with position, party, inventory, money, flags and Flash preserved;
+a direct full-map comparison found zero previously walkable cells newly solid.
+The Lands End / Route16 crossing and return passed the corrected transient
+frame/menu check. A controller tour and full map are in
+`.tools/benchmarks/lands-v144-scenes/` and `lands-v144-native-map/`; the same
+13,299-frame tour replayed exactly in the web WASM core. This is not full-world
+WASM, browser timing/audio, public deployment, or old-Save coverage for every
+historical build.
+
+Fresh independent review compared that actual ROM's full map and five closeups
+to the matching ideal and v142b. Scores out of4: layout1, density1, joins1,
+planting1, district identity1, exploration2. It found a small visible
+improvement, but the pools still look pristine and rectilinear on an empty
+slab, disconnected from the coast; forest and shore remain repetitive. Next
+work must add broken basin partitions/rubble, weathered materials and a real
+coast-linked promenade, irregular rock/surf and organic planting. No visual
+human approval or full-town completion is claimed.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

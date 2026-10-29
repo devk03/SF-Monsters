@@ -423,6 +423,11 @@ def compile_kit(root=ROOT, profile='residential'):
         card('working_hall',raw,w,h,12,paving,7,deduplicate=True)
         catalog['working_hall'].update(closed_edges=['left','right'],
             architecture_type='industrial_working_hall')
+    if profile=='nature':
+        from world_baths_art import basin_rim
+        for side in ('north','south','west','east','nw','ne','sw','se'):
+            card('baths_rim_'+side,basin_rim(side,(dark,shade,light,stone)),
+                 16,16,8,paving,7)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

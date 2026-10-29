@@ -6173,6 +6173,70 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "baths_rim_north": {
+          "first": 609,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_south": {
+          "first": 610,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_west": {
+          "first": 611,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_east": {
+          "first": 612,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_nw": {
+          "first": 613,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_ne": {
+          "first": 614,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_sw": {
+          "first": 615,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_se": {
+          "first": 616,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },
