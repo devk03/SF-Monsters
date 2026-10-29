@@ -878,6 +878,25 @@ Large lawns, detached frontages and repetitive landscaping also remain. These
 are open design defects, not human approval; full-world native/WASM, browser
 and public-release gates remain open.
 
+**Private Mission v150 candidate.** The mural backing has a darker, visibly
+finished parapet and subtle side trim. The frozen Mission rows and collision
+legend are byte-for-byte identical to v149; only the art changed. ROM SHA-256
+`149c270c49d27be6d492e7037d458c9754a0a49c2f68e5e6de880e315d5a1437`,
+receipt `480808cd054140c8a54efef63beea422`. All 110 world tests, native build
+and BPS round-trip pass. A v149 ordinary Save in front of the mural continued
+with position, party, money, inventory, flags, chapter and Flash preserved. Both
+Mission boundary pairs passed corrected transient/menu checks, and the
+20,714-frame Mission tour replayed exactly in the website WASM core. Private
+actual captures and matched older views are in `.tools/benchmarks/mission-v150-wall-closeups/` and `mission-v149-wall-closeups/`; the full native map is in
+`mission-v150-native-map/`.
+
+A fresh reviewer scored layout2, density2, joins2, planting1, identity2 and
+readability3 out of4. Matched closeups confirm a clearer continuous roof cap;
+side joins and the gray wall-to-mural transition remain essentially unchanged.
+The nearby grass gap, large lawns and sparse street activity still require
+substantial work. This is visual triage, not human approval; full-world native
+and WASM, browser and public release checks remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
