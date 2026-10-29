@@ -1236,6 +1236,34 @@ individual lots. No candidate has been integrated; create varied smaller roof
 masses and prove allocation, atomic replacement, native traversal and saves
 before accepting a new block.
 
+**Castro v180 theater crossing, in progress.** Five original colored stripes
+replace the theater intersection's white crossing, using five additional
+culture metatile records (504/512) and existing palette colors. The 15 changed
+map cells remain walkable; all other generated map cells retain the same
+metatile semantics. The native build/BPS round trip, 114 existing world tests,
+targeted crossing test, an older v153 Save recovery, both Castro route seams
+with transient frames and menu, and a 5,930-frame native-to-website-WASM
+replay (zero different RAM bytes) passed. ROM SHA-256
+`07492d23acb6dd38b8812be5d1ebc017b951bf76023789f29367c4f80d03d37b`;
+private actual scenes and full map are in `.tools/benchmarks/castro-v180-scenes/`
+and `castro-v180-native-map/`. This does not verify browser audio or timing.
+
+A fresh reviewer found the crossing recognizable and recommended keeping it,
+while noting its broad flat bands. Castro still has extensive empty lawns,
+repetitive facade strips, isolated buildings and too little neighborhood
+activity. Proper deep blocks and a stronger theater focal point remain open;
+this localized visual cue is not town approval.
+
+**Mission capacity model.** A private Mission-only compaction simulation
+retained 415 records across all traced or metadata-referenced cards, map cells
+and border, leaving 97 theoretical records. It matches the current native
+mixed-use record/attribute bytes and inventories affected cards and route
+margins. The 97 is an upper bound, not proved reclaimable: dynamic writes,
+contributor contracts, primary graphics, palettes, reverse/transient seams and
+old Saves still require verification. Evidence is in
+`.tools/mission-capacity-study/card-compaction-result.json`; no profile was
+changed or compacted.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds

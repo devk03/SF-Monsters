@@ -9839,6 +9839,71 @@
           "blocked": false,
           "behavior": 0,
           "layer": 1
+        },
+        "castro_crossing_red": {
+          "first": 1011,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1011
+            ]
+          ]
+        },
+        "castro_crossing_gold": {
+          "first": 1012,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1012
+            ]
+          ]
+        },
+        "castro_crossing_green": {
+          "first": 1013,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1013
+            ]
+          ]
+        },
+        "castro_crossing_blue": {
+          "first": 1014,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1014
+            ]
+          ]
+        },
+        "castro_crossing_violet": {
+          "first": 1015,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1015
+            ]
+          ]
         }
       }
     },

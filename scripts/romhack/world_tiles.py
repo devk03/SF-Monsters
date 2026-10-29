@@ -458,6 +458,12 @@ def compile_kit(root=ROOT, profile='residential'):
              16,16,11,paving,7,floor=True)
         card('sunset_surf_alt',bytes(foam[(15-y)*16+x] for y in range(16) for x in range(16)),
              16,16,11,paving,7,floor=True)
+    if profile == 'culture':
+        # Five bright stripes use existing SF building-palette colors; asphalt
+        # remains the lower layer and each tile has ordinary walk behavior.
+        for name,color in (('red',7),('gold',10),('green',14),('blue',4),('violet',11)):
+            ink=bytes(color if 1<=x<=14 else 0 for y in range(16) for x in range(16))
+            card('castro_crossing_'+name,ink,16,16,6,asphalt,8,False,deduplicate=True)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

@@ -62,6 +62,9 @@ def furnish(plans, manifest):
         surface('curb_north',1,10,30,10)
         surface('curb_south',1,14,30,14)
         surface('crossing',14,11,18,13)
+        if district=='castro':
+            for x,color in enumerate(('red','gold','green','blue','violet'),14):
+                surface('castro_crossing_'+color,x,11,x,13)
         for left,right in ((4,6),(14,18)):
             surface('curb_cut',left,10,right,10)
             surface('curb_cut',left,14,right,14)
