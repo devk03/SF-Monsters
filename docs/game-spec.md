@@ -693,6 +693,22 @@ cliff placements in this experiment are test fixtures, not a playable map or
 evidence of a real native transition with the new terrain. Full-frame native
 and WASM tests, save safety and independent visual review remain required.
 
+A source-only Twin north-summit study tried three compositions against the
+142b map. The rectangular plateau passed the generation contract and had no
+unreachable walkable cells, but a fresh reviewer found that it reads as a
+walled pen, not a hill. A shorter open rim exposed awkward vertical ends; a
+deep rock rectangle became a broad uniform slab. None is accepted or wired
+into the game. Private source overlays and scripts are under
+`.tools/twin-north-plateau-candidate/`, `.tools/twin-north-open-ridge-candidate/`
+and `.tools/twin-north-deep-ridge-candidate/`; these are not gameplay captures.
+A private rendering study of the pinned native mountain exterior shows that
+convincing relief uses connected, irregular multi-level rock masses and grass
+landings rather than isolated bars or one rectangular wall. Next design should
+build that silhouette around the existing stops, avoiding repeated forests,
+with a winding route and clear summit destinations. Any new collision treatment,
+old-Save recovery, compiled transitions and independent actual-game review
+remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
