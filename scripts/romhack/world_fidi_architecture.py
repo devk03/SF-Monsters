@@ -21,7 +21,7 @@ def facade(spec, closed=('left','right')):
     def micro(kind,variant=0,edge=None):
         # Ground-level masonry is shared between office types. Upper stories
         # retain their own material; the shared plinth saves native graphics.
-        a=bytearray([10 if kind in ('base','door_top','door_bottom') else wall]*64)
+        a=bytearray([10 if kind=='base' or kind.startswith('door_') else wall]*64)
         def box(x0,y0,x1,y1,c):
             for y in range(max(0,y0),min(8,y1+1)):
                 for x in range(max(0,x0),min(8,x1+1)):a[y*8+x]=c
@@ -52,10 +52,21 @@ def facade(spec, closed=('left','right')):
             else:
                 box(0,2,7,3,7);box(0,2,3,3,5)
                 box(1,4,6,6,1);box(2,4,5,6,4)
-        elif kind=='door_top':
-            box(0,0,7,1,5);box(1,2,6,7,1);box(2,3,5,7,4)
-        elif kind=='door_bottom':
-            box(1,0,6,6,1);box(2,0,5,5,4);box(3,1,3,5,5);box(0,7,7,7,6)
+        elif kind.startswith('door_'):
+            _,stage,side=kind.split('_')
+            # Two 8px columns by three rows give a 16x24 entrance, scaled to
+            # the player. Mirror the frame at the right half of the opening.
+            box(0,0,7,7,1);box(2,0,7,7,4);box(2,0,2,7,5)
+            box(7,0,7,7,1)
+            if stage=='top':
+                box(0,0,7,1,5)
+                box(3,3,4,4,3)
+                if variant==1:box(2,2,7,2,5)
+                elif variant==2:box(0,0,3,2,7)
+            elif stage=='middle':box(5,4,6,5,13)
+            elif stage=='bottom':
+                box(3,5,5,6,2);box(0,7,7,7,6)
+            if side=='right':a=bytearray(a[y*8+7-x] for y in range(8) for x in range(8))
         if edge=='left':box(0,0,0,7,1)
         if edge=='right':box(7,0,7,7,1)
         return bytes(a)
@@ -71,12 +82,18 @@ def facade(spec, closed=('left','right')):
                 left=right=max(0,(tw//2-1)-(ty*tw//(2*(th-2))))
             if tx<left or tx>=tw-right:kind='empty'
             elif ty==0:kind='roof'
-            elif ty>=th-2:kind=('door_top' if ty==th-2 else 'door_bottom') if tx==tw//2 else 'base'
+            elif ty==th-4:kind='base'
+            elif ty>=th-3:
+                door_left=(tw//2//2)*2
+                if tx in (door_left,door_left+1):
+                    stage=('top','middle','bottom')[ty-(th-3)]
+                    kind='door_'+stage+('_left' if tx==door_left else '_right')
+                else:kind='base'
             elif family in (1,5,9):kind='glass'
             else:kind='window' if (tx+family)%2==0 else 'wall'
             edge=('left' if tx==0 and 'left' in closed else
                   'right' if tx==tw-1 and 'right' in closed else None)
-            variant=spec['crown'] if kind=='roof' else spec['entrance'] if kind=='base' else spec['windows']
+            variant=spec['crown'] if kind=='roof' else spec['entrance'] if kind=='base' or kind.startswith('door_') else spec['windows']
             raw=micro(kind,variant,edge)
             for dy in range(8):
                 pixels[(ty*8+dy)*width+tx*8:(ty*8+dy)*width+tx*8+8]=raw[dy*8:dy*8+8]

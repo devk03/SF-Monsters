@@ -1074,6 +1074,25 @@ is removed; its private patch is `.tools/fidi-v166-rejected-integration.patch`.
 The art generator remains a study, not shipped game art. Actual live seam,
 matching WASM, whole-world and public-release gates remain open.
 
+**FiDi v168–v170 private experiments, not released.** Moving the seven draft
+fronts nearer the road reduced the oversized apron. A 16×24 door, aligned to
+native metatiles and sharing its upper base row, fit within 491 civic metatiles;
+frames and handles replaced the earlier blank 16×32 strips. The v170 native
+build and BPS round-trip passed, and a v159 Save on newly occupied ground
+recovered with party, money, inventory, flags, chapter and Flash preserved. ROM
+SHA-256 `f33bb23df7aba678659e2e3bddbfa463200a33adf10ee24638511140b714ddb5`,
+receipt `67729ace682c41889f0227a58421d6a9`; actual private captures and full map
+are in `.tools/benchmarks/fidi-v170-scenes/` and `fidi-v170-native-map/`.
+
+Fresh reviewers found the narrower sidewalk and shorter doors improved but
+still rejected the district: the podium and entries repeat, the rest of the
+map has large vacant lawns and too few distinct towers, and visual evidence
+does not make decorative doorways functional. Only seven draft buildings were
+placed. The temporary integration is removed and preserved privately as
+`.tools/fidi-v170-rejected-integration.patch`; no public-game changes result.
+Thirty distinct approved designs, complete dense blocks, actual door contracts,
+live seams, matching WASM and release checks remain outstanding.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
