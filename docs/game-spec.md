@@ -1481,6 +1481,36 @@ paving improved but the mural remains a small framed strip beneath a blank
 wall; broad lawns, repeated shallow rows and weak Mission identity remain.
 Full-world v190 traversal, browser and human approval remain open.
 
+The v190 native tour additionally captured full backgrounds and arrival views
+for all 19 destinations, with per-map live render audit; see private
+`.tools/benchmarks/world-v190-town-capture/index.html`. The 208,844-frame
+tour replayed in the pinned website core with zero RAM differences. Full maps
+omit actors; one arrival view per destination does not satisfy the separate
+landmark/secondary-view review or browser and human acceptance gates.
+
+**Castro v191 central block, private draft.** New facades close gaps in both
+central street walls; the court notice moves to `(44,41)`, with standing point
+`(45,41)`. The linked native build, BPS round trip and all 123 world tests pass. An actual v190
+Save on newly occupied `(40,38)` cold-continued at `(40,36)` with party,
+inventory, money, flags, chapter and Flash preserved; room return passed.
+The moved notice opened and returned safely with native controls. An
+8,252-frame native walk matched the web core with zero RAM differences.
+ROM SHA-256 `c4e6f582002abbfe6002f0c70cb1db704c5087fadea33ab0e58f36423283f6c6`;
+private actual full map and views are in `.tools/benchmarks/castro-v191-native-map/`
+and `castro-v191-scenes-retry/`. A fresh reviewer recommends retaining the
+connected fronts but finds the nook unplanned, rows shallow and repetitive,
+lawns excessive and Castro-specific activity sparse. Full-world v191, browser
+and human visual acceptance remain open.
+
+**Mission full-height mural trial.** An isolated original replacement painted
+the former blank wall and preserved card IDs; linked build, BPS, old-Save
+recovery and a 6,412-frame matching web-core replay passed. Trial ROM SHA-256
+`d1ab44f19feb5ee24c47794e53d1a2ca4bad9a29e42e3712edc87f7b07e90cfe`;
+private map and scenes are under `.tools/mission-mural-isolated/.tools/benchmarks/`.
+A fresh reviewer found the full wall and joins improved, but rejected its
+generic geometric landscape and lost fine detail. More specific artwork and
+native seam/browser checks are needed; the study is not integrated.
+
 **FiDi v6 isolated native experiment.** Five original attached office fronts
 replace 14 complete residential stamps in an isolated checkout. Native build,
 BPS round trip, a real older Save recovery, both local route seams in both
@@ -1495,6 +1525,13 @@ player camera, with repetitive windows, weak street-level bases and a broad
 empty apron. The rest of the district remains sparse and residential. Refine
 the massing and readable bases; 30 distinct buildings, all-world seams,
 browser and human approval remain open. No trial art is in the game source.
+
+The isolated v8 follow-up adds roof coverage and less door-like glazing; its
+linked build/BPS and old-Save recovery pass (ROM SHA-256
+`6b29c4af50998e580fae26d448f491f62eb1b534cb3c71bc79944fc38732684b`).
+A fresh review still rejects its flat repeated fronts, weak roof joins and
+empty sidewalk. Seams, WASM and browser checks are not claimed; evidence is
+under `.tools/fidi-v8-isolated/.tools/benchmarks/`.
 
 **FiDi v7 and Lands End source studies.** The isolated v7 trial shortens the
 five FiDi buildings to 6–8 metatiles; its linked build/BPS and old-Save
