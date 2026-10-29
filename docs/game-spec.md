@@ -1144,6 +1144,27 @@ needed; it overlaps the protected northwest service area, so replacing existing
 frontage requires explicit service/access and old-save checks, not incidental
 new stamps. Preserve the mural viewpoint at (10,29). No redesign is claimed.
 
+**FiDi v177 native block trial, not retained.** Four original 8px-motif
+buildings (masonry, glass, ribbed and low podium) were compiled as a joined
+private street wall. The trial's civic kit used 421 metatiles and 165 shared
+primary graphics; linked build and BPS round trip passed. A v159 ordinary Save
+on the new wall recovered with party, money, inventory, flags, chapter, Flash
+and room return preserved. The 114 world tests and FiDi–Route 13 native seam
+with transient frames and menu passed. ROM SHA-256
+`38d0e1ae64d5e3ebf2a5a7a5bdf32f8d0efcca41741b8cdfe0ac0e7b30402175`.
+Private full-map and player captures are in `.tools/benchmarks/fidi-v177-native-map/`
+and `fidi-v177-scenes/`.
+
+A fresh reviewer rated density 1.5/4, variation 1/4, native integration 2/4,
+edge/continuity 2/4, player readability 1.5/4 and ideal fidelity 1/4. The
+joined wall helps, but it reads as an oversized flat billboard with repeated
+implied doors, weak roof depth and abrupt scale changes beside smaller houses.
+Integration was reverted and saved in `.tools/fidi-v177-rejected-integration.patch`;
+original study source remains under `.tools/fidi-block-study/`. Redesign
+individual bases, roof/side planes and scale before another native trial.
+Thirty distinct acceptable towers, full route/WASM gates and visual approval
+remain open.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
