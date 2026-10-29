@@ -1120,6 +1120,30 @@ contact sheet are `.tools/fidi-landmarks-v1-rejected.py` and
 compiled metatile budget nor a playable improvement; 30 distinct high-quality
 buildings, attached street blocks, functional entrances and seam checks remain.
 
+**FiDi connected-block source experiments.** A four-building study used
+masonry, glass, a ribbed facade and a low podium. Its original source estimate
+of 285 additional canonical 8px graphics exceeds the 193 free primary slots
+before connection margins. Aligning recurring motifs to 8px reduced the estimate
+to 15, and a hybrid to 29, but sacrificed visual richness. A fresh reviewer
+found the original sheet strongest and the hybrid useful only as an experimental
+placement study: repetitive shared podium and crowns, a checkerboard glass
+face, flat planes, harsh outlines and unresolved entries remain. Private sheets
+and source are under `.tools/fidi-block-study/`. These are source estimates,
+not compiled metatile, margin or native-scene results. No study is integrated;
+30 distinct downtown sprites remain unfinished.
+
+**Mission current v176 review.** The actual native full map and five player
+views were captured from ROM SHA-256
+`36c1692fc0c3731837305a469f67f1d82ad2fef9619fe0923654a7311efceea2`
+in `.tools/benchmarks/mission-v176-native-map/`,
+`mission-v176-current-scenes/` and `mission-v176-extra-scenes/`. A fresh review
+against the Mission ideal scored layout 2/4, density 1/4, architecture 2/4,
+sidewalks 2/4, identity 1/4 and readability 3/4. Empty grass and paving,
+repetitive rows and a small framed mural remain. A deeper west mural block is
+needed; it overlaps the protected northwest service area, so replacing existing
+frontage requires explicit service/access and old-save checks, not incidental
+new stamps. Preserve the mural viewpoint at (10,29). No redesign is claimed.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
@@ -1176,7 +1200,10 @@ replacement remain open.
 
 **North Beach northern frontage v176, in progress.** Four façades extend
 and join the existing northern street wall beside the reading court; its sign,
-checkpoint and NPC positions remain unchanged. The native build and BPS round
+checkpoint and NPC positions remain unchanged. Comparing all v173 and v176
+frozen generated JSON files found only North Beach changed; its access points,
+background and coordinate events, NPCs, connections and viewpoints match.
+The native build and BPS round
 trip passed. An ordinary v173 Save at (63,3), now inside the new wall, recovered
 to (63,5) with party, money, inventory, flags, chapter and Flash preserved; room
 return passed. The 113 existing world tests and a targeted court/party-wall
