@@ -53,12 +53,15 @@ def main():
                         help='Isolated private native-host checkout for independent experiments')
     parser.add_argument('--connection-atlas', action=argparse.BooleanOptionalAction, default=True,
                         help='Faithful cross-profile connection rendering (enabled by default)')
+    parser.add_argument('--prototype-borrowed-primary', action='store_true', help='Private experimental native-primary restore; never publish without transition QA')
     parser.add_argument('--modules-root', type=Path, default=MODULES,
                         help='Use an isolated package copy for native QA')
     parser.add_argument('--playtest-module', help='Build an explicitly isolated fresh-game module fixture')
     parser.add_argument('--service-fixture', action='store_true', help='Isolated native healing/shop/full-bag bench')
     parser.add_argument('--scenario', choices=['ready', 'locked', 'completed', 'weak-party'], default='ready')
     args = parser.parse_args()
+    if args.prototype_borrowed_primary and (not args.connection_atlas or args.service_fixture or args.playtest_module):
+        parser.error('Borrowed-primary experiment requires a normal connection-atlas build')
     if args.service_fixture and args.playtest_module:
         parser.error('Choose either a module or town-service fixture')
     # Native-derived cards read immutable base resources during generation.
@@ -159,7 +162,7 @@ def main():
         raise ValueError('Shared SF primary art requires the connection atlas loader')
     if args.connection_atlas:
         from world_seams import apply_seams
-        ledger += apply_seams(engine, plans)
+        ledger += apply_seams(engine, plans, args.prototype_borrowed_primary)
         inputs['connection-atlas.json'] = (engine/'sf-world-seams.json').read_bytes()
     guard = engine / 'src/sf_save_guard.h'
     magic = fixture['save_magic'] if fixture else manifest['native']['save_magic']
@@ -170,8 +173,8 @@ def main():
     (engine / 'sf-world-overlay.json').write_text(json.dumps(ledger, indent=2) + '\n')
     name = 'sf-town-services-qa' if args.service_fixture else 'sf-module-playtest' if fixture else manifest['native']['file_name']
     version = ('0.0.84-town-service-qa' if args.service_fixture else f'0.0.81-module-playtest-{args.playtest_module}-{args.scenario}'
-               if fixture else manifest['version'])
-    inputs['build-mode.json'] = (json.dumps({'fixture': fixture, 'connection_atlas':args.connection_atlas}, sort_keys=True) + '\n').encode()
+               if fixture else '0.0.143-twin-borrowed-primary-experiment' if args.prototype_borrowed_primary else manifest['version'])
+    inputs['build-mode.json'] = (json.dumps({'fixture': fixture, 'connection_atlas':args.connection_atlas, 'prototype_borrowed_primary':args.prototype_borrowed_primary}, sort_keys=True) + '\n').encode()
     host_make(engine, 'FILE_NAME=' + name, 'TITLE=' + ('SF MODULE QA' if fixture else 'SF WORLD TEST'),
               'GAME_CODE=' + manifest['native']['game_code'])
     target, elf = engine / (name + '.gba'), engine / (name + '.elf')
@@ -215,6 +218,7 @@ def main():
     native_elf = freeze_artifacts(target, elf, output, run)
     receipt = {'version': version, 'profile': 'module-playtest' if fixture else manifest['profile'],
                'experimental_connection_atlas':args.connection_atlas,
+               'prototype_borrowed_primary':args.prototype_borrowed_primary,
                'fixture': fixture,
                'target_sha256': digest(target), 'base_sha256': digest(base),
                'native_elf': native_elf,

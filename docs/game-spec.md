@@ -643,6 +643,24 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Fresh independent review and private terrain experiment.** A fresh reviewer
+inspected all 19 current 142b town/ideal comparison sheets; the prioritized
+composition findings are recorded in [the visual review baseline](world/visual-review-baseline-2026-10-28.md).
+Twin Peaks and Lands End remain the leading nature redesigns. No town has human
+visual approval. This is the current durable goal; the goal tool cannot rewrite
+an unfinished objective card, whose deadline is obsolete.
+
+The opt-in `--prototype-borrowed-primary` build relocates Twin Peaks atlas
+graphics that conflict with ten native terrain slots, and queues pinned native
+graphics restoration before scene-owned graphics. Private experiment 143 has
+ROM SHA-256 `98eeab77d31af668ee86d05930c3265489af13c3705a2d60bff91d979378911e`;
+104 world tests, build and BPS round-trip passed, and a 142b Twin Peaks ordinary
+Save cold-continued with its position, state and movement intact. The Twin Peaks
+to Route 09 crossing and return passed a 16-frame native transient audit and
+menu restoration; other crossings remain untested. This experiment has not
+changed the actual terrain or proved all transition frames, browser
+behavior, animation safety or visual quality; it must not be published.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

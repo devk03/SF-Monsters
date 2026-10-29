@@ -95,3 +95,28 @@ Target at least3/4 in every applicable dimension, no unresolved major visual
 defect, and the user's acceptance of actual comparisons. Estimates alone cannot
 complete the goal. The full objective, hardware/save safeguards and completion
 gates remain in [game-spec.md §15.1](../game-spec.md#151-objective-and-completion-rule).
+
+
+## Fresh independent follow-up: current 142b
+
+A new reviewer independently inspected all 19 paired sheets from the current
+142b capture set. ROM SHA-256 `5f3d894e5ed1f2744b274e3e3a64bfe80e80ca95dcbcda5088bd87f3283a1e36`.
+Each sheet pairs the ideal with the full native map and four player-scale views;
+private paths are `.tools/benchmarks/fresh-town-review-2026-10-28-current142/`.
+These exterior stills do not verify interiors, dialogue, traversal or collision.
+
+Highest priorities: **Twin Peaks** needs two readable raised summits, a lower
+saddle and uphill links; **Lands End** needs a rocky headland, connected Baths
+basins and a stepped descent. Across urban districts, shallow frontage strips,
+large empty lawns and tiny isolated landmarks remain common.
+
+Next composition targets: Dogpatch enclosed work court and quay; Potrero
+terraces and stairs; Mission mural block; Castro theater plaza; Sunset dunes;
+Golden Gate Park lake, bridge and conservatory garden; Marina slips and green;
+Pacific Heights elevated garden and mansion; Noe commercial/playground court;
+Mission Bay inlet and larger modern buildings; Giants Stadium connected gate,
+stands and field; Financial District deeper offices and plaza; North Beach
+piazza and uphill passage; Treasure Island ferry/warehouse court; Sutro Tower
+ridge compound; Angel Island ferry, campus and League approach; Presidio campus
+green and forest transition. Each is a redesign suggestion, not an implemented
+or approved feature. Re-review actual changed scenes with a fresh reviewer.

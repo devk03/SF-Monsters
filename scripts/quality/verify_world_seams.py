@@ -188,7 +188,7 @@ class RenderAudit:
         secondary_graphics,=self.unpack(layout['secondary']+4,'I')
         own=self.primary_art(secondary_graphics)
         required_own={word&1023 for identifier in set(cell&1023 for cell in layout['cells'])
-                      if identifier>=512 for word in self.original_record(layout,identifier)[0]
+                      if identifier>=512 and not lookup[identifier] for word in self.original_record(layout,identifier)[0]
                       if word&1023<512 and word>>12>=6}
         if not required_own<=own.keys():raise ValueError('Linked own map references unloaded primary art')
         for slot in required_own:
@@ -201,9 +201,10 @@ class RenderAudit:
         for identifier in set(cell&1023 for cell in layout['cells']):
             if identifier<512:continue
             words,_,graphics,original_palettes=self.original_record(layout,identifier)
-            for word in words:
-                slot=word&1023;bank=word>>12
-                if self.pixels(word,vram[slot*32:(slot+1)*32],palettes[bank*32:(bank+1)*32])!=self.source_pixels(word,graphics,original_palettes):
+            active_words,_=active(identifier)
+            for word,rendered in zip(words,active_words):
+                slot=rendered&1023;bank=rendered>>12
+                if self.pixels(rendered,vram[slot*32:(slot+1)*32],palettes[bank*32:(bank+1)*32])!=self.source_pixels(word,graphics,original_palettes):
                     raise ValueError(owner+': authored SF graphics/colors differ from linked art')
         margin_cells=0
         margin_checks=[];owners={}
