@@ -1110,6 +1110,16 @@ few distinct skyscrapers. The prototype integration was removed and is saved
 privately as `.tools/fidi-v171-rejected-integration.patch`. A properly joined,
 distinctive and playable downtown remains outstanding.
 
+**FiDi landmark source study, not integrated.** Four original civic-palette
+studies explored different silhouettes with a source-only estimate of 22 extra
+8px graphics before connection margins. A fresh reviewer found the stepped
+massing somewhat promising but rejected the shared boxy podiums, flat repetitive
+windows, shallow crowns and striped slab. The privately preserved generator and
+contact sheet are `.tools/fidi-landmarks-v1-rejected.py` and
+`.tools/benchmarks/fidi-landmarks-v1/contact-sheet.png`. This is neither a
+compiled metatile budget nor a playable improvement; 30 distinct high-quality
+buildings, attached street blocks, functional entrances and seam checks remain.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
@@ -1131,7 +1141,10 @@ review remain mandatory. Reproduce with `python3 scripts/quality/audit_urban_for
 segments add ten buildings, connecting a northern gap and introducing two
 street-facing rows with sidewalk approaches. The native build and BPS round trip
 succeeded; 113 world tests passed and the North Beach to Route 17 seam
-passed a native transient-frame and menu check. Three v159 saves on newly
+passed a native transient-frame and menu check. The five-scene native
+controller walk replayed in the pinned website WASM core with 0 differing RAM
+bytes across 10,559 frames; this does not establish browser or audio quality.
+Three v159 saves on newly
 occupied tiles cold-continued safely, with
 party, inventory, money, flags and room return preserved. The private native
 captures are in `.tools/benchmarks/north-beach-v173-scenes/` and the full map
