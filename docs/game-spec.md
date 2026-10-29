@@ -1282,6 +1282,21 @@ reading nook is a lone planter in a large paved area, twin green bays repeat,
 and substantial grass gaps and detached building islands remain. This is a
 local fix, not district approval or completion.
 
+**North Beach v182 reading nook, in progress.** An existing bench and street
+tree now furnish the relocated nook. The native build/BPS round trip, 115 world
+tests, two v181 ordinary Save recoveries on new furniture footprints, six
+native collision pushes, all 26 court walks and notices, and the Route 17
+transient seam/menu passed. A 7,544-frame native walk replayed in the pinned
+website WASM core with zero differing RAM bytes; browser/audio quality remains
+unverified. ROM SHA-256
+`bbc50798e53e9c93cd784c31182320b72210a0c21cd201aeb5124cd04cd5bcb4`;
+private actual scenes and full map are under
+`.tools/benchmarks/north-beach-v182-scenes/` and `north-beach-v182-native-map/`.
+A fresh reviewer found the seating area clearer, with no furniture-to-furniture
+clipping in the stills; empty lawns, detached repeated strips and sparse street
+life remain the district's main problems. This is a local improvement, not
+approval of the neighborhood.
+
 **Mission profile and roof v3 studies.** A private source-only profile model
 remaps 415 records and 101 traced cards while checking all 6,144 Mission cells,
 used legend entries, border and source seam mappings; omitted catalog/dynamic

@@ -113,3 +113,14 @@ def furnish(plan, stamp, grid, token, lanes, occupied, cards, passage_cells):
         for x in range(left, right):
             if (x, y) not in protected and not plan['legend'][grid[y][x]][1]:
                 grid[y][x] = token('brick_walk', x, y)
+
+    # A bench and a tree make the reading nook a place to linger. Keep the
+    # notice standing tile and its approach clear, including actor ranges.
+    for style,x,y in (('bench',56,7),('street_tree',62,7)):
+        card=cards[style]
+        cells={(x+dx,y+dy) for dy,row in enumerate(card['tiles']) for dx,_ in enumerate(row)}
+        if cells & (actors | events | checkpoints | set(lanes) | set(occupied)):
+            raise ValueError('North Beach reading nook furniture conflicts: '+style)
+        if not stamp(style,x,y,shoulder=True,passage=True):
+            raise ValueError('North Beach reading nook furniture cannot fit: '+style)
+        plan.setdefault('expanded_details',[]).append(dict(name=style,x=x,y=y))
