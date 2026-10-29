@@ -60,7 +60,10 @@ def furnish(plan,grid,cards,stamp,token,lanes):
         sand=chr(0x800+0x124);plan['legend'][sand]=[0x124,False,3]
         for y in range(35,45):
             for x in range(58,75):
-                if abs(x-66)+abs(y-40)<=6:grid[y][x]=sand
+                # Dirt follows a diamond-shaped base path around a grass
+                # center, with a small pitcher's mound.
+                distance=abs(x-66)+abs(y-40)
+                if distance in (4,5) or (x,y)==(66,40):grid[y][x]=sand
         paint('brick_walk',left,45,right,46)
         for x in (54,58,62,72,76):put('bench',x,33)
         for x in (54,78):put('street_tree',x,39)

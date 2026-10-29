@@ -28,6 +28,16 @@ of actual in-game screenshots and the corresponding ideal. Reviewers should
 identify remaining gaps and must not treat concept art as implemented gameplay.
 Continue across the town queue; a single improvement is not approval of a town.
 
+The latest urban-layout direction supersedes earlier garden-court assumptions:
+Dogpatch, Potrero Hill, Mission, Castro, Outer Sunset and North Beach need
+continuous attached buildings along city blocks, with streets around solid
+blocks rather than frequent open alleys. Replace large urban grass lots with
+district-appropriate blocks; retain a small North Beach park and coastal nature
+only where they make geographic sense. Vary architectural families and color
+rhythms between districts. Financial District needs prominent clusters of tall
+office buildings. Preserve Angel Island's forests, and keep Sutro Tower and
+Treasure Island's character while addressing separately identified defects.
+
 Finish a cohesive world before independently assigned gym/mission encounters:
 
 - All19destinations, including Presidio, have96×64footprints:6144metatiles each,

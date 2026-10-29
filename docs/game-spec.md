@@ -989,6 +989,36 @@ planting, activity and denser blocks are still required. Do not treat this
 microfix as a composition milestone or user approval. Broader native seams,
 matching WASM and public release checks remain open.
 
+**Private Ballpark v159 candidate.** The southeast field now uses an outlined
+dirt base path and grassy center instead of a solid sand diamond. A v158
+grandstand experiment was rejected by independent review: it looked like a
+long repetitive fence and remained disconnected from the entrance. Its private
+captures and prototype remain in `.tools`; it is not part of v159. Native build
+and BPS round-trip pass. A v157 ordinary Save near the field continued with
+position, movement, party, money, inventory, flags, chapter and Flash preserved.
+ROM SHA-256 `55e8e40fcc6edcdda9452b02d5ebe89ccae1f918879ac40fe43c8c2e27952992`,
+receipt `7419b018c2a040d39765d56873b16218`. Current gameplay captures and full
+native map are private in `.tools/benchmarks/ballpark-v159-scenes/` and
+`ballpark-v159-native-map/`. All 111 world tests pass.
+
+A fresh independent reviewer scored layout1.5, density1, joins1.5, planting0.5,
+identity1 and readability2.5 out of4. The diamond reads better on the full map,
+but gameplay still shows a largely empty field; the gate is detached and no
+stadium enclosure, real fan plaza or waterfront destination exists. A coherent
+ballpark composition is a major outstanding requirement, not user approval.
+Full-world native and matching WASM traversal and public release checks remain.
+
+**Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
+Castro, Outer Sunset and North Beach should have buildings attached along each
+street block, with routes around blocks rather than routine pedestrian alleys.
+Broad vacant lawns are inappropriate in these urban districts; North Beach may
+retain a small park and Outer Sunset its actual coastal edge. Districts need
+distinct building families and color rhythms, not the same repeated house mix.
+Financial District needs substantially more prominent tall office buildings.
+Angel Island remains forested; preserve the existing direction of Sutro Tower
+and Treasure Island while fixing individual defects. These are new acceptance
+requirements, not claims that current maps satisfy them.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
