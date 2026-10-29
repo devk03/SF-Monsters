@@ -709,6 +709,22 @@ with a winding route and clear summit destinations. Any new collision treatment,
 old-Save recovery, compiled transitions and independent actual-game review
 remain open.
 
+A further source-only stepped Twin ridge has visible clipped elbow joins and
+separate blocks; a fresh independent reviewer judged it unready for native
+playtest (`.tools/twin-north-stepped-ridge-candidate/`). Keep the route/terrain
+work in progress rather than treating that sketch as a hill.
+
+A first Lands End Baths study explored paired pools and ruined masonry, then
+moved the footprint nearer the sea. Its source-only preview remains too small
+and reads as modern identical swimming pools on a flat slab. A fresh reviewer
+identified the missing varied basin compartments, broken stone dividers,
+weathered walls, narrow promenade, irregular rocky shoreline and softer tree
+edge. Preserve the study in `.tools/lands-baths-candidate/`; it is not part of
+the game. A reachability check caught the first waterfront footprint blocking a
+legacy shore approach, so the later prototype left that approach clear; native
+collision and old-Save recovery are still untested. The next Baths design needs
+to join a larger ruin complex to the actual coast and demonstrate those gates.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
