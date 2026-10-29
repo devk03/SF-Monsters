@@ -1159,6 +1159,21 @@ Beach commercial/civic character. These rows are not approval of the town or
 proof of overall visual parity. FiDi's approximately 30 distinct attached tower
 designs remain a separate outstanding requirement.
 
+**North Beach v175 court experiment, not retained.** A private trial added two
+attached storefronts and connected a court's paving. Its native build and patch
+round trip passed; an ordinary v173 save on newly occupied ground cold-continued
+safely, and a targeted test preserved the existing court interaction and its
+walkable approach. ROM SHA-256 `e95130c76877f3cda40b6fbc26b9df93929e03a8f83bfc4e6be3ce59b27c6d0e`.
+The full map and actual scenes are private under
+`.tools/benchmarks/north-beach-v175-native-map/` and `north-beach-v175-scenes/`.
+A fresh reviewer comparing the expanded ideal found some pavement improvement,
+but the added frontage remains an isolated fragment in a broad lawn, without
+the continuous blocks or enclosed square requested. Integration was reverted;
+the trial is preserved in `.tools/north-beach-v175-rejected-integration.patch`.
+Redesign the whole court and surrounding block as a coherent composition rather
+than adding another isolated row. Native/WASM traversal and user approval of a
+replacement remain open.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
