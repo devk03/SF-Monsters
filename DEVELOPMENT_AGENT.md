@@ -34,9 +34,12 @@ continuous attached buildings along city blocks, with streets around solid
 blocks rather than frequent open alleys. Replace large urban grass lots with
 district-appropriate blocks; retain a small North Beach park and coastal nature
 only where they make geographic sense. Vary architectural families and color
-rhythms between districts. Financial District needs prominent clusters of tall
-office buildings. Preserve Angel Island's forests, and keep Sutro Tower and
-Treasure Island's character while addressing separately identified defects.
+rhythms between districts. Financial District needs approximately 30 distinct
+building sprites with different silhouettes and façades, readable at the game's
+GBA pixel scale and composable into attached downtown blocks. Color changes
+alone do not count as different designs. Preserve Angel Island's forests, and
+keep Sutro Tower and Treasure Island's character while addressing separately
+identified defects.
 
 Finish a cohesive world before independently assigned gym/mission encounters:
 

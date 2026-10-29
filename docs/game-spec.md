@@ -1034,13 +1034,29 @@ public game do not include these prototypes. Future work needs individually
 bounded roof planes and large, joined downtown bases designed at native pixel
 scale, with much less empty ground and verified connection budgets.
 
+**FiDi 30-sprite source study.** `world_fidi_architecture.py` is a private
+source-art experiment, not an integrated building set. It generates 30 draft
+images and four exposed-edge variants each. A fresh reviewer of an earlier
+sheet identified only about three recognizable families and rejected it as
+meeting the requested variety or visual quality. A follow-up uses shared 8px
+modules and varied footprints; its latest draft sheet is private at
+`.tools/benchmarks/fidi-30-concepts-v4/contact-sheet.png`, and remains too
+repetitive and flat for integration. `--budget` estimates 49 additional unique
+8px graphics versus the current civic kit, with 193 primary slots free before
+connection margins. This is not a compiled metatile, live-seam or quality
+check. Thirty genuinely distinct, readable native-scale buildings with usable
+joined ends are still required; the prototype does not prove that requirement.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
 Broad vacant lawns are inappropriate in these urban districts; North Beach may
 retain a small park and Outer Sunset its actual coastal edge. Districts need
 distinct building families and color rhythms, not the same repeated house mix.
-Financial District needs substantially more prominent tall office buildings.
+Financial District needs approximately 30 distinct building sprite designs,
+with varied silhouettes and façades at the game's GBA pixel scale, composable
+into attached blocks; color-only changes do not count as distinct designs.
+It also needs substantially more prominent tall office buildings.
 Angel Island remains forested; preserve the existing direction of Sutro Tower
 and Treasure Island while fixing individual defects. These are new acceptance
 requirements, not claims that current maps satisfy them.
