@@ -654,6 +654,12 @@ actual linked-resource and transition checks before placing the plateau. Preserv
 the two existing park paths, gym bindings and ordinary-Save recovery; the study's
 old west-port geometry also needs correction against the current manifest.
 No Twin Peaks geometry, rendering or visual approval changed in this check.
+Follow-up source liveness check: all310industrial primary graphics are referenced
+by at least one industrial map (Dogpatch304, Treasure Island111, route_01 33;
+counts overlap). Simple whole-profile dead-art pruning therefore cannot recover
+the six slots. Per-map loading might reclaim space, but these counts exclude
+connection margins and do not prove that transitions restore native graphics;
+those must be verified before changing allocation. No artwork was simplified.
 
 **October28 refined working goal — all-town improvement with fresh visual review.**
 Continue redesigning ALL19destinations (18campaign stops plus Presidio) into
