@@ -1488,6 +1488,28 @@ tour replayed in the pinned website core with zero RAM differences. Full maps
 omit actors; one arrival view per destination does not satisfy the separate
 landmark/secondary-view review or browser and human acceptance gates.
 
+The current v191 capture now includes all 19 background maps, arrival views,
+and two controller-walked named viewpoints per destination, without navigation
+failures. Private gallery: `.tools/benchmarks/world-v191-viewpoints/index.html`;
+ROM SHA-256 `c4e6f582002abbfe6002f0c70cb1db704c5087fadea33ab0e58f36423283f6c6`.
+Those images are implementation evidence, not completed independent reviews
+or human acceptance; the maps omit actors.
+
+**North Beach v192 central block, private draft.** Four new facades close
+both central frontage gaps and a fifth existing shop is moved as a complete
+stamp. The reading notice moves to `(44,41)`, with standing position `(45,41)`.
+Native build, BPS round trip and 124 world tests pass. A real v191 Save on
+newly occupied `(30,38)` cold-continued at `(30,36)`, preserving party, money,
+inventory, flags, chapter and Flash; room return passed. The relocated notice
+opened and returned safely with native controls. A 12,368-frame native walk
+matched the web core with zero RAM differences. ROM SHA-256
+`b48797ec224247f7f141af2dbe03f316aa84aab780629c96e094f268c5a67d1a`;
+private full map and views are in `.tools/benchmarks/north-beach-v192-native-map/`
+and `north-beach-v192-scenes/`. A fresh reviewer recommends retaining the
+connected walls, but finds the reading nook unplanned, the rows shallow and
+repetitive, and lawns and empty pavement excessive. Full-world v192, browser
+and human visual approval remain open.
+
 **Castro v191 central block, private draft.** New facades close gaps in both
 central street walls; the court notice moves to `(44,41)`, with standing point
 `(45,41)`. The linked native build, BPS round trip and all 123 world tests pass. An actual v190
@@ -1511,6 +1533,14 @@ A fresh reviewer found the full wall and joins improved, but rejected its
 generic geometric landscape and lost fine detail. More specific artwork and
 native seam/browser checks are needed; the study is not integrated.
 
+An isolated community-themed follow-up (ROM SHA-256
+`2a8f69a9ff4de0bad336c8aac489787d8e297ee570389e859c527d2c000b58ae`)
+passed linked build/BPS, an older-Save recovery and a 6,412-frame matching
+web-core replay. A fresh reviewer found better full-wall coverage and theme,
+but rejected the stick-like figures, cropped subject and flat geometric art.
+Native scenes are in `.tools/mission-mural-isolated/.tools/benchmarks/community-mural-scenes/`;
+no art from this trial is integrated, and seam/browser acceptance is open.
+
 **FiDi v6 isolated native experiment.** Five original attached office fronts
 replace 14 complete residential stamps in an isolated checkout. Native build,
 BPS round trip, a real older Save recovery, both local route seams in both
@@ -1532,6 +1562,14 @@ linked build/BPS and old-Save recovery pass (ROM SHA-256
 A fresh review still rejects its flat repeated fronts, weak roof joins and
 empty sidewalk. Seams, WASM and browser checks are not claimed; evidence is
 under `.tools/fidi-v8-isolated/.tools/benchmarks/`.
+
+An isolated v9 trial (ROM SHA-256
+`88c0e6d1a806cab23d7dae238f74806bff4dc9b3b3e8d0fe0a96742eec6aaf00`)
+passed linked build and BPS, with 452 civic records and 179 own primary
+graphics before margins. A fresh reviewer rejected its blank street-level
+walls, repeated roof bands and oversized pavement despite fewer fake doors.
+Save, seams, WASM, browser and human approval are not claimed for v9; actual
+private views are under `.tools/fidi-v9-isolated/.tools/benchmarks/`.
 
 **FiDi v7 and Lands End source studies.** The isolated v7 trial shortens the
 five FiDi buildings to 6–8 metatiles; its linked build/BPS and old-Save

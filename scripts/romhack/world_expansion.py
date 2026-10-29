@@ -244,6 +244,9 @@ def expand(plans, manifest):
                 join_mission_court(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
                 from world_mission_mural_street import furnish as join_mural_street
                 join_mural_street(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
+            if name=='north_beach':
+                from world_north_beach_central_block import furnish as join_north_beach_central
+                join_north_beach_central(plan,grid,cards,token,lanes,walks,occupied,sea,shore,passage_cells)
             if name=='castro':
                 from world_castro_block_join import furnish as join_castro_block
                 join_castro_block(plan,grid,cards,token,lanes,walks,occupied,sea,shore,passage_cells)
