@@ -10,6 +10,7 @@ POOLS=({(x,y) for y in range(26,32) for x in range(20,26)},
        {(x,y) for y in range(27,31) for x in range(28,34)})
 RUINS=((20,24),)
 ROCKS=((30,24),)
+TRAIL_CROSSING={(x,32) for x in (15,16,17)}
 
 
 def prepare(plan, lanes, protected):
@@ -19,7 +20,10 @@ def prepare(plan, lanes, protected):
         raise ValueError('Sutro Baths landmark overlaps a route or protected area')
     for key in ('access_points','bg_events','coord_events','npcs'):
         for event in plan.get(key,[]):
-            if (event['x'],event['y']) in RESERVE:
+            rx,ry=event.get('range_x',0),event.get('range_y',0)
+            occupied={(event['x']+dx,event['y']+dy)
+                      for dx in range(-rx,rx+1) for dy in range(-ry,ry+1)}
+            if occupied & (RESERVE|TRAIL_CROSSING):
                 raise ValueError('Sutro Baths reservation covers an existing event')
     return reserve
 
@@ -27,7 +31,8 @@ def prepare(plan, lanes, protected):
 def furnish(plan, grid, cards, token, reserve):
     if plan['world_id']!='lands_end':return
     if not reserve or not reserve<=RESERVE:raise ValueError('Reserve Sutro Baths before forest packing')
-    patches={point:token('paving' if point[1]==32 or (point[1] in (25,26,31,32) and point[0]>=19) or point[0] in (19,26,27,34) else 'grass') for point in reserve}
+    patches={point:token('baths_walk',*point) if point[1]==32 or (point[1] in (25,26,31,32) and point[0]>=19) or point[0] in (19,26,27,34) else token('grass') for point in reserve}
+    patches.update({point:token('baths_walk',*point) for point in TRAIL_CROSSING})
     legend={}
     for pool in POOLS:
         for x,y in pool:
@@ -35,7 +40,11 @@ def furnish(plan, grid, cards, token, reserve):
             west=(x-1,y) not in pool;east=(x+1,y) not in pool
             side=('n' if north else 's' if south else '')+('w' if west else 'e' if east else '')
             side={'n':'north','s':'south','w':'west','e':'east'}.get(side,side)
+            if side in ('north','south') and x%3==1:side+='_weathered'
             patches[x,y]=token('baths_rim_'+side if side else 'scenic_sea')
+    # A low internal wall subdivides the smaller old basin; both water and the
+    # wall were already solid, so this cannot create a new blocked save tile.
+    for y in (28,29):patches[30,y]=token('baths_rim_west')
     rows=cards['bath_ruins']['tiles']
     blocks=[]
     for style,x,y in [('bath_ruins',x,y) for x,y in RUINS]+[('rocks',x,y) for x,y in ROCKS]:

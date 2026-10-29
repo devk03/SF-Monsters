@@ -6237,6 +6237,30 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "baths_rim_north_weathered": {
+          "first": 617,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_rim_south_weathered": {
+          "first": 618,
+          "width": 1,
+          "height": 1,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
+        },
+        "baths_walk": {
+          "first": 619,
+          "width": 2,
+          "height": 2,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },

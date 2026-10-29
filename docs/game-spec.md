@@ -758,6 +758,30 @@ work must add broken basin partitions/rubble, weathered materials and a real
 coast-linked promenade, irregular rock/surf and organic planting. No visual
 human approval or full-town completion is claimed.
 
+**Private Lands End v145 candidate.** The Baths path crosses the existing
+trail in a continuous neutral-gray surface; stone tiles have sparse weathering
+and the smaller basin has an internal partition. Original NPC roaming ranges
+are now protected in the reservation. This does not finish the Baths or coast.
+ROM SHA-256 `b73b4768ba427ba8920aa5e8c6ba397289c59844daa85f6bf0ff63ab02fa6572`,
+receipt `6498266dec454b1d86620d022a4c7c24`. All 108 world tests, compiled
+native build and BPS round-trip pass. A v144 ordinary Save at the courtyard
+cold-continued with position, party, money, inventory, flags and Flash intact;
+source comparison found zero v144 walkable Lands End cells newly solid. The
+Lands End / Route16 boundary passed the corrected transient/menu audit, and
+the 14,354-frame Lands End controller tour replayed exactly in the website
+WASM core. Actual full map and closeups are private under
+`.tools/benchmarks/lands-v145-native-map/` and `lands-v145-baths-closeups/`.
+
+A fresh independent reviewer scored layout2, density1, joins1, planting1,
+identity1 and readability2 out of4. The connected path and small partition
+improve v144, but the path still terminates abruptly at the coast and the
+partition floats; the pristine pools, straight seawall, fragmented cliffs and
+uniform forest remain far from the ideal. Next redesign: an interconnected
+cluster of weathered compartments with finished wall joins, a real rocky coast
+and deliberate overlook, plus irregular vegetation and legible trails. These
+are open visual requirements, not human approval. Full-world continuous native
+and WASM circuits, browser behavior and public release remain unverified.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and

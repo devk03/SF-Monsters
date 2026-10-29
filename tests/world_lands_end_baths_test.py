@@ -30,6 +30,12 @@ class LandsEndBathsTests(unittest.TestCase):
             self.assertIn(point,seen)
         for pool in POOLS:
             for x,y in pool:self.assertTrue(legend[rows[y][x]][1],(x,y))
+        # The promenade actually crosses the pre-existing trail; it must not
+        # become two visually disconnected strips or block that route.
+        crossing=[legend[rows[32][x]] for x in range(14,20)]
+        from world_tiles import compile_kit
+        walk={tile for row in compile_kit(profile='nature')['catalog']['baths_walk']['tiles'] for tile in row}
+        self.assertTrue(all(cell[0] in walk and not cell[1] for cell in crossing))
         self.assertEqual([(n['x'],n['y']) for n in plan['npcs']],[(12,9),(14,37),(65,41)])
 
     def test_reserved_landmark_rejects_a_route_or_event_conflict(self):
@@ -37,5 +43,8 @@ class LandsEndBathsTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'overlaps'):
             prepare(p,{(20,26)},set())
         p['npcs']=[{'x':20,'y':24}]
+        with self.assertRaisesRegex(ValueError,'event'):
+            prepare(p,set(),set())
+        p['npcs']=[{'x':8,'y':32,'range_x':1}]
         with self.assertRaisesRegex(ValueError,'event'):
             prepare(p,set(),set())
