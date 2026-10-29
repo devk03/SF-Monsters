@@ -5,6 +5,43 @@ overwritten slots, destination-owned slots, and pristine native8x8 tiles.
 This prototype does not change allocation or claim that its plan fits VBlank.
 """
 from world_shared_primary import validate_tile
+import struct
+
+
+def visible_native_slots(plan, by_native, kits, general_records):
+    """Gather native primary graphics visible on this map and clipped margins.
+
+    Include the implicit renderer background and native grass used beneath
+    composite cards. This is an input planner, not a runtime allocation change.
+    """
+    from world_seams import margin_points
+    native_words=set()
+    def split_ids(area, identifiers):
+        kit=kits[area.get('tile_profile','residential')]
+        for identifier in identifiers:
+            if identifier>=512:
+                for word in kit['records'][identifier-512]:
+                    if (word&1023)<512 and word>>12<6:native_words.add(word&1023)
+        return {i for i in identifiers if i<512}
+    def native_ids(area, points):
+        return split_ids(area,{area['legend'][area['rows'][y][x]][0] for x,y in points})
+    points=((x,y) for y,row in enumerate(plan['rows']) for x in range(len(row)))
+    ids=native_ids(plan,points)
+    ids |= split_ids(plan,set(plan.get('border_metatiles',[plan.get('border_tile',11)])))
+    if kits[plan.get('tile_profile','residential')].get('uses_native_grass'):ids.add(1)
+    for link in plan.get('connections') or []:
+        neighbor=by_native[link['map']]
+        ids |= native_ids(neighbor,margin_points(neighbor,link['direction'],plan,link['offset']))
+        if kits[neighbor.get('tile_profile','residential')].get('uses_native_grass'):ids.add(1)
+    slots={20} | native_words  # The field renderer draws implicit background word 0x3014.
+    for identifier in ids:
+        if len(general_records) < (identifier+1)*16:
+            raise ValueError('Missing native primary metatile record')
+        for word in struct.unpack_from('<8H',general_records,identifier*16):
+            slot=word&1023
+            if slot>=512:raise ValueError('Native metatile references secondary graphics')
+            slots.add(slot)
+    return slots
 
 
 def restoration(previous_slots, destination_native, destination_owned, native_tiles):

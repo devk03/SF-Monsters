@@ -652,6 +652,13 @@ not establish transition correctness or VBlank capacity. The next implementation
 must supply destination-visible native slots including connection margins, use
 validated pinned native resources, and test real transitions and transient frames.
 Twin Peaks' landform and visual-review gates remain open.
+The prototype now derives destination-visible native slots from actual map
+cells, all border metatiles, clipped connection margins, implicit field
+background, and native graphics referenced by composite cards. Synthetic tests
+cover clipped neighbors, composite references and maps without connections. A
+read-only run against hash-validated General records completed for all77current
+maps. This checks planner inputs only; it does not allocate VRAM, restore pixels
+in-game, validate transition timing or add the proposed Twin Peaks terrain.
 
 **Twin Peaks connectivity guard.** Summit validation now floods from the actual
 gym return instead of treating every pre-existing lane as a starting point.
