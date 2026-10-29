@@ -1056,6 +1056,24 @@ designs and all four edge variants reached 523 civic metatiles, above the 512
 limit, before connection and in-game validation. The experiment is not wired into
 the game. More genuinely distinct forms and metatile reuse are both required.
 
+**FiDi v166 private native experiment, rejected.** Sharing the ground-level
+palette reduced the 30 draft designs and four edge variants to 491 civic
+metatiles and 177 primary graphic slots. A private build with seven draft
+buildings in a contiguous FiDi street wall compiled, passed its linked native
+resource audit and BPS round-trip, and recovered a v159 Save on newly occupied
+ground with party, inventory, money, flags, chapter and Flash intact. ROM
+SHA-256 `a2b95c65b9a594ffe2f490ec090e3a16104684418a0cec577d1dc2de918a5437`,
+receipt `b415e29ae3a04e039cfe0238a6897ac0`. Captures and full native map are
+private in `.tools/benchmarks/fidi-v166-scenes/` and `fidi-v166-native-map/`.
+
+A fresh reviewer rejected the implementation: entrances are smaller than the
+player, façades repeat, the apron is too broad, and the rest of the district
+still contains extensive grass and low-rise repetition. Only seven drafts were
+placed, and 30 visually distinct buildings are not established. The integration
+is removed; its private patch is `.tools/fidi-v166-rejected-integration.patch`.
+The art generator remains a study, not shipped game art. Actual live seam,
+matching WASM, whole-world and public-release gates remain open.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.

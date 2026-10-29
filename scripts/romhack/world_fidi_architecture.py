@@ -19,7 +19,9 @@ def facade(spec, closed=('left','right')):
     family=spec['family']; material=family%3
     wall=(7,9,10)[material]; shade=(8,6,6)[material]
     def micro(kind,variant=0,edge=None):
-        a=bytearray([wall]*64)
+        # Ground-level masonry is shared between office types. Upper stories
+        # retain their own material; the shared plinth saves native graphics.
+        a=bytearray([10 if kind in ('base','door_top','door_bottom') else wall]*64)
         def box(x0,y0,x1,y1,c):
             for y in range(max(0,y0),min(8,y1+1)):
                 for x in range(max(0,x0),min(8,x1+1)):a[y*8+x]=c
