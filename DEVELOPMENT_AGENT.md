@@ -71,9 +71,28 @@ The first fresh all19review is complete; see
 [its baseline and ranked queue](docs/world/visual-review-baseline-2026-10-28.md).
 Private full report/gallery: `.tools/benchmarks/fresh-town-review-2026-10-28/`.
 All19have full-map/ideal pairs and four inspected player views, with six
-separate scores;18capture sets are historical. No town meets the visual bar.
-Refresh all19on the current candidate before treating those historical
-screenshots as current. Preserve the separate existing alignment-chat cadence.
+separate scores. The first mixed-age baseline is preserved; a separate
+current142b all19tour and fresh review now close all18capture-age gaps at
+`.tools/benchmarks/fresh-town-review-2026-10-28-current142/`. Scores/priorities
+remain unchanged. No town meets the visual bar. Preserve the separate existing
+alignment-chat cadence.
+
+Current private142b has a deeper14x7main work hall, shorter attached garage/
+workshop frontage, an east loft wing and a dispatch crossing toward the quay.
+The initial142a aligned the loft in another north row; it was rejected and
+preserved separately. Final142b identity/evidence is in15.1. All94tests/build,
+actual prior Saves on new buildings/moved actor,41work-block wall approaches
+(39building cells plus two fixtures), resident/notice/room checks, west seam
+and77637-frame matching local WASM pass. All19current native full maps and
+player tours are captured. A55second genuine native A/Vwalk is private; it is
+not an Emerald paired comparison or browser/quality acceptance. Full14277-map/
+57-boundary-pair repeat remains open;141 below owns the last full circuit.
+
+Use the fresh cross-town queue now: continue addressing Dogpatch's poor
+density/working-yard identity, but the next distinct-town redesign should be
+Twin Peaks' two coherent summit masses/saddle, followed by Lands End's Baths/
+coast. Do not trap all other destinations behind another endless Dogpatch pass.
+The numbered older checkpoints below are history, not competing next actions.
 
 Private v141 replaces two of140's repeated lofts with a native-derived recessed
 studio canopy, original WORKS sign/closed shutter and existing SF colors. The two

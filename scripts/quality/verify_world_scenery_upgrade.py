@@ -25,9 +25,14 @@ def main():
         cold_continue(c);w=Walker(c,json.loads((ROOT/'romhack/world/world.json').read_text()))
         identifier,point=w.location();plan=w.plans[identifier]
         previous=expected['position'];old_point=(previous['x'],previous['y'])
+        actors={(n['x']+dx,n['y']+dy) for n in plan['npcs']
+                for dx in range(-n.get('range_x',0),n.get('range_x',0)+1)
+                for dy in range(-n.get('range_y',0),n.get('range_y',0)+1)}
+        def occupied(p):
+            x,y=p
+            return plan['legend'][plan['rows'][y][x]][1] or p in actors
         if ((c.position()['group'],c.position()['number'])!=(previous['group'],previous['number'])
-                or not plan['legend'][plan['rows'][old_point[1]][old_point[0]]][1]
-                or point==old_point or plan['legend'][plan['rows'][point[1]][point[0]]][1]):
+                or not occupied(old_point) or point==old_point or occupied(point)):
             raise ValueError('Fixture did not prove recovery from actual newly blocked ground')
         pointer,=struct.unpack('<I',c.read(c.symbols['gSaveBlock1Ptr'],4))
         sb2,=struct.unpack('<I',c.read(c.symbols['gSaveBlock2Ptr'],4))
@@ -64,6 +69,7 @@ def main():
                     route_return_proven=route_return,
                     party_money_flags_flash_preserved=True,scope='actual ordinary Save on newly blocked ground')
         result['party_money_inventory_flags_chapter_flash_preserved']=True
+        result['old_position_blocked_by']='actor' if old_point in actors else 'scenery'
         (c.output/'scenery-upgrade-result.json').write_text(json.dumps(result,indent=2)+'\n')
         print(json.dumps(result))
     finally:c.close()

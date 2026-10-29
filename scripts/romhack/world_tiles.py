@@ -377,6 +377,13 @@ def compile_kit(root=ROOT, profile='residential'):
         catalog['garage_hall']=dict(tiles=[list(a+b) for a,b in zip(left,right)],
             blocked=True,closed_edges=['left','right'],architecture_type='garage_hall',
             explicit_cells=True)
+        middle=catalog['workshop_m']['tiles']
+        for suffix,a,b,edges in (('_l',left,middle,['left']),
+                                  ('_m',middle,middle,[]),
+                                  ('_r',middle,right,['right'])):
+            catalog['garage_hall'+suffix]=dict(tiles=[list(x+y) for x,y in zip(a,b)],
+                blocked=True,closed_edges=edges,architecture_type='garage_hall',
+                explicit_cells=True)
     if profile=='mixed_use':
         # A broad campus hall reuses finished outer wings and a continuous
         # central gable. Its scale changes without allocating another atlas.
@@ -411,6 +418,11 @@ def compile_kit(root=ROOT, profile='residential'):
         catalog['native_studio'].update(closed_edges=['left','right'],
             architecture_type='industrial_recessed_studio',
             provenance='Pinned Emerald Mauville canopy; original SF materials/sign/closed shutter')
+        from world_industrial_factory import working_hall
+        w,h,raw=working_hall()
+        card('working_hall',raw,w,h,12,paving,7,deduplicate=True)
+        catalog['working_hall'].update(closed_edges=['left','right'],
+            architecture_type='industrial_working_hall')
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

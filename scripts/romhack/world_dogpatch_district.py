@@ -16,7 +16,6 @@ ROWS = (
     (2,25,('workshop','walkup__sage','duplex','deco')),
     (20,25,('gable__sage','arcade','workshop','walkup')),
     (2,44,('workshop','workshop__sage','arcade','walkup','duplex','deco')),
-    (38,44,('workshop','flats__sage','shophouse','workshop__sage','deco')),
     (5,55,('duplex__sage','deco','arcade__sage')),
     (20,55,('walkup__sage','duplex','deco__sage','gable')),
     (38,55,('workshop','walkup__sage','arcade','duplex','deco__sage','gable')),
@@ -26,11 +25,11 @@ BUILDINGS = (
     ('native_studio',58,5),('workshop',66,5),('workshop__sage',69,5),
     ('native_loft',58,18),('workshop',67,20),('workshop__sage',70,20),
     ('native_studio',2,37),('factory_sage',11,35),('factory',20,35),
-    ('factory',38,35),('factory_sage',46,35),('native_loft',59,36),
-    ('garage_hall',22,44),('garage_hall',59,44),('workshop',66,44),
+    ('working_hall',38,35),('native_studio',54,37),('native_loft',64,40),
+    ('garage_hall',22,44),('garage_hall',38,44),('workshop__sage',44,44),
 )
 # Scripts, local IDs and resident order are stable, positions follow actual use.
-RESIDENTS = ((55,27),(69,26),(65,57),(81,45),(25,60),(51,23),(39,42),(56,10))
+RESIDENTS = ((55,27),(69,26),(65,57),(81,45),(25,60),(51,23),(40,43),(56,10))
 AMBIENT = (
     (37,16,'Courier','OBJ_EVENT_GFX_MAN_2',0,1,
      "I'm picking up, not delivering. They still handed me three bags."),
@@ -47,7 +46,8 @@ AMBIENT = (
 )
 VIEWS = ((35,32,'West entry'),(47,10,'Mixed-use street'),
          (56,26,'Studio service aisle'),(18,43,'West loading yard'),
-         (56,42,'Main working court'),(79,29,'Quay approach'),
+         (56,42,'Main working court'),(55,46,'South loading mouth'),
+         (73,47,'Quay crossing'),(79,29,'Quay approach'),
          (91,22,'North timber pier'),(90,42,'South timber pier'),
          (66,59,'Waterfront pocket'))
 
@@ -86,7 +86,11 @@ def compose(source,cards):
     for x in (35,75):fill(rect(x-1,31,3,3),'crossing')
     # Hard work courts are contained between actual buildings. Green is one
     # deliberate public pocket, not a collar around every pasted facade.
-    fill(rect(10,40,20,8),'dark_walk');fill(rect(38,40,35,8),'dark_walk')
+    fill(rect(10,40,20,8),'dark_walk')
+    # One smaller yard, a south loading mouth and an east dispatch lane.
+    # Buildings enclose these uses; floor color alone does not define a block.
+    fill(rect(38,41,26,3),'dark_walk');fill(rect(47,44,17,4),'dark_walk')
+    fill(rect(63,46,11,2),'dark_walk')
     fill(rect(58,25,15,4),'dark_walk');fill(rect(58,55,15,6),'grass')
     fill(rect(64,53,2,8),'stone_walk');fill(rect(58,59,22,2),'stone_walk')
     for y in range(height):
@@ -102,6 +106,7 @@ def compose(source,cards):
     fill(roads,'asphalt')
     for x in (35,75):fill(rect(x-1,31,3,3),'crossing')
     fill(rect(74,59,3,1),'crossing')
+    fill(rect(74,46,3,2),'crossing')
     # Actors are placed before scenery so every footprint respects the complete
     # roaming envelope and interaction standing cell, not just the actor pixel.
     residents=[n for n in p['npcs'] if n['script'].startswith('WBTown_')]
@@ -169,7 +174,7 @@ def compose(source,cards):
     architecture=[b for b in blocks if cards[b['style']].get('architecture_type')]
     for b in architecture:
         family=cards[b['style']]['architecture_type']
-        if family not in FORMS:continue
+        if family not in FORMS and family!='garage_hall':continue
         joined=[]
         for side in ('left','right'):
             edge=b['x'] if side=='left' else b['x']+b['width']
@@ -199,7 +204,7 @@ def compose(source,cards):
     p.update(rows=[''.join(r) for r in grid],town_blocks=blocks,water_positions=[],
              scenic_viewpoints=[dict(name=n,x=x,y=y) for x,y,n in VIEWS]+p.get('scenic_viewpoints',[]),
              expanded_design=dict(size=[96,64],circulation=[list(line) for line in lines],legacy_service_block=[0,0,31,23],status='whole-district authored candidate; native/human review pending'),
-             authored_dogpatch=dict(revision=1,land_use=['mixed-use blocks','studio aisle','working yards','quay','timber piers','one planted rest'],generic_frontage_packing=False,new_flags=0,new_warps=0))
+             authored_dogpatch=dict(revision=2,land_use=['mixed-use blocks','studio aisle','enclosed work court','south loading mouth','quay dispatch crossing','timber piers','one planted rest'],generic_frontage_packing=False,new_flags=0,new_warps=0))
     p['border_tile']=cards['scenic_sea']['tiles'][0][0]
     p['border_metatiles']=[p['border_tile']]*4
     return p

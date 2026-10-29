@@ -14,14 +14,15 @@ the separate Presidio destination remain in scope; the gym count stays eight.
 Every row is an implementation candidate. None has human visual acceptance.
 “Source” describes authored geometry, not evidence of correct native rendering.
 The [October28fresh independent baseline](visual-review-baseline-2026-10-28.md)
-now supplies six visual scores and a ranked all19redesign queue. Its eighteen
-non-Dogpatch screenshot sets are historical; current-candidate capture refresh
-is underway. Review substantial revisions with a fresh-context subagent using
+now supplies six visual scores and a ranked all19redesign queue. Its original
+mixed-age screenshots remain historical; a separate current142b all19tour and
+independent review have closed all18capture-age gaps, without score increases.
+Review substantial revisions with a fresh-context subagent using
 actual full-map/player screenshots against each corresponding expanded ideal.
 
 | District / expanded reference | Source composition now | Material gap before a close match |
 | --- | --- | --- |
-| [Dogpatch](../../output/imagegen/neighborhood-ideals-v2-expanded/dogpatch.png) | Private v141 uses two broad neutral lofts, two recessed WORKS studios,15residents, authored mixed-use blocks, quay and timber piers. Actual views,32front wall pushes, prior Saves, interactions and full native77-map circuit pass; full website-core/boundary status is in15.1. | User rejects overall town quality. Parallel facade bands, large unexplained paved yards, remaining material mismatch and sparse quay still miss the reference. Next compose the complete main work block38..72,35..47 around one deliberate loading mouth and smaller court; no approved town/template yet. |
+| [Dogpatch](../../output/imagegen/neighborhood-ideals-v2-expanded/dogpatch.png) | Private142b adds a deep joined work hall, shorter attached garage/workshop frontage, an east loft wing and quay dispatch crossing. Native views,39building-front wall pushes plus two fixtures, three unsafe earlier Saves, current actor/dialogue/room checks, west seam and matching local WASM pass. All19current native maps/player tours are captured and independently reviewed. | Fresh review still scores purposeful density1/4: broad empty court and repeated shallow residential strips dominate. Working blocks and docks need a stronger shared layout; other district quality work must proceed from the all19queue rather than waiting indefinitely on this pilot. No approved town/template yet. |
 | [Potrero Hill](../../output/imagegen/neighborhood-ideals-v2-expanded/potrero-hill.png) | Offset hill streets through `(40,26)/(76,46)`, short terrace housing, library and two reserved native stair courts. | Native v123 stairs work, but short rock faces still read as barriers. The larger residential slope and retaining-wall massing need refinement. |
 | [Mission](../../output/imagegen/neighborhood-ideals-v2-expanded/mission.png) | Mural/studio court `(42,17)`, market/music block envelopes, community garden `(66,37)..(82,48)`, connected mixed-use streets. Inland. | Distinct taqueria, bakery and venue fronts; more legible mural-alley destination sequence. |
 | [Castro](../../output/imagegen/neighborhood-ideals-v2-expanded/castro.png) | Existing theater/gym approach, branching cafe blocks and planted cut-throughs, short hillside mews. | A designed theater gathering space, restrained rainbow details and independent shop signs. |

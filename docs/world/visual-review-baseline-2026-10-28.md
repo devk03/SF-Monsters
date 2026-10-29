@@ -10,8 +10,16 @@ No destination currently meets the visual completion bar.
 Evidence is mixed-age: Dogpatch142b uses candidate ROM
 `5f3d894e5ed1f2744b274e3e3a64bfe80e80ca95dcbcda5088bd87f3283a1e36`;
 five nature maps use136; thirteen other maps use130. All eighteen non-Dogpatch
-sets are historical, not current-candidate proof. Refreshing all19screenshots on
-the current candidate is underway. Preserve these baseline labels afterward.
+sets are historical, not current-candidate proof. Those capture sets remain historical. Preserve these baseline labels; the
+same-ROM follow-up below supplies current evidence.
+
+A separate same-ROM follow-up now covers **all19current142b destinations**:
+`.tools/benchmarks/fresh-town-review-2026-10-28-current142/` contains its report,
+relative-link gallery, evidence hashes and19paired sheets. The reviewer inspected
+19current full maps and76current player views; the parent rechecked209image
+hashes and coverage. All18capture-age gaps are closed. Composition scores and
+priorities remain unchanged. The table below preserves the initial baseline's
+original evidence ages; use the separate current report for latest captures.
 
 Actual native images and the full private report stay in ignored
 `.tools/benchmarks/fresh-town-review-2026-10-28/`: `review.md`, `index.html`,

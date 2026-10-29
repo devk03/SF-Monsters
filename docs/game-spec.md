@@ -692,11 +692,73 @@ manual-only Actions. Coordinate with the existing alignment chat about every
 review is complete:19actual/ideal full-map pairs,76sampled player views plus
 three additional Dogpatch views, six separate scores, and three defects/actions
 per town. The parent rechecked image hashes and coverage. Eighteen capture sets
-are explicitly historical; a new current-candidate all19tour is underway.
+were explicitly historical. A separate current142b controller tour/full-map
+capture and independent re-review now cover all19current destinations and
+76current player views, closing those18capture-age gaps. The parent rechecked
+the current evidence hashes and six-score/three-view coverage. Visible evidence
+does not warrant score/priority increases. Preserve the first baseline rather
+than relabeling its older captures.
 The [baseline and queue](world/visual-review-baseline-2026-10-28.md) preserve the
 findings. Private full report/gallery/evidence are in
-`.tools/benchmarks/fresh-town-review-2026-10-28/`. No town is visually accepted;
+`.tools/benchmarks/fresh-town-review-2026-10-28/`; latest same-ROM review is in
+`.tools/benchmarks/fresh-town-review-2026-10-28-current142/`.
+No town is visually accepted;
 low scores expose remaining work, not a reduced scope. Goal stays active.
+
+**v142b main working court — actual local proofs/current all-town captures.**
+Version `0.0.142-dogpatch-working-court-world-draft`, final ROM SHA
+`5f3d894e5ed1f2744b274e3e3a64bfe80e80ca95dcbcda5088bd87f3283a1e36`,
+receipt `614ec71b1c39407a8659c6efff4e328d`. New original14x7work hall joins two
+loading wings with one continuous roof/footing and complete outer caps. The
+southern generic frontage is shortened to attached garage/workshop bays; the
+loft now encloses the east side, with dispatch lane/crossing beneath it toward
+the quay. Initial142a SHA`6d128d8f…` kept the loft in another north row and was
+rejected on actual full-map review; its captures are not final142b evidence.
+
+The hall initially exceeded safe graphics allocation; simpler roof seams fit
+493records/512secondary/310own-primary without altering native reservations.
+Asset/frontage extent contracts now admit widths up to16instead of11, retaining
+height8, explicit cell/range/collision/overlap guards and actual resource audits.
+Independent14x7fixture tests reject incomplete rows, width17and out-of-range
+native IDs; the earlier validator demonstrably rejects the valid14wide fixture.
+All94world tests, deterministic build/resource checks and BPS roundtrip pass.
+
+Repair resident moves39,42to40,43 with the block. Actual141ordinary Saves at
+new hall40,40and moved actor40,43 both resume safely at40,42; east-wing70,43
+resumes at73,43. Valid5,9Save stays put. Party, money, decoded inventory,
+flags/chapter and Flash are preserved, with real Repair Counter returns.
+The upgrade verifier now also recognizes newly occupied actor envelopes, not
+only solid terrain. Native read-only checks confirm current15templates/scripts,
+two bounded walkers, six notices,11static conversations and room return.
+Actual41work-block upward wall pushes include39building-front cells and two
+fixture approaches. West boundary passes both directions/inward walking,
+transient render checks and separate guide-palette check.
+
+Final local proof paths are `concept-v142b-{valid-save-continue,hall-save-upgrade,
+resident-save-upgrade,east-wing-save-upgrade,working-court-resumed-v2,
+dogpatch-seam-resumed,dogpatch-scenes,dogpatch-native-review}` under private
+`.tools/benchmarks/`. The interrupted earlier walk/seam processes had no final
+results and missing process handles; fresh output directories preserve those
+partial attempts. A recorder-only40second limit was too short for the actual
+route; the corrected55second bound succeeds without game changes.
+
+Matching77637-frame local website-core replay passes with zero differences
+across294912RAM bytes, SHA
+`c164be6e19cae25563e18525d4c8887fd587f52f14de9eaa1ceb18a23fe1826c`
+(`concept-v142b-working-court-wasm`). Actual native A/Vwalk from the work court
+to quay/pier is55.25seconds at240x160; encoded A/Vskew is-0.0153ms and audible
+signal exists (`concept-v142b-court-quay-native-clip/review.mp4`). This is an
+unpaired SF-only clip, not an Emerald comparison, audio approval or browser proof.
+
+Current controller tours and native reconstructed backgrounds for all19areas
+are complete (`concept-v142b-all-town-{scenes,native-review}`), then independently
+reviewed against all19ideals as recorded above. The review still gives poor
+density/identity scores; no visual completion is claimed. Full14277-map circuit,
+57boundary-pair repeat, browser/audio/mobile/publication and human acceptance
+remain OPEN. Last full circuit/seam proof remains141. Publicv80/v92 are unchanged.
+The existing Sites project lookup still returns not found; no replacement site,
+deployment, account bypass or workflow was attempted. Continue independent
+town work from the fresh queue, including Twin Peaks and Lands End.
 
 **v141 recessed studios and quieter loft materials — private world candidate.**
 Version `0.0.141-dogpatch-studio-masonry-world-draft`, ROM SHA

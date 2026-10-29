@@ -296,7 +296,7 @@ class _World:
                 spec = profile.get('cards',{}).get(block['style'],{})
                 _need((spec.get('first'),spec.get('width'),spec.get('height')) ==
                       (block['first_metatile'],width,height),'frontage','Building allocation disagrees with the art contract')
-            _integer(width,1,11,'frontage width');_integer(height,1,8,'frontage height')
+            _integer(width,1,16,'frontage width');_integer(height,1,8,'frontage height')
             for dy in range(height):
                 for dx in range(width):
                     point=(x0+dx,y0+dy)

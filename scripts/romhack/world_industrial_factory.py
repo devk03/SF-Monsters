@@ -81,6 +81,48 @@ def factory():
     return width,height,bytes(pixels)
 
 
+def working_hall():
+    """One deep two-wing work hall with a continuous roof and finished ends.
+
+    Keep the loading facade's native pixel scale. Interior piers are masonry,
+    not two exposed end caps or a transparent seam between pasted buildings.
+    """
+    width,height=224,112;pixels=bytearray(width*height)
+    def box(x0,y0,x1,y1,color):
+        for y in range(y0,y1+1):
+            for x in range(x0,x1+1):pixels[y*width+x]=color
+    box(4,7,219,63,1);box(6,9,217,61,2)
+    # Broad zinc sheets, quiet seams, four complete north-light skylights.
+    for y in (16,32,48):box(7,y,216,y,3)
+    for x in (32,80,128,176):
+        box(x,20,x+15,39,1);box(x+1,21,x+14,38,4)
+        box(x+2,21,x+4,37,3);box(x+1,29,x+14,29,1)
+    box(3,59,220,62,1);box(4,59,219,59,3)
+    _,_,front=factory()
+    for y in range(31,80):
+        pixels[(y+32)*width:(y+32)*width+112]=front[y*112:(y+1)*112]
+        pixels[(y+32)*width+112:(y+33)*width]=front[y*112:(y+1)*112]
+    # Join the interior end piers and footing; preserve both outside caps.
+    box(106,63,117,105,7)
+    for y in (75,91,99):box(106,y,117,y,9)
+    box(106,63,117,64,8);box(106,106,117,108,12)
+    box(106,109,117,110,13);box(106,111,117,111,1)
+    # The old shallow fronts' labels crossed their roof line. Remove those
+    # partial labels and give the combined hall one complete central sign.
+    for x in (42,154):box(x,63,x+28,68,7)
+    box(98,58,126,67,1);box(99,59,125,66,5)
+    rows=((17,17,21,21,10),(7,5,5,5,7),(6,5,6,5,5),
+          (5,6,4,6,5),(7,4,7,1,7))
+    cursor=102
+    for n,letter in enumerate(rows):
+        size=5 if n==0 else 3
+        for y,row in enumerate(letter):
+            for x in range(size):
+                if row&(1<<(size-1-x)):pixels[(60+y)*width+cursor+x]=1
+        cursor+=size+1
+    return width,height,bytes(pixels)
+
+
 def factory_block():
     """A deep roof/body mass, not stacked miniature facade strips."""
     width,height=112,112
