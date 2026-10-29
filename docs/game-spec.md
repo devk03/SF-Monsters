@@ -1448,6 +1448,37 @@ ends and continuous brick paving, but finds sparse lawns, repeated rows and
 weak Mission identity still need a whole-block redesign. Full-world traversal,
 browser acceptance and human visual approval remain open.
 
+**Mission v189 court block, private draft.** A second pair of existing facades
+closes the northern gap in the central street wall; the court sign and its
+standing position move to `(58,40)` and `(58,41)`, and the inner strip uses
+matching brick paving. The linked native build, BPS round trip and 121 world
+tests pass. A real v188 Save on newly occupied `(50,38)` cold-continued safely
+at `(50,36)`, preserving party, inventory, money, flags, chapter and Flash;
+room return passed. A 7,552-frame native walk matched the website WASM core
+with zero RAM differences. ROM SHA-256
+`c568d753b5493fe9f535829745c937c5ae530b440f933014f74501addd49b783`;
+actual private views and full map are in `.tools/benchmarks/mission-v189-scenes/`
+and `mission-v189-native-map/`. All 26 court notices were read with native
+controls, including the moved notice, with protected state and Flash intact.
+A fresh reviewer recommends retaining the connected frontage and paving but
+finds the nook underspecified and the district still sparse and repetitive.
+This remains an incremental change, not a complete redesign or human approval.
+
+**FiDi v6 isolated native experiment.** Five original attached office fronts
+replace 14 complete residential stamps in an isolated checkout. Native build,
+BPS round trip, a real older Save recovery, both local route seams in both
+directions with transient/menu checks, and a 2,186-frame matching WASM walk
+passed. Trial ROM SHA-256
+`ff328714c012155ea83caab10997147dcebd4b4ca0815fd97eb5d65f65f0681c`;
+private actual scenes and full map are under `.tools/fidi-v6-isolated/.tools/benchmarks/`.
+The trial raises the building height limit only in its isolated checkout and
+uses 407 civic metatiles and 162 own primary graphics before margins. A fresh
+review rejects integration: the joined masses are overscaled and flat at the
+player camera, with repetitive windows, weak street-level bases and a broad
+empty apron. The rest of the district remains sparse and residential. Refine
+the massing and readable bases; 30 distinct buildings, all-world seams,
+browser and human approval remain open. No trial art is in the game source.
+
 **FiDi east-block feasibility, v187 source inspection.** The parcel at
 `(64,17)..(82,28)` contains two complete rows of 14 four-tile-high building
 stamps. A proposed five-building replacement spans all 19 columns, with widths
