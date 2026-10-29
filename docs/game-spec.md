@@ -1431,6 +1431,23 @@ The alignment review proposes an attached five-building east block with varied
 heights, materials and bases as a next experiment; geometry and resource fit
 are unverified. Approximately 30 distinct downtown designs remain outstanding.
 
+**Mission v188 south frontage, private draft.** Two existing mixed-use facades
+close a four-tile gap in the southern studio street wall; the neighboring
+fronts attach and the adjacent brick sidewalk continues across the join. The
+previous passage becomes a reachable court nook, retaining its sign and
+interaction position. The native build, BPS round trip and all 120 world tests
+pass on the final brick-sidewalk candidate. A real
+v187 ordinary Save on newly blocked `(48,44)` cold-continued safely at
+`(48,43)`, preserving party, inventory, money, flags, chapter and Flash;
+room return passed. An 8,219-frame native walk replayed in the pinned web
+core with zero RAM differences. ROM SHA-256
+`e0c4c4242ad592ae8606b9b42619bff4634f15e7ef597bde982978a61eee1802`;
+private actual views and full map are in `.tools/benchmarks/mission-v188-brick-scenes/`
+and `mission-v188-brick-native-map/`. A fresh final review confirms connected
+ends and continuous brick paving, but finds sparse lawns, repeated rows and
+weak Mission identity still need a whole-block redesign. Full-world traversal,
+browser acceptance and human visual approval remain open.
+
 **FiDi east-block feasibility, v187 source inspection.** The parcel at
 `(64,17)..(82,28)` contains two complete rows of 14 four-tile-high building
 stamps. A proposed five-building replacement spans all 19 columns, with widths

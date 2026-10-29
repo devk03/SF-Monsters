@@ -237,6 +237,9 @@ def expand(plans, manifest):
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)
+            if name=='mission':
+                from world_mission_south_wall import furnish as join_mission_wall
+                join_mission_wall(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
             if name=='potrero_hill':
                 from world_potrero_wall_join import furnish as join_potrero_wall
                 join_potrero_wall(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
