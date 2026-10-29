@@ -661,6 +661,13 @@ missing resources and secondary exhaustion. This is not integrated into native
 map rendering: connection margins, animations, restoration order, DMA timing,
 old Saves and actual transient frames remain unverified. It does not yet alter
 the Twin Peaks map or establish visual quality.
+An additional current142b in-memory check combines176own and31foreign metatile
+records: the same relocation helper can move all ten conflicting graphics,
+changing eight owned and two foreign records while preserving source tile bytes,
+palette indices and flip flags. A synthetic shared-tile test protects foreign
+and own references that use the same source tile. This does not repack or load
+the actual runtime atlas; native restoration, map entry/transition DMA and visual
+proof remain required before the proposed landform can be used.
 The prototype now also offers a history-independent destination plan: restoring
 only slots written by the immediately previous map misses art overwritten two
 transitions earlier. An A→B→C synthetic case protects that failure. With current

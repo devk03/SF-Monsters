@@ -22,6 +22,17 @@ class PrimaryRestorationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Insufficient'):
             relocate_owned_records(records,owned,{76},set(range(512,1024)))
 
+    def test_shared_owned_and_foreign_references_move_together(self):
+        # A foreign seam may reuse the host's tile with a different palette
+        # and flip; both records must address the same relocated pixels.
+        records={('own',512):[0x604c]*8,('foreign',0):[0x784c]*8}
+        pixels=bytes([3])*64
+        result=relocate_owned_records(records,{76:pixels},{76})
+        slot=result['mapping'][76]
+        self.assertEqual(result['graphics'][slot],pixels)
+        self.assertEqual(result['records'][('own',512)][0],0x6000|slot)
+        self.assertEqual(result['records'][('foreign',0)][0],0x7800|slot)
+
     def test_borrowed_plan_rejects_untracked_older_map_writes(self):
         original={7:bytes([2])*64,11:bytes([3])*64}
         plan=borrowed_restoration({7,11},{20},original,{7,30},{7})
