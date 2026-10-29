@@ -1215,6 +1215,27 @@ remains sparse, low-rise and repetitive. Placement was reverted and saved as
 an experiment, not integrated game art. The thirty distinct attached towers,
 coherent block design, full traversal/WASM checks and human approval remain open.
 
+**Mission deep-block source prototype, not integrated.** A fail-closed
+whole-stamp transaction was prototyped for the west mural: it fingerprints
+12 retired stamps, preserves the mural and bindings, and checks source-map
+reachability before mutation. Its two north pieces are each 10×8 metatiles
+and the south piece 15×5, within the 16-wide art-card limit. Synthetic source
+checks are not native, save or event validation. The private transaction and
+roof study live in `.tools/mission-deep-block-study/`; the v2 preview is in
+`.tools/mission-roof-study-v2/`.
+
+The current mixed-use kit has 506 of 512 metatile records; four current maps
+use 454 distinct IDs, but absent map IDs are not proven safe to reclaim from
+contracts, modules or seams. Only three records are exact duplicates with equal
+attributes. Reproduce the per-profile inventory with
+`python3 scripts/quality/audit_metatile_usage.py`; it explicitly does not prove
+that records can be reclaimed. The experimental north roof has 62 distinct patterns, so fitting
+it would require substantial safe reuse or allocation redesign. A fresh visual
+review rejected the large uniform roof slabs as too flat and disconnected from
+individual lots. No candidate has been integrated; create varied smaller roof
+masses and prove allocation, atomic replacement, native traversal and saves
+before accepting a new block.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
