@@ -1008,6 +1008,17 @@ stadium enclosure, real fan plaza or waterfront destination exists. A coherent
 ballpark composition is a major outstanding requirement, not user approval.
 Full-world native and matching WASM traversal and public release checks remain.
 
+**North Beach block experiments, rejected.** The private v160 west-block
+prototype filled a lawn with a contiguous second row, but its doors ran directly
+into the roofs of the existing row. The v161 roof-backed replacement passed an
+old-Save recovery and native build, but a fresh reviewer found its repetitive
+blue-gray slab implausible. Neither prototype remains in the source or release.
+Private gameplay captures and native maps remain under `.tools/benchmarks/`
+with `north-beach-v160` and `north-beach-v161` prefixes. Future closed blocks
+need varied, bounded roofs aligned to their actual façade modules, no false
+doors, no walkable interior alleys, preserved street approaches and old-Save
+recovery. The large lawns and isolated rows throughout North Beach remain open.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
