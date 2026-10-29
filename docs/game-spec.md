@@ -1174,6 +1174,28 @@ Redesign the whole court and surrounding block as a coherent composition rather
 than adding another isolated row. Native/WASM traversal and user approval of a
 replacement remain open.
 
+**North Beach northern frontage v176, in progress.** Four façades extend
+and join the existing northern street wall beside the reading court; its sign,
+checkpoint and NPC positions remain unchanged. The native build and BPS round
+trip passed. An ordinary v173 Save at (63,3), now inside the new wall, recovered
+to (63,5) with party, money, inventory, flags, chapter and Flash preserved; room
+return passed. The 113 existing world tests and a targeted court/party-wall
+reachability test passed, as did the North Beach–Route 17 native seam with
+transient frames and menu. A 7,699-frame native walking sequence reproduced
+exactly in the pinned website WASM core (zero differing RAM bytes); browser
+performance and audio were not assessed. ROM SHA-256
+`36c1692fc0c3731837305a469f67f1d82ad2fef9619fe0923654a7311efceea2`;
+actual scenes and full map are private in `.tools/benchmarks/north-beach-v176-scenes/`
+and `.tools/benchmarks/north-beach-v176-native-map/`.
+
+A fresh independent review against the corresponding ideal rated the result
+roughly 2/4: it is a modest street-wall improvement, but orphaned façades,
+large empty grass areas, clipped-looking east edges and repetitive architecture
+remain. Whole-block composition, full route/event verification and user visual
+approval remain open. The separate alignment thread also emphasized verifying
+unchanged actor/event placements and all playable ground, not treating adjacency
+or one successful seam as proof of the entire world.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.

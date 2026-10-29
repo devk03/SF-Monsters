@@ -153,6 +153,8 @@ def expand(plans, manifest):
             from world_pedestrian_courts import propose,furnish
             courts=propose(name,bands,width,height,occupied|parcel_cells|sea|shore,walks,lanes)
             passage_cells=set().union(*(p['cells'] for p in courts)) if courts else set()
+            from world_north_beach_block import deferred_cells as north_block_cells
+            parcel_cells|=north_block_cells(name,cards)
             furnish(plan,grid,courts,stamp,token,material)
             from world_concept_blocks import frontage_bands, mark_composition
             authored = frontage_bands(name)
@@ -230,6 +232,8 @@ def expand(plans, manifest):
         if name=='north_beach':
             from world_north_beach_frontage import furnish as furnish_north_frontage
             furnish_north_frontage(stamp,grid,token,lanes,cards)
+            from world_north_beach_block import furnish as furnish_north_block
+            furnish_north_block(plan,stamp,grid,token,lanes,occupied,cards)
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)
