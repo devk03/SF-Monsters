@@ -242,6 +242,8 @@ def expand(plans, manifest):
                 join_mission_wall(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
                 from world_mission_court_block import furnish as join_mission_court
                 join_mission_court(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
+                from world_mission_mural_street import furnish as join_mural_street
+                join_mural_street(plan,grid,cards,token,lanes,walks,occupied,sea,shore)
             if name=='potrero_hill':
                 from world_potrero_wall_join import furnish as join_potrero_wall
                 join_potrero_wall(plan,grid,cards,token,lanes,walks,occupied,sea,shore)

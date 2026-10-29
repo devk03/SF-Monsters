@@ -1463,6 +1463,23 @@ controls, including the moved notice, with protected state and Flash intact.
 A fresh reviewer recommends retaining the connected frontage and paving but
 finds the nook underspecified and the district still sparse and repetitive.
 This remains an incremental change, not a complete redesign or human approval.
+All 57 unique world boundary pairs also passed in one continuous native v189
+run, both directions with transient-frame and menu checks. Evidence:
+`.tools/benchmarks/world-v189-continuous-all-seams/seams-result.json`.
+
+**Mission v190 mural frontage, private draft.** Four shops move as whole
+stamps to align with the mural-side storefront; matching brick sidewalk fills
+the former gap. The mural viewpoint and road remain reachable. The linked
+native build, BPS round trip and 122 world tests pass. A real v189 Save at
+newly occupied `(15,24)` cold-continued at `(15,23)` with protected state and
+Flash intact and room return proven. A 6,412-frame native walk matched the
+website WASM core with zero RAM differences. ROM SHA-256
+`1ef8d0c5a80e36a311a7663e65dfd6deb3a6f35d15d76c7fd679e61a6af5bdd3`;
+actual private map and player scenes are in `.tools/benchmarks/mission-v190-native-map/`
+and `mission-v190-scenes/`. A fresh reviewer finds the attached frontage and
+paving improved but the mural remains a small framed strip beneath a blank
+wall; broad lawns, repeated shallow rows and weak Mission identity remain.
+Full-world v190 traversal, browser and human approval remain open.
 
 **FiDi v6 isolated native experiment.** Five original attached office fronts
 replace 14 complete residential stamps in an isolated checkout. Native build,
@@ -1478,6 +1495,18 @@ player camera, with repetitive windows, weak street-level bases and a broad
 empty apron. The rest of the district remains sparse and residential. Refine
 the massing and readable bases; 30 distinct buildings, all-world seams,
 browser and human approval remain open. No trial art is in the game source.
+
+**FiDi v7 and Lands End source studies.** The isolated v7 trial shortens the
+five FiDi buildings to 6–8 metatiles; its linked build/BPS and old-Save
+recovery pass. ROM SHA-256 begins `d7c07a57`; actual private map and views are
+under `.tools/fidi-v7-isolated/.tools/benchmarks/`. A fresh reviewer rejects
+its flat strip, door-like windows, empty rear pavement and weak street level.
+Local seams, WASM and browser are untested for v7. A separate source-only
+Lands End irregular basin/rock sketch and indexed tile study under
+`.tools/lands-coast-v2/` and `.tools/lands-coast-tiles-v1/` preserve protected
+source geometry in flood checks but still look like regular pools on a flat
+slab; concave joints and shoreline composition need redesign before any native
+trial. Neither study is integrated or visually approved.
 
 **FiDi east-block feasibility, v187 source inspection.** The parcel at
 `(64,17)..(82,28)` contains two complete rows of 14 four-tile-high building
