@@ -22,9 +22,14 @@ def main():
             if not courts:continue
             w.travel(identifier)
             for index,court in enumerate(courts):
-                x,top=court['x'],court['top'];entry=(x+1,top+5);rest=tuple(court['rest'])
+                rest=tuple(court['rest'])
+                if court.get('kind')=='nook':
+                    left,top,right,bottom=court['bounds'];entry=(rest[0],bottom)
+                else:
+                    left=court['x'];top=court['top']-3;right=left+2;bottom=court['top']+5
+                    entry=(left+1,bottom)
                 local=copy.deepcopy(plan);local['legend']['!']=[11,True,3]
-                local['rows']=[''.join(t if x<=xx<x+3 and top-3<=y<=top+5 else '!'
+                local['rows']=[''.join(t if left<=xx<=right and top<=y<=bottom else '!'
                     for xx,t in enumerate(row)) for y,row in enumerate(plan['rows'])]
                 w.go(entry);before=audit.protected();friends=list(audit.friendships);steps=audit.steps;trace=[list(entry)]
                 for target in (rest,entry):
@@ -37,7 +42,7 @@ def main():
                         # prevents a successful detour around the whole block.
                         direction=w.path(local,here,target)[0];w.walk(direction)
                         current,here=w.location()
-                        if current!=identifier or not(x<=here[0]<x+3 and top-3<=here[1]<=top+5):
+                        if current!=identifier or not(left<=here[0]<=right and top<=here[1]<=bottom):
                             raise ValueError('Native court traversal left its reserved footprint')
                         trace.append(list(here))
                     else:raise ValueError('Court passage did not reach its endpoint')
@@ -58,7 +63,7 @@ def main():
         if (c.output/'all-courts-traversed.sav').read_bytes()!=state.with_suffix('.sav').read_bytes():
             raise ValueError('Court traversal changed ordinary Flash')
         result=dict(passed=True,rom_sha256=c.digest(),courts=len(checked),checked=checked,
-                    protected_state_and_flash_unchanged=True,party_exception='Only checksum-validated friendship increases within native walking-step bounds',scope='Native entry-to-court and return inside each three-tile passage; not human composition approval')
+                    protected_state_and_flash_unchanged=True,party_exception='Only checksum-validated friendship increases within native walking-step bounds',scope='Native entry-to-court and return inside each reserved passage or nook; not human composition approval')
         (c.output/'courts-result.json').write_text(json.dumps(result,indent=2)+'\n')
         print(json.dumps({k:v for k,v in result.items() if k!='checked'}))
     finally:c.close()

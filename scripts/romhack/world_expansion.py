@@ -233,7 +233,7 @@ def expand(plans, manifest):
             from world_north_beach_frontage import furnish as furnish_north_frontage
             furnish_north_frontage(stamp,grid,token,lanes,cards)
             from world_north_beach_block import furnish as furnish_north_block
-            furnish_north_block(plan,stamp,grid,token,lanes,occupied,cards)
+            furnish_north_block(plan,stamp,grid,token,lanes,occupied,cards,passage_cells)
         if not nature:
             from world_concept_blocks import furnish_ground
             furnish_ground(plan,grid,stamp,token)

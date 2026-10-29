@@ -1264,6 +1264,33 @@ old Saves still require verification. Evidence is in
 `.tools/mission-capacity-study/card-compaction-result.json`; no profile was
 changed or compacted.
 
+**North Beach v181 joined northern block, in progress.** Two new attached
+facades close the grass break between the existing northern rows. The reading
+court is now a compact 3×3 nook with its original script and text at (59,8),
+standing point (58,8). Only 33 generated map cells changed versus v180, all in
+North Beach. The native build/BPS round trip, 115 world tests, v176 ordinary
+Save recovery from newly occupied (58,4), the Route 17 transient seam/menu,
+all 26 court/nook walks and all 26 court notice interactions passed. A
+7,450-frame controller walk replayed in the website WASM core with zero
+RAM-byte differences; browser timing and audio were not assessed. ROM SHA-256
+`33efff515144ef21e8b23ee673f847559d37e0df9f4bfd366d2695d073976090`;
+private actual views and map are in `.tools/benchmarks/north-beach-v181-scenes/`
+and `north-beach-v181-native-map/`.
+
+A fresh independent reviewer found the joined wall an improvement, but the
+reading nook is a lone planter in a large paved area, twin green bays repeat,
+and substantial grass gaps and detached building islands remain. This is a
+local fix, not district approval or completion.
+
+**Mission profile and roof v3 studies.** A private source-only profile model
+remaps 415 records and 101 traced cards while checking all 6,144 Mission cells,
+used legend entries, border and source seam mappings; omitted catalog/dynamic
+IDs, actual native atlas packing, contributors and save behavior remain
+unverified. Evidence is under `.tools/mission-profile-prototype/`. The v3
+roof concept has narrower lots than v2 but an independent review still found
+it too flat and repetitive; it needs varied depth, corner returns and a coherent
+playable block. No Mission profile, roof or replacement was integrated.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds

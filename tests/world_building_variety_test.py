@@ -141,9 +141,15 @@ class BuildingVarietyTests(unittest.TestCase):
             if p['world_id'] not in URBAN or p['world_id']=='dogpatch':continue
             self.assertEqual(len(p['pedestrian_courts']),2,p['world_id'])
             for court,notice in zip(p['pedestrian_courts'],p['court_notices']):
-                x,top=court['x'],court['top']
-                for y in range(top-3,top+6):
-                    self.assertFalse(p['legend'][p['rows'][y][x+1]][1],(p['world_id'],x+1,y))
+                if court.get('kind')=='nook':
+                    left,top,right,bottom=court['bounds']; x=court['rest'][0]
+                    self.assertEqual((right-left+1,bottom-top+1),(3,3))
+                    for y in range(top,bottom+1):
+                        self.assertFalse(p['legend'][p['rows'][y][x]][1],(p['world_id'],x,y))
+                else:
+                    x,top=court['x'],court['top']
+                    for y in range(top-3,top+6):
+                        self.assertFalse(p['legend'][p['rows'][y][x+1]][1],(p['world_id'],x+1,y))
                 ox,oy=notice['object']
                 self.assertTrue(p['legend'][p['rows'][oy][ox]][1])
                 self.assertTrue(any(e['script']==notice['script'] for e in p['bg_events']))
