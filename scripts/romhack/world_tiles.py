@@ -452,6 +452,12 @@ def compile_kit(root=ROOT, profile='residential'):
             for x in range(13+(y//4)%2,16):foam[y*16+x]=4 if y%5 else 3
         card('sunset_ocean',bytes(ocean),16,16,11,paving,7,floor=True)
         card('sunset_surf',bytes(foam),16,16,11,paving,7,floor=True)
+        # Flipped patterns reuse the same 8x8 graphics while breaking the
+        # identical horizontal dashes and foam sequence at adjacent cells.
+        card('sunset_ocean_alt',bytes(ocean[y*16+15-x] for y in range(16) for x in range(16)),
+             16,16,11,paving,7,floor=True)
+        card('sunset_surf_alt',bytes(foam[(15-y)*16+x] for y in range(16) for x in range(16)),
+             16,16,11,paving,7,floor=True)
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):

@@ -969,6 +969,26 @@ stair-stepped, and the upper-left dark-water patch remains inconsistent. Dunes,
 planting, beach activity, denser blocks and natural transitions are still open.
 This is not user approval; broader seam, WASM and public release checks remain.
 
+**Private Outer Sunset v157 candidate.** The upper western water now uses the
+same blue as the beach and adjacent water/foam cells alternate reflected tile
+patterns without consuming new primary graphics. The native build and BPS
+round-trip pass, as do all 111 world tests. ROM SHA-256
+`4aeb885ff1d3f9f86998fe222dddb12b55e1775573f69cd01855f72015a157a9`, receipt
+`f01df0bbfdad49278b8ea1359de543df`. A v154 coastal Save cold-continued with
+position, movement, party, money, inventory, flags, chapter and Flash intact;
+the north connection and reverse passed native 16-frame and menu checks.
+Actual v157 screenshots and full native map are private in
+`.tools/benchmarks/sunset-v157-scenes/` and `sunset-v157-native-map/`.
+
+A fresh reviewer scored layout2.5, density2, joins2, planting1, identity2 and
+readability3.5 out of4. The dark patch is absent; the water remains visibly
+periodic and the shore is a hard stepped line. The north capture also shows
+boundary shrubs apparently floating over water and an abrupt seawall-to-house
+join. A coherent coast-to-dune-to-street composition, accessible beach paths,
+planting, activity and denser blocks are still required. Do not treat this
+microfix as a composition milestone or user approval. Broader native seams,
+matching WASM and public release checks remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
