@@ -643,6 +643,18 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Twin Peaks allocation check — preparation, not a redesigned summit.**
+The existing native plateau study proposes ten additional protected General
+graphics slots. On the current142b industrial kit all ten slots are already
+assigned to its own artwork; only four of314globally safe slots remain. A global
+reservation would therefore exceed the kit's capacity by six slots before
+foreign seam requirements. This is a measured allocation conflict, not evidence
+that the proposed summit is impossible. Recover or reallocate capacity with
+actual linked-resource and transition checks before placing the plateau. Preserve
+the two existing park paths, gym bindings and ordinary-Save recovery; the study's
+old west-port geometry also needs correction against the current manifest.
+No Twin Peaks geometry, rendering or visual approval changed in this check.
+
 **October28 refined working goal — all-town improvement with fresh visual review.**
 Continue redesigning ALL19destinations (18campaign stops plus Presidio) into
 distinct, cohesive, explorable native SF districts, using each matching expanded
