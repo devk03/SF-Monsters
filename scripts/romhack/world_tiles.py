@@ -423,6 +423,11 @@ def compile_kit(root=ROOT, profile='residential'):
         card('working_hall',raw,w,h,12,paving,7,deduplicate=True)
         catalog['working_hall'].update(closed_edges=['left','right'],
             architecture_type='industrial_working_hall')
+    if profile=='mixed_use':
+        directory=root/'assets/tiles/mission-mural-sun-v1'
+        receipt=json.loads((directory/'conversion.json').read_text())
+        card('mission_sun_mural',checked(directory,'mural.indices',receipt),
+             64,32,11,paving,7)
     if profile=='nature':
         from world_baths_art import basin_rim, promenade
         for side in ('north','south','west','east','nw','ne','sw','se'):

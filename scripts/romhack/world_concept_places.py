@@ -11,7 +11,8 @@ RECTS={
     'mission_bay':(64,17,76,28),
     'mission':(66,37,82,48),
 }
-EXTRA_RECTS={'dogpatch':((3,24,13,28),(3,37,13,43))}
+EXTRA_RECTS={'dogpatch':((3,24,13,28),(3,37,13,43)),
+             'mission':((4,24,14,27),)}
 
 
 def reserved_cells(identifier):
@@ -92,6 +93,13 @@ def furnish(plan,grid,cards,stamp,token,lanes):
         title='Community garden crossing';point=(74,43)
         obj=(79,44);standing=(79,45)
         note='Neighbors share this garden. The gate stays open. Please ask before picking anything; someone has been waiting for those tomatoes.'
+        # A second original mural anchors the formerly empty west street.
+        # Adjacent shops stay separate from the low, complete-ended wall.
+        for style,x,y in [('shophouse__slate',4,24),('arcade__sage',6,24),
+                          ('mission_sun_mural',9,26),('shophouse',13,24)]:
+            put(style,x,y)
+        paint('brick_walk',4,28,14,29)
+        plan.setdefault('scenic_viewpoints',[]).append(dict(name='Sun mural street',x=10,y=29))
     put('shop_board',*obj)
     label='WBPlace_'+identifier
     plan.setdefault('extra_street_signs',[]).append(dict(script=label,text=note))

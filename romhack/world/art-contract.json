@@ -20629,6 +20629,14 @@
             "right"
           ],
           "architecture_type": "campus_hall"
+        },
+        "mission_sun_mural": {
+          "first": 1002,
+          "width": 4,
+          "height": 2,
+          "blocked": true,
+          "behavior": 0,
+          "layer": 1
         }
       }
     },

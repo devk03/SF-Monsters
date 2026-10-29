@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "tool": "built-in imagegen",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_bounds": [
+    152,
+    166,
+    1622,
+    762
+  ],
+  "size": [
+    64,
+    32
+  ],
+  "palette": "neighborhood-landmarks-v1 bank11",
+  "conversion": "alpha crop, aspect-preserving BOX reduction, fixed RGB555 palette, no dithering",
+  "files": {
+    "source.png": "81b22acf1ad64b7e56c906a6a73f9de483f911c2891f0ee3984e2f0f944cf773",
+    "mural.indices": "4436474774e65feb8573e285846e2b2b0fa9b47637a84e1acee39e2c02c85ad0",
+    "mural.png": "8222b312bf1aed43f7b7ffcea2598a1471a1f6a445a655e61d7ab56343fdef67",
+    "prompt.md": "025a9f7db09667244e7fb310aee19efd7fe20abaaa5a399a0d6c83a3272b1d6f"
+  }
+}

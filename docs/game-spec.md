@@ -832,6 +832,31 @@ lookout, varied façades and street activity remain necessary. This review is
 visual triage, not human approval; full-world native/WASM, browser and public
 release gates remain open.
 
+**Private Mission v148 candidate.** A new original sun-and-flowers mural wall
+and three adjacent shops occupy the formerly empty west-middle street, with a
+walkable brick frontage. The mural was generated with built-in imagegen from
+the existing project wall as a style reference and converted deterministically
+to the existing neighborhood RGB555 palette; source, prompt, conversion script
+and receipt are under `assets/tiles/mission-mural-sun-v1/`. No existing art
+card allocation changed. This adds a local landmark, not a finished Mission.
+ROM SHA-256 `28557b4cf987790bc6129202f79f0601135b0c96c72f41a972cad8a83e60fc8d`,
+receipt `c261ae1dfa184c58b31107e43a343bd2`. All 110 world tests, native build
+and BPS round-trip pass. Relative to v147, 36 newly solid cells all lie inside
+the new mural/shop footprint. Two genuine v142b ordinary Saves inside that
+footprint recovered to safe positions and completed room returns with party,
+inventory, money, flags, chapter and Flash preserved. Both Mission route
+boundaries passed corrected transient/menu checks; the 20,300-frame native
+tour matched the website WASM core. Actual full map and player views are in
+`.tools/benchmarks/mission-v148-native-map/` and `mission-v148-scenes/`.
+
+A fresh independent reviewer scored layout2, density2, joins2, planting1,
+identity2 and readability3 out of4. The mural is crisp and recognizable, but
+its wall reads freestanding between abrupt building ends, broad lawns and
+repeated frontage remain, and planting/activity is sparse. The next pass needs
+a continuous wall/street edge, useful locally distinctive spaces and dense
+varied greenery. These scores do not establish human approval; full-world
+native/WASM, browser and public release gates remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
