@@ -28,7 +28,7 @@ class WornTrailTests(unittest.TestCase):
         for row in grid:row[32]='#'
         plan={'world_id':'twin_peaks','legend':{'.':[1,False,3],'#':[11,True,3]},
               'npcs':[]}
-        draft={'trail':set(),'lanes':{(16,10),(45,18)},'protected':set(),
+        draft={'clear':set(),'trail':set(),'lanes':{(16,10),(45,18)},'protected':set(),
                'faces':{},'stairs':{},'rims':[]}
         with self.assertRaisesRegex(ValueError,'strands'):
             furnish(plan,grid,draft,None)
