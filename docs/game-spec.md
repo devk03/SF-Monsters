@@ -725,6 +725,14 @@ legacy shore approach, so the later prototype left that approach clear; native
 collision and old-Save recovery are still untested. The next Baths design needs
 to join a larger ruin complex to the actual coast and demonstrate those gates.
 
+Two original imagegen references for weathered Baths masonry and connected
+basins are saved privately at `.tools/lands-baths-candidate/generated-complex-concept.png`
+and `generated-simplified-concept.png`. Both remain too isometric and detailed
+to be usable as GBA tiles; do not import them as finished game art. The design
+prompt requested simple orthogonal low-resolution ruins with stone partitions,
+walkable paths and coastal rocks; the resulting images are reference studies,
+not playable assets or evidence of native tile/palette capacity.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
