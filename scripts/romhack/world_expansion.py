@@ -162,7 +162,7 @@ def expand(plans, manifest):
                 # This infill is a new independent block. Its eight buildings
                 # must not advance the established selection rhythm for every
                 # later Potrero street or change unrelated saved positions.
-                independent = name=='potrero_hill' and (left,right,top)==(4,28,24)
+                independent = name=='potrero_hill' and (left,right,top)==(4,29,24)
                 previous_index = index
                 x = max(1,left)
                 while x<min(width-1,right):

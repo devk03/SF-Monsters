@@ -17,12 +17,14 @@ class PotreroFrontageTests(unittest.TestCase):
         plan=next(p for p in generate(manifest) if p['world_id']=='potrero_hill')
         kit=compile_kit(profile=plan['tile_profile'])
         blocks=sorted((b for b in plan['town_blocks'] if b['y']==24 and 4<=b['x']<=27),key=lambda b:b['x'])
-        self.assertGreaterEqual(len(blocks),7)
+        self.assertGreaterEqual(len(blocks),8)
         self.assertEqual(blocks[0]['x'],4)
         for a,b in zip(blocks,blocks[1:]):self.assertEqual(a['x']+a['width'],b['x'])
         self.assertEqual(kit['catalog'][blocks[0]['style']]['closed_edges'],['left'])
         self.assertEqual(kit['catalog'][blocks[-1]['style']]['closed_edges'],['right'])
-        self.assertGreaterEqual(len({kit['catalog'][b['style']]['architecture_type'] for b in blocks}),5)
+        self.assertGreaterEqual(len({kit['catalog'][b['style']]['architecture_type'] for b in blocks}),8)
+        fixtures={(b['style'],b['x'],b['y']) for b in plan['town_blocks']}
+        self.assertTrue({('lamp',2,27),('lavender',29,28)}<=fixtures)
         # Inserting this northern block must not renumber the established
         # southern frontage or change its collision footprint for old saves.
         south=[(b['x'],b['style']) for b in plan['town_blocks'] if b['y']==49 and 4<=b['x']<=16]
@@ -37,6 +39,6 @@ class PotreroFrontageTests(unittest.TestCase):
                 nx,ny=x+dx,y+dy
                 if 0<=ny<len(rows) and 0<=nx<len(rows[ny]) and (nx,ny) not in seen and not legend[rows[ny][nx]][1]:
                     seen.add((nx,ny));queue.append((nx,ny))
-        for x in range(4,28):self.assertIn((x,29),seen)
-        self.assertTrue(all((event['x'],event['y']) not in {(x,y) for x in range(4,28) for y in range(24,28)}
+        for x in range(4,29):self.assertIn((x,29),seen)
+        self.assertTrue(all((event['x'],event['y']) not in {(x,y) for x in range(4,29) for y in range(24,28)}
                             for event in plan['npcs']+plan['bg_events']+plan['coord_events']))

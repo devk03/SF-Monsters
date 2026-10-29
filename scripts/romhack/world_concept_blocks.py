@@ -21,7 +21,7 @@ BLOCKS = {
         (50,54,62,61,'south workshops'), (69,54,78,61,'pier neighborhood'),
     ],
     'potrero_hill': [
-        (4,24,27,27,'west hillside homes above the main street'),
+        (4,24,28,27,'west hillside homes above the main street'),
         (82,18,92,22,'east stair landing homes'),
         (82,43,92,47,'lower east terrace homes'),
         (34,1,43,9,'upper hill homes'), (46,2,54,20,'stair-side flats'),
@@ -155,6 +155,13 @@ def mark_composition(plan):
 
 
 def furnish_ground(plan, grid, stamp, token):
+    if plan['world_id'] == 'potrero_hill':
+        # Frame the new west block with small street fixtures, leaving the
+        # complete two-row walk in front of the houses open.
+        for style,x,y in [('lamp',2,27),('lavender',29,28)]:
+            if stamp(style,x,y,shoulder=True):
+                plan.setdefault('expanded_details',[]).append(dict(name=style,x=x,y=y))
+        return
     if plan['world_id'] != 'dogpatch':
         return
     # A real service lane links the workshop backs to the southern coffee/home

@@ -28,6 +28,11 @@ PAINT={
 
 
 def frontage(identifier,index,x,y,catalog):
+    # The Potrero infill finishes with different-width townhouses rather than
+    # repeating two identical bays. The joined-ends pass remains authoritative.
+    if identifier=='potrero_hill' and y==24:
+        infill={19:'duplex__slate',22:'shophouse__slate',24:'flats__sage',26:'gable'}
+        if x in infill:return infill[x]
     rhythm=FORMS[identifier];family=rhythm[index%len(rhythm)]
     schemes=PAINT[identifier]
     paint=schemes[(x*7+y*11+index*3+len(identifier))%len(schemes)]

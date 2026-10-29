@@ -809,6 +809,29 @@ unit, linked garden and street paths, a coherent terraced hill with actual
 lookouts, and more street activity. This is not human approval, full-world
 continuous testing, browser validation or public release.
 
+**Private Potrero Hill v147 candidate.** The west-central block now contains
+nine joined buildings across eight structural types, with revised middle/east
+colors, a lamp and lavender at its ends. Existing unrelated southern frontage
+remains stable. ROM SHA-256
+`70e42e06c3fb1bf9c68e21b9367b30e95930e9b6ee6641be44e07f61964e1a26`,
+receipt `7d5e6d0456c44b7f8d06488c27369fd4`. All 109 world tests, native build
+and BPS round-trip pass. Exactly seven v146b walkable cells became solid: four
+at the extended building end, two at the lamp and one at the planter. Three
+ordinary v146b saves at representative end/lamp/planter cells cold-recovered
+to safe positions with party, inventory, money, flags, chapter and Flash intact
+and completed room returns. The two Potrero boundary pairs passed corrected
+transient/menu checks; the 19,108-frame native tour replayed exactly in the
+website WASM core. Captures: `.tools/benchmarks/potrero-v147-native-map/`,
+`potrero-v147-scenes/` and `potrero-v147-frontage-closeups/`.
+
+A fresh reviewer scored layout2, density2, joins2, planting1, identity2 and
+readability3 out of4. The changed color/forms and end fixtures improve v146b,
+but the eastern façade still meets grass and blank sidewalk abruptly. The
+town remains flat and sparse: connected terraced gardens, stairs, a meaningful
+lookout, varied façades and street activity remain necessary. This review is
+visual triage, not human approval; full-world native/WASM, browser and public
+release gates remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
