@@ -659,7 +659,8 @@ Save cold-continued with its position, state and movement intact. The Twin Peaks
 to Route 09 crossing and return passed a 16-frame native transient audit and
 menu restoration. A broader transient run failed while returning to Marina
 with its own primary graphics missing; a fresh isolated four-boundary Marina
-run passed, so the history/timing-dependent cause is not resolved. Evidence is
+run passed. A repeated 143 sequence failed at Marina primary slot 76; the same
+20-boundary sequence passed on the prior 142b ROM. The cause is not resolved. Evidence is
 under `.tools/benchmarks/concept-v143-all-boundaries/` and
 `concept-v143-marina-history-isolate/`. The original transient check missed
 the map-identity change frame; a corrected check also passed the Twin Peaks /
@@ -668,6 +669,16 @@ found that route-margin consumers need their own relocation before terrain using
 these slots can be enabled. This experiment has not
 changed the actual terrain or proved all transition frames, browser
 behavior, animation safety or visual quality; it must not be published.
+
+A follow-up private candidate `cb4233d2e5b5c58987997f134769b616066902844e858df8fbcf9e85f84d51b4`
+limits restoration to Twin Peaks, because current other maps do not consume
+the borrowed native slots and may own them. It passes the corrected Twin Peaks
+transient test, the first 20 all-world boundary pairs including the previously
+failing Marina sequence, the remaining 37 pairs in a separate run, all 104
+world tests, old-Save cold Continue, native compilation and BPS round-trip.
+This is still a no-new-terrain
+experiment: native consumers in connected margins need per-destination
+relocation, and browser, VBlank phase and full-continuous-history tests remain.
 
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous

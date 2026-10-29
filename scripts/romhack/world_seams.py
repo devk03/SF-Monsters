@@ -264,7 +264,14 @@ struct SFSeamAtlas {
             start = end
         anchor = '    if (!sSFSeamCurrent || sSFSeamTransition) return;\n    for (start=0;'
         if runtime.count(anchor) != 1: raise ValueError('Borrowed native graphics anchor changed')
-        runtime = runtime.replace(anchor, anchor.split('\n')[0]+'\n'+'\n'.join(calls)+'\n    for (start=0;', 1)
+        # This prototype restores on Twin only. Other scenes currently use no
+        # native borrowed slots and may own them; globally restoring those
+        # slots can transiently clobber their graphics. Future native margin
+        # consumers require independently validated per-map allocation.
+        guarded = ('    if (sSFSeamCurrent->group==MAP_GROUP(MAP_PACIFIDLOG_TOWN) && '
+                   'sSFSeamCurrent->num==MAP_NUM(MAP_PACIFIDLOG_TOWN))\n    {\n' +
+                   '\n'.join('    '+call for call in calls) + '\n    }')
+        runtime = runtime.replace(anchor, anchor.split('\n')[0]+'\n'+guarded+'\n    for (start=0;', 1)
     out.append(runtime)
     return ''.join(out)
 
