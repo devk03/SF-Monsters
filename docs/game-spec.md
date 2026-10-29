@@ -652,6 +652,15 @@ not establish transition correctness or VBlank capacity. The next implementation
 must supply destination-visible native slots including connection margins, use
 validated pinned native resources, and test real transitions and transient frames.
 Twin Peaks' landform and visual-review gates remain open.
+An in-memory Twin Peaks relocation prototype now moves the eight owned primary
+graphics that conflict with the proposed ten native slots into currently unused
+secondary slots, rewriting eight of176used metatile records while retaining
+palette and flip bits. The other two conflicts are foreign seam graphics and
+must be repacked. Targeted tests check pixel bytes, native words, flip flags,
+missing resources and secondary exhaustion. This is not integrated into native
+map rendering: connection margins, animations, restoration order, DMA timing,
+old Saves and actual transient frames remain unverified. It does not yet alter
+the Twin Peaks map or establish visual quality.
 The prototype now also offers a history-independent destination plan: restoring
 only slots written by the immediately previous map misses art overwritten two
 transitions earlier. An A→B→C synthetic case protects that failure. With current

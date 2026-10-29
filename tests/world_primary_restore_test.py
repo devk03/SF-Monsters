@@ -4,11 +4,24 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration
+from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration,relocate_owned_records
 import struct
 
 
 class PrimaryRestorationTests(unittest.TestCase):
+    def test_conflicting_owned_tile_moves_without_changing_native_or_flip(self):
+        owned={76:bytes([7])*64}
+        records={512:[0x604c,0x644c,0x204c,0x6200,0,0,0,0]}
+        result=relocate_owned_records(records,owned,{76},{513})
+        self.assertEqual(result['mapping'],{76:514})
+        self.assertEqual(result['graphics'][514],owned[76])
+        self.assertEqual(result['records'][512][:4],[0x6202,0x6602,0x204c,0x6200])
+        self.assertEqual(records[512][0],0x604c)
+        with self.assertRaisesRegex(ValueError,'Missing owned'):
+            relocate_owned_records(records,{}, {76})
+        with self.assertRaisesRegex(ValueError,'Insufficient'):
+            relocate_owned_records(records,owned,{76},set(range(512,1024)))
+
     def test_borrowed_plan_rejects_untracked_older_map_writes(self):
         original={7:bytes([2])*64,11:bytes([3])*64}
         plan=borrowed_restoration({7,11},{20},original,{7,30},{7})

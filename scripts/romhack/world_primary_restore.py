@@ -84,3 +84,34 @@ def borrowed_restoration(destination_native, destination_owned, native_tiles,
     if (native & overwritten) - borrowed:
         raise ValueError('A destination-native slot can be overwritten outside the borrowed set')
     return restoration(borrowed,native,destination_owned,native_tiles)
+
+
+def relocate_owned_records(records, owned_graphics, native_slots, forbidden_secondary=()):
+    """Plan lossless per-map relocation of conflicting owned primary tiles.
+
+    `records` must cover every map cell, border and same-profile connection
+    margin. Reserve foreign seam/animation slots in `forbidden_secondary`.
+    The returned record overrides and graphics are a prototype: the engine
+    must load them atomically and restore destination native pixels separately.
+    """
+    forbidden=set(forbidden_secondary);native=set(native_slots)
+    if any(type(i) is not int or not 512<=i<1024 for i in forbidden):
+        raise ValueError('Invalid secondary graphics reservation')
+    if any(type(i) is not int or not 0<=i<512 for i in native):
+        raise ValueError('Invalid native primary graphics reservation')
+    words=[word for row in records.values() for word in row]
+    if any(len(row)!=8 for row in records.values()) or any(type(w) is not int or not 0<=w<=65535 for w in words):
+        raise ValueError('Expected native eight-word metatile records')
+    own={w&1023 for w in words if (w&1023)<512 and w>>12>=6}
+    missing=own-owned_graphics.keys()
+    if missing:raise ValueError('Missing owned primary graphics')
+    conflict=sorted(own & native)
+    used={w&1023 for w in words if (w&1023)>=512}
+    free=sorted(set(range(512,1024))-used-forbidden)
+    if len(conflict)>len(free):raise ValueError('Insufficient unused secondary graphics slots')
+    mapping=dict(zip(conflict,free))
+    graphics={mapping[slot]:validate_tile(owned_graphics[slot]) for slot in conflict}
+    revised={identifier:[(w&~1023)|mapping[w&1023]
+                         if (w&1023) in mapping and w>>12>=6 else w for w in row]
+             for identifier,row in records.items()}
+    return dict(mapping=mapping,graphics=graphics,records=revised)
