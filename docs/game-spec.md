@@ -1019,6 +1019,21 @@ need varied, bounded roofs aligned to their actual façade modules, no false
 doors, no walkable interior alleys, preserved street approaches and old-Save
 recovery. The large lawns and isolated rows throughout North Beach remain open.
 
+**Further dense-block and FiDi experiments, rejected.** A v162 North Beach
+prototype aligned simplified roof planes to underlying façade widths, but a
+fresh reviewer found the alternating planes looked like a striped slab and
+clashed with the game's pixel detail. It was not retained. In FiDi, v164
+replaced two low-rise rows with repeated tall blue offices, but a fresh review
+found cloned silhouettes and an oversized paved apron. A v165 attempt used three
+original image-generated tower concepts; larger conversions exceeded real
+connection-margin graphics budgets, and smaller versions built but looked like
+detached miniature models. It too was rejected. Private captures, source art
+and experiments remain under `.tools` with `north-beach-v162`, `fidi-v164`,
+`fidi-v165` and `fidi-towers-v1-rejected` prefixes. The actual v159 source and
+public game do not include these prototypes. Future work needs individually
+bounded roof planes and large, joined downtown bases designed at native pixel
+scale, with much less empty ground and verified connection budgets.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
