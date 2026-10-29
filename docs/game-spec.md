@@ -1093,6 +1093,40 @@ placed. The temporary integration is removed and preserved privately as
 Thirty distinct approved designs, complete dense blocks, actual door contracts,
 live seams, matching WASM and release checks remain outstanding.
 
+**FiDi v171 native-silhouette experiment, rejected.** A local-build-only
+adaptation of the pinned Rustboro loft was placed beside three existing office
+cards. Its original native art inputs remain private and are not committed.
+The v171 ROM built, its BPS round-trip and 111 world tests passed, and a v159
+Save on newly occupied ground recovered safely. ROM SHA-256
+`e45dab2a45e00f9d1b65bb7fd9434f479c04f0edf356b7ef21be324d57987f39`, receipt
+`4e5fe6e20d9d4c299ae399c418fda664`. Private actual captures and full map are
+in `.tools/benchmarks/fidi-v171-scenes/` and `fidi-v171-native-map/`.
+
+A fresh reviewer found the native component more coherent with GBA pixel art
+but rejected the composition: it reads as a squat blank slab, its decorative
+door may imply an entrance, and it is visibly detached from cloned blue towers.
+The surrounding district still has lawns, isolated low-rise buildings and too
+few distinct skyscrapers. The prototype integration was removed and is saved
+privately as `.tools/fidi-v171-rejected-integration.patch`. A properly joined,
+distinctive and playable downtown remains outstanding.
+
+**Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
+reports source-map grass, contiguous grass patches, building footprints,
+party-wall adjacency and tall office counts for urban areas. On v159 it finds
+North Beach has 24.7% canonical grass and a 517-tile connected grass patch;
+Financial District has 19.9% grass, a 376-tile connected patch and four tall
+office cards. Other examples include a 601-tile Potrero Hill patch and a
+646-tile Castro patch. These counts support the user's complaint and expose
+gaps that the old “no empty 10×10 square” check can miss.
+
+The report counts 129 of 133 North Beach building footprints as having some
+party-wall adjacency, even though screenshots show isolated rows amid lawns.
+Adjacency counts do not prove complete blocks, appropriate roof joins, playable
+approaches, distinct designs or aesthetic quality. Actual visual and native/WASM
+review remain mandatory. Reproduce with `python3 scripts/quality/audit_urban_form.py
+--output <local-report.json>`; the current private report is
+`.tools/benchmarks/urban-form-v159/report.json`.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
