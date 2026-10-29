@@ -643,6 +643,14 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Twin Peaks connectivity guard.** Summit validation now floods from the actual
+gym return instead of treating every pre-existing lane as a starting point.
+An independent split-map fixture demonstrates that the previous validator
+accepted isolated summits; the new validator rejects them. All94existing world
+tests and the four targeted trail tests pass. This is a source validation fix;
+no town geometry, ROM or visual acceptance changed. Twin Peaks' terrain redesign
+and graphics capacity remain open.
+
 **Twin Peaks allocation check — preparation, not a redesigned summit.**
 The existing native plateau study proposes ten additional protected General
 graphics slots. On the current142b industrial kit all ten slots are already

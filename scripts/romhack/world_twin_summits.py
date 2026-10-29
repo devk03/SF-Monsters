@@ -157,8 +157,13 @@ def furnish(plan, grid, draft, token):
         if (x, y) in patches:
             return not patches[x, y][1]
         return not plan['legend'][grid[y][x]][1]
-    seen = {(x, y) for x, y in draft['lanes'] if walkable(x, y)}
-    pending = list(seen)
+    # A disconnected lane must not certify itself as reachable. Start from
+    # the actual gym return and prove every summit/stop can be reached from it.
+    origin = (16, 10)
+    if not walkable(*origin):
+        raise ValueError('Twin summit gym return is not walkable')
+    seen = {origin}
+    pending = [origin]
     while pending:
         x, y = pending.pop()
         for nx, ny in ((x-1, y), (x+1, y), (x, y-1), (x, y+1)):

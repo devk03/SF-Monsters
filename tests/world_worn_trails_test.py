@@ -22,6 +22,17 @@ def reachable(cells,start):
 
 
 class WornTrailTests(unittest.TestCase):
+    def test_twin_lane_cannot_certify_an_isolated_summit(self):
+        from world_twin_summits import furnish
+        grid=[['.' for _ in range(96)] for _ in range(64)]
+        for row in grid:row[32]='#'
+        plan={'world_id':'twin_peaks','legend':{'.':[1,False,3],'#':[11,True,3]},
+              'npcs':[]}
+        draft={'trail':set(),'lanes':{(16,10),(45,18)},'protected':set(),
+               'faces':{},'stairs':{},'rims':[]}
+        with self.assertRaisesRegex(ValueError,'strands'):
+            furnish(plan,grid,draft,None)
+
     def test_diagonal_trails_share_edges_without_widening_the_walking_corridor(self):
         for line in ([(2,2),(13,9)],[(13,2),(2,9)],
                      [(2,2),(8,12),(19,5)],[(4,4),(4,4)],
