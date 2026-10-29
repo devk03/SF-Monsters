@@ -668,6 +668,14 @@ palette indices and flip flags. A synthetic shared-tile test protects foreign
 and own references that use the same source tile. This does not repack or load
 the actual runtime atlas; native restoration, map entry/transition DMA and visual
 proof remain required before the proposed landform can be used.
+The relocation prototype can now produce an isolated atlas with both foreign
+records and owned-record overrides. It also handles foreign mappings that
+deduplicate to otherwise-unused host records. Against the real142b Twin Peaks
+inputs it relocates ten graphics, creates eight own overrides and generates a
+header; all15changed quadrants retain exact indexed pixels, palette and flip
+bits. Targeted tests cover shared and deduplicated records. This atlas is not
+wired into a build: destination-native restoration, animation, transition timing,
+real gameplay and town visual review are still unverified.
 The prototype now also offers a history-independent destination plan: restoring
 only slots written by the immediately previous map misses art overwritten two
 transitions earlier. An A→B→C synthetic case protects that failure. With current

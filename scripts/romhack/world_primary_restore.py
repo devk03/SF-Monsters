@@ -115,3 +115,50 @@ def relocate_owned_records(records, owned_graphics, native_slots, forbidden_seco
                          if (w&1023) in mapping and w>>12>=6 else w for w in row]
              for identifier,row in records.items()}
     return dict(mapping=mapping,graphics=graphics,records=revised)
+
+
+def relocate_atlas(atlas, kit, own_ids, native_slots):
+    """Produce an isolated atlas with own and foreign conflicts relocated.
+
+    `own_ids` must include the map, borders, and same-profile margins. This
+    does not restore native graphics or schedule DMA; do not publish its output
+    until those engine operations and actual transitions have been verified.
+    """
+    from copy import deepcopy
+    own_ids=set(own_ids)
+    # A foreign metatile may deduplicate to an otherwise-unused host record.
+    # Its mapping still renders that record, so it needs the same override.
+    for neighbor in atlas.get('neighbors',[]):
+        for identifier in neighbor['used']:
+            if identifier>=512:
+                mapped=neighbor['mapping'][identifier-512]
+                if 512<=mapped<512+len(kit['records']):own_ids.add(mapped)
+    if any(type(i) is not int or not 512<=i<512+len(kit['records']) for i in own_ids):
+        raise ValueError('Invalid owned metatile identifier')
+    if len(atlas['record_ids'])!=len(atlas['records']) or len(atlas['attributes'])!=len(atlas['records']):
+        raise ValueError('Foreign atlas record metadata does not match')
+    if len(set(atlas['record_ids']))!=len(atlas['record_ids']) or own_ids & set(atlas['record_ids']):
+        raise ValueError('Own and foreign atlas identifiers overlap')
+    if len(atlas['tile_slots'])!=len(atlas['tiles']) or len(set(atlas['tile_slots']))!=len(atlas['tile_slots']):
+        raise ValueError('Atlas graphics allocation is invalid')
+    records={('own',i):kit['records'][i-512] for i in own_ids}
+    records.update({('foreign',i):r for i,r in enumerate(atlas['records'])})
+    all_graphics=dict(zip(atlas['tile_slots'],atlas['tiles']))
+    primary={i:v for i,v in all_graphics.items() if i<512}
+    secondary={i for i in all_graphics if i>=512}
+    plan=relocate_owned_records(records,primary,native_slots,secondary)
+    result=deepcopy(atlas)
+    result['records']=[plan['records'][('foreign',i)] for i in range(len(atlas['records']))]
+    for identifier in sorted(own_ids):
+        row=plan['records'][('own',identifier)]
+        if row != kit['records'][identifier-512]:
+            result['record_ids'].append(identifier)
+            result['records'].append(row)
+            result['attributes'].append(kit['attributes'][identifier-512])
+    for old,new in plan['mapping'].items():
+        del all_graphics[old]
+        all_graphics[new]=plan['graphics'][new]
+    result['tile_slots']=sorted(all_graphics)
+    result['tiles']=[all_graphics[i] for i in result['tile_slots']]
+    result['own_primary_slots']=[i for i in atlas['own_primary_slots'] if i not in plan['mapping']]
+    return result,plan['mapping']

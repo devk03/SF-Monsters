@@ -4,11 +4,34 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration,relocate_owned_records
+from world_primary_restore import restoration,visible_native_slots,destination_restoration,borrowed_restoration,relocate_owned_records,relocate_atlas
 import struct
 
 
 class PrimaryRestorationTests(unittest.TestCase):
+    def test_atlas_relocates_shared_tile_and_adds_own_override(self):
+        pixels=bytes([3])*64
+        kit={'records':[[0x604c]*8], 'attributes':[0x1000]}
+        atlas={'records':[[0x784c]*8], 'record_ids':[513], 'attributes':[0x1000],
+               'tiles':[pixels], 'tile_slots':[76], 'own_primary_slots':[76]}
+        result,mapping=relocate_atlas(atlas,kit,{512},{76})
+        slot=mapping[76]
+        self.assertEqual(result['record_ids'],[513,512])
+        self.assertEqual(result['records'][0][0],0x7800|slot)
+        self.assertEqual(result['records'][1][0],0x6000|slot)
+        self.assertEqual(dict(zip(result['tile_slots'],result['tiles']))[slot],pixels)
+        self.assertEqual(atlas['record_ids'],[513])
+
+    def test_foreign_mapping_to_unused_host_record_is_also_overridden(self):
+        pixels=bytes([3])*64
+        kit={'records':[[0x604c]*8], 'attributes':[0x1000]}
+        atlas={'records':[], 'record_ids':[], 'attributes':[],
+               'tiles':[pixels], 'tile_slots':[76], 'own_primary_slots':[76],
+               'neighbors':[{'used':[512],'mapping':[512]}]}
+        result,mapping=relocate_atlas(atlas,kit,set(),{76})
+        self.assertEqual(result['record_ids'],[512])
+        self.assertEqual(result['records'][0][0],0x6000|mapping[76])
+
     def test_conflicting_owned_tile_moves_without_changing_native_or_flip(self):
         owned={76:bytes([7])*64}
         records={512:[0x604c,0x644c,0x204c,0x6200,0,0,0,0]}
