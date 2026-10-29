@@ -1431,6 +1431,37 @@ The alignment review proposes an attached five-building east block with varied
 heights, materials and bases as a next experiment; geometry and resource fit
 are unverified. Approximately 30 distinct downtown designs remain outstanding.
 
+**FiDi east-block feasibility, v187 source inspection.** The parcel at
+`(64,17)..(82,28)` contains two complete rows of 14 four-tile-high building
+stamps. A proposed five-building replacement spans all 19 columns, with widths
+4/3/4/3/5 and a common bottom at y27; its different top elevations have no
+circulation-lane or actor-envelope intersection in a source-only flood study.
+All previously reachable access points and scenic viewpoints remain reachable
+in that study, but 59 formerly walkable cells become occupied. An actual old
+Save on newly occupied ground must be tested after implementation. The
+street-tree footprint at `(81,15)..(82,16)`, host at `(83,15)`, worker and
+its `(79..81,29)` movement envelope must remain intact. Remove the parcel's
+tuft as a complete detail and replace all old stamps, including their right
+ends, rather than clipping them. These are feasibility findings, not a native
+map or a guarantee that any particular facade fits.
+
+The v187 civic kit has 357 of 512 secondary metatile records, a full 512
+secondary 8px graphics slots and 121 own primary graphics. FiDi's current
+atlas uses 247 of 314 available primary slots, including foreign margins;
+Mission Bay shares the kit. The 67 remaining slots are not a guaranteed
+additive art budget because connection margins can change. A second original
+five-building study (`.tools/fidi-depth-block-v2/`) estimates 206 additional
+graphics even before margins and still looks flat, so it is not integrated.
+Pruning unused records alone is not demonstrated to solve this: only 12
+secondary graphics were exclusive to unrendered kit records in the source
+inventory. Prototype shared depth and facade modules, then compile and audit
+both civic maps and their connected margins before claiming feasibility.
+An additional modular source study (`.tools/fidi-modular-study/`) estimates
+20–24 incremental graphics but remains visually inadequate: repetitive
+window grids, striped crowns and flat shared bases. Its transparency and
+roof masks have not been validated in a native map. Lower tile count alone
+does not establish the requested quality or 30 distinct designs.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
