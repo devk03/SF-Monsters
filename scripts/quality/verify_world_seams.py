@@ -35,8 +35,10 @@ def cross(c,w,audit,direction,target,name,stages,transient):
             c.step({'left':32,'right':16,'up':64,'down':128}[direction],1)
             if w.location()[0]==target:break
         else:raise ValueError('No transient native camera crossing')
-        for frame in range(1,17):
-            c.step(0,1)
+        # Include the exact frame where the map identity first changed; the
+        # following sixteen alone cannot expose a one-frame mixed scene.
+        for frame in range(0,17):
+            if frame: c.step(0,1)
             if audit.scene_signature()==source_scene:
                 capture=f'{name}-coherent-source-frame-{frame:02d}';c.picture(capture)
                 c.observations.append({'kind':'connection-animation-frame','frame':frame,'capture':capture,
@@ -193,7 +195,7 @@ class RenderAudit:
         if not required_own<=own.keys():raise ValueError('Linked own map references unloaded primary art')
         for slot in required_own:
             raw=own[slot]
-            if vram[slot*32:(slot+1)*32]!=raw:raise ValueError(owner+': own-primary facade graphics not loaded')
+            if vram[slot*32:(slot+1)*32]!=raw:raise ValueError(f'{owner}: own-primary facade graphics not loaded at tile {slot}')
         if secondary_graphics not in self.graphics:
             self.graphics[secondary_graphics]=decode_lz(self.rom[secondary_graphics-0x08000000:secondary_graphics-0x08000000+32768])
         # Compare every authored graphic/color. Unused secondary slots may hold

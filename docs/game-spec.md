@@ -657,7 +657,15 @@ ROM SHA-256 `98eeab77d31af668ee86d05930c3265489af13c3705a2d60bff91d979378911e`;
 104 world tests, build and BPS round-trip passed, and a 142b Twin Peaks ordinary
 Save cold-continued with its position, state and movement intact. The Twin Peaks
 to Route 09 crossing and return passed a 16-frame native transient audit and
-menu restoration; other crossings remain untested. This experiment has not
+menu restoration. A broader transient run failed while returning to Marina
+with its own primary graphics missing; a fresh isolated four-boundary Marina
+run passed, so the history/timing-dependent cause is not resolved. Evidence is
+under `.tools/benchmarks/concept-v143-all-boundaries/` and
+`concept-v143-marina-history-isolate/`. The original transient check missed
+the map-identity change frame; a corrected check also passed the Twin Peaks /
+Route 09 trial, but the full circuit must be repeated. The alignment review also
+found that route-margin consumers need their own relocation before terrain using
+these slots can be enabled. This experiment has not
 changed the actual terrain or proved all transition frames, browser
 behavior, animation safety or visual quality; it must not be published.
 
