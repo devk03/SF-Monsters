@@ -1165,6 +1165,35 @@ individual bases, roof/side planes and scale before another native trial.
 Thirty distinct acceptable towers, full route/WASM gates and visual approval
 remain open.
 
+**FiDi v178 native-inspired anchor trial, not retained.** Local source-map
+research identified a layered civic building with deeper roof and façade planes;
+private reference renders and SHA-checked extraction studies are under
+`.tools/fidi-native-reference/`. A private 128px-high pilot used locally derived
+art, not a committed bitmap. The native build and BPS round trip passed; the
+civic kit used 395 metatiles and 163 shared primary graphics. A v159 ordinary
+Save on the new footprint recovered safely, preserving party, money, inventory,
+flags, chapter and Flash, with room return. ROM SHA-256
+`4e5c5371a46003dfec0b19ffa67db85fc949c973eacdf0e0e54f0ec6e8bd6e0b`;
+private native map and player scenes are in
+`.tools/benchmarks/fidi-v178-native-map/` and `fidi-v178-scenes/`.
+
+A fresh reviewer found its native style more coherent than v177 but identified
+a blank gray base, shallow cap and abrupt join to a much smaller neighbor;
+the district remains sparse and residential. The extractor's output lacks a
+verified working entrance, and this private placement depended on an ignored
+intermediate rather than a reproducible pinned-source build path. Integration
+was reverted to v176 and preserved in `.tools/fidi-v178-rejected-integration.patch`.
+Build a complete grounded facade and verified local extraction pipeline before
+retesting; 30 distinct downtown buildings and whole-world gates remain open.
+
+**Mission deep-block investigation.** A private source geometry audit of the
+v176 west mural envelope found 19 complete stamps. Its baseline terrain flood
+fill reached all 12 access points while excluding actor movement cells; this is
+not a changed-world or native proof. The protected northwest service area and
+existing northern storefront approaches mean filling the intervening ground
+requires a carefully validated whole-stamp replacement and new deep roof/side
+art. Audit source and output are under `.tools/mission-deep-block-study/`.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
