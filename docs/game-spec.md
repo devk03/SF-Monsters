@@ -1306,6 +1306,32 @@ roof concept has narrower lots than v2 but an independent review still found
 it too flat and repetitive; it needs varied depth, corner returns and a coherent
 playable block. No Mission profile, roof or replacement was integrated.
 
+**Twin Peaks v182 current review and native-motif studies.** Actual native
+full-map and five player views from ROM SHA-256
+`bbc50798e53e9c93cd784c31182320b72210a0c21cd201aeb5124cd04cd5bcb4`
+are in `.tools/benchmarks/twin-peaks-v182-native-map/` and
+`twin-peaks-v182-scenes/`. A fresh independent review against the ideal scored
+composition 1/4, density/purposeful space 2/4, visual consistency 1/4,
+planting/activity 1/4, identity 1/4 and exploration readability 2/4. Two
+coherent hill masses, a saddle and convincing summit approaches remain absent.
+
+Two private source-only Mt Pyre motif overlays are under
+`.tools/twin-mtpyre-motif-study/` and `.tools/twin-mtpyre-refined-study/`.
+Both were rejected visually: cliff faces end abruptly, stairs do not resolve,
+and old forest/canopy boundaries need a whole-stamp treatment. They are not
+native gameplay. The first 20-metatile motif uses 59 General graphics slots,
+15 of which need borrowing beyond pinned reservations. A reproducible in-memory
+current-world probe at `.tools/twin-mtpyre-motif-study/capacity.py` successfully
+allocated 55 atlases and relocated those 15 slots for the Twin Peaks consumer.
+This establishes source allocation only; it does not prove compiled VRAM,
+neighbor transitions, 57-pair continuous history, collision, old saves, WASM,
+or visual quality. The final motif's demands must be recalculated.
+A later bounded source-only assembly in `.tools/twin-mtpyre-bounded-study/`
+closes the cliff outline and stair opening, but a fresh reviewer found its
+symmetric rectangle and empty top resemble a raised lawn rather than a summit.
+It remains an unintegrated construction study; a connected asymmetric contour,
+credible ascent and actual native proof are still needed.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
