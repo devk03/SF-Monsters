@@ -643,6 +643,16 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Primary graphics restoration prototype.** `world_primary_restore.py` now
+computes the native graphics that a destination must restore after a previous
+scene overwrote them. A synthetic transition test checks recovered pixels and
+rejects destination collisions and missing native tiles. This is a pure planner;
+it is not wired into the engine, does not reserve Twin Peaks graphics, and does
+not establish transition correctness or VBlank capacity. The next implementation
+must supply destination-visible native slots including connection margins, use
+validated pinned native resources, and test real transitions and transient frames.
+Twin Peaks' landform and visual-review gates remain open.
+
 **Twin Peaks connectivity guard.** Summit validation now floods from the actual
 gym return instead of treating every pre-existing lane as a starting point.
 An independent split-map fixture demonstrates that the previous validator
