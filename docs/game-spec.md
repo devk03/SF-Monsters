@@ -914,6 +914,24 @@ needs a cohesive gathering space, the district has empty grass, awkward joins,
 sparse planting and too little human activity. Full-world native/WASM, browser
 and release checks remain open.
 
+**Private Castro v154 candidate.** Two existing east-end buildings now align
+with the new storefront row instead of projecting into its sidewalk. The native
+build and BPS round-trip pass, as do all 110 world tests. A v153 ordinary Save
+on ground newly occupied by the shifted buildings recovered safely and returned
+through a room, preserving party, money, inventory, flags, chapter and Flash.
+ROM SHA-256 `c22aa3f42e992cd5694dc457ed07c5a0741db15c751a69581855d0d4c7b31285`;
+receipt `7a709704f351402fb18a2cc40a3e0b60`. Current actual player-scale views
+are in `.tools/benchmarks/castro-v154-scenes/` and the native full map is in
+`castro-v154-native-map/`.
+
+A fresh independent reviewer compared both with v153 and the Castro ideal,
+scoring layout2, density2, joins2.5, planting1, identity2 and readability3 out
+of4. The roofline and sidewalk join visibly improve, but a vertical seam remains.
+Large grass lots, repetitive roads, sparse trees, disconnected street fronts,
+little activity and a generic theater plaza are still substantial defects.
+This is not human acceptance; matching WASM traversal, full-world and public
+release checks remain outstanding.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
