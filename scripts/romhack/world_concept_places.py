@@ -10,6 +10,7 @@ RECTS={
     'financial_district':(40,17,56,28),
     'mission_bay':(64,17,76,28),
     'mission':(66,37,82,48),
+    'castro':(3,24,21,29),
 }
 EXTRA_RECTS={'dogpatch':((3,24,13,28),(3,37,13,43)),
              'mission':((4,24,14,27),)}
@@ -83,6 +84,17 @@ def furnish(plan,grid,cards,stamp,token,lanes):
         note=('Public lunch court. You can eat here even if you do not work in any of these buildings.'
               if identifier=='financial_district' else
               'Research campus court. A good place to sit between appointments. Please leave the bicycle entrance clear.')
+    elif identifier=='castro':
+        # Joined, varied storefronts complete an otherwise vacant block.
+        # The open strip below remains a continuous pedestrian approach.
+        for style,x in [('arcade_l',4),('shophouse_m__sage',7),
+                        ('deco_m',9),('walkup_m__slate',12),('duplex_m',15),
+                        ('shophouse_m',18),('shophouse_r__sage',20)]:
+            put(style,x,24)
+        paint('brick_walk',4,28,21,29)
+        title='Castro neighborhood storefronts';point=(11,29)
+        obj=(3,28);standing=(3,29)
+        note='The theater is up the street. The little shops here stay open after the show.'
     else:
         paint('grass',left,top,right,bottom)
         paint('brick_walk',left,42,right,43)

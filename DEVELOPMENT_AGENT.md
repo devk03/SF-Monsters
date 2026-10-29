@@ -22,6 +22,12 @@ layouts. Concepts are references, not ready-to-use tilemaps or human approval of
 implementation. Track district composition and gaps in
 [concept-translation.md](docs/world/concept-translation.md).
 
+The current user-directed iteration is to improve each destination against its
+own expanded ideal, then request a completely fresh independent subagent review
+of actual in-game screenshots and the corresponding ideal. Reviewers should
+identify remaining gaps and must not treat concept art as implemented gameplay.
+Continue across the town queue; a single improvement is not approval of a town.
+
 Finish a cohesive world before independently assigned gym/mission encounters:
 
 - All19destinations, including Presidio, have96×64footprints:6144metatiles each,

@@ -897,6 +897,23 @@ The nearby grass gap, large lawns and sparse street activity still require
 substantial work. This is visual triage, not human approval; full-world native
 and WASM, browser and public release checks remain open.
 
+**Private Castro v153 candidate.** A previously empty southern block now has
+seven connected storefronts with varied forms and colors, a clear pedestrian
+strip and a local sign. The v151 scattered-planter experiment was rejected by
+independent visual review; v152 replaced it with the new frontage, and v153
+extends that frontage east. Native build and BPS round-trip passed. A real v142
+save on newly occupied ground continued safely in v153 and completed a room
+return with party, money, inventory, flags, chapter and Flash preserved.
+Actual v153 screenshots are private in `.tools/benchmarks/castro-v153-scenes/`.
+All 110 world tests pass. A fresh independent review scores layout2, density2,
+joins2, planting1, identity2 and readability3 out of4. It confirms the east
+grass gap is now frontage, while flagging a mismatched roofline seam, a broad
+empty street gap and an unchanged theater forecourt.
+This is an incremental candidate, not neighborhood approval: the theater still
+needs a cohesive gathering space, the district has empty grass, awkward joins,
+sparse planting and too little human activity. Full-world native/WASM, browser
+and release checks remain open.
+
 **Primary graphics restoration prototype.** `world_primary_restore.py` now
 computes the native graphics that a destination must restore after a previous
 scene overwrote them. A synthetic transition test checks recovered pixels and
