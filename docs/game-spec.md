@@ -1194,6 +1194,27 @@ existing northern storefront approaches mean filling the intervening ground
 requires a carefully validated whole-stamp replacement and new deep roof/side
 art. Audit source and output are under `.tools/mission-deep-block-study/`.
 
+**FiDi v179 anchor pipeline and placement trial.**
+`world_fidi_native_anchor.py` is a source-only, build-time extraction candidate:
+it verifies pinned local Git objects and emits indexed pixels in memory; no
+native bitmap or palette is committed. It fills the v178 blank base with
+windowed masonry and has no inherited entrance or warp. A private pilot placed
+it next to a shorter office and house frontage. Civic allocation was 393
+metatiles and 156 shared primary graphics; native build, BPS round trip, 114
+world tests, one FiDi–Route 13 transient seam/menu check and a v159 ordinary
+Save recovery passed. ROM SHA-256
+`ca362f3ab4a6c965d1d96f8d1f97998739c053de1213e165b13b3918ff5bd27c`;
+private actual map/player views are under `.tools/benchmarks/fidi-v179-native-map/`
+and `fidi-v179-scenes/`.
+
+Fresh independent review against the ideal found the repaired base an
+improvement but rated the district 3/10: the neighboring tower appears pasted
+on, has door-shaped bays without established interactions, and most of FiDi
+remains sparse, low-rise and repetitive. Placement was reverted and saved as
+`.tools/fidi-v179-rejected-integration.patch`; the source-only extractor remains
+an experiment, not integrated game art. The thirty distinct attached towers,
+coherent block design, full traversal/WASM checks and human approval remain open.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
