@@ -668,6 +668,14 @@ counts overlap). Simple whole-profile dead-art pruning therefore cannot recover
 the six slots. Per-map loading might reclaim space, but these counts exclude
 connection margins and do not prove that transitions restore native graphics;
 those must be verified before changing allocation. No artwork was simplified.
+The native camera-transition call path was traced: `LoadMapFromCameraTransition`
+loads the destination secondary tileset but does not call the primary-tileset
+copy. `SFSeamCommit` queues destination secondary/owned graphics and palettes;
+it does not restore overwritten native primary graphics. A per-map allocator
+must therefore restore any destination-native primary slots in the same atomic
+scene commit, before the destination's owned graphics, and prove both directions
+and transient frames. Ordinary map loads also need independent verification.
+This is source inspection, not a transition or DMA-budget test.
 
 **October28 refined working goal — all-town improvement with fresh visual review.**
 Continue redesigning ALL19destinations (18campaign stops plus Presidio) into
