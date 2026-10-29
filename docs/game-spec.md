@@ -643,6 +643,61 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**October28 refined working goal — all-town improvement with fresh visual review.**
+Continue redesigning ALL19destinations (18campaign stops plus Presidio) into
+distinct, cohesive, explorable native SF districts, using each matching expanded
+ideal in `output/imagegen/neighborhood-ideals-v2-expanded/` as the composition
+reference. Retain96x64destination footprints,36physical intermediate routes,
+all eight gym/contributor contracts, useful services and safe Saves. This is
+the current refinement of the existing active goal; its original scope stays
+intact. The goal tool supports status changes only, so its older card text is
+not editable here. This section and DEVELOPMENT_AGENT.md carry the revised
+working objective and supersede the obsolete October23deadline. No new cutoff
+or completion claim is introduced.
+
+Use a completely fresh-context subagent, separate from implementation, to
+visually review every town against its corresponding ideal. The first fresh
+round covers all19; subsequent rounds independently review materially changed
+towns and maintain a full-world queue. Do not copy earlier critiques or infer
+appearance from source/tests. Each town needs one actual complete native map
+and at least three player-level screenshots covering arrival, primary activity/
+landmark and secondary street/trail. Pair these with the ideal and, after a
+redesign, its genuine prior implementation. Record version, ROM hash, exact
+capture paths and coverage; explicitly label historical or missing evidence.
+Keep inherited native screenshots/ROM material private under `.tools`.
+
+Review layout/massing, density and use of space, architecture/finished edges,
+sidewalks/planting/activity, local identity, and exploration/readability.
+Use0–4 estimates:0absent,1rough,2partial,3close/coherent,4strongly matches intent
+within explained native constraints. For each town list the three largest
+visible defects, specific redesign actions and unresolved uncertainty. These
+are reviewer estimates, not human approval or evidence of Emerald parity.
+
+Implement from the ranked cross-town findings; do not keep every other town
+waiting indefinitely on Dogpatch. Favor whole-block/terrain/landmark changes
+that address the image comparison over count increases or paint-only fixes.
+After substantial changes capture new native evidence and get another fresh
+independent review, recording addressed/remaining defects in the district
+ledger. Target at least3/4 in every applicable dimension and no unresolved major
+visual defect in any destination. Scores cannot waive user-requested quality,
+native constraints cannot excuse incoherent composition, and only the user
+can grant final aesthetic/game-feel acceptance on actual comparisons.
+
+Completion still requires all19towns, native/WASM connectivity and resource
+checks, old-Save cold Continue, complete maps/gameplay for critique, browser/
+audio/mobile verification and human acceptance. Preserve publicv80/v92 and
+local-ROM/patch-only distribution. Commit coherent changes frequently with
+manual-only Actions. Coordinate with the existing alignment chat about every
+30active minutes; do not create recurring monitors. The first fresh independent
+review is complete:19actual/ideal full-map pairs,76sampled player views plus
+three additional Dogpatch views, six separate scores, and three defects/actions
+per town. The parent rechecked image hashes and coverage. Eighteen capture sets
+are explicitly historical; a new current-candidate all19tour is underway.
+The [baseline and queue](world/visual-review-baseline-2026-10-28.md) preserve the
+findings. Private full report/gallery/evidence are in
+`.tools/benchmarks/fresh-town-review-2026-10-28/`. No town is visually accepted;
+low scores expose remaining work, not a reduced scope. Goal stays active.
+
 **v141 recessed studios and quieter loft materials — private world candidate.**
 Version `0.0.141-dogpatch-studio-masonry-world-draft`, ROM SHA
 `3e500b1ff2a46dcc28da7115c33f80d75857af8266de6e4808a6ba8037ad67c6`,

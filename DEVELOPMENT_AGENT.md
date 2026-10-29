@@ -43,9 +43,38 @@ Finish a cohesive world before independently assigned gym/mission encounters:
 
 ## Current checkpoint and next work
 
-The user again rejected overall town quality. Prioritize ONE complete Dogpatch
-rebuild against its expanded concept before spreading another small fix across
-towns. Counts/tests are functional evidence, not acceptable composition.
+The October28 user instruction requires continued improvement of EVERY town,
+guided by a completely fresh independent subagent reviewing actual screenshots
+against each corresponding expanded ideal. This supersedes the former rule to
+finish only the Dogpatch pilot before working elsewhere. Keep all19destinations
+in the review and implementation queue, including the parks and both islands.
+Counts/tests are functional evidence, not acceptable composition.
+
+For each review round, use a fresh-context reviewer who did not implement the
+changes. Review an actual full native map plus at least three player-scale
+screenshots (arrival, main activity/landmark, secondary street/trail) against the
+matching ideal. Record exact version/ROM hash and capture paths; flag historical
+or missing evidence. Never relabel old screenshots as current. Include visible
+before/after pairs after substantial changes. Keep native captures private.
+
+Evaluate layout/massing, density/purposeful space, architecture/finished joins,
+sidewalks/planting/activity, district identity, and exploration/readability on a
+0–4 rubric. Scores are independent triage, never human approval. Each review
+must name the three most consequential visible defects and concrete redesigns.
+Work from the ranked cross-town queue, re-review changed towns, and update
+15.1/concept-translation.md with addressed and remaining gaps. Aim for at least
+3/4 in every applicable dimension, with no unresolved major visual defect;
+human approval of actual comparisons remains required for completion. Native
+hardware limits must lead to coherent adaptation, not a lower quality claim.
+
+The first fresh all19review is complete; see
+[its baseline and ranked queue](docs/world/visual-review-baseline-2026-10-28.md).
+Private full report/gallery: `.tools/benchmarks/fresh-town-review-2026-10-28/`.
+All19have full-map/ideal pairs and four inspected player views, with six
+separate scores;18capture sets are historical. No town meets the visual bar.
+Refresh all19on the current candidate before treating those historical
+screenshots as current. Preserve the separate existing alignment-chat cadence.
+
 Private v141 replaces two of140's repeated lofts with a native-derived recessed
 studio canopy, original WORKS sign/closed shutter and existing SF colors. The two
 remaining lofts have muted gray masonry/roof materials. First freight section

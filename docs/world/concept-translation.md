@@ -13,6 +13,11 @@ the separate Presidio destination remain in scope; the gym count stays eight.
 
 Every row is an implementation candidate. None has human visual acceptance.
 “Source” describes authored geometry, not evidence of correct native rendering.
+The [October28fresh independent baseline](visual-review-baseline-2026-10-28.md)
+now supplies six visual scores and a ranked all19redesign queue. Its eighteen
+non-Dogpatch screenshot sets are historical; current-candidate capture refresh
+is underway. Review substantial revisions with a fresh-context subagent using
+actual full-map/player screenshots against each corresponding expanded ideal.
 
 | District / expanded reference | Source composition now | Material gap before a close match |
 | --- | --- | --- |
