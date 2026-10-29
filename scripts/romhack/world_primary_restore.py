@@ -55,3 +55,15 @@ def restoration(previous_slots, destination_native, destination_owned, native_ti
     if missing:
         raise ValueError('Missing pristine native graphics for restoration')
     return [(slot, validate_tile(native_tiles[slot])) for slot in needed]
+
+
+def destination_restoration(destination_native, destination_owned, native_tiles):
+    """Restore all visible native graphics, independent of transition history.
+
+    A slot overwritten two maps ago can still be stale when the immediately
+    preceding map never touched it. A runtime that tracks only the last map's
+    writes is therefore insufficient. Animation and VBlank timing remain for the
+    engine integration to prove; this helper is only a conservative plan.
+    """
+    native=set(destination_native)
+    return restoration(native,native,destination_owned,native_tiles)

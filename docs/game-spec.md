@@ -652,6 +652,13 @@ not establish transition correctness or VBlank capacity. The next implementation
 must supply destination-visible native slots including connection margins, use
 validated pinned native resources, and test real transitions and transient frames.
 Twin Peaks' landform and visual-review gates remain open.
+The prototype now also offers a history-independent destination plan: restoring
+only slots written by the immediately previous map misses art overwritten two
+transitions earlier. An A→B→C synthetic case protects that failure. With current
+map data, the conservative visible-native plan reaches71tiles/24contiguous runs
+(2272bytes) for Twin Peaks. This is an input estimate, not a DMA/VBlank test;
+animation slots, transition timing, linked art and real browser/native checks
+still require engineering and verification before integration.
 The prototype now derives destination-visible native slots from actual map
 cells, all border metatiles, clipped connection margins, implicit field
 background, and native graphics referenced by composite cards. Synthetic tests

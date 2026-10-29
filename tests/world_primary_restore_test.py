@@ -4,11 +4,20 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/romhack'))
-from world_primary_restore import restoration,visible_native_slots
+from world_primary_restore import restoration,visible_native_slots,destination_restoration
 import struct
 
 
 class PrimaryRestorationTests(unittest.TestCase):
+    def test_restore_does_not_assume_only_previous_scene_can_be_dirty(self):
+        original={7:bytes([2])*64,11:bytes([3])*64}
+        scene={7:bytes([9])*64,11:original[11]}  # Map A overwrote slot7.
+        scene[11]=bytes([8])*64  # Map B wrote only slot11.
+        scene.update(destination_restoration({7}, {20}, original))
+        self.assertEqual(scene[7],original[7])  # Map C needs A's old slot.
+        with self.assertRaisesRegex(ValueError,'Missing'):
+            destination_restoration({7,11},{20},{7:original[7]})
+
     def test_visible_native_slots_include_borders_and_clipped_neighbors(self):
         legend={'.':[1,False,3], 'b':[3,True,3], 'v':[4,False,3], 'x':[5,False,3], 's':[512,True,3]}
         neighbor={'rows':['v'+'.'*19]+['.'*20 for _ in range(10)]+['x'+'.'*19],
