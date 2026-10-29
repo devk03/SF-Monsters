@@ -29,10 +29,12 @@ def visible_native_slots(plan, by_native, kits, general_records):
     ids=native_ids(plan,points)
     ids |= split_ids(plan,set(plan.get('border_metatiles',[plan.get('border_tile',11)])))
     if kits[plan.get('tile_profile','residential')].get('uses_native_grass'):ids.add(1)
+    if kits[plan.get('tile_profile','residential')].get('uses_native_sand'):ids.add(0x124)
     for link in plan.get('connections') or []:
         neighbor=by_native[link['map']]
         ids |= native_ids(neighbor,margin_points(neighbor,link['direction'],plan,link['offset']))
         if kits[neighbor.get('tile_profile','residential')].get('uses_native_grass'):ids.add(1)
+        if kits[neighbor.get('tile_profile','residential')].get('uses_native_sand'):ids.add(0x124)
     slots={20} | native_words  # The field renderer draws implicit background word 0x3014.
     for identifier in ids:
         if len(general_records) < (identifier+1)*16:

@@ -116,6 +116,14 @@ class PrimaryRestorationTests(unittest.TestCase):
         plan['connections']=None
         self.assertEqual(visible_native_slots(plan,{}, kits,records),{10,17,20,30})
 
+    def test_composite_sand_reserves_native_graphics_even_without_sand_map_cells(self):
+        plan={'rows':['.'], 'legend':{'.':[1,False,3]}, 'tile_profile':'coast',
+              'border_tile':1, 'connections':None}
+        records=b''.join(struct.pack('<8H',*([264 if i==0x124 else 2]*8))
+                         for i in range(0x125))
+        slots=visible_native_slots(plan,{}, {'coast':{'uses_native_sand':True}},records)
+        self.assertIn(264,slots)
+
     def test_transition_recovers_only_needed_native_tiles(self):
         original={7:bytes([2])*64, 11:bytes([3])*64, 15:bytes([4])*64}
         scene={7:bytes([9])*64,11:bytes([8])*64,15:original[15]}

@@ -96,9 +96,11 @@ def make_atlases(plans, kits, reserved_tiles, reserved_banks, palette_locks=None
         active_ids={plan['legend'][t][0] for row in plan['rows'] for t in row if plan['legend'][t][0]<512}
         if plan.get('border_tile',11)<512:active_ids.add(plan.get('border_tile',11))
         if kit.get('uses_native_grass'):active_ids.add(1)
+        if kit.get('uses_native_sand'):active_ids.add(0x124)
         for link in plan['connections'] or []:
             other=by_native[link['map']]
             if kits[other.get('tile_profile','residential')].get('uses_native_grass'):active_ids.add(1)
+            if kits[other.get('tile_profile','residential')].get('uses_native_sand'):active_ids.add(0x124)
             active_ids|={other['legend'][other['rows'][y][x]][0] for x,y in margin_points(other,link['direction'],plan,link['offset'])
                          if other['legend'][other['rows'][y][x]][0]<512}
         active_banks=set(reserved_banks) if primary_banks is None else set().union(*(primary_banks[i] for i in active_ids))

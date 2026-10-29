@@ -27,6 +27,14 @@ class SunsetBeachTests(unittest.TestCase):
             self.assertIn(point, seen)
         self.assertEqual(legend[rows[35][10]][0], 0x124)  # Native sand.
         self.assertTrue(legend[rows[35][5]][1])  # Ocean cannot be walked on.
+        self.assertFalse(any(b['style']=='street_tree' and (b['x'],b['y'])==(12,32) for b in plan['town_blocks']))
+        for _,x,y in plan['sunset_dunes']['plantings']:
+            self.assertIn((x,y),seen)
+            self.assertFalse(legend[rows[y][x]][1])
+        for point in ((12,32),(13,33)):
+            self.assertIn(point,seen)
+            self.assertEqual(legend[rows[point[1]][point[0]]][0],0x124)
+
 
 
 if __name__ == '__main__':

@@ -4,6 +4,15 @@ from pathlib import Path
 from PIL import Image
 
 
+def approved_native_word(profile, record_id, quadrant, word, sand_ids, sand_lower):
+    if profile == 'residential' or quadrant >= 4:
+        return False
+    if word == (0x2002,0x2003,0x2003,0x2002)[quadrant]:
+        return True
+    return (profile == 'neighborhood' and record_id in sand_ids
+            and word == sand_lower[quadrant])
+
+
 def audit_resources(rom,read,secondary,profile,engine,symbols=None):
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'quality'))
     from check_creature_resources import decode_lz
@@ -44,12 +53,21 @@ def audit_resources(rom,read,secondary,profile,engine,symbols=None):
         resources.extend([('primary-slots',slots_raw,bytes(read(symbols['gSFPrimarySlots_'+suffix],str(len(slots_raw))+'B'))),
                           ('primary-art',raw,bytes(read(symbols['gSFPrimaryGraphics_'+suffix],str(len(raw))+'B')))])
         own=dict(zip(slots,(raw[i*32:(i+1)*32] for i in range(len(slots)))))
+    sand_ids=set();sand_lower=()
+    if profile=='neighborhood':
+        from world_art_contract import load_profiles
+        from world_shared_primary import validate_general
+        contract=load_profiles()[profile]['cards']
+        sand_ids={contract['dune_grass_'+str(i)]['first'] for i in (1,2,3)}
+        general=(engine/'data/tilesets/primary/general/metatiles.bin').read_bytes()
+        validate_general(general)
+        sand_lower=struct.unpack_from('<8H',general,0x124*16)[:4]
     for index,word in enumerate(struct.unpack('<'+'H'*(len(source)//2),source)):
         if word&1023<512:
             if word>>12>=6:
                 if word&1023 not in own or word>>12>12:raise ValueError('SF record addresses unloaded own-primary graphics')
                 continue
-            if profile=='residential' or index%8>=4 or word!=[0x2002,0x2003,0x2003,0x2002][index%8]:
+            if not approved_native_word(profile,512+index//8,index%8,word,sand_ids,sand_lower):
                 raise ValueError('SF record references unapproved primary terrain')
             continue
         if not 512<=word&1023<1024 or not 6<=word>>12<=12:

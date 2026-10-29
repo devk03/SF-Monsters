@@ -29,11 +29,14 @@ class BuildingVarietyTests(unittest.TestCase):
             grass=kit['catalog']['grass']['tiles'][0][0]
             self.assertEqual(kit['records'][grass-512][:4],[0x2002,0x2003,0x2003,0x2002])
             self.assertFalse(kit['catalog']['grass']['blocked'])
-            for card in kit['catalog'].values():
+            for name,card in kit['catalog'].items():
                 for row in card['tiles']:
                     for tile in row:
                         native=[word for word in kit['records'][tile-512] if word&1023<512 and word>>12<6]
-                        self.assertTrue(all(word in (0x2002,0x2003) for word in native))
+                        if profile=='neighborhood' and name in ('dune_grass_1','dune_grass_2','dune_grass_3'):
+                            self.assertEqual(native,[0x5108,0x5118,0x5118,0x5108])
+                        else:
+                            self.assertTrue(all(word in (0x2002,0x2003) for word in native))
                         for word in kit['records'][tile-512]:
                             if word&1023<512 and word>>12>=6:
                                 self.assertIn(word&1023,kit['primary_tiles'])

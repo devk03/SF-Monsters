@@ -308,6 +308,8 @@ def expand(plans, manifest):
                     if (x,y) in sea|lanes|occupied:continue
                     if (x,y) in shore or grid[y][x]==token('grass',x,y):
                         grid[y][x]=sand
+            from world_sunset_dunes import furnish as furnish_sunset_dunes
+            furnish_sunset_dunes(plan,grid,cards,lanes,occupied,sea,shore)
         if name=='angel_island':
             # The former compact map's east shore is now inland. Remove only
             # those obsolete sea/wall cells, retaining landmarks and actors.

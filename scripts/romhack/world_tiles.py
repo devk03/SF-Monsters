@@ -464,6 +464,23 @@ def compile_kit(root=ROOT, profile='residential'):
         for name,color in (('red',7),('gold',10),('green',14),('blue',4),('violet',11)):
             ink=bytes(color if 1<=x<=14 else 0 for y in range(16) for x in range(16))
             card('castro_crossing_'+name,ink,16,16,6,asphalt,8,False,deduplicate=True)
+    if profile == 'neighborhood':
+        # Build original sparse dune plants over verified native sand, without
+        # embedding or distributing sand pixels in the SF source assets.
+        from world_native_loft import checked_blobs
+        from world_shared_primary import validate_general
+        from world_sunset_dune_art import cards as dune_cards
+        source='data/tilesets/primary/general/metatiles.bin'
+        raw=checked_blobs(root,{source:'17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910'})[source]
+        validate_general(raw)
+        lower=list(struct.unpack_from('<8H',raw,0x124*16)[:4])
+        for name,pixels in dune_cards():
+            record=lower+words(pixels,7)
+            attribute=LAYER_COVERED
+            prior=next((i for i,(r,a) in enumerate(zip(records,attributes)) if r==record and a==attribute),None)
+            if prior is None:
+                prior=len(records);records.append(record);attributes.append(attribute)
+            catalog[name]={'tiles':[[FIRST_METATILE+prior]],'blocked':False,'explicit_cells':True}
     if len(records) > 512:
         raise ValueError('SF world kit exceeds native secondary allocation')
     if any(not 6<=bank<=12 or len(raw)!=32 for bank,raw in palettes.items()):
@@ -472,7 +489,7 @@ def compile_kit(root=ROOT, profile='residential'):
     tiles, primary_tiles, records = pack_graphics(tiles,records)
     return {'tiles': tiles, 'primary_tiles':primary_tiles, 'records': records, 'attributes': attributes,
             'palettes': palettes, 'catalog': catalog, 'profile':profile,
-            'uses_native_grass':profile!='residential'}
+            'uses_native_grass':profile!='residential', 'uses_native_sand':profile=='neighborhood'}
 
 
 def apply_kit(engine, original, kit):

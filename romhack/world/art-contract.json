@@ -17071,6 +17071,45 @@
           "blocked": true,
           "behavior": 0,
           "layer": 1
+        },
+        "dune_grass_1": {
+          "first": 1006,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1006
+            ]
+          ]
+        },
+        "dune_grass_2": {
+          "first": 1007,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1007
+            ]
+          ]
+        },
+        "dune_grass_3": {
+          "first": 1008,
+          "width": 1,
+          "height": 1,
+          "blocked": false,
+          "behavior": 0,
+          "layer": 1,
+          "cells": [
+            [
+              1008
+            ]
+          ]
         }
       }
     },

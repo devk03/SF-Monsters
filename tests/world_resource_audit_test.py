@@ -7,6 +7,18 @@ sys.path.insert(0,str(ROOT/'scripts/romhack'))
 from world_resource_audit import audit_resources
 
 
+class NativeSandApprovalTests(unittest.TestCase):
+    def test_sand_is_limited_to_approved_cards_and_lower_quadrants(self):
+        from world_resource_audit import approved_native_word
+        sand=(0x5108,0x5118,0x5118,0x5108)
+        for q,word in enumerate(sand):
+            self.assertTrue(approved_native_word('neighborhood',900,q,word,{900},sand))
+        self.assertFalse(approved_native_word('neighborhood',901,0,sand[0],{900},sand))
+        self.assertFalse(approved_native_word('culture',900,0,sand[0],{900},sand))
+        self.assertFalse(approved_native_word('neighborhood',900,4,sand[0],{900},sand))
+        self.assertFalse(approved_native_word('neighborhood',900,0,sand[1],{900},sand))
+
+
 class WorldResourceTests(unittest.TestCase):
     def setUp(self):
         self.folder=Path(tempfile.mkdtemp(prefix='world-resources-',dir=ROOT/'.tools'))

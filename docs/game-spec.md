@@ -1382,6 +1382,29 @@ The coastline is still a flat strip and broad empty paving, repetitive façades,
 limited coastal planting and sparse activity remain. This is not completion or
 human visual approval of the town.
 
+**Outer Sunset v186 coastal planting, in progress.** Three original sparse
+sand-backed dune-grass motifs replace the boxed street tree on the beach with
+six walkable tufts. Only ten generated map cells changed, all in Outer Sunset.
+The sand lower layer is read from hash-verified pinned General metatile 0x124;
+no native sand pixels or palette are distributed. Three new neighborhood
+metatile records and eleven additional original 8px graphics are used. The
+linked resource audit restricts native sand references to those specific cards,
+and native sand dependencies are reserved during seam allocation/restoration.
+
+The native build/BPS round trip, 118 world tests plus targeted native-sand
+restoration checks, and an ordinary v185 Save continued from a changed walkable
+sand tile passed. All 57 unique native world boundary pairs passed in one
+continuous run, in both directions with transient-frame and menu checks; this
+does not establish whole-game or browser visual approval. A 7,353-frame native walk replayed in the pinned website
+WASM core with zero differing RAM bytes; browser timing/audio remain unverified.
+ROM SHA-256 `087e73f6e85077791a1993b9199a0f21a9857b0332949200523db476cd64c7f0`;
+private actual views and full map are in `.tools/benchmarks/outer-sunset-v186-scenes/`
+and `outer-sunset-v186-native-map/`. A fresh independent reviewer recommends
+retaining the local fix: the beach tree no longer looks like a boxed city
+planter, but tufts are sparse and repeated, the coastline remains straight and
+hard-edged, and the town still needs coherent dense blocks and coastal identity.
+This is not visual approval of the town.
+
 **Urban-form baseline.** `scripts/quality/audit_urban_form.py` independently
 reports source-map grass, contiguous grass patches, building footprints,
 party-wall adjacency and tall office counts for urban areas. On v159 it finds
