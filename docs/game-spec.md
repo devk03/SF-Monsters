@@ -1127,6 +1127,25 @@ review remain mandatory. Reproduce with `python3 scripts/quality/audit_urban_for
 --output <local-report.json>`; the current private report is
 `.tools/benchmarks/urban-form-v159/report.json`.
 
+**North Beach eastern frontage v173, in progress.** Three targeted frontage
+segments add ten buildings, connecting a northern gap and introducing two
+street-facing rows with sidewalk approaches. The native build and BPS round trip
+succeeded; 113 world tests passed and the North Beach to Route 17 seam
+passed a native transient-frame and menu check. Three v159 saves on newly
+occupied tiles cold-continued safely, with
+party, inventory, money, flags and room return preserved. The private native
+captures are in `.tools/benchmarks/north-beach-v173-scenes/` and the full map
+is in `.tools/benchmarks/north-beach-v173-native-map/`. Urban-form audit: grass
+fell from 24.7% to 22.4%, and the largest grass patch from 517 to 433 tiles.
+
+A fresh independent visual review rates density and North Beach identity 1/4:
+large lawns, isolated rows, disconnected paving, dead-end spurs and generic
+repeated façades remain. The next pass must form cohesive street blocks with
+continuous sidewalks, remove purposeless paving, and add recognizable North
+Beach commercial/civic character. These rows are not approval of the town or
+proof of overall visual parity. FiDi's approximately 30 distinct attached tower
+designs remain a separate outstanding requirement.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.
