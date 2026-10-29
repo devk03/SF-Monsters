@@ -1047,6 +1047,15 @@ connection margins. This is not a compiled metatile, live-seam or quality
 check. Thirty genuinely distinct, readable native-scale buildings with usable
 joined ends are still required; the prototype does not prove that requirement.
 
+The v5 source-only study adds storefront details and stepped/offset silhouettes;
+its sheet is `.tools/benchmarks/fidi-30-concepts-v5/contact-sheet.png`. A fresh
+reviewer found improvement but only about five to seven recognizable structural
+families, repetitive entries and insufficient depth. Its source-only estimate
+is 74 additional 8px graphics. A private compiler experiment adding all 30
+designs and all four edge variants reached 523 civic metatiles, above the 512
+limit, before connection and in-game validation. The experiment is not wired into
+the game. More genuinely distinct forms and metatile reuse are both required.
+
 **Latest urban composition direction.** Dogpatch, Potrero Hill, Mission,
 Castro, Outer Sunset and North Beach should have buildings attached along each
 street block, with routes around blocks rather than routine pedestrian alleys.

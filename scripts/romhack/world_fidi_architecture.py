@@ -1,14 +1,14 @@
 """Original, modular GBA-scale Financial District building candidates.
 
-Every design changes structural features, not just its palette. The sheet is a
-private art prototype until it passes native budget and in-game visual review.
+The images vary some structural features, but remain too repetitive to meet the
+30-distinct-design requirement. This is a source-art prototype, not game art.
 """
 from pathlib import Path
 import argparse
 
 DESIGNS=tuple(dict(id=f'fidi_{i+1:02d}', family=i%10, crown=i%5, material=(i//5)%3,
                    width=2+i%3, height=5+i%4, windows=(i//3)%3,
-                   entrance=(i//2)%3, setback=(i//3)%4) for i in range(30))
+                   entrance=(i//2)%3, shape=6 if i==14 else i%6) for i in range(30))
 
 
 def facade(spec, closed=('left','right')):
@@ -18,7 +18,7 @@ def facade(spec, closed=('left','right')):
     pixels=bytearray(width*height)
     family=spec['family']; material=family%3
     wall=(7,9,10)[material]; shade=(8,6,6)[material]
-    def micro(kind,variant=0,edge=False):
+    def micro(kind,variant=0,edge=None):
         a=bytearray([wall]*64)
         def box(x0,y0,x1,y1,c):
             for y in range(max(0,y0),min(8,y1+1)):
@@ -43,22 +43,39 @@ def facade(spec, closed=('left','right')):
             box(2,1,3,2,3)
         elif kind=='base':
             box(0,0,7,1,5);box(0,7,7,7,6)
+            if variant==0:
+                box(1,2,6,6,1);box(2,3,5,5,4)
+            elif variant==1:
+                box(1,2,6,6,1);box(2,3,5,6,4);box(2,2,5,2,5)
+            else:
+                box(0,2,7,3,7);box(0,2,3,3,5)
+                box(1,4,6,6,1);box(2,4,5,6,4)
         elif kind=='door_top':
             box(0,0,7,1,5);box(1,2,6,7,1);box(2,3,5,7,4)
         elif kind=='door_bottom':
             box(1,0,6,6,1);box(2,0,5,5,4);box(3,1,3,5,5);box(0,7,7,7,6)
-        if edge:box(0,0,0,7,1)
+        if edge=='left':box(0,0,0,7,1)
+        if edge=='right':box(7,0,7,7,1)
         return bytes(a)
     for ty in range(th):
         for tx in range(tw):
-            inset=1 if spec['setback'] and ty<2 else 0
-            if tx<inset or tx>=tw-inset:kind='empty'
+            shape=spec['shape']; left=right=0
+            if shape==1 and ty<2:left=right=1
+            elif shape==2 and ty<4:left=right=2 if ty<2 and tw>=6 else 1
+            elif shape==3 and ty<3:left=1
+            elif shape==4 and ty<3:right=1
+            elif shape==5 and ty<th//2:left=right=1
+            elif shape==6 and ty<th-2:
+                left=right=max(0,(tw//2-1)-(ty*tw//(2*(th-2))))
+            if tx<left or tx>=tw-right:kind='empty'
             elif ty==0:kind='roof'
             elif ty>=th-2:kind=('door_top' if ty==th-2 else 'door_bottom') if tx==tw//2 else 'base'
             elif family in (1,5,9):kind='glass'
-            else:kind='window' if (tx+family)%2==0 else 'base'
-            exposed=(tx==0 and 'left' in closed) or (tx==tw-1 and 'right' in closed)
-            raw=micro(kind,spec['crown'] if kind=='roof' else spec['windows'],exposed)
+            else:kind='window' if (tx+family)%2==0 else 'wall'
+            edge=('left' if tx==0 and 'left' in closed else
+                  'right' if tx==tw-1 and 'right' in closed else None)
+            variant=spec['crown'] if kind=='roof' else spec['entrance'] if kind=='base' else spec['windows']
+            raw=micro(kind,variant,edge)
             for dy in range(8):
                 pixels[(ty*8+dy)*width+tx*8:(ty*8+dy)*width+tx*8+8]=raw[dy*8:dy*8+8]
     return width,height,bytes(pixels)
