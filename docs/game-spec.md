@@ -1579,6 +1579,36 @@ that rejection; it did not pass. Both experiments are preserved privately at
 the current game. Design the plot as a connected, bounded community space
 before paying the shared tileset cost. No human approval is implied.
 
+Further source-only Noe plot studies in `.tools/noe-community-v2/` and
+`noe-community-v3/` preserve actor-aware reachability in their geometry model,
+but still look like regimented crop strips. The latter estimates 14 unique
+metatile pieces against six free mixed-use records before compilation and
+margins. Neither is a playable candidate or accepted visual design.
+
+**Marina v195 harbor trial, rejected.** A private build added a walkable pier
+and two different original boats to solid scenic water. Linked build, BPS,
+125 world tests, a v192 ordinary Save cold Continue at the quay and a
+4,658-frame matching web-core replay passed. ROM SHA-256
+`fc37f769117c1f44b9bfc60d2ff5e59c1af36140dbe6d43e6e6499d5db240c32`;
+private native views and full map are under `.tools/benchmarks/marina-v195-scenes/`
+and `marina-v195-native-map/`. A fresh reviewer found the narrow harbor boxed
+in by repeating trees at the camera edge, a poorly legible dinghy and an
+abrupt pier; the broader waterfront remains empty. The source trial is saved
+at `.tools/marina-v195-rejected/`, not integrated. A coherent bay edge,
+moored vessels and route/margin validation remain open.
+
+**Golden Gate Park whole-map source study.** An alignment-led composition
+study in `.tools/ggp-whole-composition-study/` cleared complete tree groups
+and sketched new paths while preserving existing source-level reachability.
+A fresh review rejected its enormous empty lawns, repetitive groves, tiny
+isolated landmarks and discontinuous paths. It is a source composite, not
+native gameplay; shrink and furnish the clearings, recompose irregular groves
+and connect landmark/lake paths before a native trial.
+The refined source pass connects its visible sand component and preserves
+previously reachable actor-aware cells in source tests, but a second fresh
+review still found oversized empty lawns, repeated tree grids, stubbed landmark
+paths and an ungrounded lake. It too remains private and unintegrated.
+
 **Twin Peaks open-shelf study, rejected.** A source-only native-metatile
 montage in `.tools/twin-open-mass-study/` explored asymmetric shelves and an
 outside bypass. Its hypothetical geometry preserved reachable ground after
