@@ -1563,6 +1563,29 @@ pairs passed in one continuous native v192 run, both directions with
 transient-frame and menu checks (`.tools/benchmarks/world-v192-all-seams/`).
 Browser and human visual approval remain open.
 
+**Noe Valley v193–v194 garden trials, rejected.** V193 converted a lawn into
+a paved arrangement of existing pots; a fresh reviewer found it looked like a
+prop grid. V194 added original bounded soil-bed art, a bench and a walk. Both
+private native builds/BPS round trips and real v192 Save recovery on `(5,44)`
+passed; v194 also passed 125 world tests and a 2,978-frame matching web-core
+replay. V194 ROM SHA-256
+`19a5b462006dd0912f0bcd83d213554b006a3818352706673df125f32743e08f`;
+its private actual map and scenes are under `.tools/benchmarks/noe-v194-native-map/`
+and `noe-v194-scenes/`. A fresh reviewer found the soil more readable but
+still saw three isolated strips rather than a coherent garden, with excessive
+surrounding grass and abrupt paths. The full transition run was stopped after
+that rejection; it did not pass. Both experiments are preserved privately at
+`.tools/noe-v193-rejected/` and `.tools/noe-v194-rejected/`; neither is in
+the current game. Design the plot as a connected, bounded community space
+before paying the shared tileset cost. No human approval is implied.
+
+**Twin Peaks open-shelf study, rejected.** A source-only native-metatile
+montage in `.tools/twin-open-mass-study/` explored asymmetric shelves and an
+outside bypass. Its hypothetical geometry preserved reachable ground after
+complete tree/cliff clears, but the actual montage shows flat slabs, broken
+joins and no usable stairs; it was not integrated or native-tested. Joined
+multi-tier relief, stair behavior and forest finishing remain necessary.
+
 **Castro v191 central block, private draft.** New facades close gaps in both
 central street walls; the court notice moves to `(44,41)`, with standing point
 `(45,41)`. The linked native build, BPS round trip and all 123 world tests pass. An actual v190
@@ -1623,6 +1646,15 @@ graphics before margins. A fresh reviewer rejected its blank street-level
 walls, repeated roof bands and oversized pavement despite fewer fake doors.
 Save, seams, WASM, browser and human approval are not claimed for v9; actual
 private views are under `.tools/fidi-v9-isolated/.tools/benchmarks/`.
+
+Isolated v10b adds larger fixed display windows and street furniture; its
+native build/BPS, old-Save recovery and 911-frame matching web-core replay
+passed. ROM SHA-256
+`a4b1ec89aedf810227cf5563ad1d52c48d384463e708290a5fb0530c2849a4cf`;
+private native views are under `.tools/fidi-v10-isolated/.tools/benchmarks/`.
+A fresh reviewer found the base livelier than v9 but rejected the flat,
+repetitive block and wide empty apron. Seams, browser and human approval are
+unverified; the experiment is not integrated.
 
 **FiDi v7 and Lands End source studies.** The isolated v7 trial shortens the
 five FiDi buildings to 6–8 metatiles; its linked build/BPS and old-Save
