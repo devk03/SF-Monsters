@@ -1495,6 +1495,16 @@ ROM SHA-256 `c4e6f582002abbfe6002f0c70cb1db704c5087fadea33ab0e58f36423283f6c6`.
 Those images are implementation evidence, not completed independent reviews
 or human acceptance; the maps omit actors.
 
+**Screenshot-based town evaluation.** The repeatable rubric is in
+`docs/world/town-visual-evaluation.md`, with a local evidence validator/report
+generator at `scripts/quality/evaluate_town_visual.py`. A fresh reviewer
+applied it to historical North Beach v191; the private pilot is
+`.tools/benchmarks/town-visual-eval-pilot/north-beach-v191.html`. It records
+six evidence-linked scores and localized issues in block density, cafe
+identity and arrival composition. That pilot is not a v192 review. The tool
+checks hashes and declared ROM IDs, not aesthetic quality or provenance; user
+approval and native traversal remain separate gates.
+
 Two fresh independent reviewers then inspected the v191 full background map,
 arrival and two named views for each of the 19 destinations against its ideal.
 Highest-priority redesigns are coherent Twin Peaks summit masses and saddle;

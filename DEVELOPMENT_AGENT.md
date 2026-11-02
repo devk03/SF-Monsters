@@ -75,6 +75,9 @@ screenshots (arrival, main activity/landmark, secondary street/trail) against th
 matching ideal. Record exact version/ROM hash and capture paths; flag historical
 or missing evidence. Never relabel old screenshots as current. Include visible
 before/after pairs after substantial changes. Keep native captures private.
+Use [the town visual evaluation](docs/world/town-visual-evaluation.md) and its
+structured evidence contract for every candidate. A passing build or a better
+single prop does not override a severe visible regression or establish quality.
 
 Evaluate layout/massing, density/purposeful space, architecture/finished joins,
 sidewalks/planting/activity, district identity, and exploration/readability on a
