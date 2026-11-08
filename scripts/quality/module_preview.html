@@ -20,6 +20,13 @@ pre{white-space:pre-wrap;font-size:12px}
 const status=document.querySelector('#status'),canvas=document.querySelector('canvas');
 let game,timer,finished=false;
 const button=id=>document.querySelector('#'+id);
+// The emulator ignores repeated keydown events, but the browser still scrolls
+// on them unless their default action is cancelled. Keep arrow keys available
+// to the emulator while preventing page movement during an active playtest.
+window.addEventListener('keydown',event=>{
+  if(game && !finished && ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.code))
+    event.preventDefault();
+},{capture:true});
 async function finish(){
   if(finished)return;finished=true;clearTimeout(timer);game?.destroy();
   for(const node of document.querySelectorAll('button'))node.disabled=true;
