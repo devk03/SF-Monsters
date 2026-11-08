@@ -643,6 +643,14 @@ Current checkpoint — October 15, 2026, 06:27 UTC:
 
 ### 15.1 Objective and completion rule
 
+**Current user direction:** prioritize building and calibrating a screenshot-based
+LLM judge against the user's actual feedback. The existing evaluation script
+validates reviewer-supplied scores; it is not an automated LLM judge. The
+implementation and held-out evaluation plan is in
+[the visual judge plan](world/llm-visual-judge-plan.md). The user cleared the
+previous active goal; do not assume it has been restarted. The world-quality
+requirements below remain reference criteria for future work.
+
 **Fresh independent review and private terrain experiment.** A fresh reviewer
 inspected all 19 current 142b town/ideal comparison sheets; the prioritized
 composition findings are recorded in [the visual review baseline](world/visual-review-baseline-2026-10-28.md).

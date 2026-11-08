@@ -2,10 +2,10 @@
 
 ## Active objective and authority
 
-Keep the current world goal active under the user's latest “keep the goal going”
-instruction. The October23 four-hour deadline and earlier pauses are historical;
-there is no renewed cutoff. The goal tool's old objective text cannot be replaced
-while unfinished. Do not falsely complete it or stop because that card is stale.
+The user cleared the previous active world goal. Do not assume it is still
+running or create a new goal without a request. The October23 four-hour
+deadline and earlier pauses are historical. The world requirements remain
+reference criteria for future work.
 
 Before implementation, read this guide, AGENTS.md and the latest checkpoint in
 [game-spec.md §15.1](docs/game-spec.md#151-objective-and-completion-rule).
@@ -61,6 +61,11 @@ Finish a cohesive world before independently assigned gym/mission encounters:
   outside-SF exception, with Victory Road and the League. Keep Treasure separate.
 
 ## Current checkpoint and next work
+
+The user now prioritizes building and calibrating a screenshot-based LLM judge.
+Follow [the judge plan](docs/world/llm-visual-judge-plan.md); keep the existing
+validator distinct from an actual model-based evaluation. Preserve the wider
+world requirements as the subject of that work.
 
 The October28 user instruction requires continued improvement of EVERY town,
 guided by a completely fresh independent subagent reviewing actual screenshots
